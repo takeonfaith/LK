@@ -1,15 +1,14 @@
 import { useStore } from "effector-react";
 import React from "react";
-import { HOME_ROUTE, publicRoutes } from "./routes";
-import { Switch, Route, Redirect } from "react-router-dom";
-import { LOGIN_ROUTE } from "./routes";
-import $userStore from "../../entities/user";
+import { Redirect, Route, Switch } from "react-router-dom";
+import $userStore, { NO_USER_ID } from "../../entities/user";
 import ContentLayout from "../../shared/ui/content-layout";
+import { LOGIN_ROUTE, publicRoutes } from "./routes";
 
 const Router = () => {
   const { currentUser } = useStore($userStore);
-  console.log(currentUser);
-  return currentUser.id === "-1" ? (
+
+  return currentUser.id === NO_USER_ID ? (
     <Switch>
       <Route path="/" component={ContentLayout} />
     </Switch>
