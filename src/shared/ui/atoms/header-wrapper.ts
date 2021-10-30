@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.header`
   width: 100%;
   height: 45px;
   background: var(--primary-background);
