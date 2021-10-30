@@ -5,17 +5,17 @@ import styled from "styled-components";
 import { BlueColor, RedColor } from "../colors";
 
 interface Props {
-  id: number;
-  title: string;
-  icon: IconType;
-  path: string;
-  currentPage: number;
-  setCurrentPage: (currentPage: number) => void;
+	id: number;
+	title: string;
+	icon: IconType;
+	path: string;
+	currentPage: number;
+	setCurrentPage: (currentPage: number) => void;
 }
 
-const LeftsideBarItemWrapper = styled(Link)<{
-  isCurrent: boolean;
-  currentPage: number;
+const LeftsideBarItemWrapper = styled(Link) <{
+	isCurrent: boolean;
+	currentPage: number;
 }>`
   position: relative;
 
@@ -45,30 +45,30 @@ const LeftsideBarItemWrapper = styled(Link)<{
 `;
 
 const LeftsideBarItem = ({
-  icon,
-  id,
-  title,
-  path,
-  currentPage,
-  setCurrentPage,
+	icon,
+	id,
+	title,
+	path,
+	currentPage,
+	setCurrentPage,
 }: Props) => {
-  const showIcon = () => {
-    const Icon = icon;
-    return <Icon />;
-  };
+	const showIcon = () => {
+		const Icon = icon;
+		return <Icon />;
+	};
 
-  return (
-    <LeftsideBarItemWrapper
-      to={path}
-      className="leftside-bar-item"
-      onClick={() => setCurrentPage(id)}
-      currentPage={currentPage}
-      isCurrent={id === currentPage}
-    >
-      {showIcon()}
-      <strong>{title}</strong>
-    </LeftsideBarItemWrapper>
-  );
+	return (
+		<LeftsideBarItemWrapper
+			to={path}
+			className="leftside-bar-item"
+			onClick={() => setCurrentPage(id)}
+			currentPage={currentPage}
+			isCurrent={id === currentPage}
+		>
+			{showIcon()}
+			<strong>{title}</strong>
+		</LeftsideBarItemWrapper>
+	);
 };
 
 export default LeftsideBarItem;

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 import { SliderItem } from "../atoms/slider-item";
 
-export interface ISlider {
-  pages: string[];
+interface ISlider {
+	pages: string[];
 }
 
 const SliderWrapper = styled.div`
@@ -66,33 +66,34 @@ const SliderWrapper = styled.div`
   }
 `;
 
-const Slider: React.FC<ISlider> = ({ pages }) => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const moreThanNeeded = pages.length >= 4;
-  return (
-    <SliderWrapper>
-      <span
-        className="currentPage"
-        style={{
-          left: `calc(${
-            (currentPage * 100) / (moreThanNeeded ? 4 : pages.length)
-          }% + 3px)`,
-          width: `calc(${100 / pages.length}% - 6px)`,
-        }}
-      />
-      {pages.map((page: string, index: number) => {
-        return (
-          <SliderItem
-            id={index}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            pageTitle={page}
-            key={index}
-          />
-        );
-      })}
-    </SliderWrapper>
-  );
-};
+const Slider: React.FC<ISlider> = memo(({ pages }) => {
+	const [currentPage, setCurrentPage] = useState(0);
+
+	const moreThanNeeded = pages.length >= 4;
+
+	return (
+		<SliderWrapper>
+			<span
+				className="currentPage"
+				style={{
+					left: `calc(${(currentPage * 100) / (moreThanNeeded ? 4 : pages.length)
+						}% + 3px)`,
+					width: `calc(${100 / pages.length}% - 6px)`,
+				}}
+			/>
+			{pages.map((page: string, index: number) => {
+				return (
+					<SliderItem
+						id={index}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+						pageTitle={page}
+						key={index}
+					/>
+				);
+			})}
+		</SliderWrapper>
+	);
+});
 
 export default Slider;
