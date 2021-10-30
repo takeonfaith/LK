@@ -1,14 +1,14 @@
-import { useStore } from "effector-react";
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import $userStore, { NO_USER_ID } from "../../entities/user";
+import { userModel } from "../../entities/user";
+import { NO_USER_ID } from "../../entities/user/model";
 import ContentLayout from "../../shared/ui/content-layout";
 import { LOGIN_ROUTE, publicRoutes } from "./routes";
 
 const Router = () => {
-  const { currentUser } = useStore($userStore);
+  const { currentUser } = userModel.selectors.useUser();
 
-  return currentUser.id === NO_USER_ID ? (
+  return currentUser !== null ? (
     <Switch>
       <Route path="/" component={ContentLayout} />
     </Switch>
