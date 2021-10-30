@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { LOGIN_ROUTE } from "../../app/routes/routes";
+import Slider from "../../features/slider/molecules/slider";
 import SwitchToggle from "../../shared/ui/moleculas/switch-toggle";
 
 const HomePage = () => {
@@ -14,6 +13,7 @@ const HomePage = () => {
         setIsToggled={setIsToggled}
         key={0}
       />
+      <Slider pages={["Page 1", "Page 2", "Page 3", "Page 4", "Page 5"]} />
     </div>
   );
 };
