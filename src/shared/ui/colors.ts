@@ -19,3 +19,7 @@ export const TextColor = {
   primary: "#0c0c0c",
   secondary: "#565656",
 };
+
+export const ThemeColor = {
+  primary: "#fff",
+};
