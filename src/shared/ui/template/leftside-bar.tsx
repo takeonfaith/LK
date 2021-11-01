@@ -1,15 +1,15 @@
 import React from "react";
-import { privateRoutes } from "../../../app/routes/routes";
 import LeftsideBarWrapper from "../atoms/leftside-bar-wrapper";
-import LeftsideBarItem from "../molecules/leftside-bar-item";
+import Logo from "../atoms/logo";
 import LeftsideBarList from "../organisms/leftside-bar-list";
 
 const LeftsideBar = () => {
-	return (
-		<LeftsideBarWrapper>
-			<LeftsideBarList />
-		</LeftsideBarWrapper>
-	);
+  return (
+    <LeftsideBarWrapper>
+      <Logo />
+      <LeftsideBarList />
+    </LeftsideBarWrapper>
+  );
 };
 
 export default LeftsideBar;

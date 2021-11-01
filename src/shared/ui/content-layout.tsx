@@ -10,19 +10,20 @@ const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 3;
+  background: var(--theme);
 `;
 
 const ContentLayout = () => {
-	return (
-		<div style={{ height: "100vh", display: "flex" }}>
-			<LeftsideBar />
-			<ContentWrapper>
-				<Header />
-				<PrivateRouter />
-			</ContentWrapper>
-			<Modal />
-		</div>
-	);
+  return (
+    <div style={{ height: "100vh", display: "flex" }}>
+      <LeftsideBar />
+      <ContentWrapper>
+        <Header />
+        <PrivateRouter />
+      </ContentWrapper>
+      <Modal />
+    </div>
+  );
 };
 
 export default ContentLayout;
