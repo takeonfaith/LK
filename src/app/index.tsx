@@ -1,13 +1,15 @@
 import React from "react";
-import "./index.css";
-import "./styles/vars.css";
 import { HashRouter } from "react-router-dom";
+import { ModalProvider } from "../features/modal";
 import Router from "./routes/Router";
+
 const App = () => {
   return (
-    <HashRouter basename="/">
-      <Router />
-    </HashRouter>
+    <ModalProvider>
+      <HashRouter basename="/">
+        <Router />
+      </HashRouter>
+    </ModalProvider>
   );
 };
 

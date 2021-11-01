@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { userModel } from "../../../../entities/user";
+import useTheme from "../../../../shared/lib/hooks/use-theme";
 import Input from "../../../../shared/ui/atoms/input";
 import SubmitButton from "../../../../shared/ui/atoms/submit-button";
-import { ThemeColor } from "../../../../shared/ui/colors";
+import Themes from "../../../../shared/ui/colors";
 
-const LoginBlockWrapper = styled.div`
+const LoginBlockWrapper = styled.div<{ theme: any }>`
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: 500px;
-  background: ${ThemeColor.primary};
+  background: var(--theme);
   box-shadow: 0 0 100px #9e9e9e4e;
   border-radius: 8px;
   padding: 20px;
@@ -21,9 +22,10 @@ const LoginBlock = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const loginFunc = userModel.events.login;
+  const { theme } = useTheme();
 
   return (
-    <LoginBlockWrapper>
+    <LoginBlockWrapper theme={Themes[theme]}>
       <h2>Вход в личный кабинет</h2>
       <Input
         value={login}

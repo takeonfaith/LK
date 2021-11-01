@@ -1,20 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import { GreyColor, TextColor } from "../colors";
+import useTheme from "../../lib/hooks/use-theme";
+import Themes from "../colors";
 
-const ButtonWrapper = styled.button<{ text: boolean }>`
+const ButtonWrapper = styled.button<{ theme: string; text: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  color: ${GreyColor.primary};
   outline: none;
-  color: ${TextColor.secondary};
-  padding: 5px;
-  /* width: 100%; */
+  color: var(--text);
+  background: var(--search);
+  padding: 10px;
   border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
+  transition: 0.2s transform;
+
+  &:active {
+    transform: scale(0.95);
+  }
 
   svg {
     margin-right: ${({ text }) => (text ? "7px" : "0")};
@@ -26,12 +31,13 @@ const ButtonWrapper = styled.button<{ text: boolean }>`
 interface Props {
   icon: JSX.Element;
   text?: string;
-  onClick: () => void;
+  onClick: (event: any) => void;
 }
 
 const Button = ({ icon, text, onClick }: Props) => {
+  const { theme } = useTheme();
   return (
-    <ButtonWrapper text={!!text} onClick={onClick}>
+    <ButtonWrapper text={!!text} onClick={onClick} theme={Themes[theme]}>
       {!!icon && icon}
       <span>{text}</span>
     </ButtonWrapper>

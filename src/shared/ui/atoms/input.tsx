@@ -1,7 +1,7 @@
 import React from "react";
 import { FiX } from "react-icons/fi";
 import styled from "styled-components";
-import { GreyColor, TextColor, ThemeColor } from "../colors";
+import Themes from "../colors";
 import Button from "./button";
 
 const InputWrapper = styled.div`
@@ -18,9 +18,9 @@ const InputWrapper = styled.div`
 
   input {
     border: none;
-    color: ${TextColor.primary};
+    color: var(--text);
     outline: none;
-    background: ${GreyColor.primary};
+    background: var(--grey);
     height: 100%;
     width: 100%;
     padding: 10px;
@@ -40,7 +40,7 @@ const InputWrapper = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 5px;
-    background: ${GreyColor.primary};
+    background: var(--grey);
 
     svg {
       width: 10px;

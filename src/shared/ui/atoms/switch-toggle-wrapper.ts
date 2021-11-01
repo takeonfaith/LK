@@ -4,7 +4,6 @@ const SwitchToggleWrapper = styled.div`
   user-select: none;
   width: 56px;
   height: 30px;
-  margin: 10px;
 
   .checkbox {
     display: none;
@@ -15,7 +14,7 @@ const SwitchToggleWrapper = styled.div`
     height: 100%;
     display: block;
     position: relative;
-    background: rgb(233, 233, 233);
+    background: var(--search);
     cursor: pointer;
     border-radius: 50px;
     padding: 3px;
@@ -24,18 +23,15 @@ const SwitchToggleWrapper = styled.div`
 
   .toggleCircle {
     height: 100%;
-    // background: rgb(102, 102, 102);
-    background: #fff;
+    background: var(--theme);
     width: 25px;
     display: block;
     border-radius: 100%;
-    border: 6px solid rgba(255, 255, 255, 0.301);
-    transition: 0.2s margin-left, 0.2s transform, 0.2s box-shadow;
+    transition: 0.2s;
   }
 
   .checkbox:checked + .toggleBody .toggleCircle {
-    // background: rgb(65, 192, 97);
-
+    background: #fff;
     margin-left: calc(100% - 25px);
     box-shadow: 0 0 30px #6290e4;
   }

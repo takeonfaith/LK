@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { ImCheckmark } from "react-icons/im";
 import styled from "styled-components";
-import { BlueColor, TextColor } from "../colors";
+import useTheme from "../../lib/hooks/use-theme";
+import Themes from "../colors";
 import Loading from "./loading";
 
 const SubmitButtonWrapper = styled.button<{
@@ -25,7 +26,7 @@ const SubmitButtonWrapper = styled.button<{
   overflow: hidden;
   border: none;
   cursor: pointer;
-  background: ${BlueColor.primary};
+  background: var(--blue);
 
   @keyframes button-animation-in {
     0% {
@@ -115,6 +116,7 @@ const SubmitButton = ({
   isActive = true,
 }: Props) => {
   //   const { openBottomMessage } = useModal();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (completed) {
@@ -132,6 +134,7 @@ const SubmitButton = ({
       completed={completed}
       isActive={isActive}
       onClick={action}
+      theme={Themes[theme]}
     >
       <div className="inner-button">
         {completed ? (

@@ -5,7 +5,8 @@ const LeftsideBarWrapper = styled.div`
   width: 235px;
   height: 100%;
   box-shadow: var(--light-box-shadow);
-  z-index: 0;
+  background: var(--theme);
+  z-index: 4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +19,7 @@ const LeftsideBarWrapper = styled.div`
     margin-top: 15px;
     overflow-y: auto;
     // box-shadow: 0 0 3px rgba(0, 0, 0, 0.342);
-    background: rgb(248, 248, 248);
+    background: var(--search2);
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -34,7 +35,6 @@ const LeftsideBarWrapper = styled.div`
       justify-content: flex-start;
       padding: 10px 0;
       margin: 10px 0;
-      color: var(--text-color);
       cursor: pointer;
       position: relative;
       user-select: none;

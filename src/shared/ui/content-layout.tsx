@@ -1,13 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import PrivateRouter from "../../app/routes/PrivateRouter";
+
 import Header from "./template/header";
+import Modal from "../../features/modal";
 import LeftsideBar from "./template/leftside-bar";
+import PrivateRouter from "../../app/routes/PrivateRouter";
 
 const ContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 3;
+  background: var(--theme);
 `;
 
 const ContentLayout = () => {
@@ -18,6 +21,7 @@ const ContentLayout = () => {
         <Header />
         <PrivateRouter />
       </ContentWrapper>
+      <Modal />
     </div>
   );
 };
