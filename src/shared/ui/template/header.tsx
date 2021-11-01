@@ -1,19 +1,16 @@
-import React from "react";
-import { FiSettings } from "react-icons/fi";
-import { useModal } from "../../../features/modal";
-import SettingsPage from "../../../pages/settings";
-import Button from "../atoms/button";
+import React, { memo } from "react";
+import SettingsButton from "../../../features/header/ui/molecules/settings-button";
+import { useRender } from "../../lib/hooks/use-render";
 import HeaderWrapper from "../atoms/header-wrapper";
 
-const Header = () => {
-  const { toggle } = useModal(<SettingsPage />);
-
-  return (
-    <HeaderWrapper>
-      <h3>Home</h3>
-      <Button text="Настройки" icon={<FiSettings />} onClick={toggle} />
-    </HeaderWrapper>
-  );
-};
+const Header = memo(() => {
+	useRender('header');
+	return (
+		<HeaderWrapper>
+			<h3>Home</h3>
+			<SettingsButton />
+		</HeaderWrapper>
+	);
+});
 
 export default Header;

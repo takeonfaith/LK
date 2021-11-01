@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import useTheme from "../../lib/hooks/use-theme";
 import Themes from "../colors";
@@ -29,19 +29,19 @@ const ButtonWrapper = styled.button<{ theme: string; text: boolean }>`
 `;
 
 interface Props {
-  icon: JSX.Element;
-  text?: string;
-  onClick: (event: any) => void;
+	icon: JSX.Element;
+	text?: string;
+	onClick: (event: any) => void;
 }
 
-const Button = ({ icon, text, onClick }: Props) => {
-  const { theme } = useTheme();
-  return (
-    <ButtonWrapper text={!!text} onClick={onClick} theme={Themes[theme]}>
-      {!!icon && icon}
-      <span>{text}</span>
-    </ButtonWrapper>
-  );
-};
+const Button = memo(({ icon, text, onClick }: Props) => {
+	const { theme } = useTheme();
+	return (
+		<ButtonWrapper text={!!text} onClick={onClick} theme={Themes[theme]}>
+			{!!icon && icon}
+			<span>{text}</span>
+		</ButtonWrapper>
+	);
+});
 
 export default Button;
