@@ -1,7 +1,6 @@
 import React from "react";
 import { FiX } from "react-icons/fi";
 import styled from "styled-components";
-import Themes from "../colors";
 import Button from "./button";
 
 const InputWrapper = styled.div`
@@ -20,7 +19,7 @@ const InputWrapper = styled.div`
     border: none;
     color: var(--text);
     outline: none;
-    background: var(--grey);
+    background: var(--search);
     height: 100%;
     width: 100%;
     padding: 10px;
@@ -40,7 +39,9 @@ const InputWrapper = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 5px;
-    background: var(--grey);
+    background: var(--search2);
+    color: var(--text);
+    padding: 0;
 
     svg {
       width: 10px;

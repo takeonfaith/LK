@@ -9,7 +9,7 @@ const SwitchToggleWrapper = styled.div`
     display: none;
   }
 
-  .toggleBody {
+  .toggle-body {
     width: 100%;
     height: 100%;
     display: block;
@@ -21,7 +21,7 @@ const SwitchToggleWrapper = styled.div`
     transition: 0.2s background;
   }
 
-  .toggleCircle {
+  .toggle-circle {
     height: 100%;
     background: var(--theme);
     width: 25px;
@@ -30,17 +30,17 @@ const SwitchToggleWrapper = styled.div`
     transition: 0.2s;
   }
 
-  .checkbox:checked + .toggleBody .toggleCircle {
+  .checkbox:checked + .toggle-body .toggle-circle {
     background: #fff;
     margin-left: calc(100% - 25px);
     box-shadow: 0 0 30px #6290e4;
   }
 
-  .checkbox:checked + .toggleBody {
+  .checkbox:checked + .toggle-body {
     background: #6290e4;
   }
 
-  .checkbox:active + .toggleBody .toggleCircle {
+  .checkbox:active + .toggle-body .toggle-circle {
     transform: scale(0.9);
   }
 `;

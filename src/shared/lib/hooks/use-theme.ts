@@ -1,24 +1,39 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import useLocalStorage from "./use-local-storage";
 
 const useTheme = () => {
+  const { get, set } = useLocalStorage();
   const [theme, setTheme] = useState<string>(
-    document.documentElement.getAttribute("data-theme") ?? "light"
+    get("theme") ??
+      document.documentElement.getAttribute("data-theme") ??
+      "light"
   );
 
   useEffect(() => {
-    if (!document.documentElement.getAttribute("data-theme"))
-      document.documentElement.setAttribute("data-theme", "light");
-  }, []);
+    const localTheme = get("theme");
 
-  const switchTheme = useCallback((state) => {
-    setTheme((prev) => {
-      const newTheme = state ? "dark" : "light";
+    if (!localTheme) {
+      if (!document.documentElement.getAttribute("data-theme")) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    } else {
+      document.documentElement.setAttribute("data-theme", localTheme);
+    }
+  }, [get]);
 
-      document.documentElement.setAttribute("data-theme", newTheme);
+  const switchTheme = useCallback(
+    (state) => {
+      setTheme((prev) => {
+        const newTheme = state ? "dark" : "light";
 
-      return newTheme;
-    });
-  }, []);
+        document.documentElement.setAttribute("data-theme", newTheme);
+        set("theme", newTheme);
+
+        return newTheme;
+      });
+    },
+    [set]
+  );
 
   return { theme, switchTheme };
 };

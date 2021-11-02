@@ -12,7 +12,8 @@ const LoginBlockWrapper = styled.div<{ theme: any }>`
   width: 100%;
   max-width: 500px;
   background: var(--theme);
-  box-shadow: 0 0 100px #9e9e9e4e;
+  color: var(--text);
+  box-shadow: 0 0 100px #0000004e;
   border-radius: 8px;
   padding: 20px;
   row-gap: 20px;

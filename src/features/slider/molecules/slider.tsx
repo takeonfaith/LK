@@ -1,5 +1,6 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import styled from "styled-components";
+import useResize from "../../../shared/lib/hooks/use-resize";
 import { SliderItem } from "../atoms/slider-item";
 
 interface ISlider {
@@ -8,7 +9,7 @@ interface ISlider {
   setCurrentPage: (currentPage: number) => void;
 }
 
-const SliderWrapper = styled.div`
+const SliderWrapper = styled.div<{ size: number }>`
   width: 100%;
   height: 50px;
   padding: 3px;
@@ -33,7 +34,7 @@ const SliderWrapper = styled.div`
   .SliderItem {
     width: 100%;
     height: 100%;
-    min-width: 20%;
+    min-width: calc(100% / ${({ size }) => size});
     padding: 10px 5px;
     display: flex;
     align-items: center;
@@ -69,17 +70,30 @@ const SliderWrapper = styled.div`
 
 const Slider: React.FC<ISlider> = memo(
   ({ pages, currentPage, setCurrentPage }) => {
-    const moreThanNeeded = pages.length >= 5;
+    const [size, setSize] = useState(5);
+    const moreThanNeeded = pages.length >= size;
+    const { width } = useResize();
+
+    console.log(width, size);
+
+    useEffect(() => {
+      if (width > 1200) setSize(6);
+      else if (width > 1000 && width <= 1200) setSize(5);
+      else if (width > 600 && width <= 1000) setSize(4);
+      else if (width <= 600) setSize(3);
+    }, [width]);
 
     return (
-      <SliderWrapper>
+      <SliderWrapper size={size}>
         <span
           className="currentPage"
           style={{
             left: `calc(${
-              (currentPage * 100) / (!moreThanNeeded ? pages.length : 5)
+              (currentPage * 100) / (!moreThanNeeded ? pages.length : size)
             }% + 3px)`,
-            width: `calc(${100 / (!moreThanNeeded ? pages.length : 5)}% - 6px)`,
+            width: `calc(${
+              100 / (!moreThanNeeded ? pages.length : size)
+            }% - 6px)`,
           }}
         />
         {pages.map((page: string, index: number) => {

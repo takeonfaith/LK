@@ -1,14 +1,7 @@
-import React, { useState } from "react";
-import Input from "../../shared/ui/atoms/input";
+import React from "react";
 
 const HomePage = () => {
-  const [value, setValue] = useState("");
-
-  return (
-    <div>
-      <Input value={value} setValue={setValue} />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default HomePage;

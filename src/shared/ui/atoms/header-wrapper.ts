@@ -3,7 +3,7 @@ import styled from "styled-components";
 const HeaderWrapper = styled.header`
   width: 100%;
   height: 45px;
-  background: var(--primary-background);
+  background: var(--theme);
   box-shadow: var(--header-box-shadow);
   z-index: 1;
   display: flex;
