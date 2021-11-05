@@ -4,13 +4,13 @@ import LeftsideBarListWrapper from "../../../../../../features/leftside-bar/ui/a
 import { CustomizeLeftsideBarItem } from "../molecules";
 
 const CustomizeLeftsideBarList = () => {
-  return (
-    <LeftsideBarListWrapper>
-      {privateRoutes.map((el, index) => {
-        return <CustomizeLeftsideBarItem {...el} key={index} />;
-      })}
-    </LeftsideBarListWrapper>
-  );
+	return (
+		<LeftsideBarListWrapper>
+			{Object.values(privateRoutes).map((el, index) => {
+				return <CustomizeLeftsideBarItem {...el} key={index} />;
+			})}
+		</LeftsideBarListWrapper>
+	);
 };
 
 export default CustomizeLeftsideBarList;
