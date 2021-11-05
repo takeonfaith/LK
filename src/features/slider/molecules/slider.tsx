@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import useResize from "../../../shared/lib/hooks/use-resize";
 import { SliderItem } from "../atoms/slider-item";
@@ -17,11 +17,18 @@ const SliderWrapper = styled.div<{ size: number }>`
   align-items: center;
   justify-content: flex-start;
   background: var(--search2);
-  position: relative;
   border-radius: 17px;
   overflow-y: hidden;
   overflow-x: auto;
   scroll-snap-type: x proximity;
+
+  .slider-body {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -46,8 +53,13 @@ const SliderWrapper = styled.div<{ size: number }>`
     user-select: none;
     color: var(--text);
 
+    &:hover {
+      filter: brightness(0.8);
+    }
+
     &.active {
       opacity: 1;
+      /* background: red; */
     }
 
     &:active {
@@ -56,7 +68,7 @@ const SliderWrapper = styled.div<{ size: number }>`
   }
 
   .currentPage {
-    min-width: 150px;
+    min-width: 80px;
     height: calc(100% - 6px);
     background: var(--theme);
     display: block;
@@ -65,16 +77,16 @@ const SliderWrapper = styled.div<{ size: number }>`
     z-index: 0;
     border-radius: 14px;
     scroll-snap-align: center;
+    height: 100%;
   }
 `;
 
 const Slider: React.FC<ISlider> = memo(
   ({ pages, currentPage, setCurrentPage }) => {
     const [size, setSize] = useState(5);
-    const moreThanNeeded = pages.length >= size;
+    const moreThanNeeded = pages.length > size;
     const { width } = useResize();
-
-    console.log(width, size);
+    const currentPageRef = useRef<any>(null);
 
     useEffect(() => {
       if (width > 1200) setSize(6);
@@ -85,28 +97,31 @@ const Slider: React.FC<ISlider> = memo(
 
     return (
       <SliderWrapper size={size}>
-        <span
-          className="currentPage"
-          style={{
-            left: `calc(${
-              (currentPage * 100) / (!moreThanNeeded ? pages.length : size)
-            }% + 3px)`,
-            width: `calc(${
-              100 / (!moreThanNeeded ? pages.length : size)
-            }% - 6px)`,
-          }}
-        />
-        {pages.map((page: string, index: number) => {
-          return (
-            <SliderItem
-              id={index}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              pageTitle={page}
-              key={index}
-            />
-          );
-        })}
+        <div className="slider-body">
+          <span
+            className="currentPage"
+            ref={currentPageRef}
+            style={{
+              left: `calc(${
+                (currentPage * 100) / (!moreThanNeeded ? pages.length : size)
+              }%`,
+              width: `calc(100% / ${!moreThanNeeded ? pages.length : size} - ${
+                pages.length > size ? 3 : 0
+              }px)`,
+            }}
+          />
+          {pages.map((page: string, index: number) => {
+            return (
+              <SliderItem
+                id={index}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                pageTitle={page}
+                key={index}
+              />
+            );
+          })}
+        </div>
       </SliderWrapper>
     );
   }
