@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const LeftsideBarItemWrapper = styled.div<{
-  chosen: boolean;
+	chosen: boolean;
 }>`
   position: relative;
   display: flex;

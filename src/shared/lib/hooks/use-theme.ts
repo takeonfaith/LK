@@ -1,41 +1,41 @@
 import { useCallback, useEffect, useState } from "react";
+import { useSettings } from "../contexts/settings-context";
 import useLocalStorage from "./use-local-storage";
 
 const useTheme = () => {
-  const { get, set } = useLocalStorage();
-  const [theme, setTheme] = useState<string>(
-    get("theme") ??
-      document.documentElement.getAttribute("data-theme") ??
-      "light"
-  );
+	const { setting, change } = useSettings('theme');
 
-  useEffect(() => {
-    const localTheme = get("theme");
+	const [theme, setTheme] = useState<string>(
+		setting as string ??
+		document.documentElement.getAttribute("data-theme") ??
+		"light"
+	);
 
-    if (!localTheme) {
-      if (!document.documentElement.getAttribute("data-theme")) {
-        document.documentElement.setAttribute("data-theme", "light");
-      }
-    } else {
-      document.documentElement.setAttribute("data-theme", localTheme);
-    }
-  }, [get]);
+	useEffect(() => {
+		if (!setting) {
+			if (!document.documentElement.getAttribute("data-theme")) {
+				document.documentElement.setAttribute("data-theme", setting as string);
+			}
+		} else {
+			document.documentElement.setAttribute("data-theme", setting as string);
+		}
+	}, [setting]);
 
-  const switchTheme = useCallback(
-    (state) => {
-      setTheme((prev) => {
-        const newTheme = state ? "dark" : "light";
+	const switchTheme = useCallback(
+		(state) => {
+			setTheme((prev) => {
+				const newTheme = state ? "dark" : "light";
 
-        document.documentElement.setAttribute("data-theme", newTheme);
-        set("theme", newTheme);
+				document.documentElement.setAttribute("data-theme", newTheme);
+				change(newTheme);
 
-        return newTheme;
-      });
-    },
-    [set]
-  );
+				return newTheme;
+			});
+		},
+		[]
+	);
 
-  return { theme, switchTheme };
+	return { theme, switchTheme };
 };
 
 export default useTheme;

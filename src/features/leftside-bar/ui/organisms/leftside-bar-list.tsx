@@ -1,15 +1,31 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
 import LeftsideBarDropdown from "./leftside-bar-dropdown";
 import LeftsideBarItem from "../molecules/leftside-bar-item";
-import { privateRoutes } from "../../../../app/routes/routes";
+import { IRoutes, privateRoutes } from "../../../../app/routes/routes";
+import LeftsideBarListWrapper from "../atoms/leftside-bar-list-wrapper";
+import { useSettings } from "../../../../shared/lib/contexts/settings-context";
 
-const LeftsideBarList = () => {
+export function getEnabledRoutes(ids: number[]) {
+	return ids.reduce((acc: IRoutes, id) => {
+		const privateRoute = privateRoutes[id];
+
+		if (privateRoute) {
+			acc[id] = privateRoute
+		}
+
+		return acc;
+	}, {});
+}
+
+const LeftsideBarList = memo(() => {
 	const [currentPage, setCurrentPage] = useState(0);
+	const { setting } = useSettings<number[]>('menu');
+
 
 	return (
-		<div className="leftside-bar-list">
-			{Object.values(privateRoutes).map(({ icon, id, title, path }) => {
+		<LeftsideBarListWrapper>
+			{Object.values(getEnabledRoutes(setting as number[])).map(({ icon, id, title, path }) => {
 				return (
 					<LeftsideBarItem
 						key={id}
@@ -50,8 +66,8 @@ const LeftsideBarList = () => {
 					);
 				})}
 			</LeftsideBarDropdown>
-		</div>
+		</LeftsideBarListWrapper>
 	);
-};
+});
 
 export default LeftsideBarList;

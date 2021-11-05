@@ -61,7 +61,7 @@ interface IRoute {
 	isTemplate: boolean
 }
 
-interface IRoutes {
+export interface IRoutes {
 	[id: routeId]: IRoute
 }
 
