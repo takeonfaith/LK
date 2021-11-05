@@ -9,6 +9,7 @@ const LeftsideBarWrapper = styled.div`
   z-index: 4;
   display: flex;
   flex-direction: column;
+  row-gap: 20px;
   align-items: center;
   box-sizing: border-box;
   padding: 20px 15px;

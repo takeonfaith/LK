@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const LeftsideBarItemWrapper = styled.div<{
-	chosen: boolean;
+  chosen: boolean;
 }>`
   position: relative;
   display: flex;
@@ -20,6 +20,11 @@ const LeftsideBarItemWrapper = styled.div<{
   .icon-and-title {
     display: flex;
     align-items: center;
+
+    svg,
+    strong {
+      color: ${({ chosen }) => (chosen ? "var(--blue)" : "var(--text)")};
+    }
   }
 
   svg {
@@ -41,11 +46,6 @@ const LeftsideBarItemWrapper = styled.div<{
   &:hover::before {
     width: 5px;
     background: var(--red);
-  }
-
-  svg,
-  strong {
-    color: ${({ chosen }) => (chosen ? "var(--blue)" : "var(--text)")};
   }
 `;
 

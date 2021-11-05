@@ -2,11 +2,18 @@ import React from "react";
 import LeftsideBarWrapper from "../atoms/leftside-bar-wrapper";
 import Logo from "../atoms/logo";
 import LeftsideBarList from "../../../features/leftside-bar/ui/organisms/leftside-bar-list";
+import LocalSearch from "../molecules/local-search";
+import { privateRoutes } from "../../../app/routes/routes";
 
 const LeftsideBar = () => {
   return (
     <LeftsideBarWrapper>
       <Logo />
+      <LocalSearch
+        whereToSearch={[privateRoutes]}
+        setResult={() => null}
+        searchEngine={() => []}
+      />
       <LeftsideBarList />
     </LeftsideBarWrapper>
   );

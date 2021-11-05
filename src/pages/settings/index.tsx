@@ -28,14 +28,7 @@ const SettingsPage = () => {
   return (
     <Wrapper>
       <Slider
-        pages={[
-          "Общие",
-          "Внешний вид",
-          "Меню",
-          "Аккаунт",
-          "Безопасность",
-          "Безопасность",
-        ]}
+        pages={["Общие", "Внешний вид", "Меню", "Аккаунт", "Безопасность"]}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />

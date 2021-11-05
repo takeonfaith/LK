@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const LeftsideBarListWrapper = styled.div`
-  margin-top: 15px;
   overflow-y: auto;
   background: var(--search2);
   width: 100%;
