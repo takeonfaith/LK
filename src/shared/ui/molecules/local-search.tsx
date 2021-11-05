@@ -16,7 +16,7 @@ const LocalSearch = <T,>({
 
   useEffect(() => {
     setResult(searchEngine(value, whereToSearch));
-  }, [value]);
+  }, [value, setResult, searchEngine, whereToSearch]);
 
   return (
     <Input value={value} setValue={setValue} placeholder="Поиск по меню" />

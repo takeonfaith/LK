@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 
 const useLocalStorage = () => {
   const get = useCallback((key: string) => {

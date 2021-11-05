@@ -125,7 +125,7 @@ const SubmitButton = ({
         setCompleted(false);
       }, 2000);
     }
-  }, [completed]);
+  }, [completed, setCompleted]);
 
   return (
     <SubmitButtonWrapper

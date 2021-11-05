@@ -17,4 +17,3 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
 };
 
 export const SETTINGS = "settings";
-export const EMPTY_SETTINGS = "{}";
