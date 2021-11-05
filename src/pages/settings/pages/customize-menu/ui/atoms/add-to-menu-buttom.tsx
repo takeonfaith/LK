@@ -4,16 +4,17 @@ import Button from "../../../../../../shared/ui/atoms/button";
 import { IoIosCheckmarkCircle, IoIosRadioButtonOff } from "react-icons/io";
 
 interface Props {
-  chosen: boolean;
+	chosen: boolean;
+	onClick: () => void
 }
 
-const AddToMenuButton = ({ chosen }: Props) => {
-  return (
-    <Button
-      icon={chosen ? <IoIosCheckmarkCircle /> : <IoIosRadioButtonOff />}
-      onClick={() => null}
-    />
-  );
+const AddToMenuButton = ({ chosen, onClick }: Props) => {
+	return (
+		<Button
+			icon={chosen ? <IoIosCheckmarkCircle /> : <IoIosRadioButtonOff />}
+			onClick={onClick}
+		/>
+	);
 };
 
 export default AddToMenuButton;
