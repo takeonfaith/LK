@@ -1,7 +1,7 @@
 import React from "react";
 import { privateRoutes } from "../../../../../../app/routes/routes";
+import getChosenRoutes from "../../../../../../features/leftside-bar/lib/get-chosen-routes";
 import LeftsideBarListWrapper from "../../../../../../features/leftside-bar/ui/atoms/leftside-bar-list-wrapper";
-import { getChosenRoutes } from "../../../../../../features/leftside-bar/ui/organisms/leftside-bar-list";
 import { useSettings } from "../../../../../../shared/lib/contexts/settings-context";
 import { CustomizeLeftsideBarItem } from "../molecules";
 

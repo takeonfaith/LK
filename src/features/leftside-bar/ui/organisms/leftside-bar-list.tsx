@@ -1,30 +1,11 @@
 import React, { memo, useState } from "react";
 import { FiCompass } from "react-icons/fi";
-import { IRoute, IRoutes, privateRoutes } from "../../../../app/routes/routes";
 import { useSettings } from "../../../../shared/lib/contexts/settings-context";
+import getChosenRoutes from "../../lib/get-chosen-routes";
+import getNotChosenRoutes from "../../lib/get-not-chosen-routes";
 import LeftsideBarListWrapper from "../atoms/leftside-bar-list-wrapper";
 import LeftsideBarItem from "../molecules/leftside-bar-item";
 import LeftsideBarDropdown from "./leftside-bar-dropdown";
-
-export function getChosenRoutes(ids: number[]) {
-  return ids.reduce((acc: IRoutes, id) => {
-    const privateRoute = privateRoutes[id];
-
-    if (privateRoute) {
-      acc[id] = privateRoute;
-    }
-
-    return acc;
-  }, {});
-}
-
-export function getNotChosenRoutes(ids: number[]): IRoutes {
-  return Object.values(privateRoutes).reduce((acc, route: IRoute) => {
-    if (!ids.includes(route.id)) acc[route.id] = route;
-
-    return acc;
-  }, {});
-}
 
 const LeftsideBarList = memo(() => {
   const [currentPage, setCurrentPage] = useState(0);
