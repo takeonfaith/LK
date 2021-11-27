@@ -7,13 +7,13 @@ import React, {
 export const Context = createContext<ModalContext>({
 	isOpen: false,
 	component: undefined,
-	toggle: (event: any) => { },
+	toggle: (event?: any) => { },
 });
 
 export interface ModalContext {
 	isOpen: boolean;
 	component: React.ReactElement<any, any> | undefined;
-	toggle: (event: any) => void;
+	toggle: (event?: any) => void;
 	setComponent?: React.Dispatch<
 		React.SetStateAction<React.ReactElement<any, any> | undefined>
 	>;

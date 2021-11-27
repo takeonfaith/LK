@@ -3,7 +3,7 @@ import { Context, ModalContext } from "../context";
 
 export interface IModal {
 	isOpen: boolean;
-	toggle: (event: any) => void;
+	toggle: (event?: any) => void;
 }
 
 const useModal = (component: React.ReactElement<any, any>): IModal => {
