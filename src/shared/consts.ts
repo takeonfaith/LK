@@ -46,13 +46,18 @@ export const Colors = {
   },
 };
 
+export interface IWeekDayName {
+  full: string;
+  short: string;
+}
+
 export interface IWeekDays {
-  monday: { full: string; short: string };
-  tuesday: { full: string; short: string };
-  wednesday: { full: string; short: string };
-  thursday: { full: string; short: string };
-  friday: { full: string; short: string };
-  saturday: { full: string; short: string };
+  monday: IWeekDayName;
+  tuesday: IWeekDayName;
+  wednesday: IWeekDayName;
+  thursday: IWeekDayName;
+  friday: IWeekDayName;
+  saturday: IWeekDayName;
 }
 
 export const WeekDays: IWeekDays = {

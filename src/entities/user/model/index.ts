@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore } from "effector";
+import { createEvent, createStore } from "effector";
 import { useStore } from "effector-react";
 
 export const NO_USER_ID = "-1";
@@ -14,27 +14,27 @@ interface UserStore {
   currentUser: User | null;
 }
 
-const loadUserFx = createEffect(async () => {
-  const userData = await fetch("https://jsonplaceholder.typicode.com/users");
-  return userData;
-});
-
 const useUser = () => {
   return useStore($userStore);
 };
 
 const login = createEvent<{ login: string; password: string }>();
+const logout = createEvent();
 
 const $userStore = createStore<UserStore>({
   currentUser: null,
-}).on(login, (oldState, newState) => ({
-  currentUser: {
-    id: "0",
-    name: newState.login,
-    photo: "",
-    course: 0,
-  },
-}));
+})
+  .on(login, (oldState, newState) => ({
+    currentUser: {
+      id: "0",
+      name: newState.login,
+      photo: "",
+      course: 0,
+    },
+  }))
+  .on(logout, () => ({
+    currentUser: null,
+  }));
 
 export const selectors = {
   useUser,
@@ -42,4 +42,5 @@ export const selectors = {
 
 export const events = {
   login,
+  logout,
 };

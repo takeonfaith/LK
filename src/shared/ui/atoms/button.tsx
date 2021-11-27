@@ -3,14 +3,18 @@ import styled from "styled-components";
 import useTheme from "../../lib/hooks/use-theme";
 import Themes from "../colors";
 
-const ButtonWrapper = styled.button<{ theme: string; text: boolean }>`
+const ButtonWrapper = styled.button<{
+  theme: string;
+  text: boolean;
+  isChosen: boolean;
+}>`
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
   outline: none;
   color: var(--text);
-  background: var(--search);
+  background: ${({ isChosen }) => (isChosen ? "var(--blue)" : "var(--search)")};
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
@@ -29,19 +33,25 @@ const ButtonWrapper = styled.button<{ theme: string; text: boolean }>`
 `;
 
 interface Props {
-	icon: JSX.Element;
-	text?: string;
-	onClick: (event: any) => void;
+  icon: JSX.Element;
+  text?: string;
+  onClick: (event: any) => void;
+  isChosen?: boolean;
 }
 
-const Button = memo(({ icon, text, onClick }: Props) => {
-	const { theme } = useTheme();
-	return (
-		<ButtonWrapper text={!!text} onClick={onClick} theme={Themes[theme]}>
-			{!!icon && icon}
-			<span>{text}</span>
-		</ButtonWrapper>
-	);
+const Button = memo(({ icon, text, onClick, isChosen = false }: Props) => {
+  const { theme } = useTheme();
+  return (
+    <ButtonWrapper
+      text={!!text}
+      onClick={onClick}
+      theme={Themes[theme]}
+      isChosen={isChosen}
+    >
+      {!!icon && icon}
+      <span>{text}</span>
+    </ButtonWrapper>
+  );
 });
 
 export default Button;

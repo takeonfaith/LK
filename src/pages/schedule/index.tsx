@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FiSearch, FiUsers } from "react-icons/fi";
 import styled from "styled-components";
+import { scheduleModel } from "../../entities/schedule";
 import { WeekDayButton, WeekSchedule } from "../../features/schedule/ui";
+import ScheduleViewButtonsList from "../../features/schedule/ui/molecules/schedule-view-buttons-list";
+import WeekDayButtonsList from "../../features/schedule/ui/molecules/week-day-buttons-list";
 import Slider from "../../features/slider/molecules/slider";
-import { IWeekSchedule } from "../../shared/api/model";
+import { IWeekSchedule, ViewType } from "../../shared/api/model";
 import { Input, Wrapper } from "../../shared/ui/atoms";
 
 const SchedulePageContent = styled.div`
@@ -17,10 +20,17 @@ const SchedulePageContent = styled.div`
     max-width: 400px;
     font-size: 0.8em;
   }
+
+  .buttons-and-search {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
 `;
 
 const SchedulePage = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const { schedule, currentModule, view } =
+    scheduleModel.selectors.useSchedule();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,473 +39,6 @@ const SchedulePage = () => {
     }, 1000);
   }, []);
   const [value, setValue] = useState("191-722");
-  const schedule = {
-    "0": {
-      monday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      tuesday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      wednesday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      thursday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      friday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      saturday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-    },
-    "1": {
-      monday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Матeематика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      tuesday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      wednesday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      thursday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      friday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-      saturday: {
-        subjects: [
-          {
-            timeInterval: "9:00 - 10:30",
-            name: "Математика",
-            place: "Webinar",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "10:40 - 12:10",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "12:20 - 13:50",
-            name: "Технология кроссплатформенного программирования (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Программирование",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-          {
-            timeInterval: "14:30 - 16:00",
-            name: "Теория информационных процессов и систем (Лаб. работа)",
-            place: "Пряники",
-            teachers: ["Колесникова В. А.", "Ципенюк А. Б."],
-            dateInterval: "4 сен - 1 нояб",
-          },
-        ],
-      },
-    },
-  };
 
   return (
     <Wrapper loading={loading}>
@@ -503,20 +46,34 @@ const SchedulePage = () => {
         <div className="slider-wrapper">
           <Slider
             pages={["Первый модуль", "Второй модуль"]}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+            currentPage={parseInt(currentModule)}
+            setCurrentPage={(currentPage: number) =>
+              scheduleModel.events.changeCurrentModule({
+                currentModule: currentPage,
+              })
+            }
           />
         </div>
-        <Input
-          value={value}
-          setValue={setValue}
-          placeholder="Номер группы"
-          leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}
-        />
+        <div className="buttons-and-search">
+          <ScheduleViewButtonsList
+            view={view}
+            setView={(view: ViewType) =>
+              scheduleModel.events.changeView({ view })
+            }
+          />
+          <Input
+            value={value}
+            setValue={setValue}
+            placeholder="Номер группы"
+            leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}
+          />
+        </div>
+        <WeekDayButtonsList />
         <WeekSchedule
+          view={view}
           weekSchedule={
             schedule[
-              currentPage.toString() as keyof {
+              currentModule.toString() as keyof {
                 "0": IWeekSchedule;
                 "1": IWeekSchedule;
               }

@@ -11,8 +11,14 @@ const ContentWrapper = styled.div`
   height: 100%;
   z-index: 3;
   background: var(--theme);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
+
+  .page-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    height: calc(100vh - 45px);
+  }
 `;
 
 const ContentLayout = () => {
@@ -21,7 +27,9 @@ const ContentLayout = () => {
       <LeftsideBar />
       <ContentWrapper>
         <Header />
-        <PrivateRouter />
+        <div className="page-content">
+          <PrivateRouter />
+        </div>
       </ContentWrapper>
       <Modal />
     </div>

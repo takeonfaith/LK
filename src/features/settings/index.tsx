@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Slider from "../slider/molecules/slider";
+import Account from "./pages/account";
 import Appearance from "./pages/appearance";
 import CustomizeMenu from "./pages/customize-menu";
 import General from "./pages/general";
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
 
 const SettingsPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const pages = [<General />, <Appearance />, <CustomizeMenu />];
+  const pages = [<General />, <Appearance />, <CustomizeMenu />, <Account />];
   return (
     <Wrapper>
       <Slider

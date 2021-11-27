@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { ISubject } from "../../../../shared/api/model";
+import {
+  ISubject,
+  ITimeIntervalColor,
+  TimeIntervalColor,
+} from "../../../../shared/api/model";
 
 const SubjectWrapper = styled.div<{
   isCurrent: boolean;
@@ -14,7 +18,7 @@ const SubjectWrapper = styled.div<{
       : "var(--schedule)"};
   color: ${({ isCurrent }) => (isCurrent ? "#fff" : "var(--text)")};
   padding: 20px 15px;
-  box-shadow: 0 0 2px #8a8a8a;
+  border-radius: 9px;
 
   .time-and-place {
     font-size: 0.7em;
@@ -77,8 +81,13 @@ const Subject = ({
         <span
           className="time"
           style={{
-            background: colors[index],
-            boxShadow: `0 0 30px ${colors2[index]}`,
+            background:
+              TimeIntervalColor[timeInterval as keyof ITimeIntervalColor]
+                .primary,
+            boxShadow: `0 0 30px ${
+              TimeIntervalColor[timeInterval as keyof ITimeIntervalColor]
+                .secondary
+            }`,
           }}
         >
           {timeInterval}

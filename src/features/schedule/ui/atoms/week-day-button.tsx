@@ -1,20 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import { ISubjects } from "../../../../shared/api/model";
-import { Colors } from "../../../../shared/consts";
+import { scheduleModel } from "../../../../entities/schedule";
+import {
+  ISubjects,
+  ITimeIntervalColor,
+  TimeIntervalColor,
+} from "../../../../shared/api/model";
 import { Title } from "../../../../shared/ui/atoms";
 
-const WeekDayButtonWrapper = styled.button`
+const WeekDayButtonWrapper = styled.button<{ isCurrent: boolean }>`
   padding: 10px;
   border-radius: 10px;
-  background: var(--mild-theme);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border: none;
-  color: var(--text);
+  color: ${({ isCurrent }) => (isCurrent ? "#000" : "var(--text)")};
   row-gap: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: 0.2s;
+  width: 100px;
+  user-select: none;
+  opacity: ${({ isCurrent }) => (isCurrent ? "1" : "0.7")};
+  transform: scale(${({ isCurrent }) => (isCurrent ? "1" : "0.9")});
+  background: ${({ isCurrent }) =>
+    isCurrent ? "var(--lightBlue)" : "var(--mild-theme)"};
 
   .marker-circles {
     display: flex;
@@ -29,20 +41,34 @@ const WeekDayButtonWrapper = styled.button`
   }
 `;
 
-type Props = ISubjects & { weekDay: string };
+type Props = ISubjects & { weekDay: string; isCurrent: boolean; index: number };
 
-const WeekDayButton = ({ weekDay, subjects }: Props) => {
+const WeekDayButton = ({ weekDay, subjects, isCurrent, index }: Props) => {
   return (
-    <WeekDayButtonWrapper>
+    <WeekDayButtonWrapper
+      isCurrent={isCurrent}
+      onClick={() =>
+        scheduleModel.events.changeCurrentChosenDay({ day: index })
+      }
+    >
       <Title size={4}>{weekDay}</Title>
       <span className="marker-circles">
-        {Object.values(Colors).map((color) => {
-          return (
-            <span
-              className="marker-circle"
-              style={{ background: color.primary }}
-            />
-          );
+        {subjects.map((subject) => {
+          if (
+            TimeIntervalColor[subject.timeInterval as keyof ITimeIntervalColor]
+          ) {
+            return (
+              <span
+                className="marker-circle"
+                style={{
+                  background:
+                    TimeIntervalColor[
+                      subject.timeInterval as keyof ITimeIntervalColor
+                    ].primary,
+                }}
+              />
+            );
+          }
         })}
       </span>
     </WeekDayButtonWrapper>

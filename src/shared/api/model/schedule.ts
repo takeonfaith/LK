@@ -21,6 +21,21 @@ export interface IWeekSchedule {
   saturday: ISubjects;
 }
 
+export interface IModules {
+  "0": IWeekSchedule;
+  "1": IWeekSchedule;
+}
+
+export type ViewType = "full" | "big";
+
+export interface ISchedule {
+  schedule: IModules;
+  currentModule: "0" | "1";
+  currentDay: number;
+  currentChosenDay: number;
+  view: ViewType;
+}
+
 export type TimeIntervals =
   | "9:00 - 10:30"
   | "10:40 - 12:10"
@@ -28,7 +43,15 @@ export type TimeIntervals =
   | "14:30 - 16:00"
   | "16:10 - 17:40";
 
-export const TimeIntervalColor = {
+export interface ITimeIntervalColor {
+  "9:00 - 10:30": any;
+  "10:40 - 12:10": any;
+  "12:20 - 13:50": any;
+  "14:30 - 16:00": any;
+  "16:10 - 17:40": any;
+}
+
+export const TimeIntervalColor: ITimeIntervalColor = {
   "9:00 - 10:30": Colors.lightGreen,
   "10:40 - 12:10": Colors.blue,
   "12:20 - 13:50": Colors.purple,

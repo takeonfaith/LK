@@ -10,16 +10,16 @@ const GlobalStyles = createGlobalStyle`
 	}
 
 	::-webkit-scrollbar {
-		width: 13px;
+		width: 14px;
 	}
 
 	::-webkit-scrollbar-track {
-		background-color: var(--theme);
+		background-color: var(--mild-theme);
 	}
 
 	::-webkit-scrollbar-thumb {
 		border-radius: 100px;
-		border: 3px solid transparent;
+		border: 4px solid transparent;
 		background-clip: content-box;
 		background-color: var(--theme-mild-opposite);
 	}
@@ -48,6 +48,7 @@ const GlobalStyles = createGlobalStyle`
 		--search2: #313131;
 		--search: #313131;
 		--text: #f0f0f0;
+		--invert-text: #272727;
 		--select: #292929;
 		--content: #474747;
 		--invert: 0;
@@ -62,6 +63,7 @@ const GlobalStyles = createGlobalStyle`
 		--mildPurple: #8d91f8;
 		--orange: #f0b357;
 		--reallyBlue: #567dff;
+		--lightBlue: #dbdbff;
 		--darker: #272727;	
 		--purpleGradient: linear-gradient(45deg,#99a2f4,#b199f4);
 		--orangeGradient: linear-gradient(45deg,#e27992,#f4af99);
@@ -79,6 +81,7 @@ const GlobalStyles = createGlobalStyle`
 		--leftside-bar-shadow: 5px 5px 10px hsla(0,0%,40.8%,0.24);
 		--header: #e9e9e9;
 		--text: #272727;
+		--invert-text: #f0f0f0;
 		--select: #f3f3f3;
 		--content: #f1f1f1;
 		--invert: 1;
@@ -94,6 +97,7 @@ const GlobalStyles = createGlobalStyle`
 		--purple: #9094fe;
 		--mildPurple: #9a99ff;
 		--reallyBlue: #567dff;
+		--lightBlue: #dbdbff;
 		--darker: #c4c4c4;
 		--purpleGradient: linear-gradient(90deg,#6e72eb,rgb(91 129 237));
 		--orangeGradient: linear-gradient(45deg,#ffbdf1,#ff94ad);
