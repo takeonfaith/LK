@@ -9,6 +9,22 @@ const GlobalStyles = createGlobalStyle`
 		-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 	}
 
+	::-webkit-scrollbar {
+		width: 13px;
+	}
+
+	::-webkit-scrollbar-track {
+		background-color: var(--theme);
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 100px;
+		border: 3px solid transparent;
+		background-clip: content-box;
+		background-color: var(--theme-mild-opposite);
+	}
+
+
 	h1 {
 		color: var(--text-color);
 	}
@@ -37,6 +53,7 @@ const GlobalStyles = createGlobalStyle`
 		--invert: 0;
 		--closeToContent: #3a3a3a;
 		--theme: #3a3a3a;
+		--theme-mild-opposite: #d2d2d2;
 		--settings: #292929;
 		--blue: #90b3e7;
 		--green: #94f0b9;
@@ -50,6 +67,8 @@ const GlobalStyles = createGlobalStyle`
 		--orangeGradient: linear-gradient(45deg,#e27992,#f4af99);
 		--almostTransparent: rgba(0,0,0,0.281);
 		--almostTransparentOpposite: hsla(0,0%,100%,0.103);
+		--schedule: #2e2e2e;
+		--schedule-shadow: 0;
 	}
 
 	html[data-theme=light] {
@@ -65,6 +84,7 @@ const GlobalStyles = createGlobalStyle`
 		--invert: 1;
 		--closeToContent: #f3f3f3;
 		--theme: #fff;
+		--theme-mild-opposite: #565656;
 		--search2: #eee;
 		--search: #e7e7e7;
 		--settings: #dadada;
@@ -79,6 +99,8 @@ const GlobalStyles = createGlobalStyle`
 		--orangeGradient: linear-gradient(45deg,#ffbdf1,#ff94ad);
 		--almostTransparent: hsla(0,0%,87.8%,0.486);
 		--almostTransparentOpposite: rgba(53,53,53,0.151);
+		--schedule: #fff;
+		--schedule-shadow: 0 0 2px rgb(0 0 0 / 24%);
 	}
 `;
 

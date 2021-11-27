@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FiSearch } from "react-icons/fi";
 import Input from "../atoms/input";
 
 interface Props<T> {
@@ -19,7 +20,12 @@ const LocalSearch = <T,>({
   }, [value, setResult, searchEngine, whereToSearch]);
 
   return (
-    <Input value={value} setValue={setValue} placeholder="Поиск по меню" />
+    <Input
+      value={value}
+      setValue={setValue}
+      placeholder="Поиск по меню"
+      leftIcon={<FiSearch />}
+    />
   );
 };
 

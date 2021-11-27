@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Slider from "../../features/slider/molecules/slider";
+import Slider from "../slider/molecules/slider";
 import Appearance from "./pages/appearance";
 import CustomizeMenu from "./pages/customize-menu";
 import General from "./pages/general";

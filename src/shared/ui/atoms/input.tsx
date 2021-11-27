@@ -1,9 +1,10 @@
+import { spawn } from "child_process";
 import React from "react";
 import { FiX } from "react-icons/fi";
 import styled from "styled-components";
 import Button from "./button";
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ leftIcon: boolean }>`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -13,6 +14,14 @@ const InputWrapper = styled.div`
 
   h5 {
     margin-bottom: 5px;
+  }
+
+  .icon {
+    position: absolute;
+    left: 7px;
+    top: 55%;
+    transform: translateY(-50%);
+    color: var(--text);
   }
 
   input {
@@ -25,6 +34,7 @@ const InputWrapper = styled.div`
     padding: 10px;
     font-weight: bold;
     border-radius: 7px;
+    padding-left: ${({ leftIcon }) => (leftIcon ? "30px" : "10px")};
 
     &::placeholder {
       font-weight: 500;
@@ -53,6 +63,7 @@ const InputWrapper = styled.div`
 interface Props {
   value: string;
   setValue: (value: string) => void;
+  leftIcon?: React.ReactNode;
   title?: string;
   placeholder?: string;
   type?: string;
@@ -61,13 +72,15 @@ interface Props {
 const Input = ({
   value,
   setValue,
+  leftIcon,
   title,
   placeholder = "Введите сюда",
   type = "text",
 }: Props) => {
   return (
-    <InputWrapper>
+    <InputWrapper leftIcon={!!leftIcon}>
       {!!title && <h5>{title}</h5>}
+      {leftIcon && <span className="icon">{leftIcon}</span>}
       <input
         type={type}
         placeholder={placeholder}

@@ -5,6 +5,7 @@ import getChosenRoutes from "../../lib/get-chosen-routes";
 import getNotChosenRoutes from "../../lib/get-not-chosen-routes";
 import LeftsideBarListWrapper from "../atoms/leftside-bar-list-wrapper";
 import LeftsideBarItem from "../molecules/leftside-bar-item";
+import LeftsideBarItemButton from "../molecules/leftside-bar-item-button";
 import LeftsideBarDropdown from "./leftside-bar-dropdown";
 
 const LeftsideBarList = memo(() => {
@@ -30,14 +31,11 @@ const LeftsideBarList = memo(() => {
       )}
       <LeftsideBarDropdown
         heading={
-          <LeftsideBarItem
+          <LeftsideBarItemButton
             key={0}
             id={0}
             icon={FiCompass}
             title={"Другое"}
-            path={"/home"}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
           />
         }
         height={Object.values(getNotChosenRoutes(setting)).length * 54}

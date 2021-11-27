@@ -1,10 +1,6 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const LeftsideBarItemWrapper = styled(Link)<{
-  isCurrent: boolean;
-  currentPage: number;
-}>`
+const LeftsideBarItemButtonWrapper = styled.button`
   position: relative;
   display: flex;
   align-items: center;
@@ -17,6 +13,9 @@ const LeftsideBarItemWrapper = styled(Link)<{
   position: relative;
   user-select: none;
   text-decoration: none;
+  border: none;
+  background: transparent;
+  color: var(--text);
 
   svg {
     width: 22px;
@@ -26,8 +25,8 @@ const LeftsideBarItemWrapper = styled(Link)<{
 
   &::before {
     content: "";
-    width: ${({ isCurrent }) => (isCurrent ? "3px" : "0")};
     height: 20px;
+    width: 0;
     display: block;
     position: absolute;
     top: 50%;
@@ -42,11 +41,6 @@ const LeftsideBarItemWrapper = styled(Link)<{
     width: 5px;
     background: var(--red);
   }
-
-  svg,
-  strong {
-    color: ${({ isCurrent }) => (isCurrent ? "var(--blue)" : "var(--text)")};
-  }
 `;
 
-export default LeftsideBarItemWrapper;
+export default LeftsideBarItemButtonWrapper;

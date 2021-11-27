@@ -85,8 +85,8 @@ export const privateRoutes: IRoutes = {
     id: 2,
     title: "Расписание",
     icon: BiTimeFive,
-    path: TEMPLATE_CHAT_ROUTE,
-    Component: ChatPage,
+    path: SCHEDULE_ROUTE,
+    Component: SchedulePage,
     isTemplate: true,
   },
   3: {

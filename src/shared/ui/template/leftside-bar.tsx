@@ -1,16 +1,18 @@
 import React from "react";
+import { IRoute, privateRoutes } from "../../../app/routes/routes";
+import LeftsideBarList from "../../../features/leftside-bar/ui/organisms/leftside-bar-list";
 import LeftsideBarWrapper from "../atoms/leftside-bar-wrapper";
 import Logo from "../atoms/logo";
-import LeftsideBarList from "../../../features/leftside-bar/ui/organisms/leftside-bar-list";
 import LocalSearch from "../molecules/local-search";
-import { privateRoutes } from "../../../app/routes/routes";
 
 const LeftsideBar = () => {
   return (
     <LeftsideBarWrapper>
       <Logo />
       <LocalSearch
-        whereToSearch={[privateRoutes]}
+        whereToSearch={[
+          Object.values(privateRoutes).map((el: IRoute) => el.title),
+        ]}
         setResult={() => null}
         searchEngine={() => []}
       />
