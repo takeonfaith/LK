@@ -64,7 +64,7 @@ const WeekDayButton = ({ weekDay, subjects, isCurrent, index }: Props) => {
                   background:
                     TimeIntervalColor[
                       subject.timeInterval as keyof ITimeIntervalColor
-                    ].primary,
+                    ].main,
                 }}
               />
             );

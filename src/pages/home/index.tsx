@@ -1,34 +1,25 @@
 import React from "react";
 import { userModel } from "../../entities/user";
+import ScheduleAndNotification from "../../features/home/ui/organisms/schedule-and-notification";
 import UserInfo from "../../features/home/ui/organisms/user-info";
-import { Title, Wrapper } from "../../shared/ui/atoms";
+import { Wrapper } from "../../shared/ui/atoms";
 import { Content } from "./ui/atoms/content";
 
 export default Home;
 
 function Home() {
-	const { currentUser: user } = userModel.selectors.useUser();
+  const { currentUser: user } = userModel.selectors.useUser();
 
-	return (
-		<Wrapper loading={!user}>
-			<Content>
-				{user && (
-					<div>
-						<UserInfo user={user} />
-						<section></section>
-						<section>
-							<article>
-								<Title size={3}>
-									<div></div>
-								</Title>
-							</article>
-							<article></article>
-							<article></article>
-							<article></article>
-						</section>
-					</div>
-				)}
-			</Content>
-		</Wrapper >
-	)
+  return (
+    <Wrapper loading={!user}>
+      <Content>
+        {user && (
+          <div className="home-page-content-inner">
+            <UserInfo user={user} />
+            <ScheduleAndNotification />
+          </div>
+        )}
+      </Content>
+    </Wrapper>
+  );
 }

@@ -34,7 +34,7 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
 `;
 
 interface Props {
-  children: JSX.Element | string;
+  children?: JSX.Element | string | null;
   loading: boolean;
 }
 

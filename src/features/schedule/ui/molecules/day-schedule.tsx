@@ -8,7 +8,13 @@ import inTimeInterval from "../../lib/in-time-interval";
 import { Subject } from "../atoms";
 import TodayPlate from "../atoms/today-plate";
 
-type Props = ISubjects & { weekDay: string; isCurrent: boolean; view: string };
+type Props = ISubjects & {
+  weekDay?: string;
+  isCurrent?: boolean;
+  view?: string;
+  width?: number;
+  height?: number;
+};
 
 const findOpacity = (
   isCurrent: boolean,
@@ -34,10 +40,16 @@ const DayScheduleWrapper = styled.div<{
   isCurrent: boolean;
   isFull: boolean;
   isVisible: boolean;
+  width?: number | undefined;
+  height?: number | undefined;
 }>`
   display: flex;
   flex-direction: column;
-  min-width: ${({ isFull }) => (isFull ? "calc(100% / 6 - 9px)" : "400px")};
+  min-width: ${({ width, isFull }) =>
+    !!width ? width + "px" : isFull ? "calc(100% / 6 - 9px)" : "400px"};
+  width: ${({ width, isFull }) =>
+    !!width ? width + "px" : isFull ? "calc(100% / 6 - 9px)" : "400px"};
+  height: ${({ height }) => (!!height ? height + "px" : "fit-content")};
   transition: 0.2s;
   color: var(--text);
   opacity: ${({ isCurrent, isFull, isVisible }) =>
@@ -46,6 +58,7 @@ const DayScheduleWrapper = styled.div<{
     ${({ isCurrent, isFull, isVisible }) =>
       findScale(isCurrent, isFull, isVisible)}
   );
+  overflow-y: auto;
 
   .day-title {
     display: flex;
@@ -61,13 +74,26 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
   overflow: hidden;
   box-shadow: var(--schedule-shadow);
   padding: 6px;
-  background: var(--search);
+  background: var(--scheduleBg);
   display: flex;
   flex-direction: column;
   row-gap: 6px;
+  overflow-y: auto;
+  scroll-snap-type: y proximity;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
 `;
 
-const DaySchedule = ({ subjects, weekDay, isCurrent, view }: Props) => {
+const DaySchedule = ({
+  subjects,
+  weekDay,
+  isCurrent,
+  view,
+  width,
+  height,
+}: Props) => {
   const dayRef = useRef<null | HTMLDivElement>(null);
   const { currentChosenDay } = scheduleModel.selectors.useSchedule();
   const isOnScreen = useOnScreen(dayRef);
@@ -79,22 +105,28 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view }: Props) => {
 
   return (
     <DayScheduleWrapper
-      isCurrent={isCurrent}
+      isCurrent={isCurrent ?? false}
       isFull={view === "full"}
       isVisible={isOnScreen}
       ref={dayRef}
+      width={width}
+      height={height}
     >
-      <div className="day-title">
-        <Title size={4}>{weekDay}</Title>
-        {isCurrent && <TodayPlate />}
-      </div>
+      {!!weekDay && (
+        <div className="day-title">
+          <Title size={4}>{weekDay}</Title>
+          {isCurrent && <TodayPlate />}
+        </div>
+      )}
       <DayScheduleListWrapper isFull={view === "full"}>
         {subjects.map((subject: ISubject, index) => {
           return (
             <Subject
               {...subject}
               index={index}
-              isCurrent={isCurrent && inTimeInterval(subject.timeInterval)}
+              isCurrent={
+                (isCurrent && inTimeInterval(subject.timeInterval)) ?? false
+              }
             />
           );
         })}

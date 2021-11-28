@@ -7,8 +7,6 @@ const GlobalStyles = createGlobalStyle`
 		box-sizing: border-box;
 		font-family: "Montserrat", sans-serif;
 		-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
-
-		color: var(--text);
 	}
 
 	::-webkit-scrollbar {
@@ -72,6 +70,7 @@ const GlobalStyles = createGlobalStyle`
 		--almostTransparent: rgba(0,0,0,0.281);
 		--almostTransparentOpposite: hsla(0,0%,100%,0.103);
 		--schedule: #2e2e2e;
+		--scheduleBg: #232323;
 		--schedule-shadow: 0;
 	}
 
@@ -106,6 +105,7 @@ const GlobalStyles = createGlobalStyle`
 		--almostTransparent: hsla(0,0%,87.8%,0.486);
 		--almostTransparentOpposite: rgba(53,53,53,0.151);
 		--schedule: #fff;
+		--scheduleBg: #eee;
 		--schedule-shadow: 0 0 2px rgb(0 0 0 / 24%);
 	}
 `;

@@ -5,11 +5,14 @@ import {
   ITimeIntervalColor,
   TimeIntervalColor,
 } from "../../../../shared/api/model";
+import NowPlate from "./now-plate";
 
 const SubjectWrapper = styled.div<{
   isCurrent: boolean;
   color: string;
   color2: string;
+  darkColor: string;
+  transparent: string;
 }>`
   width: 100%;
   background: ${({ isCurrent, color, color2 }) =>
@@ -19,14 +22,19 @@ const SubjectWrapper = styled.div<{
   color: ${({ isCurrent }) => (isCurrent ? "#fff" : "var(--text)")};
   padding: 20px 15px;
   border-radius: 9px;
+  scroll-snap-align: center;
 
   .time-and-place {
     font-size: 0.7em;
+    /* display: flex; */
     .time {
       padding: 3px 10px;
-      background: rgb(64, 197, 197);
-      color: #fff;
+      background: var(--search);
+      background: ${({ isCurrent, darkColor, color2 }) =>
+        isCurrent ? darkColor : color2};
       border-radius: 100px;
+      box-shadow: ${({ transparent }) => `0 0 30px ${transparent}`};
+      color: #fff;
     }
   }
 
@@ -57,41 +65,23 @@ const Subject = ({
   index,
   isCurrent,
 }: Props) => {
-  const colors = [
-    "rgb(64, 197, 197)",
-    "rgb(95, 109, 236)",
-    "rgb(168, 95, 236)",
-    "rgb(236, 95, 182)",
-    "rgb(236, 95, 107)",
-  ];
-  const colors2 = [
-    "rgba(64, 197, 197, .3)",
-    "rgba(95, 109, 236, .3)",
-    "rgba(168, 95, 236, .3)",
-    "rgba(236, 95, 182, .3)",
-    "rgba(236, 95, 107, .3)",
-  ];
   return (
     <SubjectWrapper
       isCurrent={isCurrent}
-      color={colors[index]}
-      color2={colors2[index]}
+      color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].darker}
+      color2={
+        TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].lighter
+      }
+      darkColor={
+        TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark
+      }
+      transparent={
+        TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent
+      }
     >
       <h4 className="time-and-place">
-        <span
-          className="time"
-          style={{
-            background:
-              TimeIntervalColor[timeInterval as keyof ITimeIntervalColor]
-                .primary,
-            boxShadow: `0 0 30px ${
-              TimeIntervalColor[timeInterval as keyof ITimeIntervalColor]
-                .secondary
-            }`,
-          }}
-        >
-          {timeInterval}
-        </span>
+        <span className="time">{timeInterval}</span>
+        {/* {isCurrent && <NowPlate />} */}
         <span className="place"> {place}</span>
         {/* <span className="currentOrNext" >{isToday ? inTimeInterval(time, currentDay) ? "Сейчас" : isNextSubject(time, currentDay) ? "Следующая" : null : null}</span> */}
       </h4>
