@@ -1,12 +1,37 @@
 import React from 'react';
+import { ShortCutLinksType } from '../../../../shared/consts';
+import { useSettings } from '../../../../shared/lib/contexts/settings-context';
+import getChosenRoutes from '../../../leftside-bar/lib/get-chosen-routes';
 import { Section } from '../atoms/section';
+import { ShortCutItem, ShortCutList } from '../atoms/short-cut';
+import ShortCutLink from '../molecules/short-cut-link';
 
 export default ShortCutLinks;
 
+const colors = [
+	'purple',
+	'lightGreen',
+	'red',
+	'blue'
+]
 function ShortCutLinks() {
+	const { change, setting } = useSettings<ShortCutLinksType>('shortCutLinks');
+	const enabledLeftsideBarItems = getChosenRoutes(setting);
+	console.log(enabledLeftsideBarItems);
+
 	return (
 		<Section>
-
+			<ShortCutList>
+				{setting.map((menuIndex, i) =>
+					<ShortCutItem key={menuIndex}>
+						<ShortCutLink
+							title={enabledLeftsideBarItems[menuIndex].title}
+							icon={enabledLeftsideBarItems[menuIndex].icon}
+							to={enabledLeftsideBarItems[menuIndex].path}
+							color={colors[i]}
+						/>
+					</ShortCutItem>)}
+			</ShortCutList>
 		</Section>
 	)
 }

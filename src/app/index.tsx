@@ -5,15 +5,15 @@ import SettingsProvider from "../shared/lib/contexts/settings-context";
 import Router from "./routes/router";
 
 const App = () => {
-  return (
-    <ModalProvider>
-      <SettingsProvider>
-        <HashRouter basename="/">
-          <Router />
-        </HashRouter>
-      </SettingsProvider>
-    </ModalProvider>
-  );
+	return (
+		<ModalProvider>
+			<SettingsProvider>
+				<HashRouter basename="/">
+					<Router />
+				</HashRouter>
+			</SettingsProvider>
+		</ModalProvider>
+	);
 };
 
 export default App;

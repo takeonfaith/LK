@@ -19,7 +19,7 @@ export const MoreInfoLink = styled.div`
 `;
 
 export const MoreInfoContent = styled.div`
-	min-width: 600px;
+	width: 700px;
 `;
 
 export const Description = styled.div`
