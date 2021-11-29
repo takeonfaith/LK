@@ -22,6 +22,7 @@ const WeekDayButtonWrapper = styled.button<{ isCurrent: boolean }>`
   outline: none;
   transition: 0.2s;
   width: 100px;
+  height: 54px;
   user-select: none;
   opacity: ${({ isCurrent }) => (isCurrent ? "1" : "0.7")};
   transform: scale(${({ isCurrent }) => (isCurrent ? "1" : "0.9")});
@@ -32,11 +33,17 @@ const WeekDayButtonWrapper = styled.button<{ isCurrent: boolean }>`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .marker-circle {
       width: 8px;
       height: 8px;
       margin: 0px 3px;
       border-radius: 100%;
+    }
+
+    img {
+      width: 20px;
+      height: 20px;
     }
   }
 `;
@@ -70,6 +77,12 @@ const WeekDayButton = ({ weekDay, subjects, isCurrent, index }: Props) => {
             );
           }
         })}
+        {!subjects.length && (
+          <img
+            src="https://i.pinimg.com/originals/d5/2c/46/d52c464bef731d5a93570687acd99b79.gif"
+            alt="спим"
+          />
+        )}
       </span>
     </WeekDayButtonWrapper>
   );

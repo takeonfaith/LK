@@ -11,6 +11,7 @@ const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
   transition: 0.2s;
   height: ${({ isFull }) => (!isFull ? "50px" : "0px")};
   opacity: ${({ isFull }) => (!isFull ? "1" : "0")};
+  visibility: ${({ isFull }) => (!isFull ? "visible" : "hidden")};
 `;
 
 const WeekDayButtonsList = () => {

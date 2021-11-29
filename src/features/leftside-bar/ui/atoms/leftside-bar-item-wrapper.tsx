@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const LeftsideBarItemWrapper = styled(Link)<{
   isCurrent: boolean;
-  currentPage: number;
 }>`
   position: relative;
   display: flex;

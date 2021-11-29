@@ -4,7 +4,7 @@ import { IRoute, privateRoutes } from "../../../app/routes/routes";
 
 const useCurrentPage = () => {
   const history = useHistory();
-  const [currentPage, setCurrentPage] = useState(
+  const [currentPage, setCurrentPage] = useState<IRoute>(
     Object.values(privateRoutes).find(
       (link: IRoute) => link.path === history.location.pathname
     ) ?? privateRoutes[0]

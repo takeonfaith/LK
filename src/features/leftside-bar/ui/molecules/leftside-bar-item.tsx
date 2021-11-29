@@ -7,26 +7,18 @@ interface Props {
   title: string;
   icon: IconType;
   path: string;
-  currentPage: number;
-  setCurrentPage: (currentPage: number) => void;
+  isCurrent: boolean;
 }
 
 const LeftsideBarItem = memo(
-  ({ id, path, icon, title, currentPage, setCurrentPage }: Props) => {
-    const showIcon = () => {
-      const Icon = icon;
-      return <Icon />;
-    };
-
+  ({ id, path, icon: Icon, title, isCurrent }: Props) => {
     return (
       <LeftsideBarItemWrapper
         to={path}
         className="leftside-bar-item"
-        onClick={() => setCurrentPage(id)}
-        currentPage={currentPage}
-        isCurrent={id === currentPage}
+        isCurrent={isCurrent}
       >
-        {showIcon()}
+        <Icon />
         <strong>{title}</strong>
       </LeftsideBarItemWrapper>
     );

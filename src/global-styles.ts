@@ -9,6 +9,10 @@ const GlobalStyles = createGlobalStyle`
 		-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 	}
 
+	body {
+		overflow: hidden;
+	}
+
 	::-webkit-scrollbar {
 		width: 14px;
 	}
@@ -35,7 +39,7 @@ const GlobalStyles = createGlobalStyle`
 		--grey: #808080;
 		--brLight: 9px;
 		--brSemi: 19px;
-		--bBold: 30px;
+		--brBold: 30px;
 	}
 
 	html[data-theme=dark] {

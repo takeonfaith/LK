@@ -5,7 +5,6 @@ import {
   ITimeIntervalColor,
   TimeIntervalColor,
 } from "../../../../shared/api/model";
-import NowPlate from "./now-plate";
 
 const SubjectWrapper = styled.div<{
   isCurrent: boolean;

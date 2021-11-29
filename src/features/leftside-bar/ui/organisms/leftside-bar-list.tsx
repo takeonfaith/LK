@@ -1,6 +1,7 @@
 import React, { memo, useState } from "react";
 import { FiCompass } from "react-icons/fi";
 import { useSettings } from "../../../../shared/lib/contexts/settings-context";
+import useCurrentPage from "../../../../shared/lib/hooks/use-current-page";
 import getChosenRoutes from "../../lib/get-chosen-routes";
 import getNotChosenRoutes from "../../lib/get-not-chosen-routes";
 import LeftsideBarListWrapper from "../atoms/leftside-bar-list-wrapper";
@@ -9,7 +10,7 @@ import LeftsideBarItemButton from "../molecules/leftside-bar-item-button";
 import LeftsideBarDropdown from "./leftside-bar-dropdown";
 
 const LeftsideBarList = memo(() => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const currentPage = useCurrentPage();
   const { setting } = useSettings<number[]>("menu");
 
   return (
@@ -23,8 +24,7 @@ const LeftsideBarList = memo(() => {
               icon={icon}
               title={title}
               path={path}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
+              isCurrent={currentPage.id === id}
             />
           );
         }
@@ -49,8 +49,7 @@ const LeftsideBarList = memo(() => {
                 icon={icon}
                 title={title}
                 path={path}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
+                isCurrent={currentPage.id === id}
               />
             );
           }

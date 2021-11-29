@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { scheduleModel } from "../../../../entities/schedule";
 import { ISubject, ISubjects } from "../../../../shared/api/model";
+import getCorrentWordForm from "../../../../shared/lib/get-correct-word-form";
 import useOnScreen from "../../../../shared/lib/hooks/use-on-screen";
 import { Title } from "../../../../shared/ui/atoms";
 import inTimeInterval from "../../lib/in-time-interval";
 import { Subject } from "../atoms";
+import HolidayPlate from "../atoms/holiday-plate";
 import TodayPlate from "../atoms/today-plate";
 
 type Props = ISubjects & {
@@ -28,12 +30,8 @@ const findOpacity = (
   }
 };
 
-const findScale = (isCurrent: boolean, isFull: boolean, isVisible: boolean) => {
-  if (isFull) {
-    return isCurrent ? 1 : 0.97;
-  } else {
-    return isVisible ? 1 : 0.9;
-  }
+const findScale = (isVisible: boolean) => {
+  return isVisible ? 1 : 0.9;
 };
 
 const DayScheduleWrapper = styled.div<{
@@ -48,16 +46,13 @@ const DayScheduleWrapper = styled.div<{
   min-width: ${({ width, isFull }) =>
     !!width ? width + "px" : isFull ? "calc(100% / 6 - 9px)" : "400px"};
   width: ${({ width, isFull }) =>
-    !!width ? width + "px" : isFull ? "calc(100% / 6 - 9px)" : "400px"};
+    !!width ? width + "px" : isFull ? "calc(100% / 6)" : "400px"};
   height: ${({ height }) => (!!height ? height + "px" : "fit-content")};
   transition: 0.2s;
   color: var(--text);
   opacity: ${({ isCurrent, isFull, isVisible }) =>
     findOpacity(isCurrent, isFull, isVisible)};
-  transform: scale(
-    ${({ isCurrent, isFull, isVisible }) =>
-      findScale(isCurrent, isFull, isVisible)}
-  );
+  transform: scale(${({ isVisible }) => findScale(isVisible)});
   overflow-y: auto;
 
   .day-title {
@@ -66,6 +61,18 @@ const DayScheduleWrapper = styled.div<{
     column-gap: 10px;
     margin-bottom: 5px;
     margin-left: 10px;
+    width: calc(100% - 20px);
+    justify-content: space-between;
+
+    h4 {
+      color: ${({ isCurrent }) => (isCurrent ? "var(--blue)" : "var(--text)")};
+    }
+
+    span {
+      font-weight: 500;
+      opacity: 0.7;
+      font-size: 0.9em;
+    }
   }
 `;
 
@@ -100,7 +107,7 @@ const DaySchedule = ({
 
   useEffect(() => {
     if (isCurrent && dayRef.current)
-      dayRef?.current?.scrollIntoView({ block: "end", behavior: "smooth" });
+      dayRef?.current?.scrollIntoView({ block: "center", behavior: "smooth" });
   }, [currentChosenDay]);
 
   return (
@@ -115,7 +122,15 @@ const DaySchedule = ({
       {!!weekDay && (
         <div className="day-title">
           <Title size={4}>{weekDay}</Title>
-          {isCurrent && <TodayPlate />}
+          <span>
+            {subjects.length}{" "}
+            {getCorrentWordForm(subjects.length, {
+              zero: "пар",
+              one: "пара",
+              twoToFour: "пары",
+              fiveToNine: "пар",
+            })}
+          </span>
         </div>
       )}
       <DayScheduleListWrapper isFull={view === "full"}>
@@ -130,6 +145,7 @@ const DaySchedule = ({
             />
           );
         })}
+        {!subjects.length && <HolidayPlate />}
       </DayScheduleListWrapper>
     </DayScheduleWrapper>
   );
