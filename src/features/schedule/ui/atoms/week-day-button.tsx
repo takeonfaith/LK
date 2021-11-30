@@ -8,7 +8,10 @@ import {
 } from "../../../../shared/api/model";
 import { Title } from "../../../../shared/ui/atoms";
 
-const WeekDayButtonWrapper = styled.button<{ isCurrent: boolean }>`
+const WeekDayButtonWrapper = styled.button<{
+  isCurrent: boolean;
+  isChosen: boolean;
+}>`
   padding: 10px;
   border-radius: 10px;
   display: flex;
@@ -16,7 +19,6 @@ const WeekDayButtonWrapper = styled.button<{ isCurrent: boolean }>`
   align-items: center;
   justify-content: center;
   border: none;
-  color: ${({ isCurrent }) => (isCurrent ? "#000" : "var(--text)")};
   row-gap: 6px;
   cursor: pointer;
   outline: none;
@@ -26,8 +28,14 @@ const WeekDayButtonWrapper = styled.button<{ isCurrent: boolean }>`
   user-select: none;
   opacity: ${({ isCurrent }) => (isCurrent ? "1" : "0.7")};
   transform: scale(${({ isCurrent }) => (isCurrent ? "1" : "0.9")});
-  background: ${({ isCurrent }) =>
-    isCurrent ? "var(--lightBlue)" : "var(--mild-theme)"};
+  background: var(--mild-theme);
+  color: ${({ isCurrent }) => (isCurrent ? "var(--blue)" : "var(--text)")};
+
+  h4 {
+    opacity: ${({ isChosen }) => (isChosen ? 1 : 0.5)};
+    transition: 0.2s transform;
+    transform: translateY(${({ isChosen }) => (isChosen ? "-5px" : "0px")});
+  }
 
   .marker-circles {
     display: flex;
@@ -46,14 +54,61 @@ const WeekDayButtonWrapper = styled.button<{ isCurrent: boolean }>`
       height: 20px;
     }
   }
+
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    transition: 0.2s;
+    width: ${({ isChosen }) => (isChosen ? "20px" : "0px")};
+    height: 4px;
+    border-radius: 10px;
+    background: ${({ isChosen }) =>
+      isChosen ? "var(--reallyBlue)" : "#4f4f4f"};
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 0.7em;
+    transform: scale(1);
+    width: calc(100% / 6);
+
+    .marker-circles {
+      .marker-circle {
+        width: 6px;
+        height: 6px;
+        margin: 0px 2px;
+        border-radius: 100%;
+      }
+
+      img {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
 `;
 
-type Props = ISubjects & { weekDay: string; isCurrent: boolean; index: number };
+type Props = ISubjects & {
+  weekDay: string;
+  isCurrent: boolean;
+  isChosen: boolean;
+  index: number;
+};
 
-const WeekDayButton = ({ weekDay, subjects, isCurrent, index }: Props) => {
+const WeekDayButton = ({
+  weekDay,
+  subjects,
+  isCurrent,
+  isChosen,
+  index,
+}: Props) => {
   return (
     <WeekDayButtonWrapper
       isCurrent={isCurrent}
+      isChosen={isChosen}
       onClick={() =>
         scheduleModel.events.changeCurrentChosenDay({ day: index })
       }

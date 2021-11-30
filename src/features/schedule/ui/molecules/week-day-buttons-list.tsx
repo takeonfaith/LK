@@ -12,10 +12,21 @@ const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
   height: ${({ isFull }) => (!isFull ? "50px" : "0px")};
   opacity: ${({ isFull }) => (!isFull ? "1" : "0")};
   visibility: ${({ isFull }) => (!isFull ? "visible" : "hidden")};
+
+  @media (max-width: 1000px) {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    opacity: 1;
+    visibility: visible;
+    column-gap: 5px;
+  }
 `;
 
 const WeekDayButtonsList = () => {
-  const { schedule, currentModule, currentChosenDay, view } =
+  const { schedule, currentModule, currentChosenDay, currentDay, view } =
     scheduleModel.selectors.useSchedule();
 
   return (
@@ -25,7 +36,8 @@ const WeekDayButtonsList = () => {
           <WeekDayButton
             weekDay={WeekDays[day as keyof IWeekDays].short}
             subjects={schedule[currentModule][day as keyof IWeekDays].subjects}
-            isCurrent={currentChosenDay === index + 1}
+            isCurrent={currentDay === index + 1}
+            isChosen={currentChosenDay === index + 1}
             index={index + 1}
           />
         );

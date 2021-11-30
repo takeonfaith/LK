@@ -12,12 +12,16 @@ const ScheduleWrapper = styled.div<{ isFull: boolean }>`
   width: 100%;
   transition: 0.2s;
   padding: ${({ isFull }) => (isFull ? "0px" : "0px calc(50% - 200px)")};
-  scroll-snap-type: x proximity;
+  scroll-snap-type: y proximity;
   scroll-behavior: smooth;
   /* scroll-padding-right: 400px; */
 
   &::-webkit-scrollbar {
     height: 0;
+  }
+
+  @media (max-width: 1000px) {
+    scroll-snap-type: x mandatory;
   }
 `;
 
@@ -27,16 +31,17 @@ interface Props {
 }
 
 const WeekSchedule = ({ weekSchedule, view }: Props) => {
-  const { currentChosenDay } = scheduleModel.selectors.useSchedule();
+  const { currentDay } = scheduleModel.selectors.useSchedule();
   return (
     <ScheduleWrapper isFull={view === "full"}>
       {Object.keys(weekSchedule).map((day, index) => (
         <>
           <DaySchedule
-            isCurrent={currentChosenDay === index + 1}
+            isCurrent={currentDay === index + 1}
             weekDay={WeekDays[day as keyof IWeekDays].full}
             subjects={weekSchedule[day as keyof IWeekDays].subjects}
             view={view}
+            index={index + 1}
           />
         </>
       ))}

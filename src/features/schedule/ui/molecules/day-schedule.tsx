@@ -8,7 +8,6 @@ import { Title } from "../../../../shared/ui/atoms";
 import inTimeInterval from "../../lib/in-time-interval";
 import { Subject } from "../atoms";
 import HolidayPlate from "../atoms/holiday-plate";
-import TodayPlate from "../atoms/today-plate";
 
 type Props = ISubjects & {
   weekDay?: string;
@@ -16,6 +15,7 @@ type Props = ISubjects & {
   view?: string;
   width?: number;
   height?: number;
+  index: number;
 };
 
 const findOpacity = (
@@ -74,6 +74,15 @@ const DayScheduleWrapper = styled.div<{
       font-size: 0.9em;
     }
   }
+
+  @media (max-width: 1000px) {
+    transition: 0.5s opacity;
+    opacity: ${({ isVisible }) => (isVisible ? "1" : "0")};
+    width: 100%;
+    min-width: 100%;
+    scroll-snap-align: start;
+    transform: scale(1);
+  }
 `;
 
 const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
@@ -87,6 +96,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
   row-gap: 6px;
   overflow-y: auto;
   scroll-snap-type: y proximity;
+  max-height: calc(100vh - 285px);
 
   &::-webkit-scrollbar {
     width: 0;
@@ -100,15 +110,21 @@ const DaySchedule = ({
   view,
   width,
   height,
+  index,
 }: Props) => {
   const dayRef = useRef<null | HTMLDivElement>(null);
-  const { currentChosenDay } = scheduleModel.selectors.useSchedule();
+  const { currentDay, currentChosenDay } =
+    scheduleModel.selectors.useSchedule();
   const isOnScreen = useOnScreen(dayRef);
 
   useEffect(() => {
-    if (isCurrent && dayRef.current)
-      dayRef?.current?.scrollIntoView({ block: "center", behavior: "smooth" });
-  }, [currentChosenDay]);
+    if (isOnScreen) scheduleModel.events.changeCurrentChosenDay({ day: index });
+  }, [isOnScreen]);
+
+  // useEffect(() => {
+  //   if (isCurrent && dayRef.current)
+  //     dayRef?.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+  // }, [currentChosenDay]);
 
   return (
     <DayScheduleWrapper

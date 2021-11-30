@@ -12,6 +12,7 @@ const ScheduleAndNotification = () => {
         width={400}
         height={156}
         isCurrent
+        index={0}
       />
     </Section>
   );

@@ -15,6 +15,11 @@ const LeftsideBarWrapper = styled.div`
   padding: 20px 15px;
   transition: 0.2s transform, width 0.3s;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+
+  @media (max-width: 1000px) {
+    position: absolute;
+    left: -100%;
+  }
 `;
 
 export default LeftsideBarWrapper;

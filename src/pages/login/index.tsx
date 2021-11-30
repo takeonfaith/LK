@@ -9,6 +9,10 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: var(--theme);
+
+  @media (max-width: 1000px) {
+    align-items: flex-end;
+  }
 `;
 
 const LoginPage = () => {

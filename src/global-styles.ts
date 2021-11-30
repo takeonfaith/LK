@@ -13,20 +13,23 @@ const GlobalStyles = createGlobalStyle`
 		overflow: hidden;
 	}
 
-	::-webkit-scrollbar {
-		width: 14px;
+	@media (min-width: 1001px) {
+		::-webkit-scrollbar {
+			width: 14px;
+		}
+	
+		::-webkit-scrollbar-track {
+			background-color: var(--mild-theme);
+		}
+	
+		::-webkit-scrollbar-thumb {
+			border-radius: 100px;
+			border: 4px solid transparent;
+			background-clip: content-box;
+			background-color: var(--theme-mild-opposite);
+		}
 	}
 
-	::-webkit-scrollbar-track {
-		background-color: var(--mild-theme);
-	}
-
-	::-webkit-scrollbar-thumb {
-		border-radius: 100px;
-		border: 4px solid transparent;
-		background-clip: content-box;
-		background-color: var(--theme-mild-opposite);
-	}
 
 
 	h1 {

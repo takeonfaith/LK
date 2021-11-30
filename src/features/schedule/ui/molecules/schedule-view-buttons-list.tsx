@@ -18,6 +18,10 @@ const ScheduleViewButtonsListWrapper = styled.div`
   button:nth-child(2) {
     border-radius: 0 10px 10px 0;
   }
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 interface Props {

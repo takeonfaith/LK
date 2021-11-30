@@ -4,7 +4,7 @@ import { Loading } from ".";
 const WrapperBlock = styled.div<{ loading: boolean }>`
   width: 100%;
   padding: 10px;
-  /* position: relative; */
+  height: 100%;
 
   .loading {
     width: 100%;
@@ -30,6 +30,7 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
     opacity: ${({ loading }) => (loading ? 0 : 1)};
     visibility: ${({ loading }) => (loading ? "hidden" : "visible")};
     transform: scale(${({ loading }) => (loading ? "0.98" : "1")});
+    height: 100%;
   }
 `;
 

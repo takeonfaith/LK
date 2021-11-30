@@ -7,6 +7,7 @@ import ScheduleViewButtonsList from "../../features/schedule/ui/molecules/schedu
 import WeekDayButtonsList from "../../features/schedule/ui/molecules/week-day-buttons-list";
 import Slider from "../../features/slider/molecules/slider";
 import { IWeekSchedule, ViewType } from "../../shared/api/model";
+import useResize from "../../shared/lib/hooks/use-resize";
 import { Input, Wrapper } from "../../shared/ui/atoms";
 
 const SchedulePageContent = styled.div`
@@ -26,6 +27,10 @@ const SchedulePageContent = styled.div`
     align-items: center;
     column-gap: 10px;
   }
+
+  @media (max-width: 1000px) {
+    row-gap: 15px;
+  }
 `;
 
 const SchedulePage = () => {
@@ -39,6 +44,7 @@ const SchedulePage = () => {
     }, 1000);
   }, []);
   const [value, setValue] = useState("191-722");
+  const { width } = useResize();
 
   return (
     <Wrapper loading={loading}>
@@ -80,6 +86,7 @@ const SchedulePage = () => {
             ]
           }
         />
+        {width < 1000 && <WeekDayButtonsList />}
       </SchedulePageContent>
     </Wrapper>
   );

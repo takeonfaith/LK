@@ -17,6 +17,10 @@ const LoginBlockWrapper = styled.div<{ theme: any }>`
   border-radius: 8px;
   padding: 20px;
   row-gap: 20px;
+
+  @media (max-width: 1000px) {
+    border-radius: var(--brSemi) var(--brSemi) 0 0;
+  }
 `;
 
 const LoginBlock = () => {
