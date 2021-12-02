@@ -19,6 +19,11 @@ export const ShortCutItem = styled.li`
   &:not(:last-child) {
     margin-right: 10px;
   }
+
+  @media (max-width: 1000px) {
+    width: 50%;
+    max-width: none;
+  }
 `;
 
 export const ShortCutLinkContainer = styled(Link)`

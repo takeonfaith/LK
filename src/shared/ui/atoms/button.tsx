@@ -7,6 +7,7 @@ const ButtonWrapper = styled.button<{
   theme: string;
   text: boolean;
   isChosen: boolean;
+  width?: string;
 }>`
   display: flex;
   align-items: center;
@@ -20,6 +21,7 @@ const ButtonWrapper = styled.button<{
   cursor: pointer;
   font-weight: bold;
   transition: 0.2s transform;
+  width: ${({ width }) => (width ? width : "fit-content")};
 
   &:active {
     transform: scale(0.95);
@@ -37,21 +39,25 @@ interface Props {
   text?: string;
   onClick: (event: any) => void;
   isChosen?: boolean;
+  width?: string;
 }
 
-const Button = memo(({ icon, text, onClick, isChosen = false }: Props) => {
-  const { theme } = useTheme();
-  return (
-    <ButtonWrapper
-      text={!!text}
-      onClick={onClick}
-      theme={Themes[theme]}
-      isChosen={isChosen}
-    >
-      {!!icon && icon}
-      <span>{text}</span>
-    </ButtonWrapper>
-  );
-});
+const Button = memo(
+  ({ icon, text, onClick, isChosen = false, width }: Props) => {
+    const { theme } = useTheme();
+    return (
+      <ButtonWrapper
+        text={!!text}
+        onClick={onClick}
+        theme={Themes[theme]}
+        isChosen={isChosen}
+        width={width}
+      >
+        {!!icon && icon}
+        <span>{text}</span>
+      </ButtonWrapper>
+    );
+  }
+);
 
 export default Button;

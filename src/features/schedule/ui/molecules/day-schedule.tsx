@@ -113,18 +113,16 @@ const DaySchedule = ({
   index,
 }: Props) => {
   const dayRef = useRef<null | HTMLDivElement>(null);
-  const { currentDay, currentChosenDay } =
-    scheduleModel.selectors.useSchedule();
+  const { currentChosenDay } = scheduleModel.selectors.useSchedule();
   const isOnScreen = useOnScreen(dayRef);
 
-  useEffect(() => {
-    if (isOnScreen) scheduleModel.events.changeCurrentChosenDay({ day: index });
-  }, [isOnScreen]);
-
   // useEffect(() => {
-  //   if (isCurrent && dayRef.current)
-  //     dayRef?.current?.scrollIntoView({ block: "center", behavior: "smooth" });
-  // }, [currentChosenDay]);
+  //   if (
+  //     isOnScreen &&
+  //     (index === currentChosenDay + 1 || index === currentChosenDay - 1)
+  //   )
+  //     scheduleModel.events.changeCurrentChosenDay({ day: index });
+  // }, [isOnScreen]);
 
   return (
     <DayScheduleWrapper

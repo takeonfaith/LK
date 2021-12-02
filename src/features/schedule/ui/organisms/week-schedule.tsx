@@ -1,8 +1,9 @@
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
 import { scheduleModel } from "../../../../entities/schedule";
 import { IWeekSchedule } from "../../../../shared/api/model";
 import { IWeekDays, WeekDays } from "../../../../shared/consts";
+import useResize from "../../../../shared/lib/hooks/use-resize";
 import { DaySchedule } from "../molecules";
 
 const ScheduleWrapper = styled.div<{ isFull: boolean }>`
@@ -31,9 +32,21 @@ interface Props {
 }
 
 const WeekSchedule = ({ weekSchedule, view }: Props) => {
-  const { currentDay } = scheduleModel.selectors.useSchedule();
+  const { currentDay, currentChosenDay } =
+    scheduleModel.selectors.useSchedule();
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const { width } = useResize();
+
+  useEffect(() => {
+    console.log((currentChosenDay * width) / 4);
+
+    if (width < 1000 && wrapperRef?.current) {
+      wrapperRef.current.scrollLeft =
+        (currentChosenDay * width * currentChosenDay) / 6;
+    }
+  }, [currentChosenDay]);
   return (
-    <ScheduleWrapper isFull={view === "full"}>
+    <ScheduleWrapper isFull={view === "full"} ref={wrapperRef}>
       {Object.keys(weekSchedule).map((day, index) => (
         <>
           <DaySchedule

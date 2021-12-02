@@ -11,8 +11,21 @@ const HeaderWrapper = styled.header`
   justify-content: space-between;
   padding: 0px 20px;
 
-  h3 {
-    color: var(--text);
+  .header-button-and-title {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-right: 8px;
+    }
+
+    h3 {
+      color: var(--text);
+    }
+  }
+
+  @media (max-width: 1000px) {
+    padding: 0 10px;
   }
 `;
 
