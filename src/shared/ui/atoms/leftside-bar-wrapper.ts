@@ -25,6 +25,7 @@ const LeftsideBarWrapper = styled.div<{ isOpen: boolean }>`
     justify-content: space-between;
     row-gap: 20px;
     align-items: center;
+    max-height: 100%;
   }
 
   @media (max-width: 1000px) {
@@ -33,6 +34,8 @@ const LeftsideBarWrapper = styled.div<{ isOpen: boolean }>`
     width: 100%;
 
     .top-wrapper {
+      max-height: calc(100% - 60px);
+
       img {
         width: 200px;
       }

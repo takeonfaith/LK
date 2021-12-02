@@ -5,23 +5,21 @@ export const ShortCutList = styled.ul`
   display: flex;
   width: 100%;
   list-style-type: none;
+  flex-wrap: wrap;
+  gap: 10px;
 `;
 
 export const ShortCutItem = styled.li`
   min-width: 150px;
   max-width: 250px;
   width: 15%;
-  height: 100%;
+  height: fit-content;
 
   transition: 0.2s;
   cursor: pointer;
 
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
-
   @media (max-width: 1000px) {
-    width: 50%;
+    width: calc(50% - 5px);
     max-width: none;
   }
 `;
