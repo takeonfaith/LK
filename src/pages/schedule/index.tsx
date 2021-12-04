@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiSearch, FiUsers } from "react-icons/fi";
 import styled from "styled-components";
 import { scheduleModel } from "../../entities/schedule";
-import { WeekDayButton, WeekSchedule } from "../../features/schedule/ui";
+import { WeekSchedule } from "../../features/schedule/ui";
 import ScheduleViewButtonsList from "../../features/schedule/ui/molecules/schedule-view-buttons-list";
 import WeekDayButtonsList from "../../features/schedule/ui/molecules/week-day-buttons-list";
 import Slider from "../../features/slider/molecules/slider";
@@ -41,7 +41,7 @@ const SchedulePage = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   }, []);
   const [value, setValue] = useState("191-722");
   const { width } = useResize();

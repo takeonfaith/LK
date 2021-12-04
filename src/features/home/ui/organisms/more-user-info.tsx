@@ -1,6 +1,6 @@
-import React, { memo, useMemo, useState } from "react";
+import React, { memo } from "react";
 import { User } from "../../../../entities/user/model";
-import Slider from "../../../slider/molecules/slider";
+import SliderPage from "../../../slider/organisms/slider-page";
 import { MoreInfoContent } from "../atoms/more-info";
 import AllInfo from "../molecules/all-info";
 import Orders from "../molecules/orders";
@@ -12,20 +12,14 @@ interface Props {
 }
 
 function MoreUserInfo({ user }: Props) {
-  const [indexPage, setIndexPage] = useState<number>(0);
-  const pages = useMemo(
-    () => [<AllInfo user={user} />, <Orders orders={user.orders} />],
-    [user]
-  );
-
   return (
     <MoreInfoContent>
-      <Slider
-        pages={["Учетная карточка", "Приказы"]}
-        currentPage={indexPage}
-        setCurrentPage={setIndexPage}
+      <SliderPage
+        pages={[
+          { title: "Учетная карточка", content: <AllInfo user={user} /> },
+          { title: "Приказы", content: <Orders orders={user.orders} /> },
+        ]}
       />
-      {pages[indexPage]}
     </MoreInfoContent>
   );
 }

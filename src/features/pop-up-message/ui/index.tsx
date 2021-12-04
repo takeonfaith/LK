@@ -6,7 +6,7 @@ import { Colors } from "../../../shared/consts";
 const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string }>`
   width: 300px;
   border-radius: var(--brLight);
-  background: ${({ color }) => Colors[color].darkTransparent};
+  background: ${({ color }) => Colors[color].dark};
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -19,6 +19,15 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string }>`
   text-align: left;
   color: ${({ color }) => Colors[color].main};
   font-weight: 600;
+
+  @media (max-width: 1000px) {
+    top: 20px;
+    bottom: auto;
+    left: 50%;
+    transform: translate(
+      ${({ isOpen }) => (isOpen ? "-50%, 0px" : "-50%, -20px")}
+    );
+  }
 `;
 
 const PopUpMessage = () => {

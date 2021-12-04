@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import { ImCheckmark } from "react-icons/im";
 import styled from "styled-components";
-import useTheme from "../../lib/hooks/use-theme";
-import Themes from "../colors";
+import { popUpMessageModel } from "../../../entities/pop-up-message";
 import Loading from "./loading";
 
 const SubmitButtonWrapper = styled.button<{
@@ -102,7 +101,8 @@ interface Props {
   isLoading: boolean;
   completed: boolean;
   setCompleted: (completed: boolean) => void;
-  bottomMessage: string;
+  popUpSuccessMessage?: string;
+  popUpFailureMessage?: string;
   isActive: boolean;
 }
 
@@ -112,20 +112,31 @@ const SubmitButton = ({
   isLoading = false,
   completed = false,
   setCompleted,
-  bottomMessage,
+  popUpSuccessMessage = "Успешно",
+  popUpFailureMessage = "Nope",
   isActive = true,
 }: Props) => {
-  //   const { openBottomMessage } = useModal();
-  const { theme } = useTheme();
-
   useEffect(() => {
     if (completed) {
-      // openBottomMessage(bottomMessage ?? undefined);
+      popUpMessageModel.events.evokePopUpMessage({
+        message: popUpSuccessMessage,
+        type: "success",
+      });
+
       setTimeout(() => {
         setCompleted(false);
       }, 2000);
     }
   }, [completed, setCompleted]);
+
+  const handleAction = () => {
+    if (isActive) return action();
+
+    popUpMessageModel.events.evokePopUpMessage({
+      message: popUpFailureMessage,
+      type: "failure",
+    });
+  };
 
   return (
     <SubmitButtonWrapper
@@ -133,8 +144,7 @@ const SubmitButton = ({
       className="submit-button"
       completed={completed}
       isActive={isActive}
-      onClick={action}
-      theme={Themes[theme]}
+      onClick={handleAction}
     >
       <div className="inner-button">
         {completed ? (

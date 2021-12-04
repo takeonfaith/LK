@@ -1,7 +1,7 @@
 const inTimeInterval = (timeInterval: string) => {
   let startTime = "",
     endTime = "";
-  const currentTime = new Date("22 November, 2021 10:41");
+  const currentTime = new Date();
 
   let a = timeInterval.split(" - ");
   startTime = a[0];

@@ -38,6 +38,11 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
   const { width } = useResize();
 
   useEffect(() => {
+    if (wrapperRef?.current && view === "big")
+      wrapperRef.current.scrollLeft = currentDay * 400 - 350;
+  }, [view]);
+
+  useEffect(() => {
     if (wrapperRef?.current) {
       if (width < 1000) {
         wrapperRef.current.scrollLeft =
@@ -51,15 +56,13 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
   return (
     <ScheduleWrapper isFull={view === "full"} ref={wrapperRef}>
       {Object.keys(weekSchedule).map((day, index) => (
-        <>
-          <DaySchedule
-            isCurrent={currentDay === index + 1}
-            weekDay={WeekDays[day as keyof IWeekDays].full}
-            subjects={weekSchedule[day as keyof IWeekDays].subjects}
-            view={view}
-            index={index + 1}
-          />
-        </>
+        <DaySchedule
+          isCurrent={currentDay === index + 1}
+          weekDay={WeekDays[day as keyof IWeekDays].full}
+          subjects={weekSchedule[day as keyof IWeekDays].subjects}
+          view={view}
+          index={index + 1}
+        />
       ))}
     </ScheduleWrapper>
   );

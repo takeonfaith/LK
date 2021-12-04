@@ -70,7 +70,7 @@ export const Colors: IColors = {
     lighter: "#d079ec",
     darker: "#824eb2",
     light: "",
-    dark: "",
+    dark: "#7e3798",
     darkTransparent: "",
   },
   pink: {

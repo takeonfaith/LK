@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Slider from "../slider/molecules/slider";
+import SliderPage from "../slider/organisms/slider-page";
 import Account from "./pages/account";
 import Appearance from "./pages/appearance";
 import CustomizeMenu from "./pages/customize-menu";
 import General from "./pages/general";
+import Security from "./pages/security";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -24,16 +26,18 @@ const Wrapper = styled.div`
 `;
 
 const SettingsPage = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const pages = [<General />, <Appearance />, <CustomizeMenu />, <Account />];
   return (
     <Wrapper>
-      <Slider
-        pages={["Общие", "Внешний вид", "Меню", "Аккаунт", "Безопасность"]}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+      <SliderPage
+        pages={[
+          { title: "Общие", content: <General /> },
+          { title: "Внешний вид", content: <Appearance /> },
+          { title: "Меню", content: <CustomizeMenu /> },
+          { title: "Аккаунт", content: <Account /> },
+          { title: "Безопасность", content: <Security /> },
+        ]}
+        className="settings-page"
       />
-      <div className="settings-page">{pages[currentPage]}</div>
     </Wrapper>
   );
 };

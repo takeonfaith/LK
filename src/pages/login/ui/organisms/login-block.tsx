@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { userModel } from "../../../../entities/user";
 import useTheme from "../../../../shared/lib/hooks/use-theme";
+import { Title } from "../../../../shared/ui/atoms";
 import Input from "../../../../shared/ui/atoms/input";
 import SubmitButton from "../../../../shared/ui/atoms/submit-button";
 import Themes from "../../../../shared/ui/colors";
@@ -20,6 +21,7 @@ const LoginBlockWrapper = styled.div<{ theme: any }>`
 
   @media (max-width: 1000px) {
     border-radius: var(--brSemi) var(--brSemi) 0 0;
+    height: 50ch;
   }
 `;
 
@@ -31,7 +33,7 @@ const LoginBlock = () => {
 
   return (
     <LoginBlockWrapper theme={Themes[theme]}>
-      <h2>Вход в личный кабинет</h2>
+      <Title size={2}>Вход в личный кабинет</Title>
       <Input
         value={login}
         setValue={setLogin}
@@ -51,8 +53,7 @@ const LoginBlock = () => {
         isLoading={false}
         completed={false}
         setCompleted={() => null}
-        bottomMessage={""}
-        isActive={true}
+        isActive={!!password && !!login}
       />
     </LoginBlockWrapper>
   );
