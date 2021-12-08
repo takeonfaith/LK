@@ -1,1 +1,1 @@
-export * as menuModel from "./model";
+export * as menuModel from './model'

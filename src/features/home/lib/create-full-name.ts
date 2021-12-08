@@ -1,11 +1,11 @@
-export default createFullName;
+export default createFullName
 
 interface Props {
-	name: string,
-	surname: string,
-	patronymic: string
+    name: string
+    surname: string
+    patronymic: string
 }
 
 function createFullName({ name, surname, patronymic }: Props): string {
-	return `${surname} ${name} ${patronymic}`;
+    return `${surname} ${name} ${patronymic}`
 }

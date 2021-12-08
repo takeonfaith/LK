@@ -1,52 +1,52 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 const LeftsideBarItemWrapper = styled.div<{
-  chosen: boolean;
+    chosen: boolean
 }>`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  width: 100%;
-  padding: 10px 0;
-  cursor: pointer;
-  position: relative;
-  user-select: none;
-  text-decoration: none;
-
-  .icon-and-title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
     display: flex;
     align-items: center;
+    font-weight: 700;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    text-decoration: none;
 
-    svg,
-    strong {
-      color: ${({ chosen }) => (chosen ? "var(--blue)" : "var(--text)")};
+    .icon-and-title {
+        display: flex;
+        align-items: center;
+
+        svg,
+        strong {
+            color: ${({ chosen }) => (chosen ? 'var(--blue)' : 'var(--text)')};
+        }
     }
-  }
-
-  svg {
-    width: 22px;
-    height: 22px;
-    margin-right: 7px;
-  }
-
-  .buttons {
-    display: flex;
-    align-items: center;
-    column-gap: 5px;
 
     svg {
-      margin: 0;
+        width: 22px;
+        height: 22px;
+        margin-right: 7px;
     }
-  }
 
-  &:hover::before {
-    width: 5px;
-    background: var(--red);
-  }
-`;
+    .buttons {
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
 
-export default LeftsideBarItemWrapper;
+        svg {
+            margin: 0;
+        }
+    }
+
+    &:hover::before {
+        width: 5px;
+        background: var(--red);
+    }
+`
+
+export default LeftsideBarItemWrapper

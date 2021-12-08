@@ -1,1 +1,1 @@
-export { default as LeftsideBarList } from "./leftside-bar-list";
+export { default as LeftsideBarList } from './leftside-bar-list'

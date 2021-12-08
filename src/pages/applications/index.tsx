@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const ApplicationsPage = () => {
-  return <div></div>;
-};
+    return <div></div>
+}
 
-export default ApplicationsPage;
+export default ApplicationsPage

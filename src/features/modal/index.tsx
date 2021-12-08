@@ -1,2 +1,2 @@
-export { default as Modal } from './ui';
-export * from './lib';
+export { default as Modal } from './ui'
+export * from './lib'

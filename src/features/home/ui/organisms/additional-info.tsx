@@ -1,9 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-export default AdditionalInfo;
+export default AdditionalInfo
 
 function AdditionalInfo() {
-	return (
-		<div></div>
-	)
+    return <div></div>
 }

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const AcadPerformance = () => {
-  return <div></div>;
-};
+    return <div></div>
+}
 
-export default AcadPerformance;
+export default AcadPerformance
