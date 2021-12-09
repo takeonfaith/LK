@@ -1,12 +1,8 @@
-import React from "react";
-import CustomizeLeftsideBarList from "./ui/organisms/customize-leftside-bar-list";
+import React from 'react'
+import CustomizeLeftsideBarList from './ui/organisms/customize-leftside-bar-list'
 
 const CustomizeMenu = () => {
-  return (
-    <>
-      <CustomizeLeftsideBarList />
-    </>
-  );
-};
+    return <CustomizeLeftsideBarList />
+}
 
-export default CustomizeMenu;
+export default CustomizeMenu

@@ -1,1 +1,1 @@
-export { default as LeftsideBarItemWrapper } from "./leftside-bar-item-wrapper";
+export { default as LeftsideBarItemWrapper } from './leftside-bar-item-wrapper'

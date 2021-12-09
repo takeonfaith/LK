@@ -1,1 +1,1 @@
-export * as popUpMessageModel from "./model";
+export * as popUpMessageModel from './model'

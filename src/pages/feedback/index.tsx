@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const FeedbackPage = () => {
-  return <div></div>;
-};
+    return <div></div>
+}
 
-export default FeedbackPage;
+export default FeedbackPage

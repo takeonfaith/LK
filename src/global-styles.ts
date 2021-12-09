@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 	* {
@@ -115,6 +115,6 @@ const GlobalStyles = createGlobalStyle`
 		--scheduleBg: #eee;
 		--schedule-shadow: 0 0 2px rgb(0 0 0 / 24%);
 	}
-`;
+`
 
-export default GlobalStyles;
+export default GlobalStyles

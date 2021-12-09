@@ -1,32 +1,29 @@
-import { createEvent, createStore } from "effector";
-import { useStore } from "effector-react";
+import { createEvent, createStore } from 'effector'
+import { useStore } from 'effector-react'
 
 interface Menu {
-  isOpen: boolean;
+    isOpen: boolean
 }
 
 const defaultStore: Menu = {
-  isOpen: false,
-};
+    isOpen: false,
+}
 
 const useMenu = () => {
-  return useStore($menu);
-};
+    return useStore($menu)
+}
 
-const changeOpen = createEvent<Menu>();
+const changeOpen = createEvent<Menu>()
 
-const $menu = createStore<Menu>(defaultStore).on(
-  changeOpen,
-  (oldState, { isOpen }) => ({
+const $menu = createStore<Menu>(defaultStore).on(changeOpen, (oldState, { isOpen }) => ({
     ...oldState,
     isOpen: isOpen,
-  })
-);
+}))
 
 export const selectors = {
-  useMenu,
-};
+    useMenu,
+}
 
 export const events = {
-  changeOpen,
-};
+    changeOpen,
+}

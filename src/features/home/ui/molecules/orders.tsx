@@ -1,17 +1,17 @@
-import React, { memo } from 'react';
+import React, { memo } from 'react'
 
-export default memo(Orders);
+export default memo(Orders)
 
 interface Props {
-	orders: string[]
+    orders: string[]
 }
 
 function Orders({ orders }: Props) {
-	return (
-		<div>
-			{orders.map(order =>
-				<p>{order}</p>
-			)}
-		</div>
-	)
+    return (
+        <div>
+            {orders.map((order) => (
+                <p key={order}>{order}</p>
+            ))}
+        </div>
+    )
 }

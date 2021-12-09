@@ -1,1 +1,1 @@
-export { default as CustomizeLeftsideBarWrapper } from "./customize-leftside-bar-wrapper";
+export { default as CustomizeLeftsideBarWrapper } from './customize-leftside-bar-wrapper'

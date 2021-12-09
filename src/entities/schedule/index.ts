@@ -1,1 +1,1 @@
-export * as scheduleModel from "./model";
+export * as scheduleModel from './model'

@@ -1,9 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-export default Info;
+export default Info
 
 function Info() {
-	return (
-		<div>dds</div>
-	)
+    return <div>dds</div>
 }

@@ -1,1 +1,1 @@
-export { default as WeekSchedule } from "./week-schedule";
+export { default as WeekSchedule } from './week-schedule'

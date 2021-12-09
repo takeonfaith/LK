@@ -1,1 +1,1 @@
-export * as settingsModel from "./model";
+export * as settingsModel from './model'

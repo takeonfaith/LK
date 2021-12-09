@@ -1,15 +1,15 @@
-import { useCallback } from "react";
+import { useCallback } from 'react'
 
 const useLocalStorage = () => {
-  const get = useCallback((key: string) => {
-    return localStorage.getItem(key);
-  }, []);
+    const get = useCallback((key: string) => {
+        return localStorage.getItem(key)
+    }, [])
 
-  const set = useCallback((key: string, value: string) => {
-    localStorage.setItem(key, value);
-  }, []);
+    const set = useCallback((key: string, value: string) => {
+        localStorage.setItem(key, value)
+    }, [])
 
-  return { get, set };
-};
+    return { get, set }
+}
 
-export default useLocalStorage;
+export default useLocalStorage

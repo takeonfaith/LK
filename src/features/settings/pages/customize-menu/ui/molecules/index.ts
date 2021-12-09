@@ -1,1 +1,1 @@
-export { default as CustomizeLeftsideBarItem } from "./customize-leftside-bar-item";
+export { default as CustomizeLeftsideBarItem } from './customize-leftside-bar-item'
