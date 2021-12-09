@@ -62,15 +62,15 @@ interface UserStore {
 }
 
 const getUserFx = createEffect(async (params: LoginData): Promise<User> => {
-    let data
     try {
-        data = await userApi.getUser(params)
-    } catch (error) {
-        throw new Error(error as string)
-    }
+        const data = await userApi.getUser(params)
 
-    //TODO: Change mock do data when data is ready
-    return mock
+        console.log(data)
+        //TODO: Change mock do data when data is ready
+        return mock
+    } catch (error) {
+        throw new Error('Неверный логин или пароль')
+    }
 })
 
 const useUser = () => {
