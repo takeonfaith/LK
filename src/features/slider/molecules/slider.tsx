@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import useResize from '../../../shared/lib/hooks/use-resize'
 import { SliderItem } from '../atoms/slider-item'
@@ -21,7 +21,6 @@ const SliderWrapper = styled.div<{ size: number }>`
     overflow-y: hidden;
     overflow-x: auto;
     scroll-snap-type: x proximity;
-
     .slider-body {
         position: relative;
         display: flex;
@@ -29,15 +28,12 @@ const SliderWrapper = styled.div<{ size: number }>`
         width: 100%;
         height: 100%;
     }
-
     &::-webkit-scrollbar {
         display: none;
     }
-
     &:active .currentPage {
         transform: scale(0.9);
     }
-
     .SliderItem {
         width: 100%;
         height: 100%;
@@ -52,21 +48,16 @@ const SliderWrapper = styled.div<{ size: number }>`
         cursor: pointer;
         user-select: none;
         color: var(--text);
-
         &:hover {
             filter: brightness(0.8);
         }
-
         &.active {
             opacity: 1;
-            /* background: red; */
         }
-
         &:active {
             transform: scale(0.97);
         }
     }
-
     .currentPage {
         min-width: 80px;
         height: calc(100% - 6px);
@@ -77,12 +68,13 @@ const SliderWrapper = styled.div<{ size: number }>`
         z-index: 0;
         border-radius: 14px;
         scroll-snap-align: center;
+        height: 100%;
     }
 `
 
-const Slider: React.FC<ISlider> = ({ pages, currentPage, setCurrentPage }) => {
+const Slider = ({ pages, currentPage, setCurrentPage }: ISlider) => {
     const [size, setSize] = useState(5)
-    const moreThanNeeded = pages?.length > size
+    const moreThanNeeded = pages.length > size
     const { width } = useResize()
     const currentPageRef = useRef<any>(null)
 
@@ -122,4 +114,4 @@ const Slider: React.FC<ISlider> = ({ pages, currentPage, setCurrentPage }) => {
     )
 }
 
-export default React.memo(Slider)
+export default memo(Slider)

@@ -5,7 +5,6 @@ import Button from './button'
 
 const InputWrapper = styled.div<{ leftIcon: boolean }>`
     display: flex;
-    align-items: center;
     flex-direction: column;
     justify-content: space-between;
     position: relative;

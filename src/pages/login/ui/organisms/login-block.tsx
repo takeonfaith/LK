@@ -6,6 +6,7 @@ import { Title } from '../../../../shared/ui/atoms'
 import Input from '../../../../shared/ui/atoms/input'
 import SubmitButton from '../../../../shared/ui/atoms/submit-button'
 import Themes from '../../../../shared/ui/colors'
+import ErrorMessage from '../atoms/error-message'
 
 const LoginBlockWrapper = styled.div<{ theme: any }>`
     display: flex;
@@ -30,10 +31,12 @@ const LoginBlock = () => {
     const [password, setPassword] = useState('')
     const loginFunc = userModel.events.login
     const { theme } = useTheme()
+    const { loading, error } = userModel.selectors.useUser()
 
     return (
         <LoginBlockWrapper theme={Themes[theme]}>
             <Title size={2}>Вход в личный кабинет</Title>
+            <ErrorMessage message={error} />
             <Input value={login} setValue={setLogin} title="Логин" placeholder="Введите логин" />
             <Input
                 value={password}
@@ -45,7 +48,7 @@ const LoginBlock = () => {
             <SubmitButton
                 text="Вход"
                 action={() => loginFunc({ login, password })}
-                isLoading={false}
+                isLoading={loading}
                 completed={false}
                 setCompleted={() => null}
                 isActive={!!password && !!login}

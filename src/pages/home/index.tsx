@@ -9,14 +9,14 @@ import { Content } from './ui/atoms/content'
 export default Home
 
 function Home() {
-    const { currentUser: user } = userModel.selectors.useUser()
+    const { data } = userModel.selectors.useUser()
 
     return (
-        <Wrapper loading={!user}>
+        <Wrapper loading={!data}>
             <Content>
-                {user && (
+                {data && (
                     <div className="home-page-content-inner">
-                        <UserInfo user={user} />
+                        <UserInfo user={data} />
                         <ScheduleAndNotification />
                         <ShortCutLinks />
                     </div>

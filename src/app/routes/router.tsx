@@ -5,9 +5,9 @@ import ContentLayout from '../../shared/ui/content-layout'
 import { LOGIN_ROUTE, publicRoutes } from './routes'
 
 const Router = () => {
-    const { currentUser } = userModel.selectors.useUser()
+    const { data } = userModel.selectors.useUser()
 
-    return currentUser !== null ? (
+    return data !== null ? (
         <Switch>
             <Route path="/" component={ContentLayout} />
         </Switch>

@@ -80,18 +80,13 @@ const SubmitButtonWrapper = styled.button<{
         z-index: 0;
     }
 
-    .LoadingCircle {
+    .loading-circle {
         position: relative;
         transform: none;
         left: auto;
         top: auto;
         width: 30px;
         height: 30px;
-
-        img {
-            width: 30px;
-            height: 30px;
-        }
     }
 `
 
@@ -130,7 +125,7 @@ const SubmitButton = ({
     }, [completed, setCompleted])
 
     const handleAction = () => {
-        if (isActive) return action()
+        if (isActive && !isLoading) return action()
 
         popUpMessageModel.events.evokePopUpMessage({
             message: popUpFailureMessage,

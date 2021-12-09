@@ -15,7 +15,8 @@
       "@models/*": ["./shared/api/models/*"],
       "@entities/*": ["./entities/*"],
       "@api": ["./shared/api/"],
-      "@api/*": ["./shared/api/*"]
+      "@api/*": ["./shared/api/*"],
+      "@consts":["./shared/consts.ts"]
     }
   }
 }

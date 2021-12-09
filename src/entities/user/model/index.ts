@@ -1,7 +1,7 @@
-import { createEffect, createEvent, createStore, forward } from 'effector'
-import { useStore } from 'effector-react'
 import { userApi } from '@api'
 import { LoginData } from '@api/user-api'
+import { createEffect, createEvent, createStore, forward } from 'effector'
+import { useStore } from 'effector-react'
 
 export const NO_USER_ID = '-1'
 
@@ -58,15 +58,28 @@ const mock: User = {
 
 interface UserStore {
     currentUser: User | null
+    error: string
 }
+
+const getUserFx = createEffect(async (params: LoginData): Promise<User> => {
+    let data
+    try {
+        data = await userApi.getUser(params)
+    } catch (error) {
+        throw new Error(error as string)
+    }
+
+    //TODO: Change mock do data when data is ready
+    return mock
+})
 
 const useUser = () => {
-    return useStore($userStore)
+    return {
+        data: useStore($userStore).currentUser,
+        loading: useStore(getUserFx.pending),
+        error: useStore($userStore).error,
+    }
 }
-
-const getUserFx = createEffect((params: LoginData) => {
-    userApi.getUser(params)
-})
 
 const login = createEvent<LoginData>()
 const logout = createEvent()
@@ -75,11 +88,18 @@ forward({ from: login, to: getUserFx })
 
 const $userStore = createStore<UserStore>({
     currentUser: null,
+    error: '',
 })
-    .on(getUserFx, (prev, next) => ({
-        currentUser: mock,
+    .on(getUserFx.doneData, (old, newData) => ({
+        ...old,
+        currentUser: newData,
+    }))
+    .on(getUserFx.failData, (_, newData) => ({
+        error: newData.message,
+        currentUser: null,
     }))
     .on(logout, () => ({
+        error: '',
         currentUser: null,
     }))
 
