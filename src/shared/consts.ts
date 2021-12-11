@@ -43,7 +43,7 @@ export const Colors: IColors = {
         lighter: '#3cd2d2',
         darker: '#258787',
         light: '',
-        dark: '#166c21',
+        dark: '#2a4f2f',
         darkTransparent: '#166c217a',
     },
     lightGreen: {
@@ -88,7 +88,7 @@ export const Colors: IColors = {
         lighter: '#f67b86',
         darker: '#b63c46',
         light: '',
-        dark: '#a0363f',
+        dark: '#632d32',
         darkTransparent: '#511a1ea3',
     },
 }

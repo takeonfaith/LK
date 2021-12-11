@@ -19,7 +19,6 @@ const SchedulePageContent = styled.div`
     .slider-wrapper {
         width: 100%;
         max-width: 400px;
-        font-size: 0.8em;
     }
 
     .buttons-and-search {

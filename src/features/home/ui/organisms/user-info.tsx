@@ -32,7 +32,9 @@ function UserInfo({ user }: Props) {
         <Section>
             <Avatar avatar={avatar} />
             <Description>
-                <Title size={2}>{createFullName(params)}</Title>
+                <Title size={2} align="left">
+                    {createFullName(params)}
+                </Title>
                 <div className="short-status">
                     <p>Статус: {status}</p>
                     <p>Курс: {course}</p>

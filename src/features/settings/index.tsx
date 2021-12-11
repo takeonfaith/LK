@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 
     .settings-page {
         height: 90%;
+        width: 100%;
         border-radius: 10px;
         overflow-y: auto;
         margin-top: 10px;
@@ -21,6 +22,9 @@ const Wrapper = styled.div`
 
     @media (max-width: 800px) {
         width: 100%;
+        .settings-page {
+            font-size: 0.8em;
+        }
     }
 `
 

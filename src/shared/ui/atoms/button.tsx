@@ -8,14 +8,16 @@ const ButtonWrapper = styled.button<{
     text: boolean
     isChosen: boolean
     width?: string
+    background?: string
+    whiteText?: boolean
 }>`
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
     outline: none;
-    color: var(--text);
-    background: ${({ isChosen }) => (isChosen ? 'var(--blue)' : 'var(--search)')};
+    color: ${({ whiteText }) => (whiteText ? '#fff' : 'var(--text)')};
+    background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
@@ -35,17 +37,27 @@ const ButtonWrapper = styled.button<{
 `
 
 interface Props {
-    icon: JSX.Element
+    icon?: JSX.Element
     text?: string
     onClick: (event: any) => void
     isChosen?: boolean
     width?: string
+    background?: string
+    whiteText?: boolean
 }
 
-const Button = ({ icon, text, onClick, isChosen = false, width }: Props) => {
+const Button = ({ icon, text, onClick, isChosen = false, width, background, whiteText = false }: Props) => {
     const { theme } = useTheme()
     return (
-        <ButtonWrapper text={!!text} onClick={onClick} theme={Themes[theme]} isChosen={isChosen} width={width}>
+        <ButtonWrapper
+            text={!!text}
+            onClick={onClick}
+            theme={Themes[theme]}
+            isChosen={isChosen}
+            width={width}
+            background={background}
+            whiteText={whiteText}
+        >
             {!!icon && icon}
             <span>{text}</span>
         </ButtonWrapper>

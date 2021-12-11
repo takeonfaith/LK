@@ -7,11 +7,13 @@ interface ISlider {
     pages: string[]
     currentPage: number
     setCurrentPage: (currentPage: number) => void
+    sliderWidth?: string
 }
 
-const SliderWrapper = styled.div<{ size: number }>`
+const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
+    max-width: ${({ sliderWidth }) => sliderWidth ?? '100%'};
     width: 100%;
-    height: 50px;
+    min-height: 50px;
     padding: 3px;
     display: flex;
     align-items: center;
@@ -21,12 +23,14 @@ const SliderWrapper = styled.div<{ size: number }>`
     overflow-y: hidden;
     overflow-x: auto;
     scroll-snap-type: x proximity;
+    font-size: 0.9em;
+
     .slider-body {
         position: relative;
         display: flex;
         align-items: center;
         width: 100%;
-        height: 100%;
+        height: 44px;
     }
     &::-webkit-scrollbar {
         display: none;
@@ -70,9 +74,23 @@ const SliderWrapper = styled.div<{ size: number }>`
         scroll-snap-align: center;
         height: 100%;
     }
+
+    @media (max-width: 1000px) {
+        font-size: 0.7em;
+        min-height: 40px;
+        border-radius: var(--brLight);
+
+        .currentPage {
+            border-radius: calc(var(--brLight) - 2px);
+        }
+
+        .slider-body {
+            height: 34px;
+        }
+    }
 `
 
-const Slider = ({ pages, currentPage, setCurrentPage }: ISlider) => {
+const Slider = ({ pages, currentPage, setCurrentPage, sliderWidth }: ISlider) => {
     const [size, setSize] = useState(5)
     const moreThanNeeded = pages.length > size
     const { width } = useResize()
@@ -86,7 +104,7 @@ const Slider = ({ pages, currentPage, setCurrentPage }: ISlider) => {
     }, [width])
 
     return (
-        <SliderWrapper size={size}>
+        <SliderWrapper size={size} sliderWidth={sliderWidth}>
             <div className="slider-body">
                 <span
                     className="currentPage"

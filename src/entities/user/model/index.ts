@@ -64,8 +64,6 @@ interface UserStore {
 const getUserFx = createEffect(async (params: LoginData): Promise<User> => {
     try {
         const data = await userApi.getUser(params)
-
-        console.log(data)
         //TODO: Change mock do data when data is ready
         return mock
     } catch (error) {
@@ -87,7 +85,7 @@ const logout = createEvent()
 forward({ from: login, to: getUserFx })
 
 const $userStore = createStore<UserStore>({
-    currentUser: null,
+    currentUser: mock,
     error: '',
 })
     .on(getUserFx.doneData, (old, newData) => ({

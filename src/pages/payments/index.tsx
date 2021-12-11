@@ -1,7 +1,27 @@
-import React from 'react'
+import { paymentsModel } from '@entities/payments'
+import SliderPage from '@features/slider/organisms/slider-page'
+import { Wrapper } from '@ui/atoms'
+import React, { useEffect } from 'react'
+import { DormitoryPayments, EducationPayments, InfoPayments } from './pages'
 
 const PaymentsPage = () => {
-    return <div></div>
+    const { loading } = paymentsModel.selectors.usePayments()
+
+    useEffect(() => {
+        paymentsModel.effects.getPaymentsFx()
+    }, [])
+    return (
+        <Wrapper loading={loading}>
+            <SliderPage
+                pages={[
+                    { title: 'Общежитие', content: <DormitoryPayments /> },
+                    { title: 'Образование', content: <EducationPayments /> },
+                    { title: 'Информация', content: <InfoPayments /> },
+                ]}
+                sliderWidth={'600px'}
+            />
+        </Wrapper>
+    )
 }
 
 export default PaymentsPage

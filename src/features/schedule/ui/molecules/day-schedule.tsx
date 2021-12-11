@@ -64,6 +64,8 @@ const DayScheduleWrapper = styled.div<{
             font-weight: 500;
             opacity: 0.7;
             font-size: 0.9em;
+            width: 70px;
+            text-align: center;
         }
     }
 
@@ -119,7 +121,9 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height }: Prop
         >
             {!!weekDay && (
                 <div className="day-title">
-                    <Title size={4}>{weekDay}</Title>
+                    <Title size={4} align="left">
+                        {weekDay}
+                    </Title>
                     <span>
                         {subjects.length}{' '}
                         {getCorrectWordForm(subjects.length, {
