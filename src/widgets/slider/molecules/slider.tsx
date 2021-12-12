@@ -76,7 +76,7 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
     }
 
     @media (max-width: 1000px) {
-        font-size: 0.7em;
+        font-size: 11px;
         min-height: 40px;
         border-radius: var(--brLight);
 

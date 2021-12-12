@@ -1,7 +1,7 @@
 import React from 'react'
 import { ShortCutLinksType } from '@consts'
 import { useSettings } from '@utils/contexts/settings-context'
-import getChosenRoutes from '../../../leftside-bar/lib/get-chosen-routes'
+import getChosenRoutes from '../../../../widgets/leftside-bar/lib/get-chosen-routes'
 import { Section } from '../atoms/section'
 import { ShortCutItem, ShortCutList } from '../atoms/short-cut'
 import ShortCutLink from '../molecules/short-cut-link'

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import SliderPage from '../slider/organisms/slider-page'
+import SliderPage from '../../widgets/slider/organisms/slider-page'
 import Account from './pages/account'
 import Appearance from './pages/appearance'
 import CustomizeMenu from './pages/customize-menu'

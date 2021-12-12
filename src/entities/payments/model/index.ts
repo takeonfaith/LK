@@ -102,7 +102,7 @@ const mock: Payments = {
 
 const usePayments = () => {
     return {
-        user: useStore($paymentsStore),
+        data: useStore($paymentsStore),
         dormitory: useStore($paymentsStore).payments?.dormitory,
         bachelor: useStore($paymentsStore).payments?.bachelor,
         magistracy: useStore($paymentsStore).payments?.magistracy,

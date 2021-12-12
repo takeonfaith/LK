@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import SliderPage from '../../../slider/organisms/slider-page'
+import SliderPage from '../../../../widgets/slider/organisms/slider-page'
 import { MoreInfoContent } from '../atoms/more-info'
 import AllInfo from '../molecules/all-info'
 import Orders from '../molecules/orders'

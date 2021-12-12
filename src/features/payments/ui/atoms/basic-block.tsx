@@ -4,7 +4,7 @@ const BasicBlock = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    background: var(--scheduleBg);
+    background: var(--search2);
     border-radius: var(--brSemi);
     padding: 30px;
     height: 400px;

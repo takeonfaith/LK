@@ -68,7 +68,7 @@ const useUser = () => {
     const { currentUser: user, error, token } = useStore($userStore)
     return {
         data: { user, token },
-        loading: useStore(getUserFx.pending),
+        loading: useStore(getUserTokenFx.pending),
         error: error,
     }
 }

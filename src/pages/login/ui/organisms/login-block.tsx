@@ -35,7 +35,9 @@ const LoginBlock = () => {
 
     return (
         <LoginBlockWrapper theme={Themes[theme]}>
-            <Title size={2}>Вход в личный кабинет</Title>
+            <Title size={2} align="left">
+                Вход в личный кабинет
+            </Title>
             <ErrorMessage message={error} />
             <Input value={login} setValue={setLogin} title="Логин" placeholder="Введите логин" />
             <Input

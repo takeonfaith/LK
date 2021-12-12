@@ -2,6 +2,15 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--almostTransparent);
+
+    svg {
+        width: 40%;
+        height: 40%;
+    }
 
     width: 160px;
     height: 160px;

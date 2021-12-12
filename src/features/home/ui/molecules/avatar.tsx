@@ -1,4 +1,5 @@
 import React from 'react'
+import { FiUser } from 'react-icons/fi'
 
 import { Container, Img } from '../atoms/avatar'
 
@@ -9,9 +10,5 @@ interface Props {
 }
 
 function Avatar({ avatar }: Props) {
-    return (
-        <Container>
-            <Img src={avatar} alt="Аватар пользователя" />
-        </Container>
-    )
+    return <Container>{!!avatar ? <Img src={avatar} alt="Аватар пользователя" /> : <FiUser />}</Container>
 }

@@ -1,5 +1,5 @@
 import { paymentsModel } from '@entities/payments'
-import SliderPage from '@features/slider/organisms/slider-page'
+import SliderPage from 'widgets/slider/organisms/slider-page'
 import { Wrapper } from '@ui/atoms'
 import React, { useEffect } from 'react'
 import { DormitoryPayments, EducationPayments, InfoPayments } from './pages'

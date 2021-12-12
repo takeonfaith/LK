@@ -5,6 +5,11 @@ import { BasicBlock } from '../atoms'
 const LeftBlockWrapper = styled(BasicBlock)`
     width: calc(100% - 5px);
     max-width: 900px;
+
+    @media (max-width: 1000px) {
+        width: 100%;
+        max-width: 100%;
+    }
 `
 
 interface Props {
