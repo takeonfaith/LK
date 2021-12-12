@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '../../../../shared/api/model'
+import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean

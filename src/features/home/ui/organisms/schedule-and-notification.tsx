@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
-import { scheduleModel } from '../../../../entities/schedule'
-import { IWeekSchedule } from '../../../../shared/api/model'
+import { scheduleModel } from '@entities/schedule'
+import { IWeekSchedule } from '@api/model'
 import { DaySchedule } from '../../../schedule/ui'
 import { Section } from '../atoms/section'
 

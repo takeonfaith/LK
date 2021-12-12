@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
-import { scheduleModel } from '../../../../entities/schedule'
-import { IWeekSchedule } from '../../../../shared/api/model'
-import { IWeekDays, WeekDays } from '../../../../shared/consts'
-import useResize from '../../../../shared/lib/hooks/use-resize'
+import { scheduleModel } from '@entities/schedule'
+import { IWeekSchedule } from '@api/model'
+import { IWeekDays, WeekDays } from '@consts'
+import useResize from '@utils/hooks/use-resize'
 import { DaySchedule } from '../molecules'
 
 const ScheduleWrapper = styled.div<{ isFull: boolean }>`

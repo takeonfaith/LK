@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
-import useResize from '../../../shared/lib/hooks/use-resize'
+import useResize from '@utils/hooks/use-resize'
 import { SliderItem } from '../atoms/slider-item'
 
 interface ISlider {

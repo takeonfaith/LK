@@ -1,6 +1,6 @@
 import { createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
-import { IModules, ISchedule, ViewType } from '../../../shared/api/model'
+import { IModules, ISchedule, ViewType } from '@api/model'
 
 const useSchedule = () => {
     return useStore($schedule)

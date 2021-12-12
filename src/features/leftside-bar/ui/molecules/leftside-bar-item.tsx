@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconType } from 'react-icons/lib'
-import { menuModel } from '../../../../entities/menu'
+import { menuModel } from '@entities/menu'
 import LeftsideBarItemWrapper from '../atoms/leftside-bar-item-wrapper'
 
 interface Props {

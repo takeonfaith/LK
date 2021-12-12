@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { User } from '../../../../entities/user/model'
+import { User } from '@api/model'
 
 export default memo(AllInfo)
 

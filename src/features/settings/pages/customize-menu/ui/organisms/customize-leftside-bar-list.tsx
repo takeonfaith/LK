@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
-import { privateRoutes } from '../../../../../../app/routes/routes'
-import getChosenRoutes from '../../../../../leftside-bar/lib/get-chosen-routes'
-import LeftsideBarListWrapper from '../../../../../leftside-bar/ui/atoms/leftside-bar-list-wrapper'
-import { useSettings } from '../../../../../../shared/lib/contexts/settings-context'
+import { privateRoutes } from '@app/routes/routes'
+import getChosenRoutes from '@features/leftside-bar/lib/get-chosen-routes'
+import LeftsideBarListWrapper from '@features/leftside-bar/ui/atoms/leftside-bar-list-wrapper'
+import { useSettings } from '@utils/contexts/settings-context'
 import { CustomizeLeftsideBarItem } from '../molecules'
-import { ShortCutLinksType, SHORT_CUT_LINKS_LIMIT_SIZE } from '../../../../../../shared/consts'
-import { popUpMessageModel } from '../../../../../../entities/pop-up-message'
+import { ShortCutLinksType, SHORT_CUT_LINKS_LIMIT_SIZE } from '@consts'
+import { popUpMessageModel } from '@entities/pop-up-message'
 
 const CustomizeLeftsideBarList = () => {
     const { setting, change } = useSettings<number[]>('menu')
@@ -33,7 +33,6 @@ const CustomizeLeftsideBarList = () => {
     }
 
     const switchShortChosen = (id: number) => {
-        console.log({ enabledShortCutMenu, id })
         if (enabledShortCutMenu[id]) {
             const newSettings = shortCutMenu.filter((settingId: number) => settingId !== id)
 

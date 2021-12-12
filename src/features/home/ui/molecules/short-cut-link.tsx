@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconType } from 'react-icons'
-import { Colors } from '../../../../shared/consts'
-import { Title } from '../../../../shared/ui/atoms'
+import { Colors } from '@consts'
+import { Title } from '@ui/atoms'
 import { ShortCutLinkContainer } from '../atoms/short-cut'
 
 export default ShortCutLink

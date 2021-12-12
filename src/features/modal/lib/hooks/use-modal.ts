@@ -12,7 +12,7 @@ const useModal = (component: React.ReactElement<any, any>): IModal => {
     const { isOpen, toggle: coreToggle, setComponent } = useContext<ModalContext>(Context)
 
     useEffect(() => {
-        setComponentInner((_) => component)
+        setComponentInner(() => component)
     }, [])
 
     const toggle = useCallback(
