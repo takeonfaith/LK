@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { scheduleModel } from '../../../../entities/schedule'
-import { ISubjects, ITimeIntervalColor, TimeIntervalColor } from '../../../../shared/api/model'
-import { Title } from '../../../../shared/ui/atoms'
+import { scheduleModel } from '@entities/schedule'
+import { ISubjects, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
+import { Title } from '@ui/atoms'
 
 const WeekDayButtonWrapper = styled.button<{
     isCurrent: boolean
@@ -41,7 +41,7 @@ const WeekDayButtonWrapper = styled.button<{
         .marker-circle {
             width: 8px;
             height: 8px;
-            margin: 0px 3px;
+            margin: 0 3px;
             border-radius: 100%;
         }
 
@@ -74,7 +74,7 @@ const WeekDayButtonWrapper = styled.button<{
             .marker-circle {
                 width: 6px;
                 height: 6px;
-                margin: 0px 2px;
+                margin: 0 2px;
                 border-radius: 100%;
             }
 

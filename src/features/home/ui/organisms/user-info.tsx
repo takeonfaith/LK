@@ -6,7 +6,7 @@ import { useModal } from '../../../modal'
 import { Section } from '../atoms/section'
 import MoreUserInfo from './more-user-info'
 import { Description, MoreInfoLink } from '../atoms/more-info'
-import { Title } from '../../../../shared/ui/atoms'
+import { Title } from '@ui/atoms'
 import createFullName from '../../lib/create-full-name'
 import { User } from '@api/model'
 

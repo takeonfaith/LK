@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
-import { IRoute, privateRoutes } from '../../../app/routes/routes'
+import { IRoute, privateRoutes } from '@app/routes/routes'
 
 const useCurrentPage = () => {
     const history = useHistory()

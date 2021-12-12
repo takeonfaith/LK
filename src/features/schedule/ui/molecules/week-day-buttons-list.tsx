@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { WeekDayButton } from '..'
-import { scheduleModel } from '../../../../entities/schedule'
-import { IWeekDays, WeekDays } from '../../../../shared/consts'
+import { scheduleModel } from '@entities/schedule'
+import { IWeekDays, WeekDays } from '@consts'
 
 const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
     display: flex;

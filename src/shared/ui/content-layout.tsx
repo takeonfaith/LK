@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import Header from './template/header'
 import LeftsideBar from './template/leftside-bar'
-import PrivateRouter from '../../app/routes/private-router'
-import { Modal } from '../../features/modal'
-import PopUpMessage from '../../features/pop-up-message/ui'
+import PrivateRouter from '@app/routes/private-router'
+import { Modal } from '@features/modal'
+import PopUpMessage from '@features/pop-up-message/ui'
 
 const ContentWrapper = styled.div`
     width: 100%;

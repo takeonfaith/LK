@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { userModel } from '../../../../entities/user'
-import useTheme from '../../../../shared/lib/hooks/use-theme'
-import { Title } from '../../../../shared/ui/atoms'
-import Input from '../../../../shared/ui/atoms/input'
-import SubmitButton from '../../../../shared/ui/atoms/submit-button'
-import Themes from '../../../../shared/ui/colors'
+import { userModel } from '@entities/user'
+import useTheme from '@utils/hooks/use-theme'
+import { Title } from '@ui/atoms'
+import Input from '@ui/atoms/input'
+import SubmitButton from '@ui/atoms/submit-button'
+import Themes from '@ui/colors'
 import ErrorMessage from '../atoms/error-message'
 
 const LoginBlockWrapper = styled.div<{ theme: any }>`

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { ImCheckmark } from 'react-icons/im'
 import styled from 'styled-components'
-import { popUpMessageModel } from '../../../entities/pop-up-message'
+import { popUpMessageModel } from '@entities/pop-up-message'
 import Loading from './loading'
 
 const SubmitButtonWrapper = styled.button<{

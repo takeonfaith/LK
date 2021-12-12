@@ -1,4 +1,4 @@
-import { IRoute, IRoutes, privateRoutes } from '../../../app/routes/routes'
+import { IRoute, IRoutes, privateRoutes } from '@app/routes/routes'
 
 const getNotChosenRoutes = (ids: number[]): IRoutes => {
     return Object.values(privateRoutes).reduce((acc, route: IRoute) => {

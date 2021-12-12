@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import useTheme from '../../../../shared/lib/hooks/use-theme'
-import ToggleArea, { ToggleItem } from '../../../../shared/ui/organisms/toggle-area'
+import useTheme from '@utils/hooks/use-theme'
+import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 
 const Appearance = () => {
     const { theme, switchTheme } = useTheme()

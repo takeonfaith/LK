@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from 'react'
-import useOnClickOutside from '../../../shared/lib/hooks/use-on-click-outside'
+import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import useCoreModal from '../lib/hooks/use-core-modal'
 import ModalContent from './atoms/modal-content'
 import ModalWrapper from './atoms/modal-wrapper'

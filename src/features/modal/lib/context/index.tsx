@@ -3,7 +3,7 @@ import React, { useState, useCallback, createContext } from 'react'
 export const Context = createContext<ModalContext>({
     isOpen: false,
     component: undefined,
-    toggle: (event?: any) => {},
+    toggle: () => {},
 })
 
 export interface ModalContext {

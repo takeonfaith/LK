@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import useTheme from '../../lib/hooks/use-theme'
+import useTheme from '@utils/hooks/use-theme'
 import Themes from '../colors'
 
 const ButtonWrapper = styled.button<{

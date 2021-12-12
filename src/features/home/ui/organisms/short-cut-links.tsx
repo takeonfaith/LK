@@ -1,6 +1,6 @@
 import React from 'react'
-import { ShortCutLinksType } from '../../../../shared/consts'
-import { useSettings } from '../../../../shared/lib/contexts/settings-context'
+import { ShortCutLinksType } from '@consts'
+import { useSettings } from '@utils/contexts/settings-context'
 import getChosenRoutes from '../../../leftside-bar/lib/get-chosen-routes'
 import { Section } from '../atoms/section'
 import { ShortCutItem, ShortCutList } from '../atoms/short-cut'

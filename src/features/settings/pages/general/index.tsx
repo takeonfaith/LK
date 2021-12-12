@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { GeneralType } from '../../../../shared/consts'
-import { useSettings } from '../../../../shared/lib/contexts/settings-context'
-import ToggleArea, { ToggleItem } from '../../../../shared/ui/organisms/toggle-area'
+import { GeneralType } from '@consts'
+import { useSettings } from '@utils/contexts/settings-context'
+import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 
 const General = () => {
     const { setting, change } = useSettings<GeneralType>('general')

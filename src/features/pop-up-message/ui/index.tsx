@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { popUpMessageModel } from '../../../entities/pop-up-message'
-import { Colors } from '../../../shared/consts'
+import { popUpMessageModel } from '@entities/pop-up-message'
+import { Colors } from '@consts'
 
 const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string }>`
     width: 300px;
