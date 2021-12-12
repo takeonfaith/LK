@@ -7,8 +7,8 @@ import { Section } from '../atoms/section'
 import MoreUserInfo from './more-user-info'
 import { Description, MoreInfoLink } from '../atoms/more-info'
 import { Title } from '../../../../shared/ui/atoms'
-import { User } from '../../../../entities/user/model'
 import createFullName from '../../lib/create-full-name'
+import { User } from '@api/model'
 
 export default UserInfo
 

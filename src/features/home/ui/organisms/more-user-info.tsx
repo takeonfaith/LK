@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
-import { User } from '../../../../entities/user/model'
 import SliderPage from '../../../slider/organisms/slider-page'
 import { MoreInfoContent } from '../atoms/more-info'
 import AllInfo from '../molecules/all-info'
 import Orders from '../molecules/orders'
+import { User } from '@api/model'
 
 export default memo(MoreUserInfo)
 

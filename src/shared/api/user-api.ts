@@ -1,11 +1,12 @@
-import axios from 'axios'
+import { $api } from '@api/config'
+import { User, UserToken } from './model'
 
 export type LoginData = { login: string; password: string }
 
-export const getUser = ({ login, password }: LoginData) => {
-    // TODO: add base axios with origin and interceptors
-    return axios.post(
-        'https://e.mospolytech.ru/lk_api.php',
-        'ulogin=' + encodeURIComponent(login) + '&upassword=' + encodeURIComponent(password),
-    )
+export const getUserToken = ({ login, password }: LoginData) => {
+    return $api.post<UserToken>('', `ulogin=${encodeURIComponent(login)}&upassword=${encodeURIComponent(password)}`)
+}
+
+export const getUser = (token: string) => {
+    return $api.get<{ user: User }>(`?getUser&token=${token}`)
 }
