@@ -32,7 +32,9 @@ interface Props {
 }
 
 const WeekSchedule = ({ weekSchedule, view }: Props) => {
-    const { currentDay, currentChosenDay } = scheduleModel.selectors.useSchedule()
+    const {
+        data: { currentDay, currentChosenDay },
+    } = scheduleModel.selectors.useSchedule()
     const wrapperRef = useRef<HTMLDivElement>(null)
     const { width } = useResize()
 

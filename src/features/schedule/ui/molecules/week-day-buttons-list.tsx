@@ -26,22 +26,25 @@ const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
 `
 
 const WeekDayButtonsList = () => {
-    const { schedule, currentModule, currentChosenDay, currentDay, view } = scheduleModel.selectors.useSchedule()
+    const {
+        data: { schedule, currentModule, currentChosenDay, currentDay, view },
+    } = scheduleModel.selectors.useSchedule()
 
     return (
         <WeekDayButtonsListWrapper isFull={view === 'full'}>
-            {Object.keys(WeekDays).map((day, index) => {
-                return (
-                    <WeekDayButton
-                        key={index}
-                        weekDay={WeekDays[day as keyof IWeekDays].short}
-                        subjects={schedule[currentModule][day as keyof IWeekDays].subjects}
-                        isCurrent={currentDay === index + 1}
-                        isChosen={currentChosenDay === index + 1}
-                        index={index + 1}
-                    />
-                )
-            })}
+            {!!schedule &&
+                Object.keys(WeekDays).map((day, index) => {
+                    return (
+                        <WeekDayButton
+                            key={index}
+                            weekDay={WeekDays[day as keyof IWeekDays].short}
+                            subjects={schedule[currentModule][day as keyof IWeekDays].subjects}
+                            isCurrent={currentDay === index + 1}
+                            isChosen={currentChosenDay === index + 1}
+                            index={index + 1}
+                        />
+                    )
+                })}
         </WeekDayButtonsListWrapper>
     )
 }

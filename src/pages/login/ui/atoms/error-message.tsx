@@ -15,7 +15,7 @@ const ErrorMessageWrapper = styled.div`
 `
 
 interface Props {
-    message: string
+    message: string | null
 }
 
 const ErrorMessage = ({ message }: Props) => {

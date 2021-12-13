@@ -29,11 +29,12 @@ export interface IModules {
 export type ViewType = 'full' | 'big'
 
 export interface ISchedule {
-    schedule: IModules
+    schedule: IModules | null
     currentModule: '0' | '1'
     currentDay: number
     currentChosenDay: number
     view: ViewType
+    error: string | null
 }
 
 export type TimeIntervals = '9:00 - 10:30' | '10:40 - 12:10' | '12:20 - 13:50' | '14:30 - 16:00' | '16:10 - 17:40'

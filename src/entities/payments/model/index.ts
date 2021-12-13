@@ -107,18 +107,34 @@ const usePayments = () => {
         bachelor: useStore($paymentsStore).payments?.bachelor,
         magistracy: useStore($paymentsStore).payments?.magistracy,
         loading: useStore(getPaymentsFx.pending),
+        error: useStore($paymentsStore).error,
     }
 }
 
 interface PaymentsStore {
     payments: Payments | null
+    error: string | null
 }
 
-const getPaymentsFx = createEffect(() => {
+const getPaymentsFx = createEffect(async (): Promise<Payments> => {
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+    // throw new Error('Что-то пошло не так')
     return mock
 })
 
-const $paymentsStore = createStore<PaymentsStore>({ payments: mock }).on(getPaymentsFx.doneData, () => {})
+const $paymentsStore = createStore<PaymentsStore>({ payments: null, error: null })
+    .on(getPaymentsFx, (oldData, _) => ({
+        ...oldData,
+        error: null,
+    }))
+    .on(getPaymentsFx.doneData, (oldData, newData) => ({
+        ...oldData,
+        payments: newData,
+    }))
+    .on(getPaymentsFx.failData, (oldData, newData) => ({
+        ...oldData,
+        error: newData.message,
+    }))
 
 export const selectors = {
     usePayments,

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface Props {
-    children: JSX.Element | string
+    children: JSX.Element | string | null | boolean
     size?: number
     align?: 'left' | 'center' | 'right'
     bottomGap?: boolean

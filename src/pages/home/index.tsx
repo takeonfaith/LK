@@ -11,10 +11,11 @@ export default Home
 function Home() {
     const {
         data: { user },
+        error,
     } = userModel.selectors.useUser()
 
     return (
-        <Wrapper loading={!user}>
+        <Wrapper loading={!user} load={() => null} error={error}>
             <Content>
                 {user && (
                     <div className="home-page-content-inner">

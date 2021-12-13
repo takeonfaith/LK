@@ -33,57 +33,57 @@ const SchedulePageContent = styled.div`
 `
 
 const SchedulePage = () => {
-    const { schedule, currentModule, view } = scheduleModel.selectors.useSchedule()
-    const [loading, setLoading] = useState(true)
+    const {
+        data: { schedule, currentModule, view },
+        loading,
+        error,
+    } = scheduleModel.selectors.useSchedule()
 
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 500)
-    }, [])
     const [value, setValue] = useState('191-722')
     const { width } = useResize()
 
     return (
-        <Wrapper loading={loading}>
-            <SchedulePageContent>
-                <div className="slider-wrapper">
-                    <Slider
-                        pages={['Первый модуль', 'Второй модуль']}
-                        currentPage={parseInt(currentModule)}
-                        setCurrentPage={(currentPage: number) =>
-                            scheduleModel.events.changeCurrentModule({
-                                currentModule: currentPage,
-                            })
+        <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx(value)} error={error}>
+            {!!schedule ? (
+                <SchedulePageContent>
+                    <div className="slider-wrapper">
+                        <Slider
+                            pages={['Первый модуль', 'Второй модуль']}
+                            currentPage={parseInt(currentModule)}
+                            setCurrentPage={(currentPage: number) =>
+                                scheduleModel.events.changeCurrentModule({
+                                    currentModule: currentPage,
+                                })
+                            }
+                        />
+                    </div>
+                    <div className="buttons-and-search">
+                        <ScheduleViewButtonsList
+                            view={view}
+                            setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
+                        />
+                        <Input
+                            value={value}
+                            setValue={setValue}
+                            placeholder="Номер группы"
+                            leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}
+                        />
+                    </div>
+                    <WeekDayButtonsList />
+                    <WeekSchedule
+                        view={view}
+                        weekSchedule={
+                            schedule[
+                                currentModule.toString() as keyof {
+                                    '0': IWeekSchedule
+                                    '1': IWeekSchedule
+                                }
+                            ]
                         }
                     />
-                </div>
-                <div className="buttons-and-search">
-                    <ScheduleViewButtonsList
-                        view={view}
-                        setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
-                    />
-                    <Input
-                        value={value}
-                        setValue={setValue}
-                        placeholder="Номер группы"
-                        leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}
-                    />
-                </div>
-                <WeekDayButtonsList />
-                <WeekSchedule
-                    view={view}
-                    weekSchedule={
-                        schedule[
-                            currentModule.toString() as keyof {
-                                '0': IWeekSchedule
-                                '1': IWeekSchedule
-                            }
-                        ]
-                    }
-                />
-                {width < 1000 && <WeekDayButtonsList />}
-            </SchedulePageContent>
+                    {width < 1000 && <WeekDayButtonsList />}
+                </SchedulePageContent>
+            ) : null}
         </Wrapper>
     )
 }

@@ -37,7 +37,7 @@ export const NO_USER_ID = '-1'
 interface UserStore {
     currentUser: User | null
     token: UserToken | null
-    error: string
+    error: string | null
 }
 
 const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginData) => {
@@ -87,9 +87,13 @@ const tokenInStorage = JSON.parse(localStorage.getItem('token') ?? 'null')
 
 const $userStore = createStore<UserStore>({
     currentUser: null,
-    error: '',
+    error: null,
     token: tokenInStorage,
 })
+    .on(getUserFx, (oldData, _) => ({
+        ...oldData,
+        error: null,
+    }))
     .on(getUserFx.doneData, (_, newData) => newData)
     .on(getUserFx.failData, (_, newData) => ({
         error: newData.message,
@@ -110,4 +114,8 @@ export const selectors = {
 export const events = {
     login,
     logout,
+}
+
+export const effects = {
+    getUserFx,
 }

@@ -15,6 +15,7 @@ const ContentWrapper = styled.div`
     overflow: hidden;
 
     .page-content {
+        position: relative;
         overflow-x: hidden;
         overflow-y: auto;
         width: 100%;
