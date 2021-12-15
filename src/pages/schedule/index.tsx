@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { FiSearch, FiUsers } from 'react-icons/fi'
-import styled from 'styled-components'
-import { scheduleModel } from '../../entities/schedule'
+import { IWeekSchedule, ViewType } from '@api/model'
 import { WeekSchedule } from '@features/schedule/ui'
 import ScheduleViewButtonsList from '@features/schedule/ui/molecules/schedule-view-buttons-list'
 import WeekDayButtonsList from '@features/schedule/ui/molecules/week-day-buttons-list'
-import Slider from 'widgets/slider/molecules/slider'
-import { IWeekSchedule, ViewType } from '@api/model'
-import useResize from '@utils/hooks/use-resize'
 import { Input, Wrapper } from '@ui/atoms'
+import useResize from '@utils/hooks/use-resize'
+import React, { useState } from 'react'
+import { FiSearch, FiUsers } from 'react-icons/fi'
+import styled from 'styled-components'
+import Slider from 'widgets/slider/molecules/slider'
+import { scheduleModel } from '../../entities/schedule'
 
 const SchedulePageContent = styled.div`
     display: flex;
