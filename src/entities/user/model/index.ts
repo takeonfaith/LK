@@ -6,7 +6,7 @@ import { User, UserToken } from '@api/model'
 
 interface UserStore {
     currentUser: User | null
-    token: UserToken | null
+    isAuthenticated: boolean | null
     error: string | null
 }
 
@@ -26,7 +26,7 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
     try {
         const userResponse = await userApi.getUser(data.token)
 
-        return { currentUser: userResponse.data.user, token: data, error: '' }
+        return { currentUser: userResponse.data.user, isAuthenticated: !!data, error: '' }
     } catch (error) {
         logout()
         throw new Error('token expired')
@@ -34,9 +34,9 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
 })
 
 const useUser = () => {
-    const { currentUser: user, error, token } = useStore($userStore)
+    const { currentUser: user, error, isAuthenticated } = useStore($userStore)
     return {
-        data: { user, token },
+        data: { user, isAuthenticated: isAuthenticated },
         loading: useStore(getUserTokenFx.pending),
         error: error,
     }
@@ -62,9 +62,9 @@ const tokenInStorage = JSON.parse(localStorage.getItem('token') ?? 'null')
 const $userStore = createStore<UserStore>({
     currentUser: null,
     error: null,
-    token: tokenInStorage,
+    isAuthenticated: !!tokenInStorage,
 })
-    .on(getUserFx, (oldData, _) => ({
+    .on(getUserFx, (oldData) => ({
         ...oldData,
         error: null,
     }))
@@ -72,12 +72,12 @@ const $userStore = createStore<UserStore>({
     .on(getUserFx.failData, (_, newData) => ({
         error: newData.message,
         currentUser: null,
-        token: null,
+        isAuthenticated: null,
     }))
-    .on(getUserTokenFx.failData, (_, error) => ({ token: null, currentUser: null, error: error.message }))
+    .on(getUserTokenFx.failData, (_, error) => ({ isAuthenticated: null, currentUser: null, error: error.message }))
     .on(logout, () => ({
         error: '',
-        token: null,
+        isAuthenticated: null,
         currentUser: null,
     }))
 

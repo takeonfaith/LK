@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
-import { ISubject, ISubjects } from '@api/model'
+import { ISubject, ILessons } from '@api/model'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import useOnScreen from '@utils/hooks/use-on-screen'
 import { Title } from '@ui/atoms'
@@ -8,7 +8,7 @@ import inTimeInterval from '../../lib/in-time-interval'
 import { Subject } from '../atoms'
 import HolidayPlate from '../atoms/holiday-plate'
 
-type Props = ISubjects & {
+type Props = ILessons & {
     weekDay?: string
     isCurrent?: boolean
     view?: string
@@ -97,7 +97,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
     }
 `
 
-const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height }: Props) => {
+const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height }: Props) => {
     const dayRef = useRef<null | HTMLDivElement>(null)
     // const { currentChosenDay } = scheduleModel.selectors.useSchedule()
     const isOnScreen = useOnScreen(dayRef)
@@ -125,8 +125,8 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height }: Prop
                         {weekDay}
                     </Title>
                     <span>
-                        {subjects.length}{' '}
-                        {getCorrectWordForm(subjects.length, {
+                        {lessons.length}{' '}
+                        {getCorrectWordForm(lessons.length, {
                             zero: 'пар',
                             one: 'пара',
                             twoToFour: 'пары',
@@ -136,7 +136,7 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height }: Prop
                 </div>
             )}
             <DayScheduleListWrapper isFull={view === 'full'}>
-                {subjects.map((subject: ISubject, index) => {
+                {lessons.map((subject: ISubject, index) => {
                     return (
                         <Subject
                             {...subject}
@@ -146,7 +146,7 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height }: Prop
                         />
                     )
                 })}
-                {!subjects.length && <HolidayPlate />}
+                {!lessons.length && <HolidayPlate />}
             </DayScheduleListWrapper>
         </DayScheduleWrapper>
     )

@@ -19,7 +19,7 @@ const ScheduleAndNotification = () => {
         <Section>
             {!!schedule && (
                 <DaySchedule
-                    subjects={schedule[currentModule][currentStringDay as keyof IWeekSchedule].subjects}
+                    lessons={schedule[currentModule][currentStringDay as keyof IWeekSchedule].lessons}
                     width={400}
                     height={156}
                     isCurrent

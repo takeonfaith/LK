@@ -6,10 +6,10 @@ import { LOGIN_ROUTE, publicRoutes } from './routes'
 
 const Router = () => {
     const {
-        data: { token },
+        data: { isAuthenticated },
     } = userModel.selectors.useUser()
 
-    return !!token ? (
+    return isAuthenticated ? (
         <Switch>
             <Route path="/" component={ContentLayout} />
         </Switch>
