@@ -53,11 +53,12 @@ interface Props {
     load: () => void
     loading: boolean
     error: string | null
+    data: any | null
 }
 
-const Wrapper = ({ children, load, loading = false, error }: Props) => {
+const Wrapper = ({ children, load, loading = false, error, data }: Props) => {
     useEffect(() => {
-        load()
+        if (!data) load()
     }, [])
 
     return (

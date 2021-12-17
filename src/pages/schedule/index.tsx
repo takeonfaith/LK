@@ -40,7 +40,7 @@ const SchedulePage = () => {
     const { width } = useResize()
 
     return (
-        <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx()} error={error}>
+        <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx()} error={error} data={schedule}>
             {!!schedule ? (
                 <SchedulePageContent>
                     <div className="slider-wrapper">

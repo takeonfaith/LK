@@ -19,9 +19,10 @@ function Home() {
         <Wrapper
             loading={!user}
             load={() => {
-                scheduleModel.effects.getScheduleFx(user?.group ?? '')
+                scheduleModel.effects.getScheduleFx()
             }}
             error={error}
+            data={user}
         >
             <Content>
                 {user && (

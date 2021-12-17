@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
-import SkeletonLoading from './skeleton-loading'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean
@@ -30,6 +29,16 @@ const SubjectWrapper = styled.div<{
             box-shadow: ${({ transparent }) => `0 0 30px ${transparent}`};
             color: #fff;
         }
+
+        .place {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        a.place {
+            color: var(--blue);
+        }
     }
 
     h3 {
@@ -48,10 +57,10 @@ const SubjectWrapper = styled.div<{
     }
 `
 
-type Props = ISubject & { index: number; isCurrent: boolean; loading?: boolean }
+type Props = ISubject & { index: number; isCurrent: boolean }
 
-const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent, loading = false }: Props) => {
-    return !loading ? (
+const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent, link }: Props) => {
+    return (
         <SubjectWrapper
             isCurrent={isCurrent}
             color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].darker}
@@ -62,7 +71,13 @@ const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent,
             <h4 className="time-and-place">
                 <span className="time">{timeInterval}</span>
                 {/* {isCurrent && <NowPlate />} */}
-                <span className="place"> {place}</span>
+                {!link ? (
+                    <span className="place"> {place}</span>
+                ) : (
+                    <a href={link} className="place">
+                        {place}
+                    </a>
+                )}
                 {/* <span className="currentOrNext" >{isToday ? inTimeInterval(time, currentDay) ? "Сейчас" : isNextSubject(time, currentDay) ? "Следующая" : null : null}</span> */}
             </h4>
             <h3>{name}</h3>
@@ -73,8 +88,6 @@ const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent,
             </p>
             <p className="date-interval">{dateInterval}</p>
         </SubjectWrapper>
-    ) : (
-        <SkeletonLoading />
     )
 }
 

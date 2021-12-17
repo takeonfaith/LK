@@ -5,10 +5,10 @@ import SliderPage from 'widgets/slider/organisms/slider-page'
 import { DormitoryPayments, EducationPayments, InfoPayments } from './pages'
 
 const PaymentsPage = () => {
-    const { loading, error } = paymentsModel.selectors.usePayments()
+    const { data, loading, error } = paymentsModel.selectors.usePayments()
 
     return (
-        <Wrapper loading={loading} load={paymentsModel.effects.getPaymentsFx} error={error}>
+        <Wrapper loading={loading} load={paymentsModel.effects.getPaymentsFx} error={error} data={data}>
             <SliderPage
                 pages={[
                     { title: 'Общежитие', content: <DormitoryPayments /> },
