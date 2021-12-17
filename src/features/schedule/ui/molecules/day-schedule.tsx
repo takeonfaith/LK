@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
-import { ISubject, ISubjects } from '@api/model'
+import { ISubject, ILessons } from '@api/model'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import useOnScreen from '@utils/hooks/use-on-screen'
 import { Title } from '@ui/atoms'
@@ -9,7 +9,7 @@ import { Subject } from '../atoms'
 import HolidayPlate from '../atoms/holiday-plate'
 import SkeletonLoading from '../atoms/skeleton-loading'
 
-type Props = ISubjects & {
+type Props = ILessons & {
     weekDay?: string
     isCurrent?: boolean
     view?: string
@@ -99,9 +99,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
     }
 `
 
-const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height, loading }: Props) => {
-    console.log(subjects)
-
+const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, loading }: Props) => {
     const dayRef = useRef<null | HTMLDivElement>(null)
     // const { currentChosenDay } = scheduleModel.selectors.useSchedule()
     const isOnScreen = useOnScreen(dayRef)
@@ -123,14 +121,14 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height, loadin
             width={width}
             height={height}
         >
-            {!!weekDay && !!subjects && (
+            {!!weekDay && !!lessons && (
                 <div className="day-title">
                     <Title size={4} align="left">
                         {weekDay}
                     </Title>
                     <span>
-                        {subjects.length}{' '}
-                        {getCorrectWordForm(subjects.length, {
+                        {lessons.length}{' '}
+                        {getCorrectWordForm(lessons.length, {
                             zero: 'пар',
                             one: 'пара',
                             twoToFour: 'пары',
@@ -140,20 +138,19 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height, loadin
                 </div>
             )}
             <DayScheduleListWrapper isFull={view === 'full'}>
-                {!subjects && <SkeletonLoading />}
-                {!!subjects &&
-                    subjects.map((subject: ISubject, index) => {
+                {!lessons && <SkeletonLoading />}
+                {!!lessons &&
+                    lessons.map((subject: ISubject, index) => {
                         return (
                             <Subject
                                 {...subject}
                                 key={index}
                                 index={index}
                                 isCurrent={(isCurrent && inTimeInterval(subject.timeInterval)) ?? false}
-                                loading={loading}
                             />
                         )
                     })}
-                {!!subjects && !subjects.length && <HolidayPlate />}
+                {!!lessons && !lessons.length && <HolidayPlate />}
             </DayScheduleListWrapper>
         </DayScheduleWrapper>
     )
