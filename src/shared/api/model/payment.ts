@@ -1,25 +1,24 @@
 export interface IPaymentItem {
     date: string
-    value: number
+    value: string
 }
 
 export interface PaymentsContract {
-    customer: string
-    student: string
+    balance: string
+    balance_currdate: string
+    contragent: string
+    endDateFact: string
+    endDatePlan: string
+    lastPaymentDate: string
+    name: string
     number: string
-    startDate: string
-    sum: number
-    endDate: string
-    monthly: number
-}
-
-export interface PaymentStructure {
-    contract: PaymentsContract
     payments: IPaymentItem[]
+    startDate: string
+    student: string
+    sum: string
+    type: string
 }
 
 export interface Payments {
-    bachelor: PaymentStructure
-    magistracy: PaymentStructure
-    dormitory: PaymentStructure
+    contracts: PaymentsContract[]
 }

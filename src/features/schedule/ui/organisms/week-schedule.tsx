@@ -52,6 +52,16 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
         }
     }, [currentChosenDay])
 
+    useEffect(() => {
+        if (wrapperRef?.current) {
+            if (width < 1000) {
+                wrapperRef.current.scrollLeft = (currentChosenDay * width * currentChosenDay) / 6
+            } else {
+                wrapperRef.current.scrollLeft = currentChosenDay * 400 - 350
+            }
+        }
+    }, [])
+
     return (
         <ScheduleWrapper isFull={view === 'full'} ref={wrapperRef}>
             {Object.keys(weekSchedule).map((day, index) => (

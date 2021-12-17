@@ -46,7 +46,7 @@ const SchedulePage = () => {
                 <SchedulePageContent>
                     <div className="slider-wrapper">
                         <Slider
-                            pages={['Текущяя неделя', 'Весь семестр']}
+                            pages={['Текущая неделя', 'Весь семестр']}
                             currentPage={parseInt(currentModule)}
                             setCurrentPage={(currentPage: number) =>
                                 scheduleModel.events.changeCurrentModule({

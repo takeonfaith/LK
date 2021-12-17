@@ -12,7 +12,7 @@ const ScheduleAndNotification = () => {
         () =>
             (!!schedule && Object.keys(schedule[currentModule]).find((_, index) => index + 1 === currentDay)) ||
             'monday',
-        [currentDay],
+        [currentDay, schedule],
     )
 
     const lessons =
@@ -29,13 +29,9 @@ const ScheduleAndNotification = () => {
         !!schedule && schedule[currentModule][currentStringDay as keyof IWeekSchedule].lessons,
     )
 
-    // console.log(!!schedule && schedule[currentModule][currentStringDay as keyof IWeekSchedule].subjects)
-
-    // console.log(!!schedule ? schedule[currentModule][currentStringDay as keyof IWeekSchedule].subjects : 'sasi')
-
     return (
         <Section>
-            <DaySchedule lessons={lessons || null} width={400} height={156} isCurrent index={0} loading={!schedule} />
+            <DaySchedule lessons={lessons || null} width={400} height={156} isCurrent index={0} fixedHeight />
         </Section>
     )
 }

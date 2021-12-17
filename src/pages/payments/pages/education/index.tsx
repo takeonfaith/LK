@@ -1,10 +1,14 @@
 import { paymentsModel } from '@entities/payments'
 import { Contract, LeftBlock, PageWrapper, PaymentList, PaymentsInfo, RightBlock } from '@features/payments'
 import { Title } from '@ui/atoms'
+import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 
 const EducationPayments = () => {
-    const { bachelor, magistracy } = paymentsModel.selectors.usePayments()
+    const { data } = paymentsModel.selectors.usePayments()
+    const bachelor = data?.contracts[1]
+    const magistracy = data?.contracts[2]
+
     return (
         <PageWrapper>
             <div className="blocks-wrapper">
@@ -15,13 +19,14 @@ const EducationPayments = () => {
                     <div className="payment-block-content">
                         <PaymentList payments={magistracy?.payments ?? []} />
                         <PaymentsInfo
-                            monthly={magistracy?.contract.monthly ?? 0}
-                            startDate={magistracy?.contract.startDate ?? ''}
-                            endDate={magistracy?.contract.endDate ?? ''}
-                            sum={magistracy?.contract.sum ?? 0}
+                            balanceCurrDate={getCorrectNumberFormat(magistracy?.balance_currdate ?? '0')}
+                            monthly={100000}
+                            startDate={magistracy?.startDate ?? ''}
+                            endDate={magistracy?.endDatePlan ?? ''}
+                            sum={Number(magistracy?.sum) ?? 0}
                             allPayments={
                                 magistracy?.payments?.reduce((acc, curr) => {
-                                    return acc + curr.value
+                                    return acc + getCorrectNumberFormat(curr.value)
                                 }, 0) ?? 0
                             }
                         />
@@ -31,7 +36,7 @@ const EducationPayments = () => {
                     <Title size={2} align="left" bottomGap>
                         Реквизиты договора
                     </Title>
-                    <Contract contract={magistracy?.contract} />
+                    <Contract contract={magistracy} />
                 </RightBlock>
             </div>
             <div className="blocks-wrapper">
@@ -42,13 +47,14 @@ const EducationPayments = () => {
                     <div className="payment-block-content">
                         <PaymentList payments={bachelor?.payments ?? []} />
                         <PaymentsInfo
-                            monthly={bachelor?.contract.monthly ?? 0}
-                            startDate={bachelor?.contract.startDate ?? ''}
-                            endDate={bachelor?.contract.endDate ?? ''}
-                            sum={bachelor?.contract.sum ?? 0}
+                            balanceCurrDate={getCorrectNumberFormat(bachelor?.balance_currdate ?? '0')}
+                            monthly={100000}
+                            startDate={bachelor?.startDate ?? ''}
+                            endDate={bachelor?.endDatePlan ?? ''}
+                            sum={Number(bachelor?.sum) ?? 0}
                             allPayments={
                                 bachelor?.payments?.reduce((acc, curr) => {
-                                    return acc + curr.value
+                                    return acc + getCorrectNumberFormat(curr.value)
                                 }, 0) ?? 0
                             }
                         />
@@ -58,7 +64,7 @@ const EducationPayments = () => {
                     <Title size={2} align="left" bottomGap>
                         Реквизиты договора
                     </Title>
-                    <Contract contract={bachelor?.contract} />
+                    <Contract contract={bachelor} />
                 </RightBlock>
             </div>
         </PageWrapper>

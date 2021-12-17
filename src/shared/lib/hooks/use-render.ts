@@ -7,5 +7,6 @@ export const useRender = (string: string) => {
         count.current++
     })
 
+    // eslint-disable-next-line no-console
     console.log(`${string}: ${count.current}`)
 }

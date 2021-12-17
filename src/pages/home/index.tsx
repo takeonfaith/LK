@@ -14,6 +14,7 @@ function Home() {
         data: { user },
         error,
     } = userModel.selectors.useUser()
+    const { data } = scheduleModel.selectors.useSchedule()
 
     return (
         <Wrapper

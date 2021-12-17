@@ -21,8 +21,11 @@ const LoginBlockWrapper = styled.div<{ theme: any }>`
     row-gap: 20px;
 
     @media (max-width: 1000px) {
-        border-radius: var(--brSemi) var(--brSemi) 0 0;
-        height: 50ch;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+        height: 100%;
+        justify-content: center;
     }
 `
 

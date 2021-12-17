@@ -38,7 +38,7 @@ const Contract = ({ contract }: Props) => {
         },
         {
             text: 'Заказчик: ',
-            info: contract?.customer ?? '',
+            info: contract?.contragent || 'Московский политех',
         },
         {
             text: 'Обучающийся: ',
@@ -48,10 +48,10 @@ const Contract = ({ contract }: Props) => {
             text: 'Сумма к оплате: ',
             info: contract?.sum ?? '',
         },
-        {
-            text: 'Ежемесячная плата: ',
-            info: contract?.monthly ?? '',
-        },
+        // {
+        //     text: 'Ежемесячная плата: ',
+        //     info: contract?. ?? '',
+        // },
     ]
 
     const handleCopy = () => {

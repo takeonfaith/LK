@@ -16,7 +16,7 @@ type Props = ILessons & {
     width?: number
     height?: number
     index: number
-    loading?: boolean
+    fixedHeight?: boolean
 }
 
 const findOpacity = (isCurrent: boolean, isFull: boolean, isVisible: boolean) => {
@@ -66,7 +66,7 @@ const DayScheduleWrapper = styled.div<{
             font-weight: 500;
             opacity: 0.7;
             font-size: 0.9em;
-            width: 70px;
+            width: 90px;
             text-align: center;
         }
     }
@@ -99,7 +99,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
     }
 `
 
-const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, loading }: Props) => {
+const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHeight = false }: Props) => {
     const dayRef = useRef<null | HTMLDivElement>(null)
     // const { currentChosenDay } = scheduleModel.selectors.useSchedule()
     const isOnScreen = useOnScreen(dayRef)
@@ -147,6 +147,7 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, loading
                                 key={index}
                                 index={index}
                                 isCurrent={(isCurrent && inTimeInterval(subject.timeInterval)) ?? false}
+                                fixedHeight={fixedHeight}
                             />
                         )
                     })}
