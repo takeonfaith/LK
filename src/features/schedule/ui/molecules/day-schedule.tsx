@@ -7,6 +7,7 @@ import { Title } from '@ui/atoms'
 import inTimeInterval from '../../lib/in-time-interval'
 import { Subject } from '../atoms'
 import HolidayPlate from '../atoms/holiday-plate'
+import SkeletonLoading from '../atoms/skeleton-loading'
 
 type Props = ISubjects & {
     weekDay?: string
@@ -15,6 +16,7 @@ type Props = ISubjects & {
     width?: number
     height?: number
     index: number
+    loading?: boolean
 }
 
 const findOpacity = (isCurrent: boolean, isFull: boolean, isVisible: boolean) => {
@@ -97,7 +99,9 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
     }
 `
 
-const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height }: Props) => {
+const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height, loading }: Props) => {
+    console.log(subjects)
+
     const dayRef = useRef<null | HTMLDivElement>(null)
     // const { currentChosenDay } = scheduleModel.selectors.useSchedule()
     const isOnScreen = useOnScreen(dayRef)
@@ -119,7 +123,7 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height }: Prop
             width={width}
             height={height}
         >
-            {!!weekDay && (
+            {!!weekDay && !!subjects && (
                 <div className="day-title">
                     <Title size={4} align="left">
                         {weekDay}
@@ -136,17 +140,20 @@ const DaySchedule = ({ subjects, weekDay, isCurrent, view, width, height }: Prop
                 </div>
             )}
             <DayScheduleListWrapper isFull={view === 'full'}>
-                {subjects.map((subject: ISubject, index) => {
-                    return (
-                        <Subject
-                            {...subject}
-                            key={index}
-                            index={index}
-                            isCurrent={(isCurrent && inTimeInterval(subject.timeInterval)) ?? false}
-                        />
-                    )
-                })}
-                {!subjects.length && <HolidayPlate />}
+                {!subjects && <SkeletonLoading />}
+                {!!subjects &&
+                    subjects.map((subject: ISubject, index) => {
+                        return (
+                            <Subject
+                                {...subject}
+                                key={index}
+                                index={index}
+                                isCurrent={(isCurrent && inTimeInterval(subject.timeInterval)) ?? false}
+                                loading={loading}
+                            />
+                        )
+                    })}
+                {!!subjects && !subjects.length && <HolidayPlate />}
             </DayScheduleListWrapper>
         </DayScheduleWrapper>
     )

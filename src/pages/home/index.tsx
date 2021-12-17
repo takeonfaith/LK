@@ -5,6 +5,7 @@ import ShortCutLinks from '@features/home/ui/organisms/short-cut-links'
 import UserInfo from '@features/home/ui/organisms/user-info'
 import { Wrapper } from '@ui/atoms'
 import { Content } from './ui/atoms/content'
+import { scheduleModel } from '@entities/schedule'
 
 export default Home
 
@@ -15,7 +16,13 @@ function Home() {
     } = userModel.selectors.useUser()
 
     return (
-        <Wrapper loading={!user} load={() => null} error={error}>
+        <Wrapper
+            loading={!user}
+            load={() => {
+                scheduleModel.effects.getScheduleFx(user?.group ?? '')
+            }}
+            error={error}
+        >
             <Content>
                 {user && (
                     <div className="home-page-content-inner">

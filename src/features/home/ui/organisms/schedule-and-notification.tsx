@@ -15,17 +15,24 @@ const ScheduleAndNotification = () => {
         [currentDay],
     )
 
+    // console.log(!!schedule, schedule)
+
+    // console.log(!!schedule && schedule[currentModule][currentStringDay as keyof IWeekSchedule].subjects)
+
+    // console.log(!!schedule ? schedule[currentModule][currentStringDay as keyof IWeekSchedule].subjects : 'sasi')
+
     return (
         <Section>
-            {!!schedule && (
-                <DaySchedule
-                    subjects={schedule[currentModule][currentStringDay as keyof IWeekSchedule].subjects}
-                    width={400}
-                    height={156}
-                    isCurrent
-                    index={0}
-                />
-            )}
+            <DaySchedule
+                subjects={
+                    !!schedule ? schedule[currentModule][currentStringDay as keyof IWeekSchedule]?.subjects : undefined
+                }
+                width={400}
+                height={156}
+                isCurrent
+                index={0}
+                loading={!schedule}
+            />
         </Section>
     )
 }

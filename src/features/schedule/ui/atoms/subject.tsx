@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
+import SkeletonLoading from './skeleton-loading'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean
@@ -47,10 +48,10 @@ const SubjectWrapper = styled.div<{
     }
 `
 
-type Props = ISubject & { index: number; isCurrent: boolean }
+type Props = ISubject & { index: number; isCurrent: boolean; loading?: boolean }
 
-const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent }: Props) => {
-    return (
+const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent, loading = false }: Props) => {
+    return !loading ? (
         <SubjectWrapper
             isCurrent={isCurrent}
             color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].darker}
@@ -72,6 +73,8 @@ const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent 
             </p>
             <p className="date-interval">{dateInterval}</p>
         </SubjectWrapper>
+    ) : (
+        <SkeletonLoading />
     )
 }
 

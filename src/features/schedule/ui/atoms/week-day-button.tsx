@@ -94,7 +94,7 @@ type Props = ISubjects & {
 }
 
 const WeekDayButton = ({ weekDay, subjects, isCurrent, isChosen, index }: Props) => {
-    return (
+    return !!subjects ? (
         <WeekDayButtonWrapper
             isCurrent={isCurrent}
             isChosen={isChosen}
@@ -123,7 +123,7 @@ const WeekDayButton = ({ weekDay, subjects, isCurrent, isChosen, index }: Props)
                 )}
             </span>
         </WeekDayButtonWrapper>
-    )
+    ) : null
 }
 
 export default WeekDayButton

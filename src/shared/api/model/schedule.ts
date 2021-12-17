@@ -9,7 +9,7 @@ export interface ISubject {
 }
 
 export interface ISubjects {
-    subjects: ISubject[]
+    subjects?: ISubject[]
 }
 
 export interface IWeekSchedule {
