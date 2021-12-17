@@ -1,4 +1,4 @@
-import { IWeekSchedule } from '@api/model'
+import { IWeekSchedule, ViewType } from '@api/model'
 import { WeekSchedule } from '@features/schedule/ui'
 import WeekDayButtonsList from '@features/schedule/ui/molecules/week-day-buttons-list'
 import { Wrapper } from '@ui/atoms'
@@ -7,6 +7,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Slider from 'widgets/slider/molecules/slider'
 import { scheduleModel } from '@entities/schedule'
+import ScheduleViewButtonsList from '@features/schedule/ui/molecules/schedule-view-buttons-list'
 
 const SchedulePageContent = styled.div`
     display: flex;
@@ -45,7 +46,7 @@ const SchedulePage = () => {
                 <SchedulePageContent>
                     <div className="slider-wrapper">
                         <Slider
-                            pages={['Первый модуль', 'Второй модуль']}
+                            pages={['Текущяя неделя', 'Весь семестр']}
                             currentPage={parseInt(currentModule)}
                             setCurrentPage={(currentPage: number) =>
                                 scheduleModel.events.changeCurrentModule({
@@ -54,18 +55,18 @@ const SchedulePage = () => {
                             }
                         />
                     </div>
-                    {/*<div className="buttons-and-search">*/}
-                    {/*    <ScheduleViewButtonsList*/}
-                    {/*        view={view}*/}
-                    {/*        setView={(view: ViewType) => scheduleModel.events.changeView({ view })}*/}
-                    {/*    />*/}
-                    {/*    <Input*/}
-                    {/*        value={value}*/}
-                    {/*        setValue={setValue}*/}
-                    {/*        placeholder="Номер группы"*/}
-                    {/*        leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
+                    <div className="buttons-and-search">
+                        <ScheduleViewButtonsList
+                            view={view}
+                            setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
+                        />
+                        {/*<Input*/}
+                        {/*    value={value}*/}
+                        {/*    setValue={setValue}*/}
+                        {/*    placeholder="Номер группы"*/}
+                        {/*    leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}*/}
+                        {/*/>*/}
+                    </div>
                     <WeekDayButtonsList />
                     <WeekSchedule
                         view={view}
