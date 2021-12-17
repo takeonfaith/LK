@@ -26,14 +26,15 @@ const isCurrentWeekSubject = (subject: ISubject): boolean => {
             ? new Date(`${parsedEndDateMonth}/${endDay}/${currentDate.getFullYear()}`)
             : null
 
-    if (!fullEndDate && weekStart <= fullStartDate && fullStartDate <= weekEnd) {
-        return true
-    }
+    if (fullStartDate <= weekEnd) {
+        if (!fullEndDate && weekStart <= fullStartDate) {
+            return true
+        }
 
-    if (!!fullEndDate && fullStartDate <= weekStart && fullEndDate >= weekEnd) {
-        return true
+        if (!!fullEndDate && fullEndDate >= weekStart) {
+            return true
+        }
     }
-
     return false
 }
 
