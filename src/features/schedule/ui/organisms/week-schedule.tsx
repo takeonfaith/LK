@@ -59,7 +59,7 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
                     key={index}
                     isCurrent={currentDay === index + 1}
                     weekDay={WeekDays[day as keyof IWeekDays].full}
-                    subjects={weekSchedule[day as keyof IWeekDays].subjects}
+                    lessons={weekSchedule[day as keyof IWeekDays].lessons}
                     view={view}
                     index={index + 1}
                 />
