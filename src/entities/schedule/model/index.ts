@@ -2,6 +2,7 @@ import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
 import { IModules, ISchedule, IWeekSchedule, ViewType } from '@api/model'
 import { scheduleApi } from '@api'
+import getCurrentDaySubjects from '@entities/schedule/lib/get-current-day-schedule'
 
 const useSchedule = () => {
     return { data: useStore($schedule), loading: useStore(getScheduleFx.pending), error: useStore($schedule).error }
@@ -10,16 +11,22 @@ const useSchedule = () => {
 const getScheduleFx = createEffect(async (): Promise<IModules> => {
     try {
         const response = await scheduleApi.get()
-        const obj: { [key: string]: any } = {}
+        const fullSchedule: { [key: string]: any } = {}
 
         for (const key in response.data) {
             const transformedKey = key.charAt(0).toLowerCase() + key.slice(1)
-            obj[transformedKey] = response.data[key]
+            fullSchedule[transformedKey] = response.data[key]
+        }
+
+        const currentWeekSchedule: { [key: string]: any } = {}
+
+        for (const [key, value] of Object.entries(fullSchedule)) {
+            currentWeekSchedule[key] = { lessons: getCurrentDaySubjects(value.lessons) }
         }
 
         return {
-            '0': obj as IWeekSchedule,
-            '1': obj as IWeekSchedule,
+            '0': currentWeekSchedule as IWeekSchedule,
+            '1': fullSchedule as IWeekSchedule,
         }
     } catch {
         throw new Error('Не удалось загрузить расписание')
