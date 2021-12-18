@@ -13,7 +13,7 @@ const SubjectWrapper = styled(Link)<{
     fixedHeight: boolean
 }>`
     width: 100%;
-    background: ${({ isCurrent, color, color2 }) =>
+    background: ${({ isCurrent, color }) =>
         isCurrent ? `linear-gradient(45deg, ${color}, ${color})` : 'var(--schedule)'};
     color: ${({ isCurrent }) => (isCurrent ? '#fff' : 'var(--text)')};
     padding: 20px 15px;

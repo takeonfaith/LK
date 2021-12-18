@@ -66,7 +66,6 @@ const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: P
     const [page, setPage] = useState(currentPage)
     const { width: screenWidth } = useResize()
     const sliderContentRef = useRef<HTMLDivElement | null>(null)
-
     const handleScroll = () => {
         if (sliderContentRef?.current && screenWidth <= 1000) {
             setPage(Math.round(sliderContentRef.current?.scrollLeft / screenWidth))

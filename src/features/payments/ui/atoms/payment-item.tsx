@@ -1,6 +1,7 @@
 import { IPaymentItem } from '@api/model'
 import React from 'react'
 import styled from 'styled-components'
+import localizeDate from '@utils/localize-date'
 
 const PaymentItemWrapper = styled.div`
     width: 100%;
@@ -24,7 +25,7 @@ const PaymentItemWrapper = styled.div`
 const PaymentItem = ({ date, value }: IPaymentItem) => {
     return (
         <PaymentItemWrapper>
-            <span className="payment-item-date">{date}</span>
+            <span className="payment-item-date">{localizeDate(date)}</span>
             <span className="payment-item-money">{value}</span>
         </PaymentItemWrapper>
     )
