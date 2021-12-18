@@ -14,9 +14,8 @@ const LeftsideBarWrapper = styled.div<{ isOpen: boolean }>`
     align-items: center;
     box-sizing: border-box;
     padding: 20px 15px;
-    transition: 0.2s transform, width 0.3s;
+    transition: 0.2s transform, width 0.3s, 0.2s left, 0.2 opacity;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    transition: 0.2s left;
 
     .top-wrapper {
         width: 100%;
@@ -29,8 +28,10 @@ const LeftsideBarWrapper = styled.div<{ isOpen: boolean }>`
     }
 
     @media (max-width: 1000px) {
+        transition: 0.2s left, 0.2s opacity;
         position: absolute;
         left: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+        opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
         width: 100%;
         font-size: 0.9em;
 

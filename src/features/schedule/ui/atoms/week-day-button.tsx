@@ -22,7 +22,6 @@ const WeekDayButtonWrapper = styled.button<{
     width: 100px;
     height: 54px;
     user-select: none;
-    opacity: ${({ isCurrent }) => (isCurrent ? '1' : '0.7')};
     transform: scale(${({ isCurrent }) => (isCurrent ? '1' : '0.9')});
     background: var(--mild-theme);
     color: ${({ isCurrent }) => (isCurrent ? 'var(--blue)' : 'var(--text)')};
@@ -94,6 +93,10 @@ type Props = ILessons & {
 }
 
 const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index }: Props) => {
+    const {
+        data: { currentModule },
+    } = scheduleModel.selectors.useSchedule()
+
     return !!lessons ? (
         <WeekDayButtonWrapper
             isCurrent={isCurrent}
@@ -102,18 +105,20 @@ const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index }: Props) 
         >
             <Title size={4}>{weekDay}</Title>
             <span className="marker-circles">
-                {lessons.map((lesson) => {
-                    if (TimeIntervalColor[lesson.timeInterval as keyof ITimeIntervalColor]) {
-                        return (
-                            <span
-                                className="marker-circle"
-                                style={{
-                                    background: TimeIntervalColor[lesson.timeInterval as keyof ITimeIntervalColor].main,
-                                }}
-                            />
-                        )
-                    }
-                })}
+                {currentModule !== '1' &&
+                    lessons.map((lesson) => {
+                        if (TimeIntervalColor[lesson.timeInterval as keyof ITimeIntervalColor]) {
+                            return (
+                                <span
+                                    className="marker-circle"
+                                    style={{
+                                        background:
+                                            TimeIntervalColor[lesson.timeInterval as keyof ITimeIntervalColor].main,
+                                    }}
+                                />
+                            )
+                        }
+                    })}
                 {!lessons.length && (
                     <img
                         src="https://i.pinimg.com/originals/d5/2c/46/d52c464bef731d5a93570687acd99b79.gif"

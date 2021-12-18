@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
+import { Link } from 'react-router-dom'
+import { SCHEDULE_ROUTE } from '@routes'
 
-const SubjectWrapper = styled.div<{
+const SubjectWrapper = styled(Link)<{
     isCurrent: boolean
     color: string
     color2: string
@@ -12,13 +14,14 @@ const SubjectWrapper = styled.div<{
 }>`
     width: 100%;
     background: ${({ isCurrent, color, color2 }) =>
-        isCurrent ? `linear-gradient(45deg, ${color}, ${color2})` : 'var(--schedule)'};
+        isCurrent ? `linear-gradient(45deg, ${color}, ${color})` : 'var(--schedule)'};
     color: ${({ isCurrent }) => (isCurrent ? '#fff' : 'var(--text)')};
     padding: 20px 15px;
     border-radius: 9px;
     scroll-snap-align: center;
     min-height: ${({ fixedHeight }) => (fixedHeight ? '144.2px' : 'auto')};
     height: fit-content;
+    text-decoration: none;
 
     .time-and-place {
         font-size: 0.7em;
@@ -40,7 +43,7 @@ const SubjectWrapper = styled.div<{
         }
 
         a.place {
-            color: var(--blue);
+            color: ${({ isCurrent, color2 }) => (isCurrent ? color2 : 'var(--blue)')};
         }
     }
 
@@ -80,6 +83,7 @@ const Subject = ({
             darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark}
             transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent}
             fixedHeight={fixedHeight}
+            to={SCHEDULE_ROUTE}
         >
             <h4 className="time-and-place">
                 <span className="time">{timeInterval}</span>

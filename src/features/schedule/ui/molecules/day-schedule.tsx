@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
-import styled from 'styled-components'
-import { ISubject, ILessons } from '@api/model'
+import { ILessons, ISubject } from '@api/model'
+import { Title } from '@ui/atoms'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import useOnScreen from '@utils/hooks/use-on-screen'
-import { Title } from '@ui/atoms'
+import React, { useEffect, useRef } from 'react'
+import styled from 'styled-components'
 import inTimeInterval from '../../lib/in-time-interval'
 import { Subject } from '../atoms'
 import HolidayPlate from '../atoms/holiday-plate'
@@ -92,32 +92,40 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
     row-gap: 6px;
     overflow-y: auto;
     scroll-snap-type: y proximity;
-    max-height: calc(100vh - 285px);
+    max-height: calc(100vh - 325px);
 
     &::-webkit-scrollbar {
         width: 0;
+    }
+
+    @media (max-width: 1000px) {
+        max-height: calc(100vh - 240px);
     }
 `
 
 const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHeight = false }: Props) => {
     const dayRef = useRef<null | HTMLDivElement>(null)
-    // const { currentChosenDay } = scheduleModel.selectors.useSchedule()
     const isOnScreen = useOnScreen(dayRef)
 
     // useEffect(() => {
-    //   if (
-    //     isOnScreen &&
-    //     (index === currentChosenDay + 1 || index === currentChosenDay - 1)
-    //   )
-    //     scheduleModel.events.changeCurrentChosenDay({ day: index });
-    // }, [isOnScreen]);
+    //     if (isOnScreen && (index === data.currentChosenDay + 1 || index === data.currentChosenDay - 1))
+    //         scheduleModel.events.changeCurrentChosenDay({ day: index })
+    // }, [isOnScreen])
+
+    useEffect(() => {
+        if (dayRef?.current) {
+            const currentLessonIndex = lessons?.findIndex((lesson) => inTimeInterval(lesson.timeInterval)) ?? -1
+            if (isCurrent && currentLessonIndex !== -1) {
+                dayRef.current.scrollTop = currentLessonIndex * 150
+            }
+        }
+    }, [lessons])
 
     return (
         <DayScheduleWrapper
             isCurrent={isCurrent ?? false}
             isFull={view === 'full'}
             isVisible={isOnScreen}
-            ref={dayRef}
             width={width}
             height={height}
         >
@@ -137,7 +145,7 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHe
                     </span>
                 </div>
             )}
-            <DayScheduleListWrapper isFull={view === 'full'}>
+            <DayScheduleListWrapper isFull={view === 'full'} ref={dayRef}>
                 {!lessons && <SkeletonLoading />}
                 {!!lessons &&
                     lessons.map((subject: ISubject, index) => {

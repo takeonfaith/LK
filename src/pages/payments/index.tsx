@@ -9,10 +9,6 @@ const PaymentsPage = () => {
 
     const findPages = () => {
         const pages = [{ title: 'Информация', content: <InfoPayments /> }]
-        const allPossiblePages = {
-            Общежитие: <DormitoryPayments />,
-            Образование: <EducationPayments />,
-        }
 
         for (let index = 0; index < (data?.contracts ?? []).length ?? 0; index++) {
             const el = data?.contracts[index]

@@ -62,7 +62,7 @@ const Wrapper = ({ children, load, loading = false, error, data }: Props) => {
     }, [])
 
     return (
-        <WrapperBlock loading={!!error || !data}>
+        <WrapperBlock loading={!!error || loading}>
             <span className="loading">
                 {!error ? (
                     <Loading />

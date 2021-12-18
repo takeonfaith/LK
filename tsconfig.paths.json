@@ -49,6 +49,9 @@
       ],
       "@consts": [
         "./shared/consts.ts"
+      ],
+      "@routes": [
+        "./app/routes/routes.ts"
       ]
     }
   }
