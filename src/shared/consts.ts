@@ -26,7 +26,7 @@ interface IColors {
     [key: string]: IColorPalette
 }
 
-interface IColorPalette {
+export interface IColorPalette {
     main: string
     transparent: string
     lighter: string

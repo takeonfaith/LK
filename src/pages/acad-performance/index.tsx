@@ -1,9 +1,17 @@
 import { acadPerformanceModel } from '@entities/acad-performance'
 import Select from '@features/select'
 import { Wrapper } from '@ui/atoms'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
+const items = {
+    0: '1 cеместр',
+    1: '2 cеместр',
+    2: '3 cеместр',
+    3: 'За все время',
+}
 
 const AcadPerformance = () => {
+    const [selected, setSelected] = useState<number>(0)
     const { data, loading } = acadPerformanceModel.selectors.useAcadPerformance()
 
     useEffect(() => {
@@ -15,25 +23,7 @@ const AcadPerformance = () => {
 
     return (
         <Wrapper loading={loading}>
-            <Select />
-            {/* <ProgressCircles AcadPerformanceData={data} />
-            <ExamsTable
-                AcadPerformanceData={data}
-                setCurrentSubjectClicked={setCurrentSubjectClicked}
-                setOpenStatisticsMenu={setOpenStatisticsMenu}
-            />
-            <EasyExamsTable
-                AcadPerformanceData={data}
-                setCurrentSubjectClicked={setCurrentSubjectClicked}
-                setOpenStatisticsMenu={setOpenStatisticsMenu}
-            />
-            <StatisticWindow
-                data={data}
-                currentNumberOption={currentNumberOption}
-                openStatisticsMenu={openStatisticsMenu}
-                currentSubjectClicked={currentSubjectClicked}
-                setOpenStatisticsMenu={setOpenStatisticsMenu}
-            /> */}
+            <Select items={items} selected={selected} setSelected={setSelected} />
         </Wrapper>
     )
 }

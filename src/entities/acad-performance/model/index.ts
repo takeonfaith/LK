@@ -1,4 +1,4 @@
-import { createEffect, createEvent, createStore } from 'effector'
+import { createEffect, createStore } from 'effector'
 import { useStore } from 'effector-react'
 import { prepare } from '../lib/prepare'
 import mock from './mock.json'
