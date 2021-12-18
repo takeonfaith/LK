@@ -1,5 +1,6 @@
 import { IPaymentItem } from '@api/model'
 import { PaymentItem } from '@features/payments'
+import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -58,7 +59,7 @@ const PaymentList = ({ payments }: Props) => {
                 <span>Поступившие платежи</span>
                 <span>
                     {payments?.reduce((acc, curr) => {
-                        return acc + curr.value
+                        return acc + getCorrectNumberFormat(curr.value)
                     }, 0)}{' '}
                     руб.
                 </span>

@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Header from './template/header'
-import LeftsideBar from './template/leftside-bar'
+import LeftsideBar from '../../widgets/leftside-bar'
 import PrivateRouter from '@app/routes/private-router'
-import { Modal } from '@features/modal'
-import PopUpMessage from '@features/pop-up-message/ui'
+import { Modal } from 'widgets/modal'
+import PopUpMessage from 'widgets/pop-up-message/ui'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -15,10 +15,15 @@ const ContentWrapper = styled.div`
     overflow: hidden;
 
     .page-content {
+        position: relative;
         overflow-x: hidden;
         overflow-y: auto;
         width: 100%;
         height: calc(100vh - 45px);
+    }
+
+    @media (max-width: 1000px) {
+        font-size: 0.9em;
     }
 `
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { scheduleModel } from '@entities/schedule'
-import { ISubjects, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
+import { ILessons, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
 import { Title } from '@ui/atoms'
 
 const WeekDayButtonWrapper = styled.button<{
@@ -86,15 +86,15 @@ const WeekDayButtonWrapper = styled.button<{
     }
 `
 
-type Props = ISubjects & {
+type Props = ILessons & {
     weekDay: string
     isCurrent: boolean
     isChosen: boolean
     index: number
 }
 
-const WeekDayButton = ({ weekDay, subjects, isCurrent, isChosen, index }: Props) => {
-    return (
+const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index }: Props) => {
+    return !!lessons ? (
         <WeekDayButtonWrapper
             isCurrent={isCurrent}
             isChosen={isChosen}
@@ -102,20 +102,19 @@ const WeekDayButton = ({ weekDay, subjects, isCurrent, isChosen, index }: Props)
         >
             <Title size={4}>{weekDay}</Title>
             <span className="marker-circles">
-                {subjects.map((subject) => {
-                    if (TimeIntervalColor[subject.timeInterval as keyof ITimeIntervalColor]) {
+                {lessons.map((lesson) => {
+                    if (TimeIntervalColor[lesson.timeInterval as keyof ITimeIntervalColor]) {
                         return (
                             <span
                                 className="marker-circle"
                                 style={{
-                                    background:
-                                        TimeIntervalColor[subject.timeInterval as keyof ITimeIntervalColor].main,
+                                    background: TimeIntervalColor[lesson.timeInterval as keyof ITimeIntervalColor].main,
                                 }}
                             />
                         )
                     }
                 })}
-                {!subjects.length && (
+                {!lessons.length && (
                     <img
                         src="https://i.pinimg.com/originals/d5/2c/46/d52c464bef731d5a93570687acd99b79.gif"
                         alt="спим"
@@ -123,7 +122,7 @@ const WeekDayButton = ({ weekDay, subjects, isCurrent, isChosen, index }: Props)
                 )}
             </span>
         </WeekDayButtonWrapper>
-    )
+    ) : null
 }
 
 export default WeekDayButton

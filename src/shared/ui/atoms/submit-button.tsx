@@ -88,6 +88,11 @@ const SubmitButtonWrapper = styled.button<{
         width: 30px;
         height: 30px;
     }
+
+    @media (max-width: 1000px) {
+        font-size: 0.8em;
+        height: 36px;
+    }
 `
 
 interface Props {
@@ -96,6 +101,7 @@ interface Props {
     isLoading: boolean
     completed: boolean
     setCompleted: (completed: boolean) => void
+    buttonSuccessText?: string
     popUpSuccessMessage?: string
     popUpFailureMessage?: string
     isActive: boolean
@@ -107,6 +113,7 @@ const SubmitButton = ({
     isLoading = false,
     completed = false,
     setCompleted,
+    buttonSuccessText = 'Готово',
     popUpSuccessMessage = 'Успешно',
     popUpFailureMessage = 'Nope',
     isActive = true,
@@ -144,7 +151,7 @@ const SubmitButton = ({
             <div className="inner-button">
                 {completed ? (
                     <div className="inner-button-success">
-                        <ImCheckmark /> Done
+                        <ImCheckmark /> {buttonSuccessText}
                     </div>
                 ) : !isLoading ? (
                     <div className="inner-button-text">{text}</div>

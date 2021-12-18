@@ -25,6 +25,8 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string }>`
         bottom: auto;
         left: 50%;
         transform: translate(${({ isOpen }) => (isOpen ? '-50%, 0px' : '-50%, -20px')});
+        font-size: 0.8em;
+        text-align: center;
     }
 `
 

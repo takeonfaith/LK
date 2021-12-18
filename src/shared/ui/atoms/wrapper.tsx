@@ -1,6 +1,7 @@
+import React, { useEffect } from 'react'
+import { AiOutlineReload } from 'react-icons/ai'
 import styled from 'styled-components'
-import { Loading } from '.'
-import React from 'react'
+import { Button, Loading, Title } from '.'
 
 const WrapperBlock = styled.div<{ loading: boolean }>`
     width: 100%;
@@ -33,18 +34,44 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
         transform: scale(${({ loading }) => (loading ? '0.98' : '1')});
         height: 100%;
     }
+
+    .reload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text);
+
+        & > * + * {
+            margin-top: 10px;
+        }
+    }
 `
 
 interface Props {
     children?: JSX.Element | string | null
+    load: () => void
     loading: boolean
+    error: string | null
+    data: any | null
 }
 
-const Wrapper = ({ children, loading = false }: Props) => {
+const Wrapper = ({ children, load, loading = false, error, data }: Props) => {
+    useEffect(() => {
+        if (!data) load()
+    }, [])
+
     return (
-        <WrapperBlock loading={loading}>
+        <WrapperBlock loading={!!error || !data}>
             <span className="loading">
-                <Loading />
+                {!error ? (
+                    <Loading />
+                ) : (
+                    <div className="reload">
+                        <Title size={3}>{!!error && error}</Title>
+                        <Button onClick={() => load()} text="Загрузить снова" icon={<AiOutlineReload />} />
+                    </div>
+                )}
             </span>
             <div className="content">{children}</div>
         </WrapperBlock>

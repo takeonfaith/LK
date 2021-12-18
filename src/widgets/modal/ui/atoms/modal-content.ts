@@ -11,6 +11,10 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
     transition: 0.2s opacity, 0.2s transform;
     overflow: hidden;
 
+    @media (max-width: 1000px) {
+        font-size: 0.9em;
+    }
+
     @media (min-width: 801px) {
         transform: scale(${({ isOpen }) => (isOpen ? 1 : 0.95)});
     }

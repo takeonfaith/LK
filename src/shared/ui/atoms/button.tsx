@@ -34,6 +34,16 @@ const ButtonWrapper = styled.button<{
         width: 15px;
         height: 15px;
     }
+
+    @media (max-width: 1000px) {
+        font-size: 12px;
+        height: 36px;
+
+        svg {
+            width: 14px;
+            height: 14px;
+        }
+    }
 `
 
 interface Props {

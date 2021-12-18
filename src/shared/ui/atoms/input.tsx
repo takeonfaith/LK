@@ -8,6 +8,7 @@ const InputWrapper = styled.div<{ leftIcon: boolean }>`
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    width: 100%;
 
     h5 {
         margin-bottom: 5px;

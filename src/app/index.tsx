@@ -1,6 +1,6 @@
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
-import { ModalProvider } from '../features/modal'
+import { ModalProvider } from '../widgets/modal'
 import SettingsProvider from '../shared/lib/contexts/settings-context'
 import Router from './routes/router'
 

@@ -2,7 +2,7 @@ import { FiSettings } from 'react-icons/fi'
 
 import SettingsPage from '../../../settings'
 import Button from '@ui/atoms/button'
-import { useModal } from '../../../modal'
+import { useModal } from '../../../../widgets/modal'
 import React from 'react'
 
 const SettingsButton = () => {

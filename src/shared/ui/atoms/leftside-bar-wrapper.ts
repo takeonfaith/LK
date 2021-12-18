@@ -32,6 +32,7 @@ const LeftsideBarWrapper = styled.div<{ isOpen: boolean }>`
         position: absolute;
         left: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
         width: 100%;
+        font-size: 0.9em;
 
         .top-wrapper {
             max-height: calc(100% - 60px);

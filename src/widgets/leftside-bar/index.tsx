@@ -1,12 +1,12 @@
 import React from 'react'
 import { IRoute, privateRoutes } from '@app/routes/routes'
 import { menuModel } from '@entities/menu'
-import CloseMenuButton from '@features/leftside-bar/ui/molecules/close-menu-button'
-import LeftsideBarList from '@features/leftside-bar/ui/organisms/leftside-bar-list'
+import CloseMenuButton from 'widgets/leftside-bar/ui/molecules/close-menu-button'
+import LeftsideBarList from 'widgets/leftside-bar/ui/organisms/leftside-bar-list'
 import useResize from '@utils/hooks/use-resize'
-import LeftsideBarWrapper from '../atoms/leftside-bar-wrapper'
-import Logo from '../atoms/logo'
-import LocalSearch from '../molecules/local-search'
+import LeftsideBarWrapper from '@ui/atoms/leftside-bar-wrapper'
+import Logo from '@ui/atoms/logo'
+import LocalSearch from '@ui/molecules/local-search'
 
 const LeftsideBar = () => {
     const { isOpen } = menuModel.selectors.useMenu()

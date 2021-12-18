@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { FiHelpCircle } from 'react-icons/fi'
 
 import Avatar from '../molecules/avatar'
-import { useModal } from '../../../modal'
+import { useModal } from '../../../../widgets/modal'
 import { Section } from '../atoms/section'
 import MoreUserInfo from './more-user-info'
 import { Description, MoreInfoLink } from '../atoms/more-info'

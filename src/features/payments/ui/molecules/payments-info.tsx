@@ -1,6 +1,5 @@
 import { Colors } from '@consts'
 import { Button } from '@ui/atoms'
-import getMonthDiff from '@utils/get-months-diff'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -30,17 +29,17 @@ interface Props {
     startDate: string
     sum: number
     allPayments: number
+    balanceCurrDate: number
 }
 
-const PaymentsInfo = ({ monthly, endDate, sum, allPayments, startDate }: Props) => {
-    const paymentDifference = getMonthDiff(new Date(startDate), new Date()) * monthly - allPayments
+const PaymentsInfo = ({ monthly, endDate, sum, allPayments, startDate, balanceCurrDate }: Props) => {
     return (
-        <PaymentsInfoWrapper paymentDifference={paymentDifference}>
+        <PaymentsInfoWrapper paymentDifference={balanceCurrDate}>
             <div>
                 <p>
-                    {paymentDifference < 0 ? 'Переплата' : 'Долг'} на {new Date().toString()}{' '}
-                    <span className="debt-or-overpay">{paymentDifference.toFixed(1)} руб.</span> Следующий платеж -{' '}
-                    <span className="monthly">{monthly} руб.</span> - должен быть не позднее, чем 10.05.2021
+                    {balanceCurrDate < 0 ? 'Переплата' : 'Долг'} на {new Date().toString()}{' '}
+                    <span className="debt-or-overpay">{balanceCurrDate} руб.</span> Следующий платеж -{' '}
+                    <span className="monthly">{monthly} руб.</span>
                 </p>
                 <br />
                 <p>

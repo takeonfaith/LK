@@ -64,7 +64,7 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
     }
     .currentPage {
         min-width: 80px;
-        height: calc(100% - 6px);
+        height: calc(100% - 0px);
         background: var(--theme);
         display: block;
         position: absolute;
@@ -72,11 +72,10 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
         z-index: 0;
         border-radius: 14px;
         scroll-snap-align: center;
-        height: 100%;
     }
 
     @media (max-width: 1000px) {
-        font-size: 0.7em;
+        font-size: 11px;
         min-height: 40px;
         border-radius: var(--brLight);
 

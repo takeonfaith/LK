@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import { FiSearch, FiUsers } from 'react-icons/fi'
-import styled from 'styled-components'
-import { scheduleModel } from '../../entities/schedule'
-import { WeekSchedule } from '@features/schedule/ui'
-import ScheduleViewButtonsList from '@features/schedule/ui/molecules/schedule-view-buttons-list'
-import WeekDayButtonsList from '@features/schedule/ui/molecules/week-day-buttons-list'
-import Slider from '@features/slider/molecules/slider'
 import { IWeekSchedule, ViewType } from '@api/model'
+import { WeekSchedule } from '@features/schedule/ui'
+import WeekDayButtonsList from '@features/schedule/ui/molecules/week-day-buttons-list'
+import { Wrapper } from '@ui/atoms'
 import useResize from '@utils/hooks/use-resize'
-import { Input, Wrapper } from '@ui/atoms'
+import React from 'react'
+import styled from 'styled-components'
+import Slider from 'widgets/slider/molecules/slider'
+import { scheduleModel } from '@entities/schedule'
+import ScheduleViewButtonsList from '@features/schedule/ui/molecules/schedule-view-buttons-list'
 
 const SchedulePageContent = styled.div`
     display: flex;
@@ -33,57 +32,56 @@ const SchedulePageContent = styled.div`
 `
 
 const SchedulePage = () => {
-    const { schedule, currentModule, view } = scheduleModel.selectors.useSchedule()
-    const [loading, setLoading] = useState(true)
+    const {
+        data: { schedule, currentModule, view },
+        loading,
+        error,
+    } = scheduleModel.selectors.useSchedule()
 
-    useEffect(() => {
-        setTimeout(() => {
-            setLoading(false)
-        }, 500)
-    }, [])
-    const [value, setValue] = useState('191-722')
     const { width } = useResize()
 
     return (
-        <Wrapper loading={loading}>
-            <SchedulePageContent>
-                <div className="slider-wrapper">
-                    <Slider
-                        pages={['Первый модуль', 'Второй модуль']}
-                        currentPage={parseInt(currentModule)}
-                        setCurrentPage={(currentPage: number) =>
-                            scheduleModel.events.changeCurrentModule({
-                                currentModule: currentPage,
-                            })
+        <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx()} error={error} data={schedule}>
+            {!!schedule ? (
+                <SchedulePageContent>
+                    <div className="slider-wrapper">
+                        <Slider
+                            pages={['Текущая неделя', 'Весь семестр']}
+                            currentPage={parseInt(currentModule)}
+                            setCurrentPage={(currentPage: number) =>
+                                scheduleModel.events.changeCurrentModule({
+                                    currentModule: currentPage,
+                                })
+                            }
+                        />
+                    </div>
+                    <div className="buttons-and-search">
+                        <ScheduleViewButtonsList
+                            view={view}
+                            setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
+                        />
+                        {/*<Input*/}
+                        {/*    value={value}*/}
+                        {/*    setValue={setValue}*/}
+                        {/*    placeholder="Номер группы"*/}
+                        {/*    leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}*/}
+                        {/*/>*/}
+                    </div>
+                    <WeekDayButtonsList />
+                    <WeekSchedule
+                        view={view}
+                        weekSchedule={
+                            schedule[
+                                currentModule.toString() as keyof {
+                                    '0': IWeekSchedule
+                                    '1': IWeekSchedule
+                                }
+                            ]
                         }
                     />
-                </div>
-                <div className="buttons-and-search">
-                    <ScheduleViewButtonsList
-                        view={view}
-                        setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
-                    />
-                    <Input
-                        value={value}
-                        setValue={setValue}
-                        placeholder="Номер группы"
-                        leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}
-                    />
-                </div>
-                <WeekDayButtonsList />
-                <WeekSchedule
-                    view={view}
-                    weekSchedule={
-                        schedule[
-                            currentModule.toString() as keyof {
-                                '0': IWeekSchedule
-                                '1': IWeekSchedule
-                            }
-                        ]
-                    }
-                />
-                {width < 1000 && <WeekDayButtonsList />}
-            </SchedulePageContent>
+                    {width < 1000 && <WeekDayButtonsList />}
+                </SchedulePageContent>
+            ) : null}
         </Wrapper>
     )
 }

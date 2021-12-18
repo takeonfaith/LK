@@ -32,7 +32,9 @@ interface Props {
 }
 
 const WeekSchedule = ({ weekSchedule, view }: Props) => {
-    const { currentDay, currentChosenDay } = scheduleModel.selectors.useSchedule()
+    const {
+        data: { currentDay, currentChosenDay },
+    } = scheduleModel.selectors.useSchedule()
     const wrapperRef = useRef<HTMLDivElement>(null)
     const { width } = useResize()
 
@@ -50,6 +52,16 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
         }
     }, [currentChosenDay])
 
+    useEffect(() => {
+        if (wrapperRef?.current) {
+            if (width < 1000) {
+                wrapperRef.current.scrollLeft = (currentChosenDay * width * currentChosenDay) / 6
+            } else {
+                wrapperRef.current.scrollLeft = currentChosenDay * 400 - 350
+            }
+        }
+    }, [])
+
     return (
         <ScheduleWrapper isFull={view === 'full'} ref={wrapperRef}>
             {Object.keys(weekSchedule).map((day, index) => (
@@ -57,7 +69,7 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
                     key={index}
                     isCurrent={currentDay === index + 1}
                     weekDay={WeekDays[day as keyof IWeekDays].full}
-                    subjects={weekSchedule[day as keyof IWeekDays].subjects}
+                    lessons={weekSchedule[day as keyof IWeekDays].lessons}
                     view={view}
                     index={index + 1}
                 />

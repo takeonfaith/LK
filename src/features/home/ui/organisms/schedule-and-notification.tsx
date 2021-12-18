@@ -5,21 +5,33 @@ import { DaySchedule } from '../../../schedule/ui'
 import { Section } from '../atoms/section'
 
 const ScheduleAndNotification = () => {
-    const { currentModule, schedule, currentDay } = scheduleModel.selectors.useSchedule()
+    const {
+        data: { currentModule, schedule, currentDay },
+    } = scheduleModel.selectors.useSchedule()
     const currentStringDay = useMemo(
-        () => Object.keys(schedule[currentModule]).find((_, index) => index + 1 === currentDay) ?? 'monday',
-        [currentDay],
+        () =>
+            (!!schedule && Object.keys(schedule[currentModule]).find((_, index) => index + 1 === currentDay)) ||
+            'monday',
+        [currentDay, schedule],
+    )
+
+    const lessons =
+        !!schedule &&
+        !!schedule[currentModule][currentStringDay as keyof IWeekSchedule] &&
+        schedule[currentModule][currentStringDay as keyof IWeekSchedule].lessons
+
+    console.log(
+        !!schedule,
+        schedule,
+        lessons,
+        currentModule,
+        currentStringDay,
+        !!schedule && schedule[currentModule][currentStringDay as keyof IWeekSchedule].lessons,
     )
 
     return (
         <Section>
-            <DaySchedule
-                subjects={schedule[currentModule][currentStringDay as keyof IWeekSchedule].subjects}
-                width={400}
-                height={156}
-                isCurrent
-                index={0}
-            />
+            <DaySchedule lessons={lessons || null} width={400} height={156} isCurrent index={0} fixedHeight />
         </Section>
     )
 }

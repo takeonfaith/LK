@@ -21,8 +21,11 @@ const LoginBlockWrapper = styled.div<{ theme: any }>`
     row-gap: 20px;
 
     @media (max-width: 1000px) {
-        border-radius: var(--brSemi) var(--brSemi) 0 0;
-        height: 50ch;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+        height: 100%;
+        justify-content: center;
     }
 `
 
@@ -35,7 +38,9 @@ const LoginBlock = () => {
 
     return (
         <LoginBlockWrapper theme={Themes[theme]}>
-            <Title size={2}>Вход в личный кабинет</Title>
+            <Title size={2} align="left">
+                Вход в личный кабинет
+            </Title>
             <ErrorMessage message={error} />
             <Input value={login} setValue={setLogin} title="Логин" placeholder="Введите логин" />
             <Input

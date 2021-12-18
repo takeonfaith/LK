@@ -8,6 +8,7 @@ const SubjectWrapper = styled.div<{
     color2: string
     darkColor: string
     transparent: string
+    fixedHeight: boolean
 }>`
     width: 100%;
     background: ${({ isCurrent, color, color2 }) =>
@@ -16,6 +17,8 @@ const SubjectWrapper = styled.div<{
     padding: 20px 15px;
     border-radius: 9px;
     scroll-snap-align: center;
+    min-height: ${({ fixedHeight }) => (fixedHeight ? '144.2px' : 'auto')};
+    height: fit-content;
 
     .time-and-place {
         font-size: 0.7em;
@@ -28,6 +31,16 @@ const SubjectWrapper = styled.div<{
             border-radius: 100px;
             box-shadow: ${({ transparent }) => `0 0 30px ${transparent}`};
             color: #fff;
+        }
+
+        .place {
+            color: var(--text);
+            text-decoration: none;
+            margin-left: 5px;
+        }
+
+        a.place {
+            color: var(--blue);
         }
     }
 
@@ -47,9 +60,18 @@ const SubjectWrapper = styled.div<{
     }
 `
 
-type Props = ISubject & { index: number; isCurrent: boolean }
+type Props = ISubject & { index: number; isCurrent: boolean; fixedHeight?: boolean }
 
-const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent }: Props) => {
+const Subject = ({
+    timeInterval,
+    name,
+    place,
+    teachers,
+    dateInterval,
+    isCurrent,
+    link,
+    fixedHeight = false,
+}: Props) => {
     return (
         <SubjectWrapper
             isCurrent={isCurrent}
@@ -57,11 +79,18 @@ const Subject = ({ timeInterval, name, place, teachers, dateInterval, isCurrent 
             color2={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].lighter}
             darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark}
             transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent}
+            fixedHeight={fixedHeight}
         >
             <h4 className="time-and-place">
                 <span className="time">{timeInterval}</span>
                 {/* {isCurrent && <NowPlate />} */}
-                <span className="place"> {place}</span>
+                {!link ? (
+                    <span className="place"> {place}</span>
+                ) : (
+                    <a href={link} className="place">
+                        {place}
+                    </a>
+                )}
                 {/* <span className="currentOrNext" >{isToday ? inTimeInterval(time, currentDay) ? "Сейчас" : isNextSubject(time, currentDay) ? "Следующая" : null : null}</span> */}
             </h4>
             <h3>{name}</h3>
