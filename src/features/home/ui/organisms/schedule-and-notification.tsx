@@ -15,18 +15,12 @@ const ScheduleAndNotification = () => {
         [currentDay, schedule],
     )
 
-    const lessons =
-        !!schedule &&
-        !!schedule[currentModule][currentStringDay as keyof IWeekSchedule] &&
-        schedule[currentModule][currentStringDay as keyof IWeekSchedule].lessons
-
-    console.log(
-        !!schedule,
-        schedule,
-        lessons,
-        currentModule,
-        currentStringDay,
-        !!schedule && schedule[currentModule][currentStringDay as keyof IWeekSchedule].lessons,
+    const lessons = useMemo(
+        () =>
+            !!schedule &&
+            !!schedule[currentModule][currentStringDay as keyof IWeekSchedule] &&
+            schedule[currentModule][currentStringDay as keyof IWeekSchedule].lessons,
+        [schedule],
     )
 
     return (

@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react'
-import styled from 'styled-components'
-import { scheduleModel } from '@entities/schedule'
 import { IWeekSchedule } from '@api/model'
 import { IWeekDays, WeekDays } from '@consts'
+import { scheduleModel } from '@entities/schedule'
 import useResize from '@utils/hooks/use-resize'
+import React, { useEffect, useRef } from 'react'
+import styled from 'styled-components'
 import { DaySchedule } from '../molecules'
 
 const ScheduleWrapper = styled.div<{ isFull: boolean }>`
@@ -15,7 +15,6 @@ const ScheduleWrapper = styled.div<{ isFull: boolean }>`
     padding: ${({ isFull }) => (isFull ? '0px' : '0px calc(50% - 200px)')};
     scroll-snap-type: y proximity;
     scroll-behavior: smooth;
-    /* scroll-padding-right: 400px; */
 
     &::-webkit-scrollbar {
         height: 0;
@@ -44,23 +43,13 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
 
     useEffect(() => {
         if (wrapperRef?.current) {
-            if (width < 1000) {
+            if (width <= 1000) {
                 wrapperRef.current.scrollLeft = (currentChosenDay * width * currentChosenDay) / 6
             } else {
                 wrapperRef.current.scrollLeft = currentChosenDay * 400 - 350
             }
         }
-    }, [currentChosenDay])
-
-    useEffect(() => {
-        if (wrapperRef?.current) {
-            if (width < 1000) {
-                wrapperRef.current.scrollLeft = (currentChosenDay * width * currentChosenDay) / 6
-            } else {
-                wrapperRef.current.scrollLeft = currentChosenDay * 400 - 350
-            }
-        }
-    }, [])
+    }, [currentChosenDay, wrapperRef?.current])
 
     return (
         <ScheduleWrapper isFull={view === 'full'} ref={wrapperRef}>

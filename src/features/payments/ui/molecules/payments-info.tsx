@@ -32,7 +32,7 @@ interface Props {
     balanceCurrDate: number
 }
 
-const PaymentsInfo = ({ monthly, endDate, sum, allPayments, startDate, balanceCurrDate }: Props) => {
+const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: Props) => {
     return (
         <PaymentsInfoWrapper paymentDifference={balanceCurrDate}>
             <div>

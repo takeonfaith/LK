@@ -49,7 +49,7 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
 `
 
 interface Props {
-    children?: JSX.Element | string | null
+    children?: JSX.Element[] | JSX.Element | string | null
     load: () => void
     loading: boolean
     error: string | null
@@ -62,7 +62,7 @@ const Wrapper = ({ children, load, loading = false, error, data }: Props) => {
     }, [])
 
     return (
-        <WrapperBlock loading={!!error || !data}>
+        <WrapperBlock loading={!!error || loading}>
             <span className="loading">
                 {!error ? (
                     <Loading />

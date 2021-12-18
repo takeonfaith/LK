@@ -6,6 +6,7 @@ import LeftsideBar from '../../widgets/leftside-bar'
 import PrivateRouter from '@app/routes/private-router'
 import { Modal } from 'widgets/modal'
 import PopUpMessage from 'widgets/pop-up-message/ui'
+import useResize from '@utils/hooks/use-resize'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -28,8 +29,9 @@ const ContentWrapper = styled.div`
 `
 
 const ContentLayout = () => {
+    const { height } = useResize()
     return (
-        <div style={{ height: '100vh', display: 'flex' }}>
+        <div style={{ height, display: 'flex' }}>
             <LeftsideBar />
             <ContentWrapper>
                 <Header />
