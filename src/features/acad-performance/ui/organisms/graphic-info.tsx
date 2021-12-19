@@ -116,6 +116,8 @@ const GraphicInfo = () => {
     const examPercentage = data?.exam.length ? findPercentage(data.exam, circleMode) : 0
     const easyExamPercentage = data?.test.length ? findPercentage(data.test) : 0
 
+    console.log(data?.exam, examPercentage)
+
     return (
         <Wrap>
             <Circle>
