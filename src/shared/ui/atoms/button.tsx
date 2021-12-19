@@ -1,22 +1,19 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
-import useTheme from '@utils/hooks/use-theme'
-import Themes from '../colors'
 
 const ButtonWrapper = styled.button<{
-    theme: string
     text: boolean
     isChosen: boolean
     width?: string
     background?: string
-    whiteText?: boolean
+    textColor?: string
 }>`
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
     outline: none;
-    color: ${({ whiteText }) => (whiteText ? '#fff' : 'var(--text)')};
+    color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
     padding: 10px;
     border-radius: 10px;
@@ -53,20 +50,18 @@ interface Props {
     isChosen?: boolean
     width?: string
     background?: string
-    whiteText?: boolean
+    textColor?: string
 }
 
-const Button = ({ icon, text, onClick, isChosen = false, width, background, whiteText = false }: Props) => {
-    const { theme } = useTheme()
+const Button = ({ icon, text, onClick, width, background, textColor, isChosen = false }: Props) => {
     return (
         <ButtonWrapper
             text={!!text}
             onClick={onClick}
-            theme={Themes[theme]}
             isChosen={isChosen}
             width={width}
             background={background}
-            whiteText={whiteText}
+            textColor={textColor}
         >
             {!!icon && icon}
             <span>{text}</span>

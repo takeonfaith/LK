@@ -56,13 +56,13 @@ interface Props {
     data: any | null
 }
 
-const Wrapper = ({ children, load, loading = false, error, data }: Props) => {
+const Wrapper = ({ children, load, error, data }: Props) => {
     useEffect(() => {
         if (!data) load()
     }, [])
 
     return (
-        <WrapperBlock loading={!!error || loading}>
+        <WrapperBlock loading={!!error || !data}>
             <span className="loading">
                 {!error ? (
                     <Loading />

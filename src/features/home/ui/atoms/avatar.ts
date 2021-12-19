@@ -20,9 +20,9 @@ export const Container = styled.div`
     margin-right: 32px;
 
     @media (max-width: 1000px) {
-        min-width: 80px;
-        width: 80px;
-        height: 80px;
+        min-width: 75px;
+        width: 75px;
+        height: 75px;
         margin-right: 15px;
     }
 `

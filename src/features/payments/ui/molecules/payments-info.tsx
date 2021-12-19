@@ -52,7 +52,7 @@ const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: P
                     text={'Оплатить через QR-код Сбербанк онлайн'}
                     width={'100%'}
                     background={Colors.green.main}
-                    whiteText
+                    textColor="#fff"
                 />
             </div>
         </PaymentsInfoWrapper>

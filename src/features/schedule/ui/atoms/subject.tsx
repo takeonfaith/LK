@@ -1,10 +1,8 @@
+import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
 import React from 'react'
 import styled from 'styled-components'
-import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
-import { Link } from 'react-router-dom'
-import { SCHEDULE_ROUTE } from '@routes'
 
-const SubjectWrapper = styled(Link)<{
+const SubjectWrapper = styled.div<{
     isCurrent: boolean
     color: string
     color2: string
@@ -21,7 +19,6 @@ const SubjectWrapper = styled(Link)<{
     scroll-snap-align: center;
     min-height: ${({ fixedHeight }) => (fixedHeight ? '144.2px' : 'auto')};
     height: fit-content;
-    text-decoration: none;
 
     .time-and-place {
         font-size: 0.7em;
@@ -83,7 +80,6 @@ const Subject = ({
             darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark}
             transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent}
             fixedHeight={fixedHeight}
-            to={SCHEDULE_ROUTE}
         >
             <h4 className="time-and-place">
                 <span className="time">{timeInterval}</span>
@@ -91,7 +87,7 @@ const Subject = ({
                 {!link ? (
                     <span className="place"> {place}</span>
                 ) : (
-                    <a href={link} className="place">
+                    <a href={link} className="place" target="_blank" rel="noreferrer">
                         {place}
                     </a>
                 )}

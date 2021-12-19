@@ -7,7 +7,6 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
     min-height: 50vh;
     max-height: 90vh;
     border-radius: 29px;
-    opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
     transition: 0.2s opacity, 0.2s transform;
     overflow: hidden;
 
@@ -25,7 +24,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
         height: 80%;
         bottom: 0;
         border-radius: 20px 20px 0 0;
-        transform: ${({ isOpen }) => (isOpen ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(50px)')};
+        transform: ${({ isOpen }) => (isOpen ? 'scale(1) translateY(0)' : 'scale(1) translateY(150px)')};
         border-radius: var(--brLight) var(--brLight) 0 0;
     }
 `

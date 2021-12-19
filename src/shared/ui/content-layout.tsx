@@ -7,6 +7,7 @@ import PrivateRouter from '@app/routes/private-router'
 import { Modal } from 'widgets/modal'
 import PopUpMessage from 'widgets/pop-up-message/ui'
 import useResize from '@utils/hooks/use-resize'
+import ConfirmMessage from 'widgets/confirm'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -41,6 +42,7 @@ const ContentLayout = () => {
             </ContentWrapper>
             <Modal />
             <PopUpMessage />
+            <ConfirmMessage />
         </div>
     )
 }

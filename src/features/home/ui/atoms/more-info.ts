@@ -3,18 +3,26 @@ import styled from 'styled-components'
 export const MoreInfoLink = styled.div`
     cursor: pointer;
     margin-top: 8px;
+    font-weight: 600;
 
     display: flex;
 
     & > svg {
-        stroke: var(--blue);
-        filter: brightness(1.2);
+        color: var(--blue);
+        /* filter: brightness(1.2); */
     }
 
     & > span {
         margin-left: 5px;
         color: var(--blue);
         filter: brightness(1.2);
+    }
+
+    @media (max-width: 1000px) {
+        & > svg {
+            width: 13px;
+            height: 13px;
+        }
     }
 `
 
@@ -36,8 +44,12 @@ export const Description = styled.div`
     justify-content: space-evenly;
 
     @media (max-width: 1000px) {
+        & .short-status p:nth-child(2) {
+            display: none;
+        }
         h2 {
             font-size: 0.9em;
+            margin-bottom: 5px;
         }
 
         .short-status {

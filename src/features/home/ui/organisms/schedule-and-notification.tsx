@@ -11,7 +11,7 @@ const ScheduleAndNotification = () => {
     const currentStringDay = useMemo(
         () =>
             (!!schedule && Object.keys(schedule[currentModule]).find((_, index) => index + 1 === currentDay)) ||
-            'monday',
+            'sunday',
         [currentDay, schedule],
     )
 
@@ -25,7 +25,7 @@ const ScheduleAndNotification = () => {
 
     return (
         <Section>
-            <DaySchedule lessons={lessons || null} width={400} height={156} isCurrent index={0} fixedHeight />
+            <DaySchedule lessons={lessons || []} width={400} height={156} isCurrent index={0} fixedHeight />
         </Section>
     )
 }

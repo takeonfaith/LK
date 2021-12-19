@@ -1,14 +1,13 @@
-import React, { useCallback } from 'react'
-import { FiHelpCircle } from 'react-icons/fi'
-
-import Avatar from '../molecules/avatar'
-import { useModal } from '../../../../widgets/modal'
-import { Section } from '../atoms/section'
-import MoreUserInfo from './more-user-info'
-import { Description, MoreInfoLink } from '../atoms/more-info'
-import { Title } from '@ui/atoms'
-import createFullName from '../../lib/create-full-name'
 import { User } from '@api/model'
+import { Title } from '@ui/atoms'
+import React, { useCallback } from 'react'
+import { FiInfo } from 'react-icons/fi'
+import { useModal } from '../../../../widgets/modal'
+import createFullName from '../../lib/create-full-name'
+import { Description, MoreInfoLink } from '../atoms/more-info'
+import { Section } from '../atoms/section'
+import Avatar from '../molecules/avatar'
+import MoreUserInfo from './more-user-info'
 
 export default UserInfo
 
@@ -40,7 +39,7 @@ function UserInfo({ user }: Props) {
                     <p>Курс: {course}</p>
                     <p>Дата рождения: {birthday}</p>
                     <MoreInfoLink onClick={handleNodel}>
-                        <FiHelpCircle />
+                        <FiInfo />
                         <span>Подробная информация</span>
                     </MoreInfoLink>
                 </div>
