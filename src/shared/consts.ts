@@ -1,3 +1,5 @@
+import { IGrade } from '@api/model/acad-performance'
+
 export type MenuType = number[]
 export type ShortCutLinksType = number[]
 export type ThemeType = string
@@ -141,4 +143,12 @@ export const WidthByGrade = {
     Удовлетворительно: '60%',
     Неудовлетворительно: '40%',
     default: '40%',
+}
+
+export const GradeByScore: IGrade = {
+    Зачтено: 5,
+    Отлично: 5,
+    Хорошо: 4,
+    Удовлетворительно: 3,
+    Неудовлетворительно: 2,
 }

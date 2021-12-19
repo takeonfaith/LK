@@ -4,7 +4,7 @@ const SelectWrapper = styled.div`
     max-width: 155px;
     width: 50%;
     min-width: 50px;
-    height: 36px;
+    min-height: 36px;
 
     position: relative;
     user-select: none;
@@ -16,6 +16,7 @@ const SelectWrapper = styled.div`
     color: var(--text);
     cursor: pointer;
     transition: 0.3s;
+    z-index: 1;
     &:active {
         transform: translateY(3px);
     }

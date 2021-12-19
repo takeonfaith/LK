@@ -19,10 +19,10 @@ const Wrap = styled.div`
     align-items: center;
     justify-content: space-between;
     background: var(--schedule);
-    margin: 10px 0;
-    padding: 5px 0;
+    padding: 15px 0;
     box-sizing: border-box;
     cursor: pointer;
+
     &:not(:last-child) {
         border-bottom: 1px solid var(--almostTransparentOpposite);
     }
@@ -49,6 +49,10 @@ const Name = styled.div`
 
         margin-left: 5px;
     }
+
+    @media (max-width: 1000px) {
+        min-width: 0px;
+    }
 `
 
 const Bar = styled.div`
@@ -65,6 +69,13 @@ const Bar = styled.div`
     @media (max-width: 1200px) {
         display: none;
     }
+
+    @media (max-width: 1000px) {
+        min-width: 0px;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 5px;
+    }
 `
 
 const Grade = styled.div`
@@ -72,14 +83,30 @@ const Grade = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
 `
 
 const ExamDate = styled.div`
     min-width: 130px;
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
 `
 
 const Teacher = styled.div`
     min-width: 150px;
+
+    @media (max-width: 1200px) {
+        display: none;
+    }
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
 `
 
 const SubjectItem = ({ item, number, type }: Props) => {

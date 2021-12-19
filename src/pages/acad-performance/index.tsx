@@ -1,45 +1,64 @@
 import { acadPerformanceModel } from '@entities/acad-performance'
+import { userModel } from '@entities/user'
+import createSelectItems from '@features/acad-performance/lib/create-select-items'
 import { GraphicInfo, SubjectList } from '@features/acad-performance/ui/organisms'
 import Select from '@features/select'
-import { SkeletonShape, Wrapper } from '@ui/atoms'
-import React, { useEffect, useState } from 'react'
+import { Wrapper, Error } from '@ui/atoms'
+import React, { useEffect, useMemo, useState } from 'react'
+import styled from 'styled-components'
 
-const items = {
-    0: '1 cеместр',
-    1: '2 cеместр',
-    2: '3 cеместр',
-    3: '4',
-    5: '5',
-    6: '6',
-    7: '7',
-}
+const AcadPerformanceWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    height: 100%;
+    width: 100%;
+
+    & > * + * {
+        margin-top: 20px;
+    }
+    @media (max-width: 1000px) {
+        padding: 0px;
+    }
+`
 
 const AcadPerformance = () => {
-    const [selected, setSelected] = useState<number>(5)
     const { data, loading, error } = acadPerformanceModel.selectors.useAcadPerformance()
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
+    const items = useMemo(() => createSelectItems(user?.course ?? 0), [user])
+    const [selected, setSelected] = useState<number>(1)
 
     useEffect(() => {
         if (data) {
-            acadPerformanceModel.effects.getAcadPerformanceFx({ semestr: `${selected + 1}` })
+            acadPerformanceModel.effects.getAcadPerformanceFx({ semestr: `${selected !== -1 ? selected : ''}` })
         }
     }, [selected])
 
     return (
-        <div style={{ padding: '40px' }}>
-            <Wrapper
-                loading={loading}
-                load={() => acadPerformanceModel.effects.getAcadPerformanceFx({ semestr: `${selected + 1}` })}
-                error={error}
-                data={data}
-            >
-                <>
-                    <Select items={items} selected={selected} setSelected={setSelected} />
-                    {/* {data ? <GraphicInfo data={data} /> : null} */}
-                    {data && <SubjectList header={'Экзамены'} items={data.exam} />}
-                    {data && <SubjectList header={'Зачеты'} items={data.test} type={'test'} />}
-                </>
-            </Wrapper>
-        </div>
+        <Wrapper
+            loading={loading}
+            load={() =>
+                acadPerformanceModel.effects.getAcadPerformanceFx({ semestr: `${selected !== -1 ? selected : ''}` })
+            }
+            error={error}
+            data={data}
+        >
+            <AcadPerformanceWrapper>
+                <Select items={items} selected={selected} setSelected={setSelected} />
+                {data?.exam?.length === 0 && data?.test.length === 0 && !loading ? (
+                    <Error text={'Данных за этот семестр нет, попробуйте другой!'} />
+                ) : (
+                    <>
+                        <GraphicInfo />
+                        <SubjectList header={'Экзамены'} items={data?.exam} loading={loading} />
+                        <SubjectList header={'Зачеты'} items={data?.test} type={'test'} loading={loading} />
+                    </>
+                )}
+            </AcadPerformanceWrapper>
+        </Wrapper>
     )
 }
 

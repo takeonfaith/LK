@@ -6,7 +6,7 @@ import styled from 'styled-components'
 const Container = styled.div`
     width: 600px;
 
-    @media screen (max-width: 800px) {
+    @media (max-width: 800px) {
         width: 100%;
     }
 `
