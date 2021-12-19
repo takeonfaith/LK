@@ -9,9 +9,8 @@ const SelectHeaderWrapper = styled.div`
     padding: 5px 10px;
     box-shadow: var(--light-box-shadow);
     position: relative;
-    background: var(--search2);
+    background: var(--schedule);
     border-radius: var(--brLight);
-    background: var(--search2);
     overflow: hidden;
 
     &:hover {

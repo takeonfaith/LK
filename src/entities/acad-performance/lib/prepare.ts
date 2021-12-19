@@ -12,7 +12,11 @@ const EXAM = 'exam'
 const TEST = 'test'
 
 const MATCHES: Matches = {
+    'Курсовой проект': EXAM,
+    'Дипломный проект': EXAM,
     Экзамен: EXAM,
+    Практика: EXAM,
+    'Дифференцированный зачет': EXAM,
     Зачет: TEST,
 }
 
@@ -23,7 +27,7 @@ export function prepare(data: AcadPerformance[]): PreparedData {
     }
 
     for (const item of data) {
-        result[MATCHES[item.form]].push(item)
+        result[MATCHES[item.exam_type]].push(item)
     }
 
     return result

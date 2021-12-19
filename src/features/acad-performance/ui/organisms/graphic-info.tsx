@@ -1,16 +1,18 @@
+import { AcadPerformance } from '@entities/acad-performance/model'
 import findColor from '@features/acad-performance/lib/find-color'
 import findPercentage from '@features/acad-performance/lib/find-percentage'
 import React, { useState } from 'react'
 
 interface Props {
-    data: any
+    data: { [key: string]: AcadPerformance[] }
 }
 const GraphicInfo = ({ data }: Props) => {
-    const [circleMode, setCircleMode] = useState(0)
-    const examPercentage = findPercentage(data, 'exams', circleMode)
-    const easyExamPercentage = findPercentage(data, 'easyExams')
+    const [circleMode, setCircleMode] = useState(1)
+    const examPercentage = findPercentage(data.exam, circleMode)
+    const easyExamPercentage = findPercentage(data.test)
+
     return (
-        <div>
+        <div style={{ marginTop: '300px' }}>
             <div style={window.innerWidth < 1000 ? { width: window.innerWidth - 200 + 'px' } : {}}>
                 <div>
                     <svg style={{ filter: 'drop-shadow(0 0 25px ' + findColor(examPercentage) + ')' }}>

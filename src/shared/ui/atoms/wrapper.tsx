@@ -54,12 +54,13 @@ interface Props {
     loading: boolean
     error: string | null
     data: any | null
+    deps?: any[]
 }
 
-const Wrapper = ({ children, load, loading = false, error, data }: Props) => {
+const Wrapper = ({ children, load, loading = false, error, data, deps = [] }: Props) => {
     useEffect(() => {
         if (!data) load()
-    }, [])
+    }, deps)
 
     return (
         <WrapperBlock loading={!!error || loading}>

@@ -91,6 +91,15 @@ export const Colors: IColors = {
         dark: '#632d32',
         darkTransparent: '#511a1ea3',
     },
+    yellow: {
+        main: '#ee9e44',
+        transparent: 'rgba(236, 95, 107, .3)',
+        lighter: '#f67b86',
+        darker: '#b63c46',
+        light: '',
+        dark: '#632d32',
+        darkTransparent: '#511a1ea3',
+    },
 }
 
 export interface IWeekDayName {
@@ -114,4 +123,22 @@ export const WeekDays: IWeekDays = {
     thursday: { full: 'Четверг', short: 'Чт' },
     friday: { full: 'Пятница', short: 'Пт' },
     saturday: { full: 'Суббота', short: 'Сб' },
+}
+
+export const ColorsByGrade = {
+    Зачтено: Colors.green.main,
+    Отлично: Colors.green.main,
+    Хорошо: Colors.blue.main,
+    Удовлетворительно: Colors.yellow.main,
+    Неудовлетворительно: Colors.red.main,
+    default: Colors.red.main,
+}
+
+export const WidthByGrade = {
+    Зачтено: '100%',
+    Отлично: '100%',
+    Хорошо: '80%',
+    Удовлетворительно: '60%',
+    Неудовлетворительно: '40%',
+    default: '40%',
 }

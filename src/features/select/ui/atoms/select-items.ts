@@ -10,6 +10,7 @@ const SelectItems = styled.ul<{ isOpen: boolean }>`
 
     box-shadow: var(--light-box-shadow);
     border-radius: var(--brLight);
+    background: var(--schedule);
     user-select: none;
 
     overflow: hidden;
