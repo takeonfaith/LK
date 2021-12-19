@@ -20,8 +20,8 @@ const DormitoryPayments = () => {
                         <PaymentsInfo
                             balanceCurrDate={getCorrectNumberFormat(dormitory?.balance_currdate ?? '0')}
                             monthly={650}
-                            startDate={dormitory?.startDate ?? ''}
-                            endDate={dormitory?.endDatePlan ?? ''}
+                            startDate={dormitory?.startDate}
+                            endDate={dormitory?.endDatePlan}
                             sum={Number(dormitory?.sum) ?? 0}
                             allPayments={
                                 dormitory?.payments?.reduce((acc, curr) => {

@@ -1,3 +1,5 @@
+import { IGrade } from '@api/model/acad-performance'
+
 export type MenuType = number[]
 export type ShortCutLinksType = number[]
 export type ThemeType = string
@@ -26,7 +28,7 @@ interface IColors {
     [key: string]: IColorPalette
 }
 
-interface IColorPalette {
+export interface IColorPalette {
     main: string
     transparent: string
     lighter: string
@@ -91,6 +93,15 @@ export const Colors: IColors = {
         dark: '#632d32',
         darkTransparent: '#511a1ea3',
     },
+    yellow: {
+        main: '#ee9e44',
+        transparent: 'rgba(236, 95, 107, .3)',
+        lighter: '#f67b86',
+        darker: '#b63c46',
+        light: '',
+        dark: '#632d32',
+        darkTransparent: '#511a1ea3',
+    },
 }
 
 export interface IWeekDayName {
@@ -114,4 +125,30 @@ export const WeekDays: IWeekDays = {
     thursday: { full: 'Четверг', short: 'Чт' },
     friday: { full: 'Пятница', short: 'Пт' },
     saturday: { full: 'Суббота', short: 'Сб' },
+}
+
+export const ColorsByGrade = {
+    Зачтено: Colors.green.main,
+    Отлично: Colors.green.main,
+    Хорошо: Colors.blue.main,
+    Удовлетворительно: Colors.yellow.main,
+    Неудовлетворительно: Colors.red.main,
+    default: Colors.red.main,
+}
+
+export const WidthByGrade = {
+    Зачтено: '100%',
+    Отлично: '100%',
+    Хорошо: '80%',
+    Удовлетворительно: '60%',
+    Неудовлетворительно: '40%',
+    default: '40%',
+}
+
+export const GradeByScore: IGrade = {
+    Зачтено: 5,
+    Отлично: 5,
+    Хорошо: 4,
+    Удовлетворительно: 3,
+    Неудовлетворительно: 2,
 }

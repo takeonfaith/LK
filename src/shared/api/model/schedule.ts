@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors, IColorPalette } from '../../consts'
 
 export interface ISubject {
     timeInterval: string
@@ -47,12 +47,12 @@ export type TimeIntervals =
     | '17:50 - 19:20'
 
 export interface ITimeIntervalColor {
-    '9:00 - 10:30': any
-    '10:40 - 12:10': any
-    '12:20 - 13:50': any
-    '14:30 - 16:00': any
-    '16:10 - 17:40': any
-    '17:50 - 19:20': any
+    '9:00 - 10:30': IColorPalette
+    '10:40 - 12:10': IColorPalette
+    '12:20 - 13:50': IColorPalette
+    '14:30 - 16:00': IColorPalette
+    '16:10 - 17:40': IColorPalette
+    '17:50 - 19:20': IColorPalette
 }
 
 export const TimeIntervalColor: ITimeIntervalColor = {

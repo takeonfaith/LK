@@ -32,12 +32,15 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
         width: 100%;
         height: 44px;
     }
+
     &::-webkit-scrollbar {
         display: none;
     }
+
     &:active .currentPage {
         transform: scale(0.9);
     }
+
     .SliderItem {
         width: 100%;
         height: 100%;
@@ -52,16 +55,20 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
         cursor: pointer;
         user-select: none;
         color: var(--text);
+
         &:hover {
             filter: brightness(0.8);
         }
+
         &.active {
             opacity: 1;
         }
+
         &:active {
             transform: scale(0.97);
         }
     }
+
     .currentPage {
         min-width: 80px;
         height: calc(100% - 0px);

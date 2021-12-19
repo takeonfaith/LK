@@ -8,6 +8,7 @@ import { Modal } from 'widgets/modal'
 import PopUpMessage from 'widgets/pop-up-message/ui'
 import useResize from '@utils/hooks/use-resize'
 import ConfirmMessage from 'widgets/confirm'
+import useTheme from '@utils/hooks/use-theme'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -31,6 +32,8 @@ const ContentWrapper = styled.div`
 
 const ContentLayout = () => {
     const { height } = useResize()
+    useTheme()
+
     return (
         <div style={{ height, display: 'flex' }}>
             <LeftsideBar />

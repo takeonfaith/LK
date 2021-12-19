@@ -2,6 +2,7 @@ import { Colors } from '@consts'
 import { Button } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
+import localizeDate from '@utils/localize-date'
 
 const PaymentsInfoWrapper = styled.div<{ paymentDifference: number }>`
     display: flex;
@@ -25,8 +26,8 @@ const PaymentsInfoWrapper = styled.div<{ paymentDifference: number }>`
 
 interface Props {
     monthly: number
-    endDate: string
-    startDate: string
+    endDate?: string
+    startDate?: string
     sum: number
     allPayments: number
     balanceCurrDate: number
@@ -37,13 +38,13 @@ const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: P
         <PaymentsInfoWrapper paymentDifference={balanceCurrDate}>
             <div>
                 <p>
-                    {balanceCurrDate < 0 ? 'Переплата' : 'Долг'} на {new Date().toString()}{' '}
+                    {balanceCurrDate < 0 ? 'Переплата' : 'Долг'} на {localizeDate(new Date().toString())}{' '}
                     <span className="debt-or-overpay">{balanceCurrDate} руб.</span> Следующий платеж -{' '}
                     <span className="monthly">{monthly} руб.</span>
                 </p>
                 <br />
                 <p>
-                    К выплате до конца действия договора (до {new Date(endDate).toString()} г.):
+                    К выплате до конца действия договора (до {localizeDate(endDate)} г.):
                     <span className="rest-money"> {sum - allPayments} руб.</span> (без учета индексации)
                 </p>
                 <br />

@@ -7,7 +7,7 @@ import ModalWrapper from 'widgets/modal/ui/atoms/modal-wrapper'
 
 const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     position: absolute;
-    bottom: 10px;
+    bottom: 50%;
     left: 50%;
     width: 100%;
     max-width: 500px;
@@ -20,7 +20,7 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     transition: 0.2s;
     opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
-    transform: translateY(${({ isOpen }) => (isOpen ? '0' : '20px')}) translateX(-50%)
+    transform: translateY(${({ isOpen }) => (isOpen ? '50%' : '51%')}) translateX(-50%)
         scale(${({ isOpen }) => (isOpen ? '1' : '0.95')});
 
     .buttons {
@@ -33,6 +33,11 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
             margin-left: 10px;
         }
     }
+
+    @media (max-width: 1000px) {
+        bottom: 10px;
+        width: calc(100% - 20px);
+    }
 `
 
 const ConfirmMessage = () => {
@@ -42,20 +47,18 @@ const ConfirmMessage = () => {
     useOnClickOutside(confirmRef, () => confirmModel.events.closeConfirm())
 
     return (
-        <ModalWrapper isOpen={isOpen}>
-            <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
-                <Title size={3}>{message ?? 'Хотите продолжить?'}</Title>
-                <div className="buttons">
-                    <Button text="Да" onClick={onConfirm} width="100%" textColor="var(--blue)" />
-                    <Button
-                        text="Нет"
-                        onClick={onReject ?? confirmModel.events.closeConfirm}
-                        width="100%"
-                        textColor="var(--red)"
-                    />
-                </div>
-            </ConfirmWrapper>
-        </ModalWrapper>
+        <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
+            <Title size={3}>{message ?? 'Хотите продолжить?'}</Title>
+            <div className="buttons">
+                <Button text="Да" onClick={onConfirm} width="100%" textColor="var(--blue)" />
+                <Button
+                    text="Нет"
+                    onClick={onReject ?? confirmModel.events.closeConfirm}
+                    width="100%"
+                    textColor="var(--red)"
+                />
+            </div>
+        </ConfirmWrapper>
     )
 }
 

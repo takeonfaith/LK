@@ -2,6 +2,7 @@ import { PaymentsContract } from '@api/model'
 import { SubmitButton } from '@ui/atoms'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import localizeDate from '@utils/localize-date'
 
 const ContractWrapper = styled.div`
     display: flex;
@@ -34,7 +35,7 @@ const Contract = ({ contract }: Props) => {
         },
         {
             text: 'Начало действия: ',
-            info: contract?.startDate ?? '',
+            info: localizeDate(contract?.startDate),
         },
         {
             text: 'Заказчик: ',

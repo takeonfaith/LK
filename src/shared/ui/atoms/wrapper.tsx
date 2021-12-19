@@ -32,7 +32,6 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
         opacity: ${({ loading }) => (loading ? 0 : 1)};
         visibility: ${({ loading }) => (loading ? 'hidden' : 'visible')};
         transform: scale(${({ loading }) => (loading ? '0.98' : '1')});
-        height: 100%;
     }
 
     .reload {
@@ -54,12 +53,13 @@ interface Props {
     loading: boolean
     error: string | null
     data: any | null
+    deps?: any[]
 }
 
-const Wrapper = ({ children, load, error, data }: Props) => {
+const Wrapper = ({ children, load, loading = false, error, data, deps = [] }: Props) => {
     useEffect(() => {
         if (!data) load()
-    }, [])
+    }, deps)
 
     return (
         <WrapperBlock loading={!!error || !data}>
