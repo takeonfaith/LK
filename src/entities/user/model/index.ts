@@ -20,8 +20,11 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
         form.set('upassword', params.password)
         form.set('auth_action', 'userlogin')
 
-        const t = await axios.post('http://test-e.mospolytech.ru/old', form)
-        console.log(t)
+        // set old version site cookies
+        try {
+            await axios.post('/old', form)
+        } catch {}
+
         localStorage.setItem('token', JSON.stringify(tokenResponse.data))
 
         return tokenResponse.data
