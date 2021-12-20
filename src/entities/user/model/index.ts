@@ -3,6 +3,7 @@ import { LoginData } from '@api/user-api'
 import { createEffect, createEvent, createStore, forward } from 'effector'
 import { useStore } from 'effector-react'
 import { User, UserToken } from '@api/model'
+import axios from 'axios'
 
 interface UserStore {
     currentUser: User | null
@@ -14,6 +15,13 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
     try {
         const tokenResponse = await userApi.getUserToken(params)
 
+        const form = new FormData()
+        form.set('ulogin', params.login)
+        form.set('upassword', params.password)
+        form.set('auth_action', 'userlogin')
+
+        const t = await axios.post('http://test-e.mospolytech.ru/old', form)
+        console.log(t)
         localStorage.setItem('token', JSON.stringify(tokenResponse.data))
 
         return tokenResponse.data
