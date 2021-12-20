@@ -16,7 +16,9 @@ const PageIsNotReady = () => {
         <Error text={'Страница еще находится в разработке. Если вам она нужна, вернитесь к старому'}>
             <Button
                 text={<a href="http://test-e.mospolytech.ru/old/">Перейти к старому дизану</a>}
-                onClick={() => null}
+                onClick={() => {
+                    localStorage.setItem('useOldVersion', 'true')
+                }}
                 background="var(--purple)"
                 width="300px"
             />
