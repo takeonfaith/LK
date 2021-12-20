@@ -1,5 +1,4 @@
 import { acadPerformanceModel } from '@entities/acad-performance'
-import { AcadPerformance } from '@entities/acad-performance/model'
 import findColor from '@features/acad-performance/lib/find-color'
 import findPercentage from '@features/acad-performance/lib/find-percentage'
 import { SkeletonShape, Title } from '@ui/atoms'
@@ -10,7 +9,7 @@ import styled from 'styled-components'
 const Wrap = styled.div`
     display: flex;
 
-    @media (max-width: 400px) {
+    @media (max-width: 330px) {
         flex-direction: column;
         align-items: center;
     }
@@ -115,8 +114,6 @@ const GraphicInfo = () => {
     const [circleMode, setCircleMode] = useState(1)
     const examPercentage = data?.exam.length ? findPercentage(data.exam, circleMode) : 0
     const easyExamPercentage = data?.test.length ? findPercentage(data.test) : 0
-
-    console.log(data?.exam, examPercentage)
 
     return (
         <Wrap>

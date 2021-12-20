@@ -79,7 +79,7 @@ const SchedulePage = () => {
                             ]
                         }
                     />
-                    {width < 1000 && <WeekDayButtonsList />}
+                    {/* {width < 1000 && <WeekDayButtonsList />} */}
                 </SchedulePageContent>
             ) : null}
         </Wrapper>

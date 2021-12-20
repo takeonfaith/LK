@@ -7,6 +7,7 @@ import { Section } from '../atoms/section'
 const ScheduleAndNotification = () => {
     const {
         data: { currentModule, schedule, currentDay },
+        loading,
     } = scheduleModel.selectors.useSchedule()
     const currentStringDay = useMemo(
         () =>
@@ -25,7 +26,14 @@ const ScheduleAndNotification = () => {
 
     return (
         <Section>
-            <DaySchedule lessons={lessons || []} width={400} height={156} isCurrent index={0} fixedHeight />
+            <DaySchedule
+                lessons={loading ? null : lessons || []}
+                width={400}
+                height={156}
+                isCurrent
+                index={0}
+                fixedHeight
+            />
         </Section>
     )
 }

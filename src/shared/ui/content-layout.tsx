@@ -22,7 +22,7 @@ const ContentWrapper = styled.div`
         overflow-x: hidden;
         overflow-y: auto;
         width: 100%;
-        height: calc(100vh - 45px);
+        height: calc(100% - 45px);
     }
 
     @media (max-width: 1000px) {

@@ -37,6 +37,7 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     @media (max-width: 1000px) {
         bottom: 10px;
         width: calc(100% - 20px);
+        transform: translateY(0) translateX(-50%) scale(${({ isOpen }) => (isOpen ? '1' : '0.95')});
     }
 `
 

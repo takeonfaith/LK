@@ -32,6 +32,7 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
         opacity: ${({ loading }) => (loading ? 0 : 1)};
         visibility: ${({ loading }) => (loading ? 'hidden' : 'visible')};
         transform: scale(${({ loading }) => (loading ? '0.98' : '1')});
+        height: 100%;
     }
 
     .reload {
