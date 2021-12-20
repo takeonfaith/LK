@@ -1,6 +1,5 @@
 {
   "name": "lk",
-  "homepage": "http://takeonfaith.github.io/LK",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
