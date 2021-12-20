@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 import Header from './template/header'
@@ -9,6 +9,7 @@ import PopUpMessage from 'widgets/pop-up-message/ui'
 import useResize from '@utils/hooks/use-resize'
 import ConfirmMessage from 'widgets/confirm'
 import useTheme from '@utils/hooks/use-theme'
+import { popUpMessageModel } from '@entities/pop-up-message'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -33,6 +34,14 @@ const ContentWrapper = styled.div`
 const ContentLayout = () => {
     const { height } = useResize()
     useTheme()
+    useEffect(() => {
+        popUpMessageModel.events.evokePopUpMessage({
+            message:
+                'Это новый вариант личного кабинета. Если вы хотите перейти на старый, зайдите в настройки -> общие',
+            type: 'info',
+            time: 20000,
+        })
+    }, [])
 
     return (
         <div style={{ height, display: 'flex' }}>

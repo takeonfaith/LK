@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-const LeftsideBarWrapper = styled.div<{ isOpen: boolean }>`
+const LeftsideBarWrapper = styled.div<{ isOpen: boolean; height: number }>`
     min-width: 235px;
     width: 235px;
-    height: 100%;
+    height: ${({ height }) => height + 'px'};
     box-shadow: var(--light-box-shadow);
     background: var(--theme);
     z-index: 4;

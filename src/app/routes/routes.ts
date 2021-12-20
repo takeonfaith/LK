@@ -25,6 +25,7 @@ import AcadPerformance from '../../pages/acad-performance'
 import FeedbackPage from '../../pages/feedback'
 import PortfolioPage from '../../pages/portfolio'
 import { IconType } from 'react-icons/lib'
+import PageIsNotReady from '@pages/page-is-not-ready'
 
 export const HOME_ROUTE = '/home'
 export const MESSAGES_ROUTE = '/messages'
@@ -77,7 +78,7 @@ export const privateRoutes: IRoutes = {
         title: 'Сообщения',
         icon: BiMessageRounded,
         path: MESSAGES_ROUTE,
-        Component: MessagesPage,
+        Component: PageIsNotReady,
         isTemplate: false,
     },
     2: {
@@ -93,7 +94,7 @@ export const privateRoutes: IRoutes = {
         title: 'ПД',
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: ProjectActivitiesPage,
+        Component: PageIsNotReady,
         isTemplate: false,
     },
     4: {
@@ -101,7 +102,7 @@ export const privateRoutes: IRoutes = {
         title: 'Работа',
         icon: FiBriefcase,
         path: JOB_ROUTE,
-        Component: JobPage,
+        Component: PageIsNotReady,
         isTemplate: false,
     },
     5: {
@@ -117,7 +118,7 @@ export const privateRoutes: IRoutes = {
         title: 'Заявления',
         icon: FiFileText,
         path: APPLICATIONS_ROUTE,
-        Component: ApplicationsPage,
+        Component: PageIsNotReady,
         isTemplate: false,
     },
     7: {
@@ -125,7 +126,7 @@ export const privateRoutes: IRoutes = {
         title: 'Студенты',
         icon: BiGroup,
         path: ALL_STUDENTS_ROUTE,
-        Component: AllStudentsPage,
+        Component: PageIsNotReady,
         isTemplate: false,
     },
     8: {
@@ -133,7 +134,7 @@ export const privateRoutes: IRoutes = {
         title: 'Преподаватели',
         icon: BiBookReader,
         path: ALL_TEACHERS_ROUTE,
-        Component: AllTeachersPage,
+        Component: PageIsNotReady,
         isTemplate: false,
     },
     9: {
@@ -149,7 +150,7 @@ export const privateRoutes: IRoutes = {
         title: 'Портфолио',
         icon: BiIdCard,
         path: '/portfolio',
-        Component: PortfolioPage,
+        Component: PageIsNotReady,
         isTemplate: false,
     },
     11: {
@@ -157,7 +158,7 @@ export const privateRoutes: IRoutes = {
         title: 'Обратная связь',
         icon: BiHeadphone,
         path: '/feedback',
-        Component: FeedbackPage,
+        Component: PageIsNotReady,
         isTemplate: false,
     },
 }

@@ -31,18 +31,18 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string }>`
 `
 
 const PopUpMessage = () => {
-    const { isOpen, message, type } = popUpMessageModel.selectors.usePopUpMessage()
+    const { isOpen, message, type, time } = popUpMessageModel.selectors.usePopUpMessage()
 
     useEffect(() => {
         if (isOpen) {
             setTimeout(() => {
                 popUpMessageModel.events.openPopUpMessage({ isOpen: !isOpen })
-            }, 2000)
+            }, time)
         }
     }, [isOpen])
 
     return (
-        <PopUpMessageWrapper isOpen={isOpen} color={type === 'success' ? 'green' : 'red'}>
+        <PopUpMessageWrapper isOpen={isOpen} color={type === 'success' ? 'green' : type === 'info' ? 'blue' : 'red'}>
             {message}
         </PopUpMessageWrapper>
     )

@@ -22,6 +22,11 @@ const ButtonWrapper = styled.button<{
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
 
+    span a {
+        text-decoration: none;
+        color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
+    }
+
     &:active {
         transform: scale(0.95);
     }
@@ -45,7 +50,7 @@ const ButtonWrapper = styled.button<{
 
 interface Props {
     icon?: JSX.Element
-    text?: string
+    text?: React.ReactNode | string
     onClick: (event: any) => void
     isChosen?: boolean
     width?: string

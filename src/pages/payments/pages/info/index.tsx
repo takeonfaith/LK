@@ -67,7 +67,7 @@ const InfoPayments = () => {
                             </a>
                             <iframe
                                 src="https://yandex.ru/map-widget/v1/-/CCUQyTcGWD"
-                                width="350"
+                                width="100%"
                                 height="270"
                                 allowFullScreen={true}
                                 style={{ position: 'relative' }}

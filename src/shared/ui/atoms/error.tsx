@@ -11,22 +11,29 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: var(--text);
 
     img {
         width: 100px;
         height: 100px;
         margin-bottom: 20px;
     }
+
+    .error-content {
+        margin-top: 20px;
+    }
 `
 
 interface Props {
     text: string
+    children?: React.ReactNode[] | React.ReactNode | string | null
 }
-const Error = ({ text }: Props) => {
+const Error = ({ text, children }: Props) => {
     return (
         <Container>
             <img src={Sad} alt="груфтим(" />
             <Title size={3}>{text}</Title>
+            <div className="error-content">{children}</div>
         </Container>
     )
 }

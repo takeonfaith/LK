@@ -10,10 +10,10 @@ import LocalSearch from '@ui/molecules/local-search'
 
 const LeftsideBar = () => {
     const { isOpen } = menuModel.selectors.useMenu()
-    const { width } = useResize()
+    const { width, height } = useResize()
 
     return (
-        <LeftsideBarWrapper isOpen={isOpen}>
+        <LeftsideBarWrapper isOpen={isOpen} height={height}>
             <div className="top-wrapper">
                 <Logo />
                 <LocalSearch
