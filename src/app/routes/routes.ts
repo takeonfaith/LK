@@ -13,17 +13,9 @@ import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
 
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
-import MessagesPage from '../../pages/all-messages'
-import ProjectActivitiesPage from '../../pages/project-activities'
-import JobPage from '../../pages/job'
 import SchedulePage from '../../pages/schedule'
-import ApplicationsPage from '../../pages/applications'
 import PaymentsPage from '../../pages/payments'
-import AllTeachersPage from '../../pages/all-teachers'
-import AllStudentsPage from '../../pages/all-students'
 import AcadPerformance from '../../pages/acad-performance'
-import FeedbackPage from '../../pages/feedback'
-import PortfolioPage from '../../pages/portfolio'
 import { IconType } from 'react-icons/lib'
 import PageIsNotReady from '@pages/page-is-not-ready'
 
@@ -78,7 +70,7 @@ export const privateRoutes: IRoutes = {
         title: 'Сообщения',
         icon: BiMessageRounded,
         path: MESSAGES_ROUTE,
-        Component: PageIsNotReady,
+        Component: () => PageIsNotReady({ oldVersionUrl: 'messages' }),
         isTemplate: false,
     },
     2: {
@@ -94,7 +86,7 @@ export const privateRoutes: IRoutes = {
         title: 'ПД',
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: PageIsNotReady,
+        Component: () => PageIsNotReady({ oldVersionUrl: 'projects' }),
         isTemplate: false,
     },
     4: {
@@ -102,7 +94,7 @@ export const privateRoutes: IRoutes = {
         title: 'Работа',
         icon: FiBriefcase,
         path: JOB_ROUTE,
-        Component: PageIsNotReady,
+        Component: () => PageIsNotReady({ oldVersionUrl: 'job' }),
         isTemplate: false,
     },
     5: {
@@ -118,7 +110,7 @@ export const privateRoutes: IRoutes = {
         title: 'Заявления',
         icon: FiFileText,
         path: APPLICATIONS_ROUTE,
-        Component: PageIsNotReady,
+        Component: () => PageIsNotReady({ oldVersionUrl: '' }),
         isTemplate: false,
     },
     7: {
@@ -126,7 +118,7 @@ export const privateRoutes: IRoutes = {
         title: 'Студенты',
         icon: BiGroup,
         path: ALL_STUDENTS_ROUTE,
-        Component: PageIsNotReady,
+        Component: () => PageIsNotReady({ oldVersionUrl: 'stud_blanks' }),
         isTemplate: false,
     },
     8: {
@@ -134,7 +126,7 @@ export const privateRoutes: IRoutes = {
         title: 'Преподаватели',
         icon: BiBookReader,
         path: ALL_TEACHERS_ROUTE,
-        Component: PageIsNotReady,
+        Component: () => PageIsNotReady({ oldVersionUrl: 'teachers' }),
         isTemplate: false,
     },
     9: {
@@ -150,7 +142,7 @@ export const privateRoutes: IRoutes = {
         title: 'Портфолио',
         icon: BiIdCard,
         path: '/portfolio',
-        Component: PageIsNotReady,
+        Component: () => PageIsNotReady({ oldVersionUrl: 'myportfolio' }),
         isTemplate: false,
     },
     11: {
@@ -158,7 +150,7 @@ export const privateRoutes: IRoutes = {
         title: 'Обратная связь',
         icon: BiHeadphone,
         path: '/feedback',
-        Component: PageIsNotReady,
+        Component: () => PageIsNotReady({ oldVersionUrl: 'contact' }),
         isTemplate: false,
     },
 }

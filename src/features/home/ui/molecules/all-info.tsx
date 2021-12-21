@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { User } from '@api/model'
+import transformSex from '@utils/transform-sex'
 
 export default memo(AllInfo)
 
@@ -23,53 +24,81 @@ function AllInfo({ user }: Props) {
         finance,
         degreeLevel,
         enterYear,
+        subdivisions,
     } = user
+
+    const items = [
+        {
+            key: 'Статус',
+            value: status,
+        },
+        {
+            key: 'Пол',
+            value: transformSex(sex),
+        },
+        {
+            key: 'Дата рождения',
+            value: birthday,
+        },
+        {
+            key: 'Код студента',
+            value: code,
+        },
+        {
+            key: 'Факультет',
+            value: faculty,
+        },
+        {
+            key: 'Курс',
+            value: course,
+        },
+        {
+            key: 'Группа',
+            value: group,
+        },
+        {
+            key: 'Специальность',
+            value: specialty,
+        },
+        {
+            key: 'Специализация',
+            value: specialization,
+        },
+        {
+            key: 'Срок обучения',
+            value: degreeLength,
+        },
+        {
+            key: 'Форма обучения',
+            value: educationForm,
+        },
+        {
+            key: 'Вид финансирования',
+            value: finance,
+        },
+        {
+            key: 'Сведения об трудоусторйстве',
+            value: subdivisions?.map((t, index) => <div key={index}>{`${index + 1})${t.subdivision}`}</div>),
+        },
+        {
+            key: 'Уровень образования',
+            value: degreeLevel,
+        },
+        {
+            key: 'Год набора',
+            value: enterYear,
+        },
+    ]
     return (
         <div>
-            <p>
-                <b>Статус:</b> {status}
-            </p>
-            <p>
-                <b>Пол: </b>
-                {sex}
-            </p>
-            <p>
-                <b>Дата рождения:</b> {birthday}
-            </p>
-            <p>
-                <b>Код студента: </b>
-                {code}
-            </p>
-            <p>
-                <b>Факультет:</b> {faculty}
-            </p>
-            <p>
-                <b>Курс:</b> {course}
-            </p>
-            <p>
-                <b>Группа:</b> {group}
-            </p>
-            <p>
-                <b>Специальность:</b> {specialty}
-            </p>
-            <p>
-                <b>Специализация: </b> {specialization}
-            </p>
-            <p>
-                <b>Срок обучения: </b> {degreeLength}
-            </p>
-            <p>
-                <b>Форма обучения: </b> {educationForm}
-            </p>
-            <p>
-                <b>Вид финансирования: </b> {finance}
-            </p>
-            <p>
-                <b>Уровень образования:</b> {degreeLevel}
-            </p>
-            <p>
-                <b>Год набора:</b> {enterYear}
-            </p>
+            {items.map(
+                ({ key, value }) =>
+                    !!value && (
+                        <p key={key}>
+                            <b>{key}:</b> {value}
+                        </p>
+                    ),
+            )}
         </div>
     )
 }

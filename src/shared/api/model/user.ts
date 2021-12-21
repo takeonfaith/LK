@@ -1,3 +1,5 @@
+import { Sex } from '@utility-types/sex'
+
 export interface User {
     id: string
     name: string
@@ -8,7 +10,7 @@ export interface User {
     birthday: string
     patronymic: string
     orders: string[]
-    sex: boolean
+    sex: Sex
     code: string
     faculty: string
     group: string
@@ -19,4 +21,13 @@ export interface User {
     finance: string
     degreeLevel: string
     enterYear: string
+    subdivisions?: Subdivision[]
+}
+
+interface Subdivision {
+    categoty: string
+    jobType?: string
+    status?: string
+    subdivision?: string
+    wage?: string
 }

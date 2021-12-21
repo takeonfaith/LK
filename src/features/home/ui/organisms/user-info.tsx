@@ -16,7 +16,7 @@ interface Props {
 }
 
 function UserInfo({ user }: Props) {
-    const { avatar, status, course, birthday, ...params } = user
+    const { avatar, status, course, birthday, subdivisions, ...params } = user
 
     const { toggle } = useModal(<MoreUserInfo user={user} />)
 
@@ -35,9 +35,17 @@ function UserInfo({ user }: Props) {
                     {createFullName(params)}
                 </Title>
                 <div className="short-status">
-                    <p>Статус: {status}</p>
-                    <p>Курс: {course}</p>
-                    <p>Дата рождения: {birthday}</p>
+                    {!!status && <p>Статус: {status}</p>}
+                    {!!course && <p>Курс: {course}</p>}
+                    {!!subdivisions?.length && (
+                        <p>
+                            Сведения об трудоусторйстве:{' '}
+                            {subdivisions?.map((t, index) => (
+                                <div key={index}>{`${index + 1})${t.subdivision}`}</div>
+                            ))}
+                        </p>
+                    )}
+                    <p style={!!subdivisions?.length ? { marginTop: 10 } : undefined}>Дата рождения: {birthday}</p>
                     <MoreInfoLink onClick={handleNodel}>
                         <FiInfo />
                         <span>Подробная информация</span>
