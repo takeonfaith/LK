@@ -79,7 +79,7 @@ export const teachersPrivateRoutes: IRoutes = {
         title: 'Профиль',
         icon: BiUserCircle,
         path: HOME_ROUTE,
-        Component: Home,
+        Component: () => Home(),
         isTemplate: false,
     },
     1: {

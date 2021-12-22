@@ -37,8 +37,6 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
     try {
         const userResponse = await userApi.getUser(data.token)
 
-        console.log(userResponse.data.user)
-
         return { currentUser: userResponse.data.user, isAuthenticated: !!data, error: '' }
     } catch (error) {
         logout()

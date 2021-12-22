@@ -6,26 +6,16 @@ import UserInfo from '@features/home/ui/organisms/user-info'
 import { Wrapper } from '@ui/atoms'
 import { Content } from './ui/atoms/content'
 import { scheduleModel } from '@entities/schedule'
+import { useRender } from '@utils/hooks/use-render'
 
-export default Home
-
-function Home() {
+const Home = () => {
     const {
         data: { user },
         error,
     } = userModel.selectors.useUser()
 
-    console.log('Test')
-
     return (
-        <Wrapper
-            loading={!user}
-            load={() => {
-                scheduleModel.effects.getScheduleFx()
-            }}
-            error={error}
-            data={user}
-        >
+        <div>
             <Content>
                 {user && (
                     <div className="home-page-content-inner">
@@ -35,6 +25,8 @@ function Home() {
                     </div>
                 )}
             </Content>
-        </Wrapper>
+        </div>
     )
 }
+
+export default Home

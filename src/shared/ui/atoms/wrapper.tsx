@@ -74,7 +74,7 @@ const Wrapper = ({ children, load, loading = false, error, data, deps = [] }: Pr
                     </div>
                 )}
             </span>
-            <div className="content">{children}</div>
+            <div className="content">{}</div>
         </WrapperBlock>
     )
 }

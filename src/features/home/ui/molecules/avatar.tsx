@@ -10,8 +10,6 @@ interface Props {
 }
 
 function Avatar({ avatar }: Props) {
-    console.log(avatar)
-
     return (
         <Container>
             <FiUser />
