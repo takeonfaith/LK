@@ -77,7 +77,7 @@ function AllInfo({ user }: Props) {
             value: finance,
         },
         {
-            key: 'Сведения об трудоусторйстве',
+            key: 'Сведения о трудоусторйстве',
             value: subdivisions?.map((t, index) => <div key={index}>{`${index + 1})${t.subdivision}`}</div>),
         },
         {
