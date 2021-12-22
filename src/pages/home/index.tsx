@@ -15,7 +15,7 @@ const Home = () => {
     } = userModel.selectors.useUser()
 
     return (
-        <div>
+        <Wrapper loading={!user} load={() => true} error={error} data={user}>
             <Content>
                 {user && (
                     <div className="home-page-content-inner">
@@ -25,7 +25,7 @@ const Home = () => {
                     </div>
                 )}
             </Content>
-        </div>
+        </Wrapper>
     )
 }
 
