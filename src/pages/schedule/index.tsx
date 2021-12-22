@@ -38,8 +38,6 @@ const SchedulePage = () => {
         error,
     } = scheduleModel.selectors.useSchedule()
 
-    const { width } = useResize()
-
     return (
         <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx()} error={error} data={schedule}>
             {!!schedule ? (

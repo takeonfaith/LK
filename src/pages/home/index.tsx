@@ -6,7 +6,6 @@ import UserInfo from '@features/home/ui/organisms/user-info'
 import { Wrapper } from '@ui/atoms'
 import { Content } from './ui/atoms/content'
 import { scheduleModel } from '@entities/schedule'
-import { useRender } from '@utils/hooks/use-render'
 
 const Home = () => {
     const {
@@ -17,10 +16,10 @@ const Home = () => {
     return (
         <Wrapper loading={!user} load={() => scheduleModel.effects.getScheduleFx()} error={error} data={user}>
             <Content>
-                {user && (
+                {!!user && (
                     <div className="home-page-content-inner">
                         <UserInfo user={user} />
-                        <ScheduleAndNotification />
+                        {!user.subdivisions && <ScheduleAndNotification />}
                         <ShortCutLinks />
                     </div>
                 )}
