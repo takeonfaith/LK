@@ -7,7 +7,6 @@ import { teachersPrivateRoutes } from './techers-routes'
 const PrivateRouter = () => {
     const { data } = userModel.selectors.useUser()
     const currentRoute = !data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
-    console.log(currentRoute)
 
     return (
         <Switch>
