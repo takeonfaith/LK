@@ -42,7 +42,11 @@ const PopUpMessage = () => {
     }, [isOpen])
 
     return (
-        <PopUpMessageWrapper isOpen={isOpen} color={type === 'success' ? 'green' : type === 'info' ? 'blue' : 'red'}>
+        <PopUpMessageWrapper
+            isOpen={isOpen}
+            color={type === 'success' ? 'green' : type === 'info' ? 'blue' : 'red'}
+            onClick={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })}
+        >
             {message}
         </PopUpMessageWrapper>
     )
