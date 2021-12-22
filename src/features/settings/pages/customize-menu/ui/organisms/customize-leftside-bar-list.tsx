@@ -6,13 +6,18 @@ import { useSettings } from '@utils/contexts/settings-context'
 import { CustomizeLeftsideBarItem } from '../molecules'
 import { ShortCutLinksType, SHORT_CUT_LINKS_LIMIT_SIZE } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
+import { userModel } from '@entities/user'
+import useResize from '@utils/hooks/use-resize'
+import { teachersPrivateRoutes } from '@app/routes/techers-routes'
 
 const CustomizeLeftsideBarList = () => {
     const { setting, change } = useSettings<number[]>('menu')
     const { setting: shortCutMenu, change: shortCutChange } = useSettings<ShortCutLinksType>('shortCutLinks')
+    const { data } = userModel.selectors.useUser()
+    const { height } = useResize()
 
-    const enabledLeftsideBarItems = getChosenRoutes(setting)
-    const enabledShortCutMenu = useMemo(() => getChosenRoutes(shortCutMenu), [shortCutMenu])
+    const enabledLeftsideBarItems = getChosenRoutes(setting, data)
+    const enabledShortCutMenu = useMemo(() => getChosenRoutes(shortCutMenu, data), [shortCutMenu])
 
     const switchChosen = (id: number) => {
         if (enabledLeftsideBarItems[id]) {
@@ -59,8 +64,8 @@ const CustomizeLeftsideBarList = () => {
     }
 
     return (
-        <LeftsideBarListWrapper>
-            {Object.values(privateRoutes).map((el, index) => {
+        <LeftsideBarListWrapper style={{ height: height - 200 }}>
+            {Object.values(!data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes).map((el, index) => {
                 return (
                     <CustomizeLeftsideBarItem
                         {...el}

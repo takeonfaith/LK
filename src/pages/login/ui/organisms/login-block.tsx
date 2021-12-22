@@ -36,8 +36,14 @@ const LoginBlock = () => {
     const { theme } = useTheme()
     const { loading, error } = userModel.selectors.useUser()
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === 'Enter') {
+            loginFunc({ login, password })
+        }
+    }
+
     return (
-        <LoginBlockWrapper theme={Themes[theme]}>
+        <LoginBlockWrapper theme={Themes[theme]} onKeyPress={handleKeyPress}>
             <Title size={2} align="left">
                 Вход в личный кабинет
             </Title>

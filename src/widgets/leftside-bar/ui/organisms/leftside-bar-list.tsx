@@ -8,14 +8,16 @@ import LeftsideBarListWrapper from '../atoms/leftside-bar-list-wrapper'
 import LeftsideBarItem from '../molecules/leftside-bar-item'
 import LeftsideBarItemButton from '../molecules/leftside-bar-item-button'
 import LeftsideBarDropdown from './leftside-bar-dropdown'
+import { userModel } from '@entities/user'
 
 const LeftsideBarList = () => {
     const currentPage = useCurrentPage()
     const { setting } = useSettings<number[]>('menu')
+    const { data } = userModel.selectors.useUser()
 
     return (
         <LeftsideBarListWrapper>
-            {Object.values(getChosenRoutes(setting)).map(({ icon, id, title, path }) => {
+            {Object.values(getChosenRoutes(setting, data)).map(({ icon, id, title, path }) => {
                 return (
                     <LeftsideBarItem
                         key={id}
@@ -29,9 +31,9 @@ const LeftsideBarList = () => {
             })}
             <LeftsideBarDropdown
                 heading={<LeftsideBarItemButton key={0} id={0} icon={FiCompass} title={'Другое'} />}
-                height={Object.values(getNotChosenRoutes(setting)).length * 54}
+                height={Object.values(getNotChosenRoutes(setting, data)).length * 54}
             >
-                {Object.values(getNotChosenRoutes(setting)).map(({ icon, id, title, path }) => {
+                {Object.values(getNotChosenRoutes(setting, data)).map(({ icon, id, title, path }) => {
                     return (
                         <LeftsideBarItem
                             key={id}

@@ -5,13 +5,16 @@ import getChosenRoutes from '../../../../widgets/leftside-bar/lib/get-chosen-rou
 import { Section } from '../atoms/section'
 import { ShortCutItem, ShortCutList } from '../atoms/short-cut'
 import ShortCutLink from '../molecules/short-cut-link'
+import { userModel } from '@entities/user'
 
 export default ShortCutLinks
 
 const colors = ['purple', 'lightGreen', 'red', 'blue']
 function ShortCutLinks() {
     const { setting } = useSettings<ShortCutLinksType>('shortCutLinks')
-    const enabledLeftsideBarItems = getChosenRoutes(setting)
+    const { data } = userModel.selectors.useUser()
+
+    const enabledLeftsideBarItems = getChosenRoutes(setting, data)
 
     return (
         <Section>

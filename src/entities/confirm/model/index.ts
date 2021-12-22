@@ -4,7 +4,7 @@ import { useStore } from 'effector-react'
 export interface Confirm {
     isOpen: boolean
     message?: string | null
-    onConfirm: (params: any) => void
+    onConfirm: () => void
     onReject?: (params: any) => void
 }
 
@@ -19,8 +19,7 @@ const useConfirm = () => {
     return useStore($confirm)
 }
 
-const evokeConfirm =
-    createEvent<{ message: string; onConfirm: (params: any) => void; onReject?: (params: any) => void }>()
+const evokeConfirm = createEvent<{ message: string; onConfirm: () => void; onReject?: (params: any) => void }>()
 
 const closeConfirm = createEvent()
 

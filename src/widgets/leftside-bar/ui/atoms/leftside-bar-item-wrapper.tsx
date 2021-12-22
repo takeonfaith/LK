@@ -17,6 +17,10 @@ const LeftsideBarItemWrapper = styled(Link)<{
     user-select: none;
     text-decoration: none;
 
+    strong {
+        width: 130px;
+    }
+
     svg {
         width: 22px;
         height: 22px;

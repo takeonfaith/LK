@@ -21,22 +21,33 @@ const SubjectWrapper = styled.div<{
     height: fit-content;
 
     .time-and-place {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
         font-size: 0.7em;
+        height: 21px;
+        font-weight: bold;
+
         /* display: flex; */
 
         .time {
             padding: 3px 10px;
+            height: 21px;
             background: var(--search);
             background: ${({ isCurrent, darkColor, color2 }) => (isCurrent ? darkColor : color2)};
             border-radius: 100px;
             box-shadow: ${({ transparent }) => `0 0 30px ${transparent}`};
             color: #fff;
+            white-space: nowrap;
         }
 
         .place {
             color: var(--text);
             text-decoration: none;
             margin-left: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         a.place {
@@ -48,6 +59,7 @@ const SubjectWrapper = styled.div<{
         margin-top: 15px;
         margin-bottom: 10px;
         font-size: 0.9em;
+        word-wrap: break-word;
     }
 
     .teachers {
@@ -81,7 +93,7 @@ const Subject = ({
             transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent}
             fixedHeight={fixedHeight}
         >
-            <h4 className="time-and-place">
+            <div className="time-and-place">
                 <span className="time">{timeInterval}</span>
                 {/* {isCurrent && <NowPlate />} */}
                 {!link ? (
@@ -92,7 +104,7 @@ const Subject = ({
                     </a>
                 )}
                 {/* <span className="currentOrNext" >{isToday ? inTimeInterval(time, currentDay) ? "Сейчас" : isNextSubject(time, currentDay) ? "Следующая" : null : null}</span> */}
-            </h4>
+            </div>
             <h3>{name}</h3>
             <p className="teachers">
                 {teachers.map((teacher: string) => {

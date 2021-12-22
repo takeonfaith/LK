@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { IRoute, privateRoutes } from '@app/routes/routes'
+import { userModel } from '@entities/user'
+import { teachersPrivateRoutes } from '@app/routes/techers-routes'
 
 const useCurrentPage = () => {
     const history = useHistory()
+    const { data } = userModel.selectors.useUser()
+    const currentRoute = !data.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
+
     const [currentPage, setCurrentPage] = useState<IRoute>(
-        Object.values(privateRoutes).find((link: IRoute) => link.path === history.location.pathname) ??
-            privateRoutes[0],
+        Object.values(currentRoute).find((link: IRoute) => link.path === history.location.pathname) ?? currentRoute[0],
     )
 
     useEffect(() => {
         return history.listen((location) => {
             setCurrentPage(
-                Object.values(privateRoutes).find((link: IRoute) => link.path === location.pathname) ??
-                    privateRoutes[0],
+                Object.values(currentRoute).find((link: IRoute) => link.path === location.pathname) ?? currentRoute[0],
             )
         })
-    }, [history])
+    }, [history, data?.user?.subdivisions])
 
     return currentPage
 }

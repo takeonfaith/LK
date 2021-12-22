@@ -10,5 +10,11 @@ interface Props {
 }
 
 function Avatar({ avatar }: Props) {
-    return <Container>{!!avatar ? <Img src={avatar} alt="Аватар пользователя" /> : <FiUser />}</Container>
+    console.log(avatar)
+
+    return (
+        <Container>
+            <FiUser />
+        </Container>
+    )
 }

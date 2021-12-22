@@ -15,6 +15,8 @@ function Home() {
         error,
     } = userModel.selectors.useUser()
 
+    console.log('Test')
+
     return (
         <Wrapper
             loading={!user}

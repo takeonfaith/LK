@@ -2,6 +2,7 @@ import { ILessons, ISubject } from '@api/model'
 import { Title } from '@ui/atoms'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import useOnScreen from '@utils/hooks/use-on-screen'
+import useResize from '@utils/hooks/use-resize'
 import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import inTimeInterval from '../../lib/in-time-interval'
@@ -81,7 +82,7 @@ const DayScheduleWrapper = styled.div<{
     }
 `
 
-const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
+const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number }>`
     border-radius: 15px;
     overflow: hidden;
     box-shadow: var(--schedule-shadow);
@@ -92,20 +93,21 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean }>`
     row-gap: 6px;
     overflow-y: auto;
     scroll-snap-type: y proximity;
-    max-height: calc(100vh - 325px);
+    max-height: ${({ height }) => `calc(${height}px - 325px)`};
 
     &::-webkit-scrollbar {
         width: 0;
     }
 
     @media (max-width: 1000px) {
-        max-height: calc(100vh - 240px);
+        max-height: ${({ height }) => `calc(${height}px - 240px)`};
     }
 `
 
 const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHeight = false }: Props) => {
     const dayRef = useRef<null | HTMLDivElement>(null)
     const isOnScreen = useOnScreen(dayRef)
+    const { height: screenHeight } = useResize()
 
     // useEffect(() => {
     //     if (isOnScreen && (index === data.currentChosenDay + 1 || index === data.currentChosenDay - 1))
@@ -145,7 +147,7 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHe
                     </span>
                 </div>
             )}
-            <DayScheduleListWrapper isFull={view === 'full'} ref={dayRef}>
+            <DayScheduleListWrapper isFull={view === 'full'} ref={dayRef} height={screenHeight}>
                 {!lessons && <SkeletonLoading />}
                 {!!lessons &&
                     lessons.map((subject: ISubject, index) => {

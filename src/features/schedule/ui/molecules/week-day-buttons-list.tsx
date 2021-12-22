@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { WeekDayButton } from '..'
 import { scheduleModel } from '@entities/schedule'
 import { IWeekDays, WeekDays } from '@consts'
+import useResize from '@utils/hooks/use-resize'
 
 const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
     display: flex;
@@ -29,9 +30,10 @@ const WeekDayButtonsList = () => {
     const {
         data: { schedule, currentModule, currentChosenDay, currentDay, view },
     } = scheduleModel.selectors.useSchedule()
+    const { width } = useResize()
 
     return (
-        <WeekDayButtonsListWrapper isFull={view === 'full'}>
+        <WeekDayButtonsListWrapper isFull={width > 1000 ? view === 'full' : true}>
             {!!schedule &&
                 Object.keys(WeekDays).map((day, index) => {
                     return (
