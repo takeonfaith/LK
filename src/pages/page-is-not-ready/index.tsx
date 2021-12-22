@@ -14,7 +14,7 @@ const PageIsNotReady = ({ oldVersionUrl }: Props) => {
         <Error text={'Страница еще находится в разработке. Если вам она нужна, вернитесь к старому'}>
             <a href={`https://e.mospolytech.ru/old/?p=${oldVersionUrl}`}>
                 <Button
-                    text={'Перейти к старому дизану'}
+                    text={'Перейти к старому дизайну'}
                     onClick={() => {
                         localStorage.setItem('useOldVersion', 'true')
                     }}

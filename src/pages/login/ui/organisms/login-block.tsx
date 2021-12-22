@@ -49,7 +49,7 @@ const LoginBlock = () => {
             </Title>
             <a href="https://e.mospolytech.ru/old/index.php" style={{ textDecoration: 'none' }}>
                 <Button
-                    text={'Перейти к старому дизану'}
+                    text={'Перейти к старому дизайну'}
                     onClick={() => {
                         localStorage.setItem('useOldVersion', 'true')
                     }}

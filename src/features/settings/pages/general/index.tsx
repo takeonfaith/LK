@@ -20,7 +20,7 @@ const General = () => {
             {/* <ToggleArea title={'Общие'} toggles={toggles} setToggles={setToggles} /> */}
             <a href="https://e.mospolytech.ru/old/index.php">
                 <Button
-                    text={'Перейти к старому дизану'}
+                    text={'Перейти к старому дизайну'}
                     onClick={() => {
                         localStorage.setItem('useOldVersion', 'true')
                     }}
