@@ -26,14 +26,7 @@ const ScheduleAndNotification = () => {
 
     return (
         <Section>
-            <DaySchedule
-                lessons={loading ? null : lessons || []}
-                width={400}
-                height={156}
-                isCurrent
-                index={0}
-                fixedHeight
-            />
+            <DaySchedule lessons={lessons || null} width={400} height={156} isCurrent index={0} fixedHeight />
         </Section>
     )
 }
