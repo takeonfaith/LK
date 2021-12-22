@@ -21,6 +21,7 @@ const ButtonWrapper = styled.button<{
     font-weight: bold;
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
+    text-decoration: none;
 
     span a {
         text-decoration: none;

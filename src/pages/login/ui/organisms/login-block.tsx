@@ -47,14 +47,16 @@ const LoginBlock = () => {
             <Title size={2} align="left">
                 Вход в личный кабинет
             </Title>
-            <Button
-                text={<a href={`/old`}>Перейти к старому дизану</a>}
-                onClick={() => {
-                    localStorage.setItem('useOldVersion', 'true')
-                }}
-                background="var(--purple)"
-                width="100%"
-            />
+            <a href="https://e.mospolytech.ru/old/index.php" style={{ textDecoration: 'none' }}>
+                <Button
+                    text={'Перейти к старому дизану'}
+                    onClick={() => {
+                        localStorage.setItem('useOldVersion', 'true')
+                    }}
+                    background="var(--purple)"
+                    width="100%"
+                />
+            </a>
             <ErrorMessage message={error} />
             <Input value={login} setValue={setLogin} title="Логин" placeholder="Введите логин" />
             <Input
