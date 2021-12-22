@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { userModel } from '@entities/user'
 import useTheme from '@utils/hooks/use-theme'
-import { Title } from '@ui/atoms'
+import { Button, Title } from '@ui/atoms'
 import Input from '@ui/atoms/input'
 import SubmitButton from '@ui/atoms/submit-button'
 import Themes from '@ui/colors'
@@ -47,6 +47,14 @@ const LoginBlock = () => {
             <Title size={2} align="left">
                 Вход в личный кабинет
             </Title>
+            <Button
+                text={<a href={`/old`}>Перейти к старому дизану</a>}
+                onClick={() => {
+                    localStorage.setItem('useOldVersion', 'true')
+                }}
+                background="var(--purple)"
+                width="100%"
+            />
             <ErrorMessage message={error} />
             <Input value={login} setValue={setLogin} title="Логин" placeholder="Введите логин" />
             <Input
