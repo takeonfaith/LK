@@ -1,6 +1,7 @@
 import { ISubject } from '@api/model'
 import { Months } from '@utility-types/months'
 import getDateWithoutTime from '@utils/get-date-without-time'
+import localizeDate from '@utils/localize-date'
 
 const currentDate = new Date()
 
@@ -23,7 +24,13 @@ const isCurrentWeekSubject = (subject: ISubject): boolean => {
     const fullStartDate = new Date(`${parsedStartDateMonth}/${startDay}/${currentDate.getFullYear()}`)
     const fullEndDate =
         !!endDay && !!parsedEndDateMonth
-            ? new Date(`${parsedEndDateMonth}/${endDay}/${currentDate.getFullYear()}`)
+            ? new Date(
+                  `${parsedEndDateMonth}/${endDay}/${
+                      parsedEndDateMonth >= parsedStartDateMonth
+                          ? currentDate.getFullYear()
+                          : currentDate.getFullYear() + 1
+                  }`,
+              )
             : null
 
     if (fullStartDate <= weekEnd) {

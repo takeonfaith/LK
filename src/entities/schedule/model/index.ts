@@ -15,6 +15,7 @@ const getScheduleFx = createEffect(async (): Promise<IModules> => {
 
         for (const key in response.data) {
             const transformedKey = key.charAt(0).toLowerCase() + key.slice(1)
+
             fullSchedule[transformedKey] = response.data[key]
         }
 

@@ -12,9 +12,15 @@ const Home = () => {
         data: { user },
         error,
     } = userModel.selectors.useUser()
+    const { data } = scheduleModel.selectors.useSchedule()
 
     return (
-        <Wrapper loading={!user} load={() => scheduleModel.effects.getScheduleFx()} error={error} data={user}>
+        <Wrapper
+            loading={!user}
+            load={() => scheduleModel.effects.getScheduleFx()}
+            error={error}
+            data={user && data.schedule}
+        >
             <Content>
                 {!!user && (
                     <div className="home-page-content-inner">

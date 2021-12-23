@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { WeekDayButton } from '..'
 import { scheduleModel } from '@entities/schedule'
@@ -31,9 +31,10 @@ const WeekDayButtonsList = () => {
         data: { schedule, currentModule, currentChosenDay, currentDay, view },
     } = scheduleModel.selectors.useSchedule()
     const { width } = useResize()
+    const isFull = useMemo(() => (width > 1000 ? view === 'full' : true), [width, view])
 
     return (
-        <WeekDayButtonsListWrapper isFull={width > 1000 ? view === 'full' : true}>
+        <WeekDayButtonsListWrapper isFull={isFull}>
             {!!schedule &&
                 Object.keys(WeekDays).map((day, index) => {
                     return (

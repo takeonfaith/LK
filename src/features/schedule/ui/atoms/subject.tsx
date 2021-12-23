@@ -1,6 +1,8 @@
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
+import calcTimeLeft from '@features/schedule/lib/calc-time-left'
 import React from 'react'
 import styled from 'styled-components'
+import NextSubject from './next-subject'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean
@@ -33,6 +35,8 @@ const SubjectWrapper = styled.div<{
         .time {
             padding: 3px 10px;
             height: 21px;
+            display: flex;
+            align-items: center;
             background: var(--search);
             background: ${({ isCurrent, darkColor, color2 }) => (isCurrent ? darkColor : color2)};
             border-radius: 100px;
@@ -56,8 +60,7 @@ const SubjectWrapper = styled.div<{
     }
 
     h3 {
-        margin-top: 15px;
-        margin-bottom: 10px;
+        margin: 10px 0;
         font-size: 0.9em;
         word-wrap: break-word;
     }
@@ -72,7 +75,7 @@ const SubjectWrapper = styled.div<{
     }
 `
 
-type Props = ISubject & { index: number; isCurrent: boolean; fixedHeight?: boolean }
+type Props = ISubject & { index: number; isCurrent: boolean; fixedHeight?: boolean; isNext?: boolean }
 
 const Subject = ({
     timeInterval,
@@ -82,6 +85,7 @@ const Subject = ({
     dateInterval,
     isCurrent,
     link,
+    isNext = false,
     fixedHeight = false,
 }: Props) => {
     return (
@@ -95,7 +99,7 @@ const Subject = ({
         >
             <div className="time-and-place">
                 <span className="time">{timeInterval}</span>
-                {/* {isCurrent && <NowPlate />} */}
+                {isNext && <NextSubject timeLeft={calcTimeLeft(timeInterval)} />}
                 {!link ? (
                     <span className="place"> {place}</span>
                 ) : (
@@ -103,7 +107,6 @@ const Subject = ({
                         {place}
                     </a>
                 )}
-                {/* <span className="currentOrNext" >{isToday ? inTimeInterval(time, currentDay) ? "Сейчас" : isNextSubject(time, currentDay) ? "Следующая" : null : null}</span> */}
             </div>
             <h3>{name}</h3>
             <p className="teachers">

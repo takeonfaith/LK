@@ -9,13 +9,18 @@ import LeftsideBarItem from '../molecules/leftside-bar-item'
 import LeftsideBarItemButton from '../molecules/leftside-bar-item-button'
 import LeftsideBarDropdown from './leftside-bar-dropdown'
 import { userModel } from '@entities/user'
+import { IRoutes } from '@app/routes/techers-routes'
 
-const LeftsideBarList = () => {
+interface Props {
+    searchList: IRoutes | null
+}
+
+const LeftsideBarList = ({ searchList }: Props) => {
     const currentPage = useCurrentPage()
     const { setting } = useSettings<number[]>('menu')
     const { data } = userModel.selectors.useUser()
 
-    return (
+    return !searchList ? (
         <LeftsideBarListWrapper>
             {Object.values(getChosenRoutes(setting, data)).map(({ icon, id, title, path }) => {
                 return (
@@ -46,6 +51,21 @@ const LeftsideBarList = () => {
                     )
                 })}
             </LeftsideBarDropdown>
+        </LeftsideBarListWrapper>
+    ) : (
+        <LeftsideBarListWrapper>
+            {Object.values(searchList).map(({ icon, id, title, path }) => {
+                return (
+                    <LeftsideBarItem
+                        key={id}
+                        id={id}
+                        icon={icon}
+                        title={title}
+                        path={path}
+                        isCurrent={currentPage.id === id}
+                    />
+                )
+            })}
         </LeftsideBarListWrapper>
     )
 }

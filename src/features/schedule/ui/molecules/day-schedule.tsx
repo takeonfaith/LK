@@ -1,9 +1,11 @@
 import { ILessons, ISubject } from '@api/model'
+import calcNextSubjectTime from '@features/schedule/lib/calc-next-subject-time'
+import calcTimeLeft from '@features/schedule/lib/calc-time-left'
 import { Title } from '@ui/atoms'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import useOnScreen from '@utils/hooks/use-on-screen'
 import useResize from '@utils/hooks/use-resize'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import inTimeInterval from '../../lib/in-time-interval'
 import { Subject } from '../atoms'
@@ -109,6 +111,8 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHe
     const isOnScreen = useOnScreen(dayRef)
     const { height: screenHeight } = useResize()
 
+    const nextSubjectTime = useMemo(() => calcNextSubjectTime(lessons ?? []), [])
+
     // useEffect(() => {
     //     if (isOnScreen && (index === data.currentChosenDay + 1 || index === data.currentChosenDay - 1))
     //         scheduleModel.events.changeCurrentChosenDay({ day: index })
@@ -116,7 +120,12 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHe
 
     useEffect(() => {
         if (dayRef?.current) {
-            const currentLessonIndex = lessons?.findIndex((lesson) => inTimeInterval(lesson.timeInterval)) ?? -1
+            const currentLessonIndex =
+                lessons?.findIndex(
+                    (lesson) =>
+                        inTimeInterval(lesson.timeInterval) ||
+                        (calcTimeLeft(lesson.timeInterval) < 60 && calcTimeLeft(lesson.timeInterval) > 0),
+                ) ?? -1
             if (isCurrent && currentLessonIndex !== -1) {
                 dayRef.current.scrollTop = currentLessonIndex * 150
             }
@@ -158,6 +167,7 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHe
                                 index={index}
                                 isCurrent={(isCurrent && inTimeInterval(subject.timeInterval)) ?? false}
                                 fixedHeight={fixedHeight}
+                                isNext={isCurrent && nextSubjectTime === calcTimeLeft(subject.timeInterval)}
                             />
                         )
                     })}

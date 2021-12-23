@@ -3,6 +3,7 @@ import { FiColumns, FiSidebar } from 'react-icons/fi'
 import styled from 'styled-components'
 import { ViewType } from '@api/model'
 import { Button } from '@ui/atoms'
+import Tooltip from '@ui/atoms/tooltip'
 
 const ScheduleViewButtonsListWrapper = styled.div`
     display: flex;
@@ -10,13 +11,11 @@ const ScheduleViewButtonsListWrapper = styled.div`
     justify-content: center;
     border-radius: 10px;
     background: var(--mild-theme);
+    border-radius: 10px;
+    overflow: hidden;
 
-    button:nth-child(1) {
-        border-radius: 10px 0 0 10px;
-    }
-
-    button:nth-child(2) {
-        border-radius: 0 10px 10px 0;
+    button {
+        border-radius: 0;
     }
 
     @media (max-width: 1000px) {
@@ -30,13 +29,10 @@ interface Props {
 }
 
 const ScheduleViewButtonsList = ({ view, setView }: Props) => {
-    const handleChangeView = (view: ViewType) => {
-        setView(view)
-    }
     return (
         <ScheduleViewButtonsListWrapper>
-            <Button icon={<FiSidebar />} onClick={() => handleChangeView('full')} isChosen={view === 'full'} />
-            <Button icon={<FiColumns />} onClick={() => handleChangeView('big')} isChosen={view === 'big'} />
+            <Button icon={<FiSidebar />} onClick={() => setView('full')} isChosen={view === 'full'} />
+            <Button icon={<FiColumns />} onClick={() => setView('big')} isChosen={view === 'big'} />
         </ScheduleViewButtonsListWrapper>
     )
 }

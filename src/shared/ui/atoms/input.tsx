@@ -1,5 +1,5 @@
-import React from 'react'
-import { FiX } from 'react-icons/fi'
+import React, { useState } from 'react'
+import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Button from './button'
 
@@ -68,12 +68,25 @@ interface Props {
 }
 
 const Input = ({ value, setValue, leftIcon, title, placeholder = 'Введите сюда', type = 'text' }: Props) => {
+    const [inputType, setInputType] = useState(type)
     return (
         <InputWrapper leftIcon={!!leftIcon}>
             {!!title && <h5>{title}</h5>}
             {leftIcon && <span className="icon">{leftIcon}</span>}
-            <input type={type} placeholder={placeholder} value={value} onChange={(e) => setValue(e.target.value)} />
-            {!!value.length && <Button icon={<FiX />} onClick={() => setValue('')} />}
+            <input
+                type={inputType}
+                placeholder={placeholder}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+            />
+            {type !== 'password' ? (
+                !!value.length && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
+            ) : (
+                <Button
+                    icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}
+                    onClick={() => setInputType((prev) => (prev === 'password' ? 'text' : 'password'))}
+                />
+            )}
         </InputWrapper>
     )
 }

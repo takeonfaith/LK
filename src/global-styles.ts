@@ -28,6 +28,10 @@ const GlobalStyles = createGlobalStyle`
 			background-clip: content-box;
 			background-color: var(--theme-mild-opposite);
 		}
+
+		::-webkit-scrollbar-thumb:hover {
+			border: 2px solid transparent;
+		}
 	}
 
 

@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 
-const ButtonWrapper = styled.button<{
+const LinkButtonWrapper = styled.a<{
     text: boolean
     isChosen: boolean
     width?: string
@@ -22,6 +22,7 @@ const ButtonWrapper = styled.button<{
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;
+    font-size: 0.8em;
 
     span a {
         text-decoration: none;
@@ -49,7 +50,7 @@ const ButtonWrapper = styled.button<{
     }
 `
 
-interface Props extends React.HTMLAttributes<HTMLButtonElement> {
+interface Props {
     icon?: JSX.Element
     text?: React.ReactNode | string
     onClick: (event: any) => void
@@ -57,24 +58,24 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
     width?: string
     background?: string
     textColor?: string
-    restProps?: any | unknown
+    href: string
 }
 
-const Button = ({ icon, text, onClick, width, background, textColor, isChosen = false, ...restProps }: Props) => {
+const LinkButton = ({ icon, text, onClick, width, background, textColor, isChosen = false, href }: Props) => {
     return (
-        <ButtonWrapper
+        <LinkButtonWrapper
             text={!!text}
             onClick={onClick}
             isChosen={isChosen}
             width={width}
             background={background}
             textColor={textColor}
-            {...restProps}
+            href={href}
         >
             {!!icon && icon}
             <span>{text}</span>
-        </ButtonWrapper>
+        </LinkButtonWrapper>
     )
 }
 
-export default memo(Button)
+export default memo(LinkButton)

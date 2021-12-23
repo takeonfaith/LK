@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Sleep from '../../../../shared/images/sleep.gif'
 
 const HolidayPlateWrapper = styled.div`
     width: 100%;
@@ -13,6 +14,7 @@ const HolidayPlateWrapper = styled.div`
     justify-content: center;
     flex-direction: column;
     font-weight: bold;
+    text-align: center;
 
     img {
         width: 70px;
@@ -23,10 +25,7 @@ const HolidayPlateWrapper = styled.div`
 const HolidayPlate = () => {
     return (
         <HolidayPlateWrapper>
-            <img
-                src="https://i.pinimg.com/originals/d5/2c/46/d52c464bef731d5a93570687acd99b79.gif"
-                alt="дед наелся и спит"
-            />
+            <img src={Sleep} alt="дед наелся и спит" />
             <span>В этот день пар нет</span>
         </HolidayPlateWrapper>
     )

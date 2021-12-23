@@ -1,11 +1,7 @@
 const inTimeInterval = (timeInterval: string) => {
-    let startTime = '',
-        endTime = ''
     const currentTime = new Date()
 
-    const a = timeInterval.split(' - ')
-    startTime = a[0]
-    endTime = a[1]
+    const [startTime, endTime] = timeInterval.split(' - ')
     let pieces = startTime.split(':')
     const startHour = parseInt(pieces[0])
     const startMinute = parseInt(pieces[1], 10)

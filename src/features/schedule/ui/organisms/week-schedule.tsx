@@ -38,7 +38,11 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
     const { width } = useResize()
 
     useEffect(() => {
-        if (wrapperRef?.current && view === 'big') wrapperRef.current.scrollLeft = currentDay * 400 - 350
+        setTimeout(() => {
+            if (wrapperRef?.current && view === 'big') {
+                wrapperRef.current.scrollLeft = currentDay * 400 - 360
+            }
+        }, 200)
     }, [view])
 
     useEffect(() => {
@@ -46,7 +50,7 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
             if (width <= 1000) {
                 wrapperRef.current.scrollLeft = (currentChosenDay * width * currentChosenDay) / 6
             } else {
-                wrapperRef.current.scrollLeft = currentChosenDay * 400 - 350
+                wrapperRef.current.scrollLeft = currentChosenDay * 400 - 360
             }
         }
     }, [currentChosenDay, wrapperRef?.current])

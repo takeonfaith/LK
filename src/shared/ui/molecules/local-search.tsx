@@ -3,16 +3,17 @@ import { FiSearch } from 'react-icons/fi'
 import Input from '../atoms/input'
 
 interface Props<T> {
-    whereToSearch: Array<T>
-    searchEngine: (value: string, whereToSearch: Array<T>) => Array<T>
-    setResult: (res: Array<T>) => void
+    whereToSearch: T
+    searchEngine: (value: string, whereToSearch: T) => T
+    setResult: (res: T | null) => void
 }
 
 const LocalSearch = <T,>({ whereToSearch, searchEngine, setResult }: Props<T>) => {
     const [value, setValue] = useState('')
 
     useEffect(() => {
-        setResult(searchEngine(value, whereToSearch))
+        if (value.length) setResult(searchEngine(value, whereToSearch))
+        else setResult(null)
     }, [value, setResult, searchEngine, whereToSearch])
 
     return <Input value={value} setValue={setValue} placeholder="Поиск по меню" leftIcon={<FiSearch />} />

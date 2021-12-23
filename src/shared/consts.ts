@@ -66,6 +66,15 @@ export const Colors: IColors = {
         dark: '#3f457f',
         darkTransparent: '',
     },
+    darkBlue: {
+        main: '#4c73ca',
+        transparent: 'rgba(95, 109, 236, .3)',
+        lighter: '#7884ec',
+        darker: '#414ca8',
+        light: '',
+        dark: '#9cbbff',
+        darkTransparent: '',
+    },
     purple: {
         main: 'rgb(168, 95, 236)',
         transparent: 'rgba(168, 95, 236, .3)',
