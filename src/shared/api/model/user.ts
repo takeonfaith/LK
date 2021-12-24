@@ -1,5 +1,7 @@
 import { Sex } from '@utility-types/sex'
 
+type UserStatus = 'stud' | 'staff'
+
 export interface User {
     id: string
     name: string
@@ -22,6 +24,7 @@ export interface User {
     degreeLevel: string
     enterYear: string
     subdivisions?: Subdivision[]
+    user_status: UserStatus
 }
 
 interface Subdivision {

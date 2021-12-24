@@ -19,7 +19,7 @@ const Home = () => {
             loading={!user}
             load={() => scheduleModel.effects.getScheduleFx()}
             error={error}
-            data={user && data.schedule}
+            data={user?.user_status === 'stud' ? user && data.schedule : user}
         >
             <Content>
                 {!!user && (

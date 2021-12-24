@@ -111,7 +111,7 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHe
     const isOnScreen = useOnScreen(dayRef)
     const { height: screenHeight } = useResize()
 
-    const nextSubjectTime = useMemo(() => calcNextSubjectTime(lessons ?? []), [])
+    const nextSubjectTime = useMemo(() => calcNextSubjectTime(lessons ?? []), [lessons])
 
     // useEffect(() => {
     //     if (isOnScreen && (index === data.currentChosenDay + 1 || index === data.currentChosenDay - 1))
