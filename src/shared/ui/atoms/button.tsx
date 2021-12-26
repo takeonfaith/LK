@@ -14,7 +14,6 @@ const ButtonWrapper = styled.button<{
     align-items: center;
     justify-content: center;
     border: none;
-    /* outline: none; */
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
     padding: 10px;
@@ -24,6 +23,14 @@ const ButtonWrapper = styled.button<{
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;
+
+    &:focus {
+        outline: 4px solid var(--almostTransparentOpposite);
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
 
     &:active {
         transform: scale(0.95);

@@ -27,6 +27,14 @@ const SubmitButtonWrapper = styled.button<{
     cursor: pointer;
     background: var(--blue);
 
+    &:focus {
+        outline: 4px solid var(--almostTransparentOpposite);
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
+
     @keyframes button-animation-in {
         0% {
             opacity: 0;

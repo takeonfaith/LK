@@ -23,9 +23,16 @@ const LinkButtonWrapper = styled.a<{
     text-decoration: none;
     font-size: 0.8em;
 
-    span a {
-        text-decoration: none;
-        color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
+    button {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: 4px solid var(--almostTransparentOpposite);
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
     }
 
     &:active {

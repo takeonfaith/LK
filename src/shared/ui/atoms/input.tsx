@@ -39,6 +39,14 @@ const InputWrapper = styled.div<{ leftIcon: boolean }>`
         &::placeholder {
             font-weight: 500;
         }
+
+        &:focus-visible {
+            outline: 4px solid var(--almostTransparentOpposite);
+        }
+
+        &:focus:not(:focus-visible) {
+            outline: none;
+        }
     }
 
     button {
