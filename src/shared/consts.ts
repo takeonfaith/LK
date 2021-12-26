@@ -125,6 +125,7 @@ export interface IWeekDays {
     thursday: IWeekDayName
     friday: IWeekDayName
     saturday: IWeekDayName
+    // sunday: IWeekDayName
 }
 
 export const WeekDays: IWeekDays = {
@@ -134,6 +135,7 @@ export const WeekDays: IWeekDays = {
     thursday: { full: 'Четверг', short: 'Чт' },
     friday: { full: 'Пятница', short: 'Пт' },
     saturday: { full: 'Суббота', short: 'Сб' },
+    // sunday: { full: 'Воскресенье', short: 'Вс' },
 }
 
 export const ColorsByGrade = {

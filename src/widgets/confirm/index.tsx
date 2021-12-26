@@ -1,8 +1,10 @@
+import { Colors } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { Button, Title } from '@ui/atoms'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useRef } from 'react'
 import styled from 'styled-components'
+import ModalWrapper from '../../widgets/modal/ui/atoms/modal-wrapper'
 
 const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     position: absolute;
@@ -47,26 +49,30 @@ const ConfirmMessage = () => {
     useOnClickOutside(confirmRef, () => confirmModel.events.closeConfirm())
 
     return (
-        <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
-            <Title size={3}>{message ?? 'Хотите продолжить?'}</Title>
-            <div className="buttons">
-                <Button
-                    text="Да"
-                    onClick={() => {
-                        onConfirm()
-                        confirmModel.events.closeConfirm()
-                    }}
-                    width="100%"
-                    textColor="var(--blue)"
-                />
-                <Button
-                    text="Нет"
-                    onClick={onReject ?? confirmModel.events.closeConfirm}
-                    width="100%"
-                    textColor="var(--red)"
-                />
-            </div>
-        </ConfirmWrapper>
+        <ModalWrapper isOpen={isOpen}>
+            <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
+                <Title size={3}>{message ?? 'Хотите продолжить?'}</Title>
+                <div className="buttons">
+                    <Button
+                        text="Да"
+                        onClick={() => {
+                            onConfirm()
+                            confirmModel.events.closeConfirm()
+                        }}
+                        width="100%"
+                        textColor="var(--blue)"
+                        hoverBackground={Colors.blue.transparent}
+                    />
+                    <Button
+                        text="Нет"
+                        onClick={onReject ?? confirmModel.events.closeConfirm}
+                        width="100%"
+                        textColor="var(--red)"
+                        hoverBackground={Colors.red.transparent}
+                    />
+                </div>
+            </ConfirmWrapper>
+        </ModalWrapper>
     )
 }
 

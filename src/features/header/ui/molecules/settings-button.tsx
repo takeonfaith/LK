@@ -8,7 +8,7 @@ import React from 'react'
 const SettingsButton = () => {
     const { toggle } = useModal(<SettingsPage />)
 
-    return <Button text="Настройки" icon={<FiSettings />} onClick={toggle} />
+    return <Button text="Настройки" icon={<FiSettings />} onClick={toggle} shrinkTextInMobile />
 }
 
 export default SettingsButton

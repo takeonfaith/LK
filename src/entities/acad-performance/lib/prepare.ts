@@ -1,6 +1,6 @@
 import { AcadPerformance } from '../model'
 
-interface PreparedData {
+export interface PreparedData {
     [key: string]: AcadPerformance[]
 }
 

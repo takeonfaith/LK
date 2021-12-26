@@ -7,12 +7,14 @@ const ButtonWrapper = styled.button<{
     width?: string
     background?: string
     textColor?: string
+    shrinkTextInMobile: boolean
+    hoverBackground?: string
 }>`
     display: flex;
     align-items: center;
     justify-content: center;
     border: none;
-    outline: none;
+    /* outline: none; */
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
     padding: 10px;
@@ -23,13 +25,13 @@ const ButtonWrapper = styled.button<{
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;
 
-    span a {
-        text-decoration: none;
-        color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
-    }
-
     &:active {
         transform: scale(0.95);
+    }
+
+    &:hover {
+        background: ${({ hoverBackground, isChosen, background }) =>
+            hoverBackground ?? (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
     }
 
     svg {
@@ -45,6 +47,11 @@ const ButtonWrapper = styled.button<{
         svg {
             width: 14px;
             height: 14px;
+            margin-right: ${({ shrinkTextInMobile, text }) => (shrinkTextInMobile || !text ? '0px' : '7px')};
+        }
+
+        span {
+            display: ${({ shrinkTextInMobile }) => (shrinkTextInMobile ? 'none' : 'flex')};
         }
     }
 `
@@ -57,10 +64,23 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
     width?: string
     background?: string
     textColor?: string
+    shrinkTextInMobile?: boolean
+    hoverBackground?: string
     restProps?: any | unknown
 }
 
-const Button = ({ icon, text, onClick, width, background, textColor, isChosen = false, ...restProps }: Props) => {
+const Button = ({
+    icon,
+    text,
+    onClick,
+    width,
+    background,
+    textColor,
+    hoverBackground,
+    isChosen = false,
+    shrinkTextInMobile = false,
+    ...restProps
+}: Props) => {
     return (
         <ButtonWrapper
             text={!!text}
@@ -69,6 +89,8 @@ const Button = ({ icon, text, onClick, width, background, textColor, isChosen = 
             width={width}
             background={background}
             textColor={textColor}
+            shrinkTextInMobile={shrinkTextInMobile}
+            hoverBackground={hoverBackground}
             {...restProps}
         >
             {!!icon && icon}

@@ -1,6 +1,6 @@
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
-import { IModules, ISchedule, IWeekSchedule, ViewType } from '@api/model'
+import { ILessons, IModules, ISchedule, IWeekSchedule, ViewType } from '@api/model'
 import { scheduleApi } from '@api'
 import getCurrentDaySubjects from '@entities/schedule/lib/get-current-day-schedule'
 
@@ -19,10 +19,17 @@ const getScheduleFx = createEffect(async (): Promise<IModules> => {
             fullSchedule[transformedKey] = response.data[key]
         }
 
-        const currentWeekSchedule: { [key: string]: any } = {}
+        const currentWeekSchedule: IWeekSchedule = {
+            monday: { lessons: [] },
+            tuesday: { lessons: [] },
+            wednesday: { lessons: [] },
+            thursday: { lessons: [] },
+            friday: { lessons: [] },
+            saturday: { lessons: [] },
+        }
 
         for (const [key, value] of Object.entries(fullSchedule)) {
-            currentWeekSchedule[key] = { lessons: getCurrentDaySubjects(value.lessons) }
+            currentWeekSchedule[key as keyof IWeekSchedule].lessons = getCurrentDaySubjects(value.lessons)
         }
 
         return {

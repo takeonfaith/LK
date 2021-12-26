@@ -39,7 +39,7 @@ function UserInfo({ user }: Props) {
                     {!!course && <p>Курс: {course}</p>}
                     {!!subdivisions?.length && (
                         <p>
-                            Сведения об трудоусторйстве:{' '}
+                            Сведения о трудоустройстве:{' '}
                             {subdivisions?.map((t, index) => (
                                 <div key={index}>{`${index + 1})${t.subdivision}`}</div>
                             ))}

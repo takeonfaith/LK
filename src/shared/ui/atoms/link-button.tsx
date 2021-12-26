@@ -12,7 +12,6 @@ const LinkButtonWrapper = styled.a<{
     align-items: center;
     justify-content: center;
     border: none;
-    outline: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
     padding: 10px;

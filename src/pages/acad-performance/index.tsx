@@ -1,9 +1,13 @@
 import { acadPerformanceModel } from '@entities/acad-performance'
+import { PreparedData } from '@entities/acad-performance/lib/prepare'
+import { AcadPerformance as IAcadPerformance } from '@entities/acad-performance/model'
 import { userModel } from '@entities/user'
 import createSelectItems from '@features/acad-performance/lib/create-select-items'
+import search from '@features/acad-performance/lib/search'
 import { GraphicInfo, SubjectList } from '@features/acad-performance/ui/organisms'
 import Select from '@features/select'
 import { Error, Wrapper } from '@ui/atoms'
+import LocalSearch from '@ui/molecules/local-search'
 import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
@@ -31,6 +35,7 @@ const AcadPerformance = () => {
     } = userModel.selectors.useUser()
     const items = useMemo(() => createSelectItems(user?.course ?? 0), [user])
     const [selected, setSelected] = useState<number>(1)
+    const [foundSubjects, setFoundSubjects] = useState<PreparedData | null>(null)
 
     useEffect(() => {
         acadPerformanceModel.effects.getAcadPerformanceFx({ semestr: `${selected !== -1 ? selected : ''}` })
@@ -52,8 +57,19 @@ const AcadPerformance = () => {
                 ) : (
                     <>
                         <GraphicInfo />
-                        <SubjectList header={'Экзамены'} items={data?.exam} loading={loading} />
-                        <SubjectList header={'Зачеты'} items={data?.test} type={'test'} loading={loading} />
+                        <LocalSearch<IAcadPerformance[], PreparedData>
+                            whereToSearch={[...(data?.exam ?? []), ...(data?.test ?? [])]}
+                            searchEngine={search}
+                            setResult={setFoundSubjects}
+                            placeholder={'Поиск предметов'}
+                        />
+                        <SubjectList header={'Экзамены'} items={foundSubjects?.exam ?? data?.exam} loading={loading} />
+                        <SubjectList
+                            header={'Зачеты'}
+                            items={foundSubjects?.test ?? data?.test}
+                            type={'test'}
+                            loading={loading}
+                        />
                     </>
                 )}
             </AcadPerformanceWrapper>

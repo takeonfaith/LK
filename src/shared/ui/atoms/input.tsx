@@ -20,6 +20,7 @@ const InputWrapper = styled.div<{ leftIcon: boolean }>`
         top: 55%;
         transform: translateY(-50%);
         color: var(--text);
+        opacity: 0.4;
     }
 
     input {
@@ -33,6 +34,7 @@ const InputWrapper = styled.div<{ leftIcon: boolean }>`
         font-weight: bold;
         border-radius: 7px;
         padding-left: ${({ leftIcon }) => (leftIcon ? '30px' : '10px')};
+        padding-right: 35px;
 
         &::placeholder {
             font-weight: 500;
@@ -41,19 +43,22 @@ const InputWrapper = styled.div<{ leftIcon: boolean }>`
 
     button {
         position: absolute;
-        bottom: -2px;
-        right: 10px;
-        transform: translateY(-50%);
-        width: 20px;
-        height: 20px;
+        bottom: 5px;
+        right: 5px;
+        width: 25px;
+        height: 25px;
         border-radius: 5px;
         background: var(--search2);
         color: var(--text);
         padding: 0;
 
+        &:active {
+            transform: scale(1);
+        }
+
         svg {
-            width: 10px;
-            height: 10px;
+            width: 15px;
+            height: 15px;
         }
     }
 `
@@ -84,6 +89,7 @@ const Input = ({ value, setValue, leftIcon, title, placeholder = 'Введите
             ) : (
                 <Button
                     icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}
+                    tabIndex={-1}
                     onClick={() => setInputType((prev) => (prev === 'password' ? 'text' : 'password'))}
                 />
             )}

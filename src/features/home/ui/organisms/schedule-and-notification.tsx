@@ -21,9 +21,18 @@ const ScheduleAndNotification = () => {
         [schedule],
     )
 
+    console.log(schedule)
+
     return (
         <Section>
-            <DaySchedule lessons={lessons || null} width={400} height={156} isCurrent index={0} fixedHeight />
+            <DaySchedule
+                lessons={currentStringDay === 'sunday' ? [] : lessons || null}
+                width={400}
+                height={156}
+                isCurrent
+                index={0}
+                fixedHeight
+            />
         </Section>
     )
 }
