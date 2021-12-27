@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useTheme from '@utils/hooks/use-theme'
 import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 
@@ -12,7 +12,19 @@ const Appearance = () => {
         },
     ])
 
+    useEffect(() => {
+        setToggles([
+            {
+                title: 'Темная тема',
+                state: theme !== 'light',
+                action: (state: boolean) => switchTheme(state),
+            },
+        ])
+    }, [theme])
+
     return <ToggleArea title={'Тема'} toggles={toggles} setToggles={setToggles} />
+
+    return <>Test</>
 }
 
 export default React.memo(Appearance)

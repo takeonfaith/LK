@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import useResize from '@utils/hooks/use-resize'
-import { SliderItem } from '../atoms/slider-item'
+import { SliderItem } from './ui/atoms'
 
 interface ISlider {
     pages: string[]

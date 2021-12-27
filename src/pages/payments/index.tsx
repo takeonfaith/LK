@@ -1,7 +1,7 @@
 import { paymentsModel } from '@entities/payments'
 import { Wrapper } from '@ui/atoms'
 import React from 'react'
-import SliderPage from 'widgets/slider/organisms/slider-page'
+import { SliderPage } from 'widgets'
 import { DormitoryPayments, InfoPayments } from './pages'
 
 const PaymentsPage = () => {

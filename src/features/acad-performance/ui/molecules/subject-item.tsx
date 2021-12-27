@@ -1,11 +1,11 @@
 import { AcadPerformance } from '@entities/acad-performance/model'
-import prepareTeacherName from '@features/acad-performance/lib/prepare-teacher-name'
 import localizeDate from '@utils/localize-date'
+import getShortName from '@utils/get-short-name'
 import React from 'react'
 import styled from 'styled-components'
-import { useModal } from 'widgets/modal'
+import { useModal } from 'widgets'
 import { SubjectModal } from '.'
-import { SubjectProgresssBar, SubjectCheker } from '../atoms'
+import { SubjectCheker, SubjectProgresssBar } from '../atoms'
 
 interface Props {
     item: AcadPerformance
@@ -130,7 +130,7 @@ const SubjectItem = ({ item, number, type }: Props) => {
                 </Bar>
                 <Grade>{item.grade}</Grade>
                 <ExamDate>{localizeDate(item.exam_date)}</ExamDate>
-                <Teacher>{prepareTeacherName(item.teacher)}</Teacher>
+                <Teacher>{getShortName(item.teacher)}</Teacher>
             </Wrap>
         )
     )

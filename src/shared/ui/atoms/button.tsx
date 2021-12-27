@@ -9,10 +9,11 @@ const ButtonWrapper = styled.button<{
     textColor?: string
     shrinkTextInMobile: boolean
     hoverBackground?: string
+    align?: 'left' | 'center' | 'right'
 }>`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: ${({ align }) => align ?? 'center'};
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
@@ -73,6 +74,7 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
     textColor?: string
     shrinkTextInMobile?: boolean
     hoverBackground?: string
+    align?: 'left' | 'center' | 'right'
     restProps?: any | unknown
 }
 
@@ -86,6 +88,7 @@ const Button = ({
     hoverBackground,
     isChosen = false,
     shrinkTextInMobile = false,
+    align,
     ...restProps
 }: Props) => {
     return (
@@ -98,6 +101,7 @@ const Button = ({
             textColor={textColor}
             shrinkTextInMobile={shrinkTextInMobile}
             hoverBackground={hoverBackground}
+            align={align}
             {...restProps}
         >
             {!!icon && icon}

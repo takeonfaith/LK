@@ -52,6 +52,12 @@
       ],
       "@routes": [
         "./app/routes/routes.ts"
+      ],
+      "@widgets": [
+        "./app/widgets"
+      ],
+      "@widgets/": [
+        "./app/widgets/*"
       ]
     }
   }

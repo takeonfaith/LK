@@ -6,7 +6,7 @@ import WeekDayButtonsList from '@features/schedule/ui/molecules/week-day-buttons
 import { Wrapper } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
-import Slider from 'widgets/slider/molecules/slider'
+import { Slider } from 'widgets'
 
 const SchedulePageContent = styled.div`
     display: flex;

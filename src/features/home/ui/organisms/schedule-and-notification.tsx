@@ -21,8 +21,6 @@ const ScheduleAndNotification = () => {
         [schedule],
     )
 
-    console.log(schedule)
-
     return (
         <Section>
             <DaySchedule

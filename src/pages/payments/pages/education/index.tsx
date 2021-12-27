@@ -29,6 +29,8 @@ const EducationPayments = () => {
                                     return acc + getCorrectNumberFormat(curr.value)
                                 }, 0) ?? 0
                             }
+                            qr_current={magistracy?.qr_current ?? ''}
+                            qr_total={magistracy?.qr_total ?? ''}
                         />
                     </div>
                 </LeftBlock>
@@ -57,6 +59,8 @@ const EducationPayments = () => {
                                     return acc + getCorrectNumberFormat(curr.value)
                                 }, 0) ?? 0
                             }
+                            qr_current={bachelor?.qr_current ?? ''}
+                            qr_total={bachelor?.qr_total ?? ''}
                         />
                     </div>
                 </LeftBlock>

@@ -8,6 +8,8 @@ const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
     const dormitory = data?.contracts[0]
 
+    console.log(data)
+
     return (
         <PageWrapper>
             <div className="blocks-wrapper">
@@ -28,6 +30,8 @@ const DormitoryPayments = () => {
                                     return acc + getCorrectNumberFormat(curr.value)
                                 }, 0) ?? 0
                             }
+                            qr_current={dormitory?.qr_current ?? ''}
+                            qr_total={dormitory?.qr_total ?? ''}
                         />
                     </div>
                 </LeftBlock>

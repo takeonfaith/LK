@@ -6,13 +6,16 @@ import { Container, Img } from '../atoms/avatar'
 export default Avatar
 
 interface Props {
-    avatar: string
+    avatar?: string
+    width?: string
+    height?: string
+    marginRight?: string
 }
 
-function Avatar({ avatar }: Props) {
+function Avatar({ avatar, width, height, marginRight }: Props) {
     return (
-        <Container>
-            <FiUser />
+        <Container width={width} height={height} marginRight={marginRight}>
+            {avatar ? <Img src={avatar} /> : <FiUser />}
         </Container>
     )
 }

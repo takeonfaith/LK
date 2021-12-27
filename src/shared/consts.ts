@@ -67,12 +67,12 @@ export const Colors: IColors = {
         darkTransparent: '',
     },
     darkBlue: {
-        main: '#4c73ca',
+        main: '#9cbbff',
         transparent: 'rgba(95, 109, 236, .3)',
         lighter: '#7884ec',
         darker: '#414ca8',
         light: '',
-        dark: '#9cbbff',
+        dark: '#4c73ca',
         darkTransparent: '',
     },
     purple: {

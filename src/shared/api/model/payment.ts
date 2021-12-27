@@ -17,6 +17,8 @@ export interface PaymentsContract {
     student: string
     sum: string
     type: string
+    qr_current: string
+    qr_total: string
 }
 
 export interface Payments {

@@ -56,7 +56,7 @@ const ToggleArea = ({ title, toggles, setToggles }: Props) => {
 
     return (
         <Wrapper>
-            <h2>{title}</h2>
+            {!!title.length && <h2>{title}</h2>}
             {toggles.map(({ title, state, action }, i) => {
                 return (
                     <ToggleItemBlock key={title}>

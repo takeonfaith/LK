@@ -1,7 +1,7 @@
 import useResize from '@utils/hooks/use-resize'
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
-import Slider from '../molecules/slider'
+import { Slider } from 'widgets'
 
 const SliderPageWrapper = styled.div<{ width?: string }>`
     display: flex;

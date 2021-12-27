@@ -1,28 +1,30 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.div<{ width?: string; height?: string; marginRight?: string }>`
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--almostTransparent);
+    color: var(--text);
 
     svg {
         width: 40%;
         height: 40%;
     }
 
-    width: 160px;
-    height: 160px;
+    width: ${({ width }) => width ?? '160px'};
+    min-width: ${({ width }) => width ?? '160px'};
+    height: ${({ height }) => height ?? '160px'};
 
     overflow: hidden;
 
-    margin-right: 32px;
+    margin-right: ${({ marginRight }) => marginRight ?? '32px'};
 
     @media (max-width: 1000px) {
-        min-width: 75px;
-        width: 75px;
-        height: 75px;
+        width: ${({ width }) => width ?? '75px'};
+        min-width: ${({ width }) => width ?? '75px'};
+        height: ${({ height }) => height ?? '75px'};
         margin-right: 15px;
     }
 `

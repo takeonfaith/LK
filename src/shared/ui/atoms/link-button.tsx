@@ -7,10 +7,11 @@ const LinkButtonWrapper = styled.a<{
     width?: string
     background?: string
     textColor?: string
+    align?: 'left' | 'center' | 'right'
 }>`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: ${({ align }) => align ?? 'center'};
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
@@ -64,10 +65,12 @@ interface Props {
     width?: string
     background?: string
     textColor?: string
+    align?: 'left' | 'center' | 'right'
+
     href: string
 }
 
-const LinkButton = ({ icon, text, onClick, width, background, textColor, isChosen = false, href }: Props) => {
+const LinkButton = ({ icon, text, onClick, width, background, textColor, align, href, isChosen = false }: Props) => {
     return (
         <LinkButtonWrapper
             text={!!text}
@@ -77,6 +80,7 @@ const LinkButton = ({ icon, text, onClick, width, background, textColor, isChose
             background={background}
             textColor={textColor}
             href={href}
+            align={align}
         >
             {!!icon && icon}
             <span>{text}</span>

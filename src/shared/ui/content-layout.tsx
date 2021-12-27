@@ -1,15 +1,13 @@
+import PrivateRouter from '@app/routes/private-router'
+import { popUpMessageModel } from '@entities/pop-up-message'
+import useResize from '@utils/hooks/use-resize'
+import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-
-import Header from './template/header'
-import LeftsideBar from '../../widgets/leftside-bar'
-import PrivateRouter from '@app/routes/private-router'
-import { Modal } from 'widgets/modal'
-import PopUpMessage from 'widgets/pop-up-message/ui'
-import useResize from '@utils/hooks/use-resize'
 import ConfirmMessage from 'widgets/confirm'
-import useTheme from '@utils/hooks/use-theme'
-import { popUpMessageModel } from '@entities/pop-up-message'
+import PopUpMessage from 'widgets/pop-up-message'
+import { Header, LeftsideBar } from 'widgets'
+import { Modal } from 'widgets/modal'
 
 const ContentWrapper = styled.div`
     width: 100%;

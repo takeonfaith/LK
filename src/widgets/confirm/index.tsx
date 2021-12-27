@@ -60,15 +60,15 @@ const ConfirmMessage = () => {
                             confirmModel.events.closeConfirm()
                         }}
                         width="100%"
-                        textColor="var(--blue)"
-                        hoverBackground={Colors.blue.transparent}
+                        textColor="var(--red)"
+                        hoverBackground={Colors.red.transparent}
                     />
                     <Button
                         text="Нет"
                         onClick={onReject ?? confirmModel.events.closeConfirm}
                         width="100%"
-                        textColor="var(--red)"
-                        hoverBackground={Colors.red.transparent}
+                        textColor="var(--blue)"
+                        hoverBackground={Colors.blue.transparent}
                     />
                 </div>
             </ConfirmWrapper>

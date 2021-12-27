@@ -7,10 +7,12 @@ interface ISliderItem {
     pageTitle: string
 }
 
-export const SliderItem: FC<ISliderItem> = ({ id, currentPage, setCurrentPage, pageTitle }) => {
+const SliderItem: FC<ISliderItem> = ({ id, currentPage, setCurrentPage, pageTitle }) => {
     return (
         <div className={`SliderItem ${id === currentPage ? 'active' : ''}`} onClick={() => setCurrentPage(id)}>
             <b>{pageTitle}</b>
         </div>
     )
 }
+
+export default SliderItem
