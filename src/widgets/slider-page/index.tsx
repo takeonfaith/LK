@@ -1,5 +1,5 @@
 import useResize from '@utils/hooks/use-resize'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Slider } from 'widgets'
 
@@ -66,6 +66,7 @@ const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: P
     const [page, setPage] = useState(currentPage)
     const { width: screenWidth } = useResize()
     const sliderContentRef = useRef<HTMLDivElement | null>(null)
+
     const handleScroll = () => {
         if (sliderContentRef?.current && screenWidth <= 1000) {
             setPage(Math.round(sliderContentRef.current?.scrollLeft / screenWidth))
@@ -74,11 +75,16 @@ const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: P
 
     const handleChangePage = (page: number) => {
         setPage(page)
+
         if (sliderContentRef?.current) {
             if (screenWidth <= 1000) sliderContentRef.current.scrollLeft = screenWidth * page
             else sliderContentRef.current.scrollLeft = (screenWidth / 1.3) * page
         }
     }
+
+    useEffect(() => {
+        handleChangePage(page)
+    }, [currentPage, screenWidth])
 
     return (
         <SliderPageWrapper width={width}>

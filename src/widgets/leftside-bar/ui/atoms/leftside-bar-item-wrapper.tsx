@@ -16,6 +16,7 @@ const LeftsideBarItemWrapper = styled(Link)<{
     position: relative;
     user-select: none;
     text-decoration: none;
+    border-radius: var(--brLight);
 
     strong {
         width: 130px;
@@ -25,6 +26,14 @@ const LeftsideBarItemWrapper = styled(Link)<{
         width: 22px;
         height: 22px;
         margin-right: 7px;
+    }
+
+    &:focus {
+        outline: 4px solid var(--almostTransparentOpposite);
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
     }
 
     &::before {

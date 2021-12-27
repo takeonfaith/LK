@@ -25,7 +25,7 @@ export const Container = styled.div<{ width?: string; height?: string; marginRig
         width: ${({ width }) => width ?? '75px'};
         min-width: ${({ width }) => width ?? '75px'};
         height: ${({ height }) => height ?? '75px'};
-        margin-right: 15px;
+        margin-right: ${({ marginRight }) => marginRight ?? '15px'};
     }
 `
 

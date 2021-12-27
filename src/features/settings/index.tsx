@@ -28,7 +28,11 @@ const Wrapper = styled.div`
     }
 `
 
-const SettingsPage = () => {
+interface Props {
+    currentPage?: number
+}
+
+const SettingsPage = ({ currentPage = 0 }: Props) => {
     return (
         <Wrapper>
             <SliderPage
@@ -40,6 +44,7 @@ const SettingsPage = () => {
                     { title: 'Безопасность', content: <Security /> },
                 ]}
                 className="settings-page"
+                currentPage={currentPage}
             />
         </Wrapper>
     )

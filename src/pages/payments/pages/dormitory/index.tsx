@@ -8,8 +8,6 @@ const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
     const dormitory = data?.contracts[0]
 
-    console.log(data)
-
     return (
         <PageWrapper>
             <div className="blocks-wrapper">

@@ -24,7 +24,7 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     transform: translateY(${({ isOpen }) => (isOpen ? '50%' : '51%')}) translateX(-50%)
         scale(${({ isOpen }) => (isOpen ? '1' : '0.95')});
 
-    .buttons {
+    & > .buttons {
         margin-top: 10px;
         display: flex;
         align-items: center;

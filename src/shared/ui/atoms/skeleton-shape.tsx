@@ -7,6 +7,7 @@ const SkeletonShapeWrapper = styled.div<{
     margin: string
 }>`
     width: ${({ size }) => (size ? size.width : '100px')};
+    min-width: ${({ size }) => (size ? size.width : '100px')};
     height: ${({ size, shape }) => (size ? (shape === 'circle' ? size.width : size.height) : '20px')};
     border-radius: ${({ shape }) => (shape === 'circle' ? '100%' : '10px')};
     background: var(--almostTransparent);

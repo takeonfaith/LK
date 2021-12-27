@@ -29,8 +29,6 @@ const useTheme = () => {
         })
     }, [])
 
-    // console.log(document.documentElement.getAttribute('data-theme') ?? 'light')
-
     return { theme, switchTheme }
 }
 

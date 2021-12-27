@@ -1,4 +1,4 @@
-import { Logo, Title } from '@ui/atoms'
+import { Logo } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
 import LoginBlock from './ui/organisms/login-block'
