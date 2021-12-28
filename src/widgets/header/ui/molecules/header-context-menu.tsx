@@ -1,3 +1,4 @@
+import { OLD_LK_URL } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { userModel } from '@entities/user'
 import createFullName from '@features/home/lib/create-full-name'
@@ -113,7 +114,7 @@ const HeaderContextMenu = () => {
                 icon={<FiArrowLeftCircle />}
                 width="100%"
                 align="left"
-                href="https://e.mospolytech.ru/old/index.php"
+                href={`${OLD_LK_URL}/index.php`}
             />
             <Divider />
             <Button

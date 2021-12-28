@@ -1,3 +1,4 @@
+import { OLD_LK_URL } from '@consts'
 import { userModel } from '@entities/user'
 import { LinkButton, Title } from '@ui/atoms'
 import Input from '@ui/atoms/input'
@@ -54,7 +55,7 @@ const LoginBlock = () => {
                 }}
                 background="var(--purple)"
                 width="100%"
-                href="https://e.mospolytech.ru/old/index.php"
+                href={`${OLD_LK_URL}/index.php`}
             />
             <ErrorMessage message={error} />
             <Input value={login} setValue={setLogin} title="Логин" placeholder="Введите логин" />

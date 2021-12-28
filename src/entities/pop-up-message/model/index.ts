@@ -8,10 +8,11 @@ const usePopUpMessage = () => {
 type PopUpMessageType = 'success' | 'failure' | 'info'
 
 interface IPopUpMessage {
-    message: string
+    message: React.ReactNode[] | React.ReactNode | string
     type: PopUpMessageType
     isOpen: boolean
     time?: number
+    onClick?: () => void
 }
 
 const defaultStore: IPopUpMessage = {
@@ -21,16 +22,22 @@ const defaultStore: IPopUpMessage = {
     time: 2000,
 }
 
-const evokePopUpMessage = createEvent<{ message: string; type: PopUpMessageType; time?: number }>()
+const evokePopUpMessage = createEvent<{
+    message: React.ReactNode[] | React.ReactNode | string
+    type: PopUpMessageType
+    time?: number
+    onClick?: () => void
+}>()
 
 const openPopUpMessage = createEvent<{ isOpen: boolean }>()
 
 const $popUpstore = createStore(defaultStore)
-    .on(evokePopUpMessage, (_, { message, type, time = 2000 }) => ({
+    .on(evokePopUpMessage, (_, { message, type, time = 2000, onClick }) => ({
         isOpen: true,
         message,
         type,
         time,
+        onClick,
     }))
     .on(openPopUpMessage, (oldState, { isOpen }) => ({
         ...oldState,

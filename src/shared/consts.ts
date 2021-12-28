@@ -163,3 +163,5 @@ export const GradeByScore: IGrade = {
     Удовлетворительно: 3,
     Неудовлетворительно: 2,
 }
+
+export const OLD_LK_URL = 'https://e.mospolytech.ru/old'

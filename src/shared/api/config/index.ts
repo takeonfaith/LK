@@ -1,6 +1,7 @@
+import { OLD_LK_URL } from '@consts'
 import axios, { AxiosError } from 'axios'
 
-export const API_BASE_URL = 'https://e.mospolytech.ru/old/lk_api.php'
+export const API_BASE_URL = `${OLD_LK_URL}/lk_api.php`
 
 export const $api = axios.create({ baseURL: API_BASE_URL, withCredentials: true })
 

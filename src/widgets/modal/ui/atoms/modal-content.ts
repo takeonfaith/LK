@@ -12,6 +12,22 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
+        padding-top: 15px;
+
+        /* Swipe bar on top */
+
+        /* &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            transform: translateX(-50%);
+            left: 50%;
+            top: 5px;
+            background: var(--almostTransparentOpposite);
+            width: 30px;
+            height: 4px;
+            border-radius: 10px;
+        } */
     }
 
     @media (min-width: 801px) {
@@ -20,6 +36,8 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
 
     @media (max-width: 800px) {
         padding: 10px;
+        padding-top: 15px;
+
         width: 100%;
         height: 80%;
         bottom: 0;

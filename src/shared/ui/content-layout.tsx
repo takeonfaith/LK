@@ -1,13 +1,14 @@
 import PrivateRouter from '@app/routes/private-router'
+import { OLD_LK_URL } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import ConfirmMessage from 'widgets/confirm'
-import PopUpMessage from 'widgets/pop-up-message'
 import { Header, LeftsideBar } from 'widgets'
+import ConfirmMessage from 'widgets/confirm'
 import { Modal } from 'widgets/modal'
+import PopUpMessage from 'widgets/pop-up-message'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -34,10 +35,14 @@ const ContentLayout = () => {
     useTheme()
     useEffect(() => {
         popUpMessageModel.events.evokePopUpMessage({
-            message:
-                'Это новый вариант личного кабинета. Если вы хотите перейти на старый, зайдите в настройки -> общие',
+            message: (
+                <>
+                    Если вы хотите перейти <br /> в старый личный кабинет,{' '}
+                    <a href={`${OLD_LK_URL}/index.php`}>нажмите сюда</a>
+                </>
+            ),
             type: 'info',
-            time: 7000,
+            time: 5000,
         })
     }, [])
 

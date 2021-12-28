@@ -30,7 +30,7 @@ const GlobalStyles = createGlobalStyle`
 		}
 
 		::-webkit-scrollbar-thumb:hover {
-			border: 2px solid transparent;
+			border: 3px solid transparent;
 		}
 	}
 

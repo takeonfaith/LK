@@ -1,3 +1,4 @@
+import { OLD_LK_URL } from '@consts'
 import { Error, LinkButton } from '@ui/atoms'
 import React from 'react'
 
@@ -19,7 +20,7 @@ const PageIsNotReady = ({ oldVersionUrl }: Props) => {
                 }}
                 background="var(--purple)"
                 width="300px"
-                href={`https://e.mospolytech.ru/old/?p=${oldVersionUrl?.slice(1, oldVersionUrl.length)}`}
+                href={`${OLD_LK_URL}/?p=${oldVersionUrl?.slice(1, oldVersionUrl.length)}`}
             />
         </Error>
     )

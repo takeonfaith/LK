@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { GeneralType } from '@consts'
+import { GeneralType, OLD_LK_URL } from '@consts'
 import { useSettings } from '@utils/contexts/settings-context'
 import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 import { Button, LinkButton } from '@ui/atoms'
@@ -23,7 +23,7 @@ const General = () => {
                     localStorage.setItem('useOldVersion', 'true')
                 }}
                 background="var(--purple)"
-                href="https://e.mospolytech.ru/old/index.php"
+                href={`${OLD_LK_URL}/index.php`}
             />
         </>
     )

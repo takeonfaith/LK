@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { popUpMessageModel } from '@entities/pop-up-message'
 import { Colors } from '@consts'
+import { popUpMessageModel } from '@entities/pop-up-message'
+import { Button } from '@ui/atoms'
+import React, { useCallback, useEffect } from 'react'
+import { FiX } from 'react-icons/fi'
+import styled from 'styled-components'
 
-const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string }>`
+const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string; isClickable: boolean }>`
     width: 300px;
     border-radius: var(--brLight);
     background: ${({ color }) => Colors[color].dark};
@@ -16,9 +18,31 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string }>`
     opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
     padding: 10px;
+    padding-right: 30px;
     text-align: left;
     color: ${({ color }) => Colors[color].main};
     font-weight: 600;
+    cursor: ${({ isClickable }) => (isClickable ? 'pointer' : 'normal')};
+
+    a {
+        color: #fff;
+    }
+
+    button {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        background: transparent;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        padding: 5px;
+        color: #fff;
+
+        &:hover {
+            background: #ffffff5c;
+        }
+    }
 
     @media (max-width: 1000px) {
         top: 20px;
@@ -31,7 +55,7 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string }>`
 `
 
 const PopUpMessage = () => {
-    const { isOpen, message, type, time } = popUpMessageModel.selectors.usePopUpMessage()
+    const { isOpen, message, type, time, onClick } = popUpMessageModel.selectors.usePopUpMessage()
 
     useEffect(() => {
         if (isOpen) {
@@ -41,12 +65,21 @@ const PopUpMessage = () => {
         }
     }, [isOpen])
 
+    const handleOnClick = useCallback(() => {
+        if (!!onClick) {
+            onClick()
+            popUpMessageModel.events.openPopUpMessage({ isOpen: !isOpen })
+        }
+    }, [onClick])
+
     return (
         <PopUpMessageWrapper
             isOpen={isOpen}
+            isClickable={!!onClick}
             color={type === 'success' ? 'green' : type === 'info' ? 'darkBlue' : 'red'}
-            onClick={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })}
+            onClick={handleOnClick}
         >
+            <Button onClick={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })} icon={<FiX />} />
             {message}
         </PopUpMessageWrapper>
     )
