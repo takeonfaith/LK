@@ -1,9 +1,10 @@
 import { ISubject } from '@api/model'
-import calcTimeLeft from './calc-time-left'
+import calcTimeLeft from '@utils/calc-time-left'
 
 const calcNextSubjectTime = (lessons: ISubject[]) => {
     const timeToEverySubject = lessons.reduce((acc, lesson) => {
-        if (calcTimeLeft(lesson.timeInterval) > 0) acc.push(calcTimeLeft(lesson.timeInterval))
+        const timeLeft = calcTimeLeft(lesson.timeInterval)
+        if (timeLeft > 0) acc.push(timeLeft)
         return acc
     }, [] as number[])
 

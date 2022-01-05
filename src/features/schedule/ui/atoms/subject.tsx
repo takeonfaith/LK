@@ -1,8 +1,9 @@
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
-import calcTimeLeft from '@features/schedule/lib/calc-time-left'
+import calcTimeLeft from '@utils/calc-time-left'
 import React from 'react'
 import styled from 'styled-components'
-import NextSubject from './next-subject'
+import { useModal } from 'widgets'
+import { Place, SubjectModal, Time, NextSubject } from '.'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean
@@ -10,7 +11,7 @@ const SubjectWrapper = styled.div<{
     color2: string
     darkColor: string
     transparent: string
-    fixedHeight: boolean
+    isFull: boolean
 }>`
     width: 100%;
     background: ${({ isCurrent, color }) =>
@@ -19,8 +20,9 @@ const SubjectWrapper = styled.div<{
     padding: 20px 15px;
     border-radius: 9px;
     scroll-snap-align: center;
-    min-height: ${({ fixedHeight }) => (fixedHeight ? '144.2px' : 'auto')};
+    min-height: ${({ isFull }) => (isFull ? 'fit-content' : '144.2px')};
     height: fit-content;
+    cursor: pointer;
 
     .time-and-place {
         display: flex;
@@ -29,21 +31,6 @@ const SubjectWrapper = styled.div<{
         font-size: 0.7em;
         height: 21px;
         font-weight: bold;
-
-        /* display: flex; */
-
-        .time {
-            padding: 3px 10px;
-            height: 21px;
-            display: flex;
-            align-items: center;
-            background: var(--search);
-            background: ${({ isCurrent, darkColor, color2 }) => (isCurrent ? darkColor : color2)};
-            border-radius: 100px;
-            box-shadow: ${({ transparent }) => `0 0 30px ${transparent}`};
-            color: #fff;
-            white-space: nowrap;
-        }
 
         .place {
             color: var(--text);
@@ -67,6 +54,9 @@ const SubjectWrapper = styled.div<{
 
     .teachers {
         font-size: 0.8em;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .date-interval {
@@ -75,19 +65,12 @@ const SubjectWrapper = styled.div<{
     }
 `
 
-type Props = ISubject & { index: number; isCurrent: boolean; fixedHeight?: boolean; isNext?: boolean }
+type Props = ISubject & { isCurrent: boolean; isNext?: boolean; view?: string }
 
-const Subject = ({
-    timeInterval,
-    name,
-    place,
-    teachers,
-    dateInterval,
-    isCurrent,
-    link,
-    isNext = false,
-    fixedHeight = false,
-}: Props) => {
+const Subject = (props: Props) => {
+    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, view, isNext = false } = props
+    const { toggle } = useModal(<SubjectModal {...props} />)
+
     return (
         <SubjectWrapper
             isCurrent={isCurrent}
@@ -95,18 +78,19 @@ const Subject = ({
             color2={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].lighter}
             darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark}
             transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent}
-            fixedHeight={fixedHeight}
+            isFull={view === 'full'}
+            onClick={() => {
+                toggle()
+            }}
         >
             <div className="time-and-place">
-                <span className="time">{timeInterval}</span>
-                {isNext && <NextSubject timeLeft={calcTimeLeft(timeInterval)} />}
-                {!link ? (
-                    <span className="place"> {place}</span>
-                ) : (
-                    <a href={link} className="place" target="_blank" rel="noreferrer">
-                        {place}
-                    </a>
-                )}
+                <Time
+                    timeInterval={timeInterval}
+                    isCurrent={isCurrent}
+                    differentTimeZone={new Date().getTimezoneOffset() / 60 + 3 !== 0}
+                />
+                <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
+                <Place place={place} link={link} />
             </div>
             <h3>{name}</h3>
             <p className="teachers">

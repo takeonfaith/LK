@@ -1,8 +1,8 @@
+import { ILessons, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
+import { scheduleModel } from '@entities/schedule'
+import { Title } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
-import { scheduleModel } from '@entities/schedule'
-import { ILessons, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
-import { Title } from '@ui/atoms'
 
 const WeekDayButtonWrapper = styled.button<{
     isCurrent: boolean
@@ -90,19 +90,16 @@ type Props = ILessons & {
     isCurrent: boolean
     isChosen: boolean
     index: number
+    onClick: (index: number) => void
 }
 
-const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index }: Props) => {
+const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index, onClick }: Props) => {
     const {
         data: { currentModule },
     } = scheduleModel.selectors.useSchedule()
 
     return !!lessons ? (
-        <WeekDayButtonWrapper
-            isCurrent={isCurrent}
-            isChosen={isChosen}
-            onClick={() => scheduleModel.events.changeCurrentChosenDay({ day: index })}
-        >
+        <WeekDayButtonWrapper isCurrent={isCurrent} isChosen={isChosen} onClick={() => onClick(index)}>
             <Title size={4}>{weekDay}</Title>
             <span className="marker-circles">
                 {currentModule !== '1' &&

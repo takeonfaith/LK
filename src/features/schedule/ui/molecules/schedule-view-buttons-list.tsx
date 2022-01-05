@@ -1,9 +1,8 @@
+import { ViewType } from '@api/model'
+import { Button } from '@ui/atoms'
 import React from 'react'
 import { FiColumns, FiSidebar } from 'react-icons/fi'
 import styled from 'styled-components'
-import { ViewType } from '@api/model'
-import { Button } from '@ui/atoms'
-import Tooltip from '@ui/atoms/tooltip'
 
 const ScheduleViewButtonsListWrapper = styled.div`
     display: flex;

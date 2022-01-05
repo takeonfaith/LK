@@ -4,9 +4,9 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
     background: var(--theme);
     color: var(--text);
     padding: 20px;
-    min-height: 50vh;
+    min-height: 150px;
     max-height: 90vh;
-    border-radius: 29px;
+    border-radius: var(--brSemi);
     transition: 0.2s opacity, 0.2s transform;
     overflow: hidden;
 

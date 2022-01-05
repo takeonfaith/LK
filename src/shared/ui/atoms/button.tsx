@@ -9,6 +9,7 @@ const ButtonWrapper = styled.button<{
     textColor?: string
     shrinkTextInMobile: boolean
     hoverBackground?: string
+    direction: 'horizontal' | 'vertical'
     align?: 'left' | 'center' | 'right'
 }>`
     display: flex;
@@ -24,6 +25,7 @@ const ButtonWrapper = styled.button<{
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;
+    flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);
@@ -43,9 +45,10 @@ const ButtonWrapper = styled.button<{
     }
 
     svg {
-        margin-right: ${({ text }) => (text ? '7px' : '0')};
-        width: 15px;
-        height: 15px;
+        margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')};
+        width: ${({ direction }) => (direction === 'vertical' ? '20px' : '15px')};
+        height: ${({ direction }) => (direction === 'vertical' ? '20px' : '15px')};
+        margin-bottom: ${({ direction }) => direction === 'vertical' && '4px'};
     }
 
     @media (max-width: 1000px) {
@@ -53,9 +56,10 @@ const ButtonWrapper = styled.button<{
         height: 36px;
 
         svg {
-            width: 14px;
-            height: 14px;
-            margin-right: ${({ shrinkTextInMobile, text }) => (shrinkTextInMobile || !text ? '0px' : '7px')};
+            width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
+            height: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
+            margin-right: ${({ shrinkTextInMobile, text, direction }) =>
+                shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};
         }
 
         span {
@@ -75,6 +79,7 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
     shrinkTextInMobile?: boolean
     hoverBackground?: string
     align?: 'left' | 'center' | 'right'
+    direction?: 'horizontal' | 'vertical'
     restProps?: any | unknown
 }
 
@@ -86,9 +91,10 @@ const Button = ({
     background,
     textColor,
     hoverBackground,
-    isChosen = false,
-    shrinkTextInMobile = false,
     align,
+    isChosen = false,
+    direction = 'horizontal',
+    shrinkTextInMobile = false,
     ...restProps
 }: Props) => {
     return (
@@ -102,6 +108,7 @@ const Button = ({
             shrinkTextInMobile={shrinkTextInMobile}
             hoverBackground={hoverBackground}
             align={align}
+            direction={direction}
             {...restProps}
         >
             {!!icon && icon}

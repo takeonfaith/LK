@@ -1,8 +1,9 @@
+import { scheduleApi } from '@api'
+import { IModules, ISchedule, IWeekSchedule, ViewType } from '@api/model'
+import getCurrentDaySubjects from '@entities/schedule/lib/get-current-day-schedule'
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
-import { ILessons, IModules, ISchedule, IWeekSchedule, ViewType } from '@api/model'
-import { scheduleApi } from '@api'
-import getCurrentDaySubjects from '@entities/schedule/lib/get-current-day-schedule'
+import getCurrentDayString from '../lib/get-current-day-string'
 
 const useSchedule = () => {
     return { data: useStore($schedule), loading: useStore(getScheduleFx.pending), error: useStore($schedule).error }
@@ -49,6 +50,7 @@ const store: ISchedule = {
     schedule: null,
     currentModule: '0',
     currentDay: new Date().getDay(),
+    currentDayString: 'sunday',
     currentChosenDay: new Date().getDay(),
     view: 'full',
     error: null,
@@ -62,6 +64,7 @@ const $schedule = createStore<ISchedule>(store)
     .on(getScheduleFx.doneData, (oldData, newData) => ({
         ...oldData,
         schedule: newData,
+        currentDayString: getCurrentDayString(newData, oldData.currentDay),
     }))
     .on(getScheduleFx.failData, (oldData, newData) => ({
         ...oldData,

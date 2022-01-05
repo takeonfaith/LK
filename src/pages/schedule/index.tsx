@@ -1,10 +1,8 @@
 import { IWeekSchedule, ViewType } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
-import { WeekSchedule } from '@features/schedule/ui'
-import ScheduleViewButtonsList from '@features/schedule/ui/molecules/schedule-view-buttons-list'
-import WeekDayButtonsList from '@features/schedule/ui/molecules/week-day-buttons-list'
+import { WeekSchedule, ScheduleViewButtonsList, WeekDayButtonsList } from '@features/schedule/ui'
 import { Wrapper } from '@ui/atoms'
-import React from 'react'
+import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { Slider } from 'widgets'
 
@@ -37,6 +35,8 @@ const SchedulePage = () => {
         error,
     } = scheduleModel.selectors.useSchedule()
 
+    const wrapperRef = useRef<HTMLDivElement>(null)
+
     return (
         <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx()} error={error} data={schedule}>
             {!!schedule ? (
@@ -64,9 +64,10 @@ const SchedulePage = () => {
                         {/*    leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}*/}
                         {/*/>*/}
                     </div>
-                    <WeekDayButtonsList />
+                    <WeekDayButtonsList wrapperRef={wrapperRef} />
                     <WeekSchedule
                         view={view}
+                        wrapperRef={wrapperRef}
                         weekSchedule={
                             schedule[
                                 currentModule.toString() as keyof {

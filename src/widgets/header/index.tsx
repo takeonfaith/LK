@@ -7,11 +7,10 @@ import { HeaderWrapper, UserInfo } from './ui'
 const Header = () => {
     const { width } = useResize()
     const { title } = useCurrentPage()
-
     return (
         <HeaderWrapper>
             <div className="header-button-and-title">
-                {width < 1000 && <MenuButton />}
+                {width <= 1000 && <MenuButton />}
                 <h3>{title}</h3>
             </div>
             <UserInfo />

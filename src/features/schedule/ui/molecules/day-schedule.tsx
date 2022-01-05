@@ -1,6 +1,6 @@
 import { ILessons, ISubject } from '@api/model'
 import calcNextSubjectTime from '@features/schedule/lib/calc-next-subject-time'
-import calcTimeLeft from '@features/schedule/lib/calc-time-left'
+import calcTimeLeft from '@utils/calc-time-left'
 import { Title } from '@ui/atoms'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import useOnScreen from '@utils/hooks/use-on-screen'
@@ -8,9 +8,8 @@ import useResize from '@utils/hooks/use-resize'
 import React, { useEffect, useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import inTimeInterval from '../../lib/in-time-interval'
-import { Subject } from '../atoms'
-import HolidayPlate from '../atoms/holiday-plate'
-import SkeletonLoading from '../atoms/skeleton-loading'
+import { Subject, HolidayPlate, SkeletonLoading } from '../atoms'
+import { scheduleModel } from '@entities/schedule'
 
 type Props = ILessons & {
     weekDay?: string
@@ -19,7 +18,6 @@ type Props = ILessons & {
     width?: number
     height?: number
     index: number
-    fixedHeight?: boolean
 }
 
 const findOpacity = (isCurrent: boolean, isFull: boolean, isVisible: boolean) => {
@@ -106,17 +104,12 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number }>`
     }
 `
 
-const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHeight = false }: Props) => {
+const DaySchedule = ({ lessons, weekDay, isCurrent, view, index, width, height }: Props) => {
     const dayRef = useRef<null | HTMLDivElement>(null)
     const isOnScreen = useOnScreen(dayRef)
     const { height: screenHeight } = useResize()
 
     const nextSubjectTime = useMemo(() => calcNextSubjectTime(lessons ?? []), [lessons])
-
-    // useEffect(() => {
-    //     if (isOnScreen && (index === data.currentChosenDay + 1 || index === data.currentChosenDay - 1))
-    //         scheduleModel.events.changeCurrentChosenDay({ day: index })
-    // }, [isOnScreen])
 
     useEffect(() => {
         if (dayRef?.current) {
@@ -124,7 +117,7 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHe
                 lessons?.findIndex(
                     (lesson) =>
                         inTimeInterval(lesson.timeInterval) ||
-                        (calcTimeLeft(lesson.timeInterval) < 60 && calcTimeLeft(lesson.timeInterval) > 0),
+                        calcNextSubjectTime(lessons) === calcTimeLeft(lesson.timeInterval),
                 ) ?? -1
             if (isCurrent && currentLessonIndex !== -1) {
                 dayRef.current.scrollTop = currentLessonIndex * 150
@@ -164,9 +157,8 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, fixedHe
                             <Subject
                                 {...subject}
                                 key={index}
-                                index={index}
+                                view={view}
                                 isCurrent={(isCurrent && inTimeInterval(subject.timeInterval)) ?? false}
-                                fixedHeight={fixedHeight}
                                 isNext={isCurrent && nextSubjectTime === calcTimeLeft(subject.timeInterval)}
                             />
                         )

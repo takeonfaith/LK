@@ -2,7 +2,7 @@ import { IWeekSchedule } from '@api/model'
 import { IWeekDays, WeekDays } from '@consts'
 import { scheduleModel } from '@entities/schedule'
 import useResize from '@utils/hooks/use-resize'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { DaySchedule } from '../molecules'
 
@@ -28,13 +28,13 @@ const ScheduleWrapper = styled.div<{ isFull: boolean }>`
 interface Props {
     weekSchedule: IWeekSchedule
     view: string
+    wrapperRef?: React.RefObject<HTMLDivElement>
 }
 
-const WeekSchedule = ({ weekSchedule, view }: Props) => {
+const WeekSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
     const {
-        data: { currentDay, currentChosenDay },
+        data: { currentDay },
     } = scheduleModel.selectors.useSchedule()
-    const wrapperRef = useRef<HTMLDivElement>(null)
     const { width } = useResize()
 
     useEffect(() => {
@@ -45,18 +45,18 @@ const WeekSchedule = ({ weekSchedule, view }: Props) => {
         }, 200)
     }, [view])
 
-    useEffect(() => {
+    const handleScroll = () => {
         if (wrapperRef?.current) {
             if (width <= 1000) {
-                wrapperRef.current.scrollLeft = (currentChosenDay * width * currentChosenDay) / 6
-            } else {
-                wrapperRef.current.scrollLeft = currentChosenDay * 400 - 360
+                scheduleModel.events.changeCurrentChosenDay({
+                    day: Math.floor((wrapperRef.current.scrollLeft * 1.2) / width) + 1,
+                })
             }
         }
-    }, [currentChosenDay, wrapperRef?.current])
+    }
 
     return (
-        <ScheduleWrapper isFull={view === 'full'} ref={wrapperRef}>
+        <ScheduleWrapper isFull={view === 'full'} ref={wrapperRef} onScroll={handleScroll}>
             {Object.keys(weekSchedule).map((day, index) => (
                 <DaySchedule
                     key={index}

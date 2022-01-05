@@ -1,8 +1,8 @@
 import { Colors } from '@consts'
-import { Button, Title } from '@ui/atoms'
+import { Button } from '@ui/atoms'
+import localizeDate from '@utils/localize-date'
 import React from 'react'
 import styled from 'styled-components'
-import localizeDate from '@utils/localize-date'
 import { SliderPage, useModal } from 'widgets'
 import QrCode from '../atoms/qr-code'
 
@@ -33,11 +33,9 @@ interface Props {
     sum: number
     allPayments: number
     balanceCurrDate: number
-    qr_current: string
-    qr_total: string
 }
 
-const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate, qr_total, qr_current }: Props) => {
+const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: Props) => {
     const { toggle } = useModal(
         <SliderPage
             pages={[

@@ -1,6 +1,8 @@
 const inTimeInterval = (timeInterval: string) => {
     const currentTime = new Date()
 
+    const timeZone = currentTime.getTimezoneOffset() / 60 + 3
+
     const [startTime, endTime] = timeInterval.split(' - ')
     let pieces = startTime.split(':')
     const startHour = parseInt(pieces[0])
@@ -8,8 +10,8 @@ const inTimeInterval = (timeInterval: string) => {
     pieces = endTime.split(':')
     const endHour = parseInt(pieces[0], 10)
     const endMinute = parseInt(pieces[1], 10)
-    if (currentTime.getHours() * 60 + currentTime.getMinutes() >= startHour * 60 + startMinute) {
-        if (currentTime.getHours() * 60 + currentTime.getMinutes() <= endHour * 60 + endMinute) {
+    if ((currentTime.getHours() + timeZone) * 60 + currentTime.getMinutes() >= startHour * 60 + startMinute) {
+        if ((currentTime.getHours() + timeZone) * 60 + currentTime.getMinutes() <= endHour * 60 + endMinute) {
             return true
         }
     }

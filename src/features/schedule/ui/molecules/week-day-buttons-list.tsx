@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import styled from 'styled-components'
 import { WeekDayButton } from '..'
 import { scheduleModel } from '@entities/schedule'
@@ -26,12 +26,31 @@ const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
     }
 `
 
-const WeekDayButtonsList = () => {
+interface Props {
+    wrapperRef: React.RefObject<HTMLDivElement>
+}
+
+const WeekDayButtonsList = ({ wrapperRef }: Props) => {
     const {
         data: { schedule, currentModule, currentChosenDay, currentDay, view },
     } = scheduleModel.selectors.useSchedule()
     const { width } = useResize()
     const isFull = useMemo(() => (width > 1000 ? view === 'full' : true), [width, view])
+
+    const handleClick = (index: number) => {
+        if (wrapperRef?.current) {
+            if (width <= 1000) {
+                wrapperRef.current.scrollLeft = (index * width * index) / 6
+            } else {
+                scheduleModel.events.changeCurrentChosenDay({ day: index })
+                wrapperRef.current.scrollLeft = index * 400 - 360
+            }
+        }
+    }
+
+    useEffect(() => {
+        handleClick(currentChosenDay)
+    }, [wrapperRef?.current])
 
     return (
         <WeekDayButtonsListWrapper isFull={isFull}>
@@ -39,12 +58,13 @@ const WeekDayButtonsList = () => {
                 Object.keys(WeekDays).map((day, index) => {
                     return (
                         <WeekDayButton
-                            key={index}
+                            key={day}
                             weekDay={WeekDays[day as keyof IWeekDays].short}
                             lessons={schedule[currentModule][day as keyof IWeekDays].lessons}
                             isCurrent={currentDay === index + 1}
                             isChosen={currentChosenDay === index + 1}
                             index={index + 1}
+                            onClick={handleClick}
                         />
                     )
                 })}

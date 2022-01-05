@@ -16,10 +16,13 @@ const NextSubjectWrapper = styled.div`
 
 interface Props {
     timeLeft: number
+    isNext: boolean
 }
 
-const NextSubject = ({ timeLeft }: Props) => {
-    return <NextSubjectWrapper>через {`${Math.floor(timeLeft / 60)}ч.${timeLeft % 60}мин.`}</NextSubjectWrapper>
+const NextSubject = ({ timeLeft, isNext }: Props) => {
+    return isNext ? (
+        <NextSubjectWrapper>через {`${Math.floor(timeLeft / 60)}ч.${timeLeft % 60}мин.`}</NextSubjectWrapper>
+    ) : null
 }
 
 export default NextSubject

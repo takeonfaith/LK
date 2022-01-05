@@ -45,7 +45,7 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
         width: 100%;
         height: 100%;
         min-width: calc(100% / ${({ size }) => size});
-        padding: 10px 5px;
+        padding: 10px 15px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -55,6 +55,12 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
         cursor: pointer;
         user-select: none;
         color: var(--text);
+
+        & > b {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
 
         &:hover {
             filter: brightness(0.8);
