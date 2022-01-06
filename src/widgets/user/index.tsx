@@ -40,10 +40,10 @@ interface Props {
 }
 
 const User = ({ type, avatar, name, loading = false }: Props) => {
-    const { toggle } = useModal(<TeacherModal avatar={avatar} name={name} />)
+    const { open } = useModal()
 
     return !loading ? (
-        <UserWrapper onClick={() => type === 'teacher' && toggle()}>
+        <UserWrapper onClick={() => type === 'teacher' && open(<TeacherModal avatar={avatar} name={name} />)}>
             <Avatar avatar={avatar} width="30px" height="30px" marginRight="7px" />
             <div className="name-and-status">
                 <span className="name">{name}</span>

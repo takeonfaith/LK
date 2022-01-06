@@ -1,22 +1,23 @@
-import React, { useState, useCallback, createContext, useMemo } from 'react'
+import React, { useState, useCallback, createContext, useMemo, useEffect } from 'react'
 
 export const Context = createContext<ModalContext>({
     isOpen: false,
     component: undefined,
-    toggle: () => {},
+    //  toggle: () => {},
     back: () => {},
     close: () => {},
     open: () => {},
+    canBack: false,
 })
 
 export interface ModalContext {
     isOpen: boolean
     component: React.ReactElement<any, any> | undefined
-    toggle: (event?: any) => void
     setComponent?: (Component: React.ReactElement<any, any> | undefined) => void
     back: () => void
     open: (Component: React.ReactElement<any, any> | undefined) => void
     close: () => void
+    canBack: boolean
 }
 
 interface Props {
@@ -27,14 +28,7 @@ export const ModalProvider = ({ children }: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [openModals, setOpenModals] = useState<React.ReactElement<any, any>[]>([])
 
-    const canBack = openModals.length > 0
-
-    const toggle = useCallback(() => {
-        if (isOpen) {
-            setOpenModals([])
-        }
-        setIsOpen((prev) => !prev)
-    }, [setIsOpen])
+    const canBack = openModals.length > 1
 
     const back = useCallback(() => {
         if (canBack) {
@@ -46,15 +40,18 @@ export const ModalProvider = ({ children }: Props) => {
     const open = useCallback(
         (Component: React.ReactElement<any, any> | undefined) => {
             if (Component) {
-                setOpenModals([...openModals, Component])
+                if (!isOpen) {
+                    setOpenModals(() => [Component])
+                } else {
+                    setOpenModals(() => [...openModals, Component])
+                }
                 setIsOpen(() => true)
             }
         },
-        [setOpenModals, setIsOpen],
+        [setOpenModals, setIsOpen, openModals, isOpen],
     )
 
     const close = useCallback(() => {
-        setOpenModals([])
         setIsOpen(() => false)
     }, [setOpenModals, setIsOpen])
 
@@ -66,6 +63,10 @@ export const ModalProvider = ({ children }: Props) => {
         }
     }, [])
 
+    console.log({
+        openModals,
+        canBack,
+    })
     return (
         <Context.Provider
             value={{
@@ -73,7 +74,7 @@ export const ModalProvider = ({ children }: Props) => {
                 open,
                 close,
                 isOpen,
-                toggle,
+                canBack,
                 component,
                 setComponent,
             }}
