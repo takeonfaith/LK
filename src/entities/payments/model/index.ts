@@ -125,7 +125,7 @@ const getPaymentsFx = createEffect(async (): Promise<Payments> => {
 })
 
 const $paymentsStore = createStore<PaymentsStore>({ payments: null, error: null })
-    .on(getPaymentsFx, (oldData, _) => ({
+    .on(getPaymentsFx, (oldData) => ({
         ...oldData,
         error: null,
     }))

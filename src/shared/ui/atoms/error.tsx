@@ -28,6 +28,7 @@ interface Props {
     text: string
     children?: React.ReactNode[] | React.ReactNode | string | null
 }
+
 const Error = ({ text, children }: Props) => {
     return (
         <Container>

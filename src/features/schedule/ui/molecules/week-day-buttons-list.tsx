@@ -41,7 +41,7 @@ const WeekDayButtonsList = () => {
                         <WeekDayButton
                             key={index}
                             weekDay={WeekDays[day as keyof IWeekDays].short}
-                            lessons={schedule[currentModule][day as keyof IWeekDays].lessons}
+                            lessons={schedule[currentModule][day as keyof IWeekDays]?.lessons}
                             isCurrent={currentDay === index + 1}
                             isChosen={currentChosenDay === index + 1}
                             index={index + 1}
