@@ -1,6 +1,6 @@
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
-import { ILessons, IModules, ISchedule, IWeekSchedule, ViewType } from '@api/model'
+import { IModules, ISchedule, IWeekSchedule, ViewType } from '@api/model'
 import { scheduleApi } from '@api'
 import getCurrentDaySubjects from '@entities/schedule/lib/get-current-day-schedule'
 
@@ -55,7 +55,7 @@ const store: ISchedule = {
 }
 
 const $schedule = createStore<ISchedule>(store)
-    .on(getScheduleFx, (oldData, _) => ({
+    .on(getScheduleFx, (oldData) => ({
         ...oldData,
         error: null,
     }))

@@ -1,7 +1,6 @@
 import { ISubject } from '@api/model'
 import { Months } from '@utility-types/months'
 import getDateWithoutTime from '@utils/get-date-without-time'
-import localizeDate from '@utils/localize-date'
 
 const currentDate = new Date()
 
