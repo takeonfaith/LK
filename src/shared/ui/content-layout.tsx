@@ -7,8 +7,10 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Header, LeftsideBar } from 'widgets'
 import ConfirmMessage from 'widgets/confirm'
-import { Modal } from 'widgets/modal'
+import { useModal } from 'widgets'
 import PopUpMessage from 'widgets/pop-up-message'
+import WhatsNew from 'widgets/whats-new'
+import { Modal } from 'widgets/modal'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -32,6 +34,7 @@ const ContentWrapper = styled.div`
 
 const ContentLayout = () => {
     const { height } = useResize()
+    const { toggle } = useModal(<WhatsNew />)
     useTheme()
     useEffect(() => {
         popUpMessageModel.events.evokePopUpMessage({
@@ -44,6 +47,7 @@ const ContentLayout = () => {
             type: 'info',
             time: 5000,
         })
+        toggle()
     }, [])
 
     return (

@@ -1,11 +1,11 @@
-import React from 'react'
+import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
 import ShortCutLinks from '@features/home/ui/organisms/short-cut-links'
 import UserInfo from '@features/home/ui/organisms/user-info'
 import { Wrapper } from '@ui/atoms'
+import React from 'react'
 import { Content } from './ui/atoms/content'
-import { scheduleModel } from '@entities/schedule'
 
 const Home = () => {
     const {

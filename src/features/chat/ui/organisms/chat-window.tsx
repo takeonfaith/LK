@@ -1,4 +1,3 @@
-import { Logo } from '@ui/atoms'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router'
 import styled from 'styled-components'

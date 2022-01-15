@@ -9,7 +9,7 @@ import TopDate from '../atoms/top-date'
 
 const MessageListWrapper = styled.div`
     padding: 20px 5px;
-    height: 100%;
+    min-height: 100%;
 
     .messages-section {
         position: relative;

@@ -60,8 +60,8 @@ const Messages = ({ loading }: Props) => {
             sender: 'Kostya Doloz',
             sentTime: 'January 5, 2022 21:12',
         },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 5, 2022 21:12' },
+        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
+        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
         {
             message: 'TestTestTestTestTestTest',
             sender: 'Kostya Doloz',
