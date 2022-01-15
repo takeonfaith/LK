@@ -3,6 +3,7 @@ import { DotPages } from '@ui/molecules'
 import limitNumber from '@utils/limit-number'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { useModal } from 'widgets'
 
 const WhatsNewWrapper = styled.div`
     display: flex;
@@ -33,6 +34,7 @@ const WhatsNewWrapper = styled.div`
 
 const WhatsNew = () => {
     const [currentPage, setCurrentPage] = useState(0)
+    const { close } = useModal()
 
     return (
         <WhatsNewWrapper>
@@ -42,7 +44,7 @@ const WhatsNew = () => {
             <div className="buttons">
                 <Button onClick={() => setCurrentPage((prev) => limitNumber(prev - 1, 3))} text="Назад" width="100%" />
                 {currentPage === 3 ? (
-                    <Button onClick={() => null} text="Готово" width="100%" />
+                    <Button onClick={close} text="Готово" width="100%" />
                 ) : (
                     <Button
                         onClick={() => setCurrentPage((prev) => limitNumber(prev + 1, 3))}

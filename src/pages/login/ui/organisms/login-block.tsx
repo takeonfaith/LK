@@ -3,6 +3,7 @@ import { userModel } from '@entities/user'
 import { LinkButton, Title } from '@ui/atoms'
 import Input from '@ui/atoms/input'
 import SubmitButton from '@ui/atoms/submit-button'
+import useTheme from '@utils/hooks/use-theme'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import ErrorMessage from '../atoms/error-message'
@@ -32,6 +33,7 @@ const LoginBlock = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const loginFunc = userModel.events.login
+    useTheme()
     const { loading, error } = userModel.selectors.useUser()
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {

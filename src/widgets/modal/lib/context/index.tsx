@@ -63,10 +63,6 @@ export const ModalProvider = ({ children }: Props) => {
         }
     }, [])
 
-    console.log({
-        openModals,
-        canBack,
-    })
     return (
         <Context.Provider
             value={{
