@@ -18,14 +18,11 @@ interface Props {
 function UserInfo({ user }: Props) {
     const { avatar, status, course, birthday, subdivisions, ...params } = user
 
-    const { toggle } = useModal(<MoreUserInfo user={user} />)
+    const { open } = useModal()
 
-    const handleNodel = useCallback(
-        (e) => {
-            toggle(e)
-        },
-        [toggle],
-    )
+    const handleNodel = useCallback(() => {
+        open(<MoreUserInfo user={user} />)
+    }, [open])
 
     return (
         <Section>

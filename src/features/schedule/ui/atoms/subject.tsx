@@ -69,7 +69,7 @@ type Props = ISubject & { isCurrent: boolean; isNext?: boolean; view?: string }
 
 const Subject = (props: Props) => {
     const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, view, isNext = false } = props
-    const { toggle } = useModal(<SubjectModal {...props} />)
+    const { open } = useModal()
 
     return (
         <SubjectWrapper
@@ -79,9 +79,7 @@ const Subject = (props: Props) => {
             darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark}
             transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent}
             isFull={view === 'full'}
-            onClick={() => {
-                toggle()
-            }}
+            onClick={() => open(<SubjectModal {...props} />)}
         >
             <div className="time-and-place">
                 <Time

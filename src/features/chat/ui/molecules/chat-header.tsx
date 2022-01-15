@@ -31,7 +31,7 @@ const ChatHeader = ({ avatar, name, loading }: Props) => {
     const [openMenu, setOpenMenu] = useState(false)
     const menuRef = useRef<HTMLDivElement>(null)
     const [searchMode, setSearchMode] = useState(false)
-    const { toggle } = useModal(<Attachments />)
+    const { open } = useModal()
     const history = useHistory()
     useOnClickOutside(menuRef, () => setOpenMenu(false))
 
@@ -73,7 +73,7 @@ const ChatHeader = ({ avatar, name, loading }: Props) => {
                 <Button
                     icon={<ImAttachment />}
                     text={'Вложения'}
-                    onClick={toggle}
+                    onClick={() => open(<Attachments />)}
                     width="100%"
                     align="left"
                     background="transparent"

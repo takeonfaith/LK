@@ -69,7 +69,7 @@ const HeaderContextMenu = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { toggle } = useModal(<SettingsPage currentPage={3} />)
+    const { open } = useModal()
 
     const { theme, switchTheme } = useTheme()
     const [toggles, setToggles] = useState<ToggleItem[]>([
@@ -99,7 +99,12 @@ const HeaderContextMenu = () => {
                 </div>
 
                 <div className="buttons">
-                    <Button icon={<FiEdit2 />} onClick={toggle} text="Изменить" shrinkTextInMobile />
+                    <Button
+                        icon={<FiEdit2 />}
+                        onClick={() => open(<SettingsPage currentPage={3} />)}
+                        text="Изменить"
+                        shrinkTextInMobile
+                    />
                     {/* <Button icon={<FiCreditCard />} onClick={() => null} text="Оплатить" /> */}
                 </div>
             </div>

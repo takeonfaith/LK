@@ -3,20 +3,23 @@ import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import useCoreModal from '../lib/hooks/use-core-modal'
 import ModalContent from './atoms/modal-content'
 import ModalWrapper from './atoms/modal-wrapper'
+import { Button } from '@ui/atoms'
+import { FiChevronLeft } from 'react-icons/fi'
 
 const Modal = () => {
-    const { isOpen, component: Component, toggle } = useCoreModal()
+    const { isOpen, component: Component, canBack, back, close } = useCoreModal()
     const ref = useRef(null)
     const isValid = useMemo(() => isOpen && !!Component, [isOpen, Component])
 
-    useOnClickOutside(ref, (event: any) => {
-        if (isValid) toggle(event)
+    useOnClickOutside(ref, () => {
+        close()
     })
 
     return (
         <ModalWrapper isOpen={isValid}>
             <ModalContent isOpen={isValid} ref={ref}>
-                {Component}
+                {canBack && <Button onClick={back} icon={<FiChevronLeft />} text="Назад" />}
+                <>{Component}</>
             </ModalContent>
         </ModalWrapper>
     )
