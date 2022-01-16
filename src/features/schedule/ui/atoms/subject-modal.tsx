@@ -4,7 +4,8 @@ import calcTimeLeft from '@utils/calc-time-left'
 import React from 'react'
 import styled from 'styled-components'
 import { User } from 'widgets'
-import { NextSubject, Time, PlaceModal } from '.'
+import { SubjectPlaceBlock } from '..'
+import { NextSubject, Time } from '../atoms'
 
 const SubjectModalWrapper = styled.div`
     @media (min-width: 1001px) {
@@ -43,6 +44,7 @@ type Props = ISubject & { isCurrent: boolean; isNext?: boolean }
 
 const SubjectModal = (props: Props) => {
     const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, isNext = false } = props
+
     return (
         <SubjectModalWrapper>
             <span className="date-interval">{dateInterval}</span>
@@ -53,16 +55,22 @@ const SubjectModal = (props: Props) => {
                 <Time timeInterval={timeInterval} isCurrent={isCurrent} />
                 <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
             </div>
-            <PlaceModal place={place} link={link} />
+            <SubjectPlaceBlock place={place} link={link} name={name} />
             <Divider margin="20px auto" />
-            <Title size={4} align="left" bottomGap>
-                Преподаватели
-            </Title>
-            <div className="teachers">
-                {teachers.map((teacher) => {
-                    return <User type={'teacher'} name={teacher} key={teacher} />
-                })}
-            </div>
+
+            {!!teachers[0].length && (
+                <>
+                    <Title size={4} align="left" bottomGap>
+                        Преподаватели
+                    </Title>
+
+                    <div className="teachers">
+                        {teachers.map((teacher) => {
+                            return <User type={'teacher'} name={teacher} key={teacher} />
+                        })}
+                    </div>
+                </>
+            )}
         </SubjectModalWrapper>
     )
 }

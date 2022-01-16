@@ -67,11 +67,12 @@ export const privateRoutes: IRoutes = {
         isTemplate: false,
     },
     1: {
+        //ChatPage
         id: 1,
         title: 'Сообщения',
         icon: BiMessageRounded,
         path: MESSAGES_ROUTE,
-        Component: ChatPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/messages' }),
         isTemplate: true,
     },
     2: {

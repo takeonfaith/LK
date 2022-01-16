@@ -1,9 +1,8 @@
-import React, { useState, useCallback, createContext, useMemo, useEffect } from 'react'
+import React, { createContext, useCallback, useMemo, useState } from 'react'
 
 export const Context = createContext<ModalContext>({
     isOpen: false,
     component: undefined,
-    //  toggle: () => {},
     back: () => {},
     close: () => {},
     open: () => {},

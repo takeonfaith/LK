@@ -1,12 +1,13 @@
-import { IWeekSchedule } from '@api/model'
-import { IWeekDays, WeekDays } from '@consts'
+import { ISessionSchedule } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
-import displayTopInfo from '@features/schedule/lib/display-top-info'
+import getSessionStats from '@features/schedule/lib/get-session-stats'
 import useResize from '@utils/hooks/use-resize'
+import localizeDate from '@utils/localize-date'
 import React, { memo, useEffect } from 'react'
-import styled from 'styled-components'
-import { DaySchedule } from '../molecules'
 import ScrollContainer from 'react-indiana-drag-scroll'
+import styled from 'styled-components'
+import { DaySchedule } from '..'
+import DaysTillExam from '../molecules/days-till-exam'
 
 const ScheduleWrapper = styled(ScrollContainer)<{ isFull: boolean }>`
     display: flex;
@@ -28,21 +29,22 @@ const ScheduleWrapper = styled(ScrollContainer)<{ isFull: boolean }>`
 `
 
 interface Props {
-    weekSchedule: IWeekSchedule | null
+    weekSchedule: ISessionSchedule | null
     view: string
     wrapperRef?: React.RefObject<HTMLDivElement>
 }
 
-const WeekSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
+const SessionSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
     const {
-        data: { currentDay },
+        data: { schedule, currentDay },
     } = scheduleModel.selectors.useSchedule()
+    const realCurrentDay = !!schedule && !!schedule['0'] ? -1 : currentDay
     const { width } = useResize()
 
     useEffect(() => {
         setTimeout(() => {
             if (wrapperRef?.current && view === 'big') {
-                wrapperRef.current.scrollLeft = currentDay * 400 - 360
+                wrapperRef.current.scrollLeft = realCurrentDay * 400 - 360
             }
         }, 200)
     }, [view])
@@ -51,7 +53,7 @@ const WeekSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
         if (wrapperRef?.current) {
             if (width <= 1000) {
                 scheduleModel.events.changeCurrentChosenDay({
-                    day: Math.floor((wrapperRef.current.scrollLeft * 1.2) / width) + 1,
+                    day: Math.floor((wrapperRef.current.scrollLeft * 1.1) / width) + 1,
                 })
             }
         }
@@ -60,19 +62,21 @@ const WeekSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
     return (
         weekSchedule && (
             <ScheduleWrapper isFull={view === 'full'} innerRef={wrapperRef} onScroll={handleScroll}>
-                {Object.keys(weekSchedule).map((day, index) => (
-                    <DaySchedule
-                        key={index}
-                        isCurrent={currentDay === index + 1}
-                        weekDay={WeekDays[day as keyof IWeekDays].full}
-                        lessons={weekSchedule[day as keyof IWeekDays].lessons}
-                        view={view}
-                        topInfo={displayTopInfo(weekSchedule, day as keyof IWeekDays)}
-                    />
-                ))}
+                {Object.keys(weekSchedule).map((day, index) => {
+                    return (
+                        <DaySchedule
+                            key={index}
+                            isCurrent={localizeDate(new Date(), 'weird') === day}
+                            weekDay={localizeDate(day, 'short')}
+                            lessons={weekSchedule[day as keyof ISessionSchedule].lessons}
+                            view={view}
+                            topInfo={<DaysTillExam day={day} />}
+                        />
+                    )
+                })}
             </ScheduleWrapper>
         )
     )
 }
 
-export default memo(WeekSchedule)
+export default memo(SessionSchedule)

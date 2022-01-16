@@ -11,6 +11,7 @@ const ButtonWrapper = styled.button<{
     hoverBackground?: string
     direction: 'horizontal' | 'vertical'
     align?: 'left' | 'center' | 'right'
+    active: boolean
 }>`
     display: flex;
     align-items: center;
@@ -26,6 +27,7 @@ const ButtonWrapper = styled.button<{
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;
     flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
+    opacity: ${({ active }) => (active ? 1 : 0.5)};
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);
@@ -80,6 +82,7 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
     hoverBackground?: string
     align?: 'left' | 'center' | 'right'
     direction?: 'horizontal' | 'vertical'
+    active?: boolean
     restProps?: any | unknown
 }
 
@@ -95,12 +98,13 @@ const Button = ({
     isChosen = false,
     direction = 'horizontal',
     shrinkTextInMobile = false,
+    active = true,
     ...restProps
 }: Props) => {
     return (
         <ButtonWrapper
             text={!!text}
-            onClick={onClick}
+            onClick={(e) => active && onClick(e)}
             isChosen={isChosen}
             width={width}
             background={background}
@@ -109,6 +113,7 @@ const Button = ({
             hoverBackground={hoverBackground}
             align={align}
             direction={direction}
+            active={active}
             {...restProps}
         >
             {!!icon && icon}

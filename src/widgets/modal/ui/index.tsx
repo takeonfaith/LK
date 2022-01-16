@@ -5,6 +5,7 @@ import ModalContent from './atoms/modal-content'
 import ModalWrapper from './atoms/modal-wrapper'
 import { Button } from '@ui/atoms'
 import { FiChevronLeft } from 'react-icons/fi'
+import { Colors } from '@consts'
 
 const Modal = () => {
     const { isOpen, component: Component, canBack, back, close } = useCoreModal()
@@ -18,7 +19,15 @@ const Modal = () => {
     return (
         <ModalWrapper isOpen={isValid}>
             <ModalContent isOpen={isValid} ref={ref}>
-                {canBack && <Button onClick={back} icon={<FiChevronLeft />} text="Назад" />}
+                {canBack && (
+                    <Button
+                        onClick={back}
+                        icon={<FiChevronLeft />}
+                        text="Назад"
+                        background="transparent"
+                        textColor={Colors.blue.main}
+                    />
+                )}
                 <>{Component}</>
             </ModalContent>
         </ModalWrapper>

@@ -30,16 +30,21 @@ export interface IWeekSchedule {
     saturday: ILessons
 }
 
+export interface ISessionSchedule {
+    [key: string]: ILessons
+}
+
 export interface IModules {
-    '0': IWeekSchedule
-    '1': IWeekSchedule
+    '0': IWeekSchedule | null
+    '1': IWeekSchedule | null
+    '2': ISessionSchedule | null
 }
 
 export type ViewType = 'full' | 'big'
 
 export interface ISchedule {
     schedule: IModules | null
-    currentModule: '0' | '1'
+    currentModule: '0' | '1' | '2'
     currentDay: number
     currentDayString: string
     currentChosenDay: number
