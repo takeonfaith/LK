@@ -64,7 +64,7 @@ const store: ISchedule = {
 }
 
 const $schedule = createStore<ISchedule>(store)
-    .on(getScheduleFx, (oldData, _) => ({
+    .on(getScheduleFx, (oldData) => ({
         ...oldData,
         error: null,
     }))

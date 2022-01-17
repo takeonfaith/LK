@@ -18,7 +18,6 @@ import PaymentsPage from '../../pages/payments'
 import AcadPerformance from '../../pages/acad-performance'
 import { IconType } from 'react-icons/lib'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import ChatPage from '@pages/chat'
 
 export const HOME_ROUTE = '/home'
 export const MESSAGES_ROUTE = '/messages'
