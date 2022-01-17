@@ -1,35 +1,24 @@
-import React, { useMemo } from 'react'
 import { scheduleModel } from '@entities/schedule'
-import { IWeekSchedule } from '@api/model'
+import getLessons from '@features/home/lib/get-lessons'
+import React, { useMemo } from 'react'
 import { DaySchedule } from '../../../schedule/ui'
 import { Section } from '../atoms/section'
 
 const ScheduleAndNotification = () => {
     const {
-        data: { schedule, currentDay },
+        data: { schedule, currentDayString },
     } = scheduleModel.selectors.useSchedule()
-    const currentStringDay = useMemo(
-        () => (!!schedule && Object.keys(schedule['0']).find((_, index) => index + 1 === currentDay)) || 'sunday',
-        [currentDay, schedule],
-    )
 
-    const lessons = useMemo(
-        () =>
-            !!schedule &&
-            !!schedule['0'][currentStringDay as keyof IWeekSchedule] &&
-            schedule['0'][currentStringDay as keyof IWeekSchedule].lessons,
-        [schedule],
-    )
+    const lessons = useMemo(() => getLessons(schedule, currentDayString), [schedule])
 
     return (
         <Section>
             <DaySchedule
-                lessons={currentStringDay === 'sunday' ? [] : lessons || null}
+                lessons={currentDayString === 'sunday' ? [] : lessons || null}
                 width={400}
                 height={156}
                 isCurrent
-                index={0}
-                fixedHeight
+                topInfo=""
             />
         </Section>
     )

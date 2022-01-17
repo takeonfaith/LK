@@ -10,13 +10,15 @@ const useCurrentPage = () => {
     const currentRoute = !data.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
 
     const [currentPage, setCurrentPage] = useState<IRoute>(
-        Object.values(currentRoute).find((link: IRoute) => link.path === history.location.pathname) ?? currentRoute[0],
+        Object.values(currentRoute).find((link: IRoute) => history.location.pathname.includes(link.path)) ??
+            currentRoute[0],
     )
 
     useEffect(() => {
         return history.listen((location) => {
             setCurrentPage(
-                Object.values(currentRoute).find((link: IRoute) => link.path === location.pathname) ?? currentRoute[0],
+                Object.values(currentRoute).find((link: IRoute) => location.pathname.includes(link.path)) ??
+                    currentRoute[0],
             )
         })
     }, [history, data?.user?.subdivisions])

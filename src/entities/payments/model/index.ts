@@ -1,7 +1,7 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
-import { createEffect, createStore } from 'effector'
-import { useStore } from 'effector-react'
+import { createEffect, createStore } from 'effector/compat'
+import { useStore } from 'effector-react/compat'
 
 // const mock: Payments = {
 //     bachelor: {

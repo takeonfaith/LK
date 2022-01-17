@@ -6,20 +6,34 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "scripts": {
-    "clean": "rm dist/bundle.js",
     "build-dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "webpack serve --hot --mode development"
+    "start": "webpack serve --hot --mode development",
+    "start-prod": "webpack serve --hot --mode production"
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "core-js": "^3.20.3",
     "effector": "^22.1.2",
     "effector-react": "^22.0.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.13.0",
     "react-icons": "^4.3.1",
+    "react-indiana-drag-scroll": "^2.1.0",
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
     "styled-components": "^5.3.3"
@@ -30,6 +44,7 @@
     "@babel/preset-react": "^7.16.7",
     "@hot-loader/react-dom": "^17.0.1+4.13.0",
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
+    "@types/promise-polyfill": "^6.0.4",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/react-router": "^5.1.17",
@@ -38,6 +53,7 @@
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "babel-loader": "^8.2.3",
+    "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^2.0.2",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",

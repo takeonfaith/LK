@@ -5,3 +5,8 @@ export const get = () => {
     const token = JSON.parse(localStorage.getItem('token') ?? 'null')?.token
     return $api.get(`?getSchedule&token=${token}`)
 }
+
+export const getSession = () => {
+    const token = JSON.parse(localStorage.getItem('token') ?? 'null')?.token
+    return $api.get(`?getSchedule&session=1&token=${token}`)
+}

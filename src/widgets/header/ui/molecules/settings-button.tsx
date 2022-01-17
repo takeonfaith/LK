@@ -6,13 +6,13 @@ import React from 'react'
 import { useModal } from 'widgets/modal/lib'
 
 const SettingsButton = () => {
-    const { toggle } = useModal(<SettingsPage />)
+    const { open } = useModal()
 
     return (
         <Button
             text="Настройки"
             icon={<FiSettings />}
-            onClick={toggle}
+            onClick={() => open(<SettingsPage />)}
             width="100%"
             align="left"
             background="var(--schedule)"

@@ -1,31 +1,20 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Context, ModalContext } from '../context'
 
 export interface IModal {
     isOpen: boolean
-    toggle: (event?: any) => void
+    back: () => void
+    open: (Component: React.ReactElement<any, any> | undefined) => void
+    close: () => void
 }
 
-const useModal = (component: React.ReactElement<any, any>): IModal => {
-    const [Component, setComponentInner] = useState<React.ReactElement<any, any>>(component)
-
-    const { isOpen, toggle: coreToggle, setComponent } = useContext<ModalContext>(Context)
-
-    useEffect(() => {
-        setComponentInner(() => component)
-    }, [])
-
-    const toggle = useCallback(
-        (event: any) => {
-            coreToggle(event)
-            setComponent?.(() => Component)
-        },
-        [Component],
-    )
+const useModal = (): IModal => {
+    const { open, isOpen, ...rest } = useContext<ModalContext>(Context)
 
     return {
+        open,
         isOpen,
-        toggle,
+        ...rest,
     }
 }
 

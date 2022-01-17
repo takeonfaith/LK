@@ -9,9 +9,9 @@ import Divider from '@ui/atoms/divider'
 import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect, useState } from 'react'
-import { FiArrowLeftCircle, FiEdit2, FiLogOut } from 'react-icons/fi'
+import { FiArrowLeftCircle, FiEdit2, FiGrid, FiLogOut } from 'react-icons/fi'
 import styled from 'styled-components'
-import { useModal } from 'widgets'
+import { useModal, WhatsNew } from 'widgets'
 import SettingsButton from './settings-button'
 
 const HeaderContextMenuWrapper = styled.div`
@@ -69,7 +69,7 @@ const HeaderContextMenu = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { toggle } = useModal(<SettingsPage currentPage={3} />)
+    const { open } = useModal()
 
     const { theme, switchTheme } = useTheme()
     const [toggles, setToggles] = useState<ToggleItem[]>([
@@ -99,12 +99,25 @@ const HeaderContextMenu = () => {
                 </div>
 
                 <div className="buttons">
-                    <Button icon={<FiEdit2 />} onClick={toggle} text="Изменить" shrinkTextInMobile />
+                    <Button
+                        icon={<FiEdit2 />}
+                        onClick={() => open(<SettingsPage currentPage={3} />)}
+                        text="Изменить"
+                        shrinkTextInMobile
+                    />
                     {/* <Button icon={<FiCreditCard />} onClick={() => null} text="Оплатить" /> */}
                 </div>
             </div>
             <ToggleArea title={''} toggles={toggles} setToggles={setToggles} />
             <SettingsButton />
+            <Button
+                text="Что нового"
+                icon={<FiGrid />}
+                onClick={() => open(<WhatsNew />)}
+                width="100%"
+                align="left"
+                background="var(--schedule)"
+            />
             <LinkButton
                 text={'Cтарый дизайн'}
                 onClick={() => {

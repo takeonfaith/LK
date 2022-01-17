@@ -7,7 +7,7 @@ import search from '@features/acad-performance/lib/search'
 import { GraphicInfo, SubjectList } from '@features/acad-performance/ui/organisms'
 import Select from '@features/select'
 import { Error, Wrapper } from '@ui/atoms'
-import LocalSearch from '@ui/molecules/local-search'
+import { LocalSearch } from '@ui/molecules'
 import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 

@@ -1,8 +1,9 @@
+import { ILessons, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
+import { scheduleModel } from '@entities/schedule'
+import { Title } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
-import { scheduleModel } from '@entities/schedule'
-import { ILessons, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
-import { Title } from '@ui/atoms'
+import Sleep from '../../../../shared/images/sleep.gif'
 
 const WeekDayButtonWrapper = styled.button<{
     isCurrent: boolean
@@ -19,12 +20,13 @@ const WeekDayButtonWrapper = styled.button<{
     cursor: pointer;
     outline: none;
     transition: 0.2s;
-    width: 100px;
+    min-width: 100px;
     height: 54px;
     user-select: none;
     transform: scale(${({ isCurrent }) => (isCurrent ? '1' : '0.9')});
     background: var(--mild-theme);
     color: ${({ isCurrent }) => (isCurrent ? 'var(--blue)' : 'var(--text)')};
+    scroll-snap-align: ${({ isChosen }) => (isChosen ? 'center' : 'none')};
 
     h4 {
         opacity: ${({ isChosen }) => (isChosen ? 1 : 0.5)};
@@ -68,6 +70,8 @@ const WeekDayButtonWrapper = styled.button<{
         font-size: 0.7em;
         transform: scale(1);
         width: calc(100% / 6);
+        max-width: calc(100% / 6);
+        min-width: 54px;
 
         .marker-circles {
             .marker-circle {
@@ -90,19 +94,16 @@ type Props = ILessons & {
     isCurrent: boolean
     isChosen: boolean
     index: number
+    onClick: (index: number) => void
 }
 
-const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index }: Props) => {
+const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index, onClick }: Props) => {
     const {
         data: { currentModule },
     } = scheduleModel.selectors.useSchedule()
 
     return !!lessons ? (
-        <WeekDayButtonWrapper
-            isCurrent={isCurrent}
-            isChosen={isChosen}
-            onClick={() => scheduleModel.events.changeCurrentChosenDay({ day: index })}
-        >
+        <WeekDayButtonWrapper isCurrent={isCurrent} isChosen={isChosen} onClick={() => onClick(index)}>
             <Title size={4}>{weekDay}</Title>
             <span className="marker-circles">
                 {currentModule !== '1' &&
@@ -119,12 +120,7 @@ const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index }: Props) 
                             )
                         }
                     })}
-                {!lessons.length && (
-                    <img
-                        src="https://i.pinimg.com/originals/d5/2c/46/d52c464bef731d5a93570687acd99b79.gif"
-                        alt="спим"
-                    />
-                )}
+                {!lessons.length && <img src={Sleep} alt="спим" />}
             </span>
         </WeekDayButtonWrapper>
     ) : null

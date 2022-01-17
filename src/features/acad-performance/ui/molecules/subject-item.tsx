@@ -113,10 +113,10 @@ const Teacher = styled.div`
 `
 
 const SubjectItem = ({ item, number, type }: Props) => {
-    const { toggle } = useModal(<SubjectModal item={item} />)
+    const { open } = useModal()
     return (
         item.grade && (
-            <Wrap onClick={toggle}>
+            <Wrap onClick={() => open(<SubjectModal item={item} />)}>
                 <Name>
                     <span>{number}</span>
                     <div>{item.name}</div>

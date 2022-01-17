@@ -10,8 +10,8 @@ const PrivateRouter = () => {
 
     return (
         <Switch>
-            {Object.values(currentRoute).map(({ path, Component }) => (
-                <Route path={path} component={Component} exact key={path} />
+            {Object.values(currentRoute).map(({ path, Component, isTemplate }) => (
+                <Route path={path} component={Component} exact={!isTemplate} key={path} />
             ))}
             <Redirect to={'/home'} />
         </Switch>

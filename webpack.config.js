@@ -90,7 +90,8 @@ const config = {
                 }
             }
         }
-    }
+    },
+
 };
 
 module.exports = (env, options) => {

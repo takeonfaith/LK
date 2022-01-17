@@ -1,10 +1,11 @@
-import { IWeekSchedule, ViewType } from '@api/model'
+import { IModules, ViewType } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
-import { WeekSchedule } from '@features/schedule/ui'
-import ScheduleViewButtonsList from '@features/schedule/ui/molecules/schedule-view-buttons-list'
-import WeekDayButtonsList from '@features/schedule/ui/molecules/week-day-buttons-list'
+import getSessionStats from '@features/schedule/lib/get-session-stats'
+import { ScheduleViewButtonsList, WeekDayButtonsList, WeekSchedule } from '@features/schedule/ui'
+import ExamStats from '@features/schedule/ui/atoms/exam-stats'
+import SessionSchedule from '@features/schedule/ui/organisms/session-schedule'
 import { Wrapper } from '@ui/atoms'
-import React from 'react'
+import React, { useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import { Slider } from 'widgets'
 
@@ -16,7 +17,7 @@ const SchedulePageContent = styled.div`
 
     .slider-wrapper {
         width: 100%;
-        max-width: 400px;
+        max-width: 600px;
     }
 
     .buttons-and-search {
@@ -37,13 +38,32 @@ const SchedulePage = () => {
         error,
     } = scheduleModel.selectors.useSchedule()
 
+    const wrapperRef = useRef<HTMLDivElement>(null)
+
+    const pages = useMemo(
+        () =>
+            !!schedule && [
+                <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['0']} key={0} />,
+                <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['1']} key={1} />,
+                <>
+                    <ExamStats {...getSessionStats(schedule['2'])} />
+                    <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['2']} key={1} />
+                </>,
+            ],
+        [schedule, view],
+    )
+
     return (
         <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx()} error={error} data={schedule}>
             {!!schedule ? (
                 <SchedulePageContent>
                     <div className="slider-wrapper">
                         <Slider
-                            pages={['Текущая неделя', 'Весь семестр']}
+                            pages={[
+                                { title: 'Текущая неделя', condition: !!schedule['0'] },
+                                { title: 'Весь семестр', condition: !!schedule['1'] },
+                                { title: 'Сессия', condition: !!schedule['2'] },
+                            ]}
                             currentPage={parseInt(currentModule)}
                             setCurrentPage={(currentPage: number) =>
                                 scheduleModel.events.changeCurrentModule({
@@ -64,18 +84,10 @@ const SchedulePage = () => {
                         {/*    leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}*/}
                         {/*/>*/}
                     </div>
-                    <WeekDayButtonsList />
-                    <WeekSchedule
-                        view={view}
-                        weekSchedule={
-                            schedule[
-                                currentModule.toString() as keyof {
-                                    '0': IWeekSchedule
-                                    '1': IWeekSchedule
-                                }
-                            ]
-                        }
-                    />
+                    <WeekDayButtonsList wrapperRef={wrapperRef} />
+
+                    {!!pages && pages[currentModule as keyof IModules]}
+
                     {/* {width < 1000 && <WeekDayButtonsList />} */}
                 </SchedulePageContent>
             ) : null}

@@ -1,7 +1,6 @@
+import { Colors } from '@consts'
 import React from 'react'
 import { IconType } from 'react-icons'
-import { Colors } from '@consts'
-import { Title } from '@ui/atoms'
 import { ShortCutLinkContainer } from '../atoms/short-cut'
 
 export default ShortCutLink
@@ -17,7 +16,7 @@ function ShortCutLink({ title, icon: Icon, color, to }: Props) {
     return (
         <ShortCutLinkContainer style={{ backgroundColor: Colors[color].main }} to={to}>
             <Icon />
-            <Title size={3}>{title}</Title>
+            <b>{title}</b>
         </ShortCutLinkContainer>
     )
 }

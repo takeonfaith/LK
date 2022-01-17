@@ -1,8 +1,8 @@
 import { Colors } from '@consts'
-import { Button, Title } from '@ui/atoms'
-import React from 'react'
-import styled from 'styled-components'
+import { Button } from '@ui/atoms'
 import localizeDate from '@utils/localize-date'
+import React, { useCallback } from 'react'
+import styled from 'styled-components'
 import { SliderPage, useModal } from 'widgets'
 import QrCode from '../atoms/qr-code'
 
@@ -33,19 +33,21 @@ interface Props {
     sum: number
     allPayments: number
     balanceCurrDate: number
-    qr_current: string
-    qr_total: string
 }
 
-const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate, qr_total, qr_current }: Props) => {
-    const { toggle } = useModal(
-        <SliderPage
-            pages={[
-                { title: 'Текущая залолженность', content: <QrCode qrCode={'qr_current'} contract={0} /> },
-                { title: 'Общая залолженность', content: <QrCode qrCode={'qr_total'} contract={0} /> },
-            ]}
-        />,
-    )
+const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: Props) => {
+    const { open } = useModal()
+
+    const handleModal = useCallback(() => {
+        open(
+            <SliderPage
+                pages={[
+                    { title: 'Текущая залолженность', content: <QrCode qrCode={'qr_current'} contract={0} /> },
+                    { title: 'Общая залолженность', content: <QrCode qrCode={'qr_total'} contract={0} /> },
+                ]}
+            />,
+        )
+    }, [open])
 
     return (
         <PaymentsInfoWrapper paymentDifference={balanceCurrDate}>
@@ -62,7 +64,7 @@ const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate, qr_
                 </p>
                 <br />
                 <Button
-                    onClick={() => toggle()}
+                    onClick={handleModal}
                     text={'Оплатить через QR-код Сбербанк онлайн'}
                     width={'100%'}
                     background={Colors.green.main}

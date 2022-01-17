@@ -42,4 +42,26 @@ export const ShortCutLinkContainer = styled(Link)`
         height: 50px;
         margin-bottom: 5px;
     }
+
+    @media (max-width: 600px) {
+        border-radius: var(--brLight);
+        flex-direction: row;
+        height: fit-content;
+        padding: 10px;
+        justify-content: flex-start;
+
+        & > b {
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        & > svg {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 0px;
+            margin-right: 7px;
+        }
+    }
 `

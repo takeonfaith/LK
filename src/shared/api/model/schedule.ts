@@ -1,7 +1,15 @@
 import { Colors, IColorPalette } from '../../consts'
 
+export type TimeIntervals =
+    | '9:00 - 10:30'
+    | '10:40 - 12:10'
+    | '12:20 - 13:50'
+    | '14:30 - 16:00'
+    | '16:10 - 17:40'
+    | '17:50 - 19:20'
+
 export interface ISubject {
-    timeInterval: string
+    timeInterval: TimeIntervals
     name: string
     place: string
     link: string | null
@@ -22,29 +30,27 @@ export interface IWeekSchedule {
     saturday: ILessons
 }
 
+export interface ISessionSchedule {
+    [key: string]: ILessons
+}
+
 export interface IModules {
-    '0': IWeekSchedule
-    '1': IWeekSchedule
+    '0': IWeekSchedule | null
+    '1': IWeekSchedule | null
+    '2': ISessionSchedule | null
 }
 
 export type ViewType = 'full' | 'big'
 
 export interface ISchedule {
     schedule: IModules | null
-    currentModule: '0' | '1'
+    currentModule: '0' | '1' | '2'
     currentDay: number
+    currentDayString: string
     currentChosenDay: number
     view: ViewType
     error: string | null
 }
-
-export type TimeIntervals =
-    | '9:00 - 10:30'
-    | '10:40 - 12:10'
-    | '12:20 - 13:50'
-    | '14:30 - 16:00'
-    | '16:10 - 17:40'
-    | '17:50 - 19:20'
 
 export interface ITimeIntervalColor {
     '9:00 - 10:30': IColorPalette
