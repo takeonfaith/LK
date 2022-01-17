@@ -1,5 +1,14 @@
 {
   "plugins": [
+    [
+      "babel-plugin-module-resolver",
+      {
+        "alias": {
+          "^effector$": "effector/compat",
+          "^effector-react$": "effector-react/compat"
+        }
+      }
+    ],
     "react-hot-loader/babel",
     [
       "babel-plugin-styled-components",
@@ -9,12 +18,22 @@
     ]
   ],
   "presets": [
+    "@babel/preset-react",
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "modules": false,
+        "shippedProposals": true,
+        "loose": true,
+        "useBuiltIns": false,
+        "targets": {
+          "browsers": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+          ]
+        }
       }
-    ],
-    "@babel/preset-react"
+    ]
   ]
 }

@@ -10,6 +10,7 @@ const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
     &::-webkit-scrollbar {
         display: none;
     }
+
     display: flex;
     align-items: center;
     column-gap: 0;
@@ -62,7 +63,9 @@ const WeekDayButtonsList = ({ wrapperRef }: Props) => {
         handleClick(currentChosenDay)
     }, [wrapperRef?.current])
 
-    return !!schedule && !!schedule[currentModule] ? (
+    if (!(!!schedule && !!schedule[currentModule])) return null
+
+    return (
         <WeekDayButtonsListWrapper isFull={isFull}>
             {currentModule !== '2'
                 ? Object.keys(WeekDays).map((day, index) => {
@@ -70,7 +73,7 @@ const WeekDayButtonsList = ({ wrapperRef }: Props) => {
                           <WeekDayButton
                               key={day}
                               weekDay={WeekDays[day as keyof IWeekDays].short}
-                              lessons={schedule[currentModule]?.[day as keyof IWeekDays].lessons}
+                              lessons={schedule[currentModule]?.[day as keyof IWeekDays]?.lessons}
                               isCurrent={currentDay === index + 1}
                               isChosen={currentChosenDay === index + 1}
                               index={index + 1}
@@ -84,7 +87,7 @@ const WeekDayButtonsList = ({ wrapperRef }: Props) => {
                           <WeekDayButton
                               key={day}
                               weekDay={localizeDate(day, 'short')}
-                              lessons={schedule[currentModule]?.[day as keyof IWeekDays].lessons}
+                              lessons={schedule[currentModule]?.[day as keyof IWeekDays]?.lessons}
                               isCurrent={localizeDate(new Date(), 'weird') === day}
                               isChosen={currentChosenDay === index + 1}
                               index={index + 1}
@@ -93,7 +96,7 @@ const WeekDayButtonsList = ({ wrapperRef }: Props) => {
                       )
                   })}
         </WeekDayButtonsListWrapper>
-    ) : null
+    )
 }
 
 export default memo(WeekDayButtonsList)
