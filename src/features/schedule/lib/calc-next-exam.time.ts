@@ -6,7 +6,7 @@ const calcNextExamTime = (schedule: ISessionSchedule | null) => {
     if (!!schedule && !!Object.keys(schedule).length) {
         const nextExamIndex = Object.keys(schedule).findIndex((day) => {
             const daysLeft = calcTimeLeft(day, 'days')
-            return daysLeft > 0 && daysLeft < 30
+            return daysLeft >= 0 && daysLeft < 30
         })
 
         return nextExamIndex + 1
