@@ -1,7 +1,7 @@
 import { userApi } from '@api'
 import { LoginData } from '@api/user-api'
-import { createEffect, createEvent, createStore, forward } from 'effector'
-import { useStore } from 'effector-react'
+import { createEffect, createEvent, createStore, forward } from 'effector/compat'
+import { useStore } from 'effector-react/compat'
 import { User, UserToken } from '@api/model'
 import axios from 'axios'
 
