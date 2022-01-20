@@ -23,13 +23,8 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js(x)?|ts(x)?)$/,
                 use: 'babel-loader',
-                exclude: /node_modules/
-            },
-            {
-                test: /\.ts(x)?$/,
-                loader: 'ts-loader',
                 exclude: /node_modules/
             },
             {
@@ -72,7 +67,9 @@ const config = {
         alias:
             {
                 'react-dom':
-                    '@hot-loader/react-dom'
+                    '@hot-loader/react-dom',
+                '^effector$': "effector/compat",
+                "^effector-react$": "effector-react/compat"
             }
         ,
         plugins: [new TsconfigPathsPlugin({})]
