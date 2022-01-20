@@ -1,16 +1,7 @@
 {
   "plugins": [
-    [
-      "babel-plugin-module-resolver",
-      {
-        "root": ["./src"],
-        "alias": {
-          "^effector$": "effector/compat",
-          "^effector-react$": "effector-react/compat"
-        }
-      }
-    ],
     "react-hot-loader/babel",
+    "@babel/plugin-transform-typescript",
     [
       "babel-plugin-styled-components",
       {
