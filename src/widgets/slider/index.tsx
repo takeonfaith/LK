@@ -68,14 +68,14 @@ const Slider = ({ pages, currentPage, setCurrentPage, sliderWidth }: ISlider) =>
         <SliderWrapper size={size} sliderWidth={sliderWidth}>
             <div className="slider-body">
                 <CurrentPage pages={pages} currentPage={currentPage} size={size} />
-                {pages.map(({ title, condition }, index: number) => {
+                {pages.map((page, index: number) => {
                     return (
                         <SliderItem
                             id={index}
                             currentPage={currentPage}
                             setCurrentPage={setCurrentPage}
-                            pageTitle={title}
-                            condition={condition}
+                            pageTitle={page.title}
+                            condition={page.condition}
                             size={size}
                             key={index}
                         />

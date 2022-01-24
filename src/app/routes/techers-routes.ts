@@ -10,7 +10,8 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
+import { FiBell, FiBriefcase, FiCalendar, FiClipboard, FiFileText } from 'react-icons/fi'
+import { HiOutlineUserGroup } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
@@ -21,6 +22,7 @@ export const HOME_ROUTE = '/home'
 export const MESSAGES_ROUTE = '/messages'
 export const TEMPLATE_CHAT_ROUTE = '/messages/:chatId'
 export const PROJECT_ACTIVITIES_ROUTE = '/proj_main'
+export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const PAYMENTS_ROUTE = '/payments'
 export const APPLICATIONS_ROUTE = '/applications'
 export const SCHEDULE_ROUTE = '/rasp_teachers'
@@ -101,23 +103,24 @@ export const teachersPrivateRoutes: IRoutes = {
     3: {
         id: 3,
         title: 'Оповещения',
-        icon: FaRegLightbulb,
+        icon: FiBell,
         path: ALERTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         isTemplate: false,
     },
-    4: {
-        id: 4,
-        title: 'Вакцинация',
-        icon: FiBriefcase,
-        path: VAX_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: VAX_ROUTE }),
-        isTemplate: false,
-    },
+    // 4: {
+    //     id: 4,
+    //     title: 'Анкета для сверки данных',
+    //     icon: HiOutlineMenuAlt2,
+    //     path: DATA_VERIFICATION_ROUTE,
+    //     //  DataVerificationPage
+    //     Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
+    //     isTemplate: false,
+    // },
     5: {
         id: 5,
         title: 'Инструкции, положения, правила',
-        icon: FiDollarSign,
+        icon: FiClipboard,
         path: INSTRUCTIONS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: INSTRUCTIONS_ROUTE }),
         isTemplate: false,
@@ -149,7 +152,7 @@ export const teachersPrivateRoutes: IRoutes = {
     9: {
         id: 9,
         title: 'Дети и внуки',
-        icon: BiCheckCircle,
+        icon: HiOutlineUserGroup,
         path: CHILDREN_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: CHILDREN_ROUTE }),
         isTemplate: false,
@@ -165,7 +168,7 @@ export const teachersPrivateRoutes: IRoutes = {
     12: {
         id: 12,
         title: 'График отпусков',
-        icon: BiHeadphone,
+        icon: FiCalendar,
         path: VACATION_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: VACATION_ROUTE }),
         isTemplate: false,
@@ -205,7 +208,7 @@ export const teachersPrivateRoutes: IRoutes = {
     17: {
         id: 17,
         title: 'Проектная деятельность',
-        icon: FiDollarSign,
+        icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PROJECT_ACTIVITIES_ROUTE }),
         isTemplate: false,
@@ -312,6 +315,14 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiGroup,
         path: FEEDBACK_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: FEEDBACK_ROUTE }),
+        isTemplate: false,
+    },
+    31: {
+        id: 4,
+        title: 'Вакцинация',
+        icon: FiBriefcase,
+        path: VAX_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: VAX_ROUTE }),
         isTemplate: false,
     },
 }

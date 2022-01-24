@@ -25,7 +25,15 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
 export const SETTINGS = 'settings'
 
 interface IColors {
-    [key: string]: IColorPalette
+    green: IColorPalette
+    lightGreen: IColorPalette
+    blue: IColorPalette
+    darkBlue: IColorPalette
+    purple: IColorPalette
+    pink: IColorPalette
+    red: IColorPalette
+    yellow: IColorPalette
+    orange: IColorPalette
 }
 
 export interface IColorPalette {
@@ -109,6 +117,15 @@ export const Colors: IColors = {
         darker: '#b63c46',
         light: '',
         dark: '#632d32',
+        darkTransparent: '#511a1ea3',
+    },
+    orange: {
+        main: '#ee9e44',
+        transparent: '#e9794445',
+        lighter: '#ee9e44',
+        darker: '#ae4a1b',
+        light: '',
+        dark: '#e97944',
         darkTransparent: '#511a1ea3',
     },
 }

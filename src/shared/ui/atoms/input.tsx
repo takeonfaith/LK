@@ -3,12 +3,14 @@ import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Button from './button'
 
-const InputWrapper = styled.div<{ leftIcon: boolean }>`
+const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     width: 100%;
+    pointer-events: ${({ isActive }) => !isActive && 'none'};
+    opacity: ${({ isActive }) => !isActive && 0.6};
 
     h5 {
         margin-bottom: 5px;
@@ -78,12 +80,21 @@ interface Props {
     title?: string
     placeholder?: string
     type?: string
+    isActive?: boolean
 }
 
-const Input = ({ value, setValue, leftIcon, title, placeholder = 'Введите сюда', type = 'text' }: Props) => {
+const Input = ({
+    value,
+    setValue,
+    leftIcon,
+    title,
+    placeholder = 'Введите сюда',
+    type = 'text',
+    isActive = true,
+}: Props) => {
     const [inputType, setInputType] = useState(type)
     return (
-        <InputWrapper leftIcon={!!leftIcon}>
+        <InputWrapper leftIcon={!!leftIcon} isActive={isActive}>
             {!!title && <h5>{title}</h5>}
             {leftIcon && <span className="icon">{leftIcon}</span>}
             <input

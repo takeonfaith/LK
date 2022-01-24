@@ -6,8 +6,8 @@ import React from 'react'
 
 const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
+    if (!data?.contracts) return null
     const dormitory = data?.contracts[0]
-
     return (
         <PageWrapper>
             <div className="blocks-wrapper">

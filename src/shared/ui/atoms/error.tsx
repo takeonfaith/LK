@@ -14,7 +14,7 @@ const Container = styled.div`
     color: var(--text);
 
     img {
-        width: 100px;
+        min-width: 100px;
         height: 100px;
         margin-bottom: 20px;
     }
