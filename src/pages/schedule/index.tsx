@@ -54,7 +54,7 @@ const SchedulePage = () => {
     )
 
     return (
-        <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx()} error={error} data={schedule}>
+        <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx(null)} error={error} data={schedule}>
             {!!schedule ? (
                 <SchedulePageContent>
                     <div className="slider-wrapper">

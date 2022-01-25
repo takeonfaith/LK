@@ -33,8 +33,8 @@ const Select = ({ items, setSelected, selected, title, isActive = true }: Props)
     const refElement = useRef<HTMLDivElement | null>(null)
     const refItems = useRef<HTMLUListElement | null>(null)
     const [route, setRoute] = useState<string[]>([])
-    const [currentItems, setCurrentItems] = useState(items)
-    const [selectedRoute, setSelectedRoute] = useState('')
+    const [currentItems, setCurrentItems] = useState<SelectPage[]>(items)
+    const [selectedRoute, setSelectedRoute] = useState<string>('')
 
     const handleOpen = useCallback(() => {
         setIsOpen((prev) => !prev)

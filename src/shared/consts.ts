@@ -1,4 +1,5 @@
 import { IGrade } from '@api/model/acad-performance'
+import { IndexedProperties } from '@utility-types/indexed-properties'
 
 export type MenuType = number[]
 export type ShortCutLinksType = number[]
@@ -24,7 +25,7 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
 
 export const SETTINGS = 'settings'
 
-interface IColors {
+interface IColors extends IndexedProperties {
     green: IColorPalette
     lightGreen: IColorPalette
     blue: IColorPalette

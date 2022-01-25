@@ -13,7 +13,6 @@ const Home = () => {
         error,
     } = userModel.selectors.useUser()
     const { data } = scheduleModel.selectors.useSchedule()
-    console.log(data)
 
     return (
         <Wrapper
