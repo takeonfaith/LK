@@ -1,3 +1,4 @@
+import DataVerificationPage from '@pages/data-verification'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import {
@@ -12,7 +13,7 @@ import {
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiBell, FiBriefcase, FiCalendar, FiClipboard, FiFileText } from 'react-icons/fi'
-import { HiOutlineUserGroup } from 'react-icons/hi'
+import { HiOutlineMenuAlt2, HiOutlineUserGroup } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
@@ -109,15 +110,14 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         isTemplate: false,
     },
-    // 4: {
-    //     id: 4,
-    //     title: 'Анкета для сверки данных',
-    //     icon: HiOutlineMenuAlt2,
-    //     path: DATA_VERIFICATION_ROUTE,
-    //     //  DataVerificationPage
-    //     Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
-    //     isTemplate: false,
-    // },
+    4: {
+        id: 4,
+        title: 'Анкета для сверки данных',
+        icon: HiOutlineMenuAlt2,
+        path: DATA_VERIFICATION_ROUTE,
+        Component: DataVerificationPage,
+        isTemplate: false,
+    },
     5: {
         id: 5,
         title: 'Инструкции, положения, правила',
