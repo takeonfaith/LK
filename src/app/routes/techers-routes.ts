@@ -1,4 +1,5 @@
 import PageIsNotReady from '@pages/page-is-not-ready'
+import PaymentsPage from '@pages/payments'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -250,7 +251,7 @@ export const teachersPrivateRoutes: IRoutes = {
         title: 'Сведения об оплатах',
         icon: BiIdCard,
         path: PAYMENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PAYMENTS_ROUTE }),
+        Component: PaymentsPage,
         isTemplate: false,
     },
     23: {

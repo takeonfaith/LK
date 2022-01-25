@@ -109,8 +109,6 @@ const InputArea = ({
     const handleChangeValue = (value: string, i: number) => {
         data[i].value = value
 
-        console.log(data[i], i)
-
         setData([...data])
     }
 

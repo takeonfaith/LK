@@ -17,17 +17,12 @@ interface PaymentsStore {
 }
 
 const getPaymentsFx = createEffect(async (): Promise<Payments> => {
+    const response = await paymentApi.get()
+    if (!response.data.contracts.length) throw new Error('У вас нет данных по оплате')
     try {
-        // eslint-disable-next-line no-console
-        console.log('ewqeqw')
-
-        const response = await paymentApi.get()
-        // eslint-disable-next-line no-console
-        console.log(response)
-
         return response.data
-    } catch (error) {
-        throw new Error(error as string)
+    } catch (_) {
+        throw new Error('Не удалось загрузить оплату')
     }
 })
 

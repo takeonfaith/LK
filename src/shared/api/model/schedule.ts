@@ -15,6 +15,7 @@ export interface ISubject {
     link: string | null
     teachers: string[]
     dateInterval: string
+    groups?: string
 }
 
 export interface ILessons {

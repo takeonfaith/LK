@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 const PaymentListWrapper = styled.div`
     width: 100%;
-    min-width: 400px;
+    min-width: 380px;
     max-width: 500px;
     display: flex;
     flex-direction: column;
@@ -33,6 +33,14 @@ const PaymentListWrapper = styled.div`
         & > * + * {
             margin-top: 5px;
         }
+    }
+
+    @media (max-width: 1400px) {
+        min-width: 330px;
+    }
+
+    @media (max-width: 1225px) {
+        max-width: 100%;
     }
 
     @media (max-width: 1000px) {

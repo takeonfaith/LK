@@ -13,11 +13,12 @@ const Home = () => {
         error,
     } = userModel.selectors.useUser()
     const { data } = scheduleModel.selectors.useSchedule()
+    console.log(data)
 
     return (
         <Wrapper
             loading={!user}
-            load={() => scheduleModel.effects.getScheduleFx()}
+            load={() => scheduleModel.effects.getScheduleFx(user)}
             error={error}
             data={user?.user_status === 'stud' ? user && data.schedule : user}
         >

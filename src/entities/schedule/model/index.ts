@@ -1,5 +1,5 @@
 import { scheduleApi } from '@api'
-import { IModules, ISchedule, ISessionSchedule, IWeekSchedule, ViewType } from '@api/model'
+import { IModules, ISchedule, ISessionSchedule, IWeekSchedule, User, ViewType } from '@api/model'
 import getCurrentDaySubjects from '@entities/schedule/lib/get-current-day-schedule'
 import calcNextExamTime from '@features/schedule/lib/calc-next-exam.time'
 import { createEffect, createEvent, createStore } from 'effector/compat'
@@ -10,10 +10,15 @@ const useSchedule = () => {
     return { data: useStore($schedule), loading: useStore(getScheduleFx.pending), error: useStore($schedule).error }
 }
 
-const getScheduleFx = createEffect(async (): Promise<IModules> => {
+const getScheduleFx = createEffect(async (user: User | null): Promise<IModules> => {
     try {
-        const response = await scheduleApi.get()
-        const sessionResponse = await scheduleApi.getSession()
+        const response = !user?.subdivisions
+            ? await scheduleApi.get()
+            : await scheduleApi.getTeachers(user?.name ?? '', user?.surname ?? '', user?.patronymic ?? '')
+
+        const sessionResponse = !user?.subdivisions
+            ? await scheduleApi.getSession()
+            : await scheduleApi.getTeachersSession(user?.name ?? '', user?.surname ?? '', user?.patronymic ?? '')
         const sessionSchedule: { [key: string]: any } | null = {}
         const fullSchedule: { [key: string]: any } = {}
         const currentWeekSchedule: IWeekSchedule = {

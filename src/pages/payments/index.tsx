@@ -13,6 +13,7 @@ const PaymentsPage = () => {
             load={paymentsModel.effects.getPaymentsFx}
             error={error}
             data={data && data?.contracts[0]}
+            noDataCheck={!data?.contracts.length}
         >
             {
                 <SliderPage

@@ -4,11 +4,16 @@ import { BasicBlock } from '../atoms'
 
 const LeftBlockWrapper = styled(BasicBlock)`
     width: calc(100% - 5px);
-    max-width: 900px;
+    max-width: 800px;
+
+    @media (max-width: 1225px) {
+        width: 100%;
+        max-width: 600px;
+    }
 
     @media (max-width: 1000px) {
         width: 100%;
-        max-width: 100%;
+        /* max-width: 100%; */
     }
 `
 
