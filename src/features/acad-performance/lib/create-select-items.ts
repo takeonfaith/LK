@@ -1,18 +1,15 @@
+import { SelectPage } from '@features/select'
 import findSemestr from '@utils/find-semestr'
-
-interface IResult {
-    [key: number]: string
-}
 
 const createSelectItems = (course: number) => {
     const count = findSemestr(new Date().toISOString(), course)
 
-    const result: IResult = {}
+    const result: SelectPage[] = []
     for (let i = 1; i <= count; i++) {
-        result[i] = `${i} семестр`
+        result.push({ id: i, title: `${i} семестр` })
     }
-
-    result[-1] = 'Все семестры'
+    // eslint-disable-next-line no-console
+    result.push({ id: -1, title: 'Все семестры' })
 
     return result
 }

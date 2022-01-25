@@ -2,8 +2,8 @@ import React from 'react'
 import SwitchToggleWrapper from '../atoms/switch-toggle-wrapper'
 
 interface ISwitchToggle {
-    id: number
-    key: number
+    id: string
+    key: string
     isToggled: boolean
     setIsToggled: () => void
 }
@@ -11,15 +11,8 @@ interface ISwitchToggle {
 const SwitchToggle = ({ id, isToggled, setIsToggled }: ISwitchToggle) => {
     return (
         <SwitchToggleWrapper>
-            <input
-                type="checkbox"
-                name={id.toString()}
-                id={id.toString()}
-                className="checkbox"
-                checked={isToggled}
-                onChange={setIsToggled}
-            />
-            <label className="toggle-body" htmlFor={id.toString()}>
+            <input type="checkbox" name={id} id={id} className="checkbox" checked={isToggled} onChange={setIsToggled} />
+            <label className="toggle-body" htmlFor={id}>
                 <span className="toggle-circle" />
             </label>
         </SwitchToggleWrapper>

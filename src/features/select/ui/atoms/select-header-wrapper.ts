@@ -7,7 +7,7 @@ const SelectHeaderWrapper = styled.div`
     height: 100%;
 
     padding: 5px 10px;
-    box-shadow: var(--light-box-shadow);
+    box-shadow: var(--schedule-shadow);
     position: relative;
     background: var(--schedule);
     border-radius: var(--brLight);

@@ -54,13 +54,14 @@ const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: P
             <div>
                 <p>
                     {balanceCurrDate < 0 ? 'Переплата' : 'Долг'} на {localizeDate(new Date().toString())}{' '}
-                    <span className="debt-or-overpay">{balanceCurrDate} руб.</span> Следующий платеж -{' '}
-                    <span className="monthly">{monthly} руб.</span>
+                    <span className="debt-or-overpay">{balanceCurrDate} руб.</span>
+                    {/* Следующий платеж -{' '}
+                    <span className="monthly">{monthly} руб.</span> */}
                 </p>
                 <br />
                 <p>
                     К выплате до конца действия договора (до {localizeDate(endDate)} г.):
-                    <span className="rest-money"> {sum - allPayments} руб.</span> (без учета индексации)
+                    <span className="rest-money"> {(sum - allPayments).toFixed(2)} руб.</span> (без учета индексации)
                 </p>
                 <br />
                 <Button

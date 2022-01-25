@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const SwitchToggleWrapper = styled.div`
     user-select: none;
-    width: 56px;
+    min-width: 56px;
     height: 30px;
 
     .checkbox {

@@ -1,3 +1,4 @@
+import PageIsNotReady from '@pages/page-is-not-ready'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -10,14 +11,12 @@ import {
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
-
+import { IconType } from 'react-icons/lib'
+import AcadPerformance from '../../pages/acad-performance'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
-import SchedulePage from '../../pages/schedule'
 import PaymentsPage from '../../pages/payments'
-import AcadPerformance from '../../pages/acad-performance'
-import { IconType } from 'react-icons/lib'
-import PageIsNotReady from '@pages/page-is-not-ready'
+import SchedulePage from '../../pages/schedule'
 
 export const HOME_ROUTE = '/home'
 export const MESSAGES_ROUTE = '/messages'
@@ -84,7 +83,7 @@ export const privateRoutes: IRoutes = {
     },
     3: {
         id: 3,
-        title: 'ПД',
+        title: 'Проектная деятельность',
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),

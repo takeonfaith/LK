@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { AiOutlineReload } from 'react-icons/ai'
 import styled from 'styled-components'
-import { Button, Loading, Title } from '.'
+import { Button, Error, Loading, Title } from '.'
+import Thinking from '../../images/thinking-emoji.gif'
 
 const WrapperBlock = styled.div<{ loading: boolean }>`
     width: 100%;
@@ -55,9 +56,10 @@ interface Props {
     error: string | null
     data: any | null
     deps?: any[]
+    noDataCheck?: boolean
 }
 
-const Wrapper = ({ children, load, loading = false, error, data, deps = [] }: Props) => {
+const Wrapper = ({ children, load, error, data, loading = true, deps = [], noDataCheck = false }: Props) => {
     useEffect(() => {
         if (!data) load()
     }, deps)
@@ -69,8 +71,11 @@ const Wrapper = ({ children, load, loading = false, error, data, deps = [] }: Pr
                     <Loading />
                 ) : (
                     <div className="reload">
-                        <Title size={3}>{!!error && error}</Title>
-                        <Button onClick={() => load()} text="Загрузить снова" icon={<AiOutlineReload />} />
+                        <Error text={error} image={noDataCheck && Thinking}>
+                            {!noDataCheck && (
+                                <Button onClick={() => load()} text="Загрузить снова" icon={<AiOutlineReload />} />
+                            )}
+                        </Error>
                     </div>
                 )}
             </span>

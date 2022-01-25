@@ -4,11 +4,11 @@ import { BasicBlock } from '../atoms'
 
 const RightBlockWrapper = styled(BasicBlock)`
     width: calc(100% - 5px);
-    max-width: 400px;
+    max-width: 380px;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1225px) {
         width: 100%;
-        max-width: 100%;
+        max-width: 600px;
     }
 `
 

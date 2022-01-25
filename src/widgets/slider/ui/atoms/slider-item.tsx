@@ -23,7 +23,7 @@ const SliderItemWrapper = styled.div<{ size: number; condition: boolean }>`
     }
 
     &:hover {
-        filter: brightness(0.8);
+        filter: ${({ condition }) => condition && 'brightness(0.8)'};
     }
 
     &.active {

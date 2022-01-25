@@ -15,6 +15,7 @@ export interface ISubject {
     link: string | null
     teachers: string[]
     dateInterval: string
+    groups?: string
 }
 
 export interface ILessons {
@@ -59,6 +60,7 @@ export interface ITimeIntervalColor {
     '14:30 - 16:00': IColorPalette
     '16:10 - 17:40': IColorPalette
     '17:50 - 19:20': IColorPalette
+    '19:30 - 21:00': IColorPalette
 }
 
 export const TimeIntervalColor: ITimeIntervalColor = {
@@ -68,4 +70,5 @@ export const TimeIntervalColor: ITimeIntervalColor = {
     '14:30 - 16:00': Colors.pink,
     '16:10 - 17:40': Colors.red,
     '17:50 - 19:20': Colors.red,
+    '19:30 - 21:00': Colors.orange,
 }

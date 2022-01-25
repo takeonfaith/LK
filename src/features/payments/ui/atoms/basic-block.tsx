@@ -10,7 +10,7 @@ const BasicBlock = styled.div`
     height: 400px;
     color: var(--text);
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1225px) {
         height: auto;
         padding: 20px;
     }

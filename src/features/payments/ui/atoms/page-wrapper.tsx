@@ -28,7 +28,7 @@ const PageWrapper = styled.div`
         }
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1225px) {
         & > * + * {
             margin-left: 0;
             margin-top: 40px;
