@@ -8,12 +8,12 @@ const SubmitButtonWrapper = styled.button<{
     isLoading: boolean
     completed: boolean
     isActive: boolean
+    isDone: boolean
 }>`
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
     opacity: ${(props) => (props.isLoading || !props.isActive ? 0.5 : 1)};
-    background: var(--purpleAndBlueGrad);
     color: #fff;
     font-weight: bold;
     display: flex;
@@ -25,7 +25,7 @@ const SubmitButtonWrapper = styled.button<{
     overflow: hidden;
     border: none;
     cursor: pointer;
-    background: var(--blue);
+    background: ${({ isDone }) => (isDone ? 'var(--green)' : 'var(--blue)')};
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);
@@ -112,6 +112,7 @@ interface Props {
     buttonSuccessText?: string
     popUpSuccessMessage?: string
     popUpFailureMessage?: string
+    isDone?: boolean
     isActive: boolean
 }
 
@@ -124,6 +125,7 @@ const SubmitButton = ({
     buttonSuccessText = 'Готово',
     popUpSuccessMessage = 'Успешно',
     popUpFailureMessage = 'Nope',
+    isDone = false,
     isActive = true,
 }: Props) => {
     useEffect(() => {
@@ -155,6 +157,7 @@ const SubmitButton = ({
             completed={completed}
             isActive={isActive}
             onClick={handleAction}
+            isDone={isDone}
         >
             <div className="inner-button">
                 {completed ? (
