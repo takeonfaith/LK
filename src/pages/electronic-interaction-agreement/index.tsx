@@ -4,6 +4,7 @@ import { LinkButton, SubmitButton } from '@ui/atoms'
 import useResize from '@utils/hooks/use-resize'
 import localizeDate from '@utils/localize-date'
 import React, { useEffect, useState } from 'react'
+import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 
 const ElectronicInteractionAgreementPageWrapper = styled.div`
@@ -26,6 +27,16 @@ const ElectronicInteractionAgreementPageWrapper = styled.div`
 
         p {
             margin: 10px 0;
+
+            b {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .center-section {
+            box-shadow: none;
         }
     }
 `
@@ -68,26 +79,43 @@ const ElectronicInteractionAgreementPage = () => {
                 height={height - 200}
             /> */}
             <div className="center-section">
-                <LinkButton href={data.file} onClick={() => null} text="Ссылка на согласие" width="100%" />
+                <LinkButton
+                    href={data.file}
+                    onClick={() => null}
+                    text="Скачать согласие"
+                    width="100%"
+                    icon={<FiDownload />}
+                />
                 <p>
-                    Я, {data.fio}, {data.passSer} {data.passNum} {data.passDiv} {localizeDate(data.passDate)},{' '}
-                    {data.bdate}, {data.phone}, {data.email}, настоящим безоговорочно без каких-либо изъятий или
-                    ограничений на условиях присоединения принимаю условия{' '}
-                    <a
-                        target="_blank"
-                        href="https://vk.com/doc3885147_630383620?hash=202b9242737317077e&dl=7f006d8296247652bd"
-                        rel="noreferrer"
-                    >
-                        СОГЛАШЕНИЯ
-                    </a>{' '}
-                    об электронном взаимодействии, опубликованного на официальном сайте Университета, и выражаю согласие
-                    на подписание электронных документов в личном кабинете.
-                </p>
-                {(data.status || done) && (
+                    Я, <b>{data.fio}</b>,
                     <p>
-                        Дата подписания: {localizeDate(data.date ?? new Date())} {data.fio}
+                        <b>Паспорт: </b>
+                        {data.passSer} {data.passNum}, выдан {localizeDate(data.passDate)} {data.passDiv}
+                        <br />
+                        <b>Дата рождения: </b>
+                        {localizeDate(data.bdate)}
+                        <br />
+                        <b>Номер мобильного телефона: </b>
+                        {data.phone}
+                        <br />
+                        <b>Адрес электронной почты: </b>
+                        {data.email}
                     </p>
-                )}
+                    <p>
+                        настоящим безоговорочно без каких-либо изъятий или ограничений на условиях присоединения
+                        принимаю условия{' '}
+                        <a
+                            target="_blank"
+                            href="https://e.mospolytech.ru/old/storage/files/EAccept.pdf"
+                            rel="noreferrer"
+                        >
+                            СОГЛАШЕНИЯ
+                        </a>{' '}
+                        об электронном взаимодействии, опубликованного на официальном сайте Университета, и выражаю
+                        согласие на подписание электронных документов в личном кабинете.
+                    </p>
+                </p>
+
                 <SubmitButton
                     text={!data.status && !done ? 'Подписать' : 'Подписано'}
                     action={handleSubmit}
@@ -99,6 +127,7 @@ const ElectronicInteractionAgreementPage = () => {
                     popUpFailureMessage="Согласие уже подписано"
                     popUpSuccessMessage="Согласие успешно подписано"
                 />
+                {(data.status || done) && <p>Дата подписания: {localizeDate(data.date ?? new Date())}</p>}
             </div>
         </ElectronicInteractionAgreementPageWrapper>
     ) : (
