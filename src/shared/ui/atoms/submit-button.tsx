@@ -20,6 +20,7 @@ const SubmitButtonWrapper = styled.button<{
     align-items: center;
     justify-content: center;
     height: 40px;
+    min-height: 40px;
     border-radius: 10px;
     position: relative;
     overflow: hidden;

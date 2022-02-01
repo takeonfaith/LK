@@ -1,18 +1,21 @@
 import { pepApi } from '@api'
 import { popUpMessageModel } from '@entities/pop-up-message'
-import { LinkButton, SubmitButton } from '@ui/atoms'
+import { Button, LinkButton, SubmitButton } from '@ui/atoms'
 import useResize from '@utils/hooks/use-resize'
 import localizeDate from '@utils/localize-date'
 import React, { useEffect, useState } from 'react'
 import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
+import { useModal } from 'widgets'
+import { MistakeModal, Signed } from './ui'
 
-const ElectronicInteractionAgreementPageWrapper = styled.div`
+const ElectronicInteractionAgreementPageWrapper = styled.div<{ showInfoText: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     height: 100%;
+    color: var(--text);
 
     .center-section {
         box-shadow: 0 0 100px #0000003e;
@@ -25,8 +28,19 @@ const ElectronicInteractionAgreementPageWrapper = styled.div`
         flex-direction: column;
         border-radius: var(--brSemi);
 
+        .info-text {
+            transition: 0.2s;
+            opacity: ${({ showInfoText }) => (showInfoText ? 1 : 0)};
+            visibility: ${({ showInfoText }) => (showInfoText ? 'visible' : 'hidden')};
+            height: ${({ showInfoText }) => (showInfoText ? '100%' : '0')};
+        }
+
         p {
             margin: 10px 0;
+
+            a {
+                color: var(--blue);
+            }
 
             b {
                 opacity: 0.8;
@@ -46,7 +60,7 @@ const ElectronicInteractionAgreementPageWrapper = styled.div`
 // }
 
 const ElectronicInteractionAgreementPage = () => {
-    const { height, width } = useResize()
+    const { open } = useModal()
     const [data, setData] = useState<any>(null)
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
@@ -72,7 +86,7 @@ const ElectronicInteractionAgreementPage = () => {
     console.log(data)
 
     return !!data ? (
-        <ElectronicInteractionAgreementPageWrapper>
+        <ElectronicInteractionAgreementPageWrapper showInfoText={!data.status && !done}>
             {/* <embed
                 src="https://vk.com/doc3885147_630383620?hash=fd95a34e74ede7d4de&dl=dabc5842b8d20c1936"
                 width={width - 200}
@@ -86,7 +100,8 @@ const ElectronicInteractionAgreementPage = () => {
                     width="100%"
                     icon={<FiDownload />}
                 />
-                <p>
+                <Signed show={data.status || done} />
+                <p className="info-text">
                     Я, <b>{data.fio}</b>,
                     <p>
                         <b>Паспорт: </b>
@@ -116,18 +131,35 @@ const ElectronicInteractionAgreementPage = () => {
                     </p>
                 </p>
 
-                <SubmitButton
-                    text={!data.status && !done ? 'Подписать' : 'Подписано'}
-                    action={handleSubmit}
-                    isLoading={loading}
-                    completed={completed}
-                    isDone={done || data.status}
-                    setCompleted={setCompleted}
-                    isActive={!data.status && !done}
-                    popUpFailureMessage="Согласие уже подписано"
-                    popUpSuccessMessage="Согласие успешно подписано"
-                />
-                {(data.status || done) && <p>Дата подписания: {localizeDate(data.date ?? new Date())}</p>}
+                {!data.status && !done && (
+                    <SubmitButton
+                        text={!data.status && !done ? 'Подписать' : 'Подписано'}
+                        action={handleSubmit}
+                        isLoading={loading}
+                        completed={completed}
+                        isDone={done || data.status}
+                        setCompleted={setCompleted}
+                        isActive={!data.status && !done}
+                        popUpFailureMessage="Согласие уже подписано"
+                        popUpSuccessMessage="Согласие успешно подписано"
+                    />
+                )}
+                {(data.status || done) && (
+                    <p>
+                        Дата подписания: {localizeDate(data.date || new Date())},{' '}
+                        {data.time || `${new Date().getHours()}:${new Date().getMinutes()}`}
+                        <br />
+                        {data.fio}
+                    </p>
+                )}
+                {!data.status && !done && (
+                    <Button
+                        onClick={() => open(<MistakeModal />)}
+                        text="Заметили ошибку в личных данных?"
+                        background="transparent"
+                        textColor="#b1b1b1"
+                    />
+                )}
             </div>
         </ElectronicInteractionAgreementPageWrapper>
     ) : (
