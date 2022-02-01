@@ -12,7 +12,17 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBell, FiBriefcase, FiCalendar, FiClipboard, FiFileText } from 'react-icons/fi'
+import { RiNotificationBadgeLine } from 'react-icons/ri'
+import {
+    FiBell,
+    FiBriefcase,
+    FiCalendar,
+    FiClipboard,
+    FiDollarSign,
+    FiFileText,
+    FiMonitor,
+    FiStar,
+} from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineUserGroup } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import Home from '../../pages/home'
@@ -181,7 +191,7 @@ export const teachersPrivateRoutes: IRoutes = {
     13: {
         id: 13,
         title: 'Рейтинговая система ППС',
-        icon: BiUserCircle,
+        icon: FiStar,
         path: KPI_PPS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
         isTemplate: false,
@@ -189,7 +199,7 @@ export const teachersPrivateRoutes: IRoutes = {
     14: {
         id: 14,
         title: 'Экспертиза рейтинговой системы ППС',
-        icon: BiMessageRounded,
+        icon: FiMonitor,
         path: KPI_ADMIN_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
         isTemplate: false,
@@ -197,7 +207,7 @@ export const teachersPrivateRoutes: IRoutes = {
     15: {
         id: 15,
         title: 'Анонсы научных мероприятий',
-        icon: FaRegLightbulb,
+        icon: RiNotificationBadgeLine,
         path: SC_NEWS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: SC_NEWS_ROUTE }),
         isTemplate: false,
@@ -253,7 +263,7 @@ export const teachersPrivateRoutes: IRoutes = {
     22: {
         id: 22,
         title: 'Сведения об оплатах',
-        icon: BiIdCard,
+        icon: FiDollarSign,
         path: PAYMENTS_ROUTE,
         Component: PaymentsPage,
         isTemplate: false,

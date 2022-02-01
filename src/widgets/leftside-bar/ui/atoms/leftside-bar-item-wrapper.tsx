@@ -20,6 +20,10 @@ const LeftsideBarItemWrapper = styled(Link)<{
 
     strong {
         width: 130px;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     svg {

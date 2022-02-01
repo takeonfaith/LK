@@ -1,7 +1,6 @@
 import { pepApi } from '@api'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { Button, LinkButton, SubmitButton } from '@ui/atoms'
-import useResize from '@utils/hooks/use-resize'
 import localizeDate from '@utils/localize-date'
 import React, { useEffect, useState } from 'react'
 import { FiDownload } from 'react-icons/fi'
@@ -55,10 +54,6 @@ const ElectronicInteractionAgreementPageWrapper = styled.div<{ showInfoText: boo
     }
 `
 
-// interface Data {
-
-// }
-
 const ElectronicInteractionAgreementPage = () => {
     const { open } = useModal()
     const [data, setData] = useState<any>(null)
@@ -83,15 +78,8 @@ const ElectronicInteractionAgreementPage = () => {
         pepApi.get().then((res) => setData(res.data[0]))
     }, [])
 
-    console.log(data)
-
     return !!data ? (
         <ElectronicInteractionAgreementPageWrapper showInfoText={!data.status && !done}>
-            {/* <embed
-                src="https://vk.com/doc3885147_630383620?hash=fd95a34e74ede7d4de&dl=dabc5842b8d20c1936"
-                width={width - 200}
-                height={height - 200}
-            /> */}
             <div className="center-section">
                 <LinkButton
                     href={data.file}
