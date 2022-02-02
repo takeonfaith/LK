@@ -1,3 +1,4 @@
+import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import {
     BiBookReader,
@@ -11,6 +12,7 @@ import {
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
+import { HiOutlineClipboardCheck } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import AcadPerformance from '../../pages/acad-performance'
 import Home from '../../pages/home'
@@ -22,6 +24,7 @@ export const HOME_ROUTE = '/home'
 export const MESSAGES_ROUTE = '/messages'
 export const TEMPLATE_CHAT_ROUTE = '/messages/:chatId'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
+export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const PAYMENTS_ROUTE = '/payments'
 export const APPLICATIONS_ROUTE = '/applications'
 export const SCHEDULE_ROUTE = '/schedule'
@@ -65,60 +68,60 @@ export const privateRoutes: IRoutes = {
         isTemplate: false,
     },
     1: {
-        //ChatPage
         id: 1,
+        title: 'Соглашение об электронном взаимодействии',
+        icon: HiOutlineClipboardCheck,
+        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
+        Component: ElectronicInteractionAgreementPage,
+        isTemplate: false,
+    },
+    2: {
+        //ChatPage
+        id: 2,
         title: 'Сообщения',
         icon: BiMessageRounded,
         path: MESSAGES_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/messages' }),
         isTemplate: true,
     },
-    2: {
-        id: 2,
+    3: {
+        id: 3,
         title: 'Расписание',
         icon: BiTimeFive,
         path: SCHEDULE_ROUTE,
         Component: SchedulePage,
         isTemplate: true,
     },
-    3: {
-        id: 3,
+    4: {
+        id: 4,
         title: 'Проектная деятельность',
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
         isTemplate: false,
     },
-    4: {
-        id: 4,
+    5: {
+        id: 5,
         title: 'Работа',
         icon: FiBriefcase,
         path: JOB_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
         isTemplate: false,
     },
-    5: {
-        id: 5,
+    6: {
+        id: 6,
         title: 'Оплата',
         icon: FiDollarSign,
         path: PAYMENTS_ROUTE,
         Component: PaymentsPage,
         isTemplate: false,
     },
-    6: {
-        id: 6,
+    7: {
+        id: 7,
         title: 'Заявления',
         icon: FiFileText,
         path: APPLICATIONS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
-        isTemplate: false,
-    },
-    7: {
-        id: 7,
-        title: 'Студенты',
-        icon: BiGroup,
-        path: ALL_STUDENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/stud_blanks' }),
         isTemplate: false,
     },
     8: {
@@ -151,6 +154,14 @@ export const privateRoutes: IRoutes = {
         icon: BiHeadphone,
         path: '/feedback',
         Component: () => PageIsNotReady({ oldVersionUrl: '/contact' }),
+        isTemplate: false,
+    },
+    12: {
+        id: 7,
+        title: 'Студенты',
+        icon: BiGroup,
+        path: ALL_STUDENTS_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/stud_blanks' }),
         isTemplate: false,
     },
 }

@@ -1,3 +1,4 @@
+import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import {
@@ -11,8 +12,18 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBell, FiBriefcase, FiCalendar, FiClipboard, FiFileText } from 'react-icons/fi'
-import { HiOutlineUserGroup } from 'react-icons/hi'
+import { RiNotificationBadgeLine } from 'react-icons/ri'
+import {
+    FiBell,
+    FiBriefcase,
+    FiCalendar,
+    FiClipboard,
+    FiDollarSign,
+    FiFileText,
+    FiMonitor,
+    FiStar,
+} from 'react-icons/fi'
+import { HiOutlineClipboardCheck, HiOutlineUserGroup } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
@@ -50,6 +61,7 @@ export const CENTERS_ROUTE = '/centers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
+export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 
 export const publicRoutes = [
     {
@@ -68,7 +80,7 @@ export interface IRoute {
     title: string
     icon: IconType
     path: string
-    Component: () => JSX.Element
+    Component: () => JSX.Element | string
     isTemplate: boolean
 }
 
@@ -85,12 +97,13 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => Home(),
         isTemplate: false,
     },
+
     1: {
         id: 1,
-        title: 'Сообщения',
-        icon: BiMessageRounded,
-        path: MESSAGES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: MESSAGES_ROUTE }),
+        title: 'Соглашение об электронном взаимодействии',
+        icon: HiOutlineClipboardCheck,
+        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
+        Component: () => ElectronicInteractionAgreementPage(),
         isTemplate: false,
     },
     2: {
@@ -158,12 +171,13 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: CHILDREN_ROUTE }),
         isTemplate: false,
     },
+
     10: {
-        id: 10,
-        title: 'Конкурс ППС',
-        icon: BiIdCard,
-        path: PPS_CONTEST_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        id: 1,
+        title: 'Сообщения',
+        icon: BiMessageRounded,
+        path: MESSAGES_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: MESSAGES_ROUTE }),
         isTemplate: false,
     },
     12: {
@@ -177,7 +191,7 @@ export const teachersPrivateRoutes: IRoutes = {
     13: {
         id: 13,
         title: 'Рейтинговая система ППС',
-        icon: BiUserCircle,
+        icon: FiStar,
         path: KPI_PPS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
         isTemplate: false,
@@ -185,7 +199,7 @@ export const teachersPrivateRoutes: IRoutes = {
     14: {
         id: 14,
         title: 'Экспертиза рейтинговой системы ППС',
-        icon: BiMessageRounded,
+        icon: FiMonitor,
         path: KPI_ADMIN_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
         isTemplate: false,
@@ -193,7 +207,7 @@ export const teachersPrivateRoutes: IRoutes = {
     15: {
         id: 15,
         title: 'Анонсы научных мероприятий',
-        icon: FaRegLightbulb,
+        icon: RiNotificationBadgeLine,
         path: SC_NEWS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: SC_NEWS_ROUTE }),
         isTemplate: false,
@@ -249,7 +263,7 @@ export const teachersPrivateRoutes: IRoutes = {
     22: {
         id: 22,
         title: 'Сведения об оплатах',
-        icon: BiIdCard,
+        icon: FiDollarSign,
         path: PAYMENTS_ROUTE,
         Component: PaymentsPage,
         isTemplate: false,
@@ -324,6 +338,14 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: FiBriefcase,
         path: VAX_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: VAX_ROUTE }),
+        isTemplate: false,
+    },
+    32: {
+        id: 10,
+        title: 'Конкурс ППС',
+        icon: BiIdCard,
+        path: PPS_CONTEST_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
         isTemplate: false,
     },
 }

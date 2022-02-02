@@ -30,24 +30,36 @@ const getScheduleFx = createEffect(async (user: User | null): Promise<IModules> 
             saturday: { lessons: [] },
         }
 
-        for (const key in response.data) {
-            const transformedKey = key.charAt(0).toLowerCase() + key.slice(1)
+        if (response.data.status !== 'error') {
+            for (const key in response.data) {
+                const transformedKey = key.charAt(0).toLowerCase() + key.slice(1)
 
-            fullSchedule[transformedKey] = response.data[key]
+                fullSchedule[transformedKey] = response.data[key]
+            }
+
+            for (const [key, value] of Object.entries(fullSchedule)) {
+                currentWeekSchedule[key as keyof IWeekSchedule].lessons = getCurrentDaySubjects(value.lessons)
+            }
         }
-
-        for (const key in sessionResponse.data) {
-            sessionSchedule[key] = sessionResponse.data[key]
-        }
-
-        for (const [key, value] of Object.entries(fullSchedule)) {
-            currentWeekSchedule[key as keyof IWeekSchedule].lessons = getCurrentDaySubjects(value.lessons)
+        if (sessionResponse.data.status !== 'error') {
+            for (const key in sessionResponse.data) {
+                sessionSchedule[key] = sessionResponse.data[key]
+            }
         }
 
         return {
-            '0': Object.keys(response.data).length ? (currentWeekSchedule as IWeekSchedule) : null,
-            '1': Object.keys(response.data).length ? (fullSchedule as IWeekSchedule) : null,
-            '2': Object.keys(sessionResponse.data).length ? (sessionSchedule as ISessionSchedule) : null,
+            '0':
+                Object.keys(response.data).length && response.data.status !== 'error'
+                    ? (currentWeekSchedule as IWeekSchedule)
+                    : null,
+            '1':
+                Object.keys(response.data).length && response.data.status !== 'error'
+                    ? (fullSchedule as IWeekSchedule)
+                    : null,
+            '2':
+                Object.keys(sessionResponse.data).length && sessionResponse.data.status !== 'error'
+                    ? (sessionSchedule as ISessionSchedule)
+                    : null,
         }
     } catch {
         throw new Error('Не удалось загрузить расписание')
