@@ -63,6 +63,16 @@ const LeftsideBarItemWrapper = styled(Link)<{
     strong {
         color: ${({ isCurrent }) => (isCurrent ? 'var(--blue)' : 'var(--text)')};
     }
+
+    @media (max-width: 1000px) {
+        strong {
+            width: 100%;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
 `
 
 export default LeftsideBarItemWrapper

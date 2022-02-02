@@ -24,7 +24,8 @@ const MistakeModal = () => {
         <MistakeModalWrapper>
             {user?.user_status === 'stud' ? (
                 <>
-                    Для изменения данных Вам необходимо обратиться в Ваше отделение центра по работе со студентами.
+                    Для изменения данных Вам необходимо обратиться в отделение центра по работе со студентами
+                    (многофункциональный центр)
                     <LinkButton
                         onClick={() => null}
                         href={'https://mospolytech.ru/obuchauschimsya/mnogofunkcionalnyy-centr/'}
