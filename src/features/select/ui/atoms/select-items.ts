@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
-const SelectItems = styled.ul<{ isOpen: boolean; itemsAmount: number }>`
-    max-width: 155px;
+const SelectItems = styled.ul<{ isOpen: boolean; itemsAmount: number; width?: string }>`
+    max-width: ${({ width }) => width ?? '155px'};
     width: 100%;
     min-width: 50px;
     height: ${({ itemsAmount }) => itemsAmount * 27.6 + 'px'};

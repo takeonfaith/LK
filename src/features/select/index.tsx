@@ -17,6 +17,7 @@ interface Props {
     selected: SelectPage
     isActive?: boolean
     title?: string
+    width?: string
 }
 
 const findCurrentPage = (pages: SelectPage[], path: string[]): SelectPage[] | undefined => {
@@ -28,7 +29,7 @@ const findCurrentPage = (pages: SelectPage[], path: string[]): SelectPage[] | un
     } else return page ? page.children : pages
 }
 
-const Select = ({ items, setSelected, selected, title, isActive = true }: Props) => {
+const Select = ({ items, setSelected, selected, title, width, isActive = true }: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const refElement = useRef<HTMLDivElement | null>(null)
     const refItems = useRef<HTMLUListElement | null>(null)
@@ -74,7 +75,7 @@ const Select = ({ items, setSelected, selected, title, isActive = true }: Props)
     })
 
     return (
-        <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive}>
+        <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive} width={width}>
             <SelectHeaderWrapper>
                 <SelectHeader>
                     {!!selected.icon && <span className="icon">{selected.icon}</span>}
@@ -83,6 +84,7 @@ const Select = ({ items, setSelected, selected, title, isActive = true }: Props)
                 <SelectArrow isOpen={isOpen} />
             </SelectHeaderWrapper>
             <SelectItems
+                width={width}
                 ref={refItems}
                 isOpen={isOpen}
                 className={isOpen ? 'open' : 'close'}

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean }>`
-    max-width: 155px;
-    width: 50%;
+const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: string }>`
+    max-width: ${({ width }) => width ?? '155px'};
+    width: 100%;
     min-width: 50px;
     min-height: 36px;
     height: 36px;

@@ -99,6 +99,7 @@ const Input = ({
             {leftIcon && <span className="icon">{leftIcon}</span>}
             <input
                 type={inputType}
+                pattern={inputType === 'tell' ? '+7([0-9]{3}) [0-9]{3}-[0-9]{3}-[0-9]{2}' : undefined}
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}

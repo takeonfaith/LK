@@ -20,6 +20,10 @@ const LeftsideBarItemWrapper = styled(Link)<{
 
     strong {
         width: 130px;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     svg {
@@ -58,6 +62,16 @@ const LeftsideBarItemWrapper = styled(Link)<{
     svg,
     strong {
         color: ${({ isCurrent }) => (isCurrent ? 'var(--blue)' : 'var(--text)')};
+    }
+
+    @media (max-width: 1000px) {
+        strong {
+            width: 100%;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 `
 

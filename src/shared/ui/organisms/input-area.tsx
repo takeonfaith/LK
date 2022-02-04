@@ -2,13 +2,14 @@ import { Colors } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import Select, { SelectPage } from '@features/select'
 import { Button, Input, LoadFileButton, Title } from '@ui/atoms'
+import Tooltip from '@ui/atoms/tooltip'
 import { SwitchToggle } from '@ui/molecules'
 import React, { useEffect, useState } from 'react'
-import { FiPlusCircle, FiSave, FiXCircle } from 'react-icons/fi'
-import { HiChevronDown, HiOutlineCheckCircle, HiOutlinePencil } from 'react-icons/hi'
+import { FiPlusCircle, FiSave, FiInfo } from 'react-icons/fi'
+import { HiChevronDown, HiOutlineCheckCircle, HiOutlineExclamationCircle, HiOutlinePencil } from 'react-icons/hi'
 import styled from 'styled-components'
 
-const InputAreaWrapper = styled.div<{ openArea: boolean; amount: number; withLoadDoc: boolean }>`
+const InputAreaWrapper = styled.div<{ openArea: boolean; amount: number; withLoadDoc: boolean; hint: boolean }>`
     display: flex;
     flex-direction: column;
     transition: 0.2s row-gap;
@@ -23,33 +24,41 @@ const InputAreaWrapper = styled.div<{ openArea: boolean; amount: number; withLoa
         top: -2px;
         background: var(--schedule);
         z-index: 3;
+    }
 
-        .title-and-icon {
+    .title-and-icon {
+        display: flex;
+        align-items: center;
+
+        h4 {
+            margin-right: 10px;
+        }
+
+        .icon {
+            margin-right: 10px;
             display: flex;
             align-items: center;
-
-            h4 {
-                margin-right: 10px;
-            }
-
-            .icon {
-                margin-right: 10px;
-                display: flex;
-                align-items: center;
-                svg {
-                    width: 18px;
-                    height: 18px;
-                }
-            }
-
-            .icon.success {
-                color: var(--green);
-            }
-
-            .icon.failure {
-                color: var(--red);
+            svg {
+                width: 18px;
+                height: 18px;
             }
         }
+
+        .icon.success {
+            color: var(--green);
+        }
+
+        .icon.failure {
+            color: var(--red);
+        }
+    }
+
+    .hint {
+        font-size: 0.8em;
+        opacity: 0.7;
+        padding: 10px;
+        background: var(--almostTransparentOpposite);
+        border-radius: var(--brLight);
     }
 
     .inputs {
@@ -57,11 +66,11 @@ const InputAreaWrapper = styled.div<{ openArea: boolean; amount: number; withLoa
         flex-direction: column;
         row-gap: 15px;
         transition: 0.2s height, 0.2s opacity, 0.2s visibility;
-        height: ${({ openArea, amount, withLoadDoc }) =>
+        height: ${({ openArea, amount, withLoadDoc, hint }) =>
             openArea
                 ? withLoadDoc
-                    ? amount * 57 + 36 + 15 * amount - 1 + 150 + 'px'
-                    : amount * 57 + 36 + 15 * amount - 1 + 'px'
+                    ? amount * 57 + 36 + 15 * amount - 1 + 150 + (hint ? 50 : 0) + 'px'
+                    : amount * 57 + 36 + 15 * amount - 1 + (hint ? 50 : 0) + 'px'
                 : '0'};
         opacity: ${({ openArea }) => (openArea ? '1' : '0')};
         visibility: ${({ openArea }) => (openArea ? 'visible' : 'hidden')};
@@ -76,16 +85,18 @@ const InputAreaWrapper = styled.div<{ openArea: boolean; amount: number; withLoa
 export interface IInputArea {
     title: string
     value: string | SelectPage
-    type?: 'select' | 'input'
+    type?: 'select' | 'text' | 'tel' | 'email' | 'date'
     items?: SelectPage[]
+    width?: string
 }
 
 interface Props {
     title: string
+    hint?: string
     data: IInputArea[]
     confirmed?: boolean
     setConfirmed?: React.Dispatch<React.SetStateAction<boolean>>
-    setData: React.Dispatch<React.SetStateAction<any>>
+    setData: React.Dispatch<React.SetStateAction<IInputArea[]>>
     optional?: boolean
     loadDoc?: boolean
     addNew?: boolean
@@ -93,6 +104,7 @@ interface Props {
 
 const InputArea = ({
     title,
+    hint,
     data,
     setData,
     setConfirmed,
@@ -151,7 +163,12 @@ const InputArea = ({
     }, [included])
 
     return (
-        <InputAreaWrapper openArea={openArea} amount={data.length} withLoadDoc={loadDoc && changeInputArea}>
+        <InputAreaWrapper
+            openArea={openArea}
+            amount={data.length}
+            withLoadDoc={loadDoc && changeInputArea}
+            hint={!!hint && changeInputArea}
+        >
             <div className="area-title" onClick={() => (included || !optional) && setOpenArea((prev) => !prev)}>
                 <div className="title-and-icon">
                     {confirmed ? (
@@ -160,7 +177,7 @@ const InputArea = ({
                         </span>
                     ) : (
                         <span className="icon failure">
-                            <FiXCircle />
+                            <HiOutlineExclamationCircle />
                         </span>
                     )}
                     <Title size={4} align="left">
@@ -178,23 +195,35 @@ const InputArea = ({
                 <Button icon={<HiChevronDown />} onClick={() => null} background="transparent" />
             </div>
             <div className="inputs">
-                {data.map(({ title, value, type, items }, i) => {
+                {hint && changeInputArea && (
+                    <div className="hint">
+                        <div className="title-and-icon">
+                            <Title size={5} align="left" icon={<FiInfo />} bottomGap>
+                                Как заполнить
+                            </Title>
+                        </div>
+                        {hint}
+                    </div>
+                )}
+                {data.map(({ title, value, type, items, width }, i) => {
                     return type !== 'select' || !items ? (
                         <Input
                             value={value as string}
                             title={title}
                             setValue={(value) => handleChangeValue(value, i)}
                             key={title + i}
-                            isActive={changeInputArea}
+                            type={type}
+                            isActive={changeInputArea && !loadDoc}
                         />
                     ) : (
                         <Select
                             items={items}
                             setSelected={(value) => handleChangeSelect(value as SelectPage, i)}
                             selected={value as SelectPage}
-                            isActive={changeInputArea}
+                            isActive={changeInputArea && !loadDoc}
                             title={title}
                             key={i}
+                            width={width}
                         />
                     )
                 })}
@@ -226,7 +255,7 @@ const InputArea = ({
                             ) : (
                                 <>
                                     <Button
-                                        onClick={() => setChangeInputArea(false)}
+                                        onClick={handleConfirm}
                                         text="Сохранить"
                                         icon={<FiSave />}
                                         textColor={Colors.blue.main}
