@@ -76,6 +76,7 @@ const Select = ({ items, setSelected, selected, title, width, isActive = true }:
 
     return (
         <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive} width={width}>
+            {!!title && <h5>{title}</h5>}
             <SelectHeaderWrapper>
                 <SelectHeader>
                     {!!selected.icon && <span className="icon">{selected.icon}</span>}
@@ -89,6 +90,7 @@ const Select = ({ items, setSelected, selected, title, width, isActive = true }:
                 isOpen={isOpen}
                 className={isOpen ? 'open' : 'close'}
                 itemsAmount={currentItems.length + (!!route.length ? 1 : 0)}
+                title={title}
             >
                 {!!route.length && (
                     <SelectItem

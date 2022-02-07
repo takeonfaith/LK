@@ -3,14 +3,14 @@ import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Button from './button'
 
-const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean }>`
+const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputAppearance: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     width: 100%;
     pointer-events: ${({ isActive }) => !isActive && 'none'};
-    opacity: ${({ isActive }) => !isActive && 0.6};
+    opacity: ${({ isActive }) => !isActive && 0.7};
 
     h5 {
         margin-bottom: 5px;
@@ -29,14 +29,15 @@ const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean }>`
         border: none;
         color: var(--text);
         outline: none;
-        background: var(--search);
+        background: ${({ inputAppearance }) => (inputAppearance ? 'var(--search)' : 'transparent')};
         height: 100%;
         width: 100%;
         padding: 10px;
         font-weight: bold;
         border-radius: 7px;
-        padding-left: ${({ leftIcon }) => (leftIcon ? '30px' : '10px')};
+        padding-left: ${({ leftIcon, inputAppearance }) => (leftIcon ? '30px' : inputAppearance ? '10px' : '0')};
         padding-right: 35px;
+        max-height: 36px;
 
         &::placeholder {
             font-weight: 500;
@@ -81,6 +82,7 @@ interface Props {
     placeholder?: string
     type?: string
     isActive?: boolean
+    inputAppearance?: boolean
 }
 
 const Input = ({
@@ -91,10 +93,11 @@ const Input = ({
     placeholder = 'Введите сюда',
     type = 'text',
     isActive = true,
+    inputAppearance = true,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
     return (
-        <InputWrapper leftIcon={!!leftIcon} isActive={isActive}>
+        <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance}>
             {!!title && <h5>{title}</h5>}
             {leftIcon && <span className="icon">{leftIcon}</span>}
             <input
@@ -105,7 +108,8 @@ const Input = ({
                 onChange={(e) => setValue(e.target.value)}
             />
             {type !== 'password' ? (
-                !!value.length && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
+                !!value.length &&
+                inputAppearance && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
             ) : (
                 <Button
                     icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}

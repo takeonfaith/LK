@@ -5,7 +5,6 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
     width: 100%;
     min-width: 50px;
     min-height: 36px;
-    height: 36px;
 
     position: relative;
     user-select: none;
@@ -13,7 +12,7 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
     white-space: nowrap;
     font-size: 0.9em;
     z-index: ${({ isOpen }) => (isOpen ? 5 : 2)};
-    opacity: ${({ isActive }) => !isActive && 0.6};
+    opacity: ${({ isActive }) => !isActive && 0.7};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
 
     color: var(--text);
@@ -21,6 +20,10 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
     transition: 0.3s;
     &:active {
         transform: translateY(3px);
+    }
+
+    h5 {
+        margin-bottom: 5px;
     }
 `
 

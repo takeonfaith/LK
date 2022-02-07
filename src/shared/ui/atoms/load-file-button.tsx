@@ -134,7 +134,11 @@ const LoadFileButton = ({ label, files, setFiles }: Props) => {
                 }
             } else {
                 //  files[i].invalid = true
-                popUpMessageModel.events.evokePopUpMessage({ message: 'Неверный формат файла.', type: 'failure' })
+                popUpMessageModel.events.evokePopUpMessage({
+                    message: 'Неверный формат файла.',
+                    type: 'failure',
+                    time: 5000,
+                })
             }
         }
     }

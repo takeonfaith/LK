@@ -48,8 +48,8 @@ const ButtonWrapper = styled.button<{
 
     svg {
         margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')};
-        width: ${({ direction }) => (direction === 'vertical' ? '20px' : '15px')};
-        height: ${({ direction }) => (direction === 'vertical' ? '20px' : '15px')};
+        width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
+        height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
         margin-bottom: ${({ direction }) => direction === 'vertical' && '4px'};
     }
 
