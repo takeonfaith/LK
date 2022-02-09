@@ -14,8 +14,10 @@ const TitleWrapper = styled.div<{ align: 'left' | 'center' | 'right'; bottomGap:
     width: 100%;
     text-align: ${({ align }) => align};
     margin-bottom: ${({ bottomGap }) => (bottomGap ? '10px' : '0')};
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: ${({ align }) =>
+        align ? (align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : align) : 'center'};
 
     svg {
         margin-right: 4px;
