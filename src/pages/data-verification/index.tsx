@@ -2,8 +2,8 @@ import { userModel } from '@entities/user'
 import createFullName from '@features/home/lib/create-full-name'
 import { Divider, SubmitButton, Title } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
-import { InputArea } from '@ui/organisms'
-import { IComplexInputArea, IInputArea } from '@ui/organisms/input-area'
+import InputArea from '@ui/input-area'
+import { IInputArea } from '@ui/input-area'
 import transformSex from '@utils/transform-sex'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -44,187 +44,286 @@ const DataVerificationPage = () => {
 
     if (!user?.id) return <></>
 
-    const [personalData, setPersonalData] = useState<IInputArea[]>([
-        {
-            id: 0,
-            title: 'ФИО',
-            value: createFullName({ name: user?.name, surname: user?.surname, patronymic: user?.patronymic }),
-        },
-        {
-            id: 1,
-            title: 'Пол',
-            value: transformSex(user.sex),
-        },
-        {
-            id: 2,
-            title: 'Дата рождения',
-            value: '1990-01-20',
-            type: 'date',
-        },
-        {
-            id: 3,
-            title: 'Место рождения',
-            value: 'Москва',
-        },
-    ])
-    const [personalConfirmed, setPersonalConfirmed] = useState(false)
-
-    const [education, setEducation] = useState<IInputArea[]>([
-        { id: 0, title: 'Наименование учебного заведения', value: '' },
-        {
-            id: 1,
-            title: 'Уровень образования',
-            value: { id: 'special', title: 'Специалитет' },
-            type: 'select',
-            width: '100%',
-            items: [
-                { id: 'special', title: 'Специалитет' },
-                { id: 'asp', title: 'Аспирантура' },
-                { id: 'maga', title: 'Магистратура' },
-                { id: 'bach', title: 'Бакалавр' },
-            ],
-        },
-        {
-            id: 2,
-            title: 'Год окончания',
-            value: { id: 'year', title: '2001' },
-            type: 'select',
-            width: '100%',
-            items: Array(50)
-                .fill(0)
-                .map((_, i) => {
-                    return { id: i + 1970, title: `${i + 1970}` }
-                }),
-        },
-        { id: 3, title: 'Направление подготовки', value: '' },
-    ])
-    const [educationConfirmed, setEducationConfirmed] = useState(false)
-
-    const [language, setLanguage] = useState<IComplexInputArea>([
-        [
+    const [personalData, setPersonalData] = useState<IInputArea>({
+        title: 'Личные данные',
+        hint: 'Текст подсказки',
+        data: [
             {
-                id: 0,
-                title: 'Язык',
-                value: 'Английский',
+                title: 'ФИО',
+                value: createFullName({ name: user?.name, surname: user?.surname, patronymic: user?.patronymic }),
             },
             {
-                id: 1,
-                title: 'Уровень владения',
-                value: { id: 'a', title: 'Читаю и перевожу со словарем' },
+                title: 'Пол',
+                value: transformSex(user.sex),
+            },
+            {
+                title: 'Дата рождения',
+                value: '1990-01-20',
+                type: 'date',
+            },
+            {
+                title: 'Место рождения',
+                value: 'Москва',
+            },
+        ],
+        documents: { files: [], required: true },
+        confirmed: false,
+    })
+
+    const [familyStatus, setFamilyStatus] = useState<IInputArea>({
+        title: 'Семейное положение',
+        hint: 'Текст подсказки',
+        data: [
+            {
+                title: '',
+                value: { id: 'married', title: 'Замужем/Женат' },
                 type: 'select',
                 items: [
-                    { id: 'a', title: 'Читаю и перевожу со словарем' },
-                    { id: 'b', title: 'Читаю и могу объясняться' },
-                    { id: 'с', title: 'Владею свободно' },
+                    { id: 'single', title: 'Холост/Не замужем' },
+                    { id: 'married', title: 'Замужем/Женат' },
+                    { id: 'divorced', title: 'Разведен/Разведена' },
+                    { id: 'widow', title: 'Вдовец/Вдова' },
                 ],
                 width: '100%',
             },
         ],
-    ])
-    const [languageConfirmed, setLanguageConfirmed] = useState(false)
-
-    const [familyStatus, setFamilyStatus] = useState<IInputArea[]>([
-        {
-            id: 0,
-            title: '',
-            value: { id: 'married', title: 'Замужем/Женат' },
-            type: 'select',
-            items: [
-                { id: 'single', title: 'Холост/Не замужем' },
-                { id: 'married', title: 'Замужем/Женат' },
-                { id: 'divorced', title: 'Разведен/Разведена' },
-                { id: 'widow', title: 'Вдовец/Вдова' },
+        confirmed: false,
+    })
+    const [family, setFamily] = useState<IInputArea>({
+        title: 'Состав семьи',
+        hint: 'Текст подсказки',
+        data: [
+            [
+                {
+                    title: 'Степень родства',
+                    value: { id: 'mother', title: 'Мать' },
+                    type: 'select',
+                    items: [
+                        { id: 'mother', title: 'Мать' },
+                        { id: 'father', title: 'Отец' },
+                        { id: 'wife', title: 'Жена' },
+                        { id: 'husband', title: 'Муж' },
+                        { id: 'sister', title: 'Сестра' },
+                        { id: 'brother', title: 'Брат' },
+                        { id: 'son', title: 'Сын' },
+                        { id: 'daughter', title: 'Дочь' },
+                    ],
+                },
+                {
+                    title: 'ФИО',
+                    value: '',
+                    required: true,
+                },
+                {
+                    title: 'Дата рождения',
+                    value: '1990-01-21',
+                    type: 'date',
+                    required: true,
+                },
             ],
-            width: '100%',
-        },
-    ])
-    const [familyStatusConfirmed, setFamilyStatusConfirmed] = useState(false)
+        ],
+        default: [
+            [
+                {
+                    title: 'Степень родства',
+                    value: { id: 'mother', title: 'Мать' },
+                    type: 'select',
+                    items: [
+                        { id: 'mother', title: 'Мать' },
+                        { id: 'father', title: 'Отец' },
+                        { id: 'wife', title: 'Жена' },
+                        { id: 'husband', title: 'Муж' },
+                        { id: 'sister', title: 'Сестра' },
+                        { id: 'brother', title: 'Брат' },
+                        { id: 'son', title: 'Сын' },
+                        { id: 'daughter', title: 'Дочь' },
+                    ],
+                },
+                {
+                    title: 'ФИО',
+                    value: '',
+                    required: true,
+                },
+                {
+                    title: 'Дата рождения',
+                    value: '1990-01-21',
+                    type: 'date',
+                    required: true,
+                },
+            ],
+        ],
+        addNew: true,
+        confirmed: false,
+    })
 
-    const [family, setFamily] = useState<IComplexInputArea>([
-        [
+    const [education, setEducation] = useState<IInputArea>({
+        title: 'Образование',
+        hint: 'Текст подсказки',
+        data: [
+            { title: 'Наименование учебного заведения', value: '', required: true },
             {
-                id: 0,
-                title: 'Степень родства',
-                value: { id: 'mother', title: 'Мать' },
+                title: 'Уровень образования',
+                value: { id: 'special', title: 'Специалитет' },
                 type: 'select',
+                width: '100%',
                 items: [
-                    { id: 'mother', title: 'Мать' },
-                    { id: 'father', title: 'Отец' },
-                    { id: 'wife', title: 'Жена' },
-                    { id: 'husband', title: 'Муж' },
-                    { id: 'sister', title: 'Сестра' },
-                    { id: 'brother', title: 'Брат' },
-                    { id: 'son', title: 'Сын' },
-                    { id: 'daughter', title: 'Дочь' },
+                    { id: 'special', title: 'Специалитет' },
+                    { id: 'asp', title: 'Аспирантура' },
+                    { id: 'maga', title: 'Магистратура' },
+                    { id: 'bach', title: 'Бакалавр' },
                 ],
             },
             {
-                id: 1,
-                title: 'ФИО',
-                value: '',
+                title: 'Год окончания',
+                value: { id: 'year', title: '2001' },
+                type: 'select',
+                width: '100%',
+                items: Array(50)
+                    .fill(0)
+                    .map((_, i) => {
+                        return { id: i + 1970, title: `${i + 1970}` }
+                    }),
             },
-            {
-                id: 2,
-                title: 'Дата рождения',
-                value: '1990-01-21',
-                type: 'date',
-            },
+            { title: 'Направление подготовки', value: '', required: true },
         ],
-    ])
-    const [familyConfirmed, setFamilyConfirmed] = useState(false)
+        documents: { files: [], required: true },
+        confirmed: false,
+    })
 
-    const [passport, setPassport] = useState<IInputArea[]>([
-        { id: 0, title: 'Серия', value: '' },
-        { id: 1, title: 'Номер', value: '' },
-        { id: 2, title: 'Кем выдан', value: '' },
-    ])
-    const [passportConfirmed, setPassportConfirmed] = useState(false)
+    const [language, setLanguage] = useState<IInputArea>({
+        title: 'Знание иностранных языков',
+        hint: 'Текст подсказки',
+        data: [
+            [
+                {
+                    title: 'Язык',
+                    value: 'Английский',
+                },
+                {
+                    title: 'Уровень владения',
+                    value: { id: 'a', title: 'Читаю и перевожу со словарем' },
+                    type: 'select',
+                    items: [
+                        { id: 'a', title: 'Читаю и перевожу со словарем' },
+                        { id: 'b', title: 'Читаю и могу объясняться' },
+                        { id: 'с', title: 'Владею свободно' },
+                    ],
+                    width: '100%',
+                },
+            ],
+        ],
+        default: [
+            [
+                {
+                    title: 'Язык',
+                    value: 'Английский',
+                },
+                {
+                    title: 'Уровень владения',
+                    value: { id: 'a', title: 'Читаю и перевожу со словарем' },
+                    type: 'select',
+                    items: [
+                        { id: 'a', title: 'Читаю и перевожу со словарем' },
+                        { id: 'b', title: 'Читаю и могу объясняться' },
+                        { id: 'с', title: 'Владею свободно' },
+                    ],
+                    width: '100%',
+                },
+            ],
+        ],
+        addNew: true,
+        confirmed: false,
+    })
 
-    const [driveLicense, setDriveLicense] = useState<IInputArea[]>([
-        { id: 0, title: 'Номер', value: '' },
-        {
-            id: 1,
-            title: 'Категория',
-            value: '',
+    const [passport, setPassport] = useState<IInputArea>({
+        title: 'Паспортные данные',
+        hint: 'Текст подсказки',
+        data: [
+            { title: 'Серия', value: '', required: true },
+            { title: 'Номер', value: '', required: true },
+            { title: 'Кем выдан', value: '', required: true },
+        ],
+        documents: { files: [], required: true },
+        confirmed: false,
+    })
+
+    const [driveLicense, setDriveLicense] = useState<IInputArea>({
+        title: 'Водительское удостоверение',
+        hint: 'Текст подсказки',
+        data: [],
+        optionalCheckbox: {
+            title: 'Водительское удостоверение отсутствует',
+            value: false,
+            required: true,
         },
-        { id: 2, title: 'Дата выдачи', value: '' },
-    ])
-    const [driveConfirmed, setDriveConfirmed] = useState(false)
-    const [noDriveLicense, setNoDriveLicense] = useState(false)
+        documents: { files: [], required: true },
+        confirmed: false,
+    })
 
-    const [registration, setRegistration] = useState<IInputArea[]>([
-        { id: 0, title: 'Адрес регистрации', value: '' },
-        { id: 1, title: 'Дата регистрации', value: '' },
-    ])
-    const [registrationConfirmed, setRegistrationConfirmed] = useState(false)
-    const [noRegistration, setNoRegistration] = useState(false)
+    const [registration, setRegistration] = useState<IInputArea>({
+        title: 'Регистрация',
+        hint: 'Текст подсказки',
+        data: [
+            { title: 'Адрес регистрации', value: '' },
+            { title: 'Дата регистрации', value: '' },
+        ],
+        documents: { files: [], required: true },
+        optionalCheckbox: {
+            title: 'Регистрация отсутствует',
+            value: false,
+            required: true,
+        },
+        confirmed: false,
+    })
 
-    const [location, setLocation] = useState<IInputArea[]>([
-        { id: 0, title: 'Адрес проживания', value: '' },
-        { id: 1, title: 'Дата начала проживания', value: '' },
-    ])
-    const [locationConfirmed, setLocationConfirmed] = useState(false)
+    const [location, setLocation] = useState<IInputArea>({
+        title: 'Проживание',
+        hint: 'Текст подсказки',
+        data: [
+            { title: 'Адрес проживания', value: '', required: true },
+            { title: 'Дата начала проживания', value: '', required: true },
+        ],
+        optionalCheckbox: { title: 'Адрес проживания совпадает с адресом регистрации', value: false, required: true },
+        confirmed: false,
+    })
 
-    const [contactInfo, setContactInfo] = useState<IInputArea[]>([
-        { id: 0, title: 'Мобильный телефон (личный)', type: 'tel', value: '+79423131231' },
-        { id: 1, title: 'Мобильный телефон (рабочий)', type: 'tel', value: '+79423131231' },
-        { id: 2, title: 'Служебный телефон (прямой/дополнительный)', type: 'tel', value: '+79423131231' },
-        { id: 3, title: 'Личный e-mail', type: 'email', value: 'temp@gmail.com' },
-        { id: 4, title: 'Рабочий e-mail', type: 'email', value: 'temp@gmail.com' },
-    ])
-    const [contactConfirmed, setContactConfirmed] = useState(false)
+    const [contactInfo, setContactInfo] = useState<IInputArea>({
+        title: 'Контактные данные',
+        hint: 'Текст подсказки',
+        data: [
+            { title: 'Мобильный телефон (личный)', type: 'tel', value: '+79423131231', required: true },
+            { title: 'Мобильный телефон (рабочий)', type: 'tel', value: '+79423131231' },
+            { title: 'Служебный телефон (прямой/дополнительный)', type: 'tel', value: '+79423131231' },
+            { title: 'Личный e-mail', type: 'email', value: 'temp@gmail.com', required: true },
+            { title: 'Рабочий e-mail', type: 'email', value: 'temp@gmail.com' },
+        ],
+        confirmed: false,
+    })
 
-    const [army, setArmy] = useState<IInputArea[]>([])
-    const [armyConfirmed, setArmyConfirmed] = useState(false)
-    const [noArmyDocument, setNoArmyDocument] = useState(false)
+    const [army, setArmy] = useState<IInputArea>({
+        title: 'Воинская служба',
+        hint: 'Текст подсказки',
+        data: [],
+        documents: { files: [], required: true },
+        optionalCheckbox: {
+            title: 'Документ о воинской службе отсутствует',
+            value: false,
+            required: true,
+        },
+        confirmed: false,
+    })
 
     const [confirmAll, setConfirmAll] = useState(false)
 
-    useEffect(() => {
-        window.onbeforeunload = function () {
-            window.alert('Точно?')
+    window.onbeforeunload = (event) => {
+        const e = event || window.event
+        // Cancel the event
+        e.preventDefault()
+        if (e) {
+            e.returnValue = '' // Legacy method for cross browser support
         }
-    }, [])
+        return '' // Legacy method for cross browser support
+    }
 
     return (
         <DataVerificationPageWrapper>
@@ -232,135 +331,32 @@ const DataVerificationPage = () => {
                 <Title size={3} align="left" bottomGap>
                     Подтвердите корректность указанных данных
                 </Title>
-                <InputArea
-                    confirmed={personalConfirmed}
-                    setConfirmed={setPersonalConfirmed}
-                    title={'Личные данные'}
-                    hint={'Текст подсказки'}
-                    data={personalData}
-                    setData={setPersonalData}
-                    loadDoc
-                />
+                <InputArea {...personalData} setData={setPersonalData} />
                 <Divider />
-                <InputArea
-                    confirmed={familyStatusConfirmed}
-                    setConfirmed={setFamilyStatusConfirmed}
-                    title={'Семейное положение'}
-                    hint={'Текст подсказки'}
-                    data={familyStatus}
-                    setData={setFamilyStatus}
-                />
+                <InputArea {...contactInfo} setData={setContactInfo} />
                 <Divider />
-                <InputArea
-                    confirmed={familyConfirmed}
-                    setConfirmed={setFamilyConfirmed}
-                    title={'Состав семьи'}
-                    hint={'Текст подсказки'}
-                    data={family}
-                    setData={setFamily}
-                    addNew
-                />
+                <InputArea {...passport} setData={setPassport} />
                 <Divider />
-                <InputArea
-                    confirmed={educationConfirmed}
-                    setConfirmed={setEducationConfirmed}
-                    title={'Образование'}
-                    hint={'Текст подсказки'}
-                    data={education}
-                    setData={setEducation}
-                    loadDoc
-                />
+                <InputArea {...registration} setData={setRegistration} />
                 <Divider />
-                <InputArea
-                    confirmed={languageConfirmed}
-                    setConfirmed={setLanguageConfirmed}
-                    title={'Знание иностранных языков'}
-                    hint={'Текст подсказки'}
-                    data={language}
-                    setData={setLanguage}
-                    addNew
-                />
+                <InputArea {...location} setData={setLocation} />
                 <Divider />
-                <InputArea
-                    confirmed={passportConfirmed}
-                    setConfirmed={setPassportConfirmed}
-                    title={'Паспортные данные'}
-                    hint={'Текст подсказки'}
-                    data={passport}
-                    setData={setPassport}
-                    loadDoc
-                />
+                <InputArea {...familyStatus} setData={setFamilyStatus} />
                 <Divider />
-                <InputArea
-                    confirmed={driveConfirmed}
-                    setConfirmed={setDriveConfirmed}
-                    title={'Водительское удостоверение'}
-                    hint={'Текст подсказки'}
-                    data={driveLicense}
-                    setData={setDriveLicense}
-                    optionalCheckbox={{
-                        title: 'Водительское удостоверение отсутствует',
-                        value: noDriveLicense,
-                        setValue: setNoDriveLicense,
-                    }}
-                    loadDoc
-                />
+                <InputArea {...family} setData={setFamily} />
                 <Divider />
-                <InputArea
-                    confirmed={registrationConfirmed}
-                    setConfirmed={setRegistrationConfirmed}
-                    title={'Регистрация'}
-                    hint={'Текст подсказки'}
-                    data={registration}
-                    setData={setRegistration}
-                    loadDoc
-                    optionalCheckbox={{
-                        title: 'Регистрация отсутствует',
-                        value: noRegistration,
-                        setValue: setNoRegistration,
-                        fileNeeded: true,
-                    }}
-                />
+                <InputArea {...education} setData={setEducation} />
                 <Divider />
-                <InputArea
-                    confirmed={locationConfirmed}
-                    setConfirmed={setLocationConfirmed}
-                    title={'Проживание'}
-                    hint={'Текст подсказки'}
-                    data={location}
-                    setData={setLocation}
-                />
+                <InputArea {...language} setData={setLanguage} />
                 <Divider />
-                <InputArea
-                    confirmed={contactConfirmed}
-                    setConfirmed={setContactConfirmed}
-                    title={'Контактные данные'}
-                    hint={'Текст подсказки'}
-                    data={contactInfo}
-                    setData={setContactInfo}
-                />
+                <InputArea {...driveLicense} setData={setDriveLicense} />
                 <Divider />
-                <InputArea
-                    confirmed={armyConfirmed}
-                    setConfirmed={setArmyConfirmed}
-                    title={'Воинская служба'}
-                    hint={'Текст подсказки'}
-                    data={army}
-                    setData={setArmy}
-                    loadDoc
-                    optionalCheckbox={{
-                        title: 'Документ о воинской службе отсутствует',
-                        value: noArmyDocument,
-                        setValue: (value) => setNoArmyDocument(value),
-                    }}
-                />
-
+                <InputArea {...army} setData={setArmy} />
                 <Checkbox
                     checked={confirmAll}
                     setChecked={setConfirmAll}
                     text={'Я подтверждаю корректность указанных данных'}
                 />
-
                 <SubmitButton
                     text={'Отправить'}
                     action={function (): void {
@@ -372,13 +368,13 @@ const DataVerificationPage = () => {
                         throw new Error('Function not implemented.')
                     }}
                     isActive={
-                        armyConfirmed &&
-                        driveConfirmed &&
-                        personalConfirmed &&
-                        locationConfirmed &&
-                        passportConfirmed &&
-                        educationConfirmed &&
-                        confirmAll
+                        !!army.confirmed &&
+                        !!driveLicense.confirmed &&
+                        !!personalData.confirmed &&
+                        !!location.confirmed &&
+                        !!passport.confirmed &&
+                        !!education.confirmed &&
+                        !!confirmAll
                     }
                     popUpFailureMessage="Для отправки формы необходимо, чтобы все поля были подтверждены"
                     popUpSuccessMessage="Данные формы успешно отправлены"

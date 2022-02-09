@@ -14,6 +14,11 @@ const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputApp
 
     h5 {
         margin-bottom: 5px;
+
+        .red-star {
+            color: var(--red);
+            margin-right: 5px;
+        }
     }
 
     .icon {
@@ -83,6 +88,7 @@ interface Props {
     type?: string
     isActive?: boolean
     inputAppearance?: boolean
+    required?: boolean
 }
 
 const Input = ({
@@ -90,6 +96,7 @@ const Input = ({
     setValue,
     leftIcon,
     title,
+    required,
     placeholder = 'Введите сюда',
     type = 'text',
     isActive = true,
@@ -98,7 +105,12 @@ const Input = ({
     const [inputType, setInputType] = useState(type)
     return (
         <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance}>
-            {!!title && <h5>{title}</h5>}
+            {!!title && (
+                <h5>
+                    {required && <span className="red-star">*</span>}
+                    {title}
+                </h5>
+            )}
             {leftIcon && <span className="icon">{leftIcon}</span>}
             <input
                 type={inputType}
@@ -106,6 +118,7 @@ const Input = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
+                required={required}
             />
             {type !== 'password' ? (
                 !!value.length &&

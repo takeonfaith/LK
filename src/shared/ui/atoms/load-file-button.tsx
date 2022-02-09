@@ -104,7 +104,7 @@ interface Props {
     label: string
     maxFileSizeInBytes: number
     files: File[]
-    setFiles: React.Dispatch<React.SetStateAction<File[]>>
+    setFiles: (args: any) => void
 }
 
 const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
@@ -121,16 +121,16 @@ const LoadFileButton = ({ label, files, setFiles }: Props) => {
         return true
     }
 
-    const handleFiles = (files: FileList) => {
-        for (let i = 0; i < files.length; i++) {
-            if (validateFile(files[i])) {
-                if (files[i].size > 20000000) {
+    const handleFiles = (loadedFiles: FileList) => {
+        for (let i = 0; i < loadedFiles.length; i++) {
+            if (validateFile(loadedFiles[i])) {
+                if (loadedFiles[i].size > 20000000) {
                     popUpMessageModel.events.evokePopUpMessage({
                         message: 'Размер файла слишком большой.',
                         type: 'failure',
                     })
                 } else {
-                    setFiles((prev) => [...prev, files[i]])
+                    setFiles([...files, loadedFiles[i]])
                 }
             } else {
                 //  files[i].invalid = true
@@ -193,7 +193,7 @@ const LoadFileButton = ({ label, files, setFiles }: Props) => {
         e.stopPropagation()
         const tempFiles = files.filter((file) => file.name !== name)
 
-        setFiles(tempFiles)
+        setFiles([...tempFiles])
     }
 
     return (

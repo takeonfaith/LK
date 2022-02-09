@@ -23,7 +23,7 @@ const SelectItems = styled.ul<{ isOpen: boolean; itemsAmount: number; width?: st
     &.open {
         opacity: 1;
         visibility: visible;
-        top: 46px;
+        top: ${({ title }) => (!!title ? '60px' : '46px')};
     }
 
     &.close {

@@ -1,1 +1,1 @@
-export { default as InputArea } from './input-area'
+export { default as ToggleArea } from './toggle-area'
