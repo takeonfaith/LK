@@ -17,7 +17,7 @@ import { IconType } from 'react-icons/lib'
 import AcadPerformance from '../../pages/acad-performance'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
-import PaymentsPage from '../../pages/payments'
+// import PaymentsPage from '../../pages/payments'
 import SchedulePage from '../../pages/schedule'
 
 export const HOME_ROUTE = '/home'
@@ -113,7 +113,7 @@ export const privateRoutes: IRoutes = {
         title: 'Оплата',
         icon: FiDollarSign,
         path: PAYMENTS_ROUTE,
-        Component: PaymentsPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/payments' }),
         isTemplate: false,
     },
     7: {
