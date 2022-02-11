@@ -7,6 +7,8 @@ import React, { memo, useEffect } from 'react'
 import styled from 'styled-components'
 import { DaySchedule } from '../molecules'
 import ScrollContainer from 'react-indiana-drag-scroll'
+import { Error } from '@ui/atoms'
+import Thinking from '../../../../shared/images/thinking-emoji.gif'
 
 const ScheduleWrapper = styled(ScrollContainer)<{ isFull: boolean }>`
     display: flex;
@@ -57,21 +59,21 @@ const WeekSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
         }
     }
 
-    return (
-        weekSchedule && (
-            <ScheduleWrapper isFull={view === 'full'} innerRef={wrapperRef} onScroll={handleScroll}>
-                {Object.keys(weekSchedule).map((day, index) => (
-                    <DaySchedule
-                        key={index}
-                        isCurrent={currentDay === index + 1}
-                        weekDay={WeekDays[day as keyof IWeekDays].full}
-                        lessons={weekSchedule[day as keyof IWeekDays].lessons}
-                        view={view}
-                        topInfo={displayTopInfo(weekSchedule, day as keyof IWeekDays)}
-                    />
-                ))}
-            </ScheduleWrapper>
-        )
+    return weekSchedule ? (
+        <ScheduleWrapper isFull={view === 'full'} innerRef={wrapperRef} onScroll={handleScroll}>
+            {Object.keys(weekSchedule).map((day, index) => (
+                <DaySchedule
+                    key={index}
+                    isCurrent={currentDay === index + 1}
+                    weekDay={WeekDays[day as keyof IWeekDays].full}
+                    lessons={weekSchedule[day as keyof IWeekDays].lessons}
+                    view={view}
+                    topInfo={displayTopInfo(weekSchedule, day as keyof IWeekDays)}
+                />
+            ))}
+        </ScheduleWrapper>
+    ) : (
+        <Error text={'У вас пока нет расписания'} image={Thinking} />
     )
 }
 

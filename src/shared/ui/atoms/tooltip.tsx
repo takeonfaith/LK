@@ -11,9 +11,8 @@ const findPosition = (direction: Direction) => {
             return 'translate(0, 45px)'
         case 'left':
             return 'translate(-45px, 0)'
-
         case 'right':
-            return 'translate(45px, 0)'
+            return 'translate(135px, 0)'
     }
 }
 
@@ -26,28 +25,33 @@ const TooltipWrapper = styled.div<{ direction: Direction }>`
     }
 `
 
-const TooltipBox = styled.div`
+const TooltipBox = styled.div<{ width?: string }>`
+    pointer-events: none;
     padding: 6px 10px;
     border-radius: var(--brLight);
-    background: var(--search);
-    color: var(--text);
-    position: absolute;
+    background: #000000b9;
+    color: #fff;
+    font-weight: bold;
+    position: fixed;
     transform: translate(0, 0);
     transition: 0.2s;
     opacity: 0;
     font-size: 0.8em;
+    text-align: center;
+    max-width: ${({ width }) => width ?? 'fit-content'};
 `
 
 interface Props {
     children: React.ReactNode[] | React.ReactNode | string
     direction: Direction
     text: string
+    width?: string
 }
 
-const Tooltip = ({ children, direction, text }: Props) => {
+const Tooltip = ({ children, direction, text, width }: Props) => {
     return (
         <TooltipWrapper direction={direction}>
-            <TooltipBox>{text}</TooltipBox>
+            <TooltipBox width={width}>{text}</TooltipBox>
             {children}
         </TooltipWrapper>
     )

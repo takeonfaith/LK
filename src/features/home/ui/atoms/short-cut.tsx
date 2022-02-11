@@ -30,12 +30,22 @@ export const ShortCutLinkContainer = styled(Link)`
     justify-content: center;
     align-items: center;
     height: 130px;
+    text-align: center;
+    padding: 15px;
 
     border-radius: var(--brSemi);
     box-shadow: var(--leftside-bar-shadow);
 
     color: white;
     text-decoration: none;
+
+    & > b {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
+        display: block;
+    }
 
     & > svg {
         width: 50px;
@@ -49,6 +59,7 @@ export const ShortCutLinkContainer = styled(Link)`
         height: fit-content;
         padding: 10px;
         justify-content: flex-start;
+        text-align: start;
 
         & > b {
             width: 100%;
