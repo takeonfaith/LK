@@ -58,7 +58,7 @@ const WhatsNew = () => {
                     onClick={() => setCurrentPage((prev) => limitNumber(prev - 1, pages.length - 1))}
                     text="Назад"
                     width="100%"
-                    active={currentPage !== 0}
+                    isActive={currentPage !== 0}
                 />
                 {currentPage === pages.length - 1 ? (
                     <Button onClick={close} text="Готово" width="100%" />

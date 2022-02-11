@@ -153,6 +153,7 @@ const DataVerificationPage = () => {
             ],
         ],
         addNew: true,
+        optionalCheckbox: { title: 'Близкие родственники отсутствуют', value: false, required: true },
         confirmed: false,
     })
 
@@ -160,7 +161,13 @@ const DataVerificationPage = () => {
         title: 'Образование',
         hint: 'Текст подсказки',
         data: [
-            { title: 'Наименование учебного заведения', value: '', required: true },
+            {
+                title: 'Вид документа',
+                type: 'select',
+                items: [{ id: 0, title: 'Диплом' }],
+                value: { id: 0, title: 'Диплом' },
+                width: '100%',
+            },
             {
                 title: 'Уровень образования',
                 value: { id: 'special', title: 'Специалитет' },
@@ -173,18 +180,15 @@ const DataVerificationPage = () => {
                     { id: 'bach', title: 'Бакалавр' },
                 ],
             },
+            { title: 'Учебное заведение', value: '', required: true },
+            { title: 'Квалификация', value: '', required: true },
+            { title: 'Серия', value: '', required: true },
+            { title: 'Номер', value: '', required: true },
             {
-                title: 'Год окончания',
-                value: { id: 'year', title: '2001' },
-                type: 'select',
-                width: '100%',
-                items: Array(50)
-                    .fill(0)
-                    .map((_, i) => {
-                        return { id: i + 1970, title: `${i + 1970}` }
-                    }),
+                title: 'Дата выдачи',
+                value: '',
+                type: 'date',
             },
-            { title: 'Направление подготовки', value: '', required: true },
         ],
         documents: { files: [], required: true },
         confirmed: false,
@@ -239,9 +243,17 @@ const DataVerificationPage = () => {
         title: 'Паспортные данные',
         hint: 'Текст подсказки',
         data: [
+            {
+                title: 'Вид документа',
+                value: { id: 0, title: '' },
+                width: '100%',
+                type: 'select',
+                items: [{ id: 0, title: '' }],
+            },
             { title: 'Серия', value: '', required: true },
             { title: 'Номер', value: '', required: true },
             { title: 'Кем выдан', value: '', required: true },
+            { title: 'Дата выдачи', value: '', required: true, type: 'date' },
         ],
         documents: { files: [], required: true },
         confirmed: false,
@@ -315,6 +327,17 @@ const DataVerificationPage = () => {
 
     const [confirmAll, setConfirmAll] = useState(false)
 
+    useEffect(() => {
+        setConfirmAll(false)
+    }, [
+        !!army.confirmed,
+        !!driveLicense.confirmed,
+        !!personalData.confirmed,
+        !!location.confirmed,
+        !!passport.confirmed,
+        !!education.confirmed,
+    ])
+
     return (
         <DataVerificationPageWrapper>
             <div className="data-verification-block">
@@ -346,6 +369,14 @@ const DataVerificationPage = () => {
                     checked={confirmAll}
                     setChecked={setConfirmAll}
                     text={'Я подтверждаю корректность указанных данных'}
+                    isActive={
+                        !!army.confirmed &&
+                        !!driveLicense.confirmed &&
+                        !!personalData.confirmed &&
+                        !!location.confirmed &&
+                        !!passport.confirmed &&
+                        !!education.confirmed
+                    }
                 />
                 <SubmitButton
                     text={'Отправить'}

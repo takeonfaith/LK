@@ -308,7 +308,7 @@ const InputArea = ({
                                           <UniversalInput
                                               key={i}
                                               documents={documents}
-                                              changeInputArea={changeInputArea}
+                                              changeInputArea={changeInputArea && !optionalCheckbox?.value}
                                               setData={setData}
                                               indexI={i}
                                               indexJ={j}
@@ -323,13 +323,20 @@ const InputArea = ({
                                           textColor={Colors.red.main}
                                           onClick={() => handleRemove(i)}
                                           background="transparent"
+                                          isActive={!optionalCheckbox?.value}
                                       />
                                   )}
                               </div>
                           )
                       })}
                 {addNew && changeInputArea && (
-                    <Button icon={<FiPlusCircle />} text="Добавить" onClick={handleAddNew} background="transparent" />
+                    <Button
+                        icon={<FiPlusCircle />}
+                        text="Добавить"
+                        onClick={handleAddNew}
+                        background="transparent"
+                        isActive={!optionalCheckbox?.value}
+                    />
                 )}
                 {!!documents && changeInputArea && (
                     <LoadFileButton
