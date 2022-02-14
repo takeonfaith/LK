@@ -9,7 +9,7 @@ import { Image } from '.'
 
 // const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000
 
-const LoadFileButtonWrapper = styled.label<{ showPulse: boolean }>`
+const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boolean }>`
     width: 100%;
     height: 150px;
     border-radius: var(--brLight);
@@ -18,7 +18,9 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean }>`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    cursor: pointer;
+    cursor: ${({ isActive }) => isActive && 'pointer'};
+    pointer-events: ${({ isActive }) => !isActive && 'none'};
+    opacity: ${({ isActive }) => !isActive && 0.4};
     box-shadow: ${({ showPulse }) => showPulse && '0px 0px 1px 3px var(--reallyBlue)'};
 
     .uploaded-files {
@@ -26,6 +28,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean }>`
         align-items: center;
         justify-content: center;
         width: 100%;
+
         .file-preview {
             display: flex;
             flex-direction: column;
@@ -105,11 +108,12 @@ interface Props {
     maxFileSizeInBytes: number
     files: File[]
     setFiles: (args: any) => void
+    isActive: boolean
 }
 
 const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
 
-const LoadFileButton = ({ label, files, setFiles }: Props) => {
+const LoadFileButton = ({ label, files, setFiles, isActive }: Props) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
     const { open } = useModal()
@@ -198,11 +202,12 @@ const LoadFileButton = ({ label, files, setFiles }: Props) => {
 
     return (
         <LoadFileButtonWrapper
+            isActive={isActive}
             showPulse={showPulse}
-            onDragOver={handleDragOver}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
+            onDragOver={(e) => isActive && handleDragOver(e)}
+            onDragEnter={(e) => isActive && handleDragEnter(e)}
+            onDragLeave={(e) => isActive && handleDragLeave(e)}
+            onDrop={(e) => isActive && handleDrop(e)}
         >
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
             {!files.length ? (

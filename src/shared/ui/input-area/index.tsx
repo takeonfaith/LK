@@ -54,12 +54,23 @@ const InputAreaWrapper = styled.div<{
             column-gap: 5px;
         }
     }
+
+    /* @media (max-width: 600px) {
+        .inputs {
+            .data-line {
+                display: flex;
+                row-gap: 5px;
+                column-gap: 5px;
+                flex-direction: column;
+            }
+        }
+    } */
 `
 
 export interface IInputAreaData {
     title: string
     value: string | SelectPage | boolean
-    type?: 'select' | 'text' | 'tel' | 'email' | 'date' | 'checkbox'
+    type?: 'select' | 'text' | 'tel' | 'email' | 'date' | 'checkbox' | 'number'
     items?: SelectPage[]
     width?: string
     required?: boolean
@@ -74,7 +85,7 @@ export interface IInputArea {
     default?: IInputAreaData[] | IComplexInputAreaData
     confirmed?: boolean
     optional?: boolean
-    documents?: { files: File[]; required: boolean }
+    documents?: { files: File[]; required: boolean; checkboxCondition?: boolean }
     addNew?: boolean
     optionalCheckbox?: { value: boolean; title: string; required?: boolean; fileNeeded?: boolean }
 }
@@ -219,8 +230,6 @@ const InputArea = ({
 
     const handleAddNew = () => {
         setData((area: IInputArea) => {
-            console.log(area.default)
-
             const newFields = (area.default as IComplexInputAreaData)[0].map(
                 (field): IInputAreaData => ({
                     title: field.title,
@@ -235,8 +244,6 @@ const InputArea = ({
             return { ...area, data: [...area.data, newFields] as IComplexInputAreaData }
         })
     }
-
-    // console.log(data)
 
     const handleRemove = (i: number) => {
         setData((area: IInputArea) => {
@@ -344,6 +351,7 @@ const InputArea = ({
                         files={documents.files}
                         setFiles={(files: File[]) => handleLoadFiles(files)}
                         maxFileSizeInBytes={0}
+                        isActive={documents.checkboxCondition ? !!optionalCheckbox?.value : true}
                     />
                 )}
                 {optionalCheckbox && (

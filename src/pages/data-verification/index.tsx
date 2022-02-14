@@ -44,9 +44,11 @@ const DataVerificationPage = () => {
 
     if (!user?.id) return <></>
 
+    console.log(user)
+
     const [personalData, setPersonalData] = useState<IInputArea>({
         title: 'Личные данные',
-        hint: 'Текст подсказки',
+        hint: 'Необходимо приложить скан-копию документа, подтверждающего изменения',
         data: [
             {
                 title: 'ФИО',
@@ -58,12 +60,11 @@ const DataVerificationPage = () => {
             },
             {
                 title: 'Дата рождения',
-                value: '1990-01-20',
-                type: 'date',
+                value: user.birthday,
             },
             {
                 title: 'Место рождения',
-                value: 'Москва',
+                value: '',
             },
         ],
         documents: { files: [], required: true },
@@ -72,7 +73,7 @@ const DataVerificationPage = () => {
 
     const [familyStatus, setFamilyStatus] = useState<IInputArea>({
         title: 'Семейное положение',
-        hint: 'Текст подсказки',
+        hint: 'Необходимо указать актуальную информацию',
         data: [
             {
                 title: '',
@@ -91,7 +92,7 @@ const DataVerificationPage = () => {
     })
     const [family, setFamily] = useState<IInputArea>({
         title: 'Состав семьи',
-        hint: 'Текст подсказки',
+        hint: 'Необходимо указать актуальную информацию о ближайших родственниках',
         data: [
             [
                 {
@@ -157,27 +158,49 @@ const DataVerificationPage = () => {
         confirmed: false,
     })
 
+    const [disability, setDisability] = useState<IInputArea>({
+        title: 'Инвалидность',
+        hint: 'Необходимо приложить скан-копию справки об инвалидности',
+        data: [],
+        optionalCheckbox: { value: false, title: 'Есть справка об инвалидности', required: false },
+        documents: { files: [], required: true, checkboxCondition: true },
+        confirmed: false,
+    })
+
     const [education, setEducation] = useState<IInputArea>({
         title: 'Образование',
-        hint: 'Текст подсказки',
+        hint: 'Необходимо приложить скан-копию документа об образовании (диплом, аттестат), подтверждающего изменения',
         data: [
             {
                 title: 'Вид документа',
                 type: 'select',
-                items: [{ id: 0, title: 'Диплом' }],
+                items: [
+                    { id: 0, title: 'Аттестат' },
+                    { id: 1, title: 'Аттестат с отличием' },
+                    { id: 2, title: 'Диплом' },
+                    { id: 3, title: 'Диплом дубликат' },
+                    { id: 4, title: 'Диплом с отличием' },
+                    { id: 5, title: 'Свидетельство' },
+                    { id: 6, title: 'Удостоверение' },
+                    { id: 7, title: 'Сертификат' },
+                ],
                 value: { id: 0, title: 'Диплом' },
                 width: '100%',
             },
             {
                 title: 'Уровень образования',
-                value: { id: 'special', title: 'Специалитет' },
+                value: { id: 3, title: 'Высшее образование – бакалавриат' },
                 type: 'select',
                 width: '100%',
                 items: [
-                    { id: 'special', title: 'Специалитет' },
-                    { id: 'asp', title: 'Аспирантура' },
-                    { id: 'maga', title: 'Магистратура' },
-                    { id: 'bach', title: 'Бакалавр' },
+                    { id: 0, title: 'Дополнительное профессиональное образование' },
+                    { id: 1, title: 'Среднее общее образование' },
+                    { id: 2, title: 'Среднее профессиональное образование' },
+                    { id: 3, title: 'Высшее образование – бакалавриат' },
+                    { id: 4, title: 'Высшее образование - специалитет, магистратура' },
+                    { id: 5, title: 'Профессиональное обучение' },
+                    { id: 6, title: 'Начальное профессиональное образование' },
+                    { id: 7, title: 'Послевузовское образование' },
                 ],
             },
             { title: 'Учебное заведение', value: '', required: true },
@@ -196,11 +219,12 @@ const DataVerificationPage = () => {
 
     const [language, setLanguage] = useState<IInputArea>({
         title: 'Знание иностранных языков',
-        hint: 'Текст подсказки',
+        hint: 'Необходимо указать иностранные языки и степень владения ими',
         data: [
             [
                 {
                     title: 'Язык',
+                    required: true,
                     value: 'Английский',
                 },
                 {
@@ -220,6 +244,7 @@ const DataVerificationPage = () => {
             [
                 {
                     title: 'Язык',
+                    required: true,
                     value: 'Английский',
                 },
                 {
@@ -241,19 +266,25 @@ const DataVerificationPage = () => {
 
     const [passport, setPassport] = useState<IInputArea>({
         title: 'Паспортные данные',
-        hint: 'Текст подсказки',
+        hint: 'Необходимо приложить скан-копию 2 и 3 страницы паспорта РФ. Для иностранных работников - страницу паспорта иностранного гражданина с серией и номером и нотариальный перевод паспорта иностранного гражданина.',
         data: [
             {
                 title: 'Вид документа',
-                value: { id: 0, title: '' },
+                value: { id: 0, title: 'Паспорт РФ' },
                 width: '100%',
                 type: 'select',
-                items: [{ id: 0, title: '' }],
+                items: [
+                    { id: 'russian-passport', title: 'Паспорт РФ' },
+                    { id: 'foreign-passport', title: 'Иностранный паспорт' },
+                    { id: 'resident-card', title: 'Вид на жительство' },
+                ],
             },
             { title: 'Серия', value: '', required: true },
             { title: 'Номер', value: '', required: true },
             { title: 'Кем выдан', value: '', required: true },
             { title: 'Дата выдачи', value: '', required: true, type: 'date' },
+            { title: 'Код подразделения', value: '', required: true },
+            { title: 'Гражданство', value: '', required: true },
         ],
         documents: { files: [], required: true },
         confirmed: false,
@@ -261,7 +292,7 @@ const DataVerificationPage = () => {
 
     const [driveLicense, setDriveLicense] = useState<IInputArea>({
         title: 'Водительское удостоверение',
-        hint: 'Текст подсказки',
+        hint: 'При наличии водительского удостоверения необходимо загрузить скан-копию документа с обеих сторон',
         data: [],
         optionalCheckbox: {
             title: 'Водительское удостоверение отсутствует',
@@ -274,23 +305,29 @@ const DataVerificationPage = () => {
 
     const [registration, setRegistration] = useState<IInputArea>({
         title: 'Регистрация',
-        hint: 'Текст подсказки',
+        hint: 'Необходимо приложить скан-копию 5 страницы или последующих страниц с соответствующими штампами паспорта РФ. При отсутствии регистрации также прикладывается скан-копия. Для иностранных работников - необходимо приложить скан-копию документа о регистрации на территории РФ.',
         data: [
-            { title: 'Адрес регистрации', value: '' },
-            { title: 'Дата регистрации', value: '' },
+            { title: 'Страна', value: '', required: true },
+            { title: 'Город, населенный пункт', value: '', required: true },
+            { title: 'Улица', value: '', required: true },
+            { title: 'Дом', value: '', required: true },
+            { title: 'Корпус', value: '' },
+            { title: 'Квартира', value: '' },
+            { title: 'Дата регистрации', value: '', type: 'date', required: true },
+            { title: 'Дата начала проживания', value: '', type: 'date', required: true },
+            { title: 'Индекс', value: '', type: 'number' },
         ],
         documents: { files: [], required: true },
         optionalCheckbox: {
             title: 'Регистрация отсутствует',
             value: false,
-            required: true,
         },
         confirmed: false,
     })
 
     const [location, setLocation] = useState<IInputArea>({
         title: 'Проживание',
-        hint: 'Текст подсказки',
+        hint: 'Необходимо указать фактический адрес проживания',
         data: [
             { title: 'Адрес проживания', value: '', required: true },
             { title: 'Дата начала проживания', value: '', required: true },
@@ -301,20 +338,20 @@ const DataVerificationPage = () => {
 
     const [contactInfo, setContactInfo] = useState<IInputArea>({
         title: 'Контактные данные',
-        hint: 'Текст подсказки',
+        hint: 'Личный мобильный телефон предоставляется только сотрудникам отдела кадров. Обязателен для заполнения. Рабочий мобильный телефон может быть предоставлен сотрудникам вуза для решения рабочих вопросов. Если рабочий мобильный телефон совпадает с личным - продублировать информацию в соответствующем поле. Служебный телефон (прямой/дополнительный) может быть опубликован в телефонном справочнике вуза. Личный E-mail предоставляется только сотрудникам отдела кадров. Обязателен для заполнения. Рабочий E-mail - это E-mail в домене mospolytech.ru.',
         data: [
-            { title: 'Мобильный телефон (личный)', type: 'tel', value: '+79423131231', required: true },
-            { title: 'Мобильный телефон (рабочий)', type: 'tel', value: '+79423131231' },
-            { title: 'Служебный телефон (прямой/дополнительный)', type: 'tel', value: '+79423131231' },
-            { title: 'Личный e-mail', type: 'email', value: 'temp@gmail.com', required: true },
-            { title: 'Рабочий e-mail', type: 'email', value: 'temp@gmail.com' },
+            { title: 'Мобильный телефон (личный)', type: 'tel', value: '', required: true },
+            { title: 'Мобильный телефон (рабочий)', type: 'tel', value: '' },
+            { title: 'Служебный телефон (прямой/дополнительный)', type: 'tel', value: '' },
+            { title: 'Личный e-mail', type: 'email', value: '', required: true },
+            { title: 'Рабочий e-mail', type: 'email', value: '' },
         ],
         confirmed: false,
     })
 
     const [army, setArmy] = useState<IInputArea>({
         title: 'Воинская служба',
-        hint: 'Текст подсказки',
+        hint: 'При наличии документа о воинской службе необходимо загрузить скан-копию всех заполненных страниц документа воинского учета (военного билета или удостоверения гражданина, подлежащего призыву)',
         data: [],
         documents: { files: [], required: true },
         optionalCheckbox: {
@@ -363,6 +400,8 @@ const DataVerificationPage = () => {
                 <InputArea {...language} setData={setLanguage} />
                 <Divider />
                 <InputArea {...driveLicense} setData={setDriveLicense} />
+                <Divider />
+                <InputArea {...disability} setData={setDisability} />
                 <Divider />
                 <InputArea {...army} setData={setArmy} />
                 <Checkbox

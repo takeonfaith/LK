@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Button from './button'
@@ -103,6 +103,26 @@ const Input = ({
     inputAppearance = true,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
+
+    const phoneMask = useCallback(
+        (phone: string) => {
+            return phone
+                .replace(/\D/g, '')
+                .replace(/^(\d)/, '+$1(')
+                .replace(/(\d{3})(\d{1,3})/, '$1) $2-')
+                .replace(/(\d{2})(\d{2,4})/, '$1-$2')
+                .slice(0, 17)
+        },
+        [type],
+    )
+
+    const emailMask = useCallback(
+        (email: string) => {
+            return email.replace(/@\.*/, '@mospolytech.ru').replace(/mospolytech.ru?/, '')
+        },
+        [type],
+    )
+
     return (
         <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance}>
             {!!title && (
@@ -114,10 +134,15 @@ const Input = ({
             {leftIcon && <span className="icon">{leftIcon}</span>}
             <input
                 type={inputType}
-                pattern={inputType === 'tell' ? '+7([0-9]{3}) [0-9]{3}-[0-9]{3}-[0-9]{2}' : undefined}
                 placeholder={placeholder}
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => {
+                    if (type === 'tel') {
+                        setValue(phoneMask(e.target.value))
+                    } else if (type === 'email') {
+                        setValue(emailMask(e.target.value))
+                    } else setValue(e.target.value)
+                }}
                 required={required}
             />
             {type !== 'password' ? (

@@ -26,8 +26,6 @@ const UniversalInput = ({
     setData,
 }: Props) => {
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
-        console.log(value, i, j)
-
         setData((area) => {
             if (Array.isArray(area.data[0])) {
                 ;(area.data as IComplexInputAreaData)[i][j ?? 0].value = value
@@ -39,8 +37,6 @@ const UniversalInput = ({
     }
 
     const handleChangeSelect = (page: SelectPage, i: number, j?: number) => {
-        console.log(page, i, j)
-
         setData((area) => {
             if (Array.isArray(area.data[0])) {
                 ;(area.data as IComplexInputAreaData)[i][j ?? 0].value = page
