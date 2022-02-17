@@ -23,10 +23,11 @@ import {
     FiMonitor,
     FiStar,
 } from 'react-icons/fi'
-import { HiOutlineClipboardCheck, HiOutlineUserGroup } from 'react-icons/hi'
+import { HiOutlineClipboardCheck, HiOutlineMenuAlt2, HiOutlineUserGroup } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
+import DataVerificationPage from '@pages/data-verification'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -122,15 +123,14 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         isTemplate: false,
     },
-    // 4: {
-    //     id: 4,
-    //     title: 'Анкета для сверки данных',
-    //     icon: HiOutlineMenuAlt2,
-    //     path: DATA_VERIFICATION_ROUTE,
-    //     //  DataVerificationPage
-    //     Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
-    //     isTemplate: false,
-    // },
+    4: {
+        id: 4,
+        title: 'Анкета для сверки данных',
+        icon: HiOutlineMenuAlt2,
+        path: DATA_VERIFICATION_ROUTE,
+        Component: DataVerificationPage,
+        isTemplate: false,
+    },
     5: {
         id: 5,
         title: 'Инструкции, положения, правила',
