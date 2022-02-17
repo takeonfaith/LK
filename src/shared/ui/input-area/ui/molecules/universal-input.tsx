@@ -24,6 +24,7 @@ const UniversalInput = ({
     documents,
     changeInputArea,
     setData,
+    mask,
 }: Props) => {
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
         setData((area) => {
@@ -65,6 +66,7 @@ const UniversalInput = ({
                 inputAppearance={changeInputArea && !documents}
                 placeholder={title}
                 required={required}
+                mask={mask}
             />
         )
     ) : (

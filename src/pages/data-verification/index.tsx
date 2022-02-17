@@ -1,9 +1,9 @@
 import { userModel } from '@entities/user'
 import createFullName from '@features/home/lib/create-full-name'
-import { Divider, SubmitButton, Title } from '@ui/atoms'
+import { SubmitButton, Title } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import InputArea from '@ui/input-area'
-import { IInputArea } from '@ui/input-area'
+import { IInputArea } from '@ui/input-area/model'
 import transformSex from '@utils/transform-sex'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -22,7 +22,7 @@ const DataVerificationPageWrapper = styled.div`
         max-width: 600px;
         padding: 20px;
         border-radius: var(--brLight);
-        background: var(--schedule);
+        background: var(--form);
         box-shadow: var(--schedule-shadow);
         display: flex;
         flex-direction: column;
@@ -41,10 +41,10 @@ const DataVerificationPage = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    // Про это написно ниже, в сабмит баттоне
+    const [completed, setCompleted] = useState(false)
 
     if (!user?.id) return <></>
-
-    console.log(user)
 
     const [personalData, setPersonalData] = useState<IInputArea>({
         title: 'Личные данные',
@@ -53,18 +53,22 @@ const DataVerificationPage = () => {
             {
                 title: 'ФИО',
                 value: createFullName({ name: user?.name, surname: user?.surname, patronymic: user?.patronymic }),
+                required: true,
             },
             {
                 title: 'Пол',
                 value: transformSex(user.sex),
+                required: true,
             },
             {
                 title: 'Дата рождения',
                 value: user.birthday,
+                required: true,
             },
             {
                 title: 'Место рождения',
                 value: '',
+                required: true,
             },
         ],
         documents: { files: [], required: true },
@@ -81,7 +85,7 @@ const DataVerificationPage = () => {
                 type: 'select',
                 items: [
                     { id: 'single', title: 'Холост/Не замужем' },
-                    { id: 'married', title: 'Замужем/Женат' },
+                    { id: 'married', title: 'Женат/Замужем' },
                     { id: 'divorced', title: 'Разведен/Разведена' },
                     { id: 'widow', title: 'Вдовец/Вдова' },
                 ],
@@ -90,6 +94,20 @@ const DataVerificationPage = () => {
         ],
         confirmed: false,
     })
+
+    const [contactInfo, setContactInfo] = useState<IInputArea>({
+        title: 'Контактные данные',
+        hint: 'Личный мобильный телефон предоставляется только сотрудникам отдела кадров. Обязателен для заполнения. Рабочий мобильный телефон может быть предоставлен сотрудникам вуза для решения рабочих вопросов. Если рабочий мобильный телефон совпадает с личным - продублировать информацию в соответствующем поле. Служебный телефон (прямой/дополнительный) может быть опубликован в телефонном справочнике вуза. Личный E-mail предоставляется только сотрудникам отдела кадров. Обязателен для заполнения. Рабочий E-mail - это E-mail в домене mospolytech.ru.',
+        data: [
+            { title: 'Мобильный телефон (личный)', type: 'tel', value: '', required: true, mask: true },
+            { title: 'Мобильный телефон (рабочий)', type: 'tel', value: '' },
+            { title: 'Служебный телефон (прямой/дополнительный)', type: 'tel', value: '' },
+            { title: 'Личный e-mail', type: 'email', value: '', required: true },
+            { title: 'Рабочий e-mail', type: 'email', value: '' },
+        ],
+        confirmed: false,
+    })
+
     const [family, setFamily] = useState<IInputArea>({
         title: 'Состав семьи',
         hint: 'Необходимо указать актуальную информацию о ближайших родственниках',
@@ -163,7 +181,7 @@ const DataVerificationPage = () => {
         hint: 'Необходимо приложить скан-копию справки об инвалидности',
         data: [],
         optionalCheckbox: { value: false, title: 'Есть справка об инвалидности', required: false },
-        documents: { files: [], required: true, checkboxCondition: true },
+        documents: { files: [], required: true, checkboxCondition: 'straight' },
         confirmed: false,
     })
 
@@ -211,6 +229,7 @@ const DataVerificationPage = () => {
                 title: 'Дата выдачи',
                 value: '',
                 type: 'date',
+                required: true,
             },
         ],
         documents: { files: [], required: true },
@@ -314,7 +333,6 @@ const DataVerificationPage = () => {
             { title: 'Корпус', value: '' },
             { title: 'Квартира', value: '' },
             { title: 'Дата регистрации', value: '', type: 'date', required: true },
-            { title: 'Дата начала проживания', value: '', type: 'date', required: true },
             { title: 'Индекс', value: '', type: 'number' },
         ],
         documents: { files: [], required: true },
@@ -330,22 +348,9 @@ const DataVerificationPage = () => {
         hint: 'Необходимо указать фактический адрес проживания',
         data: [
             { title: 'Адрес проживания', value: '', required: true },
-            { title: 'Дата начала проживания', value: '', required: true },
+            { title: 'Дата начала проживания', value: '', type: 'date', required: true },
         ],
         optionalCheckbox: { title: 'Адрес проживания совпадает с адресом регистрации', value: false, required: true },
-        confirmed: false,
-    })
-
-    const [contactInfo, setContactInfo] = useState<IInputArea>({
-        title: 'Контактные данные',
-        hint: 'Личный мобильный телефон предоставляется только сотрудникам отдела кадров. Обязателен для заполнения. Рабочий мобильный телефон может быть предоставлен сотрудникам вуза для решения рабочих вопросов. Если рабочий мобильный телефон совпадает с личным - продублировать информацию в соответствующем поле. Служебный телефон (прямой/дополнительный) может быть опубликован в телефонном справочнике вуза. Личный E-mail предоставляется только сотрудникам отдела кадров. Обязателен для заполнения. Рабочий E-mail - это E-mail в домене mospolytech.ru.',
-        data: [
-            { title: 'Мобильный телефон (личный)', type: 'tel', value: '', required: true },
-            { title: 'Мобильный телефон (рабочий)', type: 'tel', value: '' },
-            { title: 'Служебный телефон (прямой/дополнительный)', type: 'tel', value: '' },
-            { title: 'Личный e-mail', type: 'email', value: '', required: true },
-            { title: 'Рабочий e-mail', type: 'email', value: '' },
-        ],
         confirmed: false,
     })
 
@@ -353,7 +358,7 @@ const DataVerificationPage = () => {
         title: 'Воинская служба',
         hint: 'При наличии документа о воинской службе необходимо загрузить скан-копию всех заполненных страниц документа воинского учета (военного билета или удостоверения гражданина, подлежащего призыву)',
         data: [],
-        documents: { files: [], required: true },
+        documents: { files: [], required: true, checkboxCondition: 'reverse' },
         optionalCheckbox: {
             title: 'Документ о воинской службе отсутствует',
             value: false,
@@ -373,6 +378,12 @@ const DataVerificationPage = () => {
         !!location.confirmed,
         !!passport.confirmed,
         !!education.confirmed,
+        !!disability.confirmed,
+        !!family.confirmed,
+        !!familyStatus.confirmed,
+        !!registration.confirmed,
+        !!language.confirmed,
+        !!contactInfo.confirmed,
     ])
 
     return (
@@ -381,29 +392,18 @@ const DataVerificationPage = () => {
                 <Title size={3} align="left" bottomGap>
                     Подтвердите корректность указанных данных
                 </Title>
-                <InputArea {...personalData} setData={setPersonalData} />
-                <Divider />
-                <InputArea {...contactInfo} setData={setContactInfo} />
-                <Divider />
-                <InputArea {...passport} setData={setPassport} />
-                <Divider />
-                <InputArea {...registration} setData={setRegistration} />
-                <Divider />
-                <InputArea {...location} setData={setLocation} />
-                <Divider />
-                <InputArea {...familyStatus} setData={setFamilyStatus} />
-                <Divider />
-                <InputArea {...family} setData={setFamily} />
-                <Divider />
-                <InputArea {...education} setData={setEducation} />
-                <Divider />
-                <InputArea {...language} setData={setLanguage} />
-                <Divider />
-                <InputArea {...driveLicense} setData={setDriveLicense} />
-                <Divider />
-                <InputArea {...disability} setData={setDisability} />
-                <Divider />
-                <InputArea {...army} setData={setArmy} />
+                <InputArea {...personalData} setData={setPersonalData} divider />
+                <InputArea {...contactInfo} setData={setContactInfo} divider />
+                <InputArea {...passport} setData={setPassport} divider />
+                <InputArea {...registration} setData={setRegistration} divider />
+                <InputArea {...location} setData={setLocation} divider />
+                <InputArea {...familyStatus} setData={setFamilyStatus} divider />
+                <InputArea {...family} setData={setFamily} divider />
+                <InputArea {...education} setData={setEducation} divider />
+                <InputArea {...language} setData={setLanguage} divider />
+                <InputArea {...driveLicense} setData={setDriveLicense} divider />
+                <InputArea {...disability} setData={setDisability} divider />
+                <InputArea {...army} setData={setArmy} divider />
                 <Checkbox
                     checked={confirmAll}
                     setChecked={setConfirmAll}
@@ -419,11 +419,13 @@ const DataVerificationPage = () => {
                 />
                 <SubmitButton
                     text={'Отправить'}
+                    // Функция отправки здесь
                     action={function (): void {
                         throw new Error('Function not implemented.')
                     }}
                     isLoading={false}
                     completed={false}
+                    // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true
                     setCompleted={function (completed: boolean): void {
                         throw new Error('Function not implemented.')
                     }}
@@ -434,6 +436,12 @@ const DataVerificationPage = () => {
                         !!location.confirmed &&
                         !!passport.confirmed &&
                         !!education.confirmed &&
+                        !!disability.confirmed &&
+                        !!family.confirmed &&
+                        !!familyStatus.confirmed &&
+                        !!registration.confirmed &&
+                        !!language.confirmed &&
+                        !!contactInfo.confirmed &&
                         !!confirmAll
                     }
                     popUpFailureMessage="Для отправки формы необходимо, чтобы все поля были подтверждены"

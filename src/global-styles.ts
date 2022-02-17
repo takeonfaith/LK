@@ -84,6 +84,7 @@ const GlobalStyles = createGlobalStyle`
 		--scheduleBg: #232323;
 		--schedule-shadow: 0;
 		--info-blue: #83a2ff;
+		--form: #252525;
 	}
 
 	html[data-theme=light] {
@@ -120,6 +121,7 @@ const GlobalStyles = createGlobalStyle`
 		--scheduleBg: #eee;
 		--schedule-shadow: 0 0 2px rgb(0 0 0 / 24%);
 		--info-blue: #133db8;
+		--form: #fff;
 	}
 `
 

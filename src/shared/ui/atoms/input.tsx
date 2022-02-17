@@ -89,6 +89,7 @@ interface Props {
     isActive?: boolean
     inputAppearance?: boolean
     required?: boolean
+    mask?: boolean
 }
 
 const Input = ({
@@ -101,6 +102,7 @@ const Input = ({
     type = 'text',
     isActive = true,
     inputAppearance = true,
+    mask = false,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
 
@@ -137,10 +139,12 @@ const Input = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => {
-                    if (type === 'tel') {
-                        setValue(phoneMask(e.target.value))
-                    } else if (type === 'email') {
-                        setValue(emailMask(e.target.value))
+                    if (mask) {
+                        if (type === 'tel') {
+                            setValue(phoneMask(e.target.value))
+                        } else if (type === 'email') {
+                            setValue(emailMask(e.target.value))
+                        } else setValue(e.target.value)
                     } else setValue(e.target.value)
                 }}
                 required={required}
