@@ -1,1 +1,1 @@
-export * as Content from './Content'
+export * as Content from './content'

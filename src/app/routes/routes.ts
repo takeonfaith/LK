@@ -2,6 +2,7 @@ import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-ag
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import TeachersSchedule from '@pages/teachers-schedule'
+import ProjectActivitiesPage from '@pages/project-activities'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -103,7 +104,7 @@ export const privateRoutes: IRoutes = {
         title: 'Проектная деятельность',
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
+        Component: ProjectActivitiesPage,
         isTemplate: false,
     },
     6: {
