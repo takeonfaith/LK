@@ -1,5 +1,13 @@
 import { SelectPage } from '@features/select'
 
+export interface IInputAreaCheckbox {
+    fieldName: string
+    value: boolean
+    title: string
+    required?: boolean
+    fileNeeded?: boolean
+}
+
 export interface IInputAreaData {
     fieldName: string
     title: string
@@ -22,5 +30,5 @@ export interface IInputArea {
     optional?: boolean
     documents?: { files: File[]; required: boolean; checkboxCondition?: 'straight' | 'reverse'; fieldName: string }
     addNew?: boolean
-    optionalCheckbox?: { fieldName: string; value: boolean; title: string; required?: boolean; fileNeeded?: boolean }
+    optionalCheckbox?: IInputAreaCheckbox
 }

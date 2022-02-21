@@ -53,6 +53,7 @@ const DataVerificationPage = () => {
     } = userModel.selectors.useUser()
     // Про это написно ниже, в сабмит баттоне
     const [completed, setCompleted] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     if (!user?.id) return <></>
 
@@ -443,7 +444,7 @@ const DataVerificationPage = () => {
         hint: 'При наличии водительского удостоверения необходимо загрузить скан-копию документа с обеих сторон',
         data: [],
         optionalCheckbox: {
-            fieldName: 'driveLicenseFiles',
+            fieldName: 'dr_lic_none',
             title: 'Водительское удостоверение отсутствует',
             value: false,
             required: true,
@@ -608,6 +609,7 @@ const DataVerificationPage = () => {
                     text={'Отправить'}
                     // Функция отправки здесь
                     action={(): void => {
+                        setLoading(true)
                         const inputAreas = [
                             army,
                             driveLicense,
@@ -687,13 +689,13 @@ const DataVerificationPage = () => {
                         console.log(result)
 
                         teacherDateVerificationModel.events.postTeacherDataVerification(result)
+                        setLoading(false)
+                        setCompleted(true)
                     }}
-                    isLoading={false}
-                    completed={false}
+                    isLoading={loading}
+                    completed={completed}
                     // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true
-                    setCompleted={(completed: boolean): void => {
-                        setCompleted(completed)
-                    }}
+                    setCompleted={setCompleted}
                     isActive={
                         !!army.confirmed &&
                         !!driveLicense.confirmed &&

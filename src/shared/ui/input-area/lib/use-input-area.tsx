@@ -1,10 +1,10 @@
 import { popUpMessageModel } from '@entities/pop-up-message'
 import React, { useEffect, useState } from 'react'
-import { IComplexInputAreaData, IInputArea, IInputAreaData } from '../model'
+import { IComplexInputAreaData, IInputArea, IInputAreaCheckbox, IInputAreaData } from '../model'
 
 interface Props {
     documents?: { files: File[]; required: boolean; checkboxCondition?: 'straight' | 'reverse' }
-    optionalCheckbox?: { value: boolean; title: string; required?: boolean; fileNeeded?: boolean }
+    optionalCheckbox?: IInputAreaCheckbox
     data: IInputAreaData[] | IComplexInputAreaData
     optional?: boolean
     setData: React.Dispatch<React.SetStateAction<IInputArea>>

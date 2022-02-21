@@ -158,7 +158,7 @@ export const privateRoutes: IRoutes = {
         isTemplate: false,
     },
     12: {
-        id: 7,
+        id: 12,
         title: 'Студенты',
         icon: BiGroup,
         path: ALL_STUDENTS_ROUTE,

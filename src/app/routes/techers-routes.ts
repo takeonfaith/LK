@@ -173,7 +173,7 @@ export const teachersPrivateRoutes: IRoutes = {
     },
 
     10: {
-        id: 1,
+        id: 10,
         title: 'Сообщения',
         icon: BiMessageRounded,
         path: MESSAGES_ROUTE,
@@ -333,7 +333,7 @@ export const teachersPrivateRoutes: IRoutes = {
         isTemplate: false,
     },
     31: {
-        id: 4,
+        id: 31,
         title: 'Вакцинация',
         icon: FiBriefcase,
         path: VAX_ROUTE,
@@ -341,7 +341,7 @@ export const teachersPrivateRoutes: IRoutes = {
         isTemplate: false,
     },
     32: {
-        id: 10,
+        id: 32,
         title: 'Конкурс ППС',
         icon: BiIdCard,
         path: PPS_CONTEST_ROUTE,
