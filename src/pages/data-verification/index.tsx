@@ -1,10 +1,9 @@
+import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import { userModel } from '@entities/user'
-import createFullName from '@features/home/lib/create-full-name'
 import { SubmitButton, Title } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
-import transformSex from '@utils/transform-sex'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -37,7 +36,16 @@ const DataVerificationPageWrapper = styled.div`
     }
 `
 
+//TODO: remove default values from this component
+//TODO: нужно переписать на формах, а то глаза могут выпасть (примерные пояснения, как нужно, находятся в inputs-area)
+
 const DataVerificationPage = () => {
+    const { data } = teacherDateVerificationModel.selectors.useTeacherDataVerification()
+
+    useEffect(() => {
+        teacherDateVerificationModel.effects.getTeacherDataVerificationFx()
+    }, [])
+
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -51,27 +59,32 @@ const DataVerificationPage = () => {
         hint: 'Необходимо приложить скан-копию документа, подтверждающего изменения',
         data: [
             {
+                fieldName: 'fio',
                 title: 'ФИО',
-                value: createFullName({ name: user?.name, surname: user?.surname, patronymic: user?.patronymic }),
+                value: data?.fio ?? '',
                 required: true,
             },
             {
+                fieldName: 'sex',
                 title: 'Пол',
-                value: transformSex(user.sex),
+                value: data?.sex ?? '',
                 required: true,
             },
             {
+                fieldName: 'bdate',
                 title: 'Дата рождения',
-                value: user.birthday,
+                value: data?.bdate ?? '',
                 required: true,
+                type: 'date',
             },
             {
+                fieldName: 'bplace',
                 title: 'Место рождения',
-                value: '',
+                value: data?.bplace ?? '',
                 required: true,
             },
         ],
-        documents: { files: [], required: true },
+        documents: { files: [], required: true, fieldName: 'personalFiles' },
         confirmed: false,
     })
 
@@ -80,6 +93,8 @@ const DataVerificationPage = () => {
         hint: 'Необходимо указать актуальную информацию',
         data: [
             {
+                // TODO: ??
+                fieldName: '',
                 title: '',
                 value: { id: 'married', title: 'Замужем/Женат' },
                 type: 'select',
@@ -99,41 +114,123 @@ const DataVerificationPage = () => {
         title: 'Контактные данные',
         hint: 'Личный мобильный телефон предоставляется только сотрудникам отдела кадров. Обязателен для заполнения. Рабочий мобильный телефон может быть предоставлен сотрудникам вуза для решения рабочих вопросов. Если рабочий мобильный телефон совпадает с личным - продублировать информацию в соответствующем поле. Служебный телефон (прямой/дополнительный) может быть опубликован в телефонном справочнике вуза. Личный E-mail предоставляется только сотрудникам отдела кадров. Обязателен для заполнения. Рабочий E-mail - это E-mail в домене mospolytech.ru.',
         data: [
-            { title: 'Мобильный телефон (личный)', type: 'tel', value: '', required: true, mask: true },
-            { title: 'Мобильный телефон (рабочий)', type: 'tel', value: '' },
-            { title: 'Служебный телефон (прямой/дополнительный)', type: 'tel', value: '' },
-            { title: 'Личный e-mail', type: 'email', value: '', required: true },
-            { title: 'Рабочий e-mail', type: 'email', value: '' },
+            {
+                fieldName: 'tel_mob_private',
+                title: 'Мобильный телефон (личный)',
+                type: 'tel',
+                value: data?.tel_mob_private ?? '',
+                required: true,
+                mask: true,
+            },
+            {
+                fieldName: 'tel_mob_staff',
+                title: 'Мобильный телефон (рабочий)',
+                type: 'tel',
+                value: data?.tel_mob_staff ?? '',
+            },
+            {
+                fieldName: 'tel_staff',
+                title: 'Служебный телефон (прямой/дополнительный)',
+                type: 'tel',
+                value: data?.tel_staff ?? '',
+            },
+            {
+                fieldName: 'email_private',
+                title: 'Личный e-mail',
+                type: 'email',
+                value: data?.email_private ?? '',
+                required: true,
+            },
+            { fieldName: 'email_staff', title: 'Рабочий e-mail', type: 'email', value: data?.email_staff ?? '' },
         ],
         confirmed: false,
     })
 
+    const familyType = [
+        { id: 'mother', title: 'Мать' },
+        { id: 'father', title: 'Отец' },
+        { id: 'wife', title: 'Жена' },
+        { id: 'husband', title: 'Муж' },
+        { id: 'sister', title: 'Сестра' },
+        { id: 'brother', title: 'Брат' },
+        { id: 'son', title: 'Сын' },
+        { id: 'daughter', title: 'Дочь' },
+    ]
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    // const userFamilyData: IInputAreaData[] =
+    //     [
+    //         data?.family?.map((item) => [
+    //             {
+    //                 fieldName: 'familyRelationDegree',
+    //                 title: 'Степень родства',
+    //                 value: familyType.find((t) => t.title === item.relation) ?? { id: 'mother', title: 'Мать' },
+    //                 type: 'select',
+    //                 items: familyType,
+    //             },
+    //             {
+    //                 fieldName: 'familyFullName',
+    //                 title: 'ФИО' ?? '',
+    //                 value: item?.relation,
+    //                 required: true,
+    //             },
+    //             {
+    //                 fieldName: 'familyBirthDate',
+    //                 title: 'Дата рождения',
+    //                 value: item?.bdate ?? '',
+    //                 type: 'date',
+    //                 required: true,
+    //             },
+    //         ]),
+    //     ].filter(Boolean) ?? []
+
     const [family, setFamily] = useState<IInputArea>({
         title: 'Состав семьи',
         hint: 'Необходимо указать актуальную информацию о ближайших родственниках',
+        // data: !!t?.length
+        //     ? [t]
+        //     : [
+        //           [
+        //               {
+        //                   fieldName: 'familyRelationDegree',
+        //                   title: 'Степень родства',
+        //                   value: { id: 'mother', title: 'Мать' },
+        //                   type: 'select',
+        //                   items: familyType,
+        //               },
+        //               {
+        //                   fieldName: 'familyFullName',
+        //                   title: 'ФИО',
+        //                   value: '',
+        //                   required: true,
+        //               },
+        //               {
+        //                   fieldName: 'familyBirthDate',
+        //                   title: 'Дата рождения',
+        //                   value: '1990-01-21',
+        //                   type: 'date',
+        //                   required: true,
+        //               },
+        //           ],
+        //       ],
         data: [
             [
                 {
+                    fieldName: 'relation',
                     title: 'Степень родства',
                     value: { id: 'mother', title: 'Мать' },
                     type: 'select',
-                    items: [
-                        { id: 'mother', title: 'Мать' },
-                        { id: 'father', title: 'Отец' },
-                        { id: 'wife', title: 'Жена' },
-                        { id: 'husband', title: 'Муж' },
-                        { id: 'sister', title: 'Сестра' },
-                        { id: 'brother', title: 'Брат' },
-                        { id: 'son', title: 'Сын' },
-                        { id: 'daughter', title: 'Дочь' },
-                    ],
+                    items: familyType,
                 },
                 {
+                    fieldName: 'fio',
                     title: 'ФИО',
                     value: '',
                     required: true,
                 },
                 {
+                    fieldName: 'bdate',
                     title: 'Дата рождения',
                     value: '1990-01-21',
                     type: 'date',
@@ -144,26 +241,22 @@ const DataVerificationPage = () => {
         default: [
             [
                 {
+                    fieldName: 'relation',
                     title: 'Степень родства',
                     value: { id: 'mother', title: 'Мать' },
                     type: 'select',
-                    items: [
-                        { id: 'mother', title: 'Мать' },
-                        { id: 'father', title: 'Отец' },
-                        { id: 'wife', title: 'Жена' },
-                        { id: 'husband', title: 'Муж' },
-                        { id: 'sister', title: 'Сестра' },
-                        { id: 'brother', title: 'Брат' },
-                        { id: 'son', title: 'Сын' },
-                        { id: 'daughter', title: 'Дочь' },
-                    ],
+                    items: familyType,
                 },
+
                 {
+                    fieldName: 'fio',
                     title: 'ФИО',
                     value: '',
                     required: true,
                 },
+
                 {
+                    fieldName: 'bdate',
                     title: 'Дата рождения',
                     value: '1990-01-21',
                     type: 'date',
@@ -181,7 +274,7 @@ const DataVerificationPage = () => {
         hint: 'Необходимо приложить скан-копию справки об инвалидности',
         data: [],
         optionalCheckbox: { value: false, title: 'Есть справка об инвалидности', required: false },
-        documents: { files: [], required: true, checkboxCondition: 'straight' },
+        documents: { files: [], required: true, checkboxCondition: 'straight', fieldName: 'disabilityFiles' },
         confirmed: false,
     })
 
@@ -189,7 +282,9 @@ const DataVerificationPage = () => {
         title: 'Образование',
         hint: 'Необходимо приложить скан-копию документа об образовании (диплом, аттестат), подтверждающего изменения',
         data: [
+            // ??
             {
+                fieldName: '',
                 title: 'Вид документа',
                 type: 'select',
                 items: [
@@ -205,7 +300,9 @@ const DataVerificationPage = () => {
                 value: { id: 0, title: 'Диплом' },
                 width: '100%',
             },
+            // ??
             {
+                fieldName: '',
                 title: 'Уровень образования',
                 value: { id: 3, title: 'Высшее образование – бакалавриат' },
                 type: 'select',
@@ -221,18 +318,20 @@ const DataVerificationPage = () => {
                     { id: 7, title: 'Послевузовское образование' },
                 ],
             },
-            { title: 'Учебное заведение', value: '', required: true },
-            { title: 'Квалификация', value: '', required: true },
-            { title: 'Серия', value: '', required: true },
-            { title: 'Номер', value: '', required: true },
+            { fieldName: 'edu_org', title: 'Учебное заведение', value: data?.edu_org ?? '', required: true },
+            { fieldName: 'edu_level', title: 'Квалификация', value: data?.edu_level ?? '', required: true },
+            { fieldName: 'edu_doc_ser', title: 'Серия', value: data?.edu_doc_ser ?? '', required: true },
+            { fieldName: 'edu_doc_num', title: 'Номер', value: data?.edu_doc_num ?? '', required: true },
+            // TODO: should be year
             {
+                fieldName: 'edu_year',
                 title: 'Дата выдачи',
-                value: '',
+                value: data?.edu_year ?? '',
                 type: 'date',
                 required: true,
             },
         ],
-        documents: { files: [], required: true },
+        documents: { files: [], required: true, fieldName: 'educationFiles' },
         confirmed: false,
     })
 
@@ -242,11 +341,13 @@ const DataVerificationPage = () => {
         data: [
             [
                 {
+                    fieldName: 'name',
                     title: 'Язык',
                     required: true,
                     value: 'Английский',
                 },
                 {
+                    fieldName: 'level',
                     title: 'Уровень владения',
                     value: { id: 'a', title: 'Читаю и перевожу со словарем' },
                     type: 'select',
@@ -262,11 +363,14 @@ const DataVerificationPage = () => {
         default: [
             [
                 {
+                    fieldName: '',
                     title: 'Язык',
                     required: true,
                     value: 'Английский',
                 },
+                // ??
                 {
+                    fieldName: '',
                     title: 'Уровень владения',
                     value: { id: 'a', title: 'Читаю и перевожу со словарем' },
                     type: 'select',
@@ -287,7 +391,9 @@ const DataVerificationPage = () => {
         title: 'Паспортные данные',
         hint: 'Необходимо приложить скан-копию 2 и 3 страницы паспорта РФ. Для иностранных работников - страницу паспорта иностранного гражданина с серией и номером и нотариальный перевод паспорта иностранного гражданина.',
         data: [
+            // ??
             {
+                fieldName: '',
                 title: 'Вид документа',
                 value: { id: 0, title: 'Паспорт РФ' },
                 width: '100%',
@@ -298,14 +404,25 @@ const DataVerificationPage = () => {
                     { id: 'resident-card', title: 'Вид на жительство' },
                 ],
             },
-            { title: 'Серия', value: '', required: true },
-            { title: 'Номер', value: '', required: true },
-            { title: 'Кем выдан', value: '', required: true },
-            { title: 'Дата выдачи', value: '', required: true, type: 'date' },
-            { title: 'Код подразделения', value: '', required: true },
-            { title: 'Гражданство', value: '', required: true },
+            { fieldName: 'pass_ser', title: 'Серия', value: data?.pass_ser ?? '', required: true },
+            { fieldName: 'pass_num', title: 'Номер', value: data?.pass_num ?? '', required: true },
+            { fieldName: 'pass_div', title: 'Кем выдан', value: data?.pass_div ?? '', required: true },
+            {
+                fieldName: 'pass_date',
+                title: 'Дата выдачи',
+                value: data?.pass_date ?? '',
+                required: true,
+                type: 'date',
+            },
+            {
+                fieldName: 'pass_div_code',
+                title: 'Код подразделения',
+                value: data?.pass_div_code ?? '',
+                required: true,
+            },
+            { fieldName: 'pass_type', title: 'Гражданство', value: data?.pass_type ?? '', required: true },
         ],
-        documents: { files: [], required: true },
+        documents: { files: [], required: true, fieldName: 'passportFiles' },
         confirmed: false,
     })
 
@@ -318,7 +435,7 @@ const DataVerificationPage = () => {
             value: false,
             required: true,
         },
-        documents: { files: [], required: true },
+        documents: { files: [], required: true, fieldName: 'driversLicenseFiles' },
         confirmed: false,
     })
 
@@ -326,16 +443,54 @@ const DataVerificationPage = () => {
         title: 'Регистрация',
         hint: 'Необходимо приложить скан-копию 5 страницы или последующих страниц с соответствующими штампами паспорта РФ. При отсутствии регистрации также прикладывается скан-копия. Для иностранных работников - необходимо приложить скан-копию документа о регистрации на территории РФ.',
         data: [
-            { title: 'Страна', value: '', required: true },
-            { title: 'Город, населенный пункт', value: '', required: true },
-            { title: 'Улица', value: '', required: true },
-            { title: 'Дом', value: '', required: true },
-            { title: 'Корпус', value: '' },
-            { title: 'Квартира', value: '' },
-            { title: 'Дата регистрации', value: '', type: 'date', required: true },
-            { title: 'Индекс', value: '', type: 'number' },
+            { fieldName: '', title: 'Страна', value: data?.reg_country ?? '', required: true },
+            {
+                fieldName: 'reg_city',
+                title: 'Город, населенный пункт',
+                value: data?.reg_city ?? '',
+                required: true,
+            },
+            {
+                fieldName: 'reg_street',
+                title: 'Улица',
+                value: data?.reg_street ?? '',
+                required: true,
+            },
+            {
+                fieldName: 'reg_house',
+                title: 'Дом',
+                value: data?.reg_house ?? '',
+                required: true,
+            },
+            {
+                fieldName: 'reg_corpus',
+                title: 'Корпус',
+                value: data?.reg_corpus ?? '',
+            },
+            {
+                fieldName: 'reg_flat',
+                title: 'Квартира',
+                value: data?.reg_flat ?? '',
+            },
+            {
+                fieldName: 'reg_date',
+                title: 'Дата регистрации',
+                value: data?.reg_date ?? '',
+                type: 'date',
+                required: true,
+            },
+            {
+                fieldName: 'reg_index',
+                title: 'Индекс',
+                value: data?.reg_index ?? '',
+                type: 'number',
+            },
         ],
-        documents: { files: [], required: true },
+        documents: {
+            files: [],
+            required: true,
+            fieldName: 'registrationFiles',
+        },
         optionalCheckbox: {
             title: 'Регистрация отсутствует',
             value: false,
@@ -347,8 +502,14 @@ const DataVerificationPage = () => {
         title: 'Проживание',
         hint: 'Необходимо указать фактический адрес проживания',
         data: [
-            { title: 'Адрес проживания', value: '', required: true },
-            { title: 'Дата начала проживания', value: '', type: 'date', required: true },
+            { fieldName: 'loc_addr', title: 'Адрес проживания', value: data?.loc_addr ?? '', required: true },
+            {
+                fieldName: 'loc_date',
+                title: 'Дата начала проживания',
+                value: data?.loc_date ?? '',
+                type: 'date',
+                required: true,
+            },
         ],
         optionalCheckbox: { title: 'Адрес проживания совпадает с адресом регистрации', value: false, required: true },
         confirmed: false,
@@ -358,7 +519,7 @@ const DataVerificationPage = () => {
         title: 'Воинская служба',
         hint: 'При наличии документа о воинской службе необходимо загрузить скан-копию всех заполненных страниц документа воинского учета (военного билета или удостоверения гражданина, подлежащего призыву)',
         data: [],
-        documents: { files: [], required: true, checkboxCondition: 'reverse' },
+        documents: { files: [], required: true, checkboxCondition: 'reverse', fieldName: 'militaryServiceFiles' },
         optionalCheckbox: {
             title: 'Документ о воинской службе отсутствует',
             value: false,
@@ -420,8 +581,73 @@ const DataVerificationPage = () => {
                 <SubmitButton
                     text={'Отправить'}
                     // Функция отправки здесь
-                    action={function (): void {
-                        throw new Error('Function not implemented.')
+                    action={(): void => {
+                        const inputAreas = [
+                            army,
+                            driveLicense,
+                            personalData,
+                            location,
+                            passport,
+                            education,
+                            disability,
+                            family,
+                            familyStatus,
+                            registration,
+                            language,
+                            contactInfo,
+                        ]
+
+                        const form = inputAreas
+                            .map((t) => {
+                                if (!Array.isArray(t.data[0])) {
+                                    return t.data.map((t) => {
+                                        const obj = {}
+                                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                        // @ts-ignore
+                                        if (!!t?.fieldName) obj[t?.fieldName ?? ''] = t?.value
+                                        return obj
+                                    })
+                                } else {
+                                    const r = t.data.map((c) => {
+                                        return Object.assign(
+                                            {},
+                                            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                            // @ts-ignore
+                                            ...c?.map((r) => {
+                                                const obj = {}
+                                                if (!!r?.fieldName)
+                                                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                                    // @ts-ignore
+                                                    obj[r?.fieldName] = !!r?.value?.title ? r?.value?.title : r?.value
+                                                return obj
+                                            }),
+                                        )
+                                    })
+                                    const obj = {} as any
+
+                                    const name = t.title == 'Состав семьи' ? 'family' : 'langs'
+
+                                    obj[name] = r
+
+                                    return obj
+                                }
+                            })
+                            .flat()
+
+                        const files = inputAreas.map((area) => {
+                            const obj = {}
+                            if (area.documents?.fieldName) {
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                // @ts-ignore
+                                obj[area.documents?.fieldName] = area.documents.files
+                            }
+
+                            return obj
+                        })
+
+                        const result = Object.assign({}, ...form, ...files)
+
+                        console.log(result)
                     }}
                     isLoading={false}
                     completed={false}

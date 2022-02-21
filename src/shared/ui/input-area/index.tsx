@@ -8,6 +8,7 @@ import useInputArea from './lib/use-input-area'
 import { IComplexInputAreaData, IInputArea, IInputAreaData } from './model'
 import { UniversalInput, InputAreaWrapper, AreaTitle } from './ui'
 
+//TODO: Should be rewritten as HOC, inputs should be children props
 const InputArea = ({
     title,
     hint,
@@ -20,6 +21,7 @@ const InputArea = ({
     addNew = false,
     divider,
 }: IInputArea & { setData: React.Dispatch<React.SetStateAction<IInputArea>>; divider?: boolean }) => {
+    //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
         openArea,
         changeInputArea,
@@ -54,14 +56,15 @@ const InputArea = ({
                 <div className="inputs">
                     <InfoMessage condition={!!hint && changeInputArea} title={'Как заполнить'} text={hint} />
                     {!Array.isArray(data[0])
-                        ? (data as IInputAreaData[]).map((attr, i) => {
+                        ? (data as IInputAreaData[]).map((attr, index) => {
+                              // TODO: Remove UniversalInput, inputs performing different tasks should be different components
                               return (
                                   <UniversalInput
-                                      key={i}
+                                      key={index}
                                       documents={documents}
                                       changeInputArea={changeInputArea && !optionalCheckbox?.value}
                                       setData={setData}
-                                      indexI={i}
+                                      indexI={index}
                                       {...attr}
                                   />
                               )

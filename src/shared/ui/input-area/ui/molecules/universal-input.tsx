@@ -2,7 +2,7 @@ import React from 'react'
 import Select, { SelectPage } from '@features/select'
 import Checkbox from '@ui/atoms/checkbox'
 import { Input } from '@ui/atoms'
-import { IComplexInputAreaData, IInputArea, IInputAreaData } from '@ui/input-area'
+import { IComplexInputAreaData, IInputArea, IInputAreaData } from '@ui/input-area/model'
 
 type Props = IInputAreaData & {
     documents?: { files: File[]; required: boolean }

@@ -113,7 +113,8 @@ export const privateRoutes: IRoutes = {
         title: 'Оплата',
         icon: FiDollarSign,
         path: PAYMENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/payments' }),
+        // Component: () => PageIsNotReady({ oldVersionUrl: '/payments' }),
+        Component: PaymentsPage,
         isTemplate: false,
     },
     7: {

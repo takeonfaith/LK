@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "axios-case-converter": "^0.9.0",
     "core-js": "^3.20.3",
     "effector": "^22.1.2",
     "effector-react": "^22.0.6",

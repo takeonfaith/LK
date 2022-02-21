@@ -140,7 +140,10 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
     const handleAddNew = () => {
         setData((area: IInputArea) => {
             const newFields = (area.default as IComplexInputAreaData)[0].map(
-                (field): IInputAreaData => ({
+                (field, index): IInputAreaData => ({
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    //@ts-ignore
+                    fieldName: area?.default[index]?.fieldName ?? '',
                     title: field.title,
                     value: field.type === 'select' && field?.items ? field?.items?.[0] : '',
                     type: field.type,
