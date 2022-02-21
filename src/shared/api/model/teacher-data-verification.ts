@@ -1,12 +1,12 @@
 export interface TeacherDataVerification {
-    armyFiles: { url: string; filename: string }
+    armyFiles: { url: string; filename: string }[]
     army_doc_none: boolean
     bdate: string
     bplace: string
     contactInfoValid: boolean
     dr_lic_none: boolean
     driveLicense: { category: string; num: string; date_end: string }
-    driveLicenseFiles: { url: string; filename: string }
+    driveLicenseFiles: { url: string; filename: string }[]
     edu_doc: string
     edu_doc_num: string
     edu_doc_ser: string
@@ -14,7 +14,7 @@ export interface TeacherDataVerification {
     edu_org: string
     edu_spec: string
     edu_year: string
-    educationFiles: { url: string; filename: string }
+    educationFiles: { url: string; filename: string }[]
     educationValid: boolean
     email_private: string
     email_staff: string
@@ -22,7 +22,7 @@ export interface TeacherDataVerification {
     familyStatus: string
     family_none: boolean
     fio: string
-    invalidFiles: { url: string; filename: string }
+    invalidFiles: { url: string; filename: string }[]
     invalidValid: boolean
     invalid_date: string
     invalid_grp: string
@@ -41,9 +41,9 @@ export interface TeacherDataVerification {
     pass_num: string
     pass_ser: string
     pass_type: string
-    passportFiles: { url: string; filename: string }
+    passportFiles: { url: string; filename: string }[]
     passportValid: false
-    personalDataFiles: { url: string; filename: string }
+    personalDataFiles: { url: string; filename: string }[]
     personalDataValid: boolean
     reg_city: string
     reg_corpus: string
@@ -55,7 +55,7 @@ export interface TeacherDataVerification {
     reg_index: string
     reg_none: boolean
     reg_street: string
-    registrationFiles: { url: string; filename: string }
+    registrationFiles: { url: string; filename: string }[]
     registrationValid: boolean
     sex: string
     tel_mob_private: string

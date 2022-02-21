@@ -15,5 +15,7 @@ export const post = (args: TeacherDataVerification) => {
         formData.set(key, value)
     }
 
+    console.log(formData)
+
     return $api.post(`?getCheckData`, formData)
 }

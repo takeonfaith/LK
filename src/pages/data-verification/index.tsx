@@ -46,6 +46,8 @@ const DataVerificationPage = () => {
         teacherDateVerificationModel.effects.getTeacherDataVerificationFx()
     }, [])
 
+    console.log(data)
+
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -265,7 +267,12 @@ const DataVerificationPage = () => {
             ],
         ],
         addNew: true,
-        optionalCheckbox: { title: 'Близкие родственники отсутствуют', value: false, required: true },
+        optionalCheckbox: {
+            fieldName: 'family_none',
+            title: 'Близкие родственники отсутствуют',
+            value: false,
+            required: true,
+        },
         confirmed: false,
     })
 
@@ -273,8 +280,13 @@ const DataVerificationPage = () => {
         title: 'Инвалидность',
         hint: 'Необходимо приложить скан-копию справки об инвалидности',
         data: [],
-        optionalCheckbox: { value: false, title: 'Есть справка об инвалидности', required: false },
-        documents: { files: [], required: true, checkboxCondition: 'straight', fieldName: 'disabilityFiles' },
+        optionalCheckbox: {
+            fieldName: 'is_invalid',
+            value: false,
+            title: 'Есть справка об инвалидности',
+            required: false,
+        },
+        documents: { files: [], required: true, checkboxCondition: 'straight', fieldName: 'invalidFiles' },
         confirmed: false,
     })
 
@@ -341,7 +353,7 @@ const DataVerificationPage = () => {
         data: [
             [
                 {
-                    fieldName: 'name',
+                    fieldName: 'language',
                     title: 'Язык',
                     required: true,
                     value: 'Английский',
@@ -431,11 +443,12 @@ const DataVerificationPage = () => {
         hint: 'При наличии водительского удостоверения необходимо загрузить скан-копию документа с обеих сторон',
         data: [],
         optionalCheckbox: {
+            fieldName: 'driveLicenseFiles',
             title: 'Водительское удостоверение отсутствует',
             value: false,
             required: true,
         },
-        documents: { files: [], required: true, fieldName: 'driversLicenseFiles' },
+        documents: { files: [], required: true, fieldName: 'driveLicenseFiles' },
         confirmed: false,
     })
 
@@ -443,7 +456,7 @@ const DataVerificationPage = () => {
         title: 'Регистрация',
         hint: 'Необходимо приложить скан-копию 5 страницы или последующих страниц с соответствующими штампами паспорта РФ. При отсутствии регистрации также прикладывается скан-копия. Для иностранных работников - необходимо приложить скан-копию документа о регистрации на территории РФ.',
         data: [
-            { fieldName: '', title: 'Страна', value: data?.reg_country ?? '', required: true },
+            { fieldName: 'reg_country', title: 'Страна', value: data?.reg_country ?? '', required: true },
             {
                 fieldName: 'reg_city',
                 title: 'Город, населенный пункт',
@@ -489,9 +502,10 @@ const DataVerificationPage = () => {
         documents: {
             files: [],
             required: true,
-            fieldName: 'registrationFiles',
+            fieldName: 'personalDataFiles',
         },
         optionalCheckbox: {
+            fieldName: 'reg_none',
             title: 'Регистрация отсутствует',
             value: false,
         },
@@ -511,7 +525,13 @@ const DataVerificationPage = () => {
                 required: true,
             },
         ],
-        optionalCheckbox: { title: 'Адрес проживания совпадает с адресом регистрации', value: false, required: true },
+        optionalCheckbox: {
+            // ???
+            fieldName: '',
+            title: 'Адрес проживания совпадает с адресом регистрации',
+            value: false,
+            required: true,
+        },
         confirmed: false,
     })
 
@@ -519,8 +539,14 @@ const DataVerificationPage = () => {
         title: 'Воинская служба',
         hint: 'При наличии документа о воинской службе необходимо загрузить скан-копию всех заполненных страниц документа воинского учета (военного билета или удостоверения гражданина, подлежащего призыву)',
         data: [],
-        documents: { files: [], required: true, checkboxCondition: 'reverse', fieldName: 'militaryServiceFiles' },
+        documents: {
+            files: [],
+            required: true,
+            checkboxCondition: 'reverse',
+            fieldName: 'armyFiles',
+        },
         optionalCheckbox: {
+            fieldName: 'army_doc_none',
             title: 'Документ о воинской службе отсутствует',
             value: false,
             required: true,
@@ -645,15 +671,28 @@ const DataVerificationPage = () => {
                             return obj
                         })
 
-                        const result = Object.assign({}, ...form, ...files)
+                        const checkboxes = inputAreas.map((area) => {
+                            const obj = {}
+                            if (area.optionalCheckbox?.fieldName) {
+                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                // @ts-ignore
+                                obj[area.optionalCheckbox?.fieldName] = area.optionalCheckbox.value
+                            }
+
+                            return obj
+                        })
+
+                        const result = Object.assign({}, ...form, ...files, ...checkboxes)
 
                         console.log(result)
+
+                        teacherDateVerificationModel.events.postTeacherDataVerification(result)
                     }}
                     isLoading={false}
                     completed={false}
                     // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true
-                    setCompleted={function (completed: boolean): void {
-                        throw new Error('Function not implemented.')
+                    setCompleted={(completed: boolean): void => {
+                        setCompleted(completed)
                     }}
                     isActive={
                         !!army.confirmed &&

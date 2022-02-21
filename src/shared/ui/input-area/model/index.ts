@@ -22,5 +22,5 @@ export interface IInputArea {
     optional?: boolean
     documents?: { files: File[]; required: boolean; checkboxCondition?: 'straight' | 'reverse'; fieldName: string }
     addNew?: boolean
-    optionalCheckbox?: { value: boolean; title: string; required?: boolean; fileNeeded?: boolean }
+    optionalCheckbox?: { fieldName: string; value: boolean; title: string; required?: boolean; fileNeeded?: boolean }
 }
