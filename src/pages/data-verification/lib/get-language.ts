@@ -13,7 +13,7 @@ const getLanguage = (data: TeacherDataVerification): IInputArea => {
         title: 'Знание иностранных языков',
         hint: 'Необходимо указать иностранные языки и степень владения ими',
         data: [
-            ...data.languages.map((field): IInputAreaData[] => {
+            ...(data.languages?.map((field): IInputAreaData[] => {
                 return [
                     {
                         fieldName: 'language',
@@ -30,7 +30,7 @@ const getLanguage = (data: TeacherDataVerification): IInputArea => {
                         width: '100%',
                     },
                 ]
-            }),
+            }) ?? []),
         ],
         default: [
             [

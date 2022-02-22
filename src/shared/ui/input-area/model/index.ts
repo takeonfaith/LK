@@ -12,7 +12,7 @@ export interface IInputAreaData {
     fieldName: string
     title: string
     value: string | SelectPage | boolean
-    type?: 'select' | 'text' | 'tel' | 'email' | 'date' | 'checkbox' | 'number'
+    type?: 'select' | 'text' | 'tel' | 'email' | 'date' | 'checkbox' | 'number' | 'textarea'
     items?: SelectPage[]
     width?: string
     required?: boolean

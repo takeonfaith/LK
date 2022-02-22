@@ -18,7 +18,7 @@ const getFamily = (data: TeacherDataVerification): IInputArea => {
         title: 'Состав семьи',
         hint: 'Необходимо указать актуальную информацию о ближайших родственниках',
         data: [
-            ...data.family.map((field): IInputAreaData[] => {
+            ...(data.family?.map((field): IInputAreaData[] => {
                 return [
                     {
                         fieldName: 'relation',
@@ -44,7 +44,7 @@ const getFamily = (data: TeacherDataVerification): IInputArea => {
                         width: '30%',
                     },
                 ]
-            }),
+            }) ?? []),
         ],
         default: [
             [
