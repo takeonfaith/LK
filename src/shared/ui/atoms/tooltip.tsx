@@ -32,7 +32,7 @@ const TooltipBox = styled.div<{ width?: string }>`
     background: #000000b9;
     color: #fff;
     font-weight: bold;
-    position: fixed;
+    position: absolute;
     transform: translate(0, 0);
     transition: 0.2s;
     opacity: 0;

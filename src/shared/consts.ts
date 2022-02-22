@@ -122,7 +122,7 @@ export const Colors: IColors = {
     },
     orange: {
         main: '#ee9e44',
-        transparent: '#e9794445',
+        transparent: '#ff520014',
         lighter: '#ee9e44',
         darker: '#ae4a1b',
         light: '',

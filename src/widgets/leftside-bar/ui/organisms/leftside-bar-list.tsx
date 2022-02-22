@@ -16,9 +16,9 @@ interface Props {
 }
 
 const LeftsideBarList = ({ searchList }: Props) => {
+    const { data } = userModel.selectors.useUser()
     const currentPage = useCurrentPage()
     const { setting } = useSettings<number[]>('menu')
-    const { data } = userModel.selectors.useUser()
 
     return !searchList ? (
         <LeftsideBarListWrapper>

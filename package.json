@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
+    "axios-case-converter": "^0.9.0",
     "core-js": "^3.20.3",
     "effector": "^22.1.2",
     "effector-react": "^22.0.6",
@@ -62,6 +63,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.1",
     "html-webpack-plugin": "^5.5.0",
     "prettier": "^2.5.1",
     "tsconfig-paths-webpack-plugin": "^3.5.2",

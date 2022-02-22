@@ -10,6 +10,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugin');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ESLintPlugin = require('eslint-webpack-plugin')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const config = {
     entry: [
@@ -45,6 +47,7 @@ const config = {
     },
     stats: 'none',
     plugins: [
+        new ForkTsCheckerWebpackPlugin(),
         new HtmlWebpackPlugin
         ({
             template: 'public/index.html',
