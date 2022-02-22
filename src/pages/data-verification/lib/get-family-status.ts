@@ -1,4 +1,5 @@
 import { TeacherDataVerification } from '@api/model'
+import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
 import { IInputArea } from '@ui/input-area/model'
 
 const getFamilyStatusItems = (sex: 'Мужской' | 'Женский') => {
@@ -38,9 +39,9 @@ const getFamilyStatus = (data: TeacherDataVerification): IInputArea => {
         data: [
             {
                 // TODO: ??
-                fieldName: '',
+                fieldName: 'familyStatus',
                 title: '',
-                value: { id: 'not-chosen', title: 'Не выбрано' },
+                value: findCurrentInSelect(getFamilyStatusItems(data.sex), data.familyStatus),
                 type: 'select',
                 items: getFamilyStatusItems(data.sex),
                 width: '100%',

@@ -30,10 +30,10 @@ export interface TeacherDataVerification {
     invalid_ser: string
     is_invalid: boolean
     is_not_invalid: boolean
-    languages: { language: string; level: string }
+    languages: [{ language: string; level: string }]
     loc_addr: string
     loc_date: string
-    loc_match_reg: string
+    loc_match_reg: boolean
     locationValid: boolean
     pass_citizenship: string
     pass_date: string

@@ -1,6 +1,7 @@
+import { TeacherDataVerification } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
-const getDriverLicense = (): IInputArea => {
+const getDriverLicense = (data: TeacherDataVerification): IInputArea => {
     return {
         title: 'Водительское удостоверение',
         hint: 'При наличии водительского удостоверения необходимо загрузить скан-копию документа с обеих сторон',
@@ -8,7 +9,7 @@ const getDriverLicense = (): IInputArea => {
         optionalCheckbox: {
             fieldName: 'dr_lic_none',
             title: 'Водительское удостоверение отсутствует',
-            value: false,
+            value: data.dr_lic_none,
             required: true,
         },
         documents: { files: [], required: true, fieldName: 'driveLicenseFiles', maxFiles: 1 },

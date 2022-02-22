@@ -16,10 +16,9 @@ const getLocation = (data: TeacherDataVerification): IInputArea => {
             },
         ],
         optionalCheckbox: {
-            // ???
-            fieldName: '',
+            fieldName: 'loc_match_reg',
             title: 'Адрес проживания совпадает с адресом регистрации',
-            value: false,
+            value: data.loc_match_reg,
             required: true,
         },
         confirmed: false,

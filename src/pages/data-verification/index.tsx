@@ -1,5 +1,4 @@
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
-import { userModel } from '@entities/user'
 import { SubmitButton, Title, Wrapper } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import InputArea from '@ui/input-area'
@@ -101,10 +100,10 @@ const DataVerificationPage = () => {
             setRegistration(getRegistration(data))
             setLocation(getLocation(data))
             setFamilyStatus(getFamilyStatus(data))
-            setFamily(getFamily())
+            setFamily(getFamily(data))
             setEducation(getEducation(data))
-            setLanguage(getLanguage())
-            setDriveLicense(getDriverLicense())
+            setLanguage(getLanguage(data))
+            setDriveLicense(getDriverLicense(data))
             setDisability(getDisability(data))
             setArmy(getArmy(data))
         }

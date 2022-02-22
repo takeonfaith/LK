@@ -151,7 +151,7 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
                 (field, index): IInputAreaData => ({
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     //@ts-ignore
-                    fieldName: area?.default[index]?.fieldName ?? '',
+                    fieldName: field.fieldName ?? '',
                     title: field.title,
                     value: field.type === 'select' && field?.items ? field?.items?.[0] : '',
                     type: field.type,

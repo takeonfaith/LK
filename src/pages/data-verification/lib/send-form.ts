@@ -12,11 +12,11 @@ const sendForm = (
     const form = inputAreas
         .map((t) => {
             if (!Array.isArray(t.data[0])) {
-                return t.data.map((t) => {
+                return t.data.map((l) => {
                     const obj = {}
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
-                    if (!!t?.fieldName) obj[t?.fieldName ?? ''] = t?.value
+                    if (!!l?.fieldName) obj[l?.fieldName ?? ''] = typeof l.value !== 'object' ? l?.value : l.value.title
                     return obj
                 })
             } else {
@@ -68,6 +68,7 @@ const sendForm = (
     })
 
     const result = Object.assign({}, ...form, ...files, ...checkboxes)
+    // console.log(result)
 
     teacherDateVerificationModel.events.postTeacherDataVerification(result)
     setSubmitLoading(false)
