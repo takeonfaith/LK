@@ -1,5 +1,14 @@
 import { paymentsModel } from '@entities/payments'
-import { Contract, LeftBlock, PageWrapper, PaymentList, PaymentsInfo, RightBlock } from '@features/payments'
+import {
+    AgreementsBlock,
+    Contract,
+    ElectronicAgreementList,
+    LeftBlock,
+    PageWrapper,
+    PaymentList,
+    PaymentsInfo,
+    RightBlock,
+} from '@features/payments'
 import { Title } from '@ui/atoms'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
@@ -37,6 +46,14 @@ const DormitoryPayments = () => {
                     </Title>
                     <Contract contract={dormitory} />
                 </RightBlock>
+            </div>
+            <div className="block-wrapper">
+                <AgreementsBlock>
+                    <Title size={2} align="left" bottomGap>
+                        Доп. соглашение
+                    </Title>
+                    <ElectronicAgreementList electronicAgreements={[]} />
+                </AgreementsBlock>
             </div>
         </PageWrapper>
     )
