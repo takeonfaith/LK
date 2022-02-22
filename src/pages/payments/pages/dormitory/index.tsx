@@ -47,12 +47,12 @@ const DormitoryPayments = () => {
                     <Contract contract={dormitory} />
                 </RightBlock>
             </div>
-            <div className="block-wrapper">
+            <div className="blocks-wrapper">
                 <AgreementsBlock>
                     <Title size={2} align="left" bottomGap>
                         Доп. соглашение
                     </Title>
-                    <ElectronicAgreementList electronicAgreements={[]} />
+                    <ElectronicAgreementList electronicAgreements={dormitory.agreements} />
                 </AgreementsBlock>
             </div>
         </PageWrapper>

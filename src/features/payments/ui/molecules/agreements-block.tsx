@@ -8,7 +8,8 @@ interface Props {
 }
 
 const AgreementsContainer = styled(BasicBlock)`
-    width: calc(100% - 5px);
+    width: 100%;
+    height: 100%;
 
     @media (max-width: 1225px) {
         width: 100%;

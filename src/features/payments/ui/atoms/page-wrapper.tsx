@@ -15,6 +15,8 @@ const PageWrapper = styled.div`
 
     .blocks-wrapper {
         display: flex;
+        width: 100%;
+
         & > * + * {
             margin-left: 10px;
         }

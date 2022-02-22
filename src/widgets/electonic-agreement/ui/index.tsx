@@ -47,7 +47,7 @@ const CenterSection = styled.div<{ showInfoText: boolean }>`
 
 interface Props {
     children: React.ReactChild
-    submit: () => Promise<void>
+    submit: () => Promise<void> | void
     data: any
     setData: React.Dispatch<any>
 }
