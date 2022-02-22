@@ -1,5 +1,6 @@
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
+import PaymentsPage from '@pages/payments'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -113,7 +114,7 @@ export const privateRoutes: IRoutes = {
         title: 'Оплата',
         icon: FiDollarSign,
         path: PAYMENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/payments' }),
+        Component: PaymentsPage,
         isTemplate: false,
     },
     7: {
