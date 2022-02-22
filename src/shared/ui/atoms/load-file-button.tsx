@@ -9,7 +9,7 @@ import { Image } from '.'
 
 // const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000
 
-const LoadFileButtonWrapper = styled.label<{ showPulse: boolean }>`
+const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boolean }>`
     width: 100%;
     height: 150px;
     border-radius: var(--brLight);
@@ -18,14 +18,32 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean }>`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    cursor: pointer;
+    cursor: ${({ isActive }) => isActive && 'pointer'};
+    pointer-events: ${({ isActive }) => !isActive && 'none'};
+    opacity: ${({ isActive }) => !isActive && 0.4};
     box-shadow: ${({ showPulse }) => showPulse && '0px 0px 1px 3px var(--reallyBlue)'};
+    position: relative;
+
+    .max-files {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        padding: 5px 10px;
+        background: var(--schedule);
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7em;
+        font-weight: 600;
+    }
 
     .uploaded-files {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
+
         .file-preview {
             display: flex;
             flex-direction: column;
@@ -104,12 +122,14 @@ interface Props {
     label: string
     maxFileSizeInBytes: number
     files: File[]
-    setFiles: React.Dispatch<React.SetStateAction<File[]>>
+    setFiles: (args: any) => void
+    isActive: boolean
+    maxFiles?: number
 }
 
 const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
 
-const LoadFileButton = ({ label, files, setFiles }: Props) => {
+const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: Props) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
     const { open } = useModal()
@@ -121,20 +141,30 @@ const LoadFileButton = ({ label, files, setFiles }: Props) => {
         return true
     }
 
-    const handleFiles = (files: FileList) => {
-        for (let i = 0; i < files.length; i++) {
-            if (validateFile(files[i])) {
-                if (files[i].size > 20000000) {
+    const handleFiles = (loadedFiles: FileList) => {
+        if (!!maxFiles && files.length + loadedFiles.length > maxFiles) {
+            return popUpMessageModel.events.evokePopUpMessage({
+                message: `Нельзя загрузить больше ${maxFiles} файлов`,
+                type: 'failure',
+            })
+        }
+        for (let i = 0; i < loadedFiles.length; i++) {
+            if (validateFile(loadedFiles[i])) {
+                if (loadedFiles[i].size > 20000000) {
                     popUpMessageModel.events.evokePopUpMessage({
                         message: 'Размер файла слишком большой.',
                         type: 'failure',
                     })
                 } else {
-                    setFiles((prev) => [...prev, files[i]])
+                    setFiles([...files, loadedFiles[i]])
                 }
             } else {
                 //  files[i].invalid = true
-                popUpMessageModel.events.evokePopUpMessage({ message: 'Неверный формат файла.', type: 'failure' })
+                popUpMessageModel.events.evokePopUpMessage({
+                    message: 'Неверный формат файла.',
+                    type: 'failure',
+                    time: 5000,
+                })
             }
         }
     }
@@ -189,17 +219,19 @@ const LoadFileButton = ({ label, files, setFiles }: Props) => {
         e.stopPropagation()
         const tempFiles = files.filter((file) => file.name !== name)
 
-        setFiles(tempFiles)
+        setFiles([...tempFiles])
     }
 
     return (
         <LoadFileButtonWrapper
+            isActive={isActive}
             showPulse={showPulse}
-            onDragOver={handleDragOver}
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
+            onDragOver={(e) => isActive && handleDragOver(e)}
+            onDragEnter={(e) => isActive && handleDragEnter(e)}
+            onDragLeave={(e) => isActive && handleDragLeave(e)}
+            onDrop={(e) => isActive && handleDrop(e)}
         >
+            {maxFiles && <span className="max-files">Макс. файлов: {maxFiles}</span>}
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
             {!files.length ? (
                 <div className="message">

@@ -18,7 +18,6 @@ import { IconType } from 'react-icons/lib'
 import AcadPerformance from '../../pages/acad-performance'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
-// import PaymentsPage from '../../pages/payments'
 import SchedulePage from '../../pages/schedule'
 
 export const HOME_ROUTE = '/home'
@@ -158,7 +157,7 @@ export const privateRoutes: IRoutes = {
         isTemplate: false,
     },
     12: {
-        id: 7,
+        id: 12,
         title: 'Студенты',
         icon: BiGroup,
         path: ALL_STUDENTS_ROUTE,

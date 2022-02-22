@@ -1,7 +1,7 @@
 import { $api } from '@api/config'
 import { Payments } from './model'
+import token from '@utils/token'
 
 export const get = () => {
-    const token = JSON.parse(localStorage.getItem('token') ?? 'null')?.token
     return $api.get<Payments>(`?getPayments&token=${token}`)
 }

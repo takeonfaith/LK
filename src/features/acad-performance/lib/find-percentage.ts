@@ -3,6 +3,7 @@ import { AcadPerformance } from '@entities/acad-performance/model'
 
 function findPercentage(data: AcadPerformance[], circleMode = 0): number {
     let counter = 0
+    const totalLength = data.filter((el) => !!el.grade).length
 
     if (circleMode) {
         switch (circleMode) {
@@ -22,7 +23,7 @@ function findPercentage(data: AcadPerformance[], circleMode = 0): number {
         data.forEach(({ grade }) => GradeByScore[grade] > 2 && counter++)
     }
 
-    const perc = (+(counter / data.length)).toPrecision(2)
+    const perc = (+(counter / totalLength)).toPrecision(2)
 
     return +perc
 }
