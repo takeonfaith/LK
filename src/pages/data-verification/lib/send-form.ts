@@ -38,8 +38,7 @@ const sendForm = (
                 const obj = {} as any
 
                 const name = t.title == 'Состав семьи' ? 'family' : 'langs'
-
-                obj[name] = r
+                obj[name] = JSON.stringify(r)
 
                 return obj
             }
@@ -51,7 +50,7 @@ const sendForm = (
         if (area.documents?.fieldName) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            obj[area.documents?.fieldName] = area.documents.files
+            obj[area.documents?.fieldName] = area.documents.files.find((t) => !!t)
         }
 
         return obj
@@ -69,8 +68,6 @@ const sendForm = (
     })
 
     const result = Object.assign({}, ...form, ...files, ...checkboxes)
-
-    console.log(result)
 
     teacherDateVerificationModel.events.postTeacherDataVerification(result)
     setSubmitLoading(false)

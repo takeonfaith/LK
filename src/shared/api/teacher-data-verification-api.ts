@@ -15,7 +15,9 @@ export const post = (args: TeacherDataVerification) => {
         formData.set(key, value)
     }
 
-    // console.log(formData)
-
-    return $api.post('?saveCheckData=1', formData)
+    return $api.post('?saveCheckData=1', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
 }

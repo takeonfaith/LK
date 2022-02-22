@@ -57,8 +57,6 @@ type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 const DataVerificationPage = () => {
     const { data, error } = teacherDateVerificationModel.selectors.useTeacherDataVerification()
 
-    console.log(data)
-
     // Про это написно ниже, в сабмит баттоне
     const [completed, setCompleted] = useState(false)
     const [submitLoading, setSubmitLoading] = useState(false)
