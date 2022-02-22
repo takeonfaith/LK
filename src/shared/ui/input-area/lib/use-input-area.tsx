@@ -1,4 +1,5 @@
 import { popUpMessageModel } from '@entities/pop-up-message'
+import { SelectPage } from '@features/select'
 import React, { useEffect, useState } from 'react'
 import { IComplexInputAreaData, IInputArea, IInputAreaCheckbox, IInputAreaData } from '../model'
 
@@ -20,7 +21,10 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
             if (!documents) {
                 if (
                     (optionalCheckbox?.value && optionalCheckbox.required) ||
-                    !(data as IInputAreaData[]).find((el) => !el.value && el.required)
+                    (!(data as IInputAreaData[]).find((el) => !el.value && el.required) &&
+                        !(data as IInputAreaData[]).find(
+                            (el) => (el.value as SelectPage).id === 'not-chosen' && !!el.items?.length,
+                        ))
                 ) {
                     setData((area: IInputArea) => {
                         area.confirmed = true
@@ -78,7 +82,11 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
             if (!documents) {
                 if (
                     (optionalCheckbox?.value && optionalCheckbox.required) ||
-                    !(data as IComplexInputAreaData).find((arr) => !!arr.find((el) => !el.value && el.required))
+                    (!(data as IComplexInputAreaData).find((arr) => !!arr.find((el) => !el.value && el.required)) &&
+                        !(data as IComplexInputAreaData).find(
+                            (arr) =>
+                                !!arr.find((el) => (el.value as SelectPage).id === 'not-chosen' && !!el.items?.length),
+                        ))
                 ) {
                     setData((area: IInputArea) => {
                         area.confirmed = true

@@ -67,6 +67,7 @@ const UniversalInput = ({
                 placeholder={title}
                 required={required}
                 mask={mask}
+                width={width}
             />
         )
     ) : (

@@ -75,7 +75,7 @@ const InputArea = ({
                                       {el.map((attr, j) => {
                                           return (
                                               <UniversalInput
-                                                  key={i}
+                                                  key={j}
                                                   documents={documents}
                                                   changeInputArea={changeInputArea && !optionalCheckbox?.value}
                                                   setData={setData}

@@ -3,12 +3,13 @@ import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Button from './button'
 
-const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputAppearance: boolean }>`
+const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputAppearance: boolean; width?: string }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    width: 100%;
+    width: ${({ width }) => width ?? '100%'};
+    min-width: ${({ width }) => width};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
 
@@ -90,6 +91,7 @@ interface Props {
     inputAppearance?: boolean
     required?: boolean
     mask?: boolean
+    width?: string
 }
 
 const Input = ({
@@ -98,6 +100,7 @@ const Input = ({
     leftIcon,
     title,
     required,
+    width,
     placeholder = 'Введите сюда',
     type = 'text',
     isActive = true,
@@ -126,7 +129,7 @@ const Input = ({
     )
 
     return (
-        <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance}>
+        <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance} width={width}>
             {!!title && (
                 <h5>
                     {required && <span className="red-star">*</span>}

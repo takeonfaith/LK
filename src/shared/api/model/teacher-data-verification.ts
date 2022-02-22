@@ -28,7 +28,8 @@ export interface TeacherDataVerification {
     invalid_grp: string
     invalid_num: string
     invalid_ser: string
-    is_invalid: string
+    is_invalid: boolean
+    is_not_invalid: boolean
     languages: { language: string; level: string }
     loc_addr: string
     loc_date: string
@@ -49,6 +50,7 @@ export interface TeacherDataVerification {
     reg_corpus: string
     reg_country: string
     reg_date: string
+    reg_addr: string
     reg_date_start: string
     reg_flat: string
     reg_house: string
@@ -57,7 +59,7 @@ export interface TeacherDataVerification {
     reg_street: string
     registrationFiles: { url: string; filename: string }[]
     registrationValid: boolean
-    sex: string
+    sex: 'Мужской' | 'Женский'
     tel_mob_private: string
     tel_mob_staff: string
     tel_staff: string
