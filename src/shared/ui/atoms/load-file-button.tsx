@@ -22,6 +22,21 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.4};
     box-shadow: ${({ showPulse }) => showPulse && '0px 0px 1px 3px var(--reallyBlue)'};
+    position: relative;
+
+    .max-files {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        padding: 5px 10px;
+        background: var(--schedule);
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7em;
+        font-weight: 600;
+    }
 
     .uploaded-files {
         display: flex;
@@ -109,11 +124,12 @@ interface Props {
     files: File[]
     setFiles: (args: any) => void
     isActive: boolean
+    maxFiles?: number
 }
 
 const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
 
-const LoadFileButton = ({ label, files, setFiles, isActive }: Props) => {
+const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: Props) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
     const { open } = useModal()
@@ -126,6 +142,12 @@ const LoadFileButton = ({ label, files, setFiles, isActive }: Props) => {
     }
 
     const handleFiles = (loadedFiles: FileList) => {
+        if (!!maxFiles && files.length + loadedFiles.length > maxFiles) {
+            return popUpMessageModel.events.evokePopUpMessage({
+                message: `Нельзя загрузить больше ${maxFiles} файлов`,
+                type: 'failure',
+            })
+        }
         for (let i = 0; i < loadedFiles.length; i++) {
             if (validateFile(loadedFiles[i])) {
                 if (loadedFiles[i].size > 20000000) {
@@ -209,6 +231,7 @@ const LoadFileButton = ({ label, files, setFiles, isActive }: Props) => {
             onDragLeave={(e) => isActive && handleDragLeave(e)}
             onDrop={(e) => isActive && handleDrop(e)}
         >
+            {maxFiles && <span className="max-files">Макс. файлов: {maxFiles}</span>}
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
             {!files.length ? (
                 <div className="message">

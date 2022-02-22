@@ -11,7 +11,7 @@ const getDriverLicense = (): IInputArea => {
             value: false,
             required: true,
         },
-        documents: { files: [], required: true, fieldName: 'driveLicenseFiles' },
+        documents: { files: [], required: true, fieldName: 'driveLicenseFiles', maxFiles: 1 },
         confirmed: false,
     }
 }

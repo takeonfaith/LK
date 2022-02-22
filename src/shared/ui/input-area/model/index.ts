@@ -28,7 +28,13 @@ export interface IInputArea {
     default?: IInputAreaData[] | IComplexInputAreaData
     confirmed?: boolean
     optional?: boolean
-    documents?: { files: File[]; required: boolean; checkboxCondition?: 'straight' | 'reverse'; fieldName: string }
+    documents?: {
+        files: File[]
+        required: boolean
+        checkboxCondition?: 'straight' | 'reverse'
+        fieldName: string
+        maxFiles?: number
+    }
     addNew?: boolean
     optionalCheckbox?: IInputAreaCheckbox
 }

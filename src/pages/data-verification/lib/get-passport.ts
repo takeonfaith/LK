@@ -33,10 +33,10 @@ const getPassport = (data: TeacherDataVerification): IInputArea => {
                 fieldName: 'pass_citizenship',
                 title: 'Гражданство',
                 value: data?.pass_citizenship ?? '',
-                required: true,
+                required: false,
             },
         ],
-        documents: { files: [], required: true, fieldName: 'passportFiles' },
+        documents: { files: [], required: true, fieldName: 'passportFiles', maxFiles: 1 },
         confirmed: false,
     }
 }

@@ -32,7 +32,7 @@ const getPersonalData = (data: TeacherDataVerification): IInputArea => {
                 required: true,
             },
         ],
-        documents: { files: [], required: true, fieldName: 'personalFiles' },
+        documents: { files: [], required: true, fieldName: 'personalFiles', maxFiles: 1 },
         confirmed: false,
     }
 }

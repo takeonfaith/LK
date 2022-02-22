@@ -12,7 +12,7 @@ const getDisability = (data: TeacherDataVerification): IInputArea => {
             title: 'Нет документа об инвалидности',
             required: true,
         },
-        documents: { files: [], required: true, checkboxCondition: 'reverse', fieldName: 'invalidFiles' },
+        documents: { files: [], required: true, checkboxCondition: 'reverse', fieldName: 'invalidFiles', maxFiles: 1 },
         confirmed: false,
     }
 }
