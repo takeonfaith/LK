@@ -21,6 +21,11 @@ export interface PaymentsContract {
     qr_total: string
 }
 
-export interface Payments {
+export interface LoadPayments {
     contracts: PaymentsContract[]
+}
+
+export interface Payments {
+    dormitory: PaymentsContract[]
+    education: PaymentsContract[]
 }

@@ -109,6 +109,8 @@ const DataVerificationPage = () => {
         }
     }, [data])
 
+    console.log(data)
+
     return (
         <Wrapper
             load={() => teacherDateVerificationModel.effects.getTeacherDataVerificationFx()}
@@ -159,7 +161,7 @@ const DataVerificationPage = () => {
                             }
                         />
                         <SubmitButton
-                            text={'Отправить'}
+                            text={!data?.validated ? 'Отправить' : 'Данные отправлены'}
                             // Функция отправки здесь
                             action={() =>
                                 sendForm(
@@ -200,6 +202,7 @@ const DataVerificationPage = () => {
                                 !!contactInfo.confirmed &&
                                 !!confirmAll
                             }
+                            isDone={data?.validated}
                             popUpFailureMessage="Для отправки формы необходимо, чтобы все поля были подтверждены"
                             popUpSuccessMessage="Данные формы успешно отправлены"
                         />

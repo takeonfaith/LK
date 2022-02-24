@@ -33,17 +33,19 @@ interface Props {
     sum: number
     allPayments: number
     balanceCurrDate: number
+    qr_current: string
+    qr_total: string
 }
 
-const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: Props) => {
+const PaymentsInfo = ({ endDate, sum, allPayments, balanceCurrDate, qr_current, qr_total }: Props) => {
     const { open } = useModal()
 
     const handleModal = useCallback(() => {
         open(
             <SliderPage
                 pages={[
-                    { title: 'Текущая залолженность', content: <QrCode qrCode={'qr_current'} contract={0} /> },
-                    { title: 'Общая залолженность', content: <QrCode qrCode={'qr_total'} contract={0} /> },
+                    { title: 'Текущая залолженность', content: <QrCode qrCode={qr_current} /> },
+                    { title: 'Общая залолженность', content: <QrCode qrCode={qr_total} /> },
                 ]}
             />,
         )

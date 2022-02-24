@@ -1,5 +1,5 @@
 import { paymentApi } from '@api'
-import { Payments } from '@api/model'
+import { LoadPayments, Payments, PaymentsContract } from '@api/model'
 import { createEffect, createStore } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
 
@@ -16,11 +16,30 @@ interface PaymentsStore {
     error: string | null
 }
 
+const preparePayments = (data: LoadPayments) => {
+    const final: Payments = {
+        dormitory: [],
+        education: [],
+    }
+    data.contracts.forEach((contract: PaymentsContract) => {
+        switch (contract.type) {
+            case 'Общежитие':
+                final.dormitory.push(contract)
+                break
+            case 'Обучение':
+                final.dormitory.push(contract)
+                break
+        }
+    })
+
+    return final
+}
+
 const getPaymentsFx = createEffect(async (): Promise<Payments> => {
     const response = await paymentApi.get()
     if (!response.data.contracts.length) throw new Error('У вас нет данных по оплате')
     try {
-        return response.data
+        return preparePayments(response.data)
     } catch (_) {
         throw new Error('Не удалось загрузить оплату')
     }
