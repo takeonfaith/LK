@@ -69,6 +69,7 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo
                         )
                     })}
                 {!!lessons && !lessons.length && <HolidayPlate />}
+                {/* {!!lessons && !!lessons.length && new Date().getHours() > lessons[lessons.length-1].timeInterval.split('')} */}
             </DayScheduleListWrapper>
         </DayScheduleWrapper>
     )

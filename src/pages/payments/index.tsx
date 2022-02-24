@@ -12,20 +12,20 @@ const PaymentsPage = () => {
             loading={loading}
             load={paymentsModel.effects.getPaymentsFx}
             error={error}
-            data={data && data?.contracts[0]}
-            noDataCheck={!data?.contracts.length}
+            data={data && data?.dormitory[0]}
+            noDataCheck={!data?.dormitory.length}
         >
             {
                 <SliderPage
                     pages={[
                         {
                             title: 'Общежитие',
-                            condition: !!data?.contracts?.find((contract) => contract.type === 'Общежитие'),
+                            condition: !!data?.dormitory?.find((contract) => contract.type === 'Общежитие'),
                             content: <DormitoryPayments />,
                         },
                         {
                             title: 'Обучение',
-                            condition: !!data?.contracts.find((contract) => contract.type === 'Обучение'),
+                            condition: !!data?.education.find((contract) => contract.type === 'Обучение'),
                             content: <EducationPayments />,
                         },
                         { title: 'Информация', condition: true, content: <InfoPayments /> },

@@ -36,6 +36,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         justify-content: center;
         font-size: 0.7em;
         font-weight: 600;
+        pointer-events: none;
     }
 
     .uploaded-files {
@@ -109,6 +110,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         align-items: center;
         flex-direction: column;
         opacity: 0.6;
+        pointer-events: none;
 
         svg {
             width: 40px;

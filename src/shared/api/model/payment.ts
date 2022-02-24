@@ -32,6 +32,12 @@ export interface Agreement {
     signed_user_time: string
     type: string
 }
-export interface Payments {
+
+export interface LoadPayments {
     contracts: PaymentsContract[]
+}
+
+export interface Payments {
+    dormitory: PaymentsContract[]
+    education: PaymentsContract[]
 }
