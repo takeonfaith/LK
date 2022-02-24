@@ -16,8 +16,9 @@ import React from 'react'
 
 const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
+
     if (!data?.dormitory) return null
-    console.log(data)
+
     const agreements = data?.dormitory
         .reduce((acc, { agreements = [] }) => (acc.push(...agreements), acc), [] as Agreement[])
         ?.filter((item) => new Date(item?.date) < new Date('2022-02-22'))

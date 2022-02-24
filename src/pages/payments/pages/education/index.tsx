@@ -1,11 +1,27 @@
+import { Agreement } from '@api/model'
 import { paymentsModel } from '@entities/payments'
-import { Contract, LeftBlock, PageWrapper, PaymentList, PaymentsInfo, RightBlock } from '@features/payments'
+import {
+    AgreementsBlock,
+    Contract,
+    ElectronicAgreementList,
+    LeftBlock,
+    PageWrapper,
+    PaymentList,
+    PaymentsInfo,
+    RightBlock,
+} from '@features/payments'
 import { Title } from '@ui/atoms'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 
 const EducationPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
+
+    if (!data?.education) return null
+
+    const agreements = data.education
+        .reduce((acc, { agreements = [] }) => (acc.push(...agreements), acc), [] as Agreement[])
+        ?.filter((item) => new Date(item?.date) < new Date('2022-02-22'))
 
     return (
         <PageWrapper>
@@ -43,6 +59,16 @@ const EducationPayments = () => {
                     </div>
                 )
             })}
+            {agreements && agreements.length > 1 && (
+                <div className="blocks-wrapper">
+                    <AgreementsBlock>
+                        <Title size={2} align="left" bottomGap>
+                            Доп. соглашение
+                        </Title>
+                        <ElectronicAgreementList electronicAgreements={agreements} />
+                    </AgreementsBlock>
+                </div>
+            )}
         </PageWrapper>
     )
 }
