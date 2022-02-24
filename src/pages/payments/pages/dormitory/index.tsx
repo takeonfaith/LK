@@ -17,6 +17,9 @@ const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
     if (!data?.contracts) return null
     const dormitory = data?.contracts[0]
+
+    const agreements = dormitory?.agreements?.filter((item) => new Date(item?.date) < new Date('2022-02-22'))
+
     return (
         <PageWrapper>
             <div className="blocks-wrapper">
@@ -47,14 +50,16 @@ const DormitoryPayments = () => {
                     <Contract contract={dormitory} />
                 </RightBlock>
             </div>
-            <div className="blocks-wrapper">
-                <AgreementsBlock>
-                    <Title size={2} align="left" bottomGap>
-                        Доп. соглашение
-                    </Title>
-                    <ElectronicAgreementList electronicAgreements={dormitory.agreements} />
-                </AgreementsBlock>
-            </div>
+            {agreements && agreements.length > 1 && (
+                <div className="blocks-wrapper">
+                    <AgreementsBlock>
+                        <Title size={2} align="left" bottomGap>
+                            Доп. соглашение
+                        </Title>
+                        <ElectronicAgreementList electronicAgreements={dormitory.agreements} />
+                    </AgreementsBlock>
+                </div>
+            )}
         </PageWrapper>
     )
 }

@@ -22,10 +22,12 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
         paymentApi.agreementSubmit(id)
     }
 
+    const height = signedUser ? 200 : 250
+
     return (
-        <Accordion height={300} show title={name} confirmed={signedUser}>
+        <Accordion height={height} show title={name} confirmed={signedUser}>
             <Wrapper>
-                <ElectornicAgreement data={data} submit={handleSubmit} setData={() => {}}>
+                <ElectornicAgreement data={data} submit={handleSubmit} setData={() => {}} isDone={signedUser}>
                     <p>
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis, magni! Sit nihil veniam ea et
                         cumque placeat dolore impedit est dolorem beatae consequuntur sint neque aperiam iusto, eius

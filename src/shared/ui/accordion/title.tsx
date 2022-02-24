@@ -14,6 +14,8 @@ const AreaTitleWrapper = styled.div`
     background: var(--form);
     z-index: 3;
     width: 100%;
+    padding: 0 10px;
+    border-radius: var(--brLight);
 
     .title-and-icon {
         display: flex;

@@ -10,6 +10,7 @@ interface Props {
 const AgreementsContainer = styled(BasicBlock)`
     width: 100%;
     height: 100%;
+    max-width: 1190px;
 
     @media (max-width: 1225px) {
         width: 100%;

@@ -18,6 +18,7 @@ const CenterSection = styled.div<{ showInfoText: boolean }>`
     justify-content: center;
     flex-direction: column;
     border-radius: var(--brSemi);
+    background: var(--form);
 
     .info-text {
         transition: 0.2s;
@@ -50,13 +51,14 @@ interface Props {
     submit: () => Promise<void> | void
     data: any
     setData: React.Dispatch<any>
+    isDone?: boolean
 }
 
-const ElectornicAgreement = ({ children, data, setData, submit }: Props) => {
+const ElectornicAgreement = ({ children, data, setData, submit, isDone }: Props) => {
     const { open } = useModal()
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
-    const [done, setDone] = useState(false)
+    const [done, setDone] = useState(isDone ?? false)
 
     const handleSubmit = async () => {
         try {
@@ -85,7 +87,7 @@ const ElectornicAgreement = ({ children, data, setData, submit }: Props) => {
                 icon={<FiDownload />}
             />
             <Signed show={data.status || done} />
-            {children}
+            <div className="info-text">{children}</div>
             {!data.status && !done && (
                 <SubmitButton
                     text={!data.status && !done ? 'Подписать' : 'Подписано'}

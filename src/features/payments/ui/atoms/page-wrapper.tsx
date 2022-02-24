@@ -16,6 +16,7 @@ const PageWrapper = styled.div`
     .blocks-wrapper {
         display: flex;
         width: 100%;
+        justify-content: center;
 
         & > * + * {
             margin-left: 10px;
@@ -42,6 +43,8 @@ const PageWrapper = styled.div`
         .blocks-wrapper {
             display: flex;
             flex-direction: column;
+            align-items: center;
+
             & > * + * {
                 margin-top: 10px;
                 margin-left: 0px;
