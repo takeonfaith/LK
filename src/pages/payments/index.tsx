@@ -20,12 +20,12 @@ const PaymentsPage = () => {
                     pages={[
                         {
                             title: 'Общежитие',
-                            condition: !!data?.dormitory?.find((contract) => contract.type === 'Общежитие'),
+                            condition: !!data?.dormitory?.length,
                             content: <DormitoryPayments />,
                         },
                         {
                             title: 'Обучение',
-                            condition: !!data?.education.find((contract) => contract.type === 'Обучение'),
+                            condition: !!data?.education.length,
                             content: <EducationPayments />,
                         },
                         { title: 'Информация', condition: true, content: <InfoPayments /> },

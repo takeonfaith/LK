@@ -34,7 +34,10 @@ export interface Agreement {
 }
 
 export interface LoadPayments {
-    contracts: PaymentsContract[]
+    contracts: {
+        dormitory: PaymentsContract[]
+        education: PaymentsContract[]
+    }
 }
 
 export interface Payments {
