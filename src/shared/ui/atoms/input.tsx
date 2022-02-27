@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Button from './button'
 
-const InputWrapper = styled.div<{ leftIcon: boolean }>`
+const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputAppearance: boolean; width?: string }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    width: 100%;
+    width: ${({ width }) => width ?? '100%'};
+    min-width: ${({ width }) => width};
+    pointer-events: ${({ isActive }) => !isActive && 'none'};
+    opacity: ${({ isActive }) => !isActive && 0.7};
 
     h5 {
         margin-bottom: 5px;
+
+        .red-star {
+            color: var(--red);
+            margin-right: 5px;
+        }
     }
 
     .icon {
@@ -27,14 +35,15 @@ const InputWrapper = styled.div<{ leftIcon: boolean }>`
         border: none;
         color: var(--text);
         outline: none;
-        background: var(--search);
+        background: ${({ inputAppearance }) => (inputAppearance ? 'var(--search)' : 'transparent')};
         height: 100%;
         width: 100%;
         padding: 10px;
         font-weight: bold;
         border-radius: 7px;
-        padding-left: ${({ leftIcon }) => (leftIcon ? '30px' : '10px')};
+        padding-left: ${({ leftIcon, inputAppearance }) => (leftIcon ? '30px' : inputAppearance ? '10px' : '0')};
         padding-right: 35px;
+        max-height: 36px;
 
         &::placeholder {
             font-weight: 500;
@@ -78,22 +87,74 @@ interface Props {
     title?: string
     placeholder?: string
     type?: string
+    isActive?: boolean
+    inputAppearance?: boolean
+    required?: boolean
+    mask?: boolean
+    width?: string
 }
 
-const Input = ({ value, setValue, leftIcon, title, placeholder = 'Введите сюда', type = 'text' }: Props) => {
+const Input = ({
+    value,
+    setValue,
+    leftIcon,
+    title,
+    required,
+    width,
+    placeholder = 'Введите сюда',
+    type = 'text',
+    isActive = true,
+    inputAppearance = true,
+    mask = false,
+}: Props) => {
     const [inputType, setInputType] = useState(type)
+
+    const phoneMask = useCallback(
+        (phone: string) => {
+            return phone
+                .replace(/\D/g, '')
+                .replace(/^(\d)/, '+$1(')
+                .replace(/(\d{3})(\d{1,3})/, '$1) $2-')
+                .replace(/(\d{2})(\d{2,4})/, '$1-$2')
+                .slice(0, 17)
+        },
+        [type],
+    )
+
+    const emailMask = useCallback(
+        (email: string) => {
+            return email.replace(/@\.*/, '@mospolytech.ru').replace(/mospolytech.ru?/, '')
+        },
+        [type],
+    )
+
     return (
-        <InputWrapper leftIcon={!!leftIcon}>
-            {!!title && <h5>{title}</h5>}
+        <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance} width={width}>
+            {!!title && (
+                <h5>
+                    {required && <span className="red-star">*</span>}
+                    {title}
+                </h5>
+            )}
             {leftIcon && <span className="icon">{leftIcon}</span>}
             <input
                 type={inputType}
                 placeholder={placeholder}
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => {
+                    if (mask) {
+                        if (type === 'tel') {
+                            setValue(phoneMask(e.target.value))
+                        } else if (type === 'email') {
+                            setValue(emailMask(e.target.value))
+                        } else setValue(e.target.value)
+                    } else setValue(e.target.value)
+                }}
+                required={required}
             />
             {type !== 'password' ? (
-                !!value.length && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
+                !!value.length &&
+                inputAppearance && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
             ) : (
                 <Button
                     icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}

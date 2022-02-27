@@ -33,17 +33,19 @@ interface Props {
     sum: number
     allPayments: number
     balanceCurrDate: number
+    qr_current: string
+    qr_total: string
 }
 
-const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: Props) => {
+const PaymentsInfo = ({ endDate, sum, allPayments, balanceCurrDate, qr_current, qr_total }: Props) => {
     const { open } = useModal()
 
     const handleModal = useCallback(() => {
         open(
             <SliderPage
                 pages={[
-                    { title: 'Текущая залолженность', content: <QrCode qrCode={'qr_current'} contract={0} /> },
-                    { title: 'Общая залолженность', content: <QrCode qrCode={'qr_total'} contract={0} /> },
+                    { title: 'Текущая залолженность', content: <QrCode qrCode={qr_current} /> },
+                    { title: 'Общая залолженность', content: <QrCode qrCode={qr_total} /> },
                 ]}
             />,
         )
@@ -54,13 +56,14 @@ const PaymentsInfo = ({ monthly, endDate, sum, allPayments, balanceCurrDate }: P
             <div>
                 <p>
                     {balanceCurrDate < 0 ? 'Переплата' : 'Долг'} на {localizeDate(new Date().toString())}{' '}
-                    <span className="debt-or-overpay">{balanceCurrDate} руб.</span> Следующий платеж -{' '}
-                    <span className="monthly">{monthly} руб.</span>
+                    <span className="debt-or-overpay">{balanceCurrDate} руб.</span>
+                    {/* Следующий платеж -{' '}
+                    <span className="monthly">{monthly} руб.</span> */}
                 </p>
                 <br />
                 <p>
                     К выплате до конца действия договора (до {localizeDate(endDate)} г.):
-                    <span className="rest-money"> {sum - allPayments} руб.</span> (без учета индексации)
+                    <span className="rest-money"> {(sum - allPayments).toFixed(2)} руб.</span> (без учета индексации)
                 </p>
                 <br />
                 <Button

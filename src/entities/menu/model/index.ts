@@ -1,5 +1,5 @@
-import { createEvent, createStore } from 'effector'
-import { useStore } from 'effector-react'
+import { createEvent, createStore } from 'effector/compat'
+import { useStore } from 'effector-react/compat'
 
 interface Menu {
     isOpen: boolean

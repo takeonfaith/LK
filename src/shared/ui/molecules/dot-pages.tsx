@@ -29,7 +29,7 @@ interface Props {
 }
 
 const DotPages = ({ amount, current, direction = 'horizontal' }: Props) => {
-    return (
+    return amount > 1 ? (
         <DotPagesWrapper direction={direction}>
             {Array(amount)
                 .fill(0)
@@ -37,7 +37,7 @@ const DotPages = ({ amount, current, direction = 'horizontal' }: Props) => {
                     return <span className={'dot-page ' + (current === index && 'current')} key={index} />
                 })}
         </DotPagesWrapper>
-    )
+    ) : null
 }
 
 export default DotPages

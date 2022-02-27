@@ -62,6 +62,10 @@ const SubjectModal = ({ item }: Props) => {
                 <b>Семестр:</b>
                 <Data> {findSemestr(item.exam_date, +item.course)}</Data>
             </Line>
+            <Line>
+                <b>Кафедра:</b>
+                <Data> {item.chair}</Data>
+            </Line>
         </Container>
     )
 }

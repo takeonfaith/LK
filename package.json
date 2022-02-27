@@ -1,45 +1,11 @@
 {
   "name": "lk",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@craco/craco": "^6.4.2",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "@types/jest": "^26.0.24",
-    "@types/node": "^12.20.27",
-    "@types/react": "^17.0.24",
-    "@types/react-dom": "^17.0.9",
-    "@types/react-router-dom": "^5.3.0",
-    "axios": "^0.24.0",
-    "effector": "^22.1.1",
-    "effector-react": "^22.0.4",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.2.0",
-    "react-router": "^5.2.1",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
-    "react-swipeable": "^6.2.0",
-    "styled-components": "^5.3.1",
-    "typescript": "^4.4.3",
-    "web-vitals": "^1.1.2"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "browserslist": {
     "production": [
       ">0.2%",
@@ -52,18 +18,58 @@
       "last 1 safari version"
     ]
   },
+  "scripts": {
+    "build-dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack serve --hot --mode development",
+    "start-prod": "webpack serve --hot --mode production"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "axios-case-converter": "^0.9.0",
+    "core-js": "^3.20.3",
+    "effector": "^22.1.2",
+    "effector-react": "^22.0.6",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hot-loader": "^4.13.0",
+    "react-icons": "^4.3.1",
+    "react-indiana-drag-scroll": "^2.1.0",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0",
+    "regenerator-runtime": "^0.13.9",
+    "styled-components": "^5.3.3"
+  },
   "devDependencies": {
-    "@types/styled-components": "^5.1.14",
-    "@typescript-eslint/eslint-plugin": "^4.22.1",
-    "@typescript-eslint/parser": "^4.22.1",
-    "craco-alias": "^3.0.1",
-    "eslint": "^7.11.0",
+    "@babel/core": "^7.16.7",
+    "@babel/plugin-transform-typescript": "^7.16.8",
+    "@babel/preset-env": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "@hot-loader/react-dom": "^17.0.1+4.13.0",
+    "@soda/friendly-errors-webpack-plugin": "^1.8.1",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/react-router": "^5.1.17",
+    "@types/react-router-dom": "^5.3.2",
+    "@types/styled-components": "^5.1.19",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "babel-loader": "^8.2.3",
+    "babel-plugin-styled-components": "^2.0.2",
+    "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-boundaries": "^2.4.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.23.2",
-    "gh-pages": "^3.2.3",
-    "prettier": "^2.2.1",
-    "prettier-eslint": "^12.0.0"
+    "eslint-plugin-boundaries": "^2.8.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-webpack-plugin": "^3.1.1",
+    "file-loader": "^6.2.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.1",
+    "html-webpack-plugin": "^5.5.0",
+    "prettier": "^2.5.1",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "typescript": "^4.5.4",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.2"
   }
 }

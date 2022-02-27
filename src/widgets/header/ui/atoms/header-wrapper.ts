@@ -5,7 +5,7 @@ const HeaderWrapper = styled.header`
     height: 45px;
     background: var(--theme);
     box-shadow: var(--header-box-shadow);
-    z-index: 1;
+    z-index: 12;
     display: flex;
     align-items: center;
     justify-content: space-between;

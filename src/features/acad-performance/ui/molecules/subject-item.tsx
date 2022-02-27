@@ -13,7 +13,7 @@ interface Props {
     type: 'exam' | 'test'
 }
 
-const Wrap = styled.div`
+const Wrap = styled.div<{ isGraded: boolean }>`
     width: 100%;
     display: flex;
     min-height: 60px;
@@ -23,6 +23,7 @@ const Wrap = styled.div`
     padding: 15px 0;
     box-sizing: border-box;
     cursor: pointer;
+    opacity: ${({ isGraded }) => (isGraded ? 1 : 0.4)};
 
     &:not(:last-child) {
         border-bottom: 1px solid var(--almostTransparentOpposite);
@@ -115,24 +116,18 @@ const Teacher = styled.div`
 const SubjectItem = ({ item, number, type }: Props) => {
     const { open } = useModal()
     return (
-        item.grade && (
-            <Wrap onClick={() => open(<SubjectModal item={item} />)}>
-                <Name>
-                    <span>{number}</span>
-                    <div>{item.name}</div>
-                </Name>
-                <Bar>
-                    {type === 'exam' ? (
-                        <SubjectProgresssBar grade={item.grade} />
-                    ) : (
-                        <SubjectCheker grade={item.grade} />
-                    )}
-                </Bar>
-                <Grade>{item.grade}</Grade>
-                <ExamDate>{localizeDate(item.exam_date)}</ExamDate>
-                <Teacher>{getShortName(item.teacher)}</Teacher>
-            </Wrap>
-        )
+        <Wrap onClick={() => item.grade && open(<SubjectModal item={item} />)} isGraded={!!item.grade}>
+            <Name>
+                <span>{number}</span>
+                <div>{item.name}</div>
+            </Name>
+            <Bar>
+                {type === 'exam' ? <SubjectProgresssBar grade={item.grade} /> : <SubjectCheker grade={item.grade} />}
+            </Bar>
+            <Grade>{item.grade}</Grade>
+            <ExamDate>{localizeDate(item.exam_date)}</ExamDate>
+            <Teacher>{getShortName(item.teacher)}</Teacher>
+        </Wrap>
     )
 }
 

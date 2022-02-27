@@ -11,6 +11,7 @@ const ButtonWrapper = styled.button<{
     hoverBackground?: string
     direction: 'horizontal' | 'vertical'
     align?: 'left' | 'center' | 'right'
+    isActive: boolean
 }>`
     display: flex;
     align-items: center;
@@ -26,6 +27,7 @@ const ButtonWrapper = styled.button<{
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;
     flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
+    opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);
@@ -35,7 +37,7 @@ const ButtonWrapper = styled.button<{
         outline: none;
     }
 
-    &:active {
+    &:isactive {
         transform: scale(0.95);
     }
 
@@ -46,8 +48,8 @@ const ButtonWrapper = styled.button<{
 
     svg {
         margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')};
-        width: ${({ direction }) => (direction === 'vertical' ? '20px' : '15px')};
-        height: ${({ direction }) => (direction === 'vertical' ? '20px' : '15px')};
+        width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
+        height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
         margin-bottom: ${({ direction }) => direction === 'vertical' && '4px'};
     }
 
@@ -80,6 +82,7 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
     hoverBackground?: string
     align?: 'left' | 'center' | 'right'
     direction?: 'horizontal' | 'vertical'
+    isActive?: boolean
     restProps?: any | unknown
 }
 
@@ -95,12 +98,13 @@ const Button = ({
     isChosen = false,
     direction = 'horizontal',
     shrinkTextInMobile = false,
+    isActive = true,
     ...restProps
 }: Props) => {
     return (
         <ButtonWrapper
             text={!!text}
-            onClick={onClick}
+            onClick={(e) => isActive && onClick(e)}
             isChosen={isChosen}
             width={width}
             background={background}
@@ -109,6 +113,7 @@ const Button = ({
             hoverBackground={hoverBackground}
             align={align}
             direction={direction}
+            isActive={isActive}
             {...restProps}
         >
             {!!icon && icon}

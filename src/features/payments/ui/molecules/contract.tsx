@@ -66,7 +66,8 @@ const Contract = ({ contract }: Props) => {
                 {contractInfo.map((info, i) => {
                     return (
                         <p key={i}>
-                            <b>{info.text}</b>:<span> {info.info}</span>
+                            <b>{info.text}</b>
+                            <span> {info.info}</span>
                         </p>
                     )
                 })}

@@ -14,7 +14,7 @@ const Container = styled.div`
     color: var(--text);
 
     img {
-        width: 100px;
+        min-width: 100px;
         height: 100px;
         margin-bottom: 20px;
     }
@@ -26,14 +26,16 @@ const Container = styled.div`
 
 interface Props {
     text: string
+    image?: string
     children?: React.ReactNode[] | React.ReactNode | string | null
 }
-const Error = ({ text, children }: Props) => {
+
+const Error = ({ text, image, children }: Props) => {
     return (
         <Container>
-            <img src={Sad} alt="груфтим(" />
+            <img src={image ?? Sad} alt="груфтим(" />
             <Title size={3}>{text}</Title>
-            <div className="error-content">{children}</div>
+            {children && <div className="error-content">{children}</div>}
         </Container>
     )
 }

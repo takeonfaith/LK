@@ -5,7 +5,7 @@ import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useModal, WhatsNew, PopUpMessage, Confirm, Header, LeftsideBar } from 'widgets'
+import { Confirm, Header, LeftsideBar, PopUpMessage } from 'widgets'
 import { Modal } from 'widgets/modal'
 
 const ContentWrapper = styled.div`
@@ -30,7 +30,7 @@ const ContentWrapper = styled.div`
 
 const ContentLayout = () => {
     const { height } = useResize()
-    // const { open } = useModal()
+
     useTheme()
     useEffect(() => {
         popUpMessageModel.events.evokePopUpMessage({
@@ -43,7 +43,6 @@ const ContentLayout = () => {
             type: 'info',
             time: 5000,
         })
-        // open(<WhatsNew />)
     }, [])
 
     return (

@@ -8,6 +8,8 @@ const PrivateRouter = () => {
     const { data } = userModel.selectors.useUser()
     const currentRoute = !data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
 
+    if (!data.user) return null
+
     return (
         <Switch>
             {Object.values(currentRoute).map(({ path, Component, isTemplate }) => (

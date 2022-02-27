@@ -51,6 +51,7 @@ const SliderPageWrapper = styled.div<{ width?: string }>`
 
 interface Page {
     title: string
+    condition?: boolean
     content: React.ReactNode
 }
 
@@ -89,7 +90,10 @@ const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: P
     return (
         <SliderPageWrapper width={width}>
             <Slider
-                pages={pages.map(({ title }) => title)}
+                pages={pages.map(({ title, condition }) => ({
+                    title,
+                    condition,
+                }))}
                 currentPage={page}
                 setCurrentPage={handleChangePage}
                 sliderWidth={sliderWidth}

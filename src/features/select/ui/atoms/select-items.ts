@@ -1,27 +1,29 @@
 import styled from 'styled-components'
 
-const SelectItems = styled.ul<{ isOpen: boolean }>`
-    max-width: 155px;
+const SelectItems = styled.ul<{ isOpen: boolean; itemsAmount: number; width?: string; title?: string }>`
+    max-width: ${({ width }) => width ?? '155px'};
     width: 100%;
     min-width: 50px;
+    height: ${({ itemsAmount }) => itemsAmount * 27.6 + 'px'};
 
     position: absolute;
-    top: 46px;
+    top: ${({ title }) => (!!title ? '80px' : '46px')};
 
     box-shadow: var(--light-box-shadow);
     border-radius: var(--brLight);
     background: var(--schedule);
     user-select: none;
-
-    overflow: hidden;
+    max-height: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
     opacity: 0;
 
-    transition: 0.2s opacity, 0.2s visibility, 0.2s top;
+    transition: 0.2s opacity, 0.2s visibility, 0.2s top, height 0.3s;
 
     &.open {
         opacity: 1;
         visibility: visible;
-        top: 46px;
+        top: ${({ title }) => (!!title ? '60px' : '46px')};
     }
 
     &.close {

@@ -2,6 +2,7 @@ import React from 'react'
 import { IconType } from 'react-icons/lib'
 import { menuModel } from '@entities/menu'
 import LeftsideBarItemWrapper from '../atoms/leftside-bar-item-wrapper'
+import Tooltip from '@ui/atoms/tooltip'
 
 interface Props {
     id: number
@@ -19,6 +20,7 @@ const LeftsideBarItem = ({ path, icon: Icon, title, isCurrent }: Props) => {
             className="leftside-bar-item"
             isCurrent={isCurrent}
             onClick={() => menuModel.events.changeOpen({ isOpen: false })}
+            title={title}
         >
             <Icon />
             <strong>{title}</strong>

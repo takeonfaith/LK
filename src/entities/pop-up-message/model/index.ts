@@ -1,5 +1,5 @@
-import { createStore, createEvent } from 'effector'
-import { useStore } from 'effector-react'
+import { createStore, createEvent } from 'effector/compat'
+import { useStore } from 'effector-react/compat'
 
 const usePopUpMessage = () => {
     return useStore($popUpstore)

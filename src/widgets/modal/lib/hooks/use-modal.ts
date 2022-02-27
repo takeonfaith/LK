@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { Context, ModalContext } from '../context'
 
 export interface IModal {

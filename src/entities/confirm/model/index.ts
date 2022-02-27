@@ -1,5 +1,5 @@
-import { createEvent, createStore, forward } from 'effector'
-import { useStore } from 'effector-react'
+import { createEvent, createStore } from 'effector/compat'
+import { useStore } from 'effector-react/compat'
 
 export interface Confirm {
     isOpen: boolean
@@ -30,7 +30,7 @@ const $confirm = createStore<Confirm>(defaultStore)
         onConfirm,
         onReject,
     }))
-    .on(closeConfirm, (oldState, _) => ({
+    .on(closeConfirm, (oldState) => ({
         ...oldState,
         isOpen: false,
     }))

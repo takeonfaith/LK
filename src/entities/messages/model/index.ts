@@ -1,7 +1,7 @@
 import { messageApi } from '@api'
 import { Messages } from '@api/model'
-import { createEffect, createStore } from 'effector'
-import { useStore } from 'effector-react'
+import { createEffect, createStore } from 'effector/compat'
+import { useStore } from 'effector-react/compat'
 
 const useMessages = () => {
     return {
@@ -27,7 +27,7 @@ const getMessagesFx = createEffect(async (): Promise<Messages> => {
 })
 
 const $messagesStore = createStore<MessagesStore>({ messages: null, error: null })
-    .on(getMessagesFx, (oldData, _) => ({
+    .on(getMessagesFx, (oldData) => ({
         ...oldData,
         error: null,
     }))

@@ -1,12 +1,13 @@
 import { IPaymentItem } from '@api/model'
 import { PaymentItem } from '@features/payments'
+import { InfoMessage, Title } from '@ui/atoms'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import styled from 'styled-components'
 
 const PaymentListWrapper = styled.div`
     width: 100%;
-    min-width: 400px;
+    min-width: 380px;
     max-width: 500px;
     display: flex;
     flex-direction: column;
@@ -35,6 +36,14 @@ const PaymentListWrapper = styled.div`
         }
     }
 
+    @media (max-width: 1400px) {
+        min-width: 330px;
+    }
+
+    @media (max-width: 1225px) {
+        max-width: 100%;
+    }
+
     @media (max-width: 1000px) {
         min-width: auto;
         max-width: auto;
@@ -53,7 +62,7 @@ interface Props {
 }
 
 const PaymentList = ({ payments }: Props) => {
-    return (
+    return !!payments.length ? (
         <PaymentListWrapper>
             <div className="all-payments">
                 <span>Поступившие платежи</span>
@@ -69,6 +78,10 @@ const PaymentList = ({ payments }: Props) => {
                     return <PaymentItem {...payment} key={index} />
                 })}
             </div>
+        </PaymentListWrapper>
+    ) : (
+        <PaymentListWrapper>
+            <Title size={4}>Нет платежей</Title>
         </PaymentListWrapper>
     )
 }

@@ -63,13 +63,13 @@ const ToggleArea = ({ title, toggles, setToggles }: Props) => {
                         <label>
                             <h4>{title}</h4>
                             <SwitchToggle
-                                id={i}
+                                id={i.toString()}
                                 isToggled={state}
                                 setIsToggled={() => {
                                     handleChange(i)
                                     action && action(!state)
                                 }}
-                                key={i}
+                                key={i.toString()}
                             />
                         </label>
                     </ToggleItemBlock>

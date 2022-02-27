@@ -21,13 +21,10 @@ const QrCodeWrapper = styled.div`
 `
 
 interface Props {
-    contract: number
-    qrCode: 'qr_total' | 'qr_current'
+    qrCode: string
 }
 
-const QrCode = ({ contract, qrCode }: Props) => {
-    const { data } = paymentsModel.selectors.usePayments()
-
+const QrCode = ({ qrCode }: Props) => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -38,7 +35,7 @@ const QrCode = ({ contract, qrCode }: Props) => {
 
     return (
         <QrCodeWrapper>
-            <Image loading={loading} width={'300px'} height={'300px'} src={data?.contracts[contract][qrCode] ?? ''} />
+            <Image loading={loading} width={'300px'} height={'300px'} src={qrCode ?? ''} />
         </QrCodeWrapper>
     )
 }

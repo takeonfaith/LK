@@ -1,4 +1,6 @@
+import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
+import PaymentsPage from '@pages/payments'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -10,10 +12,22 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
+import { RiNotificationBadgeLine } from 'react-icons/ri'
+import {
+    FiBell,
+    FiBriefcase,
+    FiCalendar,
+    FiClipboard,
+    FiDollarSign,
+    FiFileText,
+    FiMonitor,
+    FiStar,
+} from 'react-icons/fi'
+import { HiOutlineClipboardCheck, HiOutlineMenuAlt2, HiOutlineUserGroup } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
+import DataVerificationPage from '@pages/data-verification'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -21,6 +35,7 @@ export const HOME_ROUTE = '/home'
 export const MESSAGES_ROUTE = '/messages'
 export const TEMPLATE_CHAT_ROUTE = '/messages/:chatId'
 export const PROJECT_ACTIVITIES_ROUTE = '/proj_main'
+export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const PAYMENTS_ROUTE = '/payments'
 export const APPLICATIONS_ROUTE = '/applications'
 export const SCHEDULE_ROUTE = '/rasp_teachers'
@@ -47,6 +62,7 @@ export const CENTERS_ROUTE = '/centers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
+export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 
 export const publicRoutes = [
     {
@@ -65,7 +81,7 @@ export interface IRoute {
     title: string
     icon: IconType
     path: string
-    Component: () => JSX.Element
+    Component: () => JSX.Element | string
     isTemplate: boolean
 }
 
@@ -82,12 +98,13 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => Home(),
         isTemplate: false,
     },
+
     1: {
         id: 1,
-        title: 'Сообщения',
-        icon: BiMessageRounded,
-        path: MESSAGES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: MESSAGES_ROUTE }),
+        title: 'Соглашение об электронном взаимодействии',
+        icon: HiOutlineClipboardCheck,
+        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
+        Component: () => ElectronicInteractionAgreementPage(),
         isTemplate: false,
     },
     2: {
@@ -101,23 +118,23 @@ export const teachersPrivateRoutes: IRoutes = {
     3: {
         id: 3,
         title: 'Оповещения',
-        icon: FaRegLightbulb,
+        icon: FiBell,
         path: ALERTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         isTemplate: false,
     },
     4: {
         id: 4,
-        title: 'Вакцинация',
-        icon: FiBriefcase,
-        path: VAX_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: VAX_ROUTE }),
+        title: 'Анкета для сверки данных',
+        icon: HiOutlineMenuAlt2,
+        path: DATA_VERIFICATION_ROUTE,
+        Component: DataVerificationPage,
         isTemplate: false,
     },
     5: {
         id: 5,
         title: 'Инструкции, положения, правила',
-        icon: FiDollarSign,
+        icon: FiClipboard,
         path: INSTRUCTIONS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: INSTRUCTIONS_ROUTE }),
         isTemplate: false,
@@ -149,23 +166,24 @@ export const teachersPrivateRoutes: IRoutes = {
     9: {
         id: 9,
         title: 'Дети и внуки',
-        icon: BiCheckCircle,
+        icon: HiOutlineUserGroup,
         path: CHILDREN_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: CHILDREN_ROUTE }),
         isTemplate: false,
     },
+
     10: {
         id: 10,
-        title: 'Конкурс ППС',
-        icon: BiIdCard,
-        path: PPS_CONTEST_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        title: 'Сообщения',
+        icon: BiMessageRounded,
+        path: MESSAGES_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: MESSAGES_ROUTE }),
         isTemplate: false,
     },
     12: {
         id: 12,
         title: 'График отпусков',
-        icon: BiHeadphone,
+        icon: FiCalendar,
         path: VACATION_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: VACATION_ROUTE }),
         isTemplate: false,
@@ -173,7 +191,7 @@ export const teachersPrivateRoutes: IRoutes = {
     13: {
         id: 13,
         title: 'Рейтинговая система ППС',
-        icon: BiUserCircle,
+        icon: FiStar,
         path: KPI_PPS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
         isTemplate: false,
@@ -181,7 +199,7 @@ export const teachersPrivateRoutes: IRoutes = {
     14: {
         id: 14,
         title: 'Экспертиза рейтинговой системы ППС',
-        icon: BiMessageRounded,
+        icon: FiMonitor,
         path: KPI_ADMIN_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
         isTemplate: false,
@@ -189,7 +207,7 @@ export const teachersPrivateRoutes: IRoutes = {
     15: {
         id: 15,
         title: 'Анонсы научных мероприятий',
-        icon: FaRegLightbulb,
+        icon: RiNotificationBadgeLine,
         path: SC_NEWS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: SC_NEWS_ROUTE }),
         isTemplate: false,
@@ -205,7 +223,7 @@ export const teachersPrivateRoutes: IRoutes = {
     17: {
         id: 17,
         title: 'Проектная деятельность',
-        icon: FiDollarSign,
+        icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PROJECT_ACTIVITIES_ROUTE }),
         isTemplate: false,
@@ -245,9 +263,9 @@ export const teachersPrivateRoutes: IRoutes = {
     22: {
         id: 22,
         title: 'Сведения об оплатах',
-        icon: BiIdCard,
+        icon: FiDollarSign,
         path: PAYMENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PAYMENTS_ROUTE }),
+        Component: PaymentsPage,
         isTemplate: false,
     },
     23: {
@@ -312,6 +330,22 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiGroup,
         path: FEEDBACK_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: FEEDBACK_ROUTE }),
+        isTemplate: false,
+    },
+    31: {
+        id: 31,
+        title: 'Вакцинация',
+        icon: FiBriefcase,
+        path: VAX_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: VAX_ROUTE }),
+        isTemplate: false,
+    },
+    32: {
+        id: 32,
+        title: 'Конкурс ППС',
+        icon: BiIdCard,
+        path: PPS_CONTEST_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
         isTemplate: false,
     },
 }

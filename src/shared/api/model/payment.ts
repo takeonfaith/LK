@@ -19,8 +19,29 @@ export interface PaymentsContract {
     type: string
     qr_current: string
     qr_total: string
+    agreements: any[]
+}
+
+export interface Agreement {
+    can_sign: boolean
+    date: string
+    file: string
+    id: string
+    name: string
+    signed_user: boolean
+    signed_user_date: string
+    signed_user_time: string
+    type: string
+}
+
+export interface LoadPayments {
+    contracts: {
+        dormitory: PaymentsContract[]
+        education: PaymentsContract[]
+    }
 }
 
 export interface Payments {
-    contracts: PaymentsContract[]
+    dormitory: PaymentsContract[]
+    education: PaymentsContract[]
 }

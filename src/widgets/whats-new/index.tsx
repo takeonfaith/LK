@@ -4,12 +4,16 @@ import limitNumber from '@utils/limit-number'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
+import { WhatsNewTemplate } from './ui'
+import Session from '../../shared/images/session-min.png'
+import SessionMobile from '../../shared/images/session-mobile.png'
 
 const WhatsNewWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
 
     @media (min-width: 1001px) {
         width: 600px;
@@ -35,19 +39,32 @@ const WhatsNewWrapper = styled.div`
 const WhatsNew = () => {
     const [currentPage, setCurrentPage] = useState(0)
     const { close } = useModal()
+    const pages = [
+        <WhatsNewTemplate
+            text={'В расписании добавлена вкладка "Сессия"'}
+            image={Session}
+            imageMobile={SessionMobile}
+            key={0}
+        />,
+    ]
 
     return (
         <WhatsNewWrapper>
             <Title size={2}>Что нового</Title>
-            <div className="content"></div>
-            <DotPages amount={4} current={currentPage} />
+            <div className="content">{pages[currentPage]}</div>
+            <DotPages amount={pages.length} current={currentPage} />
             <div className="buttons">
-                <Button onClick={() => setCurrentPage((prev) => limitNumber(prev - 1, 3))} text="Назад" width="100%" />
-                {currentPage === 3 ? (
+                <Button
+                    onClick={() => setCurrentPage((prev) => limitNumber(prev - 1, pages.length - 1))}
+                    text="Назад"
+                    width="100%"
+                    isActive={currentPage !== 0}
+                />
+                {currentPage === pages.length - 1 ? (
                     <Button onClick={close} text="Готово" width="100%" />
                 ) : (
                     <Button
-                        onClick={() => setCurrentPage((prev) => limitNumber(prev + 1, 3))}
+                        onClick={() => setCurrentPage((prev) => limitNumber(prev + 1, pages.length - 1))}
                         text="Далее"
                         width="100%"
                     />

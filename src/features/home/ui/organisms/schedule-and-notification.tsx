@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react'
 import { scheduleModel } from '@entities/schedule'
-import { IWeekSchedule } from '@api/model'
+import getLessons from '@features/home/lib/get-lessons'
+import React, { useMemo } from 'react'
 import { DaySchedule } from '../../../schedule/ui'
 import { Section } from '../atoms/section'
 
@@ -9,13 +9,7 @@ const ScheduleAndNotification = () => {
         data: { schedule, currentDayString },
     } = scheduleModel.selectors.useSchedule()
 
-    const lessons = useMemo(
-        () =>
-            !!schedule &&
-            !!schedule['0'][currentDayString as keyof IWeekSchedule] &&
-            schedule['0'][currentDayString as keyof IWeekSchedule].lessons,
-        [schedule],
-    )
+    const lessons = useMemo(() => getLessons(schedule, currentDayString), [schedule])
 
     return (
         <Section>
@@ -24,7 +18,7 @@ const ScheduleAndNotification = () => {
                 width={400}
                 height={156}
                 isCurrent
-                index={0}
+                topInfo=""
             />
         </Section>
     )
