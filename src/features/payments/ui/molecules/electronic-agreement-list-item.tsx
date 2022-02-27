@@ -1,9 +1,13 @@
 import { paymentApi } from '@api'
 import { Agreement } from '@api/model'
 import Accordion from '@ui/accordion/accordion'
+import { LinkButton, SubmitButton } from '@ui/atoms'
+import localizeDate from '@utils/localize-date'
 import React from 'react'
+import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
-import { ElectornicAgreement } from 'widgets/electonic-agreement'
+import { ElectornicAgreement, useElectronicAgreement } from 'widgets/electonic-agreement'
+import { Signed } from 'widgets/electonic-agreement/ui/atoms'
 
 interface Props {
     data: Agreement
@@ -18,22 +22,44 @@ const Wrapper = styled.div`
 const ElectronicAgreementListItem = ({ data }: Props) => {
     const { id, signed_user: signedUser, name } = data
 
-    const handleSubmit = () => {
-        paymentApi.agreementSubmit(id)
-    }
+    const { open, handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
+        isDone: signedUser,
+        submit: () => paymentApi.agreementSubmit(id),
+    })
 
     const height = signedUser ? 200 : 250
 
+    // TODO: Этап рефакторинга №2
     return (
         <Accordion height={height} show title={name} confirmed={signedUser}>
             <Wrapper>
-                <ElectornicAgreement data={data} submit={handleSubmit} setData={() => {}} isDone={signedUser}>
+                <Signed show={done} />
+                {done && (
                     <p>
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis, magni! Sit nihil veniam ea et
-                        cumque placeat dolore impedit est dolorem beatae consequuntur sint neque aperiam iusto, eius
-                        quasi eligendi.
+                        Дата подписания: {localizeDate(data.signed_user_date || new Date())},{' '}
+                        {data.signed_user_time || `${new Date().getHours()}:${new Date().getMinutes()}`}
                     </p>
-                </ElectornicAgreement>
+                )}
+                <LinkButton
+                    href={data.file}
+                    onClick={() => null}
+                    text="Скачать согласие"
+                    width="100%"
+                    icon={<FiDownload />}
+                />
+                {!done && (
+                    <SubmitButton
+                        text={!done ? 'Подписать' : 'Подписано'}
+                        action={handleSubmit}
+                        isLoading={loading}
+                        completed={completed}
+                        isDone={done}
+                        setCompleted={setCompleted}
+                        isActive={!done}
+                        popUpFailureMessage="Согласие уже подписано"
+                        popUpSuccessMessage="Согласие успешно подписано"
+                    />
+                )}
             </Wrapper>
         </Accordion>
     )

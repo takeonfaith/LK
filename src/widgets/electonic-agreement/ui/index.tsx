@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
+import { useElectronicAgreement } from '../hooks/use-electronic-agreement'
 import { MistakeModal, Signed } from './atoms'
 
 const CenterSection = styled.div<{ showInfoText: boolean }>`
@@ -50,32 +51,16 @@ interface Props {
     children: React.ReactChild
     submit: () => Promise<void> | void
     data: any
-    setData: React.Dispatch<any>
+    setData?: React.Dispatch<any>
     isDone?: boolean
 }
 
-const ElectornicAgreement = ({ children, data, setData, submit, isDone }: Props) => {
-    const { open } = useModal()
-    const [loading, setLoading] = useState(false)
-    const [completed, setCompleted] = useState(false)
-    const [done, setDone] = useState(isDone ?? false)
-
-    const handleSubmit = async () => {
-        try {
-            setLoading(true)
-            await submit()
-            setLoading(false)
-            setCompleted(true)
-            setDone(true)
-        } catch (error) {
-            setLoading(false)
-            popUpMessageModel.events.evokePopUpMessage({ message: 'Не удалось подписать', type: 'failure' })
-        }
-    }
-
-    useEffect(() => {
-        pepApi.get().then((res) => setData(res.data[0]))
-    }, [])
+const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }: Props) => {
+    const { open, handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
+        isDone,
+        submit,
+        setData,
+    })
 
     return !!data ? (
         <CenterSection showInfoText={!data.status && !done}>
