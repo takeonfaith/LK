@@ -1,8 +1,6 @@
-import { pepApi } from '@api'
-import { popUpMessageModel } from '@entities/pop-up-message'
 import { Button, LinkButton, SubmitButton } from '@ui/atoms'
 import localizeDate from '@utils/localize-date'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
@@ -56,7 +54,8 @@ interface Props {
 }
 
 const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }: Props) => {
-    const { open, handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
+    const { open } = useModal()
+    const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
         isDone,
         submit,
         setData,

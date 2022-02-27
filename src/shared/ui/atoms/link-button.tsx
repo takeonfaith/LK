@@ -23,6 +23,8 @@ const LinkButtonWrapper = styled.a<{
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;
     font-size: 0.8em;
+    height: 40px;
+    min-height: 40px;
 
     button {
         outline: none;

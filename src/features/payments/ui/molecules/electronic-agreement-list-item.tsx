@@ -16,49 +16,67 @@ interface Props {
 const Wrapper = styled.div`
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .block {
+        width: 49%;
+        min-width: 320px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+
+        .text {
+            text-align: center;
+        }
+    }
 `
 
 const ElectronicAgreementListItem = ({ data }: Props) => {
-    const { id, signed_user: signedUser, name } = data
+    const { id, signed_user: signedUser, name, can_sign: isActive } = data
 
-    const { open, handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
+    const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
         isDone: signedUser,
         submit: () => paymentApi.agreementSubmit(id),
     })
 
-    const height = signedUser ? 200 : 250
+    const height = signedUser || done ? 180 : 80
 
     // TODO: Этап рефакторинга №2
     return (
-        <Accordion height={height} show title={name} confirmed={signedUser}>
+        <Accordion height={height} title={name} confirmed={signedUser}>
             <Wrapper>
-                <Signed show={done} />
-                {done && (
-                    <p>
-                        Дата подписания: {localizeDate(data.signed_user_date || new Date())},{' '}
-                        {data.signed_user_time || `${new Date().getHours()}:${new Date().getMinutes()}`}
-                    </p>
-                )}
-                <LinkButton
-                    href={data.file}
-                    onClick={() => null}
-                    text="Скачать согласие"
-                    width="100%"
-                    icon={<FiDownload />}
-                />
-                {!done && (
-                    <SubmitButton
-                        text={!done ? 'Подписать' : 'Подписано'}
-                        action={handleSubmit}
-                        isLoading={loading}
-                        completed={completed}
-                        isDone={done}
-                        setCompleted={setCompleted}
-                        isActive={!done}
-                        popUpFailureMessage="Согласие уже подписано"
-                        popUpSuccessMessage="Согласие успешно подписано"
+                <div className="block">
+                    {done && (
+                        <p className="text">
+                            Дата подписания: {localizeDate(data.signed_user_date || new Date())},{' '}
+                            {data.signed_user_time || `${new Date().getHours()}:${new Date().getMinutes()}`}
+                        </p>
+                    )}
+                    <LinkButton
+                        href={data.file}
+                        onClick={() => null}
+                        text="Скачать согласие"
+                        width="100%"
+                        icon={<FiDownload />}
                     />
+                    {done && <Signed show={done} disabledMargin />}
+                </div>
+                {!done && (
+                    <div className="block">
+                        <SubmitButton
+                            text={!done ? 'Подписать' : 'Подписано'}
+                            action={handleSubmit}
+                            isLoading={loading}
+                            completed={completed}
+                            isDone={done}
+                            setCompleted={setCompleted}
+                            isActive={!done && isActive}
+                            popUpFailureMessage="Согласие уже подписано"
+                            popUpSuccessMessage="Согласие успешно подписано"
+                        />
+                    </div>
                 )}
             </Wrapper>
         </Accordion>

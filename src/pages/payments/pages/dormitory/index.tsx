@@ -21,7 +21,7 @@ const DormitoryPayments = () => {
 
     const agreements = data?.dormitory
         .reduce((acc, { agreements = [] }) => (acc.push(...agreements), acc), [] as Agreement[])
-        ?.filter((item) => new Date(item?.date) < new Date('2022-02-22'))
+        ?.filter((item) => new Date(item?.date) > new Date('2022-02-22'))
 
     return (
         <PageWrapper>

@@ -5,13 +5,13 @@ import AccordionWrapper from './wrapper'
 interface Props {
     children: React.ReactNode
     title: string
-    show: boolean
+    show?: boolean
     height: number
     confirmed?: boolean
 }
 
 const Accordion = (props: Props) => {
-    const { show, children, title, height, confirmed = false } = props
+    const { children, title, height, confirmed = false, show = false } = props
 
     const [open, setOpen] = useState<boolean>(show)
 

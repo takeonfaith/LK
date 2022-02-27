@@ -1,6 +1,5 @@
 import { pepApi } from '@api'
 import { useEffect, useState } from 'react'
-import { useModal } from 'widgets'
 import { popUpMessageModel } from '@entities/pop-up-message'
 
 interface Props {
@@ -10,7 +9,6 @@ interface Props {
 }
 
 export function useElectronicAgreement({ isDone, submit, setData }: Props) {
-    const { open } = useModal()
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
     const [done, setDone] = useState(isDone ?? false)

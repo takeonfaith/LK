@@ -3,7 +3,7 @@ import React from 'react'
 import { FiCheck } from 'react-icons/fi'
 import styled from 'styled-components'
 
-const SignedWrapper = styled.div<{ show: boolean }>`
+const SignedWrapper = styled.div<{ show: boolean; disabledMargin: boolean }>`
     background: ${Colors.green.transparent};
     color: ${Colors.green.main};
     display: flex;
@@ -12,7 +12,7 @@ const SignedWrapper = styled.div<{ show: boolean }>`
     border-radius: var(--brLight);
     width: 100%;
     font-weight: 600;
-    margin-top: ${({ show }) => (show ? '20px' : '0')};
+    margin-top: ${({ show, disabledMargin }) => (show && !disabledMargin ? '20px' : '0')};
     opacity: ${({ show }) => (show ? 1 : 0)};
     height: ${({ show }) => (show ? '60px' : '0')};
     visibility: ${({ show }) => (show ? 'visible' : 'hidden')};
@@ -20,11 +20,12 @@ const SignedWrapper = styled.div<{ show: boolean }>`
 
 interface Props {
     show: boolean
+    disabledMargin?: boolean
 }
 
-const Signed = ({ show }: Props) => {
+const Signed = ({ show, disabledMargin = false }: Props) => {
     return (
-        <SignedWrapper show={show}>
+        <SignedWrapper show={show} disabledMargin={disabledMargin}>
             <FiCheck />
             Успешно подписано
         </SignedWrapper>

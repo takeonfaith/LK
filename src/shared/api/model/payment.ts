@@ -23,6 +23,7 @@ export interface PaymentsContract {
 }
 
 export interface Agreement {
+    can_sign: boolean
     date: string
     file: string
     id: string
