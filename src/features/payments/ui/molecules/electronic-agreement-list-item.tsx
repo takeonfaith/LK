@@ -57,7 +57,7 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                     <LinkButton
                         href={data.file}
                         onClick={() => null}
-                        text="Скачать согласие"
+                        text="Скачать документ"
                         width="100%"
                         icon={<FiDownload />}
                     />
