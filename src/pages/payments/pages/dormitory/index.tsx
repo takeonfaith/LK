@@ -23,6 +23,8 @@ const DormitoryPayments = () => {
         .reduce((acc, { agreements = [] }) => (acc.push(...agreements), acc), [] as Agreement[])
         ?.filter((item) => new Date(item?.date) > new Date('2022-02-22'))
 
+    console.log(agreements, !!agreements && agreements.length)
+
     return (
         <PageWrapper>
             {data.dormitory.map((dormitory, i) => {
@@ -59,7 +61,7 @@ const DormitoryPayments = () => {
                     </div>
                 )
             })}
-            {agreements && agreements.length > 1 && (
+            {!!agreements && !!agreements.length && (
                 <div className="blocks-wrapper">
                     <AgreementsBlock>
                         <Title size={2} align="left" bottomGap>

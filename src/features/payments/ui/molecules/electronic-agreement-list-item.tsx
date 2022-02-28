@@ -6,7 +6,7 @@ import localizeDate from '@utils/localize-date'
 import React from 'react'
 import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
-import { ElectornicAgreement, useElectronicAgreement } from 'widgets/electonic-agreement'
+import { useElectronicAgreement } from 'widgets/electonic-agreement'
 import { Signed } from 'widgets/electonic-agreement/ui/atoms'
 
 interface Props {
@@ -19,6 +19,7 @@ const Wrapper = styled.div`
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    row-gap: 10px;
 
     .block {
         width: 49%;
@@ -34,18 +35,19 @@ const Wrapper = styled.div`
 `
 
 const ElectronicAgreementListItem = ({ data }: Props) => {
-    const { id, signed_user: signedUser, name, can_sign: isActive } = data
+    const { id, signed_user: signedUser, name, can_sign: isActive, date } = data
 
     const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
         isDone: signedUser,
         submit: () => paymentApi.agreementSubmit(id),
     })
 
-    const height = signedUser || done ? 180 : 80
+    const height = signedUser || done ? 200 : 100
 
     // TODO: Этап рефакторинга №2
     return (
         <Accordion height={height} title={name} confirmed={signedUser}>
+            {`${name} - ${localizeDate(date)}`}
             <Wrapper>
                 <div className="block">
                     {done && (
@@ -60,6 +62,7 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                         text="Скачать документ"
                         width="100%"
                         icon={<FiDownload />}
+                        // background="transparent"
                     />
                     {done && <Signed show={done} disabledMargin />}
                 </div>
@@ -73,7 +76,11 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                             isDone={done}
                             setCompleted={setCompleted}
                             isActive={!done && isActive}
-                            popUpFailureMessage="Согласие уже подписано"
+                            popUpFailureMessage={
+                                !isActive
+                                    ? 'Необходимо сначала подписать соглашение об электронном взаимодейтсвии'
+                                    : 'Согласие уже подписано'
+                            }
                             popUpSuccessMessage="Согласие успешно подписано"
                         />
                     </div>

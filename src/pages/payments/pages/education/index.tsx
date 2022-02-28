@@ -59,7 +59,7 @@ const EducationPayments = () => {
                     </div>
                 )
             })}
-            {agreements && agreements.length > 1 && (
+            {agreements && !!agreements.length && (
                 <div className="blocks-wrapper">
                     <AgreementsBlock>
                         <Title size={2} align="left" bottomGap>

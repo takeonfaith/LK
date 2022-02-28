@@ -24,7 +24,7 @@ const AccordionWrapper = styled.div<{
 
     @media (max-width: 500px) {
         .inputs {
-            height: ${({ height, open }) => (open ? height + 50 + 'px' : '0')};
+            height: ${({ height, open }) => (open ? height + 63 + 'px' : '0')};
         }
     }
 `

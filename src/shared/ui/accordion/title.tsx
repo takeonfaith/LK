@@ -20,6 +20,20 @@ const AreaTitleWrapper = styled.div`
     .title-and-icon {
         display: flex;
         align-items: center;
+        width: calc(100% - 30px);
+
+        b {
+            overflow: hidden;
+            width: 100%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        svg {
+            min-width: 16px;
+            margin-right: 7px;
+        }
+        /* white-space: nowrap; */
     }
 `
 
@@ -33,14 +47,12 @@ const AccordionTitle = ({ title, confirmed, setOpenArea }: Props) => {
     return (
         <AreaTitleWrapper onClick={() => setOpenArea((prev) => !prev)}>
             <div className="title-and-icon">
-                <Title
-                    size={4}
-                    align="left"
-                    icon={confirmed ? <HiOutlineCheckCircle /> : <HiOutlineExclamationCircle />}
-                    iconColor={confirmed ? 'var(--green)' : 'var(--red)'}
-                >
-                    {title}
-                </Title>
+                {confirmed ? (
+                    <HiOutlineCheckCircle style={{ color: 'var(--green)' }} />
+                ) : (
+                    <HiOutlineExclamationCircle style={{ color: 'var(--red)' }} />
+                )}
+                <b>{title}</b>
             </div>
             <Button icon={<HiChevronDown />} onClick={() => null} background="transparent" />
         </AreaTitleWrapper>
