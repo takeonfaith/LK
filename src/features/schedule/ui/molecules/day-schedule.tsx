@@ -1,12 +1,13 @@
 import { ILessons, ISubject } from '@api/model'
 import calcNextSubjectTime from '@features/schedule/lib/calc-next-subject-time'
+import isDayEnded from '@features/schedule/lib/is-day-ended'
 import { Title } from '@ui/atoms'
 import calcTimeLeft from '@utils/calc-time-left'
 import useOnScreen from '@utils/hooks/use-on-screen'
 import useResize from '@utils/hooks/use-resize'
 import React, { useEffect, useMemo, useRef } from 'react'
 import inTimeInterval from '../../lib/in-time-interval'
-import { DayScheduleListWrapper, DayScheduleWrapper, HolidayPlate, SkeletonLoading, Subject } from '../atoms'
+import { DayEnded, DayScheduleListWrapper, DayScheduleWrapper, HolidayPlate, SkeletonLoading, Subject } from '../atoms'
 
 type Props = ILessons & {
     weekDay?: string
@@ -25,14 +26,16 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo
     const nextSubjectTime = useMemo(() => calcNextSubjectTime(lessons ?? []), [lessons])
 
     useEffect(() => {
-        if (dayRef?.current) {
-            const currentLessonIndex =
-                lessons?.findIndex(
-                    (lesson) =>
-                        inTimeInterval(lesson.timeInterval) ||
-                        calcNextSubjectTime(lessons) === calcTimeLeft(lesson.timeInterval),
-                ) ?? -1
-            if (isCurrent && currentLessonIndex !== -1) {
+        if (dayRef?.current && !!lessons) {
+            const currentLessonIndex = !isDayEnded(lessons)
+                ? lessons?.findIndex(
+                      (lesson) =>
+                          inTimeInterval(lesson.timeInterval) ||
+                          calcNextSubjectTime(lessons) === calcTimeLeft(lesson.timeInterval),
+                  ) ?? -1
+                : lessons.length
+
+            if (isCurrent && !isDayEnded(lessons) ? currentLessonIndex !== -1 : lessons?.length + 1) {
                 dayRef.current.scrollTop = currentLessonIndex * 150
             }
         }
@@ -69,7 +72,7 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo
                         )
                     })}
                 {!!lessons && !lessons.length && <HolidayPlate />}
-                {/* {!!lessons && !!lessons.length && new Date().getHours() > lessons[lessons.length-1].timeInterval.split('')} */}
+                {!!lessons && !!lessons.length && !topInfo && isDayEnded(lessons) && <DayEnded />}
             </DayScheduleListWrapper>
         </DayScheduleWrapper>
     )

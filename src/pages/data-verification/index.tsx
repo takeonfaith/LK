@@ -109,8 +109,6 @@ const DataVerificationPage = () => {
         }
     }, [data])
 
-    console.log(data)
-
     return (
         <Wrapper
             load={() => teacherDateVerificationModel.effects.getTeacherDataVerificationFx()}
