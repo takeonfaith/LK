@@ -26,7 +26,7 @@ interface Props {
     title: string
     included: boolean
     optional: boolean
-    confirmed: boolean
+    confirmed?: boolean
     setOpenArea: React.Dispatch<React.SetStateAction<boolean>>
     setIncluded: React.Dispatch<React.SetStateAction<boolean>>
 }

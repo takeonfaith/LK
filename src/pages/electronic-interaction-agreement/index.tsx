@@ -1,13 +1,10 @@
 import { pepApi } from '@api'
-import { popUpMessageModel } from '@entities/pop-up-message'
-import { Button, LinkButton, SubmitButton } from '@ui/atoms'
+import { Button } from '@ui/atoms'
+import ButtonsList from '@ui/molecules/buttons-list'
 import localizeDate from '@utils/localize-date'
 import React, { useEffect, useState } from 'react'
-import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
-import { useModal } from 'widgets'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
-import { MistakeModal, Signed } from './ui'
 
 const ElectronicInteractionAgreementPageWrapper = styled.div`
     display: flex;
@@ -16,7 +13,10 @@ const ElectronicInteractionAgreementPageWrapper = styled.div`
     flex-direction: column;
     height: 100%;
     color: var(--text);
+    gap: 10px;
 `
+
+const ButtonsBlock = styled.div``
 
 const ElectronicInteractionAgreementPage = () => {
     const [data, setData] = useState<any>(null)
@@ -62,6 +62,49 @@ const ElectronicInteractionAgreementPage = () => {
                     </p>
                 </p>
             </ElectornicAgreement>
+
+            <ButtonsList
+                condition={true}
+                direction={'horizontal'}
+                width="95%"
+                maxWidth="500px"
+                padding="10px"
+                background="var(--schedule)"
+                title="Скачать отчеты"
+            >
+                <Button
+                    onClick={function (event: any): void {
+                        throw new Error('Function not implemented.')
+                    }}
+                    width="calc(50% - 3px)"
+                    text={'Подписавшие студенты'}
+                    background="var(--search)"
+                />
+                <Button
+                    onClick={function (event: any): void {
+                        throw new Error('Function not implemented.')
+                    }}
+                    width="calc(50% - 3px)"
+                    text={'Неподписавшие студенты'}
+                    background="var(--search)"
+                />
+                <Button
+                    onClick={function (event: any): void {
+                        throw new Error('Function not implemented.')
+                    }}
+                    width="calc(50% - 3px)"
+                    text={'Подписавшие сотрудники'}
+                    background="var(--search)"
+                />
+                <Button
+                    onClick={function (event: any): void {
+                        throw new Error('Function not implemented.')
+                    }}
+                    width="calc(50% - 3px)"
+                    text={'Неподписавшие сотрудники'}
+                    background="var(--search)"
+                />
+            </ButtonsList>
         </ElectronicInteractionAgreementPageWrapper>
     ) : (
         <></>

@@ -1,6 +1,6 @@
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { memo, useCallback, useRef, useState } from 'react'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { SelectArrow, SelectHeader, SelectHeaderWrapper, SelectItem, SelectItems, SelectWrapper } from './ui/atoms'
 
 export interface SelectPage {
@@ -10,13 +10,17 @@ export interface SelectPage {
     children?: SelectPage[]
 }
 
+type SingleSelect = React.Dispatch<React.SetStateAction<SelectPage>>
+type MultipleSelect = React.Dispatch<React.SetStateAction<SelectPage[]>>
+
 interface Props {
     items: SelectPage[]
-    setSelected: React.Dispatch<React.SetStateAction<SelectPage>>
-    selected: SelectPage
+    setSelected: SingleSelect | MultipleSelect
+    selected: SelectPage | SelectPage[]
     isActive?: boolean
     title?: string
     width?: string
+    multiple?: boolean
 }
 
 const findCurrentPage = (pages: SelectPage[], path: string[]): SelectPage[] | undefined => {
@@ -28,7 +32,8 @@ const findCurrentPage = (pages: SelectPage[], path: string[]): SelectPage[] | un
     } else return page ? page.children : pages
 }
 
-const Select = ({ items, setSelected, selected, title, width, isActive = true }: Props) => {
+const Select = (props: Props) => {
+    const { items, setSelected, selected, title, width, multiple = false, isActive = true } = props
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const refElement = useRef<HTMLDivElement | null>(null)
     const refItems = useRef<HTMLUListElement | null>(null)
@@ -42,11 +47,20 @@ const Select = ({ items, setSelected, selected, title, width, isActive = true }:
 
     const handleSelect = useCallback(
         (page: SelectPage) => {
+            console.log(page)
             if (!page.children) {
-                setSelected(page)
-                handleOpen()
+                if (multiple) {
+                    if (!!(selected as SelectPage[]).find((p) => p.id === page.id)) {
+                        ;(setSelected as MultipleSelect)((selected as SelectPage[]).filter((p) => p.id !== page.id))
+                    } else {
+                        ;(setSelected as MultipleSelect)([...(selected as SelectPage[]), page])
+                    }
+                } else {
+                    ;(setSelected as SingleSelect)(page)
+                }
+
+                !multiple && handleOpen()
                 setSelectedRoute(route.join('/'))
-                // setRoute([])
             } else {
                 route.push(page.id.toString())
                 setCurrentItems(findCurrentPage(items, [...route]) ?? [])
@@ -76,10 +90,25 @@ const Select = ({ items, setSelected, selected, title, width, isActive = true }:
     return (
         <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive} width={width}>
             {!!title && <h5>{title}</h5>}
-            <SelectHeaderWrapper>
+            <SelectHeaderWrapper multiple={multiple}>
                 <SelectHeader>
-                    {!!selected.icon && <span className="icon">{selected.icon}</span>}
-                    <span className="header-title">{selected.title}</span>
+                    {!multiple ? (
+                        <div className="single-header">
+                            {!!(selected as SelectPage).icon && (
+                                <span className="icon">{(selected as SelectPage).icon}</span>
+                            )}
+                            <span className="header-title">{(selected as SelectPage).title}</span>
+                        </div>
+                    ) : (
+                        (selected as SelectPage[]).map((page) => {
+                            return (
+                                <div className="header-item" key={page.id}>
+                                    {!!page.icon && <span className="icon">{page.icon}</span>}
+                                    <span className="header-title">{page.title}</span>
+                                </div>
+                            )
+                        })
+                    )}
                 </SelectHeader>
                 <SelectArrow isOpen={isOpen} />
             </SelectHeaderWrapper>
@@ -113,7 +142,7 @@ const Select = ({ items, setSelected, selected, title, width, isActive = true }:
                             e.stopPropagation()
                             handleSelect({ id, icon, title, children })
                         }}
-                        isSelected={selected.title.includes(title)}
+                        isSelected={!multiple && (selected as SelectPage).title.includes(title)}
                         leadingToSelected={selectedRoute.includes(id.toString())}
                     >
                         {!!icon && <span className="icon">{icon}</span>}
@@ -121,6 +150,11 @@ const Select = ({ items, setSelected, selected, title, width, isActive = true }:
                         {!!children && (
                             <span className="right-icon">
                                 <FiChevronRight />
+                            </span>
+                        )}
+                        {multiple && !!(selected as SelectPage[]).find((page) => page.title.includes(title)) && (
+                            <span className="right-icon">
+                                <FiCheck />
                             </span>
                         )}
                     </SelectItem>

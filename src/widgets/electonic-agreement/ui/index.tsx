@@ -39,6 +39,7 @@ const CenterSection = styled.div<{ showInfoText: boolean }>`
     }
 
     @media (max-width: 1000px) {
+        width: 95%;
         .center-section {
             box-shadow: none;
         }

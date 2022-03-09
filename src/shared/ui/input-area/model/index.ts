@@ -11,12 +11,13 @@ export interface IInputAreaCheckbox {
 export interface IInputAreaData {
     fieldName: string
     title: string
-    value: string | SelectPage | boolean
-    type?: 'select' | 'text' | 'tel' | 'email' | 'date' | 'checkbox' | 'number' | 'textarea'
+    value: string | SelectPage | boolean | SelectPage[]
+    type?: 'select' | 'multiselect' | 'text' | 'tel' | 'email' | 'date' | 'checkbox' | 'number' | 'textarea'
     items?: SelectPage[]
     width?: string
     required?: boolean
     mask?: boolean
+    editable?: boolean
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]

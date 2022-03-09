@@ -4,7 +4,7 @@ import calcTimeLeft from '@utils/calc-time-left'
 import React from 'react'
 import styled from 'styled-components'
 import { User } from 'widgets'
-import { SubjectPlaceBlock } from '..'
+import { Rooms, SubjectPlaceBlock } from '..'
 import { NextSubject, Time } from '../atoms'
 
 const SubjectModalWrapper = styled.div`
@@ -26,7 +26,8 @@ const SubjectModalWrapper = styled.div`
         align-items: center;
         font-size: 0.7em;
         font-weight: bold;
-        margin: 10px 0;
+        margin: 10px 0 5px 0;
+        column-gap: 3px;
     }
 
     .teachers {
@@ -43,7 +44,7 @@ const SubjectModalWrapper = styled.div`
 type Props = ISubject & { isCurrent: boolean; isNext?: boolean }
 
 const SubjectModal = (props: Props) => {
-    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, isNext = false } = props
+    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, rooms, isNext = false } = props
 
     return (
         <SubjectModalWrapper>
@@ -54,6 +55,7 @@ const SubjectModal = (props: Props) => {
             <div className="time-and-next">
                 <Time timeInterval={timeInterval} isCurrent={isCurrent} />
                 <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
+                <Rooms rooms={rooms} />
             </div>
             <SubjectPlaceBlock place={place} link={link} name={name} />
             <Divider margin="20px auto" />

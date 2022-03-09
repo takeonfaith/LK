@@ -16,8 +16,8 @@ const InputArea = ({
     optionalCheckbox,
     documents,
     setData,
+    confirmed,
     optional = false,
-    confirmed = false,
     addNew = false,
     divider,
 }: IInputArea & { setData: React.Dispatch<React.SetStateAction<IInputArea>>; divider?: boolean }) => {
@@ -34,7 +34,7 @@ const InputArea = ({
         handleLoadFiles,
         handleConfirm,
         handleCheckbox,
-    } = useInputArea({ documents, optionalCheckbox, data, setData, optional })
+    } = useInputArea({ documents, optionalCheckbox, data, setData, optional, confirmed })
     return (
         <>
             <InputAreaWrapper
@@ -131,7 +131,7 @@ const InputArea = ({
                             setChecked={handleCheckbox}
                         />
                     )}
-                    {!!confirmed !== undefined && (
+                    {confirmed !== undefined && (
                         <div className="buttons">
                             {!confirmed ? (
                                 !changeInputArea ? (

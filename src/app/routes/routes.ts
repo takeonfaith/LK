@@ -1,3 +1,4 @@
+import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -12,7 +13,7 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
+import { FiBriefcase, FiDollarSign, FiFileText, FiThumbsUp } from 'react-icons/fi'
 import { HiOutlineClipboardCheck } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import AcadPerformance from '../../pages/acad-performance'
@@ -32,6 +33,7 @@ export const JOB_ROUTE = '/job'
 export const ALL_STUDENTS_ROUTE = '/students'
 export const ALL_TEACHERS_ROUTE = '/teachers'
 export const LOGIN_ROUTE = '/login'
+export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 
 export const publicRoutes = [
     {
@@ -102,10 +104,10 @@ export const privateRoutes: IRoutes = {
     },
     5: {
         id: 5,
-        title: 'Работа',
-        icon: FiBriefcase,
-        path: JOB_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
+        title: 'Заявка на комнату повышенной комфортности',
+        icon: FiThumbsUp,
+        path: APPLICATION_FOR_SUPERIOR_ROOM_ROUTE,
+        Component: ApplicationForSuperiorRoom,
         isTemplate: false,
     },
     6: {
@@ -162,6 +164,14 @@ export const privateRoutes: IRoutes = {
         icon: BiGroup,
         path: ALL_STUDENTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/stud_blanks' }),
+        isTemplate: false,
+    },
+    13: {
+        id: 13,
+        title: 'Работа',
+        icon: FiBriefcase,
+        path: JOB_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
         isTemplate: false,
     },
 }

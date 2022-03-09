@@ -9,10 +9,11 @@ interface Props {
     data: IInputAreaData[] | IComplexInputAreaData
     optional?: boolean
     setData: React.Dispatch<React.SetStateAction<IInputArea>>
+    confirmed?: boolean
 }
 
-const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: Props) => {
-    const [changeInputArea, setChangeInputArea] = useState(false)
+const useInputArea = ({ documents, optionalCheckbox, data, setData, optional, confirmed }: Props) => {
+    const [changeInputArea, setChangeInputArea] = useState(confirmed === undefined ? true : false)
     const [openArea, setOpenArea] = useState(true)
     const [included, setIncluded] = useState(false)
 

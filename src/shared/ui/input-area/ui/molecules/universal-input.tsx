@@ -12,20 +12,25 @@ type Props = IInputAreaData & {
     indexJ?: number
 }
 
-const UniversalInput = ({
-    value,
-    required,
-    width,
-    indexI,
-    indexJ,
-    type,
-    items,
-    title,
-    documents,
-    changeInputArea,
-    setData,
-    mask,
-}: Props) => {
+const UniversalInput = (props: Props) => {
+    const {
+        value,
+        required,
+        width,
+        indexI,
+        indexJ,
+        type,
+        items,
+        title,
+        documents,
+        changeInputArea,
+        setData,
+        mask,
+        editable,
+    } = props
+
+    const isActive = editable || (changeInputArea && !documents)
+
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
         setData((area) => {
             if (Array.isArray(area.data[0])) {
@@ -37,7 +42,7 @@ const UniversalInput = ({
         })
     }
 
-    const handleChangeSelect = (page: SelectPage, i: number, j?: number) => {
+    const handleChangeSelect = (page: SelectPage | SelectPage[], i: number, j?: number) => {
         setData((area) => {
             if (Array.isArray(area.data[0])) {
                 ;(area.data as IComplexInputAreaData)[i][j ?? 0].value = page
@@ -48,7 +53,7 @@ const UniversalInput = ({
         })
     }
 
-    return type !== 'select' || !items ? (
+    return (type !== 'select' && type !== 'multiselect') || !items ? (
         type === 'checkbox' ? (
             <Checkbox
                 text={title}
@@ -61,8 +66,8 @@ const UniversalInput = ({
                 value={value as string}
                 title={title}
                 setValue={(value) => handleChangeValue(value, indexI, indexJ)}
-                isActive={changeInputArea && !documents}
-                textAreaAppearance={changeInputArea && !documents}
+                isActive={isActive}
+                textAreaAppearance={isActive}
                 placeholder={title}
                 required={required}
                 width={width}
@@ -73,8 +78,8 @@ const UniversalInput = ({
                 title={title}
                 setValue={(value) => handleChangeValue(value, indexI, indexJ)}
                 type={type}
-                isActive={changeInputArea && !documents}
-                inputAppearance={changeInputArea && !documents}
+                isActive={isActive}
+                inputAppearance={isActive}
                 placeholder={title}
                 required={required}
                 mask={mask}
@@ -84,11 +89,12 @@ const UniversalInput = ({
     ) : (
         <Select
             items={items}
-            setSelected={(value) => handleChangeSelect(value as SelectPage, indexI, indexJ)}
+            setSelected={(value: any) => handleChangeSelect(value as SelectPage | SelectPage[], indexI, indexJ)}
             selected={value as SelectPage}
-            isActive={changeInputArea && !documents}
+            isActive={isActive}
             title={title}
             width={width}
+            multiple={type === 'multiselect'}
         />
     )
 }
