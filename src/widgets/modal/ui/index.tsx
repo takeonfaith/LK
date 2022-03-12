@@ -35,6 +35,7 @@ const Modal = () => {
                         background="transparent"
                         textColor={Colors.blue.main}
                         width="100%"
+                        align="left"
                     />
                 )}
 
