@@ -24,6 +24,11 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
 
     h5 {
         margin-bottom: 5px;
+
+        .red-star {
+            color: var(--red);
+            margin-right: 5px;
+        }
     }
 `
 

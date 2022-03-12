@@ -120,7 +120,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
     }
 `
 
-interface Props {
+export interface LoadFileProps {
     label: string
     maxFileSizeInBytes: number
     files: File[]
@@ -131,7 +131,7 @@ interface Props {
 
 const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
 
-const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: Props) => {
+const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: LoadFileProps) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
     const { open } = useModal()

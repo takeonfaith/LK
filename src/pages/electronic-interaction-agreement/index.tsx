@@ -16,8 +16,6 @@ const ElectronicInteractionAgreementPageWrapper = styled.div`
     gap: 10px;
 `
 
-const ButtonsBlock = styled.div``
-
 const ElectronicInteractionAgreementPage = () => {
     const [data, setData] = useState<any>(null)
 
@@ -63,7 +61,7 @@ const ElectronicInteractionAgreementPage = () => {
                 </p>
             </ElectornicAgreement>
 
-            <ButtonsList
+            {/* <ButtonsList
                 condition={true}
                 direction={'horizontal'}
                 width="95%"
@@ -104,7 +102,7 @@ const ElectronicInteractionAgreementPage = () => {
                     text={'Неподписавшие сотрудники'}
                     background="var(--search)"
                 />
-            </ButtonsList>
+            </ButtonsList> */}
         </ElectronicInteractionAgreementPageWrapper>
     ) : (
         <></>

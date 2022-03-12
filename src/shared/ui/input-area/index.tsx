@@ -34,16 +34,23 @@ const InputArea = ({
         handleLoadFiles,
         handleConfirm,
         handleCheckbox,
-    } = useInputArea({ documents, optionalCheckbox, data, setData, optional, confirmed })
+    } = useInputArea({ documents, optionalCheckbox, data, setData, optional })
     return (
         <>
             <InputAreaWrapper
                 openArea={openArea}
-                amount={data.length}
+                amount={
+                    data.length +
+                    (data as IInputAreaData[]).reduce((acc, item) => {
+                        if (item.type === 'checkbox-docs') acc += item.items?.length ?? 0
+                        return acc
+                    }, 0) /
+                        2
+                }
                 withLoadDoc={!!documents && changeInputArea}
                 hint={changeInputArea ? hint?.length ?? 0 : 0}
                 addNew={addNew && changeInputArea}
-                optionalCheckbox={!!optionalCheckbox}
+                optionalCheckbox={!!optionalCheckbox && (optionalCheckbox.visible ?? true)}
             >
                 <AreaTitle
                     title={title}
@@ -54,7 +61,11 @@ const InputArea = ({
                     setIncluded={setIncluded}
                 />
                 <div className="inputs">
-                    <InfoMessage condition={!!hint && changeInputArea} title={'Как заполнить'} text={hint} />
+                    <InfoMessage
+                        condition={!!hint && (changeInputArea || confirmed === undefined)}
+                        title={'Как заполнить'}
+                        text={hint}
+                    />
                     {!Array.isArray(data[0])
                         ? (data as IInputAreaData[]).map((attr, index) => {
                               // TODO: Remove UniversalInput, inputs performing different tasks should be different components
@@ -123,10 +134,10 @@ const InputArea = ({
                             }
                         />
                     )}
-                    {optionalCheckbox && (
+                    {optionalCheckbox && (optionalCheckbox.visible ?? true) && (
                         <Checkbox
                             text={optionalCheckbox.title}
-                            isActive={changeInputArea}
+                            isActive={optionalCheckbox.editable || changeInputArea}
                             checked={optionalCheckbox.value}
                             setChecked={handleCheckbox}
                         />

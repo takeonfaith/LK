@@ -1,11 +1,12 @@
-import { userModel } from '@entities/user'
+import { superiorRoomModel } from '@entities/superior-room'
 import { FormBlock, SubmitButton, Wrapper } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
-import { useRender } from '@utils/hooks/use-render'
+import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import getForm from './lib/get-form'
+import sendForm from './lib/send-form'
 
 const ApplicationForSuperiorRoomWrapper = styled.div`
     display: flex;
@@ -23,36 +24,35 @@ const ApplicationForSuperiorRoomWrapper = styled.div`
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const ApplicationForSuperiorRoom = () => {
-    const [data, setData] = useState<IInputArea | null>(null)
+    const [form, setForm] = useState<IInputArea | null>(null)
+    const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
+
     useEffect(() => {
         //fetch
-        if (!!user) {
-            setData(getForm(user))
+        if (!!data) {
+            setForm(getForm(data))
         }
-    }, [])
-    useRender('form')
+    }, [data])
 
     return (
-        <Wrapper load={() => null} loading={false} error={null} data={[]}>
+        <Wrapper load={() => superiorRoomModel.effects.getSuperiorRoomFx()} loading={!data} error={error} data={data}>
             <ApplicationForSuperiorRoomWrapper>
-                {!!data && !!setData && (
+                {!!form && !!setForm && (
                     <FormBlock>
-                        <InputArea {...data} setData={setData as LoadedState} />
+                        <InputArea {...form} setData={setForm as LoadedState} />
                         <SubmitButton
-                            text={'Отправить'}
+                            text={data?.is_avaliable ? 'Отправить' : 'Отправленно'}
                             // Функция отправки здесь
-                            action={() => null}
+                            action={() => sendForm(form)}
                             isLoading={loading}
                             completed={completed}
                             // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true
                             setCompleted={setCompleted}
-                            isActive={false}
-                            popUpFailureMessage="Для отправки формы необходимо, чтобы все поля были подтверждены"
+                            isDone={!data?.is_avaliable ?? false}
+                            isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
+                            popUpFailureMessage="Для отправки формы необходимо, чтобы все поля были заполнены"
                             popUpSuccessMessage="Данные формы успешно отправлены"
                         />
                     </FormBlock>

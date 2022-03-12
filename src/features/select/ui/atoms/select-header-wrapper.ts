@@ -6,7 +6,7 @@ const SelectHeaderWrapper = styled.div<{ multiple: boolean }>`
     align-items: center;
     min-height: 36px;
 
-    padding: ${({ multiple }) => (multiple ? '5px' : '5px 10px')};
+    padding: ${({ multiple }) => (multiple ? '5px 10px 5px 5px' : '5px 10px')};
     box-shadow: var(--schedule-shadow);
     position: relative;
     background: var(--schedule);

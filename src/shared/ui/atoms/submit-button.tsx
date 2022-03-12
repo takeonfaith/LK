@@ -143,7 +143,7 @@ const SubmitButton = ({
     }, [completed, setCompleted])
 
     const handleAction = () => {
-        if (isActive && !isLoading) return action()
+        if (isActive && !isDone && !isLoading) return action()
 
         popUpMessageModel.events.evokePopUpMessage({
             message: popUpFailureMessage,

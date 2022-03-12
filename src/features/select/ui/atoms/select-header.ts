@@ -18,6 +18,15 @@ const SelectHeader = styled.header`
         width: 100%;
     }
 
+    .not-chosen {
+        font-size: 0.9em;
+        opacity: 0.6;
+
+        &.multi {
+            margin-left: 5px;
+        }
+    }
+
     .header-item {
         background: ${Colors.blue.transparent};
         color: ${Colors.blue.main};

@@ -38,7 +38,15 @@ const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setInclu
                 <Title
                     size={4}
                     align="left"
-                    icon={confirmed ? <HiOutlineCheckCircle /> : <HiOutlineExclamationCircle />}
+                    icon={
+                        confirmed !== undefined ? (
+                            confirmed ? (
+                                <HiOutlineCheckCircle />
+                            ) : (
+                                <HiOutlineExclamationCircle />
+                            )
+                        ) : undefined
+                    }
                     iconColor={confirmed ? 'var(--green)' : 'var(--red)'}
                 >
                     {title}

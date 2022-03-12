@@ -3,7 +3,6 @@ import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
 import { IInputArea, IInputAreaData } from '@ui/input-area/model'
 
 const familyType = [
-    { id: 'not-chosen', title: 'Не выбрана' },
     { id: 'mother', title: 'Мать' },
     { id: 'father', title: 'Отец' },
     { id: 'wife', title: 'Жена' },
@@ -13,6 +12,7 @@ const familyType = [
     { id: 'son', title: 'Сын' },
     { id: 'daughter', title: 'Дочь' },
 ]
+
 const getFamily = (data: TeacherDataVerification): IInputArea => {
     return {
         title: 'Состав семьи',
@@ -51,7 +51,7 @@ const getFamily = (data: TeacherDataVerification): IInputArea => {
                 {
                     fieldName: 'relation',
                     title: 'Степень родства',
-                    value: { id: 'mother', title: 'Мать' },
+                    value: null,
                     type: 'select',
                     items: familyType,
                     width: '100%',

@@ -159,7 +159,7 @@ const DataVerificationPage = () => {
                             }
                         />
                         <SubmitButton
-                            text={!data?.validated ? 'Отправить' : 'Данные отправлены'}
+                            text={'Отправить'}
                             // Функция отправки здесь
                             action={() =>
                                 sendForm(
@@ -200,7 +200,6 @@ const DataVerificationPage = () => {
                                 !!contactInfo.confirmed &&
                                 !!confirmAll
                             }
-                            isDone={data?.validated}
                             popUpFailureMessage="Для отправки формы необходимо, чтобы все поля были подтверждены"
                             popUpSuccessMessage="Данные формы успешно отправлены"
                         />

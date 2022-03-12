@@ -11,16 +11,17 @@ export interface SelectPage {
 }
 
 type SingleSelect = React.Dispatch<React.SetStateAction<SelectPage>>
-type MultipleSelect = React.Dispatch<React.SetStateAction<SelectPage[]>>
+type MultipleSelect = React.Dispatch<React.SetStateAction<SelectPage[] | null>>
 
 interface Props {
     items: SelectPage[]
     setSelected: SingleSelect | MultipleSelect
-    selected: SelectPage | SelectPage[]
+    selected: SelectPage | SelectPage[] | null
     isActive?: boolean
     title?: string
     width?: string
     multiple?: boolean
+    required?: boolean
 }
 
 const findCurrentPage = (pages: SelectPage[], path: string[]): SelectPage[] | undefined => {
@@ -33,7 +34,7 @@ const findCurrentPage = (pages: SelectPage[], path: string[]): SelectPage[] | un
 }
 
 const Select = (props: Props) => {
-    const { items, setSelected, selected, title, width, multiple = false, isActive = true } = props
+    const { items, setSelected, selected, title, width, required, multiple = false, isActive = true } = props
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const refElement = useRef<HTMLDivElement | null>(null)
     const refItems = useRef<HTMLUListElement | null>(null)
@@ -47,13 +48,19 @@ const Select = (props: Props) => {
 
     const handleSelect = useCallback(
         (page: SelectPage) => {
-            console.log(page)
             if (!page.children) {
                 if (multiple) {
-                    if (!!(selected as SelectPage[]).find((p) => p.id === page.id)) {
-                        ;(setSelected as MultipleSelect)((selected as SelectPage[]).filter((p) => p.id !== page.id))
+                    if (!!selected) {
+                        if (!!(selected as SelectPage[]).find((p) => p.id === page.id)) {
+                            const newSelected = (selected as SelectPage[]).filter((p) => p.id !== page.id)
+                            !newSelected.length
+                                ? (setSelected as MultipleSelect)(null)
+                                : (setSelected as MultipleSelect)(newSelected)
+                        } else {
+                            ;(setSelected as MultipleSelect)([...(selected as SelectPage[]), page])
+                        }
                     } else {
-                        ;(setSelected as MultipleSelect)([...(selected as SelectPage[]), page])
+                        ;(setSelected as MultipleSelect)([page])
                     }
                 } else {
                     ;(setSelected as SingleSelect)(page)
@@ -89,17 +96,28 @@ const Select = (props: Props) => {
 
     return (
         <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive} width={width}>
-            {!!title && <h5>{title}</h5>}
+            {!!title && (
+                <h5>
+                    {required && <span className="red-star">*</span>}
+                    {title}
+                </h5>
+            )}
             <SelectHeaderWrapper multiple={multiple}>
                 <SelectHeader>
                     {!multiple ? (
                         <div className="single-header">
-                            {!!(selected as SelectPage).icon && (
-                                <span className="icon">{(selected as SelectPage).icon}</span>
+                            {!!selected ? (
+                                <>
+                                    {!!(selected as SelectPage).icon && (
+                                        <span className="icon">{(selected as SelectPage).icon}</span>
+                                    )}
+                                    <span className="header-title">{(selected as SelectPage).title}</span>
+                                </>
+                            ) : (
+                                <span className="not-chosen">Не выбрано</span>
                             )}
-                            <span className="header-title">{(selected as SelectPage).title}</span>
                         </div>
-                    ) : (
+                    ) : !!selected ? (
                         (selected as SelectPage[]).map((page) => {
                             return (
                                 <div className="header-item" key={page.id}>
@@ -108,6 +126,8 @@ const Select = (props: Props) => {
                                 </div>
                             )
                         })
+                    ) : (
+                        <span className="not-chosen multi">Не выбрано</span>
                     )}
                 </SelectHeader>
                 <SelectArrow isOpen={isOpen} />
@@ -142,7 +162,7 @@ const Select = (props: Props) => {
                             e.stopPropagation()
                             handleSelect({ id, icon, title, children })
                         }}
-                        isSelected={!multiple && (selected as SelectPage).title.includes(title)}
+                        isSelected={!multiple && !!selected && (selected as SelectPage).title.includes(title)}
                         leadingToSelected={selectedRoute.includes(id.toString())}
                     >
                         {!!icon && <span className="icon">{icon}</span>}
@@ -152,11 +172,13 @@ const Select = (props: Props) => {
                                 <FiChevronRight />
                             </span>
                         )}
-                        {multiple && !!(selected as SelectPage[]).find((page) => page.title.includes(title)) && (
-                            <span className="right-icon">
-                                <FiCheck />
-                            </span>
-                        )}
+                        {multiple &&
+                            !!selected &&
+                            !!(selected as SelectPage[]).find((page) => page.title.includes(title)) && (
+                                <span className="right-icon">
+                                    <FiCheck />
+                                </span>
+                            )}
                     </SelectItem>
                 ))}
             </SelectItems>
