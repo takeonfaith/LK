@@ -80,8 +80,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#3f457f',
         darkTransparent: '',
-        lightTransparent: '',
-        littleDarker: '',
+        lightTransparent: '#567dff47',
+        littleDarker: '#3737b3',
     },
     darkBlue: {
         main: '#9cbbff',
@@ -146,8 +146,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#e97944',
         darkTransparent: '#511a1ea3',
-        lightTransparent: '',
-        littleDarker: '',
+        lightTransparent: '#ffd7a67d',
+        littleDarker: '#c75e1d',
     },
 }
 

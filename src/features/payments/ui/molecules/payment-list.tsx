@@ -1,6 +1,6 @@
 import { IPaymentItem } from '@api/model'
 import { PaymentItem } from '@features/payments'
-import { InfoMessage, Title } from '@ui/atoms'
+import { Title } from '@ui/atoms'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import styled from 'styled-components'

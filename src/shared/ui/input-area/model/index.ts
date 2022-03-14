@@ -53,6 +53,7 @@ export type IComplexInputAreaData = IInputAreaData[][]
 export interface IInputArea {
     title: string
     hint?: string
+    alert?: string
     data: IInputAreaData[] | IComplexInputAreaData
     default?: IInputAreaData[] | IComplexInputAreaData
     confirmed?: boolean
