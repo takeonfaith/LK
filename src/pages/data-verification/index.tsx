@@ -3,6 +3,7 @@ import { Message, SubmitButton, Title, Wrapper } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
+import localizeDate from '@utils/localize-date'
 import React, { useEffect, useState } from 'react'
 import { FiCheckCircle } from 'react-icons/fi'
 import styled from 'styled-components'
@@ -136,7 +137,7 @@ const DataVerificationPage = () => {
                         </Title>
                         <Message
                             type="success"
-                            title={`Данные успешно отправлены ${data?.valid_date}`}
+                            title={`Данные успешно отправлены ${localizeDate(data?.valid_date)}`}
                             icon={<FiCheckCircle />}
                             visible={data?.validated}
                         />

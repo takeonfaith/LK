@@ -13,7 +13,7 @@ const getArmy = (data: TeacherDataVerification): IInputArea => {
             required: true,
             checkboxCondition: 'reverse',
             fieldName: 'armyFiles',
-            maxFiles: 1,
+            maxFiles: 10,
         },
         optionalCheckbox: {
             fieldName: 'army_doc_none',
