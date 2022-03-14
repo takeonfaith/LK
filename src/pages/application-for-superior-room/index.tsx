@@ -41,18 +41,28 @@ const ApplicationForSuperiorRoom = () => {
             <ApplicationForSuperiorRoomWrapper>
                 {!!form && !!setForm && (
                     <FormBlock>
-                        <InputArea {...form} setData={setForm as LoadedState} />
+                        <InputArea
+                            {...form}
+                            collapsed={(completed || !data?.is_avaliable) ?? false}
+                            setData={setForm as LoadedState}
+                        />
                         <SubmitButton
-                            text={data?.is_avaliable ? 'Отправить' : 'Отправленно'}
+                            text={data?.is_avaliable ? 'Отправить' : 'Отправлено'}
                             // Функция отправки здесь
                             action={() => sendForm(form, setLoading, setCompleted)}
                             isLoading={loading}
                             completed={completed}
                             // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true
                             setCompleted={setCompleted}
-                            isDone={!data?.is_avaliable ?? false}
+                            repeatable={false}
+                            buttonSuccessText="Отправлено"
+                            isDone={(completed || !data?.is_avaliable) ?? false}
                             isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
-                            popUpFailureMessage="Для отправки формы необходимо, чтобы все поля были заполнены"
+                            popUpFailureMessage={
+                                (completed || !data?.is_avaliable) ?? false
+                                    ? data?.error_text
+                                    : 'Для отправки формы необходимо, чтобы все поля были заполнены'
+                            }
                             popUpSuccessMessage="Данные формы успешно отправлены"
                         />
                     </FormBlock>

@@ -42,9 +42,11 @@ export interface IColorPalette {
     transparent: string
     lighter: string
     darker: string
+    littleDarker: string
     light: string
     dark: string
     darkTransparent: string
+    lightTransparent: string
 }
 
 export const Colors: IColors = {
@@ -53,9 +55,11 @@ export const Colors: IColors = {
         transparent: 'rgba(64, 197, 197, .3)',
         lighter: '#3cd2d2',
         darker: '#258787',
+        littleDarker: '#27b56e',
         light: '',
         dark: '#2a4f2f',
         darkTransparent: '#166c217a',
+        lightTransparent: '#9fe4a982',
     },
     lightGreen: {
         main: 'rgb(64, 197, 197)',
@@ -65,6 +69,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#216666',
         darkTransparent: '',
+        lightTransparent: '',
+        littleDarker: '',
     },
     blue: {
         main: 'rgb(95, 109, 236)',
@@ -74,6 +80,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#3f457f',
         darkTransparent: '',
+        lightTransparent: '',
+        littleDarker: '',
     },
     darkBlue: {
         main: '#9cbbff',
@@ -83,6 +91,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#4c73ca',
         darkTransparent: '',
+        lightTransparent: '',
+        littleDarker: '',
     },
     purple: {
         main: 'rgb(168, 95, 236)',
@@ -92,6 +102,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#7e3798',
         darkTransparent: '',
+        lightTransparent: '',
+        littleDarker: '',
     },
     pink: {
         main: 'rgb(236, 95, 182)',
@@ -101,6 +113,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#842b62',
         darkTransparent: '',
+        lightTransparent: '',
+        littleDarker: '',
     },
     red: {
         main: 'rgb(236, 95, 107)',
@@ -109,7 +123,9 @@ export const Colors: IColors = {
         darker: '#b63c46',
         light: '',
         dark: '#632d32',
+        littleDarker: '#b33b3b',
         darkTransparent: '#511a1ea3',
+        lightTransparent: '#e2799273',
     },
     yellow: {
         main: '#ee9e44',
@@ -119,6 +135,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#632d32',
         darkTransparent: '#511a1ea3',
+        lightTransparent: '',
+        littleDarker: '',
     },
     orange: {
         main: '#ee9e44',
@@ -128,6 +146,8 @@ export const Colors: IColors = {
         light: '',
         dark: '#e97944',
         darkTransparent: '#511a1ea3',
+        lightTransparent: '',
+        littleDarker: '',
     },
 }
 

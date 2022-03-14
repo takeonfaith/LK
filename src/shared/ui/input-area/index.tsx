@@ -20,6 +20,7 @@ const InputArea = ({
     optional = false,
     addNew = false,
     divider,
+    collapsed,
 }: IInputArea & { setData: React.Dispatch<React.SetStateAction<IInputArea>>; divider?: boolean }) => {
     //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
@@ -34,7 +35,7 @@ const InputArea = ({
         handleLoadFiles,
         handleConfirm,
         handleCheckbox,
-    } = useInputArea({ documents, optionalCheckbox, data, setData, optional })
+    } = useInputArea({ documents, optionalCheckbox, data, setData, optional, collapsed })
     return (
         <>
             <InputAreaWrapper
@@ -59,6 +60,7 @@ const InputArea = ({
                     confirmed={confirmed}
                     setOpenArea={setOpenArea}
                     setIncluded={setIncluded}
+                    collapsed={collapsed}
                 />
                 <div className="inputs">
                     <InfoMessage

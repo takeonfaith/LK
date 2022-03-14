@@ -60,4 +60,5 @@ export interface IInputArea {
     documents?: IInputAreaFiles
     addNew?: boolean
     optionalCheckbox?: IInputAreaCheckbox
+    collapsed?: boolean
 }

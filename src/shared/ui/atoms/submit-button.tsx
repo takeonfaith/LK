@@ -9,6 +9,7 @@ const SubmitButtonWrapper = styled.button<{
     completed: boolean
     isActive: boolean
     isDone: boolean
+    repeatable: boolean
 }>`
     width: 100%;
     padding: 10px;
@@ -51,6 +52,17 @@ const SubmitButtonWrapper = styled.button<{
         }
     }
 
+    @keyframes short-button-animation-in {
+        0% {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
     @keyframes button-animation-out {
         0% {
             opacity: 0;
@@ -66,7 +78,8 @@ const SubmitButtonWrapper = styled.button<{
         z-index: 1;
 
         .inner-button-success {
-            animation: button-animation-in 2s forwards;
+            animation: ${({ repeatable }) =>
+                repeatable ? 'button-animation-in 2s forwards' : 'short-button-animation-in 2s forwards'};
         }
 
         .inner-button-text {
@@ -115,19 +128,21 @@ interface Props {
     popUpFailureMessage?: string
     isDone?: boolean
     isActive: boolean
+    repeatable?: boolean
 }
 
 const SubmitButton = ({
     text,
     action,
-    isLoading = false,
-    completed = false,
     setCompleted,
     buttonSuccessText = 'Готово',
     popUpSuccessMessage = 'Успешно',
     popUpFailureMessage = 'Nope',
     isDone = false,
     isActive = true,
+    isLoading = false,
+    completed = false,
+    repeatable = true,
 }: Props) => {
     useEffect(() => {
         if (completed) {
@@ -136,9 +151,11 @@ const SubmitButton = ({
                 type: 'success',
             })
 
-            setTimeout(() => {
-                setCompleted(false)
-            }, 2000)
+            if (repeatable) {
+                setTimeout(() => {
+                    setCompleted(false)
+                }, 2000)
+            }
         }
     }, [completed, setCompleted])
 
@@ -156,9 +173,10 @@ const SubmitButton = ({
             isLoading={isLoading}
             className="submit-button"
             completed={completed}
-            isActive={isActive}
+            isActive={isActive && !isDone}
             onClick={handleAction}
             isDone={isDone}
+            repeatable={repeatable}
         >
             <div className="inner-button">
                 {completed ? (

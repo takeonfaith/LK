@@ -29,11 +29,12 @@ interface Props {
     confirmed?: boolean
     setOpenArea: React.Dispatch<React.SetStateAction<boolean>>
     setIncluded: React.Dispatch<React.SetStateAction<boolean>>
+    collapsed?: boolean
 }
 
-const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setIncluded }: Props) => {
+const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setIncluded, collapsed }: Props) => {
     return (
-        <AreaTitleWrapper onClick={() => (included || !optional) && setOpenArea((prev) => !prev)}>
+        <AreaTitleWrapper onClick={() => !collapsed && (included || !optional) && setOpenArea((prev) => !prev)}>
             <div className="title-and-icon">
                 <Title
                     size={4}

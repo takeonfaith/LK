@@ -1,9 +1,10 @@
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
-import { SubmitButton, Title, Wrapper } from '@ui/atoms'
+import { Message, SubmitButton, Title, Wrapper } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import React, { useEffect, useState } from 'react'
+import { FiCheckCircle } from 'react-icons/fi'
 import styled from 'styled-components'
 import getArmy from './lib/get-army'
 import getContactInfo from './lib/get-contact-info'
@@ -131,8 +132,14 @@ const DataVerificationPage = () => {
                 <DataVerificationPageWrapper>
                     <div className="data-verification-block">
                         <Title size={3} align="left" bottomGap>
-                            Подтвердите корректность указанных данных
+                            Подтвердите актуальность данных, указанных в каждом разделе анкеты, либо внесите изменения
                         </Title>
+                        <Message
+                            type="success"
+                            title={`Данные успешно отправлены ${data?.valid_date}`}
+                            icon={<FiCheckCircle />}
+                            visible={data?.validated}
+                        />
                         <InputArea {...personalData} setData={setPersonalData as LoadedState} divider />
                         <InputArea {...contactInfo} setData={setContactInfo as LoadedState} divider />
                         <InputArea {...passport} setData={setPassport as LoadedState} divider />

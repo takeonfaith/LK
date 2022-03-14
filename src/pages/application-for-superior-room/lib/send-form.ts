@@ -1,4 +1,5 @@
 import { superiorRoomApi } from '@api'
+import { popUpMessageModel } from '@entities/pop-up-message'
 import { SelectPage } from '@features/select'
 import { CheckboxDocs, IInputArea, IInputAreaData } from '@ui/input-area/model'
 
@@ -28,7 +29,13 @@ const sendForm = (
         superiorRoomApi.post(data)
         setLoading(false)
         setCompleted(true)
-    } catch (error) {}
+    } catch (error) {
+        popUpMessageModel.events.evokePopUpMessage({
+            message: `Не удалось отправить форму. Ошибка: ${error as string}`,
+            type: 'failure',
+            time: 30000,
+        })
+    }
 }
 
 export default sendForm

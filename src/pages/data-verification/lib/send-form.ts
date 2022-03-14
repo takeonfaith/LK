@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { popUpMessageModel } from '@entities/pop-up-message'
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import { IInputArea } from '@ui/input-area/model'
 
@@ -70,9 +71,17 @@ const sendForm = (
     const result = Object.assign({}, ...form, ...files, ...checkboxes)
     // console.log(result)
 
-    teacherDateVerificationModel.events.postTeacherDataVerification(result)
-    setSubmitLoading(false)
-    setCompleted(true)
+    try {
+        teacherDateVerificationModel.events.postTeacherDataVerification(result)
+        setSubmitLoading(false)
+        setCompleted(true)
+    } catch (error) {
+        popUpMessageModel.events.evokePopUpMessage({
+            message: `Не удалось отправить форму. Ошибка: ${error as string}`,
+            type: 'failure',
+            time: 30000,
+        })
+    }
 }
 
 export default sendForm
