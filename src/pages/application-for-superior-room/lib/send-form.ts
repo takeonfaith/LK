@@ -12,7 +12,12 @@ const sendForm = (
     const data = (form.data as IInputAreaData[]).reduce((acc, item) => {
         if (item.type === 'checkbox-docs') {
             const files = (item.items as CheckboxDocs[])?.reduce((obj, element) => {
-                obj[element.fieldName] = element.files[0]
+                for (let fileIndex = 0; fileIndex < element.files.length; fileIndex++) {
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    obj[element?.fieldName + `[${fileIndex}]`] = element.files[fileIndex]
+                }
+
                 return obj
             }, {} as { [key: string]: any })
             acc = Object.assign({}, acc, files)
