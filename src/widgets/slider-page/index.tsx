@@ -1,3 +1,4 @@
+import { Error } from '@ui/atoms'
 import useResize from '@utils/hooks/use-resize'
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
@@ -99,11 +100,17 @@ const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: P
                 sliderWidth={sliderWidth}
             />
             <div className={className ?? 'slider-content'} ref={sliderContentRef} onScroll={handleScroll}>
-                {pages.map((page) => (
-                    <div className="slider-page" key={page.title}>
-                        {page.content}
-                    </div>
-                ))}
+                {pages.map((page) =>
+                    (page.condition !== undefined && page.condition) || page.condition === undefined ? (
+                        <div className="slider-page" key={page.title}>
+                            {page.content}
+                        </div>
+                    ) : (
+                        <div className="slider-page" key={page.title}>
+                            <Error text={'Нет данных'} />
+                        </div>
+                    ),
+                )}
             </div>
         </SliderPageWrapper>
     )

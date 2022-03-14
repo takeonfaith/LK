@@ -1,4 +1,5 @@
 const normalizeString = (str: string) => {
+    if (!str.length) return ''
     return str
         .replace(/\s/g, '')
         .replace(/\$/g, 's')

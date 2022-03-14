@@ -8,7 +8,7 @@ const TextAreaWrapper = styled.div<{ isActive: boolean; textAreaAppearance: bool
     position: relative;
     width: ${({ width }) => width ?? '100%'};
     min-width: ${({ width }) => width};
-    /* pointer-events: ${({ isActive }) => !isActive && 'none'}; */
+    pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
 
     h5 {

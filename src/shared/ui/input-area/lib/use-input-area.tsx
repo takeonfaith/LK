@@ -23,7 +23,7 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
                     (optionalCheckbox?.value && optionalCheckbox.required) ||
                     (!(data as IInputAreaData[]).find((el) => !el.value && el.required) &&
                         !(data as IInputAreaData[]).find(
-                            (el) => (el.value as SelectPage).id === 'not-chosen' && !!el.items?.length,
+                            (el) => (el.value as SelectPage) === null && !!el.items?.length,
                         ))
                 ) {
                     setData((area: IInputArea) => {
@@ -153,7 +153,7 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
                     //@ts-ignore
                     fieldName: field.fieldName ?? '',
                     title: field.title,
-                    value: field.type === 'select' && field?.items ? field?.items?.[0] : '',
+                    value: field.type === 'select' && (field?.items as SelectPage[]) ? null : '',
                     type: field.type,
                     items: field.items,
                     width: field.width,

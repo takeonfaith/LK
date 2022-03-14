@@ -33,7 +33,7 @@ interface Props {
 const Error = ({ text, image, children }: Props) => {
     return (
         <Container>
-            <img src={image ?? Sad} alt="груфтим(" />
+            <img src={image || Sad} alt="груфтим(" />
             <Title size={3}>{text}</Title>
             {children && <div className="error-content">{children}</div>}
         </Container>

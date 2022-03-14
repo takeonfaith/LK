@@ -3,7 +3,7 @@ import calcTimeLeft from '@utils/calc-time-left'
 import React from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { Place, SubjectModal, Time, NextSubject } from '.'
+import { Place, SubjectModal, Time, NextSubject, Rooms } from '.'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean
@@ -31,6 +31,7 @@ const SubjectWrapper = styled.div<{
         font-size: 0.7em;
         height: 21px;
         font-weight: bold;
+        column-gap: 3px;
 
         .place {
             color: var(--text);
@@ -68,7 +69,7 @@ const SubjectWrapper = styled.div<{
 type Props = ISubject & { isCurrent: boolean; isNext?: boolean; view?: string }
 
 const Subject = (props: Props) => {
-    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, view, isNext = false } = props
+    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, view, rooms, isNext = false } = props
     const { open } = useModal()
 
     return (
@@ -88,8 +89,9 @@ const Subject = (props: Props) => {
                     differentTimeZone={new Date().getTimezoneOffset() / 60 + 3 !== 0}
                 />
                 <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
-                <Place place={place} link={link} />
+                {rooms.length ? <Rooms rooms={rooms} isCurrent={isCurrent} /> : <Place place={place} link={link} />}
             </div>
+
             <h3>{name}</h3>
             <p className="teachers">
                 {teachers.map((teacher: string) => {

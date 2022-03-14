@@ -3,8 +3,11 @@ import styled from 'styled-components'
 const PageWrapper = styled.div`
     width: 100%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     & > * + * {
         margin-top: 10px;
@@ -12,6 +15,9 @@ const PageWrapper = styled.div`
 
     .blocks-wrapper {
         display: flex;
+        width: 100%;
+        justify-content: center;
+
         & > * + * {
             margin-left: 10px;
         }
@@ -37,6 +43,8 @@ const PageWrapper = styled.div`
         .blocks-wrapper {
             display: flex;
             flex-direction: column;
+            align-items: center;
+
             & > * + * {
                 margin-top: 10px;
                 margin-left: 0px;

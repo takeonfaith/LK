@@ -1,5 +1,6 @@
 import { IPaymentItem } from '@api/model'
 import { PaymentItem } from '@features/payments'
+import { InfoMessage, Title } from '@ui/atoms'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import styled from 'styled-components'
@@ -61,7 +62,7 @@ interface Props {
 }
 
 const PaymentList = ({ payments }: Props) => {
-    return (
+    return !!payments.length ? (
         <PaymentListWrapper>
             <div className="all-payments">
                 <span>Поступившие платежи</span>
@@ -77,6 +78,10 @@ const PaymentList = ({ payments }: Props) => {
                     return <PaymentItem {...payment} key={index} />
                 })}
             </div>
+        </PaymentListWrapper>
+    ) : (
+        <PaymentListWrapper>
+            <Title size={4}>Нет платежей</Title>
         </PaymentListWrapper>
     )
 }

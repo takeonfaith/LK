@@ -12,28 +12,30 @@ const PaymentsPage = () => {
             loading={loading}
             load={paymentsModel.effects.getPaymentsFx}
             error={error}
-            data={data && data?.contracts[0]}
-            noDataCheck={!data?.contracts.length}
+            data={data && (!!data?.dormitory.length || !!data?.education.length)}
+            noDataCheck={!data?.dormitory.length}
         >
-            {
+            {!!data?.dormitory.length || !!data?.education.length ? (
                 <SliderPage
                     pages={[
                         {
                             title: 'Общежитие',
-                            condition: !!data?.contracts?.find((contract) => contract.type === 'Общежитие'),
+                            condition: !!data?.dormitory?.length,
                             content: <DormitoryPayments />,
                         },
                         {
                             title: 'Обучение',
-                            condition: !!data?.contracts.find((contract) => contract.type === 'Обучение'),
+                            condition: !!data?.education.length,
                             content: <EducationPayments />,
                         },
                         { title: 'Информация', condition: true, content: <InfoPayments /> },
                     ]}
                     sliderWidth={'600px'}
-                    currentPage={0}
+                    currentPage={!!data?.dormitory.length ? 0 : !!data?.education.length ? 1 : 0}
                 />
-            }
+            ) : (
+                <></>
+            )}
         </Wrapper>
     )
 }

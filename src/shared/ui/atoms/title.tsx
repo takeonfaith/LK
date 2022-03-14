@@ -20,6 +20,7 @@ const TitleWrapper = styled.div<{ align: 'left' | 'center' | 'right'; bottomGap:
         align ? (align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : align) : 'center'};
 
     svg {
+        min-width: 16px;
         margin-right: 4px;
         color: ${({ iconColor }) => !!iconColor && iconColor};
     }

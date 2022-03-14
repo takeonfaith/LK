@@ -1,5 +1,6 @@
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
+import PaymentsPage from '@pages/payments'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -31,6 +32,7 @@ export const JOB_ROUTE = '/job'
 export const ALL_STUDENTS_ROUTE = '/students'
 export const ALL_TEACHERS_ROUTE = '/teachers'
 export const LOGIN_ROUTE = '/login'
+export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 
 export const publicRoutes = [
     {
@@ -99,21 +101,20 @@ export const privateRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
         isTemplate: false,
     },
-    5: {
-        id: 5,
-        title: 'Работа',
-        icon: FiBriefcase,
-        path: JOB_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
-        isTemplate: false,
-    },
+    // 5: {
+    //     id: 5,
+    //     title: 'Заявка на комнату повышенной комфортности',
+    //     icon: FiThumbsUp,
+    //     path: APPLICATION_FOR_SUPERIOR_ROOM_ROUTE,
+    //     Component: ApplicationForSuperiorRoom,
+    //     isTemplate: false,
+    // },
     6: {
         id: 6,
         title: 'Оплата',
         icon: FiDollarSign,
         path: PAYMENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/payments' }),
-        // Component: PaymentsPage,
+        Component: PaymentsPage,
         isTemplate: false,
     },
     7: {
@@ -162,6 +163,14 @@ export const privateRoutes: IRoutes = {
         icon: BiGroup,
         path: ALL_STUDENTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/stud_blanks' }),
+        isTemplate: false,
+    },
+    13: {
+        id: 13,
+        title: 'Работа',
+        icon: FiBriefcase,
+        path: JOB_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
         isTemplate: false,
     },
 }

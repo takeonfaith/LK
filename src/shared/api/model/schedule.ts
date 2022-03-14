@@ -16,6 +16,7 @@ export interface ISubject {
     teachers: string[]
     dateInterval: string
     groups?: string
+    rooms: string[]
 }
 
 export interface ILessons {

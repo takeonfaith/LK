@@ -27,7 +27,7 @@ const CheckboxWrapper = styled.div<{
     }
 `
 
-interface Props {
+export interface CheckboxProps {
     checked: boolean
     setChecked: (value: boolean) => void
     invisibleOnFalse?: boolean
@@ -35,7 +35,7 @@ interface Props {
     isActive?: boolean
 }
 
-const Checkbox = ({ text, checked, setChecked, isActive = true, invisibleOnFalse = false }: Props) => {
+const Checkbox = ({ text, checked, setChecked, isActive = true, invisibleOnFalse = false }: CheckboxProps) => {
     return (
         <CheckboxWrapper
             checked={checked}

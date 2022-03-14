@@ -1,7 +1,7 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
-import { createEffect, createStore } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
+import { createEffect, createStore } from 'effector/compat'
 
 const usePayments = () => {
     return {
@@ -18,9 +18,10 @@ interface PaymentsStore {
 
 const getPaymentsFx = createEffect(async (): Promise<Payments> => {
     const response = await paymentApi.get()
-    if (!response.data.contracts.length) throw new Error('У вас нет данных по оплате')
+    if (!response.data.contracts.education && !response.data.contracts.dormitory)
+        throw new Error('У вас нет данных по оплате')
     try {
-        return response.data
+        return response.data.contracts
     } catch (_) {
         throw new Error('Не удалось загрузить оплату')
     }

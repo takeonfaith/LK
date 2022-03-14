@@ -36,6 +36,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         justify-content: center;
         font-size: 0.7em;
         font-weight: 600;
+        pointer-events: none;
     }
 
     .uploaded-files {
@@ -109,6 +110,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         align-items: center;
         flex-direction: column;
         opacity: 0.6;
+        pointer-events: none;
 
         svg {
             width: 40px;
@@ -118,7 +120,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
     }
 `
 
-interface Props {
+export interface LoadFileProps {
     label: string
     maxFileSizeInBytes: number
     files: File[]
@@ -129,7 +131,7 @@ interface Props {
 
 const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
 
-const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: Props) => {
+const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: LoadFileProps) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
     const { open } = useModal()

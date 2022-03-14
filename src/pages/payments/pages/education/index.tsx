@@ -1,76 +1,76 @@
+import { Agreement } from '@api/model'
 import { paymentsModel } from '@entities/payments'
-import { Contract, LeftBlock, PageWrapper, PaymentList, PaymentsInfo, RightBlock } from '@features/payments'
+import {
+    AgreementsBlock,
+    Contract,
+    ElectronicAgreementList,
+    LeftBlock,
+    PageWrapper,
+    PaymentList,
+    PaymentsInfo,
+    RightBlock,
+} from '@features/payments'
 import { Title } from '@ui/atoms'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 
 const EducationPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
-    const bachelor = data?.contracts[1]
-    const magistracy = data?.contracts[2]
+
+    if (!data?.education) return null
 
     return (
         <PageWrapper>
-            {!!magistracy && (
-                <div className="blocks-wrapper">
-                    <LeftBlock>
-                        <Title size={2} align="left" bottomGap>
-                            Оплата за магистратуру
-                        </Title>
-                        <div className="payment-block-content">
-                            <PaymentList payments={magistracy?.payments ?? []} />
-                            <PaymentsInfo
-                                balanceCurrDate={getCorrectNumberFormat(magistracy?.balance_currdate ?? '0')}
-                                monthly={100000}
-                                startDate={magistracy?.startDate ?? ''}
-                                endDate={magistracy?.endDatePlan ?? ''}
-                                sum={Number(magistracy?.sum) ?? 0}
-                                allPayments={
-                                    magistracy?.payments?.reduce((acc, curr) => {
-                                        return acc + getCorrectNumberFormat(curr.value)
-                                    }, 0) ?? 0
-                                }
-                            />
+            {data?.education.map((education, i) => {
+                return (
+                    <>
+                        <div className="blocks-wrapper" key={i}>
+                            <LeftBlock>
+                                <Title size={2} align="left" bottomGap>
+                                    Оплата за образование
+                                </Title>
+                                <div className="payment-block-content">
+                                    <PaymentList payments={education?.payments ?? []} />
+                                    <PaymentsInfo
+                                        balanceCurrDate={getCorrectNumberFormat(education?.balance_currdate ?? '0')}
+                                        monthly={100000}
+                                        startDate={education?.startDate ?? ''}
+                                        endDate={education?.endDatePlan ?? ''}
+                                        sum={Number(education?.sum) ?? 0}
+                                        allPayments={
+                                            education?.payments?.reduce((acc, curr) => {
+                                                return acc + getCorrectNumberFormat(curr.value)
+                                            }, 0) ?? 0
+                                        }
+                                        qr_current={education.qr_current}
+                                        qr_total={education.qr_total}
+                                    />
+                                </div>
+                            </LeftBlock>
+                            <RightBlock>
+                                <Title size={2} align="left" bottomGap>
+                                    Реквизиты договора
+                                </Title>
+                                <Contract contract={education} />
+                            </RightBlock>
                         </div>
-                    </LeftBlock>
-                    <RightBlock>
-                        <Title size={2} align="left" bottomGap>
-                            Реквизиты договора
-                        </Title>
-                        <Contract contract={magistracy} />
-                    </RightBlock>
-                </div>
-            )}
-            {!!bachelor && (
-                <div className="blocks-wrapper">
-                    <LeftBlock>
-                        <Title size={2} align="left" bottomGap>
-                            Оплата за бакалавриат
-                        </Title>
-                        <div className="payment-block-content">
-                            <PaymentList payments={bachelor?.payments ?? []} />
-                            <PaymentsInfo
-                                balanceCurrDate={getCorrectNumberFormat(bachelor?.balance_currdate ?? '0')}
-                                monthly={100000}
-                                startDate={bachelor?.startDate ?? ''}
-                                endDate={bachelor?.endDatePlan ?? ''}
-                                sum={Number(bachelor?.sum) ?? 0}
-                                allPayments={
-                                    bachelor?.payments?.reduce((acc, curr) => {
-                                        return acc + getCorrectNumberFormat(curr.value)
-                                    }, 0) ?? 0
-                                }
-                            />
-                        </div>
-                    </LeftBlock>
-                    <RightBlock>
-                        <Title size={2} align="left" bottomGap>
-                            Реквизиты договора
-                        </Title>
-                        <Contract contract={bachelor} />
-                    </RightBlock>
-                </div>
-            )}
+                        {education.agreements && !!education.agreements.length && (
+                            <div className="blocks-wrapper">
+                                <AgreementsBlock>
+                                    <Title size={2} align="left" bottomGap>
+                                        Доп. соглашение
+                                    </Title>
+                                    <ElectronicAgreementList
+                                        electronicAgreements={education.agreements.filter(
+                                            (item) => new Date(item?.date) > new Date('2022-02-01'),
+                                        )}
+                                    />
+                                </AgreementsBlock>
+                            </div>
+                        )}
+                    </>
+                )
+            })}
         </PageWrapper>
     )
 }

@@ -1,6 +1,7 @@
+import { SpringValue } from 'react-spring'
 import styled from 'styled-components'
 
-const ModalContent = styled.div<{ isOpen: boolean }>`
+const ModalContent = styled.div<{ isOpen: boolean; position: SpringValue<number> }>`
     background: var(--theme);
     color: var(--text);
     padding: 20px;
@@ -16,7 +17,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
 
         /* Swipe bar on top */
 
-        /* &::after {
+        &::after {
             content: '';
             display: block;
             position: absolute;
@@ -27,7 +28,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
             width: 30px;
             height: 4px;
             border-radius: 10px;
-        } */
+        }
     }
 
     @media (min-width: 801px) {
@@ -42,7 +43,8 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
         height: 80%;
         bottom: 0;
         border-radius: 20px 20px 0 0;
-        transform: ${({ isOpen }) => (isOpen ? 'scale(1) translateY(0)' : 'scale(1) translateY(150px)')};
+        transform: ${({ isOpen, position }) =>
+            isOpen ? `scale(1) translateY(${position}px)` : `scale(1) translateY(150px)`};
         border-radius: var(--brLight) var(--brLight) 0 0;
     }
 `

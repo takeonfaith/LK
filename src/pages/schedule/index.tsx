@@ -45,10 +45,10 @@ const SchedulePage = () => {
             !!schedule && [
                 <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['0']} key={0} />,
                 <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['1']} key={1} />,
-                <>
+                <React.Fragment key={2}>
                     <ExamStats {...getSessionStats(schedule['2'])} />
-                    <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['2']} key={1} />
-                </>,
+                    <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['2']} />
+                </React.Fragment>,
             ],
         [schedule, view],
     )
@@ -85,10 +85,7 @@ const SchedulePage = () => {
                         {/*/>*/}
                     </div>
                     <WeekDayButtonsList wrapperRef={wrapperRef} />
-
                     {!!pages && pages[currentModule as keyof IModules]}
-
-                    {/* {width < 1000 && <WeekDayButtonsList />} */}
                 </SchedulePageContent>
             ) : null}
         </Wrapper>

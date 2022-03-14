@@ -110,13 +110,44 @@ const Input = ({
     const [inputType, setInputType] = useState(type)
 
     const phoneMask = useCallback(
-        (phone: string) => {
-            return phone
-                .replace(/\D/g, '')
-                .replace(/^(\d)/, '+$1(')
-                .replace(/(\d{3})(\d{1,3})/, '$1) $2-')
-                .replace(/(\d{2})(\d{2,4})/, '$1-$2')
-                .slice(0, 17)
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const russianNumberBeginnings = ['7', '8', '9']
+            const selectionStart = e.target.selectionStart
+            let phoneInput = e.target.value.replace(/\D/g, '')
+            let formattedPhone = ''
+
+            if (!phoneInput.length) return ''
+
+            if (e.target.value.length !== selectionStart) {
+                if (/\D/g.test((e.nativeEvent as InputEvent).data ?? '')) {
+                    return phoneInput
+                }
+                return e.target.value
+            }
+
+            if (russianNumberBeginnings.indexOf(phoneInput[0]) > -1) {
+                // russian number
+                if (phoneInput[0] === '9') phoneInput = '7' + phoneInput
+                const firstSymbols = phoneInput[0] === '8' ? '8' : '+7'
+                formattedPhone = firstSymbols + ' '
+                if (!!phoneInput.length) {
+                    formattedPhone += '(' + phoneInput.substring(1, 4)
+                }
+                if (phoneInput.length >= 5) {
+                    formattedPhone += ') ' + phoneInput.substring(4, 7)
+                }
+                if (phoneInput.length >= 8) {
+                    formattedPhone += '-' + phoneInput.substring(7, 9)
+                }
+                if (phoneInput.length >= 10) {
+                    formattedPhone += '-' + phoneInput.substring(9, 11)
+                }
+            } else {
+                // not russian number
+                formattedPhone = `+${phoneInput.substring(0, 16)}`
+            }
+
+            return formattedPhone
         },
         [type],
     )
@@ -127,6 +158,15 @@ const Input = ({
         },
         [type],
     )
+
+    const phoneMaskKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (
+            e.key === 'Backspace' &&
+            ((value[1] === '7' && value.length <= 4) || (value[0] === '8' && value.length <= 3))
+        ) {
+            setValue('')
+        }
+    }
 
     return (
         <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance} width={width}>
@@ -141,10 +181,11 @@ const Input = ({
                 type={inputType}
                 placeholder={placeholder}
                 value={value}
+                onKeyDown={(e) => type === 'tel' && phoneMaskKeyDown(e)}
                 onChange={(e) => {
                     if (mask) {
                         if (type === 'tel') {
-                            setValue(phoneMask(e.target.value))
+                            setValue(phoneMask(e))
                         } else if (type === 'email') {
                             setValue(emailMask(e.target.value))
                         } else setValue(e.target.value)
