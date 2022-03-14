@@ -49,9 +49,11 @@ const sendForm = (
     const files = inputAreas.map((area) => {
         const obj = {}
         if (area.documents?.fieldName) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            obj[area.documents?.fieldName] = area.documents.files.find((t) => !!t)
+            for (let fileIndex = 0; fileIndex < area.documents.files.length; fileIndex++) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                obj[area.documents?.fieldName + `[${fileIndex}]`] = area.documents.files[fileIndex]
+            }
         }
 
         return obj
