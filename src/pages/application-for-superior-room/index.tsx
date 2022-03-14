@@ -45,7 +45,7 @@ const ApplicationForSuperiorRoom = () => {
                         <SubmitButton
                             text={data?.is_avaliable ? 'Отправить' : 'Отправленно'}
                             // Функция отправки здесь
-                            action={() => sendForm(form)}
+                            action={() => sendForm(form, setLoading, setCompleted)}
                             isLoading={loading}
                             completed={completed}
                             // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true

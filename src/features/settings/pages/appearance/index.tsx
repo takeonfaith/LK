@@ -4,13 +4,7 @@ import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 
 const Appearance = () => {
     const { theme, switchTheme } = useTheme()
-    const [toggles, setToggles] = useState<ToggleItem[]>([
-        {
-            title: 'Темная тема',
-            state: theme !== 'light',
-            action: (state: boolean) => switchTheme(state),
-        },
-    ])
+    const [toggles, setToggles] = useState<ToggleItem[]>([])
 
     useEffect(() => {
         setToggles([
@@ -19,12 +13,15 @@ const Appearance = () => {
                 state: theme !== 'light',
                 action: (state: boolean) => switchTheme(state),
             },
+            // {
+            //     title: 'Включать темную тему вечером',
+            //     state: false,
+            //     action: (state) => !state,
+            // },
         ])
     }, [theme])
 
     return <ToggleArea title={'Тема'} toggles={toggles} setToggles={setToggles} />
-
-    return <>Test</>
 }
 
 export default React.memo(Appearance)
