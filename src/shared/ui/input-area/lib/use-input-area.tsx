@@ -1,10 +1,10 @@
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { SelectPage } from '@features/select'
 import React, { useEffect, useState } from 'react'
-import { IComplexInputAreaData, IInputArea, IInputAreaCheckbox, IInputAreaData } from '../model'
+import { IComplexInputAreaData, IInputArea, IInputAreaCheckbox, IInputAreaData, IInputAreaFiles } from '../model'
 
 interface Props {
-    documents?: { files: File[]; required: boolean; checkboxCondition?: 'straight' | 'reverse' }
+    documents?: IInputAreaFiles
     optionalCheckbox?: IInputAreaCheckbox
     data: IInputAreaData[] | IComplexInputAreaData
     optional?: boolean

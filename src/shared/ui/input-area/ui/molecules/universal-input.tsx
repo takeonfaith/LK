@@ -1,13 +1,12 @@
-import React from 'react'
 import Select, { SelectPage } from '@features/select'
-import Checkbox from '@ui/atoms/checkbox'
 import { Input, TextArea } from '@ui/atoms'
-import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData } from '@ui/input-area/model'
-import { CheckboxDocument } from '@ui/molecules'
+import Checkbox from '@ui/atoms/checkbox'
+import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData, IInputAreaFiles } from '@ui/input-area/model'
 import { CheckboxDocumentList } from '@ui/organisms'
+import React from 'react'
 
 type Props = IInputAreaData & {
-    documents?: { files: File[]; required: boolean }
+    documents?: IInputAreaFiles
     changeInputArea: boolean
     setData: React.Dispatch<React.SetStateAction<IInputArea>>
     indexI: number
