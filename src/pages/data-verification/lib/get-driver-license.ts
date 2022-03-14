@@ -12,7 +12,7 @@ const getDriverLicense = (data: TeacherDataVerification): IInputArea => {
             value: data.dr_lic_none,
             required: true,
         },
-        documents: { files: [], required: true, fieldName: 'driveLicenseFiles', maxFiles: 1 },
+        documents: { files: [], required: true, fieldName: 'driveLicenseFiles', maxFiles: 2 },
         confirmed: false,
     }
 }

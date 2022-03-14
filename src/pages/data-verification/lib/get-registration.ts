@@ -24,7 +24,7 @@ const getRegistration = (data: TeacherDataVerification): IInputArea => {
             files: [],
             required: true,
             fieldName: 'personalDataFiles',
-            maxFiles: 1,
+            maxFiles: 2,
         },
         optionalCheckbox: {
             fieldName: 'reg_none',

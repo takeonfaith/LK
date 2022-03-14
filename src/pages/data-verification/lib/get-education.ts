@@ -54,7 +54,7 @@ const getEducation = (data: TeacherDataVerification): IInputArea => {
                 required: false,
             },
         ],
-        documents: { files: [], required: true, fieldName: 'educationFiles', maxFiles: 1 },
+        documents: { files: [], required: true, fieldName: 'educationFiles', maxFiles: 5 },
         confirmed: false,
     }
 }
