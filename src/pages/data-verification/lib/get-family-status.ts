@@ -29,7 +29,7 @@ const getFamilyStatusItems = (sex: 'Мужской' | 'Женский') => {
     }
 }
 
-const getFamilyStatus = (data: TeacherDataVerification): IInputArea => {
+const getFamilyStatus = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Семейное положение',
         hint: 'Необходимо указать актуальную информацию',
@@ -44,7 +44,7 @@ const getFamilyStatus = (data: TeacherDataVerification): IInputArea => {
                 width: '100%',
             },
         ],
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 

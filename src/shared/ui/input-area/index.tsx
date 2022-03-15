@@ -1,17 +1,18 @@
 import { Colors } from '@consts'
-import { Button, Divider, InfoMessage, LoadFileButton } from '@ui/atoms'
+import { Button, Divider, FileLink, LoadFileButton, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import React from 'react'
-import { FiMinusCircle, FiPlusCircle, FiSave } from 'react-icons/fi'
+import { FiAlertCircle, FiInfo, FiMinusCircle, FiPlusCircle, FiSave } from 'react-icons/fi'
 import { HiOutlineCheckCircle, HiOutlinePencil } from 'react-icons/hi'
 import useInputArea from './lib/use-input-area'
 import { IComplexInputAreaData, IInputArea, IInputAreaData } from './model'
-import { UniversalInput, InputAreaWrapper, AreaTitle } from './ui'
+import { AreaTitle, InputAreaWrapper, UniversalInput } from './ui'
 
 //TODO: Should be rewritten as HOC, inputs should be children props
 const InputArea = ({
     title,
     hint,
+    alert,
     data,
     optionalCheckbox,
     documents,
@@ -20,6 +21,8 @@ const InputArea = ({
     optional = false,
     addNew = false,
     divider,
+    collapsed,
+    links,
 }: IInputArea & { setData: React.Dispatch<React.SetStateAction<IInputArea>>; divider?: boolean }) => {
     //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
@@ -34,7 +37,7 @@ const InputArea = ({
         handleLoadFiles,
         handleConfirm,
         handleCheckbox,
-    } = useInputArea({ documents, optionalCheckbox, data, setData, optional })
+    } = useInputArea({ documents, optionalCheckbox, data, setData, optional, collapsed })
     return (
         <>
             <InputAreaWrapper
@@ -59,13 +62,20 @@ const InputArea = ({
                     confirmed={confirmed}
                     setOpenArea={setOpenArea}
                     setIncluded={setIncluded}
+                    collapsed={collapsed}
                 />
                 <div className="inputs">
-                    <InfoMessage
-                        condition={!!hint && (changeInputArea || confirmed === undefined)}
+                    <Message type="alert" visible={!!alert?.length} title={'Внимание'} icon={<FiAlertCircle />}>
+                        {alert}
+                    </Message>
+                    <Message
+                        type="info"
+                        visible={!!hint && (changeInputArea || confirmed === undefined)}
                         title={'Как заполнить'}
-                        text={hint}
-                    />
+                        icon={<FiInfo />}
+                    >
+                        {hint}
+                    </Message>
                     {!Array.isArray(data[0])
                         ? (data as IInputAreaData[]).map((attr, index) => {
                               // TODO: Remove UniversalInput, inputs performing different tasks should be different components
@@ -134,6 +144,10 @@ const InputArea = ({
                             }
                         />
                     )}
+                    {links?.length &&
+                        links.map((link) => {
+                            return <FileLink {...link} key={link.title} />
+                        })}
                     {optionalCheckbox && (optionalCheckbox.visible ?? true) && (
                         <Checkbox
                             text={optionalCheckbox.title}

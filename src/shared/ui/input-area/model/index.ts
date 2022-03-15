@@ -35,6 +35,12 @@ export type CheckboxDocs = IInputAreaFiles & {
     value: boolean
 }
 
+export interface IInputAreaLink {
+    title: string
+    link: string
+    type: 'document' | 'webpage'
+}
+
 export interface IInputAreaData {
     fieldName: string
     title: string
@@ -46,6 +52,7 @@ export interface IInputAreaData {
     mask?: boolean
     editable?: boolean
     placeholder?: string
+    autocomplete?: boolean
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]
@@ -53,6 +60,7 @@ export type IComplexInputAreaData = IInputAreaData[][]
 export interface IInputArea {
     title: string
     hint?: string
+    alert?: string
     data: IInputAreaData[] | IComplexInputAreaData
     default?: IInputAreaData[] | IComplexInputAreaData
     confirmed?: boolean
@@ -60,4 +68,6 @@ export interface IInputArea {
     documents?: IInputAreaFiles
     addNew?: boolean
     optionalCheckbox?: IInputAreaCheckbox
+    collapsed?: boolean
+    links?: IInputAreaLink[]
 }

@@ -13,7 +13,7 @@ const familyType = [
     { id: 'daughter', title: 'Дочь' },
 ]
 
-const getFamily = (data: TeacherDataVerification): IInputArea => {
+const getFamily = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Состав семьи',
         hint: 'Необходимо указать актуальную информацию о ближайших родственниках',
@@ -82,7 +82,7 @@ const getFamily = (data: TeacherDataVerification): IInputArea => {
             value: data.family_none,
             required: true,
         },
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 

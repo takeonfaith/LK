@@ -121,8 +121,26 @@ const getForm = (data: SuperiorRoom): IInputArea => {
                 placeholder: 'Желание проживать с другом и т.д.',
             },
         ],
-        hint: 'Загрузите документы(допускаются файлы pdf размером не больше 10мб каждый',
-        optionalCheckbox: { title: 'С приказом об оплате ознакомлен', value: false, fieldName: '', editable: true },
+        alert: 'Подача заявок открыта с 15 марта по 21 марта включительно',
+        hint: 'Перед отправкой заявки обязательно проверьте указанную в форме контактную информацию (мобильный телефон и адрес электронной почты) и при необходимости внесите изменения',
+        optionalCheckbox: {
+            title: `С приказами об изменении размеров платы за дополнительные услуги № 0597-ОД от 08.06.2021 и № 0032-АХД от 09.03.2022 ознакомлен(а)`,
+            value: false,
+            fieldName: '',
+            editable: true,
+        },
+        links: [
+            {
+                title: 'Приказ № 0032-АХД от 09.03.2022',
+                link: 'https://e.mospolytech.ru/old/storage/files/Prikaz_po_osnovnoj_deyatelnosti_No_0032-AHD_ot_09_03_2022_Ob_utverzhdenii_razmerov_platy_za_dopolnitelnye_us.pdf',
+                type: 'document',
+            },
+            {
+                title: 'Приказ № 0597-ОД от 08.06.2021',
+                link: 'https://e.mospolytech.ru/old/storage/files/Prikaz_po_osnovnoj_deyatelnosti_No_0597-OD_ot_08_06_2021_Ob_utverzhdenii_razmerov_platy_za_dopolnitelnye_usl.pdf',
+                type: 'document',
+            },
+        ],
     }
 }
 

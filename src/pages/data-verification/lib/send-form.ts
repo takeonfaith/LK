@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import { popUpMessageModel } from '@entities/pop-up-message'
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import { IInputArea } from '@ui/input-area/model'
 
@@ -48,9 +49,11 @@ const sendForm = (
     const files = inputAreas.map((area) => {
         const obj = {}
         if (area.documents?.fieldName) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            obj[area.documents?.fieldName] = area.documents.files.find((t) => !!t)
+            for (let fileIndex = 0; fileIndex < area.documents.files.length; fileIndex++) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                obj[area.documents?.fieldName + `[${fileIndex}]`] = area.documents.files[fileIndex]
+            }
         }
 
         return obj
@@ -70,9 +73,17 @@ const sendForm = (
     const result = Object.assign({}, ...form, ...files, ...checkboxes)
     // console.log(result)
 
-    teacherDateVerificationModel.events.postTeacherDataVerification(result)
-    setSubmitLoading(false)
-    setCompleted(true)
+    try {
+        teacherDateVerificationModel.events.postTeacherDataVerification(result)
+        setSubmitLoading(false)
+        setCompleted(true)
+    } catch (error) {
+        popUpMessageModel.events.evokePopUpMessage({
+            message: `Не удалось отправить форму. Ошибка: ${error as string}`,
+            type: 'failure',
+            time: 30000,
+        })
+    }
 }
 
 export default sendForm

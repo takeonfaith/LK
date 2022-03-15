@@ -1,7 +1,7 @@
 import { TeacherDataVerification } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
-const getPersonalData = (data: TeacherDataVerification): IInputArea => {
+const getPersonalData = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Личные данные',
         hint: 'Необходимо приложить скан-копию документа, подтверждающего изменения',
@@ -32,8 +32,8 @@ const getPersonalData = (data: TeacherDataVerification): IInputArea => {
                 required: true,
             },
         ],
-        documents: { files: [], required: true, fieldName: 'personalFiles', maxFiles: 1 },
-        confirmed: false,
+        documents: { files: [], required: true, fieldName: 'personalFiles', maxFiles: 2 },
+        confirmed: isDone,
     }
 }
 
