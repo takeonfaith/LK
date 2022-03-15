@@ -29,6 +29,7 @@ const UniversalInput = (props: Props) => {
         mask,
         editable,
         placeholder,
+        autocomplete,
     } = props
 
     const isActive = editable || (changeInputArea && !documents)
@@ -104,6 +105,7 @@ const UniversalInput = (props: Props) => {
                 required={required}
                 mask={mask}
                 width={width}
+                autocomplete={autocomplete}
             />
         )
     ) : (

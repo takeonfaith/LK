@@ -52,6 +52,7 @@ export interface IInputAreaData {
     mask?: boolean
     editable?: boolean
     placeholder?: string
+    autocomplete?: boolean
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]

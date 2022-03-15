@@ -1,7 +1,7 @@
 import { TeacherDataVerification } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
-const getRegistration = (data: TeacherDataVerification): IInputArea => {
+const getRegistration = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Регистрация',
         hint: 'Необходимо приложить скан-копию 5 страницы или последующих страниц с соответствующими штампами паспорта РФ. При отсутствии регистрации также прикладывается скан-копия. Для иностранных работников - необходимо приложить скан-копию документа о регистрации на территории РФ.',
@@ -31,7 +31,7 @@ const getRegistration = (data: TeacherDataVerification): IInputArea => {
             title: 'Регистрация отсутствует',
             value: false,
         },
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 

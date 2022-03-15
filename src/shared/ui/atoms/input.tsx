@@ -92,6 +92,7 @@ interface Props {
     required?: boolean
     mask?: boolean
     width?: string
+    autocomplete?: boolean
 }
 
 const Input = ({
@@ -106,6 +107,7 @@ const Input = ({
     isActive = true,
     inputAppearance = true,
     mask = false,
+    autocomplete = true,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
 
@@ -181,6 +183,7 @@ const Input = ({
                 type={inputType}
                 placeholder={placeholder}
                 value={value}
+                autoComplete={autocomplete ? 'on' : 'off'}
                 onKeyDown={(e) => type === 'tel' && phoneMaskKeyDown(e)}
                 onChange={(e) => {
                     if (mask) {

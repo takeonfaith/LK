@@ -74,6 +74,7 @@ const DataVerificationPage = () => {
     const [registration, setRegistration] = useState<IInputArea | null>(null)
     const [location, setLocation] = useState<IInputArea | null>(null)
     const [army, setArmy] = useState<IInputArea | null>(null)
+    const isDone = (completed || data?.validated) ?? false
 
     const [confirmAll, setConfirmAll] = useState(false)
 
@@ -96,18 +97,18 @@ const DataVerificationPage = () => {
 
     useEffect(() => {
         if (data) {
-            setPersonalData(getPersonalData(data))
-            setContactInfo(getContactInfo(data))
-            setPassport(getPassport(data))
-            setRegistration(getRegistration(data))
-            setLocation(getLocation(data))
-            setFamilyStatus(getFamilyStatus(data))
-            setFamily(getFamily(data))
-            setEducation(getEducation(data))
-            setLanguage(getLanguage(data))
-            setDriveLicense(getDriverLicense(data))
-            setDisability(getDisability(data))
-            setArmy(getArmy(data))
+            setPersonalData(getPersonalData(data, isDone))
+            setContactInfo(getContactInfo(data, isDone))
+            setPassport(getPassport(data, isDone))
+            setRegistration(getRegistration(data, isDone))
+            setLocation(getLocation(data, isDone))
+            setFamilyStatus(getFamilyStatus(data, isDone))
+            setFamily(getFamily(data, isDone))
+            setEducation(getEducation(data, isDone))
+            setLanguage(getLanguage(data, isDone))
+            setDriveLicense(getDriverLicense(data, isDone))
+            setDisability(getDisability(data, isDone))
+            setArmy(getArmy(data, isDone))
         }
     }, [data])
 
@@ -132,85 +133,124 @@ const DataVerificationPage = () => {
             !!army ? (
                 <DataVerificationPageWrapper>
                     <div className="data-verification-block">
-                        <Title size={3} align="left" bottomGap>
-                            Подтвердите актуальность данных, указанных в каждом разделе анкеты, либо внесите изменения
-                        </Title>
+                        {!isDone && (
+                            <Title size={3} align="left" bottomGap>
+                                Подтвердите актуальность данных, указанных в каждом разделе анкеты, либо внесите
+                                изменения
+                            </Title>
+                        )}
                         <Message
                             type="success"
-                            title={`Данные успешно отправлены ${localizeDate(data?.valid_date)}`}
+                            title={`Данные успешно отправлены ${localizeDate(data?.valid_date ?? new Date())}`}
                             icon={<FiCheckCircle />}
-                            visible={data?.validated}
+                            visible={isDone}
                         />
-                        <InputArea {...personalData} setData={setPersonalData as LoadedState} divider />
-                        <InputArea {...contactInfo} setData={setContactInfo as LoadedState} divider />
-                        <InputArea {...passport} setData={setPassport as LoadedState} divider />
-                        <InputArea {...registration} setData={setRegistration as LoadedState} divider />
-                        <InputArea {...location} setData={setLocation as LoadedState} divider />
-                        <InputArea {...familyStatus} setData={setFamilyStatus as LoadedState} divider />
-                        <InputArea {...family} setData={setFamily as LoadedState} divider />
-                        <InputArea {...education} setData={setEducation as LoadedState} divider />
-                        <InputArea {...language} setData={setLanguage as LoadedState} divider />
-                        <InputArea {...driveLicense} setData={setDriveLicense as LoadedState} divider />
-                        <InputArea {...disability} setData={setDisability as LoadedState} divider />
-                        <InputArea {...army} setData={setArmy as LoadedState} divider />
-                        <Checkbox
-                            checked={confirmAll}
-                            setChecked={setConfirmAll}
-                            text={'Я подтверждаю корректность указанных данных'}
-                            isActive={
-                                !!army.confirmed &&
-                                !!driveLicense.confirmed &&
-                                !!personalData.confirmed &&
-                                !!location.confirmed &&
-                                !!passport.confirmed &&
-                                !!education.confirmed
-                            }
+                        <InputArea
+                            {...personalData}
+                            collapsed={isDone}
+                            setData={setPersonalData as LoadedState}
+                            divider
                         />
-                        <SubmitButton
-                            text={'Отправить'}
-                            // Функция отправки здесь
-                            action={() =>
-                                sendForm(
-                                    [
-                                        army,
-                                        driveLicense,
-                                        personalData,
-                                        location,
-                                        passport,
-                                        education,
-                                        disability,
-                                        family,
-                                        familyStatus,
-                                        registration,
-                                        language,
-                                        contactInfo,
-                                    ],
-                                    setSubmitLoading,
-                                    setCompleted,
-                                )
-                            }
-                            isLoading={submitLoading}
-                            completed={completed}
-                            // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true
-                            setCompleted={setCompleted}
-                            isActive={
-                                !!army.confirmed &&
-                                !!driveLicense.confirmed &&
-                                !!personalData.confirmed &&
-                                !!location.confirmed &&
-                                !!passport.confirmed &&
-                                !!education.confirmed &&
-                                !!disability.confirmed &&
-                                !!family.confirmed &&
-                                !!familyStatus.confirmed &&
-                                !!registration.confirmed &&
-                                !!language.confirmed &&
-                                !!contactInfo.confirmed &&
-                                !!confirmAll
-                            }
-                            popUpFailureMessage="Для отправки формы необходимо, чтобы все поля были подтверждены"
-                            popUpSuccessMessage="Данные формы успешно отправлены"
+                        <InputArea
+                            {...contactInfo}
+                            collapsed={isDone}
+                            setData={setContactInfo as LoadedState}
+                            divider
                         />
+                        <InputArea {...passport} collapsed={isDone} setData={setPassport as LoadedState} divider />
+                        <InputArea
+                            {...registration}
+                            collapsed={isDone}
+                            setData={setRegistration as LoadedState}
+                            divider
+                        />
+                        <InputArea {...location} collapsed={isDone} setData={setLocation as LoadedState} divider />
+                        <InputArea
+                            {...familyStatus}
+                            collapsed={isDone}
+                            setData={setFamilyStatus as LoadedState}
+                            divider
+                        />
+                        <InputArea {...family} collapsed={isDone} setData={setFamily as LoadedState} divider />
+                        <InputArea {...education} collapsed={isDone} setData={setEducation as LoadedState} divider />
+                        <InputArea {...language} collapsed={isDone} setData={setLanguage as LoadedState} divider />
+                        <InputArea
+                            {...driveLicense}
+                            collapsed={isDone}
+                            setData={setDriveLicense as LoadedState}
+                            divider
+                        />
+                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} divider />
+                        <InputArea {...army} collapsed={isDone} setData={setArmy as LoadedState} divider />
+                        {!data?.validated && (
+                            <>
+                                <Checkbox
+                                    checked={confirmAll || isDone}
+                                    setChecked={setConfirmAll}
+                                    text={'Я подтверждаю корректность указанных данных'}
+                                    isActive={
+                                        !!army.confirmed &&
+                                        !!driveLicense.confirmed &&
+                                        !!personalData.confirmed &&
+                                        !!location.confirmed &&
+                                        !!passport.confirmed &&
+                                        !!education.confirmed
+                                    }
+                                />
+                                <SubmitButton
+                                    text={!isDone ? 'Отправить' : 'Отправлено'}
+                                    // Функция отправки здесь
+                                    action={() =>
+                                        sendForm(
+                                            [
+                                                army,
+                                                driveLicense,
+                                                personalData,
+                                                location,
+                                                passport,
+                                                education,
+                                                disability,
+                                                family,
+                                                familyStatus,
+                                                registration,
+                                                language,
+                                                contactInfo,
+                                            ],
+                                            setSubmitLoading,
+                                            setCompleted,
+                                        )
+                                    }
+                                    isLoading={submitLoading}
+                                    completed={completed}
+                                    // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true
+                                    setCompleted={setCompleted}
+                                    isDone={isDone}
+                                    buttonSuccessText="Отправлено"
+                                    repeatable={false}
+                                    isActive={
+                                        !!army.confirmed &&
+                                        !!driveLicense.confirmed &&
+                                        !!personalData.confirmed &&
+                                        !!location.confirmed &&
+                                        !!passport.confirmed &&
+                                        !!education.confirmed &&
+                                        !!disability.confirmed &&
+                                        !!family.confirmed &&
+                                        !!familyStatus.confirmed &&
+                                        !!registration.confirmed &&
+                                        !!language.confirmed &&
+                                        !!contactInfo.confirmed &&
+                                        !!confirmAll
+                                    }
+                                    popUpFailureMessage={
+                                        !isDone
+                                            ? 'Для отправки формы необходимо, чтобы все поля были подтверждены'
+                                            : 'Форму нельзя отправить повторно'
+                                    }
+                                    popUpSuccessMessage="Данные формы успешно отправлены"
+                                />
+                            </>
+                        )}
                     </div>
                 </DataVerificationPageWrapper>
             ) : null}

@@ -1,7 +1,7 @@
 import { TeacherDataVerification } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
-const getArmy = (data: TeacherDataVerification): IInputArea => {
+const getArmy = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     const isMale = data.sex === 'Мужской'
 
     return {
@@ -22,7 +22,7 @@ const getArmy = (data: TeacherDataVerification): IInputArea => {
             required: true,
             visible: !isMale,
         },
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 
