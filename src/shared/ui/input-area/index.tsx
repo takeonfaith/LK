@@ -1,5 +1,5 @@
 import { Colors } from '@consts'
-import { Button, Divider, LoadFileButton, Message } from '@ui/atoms'
+import { Button, Divider, FileLink, LoadFileButton, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import React from 'react'
 import { FiAlertCircle, FiInfo, FiMinusCircle, FiPlusCircle, FiSave } from 'react-icons/fi'
@@ -22,6 +22,7 @@ const InputArea = ({
     addNew = false,
     divider,
     collapsed,
+    links,
 }: IInputArea & { setData: React.Dispatch<React.SetStateAction<IInputArea>>; divider?: boolean }) => {
     //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
@@ -143,6 +144,10 @@ const InputArea = ({
                             }
                         />
                     )}
+                    {links?.length &&
+                        links.map((link) => {
+                            return <FileLink {...link} key={link.title} />
+                        })}
                     {optionalCheckbox && (optionalCheckbox.visible ?? true) && (
                         <Checkbox
                             text={optionalCheckbox.title}

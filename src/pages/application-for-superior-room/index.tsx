@@ -10,11 +10,12 @@ import styled from 'styled-components'
 import getForm from './lib/get-form'
 import sendForm from './lib/send-form'
 
-const ApplicationForSuperiorRoomWrapper = styled.div`
+const ApplicationForSuperiorRoomWrapper = styled.div<{ isDone: boolean }>`
     display: flex;
-    align-items: flex-start;
+    align-items: ${({ isDone }) => (isDone ? 'center' : 'flex-start')};
     justify-content: center;
     width: 100%;
+    height: ${({ isDone }) => isDone && '100%'};
     padding: 10px;
     color: var(--text);
 
@@ -48,13 +49,13 @@ const ApplicationForSuperiorRoom = () => {
 
     return (
         <Wrapper load={() => superiorRoomModel.effects.getSuperiorRoomFx()} loading={!data} error={error} data={data}>
-            <ApplicationForSuperiorRoomWrapper>
+            <ApplicationForSuperiorRoomWrapper isDone={isDone}>
                 {!!form && !!setForm && (
                     <FormBlock>
                         <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                         <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
                             Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
-                            направлены Вам в срок до 30 марта 2022 на указанную в заявке почту: {data?.email}
+                            направлены Вам в срок до 30 марта 2022 года на указанную в заявке почту: {data?.email}
                         </Message>
                         <SubmitButton
                             text={data?.is_avaliable ? 'Отправить' : 'Отправлено'}
@@ -70,7 +71,7 @@ const ApplicationForSuperiorRoom = () => {
                             isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
                             popUpFailureMessage={
                                 isDone
-                                    ? data?.error_text
+                                    ? data?.error_text ?? 'Форма отправлена'
                                     : 'Для отправки формы необходимо, чтобы все поля были заполнены'
                             }
                             popUpSuccessMessage="Данные формы успешно отправлены"

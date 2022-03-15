@@ -35,6 +35,12 @@ export type CheckboxDocs = IInputAreaFiles & {
     value: boolean
 }
 
+export interface IInputAreaLink {
+    title: string
+    link: string
+    type: 'document' | 'webpage'
+}
+
 export interface IInputAreaData {
     fieldName: string
     title: string
@@ -62,4 +68,5 @@ export interface IInputArea {
     addNew?: boolean
     optionalCheckbox?: IInputAreaCheckbox
     collapsed?: boolean
+    links?: IInputAreaLink[]
 }
