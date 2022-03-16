@@ -51,7 +51,7 @@ const InputArea = ({
                     collapsed={collapsed}
                 />
                 <div className="inputs">
-                    <Message type="alert" visible={!!alert?.length} title={'Внимание'} icon={<FiAlertCircle />}>
+                    <Message type="alert" visible={!!alert} title={'Внимание'} icon={<FiAlertCircle />}>
                         {alert}
                     </Message>
                     <Message
