@@ -3,10 +3,12 @@ import { applicationsModel } from '@entities/applications'
 import search from '@features/applications/lib/search'
 import { ApplicationList } from '@features/applications/ui'
 import CreateApplicationList from '@features/applications/ui/molecules/create-application-list'
-import { Button, FormBlock, Wrapper } from '@ui/atoms'
+import Select, { SelectPage } from '@features/select'
+import { Button, FormBlock, Message, Wrapper } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
 import React, { useEffect, useState } from 'react'
-import { FiPlus } from 'react-icons/fi'
+import { FiCheck, FiClock, FiInfo, FiPlus, FiX } from 'react-icons/fi'
+import { HiSortAscending, HiSortDescending } from 'react-icons/hi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 
@@ -31,6 +33,7 @@ const ApplicationPageWrapper = styled.div`
 const ApplicationsPage = () => {
     const { data, error } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
+    const [selectedFilter, setSelectedFilter] = useState<SelectPage | null>(null)
     const [applications, setApplications] = useState<Application[] | null>([
         {
             notes: '',
@@ -271,6 +274,12 @@ const ApplicationsPage = () => {
         >
             <ApplicationPageWrapper>
                 <FormBlock maxWidth="1500px">
+                    <Message type="info" title="Информация" icon={<FiInfo />}>
+                        Данный сервис позволяет заказать необходимую справку, подать заявление, запрос. Статус
+                        (информация о степени готовности) заказанных справок меняется согласно действиям оператора. В
+                        колонке «Структурное подразделение, адрес» указывается название подразделения и адрес, куда
+                        необходимо приехать за готовым документом.
+                    </Message>
                     <div className="search-and-add">
                         <Button
                             onClick={() => open(<CreateApplicationList />)}
@@ -286,6 +295,31 @@ const ApplicationsPage = () => {
                             searchEngine={search}
                             setResult={setApplications}
                             placeholder={'Поиск заявлений'}
+                        />
+                        <Select
+                            width="200px"
+                            placeholder="Фильтры"
+                            items={[
+                                {
+                                    id: 'date',
+                                    title: 'По дате',
+                                    children: [
+                                        { id: 'asc', title: 'Сначала новые', icon: <HiSortAscending /> },
+                                        { id: 'desc', title: 'Сначала старые', icon: <HiSortDescending /> },
+                                    ],
+                                },
+                                {
+                                    id: 1,
+                                    title: 'По статусу',
+                                    children: [
+                                        { id: 'ready', title: 'Готово', icon: <FiCheck /> },
+                                        { id: 'pending', title: 'Принято в работу', icon: <FiClock /> },
+                                        { id: 'rejected', title: 'Отклонено', icon: <FiX /> },
+                                    ],
+                                },
+                            ]}
+                            setSelected={setSelectedFilter}
+                            selected={selectedFilter}
                         />
                     </div>
                     <ApplicationList loading={!applications} list={applications} />

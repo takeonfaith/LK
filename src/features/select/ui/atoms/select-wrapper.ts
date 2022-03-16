@@ -18,6 +18,14 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
     color: var(--text);
     cursor: pointer;
     transition: 0.3s;
+
+    &:focus {
+        outline: 4px solid var(--almostTransparentOpposite);
+    }
+
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
     &:active {
         transform: translateY(3px);
     }

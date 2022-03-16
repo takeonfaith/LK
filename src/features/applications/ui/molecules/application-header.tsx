@@ -9,6 +9,8 @@ const ApplicationHeaderWrapper = styled.div`
     position: sticky;
     top: -1px;
     color: var(--text);
+    background: var(--settings);
+    font-size: 0.9em;
 
     .title {
         display: flex;

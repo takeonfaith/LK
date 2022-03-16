@@ -147,7 +147,7 @@ const CreateApplicationList = () => {
                     return (
                         <div className="link-list" key={section.title}>
                             <Title size={4} align="left" bottomGap>
-                                Прочее
+                                {section.title}
                             </Title>
                             <div className="links">
                                 {section.links.map((link) => {
