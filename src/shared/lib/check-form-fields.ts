@@ -4,7 +4,7 @@ const checkFormFields = (form: IInputArea) => {
     return !(form.data as IInputAreaData[]).find((el) => {
         return el.type !== 'checkbox-docs'
             ? !el.value && el.required
-            : !(el.items as CheckboxDocs[]).find((item) => !!item.files.length)
+            : el.required && !(el.items as CheckboxDocs[]).find((item) => !!item.files.length)
     })
 }
 

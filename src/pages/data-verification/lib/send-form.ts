@@ -3,11 +3,7 @@ import { popUpMessageModel } from '@entities/pop-up-message'
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import { IInputArea } from '@ui/input-area/model'
 
-const sendForm = (
-    inputAreas: IInputArea[],
-    setSubmitLoading: React.Dispatch<React.SetStateAction<boolean>>,
-    setCompleted: React.Dispatch<React.SetStateAction<boolean>>,
-): void => {
+const sendForm = (inputAreas: IInputArea[], setSubmitLoading: React.Dispatch<React.SetStateAction<boolean>>): void => {
     setSubmitLoading(true)
 
     const form = inputAreas
@@ -76,8 +72,9 @@ const sendForm = (
     try {
         teacherDateVerificationModel.events.postTeacherDataVerification(result)
         setSubmitLoading(false)
-        setCompleted(true)
+        teacherDateVerificationModel.events.changeCompleted({ completed: true })
     } catch (error) {
+        setSubmitLoading(false)
         popUpMessageModel.events.evokePopUpMessage({
             message: `Не удалось отправить форму. Ошибка: ${error as string}`,
             type: 'failure',

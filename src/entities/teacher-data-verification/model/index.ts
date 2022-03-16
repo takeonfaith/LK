@@ -9,15 +9,18 @@ const useTeacherDataVerification = () => {
         data: useStore($teacherDataVerificationStore).teacherDataVerification,
         loading: useStore(getTeacherDataVerificationFx.pending),
         error: useStore($teacherDataVerificationStore).error,
+        completed: useStore($teacherDataVerificationStore).completed,
     }
 }
 
 interface TeacherDataVerificationStore {
     teacherDataVerification: TeacherDataVerification | null
     error: string | null
+    completed: boolean
 }
 
 const postTeacherDataVerification = createEvent<TeacherDataVerification>()
+const changeCompleted = createEvent<{ completed: boolean }>()
 
 const postTeacherDataVerificationFx = createEffect(async (postData: TeacherDataVerification): Promise<void> => {
     try {
@@ -44,6 +47,7 @@ const getTeacherDataVerificationFx = createEffect(async (): Promise<TeacherDataV
 const $teacherDataVerificationStore = createStore<TeacherDataVerificationStore>({
     teacherDataVerification: null,
     error: null,
+    completed: false,
 })
     .on(getTeacherDataVerificationFx, (oldData) => ({
         ...oldData,
@@ -57,6 +61,10 @@ const $teacherDataVerificationStore = createStore<TeacherDataVerificationStore>(
         ...oldData,
         error: newData.message,
     }))
+    .on(changeCompleted, (oldData, newData) => ({
+        ...oldData,
+        completed: newData.completed,
+    }))
 
 export const selectors = {
     useTeacherDataVerification,
@@ -67,4 +75,5 @@ export const effects = {
 }
 export const events = {
     postTeacherDataVerification,
+    changeCompleted,
 }
