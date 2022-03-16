@@ -15,11 +15,12 @@ interface IPopUpMessage {
     onClick?: () => void
 }
 
-const defaultStore: IPopUpMessage = {
-    message: '',
-    type: 'success',
-    isOpen: false,
-    time: 2000,
+interface PopUpMessageStore {
+    popUps: IPopUpMessage[]
+}
+
+const defaultStore: PopUpMessageStore = {
+    popUps: [],
 }
 
 const evokePopUpMessage = createEvent<{
@@ -32,12 +33,17 @@ const evokePopUpMessage = createEvent<{
 const openPopUpMessage = createEvent<{ isOpen: boolean }>()
 
 const $popUpstore = createStore(defaultStore)
-    .on(evokePopUpMessage, (_, { message, type, time = 2000, onClick }) => ({
-        isOpen: true,
-        message,
-        type,
-        time,
-        onClick,
+    .on(evokePopUpMessage, (oldData, { message, type, time = 2000, onClick }) => ({
+        popUps: [
+            ...oldData.popUps,
+            {
+                isOpen: true,
+                message,
+                type,
+                time,
+                onClick,
+            },
+        ],
     }))
     .on(openPopUpMessage, (oldState, { isOpen }) => ({
         ...oldState,

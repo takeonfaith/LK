@@ -5,7 +5,15 @@ import React, { useCallback, useEffect } from 'react'
 import { FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 
-const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string; isClickable: boolean }>`
+const PopUpMessages = styled.div``
+
+const PopUpMessageWrapper = styled.div<{
+    isOpen: boolean
+    color: string
+    isClickable: boolean
+    position: number
+    height: string
+}>`
     width: 300px;
     border-radius: var(--brLight);
     background: ${({ color }) => Colors[color].dark};
@@ -14,7 +22,9 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string; isClick
     right: 20px;
     z-index: 100;
     transition: 0.2s transform, 0.2s opacity, 0.2s visibility;
-    transform: translateY(${({ isOpen }) => (isOpen ? '0px' : '-20px')});
+    transform: translateY(
+        ${({ isOpen, position, height }) => (isOpen ? `calc(-${position} * ${height} - ${position * 10}px)` : '-20px')}
+    );
     opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
     padding: 10px;
@@ -54,33 +64,49 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string; isClick
 `
 
 const PopUpMessage = () => {
-    const { isOpen, message, type, time, onClick } = popUpMessageModel.selectors.usePopUpMessage()
+    const { popUps } = popUpMessageModel.selectors.usePopUpMessage()
 
-    useEffect(() => {
-        if (isOpen) {
-            setTimeout(() => {
-                popUpMessageModel.events.openPopUpMessage({ isOpen: !isOpen })
-            }, time)
-        }
-    }, [isOpen])
+    // useEffect(() => {
+    //     if (isOpen) {
+    //         setTimeout(() => {
+    //             popUpMessageModel.events.openPopUpMessage({ isOpen: !isOpen })
+    //         }, time)
+    //     }
+    // }, [isOpen])
 
-    const handleOnClick = useCallback(() => {
-        if (!!onClick) {
-            onClick()
-            popUpMessageModel.events.openPopUpMessage({ isOpen: !isOpen })
-        }
-    }, [onClick])
+    const handleOnClick = useCallback(
+        (i: number) => {
+            const click = popUps[i].onClick
+            if (!!click) {
+                click()
+                popUpMessageModel.events.openPopUpMessage({ isOpen: !popUps[i].isOpen })
+            }
+        },
+        [popUps],
+    )
 
     return (
-        <PopUpMessageWrapper
-            isOpen={isOpen}
-            isClickable={!!onClick}
-            color={type === 'success' ? 'green' : type === 'info' ? 'darkBlue' : 'red'}
-            onClick={handleOnClick}
-        >
-            <Button onClick={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })} icon={<FiX />} />
-            {message}
-        </PopUpMessageWrapper>
+        <PopUpMessages>
+            {popUps.map((popUp, i) => {
+                return (
+                    <PopUpMessageWrapper
+                        isOpen={popUp.isOpen}
+                        isClickable={!!popUp.onClick}
+                        color={popUp.type === 'success' ? 'green' : popUp.type === 'info' ? 'darkBlue' : 'red'}
+                        onClick={() => handleOnClick(i)}
+                        key={i}
+                        position={i}
+                        height={((popUps[i - 1]?.message?.toString().length ?? 0) * 1.5).toString() + 'px'}
+                    >
+                        <Button
+                            onClick={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })}
+                            icon={<FiX />}
+                        />
+                        {popUp.message}
+                    </PopUpMessageWrapper>
+                )
+            })}
+        </PopUpMessages>
     )
 }
 
