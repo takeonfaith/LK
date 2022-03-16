@@ -2,25 +2,6 @@ import styled from 'styled-components'
 
 interface Args {
     openArea: boolean
-    amount: number
-    withLoadDoc: boolean
-    hint: number
-    addNew: boolean
-    optionalCheckbox: boolean
-}
-
-const calcInputHeight = ({ openArea, amount, withLoadDoc, hint, addNew, optionalCheckbox }: Args) => {
-    return openArea
-        ? amount * 57 +
-              36 +
-              15 * amount -
-              1 +
-              (addNew ? 80 : 0) +
-              (withLoadDoc ? 150 : 0) +
-              (hint ? (hint <= 70 ? hint : (hint / 120) * 50) : 0) +
-              (optionalCheckbox ? 55 : 0) +
-              'px'
-        : '0'
 }
 
 const InputAreaWrapper = styled.div<Args>`

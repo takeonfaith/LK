@@ -59,7 +59,7 @@ export type IComplexInputAreaData = IInputAreaData[][]
 
 export interface IInputArea {
     title: string
-    hint?: string
+    hint?: React.ReactNode
     alert?: string
     data: IInputAreaData[] | IComplexInputAreaData
     default?: IInputAreaData[] | IComplexInputAreaData

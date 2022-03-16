@@ -40,21 +40,7 @@ const InputArea = ({
     } = useInputArea({ documents, optionalCheckbox, data, setData, optional, collapsed })
     return (
         <>
-            <InputAreaWrapper
-                openArea={openArea}
-                amount={
-                    data.length +
-                    (data as IInputAreaData[]).reduce((acc, item) => {
-                        if (item.type === 'checkbox-docs') acc += item.items?.length ?? 0
-                        return acc
-                    }, 0) /
-                        2
-                }
-                withLoadDoc={!!documents && changeInputArea}
-                hint={changeInputArea ? hint?.length ?? 0 : 0}
-                addNew={addNew && changeInputArea}
-                optionalCheckbox={!!optionalCheckbox && (optionalCheckbox.visible ?? true)}
-            >
+            <InputAreaWrapper openArea={openArea}>
                 <AreaTitle
                     title={title}
                     included={included}

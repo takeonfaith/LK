@@ -9,9 +9,9 @@ import { Image } from '.'
 
 // const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000
 
-const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boolean }>`
+const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boolean; topPadding: boolean }>`
     width: 100%;
-    height: 150px;
+    min-height: 150px;
     border-radius: var(--brLight);
     background: var(--almostTransparentOpposite);
     display: flex;
@@ -44,6 +44,8 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         align-items: center;
         justify-content: center;
         width: 100%;
+        flex-wrap: wrap;
+        padding: ${({ topPadding }) => topPadding && '40px 20px'};
 
         .file-preview {
             display: flex;
@@ -66,7 +68,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
             }
 
             .file-name {
-                max-width: 200px;
+                max-width: 100px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -232,6 +234,7 @@ const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: LoadFile
             onDragEnter={(e) => isActive && handleDragEnter(e)}
             onDragLeave={(e) => isActive && handleDragLeave(e)}
             onDrop={(e) => isActive && handleDrop(e)}
+            topPadding={!!maxFiles}
         >
             {maxFiles && <span className="max-files">Макс. файлов: {maxFiles}</span>}
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
