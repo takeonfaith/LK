@@ -73,7 +73,7 @@ const UniversalInput = (props: Props) => {
                 text={title}
                 isActive={isActive}
                 checked={value as boolean}
-                setChecked={(value) => handleChangeValue(!value, indexI, indexJ)}
+                setChecked={(value) => handleChangeValue(value, indexI, indexJ)}
             />
         ) : type === 'textarea' ? (
             <TextArea

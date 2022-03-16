@@ -1,5 +1,6 @@
 import { SuperiorRoom } from '@api/model'
 import { CheckboxDocs, IInputArea } from '@ui/input-area/model'
+import React from 'react'
 
 const allocationTypes = [
     { id: 0, title: 'Один в комнате' },
@@ -104,6 +105,13 @@ const getForm = (data: SuperiorRoom): IInputArea => {
                 required: true,
             },
             {
+                title: 'Я проживаю в комнате повышенной комфортности в настоящее время',
+                value: false,
+                fieldName: 'inSuperiorRoom',
+                type: 'checkbox',
+                editable: true,
+            },
+            {
                 title: 'Участие во внеучебной деятельности',
                 value: null,
                 fieldName: 'extracurricular',
@@ -121,8 +129,17 @@ const getForm = (data: SuperiorRoom): IInputArea => {
                 placeholder: 'Желание проживать с другом и т.д.',
             },
         ],
-        alert: 'Подача заявок открыта с 15 марта по 21 марта включительно',
-        hint: 'Перед отправкой заявки обязательно проверьте указанную в форме контактную информацию (мобильный телефон и адрес электронной почты) и при необходимости внесите изменения',
+        alert: 'Подача заявок открыта с 16 марта по 21 марта включительно',
+        hint: (
+            <>
+                Перед отправкой заявки обязательно проверьте указанную в форме контактную информацию (мобильный телефон
+                и адрес электронной почты) и при необходимости внесите изменения.
+                <br />
+                <br />
+                Если Вы уже проживаете в комнате повышенной комфортности и не планируете переселиться, то подавать
+                заявку повторно не требуется
+            </>
+        ),
         optionalCheckbox: {
             title: `С приказами об изменении размеров платы за дополнительные услуги № 0597-ОД от 08.06.2021 и № 0032-АХД от 09.03.2022 ознакомлен(а)`,
             value: false,
@@ -131,12 +148,12 @@ const getForm = (data: SuperiorRoom): IInputArea => {
         },
         links: [
             {
-                title: 'Приказ № 0032-АХД от 09.03.2022',
+                title: 'Приказ № 0032-АХД от 09.03.2022 (ул. Михалковская, д. 7, корп. 3)',
                 link: 'https://e.mospolytech.ru/old/storage/files/Prikaz_po_osnovnoj_deyatelnosti_No_0032-AHD_ot_09_03_2022_Ob_utverzhdenii_razmerov_platy_za_dopolnitelnye_us.pdf',
                 type: 'document',
             },
             {
-                title: 'Приказ № 0597-ОД от 08.06.2021',
+                title: 'Приказ № 0597-ОД от 08.06.2021 (ул. Малая Семеновская, д. 12)',
                 link: 'https://e.mospolytech.ru/old/storage/files/Prikaz_po_osnovnoj_deyatelnosti_No_0597-OD_ot_08_06_2021_Ob_utverzhdenii_razmerov_platy_za_dopolnitelnye_usl.pdf',
                 type: 'document',
             },
