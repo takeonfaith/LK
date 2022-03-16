@@ -20,18 +20,19 @@ const getColor = (type: MessageType) => {
     }
 }
 
-const MessageWrapper = styled.div<{ type: MessageType }>`
+const MessageWrapper = styled.div<{ type: MessageType; align: 'left' | 'center' | 'right'; width?: string }>`
+    width: ${({ width }) => width ?? 'fit-content'};
     font-size: 0.8em;
     padding: 10px;
     color: ${({ type }) => Colors[getColor(type)].main};
     background: ${({ type }) => Colors[getColor(type)].lightTransparent};
     border-radius: var(--brLight);
     position: relative;
-    padding-right: 35px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     font-weight: 500;
+    align-items: ${({ align }) => (align === 'left' ? 'flex-start' : align === 'center' ? 'center' : 'flex-end')};
 `
 
 interface Props {
@@ -40,11 +41,13 @@ interface Props {
     title: string
     icon?: React.ReactNode
     visible?: boolean
+    align?: 'left' | 'center' | 'right'
+    width?: string
 }
 
-const Message = ({ type, children, icon, title, visible = true }: Props) => {
+const Message = ({ type, children, icon, title, width, visible = true, align = 'left' }: Props) => {
     return visible ? (
-        <MessageWrapper type={type}>
+        <MessageWrapper type={type} align={align} width={width}>
             <div className="title-and-icon">
                 <Title size={4} align="left" icon={icon}>
                     {title}

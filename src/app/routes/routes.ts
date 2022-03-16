@@ -1,4 +1,5 @@
 import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
+import ApplicationsPage from '@pages/applications'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -123,7 +124,7 @@ export const privateRoutes: IRoutes = {
         title: 'Заявления',
         icon: FiFileText,
         path: APPLICATIONS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: ApplicationsPage,
         isTemplate: false,
     },
     8: {
