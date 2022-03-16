@@ -56,10 +56,9 @@ const DataVerificationPageWrapper = styled.div`
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const DataVerificationPage = () => {
-    const { data, error } = teacherDateVerificationModel.selectors.useTeacherDataVerification()
+    const { data, error, completed } = teacherDateVerificationModel.selectors.useTeacherDataVerification()
 
     // Про это написно ниже, в сабмит баттоне
-    const [completed, setCompleted] = useState(false)
     const [submitLoading, setSubmitLoading] = useState(false)
 
     const [personalData, setPersonalData] = useState<IInputArea | null>(null)
@@ -217,13 +216,14 @@ const DataVerificationPage = () => {
                                                 contactInfo,
                                             ],
                                             setSubmitLoading,
-                                            setCompleted,
                                         )
                                     }
                                     isLoading={submitLoading}
                                     completed={completed}
                                     // Здесь должен быть setCompleted, он нужен для анимации. В функции отправки формы после успешного завершения его нужно сделать true
-                                    setCompleted={setCompleted}
+                                    setCompleted={(completed: boolean) =>
+                                        teacherDateVerificationModel.events.changeCompleted({ completed })
+                                    }
                                     isDone={isDone}
                                     buttonSuccessText="Отправлено"
                                     repeatable={false}
