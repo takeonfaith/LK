@@ -2,7 +2,7 @@ import { superiorRoomModel } from '@entities/superior-room'
 import { userModel } from '@entities/user'
 import { Error, FormBlock, Message, SubmitButton, Wrapper } from '@ui/atoms'
 import InputArea from '@ui/input-area'
-import { IInputArea } from '@ui/input-area/model'
+import { IInputArea, IInputAreaData } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiInfo } from 'react-icons/fi'
@@ -53,9 +53,10 @@ const ApplicationForSuperiorRoom = () => {
                 {!!form && !!setForm && (
                     <FormBlock>
                         <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
-                        <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
+                        <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={!isDone}>
                             Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
-                            направлены Вам в срок до 30 марта 2022 года на указанную в заявке почту: {data?.email}
+                            направлены Вам в срок до 30 марта 2022 года на указанную в заявке почту:{' '}
+                            {(form.data?.[2] as IInputAreaData).value}
                         </Message>
                         <SubmitButton
                             text={data?.is_avaliable ? 'Отправить' : 'Отправлено'}
