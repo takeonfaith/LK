@@ -37,7 +37,7 @@ const InputArea = ({
         handleLoadFiles,
         handleConfirm,
         handleCheckbox,
-    } = useInputArea({ documents, optionalCheckbox, data, setData, optional, collapsed })
+    } = useInputArea({ documents, optionalCheckbox, data, setData, optional, collapsed, confirmed })
     return (
         <>
             <InputAreaWrapper

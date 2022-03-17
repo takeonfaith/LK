@@ -14,7 +14,8 @@ const FormBlockWrapper = styled.div<{ maxWidth?: string }>`
 
     @media (max-width: 1000px) {
         box-shadow: none;
-        padding: 0px;
+        padding: 10px 0px;
+        background: transparent;
     }
 `
 

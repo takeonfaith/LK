@@ -6,7 +6,8 @@ import CreateApplicationList from '@features/applications/ui/molecules/create-ap
 import Select, { SelectPage } from '@features/select'
 import { Button, FormBlock, Message, Wrapper } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
-import React, { useEffect, useState } from 'react'
+import useResize from '@utils/hooks/use-resize'
+import React, { useState } from 'react'
 import { FiCheck, FiClock, FiInfo, FiPlus, FiX } from 'react-icons/fi'
 import { HiSortAscending, HiSortDescending } from 'react-icons/hi'
 import styled from 'styled-components'
@@ -16,7 +17,6 @@ const ApplicationPageWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
     .search-and-add {
         display: flex;
         align-items: center;
@@ -24,9 +24,9 @@ const ApplicationPageWrapper = styled.div`
     }
 
     @media (max-width: 1000px) {
-        .search-and-add {
-            padding: 13px;
-        }
+        align-items: flex-start;
+        overflow-y: auto;
+        height: 100%;
     }
 `
 
@@ -256,8 +256,7 @@ const ApplicationsPage = () => {
                 'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
         },
     ])
-
-    console.log(applications)
+    const { width } = useResize()
 
     // useEffect(() => {
     //     if (data) {
@@ -287,8 +286,8 @@ const ApplicationsPage = () => {
                             background="var(--reallyBlue)"
                             textColor="#fff"
                             icon={<FiPlus />}
-                            width={'200px'}
-                            shrinkTextInMobile
+                            width={width > 1000 ? '200px' : '150px'}
+                            fixedInMobile
                         />
                         <LocalSearch<Application[], Application[]>
                             whereToSearch={applications ?? []}

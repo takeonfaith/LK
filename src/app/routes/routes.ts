@@ -1,5 +1,6 @@
 import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 import ApplicationsPage from '@pages/applications'
+import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -35,6 +36,10 @@ export const ALL_STUDENTS_ROUTE = '/students'
 export const ALL_TEACHERS_ROUTE = '/teachers'
 export const LOGIN_ROUTE = '/login'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
+
+//hidden routes
+export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
+export const ARBITRARY_REQUEST_ROUTE = APPLICATIONS_ROUTE + '/arbitrary-request'
 
 export const publicRoutes = [
     {
@@ -173,6 +178,25 @@ export const privateRoutes: IRoutes = {
         icon: FiBriefcase,
         path: JOB_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
+        isTemplate: false,
+    },
+}
+
+export const hiddenRoutes: IRoutes = {
+    14: {
+        id: 14,
+        title: 'Уточнение паспортных данных',
+        icon: FiBriefcase,
+        path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
+        isTemplate: false,
+    },
+    15: {
+        id: 15,
+        title: 'Произвольный запрос',
+        icon: FiBriefcase,
+        path: ARBITRARY_REQUEST_ROUTE,
+        Component: ArbitrayRequestPage,
         isTemplate: false,
     },
 }

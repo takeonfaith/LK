@@ -20,8 +20,14 @@ const getColor = (type: MessageType) => {
     }
 }
 
-const MessageWrapper = styled.div<{ type: MessageType; align: 'left' | 'center' | 'right'; width?: string }>`
-    width: ${({ width }) => width ?? 'fit-content'};
+const MessageWrapper = styled.div<{
+    type: MessageType
+    align: 'left' | 'center' | 'right'
+    width?: string
+    maxWidth?: string
+}>`
+    width: ${({ width }) => width ?? '100%'};
+    max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     font-size: 0.8em;
     padding: 10px;
     color: ${({ type }) => Colors[getColor(type)].main};
@@ -43,11 +49,12 @@ interface Props {
     visible?: boolean
     align?: 'left' | 'center' | 'right'
     width?: string
+    maxWidth?: string
 }
 
-const Message = ({ type, children, icon, title, width, visible = true, align = 'left' }: Props) => {
+const Message = ({ type, children, icon, title, width, maxWidth, visible = true, align = 'left' }: Props) => {
     return visible ? (
-        <MessageWrapper type={type} align={align} width={width}>
+        <MessageWrapper type={type} align={align} width={width} maxWidth={maxWidth}>
             <div className="title-and-icon">
                 <Title size={4} align="left" icon={icon}>
                     {title}

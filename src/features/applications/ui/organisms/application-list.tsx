@@ -32,8 +32,6 @@ interface Props {
 }
 
 const ApplicationList = ({ loading, list }: Props) => {
-    console.log(loading)
-
     return (
         <ApplicationListWrapper>
             <ApplicationHeader />

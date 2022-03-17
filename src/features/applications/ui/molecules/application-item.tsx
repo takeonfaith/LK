@@ -91,7 +91,8 @@ const ApplicationItem = (props: Props) => {
                     type={status === 'Готово' ? 'success' : status === 'Отклонено' ? 'failure' : 'alert'}
                     title={status}
                     align="center"
-                    width="140px"
+                    width="100%"
+                    maxWidth="150px"
                 />
             </div>
             <div className="structuralSubdivision">{structuralSubdivision}</div>

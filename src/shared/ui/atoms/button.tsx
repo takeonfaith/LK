@@ -12,6 +12,7 @@ const ButtonWrapper = styled.button<{
     direction: 'horizontal' | 'vertical'
     align?: 'left' | 'center' | 'right'
     isActive: boolean
+    fixedInMobile?: boolean
 }>`
     display: flex;
     align-items: center;
@@ -56,6 +57,10 @@ const ButtonWrapper = styled.button<{
     @media (max-width: 1000px) {
         font-size: 12px;
         height: 36px;
+        position: ${({ fixedInMobile }) => fixedInMobile && 'absolute'};
+        z-index: ${({ fixedInMobile }) => fixedInMobile && '5'};
+        bottom: 10px;
+        right: 10px;
 
         svg {
             width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
@@ -79,6 +84,7 @@ interface Props extends React.HTMLAttributes<HTMLButtonElement> {
     background?: string
     textColor?: string
     shrinkTextInMobile?: boolean
+    fixedInMobile?: boolean
     hoverBackground?: string
     align?: 'left' | 'center' | 'right'
     direction?: 'horizontal' | 'vertical'
@@ -95,6 +101,7 @@ const Button = ({
     textColor,
     hoverBackground,
     align,
+    fixedInMobile,
     isChosen = false,
     direction = 'horizontal',
     shrinkTextInMobile = false,
@@ -114,6 +121,7 @@ const Button = ({
             align={align}
             direction={direction}
             isActive={isActive}
+            fixedInMobile={fixedInMobile}
             {...restProps}
         >
             {!!icon && icon}
