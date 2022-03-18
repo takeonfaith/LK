@@ -69,7 +69,19 @@ const SubjectWrapper = styled.div<{
 type Props = ISubject & { isCurrent: boolean; isNext?: boolean; view?: string }
 
 const Subject = (props: Props) => {
-    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, view, rooms, isNext = false } = props
+    const {
+        timeInterval,
+        name,
+        place,
+        teachers,
+        dateInterval,
+        isCurrent,
+        link,
+        view,
+        rooms,
+        groups,
+        isNext = false,
+    } = props
     const { open } = useModal()
 
     return (
@@ -98,6 +110,7 @@ const Subject = (props: Props) => {
                     return teacher + ' '
                 })}
             </p>
+            <p className="date-interval">{groups}</p>
             <p className="date-interval">{dateInterval}</p>
         </SubjectWrapper>
     )

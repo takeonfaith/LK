@@ -55,7 +55,7 @@ const SubjectModal = (props: Props) => {
             <div className="time-and-next">
                 <Time timeInterval={timeInterval} isCurrent={isCurrent} />
                 <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
-                <Rooms rooms={rooms} />
+                <Rooms rooms={rooms} inModal />
             </div>
             <SubjectPlaceBlock place={place} link={link} name={name} />
             <Divider margin="20px auto" />

@@ -35,6 +35,9 @@ export const ALL_TEACHERS_ROUTE = '/teachers'
 export const LOGIN_ROUTE = '/login'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 
+// hidden routes
+export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
+
 export const publicRoutes = [
     {
         id: 0,
@@ -92,7 +95,7 @@ export const privateRoutes: IRoutes = {
         icon: BiTimeFive,
         path: SCHEDULE_ROUTE,
         Component: SchedulePage,
-        isTemplate: true,
+        isTemplate: false,
     },
     4: {
         id: 4,
@@ -172,6 +175,17 @@ export const privateRoutes: IRoutes = {
         icon: FiBriefcase,
         path: JOB_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
+        isTemplate: false,
+    },
+}
+
+export const hiddenRoutes = {
+    14: {
+        id: 14,
+        title: 'Расписание преподавателя',
+        icon: BiIdCard,
+        path: TEACHER_SCHEDULE,
+        Component: SchedulePage,
         isTemplate: false,
     },
 }

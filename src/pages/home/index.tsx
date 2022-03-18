@@ -25,7 +25,7 @@ const Home = () => {
                 {!!user && (
                     <div className="home-page-content-inner">
                         <UserInfo user={user} />
-                        {!user.subdivisions && <ScheduleAndNotification />}
+                        <ScheduleAndNotification />
                         <ShortCutLinks />
                     </div>
                 )}

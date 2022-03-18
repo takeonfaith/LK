@@ -28,6 +28,7 @@ import { IconType } from 'react-icons/lib'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
 import DataVerificationPage from '@pages/data-verification'
+import SchedulePage from '@pages/schedule'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -38,7 +39,7 @@ export const PROJECT_ACTIVITIES_ROUTE = '/proj_main'
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const PAYMENTS_ROUTE = '/payments'
 export const APPLICATIONS_ROUTE = '/applications'
-export const SCHEDULE_ROUTE = '/rasp_teachers'
+export const SCHEDULE_ROUTE = '/schedule'
 export const JOB_ROUTE = '/job'
 export const ORDERS_ROUTE = '/staff_orders'
 export const ALL_STUDENTS_ROUTE = '/students'
@@ -63,6 +64,9 @@ export const PORTFOLIO_ROUTE = '/portfolio'
 export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
+
+//hidden routes
+export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
     {
@@ -112,8 +116,8 @@ export const teachersPrivateRoutes: IRoutes = {
         title: 'Расписание',
         icon: BiTimeFive,
         path: SCHEDULE_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: SCHEDULE_ROUTE }),
-        isTemplate: true,
+        Component: SchedulePage,
+        isTemplate: false,
     },
     3: {
         id: 3,
@@ -346,6 +350,17 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiIdCard,
         path: PPS_CONTEST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        isTemplate: false,
+    },
+}
+
+export const hiddenTeacherRoutes = {
+    33: {
+        id: 33,
+        title: 'Расписание преподавателя',
+        icon: BiIdCard,
+        path: TEACHER_SCHEDULE,
+        Component: SchedulePage,
         isTemplate: false,
     },
 }

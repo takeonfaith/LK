@@ -1,12 +1,14 @@
 import { userModel } from '@entities/user'
-import { privateRoutes } from '@routes'
+import { hiddenRoutes, privateRoutes } from '@routes'
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router'
-import { teachersPrivateRoutes } from './techers-routes'
+import { hiddenTeacherRoutes, teachersPrivateRoutes } from './techers-routes'
 
 const PrivateRouter = () => {
     const { data } = userModel.selectors.useUser()
-    const currentRoute = !data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
+    const currentRoute = !data?.user?.subdivisions
+        ? Object.assign({}, privateRoutes, hiddenRoutes)
+        : Object.assign({}, teachersPrivateRoutes, hiddenTeacherRoutes)
 
     if (!data.user) return null
 
