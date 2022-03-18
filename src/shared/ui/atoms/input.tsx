@@ -1,9 +1,16 @@
+import { Colors } from '@consts'
 import React, { useCallback, useState } from 'react'
 import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Button from './button'
 
-const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputAppearance: boolean; width?: string }>`
+const InputWrapper = styled.div<{
+    leftIcon: boolean
+    isActive: boolean
+    inputAppearance: boolean
+    width?: string
+    danger?: boolean
+}>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -44,6 +51,7 @@ const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputApp
         padding-left: ${({ leftIcon, inputAppearance }) => (leftIcon ? '30px' : inputAppearance ? '10px' : '0')};
         padding-right: 35px;
         max-height: 36px;
+        border: ${({ danger }) => danger && `2px solid ${Colors.red.main}`};
 
         &::placeholder {
             font-weight: 500;
@@ -93,6 +101,7 @@ interface Props {
     mask?: boolean
     width?: string
     autocomplete?: boolean
+    danger?: boolean
 }
 
 const Input = ({
@@ -104,6 +113,7 @@ const Input = ({
     width,
     placeholder = 'Введите сюда',
     type = 'text',
+    danger,
     isActive = true,
     inputAppearance = true,
     mask = false,
@@ -171,7 +181,13 @@ const Input = ({
     }
 
     return (
-        <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance} width={width}>
+        <InputWrapper
+            leftIcon={!!leftIcon}
+            isActive={isActive}
+            inputAppearance={inputAppearance}
+            width={width}
+            danger={danger}
+        >
             {!!title && (
                 <h5>
                     {required && <span className="red-star">*</span>}
