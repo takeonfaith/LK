@@ -2,7 +2,7 @@ import { IWeekSchedule } from '@api/model'
 import { IWeekDays } from '@consts'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 
-const displayTopInfo = (weekSchedule: IWeekSchedule | null | undefined, day: keyof IWeekDays) => {
+const displayTopInfo = (weekSchedule: Nullable<IWeekSchedule>, day: keyof IWeekDays) => {
     const lessons = weekSchedule?.[day].lessons
     return !!weekSchedule && !!lessons
         ? `${lessons?.length} ${getCorrectWordForm(lessons?.length ?? 0, {

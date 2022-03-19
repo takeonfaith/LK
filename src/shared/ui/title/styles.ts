@@ -1,0 +1,18 @@
+import { Align } from '@ui/types'
+import styled from 'styled-components'
+
+export const TitleWrapper = styled.div<{ align: Align; bottomGap: boolean; iconColor?: string }>`
+    width: 100%;
+    text-align: ${({ align }) => align};
+    margin-bottom: ${({ bottomGap }) => (bottomGap ? '10px' : '0')};
+    display: inline-flex;
+    align-items: center;
+    justify-content: ${({ align }) =>
+        align ? (align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : align) : 'center'};
+
+    svg {
+        min-width: 16px;
+        margin-right: 4px;
+        color: ${({ iconColor }) => !!iconColor && iconColor};
+    }
+`

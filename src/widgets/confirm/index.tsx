@@ -54,7 +54,7 @@ const ConfirmMessage = () => {
     }
 
     const handleReject = () => {
-        onReject ?? confirmModel.events.closeConfirm()
+        confirmModel.events.closeConfirm()
     }
 
     return (
@@ -71,7 +71,7 @@ const ConfirmMessage = () => {
                     />
                     <Button
                         text="Нет"
-                        onClick={handleReject}
+                        onClick={onReject ?? handleReject}
                         width="100%"
                         textColor="var(--blue)"
                         hoverBackground={Colors.blue.transparent}
