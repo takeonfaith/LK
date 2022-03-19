@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const ContextMenuWrapper = styled.div<{ isVisible: boolean }>`
+export const ContextMenuWrapper = styled.div<{ isVisible: boolean }>`
     height: fit-content;
     opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
     visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
@@ -24,14 +23,3 @@ const ContextMenuWrapper = styled.div<{ isVisible: boolean }>`
         width: calc(100vw - 20px);
     }
 `
-
-interface Props {
-    children: React.ReactNode[] | React.ReactNode | string | number | null
-    isVisible: boolean
-}
-
-const ContextMenu = ({ children, ...restProps }: Props) => {
-    return <ContextMenuWrapper {...restProps}>{children}</ContextMenuWrapper>
-}
-
-export default ContextMenu
