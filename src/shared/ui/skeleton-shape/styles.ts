@@ -1,8 +1,8 @@
-import React from 'react'
+import { Shape } from '@ui/types'
 import styled from 'styled-components'
 
-const SkeletonShapeWrapper = styled.div<{
-    shape: 'rect' | 'circle'
+export const SkeletonShapeWrapper = styled.div<{
+    shape: Shape
     size: { width: string; height: string }
     margin: string
 }>`
@@ -26,15 +26,3 @@ const SkeletonShapeWrapper = styled.div<{
         }
     }
 `
-
-interface Props {
-    shape: 'rect' | 'circle'
-    margin?: string
-    size: { width: string; height: string }
-}
-
-const SkeletonShape = ({ shape, size, margin = '10px 0' }: Props) => {
-    return <SkeletonShapeWrapper size={size} shape={shape} margin={margin}></SkeletonShapeWrapper>
-}
-
-export default SkeletonShape

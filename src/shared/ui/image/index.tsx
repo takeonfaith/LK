@@ -1,10 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
-import { SkeletonShape } from '.'
+import { SkeletonShape } from '../skeleton-shape'
+import { ImageWrapper } from './styles'
 
-const ImageWrapper = styled.img``
-
-interface Props {
+export type ImageProps = {
     loading: boolean
     width: string
     height: string
@@ -12,7 +10,7 @@ interface Props {
     alt?: string
 }
 
-const Image = ({ loading, src, height, width, alt = '' }: Props) => {
+export function Image({ loading, src, height, width, alt = '' }: ImageProps) {
     return !loading ? (
         <ImageWrapper src={src} alt={alt} height={height} width={width} />
     ) : (
@@ -26,5 +24,3 @@ const Image = ({ loading, src, height, width, alt = '' }: Props) => {
         />
     )
 }
-
-export default Image

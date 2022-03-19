@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const TextAreaWrapper = styled.div<{ isActive: boolean; textAreaAppearance: boolean; width?: string }>`
+export const TextAreaWrapper = styled.div<{ isActive: boolean; textAreaAppearance: boolean; width?: string }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -81,41 +80,3 @@ const TextAreaWrapper = styled.div<{ isActive: boolean; textAreaAppearance: bool
         }
     }
 `
-
-interface Props {
-    value: string
-    setValue: (value: string) => void
-    isActive?: boolean
-    title?: string
-    placeholder?: string
-    required?: boolean
-    width?: string
-    textAreaAppearance?: boolean
-}
-
-const TextArea = ({
-    value,
-    setValue,
-    width,
-    placeholder,
-    required,
-    title,
-    textAreaAppearance = true,
-    isActive = true,
-}: Props) => {
-    return (
-        <TextAreaWrapper isActive={isActive} width={width} textAreaAppearance={textAreaAppearance}>
-            {!!title && (
-                <h5>
-                    {required && <span className="red-star">*</span>}
-                    {title}
-                </h5>
-            )}
-            <textarea onChange={(e) => setValue(e.target.value)} placeholder={placeholder} required={required}>
-                {value}
-            </textarea>
-        </TextAreaWrapper>
-    )
-}
-
-export default TextArea
