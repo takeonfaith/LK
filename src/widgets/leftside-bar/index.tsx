@@ -1,5 +1,5 @@
-import { privateRoutes } from '@app/routes/routes'
-import { IRoutes, teachersPrivateRoutes } from '@app/routes/techers-routes'
+import { IRoutes, privateRoutes } from '@app/routes/routes'
+import { teachersPrivateRoutes } from '@app/routes/techers-routes'
 import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
 import Logo from '@ui/atoms/logo'
