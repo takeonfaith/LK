@@ -2,7 +2,7 @@ import { Colors } from '@consts'
 import React, { useCallback, useState } from 'react'
 import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
-import Button from './button'
+import { Button } from '@ui/button'
 
 const InputWrapper = styled.div<{
     leftIcon: boolean

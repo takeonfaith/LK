@@ -1,7 +1,7 @@
 import { FiSettings } from 'react-icons/fi'
 
 import SettingsPage from '../../../../features/settings'
-import Button from '@ui/atoms/button'
+import { Button } from '@ui/button'
 import React from 'react'
 import { useModal } from 'widgets/modal/lib'
 
