@@ -48,6 +48,17 @@ const ConfirmMessage = () => {
 
     useOnClickOutside(confirmRef, () => confirmModel.events.closeConfirm())
 
+    const handleConfirm = () => {
+        onConfirm()
+        confirmModel.events.closeConfirm()
+    }
+
+    const handleReject = () => {
+        if (!onReject) {
+            confirmModel.events.closeConfirm()
+        }
+    }
+
     return (
         <ModalWrapper isOpen={isOpen}>
             <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
@@ -55,17 +66,14 @@ const ConfirmMessage = () => {
                 <div className="buttons">
                     <Button
                         text="Да"
-                        onClick={() => {
-                            onConfirm()
-                            confirmModel.events.closeConfirm()
-                        }}
+                        onClick={handleConfirm}
                         width="100%"
                         textColor="var(--red)"
                         hoverBackground={Colors.red.transparent}
                     />
                     <Button
                         text="Нет"
-                        onClick={onReject ?? confirmModel.events.closeConfirm}
+                        onClick={handleReject}
                         width="100%"
                         textColor="var(--blue)"
                         hoverBackground={Colors.blue.transparent}

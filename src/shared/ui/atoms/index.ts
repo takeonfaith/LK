@@ -1,4 +1,5 @@
-export { default as Button } from './button'
+// ToDo: Убрать отсюда Button и заменить поломанные импорты
+export { Button } from '../button'
 export { default as Input } from './input'
 export { default as Loading } from './loading'
 export { default as Logo } from './logo'
