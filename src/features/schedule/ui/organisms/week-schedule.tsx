@@ -73,7 +73,7 @@ const WeekSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
             ))}
         </ScheduleWrapper>
     ) : (
-        <Error text={'У вас пока нет расписания'} image={Thinking} />
+        <Error text={'Пока нет расписания'} image={Thinking} />
     )
 }
 

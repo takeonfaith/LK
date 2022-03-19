@@ -2,6 +2,7 @@ import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
+import TeachersSchedule from '@pages/teachers-schedule'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -185,7 +186,7 @@ export const hiddenRoutes = {
         title: 'Расписание преподавателя',
         icon: BiIdCard,
         path: TEACHER_SCHEDULE,
-        Component: SchedulePage,
+        Component: TeachersSchedule,
         isTemplate: false,
     },
 }

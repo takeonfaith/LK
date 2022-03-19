@@ -1,3 +1,4 @@
+import { ISchedule } from '@api/model'
 import { IWeekDays, WeekDays } from '@consts'
 import { scheduleModel } from '@entities/schedule'
 import useResize from '@utils/hooks/use-resize'
@@ -39,12 +40,13 @@ const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
 
 interface Props {
     wrapperRef: React.RefObject<HTMLDivElement>
+    data: ISchedule
 }
 
-const WeekDayButtonsList = ({ wrapperRef }: Props) => {
-    const {
-        data: { schedule, currentModule, currentChosenDay, currentDay, view },
-    } = scheduleModel.selectors.useSchedule()
+const WeekDayButtonsList = ({
+    wrapperRef,
+    data: { schedule, currentModule, view, currentChosenDay, currentDay },
+}: Props) => {
     const { width } = useResize()
     const isFull = useMemo(() => (width > 1000 ? view === 'full' : true), [width, view])
 

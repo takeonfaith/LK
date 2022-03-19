@@ -6,6 +6,10 @@ import styled from 'styled-components'
 
 const TeacherScheduleIndicatorWrapper = styled.div`
     color: var(--text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 `
 
 interface Props {

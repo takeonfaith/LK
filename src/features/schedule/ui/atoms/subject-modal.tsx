@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { User } from 'widgets'
 import { Rooms, SubjectPlaceBlock } from '..'
 import { NextSubject, Time } from '../atoms'
+import Groups from './groups'
 
 const SubjectModalWrapper = styled.div`
     @media (min-width: 1001px) {
@@ -44,10 +45,11 @@ const SubjectModalWrapper = styled.div`
 type Props = ISubject & { isCurrent: boolean; isNext?: boolean }
 
 const SubjectModal = (props: Props) => {
-    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, rooms, isNext = false } = props
+    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, rooms, groups, isNext = false } = props
 
     return (
         <SubjectModalWrapper>
+            <Groups groups={groups} isCurrent={isCurrent} />
             <span className="date-interval">{dateInterval}</span>
             <Title size={3} align="left">
                 {name}

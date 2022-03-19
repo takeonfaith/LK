@@ -54,9 +54,24 @@ const getSchedule = async (user: User | string | null): Promise<IModules> => {
 
     if (sessionResponse.data.status !== 'error') {
         for (const key in sessionResponse.data) {
-            sessionSchedule[key] = sessionResponse.data[key]
+            if (!isName && !user?.subdivisions) {
+                sessionSchedule[key] = sessionResponse.data[key]
+            } else {
+                if (sessionResponse.data[key].length) {
+                    sessionSchedule[key] = { lessons: sessionResponse.data[key] }
+                }
+            }
         }
     }
+    // // eslint-disable-next-line no-console
+    // console.log(sessionSchedule)
+
+    // // eslint-disable-next-line no-console
+    // console.log(
+    //     Object.keys(sessionResponse.data).length,
+    //     !!Object.values(sessionSchedule).find((el) => !!el.lessons.length),
+    //     sessionResponse.data.status !== 'error',
+    // )
 
     return {
         '0':
@@ -68,7 +83,9 @@ const getSchedule = async (user: User | string | null): Promise<IModules> => {
                 ? (fullSchedule as IWeekSchedule)
                 : null,
         '2':
-            Object.keys(sessionResponse.data).length && sessionResponse.data.status !== 'error'
+            Object.keys(sessionResponse.data).length &&
+            !!Object.values(sessionSchedule).find((el) => !!el.lessons.length) &&
+            sessionResponse.data.status !== 'error'
                 ? (sessionSchedule as ISessionSchedule)
                 : null,
     }

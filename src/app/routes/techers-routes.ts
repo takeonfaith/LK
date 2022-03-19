@@ -29,6 +29,7 @@ import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
 import DataVerificationPage from '@pages/data-verification'
 import SchedulePage from '@pages/schedule'
+import TeachersSchedule from '@pages/teachers-schedule'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -360,7 +361,7 @@ export const hiddenTeacherRoutes = {
         title: 'Расписание преподавателя',
         icon: BiIdCard,
         path: TEACHER_SCHEDULE,
-        Component: SchedulePage,
+        Component: TeachersSchedule,
         isTemplate: false,
     },
 }

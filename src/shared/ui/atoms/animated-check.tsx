@@ -105,13 +105,6 @@ const AnimatedCheckWrapper = styled.div<{ size: string }>`
             stroke-dashoffset: 0;
         }
     }
-
-    @media (max-width: 1000px) {
-        .circle-white {
-            top: ${({ size }) => `calc(${size} * 0.08)`};
-            left: ${({ size }) => `calc(${size} * 0.08)`};
-        }
-    }
 `
 
 interface Props {
