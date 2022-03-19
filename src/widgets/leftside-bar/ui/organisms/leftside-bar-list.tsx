@@ -22,7 +22,7 @@ const LeftsideBarList = ({ searchList }: Props) => {
     const currentPage = useCurrentPage()
     const { setting } = useSettings<number[]>('menu')
     const isAccessibleLink = (title: string) =>
-        (dataVerification && title === 'Скачать соглашения' && !!dataVerification?.links.length) ||
+        (dataVerification && title === 'Скачать соглашения' && !!dataVerification?.links?.length) ||
         title !== 'Скачать соглашения'
 
     return !searchList ? (
