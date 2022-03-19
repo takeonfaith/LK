@@ -1,4 +1,4 @@
-import { projectActivitesModel } from '@entities/project-activites/indes'
+import { projectActivitesModel } from '@entities/project-activites'
 import { Wrapper } from '@ui/atoms'
 import React from 'react'
 

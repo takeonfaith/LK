@@ -1,4 +1,4 @@
-import { Project } from '@entities/project-activites/model/types'
+import { Project } from '../../../../entities/project-activites/model/types'
 import React from 'react'
 import About from '../organisms/about'
 
@@ -7,7 +7,6 @@ const Content = (data: Project) => {
     return (
         <div>
             <About data={about} />
-            sdssdfв
         </div>
     )
 }

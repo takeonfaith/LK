@@ -1,5 +1,5 @@
 import React from 'react'
-import { Info } from '@entities/project-activites/model/types'
+import { Info } from '../../../../entities/project-activites/model/types'
 
 interface Props {
     data: Info
