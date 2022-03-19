@@ -54,9 +54,7 @@ const ConfirmMessage = () => {
     }
 
     const handleReject = () => {
-        if (!onReject) {
-            confirmModel.events.closeConfirm()
-        }
+        onReject ?? confirmModel.events.closeConfirm()
     }
 
     return (
