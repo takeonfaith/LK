@@ -4,7 +4,7 @@ import { CreateHeader } from './create-header'
 import { TitleWrapper } from './styles'
 
 export type TitleProps = {
-    children: JSX.Element | string | null | boolean
+    children: ChildrenType
     size?: HeaderSize
     align?: Align
     bottomGap?: boolean

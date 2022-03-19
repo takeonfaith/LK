@@ -3,7 +3,7 @@ import React from 'react'
 
 type Props = {
     size: HeaderSize
-    children: JSX.Element | string | null | boolean
+    children: ChildrenType
 }
 
 export function CreateHeader({ size, children }: Props) {
