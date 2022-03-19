@@ -1,7 +1,7 @@
 import { Colors } from '@consts'
 import React from 'react'
 import styled from 'styled-components'
-import Title from './title'
+import { Title } from '../title'
 
 type MessageType = 'success' | 'failure' | 'info' | 'alert'
 
