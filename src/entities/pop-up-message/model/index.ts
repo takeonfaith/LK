@@ -5,14 +5,25 @@ const usePopUpMessage = () => {
     return useStore($popUpstore)
 }
 
+const changeOpenState = (popUps: IPopUpMessage[], index: number, state: boolean) => {
+    const found = popUps.find((el) => el.id === index) ?? { isOpen: false }
+    found.isOpen = state
+    return popUps
+}
+
+const removeElement = (popUps: IPopUpMessage[], index: number) => {
+    return popUps.filter((el) => el.id !== index)
+}
+
 type PopUpMessageType = 'success' | 'failure' | 'info'
 
-interface IPopUpMessage {
+export interface IPopUpMessage {
     message: React.ReactNode[] | React.ReactNode | string
     type: PopUpMessageType
     isOpen: boolean
-    time?: number
+    time: number
     onClick?: () => void
+    id: number
 }
 
 interface PopUpMessageStore {
@@ -30,7 +41,9 @@ const evokePopUpMessage = createEvent<{
     onClick?: () => void
 }>()
 
-const openPopUpMessage = createEvent<{ isOpen: boolean }>()
+const removePopUp = createEvent<{ index: number }>()
+
+const openPopUpMessage = createEvent<{ isOpen: boolean; index: number }>()
 
 const $popUpstore = createStore(defaultStore)
     .on(evokePopUpMessage, (oldData, { message, type, time = 2000, onClick }) => ({
@@ -42,12 +55,17 @@ const $popUpstore = createStore(defaultStore)
                 type,
                 time,
                 onClick,
+                id: oldData.popUps.length,
             },
         ],
     }))
-    .on(openPopUpMessage, (oldState, { isOpen }) => ({
+    .on(openPopUpMessage, (oldState, { isOpen, index }) => ({
         ...oldState,
-        isOpen: isOpen,
+        popUps: changeOpenState(oldState.popUps, index, isOpen),
+    }))
+    .on(removePopUp, (oldData, { index }) => ({
+        ...oldData,
+        popUps: removeElement(oldData.popUps, index),
     }))
 
 export const selectors = {
@@ -57,4 +75,5 @@ export const selectors = {
 export const events = {
     evokePopUpMessage,
     openPopUpMessage,
+    removePopUp,
 }
