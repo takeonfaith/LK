@@ -50,6 +50,7 @@ const ButtonWrapper = styled.button<{
     svg {
         margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')};
         width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
+        min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
         height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
         margin-bottom: ${({ direction }) => direction === 'vertical' && '4px'};
     }
@@ -64,6 +65,7 @@ const ButtonWrapper = styled.button<{
 
         svg {
             width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
+            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
             height: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};

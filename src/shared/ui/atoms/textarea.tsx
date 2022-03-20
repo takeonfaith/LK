@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Title from './title'
 
 const TextAreaWrapper = styled.div<{ isActive: boolean; textAreaAppearance: boolean; width?: string }>`
     display: flex;
@@ -10,15 +11,6 @@ const TextAreaWrapper = styled.div<{ isActive: boolean; textAreaAppearance: bool
     min-width: ${({ width }) => width};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
-
-    h5 {
-        margin-bottom: 5px;
-
-        .red-star {
-            color: var(--red);
-            margin-right: 5px;
-        }
-    }
 
     .icon {
         position: absolute;
@@ -106,10 +98,9 @@ const TextArea = ({
     return (
         <TextAreaWrapper isActive={isActive} width={width} textAreaAppearance={textAreaAppearance}>
             {!!title && (
-                <h5>
-                    {required && <span className="red-star">*</span>}
+                <Title size={5} align="left" bottomGap="5px" required={required}>
                     {title}
-                </h5>
+                </Title>
             )}
             <textarea onChange={(e) => setValue(e.target.value)} placeholder={placeholder} required={required}>
                 {value}

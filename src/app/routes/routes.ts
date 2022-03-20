@@ -1,6 +1,7 @@
 import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 import ApplicationsPage from '@pages/applications'
 import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
+import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -188,7 +189,7 @@ export const hiddenRoutes: IRoutes = {
         title: 'Уточнение паспортных данных',
         icon: FiBriefcase,
         path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
+        Component: ClarificationOfPassportDataApplication,
         isTemplate: false,
     },
     15: {

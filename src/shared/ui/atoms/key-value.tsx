@@ -3,14 +3,11 @@ import styled from 'styled-components'
 
 const Line = styled.div`
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     width: 100%;
-
+    column-gap: 5px;
     margin-top: 10px;
-`
-
-const Data = styled.span`
-    margin-left: 5px;
 `
 
 interface Props {
@@ -22,7 +19,7 @@ const KeyValue = ({ keyStr, value }: Props) => {
     return (
         <Line>
             <b>{keyStr}:</b>
-            <Data>{value}</Data>
+            <span>{value}</span>
         </Line>
     )
 }

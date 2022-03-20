@@ -1,4 +1,4 @@
-import { ARBITRARY_REQUEST_ROUTE } from '@app/routes/routes'
+import { ARBITRARY_REQUEST_ROUTE, CLARIFICATION_OF_PASSPORT_DATA_ROUTE } from '@app/routes/routes'
 import createApplicationSearch from '@features/applications/lib/create-application-search'
 import { Title } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
@@ -75,7 +75,7 @@ const CreateApplicationList = () => {
                 { link: '/', title: 'Справка-вызов' },
                 { link: '/', title: 'Запрос на изменение персональных данных' },
                 { link: '/', title: 'Запрос на восстановление магнитного пропуска' },
-                { link: '/', title: 'Уточнение паспортных данных' },
+                { link: CLARIFICATION_OF_PASSPORT_DATA_ROUTE, title: 'Уточнение паспортных данных' },
                 { link: '/', title: 'Заявка на комнату повышенной комфортности' },
             ],
         },

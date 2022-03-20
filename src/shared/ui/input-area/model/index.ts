@@ -1,4 +1,5 @@
 import { SelectPage } from '@features/select'
+import { RadioButton } from '@ui/organisms/radio-button-list'
 
 export interface IInputAreaCheckbox {
     fieldName: string
@@ -18,6 +19,7 @@ type IInputAreaTypes =
     | 'email'
     | 'date'
     | 'checkbox'
+    | 'radio'
     | 'number'
     | 'textarea'
     | 'checkbox-docs'
@@ -44,9 +46,9 @@ export interface IInputAreaLink {
 export interface IInputAreaData {
     fieldName: string
     title: string
-    value: string | SelectPage | boolean | SelectPage[] | null
+    value: string | SelectPage | boolean | SelectPage[] | null | RadioButton
     type?: IInputAreaTypes
-    items?: SelectPage[] | CheckboxDocs[]
+    items?: SelectPage[] | CheckboxDocs[] | RadioButton[]
     width?: string
     required?: boolean
     mask?: boolean

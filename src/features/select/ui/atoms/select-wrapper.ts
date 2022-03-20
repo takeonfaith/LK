@@ -29,15 +29,6 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
     &:active {
         transform: translateY(3px);
     }
-
-    h5 {
-        margin-bottom: 5px;
-
-        .red-star {
-            color: var(--red);
-            margin-right: 5px;
-        }
-    }
 `
 
 export default SelectWrapper

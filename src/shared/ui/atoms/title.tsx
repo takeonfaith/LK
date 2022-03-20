@@ -1,19 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-interface Props {
-    children: JSX.Element | string | null | boolean
-    size?: number
-    align?: 'left' | 'center' | 'right'
-    bottomGap?: boolean
-    icon?: React.ReactNode
+const TitleWrapper = styled.div<{
+    align: 'left' | 'center' | 'right'
+    bottomGap: boolean | string
     iconColor?: string
-}
-
-const TitleWrapper = styled.div<{ align: 'left' | 'center' | 'right'; bottomGap: boolean; iconColor?: string }>`
+}>`
     width: 100%;
     text-align: ${({ align }) => align};
-    margin-bottom: ${({ bottomGap }) => (bottomGap ? '10px' : '0')};
+    margin-bottom: ${({ bottomGap }) => (typeof bottomGap === 'string' ? bottomGap : bottomGap ? '10px' : '0')};
     display: inline-flex;
     align-items: center;
     justify-content: ${({ align }) =>
@@ -26,11 +21,27 @@ const TitleWrapper = styled.div<{ align: 'left' | 'center' | 'right'; bottomGap:
     }
 `
 
-const Title = ({ icon, iconColor, children, size = 1, align = 'center', bottomGap = false }: Props) => {
+const RedStar = styled.span`
+    color: var(--red);
+    margin-right: 5px;
+`
+
+interface Props {
+    children: JSX.Element | string | null | boolean
+    size?: number
+    align?: 'left' | 'center' | 'right'
+    bottomGap?: boolean | string
+    icon?: React.ReactNode
+    iconColor?: string
+    required?: boolean
+}
+
+const Title = ({ icon, iconColor, children, required, size = 1, align = 'center', bottomGap = false }: Props) => {
     switch (size) {
         case 1:
             return (
                 <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
+                    {required && <RedStar>*</RedStar>}
                     {icon}
                     <h1 className="title">{children}</h1>
                 </TitleWrapper>
@@ -38,6 +49,7 @@ const Title = ({ icon, iconColor, children, size = 1, align = 'center', bottomGa
         case 2:
             return (
                 <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
+                    {required && <RedStar>*</RedStar>}
                     {icon}
                     <h2 className="title">{children}</h2>
                 </TitleWrapper>
@@ -45,6 +57,7 @@ const Title = ({ icon, iconColor, children, size = 1, align = 'center', bottomGa
         case 3:
             return (
                 <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
+                    {required && <RedStar>*</RedStar>}
                     {icon}
                     <h3 className="title">{children}</h3>
                 </TitleWrapper>
@@ -52,6 +65,7 @@ const Title = ({ icon, iconColor, children, size = 1, align = 'center', bottomGa
         case 4:
             return (
                 <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
+                    {required && <RedStar>*</RedStar>}
                     {icon}
                     <h4 className="title">{children}</h4>
                 </TitleWrapper>
@@ -59,6 +73,7 @@ const Title = ({ icon, iconColor, children, size = 1, align = 'center', bottomGa
         case 5:
             return (
                 <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
+                    {required && <RedStar>*</RedStar>}
                     {icon}
                     <h5 className="title">{children}</h5>
                 </TitleWrapper>
@@ -66,6 +81,7 @@ const Title = ({ icon, iconColor, children, size = 1, align = 'center', bottomGa
         case 6:
             return (
                 <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
+                    {required && <RedStar>*</RedStar>}
                     {icon}
                     <h6 className="title">{children}</h6>
                 </TitleWrapper>
@@ -73,6 +89,7 @@ const Title = ({ icon, iconColor, children, size = 1, align = 'center', bottomGa
         default:
             return (
                 <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
+                    {required && <RedStar>*</RedStar>}
                     {icon}
                     <h1 className="title">{children}</h1>
                 </TitleWrapper>

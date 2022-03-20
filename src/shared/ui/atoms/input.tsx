@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Button from './button'
+import Title from './title'
 
 const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputAppearance: boolean; width?: string }>`
     display: flex;
@@ -12,15 +13,6 @@ const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputApp
     min-width: ${({ width }) => width};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
-
-    h5 {
-        margin-bottom: 5px;
-
-        .red-star {
-            color: var(--red);
-            margin-right: 5px;
-        }
-    }
 
     .icon {
         position: absolute;
@@ -173,10 +165,9 @@ const Input = ({
     return (
         <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance} width={width}>
             {!!title && (
-                <h5>
-                    {required && <span className="red-star">*</span>}
+                <Title size={5} align="left" bottomGap="5px" required={required}>
                     {title}
-                </h5>
+                </Title>
             )}
             {leftIcon && <span className="icon">{leftIcon}</span>}
             <input

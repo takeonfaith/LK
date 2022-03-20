@@ -2,7 +2,8 @@ import Select, { SelectPage } from '@features/select'
 import { Input, TextArea } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData, IInputAreaFiles } from '@ui/input-area/model'
-import { CheckboxDocumentList } from '@ui/organisms'
+import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
+import { RadioButton } from '@ui/organisms/radio-button-list'
 import React from 'react'
 
 type Props = IInputAreaData & {
@@ -67,6 +68,13 @@ const UniversalInput = (props: Props) => {
         })
     }
 
+    const handleRadio = (button: RadioButton | null) => {
+        setData((area) => {
+            ;(area.data[indexI] as IInputAreaData).value = button
+            return { ...area }
+        })
+    }
+
     return (type !== 'select' && type !== 'multiselect') || !items ? (
         type === 'checkbox' ? (
             <Checkbox
@@ -92,6 +100,14 @@ const UniversalInput = (props: Props) => {
                 items={items as CheckboxDocs[]}
                 setChecked={(value, j?: number) => handleChangeValue(!value, indexI, j)}
                 setFiles={(files, j?: number) => handleLoadFiles(files, indexI, j)}
+            />
+        ) : type === 'radio' ? (
+            <RadioButtonList
+                buttons={items as RadioButton[]}
+                title={title}
+                required={required}
+                current={value as RadioButton}
+                setCurrent={handleRadio}
             />
         ) : (
             <Input

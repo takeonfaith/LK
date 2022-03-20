@@ -1,3 +1,4 @@
+import { Title } from '@ui/atoms'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { memo, useCallback, useRef, useState } from 'react'
 import { FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
@@ -29,10 +30,9 @@ const Select = (props: SelectProps) => {
     return (
         <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive ?? true} width={width}>
             {!!title && (
-                <h5>
-                    {required && <span className="red-star">*</span>}
+                <Title size={5} align="left" bottomGap="5px" required={required}>
                     {title}
-                </h5>
+                </Title>
             )}
             <SelectHeaderWrapper multiple={multiple}>
                 <SelectHeader>

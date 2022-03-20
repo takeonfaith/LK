@@ -4,7 +4,6 @@ import { userModel } from '@entities/user'
 import { Button, FormBlock, Message, SubmitButton, Wrapper } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
-import { RadioButtonList } from '@ui/organisms'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft, FiInfo } from 'react-icons/fi'
@@ -13,7 +12,7 @@ import styled from 'styled-components'
 import getForm from './lib/get-form'
 // import sendForm from './lib/send-form'
 
-const ArbitrayRequestPageWrapper = styled.div<{ isDone: boolean }>`
+const ClarificationOfPassportDataPageWrapper = styled.div<{ isDone: boolean }>`
     display: flex;
     align-items: ${({ isDone }) => (isDone ? 'center' : 'flex-start')};
     justify-content: center;
@@ -29,7 +28,7 @@ const ArbitrayRequestPageWrapper = styled.div<{ isDone: boolean }>`
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ApplicationForSuperiorRoom = () => {
+const ClarificationOfPassportDataApplication = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
@@ -49,7 +48,7 @@ const ApplicationForSuperiorRoom = () => {
 
     return (
         <Wrapper load={() => superiorRoomModel.effects.getSuperiorRoomFx()} loading={!data} error={error} data={data}>
-            <ArbitrayRequestPageWrapper isDone={isDone}>
+            <ClarificationOfPassportDataPageWrapper isDone={isDone}>
                 {!!form && !!setForm && (
                     <FormBlock>
                         <Button
@@ -85,9 +84,9 @@ const ApplicationForSuperiorRoom = () => {
                         />
                     </FormBlock>
                 )}
-            </ArbitrayRequestPageWrapper>
+            </ClarificationOfPassportDataPageWrapper>
         </Wrapper>
     )
 }
 
-export default ApplicationForSuperiorRoom
+export default ClarificationOfPassportDataApplication

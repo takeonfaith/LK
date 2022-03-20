@@ -38,7 +38,7 @@ const ApplicationList = ({ loading, list }: Props) => {
             <div className="list">
                 {!loading
                     ? list?.map((application, index) => {
-                          return <ApplicationItem {...application} index={index} key={application.requestTitle} />
+                          return <ApplicationItem {...application} index={index} key={application.regNumber} />
                       })
                     : Array(4)
                           .fill(0)
