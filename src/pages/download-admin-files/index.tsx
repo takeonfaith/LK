@@ -1,9 +1,11 @@
+import { adminLinksModel } from '@entities/admin-links'
 import { FormBlock } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
 import { SliderPage } from 'widgets'
 import DownloadAccepts from './pages/accepts'
-import DownloadAgreements from './pages/agreements'
+import AdditionalAgreements from './pages/additional-agreements'
+import DownloadCheckdata from './pages/checkdata'
 
 const DownloadAdminFilesPageWrapper = styled.div`
     padding: 20px;
@@ -14,13 +16,19 @@ const DownloadAdminFilesPageWrapper = styled.div`
 `
 
 const DownloadAdminFilesPage = () => {
+    const { data } = adminLinksModel.selectors.useAdminLinks()
     return (
         <DownloadAdminFilesPageWrapper>
             <FormBlock>
                 <SliderPage
                     pages={[
-                        { title: 'Анкета', content: <DownloadAgreements /> },
-                        { title: 'Акцепт', content: <DownloadAccepts />, condition: false },
+                        { title: 'Анкета', content: <DownloadCheckdata />, condition: !!data?.checkdata.length },
+                        { title: 'Акцепт', content: <DownloadAccepts />, condition: !!data?.accepts.length },
+                        {
+                            title: 'Доп. соглашения',
+                            content: <AdditionalAgreements />,
+                            condition: !!data?.agreements.length,
+                        },
                     ]}
                 />
             </FormBlock>

@@ -101,7 +101,7 @@ export const teachersPrivateRoutes: IRoutes = {
     },
     7: {
         id: 7,
-        title: 'Скачать соглашения',
+        title: 'Скачать отчеты',
         icon: FiArrowDownCircle,
         path: DOWNLOAD_ADMIN_FILES_ROUTE,
         Component: DownloadAdminFilesPage,

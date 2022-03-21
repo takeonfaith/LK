@@ -1,3 +1,4 @@
+import { adminLinksModel } from '@entities/admin-links'
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import React, { useEffect } from 'react'
 import { HashRouter } from 'react-router-dom'
@@ -7,7 +8,7 @@ import Router from './routes/router'
 
 const App = () => {
     useEffect(() => {
-        teacherDateVerificationModel.effects.getTeacherDataVerificationFx()
+        adminLinksModel.effects.getAdminLinksFx()
     }, [])
 
     return (

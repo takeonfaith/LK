@@ -1,26 +1,22 @@
-import React, { useMemo } from 'react'
 import { IRoute, privateRoutes } from '@app/routes/routes'
-import getChosenRoutes from 'widgets/leftside-bar/lib/get-chosen-routes'
-import LeftsideBarListWrapper from 'widgets/leftside-bar/ui/atoms/leftside-bar-list-wrapper'
-import { useSettings } from '@utils/contexts/settings-context'
-import { CustomizeLeftsideBarItem } from '../molecules'
+import { teachersPrivateRoutes } from '@app/routes/techers-routes'
 import { ShortCutLinksType, SHORT_CUT_LINKS_LIMIT_SIZE } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { userModel } from '@entities/user'
+import { useSettings } from '@utils/contexts/settings-context'
+import useIsAccessibleRoute from '@utils/hooks/use-is-accessible-route'
 import useResize from '@utils/hooks/use-resize'
-import { teachersPrivateRoutes } from '@app/routes/techers-routes'
-import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
+import React, { useMemo } from 'react'
+import getChosenRoutes from 'widgets/leftside-bar/lib/get-chosen-routes'
+import LeftsideBarListWrapper from 'widgets/leftside-bar/ui/atoms/leftside-bar-list-wrapper'
+import { CustomizeLeftsideBarItem } from '../molecules'
 
 const CustomizeLeftsideBarList = () => {
     const { setting, change } = useSettings<number[]>('menu')
     const { setting: shortCutMenu, change: shortCutChange } = useSettings<ShortCutLinksType>('shortCutLinks')
     const { data } = userModel.selectors.useUser()
-    const { data: dataVerification } = teacherDateVerificationModel.selectors.useTeacherDataVerification()
     const { height } = useResize()
-    const isAccessibleLink = (title: string) =>
-        (dataVerification && title === 'Скачать соглашения' && !!dataVerification?.links.length) ||
-        title !== 'Скачать соглашения'
-
+    const isAccessible = useIsAccessibleRoute()
     const enabledLeftsideBarItems = getChosenRoutes(setting, data)
     const enabledShortCutMenu = useMemo(() => getChosenRoutes(shortCutMenu, data), [shortCutMenu])
 
@@ -73,7 +69,7 @@ const CustomizeLeftsideBarList = () => {
             {Object.values(!data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes).map(
                 (el: IRoute, index) => {
                     return (
-                        isAccessibleLink(el.title) && (
+                        isAccessible(el.title) && (
                             <CustomizeLeftsideBarItem
                                 {...el}
                                 key={index}

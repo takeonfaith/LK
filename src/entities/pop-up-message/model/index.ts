@@ -1,15 +1,14 @@
 import { createStore, createEvent } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
+import { MessageType } from '@ui/types'
 
 const usePopUpMessage = () => {
     return useStore($popUpstore)
 }
 
-type PopUpMessageType = 'success' | 'failure' | 'info'
-
 interface IPopUpMessage {
     message: ChildrenType
-    type: PopUpMessageType
+    type: MessageType
     isOpen: boolean
     time?: number
     onClick?: () => void
@@ -24,7 +23,7 @@ const defaultStore: IPopUpMessage = {
 
 const evokePopUpMessage = createEvent<{
     message: ChildrenType
-    type: PopUpMessageType
+    type: MessageType
     time?: number
     onClick?: () => void
 }>()

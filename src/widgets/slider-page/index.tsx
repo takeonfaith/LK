@@ -79,8 +79,7 @@ const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: P
         setPage(page)
 
         if (sliderContentRef?.current) {
-            if (screenWidth <= 1000) sliderContentRef.current.scrollLeft = screenWidth * page
-            else sliderContentRef.current.scrollLeft = (screenWidth / 1.3) * page
+            sliderContentRef.current.scrollLeft = sliderContentRef.current.clientWidth * page
         }
     }
 
