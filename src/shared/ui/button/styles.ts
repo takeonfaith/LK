@@ -1,21 +1,21 @@
-import React, { memo } from 'react'
+import { Align, Direction } from '@ui/types'
 import styled from 'styled-components'
 
-const ButtonWrapper = styled.button<{
+export const ButtonWrapper = styled.button<{
     text: boolean
-    isChosen: boolean
+    isChosen?: boolean
     width?: string
     background?: string
     textColor?: string
-    shrinkTextInMobile: boolean
+    shrinkTextInMobile?: boolean
     hoverBackground?: string
-    direction: 'horizontal' | 'vertical'
-    align?: 'left' | 'center' | 'right'
+    direction?: Direction
+    align?: Align
     isActive: boolean
 }>`
     display: flex;
     align-items: center;
-    justify-content: ${({ align }) => align ?? 'center'};
+    justify-content: ${({ align = 'center' }) => align};
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
@@ -69,57 +69,3 @@ const ButtonWrapper = styled.button<{
         }
     }
 `
-
-interface Props extends React.HTMLAttributes<HTMLButtonElement> {
-    icon?: JSX.Element
-    text?: React.ReactNode | string
-    onClick: (event: any) => void
-    isChosen?: boolean
-    width?: string
-    background?: string
-    textColor?: string
-    shrinkTextInMobile?: boolean
-    hoverBackground?: string
-    align?: 'left' | 'center' | 'right'
-    direction?: 'horizontal' | 'vertical'
-    isActive?: boolean
-    restProps?: any | unknown
-}
-
-const Button = ({
-    icon,
-    text,
-    onClick,
-    width,
-    background,
-    textColor,
-    hoverBackground,
-    align,
-    isChosen = false,
-    direction = 'horizontal',
-    shrinkTextInMobile = false,
-    isActive = true,
-    ...restProps
-}: Props) => {
-    return (
-        <ButtonWrapper
-            text={!!text}
-            onClick={(e) => isActive && onClick(e)}
-            isChosen={isChosen}
-            width={width}
-            background={background}
-            textColor={textColor}
-            shrinkTextInMobile={shrinkTextInMobile}
-            hoverBackground={hoverBackground}
-            align={align}
-            direction={direction}
-            isActive={isActive}
-            {...restProps}
-        >
-            {!!icon && icon}
-            <span>{text}</span>
-        </ButtonWrapper>
-    )
-}
-
-export default memo(Button)

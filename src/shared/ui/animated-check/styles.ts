@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const AnimatedCheckWrapper = styled.div<{ size: string }>`
+export const AnimatedCheckWrapper = styled.div<{ size: string }>`
     .wrapper {
         position: relative;
         width: ${({ size }) => size};
@@ -106,25 +105,3 @@ const AnimatedCheckWrapper = styled.div<{ size: string }>`
         }
     }
 `
-
-interface Props {
-    size: string
-}
-
-const AnimatedCheck = ({ size }: Props) => {
-    return (
-        <AnimatedCheckWrapper size={size}>
-            <div className="wrapper">
-                <div className="circle-blue">
-                    <div className="circle-white"></div>
-                </div>
-                <div className="circle-blue-shadow"></div>
-                <svg className="check-svg" width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-                    <polyline className="check-poly" points="26 37 34 43 47 27" strokeLinecap="round" />
-                </svg>
-            </div>
-        </AnimatedCheckWrapper>
-    )
-}
-
-export default AnimatedCheck

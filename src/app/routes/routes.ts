@@ -56,8 +56,9 @@ export interface IRoute {
     title: string
     icon: IconType
     path: string
-    Component: () => JSX.Element
+    Component: () => JSX.Element | string
     isTemplate: boolean
+    isAdmin?: boolean
 }
 
 export interface IRoutes {

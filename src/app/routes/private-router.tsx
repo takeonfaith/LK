@@ -1,3 +1,4 @@
+import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import { userModel } from '@entities/user'
 import { hiddenRoutes, privateRoutes } from '@routes'
 import React from 'react'
@@ -9,14 +10,20 @@ const PrivateRouter = () => {
     const currentRoute = !data?.user?.subdivisions
         ? Object.assign({}, privateRoutes, hiddenRoutes)
         : Object.assign({}, teachersPrivateRoutes, hiddenTeacherRoutes)
+    const { data: dataVerification } = teacherDateVerificationModel.selectors.useTeacherDataVerification()
+    const isAccessibleRoute = (title: string) =>
+        (title === 'Скачать соглашения' && !!dataVerification?.links.length) || title !== 'Скачать соглашения'
 
     if (!data.user) return null
-
+    //TODO: fix this s**t
     return (
         <Switch>
-            {Object.values(currentRoute).map(({ path, Component, isTemplate }) => (
-                <Route path={path} component={Component} exact={!isTemplate} key={path} />
-            ))}
+            {Object.values(currentRoute).map(
+                ({ path, Component, isTemplate, title }) =>
+                    isAccessibleRoute(title) && (
+                        <Route path={path} component={Component} exact={!isTemplate} key={path} />
+                    ),
+            )}
             <Redirect to={'/home'} />
         </Switch>
     )
