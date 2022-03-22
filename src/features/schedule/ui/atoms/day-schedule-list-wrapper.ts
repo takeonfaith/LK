@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number }>`
+const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number; isTeacherSchedule: boolean }>`
     border-radius: 15px;
     overflow: hidden;
     box-shadow: var(--schedule-shadow);
@@ -18,7 +18,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number }>`
     }
 
     @media (max-width: 1000px) {
-        max-height: ${({ height }) => `calc(${height}px - 240px)`};
+        max-height: ${({ height, isTeacherSchedule }) => `calc(${height}px - ${isTeacherSchedule ? 340 : 240}px)`};
     }
 `
 

@@ -1,7 +1,7 @@
-import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
+import TeachersSchedule from '@pages/teachers-schedule'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -13,7 +13,7 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBriefcase, FiDollarSign, FiFileText, FiThumbsUp } from 'react-icons/fi'
+import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
 import { HiOutlineClipboardCheck } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import AcadPerformance from '../../pages/acad-performance'
@@ -34,6 +34,9 @@ export const ALL_STUDENTS_ROUTE = '/students'
 export const ALL_TEACHERS_ROUTE = '/teachers'
 export const LOGIN_ROUTE = '/login'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
+
+// hidden routes
+export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
     {
@@ -93,7 +96,7 @@ export const privateRoutes: IRoutes = {
         icon: BiTimeFive,
         path: SCHEDULE_ROUTE,
         Component: SchedulePage,
-        isTemplate: true,
+        isTemplate: false,
     },
     4: {
         id: 4,
@@ -101,14 +104,6 @@ export const privateRoutes: IRoutes = {
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
-        isTemplate: false,
-    },
-    5: {
-        id: 5,
-        title: 'Заявка на комнату повышенной комфортности',
-        icon: FiThumbsUp,
-        path: APPLICATION_FOR_SUPERIOR_ROOM_ROUTE,
-        Component: ApplicationForSuperiorRoom,
         isTemplate: false,
     },
     6: {
@@ -173,6 +168,17 @@ export const privateRoutes: IRoutes = {
         icon: FiBriefcase,
         path: JOB_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
+        isTemplate: false,
+    },
+}
+
+export const hiddenRoutes = {
+    14: {
+        id: 14,
+        title: 'Расписание преподавателя',
+        icon: BiIdCard,
+        path: TEACHER_SCHEDULE,
+        Component: TeachersSchedule,
         isTemplate: false,
     },
 }

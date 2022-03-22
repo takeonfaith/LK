@@ -43,7 +43,7 @@ const User = ({ type, avatar, name, loading = false }: Props) => {
     const { open } = useModal()
 
     return !loading ? (
-        <UserWrapper onClick={() => false && open(<TeacherModal avatar={avatar} name={name} />)}>
+        <UserWrapper onClick={() => type === 'teacher' && open(<TeacherModal avatar={avatar} name={name} />)}>
             <Avatar avatar={avatar} width="30px" height="30px" marginRight="7px" />
             <div className="name-and-status">
                 <span className="name">{name}</span>

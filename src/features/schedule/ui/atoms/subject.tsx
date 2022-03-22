@@ -1,9 +1,10 @@
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
 import calcTimeLeft from '@utils/calc-time-left'
+import getShortString from '@utils/get-short-string'
 import React from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { Place, SubjectModal, Time, NextSubject, Rooms } from '.'
+import { Place, SubjectModal, Time, NextSubject, Rooms, Groups } from '.'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean
@@ -69,7 +70,19 @@ const SubjectWrapper = styled.div<{
 type Props = ISubject & { isCurrent: boolean; isNext?: boolean; view?: string }
 
 const Subject = (props: Props) => {
-    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, view, rooms, isNext = false } = props
+    const {
+        timeInterval,
+        name,
+        place,
+        teachers,
+        dateInterval,
+        isCurrent,
+        link,
+        view,
+        rooms,
+        groups,
+        isNext = false,
+    } = props
     const { open } = useModal()
 
     return (
@@ -91,11 +104,16 @@ const Subject = (props: Props) => {
                 <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
                 {rooms.length ? <Rooms rooms={rooms} isCurrent={isCurrent} /> : <Place place={place} link={link} />}
             </div>
-
-            <h3>{name}</h3>
+            <h3>{getShortString(name, 70)}</h3>
+            <Groups groups={groups} isCurrent={isCurrent} />
             <p className="teachers">
-                {teachers.map((teacher: string) => {
-                    return teacher + ' '
+                {teachers.map((teacher: string, index) => {
+                    return (
+                        <>
+                            {teacher}
+                            {index !== teachers.length - 1 && ', '}
+                        </>
+                    )
                 })}
             </p>
             <p className="date-interval">{dateInterval}</p>

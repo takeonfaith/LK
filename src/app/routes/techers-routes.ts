@@ -29,6 +29,8 @@ import { HiOutlineClipboardCheck, HiOutlineMenuAlt2, HiOutlineUserGroup } from '
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
+import SchedulePage from '@pages/schedule'
+import TeachersSchedule from '@pages/teachers-schedule'
 import { IRoutes } from './routes'
 
 export const LOGIN_ROUTE = '/login'
@@ -40,7 +42,7 @@ export const PROJECT_ACTIVITIES_ROUTE = '/proj_main'
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const PAYMENTS_ROUTE = '/payments'
 export const APPLICATIONS_ROUTE = '/applications'
-export const SCHEDULE_ROUTE = '/rasp_teachers'
+export const SCHEDULE_ROUTE = '/schedule'
 export const JOB_ROUTE = '/job'
 export const ORDERS_ROUTE = '/staff_orders'
 export const ALL_STUDENTS_ROUTE = '/students'
@@ -66,6 +68,9 @@ export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const DOWNLOAD_ADMIN_FILES_ROUTE = '/download-agreements'
+
+//hidden routes
+export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
     {
@@ -96,7 +101,7 @@ export const teachersPrivateRoutes: IRoutes = {
     },
     7: {
         id: 7,
-        title: 'Скачать соглашения',
+        title: 'Скачать отчеты',
         icon: FiArrowDownCircle,
         path: DOWNLOAD_ADMIN_FILES_ROUTE,
         Component: DownloadAdminFilesPage,
@@ -105,19 +110,19 @@ export const teachersPrivateRoutes: IRoutes = {
     },
     2: {
         id: 2,
+        title: 'Расписание',
+        icon: BiTimeFive,
+        path: SCHEDULE_ROUTE,
+        Component: SchedulePage,
+        isTemplate: false,
+    },
+    3: {
+        id: 3,
         title: 'Оповещения',
         icon: FiBell,
         path: ALERTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         isTemplate: false,
-    },
-    3: {
-        id: 3,
-        title: 'Расписание',
-        icon: BiTimeFive,
-        path: SCHEDULE_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: SCHEDULE_ROUTE }),
-        isTemplate: true,
     },
     4: {
         id: 4,
@@ -342,6 +347,17 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiIdCard,
         path: PPS_CONTEST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        isTemplate: false,
+    },
+}
+
+export const hiddenTeacherRoutes = {
+    33: {
+        id: 33,
+        title: 'Расписание преподавателя',
+        icon: BiIdCard,
+        path: TEACHER_SCHEDULE,
+        Component: TeachersSchedule,
         isTemplate: false,
     },
 }

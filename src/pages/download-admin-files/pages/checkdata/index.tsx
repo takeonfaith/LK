@@ -2,9 +2,9 @@ import { adminLinksModel } from '@entities/admin-links'
 import React from 'react'
 import AdminLinksTemplate from 'widgets/admin-links-template'
 
-const DownloadAccepts = () => {
+const DownloadCheckdata = () => {
     const { data } = adminLinksModel.selectors.useAdminLinks()
-    return <AdminLinksTemplate title={'Скачать отчеты по акцептам'} links={data?.accepts} />
+    return <AdminLinksTemplate title={'Скачать отчеты по анкете'} links={data?.checkdata} />
 }
 
-export default DownloadAccepts
+export default DownloadCheckdata
