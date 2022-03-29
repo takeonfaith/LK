@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const ModalContent = styled.div<{ isOpen: boolean }>`
+const ModalContent = styled.div<{ isOpen: number; isMouseDown: boolean }>`
     background: var(--theme);
     color: var(--text);
     padding: 20px;
@@ -15,7 +15,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
         padding-top: 15px;
 
         /* Swipe bar on top */
-        /* 
+
         &::after {
             content: '';
             display: block;
@@ -27,7 +27,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
             width: 30px;
             height: 4px;
             border-radius: 10px;
-        } */
+        }
     }
 
     @media (min-width: 801px) {
@@ -35,15 +35,13 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
     }
 
     @media (max-width: 800px) {
+        max-height: 100vh;
         padding: 10px;
         padding-top: 15px;
-
+        transition: ${({ isMouseDown }) => (isMouseDown ? '0s' : '0.3s')};
+        height: ${({ isOpen }) => (isOpen <= 1 ? '80%' : '100%')};
         width: 100%;
-        height: 80%;
-        bottom: 0;
-        border-radius: 20px 20px 0 0;
-        transform: ${({ isOpen }) => (isOpen ? `scale(1) translateY(0px)` : `scale(1) translateY(150px)`)};
-        border-radius: var(--brLight) var(--brLight) 0 0;
+        border-radius: ${({ isOpen }) => (isOpen === 1 ? '14px 14px 0 0' : '0')};
     }
 `
 

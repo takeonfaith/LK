@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { Context, ModalContext } from '../context'
 
 export interface IModal {
-    isOpen: boolean
+    isOpen: number
     back: () => void
     open: (Component: React.ReactElement<any, any> | undefined) => void
     close: () => void

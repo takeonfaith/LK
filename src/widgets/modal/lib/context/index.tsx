@@ -1,21 +1,24 @@
+import limitNumber from '@utils/limit-number'
 import React, { createContext, useCallback, useMemo, useState } from 'react'
 
 export const Context = createContext<ModalContext>({
-    isOpen: false,
+    isOpen: 0,
     component: undefined,
     back: () => {},
     close: () => {},
     open: () => {},
+    setIsOpen: () => {},
     canBack: false,
 })
 
 export interface ModalContext {
-    isOpen: boolean
+    isOpen: number
     component: React.ReactElement<any, any> | undefined
     setComponent?: (Component: React.ReactElement<any, any> | undefined) => void
     back: () => void
     open: (Component: React.ReactElement<any, any> | undefined) => void
     close: () => void
+    setIsOpen: React.Dispatch<React.SetStateAction<number>>
     canBack: boolean
 }
 
@@ -24,7 +27,7 @@ interface Props {
 }
 
 export const ModalProvider = ({ children }: Props) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [isOpen, setIsOpen] = useState<number>(0)
     const [openModals, setOpenModals] = useState<React.ReactElement<any, any>[]>([])
 
     const canBack = openModals.length > 1
@@ -44,14 +47,14 @@ export const ModalProvider = ({ children }: Props) => {
                 } else {
                     setOpenModals(() => [...openModals, Component])
                 }
-                setIsOpen(() => true)
+                setIsOpen(1)
             }
         },
         [setOpenModals, setIsOpen, openModals, isOpen],
     )
 
     const close = useCallback(() => {
-        setIsOpen(() => false)
+        setIsOpen(0)
     }, [setOpenModals, setIsOpen])
 
     const component = useMemo(() => openModals[openModals.length - 1], [openModals])
@@ -71,6 +74,7 @@ export const ModalProvider = ({ children }: Props) => {
                 isOpen,
                 canBack,
                 component,
+                setIsOpen,
                 setComponent,
             }}
         >

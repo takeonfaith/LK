@@ -12,6 +12,7 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
     opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
     transition: 0.2s opacity, 0.2s visibility;
+    backdrop-filter: blur(10px);
 
     @media (max-width: 800px) {
         align-items: flex-end;
