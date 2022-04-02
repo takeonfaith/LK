@@ -43,7 +43,7 @@ const WeekSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
 
     useEffect(() => {
         setTimeout(() => {
-            if (wrapperRef?.current && view === 'big') {
+            if (wrapperRef?.current && (view === 'big' || width < 1000)) {
                 wrapperRef.current.scrollLeft = currentDay * 400 - 360
             }
         }, 200)

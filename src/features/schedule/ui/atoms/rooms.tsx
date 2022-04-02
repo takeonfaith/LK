@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const RoomsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean }>`
+const RoomsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean; color?: string }>`
     display: flex;
     align-items: center;
     column-gap: 5px;
@@ -10,6 +10,7 @@ const RoomsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean }>`
     overflow: hidden;
     position: relative;
     flex-wrap: ${({ inModal }) => inModal && 'wrap'};
+    gap: 4px;
 
     &::after {
         content: '';
@@ -19,7 +20,8 @@ const RoomsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean }>`
         position: absolute;
         top: 0;
         right: 0;
-        background: linear-gradient(90deg, transparent, var(--schedule));
+        background: ${({ isCurrent, color }) =>
+            `linear-gradient(90deg, transparent, ${isCurrent ? color : 'var(--schedule)'})`};
     }
 
     .room {
@@ -38,11 +40,12 @@ interface Props {
     rooms: string[]
     isCurrent?: boolean
     inModal?: boolean
+    color?: string
 }
 
-const Rooms = ({ rooms, isCurrent = false, inModal = false }: Props) => {
+const Rooms = ({ rooms, color, isCurrent = false, inModal = false }: Props) => {
     return !!rooms.length ? (
-        <RoomsWrapper isCurrent={isCurrent} inModal={inModal}>
+        <RoomsWrapper isCurrent={isCurrent} inModal={inModal} color={color}>
             {rooms.map((room) => (
                 <span className="room" key={room}>
                     {room}

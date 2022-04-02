@@ -1,12 +1,14 @@
 import PrivateRouter from '@app/routes/private-router'
 import { OLD_LK_URL } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
+import { userModel } from '@entities/user'
 import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Confirm, Header, LeftsideBar, PopUpMessage } from 'widgets'
 import { Modal } from 'widgets/modal'
+import InitialLoader from './initial-loader'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -30,6 +32,9 @@ const ContentWrapper = styled.div`
 
 const ContentLayout = () => {
     const { height } = useResize()
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
 
     useTheme()
     useEffect(() => {
@@ -47,6 +52,10 @@ const ContentLayout = () => {
 
     return (
         <div style={{ height, display: 'flex' }}>
+            <InitialLoader
+                loading={!user}
+                image="https://mospolytech.ru/local/templates/main/dist/img/logos/mospolytech-logo-white.png"
+            />
             <LeftsideBar />
             <ContentWrapper>
                 <Header />
