@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const GroupsWrapper = styled.div<{ isCurrent: boolean }>`
+const GroupsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean }>`
     display: flex;
     align-items: center;
     column-gap: 5px;
@@ -11,7 +11,20 @@ const GroupsWrapper = styled.div<{ isCurrent: boolean }>`
     position: relative;
     font-size: 0.7em;
     font-weight: 600;
-    margin-bottom: 5px;
+    flex-wrap: ${({ inModal }) => inModal && 'wrap'};
+    gap: 5px;
+
+    &::after {
+        content: '';
+        display: ${({ inModal }) => inModal && 'none'};
+        width: 30px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: ${({ isCurrent, color }) =>
+            `linear-gradient(90deg, transparent, ${isCurrent ? color : 'var(--schedule)'})`};
+    }
 
     span {
         background: ${({ isCurrent }) => (isCurrent ? 'var(--almostTransparent)' : 'var(--scheduleBg)')};
@@ -27,11 +40,12 @@ const GroupsWrapper = styled.div<{ isCurrent: boolean }>`
 interface Props {
     groups?: string
     isCurrent: boolean
+    inModal?: boolean
 }
 
-const Groups = ({ groups, isCurrent }: Props) => {
+const Groups = ({ groups, isCurrent, inModal = false }: Props) => {
     return groups ? (
-        <GroupsWrapper isCurrent={isCurrent}>
+        <GroupsWrapper isCurrent={isCurrent} inModal={inModal}>
             {groups.split(',').map((group) => {
                 return <span key={group}>{group}</span>
             })}
