@@ -35,6 +35,7 @@ const sendForm = (
         setLoading(false)
         setCompleted(true)
     } catch (error) {
+        setLoading(false)
         popUpMessageModel.events.evokePopUpMessage({
             message: `Не удалось отправить форму. Ошибка: ${error as string}`,
             type: 'failure',

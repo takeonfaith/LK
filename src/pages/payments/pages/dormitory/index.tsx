@@ -1,4 +1,3 @@
-import { Agreement } from '@api/model'
 import { paymentsModel } from '@entities/payments'
 import {
     AgreementsBlock,
