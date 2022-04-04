@@ -1,3 +1,5 @@
+import DataVerificationPage from '@pages/data-verification'
+import DownloadAdminFilesPage from '@pages/download-admin-files'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -12,8 +14,8 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { RiNotificationBadgeLine } from 'react-icons/ri'
 import {
+    FiArrowDownCircle,
     FiBell,
     FiBriefcase,
     FiCalendar,
@@ -24,10 +26,12 @@ import {
     FiStar,
 } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineMenuAlt2, HiOutlineUserGroup } from 'react-icons/hi'
-import { IconType } from 'react-icons/lib'
+import { RiNotificationBadgeLine } from 'react-icons/ri'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
-import DataVerificationPage from '@pages/data-verification'
+import SchedulePage from '@pages/schedule'
+import TeachersSchedule from '@pages/teachers-schedule'
+import { IRoutes } from './routes'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -38,7 +42,7 @@ export const PROJECT_ACTIVITIES_ROUTE = '/proj_main'
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const PAYMENTS_ROUTE = '/payments'
 export const APPLICATIONS_ROUTE = '/applications'
-export const SCHEDULE_ROUTE = '/rasp_teachers'
+export const SCHEDULE_ROUTE = '/schedule'
 export const JOB_ROUTE = '/job'
 export const ORDERS_ROUTE = '/staff_orders'
 export const ALL_STUDENTS_ROUTE = '/students'
@@ -63,6 +67,10 @@ export const PORTFOLIO_ROUTE = '/portfolio'
 export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
+export const DOWNLOAD_ADMIN_FILES_ROUTE = '/download-agreements'
+
+//hidden routes
+export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
     {
@@ -74,21 +82,6 @@ export const publicRoutes = [
     },
 ]
 
-type routeId = number
-
-export interface IRoute {
-    id: routeId
-    title: string
-    icon: IconType
-    path: string
-    Component: () => JSX.Element | string
-    isTemplate: boolean
-}
-
-export interface IRoutes {
-    [id: routeId]: IRoute
-}
-
 export const teachersPrivateRoutes: IRoutes = {
     0: {
         id: 0,
@@ -98,7 +91,6 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => Home(),
         isTemplate: false,
     },
-
     1: {
         id: 1,
         title: 'Соглашение об электронном взаимодействии',
@@ -107,13 +99,22 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => ElectronicInteractionAgreementPage(),
         isTemplate: false,
     },
+    7: {
+        id: 7,
+        title: 'Скачать отчеты',
+        icon: FiArrowDownCircle,
+        path: DOWNLOAD_ADMIN_FILES_ROUTE,
+        Component: DownloadAdminFilesPage,
+        isTemplate: false,
+        isAdmin: true,
+    },
     2: {
         id: 2,
         title: 'Расписание',
         icon: BiTimeFive,
         path: SCHEDULE_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: SCHEDULE_ROUTE }),
-        isTemplate: true,
+        Component: SchedulePage,
+        isTemplate: false,
     },
     3: {
         id: 3,
@@ -147,8 +148,8 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
         isTemplate: false,
     },
-    7: {
-        id: 7,
+    100: {
+        id: 100,
         title: 'Логины студентов',
         icon: BiGroup,
         path: STUDENTS_LOGINS_ROUTE,
@@ -346,6 +347,17 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiIdCard,
         path: PPS_CONTEST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        isTemplate: false,
+    },
+}
+
+export const hiddenTeacherRoutes = {
+    33: {
+        id: 33,
+        title: 'Расписание преподавателя',
+        icon: BiIdCard,
+        path: TEACHER_SCHEDULE,
+        Component: TeachersSchedule,
         isTemplate: false,
     },
 }

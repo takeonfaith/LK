@@ -1,21 +1,22 @@
-import React, { useMemo } from 'react'
-import { privateRoutes } from '@app/routes/routes'
-import getChosenRoutes from 'widgets/leftside-bar/lib/get-chosen-routes'
-import LeftsideBarListWrapper from 'widgets/leftside-bar/ui/atoms/leftside-bar-list-wrapper'
-import { useSettings } from '@utils/contexts/settings-context'
-import { CustomizeLeftsideBarItem } from '../molecules'
+import { IRoute, privateRoutes } from '@app/routes/routes'
+import { teachersPrivateRoutes } from '@app/routes/techers-routes'
 import { ShortCutLinksType, SHORT_CUT_LINKS_LIMIT_SIZE } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { userModel } from '@entities/user'
+import { useSettings } from '@utils/contexts/settings-context'
+import useIsAccessibleRoute from '@utils/hooks/use-is-accessible-route'
 import useResize from '@utils/hooks/use-resize'
-import { teachersPrivateRoutes } from '@app/routes/techers-routes'
+import React, { useMemo } from 'react'
+import getChosenRoutes from 'widgets/leftside-bar/lib/get-chosen-routes'
+import LeftsideBarListWrapper from 'widgets/leftside-bar/ui/atoms/leftside-bar-list-wrapper'
+import { CustomizeLeftsideBarItem } from '../molecules'
 
 const CustomizeLeftsideBarList = () => {
     const { setting, change } = useSettings<number[]>('menu')
     const { setting: shortCutMenu, change: shortCutChange } = useSettings<ShortCutLinksType>('shortCutLinks')
     const { data } = userModel.selectors.useUser()
     const { height } = useResize()
-
+    const isAccessible = useIsAccessibleRoute()
     const enabledLeftsideBarItems = getChosenRoutes(setting, data)
     const enabledShortCutMenu = useMemo(() => getChosenRoutes(shortCutMenu, data), [shortCutMenu])
 
@@ -65,18 +66,22 @@ const CustomizeLeftsideBarList = () => {
 
     return (
         <LeftsideBarListWrapper style={{ height: height - 200 }}>
-            {Object.values(!data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes).map((el, index) => {
-                return (
-                    <CustomizeLeftsideBarItem
-                        {...el}
-                        key={index}
-                        chosen={!!enabledLeftsideBarItems[el.id]}
-                        shortItemChosen={!!enabledShortCutMenu[el.id]}
-                        switchShortChosen={switchShortChosen}
-                        switchMenuItem={switchChosen}
-                    />
-                )
-            })}
+            {Object.values(!data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes).map(
+                (el: IRoute, index) => {
+                    return (
+                        isAccessible(el.title) && (
+                            <CustomizeLeftsideBarItem
+                                {...el}
+                                key={index}
+                                chosen={!!enabledLeftsideBarItems[el.id]}
+                                shortItemChosen={!!enabledShortCutMenu[el.id]}
+                                switchShortChosen={switchShortChosen}
+                                switchMenuItem={switchChosen}
+                            />
+                        )
+                    )
+                },
+            )}
         </LeftsideBarListWrapper>
     )
 }

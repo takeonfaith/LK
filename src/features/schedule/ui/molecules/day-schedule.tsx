@@ -6,6 +6,7 @@ import calcTimeLeft from '@utils/calc-time-left'
 import useOnScreen from '@utils/hooks/use-on-screen'
 import useResize from '@utils/hooks/use-resize'
 import React, { useEffect, useMemo, useRef } from 'react'
+import { useRouteMatch } from 'react-router'
 import inTimeInterval from '../../lib/in-time-interval'
 import { DayEnded, DayScheduleListWrapper, DayScheduleWrapper, HolidayPlate, SkeletonLoading, Subject } from '../atoms'
 
@@ -19,6 +20,7 @@ type Props = ILessons & {
 }
 
 const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo }: Props) => {
+    const route: { params: { fio?: string } } = useRouteMatch()
     const dayRef = useRef<null | HTMLDivElement>(null)
     const isOnScreen = useOnScreen(dayRef)
     const { height: screenHeight } = useResize()
@@ -57,7 +59,12 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo
                     <span>{topInfo}</span>
                 </div>
             )}
-            <DayScheduleListWrapper isFull={view === 'full'} ref={dayRef} height={screenHeight}>
+            <DayScheduleListWrapper
+                isFull={view === 'full'}
+                ref={dayRef}
+                height={screenHeight}
+                isTeacherSchedule={!!route.params.fio?.length}
+            >
                 {!lessons && <SkeletonLoading />}
                 {!!lessons &&
                     lessons.map((subject: ISubject, index) => {

@@ -2,11 +2,6 @@ import styled from 'styled-components'
 
 interface Args {
     openArea: boolean
-    amount: number
-    withLoadDoc: boolean
-    hint: number
-    addNew: boolean
-    optionalCheckbox: boolean
 }
 
 const InputAreaWrapper = styled.div<Args>`

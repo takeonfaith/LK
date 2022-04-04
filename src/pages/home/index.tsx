@@ -19,13 +19,13 @@ const Home = () => {
             loading={!user}
             load={() => scheduleModel.effects.getScheduleFx(user)}
             error={error}
-            data={user?.user_status === 'stud' ? user && data.schedule : user}
+            data={user && data.schedule}
         >
             <Content>
                 {!!user && (
                     <div className="home-page-content-inner">
                         <UserInfo user={user} />
-                        {!user.subdivisions && <ScheduleAndNotification />}
+                        <ScheduleAndNotification />
                         <ShortCutLinks />
                     </div>
                 )}

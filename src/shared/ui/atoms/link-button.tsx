@@ -8,6 +8,7 @@ const LinkButtonWrapper = styled.a<{
     background?: string
     textColor?: string
     align?: 'left' | 'center' | 'right'
+    isActive: boolean
 }>`
     display: flex;
     align-items: center;
@@ -25,6 +26,8 @@ const LinkButtonWrapper = styled.a<{
     font-size: 0.8em;
     height: 40px;
     min-height: 40px;
+    opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
+    pointer-events: ${({ isActive }) => !isActive && 'none'};
 
     button {
         outline: none;
@@ -68,21 +71,33 @@ interface Props {
     background?: string
     textColor?: string
     align?: 'left' | 'center' | 'right'
-
+    isActive?: boolean
     href: string
 }
 
-const LinkButton = ({ icon, text, onClick, width, background, textColor, align, href, isChosen = false }: Props) => {
+const LinkButton = ({
+    icon,
+    text,
+    onClick,
+    width,
+    background,
+    textColor,
+    align,
+    href,
+    isActive = true,
+    isChosen = false,
+}: Props) => {
     return (
         <LinkButtonWrapper
             text={!!text}
-            onClick={onClick}
+            onClick={(e) => isActive && onClick(e)}
             isChosen={isChosen}
             width={width}
             background={background}
             textColor={textColor}
             href={href}
             align={align}
+            isActive={isActive}
         >
             {!!icon && icon}
             <span>{text}</span>

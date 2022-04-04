@@ -1,3 +1,4 @@
+import { Colors } from '@consts'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -17,6 +18,21 @@ const LeftsideBarItemWrapper = styled(Link)<{
     user-select: none;
     text-decoration: none;
     border-radius: var(--brLight);
+
+    .admin {
+        color: #fff;
+        position: absolute;
+        margin: auto 0;
+        right: -5px;
+        background: ${Colors.pink.main};
+        font-size: 0.65em;
+        border-radius: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 17px;
+        height: 17px;
+    }
 
     strong {
         width: 130px;

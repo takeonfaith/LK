@@ -1,22 +1,24 @@
 import { userModel } from '@entities/user'
 import { hiddenRoutes, privateRoutes } from '@routes'
+import useIsAccessibleRoute from '@utils/hooks/use-is-accessible-route'
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router'
-import { teachersPrivateRoutes } from './techers-routes'
+import { hiddenTeacherRoutes, teachersPrivateRoutes } from './techers-routes'
 
 const PrivateRouter = () => {
     const { data } = userModel.selectors.useUser()
     const currentRoute = !data?.user?.subdivisions
         ? Object.assign({}, privateRoutes, hiddenRoutes)
-        : teachersPrivateRoutes
+        : Object.assign({}, teachersPrivateRoutes, hiddenTeacherRoutes)
+    const isAccessible = useIsAccessibleRoute()
 
     if (!data.user) return null
 
     return (
         <Switch>
-            {Object.values(currentRoute).map(({ path, Component, isTemplate }) => (
-                <Route path={path} component={Component} exact={!isTemplate} key={path} />
-            ))}
+            {Object.values(currentRoute).map(({ path, Component, isTemplate, title }) => {
+                return isAccessible(title) && <Route path={path} component={Component} exact={!isTemplate} key={path} />
+            })}
             <Redirect to={'/home'} />
         </Switch>
     )

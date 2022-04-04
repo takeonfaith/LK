@@ -61,7 +61,9 @@ export interface ITimeIntervalColor {
     '14:30 - 16:00': IColorPalette
     '16:10 - 17:40': IColorPalette
     '17:50 - 19:20': IColorPalette
+    '18:20 - 19:40': IColorPalette
     '19:30 - 21:00': IColorPalette
+    '19:50 - 21:10': IColorPalette
 }
 
 export const TimeIntervalColor: ITimeIntervalColor = {
@@ -71,5 +73,7 @@ export const TimeIntervalColor: ITimeIntervalColor = {
     '14:30 - 16:00': Colors.pink,
     '16:10 - 17:40': Colors.red,
     '17:50 - 19:20': Colors.red,
+    '18:20 - 19:40': Colors.orange,
     '19:30 - 21:00': Colors.orange,
+    '19:50 - 21:10': Colors.orange,
 }

@@ -65,4 +65,5 @@ export interface TeacherDataVerification {
     tel_staff: string
     valid_date: string
     validated: boolean
+    links: { title: string; url: string }[]
 }

@@ -1,5 +1,5 @@
 import { AcadPerformance } from '@entities/acad-performance/model'
-import { Title } from '@ui/atoms'
+import { TeacherWidthModal, Title } from '@ui/atoms'
 import findSemestr from '@utils/find-semestr'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
@@ -53,7 +53,9 @@ const SubjectModal = ({ item }: Props) => {
             </Line>
             <Line>
                 <b>Преподаватель:</b>
-                <Data> {item.teacher}</Data>
+                <Data>
+                    <TeacherWidthModal fio={item.teacher} />
+                </Data>
             </Line>
             <Line>
                 <b>Номер ведомости:</b>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { HiHome, HiOutlineHome } from 'react-icons/hi'
-import Button from '@ui/atoms/button'
+import { Button } from '@ui/button'
 
 interface Props {
     chosen: boolean

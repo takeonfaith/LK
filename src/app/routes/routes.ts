@@ -1,10 +1,10 @@
-import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 import ApplicationsPage from '@pages/applications'
 import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
 import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
+import TeachersSchedule from '@pages/teachers-schedule'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -16,7 +16,7 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBriefcase, FiDollarSign, FiFileText, FiThumbsUp } from 'react-icons/fi'
+import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
 import { HiOutlineClipboardCheck } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import AcadPerformance from '../../pages/acad-performance'
@@ -41,6 +41,7 @@ export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-ro
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
 export const ARBITRARY_REQUEST_ROUTE = APPLICATIONS_ROUTE + '/arbitrary-request'
+export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
     {
@@ -59,8 +60,9 @@ export interface IRoute {
     title: string
     icon: IconType
     path: string
-    Component: () => JSX.Element
+    Component: () => JSX.Element | string
     isTemplate: boolean
+    isAdmin?: boolean
 }
 
 export interface IRoutes {
@@ -99,7 +101,7 @@ export const privateRoutes: IRoutes = {
         icon: BiTimeFive,
         path: SCHEDULE_ROUTE,
         Component: SchedulePage,
-        isTemplate: true,
+        isTemplate: false,
     },
     4: {
         id: 4,
@@ -107,14 +109,6 @@ export const privateRoutes: IRoutes = {
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
-        isTemplate: false,
-    },
-    5: {
-        id: 5,
-        title: 'Заявка на комнату повышенной комфортности',
-        icon: FiThumbsUp,
-        path: APPLICATION_FOR_SUPERIOR_ROOM_ROUTE,
-        Component: ApplicationForSuperiorRoom,
         isTemplate: false,
     },
     6: {
@@ -198,6 +192,14 @@ export const hiddenRoutes: IRoutes = {
         icon: FiBriefcase,
         path: ARBITRARY_REQUEST_ROUTE,
         Component: ArbitrayRequestPage,
+        isTemplate: false,
+    },
+    16: {
+        id: 16,
+        title: 'Расписание преподавателя',
+        icon: BiIdCard,
+        path: TEACHER_SCHEDULE,
+        Component: TeachersSchedule,
         isTemplate: false,
     },
 }

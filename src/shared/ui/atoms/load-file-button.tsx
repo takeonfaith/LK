@@ -9,9 +9,9 @@ import { Image } from '.'
 
 // const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000
 
-const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boolean }>`
+const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boolean; topPadding: boolean }>`
     width: 100%;
-    height: 150px;
+    min-height: 150px;
     border-radius: var(--brLight);
     background: var(--almostTransparentOpposite);
     display: flex;
@@ -24,19 +24,24 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
     box-shadow: ${({ showPulse }) => showPulse && '0px 0px 1px 3px var(--reallyBlue)'};
     position: relative;
 
-    .max-files {
-        position: absolute;
+    .info {
         left: 10px;
         top: 10px;
-        padding: 5px 10px;
-        background: var(--schedule);
-        border-radius: 5px;
+        position: absolute;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7em;
-        font-weight: 600;
-        pointer-events: none;
+        gap: 5px;
+
+        .info-item {
+            padding: 5px 10px;
+            background: var(--schedule);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: 600;
+            pointer-events: none;
+        }
     }
 
     .uploaded-files {
@@ -44,6 +49,8 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         align-items: center;
         justify-content: center;
         width: 100%;
+        flex-wrap: wrap;
+        padding: ${({ topPadding }) => topPadding && '40px 20px'};
 
         .file-preview {
             display: flex;
@@ -66,7 +73,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
             }
 
             .file-name {
-                max-width: 200px;
+                max-width: 100px;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -130,6 +137,7 @@ export interface LoadFileProps {
 }
 
 const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
+const MAX_FILE_SIZE = 20000000
 
 const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: LoadFileProps) => {
     const fileInputRef = useRef(null)
@@ -152,10 +160,11 @@ const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: LoadFile
         }
         for (let i = 0; i < loadedFiles.length; i++) {
             if (validateFile(loadedFiles[i])) {
-                if (loadedFiles[i].size > 20000000) {
+                if (loadedFiles[i].size > MAX_FILE_SIZE) {
                     popUpMessageModel.events.evokePopUpMessage({
-                        message: 'Размер файла слишком большой.',
+                        message: 'Размер файла слишком большой. Максимальный размер файла: 15 MB',
                         type: 'failure',
+                        time: 10000,
                     })
                 } else {
                     setFiles([...files, loadedFiles[i]])
@@ -232,8 +241,12 @@ const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: LoadFile
             onDragEnter={(e) => isActive && handleDragEnter(e)}
             onDragLeave={(e) => isActive && handleDragLeave(e)}
             onDrop={(e) => isActive && handleDrop(e)}
+            topPadding={!!maxFiles}
         >
-            {maxFiles && <span className="max-files">Макс. файлов: {maxFiles}</span>}
+            <div className="info">
+                <span className="info-item">Макс. размер файла: 15 MB</span>
+                {maxFiles && <span className="info-item">Макс. файлов: {maxFiles}</span>}
+            </div>
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
             {!files.length ? (
                 <div className="message">
