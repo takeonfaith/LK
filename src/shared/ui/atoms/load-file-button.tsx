@@ -119,7 +119,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        opacity: 1;
+        opacity: 0.85;
         color: ${Colors.blue.dark};
         pointer-events: none;
 
