@@ -1,6 +1,5 @@
 import { IModules, ISchedule, ViewType } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
-import getSchedule from '@entities/schedule/lib/get-schedule'
 import { userModel } from '@entities/user'
 import getSessionStats from '@features/schedule/lib/get-session-stats'
 import {
@@ -12,8 +11,7 @@ import {
 import ExamStats from '@features/schedule/ui/atoms/exam-stats'
 import SessionSchedule from '@features/schedule/ui/organisms/session-schedule'
 import { Wrapper } from '@ui/atoms'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { useRouteMatch } from 'react-router'
+import React, { useMemo, useRef } from 'react'
 import styled from 'styled-components'
 import { Slider } from 'widgets'
 

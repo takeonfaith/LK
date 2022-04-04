@@ -1,3 +1,4 @@
+import { Title } from '@ui/title'
 import React from 'react'
 import { TextAreaWrapper } from './styles'
 
@@ -16,12 +17,9 @@ export function TextArea(props: TextAreaProps) {
     const { value, setValue, width, placeholder, required, title, textAreaAppearance = true, isActive = true } = props
     return (
         <TextAreaWrapper isActive={isActive} width={width} textAreaAppearance={textAreaAppearance}>
-            {!!title && (
-                <h5>
-                    {required && <span className="red-star">*</span>}
-                    {title}
-                </h5>
-            )}
+            <Title size={5} required={required} align="left" bottomGap="5px" visible={!!title}>
+                {title}
+            </Title>
             <textarea onChange={(e) => setValue(e.target.value)} placeholder={placeholder} required={required}>
                 {value}
             </textarea>

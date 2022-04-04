@@ -1,6 +1,7 @@
 import ApplicationsPage from '@pages/applications'
 import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
 import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
+import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -41,6 +42,7 @@ export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-ro
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
 export const ARBITRARY_REQUEST_ROUTE = APPLICATIONS_ROUTE + '/arbitrary-request'
+export const SOCIAL_SCROLLARSHIP = APPLICATIONS_ROUTE + '/social-scollarship'
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
@@ -200,6 +202,14 @@ export const hiddenRoutes: IRoutes = {
         icon: BiIdCard,
         path: TEACHER_SCHEDULE,
         Component: TeachersSchedule,
+        isTemplate: false,
+    },
+    17: {
+        id: 17,
+        title: 'Социальная стипендия',
+        icon: BiIdCard,
+        path: SOCIAL_SCROLLARSHIP,
+        Component: ApplicationForSocialScrollarship,
         isTemplate: false,
     },
 }

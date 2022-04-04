@@ -5,6 +5,7 @@ export const ButtonWrapper = styled.button<{
     text: boolean
     isChosen?: boolean
     width?: string
+    minWidth?: string
     background?: string
     textColor?: string
     shrinkTextInMobile?: boolean
@@ -26,6 +27,7 @@ export const ButtonWrapper = styled.button<{
     font-weight: bold;
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
+    min-width: ${({ minWidth }) => minWidth && minWidth};
     text-decoration: none;
     flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
     opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};

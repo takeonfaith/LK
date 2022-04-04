@@ -7,7 +7,7 @@ import Select, { SelectPage } from '@features/select'
 import { Button, FormBlock, Message, Wrapper } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
 import useResize from '@utils/hooks/use-resize'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiCheck, FiClock, FiInfo, FiPlus, FiX } from 'react-icons/fi'
 import { HiSortAscending, HiSortDescending } from 'react-icons/hi'
 import styled from 'styled-components'
@@ -34,235 +34,235 @@ const ApplicationsPage = () => {
     const { data, error } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
     const [selectedFilter, setSelectedFilter] = useState<SelectPage | null>(null)
-    const [applications, setApplications] = useState<Application[] | null>([
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Принято в работу',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Отклонено',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Принято в работу',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Отклонено',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Отклонено',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-        {
-            notes: '',
-            regDate: '31.01.2021',
-            regNumber: '3214141da',
-            requestBody: 'fsfdafsdfdsafsd',
-            requestTitle: 'Запрос о чем-то',
-            status: 'Готово',
-            statusDate: '31.01.2021',
-            structuralSubdivision:
-                'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
-        },
-    ])
+    const [applications, setApplications] = useState<Application[] | null>(null)
     const { width } = useResize()
 
-    // useEffect(() => {
-    //     if (data) {
-    //         setApplications(data)
-    //     }
-    // }, [data])
+    useEffect(() => {
+        setTimeout(() => {
+            setApplications([
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Куку',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Принято в работу',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Отклонено',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Принято в работу',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Отклонено',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Отклонено',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+                {
+                    notes: '',
+                    regDate: '31.01.2021',
+                    regNumber: '3214141da',
+                    requestBody: 'fsfdafsdfdsafsd',
+                    requestTitle: 'Запрос о чем-то',
+                    status: 'Готово',
+                    statusDate: '31.01.2021',
+                    structuralSubdivision:
+                        'Отделение «На Прянишникова» центра по работе со студентами ул. Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05-23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs-pryaniki@mospolytech.ru, crs-mikhalka@mospolytech.ru',
+                },
+            ])
+        }, 1000)
+    }, [data])
 
     return (
         <Wrapper
@@ -286,7 +286,8 @@ const ApplicationsPage = () => {
                             background="var(--reallyBlue)"
                             textColor="#fff"
                             icon={<FiPlus />}
-                            width={width > 1000 ? '200px' : '150px'}
+                            width={'150px'}
+                            minWidth={'150px'}
                             fixedInMobile
                         />
                         <LocalSearch<Application[], Application[]>

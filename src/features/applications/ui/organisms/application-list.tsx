@@ -40,7 +40,7 @@ const ApplicationList = ({ loading, list }: Props) => {
                     ? list?.map((application, index) => {
                           return <ApplicationItem {...application} index={index} key={application.regNumber} />
                       })
-                    : Array(4)
+                    : Array(8)
                           .fill(0)
                           .map((_, i) => (
                               <SkeletonShape

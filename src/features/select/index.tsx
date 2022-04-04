@@ -1,8 +1,6 @@
 import { Title } from '@ui/atoms'
-import useOnClickOutside from '@utils/hooks/use-on-click-outside'
-import React, { memo, useCallback, useRef, useState } from 'react'
+import React, { memo } from 'react'
 import { FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
-import findCurrentPage from './lib/find-current-page'
 import useSelect, { SelectProps } from './lib/hooks/use-select'
 import { SelectArrow, SelectHeader, SelectHeaderWrapper, SelectItem, SelectItems, SelectWrapper } from './ui/atoms'
 
@@ -29,11 +27,9 @@ const Select = (props: SelectProps) => {
     const { isActive, width, title, required, selected, setSelected, placeholder } = props
     return (
         <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive ?? true} width={width}>
-            {!!title && (
-                <Title size={5} align="left" bottomGap="5px" required={required}>
-                    {title}
-                </Title>
-            )}
+            <Title size={5} align="left" bottomGap="5px" visible={!!title} required={required}>
+                {title}
+            </Title>
             <SelectHeaderWrapper multiple={multiple}>
                 <SelectHeader>
                     {!multiple ? (

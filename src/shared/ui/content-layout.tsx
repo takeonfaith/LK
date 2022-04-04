@@ -50,6 +50,8 @@ const ContentLayout = () => {
         })
     }, [])
 
+    console.log(height)
+
     return (
         <div style={{ height, display: 'flex' }}>
             <InitialLoader

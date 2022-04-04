@@ -65,14 +65,14 @@ const ConfirmMessage = () => {
                     <Button
                         text="Да"
                         onClick={handleConfirm}
-                        width="100%"
+                        width="50%"
                         textColor="var(--red)"
                         hoverBackground={Colors.red.transparent}
                     />
                     <Button
                         text="Нет"
                         onClick={onReject ?? handleReject}
-                        width="100%"
+                        width="50%"
                         textColor="var(--blue)"
                         hoverBackground={Colors.blue.transparent}
                     />
