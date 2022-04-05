@@ -1,4 +1,6 @@
 import { projectActivitesModel } from '@entities/project-activites'
+import { Content } from '@features/project-activites/ui/templates'
+import Select from '@features/select'
 import { Wrapper } from '@ui/atoms'
 import React from 'react'
 
@@ -13,7 +15,7 @@ const ProjectActivitiesPage = () => {
             error={error || null}
             data={data}
         >
-            <div>projecвыt</div>
+            {data && data[0] && <Content data={data[0]} />}
         </Wrapper>
     )
 }

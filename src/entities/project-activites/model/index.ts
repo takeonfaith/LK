@@ -1,17 +1,16 @@
+import { projectActivitesApi } from '@api'
+import { Projects } from '@api/model/project-activites'
 import { createEffect, createStore } from 'effector'
 import { useStore } from 'effector-react'
-import { MOCK } from './mock'
-import { Project } from './types'
 
 interface Store {
     loading?: boolean
     error?: string
-    data?: Project[]
+    data?: Projects
 }
 
-const getProjectActivitesFx = createEffect(async (semestr: string): Promise<Project[]> => {
-    semestr.toString()
-    return MOCK
+const getProjectActivitesFx = createEffect(async (semestr: string): Promise<Projects> => {
+    return projectActivitesApi.get(semestr)
 })
 
 const $store = createStore<Store>({})

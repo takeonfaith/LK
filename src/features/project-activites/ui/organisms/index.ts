@@ -1,1 +1,1 @@
-export const o3 = {}
+export { default as About } from './about'

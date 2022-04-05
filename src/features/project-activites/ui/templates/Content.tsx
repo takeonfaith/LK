@@ -1,8 +1,11 @@
-import { Project } from '../../../../entities/project-activites/model/types'
 import React from 'react'
-import About from '../organisms/about'
+import { About } from '../organisms'
+import { Project } from '@api/model/project-activites'
 
-const Content = (data: Project) => {
+interface Props {
+    data: Project
+}
+const Content = ({ data }: Props) => {
     const { about } = data
     return (
         <div>
