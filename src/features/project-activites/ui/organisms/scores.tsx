@@ -1,6 +1,7 @@
 import { Scores as ScoresType } from '@api/model/project-activites'
 import React from 'react'
 import styled from 'styled-components'
+import { Block } from '../atoms'
 import { ScoreItem } from '../atoms/score-item'
 import ScoresLeftSide from '../molecules/scores-left-side'
 import ScoresRightSide from '../molecules/scores-right-side'
@@ -16,16 +17,16 @@ const ProjectScores = styled.div`
     border-radius: var(--brBold);
     overflow: hidden;
     background: var(--search);
-    border-radius: var(--brBold);
+    border-radius: var(--brLight);
 `
 const Scores = ({ data }: Props) => {
     const scoreSum = Object.values(data).reduce((acc, value) => acc + value, 0)
 
     return (
-        <ProjectScores>
+        <Block maxWidth="750px">
             <ScoresLeftSide scoreSum={scoreSum} scores={data} />
             <ScoresRightSide scoreSum={scoreSum} />
-        </ProjectScores>
+        </Block>
     )
 }
 

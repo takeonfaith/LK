@@ -15,7 +15,7 @@ interface Props {
 
 const Container = styled.div`
     height: 55%;
-    background: var(--search); // #e7e7e7 надо
+    background: var(--schedule);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.301);
     display: flex;
     justify-content: center;
@@ -23,13 +23,8 @@ const Container = styled.div`
     flex-direction: column;
     position: relative;
     transition: 0.2s;
-    border-radius: var(--brBold);
-
+    border-radius: calc(var(--brSemi) - 7px);
     cursor: pointer;
-
-    &:hover {
-        filter: brightness(1.1);
-    }
 `
 
 const AboutTop = ({ openDescribe, handleOpenDescribe, data, setOpenDescribe }: Props) => {

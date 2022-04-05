@@ -29,7 +29,6 @@ const ProjectActivitiesPage = () => {
 
     const items = useMemo(() => createSelectItems(user?.course ?? 0), [user])
 
-    console.log(selected?.id)
     return (
         <Wrapper
             load={() => projectActivitesModel.effects.getProjectActivitesFx('1')}

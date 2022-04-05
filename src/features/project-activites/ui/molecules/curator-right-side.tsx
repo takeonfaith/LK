@@ -1,4 +1,5 @@
 import { Button } from '@ui/button'
+import { Title } from '@ui/title'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -12,19 +13,16 @@ const RightSide = styled.div`
     max-width: 50%;
     height: 100%;
     padding: 20px;
-    border-radius: 24px;
+    border-radius: calc(var(--brSemi) - 7px);
     background: var(--theme);
-    box-sizing: border-box;
+    box-shadow: var(--schedule-shadow);
     overflow: hidden;
 
     .description {
         height: 100%;
         max-height: calc(100% - 45px);
         overflow-y: auto;
-        padding-bottom: 20px;
-        box-sizing: border-box;
-
-        h3 {
+        padding-bottom: 20px h3 {
             margin-bottom: 10px;
         }
 
@@ -43,7 +41,9 @@ const CuratorRightSide = ({ describe, id }: Props) => {
     return (
         <RightSide>
             <div className="description">
-                <h3>Описание</h3>
+                <Title size={3} align="left" bottomGap>
+                    Описание
+                </Title>
                 {describe}
             </div>
             <Link className="link-button" to={`/chat/${id}`}>

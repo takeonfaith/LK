@@ -1,1 +1,1 @@
-export const o = {}
+export { default as Block } from './block'

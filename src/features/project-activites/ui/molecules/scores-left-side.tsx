@@ -1,4 +1,6 @@
 import { Scores } from '@api/model/project-activites'
+import { Title } from '@ui/title'
+import getCorrectWordForm from '@utils/get-correct-word-form'
 import React from 'react'
 import styled from 'styled-components'
 import { ScoreItem } from '../atoms/score-item'
@@ -10,9 +12,8 @@ interface Props {
 
 const LeftSide = styled.div`
     width: 70%;
-    background: var(--settings);
-    border-radius: var(--brBold);
-    box-shadow: var(--light-box-shadow);
+    border-radius: calc(var(--brSemi) - 7px);
+    box-shadow: var(--schedule-shadow);
     padding: 30px 25px;
     display: flex;
     flex-direction: column;
@@ -52,9 +53,17 @@ const ScoresLeftSide = ({ scores, scoreSum }: Props) => {
     return (
         <LeftSide>
             <div className="header">
-                <h2>Начисление баллов</h2>
-                <span style={{ color: 'var(--blue)', fontWeight: 'bold' }}>
-                    {scoreSum} {correctNumberBasedWord(scoreSum, 'балл', 'балла', 'баллов')}
+                <Title size={2} align="left">
+                    Начисление баллов
+                </Title>
+                <span style={{ color: 'var(--blue)', fontWeight: 'bold', whiteSpace: 'nowrap' }}>
+                    {scoreSum}{' '}
+                    {getCorrectWordForm(scoreSum, {
+                        zero: 'баллов',
+                        one: 'балл',
+                        twoToFour: 'балла',
+                        fiveToNine: 'баллов',
+                    })}
                 </span>
             </div>
             <div className="list">
@@ -64,14 +73,6 @@ const ScoresLeftSide = ({ scores, scoreSum }: Props) => {
             </div>
         </LeftSide>
     )
-}
-
-function correctNumberBasedWord(number: number, word1: string, word2To4: string, word5To9: string) {
-    return number % 10 == 1 && (number < 10 || number > 20)
-        ? word1
-        : number % 10 >= 2 && number % 10 <= 4 && (number < 10 || number > 20)
-        ? word2To4
-        : word5To9
 }
 
 export default ScoresLeftSide

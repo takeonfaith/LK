@@ -1,34 +1,22 @@
-import React from 'react'
-import { About } from '../organisms'
 import { Project } from '@api/model/project-activites'
+import React from 'react'
 import styled from 'styled-components'
+import { About } from '../organisms'
 import Curator from '../organisms/curator'
-import Scores from '../organisms/scores'
 import Participants from '../organisms/participants'
+import Scores from '../organisms/scores'
 
 interface Props {
     data: Project
 }
 
-const Container = styled.div`
-    display: flex;
-`
-
 const Wrapper = styled.div`
+    padding-top: 10px;
     display: flex;
-    justify-content: center;
     width: 100%;
-    height: 100%;
-`
-
-const ProjectActivites = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 1.5rem;
-    box-sizing: border-box;
-    max-width: 1240px;
-    width: 100%;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1300px;
 `
 
 const Content = ({ data }: Props) => {
@@ -36,16 +24,10 @@ const Content = ({ data }: Props) => {
 
     return (
         <Wrapper>
-            <ProjectActivites>
-                <Container>
-                    <About data={about} />
-                    <Curator data={curator} />
-                </Container>
-                <Container>
-                    <Scores data={scores} />
-                    <Participants data={participants} />
-                </Container>
-            </ProjectActivites>
+            <About data={about} />
+            <Curator data={curator} />
+            <Scores data={scores} />
+            <Participants data={participants} />
         </Wrapper>
     )
 }

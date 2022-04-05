@@ -47,6 +47,7 @@ const GlobalStyles = createGlobalStyle`
 		--brLight: 9px;
 		--brSemi: 19px;
 		--brBold: 30px;
+		--strong-shadow: 0 0 50px #000;
 	}
 
 	html[data-theme=dark] {
