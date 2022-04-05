@@ -6,6 +6,9 @@ import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-ag
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import TeachersSchedule from '@pages/teachers-schedule'
+import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
+import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
+import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -43,6 +46,9 @@ export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-ro
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
 export const ARBITRARY_REQUEST_ROUTE = APPLICATIONS_ROUTE + '/arbitrary-request'
 export const SOCIAL_SCROLLARSHIP = APPLICATIONS_ROUTE + '/social-scollarship'
+export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-attendance'
+export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
+export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
@@ -210,6 +216,30 @@ export const hiddenRoutes: IRoutes = {
         icon: BiIdCard,
         path: SOCIAL_SCROLLARSHIP,
         Component: ApplicationForSocialScrollarship,
+        isTemplate: false,
+    },
+    18: {
+        id: 18,
+        title: 'Сертификат об обучении',
+        icon: BiIdCard,
+        path: CERTIFICATE_OF_ATTENDANCE,
+        Component: ApplicationForСertificateOfAttendance,
+        isTemplate: false,
+    },
+    19: {
+        id: 19,
+        title: 'Справка в соц.учреждения',
+        icon: BiIdCard,
+        path: SOCIAL_AGENCIES,
+        Component: ApplicationSocialAgencies,
+        isTemplate: false,
+    },
+    20: {
+        id: 20,
+        title: 'Справка-вызов',
+        icon: BiIdCard,
+        path: PAPER_CALL,
+        Component: ApplicationPaperCall,
         isTemplate: false,
     },
 }

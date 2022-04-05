@@ -1,13 +1,23 @@
-import { ARBITRARY_REQUEST_ROUTE, CLARIFICATION_OF_PASSPORT_DATA_ROUTE, SOCIAL_SCROLLARSHIP } from '@app/routes/routes'
+import {
+    ARBITRARY_REQUEST_ROUTE,
+    CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
+    SOCIAL_SCROLLARSHIP,
+    PAPER_CALL,
+    CERTIFICATE_OF_ATTENDANCE,
+    SOCIAL_AGENCIES,
+} from '@app/routes/routes'
 
 const getSectionLinks = () => {
     return [
         {
             title: 'Многофункциональный центр',
             links: [
-                { link: '/', title: 'Справка о прослушанных дисциплинах за период обучения (справка об обучении)' },
-                { link: '/', title: 'Справка в социальные учреждения (Пенсионный фонд, УСЗН и пр.)' },
-                { link: '/', title: 'Справка-вызов' },
+                {
+                    link: CERTIFICATE_OF_ATTENDANCE,
+                    title: 'Справка о прослушанных дисциплинах за период обучения (справка об обучении)',
+                },
+                { link: SOCIAL_AGENCIES, title: 'Справка в социальные учреждения (Пенсионный фонд, УСЗН и пр.)' },
+                { link: PAPER_CALL, title: 'Справка-вызов' },
                 { link: '/', title: 'Запрос на изменение персональных данных' },
                 { link: '/', title: 'Запрос на восстановление магнитного пропуска' },
                 { link: CLARIFICATION_OF_PASSPORT_DATA_ROUTE, title: 'Уточнение паспортных данных' },
