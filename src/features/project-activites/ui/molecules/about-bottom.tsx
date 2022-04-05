@@ -1,3 +1,4 @@
+import { Title } from '@ui/title'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -23,9 +24,7 @@ const AboutBottom = ({ openDescribe, theme }: Props) => {
             style={openDescribe ? { height: '0%', opacity: '0', visibility: 'hidden', transform: 'scale(0.7)' } : {}}
         >
             Тематика проекта:
-            <span>
-                <h4>{theme}</h4>
-            </span>
+            <Title size={4}>{theme}</Title>
         </Container>
     )
 }
