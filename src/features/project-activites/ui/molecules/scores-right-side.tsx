@@ -21,6 +21,7 @@ const RightSide = styled.div`
         border-radius: var(--brSemi);
     }
 `
+
 const ScoresRightSide = ({ scoreSum }: Props) => {
     return (
         <RightSide>

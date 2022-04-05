@@ -7,9 +7,16 @@ interface Props<T, R> {
     searchEngine: (value: string, whereToSearch: T) => R
     setResult: (res: R | null) => void
     placeholder?: string
+    inputAppearance?: boolean
 }
 
-const LocalSearch = <T, R>({ whereToSearch, searchEngine, setResult, placeholder = 'Поиск по меню' }: Props<T, R>) => {
+const LocalSearch = <T, R>({
+    whereToSearch,
+    searchEngine,
+    setResult,
+    inputAppearance,
+    placeholder = 'Поиск по меню',
+}: Props<T, R>) => {
     const [value, setValue] = useState('')
 
     useEffect(() => {
@@ -17,7 +24,15 @@ const LocalSearch = <T, R>({ whereToSearch, searchEngine, setResult, placeholder
         else setResult(null)
     }, [value])
 
-    return <Input value={value} setValue={setValue} placeholder={placeholder} leftIcon={<FiSearch />} />
+    return (
+        <Input
+            value={value}
+            setValue={setValue}
+            placeholder={placeholder}
+            leftIcon={<FiSearch />}
+            inputAppearance={inputAppearance}
+        />
+    )
 }
 
 export default LocalSearch

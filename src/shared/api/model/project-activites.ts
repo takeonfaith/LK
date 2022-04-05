@@ -28,7 +28,7 @@ export interface Scores {
 }
 
 export interface Participant {
-    id: number
+    id: string
     name: string
     img: string
     link: string
