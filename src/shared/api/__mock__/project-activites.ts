@@ -10,6 +10,7 @@ export const projectActivitesResponse: Projects = {
             theme: 'Урбанистика и городское хозяйство',
         },
         curator: {
+            id: '1',
             name: 'Наумов Александр Сергеевич',
             img: 'https://images.generated.photos/kcfax0-Me44ceUJx_akMnaQdZTjN4YP8jaf0IdLB89E/rs:fit:256:256/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Ry/YW5zcGFyZW50X3Yz/L3YzXzA2MTI4NTcu/cG5n.png',
             describe:
@@ -63,6 +64,7 @@ export const projectActivitesResponse: Projects = {
             theme: 'Цифровые технологии и дизайн',
         },
         curator: {
+            id: '11',
             name: 'Иванова Арина Степановна',
             img: 'https://images.generated.photos/ikJuRLlhl0UxSI2ZgtzAm6CpPqz9sux_Xz3P-7FyYLM/rs:fit:256:256/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Ry/YW5zcGFyZW50X3Yy/L3YyXzA0MTQxNzEu/cG5n.png',
             describe:
@@ -121,6 +123,7 @@ export const projectActivitesResponse: Projects = {
             theme: 'Программирование и инженерия',
         },
         curator: {
+            id: '666',
             name: 'Рыбаков Сергей Петрович',
             img: 'https://images.generated.photos/bGR702I6vJ4CATinizNMIhXm3ZaEBT7pt1dRBdw_u6I/rs:fit:256:256/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Ry/YW5zcGFyZW50X3Yz/L3YzXzA2MTU2MDMu/cG5n.png',
             describe:

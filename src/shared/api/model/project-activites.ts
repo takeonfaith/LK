@@ -17,6 +17,7 @@ export interface Info {
 }
 
 export interface Curator {
+    id: string
     name: string
     img: string
     describe: string
