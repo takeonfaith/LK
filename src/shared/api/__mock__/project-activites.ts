@@ -1,7 +1,7 @@
 import { Projects } from '@api/model/project-activites'
 
 export const projectActivitesResponse: Projects = {
-    '0': {
+    '1': {
         about: {
             name: 'Лаборатория CG-2021',
             stars: 2,
@@ -55,7 +55,7 @@ export const projectActivitesResponse: Projects = {
             },
         ],
     },
-    '1': {
+    '2': {
         about: {
             name: 'Цифровой двойник',
             stars: 2,
@@ -114,7 +114,7 @@ export const projectActivitesResponse: Projects = {
             },
         ],
     },
-    '2': {
+    '3': {
         about: {
             name: 'Введение в проектную деятельность',
             stars: 0,

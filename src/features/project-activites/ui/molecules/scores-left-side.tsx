@@ -32,6 +32,19 @@ const LeftSide = styled.div`
         align-items: center;
         max-height: 170px;
         overflow-y: auto;
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: hsla(0, 0%, 53.3%, 0.425);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
     }
 `
 

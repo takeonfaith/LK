@@ -33,6 +33,19 @@ const ParticipantsList = styled.div`
         overflow-y: auto;
         margin-top: 5px;
         border-radius: var(--standartBorderRadius1);
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background: hsla(0, 0%, 53.3%, 0.425);
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
     }
 
     .search {
@@ -43,6 +56,7 @@ const ParticipantsList = styled.div`
 
 const Participants = ({ data }: Props) => {
     const [participantsRenderList, setParticipantsRenderList] = useState<Nullable<Participant[]>>(data)
+
     useEffect(() => {
         setParticipantsRenderList(data)
     }, [data])

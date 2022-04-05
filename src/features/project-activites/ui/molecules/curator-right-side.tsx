@@ -27,6 +27,10 @@ const RightSide = styled.div`
         h3 {
             margin-bottom: 10px;
         }
+
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
     }
 
     .link-button {

@@ -25,8 +25,8 @@ const ProjectActivites = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 30px;
-
+    padding: 1.5rem;
+    box-sizing: border-box;
     max-width: 1240px;
     width: 100%;
 `
