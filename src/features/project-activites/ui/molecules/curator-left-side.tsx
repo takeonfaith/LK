@@ -1,7 +1,15 @@
+import { MESSAGES_ROUTE } from '@app/routes/techers-routes'
+import { Colors } from '@consts'
+import Avatar from '@features/home/ui/molecules/avatar'
+import { Button } from '@ui/button'
+import { Title } from '@ui/title'
 import React from 'react'
+import { FiMessageCircle } from 'react-icons/fi'
+import { useHistory } from 'react-router'
 import styled from 'styled-components'
 
 interface Props {
+    id: string
     img: string
     name: string
     title: string
@@ -17,32 +25,51 @@ const LeftSide = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
+    gap: 0.7rem;
 
-    .img-container {
-        width: 100px;
-        height: 100px;
-        overflow: hidden;
-        border-radius: 100%;
-        background: var(--orangeGradient);
+    .title-and-name {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        p {
+            opacity: 0.7;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
     }
 
-    img {
-        height: 100%;
+    @media (max-width: 550px) {
+        width: 100%;
+        height: auto;
+
+        .message-button {
+            display: none;
+        }
     }
 `
 
-const CuratorLeftSide = ({ img, name, title }: Props) => {
+const CuratorLeftSide = ({ img, name, title, id }: Props) => {
+    const history = useHistory()
     return (
         <LeftSide>
-            <div className="img-container">
-                <img src={img} alt="" />
+            <Avatar avatar={img} width="100px" height="100px" marginRight="0" />
+            <div className="title-and-name">
+                <Title size={3}>{name}</Title>
+                <p>{title}</p>
             </div>
-            {name}
-            <h3>{title}</h3>
+            <div className="message-button">
+                <Button
+                    icon={<FiMessageCircle />}
+                    text={'Написать'}
+                    onClick={() => {
+                        history.push(`${MESSAGES_ROUTE}/${name}`)
+                    }}
+                    width="160px"
+                    background={Colors.purple.transparent}
+                    textColor={Colors.purple.main}
+                />
+            </div>
         </LeftSide>
     )
 }

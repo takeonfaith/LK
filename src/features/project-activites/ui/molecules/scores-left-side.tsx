@@ -24,28 +24,20 @@ const LeftSide = styled.div`
         justify-content: space-between;
         align-items: center;
         margin-bottom: 30px;
+
+        @media (max-width: 550px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+        }
     }
 
     .list {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         max-height: 170px;
-        overflow-y: auto;
+    }
 
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background: hsla(0, 0%, 53.3%, 0.425);
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
+    @media (max-width: 550px) {
+        width: 100%;
     }
 `
 

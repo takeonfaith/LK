@@ -1,11 +1,42 @@
 import { Info } from '@api/model/project-activites'
+import { SkeletonShape } from '@ui/skeleton-shape'
 import React, { useState } from 'react'
-import { Block } from '../atoms'
+import styled from 'styled-components'
+import { Block, LoadingWrapper } from '../atoms'
 import AboutBottom from '../molecules/about-bottom'
 import AboutTop from '../molecules/about-top'
 
 interface Props {
-    data: Info
+    data: Nullable<Info>
+}
+
+const LoadingContainer = styled(LoadingWrapper)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const Loading = () => {
+    return (
+        <LoadingContainer>
+            <SkeletonShape
+                shape={'rect'}
+                size={{
+                    width: '100%',
+                    height: '150px',
+                }}
+                margin="0px 0 4rem 0"
+            />
+            <SkeletonShape
+                shape={'rect'}
+                size={{
+                    width: '70%',
+                    height: '20px',
+                }}
+                margin="0"
+            />
+        </LoadingContainer>
+    )
 }
 
 const About = ({ data }: Props) => {
@@ -18,14 +49,18 @@ const About = ({ data }: Props) => {
     }
 
     return (
-        <Block maxWidth="500px" orientation="vertical">
-            <AboutTop
-                data={data}
-                handleOpenDescribe={handleOpenDescribe}
-                openDescribe={openDescribe}
-                setOpenDescribe={setOpenDescribe}
-            />
-            <AboutBottom openDescribe={openDescribe} theme={data.theme} />
+        <Block maxWidth="500px" orientation="vertical" loading={!data} skeleton={<Loading />}>
+            {!!data && (
+                <>
+                    <AboutTop
+                        data={data}
+                        handleOpenDescribe={handleOpenDescribe}
+                        openDescribe={openDescribe}
+                        setOpenDescribe={setOpenDescribe}
+                    />
+                    <AboutBottom openDescribe={openDescribe} theme={data.theme} />
+                </>
+            )}
         </Block>
     )
 }

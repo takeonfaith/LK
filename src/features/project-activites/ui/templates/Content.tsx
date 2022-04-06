@@ -8,6 +8,7 @@ import Scores from '../organisms/scores'
 
 interface Props {
     data: Project
+    loading?: boolean
 }
 
 const Wrapper = styled.div`
@@ -17,17 +18,20 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
     gap: 1rem;
     max-width: 1300px;
+    justify-content: center;
+
+    /* @media(max-width:) */
 `
 
-const Content = ({ data }: Props) => {
+const Content = ({ data, loading }: Props) => {
     const { about, curator, scores, participants } = data
 
     return (
         <Wrapper>
-            <About data={about} />
-            <Curator data={curator} />
-            <Scores data={scores} />
-            <Participants data={participants} />
+            <About data={!loading ? about : null} />
+            <Curator data={!loading ? curator : null} />
+            <Scores data={!loading ? scores : null} />
+            <Participants data={!loading ? participants : null} />
         </Wrapper>
     )
 }

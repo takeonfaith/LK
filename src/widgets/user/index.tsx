@@ -1,4 +1,5 @@
 import { SCHEDULE_ROUTE } from '@app/routes/routes'
+import { MESSAGES_ROUTE } from '@app/routes/techers-routes'
 import { Colors } from '@consts'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { Button } from '@ui/button'
@@ -74,7 +75,7 @@ const User = ({ type, avatar, name, loading = false }: Props) => {
                                   icon={<FiMessageCircle />}
                                   text={'Написать'}
                                   onClick={() => {
-                                      history.push(`${SCHEDULE_ROUTE}/${name}`)
+                                      history.push(`${MESSAGES_ROUTE}/${name}`)
                                       close()
                                   }}
                                   width="130px"

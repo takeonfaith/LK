@@ -1,43 +1,63 @@
+import { MESSAGES_ROUTE } from '@app/routes/routes'
+import { Colors } from '@consts'
 import { Button } from '@ui/button'
 import { Title } from '@ui/title'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { FiMessageCircle } from 'react-icons/fi'
+import { useHistory } from 'react-router'
 import styled from 'styled-components'
 
 interface Props {
     describe: string
-    id: string
+    name: string
 }
 
 const RightSide = styled.div`
     max-width: 50%;
     height: 100%;
-    padding: 20px;
-    border-radius: calc(var(--brSemi) - 7px);
-    background: var(--theme);
-    box-shadow: var(--schedule-shadow);
-    overflow: hidden;
 
     .description {
         height: 100%;
-        max-height: calc(100% - 45px);
         overflow-y: auto;
-        padding-bottom: 20px h3 {
-            margin-bottom: 10px;
-        }
+        padding: 20px;
+        border-radius: calc(var(--brSemi) - 7px);
+        background: var(--theme);
+        box-shadow: var(--schedule-shadow);
 
-        &::-webkit-scrollbar {
-            width: 12px;
+        @media (max-width: 550px) {
+            max-height: 150px;
+            padding-bottom: 4px;
+            max-width: 100%;
         }
+    }
+
+    .message-button {
+        display: none;
     }
 
     .link-button {
         color: #fff;
         text-decoration: none;
     }
+
+    @media (max-width: 550px) {
+        height: auto;
+        max-width: 100%;
+
+        .description {
+            height: fit-content;
+            padding: 15px;
+        }
+
+        .message-button {
+            margin-top: 10px;
+            display: flex;
+        }
+    }
 `
 
-const CuratorRightSide = ({ describe, id }: Props) => {
+const CuratorRightSide = ({ describe, name }: Props) => {
+    const history = useHistory()
     return (
         <RightSide>
             <div className="description">
@@ -46,14 +66,18 @@ const CuratorRightSide = ({ describe, id }: Props) => {
                 </Title>
                 {describe}
             </div>
-            <Link className="link-button" to={`/chat/${id}`}>
+            <div className="message-button">
                 <Button
-                    textColor="#fff"
-                    text="Написать"
-                    background="linear-gradient(45deg, #8d6bb8, #dd708a)"
+                    icon={<FiMessageCircle />}
+                    text={'Написать'}
+                    onClick={() => {
+                        history.push(`${MESSAGES_ROUTE}/${name}`)
+                    }}
                     width="100%"
+                    background={Colors.purple.transparent}
+                    textColor={Colors.purple.main}
                 />
-            </Link>
+            </div>
         </RightSide>
     )
 }

@@ -1,4 +1,6 @@
+import { Message } from '@ui/message'
 import React from 'react'
+import { FiCheck, FiCheckCircle, FiX, FiXCircle } from 'react-icons/fi'
 import styled from 'styled-components'
 
 interface Props {
@@ -10,24 +12,17 @@ const RightSide = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    flex-direction: column;
-    font-size: 0.9em;
-
-    span {
-        font-weight: bold;
-        padding: 20px;
-        background: var(--leftside-bar);
-        border-radius: var(--brSemi);
-    }
 `
 
 const ScoresRightSide = ({ scoreSum }: Props) => {
+    const isPassed = scoreSum > 60
     return (
         <RightSide>
-            <span style={scoreSum > 60 ? { color: 'var(--green)' } : { color: 'var(--red)' }}>
-                {scoreSum > 60 ? 'Зачтено' : 'Незачтено'}
-            </span>
+            <Message
+                type={isPassed ? 'success' : 'failure'}
+                icon={isPassed ? <FiCheckCircle /> : <FiXCircle />}
+                title={isPassed ? 'Зачтено' : 'Незачтено'}
+            />
         </RightSide>
     )
 }
