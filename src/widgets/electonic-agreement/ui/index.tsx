@@ -1,24 +1,16 @@
 import { Button, LinkButton, SubmitButton } from '@ui/atoms'
+import Block from '@ui/block'
+import BlockWrapper from '@ui/block/styles'
+import { Message } from '@ui/message'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
-import { FiDownload } from 'react-icons/fi'
+import { FiCheck, FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import { useElectronicAgreement } from '../hooks/use-electronic-agreement'
 import { MistakeModal, Signed } from './atoms'
 
-const CenterSection = styled.div<{ showInfoText: boolean }>`
-    box-shadow: 0 0 100px #0000003e;
-    width: 100%;
-    max-width: 500px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border-radius: var(--brSemi);
-    background: var(--form);
-
+const CenterSection = styled(BlockWrapper)<{ showInfoText: boolean }>`
     .info-text {
         transition: 0.2s;
         opacity: ${({ showInfoText }) => (showInfoText ? 1 : 0)};
@@ -27,8 +19,6 @@ const CenterSection = styled.div<{ showInfoText: boolean }>`
     }
 
     p {
-        margin: 10px 0;
-
         a {
             color: var(--blue);
         }
@@ -63,7 +53,13 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
     })
 
     return !!data ? (
-        <CenterSection showInfoText={!data.status && !done}>
+        <CenterSection
+            showInfoText={!data.status && !done}
+            maxWidth="500px"
+            orientation="vertical"
+            height="fit-content"
+            gap="10px"
+        >
             <LinkButton
                 href={data.file}
                 onClick={() => null}
@@ -71,8 +67,8 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
                 width="100%"
                 icon={<FiDownload />}
             />
-            <Signed show={data.status || done} />
-            <div className="info-text">{children}</div>
+            <Message type={'success'} icon={<FiCheck />} title={'Успешно подписано'} visible={data.status || done} />
+            {children && <div className="info-text">{children}</div>}
             {!data.status && !done && (
                 <SubmitButton
                     text={!data.status && !done ? 'Подписать' : 'Подписано'}

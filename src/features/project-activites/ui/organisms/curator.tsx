@@ -1,8 +1,9 @@
 import { Curator as CuratorType } from '@api/model/project-activites'
+import Block from '@ui/block'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import React from 'react'
 import styled from 'styled-components'
-import { Block, LoadingWrapper } from '../atoms'
+import { LoadingWrapper } from '../atoms'
 import CuratorLeftSide from '../molecules/curator-left-side'
 import CuratorRightSide from '../molecules/curator-right-side'
 

@@ -3,6 +3,8 @@ import DownloadAdminFilesPage from '@pages/download-admin-files'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
+import SchedulePage from '@pages/schedule'
+import TeachersSchedule from '@pages/teachers-schedule'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -10,6 +12,7 @@ import {
     BiHeadphone,
     BiIdCard,
     BiMessageRounded,
+    BiRuble,
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
@@ -20,7 +23,6 @@ import {
     FiBriefcase,
     FiCalendar,
     FiClipboard,
-    FiDollarSign,
     FiFileText,
     FiMonitor,
     FiStar,
@@ -29,8 +31,6 @@ import { HiOutlineClipboardCheck, HiOutlineMenuAlt2, HiOutlineUserGroup } from '
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
-import SchedulePage from '@pages/schedule'
-import TeachersSchedule from '@pages/teachers-schedule'
 import { IRoutes } from './routes'
 
 export const LOGIN_ROUTE = '/login'
@@ -263,8 +263,8 @@ export const teachersPrivateRoutes: IRoutes = {
     },
     22: {
         id: 22,
-        title: 'Сведения об оплатах',
-        icon: FiDollarSign,
+        title: 'Оплата',
+        icon: BiRuble,
         path: PAYMENTS_ROUTE,
         Component: PaymentsPage,
         isTemplate: false,

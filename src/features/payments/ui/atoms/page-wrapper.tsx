@@ -34,23 +34,26 @@ const PageWrapper = styled.div`
         }
     }
 
-    @media (max-width: 1225px) {
-        & > * + * {
-            margin-left: 0;
-            margin-top: 40px;
-        }
-
+    @media (max-width: 1600px) {
+        align-items: center;
+        justify-content: center;
         .blocks-wrapper {
-            display: flex;
+            width: 100%;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
 
             & > * + * {
-                margin-top: 10px;
                 margin-left: 0px;
+                margin-top: 10px;
             }
         }
+    }
 
+    @media (max-width: 1225px) {
+        .blocks-wrapper {
+            max-width: 600px;
+        }
         .payment-block-content {
             flex-direction: column;
             & > * + * {

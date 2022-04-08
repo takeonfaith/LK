@@ -1,8 +1,9 @@
 import { Info } from '@api/model/project-activites'
+import Block from '@ui/block'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Block, LoadingWrapper } from '../atoms'
+import { LoadingWrapper } from '../atoms'
 import AboutBottom from '../molecules/about-bottom'
 import AboutTop from '../molecules/about-top'
 

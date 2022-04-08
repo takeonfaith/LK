@@ -1,12 +1,13 @@
 import { Participant } from '@api/model/project-activites'
 import { search } from '@features/project-activites/lib/search-participants'
+import Block from '@ui/block'
 import { LocalSearch } from '@ui/molecules'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { Title } from '@ui/title'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { User } from 'widgets'
-import { Block, LoadingWrapper } from '../atoms'
+import { LoadingWrapper } from '../atoms'
 
 interface Props {
     data: Nullable<Participant[]>

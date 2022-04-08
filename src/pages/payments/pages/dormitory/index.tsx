@@ -1,16 +1,7 @@
-import { Agreement } from '@api/model'
 import { paymentsModel } from '@entities/payments'
-import {
-    AgreementsBlock,
-    Contract,
-    ElectronicAgreementList,
-    LeftBlock,
-    PageWrapper,
-    PaymentList,
-    PaymentsInfo,
-    RightBlock,
-} from '@features/payments'
+import { Contract, ElectronicAgreementList, PageWrapper, PaymentList, PaymentsInfo } from '@features/payments'
 import { Title } from '@ui/atoms'
+import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 
@@ -23,9 +14,9 @@ const DormitoryPayments = () => {
         <PageWrapper>
             {data.dormitory.map((dormitory, i) => {
                 return (
-                    <>
+                    <React.Fragment key={dormitory.number}>
                         <div className="blocks-wrapper" key={i}>
-                            <LeftBlock>
+                            <Block orientation="vertical" maxWidth="800px">
                                 <Title size={2} align="left" bottomGap>
                                     Оплата за общежитие
                                 </Title>
@@ -46,17 +37,17 @@ const DormitoryPayments = () => {
                                         qr_total={dormitory.qr_total}
                                     />
                                 </div>
-                            </LeftBlock>
-                            <RightBlock>
+                            </Block>
+                            <Block orientation="vertical" maxWidth="380px">
                                 <Title size={2} align="left" bottomGap>
                                     Реквизиты договора
                                 </Title>
                                 <Contract contract={dormitory} />
-                            </RightBlock>
+                            </Block>
                         </div>
                         {!!dormitory.agreements && !!dormitory.agreements.length && (
                             <div className="blocks-wrapper">
-                                <AgreementsBlock>
+                                <Block orientation="vertical" maxWidth="1190px" height="fit-content">
                                     <Title size={2} align="left" bottomGap>
                                         Доп. соглашение
                                     </Title>
@@ -65,10 +56,10 @@ const DormitoryPayments = () => {
                                             (item) => new Date(item?.date) > new Date('2022-02-1'),
                                         )}
                                     />
-                                </AgreementsBlock>
+                                </Block>
                             </div>
                         )}
-                    </>
+                    </React.Fragment>
                 )
             })}
         </PageWrapper>
