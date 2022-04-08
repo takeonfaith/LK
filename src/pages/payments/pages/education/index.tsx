@@ -1,16 +1,7 @@
-import { Agreement } from '@api/model'
 import { paymentsModel } from '@entities/payments'
-import {
-    AgreementsBlock,
-    Contract,
-    ElectronicAgreementList,
-    LeftBlock,
-    PageWrapper,
-    PaymentList,
-    PaymentsInfo,
-    RightBlock,
-} from '@features/payments'
+import { Contract, ElectronicAgreementList, PageWrapper, PaymentList, PaymentsInfo } from '@features/payments'
 import { Title } from '@ui/atoms'
+import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 
@@ -25,7 +16,7 @@ const EducationPayments = () => {
                 return (
                     <>
                         <div className="blocks-wrapper" key={i}>
-                            <LeftBlock>
+                            <Block orientation="vertical" maxWidth="800px" height="fit-content">
                                 <Title size={2} align="left" bottomGap>
                                     Оплата за образование
                                 </Title>
@@ -46,17 +37,17 @@ const EducationPayments = () => {
                                         qr_total={education.qr_total}
                                     />
                                 </div>
-                            </LeftBlock>
-                            <RightBlock>
+                            </Block>
+                            <Block orientation="vertical" maxWidth="380px">
                                 <Title size={2} align="left" bottomGap>
                                     Реквизиты договора
                                 </Title>
                                 <Contract contract={education} />
-                            </RightBlock>
+                            </Block>
                         </div>
                         {education.agreements && !!education.agreements.length && (
                             <div className="blocks-wrapper">
-                                <AgreementsBlock>
+                                <Block orientation="vertical" maxWidth="1190px" height="fit-content">
                                     <Title size={2} align="left" bottomGap>
                                         Доп. соглашение
                                     </Title>
@@ -65,7 +56,7 @@ const EducationPayments = () => {
                                             (item) => new Date(item?.date) > new Date('2022-02-01'),
                                         )}
                                     />
-                                </AgreementsBlock>
+                                </Block>
                             </div>
                         )}
                     </>

@@ -1,6 +1,7 @@
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
+import ProjectActivitiesPage from '@pages/project-activities'
 import TeachersSchedule from '@pages/teachers-schedule'
 import {
     BiBookReader,
@@ -9,11 +10,12 @@ import {
     BiHeadphone,
     BiIdCard,
     BiMessageRounded,
+    BiRuble,
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBriefcase, FiDollarSign, FiFileText } from 'react-icons/fi'
+import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import { HiOutlineClipboardCheck } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import AcadPerformance from '../../pages/acad-performance'
@@ -103,13 +105,13 @@ export const privateRoutes: IRoutes = {
         title: 'Проектная деятельность',
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
+        Component: ProjectActivitiesPage,
         isTemplate: false,
     },
     6: {
         id: 6,
         title: 'Оплата',
-        icon: FiDollarSign,
+        icon: BiRuble,
         path: PAYMENTS_ROUTE,
         Component: PaymentsPage,
         isTemplate: false,

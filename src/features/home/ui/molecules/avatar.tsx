@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FiUser } from 'react-icons/fi'
 
 import { Container, Img } from '../atoms/avatar'
@@ -13,9 +13,14 @@ interface Props {
 }
 
 function Avatar({ avatar, width, height, marginRight }: Props) {
+    const [isLoaded, setIsLoaded] = useState<boolean>(true)
     return (
         <Container width={width} height={height} marginRight={marginRight}>
-            {avatar ? <Img src={avatar} /> : <FiUser />}
+            {avatar && isLoaded ? (
+                <Img onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />
+            ) : (
+                <FiUser />
+            )}
         </Container>
     )
 }

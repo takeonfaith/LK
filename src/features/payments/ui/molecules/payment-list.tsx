@@ -30,6 +30,8 @@ const PaymentListWrapper = styled.div`
         overflow-y: auto;
         height: 200px;
         padding-right: 5px;
+        box-shadow: var(--schedule-shadow);
+        border-radius: calc(var(--brSemi) - 7px);
 
         & > * + * {
             margin-top: 5px;

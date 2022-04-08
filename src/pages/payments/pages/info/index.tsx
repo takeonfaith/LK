@@ -1,5 +1,6 @@
-import { LeftBlock, PageWrapper, RightBlock } from '@features/payments'
+import { PageWrapper } from '@features/payments'
 import { Button, Title } from '@ui/atoms'
+import Block from '@ui/block'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -35,7 +36,7 @@ const InfoPayments = () => {
     return (
         <PageWrapper>
             <div className="blocks-wrapper">
-                <LeftBlock>
+                <Block orientation="vertical" maxWidth="800px">
                     <Title size={2} align="left">
                         Договорной отдел
                     </Title>
@@ -74,8 +75,8 @@ const InfoPayments = () => {
                             ></iframe>
                         </MapWrapper>
                     </div>
-                </LeftBlock>
-                <RightBlock>
+                </Block>
+                <Block orientation="vertical" maxWidth="380px">
                     <Title size={2} align="left">
                         Реквизиты договора
                     </Title>
@@ -105,7 +106,7 @@ const InfoPayments = () => {
                             background="var(--settings)"
                         />
                     </ButtonList>
-                </RightBlock>
+                </Block>
             </div>
         </PageWrapper>
     )
