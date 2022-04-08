@@ -203,3 +203,5 @@ export const GradeByScore: IGrade = {
 }
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
+
+export const LastUpdateWhatsNew = '2022-04-08T10:30:00'
