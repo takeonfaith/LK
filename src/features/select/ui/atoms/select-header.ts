@@ -11,6 +11,12 @@ const SelectHeader = styled.header`
         display: none;
     }
 
+    .single-header,
+    .header-item {
+        display: flex;
+        align-items: center;
+    }
+
     .header-title {
         overflow: hidden;
         white-space: nowrap;
@@ -33,6 +39,7 @@ const SelectHeader = styled.header`
         border-radius: 6px;
         padding: 5px 10px;
         font-size: 0.85em;
+        min-width: fit-content;
     }
 
     .icon {

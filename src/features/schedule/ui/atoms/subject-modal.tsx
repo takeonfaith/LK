@@ -45,17 +45,17 @@ const SubjectModalWrapper = styled.div`
 type Props = ISubject & { isCurrent: boolean; isNext?: boolean }
 
 const SubjectModal = (props: Props) => {
-    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, rooms, groups, isNext = false } = props
+    const { timeInterval, name, place, teachers, dateInterval, link, rooms, groups, isNext = false } = props
 
     return (
         <SubjectModalWrapper>
-            <Groups groups={groups} isCurrent={isCurrent} />
+            <Groups groups={groups} isCurrent={false} />
             <span className="date-interval">{dateInterval}</span>
             <Title size={3} align="left">
                 {name}
             </Title>
             <div className="time-and-next">
-                <Time timeInterval={timeInterval} isCurrent={isCurrent} />
+                <Time timeInterval={timeInterval} isCurrent={false} />
                 <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
                 <Rooms rooms={rooms} inModal />
             </div>

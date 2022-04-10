@@ -8,6 +8,7 @@ interface Props<T, R> {
     setResult: (res: R | null) => void
     placeholder?: string
     inputAppearance?: boolean
+    setExternalValue?: (value: string) => void
 }
 
 const LocalSearch = <T, R>({
@@ -15,6 +16,7 @@ const LocalSearch = <T, R>({
     searchEngine,
     setResult,
     inputAppearance,
+    setExternalValue,
     placeholder = 'Поиск по меню',
 }: Props<T, R>) => {
     const [value, setValue] = useState('')
@@ -27,10 +29,13 @@ const LocalSearch = <T, R>({
     return (
         <Input
             value={value}
-            setValue={setValue}
             placeholder={placeholder}
             leftIcon={<FiSearch />}
             inputAppearance={inputAppearance}
+            setValue={(value: string) => {
+                setValue(value)
+                setExternalValue && setExternalValue(value)
+            }}
         />
     )
 }

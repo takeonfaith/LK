@@ -1,11 +1,6 @@
 import React from 'react'
+import LoadingImage from '../../images/loading.gif'
 
 export function Loading() {
-    return (
-        <img
-            src="https://media0.giphy.com/media/L05HgB2h6qICDs5Sms/giphy.gif"
-            alt="loading"
-            className="loading-circle"
-        />
-    )
+    return <img src={LoadingImage} alt="loading" className="loading-circle" />
 }

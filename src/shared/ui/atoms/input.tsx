@@ -2,6 +2,7 @@ import { Colors } from '@consts'
 import React, { useCallback, useState } from 'react'
 import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
+import { Title } from '@ui/title'
 import { Button } from '@ui/button'
 
 const InputWrapper = styled.div<{
@@ -19,15 +20,6 @@ const InputWrapper = styled.div<{
     min-width: ${({ width }) => width};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
-
-    h5 {
-        margin-bottom: 5px;
-
-        .red-star {
-            color: var(--red);
-            margin-right: 5px;
-        }
-    }
 
     .icon {
         position: absolute;
@@ -188,12 +180,9 @@ const Input = ({
             width={width}
             danger={danger}
         >
-            {!!title && (
-                <h5>
-                    {required && <span className="red-star">*</span>}
-                    {title}
-                </h5>
-            )}
+            <Title size={5} align="left" visible={!!title} bottomGap="5px" required={required}>
+                {title}
+            </Title>
             {leftIcon && <span className="icon">{leftIcon}</span>}
             <input
                 type={inputType}

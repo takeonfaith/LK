@@ -14,7 +14,6 @@ const PrivateRouter = () => {
 
     if (!data.user) return null
 
-    //TODO: fix this s**t
     return (
         <Switch>
             {Object.values(currentRoute).map(({ path, Component, isTemplate, title }) => {

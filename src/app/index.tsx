@@ -1,5 +1,4 @@
 import { adminLinksModel } from '@entities/admin-links'
-import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import React, { useEffect } from 'react'
 import { HashRouter } from 'react-router-dom'
 import { ModalProvider } from 'widgets/modal/lib'

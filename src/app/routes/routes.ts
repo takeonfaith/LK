@@ -1,8 +1,15 @@
+import ApplicationsPage from '@pages/applications'
+import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
+import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
+import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import ProjectActivitiesPage from '@pages/project-activities'
 import TeachersSchedule from '@pages/teachers-schedule'
+import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
+import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
+import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -37,7 +44,13 @@ export const ALL_TEACHERS_ROUTE = '/teachers'
 export const LOGIN_ROUTE = '/login'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 
-// hidden routes
+//hidden routes
+export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
+export const ARBITRARY_REQUEST_ROUTE = APPLICATIONS_ROUTE + '/arbitrary-request'
+export const SOCIAL_SCROLLARSHIP = APPLICATIONS_ROUTE + '/social-scollarship'
+export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-attendance'
+export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
+export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
@@ -121,7 +134,7 @@ export const privateRoutes: IRoutes = {
         title: 'Заявления',
         icon: FiFileText,
         path: APPLICATIONS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: ApplicationsPage,
         isTemplate: false,
     },
     8: {
@@ -174,13 +187,61 @@ export const privateRoutes: IRoutes = {
     },
 }
 
-export const hiddenRoutes = {
+export const hiddenRoutes: IRoutes = {
     14: {
         id: 14,
+        title: 'Уточнение паспортных данных',
+        icon: FiBriefcase,
+        path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
+        Component: ClarificationOfPassportDataApplication,
+        isTemplate: false,
+    },
+    15: {
+        id: 15,
+        title: 'Произвольный запрос',
+        icon: FiBriefcase,
+        path: ARBITRARY_REQUEST_ROUTE,
+        Component: ArbitrayRequestPage,
+        isTemplate: false,
+    },
+    16: {
+        id: 16,
         title: 'Расписание преподавателя',
         icon: BiIdCard,
         path: TEACHER_SCHEDULE,
         Component: TeachersSchedule,
+        isTemplate: false,
+    },
+    17: {
+        id: 17,
+        title: 'Социальная стипендия',
+        icon: BiIdCard,
+        path: SOCIAL_SCROLLARSHIP,
+        Component: ApplicationForSocialScrollarship,
+        isTemplate: false,
+    },
+    18: {
+        id: 18,
+        title: 'Сертификат об обучении',
+        icon: BiIdCard,
+        path: CERTIFICATE_OF_ATTENDANCE,
+        Component: ApplicationForСertificateOfAttendance,
+        isTemplate: false,
+    },
+    19: {
+        id: 19,
+        title: 'Справка в соц.учреждения',
+        icon: BiIdCard,
+        path: SOCIAL_AGENCIES,
+        Component: ApplicationSocialAgencies,
+        isTemplate: false,
+    },
+    20: {
+        id: 20,
+        title: 'Справка-вызов',
+        icon: BiIdCard,
+        path: PAPER_CALL,
+        Component: ApplicationPaperCall,
         isTemplate: false,
     },
 }

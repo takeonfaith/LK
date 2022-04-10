@@ -14,9 +14,6 @@ export const post = (args: { [key: string]: any }) => {
         formData.set(key, value)
     }
 
-    // eslint-disable-next-line no-console
-    console.log(formData)
-
     return $api.post('?postRequestHighComfort=1', formData, {
         headers: {
             'Content-Type': 'multipart/form-data',

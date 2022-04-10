@@ -1,10 +1,10 @@
 import { Align } from '@ui/types'
 import styled from 'styled-components'
 
-export const TitleWrapper = styled.div<{ align: Align; bottomGap: boolean; iconColor?: string }>`
+export const TitleWrapper = styled.div<{ align: Align; bottomGap: boolean | string; iconColor?: string }>`
     width: 100%;
     text-align: ${({ align }) => align};
-    margin-bottom: ${({ bottomGap }) => (bottomGap ? '10px' : '0')};
+    margin-bottom: ${({ bottomGap }) => (typeof bottomGap === 'string' ? bottomGap : bottomGap ? '10px' : '0')};
     display: inline-flex;
     align-items: center;
     justify-content: ${({ align }) =>
@@ -15,4 +15,9 @@ export const TitleWrapper = styled.div<{ align: Align; bottomGap: boolean; iconC
         margin-right: 4px;
         color: ${({ iconColor }) => !!iconColor && iconColor};
     }
+`
+
+export const RedStar = styled.span`
+    color: var(--red);
+    margin-right: 5px;
 `

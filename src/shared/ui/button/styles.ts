@@ -5,6 +5,7 @@ export const ButtonWrapper = styled.button<{
     text: boolean
     isChosen?: boolean
     width?: string
+    minWidth?: string
     background?: string
     textColor?: string
     shrinkTextInMobile?: boolean
@@ -12,6 +13,7 @@ export const ButtonWrapper = styled.button<{
     direction?: Direction
     align?: Align
     isActive: boolean
+    fixedInMobile?: boolean
 }>`
     display: flex;
     align-items: center;
@@ -25,6 +27,7 @@ export const ButtonWrapper = styled.button<{
     font-weight: bold;
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
+    min-width: ${({ minWidth }) => minWidth && minWidth};
     text-decoration: none;
     flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
     opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
@@ -49,6 +52,7 @@ export const ButtonWrapper = styled.button<{
     svg {
         margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')};
         width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
+        min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
         height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
         margin-bottom: ${({ direction }) => direction === 'vertical' && '4px'};
     }
@@ -56,9 +60,14 @@ export const ButtonWrapper = styled.button<{
     @media (max-width: 1000px) {
         font-size: 12px;
         height: 36px;
+        position: ${({ fixedInMobile }) => fixedInMobile && 'absolute'};
+        z-index: ${({ fixedInMobile }) => fixedInMobile && '5'};
+        bottom: 10px;
+        right: 10px;
 
         svg {
             width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
+            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
             height: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};

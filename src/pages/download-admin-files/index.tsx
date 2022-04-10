@@ -13,6 +13,7 @@ const DownloadAdminFilesPageWrapper = styled.div`
     justify-content: center;
     align-items: center;
     height: 100%;
+    color: var(--text);
 `
 
 const DownloadAdminFilesPage = () => {
