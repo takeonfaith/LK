@@ -5,6 +5,7 @@ const Line = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    align-items: center;
     width: 100%;
     column-gap: 5px;
     margin-top: 10px;
@@ -12,7 +13,7 @@ const Line = styled.div`
 
 interface Props {
     keyStr: string
-    value: string
+    value: ChildrenType
 }
 
 const KeyValue = ({ keyStr, value }: Props) => {

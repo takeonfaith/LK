@@ -33,7 +33,7 @@ const BlockWrapper = styled.div<StyledProps>`
         padding-right: 5px;
     }
 
-    @media (max-width: 1600px) {
+    @media (max-width: 1400px) {
         max-width: 800px;
         width: 100%;
     }

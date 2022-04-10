@@ -41,7 +41,7 @@ const InputWrapper = styled.div<{
         font-weight: bold;
         border-radius: 7px;
         padding-left: ${({ leftIcon, inputAppearance }) => (leftIcon ? '30px' : inputAppearance ? '10px' : '0')};
-        padding-right: 35px;
+        padding-right: ${({ inputAppearance }) => (!inputAppearance ? '0' : '35px')};
         max-height: 36px;
         border: ${({ danger }) => danger && `2px solid ${Colors.red.main}`};
 
@@ -50,7 +50,7 @@ const InputWrapper = styled.div<{
         }
 
         &:focus-visible {
-            outline: 4px solid var(--almostTransparentOpposite);
+            outline: ${({ inputAppearance }) => inputAppearance && '4px solid var(--almostTransparentOpposite)'};
         }
 
         &:focus:not(:focus-visible) {

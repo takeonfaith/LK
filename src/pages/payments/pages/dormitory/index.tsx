@@ -1,9 +1,19 @@
 import { paymentsModel } from '@entities/payments'
-import { Contract, ElectronicAgreementList, PageWrapper, PaymentList, PaymentsInfo } from '@features/payments'
+import {
+    Contract,
+    ElectronicAgreementList,
+    PageWrapper,
+    PaymentGraph,
+    PaymentList,
+    PaymentsInfo,
+} from '@features/payments'
+import getDormitoryPaygraphColumns from '@pages/payments/lib/get-dormitory-paygraph-columns'
 import { Title } from '@ui/atoms'
+import { LinkButton } from '@ui/atoms'
 import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
+import { FiDownload } from 'react-icons/fi'
 
 const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
@@ -25,6 +35,7 @@ const DormitoryPayments = () => {
                                     <PaymentsInfo
                                         balanceCurrDate={getCorrectNumberFormat(dormitory?.balance_currdate ?? '0')}
                                         monthly={650}
+                                        bill={dormitory?.bill}
                                         startDate={dormitory?.startDate}
                                         endDate={dormitory?.endDatePlan}
                                         sum={Number(dormitory?.sum) ?? 0}
@@ -41,8 +52,24 @@ const DormitoryPayments = () => {
                             <Block orientation="vertical" maxWidth="380px">
                                 <Title size={2} align="left" bottomGap>
                                     Реквизиты договора
+                                    <LinkButton
+                                        onClick={() => null}
+                                        href={dormitory.file ?? ''}
+                                        icon={<FiDownload />}
+                                    />
                                 </Title>
                                 <Contract contract={dormitory} />
+                            </Block>
+                        </div>
+                        <div className="blocks-wrapper">
+                            <Block orientation="vertical" maxWidth="1190px" height="fit-content">
+                                <Title size={2} align="left" bottomGap>
+                                    График платежей
+                                </Title>
+                                <PaymentGraph
+                                    columns={getDormitoryPaygraphColumns()}
+                                    paygraph={dormitory?.paygraph ?? []}
+                                />
                             </Block>
                         </div>
                         {!!dormitory.agreements && !!dormitory.agreements.length && (

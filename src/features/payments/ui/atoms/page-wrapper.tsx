@@ -34,7 +34,7 @@ const PageWrapper = styled.div`
         }
     }
 
-    @media (max-width: 1600px) {
+    @media (max-width: 1400px) {
         align-items: center;
         justify-content: center;
         .blocks-wrapper {

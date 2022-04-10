@@ -1,5 +1,6 @@
 import { Colors } from '@consts'
-import { Button } from '@ui/atoms'
+import { Button, LinkButton } from '@ui/atoms'
+import { Divider } from '@ui/divider'
 import localizeDate from '@utils/localize-date'
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
@@ -35,9 +36,10 @@ interface Props {
     balanceCurrDate: number
     qr_current: string
     qr_total: string
+    bill?: string
 }
 
-const PaymentsInfo = ({ endDate, sum, allPayments, balanceCurrDate, qr_current, qr_total }: Props) => {
+const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_current, qr_total }: Props) => {
     const { open } = useModal()
 
     const handleModal = useCallback(() => {
@@ -73,6 +75,18 @@ const PaymentsInfo = ({ endDate, sum, allPayments, balanceCurrDate, qr_current, 
                     background={Colors.green.main}
                     textColor="#fff"
                 />
+                <Divider />
+                {bill && (
+                    <LinkButton
+                        text="Сформировать квитанцию на оплату"
+                        background="#7460f4"
+                        textColor="#bdbdbd"
+                        align="center"
+                        width="100%"
+                        href={bill}
+                        onClick={() => null}
+                    />
+                )}
             </div>
         </PaymentsInfoWrapper>
     )

@@ -1,4 +1,7 @@
-const localizeDate = (date: string | Date | null | undefined, mode: 'long' | 'short' | 'weird' = 'long'): string => {
+const localizeDate = (
+    date: string | Date | null | undefined,
+    mode: 'long' | 'short' | 'weird' | 'numeric' = 'long',
+): string => {
     if (!date) return ''
 
     switch (mode) {
@@ -12,6 +15,12 @@ const localizeDate = (date: string | Date | null | undefined, mode: 'long' | 'sh
             return new Date(Date.parse(date as string)).toLocaleDateString('ru', {
                 month: 'short',
                 day: 'numeric',
+            })
+        case 'numeric':
+            return new Date(Date.parse(date as string)).toLocaleDateString('ru', {
+                year: '2-digit',
+                month: '2-digit',
+                day: '2-digit',
             })
         case 'weird':
             const month =

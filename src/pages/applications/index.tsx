@@ -1,11 +1,13 @@
 import { Application } from '@api/model'
 import { applicationsModel } from '@entities/applications'
+import getApplicationsColumns from '@features/applications/lib/get-applications-columns'
 import search from '@features/applications/lib/search'
 import { ApplicationList } from '@features/applications/ui'
 import CreateApplicationList from '@features/applications/ui/molecules/create-application-list'
 import Select, { SelectPage } from '@features/select'
 import { Button, FormBlock, Message, Wrapper } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
+import Table from '@ui/table'
 import useResize from '@utils/hooks/use-resize'
 import React, { useEffect, useState } from 'react'
 import { FiCheck, FiClock, FiInfo, FiPlus, FiX } from 'react-icons/fi'
@@ -35,7 +37,6 @@ const ApplicationsPage = () => {
     const { open } = useModal()
     const [selectedFilter, setSelectedFilter] = useState<SelectPage | null>(null)
     const [applications, setApplications] = useState<Application[] | null>(null)
-    const { width } = useResize()
 
     useEffect(() => {
         setTimeout(() => {
@@ -322,7 +323,13 @@ const ApplicationsPage = () => {
                             selected={selectedFilter}
                         />
                     </div>
-                    <ApplicationList loading={!applications} list={applications} />
+                    <Table
+                        loading={!applications}
+                        columns={getApplicationsColumns()}
+                        data={applications}
+                        maxOnPage={7}
+                    />
+                    {/* <ApplicationList loading={!applications} list={applications} /> */}
                 </FormBlock>
             </ApplicationPageWrapper>
         </Wrapper>
