@@ -5,6 +5,9 @@ import {
     PAPER_CALL,
     CERTIFICATE_OF_ATTENDANCE,
     SOCIAL_AGENCIES,
+    PERSONAL_DATA,
+    MAGNET_RECOVERY,
+    MILITARY_REGISTRATION,
 } from '@app/routes/routes'
 
 const getSectionLinks = () => {
@@ -18,8 +21,8 @@ const getSectionLinks = () => {
                 },
                 { link: SOCIAL_AGENCIES, title: 'Справка в социальные учреждения (Пенсионный фонд, УСЗН и пр.)' },
                 { link: PAPER_CALL, title: 'Справка-вызов' },
-                { link: '/', title: 'Запрос на изменение персональных данных' },
-                { link: '/', title: 'Запрос на восстановление магнитного пропуска' },
+                { link: PERSONAL_DATA, title: 'Запрос на изменение персональных данных' },
+                { link: MAGNET_RECOVERY, title: 'Запрос на восстановление магнитного пропуска' },
                 { link: CLARIFICATION_OF_PASSPORT_DATA_ROUTE, title: 'Уточнение паспортных данных' },
                 { link: '/', title: 'Заявка на комнату повышенной комфортности' },
             ],
@@ -44,7 +47,7 @@ const getSectionLinks = () => {
         {
             title: 'Мобилизационный отдел',
             links: [
-                { link: '/', title: 'Отправить документы воинского учета' },
+                { link: MILITARY_REGISTRATION, title: 'Отправить документы воинского учета' },
                 {
                     link: '/',
                     title: 'Заполнить личную карточку обучающегося по воинскому учету для получения отсрочки от призывана военную службу',

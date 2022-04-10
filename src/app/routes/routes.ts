@@ -9,6 +9,9 @@ import TeachersSchedule from '@pages/teachers-schedule'
 import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
 import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
 import ApplicationPaperCall from '@pages/applications/pages/paper-call'
+import ApplicationPersonalData from '@pages/applications/pages/personal-data-change'
+import ApplicationForMagnetPassRecovery from '@pages/applications/pages/magnet-pass-recovery'
+import ApplicationForMilitaryRegistration from '@pages/applications/pages/military-registration'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -49,6 +52,9 @@ export const SOCIAL_SCROLLARSHIP = APPLICATIONS_ROUTE + '/social-scollarship'
 export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-attendance'
 export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
 export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
+export const PERSONAL_DATA = APPLICATIONS_ROUTE + '/personal-data-change'
+export const MAGNET_RECOVERY = APPLICATIONS_ROUTE + '/magnet-pass-recovery'
+export const MILITARY_REGISTRATION = APPLICATIONS_ROUTE + '/military-registration'
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
@@ -240,6 +246,30 @@ export const hiddenRoutes: IRoutes = {
         icon: BiIdCard,
         path: PAPER_CALL,
         Component: ApplicationPaperCall,
+        isTemplate: false,
+    },
+    21: {
+        id: 21,
+        title: 'Запрос на изменение персональных данных',
+        icon: BiIdCard,
+        path: PERSONAL_DATA,
+        Component: ApplicationPersonalData,
+        isTemplate: false,
+    },
+    22: {
+        id: 22,
+        title: 'Запрос на восстановление магнитного пропуска',
+        icon: BiIdCard,
+        path: MAGNET_RECOVERY,
+        Component: ApplicationForMagnetPassRecovery,
+        isTemplate: false,
+    },
+    23: {
+        id: 23,
+        title: 'Отправить документы воинского учета',
+        icon: BiIdCard,
+        path: MILITARY_REGISTRATION,
+        Component: ApplicationForMilitaryRegistration,
         isTemplate: false,
     },
 }
