@@ -1,3 +1,4 @@
+import AllTeachersPage from '@pages/all-teachers'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -129,7 +130,7 @@ export const privateRoutes: IRoutes = {
         title: 'Преподаватели',
         icon: BiBookReader,
         path: ALL_TEACHERS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/teachers' }),
+        Component: AllTeachersPage,
         isTemplate: false,
     },
     9: {
