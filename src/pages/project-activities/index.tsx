@@ -26,7 +26,7 @@ const ProjectActivitiesPage = () => {
     } = userModel.selectors.useUser()
     const { data, loading, error } = projectActivitesModel.selectors.useProjectActivites()
 
-    const [selected, setSelected] = useState<SelectPage>({
+    const [selected, setSelected] = useState<SelectPage | null>({
         id: findSemestr(new Date().toString(), user?.course ?? 1),
         title: findSemestr(new Date().toString(), user?.course ?? 1).toString() + ' семестр',
     })
@@ -34,8 +34,10 @@ const ProjectActivitiesPage = () => {
     const items = useMemo(() => createSelectItems(user?.course ?? 0), [user])
 
     useEffect(() => {
-        projectActivitesModel.effects.getProjectActivitesFx(selected.id.toString())
-    }, [selected.id])
+        if (selected) {
+            projectActivitesModel.effects.getProjectActivitesFx(selected.id.toString())
+        }
+    }, [selected?.id])
 
     return (
         <Wrapper
@@ -46,7 +48,7 @@ const ProjectActivitiesPage = () => {
         >
             <Container>
                 {!!user?.id && <Select items={items} selected={selected} setSelected={setSelected} />}
-                {data && data[selected.id] ? (
+                {data && selected && data[selected.id] ? (
                     <Content data={data[selected.id]} loading={loading} />
                 ) : (
                     <Error text={'Данных за этот семестр нет, попробуйте другой!'} />

@@ -65,9 +65,9 @@ const CuratorLeftSide = ({ img, name, title, id }: Props) => {
                     onClick={() => {
                         history.push(`${MESSAGES_ROUTE}/${name}`)
                     }}
-                    width="160px"
-                    background={Colors.purple.transparent}
-                    textColor={Colors.purple.main}
+                    width="130px"
+                    background={Colors.purple.light}
+                    textColor="#fff"
                 />
             </div>
         </LeftSide>

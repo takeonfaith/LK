@@ -1,6 +1,6 @@
 import { Message } from '@ui/message'
 import React from 'react'
-import { FiCheck, FiCheckCircle, FiX, FiXCircle } from 'react-icons/fi'
+import { FiCheck, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 
 interface Props {
@@ -12,6 +12,10 @@ const RightSide = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 550px) {
+        width: 50%;
+    }
 `
 
 const ScoresRightSide = ({ scoreSum }: Props) => {
@@ -20,8 +24,9 @@ const ScoresRightSide = ({ scoreSum }: Props) => {
         <RightSide>
             <Message
                 type={isPassed ? 'success' : 'failure'}
-                icon={isPassed ? <FiCheckCircle /> : <FiXCircle />}
+                icon={isPassed ? <FiCheck /> : <FiX />}
                 title={isPassed ? 'Зачтено' : 'Незачтено'}
+                align="center"
             />
         </RightSide>
     )

@@ -57,8 +57,10 @@ const CreateApplicationListWrapper = styled.div`
 
     @media (max-width: 800px) {
         .list {
-            .link-list {
-                width: 100%;
+            .links-wrapper {
+                .link-list {
+                    width: 100%;
+                }
             }
         }
     }

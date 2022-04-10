@@ -5,7 +5,7 @@ import { FiClock } from 'react-icons/fi'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { TeacherModal } from 'widgets/user/ui'
+import { UserModal } from 'widgets/user/ui'
 import { Button } from '.'
 
 const TeacherWidthModalWrapper = styled.strong`
@@ -27,7 +27,7 @@ const TeacherWidthModal = ({ fio }: Props) => {
         <TeacherWidthModalWrapper
             onClick={() =>
                 open(
-                    <TeacherModal name={fio}>
+                    <UserModal name={fio}>
                         <Button
                             icon={<FiClock />}
                             text={'Расписание'}
@@ -39,7 +39,7 @@ const TeacherWidthModal = ({ fio }: Props) => {
                             background={Colors.blue.transparent}
                             textColor={Colors.blue.main}
                         />
-                    </TeacherModal>,
+                    </UserModal>,
                 )
             }
         >

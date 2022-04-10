@@ -74,8 +74,8 @@ const CuratorRightSide = ({ describe, name }: Props) => {
                         history.push(`${MESSAGES_ROUTE}/${name}`)
                     }}
                     width="100%"
-                    background={Colors.purple.transparent}
-                    textColor={Colors.purple.main}
+                    background={Colors.purple.light}
+                    textColor="#fff"
                 />
             </div>
         </RightSide>

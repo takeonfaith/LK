@@ -8,8 +8,7 @@ import { FiClock, FiMessageCircle } from 'react-icons/fi'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { SkeletonLoading } from './ui'
-import UserModal from './ui/atoms/user-modal'
+import { SkeletonLoading, UserModal } from './ui'
 
 const UserWrapper = styled.div`
     display: flex;
@@ -64,8 +63,8 @@ const User = ({ type, avatar, name, loading = false }: Props) => {
                                       close()
                                   }}
                                   width="130px"
-                                  background={Colors.blue.transparent}
-                                  textColor={Colors.blue.main}
+                                  background={Colors.blue.light}
+                                  textColor="#fff"
                               />
                           </UserModal>,
                       )
@@ -79,8 +78,8 @@ const User = ({ type, avatar, name, loading = false }: Props) => {
                                       close()
                                   }}
                                   width="130px"
-                                  background={Colors.purple.transparent}
-                                  textColor={Colors.purple.main}
+                                  background={Colors.purple.light}
+                                  textColor="#fff"
                               />
                           </UserModal>,
                       )

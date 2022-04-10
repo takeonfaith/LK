@@ -1,5 +1,4 @@
 import { Button, LinkButton, SubmitButton } from '@ui/atoms'
-import Block from '@ui/block'
 import BlockWrapper from '@ui/block/styles'
 import { Message } from '@ui/message'
 import localizeDate from '@utils/localize-date'
@@ -8,7 +7,7 @@ import { FiCheck, FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import { useElectronicAgreement } from '../hooks/use-electronic-agreement'
-import { MistakeModal, Signed } from './atoms'
+import { MistakeModal } from './atoms'
 
 const CenterSection = styled(BlockWrapper)<{ showInfoText: boolean }>`
     .info-text {
@@ -67,8 +66,14 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
                 width="100%"
                 icon={<FiDownload />}
             />
-            <Message type={'success'} icon={<FiCheck />} title={'Успешно подписано'} visible={data.status || done} />
-            {children && <div className="info-text">{children}</div>}
+            <Message
+                type={'success'}
+                icon={<FiCheck />}
+                title={'Успешно подписано'}
+                visible={data.status || done}
+                align="center"
+            />
+            <div className="info-text">{children}</div>
             {!data.status && !done && (
                 <SubmitButton
                     text={!data.status && !done ? 'Подписать' : 'Подписано'}

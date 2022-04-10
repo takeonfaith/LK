@@ -2,12 +2,12 @@ import { paymentApi } from '@api'
 import { Agreement } from '@api/model'
 import Accordion from '@ui/accordion/accordion'
 import { LinkButton, SubmitButton } from '@ui/atoms'
+import { Message } from '@ui/message'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
-import { FiDownload } from 'react-icons/fi'
+import { FiCheck, FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useElectronicAgreement } from 'widgets/electonic-agreement'
-import { Signed } from 'widgets/electonic-agreement/ui/atoms'
 
 interface Props {
     data: Agreement
@@ -64,7 +64,13 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                         icon={<FiDownload />}
                         // background="transparent"
                     />
-                    {done && <Signed show={done} disabledMargin />}
+                    <Message
+                        type={'success'}
+                        title={'Успешно отправлено'}
+                        icon={<FiCheck />}
+                        align="center"
+                        visible={done}
+                    />
                 </div>
                 {!done && (
                     <div className="block">
