@@ -12,6 +12,7 @@ import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import ApplicationPersonalData from '@pages/applications/pages/personal-data-change'
 import ApplicationForMagnetPassRecovery from '@pages/applications/pages/magnet-pass-recovery'
 import ApplicationForMilitaryRegistration from '@pages/applications/pages/military-registration'
+import ApplicationForFinancialAssistance from '@pages/applications/pages/financial-assistance'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -55,6 +56,7 @@ export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
 export const PERSONAL_DATA = APPLICATIONS_ROUTE + '/personal-data-change'
 export const MAGNET_RECOVERY = APPLICATIONS_ROUTE + '/magnet-pass-recovery'
 export const MILITARY_REGISTRATION = APPLICATIONS_ROUTE + '/military-registration'
+export const FINANCIAL_ASSISTANCE = APPLICATIONS_ROUTE + '/financial-assistance'
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export const publicRoutes = [
@@ -270,6 +272,14 @@ export const hiddenRoutes: IRoutes = {
         icon: BiIdCard,
         path: MILITARY_REGISTRATION,
         Component: ApplicationForMilitaryRegistration,
+        isTemplate: false,
+    },
+    24: {
+        id: 24,
+        title: 'Заявка на оказание материальной помощи',
+        icon: BiIdCard,
+        path: FINANCIAL_ASSISTANCE,
+        Component: ApplicationForFinancialAssistance,
         isTemplate: false,
     },
 }

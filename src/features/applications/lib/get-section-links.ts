@@ -8,6 +8,7 @@ import {
     PERSONAL_DATA,
     MAGNET_RECOVERY,
     MILITARY_REGISTRATION,
+    FINANCIAL_ASSISTANCE,
 } from '@app/routes/routes'
 
 const getSectionLinks = () => {
@@ -32,7 +33,7 @@ const getSectionLinks = () => {
             links: [
                 { link: '/', title: 'Вступить в Профсоюз' },
                 { link: '/', title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)' },
-                { link: '/', title: 'Заявка на материальную помощь' },
+                { link: FINANCIAL_ASSISTANCE, title: 'Заявка на материальную помощь' },
                 { link: SOCIAL_SCROLLARSHIP, title: 'Оформить социальную стипендию' },
                 {
                     link: '/',
