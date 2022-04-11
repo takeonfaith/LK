@@ -1,8 +1,8 @@
 import { Error } from '@ui/error'
 import { Loading } from '@ui/loading'
 import Pagination from '@ui/pagination'
-import { TableProps } from '@ui/table'
-import React, { useState } from 'react'
+import { TableCatalogType, TableProps } from '@ui/table/types'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Row } from '../molecules'
 
@@ -39,10 +39,14 @@ const LoadingWrapper = styled.div`
     }
 `
 
-const Body = ({ data, loading, columns, maxOnPage, onRowClick }: TableProps) => {
+const Body = ({ data, loading, columns, maxOnPage, onRowClick, filter }: TableProps & { filter: TableCatalogType }) => {
     const [currentPage, setCurrentPage] = useState<number>(0)
     const pages = Math.ceil((data?.length ?? 0) / (maxOnPage ?? 1)) - 1
     const result = maxOnPage ? data?.slice(currentPage * maxOnPage, (currentPage + 1) * maxOnPage) : data
+
+    useEffect(() => {
+        setCurrentPage(0)
+    }, [filter])
 
     return !loading ? (
         <BodyWrapper>

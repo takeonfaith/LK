@@ -75,12 +75,11 @@ const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_cur
                     background={Colors.green.main}
                     textColor="#fff"
                 />
-                <Divider />
                 {bill && (
                     <LinkButton
                         text="Сформировать квитанцию на оплату"
-                        background="#7460f4"
-                        textColor="#bdbdbd"
+                        background="transparent"
+                        textColor="var(--grey)"
                         align="center"
                         width="100%"
                         href={bill}

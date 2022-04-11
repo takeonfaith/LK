@@ -1,5 +1,5 @@
 import KeyValue from '@ui/atoms/key-value'
-import { ColumnProps } from '@ui/table'
+import { ColumnProps } from '@ui/table/types'
 import { Title } from '@ui/title'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import React from 'react'

@@ -1,15 +1,19 @@
+import { ApplicationsConstants } from '@entities/applications/consts'
 import { Message } from '@ui/message'
-import { ColumnProps } from '@ui/table'
+import { ColumnProps } from '@ui/table/types'
 import React from 'react'
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
-        { title: 'Запрос', field: 'requestTitle', priority: 'one' },
+        { title: 'Запрос', field: 'requestTitle', priority: 'one', search: true },
         { title: 'Дата', field: 'regDate', priority: 'two' },
         { title: 'Рег. номер', field: 'regNumber', priority: 'three' },
         {
             title: 'Статус',
             field: 'status',
-            priority: 'two',
+            priority: 'one',
+            catalogs: [
+                ...(Object.values(ApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
+            ],
             render: (value) => (
                 <Message
                     type={value === 'Готово' ? 'success' : value === 'Отклонено' ? 'failure' : 'alert'}

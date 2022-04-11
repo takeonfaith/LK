@@ -1,7 +1,7 @@
 import { Colors } from '@consts'
 import styled from 'styled-components'
 
-const SelectHeader = styled.header`
+const SelectHeader = styled.header<{ appearance: boolean }>`
     display: flex;
     align-items: center;
     width: calc(100% - 15px);
@@ -25,8 +25,8 @@ const SelectHeader = styled.header`
     }
 
     .not-chosen {
-        font-size: 0.9em;
-        opacity: 0.6;
+        font-size: ${({ appearance }) => appearance && '0.9em'};
+        opacity: ${({ appearance }) => appearance && '0.6'};
 
         &.multi {
             margin-left: 5px;

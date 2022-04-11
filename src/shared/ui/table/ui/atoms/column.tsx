@@ -7,13 +7,14 @@ const Column = styled.div<{
     clickable?: boolean
     padding?: string
     width?: string
+    overflow?: string
 }>`
     width: ${({ width }) => width ?? '100%'};
     min-width: ${({ width }) => width ?? 'auto'};
     padding: ${({ padding }) => padding ?? '20px'};
     text-align: ${({ align }) => align && align};
     cursor: ${({ clickable }) => clickable && 'pointer'};
-    overflow: hidden;
+    overflow: ${({ overflow }) => overflow ?? 'hidden'};
     display: block;
     white-space: nowrap;
     text-overflow: ellipsis;

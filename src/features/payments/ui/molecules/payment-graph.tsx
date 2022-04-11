@@ -1,5 +1,6 @@
 import { Paygraph } from '@api/model'
-import Table, { ColumnProps } from '@ui/table'
+import Table from '@ui/table'
+import { ColumnProps } from '@ui/table/types'
 import React from 'react'
 
 interface Props {

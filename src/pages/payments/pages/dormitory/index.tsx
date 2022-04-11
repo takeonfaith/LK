@@ -50,12 +50,13 @@ const DormitoryPayments = () => {
                                 </div>
                             </Block>
                             <Block orientation="vertical" maxWidth="380px">
-                                <Title size={2} align="left" bottomGap>
+                                <Title size={2} align="left" bottomGap width="100%">
                                     Реквизиты договора
                                     <LinkButton
                                         onClick={() => null}
                                         href={dormitory.file ?? ''}
                                         icon={<FiDownload />}
+                                        width="40px"
                                     />
                                 </Title>
                                 <Contract contract={dormitory} />

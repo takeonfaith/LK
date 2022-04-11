@@ -1,6 +1,6 @@
 import { ColumnProps } from '@ui/table/types'
 
-const getDormitoryPaygraphColumns = (): ColumnProps[] => {
+const getEducationPaygraphColumns = (): ColumnProps[] => {
     return [
         {
             title: 'Год',
@@ -8,11 +8,16 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
             search: true,
         },
         {
+            title: 'Семестр',
+            field: 'semestr',
+            priority: 'five',
+            width: '110px',
+        },
+        {
             title: 'Дата начала',
             field: 'date_start',
             type: 'date',
             priority: 'five',
-            search: true,
         },
         {
             title: 'План. дата окончания',
@@ -41,4 +46,4 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
     ]
 }
 
-export default getDormitoryPaygraphColumns
+export default getEducationPaygraphColumns

@@ -1,9 +1,18 @@
 import { paymentsModel } from '@entities/payments'
-import { Contract, ElectronicAgreementList, PageWrapper, PaymentList, PaymentsInfo } from '@features/payments'
-import { Title } from '@ui/atoms'
+import {
+    Contract,
+    ElectronicAgreementList,
+    PageWrapper,
+    PaymentGraph,
+    PaymentList,
+    PaymentsInfo,
+} from '@features/payments'
+import getEducationPaygraphColumns from '@pages/payments/lib/get-education-paygraph-columns'
+import { LinkButton, Title } from '@ui/atoms'
 import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
+import { FiDownload } from 'react-icons/fi'
 
 const EducationPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
@@ -16,7 +25,7 @@ const EducationPayments = () => {
                 return (
                     <>
                         <div className="blocks-wrapper" key={i}>
-                            <Block orientation="vertical" maxWidth="800px" height="fit-content">
+                            <Block orientation="vertical" maxWidth="800px">
                                 <Title size={2} align="left" bottomGap>
                                     Оплата за образование
                                 </Title>
@@ -35,14 +44,32 @@ const EducationPayments = () => {
                                         }
                                         qr_current={education.qr_current}
                                         qr_total={education.qr_total}
+                                        bill={education.bill}
                                     />
                                 </div>
                             </Block>
                             <Block orientation="vertical" maxWidth="380px">
-                                <Title size={2} align="left" bottomGap>
+                                <Title size={2} align="left" bottomGap width="100%">
                                     Реквизиты договора
+                                    <LinkButton
+                                        onClick={() => null}
+                                        href={education.file ?? ''}
+                                        icon={<FiDownload />}
+                                        width="40px"
+                                    />
                                 </Title>
                                 <Contract contract={education} />
+                            </Block>
+                        </div>
+                        <div className="blocks-wrapper">
+                            <Block orientation="vertical" maxWidth="1190px" height="fit-content">
+                                <Title size={2} align="left" bottomGap>
+                                    График платежей
+                                </Title>
+                                <PaymentGraph
+                                    columns={getEducationPaygraphColumns()}
+                                    paygraph={education?.paygraph ?? []}
+                                />
                             </Block>
                         </div>
                         {education.agreements && !!education.agreements.length && (

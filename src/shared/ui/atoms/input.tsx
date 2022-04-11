@@ -1,5 +1,5 @@
 import { Colors } from '@consts'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Title } from '@ui/title'
@@ -10,6 +10,7 @@ const InputWrapper = styled.div<{
     isActive: boolean
     inputAppearance: boolean
     width?: string
+    minWidth?: string
     danger?: boolean
 }>`
     display: flex;
@@ -17,7 +18,7 @@ const InputWrapper = styled.div<{
     justify-content: space-between;
     position: relative;
     width: ${({ width }) => width ?? '100%'};
-    min-width: ${({ width }) => width};
+    min-width: ${({ minWidth, width }) => minWidth ?? width};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
 
@@ -92,6 +93,7 @@ interface Props {
     required?: boolean
     mask?: boolean
     width?: string
+    minWidth?: string
     autocomplete?: boolean
     danger?: boolean
 }
@@ -103,6 +105,7 @@ const Input = ({
     title,
     required,
     width,
+    minWidth,
     placeholder = 'Введите сюда',
     type = 'text',
     danger,
@@ -112,6 +115,10 @@ const Input = ({
     autocomplete = true,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
+
+    useEffect(() => {
+        setInputType(type)
+    }, [type])
 
     const phoneMask = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -179,6 +186,7 @@ const Input = ({
             inputAppearance={inputAppearance}
             width={width}
             danger={danger}
+            minWidth={minWidth}
         >
             <Title size={5} align="left" visible={!!title} bottomGap="5px" required={required}>
                 {title}

@@ -1,4 +1,5 @@
-import { ColumnProps } from '@ui/table'
+import displayWithType from '@ui/table/lib/display-with-type'
+import { ColumnProps } from '@ui/table/types'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import React from 'react'
 import { useModal } from 'widgets'
@@ -26,7 +27,9 @@ const Row = ({ columns, el, index, onRowClick }: Props) => {
                         key={column.field}
                         align={column.align}
                     >
-                        {column.render ? column.render(el[column.field], el) : el[column.field]}
+                        {column.render
+                            ? column.render(displayWithType(el[column.field], column.type), el)
+                            : displayWithType(el[column.field], column.type)}
                     </Column>
                 )
             })}

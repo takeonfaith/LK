@@ -21,3 +21,10 @@ export const RedStar = styled.span`
     color: var(--red);
     margin-right: 5px;
 `
+
+export const ChildrenWrapper = styled.div<{ width?: string }>`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: ${({ width }) => width};
+`

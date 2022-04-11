@@ -1,4 +1,4 @@
-import { Input, Button } from '@ui/atoms'
+import { Button, Input } from '@ui/atoms'
 import ButtonsList from '@ui/molecules/buttons-list'
 import { Align } from '@ui/types'
 import limitNumber from '@utils/limit-number'
@@ -15,12 +15,15 @@ interface Props {
 
 const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'center' }: Props) => {
     const [currentPageValue, setCurrentPageValue] = useState<string>(currentPage.toString())
-
     useEffect(() => {
         if (currentPageValue.length) {
             setCurrentPage(+currentPageValue)
         }
     }, [currentPageValue])
+
+    useEffect(() => {
+        setCurrentPageValue(currentPage.toString())
+    }, [currentPage])
 
     return (
         <ButtonsList align={align} condition={condition} direction={'horizontal'} width="100%" padding="10px">

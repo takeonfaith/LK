@@ -18,7 +18,7 @@ const localizeDate = (
             })
         case 'numeric':
             return new Date(Date.parse(date as string)).toLocaleDateString('ru', {
-                year: '2-digit',
+                year: 'numeric',
                 month: '2-digit',
                 day: '2-digit',
             })
