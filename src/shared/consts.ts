@@ -48,6 +48,7 @@ export interface IColorPalette {
     darkTransparent: string
     lightTransparent: string
     reallyTransparent: string
+    transparentAF: string
 }
 
 export const Colors: IColors = {
@@ -61,6 +62,7 @@ export const Colors: IColors = {
         dark: '#2a4f2f',
         reallyTransparent: '',
         darkTransparent: '#166c217a',
+        transparentAF: '',
         lightTransparent: '#9fe4a982',
     },
     lightGreen: {
@@ -72,6 +74,7 @@ export const Colors: IColors = {
         dark: '#216666',
         reallyTransparent: '',
         darkTransparent: '',
+        transparentAF: '',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -84,6 +87,7 @@ export const Colors: IColors = {
         dark: '#3f457f',
         reallyTransparent: '#6a8dff30',
         darkTransparent: '',
+        transparentAF: '#6a8dff12',
         lightTransparent: '#567dff47',
         littleDarker: '#3737b3',
     },
@@ -96,6 +100,7 @@ export const Colors: IColors = {
         dark: '#4c73ca',
         reallyTransparent: '',
         darkTransparent: '',
+        transparentAF: '',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -108,6 +113,7 @@ export const Colors: IColors = {
         dark: '#7e3798',
         reallyTransparent: '',
         darkTransparent: '',
+        transparentAF: '',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -120,6 +126,7 @@ export const Colors: IColors = {
         dark: '#842b62',
         reallyTransparent: '',
         darkTransparent: '',
+        transparentAF: '',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -133,6 +140,7 @@ export const Colors: IColors = {
         littleDarker: '#b33b3b',
         reallyTransparent: '',
         darkTransparent: '#511a1ea3',
+        transparentAF: '',
         lightTransparent: '#e2799273',
     },
     yellow: {
@@ -144,6 +152,7 @@ export const Colors: IColors = {
         dark: '#632d32',
         reallyTransparent: '',
         darkTransparent: '#511a1ea3',
+        transparentAF: '',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -156,6 +165,7 @@ export const Colors: IColors = {
         dark: '#e97944',
         reallyTransparent: '',
         darkTransparent: '#511a1ea3',
+        transparentAF: '',
         lightTransparent: '#ffd7a67d',
         littleDarker: '#c75e1d',
     },

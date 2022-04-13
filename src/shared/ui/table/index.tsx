@@ -1,3 +1,4 @@
+import AddedElementsList from '@ui/added-elements-list'
 import React from 'react'
 import styled from 'styled-components'
 import useFilter from './lib/hooks/use-filter'
@@ -12,12 +13,39 @@ const TableWrapper = styled.div`
 `
 
 const Table = ({ columns, data, maxOnPage, onRowClick, loading = false }: TableProps) => {
-    const { search, setSearch, resultData, filter, setFilter } = useFilter(data)
+    const {
+        sort,
+        setSort,
+        search,
+        setSearch,
+        resultData,
+        filter,
+        setFilter,
+        filterList,
+        setFilterList,
+        onRemoveOne,
+        onRemoveAll,
+    } = useFilter(data)
 
     return (
         <TableWrapper>
+            <AddedElementsList
+                setList={setFilterList}
+                padding="0 10px"
+                list={filterList}
+                onRemoveOne={onRemoveOne}
+                onRemoveAll={onRemoveAll}
+            />
             <Search search={search} setSearch={setSearch} />
-            <Header columns={columns} search={search} setSearch={setSearch} filter={filter} setFilter={setFilter} />
+            <Header
+                sort={sort}
+                setSort={setSort}
+                columns={columns}
+                search={search}
+                setSearch={setSearch}
+                filter={filter}
+                setFilter={setFilter}
+            />
             <Body
                 loading={loading}
                 onRowClick={onRowClick}

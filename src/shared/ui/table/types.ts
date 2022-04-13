@@ -2,8 +2,11 @@ import { SelectPage } from '@features/select'
 import { Align } from '@ui/types'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 
-export type TableSearchType = { value: string; column: Nullable<ColumnProps> }
-export type TableCatalogType = { value: SelectPage; column: Nullable<ColumnProps> } | null
+export type SortType = 'desc' | 'asc' | null
+
+export type TableSearchType = { value: string; column: Nullable<ColumnProps> } | null
+export type TableCatalogType = { [field: string]: { value: SelectPage; column: Nullable<ColumnProps> } } | null
+export type TableSortType = { value: SortType; column: Nullable<ColumnProps> } | null
 
 export type ColumnType = 'date' | 'rub'
 
@@ -15,6 +18,7 @@ export interface ColumnProps {
     width?: string
     align?: Align
     search?: boolean
+    sort?: boolean
     catalogs?: SelectPage[]
     type?: ColumnType
     render?: (value: any, obj: IndexedProperties) => ChildrenType

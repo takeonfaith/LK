@@ -121,7 +121,7 @@ const ApplicationsPage = () => {
                 {
                     notes: '',
                     regDate: '31.01.2021',
-                    regNumber: '3214141da',
+                    regNumber: '3214141db',
                     requestBody: 'fsfdafsdfdsafsd',
                     requestTitle: 'Запрос о чем-то',
                     status: 'Отклонено',
@@ -242,7 +242,7 @@ const ApplicationsPage = () => {
                 {
                     notes: '',
                     regDate: '31.01.2021',
-                    regNumber: '3214141da',
+                    regNumber: '3214141db',
                     requestBody: 'fsfdafsdfdsafsd',
                     requestTitle: 'Запрос о чем-то',
                     status: 'Готово',
@@ -253,7 +253,7 @@ const ApplicationsPage = () => {
                 {
                     notes: '',
                     regDate: '31.01.2021',
-                    regNumber: '3214141da',
+                    regNumber: '3214141db',
                     requestBody: 'fsfdafsdfdsafsd',
                     requestTitle: 'Запрос о чем-то',
                     status: 'Готово',

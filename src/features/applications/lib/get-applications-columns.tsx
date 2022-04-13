@@ -5,8 +5,16 @@ import React from 'react'
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
         { title: 'Запрос', field: 'requestTitle', priority: 'one', search: true },
-        { title: 'Дата', field: 'regDate', priority: 'two' },
-        { title: 'Рег. номер', field: 'regNumber', priority: 'three' },
+        { title: 'Дата', field: 'regDate', priority: 'two', sort: true },
+        {
+            title: 'Рег. номер',
+            field: 'regNumber',
+            priority: 'three',
+            catalogs: [
+                { id: 0, title: '3214141da' },
+                { id: 1, title: '3214141db' },
+            ],
+        },
         {
             title: 'Статус',
             field: 'status',

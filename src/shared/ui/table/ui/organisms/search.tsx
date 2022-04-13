@@ -1,5 +1,5 @@
 import { Input } from '@ui/atoms'
-import { ColumnProps, ColumnType } from '@ui/table/types'
+import { ColumnProps, ColumnType, TableSearchType } from '@ui/table/types'
 import React from 'react'
 import { FiSearch, FiX } from 'react-icons/fi'
 import { Button } from '@ui/button'
@@ -18,13 +18,8 @@ const SearchWrapper = styled.div<{ closed: boolean }>`
 `
 
 interface Props {
-    search: { value: string; column: Nullable<ColumnProps> }
-    setSearch: React.Dispatch<
-        React.SetStateAction<{
-            value: string
-            column: Nullable<ColumnProps>
-        }>
-    >
+    search: TableSearchType
+    setSearch: React.Dispatch<React.SetStateAction<TableSearchType>>
 }
 
 const getType = (type?: ColumnType) => {
@@ -42,26 +37,25 @@ const Search = ({ search, setSearch }: Props) => {
     const handleCloseSearch = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()
         e.preventDefault()
-        setSearch((prev) => {
-            prev.value = ''
-            prev.column = null
-            return { ...prev }
-        })
+        setSearch(null)
     }
 
     return (
-        <SearchWrapper closed={!search.column}>
+        <SearchWrapper closed={!search?.column}>
             <Input
-                value={search.value}
+                value={search?.value ?? ''}
                 setValue={(value: string) =>
                     setSearch((prev) => {
-                        prev.value = value
-                        return { ...prev }
+                        if (prev) {
+                            prev.value = value
+                            return { ...prev }
+                        }
+                        return null
                     })
                 }
                 width="100%"
-                type={getType(search.column?.type)}
-                placeholder={search.column?.title}
+                type={getType(search?.column?.type)}
+                placeholder={search?.column?.title}
                 leftIcon={<FiSearch />}
                 minWidth={'auto'}
             />

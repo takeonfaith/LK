@@ -8,7 +8,7 @@ const HeaderWrapper = styled.div`
     font-size: 0.9em;
     z-index: 10;
 
-    .search-icon {
+    .icon {
         position: absolute;
         top: 50%;
         right: 8px;
