@@ -17,6 +17,7 @@ export type ButtonProps = BaseProps & {
     align?: Align
     direction?: Direction
     isActive?: boolean
+    height?: string
 }
 
 export function Button(props: ButtonProps) {
@@ -33,6 +34,7 @@ export function Button(props: ButtonProps) {
         shrinkTextInMobile,
         direction = 'horizontal',
         isActive = true,
+        height,
         ...restProps
     } = props
 
@@ -49,6 +51,7 @@ export function Button(props: ButtonProps) {
             align={align}
             direction={direction}
             isActive={isActive}
+            height={height}
             {...restProps}
         >
             {!!icon && icon}

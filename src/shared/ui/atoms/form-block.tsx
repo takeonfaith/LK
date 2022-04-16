@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 
-const FormBlockWrapper = styled.div`
+const FormBlockWrapper = styled.div<{
+    maxWidth?: number
+}>`
     width: 100%;
     height: fit-content;
-    max-width: 600px;
+    max-width: ${({ maxWidth }) => (maxWidth ? maxWidth : 600) + 'px'};
     padding: 20px;
     border-radius: var(--brSemi);
     background: var(--form);

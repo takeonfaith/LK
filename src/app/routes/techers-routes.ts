@@ -31,7 +31,9 @@ import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
 import SchedulePage from '@pages/schedule'
 import TeachersSchedule from '@pages/teachers-schedule'
-import { IRoutes } from './routes'
+import { IRoutes } from '@routes'
+import FamiliarizationWithDocumentsPage from '@pages/familiarization-with-documents'
+import PersonalNotificationsPage from '@pages/personal-notifications'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -68,6 +70,7 @@ export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const DOWNLOAD_ADMIN_FILES_ROUTE = '/download-agreements'
+export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
 
 //hidden routes
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
@@ -145,7 +148,7 @@ export const teachersPrivateRoutes: IRoutes = {
         title: 'Ознакомление с документами',
         icon: FiFileText,
         path: DOCLIST_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
+        Component: FamiliarizationWithDocumentsPage,
         isTemplate: false,
     },
     100: {
@@ -347,6 +350,14 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiIdCard,
         path: PPS_CONTEST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        isTemplate: false,
+    },
+    34: {
+        id: 34,
+        title: 'Кадровые уведомления',
+        icon: BiGroup,
+        path: PERSONAL_NOTIFICATIONS,
+        Component: PersonalNotificationsPage,
         isTemplate: false,
     },
 }
