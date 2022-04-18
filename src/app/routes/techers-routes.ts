@@ -3,8 +3,10 @@ import DownloadAdminFilesPage from '@pages/download-admin-files'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
+import PersonalNotificationsPage from '@pages/personal-notifications'
 import SchedulePage from '@pages/schedule'
 import TeachersSchedule from '@pages/teachers-schedule'
+import { IRoutes } from '@routes'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -12,6 +14,7 @@ import {
     BiHeadphone,
     BiIdCard,
     BiMessageRounded,
+    BiNotification,
     BiRuble,
     BiTimeFive,
     BiUserCircle,
@@ -31,7 +34,6 @@ import { HiOutlineClipboardCheck, HiOutlineMenuAlt2, HiOutlineUserGroup } from '
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
-import { IRoutes } from './routes'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -68,6 +70,7 @@ export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const DOWNLOAD_ADMIN_FILES_ROUTE = '/download-agreements'
+export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
 
 //hidden routes
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
@@ -347,6 +350,14 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiIdCard,
         path: PPS_CONTEST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        isTemplate: false,
+    },
+    34: {
+        id: 34,
+        title: 'Кадровые уведомления',
+        icon: BiNotification,
+        path: PERSONAL_NOTIFICATIONS,
+        Component: PersonalNotificationsPage,
         isTemplate: false,
     },
 }

@@ -14,6 +14,7 @@ export const ButtonWrapper = styled.button<{
     align?: Align
     isActive: boolean
     fixedInMobile?: boolean
+    height?: string
 }>`
     display: flex;
     align-items: center;
@@ -31,6 +32,7 @@ export const ButtonWrapper = styled.button<{
     text-decoration: none;
     flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
     opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
+    height: ${({ height = '40px' }) => height};
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);

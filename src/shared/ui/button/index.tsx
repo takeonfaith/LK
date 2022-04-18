@@ -19,6 +19,7 @@ export type ButtonProps = BaseProps & {
     direction?: Direction
     isActive?: boolean
     fixedInMobile?: boolean
+    height?: string
 }
 
 export function Button(props: ButtonProps) {
@@ -37,6 +38,7 @@ export function Button(props: ButtonProps) {
         fixedInMobile,
         direction = 'horizontal',
         isActive = true,
+        height,
         ...restProps
     } = props
 
@@ -55,6 +57,7 @@ export function Button(props: ButtonProps) {
             direction={direction}
             isActive={isActive}
             fixedInMobile={fixedInMobile}
+            height={height}
             {...restProps}
         >
             {!!icon && icon}
