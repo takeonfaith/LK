@@ -6,6 +6,7 @@ import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
 import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
 import ChatPage from '@pages/chat'
+import AllTeachersPage from '@pages/all-teachers'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -143,7 +144,7 @@ export const privateRoutes: IRoutes = {
         title: 'Преподаватели',
         icon: BiBookReader,
         path: ALL_TEACHERS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/teachers' }),
+        Component: AllTeachersPage,
         isTemplate: false,
     },
     9: {

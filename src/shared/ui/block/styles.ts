@@ -7,12 +7,15 @@ export interface StyledProps {
     orientation?: Direction
     gap?: string
     height?: string
+    maxHeight?: string
+    minHeight?: string
+    justifyContent?: string
 }
 
 const BlockWrapper = styled.div<StyledProps>`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: ${({ justifyContent }) => justifyContent ?? 'space-between'};
     background: var(--schedule);
     border-radius: var(--brSemi);
     flex-direction: ${({ orientation }) => (orientation === 'vertical' ? 'column' : 'row')};
@@ -23,6 +26,8 @@ const BlockWrapper = styled.div<StyledProps>`
     width: ${({ width }) => width ?? '100%'};
     color: var(--text);
     gap: ${({ gap }) => gap ?? '0'};
+    max-height: ${({ maxHeight }) => maxHeight};
+    min-height: ${({ minHeight }) => minHeight};
 
     .list {
         width: 100%;

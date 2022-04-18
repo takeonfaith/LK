@@ -134,7 +134,6 @@ const AddedElementsList = ({ list, onRemoveAll, onRemoveOne, padding, setList }:
                                     onRemoveAll()
                                 } else {
                                     setRemoveOne(el.id)
-                                    console.log(el.id)
 
                                     onRemoveOne(el.id)
                                 }
