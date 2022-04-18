@@ -20,7 +20,12 @@ const Wrapper = styled.div`
     max-width: 1300px;
     justify-content: center;
 
-    /* @media(max-width:) */
+    @media (max-width: 1500px) {
+        max-width: 800px;
+        .block {
+            max-width: 100% !important;
+        }
+    }
 `
 
 const Content = ({ data, loading }: Props) => {

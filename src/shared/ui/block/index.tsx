@@ -87,7 +87,11 @@ const DefaultSkeleton = () => {
 
 const Block = (props: Props) => {
     const { children, skeleton = <DefaultSkeleton />, loading = false, ...restProps } = props
-    return <BlockWrapper {...restProps}>{!loading ? children : skeleton}</BlockWrapper>
+    return (
+        <BlockWrapper {...restProps} className="block">
+            {!loading ? children : skeleton}
+        </BlockWrapper>
+    )
 }
 
 export default Block

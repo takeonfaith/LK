@@ -12,7 +12,6 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
             field: 'date_start',
             type: 'date',
             priority: 'five',
-            // search: true,
             sort: true,
         },
         {
@@ -20,6 +19,7 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
             field: 'date_plan',
             type: 'date',
             priority: 'six',
+            sort: true,
         },
         {
             title: 'Дата окончания',

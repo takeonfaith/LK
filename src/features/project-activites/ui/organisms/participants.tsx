@@ -198,7 +198,7 @@ const Participants = ({ data }: Props) => {
     }, [data])
 
     return (
-        <Block maxWidth="500px" orientation="vertical" gap="0.5rem" loading={!data} skeleton={<Loading />}>
+        <Block maxWidth="420px" orientation="vertical" gap="0.5rem" loading={!data} skeleton={<Loading />}>
             {!!data && (
                 <>
                     <Title size={3} align="left">

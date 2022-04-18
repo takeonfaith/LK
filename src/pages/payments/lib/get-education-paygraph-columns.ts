@@ -12,6 +12,7 @@ const getEducationPaygraphColumns = (): ColumnProps[] => {
             field: 'semestr',
             priority: 'five',
             width: '110px',
+            sort: true,
         },
         {
             title: 'Дата начала',

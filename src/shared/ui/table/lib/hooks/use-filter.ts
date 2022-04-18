@@ -96,11 +96,6 @@ const useFilter = (data: Nullable<IndexedProperties[]>) => {
             })
             setResultData(found)
         } else {
-            setFilterList((prev) => {
-                const deletedId = findWhatToDelete(prev, 'Поиск')
-                if (prev && deletedId) delete prev[deletedId]
-                return { ...prev }
-            })
             setResultData(data)
         }
     }, [search])

@@ -59,7 +59,6 @@ const Search = ({ search, setSearch }: Props) => {
                 leftIcon={<FiSearch />}
                 minWidth={'auto'}
             />
-            <Button icon={<FiX />} background="transparent" onClick={(e) => handleCloseSearch(e)} />
         </SearchWrapper>
     )
 }

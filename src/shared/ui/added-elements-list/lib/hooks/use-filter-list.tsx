@@ -15,11 +15,11 @@ const useFilterList = (listKeys: string[], setList: React.Dispatch<React.SetStat
         }
     }, [removeAll])
 
-    useEffect(() => {
-        if (listKeys.length) {
-            if (closed) setClosed(false)
-        } else setClosed(true)
-    }, [listKeys.length])
+    // useEffect(() => {
+    //     if (listKeys.length) {
+    //         if (closed) setClosed(false)
+    //     } else setClosed(true)
+    // }, [listKeys.length])
 
     useEffect(() => {
         setTimeout(() => {

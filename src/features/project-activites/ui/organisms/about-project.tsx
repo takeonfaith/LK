@@ -50,7 +50,7 @@ const About = ({ data }: Props) => {
     }
 
     return (
-        <Block maxWidth="500px" orientation="vertical" loading={!data} skeleton={<Loading />}>
+        <Block maxWidth="420px" orientation="vertical" loading={!data} skeleton={<Loading />}>
             {!!data && (
                 <>
                     <AboutTop
