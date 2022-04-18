@@ -25,6 +25,7 @@ export interface User {
     enterYear: string
     subdivisions?: Subdivision[]
     user_status: UserStatus
+    lastaccess: string
 }
 
 interface Subdivision {
