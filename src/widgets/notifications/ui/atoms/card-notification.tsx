@@ -84,7 +84,7 @@ const CardNotification = ({ data, type }: Props) => {
                     />
                 )}
                 <SubmitButton
-                    text={data.viewed ? getRightGenderWord(user?.sex, 'Ознакомлен', 'Ознакомлена') : 'Ознакомится'}
+                    text={data.viewed ? getRightGenderWord(user?.sex, 'Ознакомлен', 'Ознакомлена') : 'Ознакомиться'}
                     action={() => {
                         setLoading(true)
                         personalNotificationModel.effects.viewPersonalNotificationsFx(data.id)

@@ -5,8 +5,9 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import { WhatsNewTemplate } from './ui'
-import Session from '../../shared/images/session-min.png'
-import SessionMobile from '../../shared/images/session-mobile.png'
+import { BiNotification, BiRuble } from 'react-icons/bi'
+import { Colors } from '@consts'
+import { userModel } from '@entities/user'
 
 const WhatsNewWrapper = styled.div`
     display: flex;
@@ -16,8 +17,8 @@ const WhatsNewWrapper = styled.div`
     height: 100%;
 
     @media (min-width: 1001px) {
-        width: 600px;
-        height: 600px;
+        width: 500px;
+        height: 500px;
     }
 
     .content {
@@ -39,12 +40,21 @@ const WhatsNewWrapper = styled.div`
 const WhatsNew = () => {
     const [currentPage, setCurrentPage] = useState(0)
     const { close } = useModal()
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const pages = [
         <WhatsNewTemplate
-            text={'В расписании добавлена вкладка "Сессия"'}
-            image={Session}
-            imageMobile={SessionMobile}
             key={0}
+            list={[
+                { icon: <BiRuble />, title: 'В оплаты добавлен график платежей', color: 'pink' },
+                {
+                    icon: <BiNotification />,
+                    title: 'Добавлен раздел Кадровые Уведомления',
+                    color: 'blue',
+                    visible: user?.user_status === 'staff',
+                },
+            ]}
         />,
     ]
 
@@ -61,7 +71,13 @@ const WhatsNew = () => {
                     isActive={currentPage !== 0}
                 />
                 {currentPage === pages.length - 1 ? (
-                    <Button onClick={close} text="Готово" width="100%" />
+                    <Button
+                        onClick={close}
+                        text="Готово"
+                        width="100%"
+                        background={Colors.blue.light}
+                        textColor="#fff"
+                    />
                 ) : (
                     <Button
                         onClick={() => setCurrentPage((prev) => limitNumber(prev + 1, pages.length - 1))}

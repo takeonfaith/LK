@@ -10,7 +10,7 @@ const InitialLoaderWrapper = styled.div<{ loading: boolean }>`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, var(--theme), var(--theme), var(--theme), ${Colors.pink.main}, var(--theme));
+    background: linear-gradient(45deg, var(--theme), var(--theme), var(--theme), ${Colors.blue.main}, var(--theme));
     z-index: 100;
     display: flex;
     justify-content: center;

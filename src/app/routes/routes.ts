@@ -1,15 +1,16 @@
 import ApplicationsPage from '@pages/applications'
 import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
+import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
 import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
+import ApplicationPaperCall from '@pages/applications/pages/paper-call'
+import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
 import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
+import ChatPage from '@pages/chat'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import ProjectActivitiesPage from '@pages/project-activities'
 import TeachersSchedule from '@pages/teachers-schedule'
-import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
-import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
-import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -102,7 +103,7 @@ export const privateRoutes: IRoutes = {
         title: 'Сообщения',
         icon: BiMessageRounded,
         path: MESSAGES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/messages' }),
+        Component: ChatPage,
         isTemplate: true,
     },
     3: {

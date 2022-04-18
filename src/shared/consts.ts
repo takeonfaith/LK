@@ -25,7 +25,7 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
 
 export const SETTINGS = 'settings'
 
-interface IColors extends IndexedProperties {
+export interface IColors extends IndexedProperties {
     green: IColorPalette
     lightGreen: IColorPalette
     blue: IColorPalette
@@ -113,7 +113,7 @@ export const Colors: IColors = {
         dark: '#7e3798',
         reallyTransparent: '',
         darkTransparent: '',
-        transparentAF: '',
+        transparentAF: '#a85fec14',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -126,7 +126,7 @@ export const Colors: IColors = {
         dark: '#842b62',
         reallyTransparent: '',
         darkTransparent: '',
-        transparentAF: '',
+        transparentAF: '#ec5fb617',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -224,4 +224,4 @@ export const GradeByScore: IGrade = {
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
-export const LastUpdateWhatsNew = '2022-04-08T10:30:00'
+export const LastUpdateWhatsNew = '2022-04-18T10:30:00'
