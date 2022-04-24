@@ -23,9 +23,13 @@ function findPercentage(data: AcadPerformance[], circleMode = 0): number {
         data.forEach(({ grade }) => GradeByScore[grade] > 2 && counter++)
     }
 
-    const perc = (+(counter / totalLength)).toPrecision(2)
+    if (totalLength !== 0) {
+        const perc = (+(counter / totalLength)).toPrecision(2)
 
-    return +perc
+        return +perc
+    }
+
+    return 0
 }
 
 export default findPercentage
