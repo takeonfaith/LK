@@ -1,5 +1,5 @@
 import { GradeByScore } from '@consts'
-import { AcadPerformance } from '@entities/acad-performance/model'
+import { AcadPerformance } from '@api/model/acad-performance'
 
 function findPercentage(data: AcadPerformance[], circleMode = 0): number {
     let counter = 0

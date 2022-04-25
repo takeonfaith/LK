@@ -3,6 +3,18 @@ import { useStore } from 'effector-react/compat'
 import { createEffect, createEvent, createStore } from 'effector/compat'
 import { Notifications } from '@api/model/notification'
 
+interface PersonalNotificationsStore {
+    personalNotifications: Notifications | null
+    error: string | null
+    completed: boolean
+}
+
+const DEFAULT_STORE: PersonalNotificationsStore = {
+    personalNotifications: null,
+    error: null,
+    completed: false,
+}
+
 const usePersonalNotifications = () => {
     return {
         data: useStore($personalNotificationsStore).personalNotifications,
@@ -10,12 +22,6 @@ const usePersonalNotifications = () => {
         error: useStore($personalNotificationsStore).error,
         completed: useStore($personalNotificationsStore).completed,
     }
-}
-
-interface PersonalNotificationsStore {
-    personalNotifications: Notifications | null
-    error: string | null
-    completed: boolean
 }
 
 const changeCompleted = createEvent<{ completed: boolean }>()
@@ -39,11 +45,9 @@ const viewPersonalNotificationsFx = createEffect(async (notificationId: string):
     }
 })
 
-const $personalNotificationsStore = createStore<PersonalNotificationsStore>({
-    personalNotifications: null,
-    error: null,
-    completed: false,
-})
+const clearStore = createEvent()
+
+const $personalNotificationsStore = createStore<PersonalNotificationsStore>(DEFAULT_STORE)
     .on(getPersonalNotificationsFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -65,6 +69,9 @@ const $personalNotificationsStore = createStore<PersonalNotificationsStore>({
         ...oldData,
         completed: newData.completed,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 viewPersonalNotificationsFx.doneData.watch(() => getPersonalNotificationsFx())
 
@@ -78,4 +85,5 @@ export const effects = {
 }
 export const events = {
     changeCompleted,
+    clearStore,
 }

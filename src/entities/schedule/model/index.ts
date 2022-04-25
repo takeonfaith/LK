@@ -5,6 +5,16 @@ import { createEffect, createEvent, createStore } from 'effector/compat'
 import getCurrentDayString from '../lib/get-current-day-string'
 import getSchedule from '../lib/get-schedule'
 
+const DEFAULT_STORE: ISchedule = {
+    schedule: null,
+    currentModule: '0',
+    currentDay: new Date().getDay(),
+    currentDayString: '',
+    currentChosenDay: new Date().getDay(),
+    view: 'full',
+    error: null,
+}
+
 const useSchedule = () => {
     return { data: useStore($schedule), loading: useStore(getScheduleFx.pending), error: useStore($schedule).error }
 }
@@ -20,18 +30,9 @@ const getScheduleFx = createEffect(async (user: User | null): Promise<IModules> 
 const changeCurrentModule = createEvent<{ currentModule: number }>()
 const changeView = createEvent<{ view: ViewType }>()
 const changeCurrentChosenDay = createEvent<{ day: number }>()
+const clearStore = createEvent()
 
-const store: ISchedule = {
-    schedule: null,
-    currentModule: '0',
-    currentDay: new Date().getDay(),
-    currentDayString: 'sunday',
-    currentChosenDay: new Date().getDay(),
-    view: 'full',
-    error: null,
-}
-
-const $schedule = createStore<ISchedule>(store)
+const $schedule = createStore<ISchedule>(DEFAULT_STORE)
     .on(getScheduleFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -60,6 +61,9 @@ const $schedule = createStore<ISchedule>(store)
         ...oldState,
         currentChosenDay: newState.day,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useSchedule,
@@ -69,6 +73,7 @@ export const events = {
     changeCurrentModule,
     changeView,
     changeCurrentChosenDay,
+    clearStore,
 }
 
 export const effects = {

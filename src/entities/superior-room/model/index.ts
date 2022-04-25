@@ -4,17 +4,22 @@ import { createEffect, createStore, createEvent } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
 import { forward } from 'effector/effector.mjs'
 
+interface SuperiorRoomStore {
+    superiorRoom: SuperiorRoom | null
+    error: string | null
+}
+
+const DEFAULT_STORE: SuperiorRoomStore = {
+    superiorRoom: null,
+    error: null,
+}
+
 const useSuperiorRoom = () => {
     return {
         data: useStore($superiorRoomStore).superiorRoom,
         loading: useStore(getSuperiorRoomFx.pending),
         error: useStore($superiorRoomStore).error,
     }
-}
-
-interface SuperiorRoomStore {
-    superiorRoom: SuperiorRoom | null
-    error: string | null
 }
 
 const postSuperiorRoom = createEvent<SuperiorRoom>()
@@ -40,10 +45,9 @@ const getSuperiorRoomFx = createEffect(async (): Promise<SuperiorRoom> => {
     }
 })
 
-const $superiorRoomStore = createStore<SuperiorRoomStore>({
-    superiorRoom: null,
-    error: null,
-})
+const clearStore = createEvent()
+
+const $superiorRoomStore = createStore<SuperiorRoomStore>(DEFAULT_STORE)
     .on(getSuperiorRoomFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -56,6 +60,9 @@ const $superiorRoomStore = createStore<SuperiorRoomStore>({
         ...oldData,
         error: newData.message,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useSuperiorRoom,
@@ -66,4 +73,5 @@ export const effects = {
 }
 export const events = {
     postSuperiorRoom,
+    clearStore,
 }

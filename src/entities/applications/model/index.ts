@@ -1,7 +1,15 @@
 import { applicationApi } from '@api'
 import { Application } from '@api/model'
+import { createEvent } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector/compat'
+
+interface ApplicationsStore {
+    applications: Application[] | null
+    error: string | null
+}
+
+const DEFAULT_STORE = { applications: null, error: null }
 
 const useApplications = () => {
     return {
@@ -9,11 +17,6 @@ const useApplications = () => {
         loading: useStore(getApplicationsFx.pending),
         error: useStore($applicationsStore).error,
     }
-}
-
-interface ApplicationsStore {
-    applications: Application[] | null
-    error: string | null
 }
 
 const getApplicationsFx = createEffect(async (): Promise<Application[]> => {
@@ -26,7 +29,9 @@ const getApplicationsFx = createEffect(async (): Promise<Application[]> => {
     }
 })
 
-const $applicationsStore = createStore<ApplicationsStore>({ applications: null, error: null })
+const clearStore = createEvent()
+
+const $applicationsStore = createStore<ApplicationsStore>(DEFAULT_STORE)
     .on(getApplicationsFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -39,6 +44,9 @@ const $applicationsStore = createStore<ApplicationsStore>({ applications: null, 
         ...oldData,
         error: newData.message,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useApplications,
@@ -46,4 +54,8 @@ export const selectors = {
 
 export const effects = {
     getApplicationsFx,
+}
+
+export const events = {
+    clearStore,
 }

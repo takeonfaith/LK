@@ -4,6 +4,18 @@ import { createEffect, createStore, createEvent } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
 import { forward } from 'effector/effector.mjs'
 
+interface TeacherDataVerificationStore {
+    teacherDataVerification: TeacherDataVerification | null
+    error: string | null
+    completed: boolean
+}
+
+const DEFAULT_STORE: TeacherDataVerificationStore = {
+    teacherDataVerification: null,
+    error: null,
+    completed: false,
+}
+
 const useTeacherDataVerification = () => {
     return {
         data: useStore($teacherDataVerificationStore).teacherDataVerification,
@@ -11,12 +23,6 @@ const useTeacherDataVerification = () => {
         error: useStore($teacherDataVerificationStore).error,
         completed: useStore($teacherDataVerificationStore).completed,
     }
-}
-
-interface TeacherDataVerificationStore {
-    teacherDataVerification: TeacherDataVerification | null
-    error: string | null
-    completed: boolean
 }
 
 const postTeacherDataVerification = createEvent<TeacherDataVerification>()
@@ -44,11 +50,9 @@ const getTeacherDataVerificationFx = createEffect(async (): Promise<TeacherDataV
     }
 })
 
-const $teacherDataVerificationStore = createStore<TeacherDataVerificationStore>({
-    teacherDataVerification: null,
-    error: null,
-    completed: false,
-})
+const clearStore = createEvent()
+
+const $teacherDataVerificationStore = createStore<TeacherDataVerificationStore>(DEFAULT_STORE)
     .on(getTeacherDataVerificationFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -65,6 +69,9 @@ const $teacherDataVerificationStore = createStore<TeacherDataVerificationStore>(
         ...oldData,
         completed: newData.completed,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useTeacherDataVerification,
@@ -73,7 +80,9 @@ export const selectors = {
 export const effects = {
     getTeacherDataVerificationFx,
 }
+
 export const events = {
     postTeacherDataVerification,
     changeCompleted,
+    clearStore,
 }

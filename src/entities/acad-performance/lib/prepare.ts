@@ -1,4 +1,4 @@
-import { AcadPerformance } from '../model'
+import { AcadPerformance } from '@api/model/acad-performance'
 
 export interface PreparedData {
     [key: string]: AcadPerformance[]

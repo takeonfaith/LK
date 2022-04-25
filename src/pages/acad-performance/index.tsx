@@ -1,6 +1,6 @@
+import { AcadPerformance as IAcadPerformance } from '@api/model/acad-performance'
 import { acadPerformanceModel } from '@entities/acad-performance'
 import { PreparedData } from '@entities/acad-performance/lib/prepare'
-import { AcadPerformance as IAcadPerformance } from '@entities/acad-performance/model'
 import { userModel } from '@entities/user'
 import createSelectItems from '@features/acad-performance/lib/create-select-items'
 import search from '@features/acad-performance/lib/search'

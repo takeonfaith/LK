@@ -1,4 +1,4 @@
-import { AcadPerformance } from '@entities/acad-performance/model'
+import { AcadPerformance } from '@api/model/acad-performance'
 import { TeacherWidthModal, Title } from '@ui/atoms'
 import findSemestr from '@utils/find-semestr'
 import localizeDate from '@utils/localize-date'

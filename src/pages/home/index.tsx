@@ -4,7 +4,7 @@ import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-no
 import ShortCutLinks from '@features/home/ui/organisms/short-cut-links'
 import UserInfo from '@features/home/ui/organisms/user-info'
 import { Wrapper } from '@ui/atoms'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Content } from './ui/atoms/content'
 
 const Home = () => {
@@ -12,15 +12,13 @@ const Home = () => {
         data: { user },
         error,
     } = userModel.selectors.useUser()
-    const { data } = scheduleModel.selectors.useSchedule()
+
+    useEffect(() => {
+        scheduleModel.effects.getScheduleFx(user)
+    }, [])
 
     return (
-        <Wrapper
-            loading={!user}
-            load={() => scheduleModel.effects.getScheduleFx(user)}
-            error={error}
-            data={user && data.schedule}
-        >
+        <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <Content>
                 {!!user && (
                     <div className="home-page-content-inner">
