@@ -1,3 +1,4 @@
+import ContactInfoActualizationPage from '@pages/contact-info-actualization'
 import DataVerificationPage from '@pages/data-verification'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
@@ -25,6 +26,7 @@ import {
     FiBell,
     FiBriefcase,
     FiCalendar,
+    FiCheckSquare,
     FiClipboard,
     FiFileText,
     FiMonitor,
@@ -71,6 +73,7 @@ export const HELP_SERVICE_ROUTE = '/help_service'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const DOWNLOAD_ADMIN_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
+export const CONTACT_INFO_ACTUALIZATION = '/contact-info-actualization'
 
 //hidden routes
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
@@ -161,10 +164,10 @@ export const teachersPrivateRoutes: IRoutes = {
     },
     8: {
         id: 8,
-        title: 'Опрос для проверки уровня цифровой грамотности',
-        icon: BiBookReader,
-        path: PPS_VOTE_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PPS_VOTE_ROUTE }),
+        title: 'Актуализация контактных данных',
+        icon: FiCheckSquare,
+        path: CONTACT_INFO_ACTUALIZATION,
+        Component: ContactInfoActualizationPage,
         isTemplate: false,
     },
     9: {
@@ -358,6 +361,14 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiNotification,
         path: PERSONAL_NOTIFICATIONS,
         Component: PersonalNotificationsPage,
+        isTemplate: false,
+    },
+    35: {
+        id: 35,
+        title: 'Опрос для проверки уровня цифровой грамотности',
+        icon: BiBookReader,
+        path: PPS_VOTE_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: PPS_VOTE_ROUTE }),
         isTemplate: false,
     },
 }

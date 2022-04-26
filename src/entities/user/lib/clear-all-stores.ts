@@ -2,6 +2,7 @@ import { acadPerformanceModel } from '@entities/acad-performance'
 import { adminLinksModel } from '@entities/admin-links'
 import { applicationsModel } from '@entities/applications'
 import { confirmModel } from '@entities/confirm'
+import { contactInfoActualizationModel } from '@entities/contact-info-actualization'
 import { electronicInteractionModel } from '@entities/electronic-interaction'
 import { menuModel } from '@entities/menu'
 import { messagesModel } from '@entities/messages'
@@ -28,6 +29,7 @@ const stores = [
     scheduleModel,
     superiorRoomModel,
     teacherDateVerificationModel,
+    contactInfoActualizationModel,
 ]
 
 const clearAllStores = () => {

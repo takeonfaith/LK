@@ -5,6 +5,7 @@ interface Args {
 }
 
 const InputAreaWrapper = styled.div<Args>`
+    width: 100%;
     display: flex;
     flex-direction: column;
     transition: 0.2s row-gap;
