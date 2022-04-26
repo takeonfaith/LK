@@ -46,7 +46,7 @@ const getTeacherDataVerificationFx = createEffect(async (): Promise<TeacherDataV
 
         return response.data
     } catch (error) {
-        throw new Error(error as string)
+        throw new Error('Не удалось войти')
     }
 })
 

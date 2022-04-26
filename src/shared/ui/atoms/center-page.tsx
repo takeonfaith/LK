@@ -5,6 +5,7 @@ const CenterPage = styled.div`
     align-items: center;
     justify-content: center;
     height: 100%;
+    color: var(--text);
 `
 
 export default CenterPage

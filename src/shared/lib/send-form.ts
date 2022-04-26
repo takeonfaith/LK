@@ -1,25 +1,28 @@
-import { superiorRoomApi } from '@api'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { IInputArea } from '@ui/input-area/model'
-import { IndexedProperties } from '@utility-types/indexed-properties'
 import prepareFormData from '@utils/prepare-form-data'
+import { Effect, Event } from 'effector'
 
-const sendForm = (
+const sendForm = async <T>(
     form: IInputArea,
+    post: Effect<T, void, Error>,
     setLoading: (loading: boolean) => void,
-    setCompleted: (loading: boolean) => void,
+    setCompleted: Event<{
+        completed: boolean
+    }>,
 ) => {
     setLoading(true)
-    const data = prepareFormData<IndexedProperties>(form)
+    const data = prepareFormData<T>(form)
 
     try {
-        superiorRoomApi.post(data)
+        await post(data)
         setLoading(false)
-        setCompleted(true)
+        setCompleted({ completed: true })
     } catch (error) {
         setLoading(false)
+
         popUpMessageModel.events.evokePopUpMessage({
-            message: `Не удалось отправить форму. Ошибка: ${error as string}`,
+            message: `${error as string}`,
             type: 'failure',
             time: 30000,
         })

@@ -11,16 +11,17 @@ const getForm = (data: ContactInfoActualization): IInputArea => {
                 value: data?.tel_mob_private,
                 fieldName: 'tel_mob_private',
                 mask: true,
+                required: true,
             },
             {
-                title: 'Рабочий мобильный телефон',
+                title: 'Служебный мобильный телефон',
                 type: 'tel',
                 value: data?.tel_mob_staff,
                 fieldName: 'tel_mob_staff',
                 mask: true,
             },
             {
-                title: 'Рабочий телефон',
+                title: 'Служебный телефон (прямой/дополнительный)',
                 type: 'tel',
                 value: data?.tel_staff,
                 fieldName: 'tel_staff',
@@ -30,6 +31,7 @@ const getForm = (data: ContactInfoActualization): IInputArea => {
                 type: 'email',
                 value: data.email_private,
                 fieldName: 'email_private',
+                required: true,
             },
             {
                 title: 'Рабочий email',

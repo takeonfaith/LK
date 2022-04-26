@@ -210,7 +210,7 @@ const Input = ({
                 required={required}
             />
             {type !== 'password' ? (
-                !!value.length &&
+                !!value?.length &&
                 inputAppearance && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
             ) : (
                 <Button

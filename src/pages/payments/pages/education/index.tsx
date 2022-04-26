@@ -8,7 +8,7 @@ import {
     PaymentsInfo,
 } from '@features/payments'
 import getEducationPaygraphColumns from '@pages/payments/lib/get-education-paygraph-columns'
-import { LinkButton, Title } from '@ui/atoms'
+import { Divider, LinkButton, Title } from '@ui/atoms'
 import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
@@ -23,7 +23,7 @@ const EducationPayments = () => {
         <PageWrapper>
             {data?.education.map((education, i) => {
                 return (
-                    <>
+                    <React.Fragment key={education.number}>
                         <div className="blocks-wrapper" key={i}>
                             <Block orientation="vertical" maxWidth="800px">
                                 <Title size={2} align="left" bottomGap>
@@ -86,7 +86,8 @@ const EducationPayments = () => {
                                 </Block>
                             </div>
                         )}
-                    </>
+                        {i !== data.education.length - 1 && <Divider margin="20px 0" />}
+                    </React.Fragment>
                 )
             })}
         </PageWrapper>

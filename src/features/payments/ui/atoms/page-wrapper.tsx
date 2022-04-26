@@ -8,10 +8,7 @@ const PageWrapper = styled.div`
     flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
-
-    & > * + * {
-        margin-top: 10px;
-    }
+    gap: 10px;
 
     .blocks-wrapper {
         display: flex;

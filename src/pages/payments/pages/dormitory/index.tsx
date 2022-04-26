@@ -8,7 +8,7 @@ import {
     PaymentsInfo,
 } from '@features/payments'
 import getDormitoryPaygraphColumns from '@pages/payments/lib/get-dormitory-paygraph-columns'
-import { Title } from '@ui/atoms'
+import { Divider, Title } from '@ui/atoms'
 import { LinkButton } from '@ui/atoms'
 import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
@@ -87,6 +87,7 @@ const DormitoryPayments = () => {
                                 </Block>
                             </div>
                         )}
+                        {i !== data.dormitory.length - 1 && <Divider margin="20px 0" />}
                     </React.Fragment>
                 )
             })}

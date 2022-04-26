@@ -1,13 +1,29 @@
 import { AxiosResponse } from 'axios'
+import { Effect, Event } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createEvent, createStore } from 'effector/compat'
-import { forward } from 'effector/effector.mjs'
 
-interface IStore<DataType> {
+export interface TemplateFormStore<DataType> {
     data: DataType | null
     completed: boolean
     error: string | null
     loading: boolean
+}
+
+export interface TemplateFormStoreOutput<DataType, PostDataType> {
+    selectors: {
+        useForm: () => TemplateFormStore<DataType>
+    }
+    effects: {
+        getFormFx: Effect<void, DataType, Error>
+        postFormFx: Effect<PostDataType, void, Error>
+    }
+    events: {
+        changeCompleted: Event<{
+            completed: boolean
+        }>
+        clearStore: Event<void>
+    }
 }
 
 interface APIType<DataType, PostDataType> {
@@ -16,16 +32,18 @@ interface APIType<DataType, PostDataType> {
     put?: () => void
 }
 
-export const createFormStore = <DataType, PostDataType>(
-    defaultStore: IStore<DataType>,
-    api: APIType<DataType, PostDataType>,
-) => {
+interface Args<DataType, PostDataType> {
+    defaultStore: TemplateFormStore<DataType>
+    api: APIType<DataType, PostDataType>
+}
+
+export const createFormStore = <DataType, PostDataType>({
+    defaultStore,
+    api,
+}: Args<DataType, PostDataType>): TemplateFormStoreOutput<DataType, PostDataType> => {
     const DEFAULT_STORE = defaultStore
 
     const useForm = () => {
-        // eslint-disable-next-line no-console
-        console.log(useStore($formStore))
-
         return {
             data: useStore($formStore).data,
             loading: useStore(getFormFx.pending),
@@ -34,7 +52,6 @@ export const createFormStore = <DataType, PostDataType>(
         }
     }
 
-    const postForm = createEvent<PostDataType>()
     const changeCompleted = createEvent<{ completed: boolean }>()
 
     const postFormFx = createEffect(async (postData: PostDataType): Promise<void> => {
@@ -43,11 +60,9 @@ export const createFormStore = <DataType, PostDataType>(
 
             return response.data
         } catch (error) {
-            throw new Error('Не удалось загрузить раздел')
+            throw new Error('Не удалось отправить данные. Проверьте интернет соединение и попробуйте снова')
         }
     })
-
-    forward({ from: postForm, to: postFormFx })
 
     const getFormFx = createEffect(async (): Promise<DataType> => {
         try {
@@ -61,7 +76,7 @@ export const createFormStore = <DataType, PostDataType>(
 
     const clearStore = createEvent()
 
-    const $formStore = createStore<IStore<DataType>>(DEFAULT_STORE)
+    const $formStore = createStore<TemplateFormStore<DataType>>(DEFAULT_STORE)
         .on(getFormFx, (oldData) => ({
             ...oldData,
             error: null,
@@ -88,9 +103,9 @@ export const createFormStore = <DataType, PostDataType>(
         },
         effects: {
             getFormFx,
+            postFormFx,
         },
         events: {
-            postForm,
             changeCompleted,
             clearStore,
         },
