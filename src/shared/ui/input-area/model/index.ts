@@ -23,6 +23,7 @@ type IInputAreaTypes =
     | 'number'
     | 'textarea'
     | 'checkbox-docs'
+    | 'date-interval'
 
 export interface IInputAreaFiles {
     files: File[]

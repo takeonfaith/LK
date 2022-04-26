@@ -39,6 +39,12 @@ const getForm = (data: ContactInfoActualization): IInputArea => {
                 value: data.email_staff,
                 fieldName: 'email_staff',
             },
+            {
+                title: 'Рабочий email',
+                type: 'date-interval',
+                value: data.email_staff,
+                fieldName: 'email_staff',
+            },
         ],
     }
 }

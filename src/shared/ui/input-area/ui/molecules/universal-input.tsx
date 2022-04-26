@@ -2,6 +2,7 @@ import Select, { SelectPage } from '@features/select'
 import { Input, TextArea } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData, IInputAreaFiles } from '@ui/input-area/model'
+import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
 import React from 'react'
@@ -100,6 +101,15 @@ const UniversalInput = (props: Props) => {
                 items={items as CheckboxDocs[]}
                 setChecked={(value, j?: number) => handleChangeValue(!value, indexI, j)}
                 setFiles={(files, j?: number) => handleLoadFiles(files, indexI, j)}
+            />
+        ) : type === 'date-interval' ? (
+            <DateInterval
+                title={title}
+                required={required}
+                dates={['', '']}
+                setDates={() => null}
+                valid={false}
+                setValid={() => null}
             />
         ) : type === 'radio' ? (
             <RadioButtonList

@@ -8,6 +8,9 @@ import { WhatsNewTemplate } from './ui'
 import { BiNotification, BiRuble } from 'react-icons/bi'
 import { Colors } from '@consts'
 import { userModel } from '@entities/user'
+import { CONTACT_INFO_ACTUALIZATION, PERSONAL_NOTIFICATIONS } from '@app/routes/techers-routes'
+import { PAYMENTS_ROUTE } from '@app/routes/routes'
+import { FiCheckSquare } from 'react-icons/fi'
 
 const WhatsNewWrapper = styled.div`
     display: flex;
@@ -47,12 +50,20 @@ const WhatsNew = () => {
         <WhatsNewTemplate
             key={0}
             list={[
-                { icon: <BiRuble />, title: 'В оплаты добавлен график платежей', color: 'pink' },
+                { icon: <BiRuble />, title: 'В оплаты добавлен график платежей', color: 'pink', goTo: PAYMENTS_ROUTE },
                 {
                     icon: <BiNotification />,
                     title: 'Добавлен раздел Кадровые Уведомления',
                     color: 'blue',
                     visible: user?.user_status === 'staff',
+                    goTo: PERSONAL_NOTIFICATIONS,
+                },
+                {
+                    icon: <FiCheckSquare />,
+                    title: 'Добавлен раздел Актуализация контактных данных',
+                    color: 'green',
+                    visible: user?.user_status === 'staff',
+                    goTo: CONTACT_INFO_ACTUALIZATION,
                 },
             ]}
         />,

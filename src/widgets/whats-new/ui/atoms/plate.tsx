@@ -1,7 +1,10 @@
 import { Colors, IColors } from '@consts'
+import { Button } from '@ui/button'
 import { Title } from '@ui/title'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import useModal from 'widgets/modal'
 
 const PlateWrapper = styled.div<{ color?: keyof IColors }>`
     display: flex;
@@ -14,6 +17,11 @@ const PlateWrapper = styled.div<{ color?: keyof IColors }>`
 
     .title {
         font-weight: 700;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--text);
     }
 
     .icon {
@@ -40,13 +48,20 @@ export interface WhatsNewPlate {
     title: string
     color?: keyof IColors
     visible?: boolean
+    goTo?: string
 }
 
-const Plate = ({ icon, title, color, visible = true }: WhatsNewPlate) => {
+const Plate = ({ icon, title, color, goTo, visible = true }: WhatsNewPlate) => {
+    const { close } = useModal()
     return visible ? (
         <PlateWrapper color={color as string}>
             <div className="icon">{icon}</div>
             <span className="title">{title}</span>
+            {!!goTo && (
+                <Link to={goTo}>
+                    <Button text="Перейти" onClick={close} background="var(--almostTransparent)" />
+                </Link>
+            )}
         </PlateWrapper>
     ) : null
 }
