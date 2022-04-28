@@ -1,9 +1,11 @@
 import { AcadPerformance } from '@api/model/acad-performance'
-import { TeacherWidthModal, Title } from '@ui/atoms'
+import { Title } from '@ui/atoms'
+import KeyValue from '@ui/atoms/key-value'
 import findSemestr from '@utils/find-semestr'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
 import styled from 'styled-components'
+import { User } from 'widgets'
 
 const Container = styled.div`
     width: 600px;
@@ -12,17 +14,6 @@ const Container = styled.div`
         width: 100%;
         padding: 10px;
     }
-`
-const Line = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    width: 100%;
-
-    margin-top: 10px;
-`
-
-const Data = styled.span`
-    margin-left: 5px;
 `
 
 interface Props {
@@ -35,40 +26,14 @@ const SubjectModal = ({ item }: Props) => {
             <Title size={2} align="left">
                 {item.name}
             </Title>
-            <Line>
-                <b>Курс:</b>
-                <Data>{item.course}</Data>
-            </Line>
-            <Line>
-                <b>Форма аттестации:</b>
-                <Data> {item.exam_type}</Data>
-            </Line>
-            <Line>
-                <b>Дата проведения:</b>
-                <Data> {localizeDate(item.exam_date)}</Data>
-            </Line>
-            <Line>
-                <b>Оценка:</b>
-                <Data> {item.grade}</Data>
-            </Line>
-            <Line>
-                <b>Преподаватель:</b>
-                <Data>
-                    <TeacherWidthModal fio={item.teacher} />
-                </Data>
-            </Line>
-            <Line>
-                <b>Номер ведомости:</b>
-                <Data> {item.bill_num}</Data>
-            </Line>
-            <Line>
-                <b>Семестр:</b>
-                <Data> {findSemestr(item.exam_date, +item.course)}</Data>
-            </Line>
-            <Line>
-                <b>Кафедра:</b>
-                <Data> {item.chair}</Data>
-            </Line>
+            <KeyValue keyStr="Курс" value={item.course} />
+            <KeyValue keyStr="Форма аттестации" value={item.exam_type} />
+            <KeyValue keyStr="Дата проведения" value={localizeDate(item.exam_date)} />
+            <KeyValue keyStr="Оценка" value={item.grade} />
+            <KeyValue keyStr="Номер ведомости" value={item.bill_num} />
+            <KeyValue keyStr="Семестр" value={findSemestr(item.exam_date, +item.course)} />
+            <KeyValue keyStr="Кафедра" value={item.chair} />
+            <KeyValue keyStr="Преподаватель" value={<User type="teacher" name={item.teacher} />} direction="vertical" />
         </Container>
     )
 }

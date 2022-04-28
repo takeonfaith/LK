@@ -49,7 +49,7 @@ const UserModal = ({ avatar, name, children }: Props) => {
     return (
         <TeacherModalWrapper>
             <div className="teacher">
-                <Avatar avatar={avatar} width="110px" height="110px" marginRight="0" />
+                <Avatar name={name} avatar={avatar} width="110px" height="110px" marginRight="0" />
                 <b>{name}</b>
             </div>
             <div className="buttons">{children}</div>

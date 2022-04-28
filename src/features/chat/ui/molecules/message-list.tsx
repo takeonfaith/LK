@@ -49,7 +49,13 @@ const MessageList = ({ messages }: Props) => {
                         <TopDate date={messages.date} />
                         <div className="messages-section" key={i}>
                             <div className={'message-avatar'}>
-                                <Avatar avatar={messages.avatar} width="32px" height="32px" marginRight="0" />
+                                <Avatar
+                                    name={messages.messages[0].sender}
+                                    avatar={messages.avatar}
+                                    width="32px"
+                                    height="32px"
+                                    marginRight="0"
+                                />
                             </div>
                             <div className="messages">
                                 {messages.messages.map((message, i) => {

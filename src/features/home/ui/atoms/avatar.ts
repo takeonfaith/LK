@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
-export const Container = styled.div<{ width?: string; height?: string; marginRight?: string }>`
+export const Container = styled.div<{ width?: string; height?: string; marginRight?: string; background?: string }>`
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--almostTransparent);
+    background: ${({ background }) => background ?? 'var(--almostTransparent)'};
     color: var(--text);
 
     svg {
@@ -20,6 +20,17 @@ export const Container = styled.div<{ width?: string; height?: string; marginRig
     overflow: hidden;
 
     margin-right: ${({ marginRight }) => marginRight ?? '32px'};
+
+    .name {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        color: #fff;
+        font-size: ${({ width }) => (width ? parseInt(width) / 50 + 'em' : '3em')};
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
 
     @media (max-width: 1000px) {
         width: ${({ width }) => width ?? '75px'};

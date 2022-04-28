@@ -26,7 +26,10 @@ function UserInfo({ user }: Props) {
 
     return (
         <Section>
-            <Avatar avatar={avatar} />
+            <Avatar
+                name={createFullName({ name: user.name, patronymic: user.patronymic, surname: user.surname })}
+                avatar={avatar}
+            />
             <Description>
                 <Title size={2} align="left">
                     {createFullName(params)}

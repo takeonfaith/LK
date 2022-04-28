@@ -85,7 +85,7 @@ const User = ({ type, avatar, name, loading = false }: Props) => {
                       )
             }
         >
-            <Avatar avatar={avatar} width="30px" height="30px" marginRight="7px" />
+            <Avatar name={name} avatar={avatar} width="30px" height="30px" marginRight="7px" />
             <div className="name-and-status">
                 <span className="name">{name}</span>
                 <span className="status"> {type === 'teacher' ? 'Сотрудник' : 'Студент'}</span>

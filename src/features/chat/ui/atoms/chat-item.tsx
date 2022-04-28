@@ -29,9 +29,9 @@ const ChatItem = ({ avatar, name, lastMessage, chatId, loading, amountOfUnreadMe
                     <div className="amount-of-unread-messages">{amountOfUnreadMessages}</div>
                 )}
                 {isOpen ? (
-                    <Avatar avatar={avatar} width="40px" height="40px" marginRight="7px" />
+                    <Avatar name={name} avatar={avatar} width="40px" height="40px" marginRight="7px" />
                 ) : (
-                    <Avatar avatar={avatar} width="45px" height="45px" marginRight="0" />
+                    <Avatar name={name} avatar={avatar} width="45px" height="45px" marginRight="0" />
                 )}
                 {isOpen && (
                     <>

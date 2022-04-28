@@ -21,15 +21,14 @@ export const AnimatedCheckWrapper = styled.div<{ size: string }>`
         height: ${({ size }) => size};
         border-radius: 50%;
         opacity: 1;
-        animation: shadowExpand 0.25s cubic-bezier(0.77, 0, 0.175, 1) forwards;
     }
 
     .circle-white {
         position: absolute;
-        top: ${({ size }) => `calc(${size} * 0.07)`};
-        left: ${({ size }) => `calc(${size} * 0.07)`};
-        width: ${({ size }) => `calc(${size} * 0.86)`};
-        height: ${({ size }) => `calc(${size} * 0.86)`};
+        top: 3px;
+        left: 3px;
+        width: ${({ size }) => `calc(${size} - 6px)`};
+        height: ${({ size }) => `calc(${size} - 6px)`};
         transform: scale(0);
         border-radius: 50%;
         background: var(--schedule);
@@ -41,23 +40,6 @@ export const AnimatedCheckWrapper = styled.div<{ size: string }>`
             transform: scale(0);
         }
         100% {
-            transform: scale(1);
-        }
-    }
-
-    @keyframes shadowExpand {
-        0% {
-            top: 0px;
-            left: 0px;
-            border: 0px solid var(--blue);
-            opacity: 1;
-            transform: scale(0);
-        }
-        100% {
-            top: ${({ size }) => `calc(${-size} / 2)`};
-            left: ${({ size }) => `calc(${-size} / 2)`};
-            border: ${({ size }) => `calc(${size} / 2)`} solid var(--blue);
-            opacity: 0;
             transform: scale(1);
         }
     }

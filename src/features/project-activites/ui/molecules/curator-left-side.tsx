@@ -53,7 +53,7 @@ const CuratorLeftSide = ({ img, name, title, id }: Props) => {
     const history = useHistory()
     return (
         <LeftSide>
-            <Avatar avatar={img} width="100px" height="100px" marginRight="0" />
+            <Avatar name={name} avatar={img} width="100px" height="100px" marginRight="0" />
             <div className="title-and-name">
                 <Title size={3}>{name}</Title>
                 <p>{title}</p>
