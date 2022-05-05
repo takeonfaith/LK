@@ -12,6 +12,7 @@ import InitialLoader from './initial-loader'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import { useModal } from 'widgets'
 import WhatsNew from '../../widgets/whats-new'
+import ContextMenu from 'widgets/context-menu'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -74,6 +75,7 @@ const ContentLayout = () => {
             <Modal />
             <PopUpMessage />
             <Confirm />
+            <ContextMenu />
         </div>
     )
 }
