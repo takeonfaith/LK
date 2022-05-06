@@ -18,7 +18,7 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
             title: 'План. дата окончания',
             field: 'date_plan',
             type: 'date',
-            priority: 'six',
+            priority: 'five',
             sort: true,
         },
         {
@@ -31,13 +31,13 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
             title: 'Cумма к оплате',
             field: 'sum',
             type: 'rub',
-            priority: 'three',
+            priority: 'one',
         },
         {
             title: 'Оплачено',
             field: 'sum_pay',
             type: 'rub',
-            priority: 'two',
+            priority: 'one',
         },
     ]
 }

@@ -1,16 +1,12 @@
-import ApplicationsPage from '@pages/applications'
 import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
 import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
 import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
 import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
 import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
-import ChatPage from '@pages/chat'
-import AllTeachersPage from '@pages/all-teachers'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
-import ProjectActivitiesPage from '@pages/project-activities'
 import TeachersSchedule from '@pages/teachers-schedule'
 import {
     BiBookReader,
@@ -104,7 +100,7 @@ export const privateRoutes: IRoutes = {
         title: 'Сообщения',
         icon: BiMessageRounded,
         path: MESSAGES_ROUTE,
-        Component: ChatPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: MESSAGES_ROUTE }),
         isTemplate: true,
     },
     3: {
@@ -120,7 +116,7 @@ export const privateRoutes: IRoutes = {
         title: 'Проектная деятельность',
         icon: FaRegLightbulb,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: ProjectActivitiesPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
         isTemplate: false,
     },
     6: {
@@ -136,7 +132,7 @@ export const privateRoutes: IRoutes = {
         title: 'Заявления',
         icon: FiFileText,
         path: APPLICATIONS_ROUTE,
-        Component: ApplicationsPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         isTemplate: false,
     },
     8: {
@@ -144,7 +140,7 @@ export const privateRoutes: IRoutes = {
         title: 'Преподаватели',
         icon: BiBookReader,
         path: ALL_TEACHERS_ROUTE,
-        Component: AllTeachersPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/teachers' }),
         isTemplate: false,
     },
     9: {

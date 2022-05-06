@@ -224,7 +224,7 @@ export const GradeByScore: IGrade = {
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
-export const LastUpdateWhatsNew = '2022-04-18T10:30:00'
+export const LastUpdateWhatsNew = '2022-05-06T10:30:00'
 
 interface LetterColorMatch {
     [key: string]: keyof IColors

@@ -28,42 +28,6 @@ const Home = () => {
                         <UserInfo user={user} />
                         <ScheduleAndNotification />
                         <ShortCutLinks />
-                        <LinksList
-                            title="Разделы"
-                            links={[
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'purple',
-                                    isNew: true,
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Расписание',
-                                    color: 'blue',
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'red',
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'green',
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'orange',
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'lightGreen',
-                                },
-                            ]}
-                        />
                     </div>
                 )}
             </Content>

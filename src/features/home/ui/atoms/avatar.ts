@@ -37,6 +37,10 @@ export const Container = styled.div<{ width?: string; height?: string; marginRig
         min-width: ${({ width }) => width ?? '75px'};
         height: ${({ height }) => height ?? '75px'};
         margin-right: ${({ marginRight }) => marginRight ?? '15px'};
+
+        .name {
+            font-size: ${({ width }) => (width ? parseInt(width) / 50 + 'em' : '1.5em')};
+        }
     }
 `
 
