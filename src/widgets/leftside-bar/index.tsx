@@ -1,13 +1,12 @@
-import { IRoutes, privateRoutes } from '@app/routes/routes'
-import { teachersPrivateRoutes } from '@app/routes/techers-routes'
+import { IRoutes } from '@app/routes/general-routes'
+import { privateRoutes } from '@app/routes/routes'
+import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
 import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
 import { Logo } from '@ui/logo'
-import LocalSearch from '@ui/molecules/local-search'
 import useResize from '@utils/hooks/use-resize'
 import React, { useState } from 'react'
-
-import search from './lib/search'
+import UserBig from 'widgets/user-big'
 import { CloseMenuButton, LeftsideBarList, LeftsideBarWrapper } from './ui'
 
 const LeftsideBar = () => {
@@ -24,7 +23,8 @@ const LeftsideBar = () => {
         <LeftsideBarWrapper isOpen={isOpen} height={height}>
             <div className="top-wrapper">
                 <Logo />
-                <LocalSearch whereToSearch={currentRoute} setResult={setFoundRoutes} searchEngine={search} />
+                <UserBig name={user?.fullName ?? ''} loading={!user} />
+                {/* <LocalSearch whereToSearch={currentRoute} setResult={setFoundRoutes} searchEngine={search} /> */}
                 <LeftsideBarList searchList={foundRoutes} />
             </div>
             {width < 1000 && <CloseMenuButton />}

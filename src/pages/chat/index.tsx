@@ -1,4 +1,4 @@
-import { TEMPLATE_CHAT_ROUTE } from '@app/routes/techers-routes'
+import { TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
 import { ChatWindow, ListOfChats } from '@features/chat'
 import EmptyHere from '@features/chat/ui/atoms/empty-here'
 import React from 'react'

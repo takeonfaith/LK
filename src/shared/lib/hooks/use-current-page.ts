@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
-import { IRoute, privateRoutes } from '@app/routes/routes'
+import { privateRoutes } from '@app/routes/routes'
 import { userModel } from '@entities/user'
-import { teachersPrivateRoutes } from '@app/routes/techers-routes'
+import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
+import { IRoute, IRoutes } from '@app/routes/general-routes'
 
 const useCurrentPage = () => {
     const history = useHistory()
     const { data } = userModel.selectors.useUser()
 
-    const currentRoute = !data.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
+    const currentRoute: IRoutes = !data.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
 
     const [currentPage, setCurrentPage] = useState<IRoute>(
         Object.values(currentRoute).find((link: IRoute) => history.location.pathname.includes(link.path)) ??

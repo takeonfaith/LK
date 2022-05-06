@@ -127,6 +127,10 @@ const GlobalStyles = createGlobalStyle`
 		--info-blue: #133db8;
 		--form: #fff;
 	}
+
+	a {
+		text-decoration: none;
+	}
 `
 
 export default GlobalStyles

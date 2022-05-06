@@ -1,4 +1,4 @@
-import PrivateRouter from '@app/routes/private-router'
+import PrivateRouter from '@app/routers/private-router'
 import { OLD_LK_URL } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { userModel } from '@entities/user'
@@ -67,7 +67,7 @@ const ContentLayout = () => {
             />
             <LeftsideBar />
             <ContentWrapper>
-                <Header />
+                {/* <Header /> */}
                 <div className="page-content">
                     <PrivateRouter />
                 </div>

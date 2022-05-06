@@ -4,7 +4,8 @@ const LeftsideBarWrapper = styled.div<{ isOpen: boolean; height: number }>`
     min-width: 235px;
     width: 235px;
     height: ${({ height }) => height + 'px'};
-    box-shadow: var(--light-box-shadow);
+    box-shadow: var(--very-mild-shadow);
+    border-radius: 0 var(--brSemi) var(--brSemi) 0;
     background: var(--theme);
     z-index: 4;
     display: flex;

@@ -1,5 +1,6 @@
 import { adminLinksModel } from '@entities/admin-links'
-import { LOGIN_ROUTE, publicRoutes } from '@routes'
+import { menuModel } from '@entities/menu'
+import { LOGIN_ROUTE, publicRoutes } from '@app/routes/general-routes'
 import React, { useEffect } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'
@@ -7,7 +8,7 @@ import ContentLayout from '../../shared/ui/content-layout'
 
 const Router = () => {
     const {
-        data: { isAuthenticated },
+        data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
 
     useEffect(() => {
@@ -15,6 +16,14 @@ const Router = () => {
             adminLinksModel.effects.getAdminLinksFx()
         }
     }, [isAuthenticated])
+
+    useEffect(() => {
+        if (user) {
+            console.log({ user })
+
+            menuModel.events.defineMenu({ user })
+        }
+    }, [user])
 
     return isAuthenticated ? (
         <Switch>

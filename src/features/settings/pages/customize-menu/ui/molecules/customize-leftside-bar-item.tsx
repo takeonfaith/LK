@@ -5,14 +5,14 @@ import AddToHomeButton from '../atoms/add-to-home-button'
 import AddToMenuButton from '../atoms/add-to-menu-buttom'
 
 interface Props {
-    id: number
+    id: string
     title: string
     icon: IconType
     path: string
     chosen: boolean
     shortItemChosen: boolean
-    switchMenuItem: (id: number) => void
-    switchShortChosen: (id: number) => void
+    switchMenuItem: (id: string) => void
+    switchShortChosen: (id: string) => void
 }
 
 const CustomizeLeftside = ({

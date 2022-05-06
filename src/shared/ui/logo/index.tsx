@@ -1,4 +1,4 @@
-import { HOME_ROUTE } from '@app/routes/routes'
+import { HOME_ROUTE } from '@app/routes/general-routes'
 import React from 'react'
 import LogoPicture from '../../images/logo.png'
 import { LogoWrapper } from './styles'

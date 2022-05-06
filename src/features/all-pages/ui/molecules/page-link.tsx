@@ -7,11 +7,15 @@ import React from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
 import styled from 'styled-components'
 import ContextContent from './context-content'
-import Icon from './icon'
+import Icon from '../atoms/icon'
+import { Link } from 'react-router-dom'
+import { menuModel } from '@entities/menu'
+import { IRoute } from '@app/routes/general-routes'
 
-const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
+export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
     position: relative;
     cursor: pointer;
+    text-decoration: none;
 
     .new {
         position: absolute;
@@ -76,43 +80,44 @@ const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
     }
 `
 
-export interface PageLinkProps {
-    icon: ChildrenType
-    title: string
-    color: string
-    isNew?: boolean
-}
-
-const PageLink = (props: PageLinkProps) => {
-    const { icon, title, color, isNew = false } = props
+const PageLink = (props: IRoute) => {
+    const { icon, title, color, path } = props
     return (
-        <PageLinkWrapper
-            padding="0"
-            width="125px"
-            height="135px"
-            orientation="vertical"
-            justifyContent="center"
-            color={color}
+        <Link
+            to={path}
+            onClick={() => {
+                menuModel.events.changeOpen({ isOpen: false, currentPage: path.slice(1, path.length) })
+            }}
         >
-            <div className="outside">
-                <Icon color={color}>{icon}</Icon>
-                <b>{getShortStirng(title, 20)}</b>
-            </div>
-            <Button
-                icon={<FiMoreVertical />}
-                textColor={Colors[color as keyof IColors].main}
-                className="more-button"
-                background="transparent"
-                onClick={(e) =>
-                    contextMenuModel.events.open({
-                        e,
-                        height: 143,
-                        content: <ContextContent {...props} />,
-                    })
-                }
-            />
-            {isNew && <span className="new">New</span>}
-        </PageLinkWrapper>
+            <PageLinkWrapper
+                padding="0"
+                width="125px"
+                height="135px"
+                orientation="vertical"
+                justifyContent="center"
+                color={color}
+            >
+                <div className="outside">
+                    <Icon color={color}>{icon}</Icon>
+                    <b>{getShortStirng(title, 20)}</b>
+                </div>
+                <Button
+                    icon={<FiMoreVertical />}
+                    textColor={Colors[color as keyof IColors].main}
+                    className="more-button"
+                    background="transparent"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        contextMenuModel.events.open({
+                            e,
+                            height: 143,
+                            content: <ContextContent {...props} />,
+                        })
+                    }}
+                />
+                {/* {isNew && <span className="new">New</span>} */}
+            </PageLinkWrapper>
+        </Link>
     )
 }
 

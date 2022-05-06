@@ -1,5 +1,6 @@
-import { IRoute, privateRoutes } from '@app/routes/routes'
-import { teachersPrivateRoutes } from '@app/routes/techers-routes'
+import { IRoute, IRoutes } from '@app/routes/general-routes'
+import { privateRoutes } from '@app/routes/routes'
+import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
 import { ShortCutLinksType, SHORT_CUT_LINKS_LIMIT_SIZE } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { userModel } from '@entities/user'
@@ -16,6 +17,7 @@ const CustomizeLeftsideBarList = () => {
     const { setting: shortCutMenu, change: shortCutChange } = useSettings<ShortCutLinksType>('shortCutLinks')
     const { data } = userModel.selectors.useUser()
     const { height } = useResize()
+    const currentRoute: IRoutes = !data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
     const isAccessible = useIsAccessibleRoute()
     const enabledLeftsideBarItems = getChosenRoutes(setting, data)
     const enabledShortCutMenu = useMemo(() => getChosenRoutes(shortCutMenu, data), [shortCutMenu])
@@ -66,22 +68,20 @@ const CustomizeLeftsideBarList = () => {
 
     return (
         <LeftsideBarListWrapper style={{ height: height - 200 }}>
-            {Object.values(!data?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes).map(
-                (el: IRoute, index) => {
-                    return (
-                        isAccessible(el.title) && (
-                            <CustomizeLeftsideBarItem
-                                {...el}
-                                key={index}
-                                chosen={!!enabledLeftsideBarItems[el.id]}
-                                shortItemChosen={!!enabledShortCutMenu[el.id]}
-                                switchShortChosen={switchShortChosen}
-                                switchMenuItem={switchChosen}
-                            />
-                        )
+            {/* {Object.values(currentRoute).map((el: IRoute, index) => {
+                return (
+                    isAccessible(el.title) && (
+                        <CustomizeLeftsideBarItem
+                            {...el}
+                            key={index}
+                            chosen={!!enabledLeftsideBarItems[el.id]}
+                            shortItemChosen={!!enabledShortCutMenu[el.id]}
+                            switchShortChosen={switchShortChosen}
+                            switchMenuItem={switchChosen}
+                        />
                     )
-                },
-            )}
+                )
+            })} */}
         </LeftsideBarListWrapper>
     )
 }

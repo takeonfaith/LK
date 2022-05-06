@@ -4,20 +4,23 @@ import styled from 'styled-components'
 
 const LeftsideBarItemWrapper = styled(Link)<{
     isCurrent: boolean
+    color: string
 }>`
     position: relative;
     display: flex;
     align-items: center;
-    font-weight: 700;
+    font-weight: ${({ isCurrent }) => (isCurrent ? 800 : 600)};
+    opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
     width: 100%;
     justify-content: flex-start;
     padding: 10px 0;
-    margin: 10px 0;
+    margin: 5px 0;
     cursor: pointer;
     position: relative;
     user-select: none;
     text-decoration: none;
     border-radius: var(--brLight);
+    color: ${({ color, isCurrent }) => (color && isCurrent ? Colors[color].main : 'var(--text)')};
 
     .admin {
         color: #fff;
@@ -34,7 +37,7 @@ const LeftsideBarItemWrapper = styled(Link)<{
         height: 17px;
     }
 
-    strong {
+    span {
         width: 130px;
         display: block;
         overflow: hidden;
@@ -58,30 +61,21 @@ const LeftsideBarItemWrapper = styled(Link)<{
 
     &::before {
         content: '';
-        width: ${({ isCurrent }) => (isCurrent ? '3px' : '0')};
-        height: 20px;
+        width: 8px;
+        height: 8px;
         display: block;
         position: absolute;
         top: 50%;
         left: -15px;
         transform: translateY(-50%);
-        background: var(--blue);
+        background: ${({ color }) => (color ? Colors[color].main : 'var(--reallyBlue)')};
         border-radius: 10px;
-        transition: 0.2s width;
-    }
-
-    &:hover::before {
-        width: 5px;
-        background: var(--red);
-    }
-
-    svg,
-    strong {
-        color: ${({ isCurrent }) => (isCurrent ? 'var(--blue)' : 'var(--text)')};
+        transition: 0.2s opacity;
+        opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0)};
     }
 
     @media (max-width: 1000px) {
-        strong {
+        span {
             width: 100%;
             display: block;
             overflow: hidden;

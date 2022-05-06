@@ -1,10 +1,10 @@
+import { IRoute } from '@app/routes/general-routes'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
 import React from 'react'
 import { FiBook, FiMinusCircle } from 'react-icons/fi'
 import styled from 'styled-components'
-import Icon from './icon'
-import { PageLinkProps } from './page-link'
+import Icon from '../atoms/icon'
 
 const ContextContentWrapper = styled.div`
     .top {
@@ -25,8 +25,8 @@ const ContextContentWrapper = styled.div`
     }
 `
 
-const ContextContent = (props: PageLinkProps) => {
-    const { icon, title, color, isNew = false } = props
+const ContextContent = (props: IRoute) => {
+    const { icon, title, color } = props
 
     return (
         <ContextContentWrapper>

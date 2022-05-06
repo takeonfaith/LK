@@ -1,5 +1,6 @@
-import { IRoutes, privateRoutes } from '@app/routes/routes'
-import { teachersPrivateRoutes } from '@app/routes/techers-routes'
+import { IRoutes } from '@app/routes/general-routes'
+import { privateRoutes } from '@app/routes/routes'
+import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
 
 const getChosenRoutes = (ids: number[], user: any) => {
     return ids.reduce((acc: IRoutes, id) => {

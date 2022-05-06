@@ -5,6 +5,7 @@ import { useStore } from 'effector-react/compat'
 import { User, UserToken } from '@api/model'
 import axios from 'axios'
 import clearAllStores from '../lib/clear-all-stores'
+import createFullName from '@features/home/lib/create-full-name'
 
 interface UserStore {
     currentUser: User | null
@@ -37,8 +38,13 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
 const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Promise<UserStore> => {
     try {
         const userResponse = await userApi.getUser(data.token)
-
-        return { currentUser: userResponse.data.user, isAuthenticated: !!data, error: '' }
+        const user = userResponse.data.user
+        const { name, surname, patronymic } = user
+        return {
+            currentUser: { ...user, fullName: createFullName({ name, surname, patronymic }) },
+            isAuthenticated: !!data,
+            error: '',
+        }
     } catch (error) {
         logout()
         throw new Error('token expired')

@@ -1,27 +1,27 @@
+import { HOME_ROUTE } from '@app/routes/general-routes'
+import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
-import { hiddenRoutes, privateRoutes } from '@routes'
 import useIsAccessibleRoute from '@utils/hooks/use-is-accessible-route'
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router'
-import { hiddenTeacherRoutes, teachersPrivateRoutes } from './techers-routes'
 
 const PrivateRouter = () => {
     const { data } = userModel.selectors.useUser()
-    const currentRoute = !data?.user?.subdivisions
-        ? Object.assign({}, privateRoutes, hiddenRoutes)
-        : Object.assign({}, teachersPrivateRoutes, hiddenTeacherRoutes)
+    const { allRoutes } = menuModel.selectors.useMenu()
     const isAccessible = useIsAccessibleRoute()
 
     if (!data.user) return null
 
-    return (
+    console.log(allRoutes)
+
+    return allRoutes ? (
         <Switch>
-            {Object.values(currentRoute).map(({ path, Component, isTemplate, title }) => {
+            {Object.values(allRoutes).map(({ path, Component, isTemplate, title }) => {
                 return isAccessible(title) && <Route path={path} component={Component} exact={!isTemplate} key={path} />
             })}
-            <Redirect to={'/home'} />
+            <Redirect to={HOME_ROUTE} />
         </Switch>
-    )
+    ) : null
 }
 
 export default PrivateRouter
