@@ -25,9 +25,10 @@ interface Props {
     align?: Align
     title?: string
     links: IRoutes
+    doNotShow?: string
 }
 
-const LinksList = ({ title, links, align = 'center' }: Props) => {
+const LinksList = ({ title, links, doNotShow, align = 'center' }: Props) => {
     return (
         <LinksListWrapper align={align}>
             <Title size={4} align="left" visible={!!title} bottomGap>
@@ -35,10 +36,10 @@ const LinksList = ({ title, links, align = 'center' }: Props) => {
             </Title>
             <div className="list">
                 {Object.values(links).map((el) => {
-                    if (el.show !== false)
+                    if (el.show !== false && doNotShow !== el.id)
                         return <PageLink key={el.id} {...el} color={el.color.length ? el.color : 'blue'} />
                 })}
-                <AllPagesLink />
+                {doNotShow !== 'all' && <AllPagesLink />}
             </div>
         </LinksListWrapper>
     )

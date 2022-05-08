@@ -61,8 +61,10 @@ const useUser = () => {
 }
 
 const logoutFx = createEffect(() => {
-    clearAllStores()
     localStorage.removeItem('token')
+    clearAllStores()
+    // eslint-disable-next-line no-console
+    console.log('log out is successfull')
 })
 
 const login = createEvent<LoginData>()

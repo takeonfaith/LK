@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+import React from 'react'
 import ContactInfoActualizationPage from '@pages/contact-info-actualization'
 import DataVerificationPage from '@pages/data-verification'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
@@ -44,7 +46,7 @@ export const CENTERS_ROUTE = '/centers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
-export const DOWNLOAD_ADMIN_FILES_ROUTE = '/download-agreements'
+export const DOWNLOAD_AGREEMENTS_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
 export const CONTACT_INFO_ACTUALIZATION = '/contact-info-actualization'
 
@@ -58,15 +60,13 @@ export const publicRoutes = [
     },
 ]
 
-// console.log(generalRoutes)
-
-export const teachersPrivateRoutes: IRoutes = {
+export const teachersPrivateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
-    'download-admit-files': {
-        id: 'download-admit-files',
+    'download-agreements': {
+        id: 'download-agreements',
         title: 'Скачать отчеты',
-        icon: FiArrowDownCircle,
-        path: DOWNLOAD_ADMIN_FILES_ROUTE,
+        icon: <FiArrowDownCircle />,
+        path: DOWNLOAD_AGREEMENTS_FILES_ROUTE,
         Component: DownloadAdminFilesPage,
         color: '',
         isTemplate: false,
@@ -75,7 +75,7 @@ export const teachersPrivateRoutes: IRoutes = {
     alerts: {
         id: 'alerts',
         title: 'Оповещения',
-        icon: FiBell,
+        icon: <FiBell />,
         path: ALERTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         color: '',
@@ -84,7 +84,7 @@ export const teachersPrivateRoutes: IRoutes = {
     'data-verification': {
         id: 'data-verification',
         title: 'Анкета для сверки данных',
-        icon: HiOutlineMenuAlt2,
+        icon: <HiOutlineMenuAlt2 />,
         path: DATA_VERIFICATION_ROUTE,
         Component: DataVerificationPage,
         color: '',
@@ -93,7 +93,7 @@ export const teachersPrivateRoutes: IRoutes = {
     instructions: {
         id: 'instructions',
         title: 'Инструкции, положения, правила',
-        icon: FiClipboard,
+        icon: <FiClipboard />,
         path: INSTRUCTIONS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: INSTRUCTIONS_ROUTE }),
         color: '',
@@ -102,7 +102,7 @@ export const teachersPrivateRoutes: IRoutes = {
     doclist: {
         id: 'doclist',
         title: 'Ознакомление с документами',
-        icon: FiFileText,
+        icon: <FiFileText />,
         path: DOCLIST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
         color: '',
@@ -111,7 +111,7 @@ export const teachersPrivateRoutes: IRoutes = {
     'students-logins': {
         id: 'students-logins',
         title: 'Логины студентов',
-        icon: BiGroup,
+        icon: <BiGroup />,
         path: STUDENTS_LOGINS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: STUDENTS_LOGINS_ROUTE }),
         color: '',
@@ -120,61 +120,61 @@ export const teachersPrivateRoutes: IRoutes = {
     'contact-info-actualization': {
         id: 'contact-info-actualization',
         title: 'Актуализация контактных данных',
-        icon: FiCheckSquare,
+        icon: <FiCheckSquare />,
         path: CONTACT_INFO_ACTUALIZATION,
         Component: ContactInfoActualizationPage,
-        color: '',
+        color: 'orange',
         isTemplate: false,
     },
     'children-route': {
         id: 'children-route',
         title: 'Дети и внуки',
-        icon: HiOutlineUserGroup,
+        icon: <HiOutlineUserGroup />,
         path: CHILDREN_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: CHILDREN_ROUTE }),
-        color: '',
+        color: 'green',
         isTemplate: false,
     },
     calendar: {
         id: 'calendar',
         title: 'График отпусков',
-        icon: FiCalendar,
+        icon: <FiCalendar />,
         path: VACATION_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: VACATION_ROUTE }),
-        color: '',
+        color: 'purple',
         isTemplate: false,
     },
     'kpi-pps': {
         id: 'kpi-pps',
         title: 'Рейтинговая система ППС',
-        icon: FiStar,
+        icon: <FiStar />,
         path: KPI_PPS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
-        color: '',
+        color: 'pink',
         isTemplate: false,
     },
     'kpi-admin': {
         id: 'kpi-admin',
         title: 'Экспертиза рейтинговой системы ППС',
-        icon: FiMonitor,
+        icon: <FiMonitor />,
         path: KPI_ADMIN_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
-        color: '',
+        color: 'darkBlue',
         isTemplate: false,
     },
     'sc-news': {
         id: 'sc-news',
         title: 'Анонсы научных мероприятий',
-        icon: RiNotificationBadgeLine,
+        icon: <RiNotificationBadgeLine />,
         path: SC_NEWS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: SC_NEWS_ROUTE }),
-        color: '',
+        color: 'orange',
         isTemplate: false,
     },
     'help-service': {
         id: 'help-service',
         title: 'Цифровые сервисы',
-        icon: FiBriefcase,
+        icon: <FiBriefcase />,
         path: HELP_SERVICE_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: HELP_SERVICE_ROUTE }),
         color: '',
@@ -183,7 +183,7 @@ export const teachersPrivateRoutes: IRoutes = {
     orders: {
         id: 'orders',
         title: 'Приказы',
-        icon: FiFileText,
+        icon: <FiFileText />,
         path: ORDERS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ORDERS_ROUTE }),
         color: '',
@@ -192,7 +192,7 @@ export const teachersPrivateRoutes: IRoutes = {
     'document-blanks': {
         id: 'document-blanks',
         title: 'Бланки документов',
-        icon: BiGroup,
+        icon: <BiGroup />,
         path: DOCUMENT_BLANKS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: DOCUMENT_BLANKS_ROUTE }),
         color: '',
@@ -202,7 +202,7 @@ export const teachersPrivateRoutes: IRoutes = {
     oop: {
         id: 'oop',
         title: 'Образовательные программы',
-        icon: BiHeadphone,
+        icon: <BiHeadphone />,
         path: OOP_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: OOP_ROUTE }),
         color: '',
@@ -211,7 +211,7 @@ export const teachersPrivateRoutes: IRoutes = {
     centers: {
         id: 'centers',
         title: 'Многофункциональный центр',
-        icon: BiHeadphone,
+        icon: <BiHeadphone />,
         path: CENTERS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: CENTERS_ROUTE }),
         color: '',
@@ -220,7 +220,7 @@ export const teachersPrivateRoutes: IRoutes = {
     info: {
         id: 'info',
         title: 'Полезная информация',
-        icon: FiFileText,
+        icon: <FiFileText />,
         path: INFO_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: INFO_ROUTE }),
         color: '',
@@ -229,7 +229,7 @@ export const teachersPrivateRoutes: IRoutes = {
     vax: {
         id: 'vax',
         title: 'Вакцинация',
-        icon: FiBriefcase,
+        icon: <FiBriefcase />,
         path: VAX_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: VAX_ROUTE }),
         color: '',
@@ -238,7 +238,7 @@ export const teachersPrivateRoutes: IRoutes = {
     'pps-contest': {
         id: 'pps-contest',
         title: 'Конкурс ППС',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: PPS_CONTEST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
         color: '',
@@ -247,21 +247,22 @@ export const teachersPrivateRoutes: IRoutes = {
     'personal-notifications': {
         id: 'personal-notifications',
         title: 'Кадровые уведомления',
-        icon: BiNotification,
+        icon: <BiNotification />,
         path: PERSONAL_NOTIFICATIONS,
         Component: PersonalNotificationsPage,
         color: '',
+        isNew: true,
         isTemplate: false,
     },
     'pps-vote': {
         id: 'pps-vote',
         title: 'Опрос для проверки уровня цифровой грамотности',
-        icon: BiBookReader,
+        icon: <BiBookReader />,
         path: PPS_VOTE_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_VOTE_ROUTE }),
         color: '',
         isTemplate: false,
     },
-}
+})
 
 export const teachersHiddenRoutes: IRoutes = { ...generalHiddenRoutes }

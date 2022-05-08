@@ -11,6 +11,8 @@ import Icon from '../atoms/icon'
 import { Link } from 'react-router-dom'
 import { menuModel } from '@entities/menu'
 import { IRoute } from '@app/routes/general-routes'
+import Notification from '@ui/notification'
+import getCorrectWordForm from '@utils/get-correct-word-form'
 
 export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
     position: relative;
@@ -58,14 +60,31 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
         justify-content: center;
         padding: 15px;
 
-        &:hover .icon {
-            box-shadow: 0 20px 110px 60px ${({ color }) => Colors[color as keyof IColors].main};
-            transform: scale(1.1) translateY(20px);
+        .notifications-title {
+            opacity: 0;
+            transform: translateY(20px);
+            font-size: 0.7em;
+            position: absolute;
+            transition: 0.2s;
+            bottom: 25px;
+            font-weight: bold;
         }
 
-        &:hover b {
-            opacity: 0;
-            transform: scale(0.95);
+        &:hover {
+            .icon {
+                box-shadow: 0 20px 110px 60px ${({ color }) => Colors[color as keyof IColors].main};
+                transform: scale(1.1) translateY(20px);
+            }
+
+            b {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            .notifications-title {
+                opacity: 1;
+                transform: translateY(0px);
+            }
         }
 
         b {
@@ -81,7 +100,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
 `
 
 const PageLink = (props: IRoute) => {
-    const { icon, title, color, path } = props
+    const { icon, title, color, path, notifications, isNew } = props
     return (
         <Link
             to={path}
@@ -97,9 +116,29 @@ const PageLink = (props: IRoute) => {
                 justifyContent="center"
                 color={color}
             >
+                <Notification
+                    outline="4px solid var(--theme)"
+                    color="red"
+                    top={'5px'}
+                    right="-10px"
+                    visible={!!notifications}
+                >
+                    {notifications}
+                </Notification>
                 <div className="outside">
                     <Icon color={color}>{icon}</Icon>
                     <b>{getShortStirng(title, 20)}</b>
+                    {notifications && (
+                        <span className="notifications-title">
+                            {notifications}{' '}
+                            {getCorrectWordForm(notifications, {
+                                one: 'уведомление',
+                                zero: 'уведомлений',
+                                twoToFour: 'уведомления',
+                                fiveToNine: 'уведомлений',
+                            })}
+                        </span>
+                    )}
                 </div>
                 <Button
                     icon={<FiMoreVertical />}
@@ -108,6 +147,7 @@ const PageLink = (props: IRoute) => {
                     background="transparent"
                     onClick={(e) => {
                         e.preventDefault()
+                        e.stopPropagation()
                         contextMenuModel.events.open({
                             e,
                             height: 143,
@@ -115,7 +155,7 @@ const PageLink = (props: IRoute) => {
                         })
                     }}
                 />
-                {/* {isNew && <span className="new">New</span>} */}
+                {isNew && <span className="new">New</span>}
             </PageLinkWrapper>
         </Link>
     )

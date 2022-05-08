@@ -2,17 +2,16 @@ import PrivateRouter from '@app/routers/private-router'
 import { OLD_LK_URL } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { userModel } from '@entities/user'
+import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Confirm, Header, LeftsideBar, PopUpMessage } from 'widgets'
-import { Modal } from 'widgets/modal'
-import InitialLoader from './initial-loader'
-import useIsShowNotification from '@utils/hooks/use-is-show-notification'
-import { useModal } from 'widgets'
-import WhatsNew from '../../widgets/whats-new'
+import { Confirm, Header, LeftsideBar, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
+import { Modal } from 'widgets/modal'
+import WhatsNew from '../../widgets/whats-new'
+import InitialLoader from './initial-loader'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -60,7 +59,7 @@ const ContentLayout = () => {
     }, [isShowNotification])
 
     return (
-        <div style={{ height, display: 'flex' }}>
+        <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
             <InitialLoader
                 loading={!user}
                 image="https://mospolytech.ru/local/templates/main/dist/img/logos/mospolytech-logo-white.png"

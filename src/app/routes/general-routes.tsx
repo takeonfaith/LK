@@ -6,6 +6,7 @@ import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import ProfilePage from '@pages/profile'
 import SchedulePage from '@pages/schedule'
+import SettingsPage from '@pages/settings'
 import TeachersSchedule from '@pages/teachers-schedule'
 import React from 'react'
 import {
@@ -19,7 +20,7 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiHome } from 'react-icons/fi'
+import { FiHome, FiSettings } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
@@ -37,6 +38,7 @@ export const ALL_STUDENTS_ROUTE = '/students'
 export const ALL_TEACHERS_ROUTE = '/teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
+export const SETTINGS_ROUTE = '/settings'
 
 // hidden
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
@@ -54,7 +56,9 @@ export interface IRoute {
     color: string
     isTemplate: boolean
     isAdmin?: boolean
+    isNew?: boolean
     show?: boolean
+    notifications?: number
 }
 
 export const publicRoutes = [
@@ -77,6 +81,16 @@ export const generalRoutes: IRoutes = {
         color: 'lightGreen',
         isTemplate: false,
         show: false,
+    },
+    settings: {
+        id: 'settings',
+        title: 'Настройки',
+        icon: <FiSettings />,
+        path: SETTINGS_ROUTE,
+        Component: () => SettingsPage({ currentPage: 0 }),
+        color: 'grey',
+        isTemplate: false,
+        show: true,
     },
     home: {
         id: 'home',
@@ -105,6 +119,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
         color: 'red',
         isTemplate: true,
+        notifications: 4,
     },
     schedule: {
         id: 'schedule',
@@ -148,7 +163,7 @@ export const generalRoutes: IRoutes = {
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
-        color: 'orange',
+        color: 'darkBlue',
         isTemplate: false,
     },
     'all-teachers': {

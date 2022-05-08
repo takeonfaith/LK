@@ -6,13 +6,13 @@ import React from 'react'
 import { Redirect, Route, Switch } from 'react-router'
 
 const PrivateRouter = () => {
-    const { data } = userModel.selectors.useUser()
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const { allRoutes } = menuModel.selectors.useMenu()
     const isAccessible = useIsAccessibleRoute()
 
-    if (!data.user) return null
-
-    console.log(allRoutes)
+    if (!user) return null
 
     return allRoutes ? (
         <Switch>

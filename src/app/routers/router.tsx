@@ -19,8 +19,6 @@ const Router = () => {
 
     useEffect(() => {
         if (user) {
-            console.log({ user })
-
             menuModel.events.defineMenu({ user })
         }
     }, [user])

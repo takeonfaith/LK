@@ -10,7 +10,7 @@ const useCurrentPage = () => {
     const history = useHistory()
     const { data } = userModel.selectors.useUser()
 
-    const currentRoute: IRoutes = !data.user?.subdivisions ? privateRoutes : teachersPrivateRoutes
+    const currentRoute: IRoutes = !data.user?.subdivisions ? privateRoutes() : teachersPrivateRoutes()
 
     const [currentPage, setCurrentPage] = useState<IRoute>(
         Object.values(currentRoute).find((link: IRoute) => history.location.pathname.includes(link.path)) ??

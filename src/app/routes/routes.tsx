@@ -27,7 +27,7 @@ export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
 // eslint-disable-next-line no-console
 console.log({ generalRoutes })
 
-export const privateRoutes: IRoutes = {
+export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
     applications: {
         id: 'applications',
@@ -56,7 +56,7 @@ export const privateRoutes: IRoutes = {
         color: '',
         isTemplate: false,
     },
-}
+})
 
 export const hiddenRoutes: IRoutes = {
     ...generalHiddenRoutes,

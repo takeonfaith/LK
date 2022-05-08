@@ -1,4 +1,4 @@
-import { IRoute, IRoutes } from '@app/routes/general-routes'
+import { IRoute } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import useIsAccessibleRoute from '@utils/hooks/use-is-accessible-route'
@@ -6,11 +6,7 @@ import React from 'react'
 import LeftsideBarListWrapper from '../atoms/leftside-bar-list-wrapper'
 import LeftsideBarItem from '../molecules/leftside-bar-item'
 
-interface Props {
-    searchList: IRoutes | null
-}
-
-const LeftsideBarList = ({ searchList }: Props) => {
+const LeftsideBarList = () => {
     const { leftsideBarRoutes, currentPage } = menuModel.selectors.useMenu()
     const isAccessible = useIsAccessibleRoute()
 
@@ -29,7 +25,7 @@ const LeftsideBarList = ({ searchList }: Props) => {
             shape={'rect'}
             size={{
                 width: '100%',
-                height: '400px',
+                height: '300px',
             }}
         />
     )

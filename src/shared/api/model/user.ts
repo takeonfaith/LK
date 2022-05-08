@@ -6,7 +6,7 @@ export interface User extends Record<string, unknown> {
     id: string
     name: string
     fullName: string
-    status: 'stud' | 'stuff'
+    status: string
     avatar: string
     course: number
     surname: string

@@ -3,7 +3,7 @@ import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import LinksList from '@features/home/ui/organisms/links-list'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
-import { Title, Wrapper } from '@ui/atoms'
+import { Button, Title, Wrapper } from '@ui/atoms'
 import React, { useEffect } from 'react'
 import getGreetingMessage from './lib/get-greeting-message'
 import getLinksForHome from './lib/get-links-for-home'
@@ -29,11 +29,17 @@ const Home = () => {
                 <Title size={2} align="left" bottomGap>
                     {getGreetingMessage(user.name)}
                 </Title>
-                <LinksList align="left" title={'Разделы'} links={getLinksForHome(visibleRoutes)} />
+                <LinksList align="left" doNotShow="home" title={'Разделы'} links={getLinksForHome(visibleRoutes)} />
                 <div className="home-page-content-inner">
                     <ScheduleAndNotification />
                     {/* <ShortCutLinks /> */}
                 </div>
+                <Button
+                    text="Increment"
+                    onClick={() =>
+                        menuModel.events.changeNotifications({ page: 'home', notifications: (prev) => prev + 1 })
+                    }
+                />
             </Content>
         </Wrapper>
     )

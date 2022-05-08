@@ -35,6 +35,7 @@ export interface IColors extends IndexedProperties {
     red: IColorPalette
     yellow: IColorPalette
     orange: IColorPalette
+    grey: IColorPalette
 }
 
 export interface IColorPalette {
@@ -168,6 +169,19 @@ export const Colors: IColors = {
         transparentAF: '',
         lightTransparent: '#ffd7a67d',
         littleDarker: '#c75e1d',
+    },
+    grey: {
+        main: '#646464',
+        transparent: '',
+        lighter: '',
+        darker: '',
+        light: '',
+        dark: '',
+        reallyTransparent: '',
+        darkTransparent: '',
+        transparentAF: '',
+        lightTransparent: '',
+        littleDarker: '',
     },
 }
 

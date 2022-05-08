@@ -10,7 +10,6 @@ const LeftsideBarItemWrapper = styled(Link)<{
     display: flex;
     align-items: center;
     font-weight: ${({ isCurrent }) => (isCurrent ? 800 : 600)};
-    opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
     width: 100%;
     justify-content: flex-start;
     padding: 10px 0;
@@ -22,22 +21,8 @@ const LeftsideBarItemWrapper = styled(Link)<{
     border-radius: var(--brLight);
     color: ${({ color, isCurrent }) => (color && isCurrent ? Colors[color].main : 'var(--text)')};
 
-    .admin {
-        color: #fff;
-        position: absolute;
-        margin: auto 0;
-        right: -5px;
-        background: ${Colors.pink.main};
-        font-size: 0.65em;
-        border-radius: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 17px;
-        height: 17px;
-    }
-
-    span {
+    .title {
+        opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
         width: 130px;
         display: block;
         overflow: hidden;
@@ -46,6 +31,7 @@ const LeftsideBarItemWrapper = styled(Link)<{
     }
 
     svg {
+        opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
         width: 22px;
         height: 22px;
         margin-right: 7px;

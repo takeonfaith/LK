@@ -26,7 +26,7 @@ const AllPages = () => {
                 searchEngine={() => null}
                 setResult={() => null}
             />
-            <LinksList align="left" links={visibleRoutes} />
+            <LinksList doNotShow="all" align="left" links={visibleRoutes} />
         </AllPagesWrapper>
     ) : null
 }
