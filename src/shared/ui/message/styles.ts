@@ -8,11 +8,14 @@ export const MessageWrapper = styled.div<{
     align?: Align
     width?: string
     maxWidth?: string
+    padding?: string
+    fontSize?: string
+    gap?: string
 }>`
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
-    font-size: 0.8em;
-    padding: 10px;
+    font-size: ${({ fontSize }) => fontSize ?? '0.8em'};
+    padding: ${({ padding }) => padding ?? '10px'};
     color: ${({ type }) => Colors[getColor(type)].main};
     background: ${({ type }) => Colors[getColor(type)].lightTransparent};
     border-radius: var(--brLight);
@@ -22,4 +25,10 @@ export const MessageWrapper = styled.div<{
     gap: 10px;
     font-weight: 500;
     align-items: ${({ align }) => (align === 'left' ? 'flex-start' : align === 'center' ? 'center' : 'flex-end')};
+
+    .info-text {
+        display: flex;
+        flex-direction: column;
+        gap: ${({ gap }) => gap ?? 0};
+    }
 `

@@ -12,6 +12,9 @@ export type MessageProps = {
     align?: Align
     width?: string
     maxWidth?: string
+    padding?: string
+    fontSize?: string
+    gap?: string
 }
 
 export function Message({
@@ -23,9 +26,20 @@ export function Message({
     title,
     align = 'left',
     visible = true,
+    padding,
+    fontSize,
+    gap,
 }: MessageProps) {
     return visible ? (
-        <MessageWrapper type={type} align={align} width={width} maxWidth={maxWidth}>
+        <MessageWrapper
+            type={type}
+            align={align}
+            width={width}
+            maxWidth={maxWidth}
+            padding={padding}
+            fontSize={fontSize}
+            gap={gap}
+        >
             <div className="title-and-icon">
                 <Title size={4} align="left" icon={icon}>
                     {title}

@@ -5,6 +5,7 @@ import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
 import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
+import FeedbackPage from '@pages/feedback'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import TeachersSchedule from '@pages/teachers-schedule'
@@ -164,7 +165,7 @@ export const privateRoutes: IRoutes = {
         title: 'Обратная связь',
         icon: BiHeadphone,
         path: '/feedback',
-        Component: () => PageIsNotReady({ oldVersionUrl: '/contact' }),
+        Component: FeedbackPage,
         isTemplate: false,
     },
     12: {
