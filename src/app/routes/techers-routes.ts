@@ -7,6 +7,7 @@ import PaymentsPage from '@pages/payments'
 import PersonalNotificationsPage from '@pages/personal-notifications'
 import SchedulePage from '@pages/schedule'
 import TeachersSchedule from '@pages/teachers-schedule'
+import AlertsPage from '@pages/alerts'
 import { IRoutes } from '@routes'
 import {
     BiBookReader,
@@ -127,7 +128,7 @@ export const teachersPrivateRoutes: IRoutes = {
         title: 'Оповещения',
         icon: FiBell,
         path: ALERTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
+        Component: AlertsPage,
         isTemplate: false,
     },
     4: {
