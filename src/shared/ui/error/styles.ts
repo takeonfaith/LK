@@ -13,7 +13,7 @@ export const ErrorContainer = styled.div`
     img {
         min-width: 100px;
         height: 100px;
-        margin-bottom: 20px;
+        margin-bottom: 5px;
     }
 
     .error-content {

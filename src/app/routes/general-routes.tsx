@@ -1,4 +1,5 @@
 import AllPages from '@pages/all-pages'
+import ChatPage from '@pages/chat'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import Home from '@pages/home'
 import LoginPage from '@pages/login'
@@ -7,6 +8,9 @@ import PaymentsPage from '@pages/payments'
 import ProfilePage from '@pages/profile'
 import SchedulePage from '@pages/schedule'
 import SettingsPage from '@pages/settings'
+import Account from '@pages/settings/pages/account'
+import Appearance from '@pages/settings/pages/appearance'
+import Security from '@pages/settings/pages/security'
 import TeachersSchedule from '@pages/teachers-schedule'
 import React from 'react'
 import {
@@ -20,7 +24,7 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiHome, FiSettings } from 'react-icons/fi'
+import { FiHome, FiLayers, FiLock, FiSettings, FiUser } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
@@ -39,6 +43,10 @@ export const ALL_TEACHERS_ROUTE = '/teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
 export const SETTINGS_ROUTE = '/settings'
+export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
+export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
+export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
+export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
 
 // hidden
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
@@ -87,9 +95,9 @@ export const generalRoutes: IRoutes = {
         title: 'Настройки',
         icon: <FiSettings />,
         path: SETTINGS_ROUTE,
-        Component: () => SettingsPage({ currentPage: 0 }),
+        Component: SettingsPage,
         color: 'grey',
-        isTemplate: false,
+        isTemplate: true,
         show: true,
     },
     home: {
@@ -116,7 +124,7 @@ export const generalRoutes: IRoutes = {
         title: 'Сообщения',
         icon: <BiMessageRounded />,
         path: CHAT_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
+        Component: ChatPage,
         color: 'red',
         isTemplate: true,
         notifications: 4,
@@ -204,5 +212,46 @@ export const generalHiddenRoutes: IRoutes = {
         Component: TeachersSchedule,
         color: '',
         isTemplate: false,
+        show: false,
+    },
+    'settings-appearance': {
+        id: 'settings-appearance',
+        title: 'Настройки. Внешний вид',
+        icon: <FiLayers />,
+        path: SETTINGS_APPEARANCE_ROUTE,
+        Component: Appearance,
+        color: 'purple',
+        isTemplate: true,
+        show: true,
+    },
+    'settings-personal': {
+        id: 'settings-personal',
+        title: 'Настройки. Аккаунт',
+        icon: <FiUser />,
+        path: SETTINGS_PERSONAl_ROUTE,
+        Component: Account,
+        color: 'pink',
+        isTemplate: true,
+        show: true,
+    },
+    'settings-security': {
+        id: 'settings-security',
+        title: 'Настройки. Безопасность',
+        icon: <FiLock />,
+        path: SETTINGS_SECURITY_ROUTE,
+        Component: Security,
+        color: 'green',
+        isTemplate: true,
+        show: true,
+    },
+    'settings-home-page': {
+        id: 'settings-home-page',
+        title: 'Настройки. Главыйн экран',
+        icon: <FiHome />,
+        path: SETTINGS_HOME_PAGE_ROUTE,
+        Component: Security,
+        color: 'blue',
+        isTemplate: true,
+        show: true,
     },
 }

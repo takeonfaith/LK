@@ -68,6 +68,7 @@ const UserBig = ({ name, avatar, loading }: Props) => {
                                         icon={<FiSettings />}
                                         width="100%"
                                         align="left"
+                                        onClick={() => contextMenuModel.events.close()}
                                     />
                                 </Link>
                                 <LinkButton

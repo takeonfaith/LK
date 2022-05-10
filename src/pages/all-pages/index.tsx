@@ -1,7 +1,10 @@
+import { IRoutes } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
+import { FoundPages } from '@features/all-pages'
+import search from '@features/all-pages/lib/search'
 import LinksList from '@features/home/ui/organisms/links-list'
 import { LocalSearch } from '@ui/molecules'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const AllPagesWrapper = styled.div`
@@ -17,16 +20,20 @@ const AllPagesWrapper = styled.div`
 `
 
 const AllPages = () => {
-    const { visibleRoutes } = menuModel.selectors.useMenu()
+    const { visibleRoutes, allRoutes } = menuModel.selectors.useMenu()
+    const [foundPages, setFoundPages] = useState<IRoutes | null>(null)
+    const [searchValue, setSearchValue] = useState<string>('')
     return visibleRoutes ? (
         <AllPagesWrapper>
             <LocalSearch
                 placeholder="Поиск разделов"
-                whereToSearch={undefined}
-                searchEngine={() => null}
-                setResult={() => null}
+                whereToSearch={allRoutes ?? {}}
+                searchEngine={search}
+                setResult={setFoundPages}
+                setExternalValue={setSearchValue}
             />
-            <LinksList doNotShow="all" align="left" links={visibleRoutes} />
+            {searchValue.length === 0 && <LinksList doNotShow="all" align="left" links={visibleRoutes} />}
+            <FoundPages pages={foundPages} />
         </AllPagesWrapper>
     ) : null
 }

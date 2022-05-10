@@ -24,4 +24,4 @@ const Appearance = () => {
     return <ToggleArea title={'Тема'} toggles={toggles} setToggles={setToggles} />
 }
 
-export default React.memo(Appearance)
+export default Appearance

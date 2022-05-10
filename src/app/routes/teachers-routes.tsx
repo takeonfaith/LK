@@ -62,6 +62,15 @@ export const publicRoutes = [
 
 export const teachersPrivateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
+    doclist: {
+        id: 'doclist',
+        title: 'Ознакомление с документами',
+        icon: <FiFileText />,
+        path: DOCLIST_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
+        color: '',
+        isTemplate: false,
+    },
     'download-agreements': {
         id: 'download-agreements',
         title: 'Скачать отчеты',
@@ -96,15 +105,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiClipboard />,
         path: INSTRUCTIONS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: INSTRUCTIONS_ROUTE }),
-        color: '',
-        isTemplate: false,
-    },
-    doclist: {
-        id: 'doclist',
-        title: 'Ознакомление с документами',
-        icon: <FiFileText />,
-        path: DOCLIST_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
         color: '',
         isTemplate: false,
     },
@@ -198,7 +198,16 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: '',
         isTemplate: false,
     },
-
+    'personal-notifications': {
+        id: 'personal-notifications',
+        title: 'Кадровые уведомления',
+        icon: <BiNotification />,
+        path: PERSONAL_NOTIFICATIONS,
+        Component: PersonalNotificationsPage,
+        color: '',
+        isNew: true,
+        isTemplate: false,
+    },
     oop: {
         id: 'oop',
         title: 'Образовательные программы',
@@ -244,16 +253,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: '',
         isTemplate: false,
     },
-    'personal-notifications': {
-        id: 'personal-notifications',
-        title: 'Кадровые уведомления',
-        icon: <BiNotification />,
-        path: PERSONAL_NOTIFICATIONS,
-        Component: PersonalNotificationsPage,
-        color: '',
-        isNew: true,
-        isTemplate: false,
-    },
     'pps-vote': {
         id: 'pps-vote',
         title: 'Опрос для проверки уровня цифровой грамотности',
@@ -265,4 +264,4 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
     },
 })
 
-export const teachersHiddenRoutes: IRoutes = { ...generalHiddenRoutes }
+export const teachersHiddenRoutes: () => IRoutes = () => ({ ...generalHiddenRoutes })

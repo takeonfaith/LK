@@ -54,7 +54,7 @@ const GlobalStyles = createGlobalStyle`
 	html[data-theme=dark] {
 		--blue: #6d86e3;
 		--primary-background: rgb(34, 34, 34);
-		--mild-theme: #2e2e2e;
+		--mild-theme: #363636;
 		--leftside-bar: #3b3b3b;
 		--leftside-bar-shadow: 5px 5px 10px rgba(0,0,0,0.377);
 		--header: #373737;
@@ -130,6 +130,13 @@ const GlobalStyles = createGlobalStyle`
 
 	a {
 		text-decoration: none;
+		&:focus {
+        outline: 4px solid var(--almostTransparentOpposite);
+    	}
+
+		&:focus:not(:focus-visible) {
+			outline: none;
+		}
 	}
 `
 

@@ -70,7 +70,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
                 : privateRoutes()[window.location.hash.slice(2, window.location.hash.length)],
         allRoutes:
             user?.user_status === 'staff'
-                ? { ...teachersPrivateRoutes(), ...teachersHiddenRoutes }
+                ? { ...teachersPrivateRoutes(), ...teachersHiddenRoutes() }
                 : { ...privateRoutes(), ...hiddenRoutes },
         visibleRoutes: user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         leftsideBarRoutes: findLeftsideBarRoutes(

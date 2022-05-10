@@ -11,6 +11,7 @@ export interface StyledProps {
     minHeight?: string
     justifyContent?: string
     padding?: string
+    shadow?: boolean
 }
 
 const BlockWrapper = styled.div<StyledProps>`
@@ -20,7 +21,7 @@ const BlockWrapper = styled.div<StyledProps>`
     background: var(--schedule);
     border-radius: var(--brSemi);
     flex-direction: ${({ orientation }) => (orientation === 'vertical' ? 'column' : 'row')};
-    box-shadow: var(--very-mild-shadow);
+    box-shadow: ${({ shadow }) => (shadow ?? true) && 'var(--very-mild-shadow)'};
     padding: ${({ padding }) => padding ?? '20px'};
     height: ${({ height }) => height ?? '330px'};
     max-width: ${({ maxWidth }) => maxWidth ?? '750px'};

@@ -22,13 +22,14 @@ const LinksListWrapper = styled.div<{ align: Align }>`
 `
 
 interface Props {
-    align?: Align
-    title?: string
     links: IRoutes
+    title?: string
+    align?: Align
     doNotShow?: string
+    restricted?: boolean
 }
 
-const LinksList = ({ title, links, doNotShow, align = 'center' }: Props) => {
+const LinksList = ({ title, links, doNotShow, align = 'center', restricted }: Props) => {
     return (
         <LinksListWrapper align={align}>
             <Title size={4} align="left" visible={!!title} bottomGap>
@@ -37,7 +38,14 @@ const LinksList = ({ title, links, doNotShow, align = 'center' }: Props) => {
             <div className="list">
                 {Object.values(links).map((el) => {
                     if (el.show !== false && doNotShow !== el.id)
-                        return <PageLink key={el.id} {...el} color={el.color.length ? el.color : 'blue'} />
+                        return (
+                            <PageLink
+                                restricted={restricted}
+                                key={el.id}
+                                {...el}
+                                color={el.color.length ? el.color : 'blue'}
+                            />
+                        )
                 })}
                 {doNotShow !== 'all' && <AllPagesLink />}
             </div>

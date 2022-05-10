@@ -13,8 +13,9 @@ import { menuModel } from '@entities/menu'
 import { IRoute } from '@app/routes/general-routes'
 import Notification from '@ui/notification'
 import getCorrectWordForm from '@utils/get-correct-word-form'
+import { Direction } from '@ui/types'
 
-export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
+export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean }>`
     position: relative;
     cursor: pointer;
     text-decoration: none;
@@ -34,8 +35,10 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
 
     .more-button {
         position: absolute;
-        top: 5px;
-        left: 5px;
+        top: ${({ isVertical }) => (isVertical ? '5px' : '50%')};
+        left: ${({ isVertical }) => (isVertical ? '5px' : 'auto')};
+        right: ${({ isVertical }) => !isVertical && '10px'};
+        transform: ${({ isVertical }) => !isVertical && 'translateY(-50%)'};
         opacity: 0;
         visibility: hidden;
         transition: 0.2s;
@@ -46,6 +49,9 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
             opacity: 1;
             visibility: visible;
         }
+        .notification-circle {
+            opacity: 0;
+        }
     }
 
     .outside {
@@ -54,10 +60,10 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
         overflow: hidden;
         gap: 15px;
         display: flex;
-        flex-direction: column;
+        flex-direction: ${({ isVertical }) => (isVertical ? 'column' : 'row')};
         border-radius: var(--brSemi);
         align-items: center;
-        justify-content: center;
+        justify-content: ${({ isVertical }) => (isVertical ? 'center' : 'flex-start')};
         padding: 15px;
 
         .notifications-title {
@@ -68,17 +74,18 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
             transition: 0.2s;
             bottom: 25px;
             font-weight: bold;
+            color: #fff;
         }
 
         &:hover {
             .icon {
                 box-shadow: 0 20px 110px 60px ${({ color }) => Colors[color as keyof IColors].main};
-                transform: scale(1.1) translateY(20px);
+                transform: ${({ isVertical }) => isVertical && 'scale(1.1) translateY(20px)'};
             }
 
             b {
-                opacity: 0;
-                transform: scale(0.95);
+                opacity: ${({ isVertical }) => isVertical && 0};
+                transform: ${({ isVertical }) => isVertical && 'scale(0.95)'};
             }
 
             .notifications-title {
@@ -99,35 +106,55 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string }>`
     }
 `
 
-const PageLink = (props: IRoute) => {
-    const { icon, title, color, path, notifications, isNew } = props
+type Props = IRoute & { orientation?: Direction; shadow?: boolean; restricted?: boolean }
+
+const PageLink = (props: Props) => {
+    const {
+        icon,
+        title,
+        color,
+        path,
+        notifications,
+        isNew,
+        orientation = 'vertical',
+        shadow = true,
+        restricted = false,
+    } = props
+    const isVertical = orientation === 'vertical'
+    const maxWordLenght = restricted ? 20 : 50
+    const linkWidth = isVertical ? (title.length > 23 && !restricted ? '260px' : '125px') : '100%'
     return (
         <Link
             to={path}
             onClick={() => {
                 menuModel.events.changeOpen({ isOpen: false, currentPage: path.slice(1, path.length) })
             }}
+            style={{ width: linkWidth }}
         >
             <PageLinkWrapper
                 padding="0"
-                width="125px"
-                height="135px"
-                orientation="vertical"
+                width={linkWidth}
+                maxWidth={orientation !== 'vertical' ? '100%' : '750px'}
+                height={isVertical ? '135px' : '60px'}
+                isVertical={isVertical}
                 justifyContent="center"
-                color={color}
+                shadow={shadow}
+                color={color.length ? color : 'blue'}
             >
                 <Notification
                     outline="4px solid var(--theme)"
                     color="red"
-                    top={'5px'}
-                    right="-10px"
+                    top={isVertical ? '60px' : '75%'}
+                    left={orientation !== 'vertical' ? '50px' : 'auto'}
+                    right={isVertical ? '32px' : 'auto'}
                     visible={!!notifications}
+                    className="notification-circle"
                 >
                     {notifications}
                 </Notification>
                 <div className="outside">
-                    <Icon color={color}>{icon}</Icon>
-                    <b>{getShortStirng(title, 20)}</b>
+                    <Icon color={color.length ? color : 'blue'}>{icon}</Icon>
+                    <b>{getShortStirng(title, maxWordLenght)}</b>
                     {notifications && (
                         <span className="notifications-title">
                             {notifications}{' '}
@@ -142,7 +169,7 @@ const PageLink = (props: IRoute) => {
                 </div>
                 <Button
                     icon={<FiMoreVertical />}
-                    textColor={Colors[color as keyof IColors].main}
+                    textColor={Colors[(color.length ? color : 'blue') as keyof IColors].main}
                     className="more-button"
                     background="transparent"
                     onClick={(e) => {

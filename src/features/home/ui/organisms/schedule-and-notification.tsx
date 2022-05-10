@@ -3,6 +3,7 @@ import getLessons from '@features/home/lib/get-lessons'
 import React, { useMemo } from 'react'
 import { DaySchedule } from '../../../schedule/ui'
 import { Section } from '../atoms/section'
+import PaymentsWidget from '../molecules/payments-widget'
 
 const ScheduleAndNotification = () => {
     const {
@@ -20,6 +21,7 @@ const ScheduleAndNotification = () => {
                 isCurrent
                 topInfo=""
             />
+            <PaymentsWidget />
         </Section>
     )
 }

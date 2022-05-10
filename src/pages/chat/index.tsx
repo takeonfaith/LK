@@ -12,7 +12,7 @@ const ChatPageWrapper = styled.div`
 `
 
 const ChatPage = () => {
-    const params = useRouteMatch('/messages/:chatId')?.params as { chatId: string | undefined }
+    const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { chatId: string | undefined }
 
     return (
         <ChatPageWrapper>

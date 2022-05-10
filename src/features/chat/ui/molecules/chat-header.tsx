@@ -1,3 +1,4 @@
+import { CHAT_ROUTE } from '@app/routes/general-routes'
 import { Button, ContextMenu } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
@@ -37,7 +38,7 @@ const ChatHeader = ({ avatar, name, loading }: Props) => {
 
     const handleClick = () => {
         if (searchMode) setSearchMode((prev) => !prev)
-        else history.push('/messages')
+        else history.push(CHAT_ROUTE)
     }
 
     return (

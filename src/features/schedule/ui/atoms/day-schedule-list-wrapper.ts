@@ -3,7 +3,6 @@ import styled from 'styled-components'
 const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number; isTeacherSchedule: boolean }>`
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: var(--schedule-shadow);
     padding: 6px;
     background: var(--scheduleBg);
     display: flex;

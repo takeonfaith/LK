@@ -25,7 +25,7 @@ const AllPagesLink = () => {
                 padding="0"
                 width="125px"
                 height="135px"
-                orientation="vertical"
+                isVertical={true}
                 justifyContent="center"
                 color={'blue'}
             >

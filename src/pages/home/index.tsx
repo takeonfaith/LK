@@ -1,4 +1,5 @@
 import { menuModel } from '@entities/menu'
+import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import LinksList from '@features/home/ui/organisms/links-list'
@@ -21,6 +22,7 @@ const Home = () => {
 
     useEffect(() => {
         scheduleModel.effects.getScheduleFx(user)
+        paymentsModel.effects.getPaymentsFx()
     }, [])
 
     return (
@@ -29,7 +31,13 @@ const Home = () => {
                 <Title size={2} align="left" bottomGap>
                     {getGreetingMessage(user.name)}
                 </Title>
-                <LinksList align="left" doNotShow="home" title={'Разделы'} links={getLinksForHome(visibleRoutes)} />
+                <LinksList
+                    align="left"
+                    restricted
+                    doNotShow="home"
+                    title={'Разделы'}
+                    links={getLinksForHome(visibleRoutes)}
+                />
                 <div className="home-page-content-inner">
                     <ScheduleAndNotification />
                     {/* <ShortCutLinks /> */}

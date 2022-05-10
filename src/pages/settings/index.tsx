@@ -1,16 +1,16 @@
+import { menuModel } from '@entities/menu'
+import { ListOfSettings } from '@features/settings'
 import ContentWrapper from '@ui/content-wrapper'
 import React from 'react'
+import { Route, Switch } from 'react-router'
 import styled from 'styled-components'
-import { SliderPage } from 'widgets'
-import Account from './pages/account'
-import Appearance from './pages/appearance'
-import CustomizeMenu from './pages/customize-menu'
-import General from './pages/general'
-import Security from './pages/security'
 
-const Wrapper = styled(ContentWrapper)`
+const Wrapper = styled.div`
     height: 100%;
     width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 
     .settings-page {
         height: 90%;
@@ -28,14 +28,26 @@ const Wrapper = styled(ContentWrapper)`
     }
 `
 
-interface Props {
-    currentPage?: number
-}
+const SETTINGS_CONFIG = ['settings-home-page', 'settings-personal', 'settings-appearance', 'settings-security']
 
-const SettingsPage = ({ currentPage = 0 }: Props) => {
+const SettingsPage = () => {
+    const { allRoutes } = menuModel.selectors.useMenu()
+
+    if (!allRoutes) return null
+
     return (
         <Wrapper>
-            <SliderPage
+            <ListOfSettings config={SETTINGS_CONFIG} />
+            <Switch>
+                {SETTINGS_CONFIG.map((id) => {
+                    return (
+                        <Route path={allRoutes[id].path} key={id}>
+                            <ContentWrapper>{allRoutes[id].Component()}</ContentWrapper>
+                        </Route>
+                    )
+                })}
+            </Switch>
+            {/* <SliderPage
                 pages={[
                     { title: 'Общие', content: <General /> },
                     { title: 'Внешний вид', content: <Appearance /> },
@@ -45,7 +57,7 @@ const SettingsPage = ({ currentPage = 0 }: Props) => {
                 ]}
                 className="settings-page"
                 currentPage={currentPage}
-            />
+            /> */}
         </Wrapper>
     )
 }
