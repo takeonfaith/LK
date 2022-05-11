@@ -20,7 +20,7 @@ const DEFAULT_STORE: AlertsStore = {
         },
         {
             id: 'id',
-            dateAlert: 'Tue April 10 2022 02:04:03 GMT+0300 (Восточная Африка)',
+            dateAlert: 'Tue September 10 2022 02:04:03 GMT+0300 (Восточная Африка)',
             topicAlert: 'Изучайте иностранные языки в рамках дополнительного образования!',
             contentAlert:
                 'Уважаемые обучающиеся!\n' +

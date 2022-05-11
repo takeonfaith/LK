@@ -19,7 +19,7 @@ const Alerts = styled.div`
 const AlertsPage = () => {
     const { data: alerts } = alertsModel.selectors.useAlerts()
     const { open } = useModal()
-    const mir = (alert: IndexedProperties) => {
+    const showAlertModal = (alert: IndexedProperties) => {
         open(<AlertModal alert={alert} />)
     }
 
@@ -31,7 +31,7 @@ const AlertsPage = () => {
                     title="На этой странице отображаются сообщения от администрации университета и портала"
                     width="100%"
                 />
-                <Table onRowClick={mir} columns={getAlertsColumns()} data={alerts} />
+                <Table onRowClick={showAlertModal} columns={getAlertsColumns()} data={alerts} />
             </Block>
         </Alerts>
     )
