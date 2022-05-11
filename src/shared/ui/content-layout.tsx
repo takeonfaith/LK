@@ -13,6 +13,7 @@ import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import { useModal } from 'widgets'
 import WhatsNew from '../../widgets/whats-new'
 import ContextMenu from 'widgets/context-menu'
+import InstallApp from '@utils/install-app'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -41,7 +42,6 @@ const ContentLayout = () => {
     } = userModel.selectors.useUser()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
-
     useTheme()
     useEffect(() => {
         popUpMessageModel.events.evokePopUpMessage({
@@ -54,6 +54,7 @@ const ContentLayout = () => {
             type: 'info',
             time: 5000,
         })
+        InstallApp()
     }, [])
     useEffect(() => {
         isShowNotification && open(<WhatsNew />)

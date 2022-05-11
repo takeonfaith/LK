@@ -12,6 +12,8 @@ const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugi
 const ESLintPlugin = require('eslint-webpack-plugin')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const CopyPlugin = require( 'copy-webpack-plugin' );
 
 const config = {
     entry: [
@@ -30,7 +32,7 @@ const config = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i,
+                test: /\.(png|jpe?g|gif|svg|json)$/i,
                 use: [
                     {
                         loader: 'file-loader',
@@ -52,14 +54,21 @@ const config = {
         ({
             template: 'public/index.html',
             filename: 'index.html',
-            favicon: 'public/icon.png'
+            favicon: 'public/icon.png',
+            // manifest: 'public/manifest.json',
         }),
         new FriendlyErrorsWebpackPlugin({
             compilationSuccessInfo: {
                 messages: ['You application is running here http://localhost:3000'],
             },
         }),
-        new ESLintPlugin({extensions: ['ts']})
+        new ESLintPlugin({extensions: ['ts']}),
+        new CopyPlugin( {
+            patterns: [
+                { from: './src/manifest.json', to: '' },
+                { from: './src/service-worker.js', to: '' },
+            ],
+        } ),
     ],
     resolve: {
         extensions: [
