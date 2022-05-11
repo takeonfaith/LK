@@ -4,8 +4,6 @@ import { confirmModel } from '@entities/confirm'
 const isInstallApp = useIsInstallApp()
 const InstallApp = () => {
     const installationSuggestion = (beforeInstallPromptEvent: any) => {
-        // eslint-disable-next-line no-console
-        console.log('mir2')
         const installReject = () => {
             localStorage.setItem('isNeedInstallation', 'false')
             confirmModel.events.closeConfirm()
@@ -17,8 +15,6 @@ const InstallApp = () => {
         })
     }
     if (isInstallApp) {
-        // eslint-disable-next-line no-console
-        console.log('mir1')
         window.addEventListener('beforeinstallprompt', installationSuggestion)
         return () => window.removeEventListener('beforeinstallprompt', installationSuggestion)
     }
