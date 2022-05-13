@@ -142,7 +142,7 @@ const PageLink = (props: Props) => {
                 color={color.length ? color : 'blue'}
             >
                 <Notification
-                    outline="4px solid var(--theme)"
+                    outline="4px solid var(--schedule)"
                     color="red"
                     top={isVertical ? '60px' : '75%'}
                     left={orientation !== 'vertical' ? '50px' : 'auto'}

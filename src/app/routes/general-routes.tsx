@@ -10,6 +10,7 @@ import SchedulePage from '@pages/schedule'
 import SettingsPage from '@pages/settings'
 import Account from '@pages/settings/pages/account'
 import Appearance from '@pages/settings/pages/appearance'
+import HomeSettings from '@pages/settings/pages/home'
 import Security from '@pages/settings/pages/security'
 import TeachersSchedule from '@pages/teachers-schedule'
 import React from 'react'
@@ -249,7 +250,7 @@ export const generalHiddenRoutes: IRoutes = {
         title: 'Настройки. Главыйн экран',
         icon: <FiHome />,
         path: SETTINGS_HOME_PAGE_ROUTE,
-        Component: Security,
+        Component: HomeSettings,
         color: 'blue',
         isTemplate: true,
         show: true,

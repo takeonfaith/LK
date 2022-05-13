@@ -7,10 +7,21 @@ import LeftsideBarListWrapper from '../atoms/leftside-bar-list-wrapper'
 import LeftsideBarItem from '../molecules/leftside-bar-item'
 
 const LeftsideBarList = () => {
-    const { leftsideBarRoutes, currentPage } = menuModel.selectors.useMenu()
+    const { leftsideBarRoutes, currentPage, allRoutes } = menuModel.selectors.useMenu()
     const isAccessible = useIsAccessibleRoute()
 
-    return !!leftsideBarRoutes ? (
+    if (!leftsideBarRoutes)
+        return (
+            <SkeletonShape
+                shape={'rect'}
+                size={{
+                    width: '100%',
+                    height: '300px',
+                }}
+            />
+        )
+
+    return (
         <LeftsideBarListWrapper>
             {Object.values(leftsideBarRoutes).map((props: IRoute) => {
                 return (
@@ -20,14 +31,6 @@ const LeftsideBarList = () => {
                 )
             })}
         </LeftsideBarListWrapper>
-    ) : (
-        <SkeletonShape
-            shape={'rect'}
-            size={{
-                width: '100%',
-                height: '300px',
-            }}
-        />
     )
 }
 

@@ -1,11 +1,11 @@
 import { menuModel } from '@entities/menu'
 import { PageLink } from '@features/all-pages'
-import List from '@ui/list'
+import { ListWrapper } from '@ui/list'
 import { Title } from '@ui/title'
 import React from 'react'
 import styled from 'styled-components'
 
-const ListOfSettingsWrapper = styled(List)`
+const ListOfSettingsWrapper = styled(ListWrapper)`
     padding: 20px;
     height: 100%;
     background: var(--schedule);
