@@ -1,6 +1,7 @@
 import AllPages from '@pages/all-pages'
 import ChatPage from '@pages/chat'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
+import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
@@ -29,6 +30,7 @@ import { FiHome, FiLayers, FiLock, FiSettings, FiUser } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
+export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
 
 export const ALL_ROUTE = '/all'
 export const HOME_ROUTE = '/home'
@@ -77,6 +79,13 @@ export const publicRoutes = [
         icon: '',
         path: LOGIN_ROUTE,
         Component: LoginPage,
+    },
+    {
+        id: 1,
+        title: '',
+        icon: '',
+        path: FORGOT_PASSWORD_ROUTE,
+        Component: ForgotPasswordPage,
     },
 ]
 

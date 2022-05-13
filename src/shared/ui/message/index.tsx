@@ -24,8 +24,10 @@ export function Message({
     align = 'left',
     visible = true,
 }: MessageProps) {
-    return visible ? (
-        <MessageWrapper type={type} align={align} width={width} maxWidth={maxWidth}>
+    if (!visible) return null
+
+    return (
+        <MessageWrapper className="message" type={type} align={align} width={width} maxWidth={maxWidth}>
             <div className="title-and-icon">
                 <Title size={4} align="left" icon={icon}>
                     {title}
@@ -33,5 +35,5 @@ export function Message({
             </div>
             {children && <div className="info-text">{children}</div>}
         </MessageWrapper>
-    ) : null
+    )
 }

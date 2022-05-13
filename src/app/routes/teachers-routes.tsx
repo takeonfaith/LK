@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import React from 'react'
 import ContactInfoActualizationPage from '@pages/contact-info-actualization'
 import DataVerificationPage from '@pages/data-verification'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PersonalNotificationsPage from '@pages/personal-notifications'
+import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
 import {
     FiArrowDownCircle,
@@ -19,10 +19,7 @@ import {
 } from 'react-icons/fi'
 import { HiOutlineMenuAlt2, HiOutlineUserGroup } from 'react-icons/hi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
-import LoginPage from '../../pages/login'
 import { generalHiddenRoutes, generalRoutes, IRoutes } from './general-routes'
-
-export const LOGIN_ROUTE = '/login'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
@@ -49,16 +46,6 @@ export const HELP_SERVICE_ROUTE = '/help_service'
 export const DOWNLOAD_AGREEMENTS_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
 export const CONTACT_INFO_ACTUALIZATION = '/contact-info-actualization'
-
-export const publicRoutes = [
-    {
-        id: 0,
-        title: '',
-        icon: '',
-        path: LOGIN_ROUTE,
-        Component: LoginPage,
-    },
-]
 
 export const teachersPrivateRoutes: () => IRoutes = () => ({
     ...generalRoutes,

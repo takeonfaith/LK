@@ -9,6 +9,10 @@ const GlobalStyles = createGlobalStyle`
 		-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 	}
 
+	#root {
+		height: 100vh;
+	}
+
 	body {
 		overflow: hidden;
 	}

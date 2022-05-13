@@ -1,49 +1,39 @@
+import { FORGOT_PASSWORD_ROUTE } from '@app/routes/general-routes'
 import { OLD_LK_URL } from '@consts'
 import { userModel } from '@entities/user'
-import { LinkButton, Title } from '@ui/atoms'
+import { Button, LinkButton, Message, Title } from '@ui/atoms'
 import Input from '@ui/atoms/input'
 import SubmitButton from '@ui/atoms/submit-button'
+import BlockWrapper from '@ui/block/styles'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import ErrorMessage from '../atoms/error-message'
-
-const LoginBlockWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 500px;
-    background: var(--theme);
-    color: var(--text);
-    box-shadow: 0 0 100px #0000004e;
-    border-radius: 8px;
-    padding: 20px;
-    row-gap: 20px;
-
-    @media (max-width: 1000px) {
-        border-radius: 0;
-        box-shadow: none;
-        background: transparent;
-        height: 100%;
-        justify-content: center;
-    }
-`
+import { FiArrowLeftCircle } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 const LoginBlock = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
+    const [capslock, setCapslock] = useState(false)
     const loginFunc = userModel.events.login
     useTheme()
     const { loading, error } = userModel.selectors.useUser()
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        setCapslock(e.getModifierState('CapsLock'))
+
         if (e.key === 'Enter') {
             loginFunc({ login, password })
         }
     }
 
     return (
-        <LoginBlockWrapper onKeyPress={handleKeyPress}>
+        <BlockWrapper
+            height="fit-content"
+            orientation="vertical"
+            gap="20px"
+            maxWidth="500px"
+            onKeyDown={handleKeyPress}
+        >
             <Title size={2} align="left">
                 Вход в личный кабинет
             </Title>
@@ -52,11 +42,15 @@ const LoginBlock = () => {
                 onClick={() => {
                     localStorage.setItem('useOldVersion', 'true')
                 }}
-                background="var(--purple)"
+                background="transparent"
+                icon={<FiArrowLeftCircle />}
+                align="left"
                 width="100%"
                 href={`${OLD_LK_URL}/index.php`}
             />
-            <ErrorMessage message={error} />
+            <Message type="failure" visible={!!error} title="Ошибка">
+                {error}
+            </Message>
             <Input value={login} setValue={setLogin} title="Логин" placeholder="Введите логин" />
             <Input
                 value={password}
@@ -64,7 +58,16 @@ const LoginBlock = () => {
                 title="Пароль"
                 placeholder="Введите пароль"
                 type="password"
+                alertMessage={capslock ? 'Включен Capslock' : undefined}
             />
+            <Link to={FORGOT_PASSWORD_ROUTE} tabIndex={-1}>
+                <Button
+                    text="Забыли пароль от ЕУЗ?"
+                    background="transparent"
+                    height="20px"
+                    textColor="var(--reallyBlue)"
+                />
+            </Link>
             <SubmitButton
                 text="Вход"
                 action={() => loginFunc({ login, password })}
@@ -73,7 +76,7 @@ const LoginBlock = () => {
                 setCompleted={() => null}
                 isActive={!!password && !!login}
             />
-        </LoginBlockWrapper>
+        </BlockWrapper>
     )
 }
 

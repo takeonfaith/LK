@@ -10,13 +10,14 @@ export interface StyledProps {
     maxHeight?: string
     minHeight?: string
     justifyContent?: string
+    alignItems?: string
     padding?: string
     shadow?: boolean
 }
 
 const BlockWrapper = styled.div<StyledProps>`
     display: flex;
-    align-items: center;
+    align-items: ${({ alignItems }) => alignItems ?? 'center'};
     justify-content: ${({ justifyContent }) => justifyContent ?? 'space-between'};
     background: var(--schedule);
     border-radius: var(--brSemi);
