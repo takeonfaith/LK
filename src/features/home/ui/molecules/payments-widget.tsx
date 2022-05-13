@@ -57,6 +57,12 @@ const PaymentsWidgetWrapper = styled.div<{ background?: string }>`
             }
         }
     }
+
+    @media (max-width: 600px) {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+    }
 `
 
 const SkeletonLoading = () => {

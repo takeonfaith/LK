@@ -20,10 +20,16 @@ const LeftsideBarItem = ({ path, icon, title, isCurrent, isAdmin, color, notific
             }}
             title={title}
         >
-            <Notification top="50%" visible={isAdmin} right="-20px" color="pink">
+            <Notification className="notification" top="50%" visible={isAdmin} right="-20px" color="pink">
                 A
             </Notification>
-            <Notification top="50%" visible={!!notifications} right={isAdmin ? '0px' : '-20px'} color="red">
+            <Notification
+                className="notification"
+                top="50%"
+                visible={!!notifications}
+                right={isAdmin ? '0px' : '-20px'}
+                color="red"
+            >
                 {notifications}
             </Notification>
             {icon}

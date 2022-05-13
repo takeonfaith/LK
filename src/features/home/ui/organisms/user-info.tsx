@@ -1,11 +1,11 @@
 import { User } from '@api/model'
 import { Title } from '@ui/atoms'
+import List from '@ui/list'
 import React, { useCallback } from 'react'
 import { FiInfo } from 'react-icons/fi'
 import { useModal } from 'widgets'
 import createFullName from '../../lib/create-full-name'
 import { Description, MoreInfoLink } from '../atoms/more-info'
-import { Section } from '../atoms/section'
 import Avatar from '../molecules/avatar'
 import MoreUserInfo from './more-user-info'
 
@@ -25,7 +25,7 @@ function UserInfo({ user }: Props) {
     }, [open])
 
     return (
-        <Section>
+        <List direction="horizontal">
             <Avatar
                 name={createFullName({ name: user.name, patronymic: user.patronymic, surname: user.surname })}
                 avatar={avatar}
@@ -52,6 +52,6 @@ function UserInfo({ user }: Props) {
                     </MoreInfoLink>
                 </div>
             </Description>
-        </Section>
+        </List>
     )
 }

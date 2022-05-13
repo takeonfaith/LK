@@ -7,7 +7,7 @@ import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Confirm, Header, LeftsideBar, PopUpMessage, useModal } from 'widgets'
+import { Confirm, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import WhatsNew from '../../widgets/whats-new'
@@ -30,6 +30,9 @@ const ContentWrapper = styled.div`
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
+        .page-content {
+            height: calc(100% - 60px);
+        }
     }
 `
 
@@ -70,6 +73,7 @@ const ContentLayout = () => {
                 <div className="page-content">
                     <PrivateRouter />
                 </div>
+                <MobileBottomMenu />
             </ContentWrapper>
             <Modal />
             <PopUpMessage />

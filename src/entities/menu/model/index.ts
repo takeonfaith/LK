@@ -17,6 +17,7 @@ interface Menu {
 
 const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students']
 
+export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
 const DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'acad-performance', 'payments', 'all']
 const DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG = [
     'home',

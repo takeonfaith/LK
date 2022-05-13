@@ -32,7 +32,7 @@ const Home = () => {
                 <Title size={2} align="left" bottomGap>
                     {getGreetingMessage(user.name)}
                 </Title>
-                <LinksList align="left" restricted title={'Разделы'} links={homeRoutes} />
+                <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
                 <ScheduleAndNotification />
                 <List title="Преподаватели" direction="horizontal" gap="0px">
                     <User type={'teacher'} name={'Долоз Констанстин'} orientation="vertical" />

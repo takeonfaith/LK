@@ -8,6 +8,7 @@ export const Content = styled.div`
     flex-direction: column;
     gap: 20px;
     color: var(--text);
+    height: 100%;
 
     .home-page-content-inner {
         display: flex;
@@ -17,5 +18,9 @@ export const Content = styled.div`
 
     @media (max-width: 1000px) {
         margin: 0;
+    }
+
+    @media (max-width: 600px) {
+        padding-top: 30px;
     }
 `

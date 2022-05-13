@@ -15,7 +15,7 @@ const AllPagesWrapper = styled.div`
     gap: 10px;
     flex-wrap: wrap;
     @media (max-width: 600px) {
-        padding: 5px;
+        padding: 10px;
     }
 `
 
@@ -23,7 +23,10 @@ const AllPages = () => {
     const { visibleRoutes, allRoutes } = menuModel.selectors.useMenu()
     const [foundPages, setFoundPages] = useState<IRoutes | null>(null)
     const [searchValue, setSearchValue] = useState<string>('')
-    return visibleRoutes ? (
+
+    if (!visibleRoutes) return null
+
+    return (
         <AllPagesWrapper>
             <LocalSearch
                 placeholder="Поиск разделов"
@@ -35,7 +38,7 @@ const AllPages = () => {
             {searchValue.length === 0 && <LinksList doNotShow="all" align="left" links={visibleRoutes} />}
             <FoundPages pages={foundPages} />
         </AllPagesWrapper>
-    ) : null
+    )
 }
 
 export default AllPages

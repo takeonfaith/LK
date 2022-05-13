@@ -1,8 +1,8 @@
 import { scheduleModel } from '@entities/schedule'
 import getLessons from '@features/home/lib/get-lessons'
+import List from '@ui/list'
 import React, { useMemo } from 'react'
 import { DaySchedule } from '../../../schedule/ui'
-import { Section } from '../atoms/section'
 import PaymentsWidget from '../molecules/payments-widget'
 
 const ScheduleAndNotification = () => {
@@ -13,7 +13,7 @@ const ScheduleAndNotification = () => {
     const lessons = useMemo(() => getLessons(schedule, currentDayString), [schedule, currentDayString])
 
     return (
-        <Section>
+        <List direction="horizontal" title="Виджеты">
             <DaySchedule
                 lessons={!schedule && currentDayString === 'sunday' ? [] : lessons}
                 width={400}
@@ -22,7 +22,7 @@ const ScheduleAndNotification = () => {
                 topInfo=""
             />
             <PaymentsWidget />
-        </Section>
+        </List>
     )
 }
 

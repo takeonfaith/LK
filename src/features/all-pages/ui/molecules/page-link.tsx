@@ -15,6 +15,16 @@ import Notification from '@ui/notification'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import { Direction } from '@ui/types'
 
+const LinkWrapper = styled(Link)<{ width: number | string }>`
+    width: ${({ width }) => (typeof width === 'number' ? `calc(125px * ${width})` : width)};
+
+    @media (max-width: 500px) {
+        max-width: ${({ width }) => (typeof width === 'number' ? `calc(33vw * ${width} - 14px)` : width)};
+        min-width: ${({ width }) => (typeof width === 'number' ? `calc(33vw * ${width} - 14px)` : width)};
+        width: ${({ width }) => (typeof width === 'number' ? `calc(33vw * ${width} - 14px)` : width)};
+    }
+`
+
 export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean }>`
     position: relative;
     cursor: pointer;
@@ -122,19 +132,19 @@ const PageLink = (props: Props) => {
     } = props
     const isVertical = orientation === 'vertical'
     const maxWordLenght = restricted ? 20 : 50
-    const linkWidth = isVertical ? (title.length > 23 && !restricted ? '260px' : '125px') : '100%'
+    const linkWidth = title.length > 23 && !restricted ? 2 : 1
     return (
-        <Link
+        <LinkWrapper
             to={path}
             onClick={() => {
                 menuModel.events.changeOpen({ isOpen: false, currentPage: path.slice(1, path.length) })
             }}
-            style={{ width: linkWidth }}
+            width={isVertical ? linkWidth : '100%'}
         >
             <PageLinkWrapper
                 padding="0"
-                width={linkWidth}
-                maxWidth={orientation !== 'vertical' ? '100%' : '750px'}
+                width={'100%'}
+                maxWidth={'100%'}
                 height={isVertical ? '135px' : '60px'}
                 isVertical={isVertical}
                 justifyContent="center"
@@ -184,7 +194,7 @@ const PageLink = (props: Props) => {
                 />
                 {isNew && <span className="new">New</span>}
             </PageLinkWrapper>
-        </Link>
+        </LinkWrapper>
     )
 }
 

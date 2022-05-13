@@ -61,12 +61,33 @@ const LeftsideBarItemWrapper = styled(Link)<{
     }
 
     @media (max-width: 1000px) {
-        span {
+        /* span {
             width: 100%;
             display: block;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+        } */
+        justify-content: center;
+
+        svg {
+            margin-right: 0px;
+        }
+
+        &::before {
+            top: auto;
+            bottom: 0px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .notification {
+            top: 10px;
+            right: 0px;
+        }
+
+        .title {
+            display: none;
         }
     }
 `

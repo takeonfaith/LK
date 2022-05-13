@@ -14,17 +14,12 @@ import { FiArrowLeftCircle, FiLogOut, FiMoreVertical, FiSettings } from 'react-i
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-interface Props {
-    name: string
-    avatar?: string
-    loading?: boolean
-}
-
 const UserBigWrapper = styled(Link)`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    height: fit-content;
     border-radius: var(--brSemi);
     padding: 20px;
     transition: 0.2s;
@@ -43,7 +38,14 @@ const UserBigWrapper = styled(Link)`
     }
 `
 
-const UserBig = ({ name, avatar, loading }: Props) => {
+interface Props {
+    name: string
+    avatar?: string
+    loading?: boolean
+    size?: string
+}
+
+const UserBig = ({ name, avatar, loading, size }: Props) => {
     return !loading ? (
         <UserBigWrapper
             to={PROFILE_ROUTE}
@@ -102,7 +104,7 @@ const UserBig = ({ name, avatar, loading }: Props) => {
                     })
                 }}
             />
-            <Avatar width="70px" height="70px" avatar={avatar} name={name} marginRight="0" />
+            <Avatar width={size ?? '70px'} height={size ?? '70px'} avatar={avatar} name={name} marginRight="0" />
             <Title size={5}>{name}</Title>
         </UserBigWrapper>
     ) : (

@@ -7,7 +7,7 @@ import { FiArrowRight } from 'react-icons/fi'
 import styled from 'styled-components'
 import PageLink from '../../../all-pages/ui/molecules/page-link'
 
-const LinksListWrapper = styled.div<{ align: Align }>`
+const LinksListWrapper = styled.div<{ align: Align; wrapOnMobile: boolean }>`
     display: flex;
     flex-direction: column;
 
@@ -19,6 +19,13 @@ const LinksListWrapper = styled.div<{ align: Align }>`
         flex-wrap: wrap;
         gap: 10px;
     }
+
+    @media (max-width: 500px) {
+        .list {
+            /* overflow-x: ${({ wrapOnMobile }) => (!wrapOnMobile ? 'auto' : 'visible')}; */
+            flex-wrap: ${({ wrapOnMobile }) => (wrapOnMobile ? 'wrap' : 'nowrap')};
+        }
+    }
 `
 
 interface Props {
@@ -27,11 +34,12 @@ interface Props {
     align?: Align
     doNotShow?: string
     restricted?: boolean
+    wrapOnMobile?: boolean
 }
 
-const LinksList = ({ title, links, doNotShow, align = 'center', restricted }: Props) => {
+const LinksList = ({ title, links, doNotShow, restricted, wrapOnMobile = true, align = 'center' }: Props) => {
     return (
-        <LinksListWrapper align={align}>
+        <LinksListWrapper align={align} wrapOnMobile={wrapOnMobile}>
             <Title size={4} align="left" visible={!!title} bottomGap>
                 {title}
             </Title>
