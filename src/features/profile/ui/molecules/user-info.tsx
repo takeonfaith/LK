@@ -1,9 +1,7 @@
 import { userModel } from '@entities/user'
 import MoreUserInfo from '@features/home/ui/organisms/more-user-info'
 import Block from '@ui/block'
-import BlockWrapper from '@ui/block/styles'
 import React from 'react'
-import styled from 'styled-components'
 
 const UserInfo = () => {
     const {
