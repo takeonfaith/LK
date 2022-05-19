@@ -23,8 +23,6 @@ function findPercentage(data: AcadPerformance[], circleMode = 0): number {
         data.forEach(({ grade }) => GradeByScore[grade] > 2 && counter++)
     }
 
-    const perc = (+(counter / totalLength)).toPrecision(2)
-
     return isNaN(+perc) ? 0 : +perc
 }
 
