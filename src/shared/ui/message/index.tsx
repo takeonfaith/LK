@@ -16,6 +16,9 @@ export type MessageProps = {
     width?: string
     maxWidth?: string
     onClose?: () => void
+    padding?: string
+    fontSize?: string
+    gap?: string
 }
 
 export function Message({
@@ -28,6 +31,9 @@ export function Message({
     onClose,
     align = 'left',
     visible = true,
+    padding,
+    fontSize,
+    gap,
 }: MessageProps) {
     if (!visible) return null
 
@@ -39,11 +45,20 @@ export function Message({
             align={align}
             width={width}
             maxWidth={maxWidth}
+            padding={padding}
+            fontSize={fontSize}
+            gap={gap}
         >
             <Title size={4} align="left" icon={icon ?? messageType[type].icon({})}>
                 {title}
             </Title>
             {onClose && <Button onClick={onClose} icon={<FiX />} className="close-button" background="transparent" />}
+
+            <div className="title-and-icon">
+                <Title size={4} align="left" icon={icon}>
+                    {title}
+                </Title>
+            </div>
             {children && <div className="info-text">{children}</div>}
         </MessageWrapper>
     )

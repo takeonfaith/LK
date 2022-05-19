@@ -8,13 +8,18 @@ export const MessageWrapper = styled.div<{
     width?: string
     maxWidth?: string
     closable?: boolean
+    fontSize?: string
+    padding?: string
+    gap?: string
 }>`
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
-    font-size: 0.8em;
-    padding: ${({ closable }) => (closable ? '10px 30px 10px 10px' : '10px')};
     color: ${({ type }) => Colors[messageType[type].color].main};
     background: ${({ type }) => Colors[messageType[type].color].lightTransparent};
+    width: ${({ width }) => width ?? '100%'};
+    max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
+    font-size: ${({ fontSize }) => fontSize ?? '0.8em'};
+    padding: ${({ padding }) => padding ?? '10px'};
     border-radius: var(--brLight);
     position: relative;
     display: flex;
@@ -27,5 +32,11 @@ export const MessageWrapper = styled.div<{
         position: absolute;
         top: 0px;
         right: 0px;
+    }
+
+    .info-text {
+        display: flex;
+        flex-direction: column;
+        gap: ${({ gap }) => gap ?? 0};
     }
 `

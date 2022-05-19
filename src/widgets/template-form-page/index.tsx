@@ -48,7 +48,7 @@ const TemplateFormPage = <T extends { last_update?: string }>({
 
     return (
         <Wrapper load={() => model.effects.getFormFx()} error={error} data={form}>
-            <CenterPage>
+            <CenterPage className="">
                 {!!form && !!setForm && (
                     <FormBlock>
                         <InputArea {...form} collapsed={isDone && !repeatable} setData={setForm as LoadedState} />
