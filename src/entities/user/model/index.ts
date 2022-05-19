@@ -55,8 +55,8 @@ const useUser = () => {
 }
 
 const logoutFx = createEffect(() => {
-    clearAllStores()
     localStorage.removeItem('token')
+    clearAllStores()
 })
 
 const login = createEvent<LoginData>()
