@@ -5,7 +5,7 @@ interface Menu {
     isOpen: boolean
 }
 
-const defaultStore: Menu = {
+const DEFAULT_STORE: Menu = {
     isOpen: false,
 }
 
@@ -14,11 +14,16 @@ const useMenu = () => {
 }
 
 const changeOpen = createEvent<Menu>()
+const clearStore = createEvent()
 
-const $menu = createStore<Menu>(defaultStore).on(changeOpen, (oldState, { isOpen }) => ({
-    ...oldState,
-    isOpen: isOpen,
-}))
+const $menu = createStore<Menu>(DEFAULT_STORE)
+    .on(changeOpen, (oldState, { isOpen }) => ({
+        ...oldState,
+        isOpen: isOpen,
+    }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useMenu,
@@ -26,4 +31,5 @@ export const selectors = {
 
 export const events = {
     changeOpen,
+    clearStore,
 }

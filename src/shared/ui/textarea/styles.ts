@@ -10,15 +10,6 @@ export const TextAreaWrapper = styled.div<{ isActive: boolean; textAreaAppearanc
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
 
-    h5 {
-        margin-bottom: 5px;
-
-        .red-star {
-            color: var(--red);
-            margin-right: 5px;
-        }
-    }
-
     .icon {
         position: absolute;
         left: 7px;

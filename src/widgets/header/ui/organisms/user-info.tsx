@@ -1,4 +1,5 @@
 import { userModel } from '@entities/user'
+import createFullName from '@features/home/lib/create-full-name'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { ContextMenu } from '@ui/atoms'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
@@ -45,7 +46,13 @@ const UserInfo = () => {
     return !!user ? (
         <UserInfoWrapper ref={userInfoRef} tabIndex={1}>
             <div className="user-info-plate" onClick={handleVisible}>
-                <Avatar avatar={user?.avatar} width="32px" height="32px" marginRight={'5px'} />
+                <Avatar
+                    name={createFullName({ name: user.name, patronymic: user.patronymic, surname: user.surname })}
+                    avatar={user?.avatar}
+                    width="32px"
+                    height="32px"
+                    marginRight={'5px'}
+                />
                 <FiChevronDown />
             </div>
             <ContextMenu isVisible={isVisible}>

@@ -1,5 +1,5 @@
 import { GradeByScore } from '@consts'
-import { AcadPerformance } from '@entities/acad-performance/model'
+import { AcadPerformance } from '@api/model/acad-performance'
 
 function findPercentage(data: AcadPerformance[], circleMode = 0): number {
     let counter = 0
@@ -23,13 +23,7 @@ function findPercentage(data: AcadPerformance[], circleMode = 0): number {
         data.forEach(({ grade }) => GradeByScore[grade] > 2 && counter++)
     }
 
-    if (totalLength !== 0) {
-        const perc = (+(counter / totalLength)).toPrecision(2)
-
-        return +perc
-    }
-
-    return 0
+    return isNaN(+perc) ? 0 : +perc
 }
 
 export default findPercentage

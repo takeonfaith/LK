@@ -10,8 +10,10 @@ const SubmitButtonWrapper = styled.button<{
     isActive: boolean
     isDone: boolean
     repeatable: boolean
+    width?: string
+    height?: string
 }>`
-    width: 100%;
+    width: ${({ width }) => width ?? '100%'};
     padding: 10px;
     box-sizing: border-box;
     opacity: ${(props) => (props.isLoading || !props.isActive ? 0.5 : 1)};
@@ -20,8 +22,8 @@ const SubmitButtonWrapper = styled.button<{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    min-height: 40px;
+    height: ${({ height }) => height ?? '40px'};
+    min-height: ${({ height }) => height ?? '40px'};
     border-radius: 10px;
     position: relative;
     overflow: hidden;
@@ -119,6 +121,8 @@ const SubmitButtonWrapper = styled.button<{
 
 interface Props {
     text: string
+    width?: string
+    height?: string
     action: () => void
     isLoading: boolean
     completed: boolean
@@ -134,6 +138,8 @@ interface Props {
 const SubmitButton = ({
     text,
     action,
+    width,
+    height,
     setCompleted,
     buttonSuccessText = 'Готово',
     popUpSuccessMessage = 'Успешно',
@@ -176,6 +182,8 @@ const SubmitButton = ({
             isActive={isActive && !isDone}
             onClick={handleAction}
             isDone={isDone}
+            width={width}
+            height={height}
             repeatable={repeatable}
         >
             <div className="inner-button">

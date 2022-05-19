@@ -1,7 +1,15 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
+import { createEvent } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector/compat'
+
+interface PaymentsStore {
+    payments: Payments | null
+    error: string | null
+}
+
+const DEFAULT_STORE: PaymentsStore = { payments: null, error: null }
 
 const usePayments = () => {
     return {
@@ -9,11 +17,6 @@ const usePayments = () => {
         loading: useStore(getPaymentsFx.pending),
         error: useStore($paymentsStore).error,
     }
-}
-
-interface PaymentsStore {
-    payments: Payments | null
-    error: string | null
 }
 
 const getPaymentsFx = createEffect(async (): Promise<Payments> => {
@@ -27,7 +30,9 @@ const getPaymentsFx = createEffect(async (): Promise<Payments> => {
     }
 })
 
-const $paymentsStore = createStore<PaymentsStore>({ payments: null, error: null })
+const clearStore = createEvent()
+
+const $paymentsStore = createStore<PaymentsStore>(DEFAULT_STORE)
     .on(getPaymentsFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -40,6 +45,9 @@ const $paymentsStore = createStore<PaymentsStore>({ payments: null, error: null 
         ...oldData,
         error: newData.message,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     usePayments,
@@ -47,4 +55,8 @@ export const selectors = {
 
 export const effects = {
     getPaymentsFx,
+}
+
+export const events = {
+    clearStore,
 }

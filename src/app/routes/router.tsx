@@ -1,13 +1,20 @@
-import React from 'react'
+import { adminLinksModel } from '@entities/admin-links'
+import { LOGIN_ROUTE, publicRoutes } from '@routes'
+import React, { useEffect } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'
 import ContentLayout from '../../shared/ui/content-layout'
-import { LOGIN_ROUTE, publicRoutes } from '@routes'
 
 const Router = () => {
     const {
         data: { isAuthenticated },
     } = userModel.selectors.useUser()
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            adminLinksModel.effects.getAdminLinksFx()
+        }
+    }, [isAuthenticated])
 
     return isAuthenticated ? (
         <Switch>

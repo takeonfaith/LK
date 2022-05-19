@@ -1,5 +1,5 @@
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
-import { Message, SubmitButton, Title, Wrapper } from '@ui/atoms'
+import { FormBlock, Message, SubmitButton, Title, Wrapper } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
@@ -131,7 +131,7 @@ const DataVerificationPage = () => {
             !!disability &&
             !!army ? (
                 <DataVerificationPageWrapper>
-                    <div className="data-verification-block">
+                    <FormBlock>
                         {!isDone && (
                             <Title size={3} align="left" bottomGap>
                                 Подтвердите актуальность данных, указанных в каждом разделе анкеты, либо внесите
@@ -251,7 +251,7 @@ const DataVerificationPage = () => {
                                 />
                             </>
                         )}
-                    </div>
+                    </FormBlock>
                 </DataVerificationPageWrapper>
             ) : null}
         </Wrapper>

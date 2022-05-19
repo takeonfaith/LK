@@ -1,5 +1,4 @@
-import { AcadPerformance } from '@entities/acad-performance/model'
-import { Title } from '@ui/atoms'
+import { AcadPerformance } from '@api/model/acad-performance'
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import SubjectItems from '../molecules/subject-items'

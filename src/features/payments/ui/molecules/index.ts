@@ -1,6 +1,4 @@
-export { default as LeftBlock } from './left-block'
-export { default as RightBlock } from './right-block'
 export { default as PaymentsInfo } from './payments-info'
 export { default as PaymentList } from './payment-list'
 export { default as Contract } from './contract'
-export { default as AgreementsBlock } from './agreements-block'
+export { default as PaymentGraph } from './payment-graph'

@@ -1,24 +1,40 @@
 import { Align, HeaderSize } from '@ui/types'
 import React from 'react'
 import { CreateHeader } from './create-header'
-import { TitleWrapper } from './styles'
+import { ChildrenWrapper, RedStar, TitleWrapper } from './styles'
 
 export type TitleProps = {
     children: ChildrenType
+    width?: string
     size?: HeaderSize
     align?: Align
-    bottomGap?: boolean
+    bottomGap?: boolean | string
     icon?: React.ReactNode
     iconColor?: string
+    required?: boolean
+    visible?: boolean
 }
 
 export function Title(props: TitleProps) {
-    const { icon, iconColor, children, size = 1, align = 'center', bottomGap = false } = props
+    const {
+        icon,
+        iconColor,
+        children,
+        size = 1,
+        required,
+        width,
+        align = 'center',
+        bottomGap = false,
+        visible = true,
+    } = props
 
-    return (
+    return visible ? (
         <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
             {icon}
-            <CreateHeader size={size}>{children}</CreateHeader>
+            <CreateHeader size={size} width={width}>
+                {required && <RedStar>*</RedStar>}
+                <ChildrenWrapper width={width}>{children}</ChildrenWrapper>
+            </CreateHeader>
         </TitleWrapper>
-    )
+    ) : null
 }

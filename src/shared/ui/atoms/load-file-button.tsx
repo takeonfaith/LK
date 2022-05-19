@@ -1,3 +1,4 @@
+import { Colors } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import getFileSize from '@utils/get-file-size'
@@ -13,7 +14,8 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
     width: 100%;
     min-height: 150px;
     border-radius: var(--brLight);
-    background: var(--almostTransparentOpposite);
+    background: ${Colors.blue.reallyTransparent};
+    border: ${({ showPulse }) => !showPulse && `3px dashed ${Colors.blue.main}`};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,6 +32,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         position: absolute;
         display: flex;
         gap: 5px;
+        pointer-events: none;
 
         .info-item {
             padding: 5px 10px;
@@ -116,7 +119,8 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        opacity: 0.6;
+        opacity: 0.7;
+        color: ${Colors.blue.dark};
         pointer-events: none;
 
         svg {
@@ -200,6 +204,7 @@ const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: LoadFile
 
     const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
         e.preventDefault()
+        setShowPulse(false)
         const files = e.dataTransfer.files
 
         if (files.length) {

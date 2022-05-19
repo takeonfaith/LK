@@ -1,6 +1,7 @@
-import useOnClickOutside from '@utils/hooks/use-on-click-outside'
-import React, { memo, useCallback, useRef, useState } from 'react'
+import { Title } from '@ui/atoms'
+import React, { memo } from 'react'
 import { FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import useSelect, { SelectProps } from './lib/hooks/use-select'
 import { SelectArrow, SelectHeader, SelectHeaderWrapper, SelectItem, SelectItems, SelectWrapper } from './ui/atoms'
 
 export interface SelectPage {
@@ -10,100 +11,36 @@ export interface SelectPage {
     children?: SelectPage[]
 }
 
-type SingleSelect = React.Dispatch<React.SetStateAction<SelectPage>>
-type MultipleSelect = React.Dispatch<React.SetStateAction<SelectPage[] | null>>
-
-interface Props {
-    items: SelectPage[]
-    setSelected: SingleSelect | MultipleSelect
-    selected: SelectPage | SelectPage[] | null
-    isActive?: boolean
-    title?: string
-    width?: string
-    multiple?: boolean
-    required?: boolean
-}
-
-const findCurrentPage = (pages: SelectPage[], path: string[]): SelectPage[] | undefined => {
-    const page = pages.find((page) => page.id.toString() === path[0])
-
-    if (path.length && page?.children) {
-        path.shift()
-        return findCurrentPage(page.children, path)
-    } else return page ? page.children : pages
-}
-
-const Select = (props: Props) => {
-    const { items, setSelected, selected, title, width, required, multiple = false, isActive = true } = props
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const refElement = useRef<HTMLDivElement | null>(null)
-    const refItems = useRef<HTMLUListElement | null>(null)
-    const [route, setRoute] = useState<string[]>([])
-    const [currentItems, setCurrentItems] = useState<SelectPage[]>(items)
-    const [selectedRoute, setSelectedRoute] = useState<string>('')
-
-    const handleOpen = useCallback(() => {
-        setIsOpen((prev) => !prev)
-    }, [setIsOpen])
-
-    const handleSelect = useCallback(
-        (page: SelectPage) => {
-            if (!page.children) {
-                if (multiple) {
-                    if (!!selected) {
-                        if (!!(selected as SelectPage[]).find((p) => p.id === page.id)) {
-                            const newSelected = (selected as SelectPage[]).filter((p) => p.id !== page.id)
-                            !newSelected.length
-                                ? (setSelected as MultipleSelect)(null)
-                                : (setSelected as MultipleSelect)(newSelected)
-                        } else {
-                            ;(setSelected as MultipleSelect)([...(selected as SelectPage[]), page])
-                        }
-                    } else {
-                        ;(setSelected as MultipleSelect)([page])
-                    }
-                } else {
-                    ;(setSelected as SingleSelect)(page)
-                }
-
-                !multiple && handleOpen()
-                setSelectedRoute(route.join('/'))
-            } else {
-                route.push(page.id.toString())
-                setCurrentItems(findCurrentPage(items, [...route]) ?? [])
-
-                setRoute([...route])
-            }
-        },
-        [setSelected, route],
-    )
-
-    const goBack = useCallback(() => {
-        route.pop()
-        setRoute([...route])
-        if (route.length === 0) {
-            setCurrentItems(items)
-        } else {
-            setCurrentItems(findCurrentPage(items, route) ?? [])
-        }
-    }, [route, setCurrentItems])
-
-    useOnClickOutside(refElement, () => {
-        if (isOpen) {
-            handleOpen()
-        }
-    })
+const Select = (props: SelectProps) => {
+    const {
+        handleOpen,
+        refElement,
+        isOpen,
+        multiple,
+        handleSelect,
+        selectedRoute,
+        currentItems,
+        route,
+        goBack,
+        refItems,
+        appearance,
+    } = useSelect(props)
+    const { isActive, width, title, required, selected, placeholder } = props
 
     return (
-        <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive} width={width}>
-            {!!title && (
-                <h5>
-                    {required && <span className="red-star">*</span>}
-                    {title}
-                </h5>
-            )}
-            <SelectHeaderWrapper multiple={multiple}>
-                <SelectHeader>
+        <SelectWrapper
+            onClick={handleOpen}
+            appearance={appearance}
+            ref={refElement}
+            isOpen={isOpen}
+            isActive={isActive ?? true}
+            width={width}
+        >
+            <Title size={5} align="left" bottomGap="5px" visible={!!title} required={required}>
+                {title}
+            </Title>
+            <SelectHeaderWrapper multiple={multiple} appearance={appearance}>
+                <SelectHeader appearance={appearance}>
                     {!multiple ? (
                         <div className="single-header">
                             {!!selected ? (
@@ -114,7 +51,7 @@ const Select = (props: Props) => {
                                     <span className="header-title">{(selected as SelectPage).title}</span>
                                 </>
                             ) : (
-                                <span className="not-chosen">Не выбрано</span>
+                                <span className="not-chosen">{placeholder ?? 'Не выбрано'}</span>
                             )}
                         </div>
                     ) : !!selected ? (
@@ -127,7 +64,7 @@ const Select = (props: Props) => {
                             )
                         })
                     ) : (
-                        <span className="not-chosen multi">Не выбрано</span>
+                        <span className="not-chosen multi">{placeholder ?? 'Не выбрано'}</span>
                     )}
                 </SelectHeader>
                 <SelectArrow isOpen={isOpen} />
@@ -155,7 +92,7 @@ const Select = (props: Props) => {
                         </span>
                     </SelectItem>
                 )}
-                {currentItems.map(({ id, icon, title, children }, i) => (
+                {currentItems.map(({ id, icon, title, children }) => (
                     <SelectItem
                         key={title}
                         onClick={(e) => {

@@ -9,12 +9,12 @@ const ScheduleAndNotification = () => {
         data: { schedule, currentDayString },
     } = scheduleModel.selectors.useSchedule()
 
-    const lessons = useMemo(() => getLessons(schedule, currentDayString), [schedule])
+    const lessons = useMemo(() => getLessons(schedule, currentDayString), [schedule, currentDayString])
 
     return (
         <Section>
             <DaySchedule
-                lessons={currentDayString === 'sunday' ? [] : lessons || null}
+                lessons={!schedule && currentDayString === 'sunday' ? [] : lessons}
                 width={400}
                 height={156}
                 isCurrent

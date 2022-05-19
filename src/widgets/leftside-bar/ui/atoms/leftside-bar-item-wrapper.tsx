@@ -7,7 +7,7 @@ const LeftsideBarItemWrapper = styled(Link)<{
 }>`
     position: relative;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     font-weight: 700;
     width: 100%;
     justify-content: flex-start;
@@ -34,16 +34,16 @@ const LeftsideBarItemWrapper = styled(Link)<{
         height: 17px;
     }
 
-    strong {
-        width: 130px;
+    /* strong {
+        width: 100%;
         display: block;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-    }
+    } */
 
     svg {
-        width: 22px;
+        min-width: 22px;
         height: 22px;
         margin-right: 7px;
     }

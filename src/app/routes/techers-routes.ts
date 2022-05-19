@@ -1,8 +1,13 @@
+import ContactInfoActualizationPage from '@pages/contact-info-actualization'
 import DataVerificationPage from '@pages/data-verification'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
+import PersonalNotificationsPage from '@pages/personal-notifications'
+import SchedulePage from '@pages/schedule'
+import TeachersSchedule from '@pages/teachers-schedule'
+import { IRoutes } from '@routes'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -10,6 +15,8 @@ import {
     BiHeadphone,
     BiIdCard,
     BiMessageRounded,
+    BiNotification,
+    BiRuble,
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
@@ -19,8 +26,8 @@ import {
     FiBell,
     FiBriefcase,
     FiCalendar,
+    FiCheckSquare,
     FiClipboard,
-    FiDollarSign,
     FiFileText,
     FiMonitor,
     FiStar,
@@ -29,9 +36,6 @@ import { HiOutlineClipboardCheck, HiOutlineMenuAlt2, HiOutlineUserGroup } from '
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
-import SchedulePage from '@pages/schedule'
-import TeachersSchedule from '@pages/teachers-schedule'
-import { IRoutes } from './routes'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -68,6 +72,8 @@ export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const DOWNLOAD_ADMIN_FILES_ROUTE = '/download-agreements'
+export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
+export const CONTACT_INFO_ACTUALIZATION = '/contact-info-actualization'
 
 //hidden routes
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
@@ -158,10 +164,10 @@ export const teachersPrivateRoutes: IRoutes = {
     },
     8: {
         id: 8,
-        title: 'Опрос для проверки уровня цифровой грамотности',
-        icon: BiBookReader,
-        path: PPS_VOTE_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PPS_VOTE_ROUTE }),
+        title: 'Актуализация контактных данных',
+        icon: FiCheckSquare,
+        path: CONTACT_INFO_ACTUALIZATION,
+        Component: ContactInfoActualizationPage,
         isTemplate: false,
     },
     9: {
@@ -263,8 +269,8 @@ export const teachersPrivateRoutes: IRoutes = {
     },
     22: {
         id: 22,
-        title: 'Сведения об оплатах',
-        icon: FiDollarSign,
+        title: 'Оплата',
+        icon: BiRuble,
         path: PAYMENTS_ROUTE,
         Component: PaymentsPage,
         isTemplate: false,
@@ -347,6 +353,22 @@ export const teachersPrivateRoutes: IRoutes = {
         icon: BiIdCard,
         path: PPS_CONTEST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        isTemplate: false,
+    },
+    34: {
+        id: 34,
+        title: 'Кадровые уведомления',
+        icon: BiNotification,
+        path: PERSONAL_NOTIFICATIONS,
+        Component: PersonalNotificationsPage,
+        isTemplate: false,
+    },
+    35: {
+        id: 35,
+        title: 'Опрос для проверки уровня цифровой грамотности',
+        icon: BiBookReader,
+        path: PPS_VOTE_ROUTE,
+        Component: () => PageIsNotReady({ oldVersionUrl: PPS_VOTE_ROUTE }),
         isTemplate: false,
     },
 }

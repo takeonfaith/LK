@@ -26,7 +26,7 @@ const DayEnded = () => {
 
     return (
         <DayEndedWrapper>
-            <AnimatedCheck size={'40px'} />
+            <AnimatedCheck size={'38px'} />
             <Title size={4}>Учебный день завершился</Title>
             {!!data.schedule?.[0] && (
                 <Button

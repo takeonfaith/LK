@@ -94,7 +94,13 @@ const HeaderContextMenu = () => {
         <HeaderContextMenuWrapper>
             <div className="user-info-plate">
                 <div className="avatar-and-name">
-                    <Avatar avatar={user?.avatar} width="35px" height="35px" marginRight={'8px'} />
+                    <Avatar
+                        name={createFullName({ name: user.name, patronymic: user.patronymic, surname: user.surname })}
+                        avatar={user?.avatar}
+                        width="35px"
+                        height="35px"
+                        marginRight={'8px'}
+                    />
                     <b>{createFullName({ name: user.name, surname: user.surname, patronymic: user.patronymic })}</b>
                 </div>
 

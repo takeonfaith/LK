@@ -1,7 +1,8 @@
 import { superiorRoomApi } from '@api'
 import { popUpMessageModel } from '@entities/pop-up-message'
-import { SelectPage } from '@features/select'
-import { CheckboxDocs, IInputArea, IInputAreaData } from '@ui/input-area/model'
+import { IInputArea } from '@ui/input-area/model'
+import { IndexedProperties } from '@utility-types/indexed-properties'
+import prepareFormData from '@utils/prepare-form-data'
 
 const sendForm = (
     form: IInputArea,
@@ -9,27 +10,8 @@ const sendForm = (
     setCompleted: (loading: boolean) => void,
 ) => {
     setLoading(true)
-    const data = (form.data as IInputAreaData[]).reduce((acc, item) => {
-        if (item.type === 'checkbox-docs') {
-            const files = (item.items as CheckboxDocs[])?.reduce((obj, element) => {
-                for (let fileIndex = 0; fileIndex < element.files.length; fileIndex++) {
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignore
-                    obj[element?.fieldName + `[${fileIndex}]`] = element.files[fileIndex]
-                }
+    const data = prepareFormData<IndexedProperties>(form)
 
-                return obj
-            }, {} as { [key: string]: any })
-            acc = Object.assign({}, acc, files)
-        } else if (item.type === 'select') {
-            acc[item.fieldName] = (item.value as SelectPage).title
-        } else {
-            acc[item.fieldName] = item.value
-        }
-        return acc
-    }, {} as { [key: string]: any })
-    // // eslint-disable-next-line no-console
-    // console.log(data)
     try {
         superiorRoomApi.post(data)
         setLoading(false)

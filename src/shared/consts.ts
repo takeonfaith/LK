@@ -25,7 +25,7 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
 
 export const SETTINGS = 'settings'
 
-interface IColors extends IndexedProperties {
+export interface IColors extends IndexedProperties {
     green: IColorPalette
     lightGreen: IColorPalette
     blue: IColorPalette
@@ -47,6 +47,8 @@ export interface IColorPalette {
     dark: string
     darkTransparent: string
     lightTransparent: string
+    reallyTransparent: string
+    transparentAF: string
 }
 
 export const Colors: IColors = {
@@ -58,7 +60,9 @@ export const Colors: IColors = {
         littleDarker: '#27b56e',
         light: '',
         dark: '#2a4f2f',
+        reallyTransparent: '',
         darkTransparent: '#166c217a',
+        transparentAF: '#3cd2881a',
         lightTransparent: '#9fe4a982',
     },
     lightGreen: {
@@ -66,9 +70,11 @@ export const Colors: IColors = {
         transparent: 'rgba(64, 197, 197, .3)',
         lighter: '#3cd2d2',
         darker: '#258787',
-        light: '',
+        light: 'rgba(105, 205, 145, 0.5)',
         dark: '#216666',
+        reallyTransparent: '',
         darkTransparent: '',
+        transparentAF: '',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -77,9 +83,11 @@ export const Colors: IColors = {
         transparent: 'rgba(95, 109, 236, .3)',
         lighter: '#7884ec',
         darker: '#414ca8',
-        light: '',
+        light: '#4a93ff',
         dark: '#3f457f',
+        reallyTransparent: '#6a8dff30',
         darkTransparent: '',
+        transparentAF: '#6a8dff12',
         lightTransparent: '#567dff47',
         littleDarker: '#3737b3',
     },
@@ -90,7 +98,9 @@ export const Colors: IColors = {
         darker: '#414ca8',
         light: '',
         dark: '#4c73ca',
+        reallyTransparent: '',
         darkTransparent: '',
+        transparentAF: '',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -99,9 +109,11 @@ export const Colors: IColors = {
         transparent: 'rgba(168, 95, 236, .3)',
         lighter: '#d079ec',
         darker: '#824eb2',
-        light: '',
+        light: '#a87eee',
         dark: '#7e3798',
+        reallyTransparent: '',
         darkTransparent: '',
+        transparentAF: '#a85fec14',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -112,7 +124,9 @@ export const Colors: IColors = {
         darker: '#b24788',
         light: '',
         dark: '#842b62',
+        reallyTransparent: '',
         darkTransparent: '',
+        transparentAF: '#ec5fb617',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -124,7 +138,9 @@ export const Colors: IColors = {
         light: '',
         dark: '#632d32',
         littleDarker: '#b33b3b',
+        reallyTransparent: '',
         darkTransparent: '#511a1ea3',
+        transparentAF: '',
         lightTransparent: '#e2799273',
     },
     yellow: {
@@ -134,7 +150,9 @@ export const Colors: IColors = {
         darker: '#b63c46',
         light: '',
         dark: '#632d32',
+        reallyTransparent: '',
         darkTransparent: '#511a1ea3',
+        transparentAF: '',
         lightTransparent: '',
         littleDarker: '',
     },
@@ -145,7 +163,9 @@ export const Colors: IColors = {
         darker: '#ae4a1b',
         light: '',
         dark: '#e97944',
+        reallyTransparent: '',
         darkTransparent: '#511a1ea3',
+        transparentAF: '',
         lightTransparent: '#ffd7a67d',
         littleDarker: '#c75e1d',
     },
@@ -203,3 +223,69 @@ export const GradeByScore: IGrade = {
 }
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
+
+export const LastUpdateWhatsNew = '2022-05-06T10:30:00'
+
+interface LetterColorMatch {
+    [key: string]: keyof IColors
+}
+
+export const letterColorMatch: LetterColorMatch = {
+    А: 'lightGreen',
+    Б: 'purple',
+    В: 'green',
+    Г: 'pink',
+    Д: 'purple',
+    Е: 'blue',
+    Ё: 'red',
+    Ж: 'blue',
+    З: 'lightGreen',
+    И: 'pink',
+    К: 'lightGreen',
+    Л: 'green',
+    М: 'red',
+    Н: 'green',
+    О: 'purple',
+    П: 'blue',
+    Р: 'darkBlue',
+    С: 'orange',
+    Т: 'blue',
+    У: 'lightGreen',
+    Ф: 'blue',
+    Х: 'green',
+    Ч: 'purple',
+    Ш: 'red',
+    Щ: 'red',
+    Ъ: 'purple',
+    Ы: 'green',
+    Ь: 'blue',
+    Э: 'red',
+    Ю: 'yellow',
+    Я: 'green',
+    A: 'lightGreen',
+    B: 'purple',
+    C: 'green',
+    D: 'pink',
+    E: 'purple',
+    F: 'blue',
+    G: 'red',
+    H: 'blue',
+    I: 'lightGreen',
+    J: 'pink',
+    K: 'lightGreen',
+    L: 'green',
+    M: 'red',
+    N: 'green',
+    O: 'purple',
+    P: 'blue',
+    Q: 'darkBlue',
+    R: 'orange',
+    S: 'blue',
+    T: 'lightGreen',
+    U: 'blue',
+    V: 'green',
+    W: 'purple',
+    X: 'red',
+    Y: 'red',
+    Z: 'purple',
+}

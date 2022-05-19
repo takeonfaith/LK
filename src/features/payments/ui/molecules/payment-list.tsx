@@ -1,9 +1,12 @@
 import { IPaymentItem } from '@api/model'
 import { PaymentItem } from '@features/payments'
 import { Title } from '@ui/atoms'
+import { Button } from '@ui/button'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
+import { HiOutlineTable } from 'react-icons/hi'
 import styled from 'styled-components'
+import { useModal } from 'widgets'
 
 const PaymentListWrapper = styled.div`
     width: 100%;
@@ -26,10 +29,13 @@ const PaymentListWrapper = styled.div`
     }
 
     .payment-list {
+        margin-bottom: 10px;
         width: 100%;
         overflow-y: auto;
         height: 200px;
         padding-right: 5px;
+        box-shadow: var(--schedule-shadow);
+        border-radius: calc(var(--brSemi) - 7px);
 
         & > * + * {
             margin-top: 5px;

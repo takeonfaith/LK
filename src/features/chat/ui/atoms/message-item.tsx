@@ -1,5 +1,7 @@
 import { Message } from '@api/model'
 import { Colors } from '@consts'
+import { contextMenuModel } from '@entities/context-menu'
+import localizeDate from '@utils/localize-date'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -63,11 +65,17 @@ interface Props {
 
 const MessageItem = ({ name, message, isLast }: Props) => {
     return (
-        <MessageItemWrapper isYourMessage={name === 'Kostya Doloz'} isLast={isLast}>
+        <MessageItemWrapper
+            isYourMessage={name === 'Kostya Doloz'}
+            isLast={isLast}
+            onContextMenu={(e) => {
+                contextMenuModel.events.open({ e, content: 'TEst', height: 70 })
+            }}
+        >
             <div className="name-and-message">
                 <div className="name-and-time">
                     <b>{name}</b>
-                    <span>{message.sentTime}</span>
+                    <span>{localizeDate(message.sentTime)}</span>
                 </div>
                 <span className="message">{message.message}</span>
             </div>

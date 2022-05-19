@@ -4,6 +4,7 @@ import { createEffect, createEvent, createStore, forward } from 'effector/compat
 import { useStore } from 'effector-react/compat'
 import { User, UserToken } from '@api/model'
 import axios from 'axios'
+import clearAllStores from '../lib/clear-all-stores'
 
 interface UserStore {
     currentUser: User | null
@@ -55,6 +56,7 @@ const useUser = () => {
 
 const logoutFx = createEffect(() => {
     localStorage.removeItem('token')
+    clearAllStores()
 })
 
 const login = createEvent<LoginData>()

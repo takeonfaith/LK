@@ -3,6 +3,18 @@ import { ElectronicInteraction } from '@api/model'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createEvent, createStore } from 'effector/compat'
 
+interface ElectronicInteractionStore {
+    electronicInteraction: ElectronicInteraction | null
+    error: string | null
+    completed: boolean
+}
+
+const DEFAULT_STORE = {
+    electronicInteraction: null,
+    error: null,
+    completed: false,
+}
+
 const useElectronicInteraction = () => {
     return {
         data: useStore($electronicInteractionStore).electronicInteraction,
@@ -10,12 +22,6 @@ const useElectronicInteraction = () => {
         error: useStore($electronicInteractionStore).error,
         completed: useStore($electronicInteractionStore).completed,
     }
-}
-
-interface ElectronicInteractionStore {
-    electronicInteraction: ElectronicInteraction | null
-    error: string | null
-    completed: boolean
 }
 
 const postElectronicInteraction = createEvent<ElectronicInteraction>()
@@ -41,11 +47,9 @@ const getElectronicInteractionFx = createEffect(async (): Promise<ElectronicInte
     }
 })
 
-const $electronicInteractionStore = createStore<ElectronicInteractionStore>({
-    electronicInteraction: null,
-    error: null,
-    completed: false,
-})
+const clearStore = createEvent()
+
+const $electronicInteractionStore = createStore<ElectronicInteractionStore>(DEFAULT_STORE)
     .on(getElectronicInteractionFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -62,6 +66,9 @@ const $electronicInteractionStore = createStore<ElectronicInteractionStore>({
         ...oldData,
         completed: newData.completed,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useElectronicInteraction,
@@ -74,4 +81,5 @@ export const effects = {
 export const events = {
     postElectronicInteraction,
     changeCompleted,
+    clearStore,
 }

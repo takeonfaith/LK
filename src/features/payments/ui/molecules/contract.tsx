@@ -38,6 +38,10 @@ const Contract = ({ contract }: Props) => {
             info: localizeDate(contract?.startDate),
         },
         {
+            text: 'Действует до: ',
+            info: localizeDate(contract?.endDatePlan),
+        },
+        {
             text: 'Заказчик: ',
             info: contract?.contragent || 'Московский политех',
         },

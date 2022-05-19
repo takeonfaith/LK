@@ -9,6 +9,10 @@ import styled from 'styled-components'
 import { Confirm, Header, LeftsideBar, PopUpMessage } from 'widgets'
 import { Modal } from 'widgets/modal'
 import InitialLoader from './initial-loader'
+import useIsShowNotification from '@utils/hooks/use-is-show-notification'
+import { useModal } from 'widgets'
+import WhatsNew from '../../widgets/whats-new'
+import ContextMenu from 'widgets/context-menu'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -35,6 +39,8 @@ const ContentLayout = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const { open } = useModal()
+    const isShowNotification = useIsShowNotification()
 
     useTheme()
     useEffect(() => {
@@ -49,6 +55,9 @@ const ContentLayout = () => {
             time: 5000,
         })
     }, [])
+    useEffect(() => {
+        isShowNotification && open(<WhatsNew />)
+    }, [isShowNotification])
 
     return (
         <div style={{ height, display: 'flex' }}>
@@ -66,6 +75,7 @@ const ContentLayout = () => {
             <Modal />
             <PopUpMessage />
             <Confirm />
+            <ContextMenu />
         </div>
     )
 }

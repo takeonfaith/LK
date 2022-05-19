@@ -13,7 +13,9 @@ export function Error({ text, image, children }: ErrorProps) {
     return (
         <ErrorContainer>
             <img src={image || Sad} alt="груфтим(" />
-            <Title size={3}>{text}</Title>
+            <Title size={3} bottomGap="20px">
+                {text}
+            </Title>
             {children && <div className="error-content">{children}</div>}
         </ErrorContainer>
     )

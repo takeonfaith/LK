@@ -1,8 +1,14 @@
+import { SCHEDULE_ROUTE } from '@app/routes/routes'
+import { MESSAGES_ROUTE } from '@app/routes/techers-routes'
+import { Colors } from '@consts'
 import Avatar from '@features/home/ui/molecules/avatar'
+import { Button } from '@ui/button'
 import React from 'react'
+import { FiClock, FiMessageCircle } from 'react-icons/fi'
+import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { SkeletonLoading, TeacherModal } from './ui'
+import { SkeletonLoading, UserModal } from './ui'
 
 const UserWrapper = styled.div`
     display: flex;
@@ -40,11 +46,46 @@ interface Props {
 }
 
 const User = ({ type, avatar, name, loading = false }: Props) => {
-    const { open } = useModal()
+    const { open, close } = useModal()
+    const history = useHistory()
 
     return !loading ? (
-        <UserWrapper onClick={() => type === 'teacher' && open(<TeacherModal avatar={avatar} name={name} />)}>
-            <Avatar avatar={avatar} width="30px" height="30px" marginRight="7px" />
+        <UserWrapper
+            onClick={() =>
+                type === 'teacher'
+                    ? open(
+                          <UserModal avatar={avatar} name={name}>
+                              <Button
+                                  icon={<FiClock />}
+                                  text={'Расписание'}
+                                  onClick={() => {
+                                      history.push(`${SCHEDULE_ROUTE}/${name}`)
+                                      close()
+                                  }}
+                                  width="130px"
+                                  background={Colors.blue.light}
+                                  textColor="#fff"
+                              />
+                          </UserModal>,
+                      )
+                    : open(
+                          <UserModal avatar={avatar} name={name}>
+                              <Button
+                                  icon={<FiMessageCircle />}
+                                  text={'Написать'}
+                                  onClick={() => {
+                                      history.push(`${MESSAGES_ROUTE}/${name}`)
+                                      close()
+                                  }}
+                                  width="130px"
+                                  background={Colors.purple.light}
+                                  textColor="#fff"
+                              />
+                          </UserModal>,
+                      )
+            }
+        >
+            <Avatar name={name} avatar={avatar} width="30px" height="30px" marginRight="7px" />
             <div className="name-and-status">
                 <span className="name">{name}</span>
                 <span className="status"> {type === 'teacher' ? 'Сотрудник' : 'Студент'}</span>

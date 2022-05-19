@@ -3,6 +3,17 @@ export interface IPaymentItem {
     value: string
 }
 
+export type Paygraph = {
+    date_end: string
+    date_plan: string
+    date_start: string
+    semestr: string
+    sum: string
+    sum_pay: string
+    sum_price: string
+    year: string
+}
+
 export interface PaymentsContract {
     balance: string
     balance_currdate: string
@@ -14,12 +25,15 @@ export interface PaymentsContract {
     number: string
     payments: IPaymentItem[]
     startDate: string
+    bill?: string
     student: string
     sum: string
     type: string
     qr_current: string
     qr_total: string
     agreements: any[]
+    file?: string
+    paygraph?: Paygraph[]
 }
 
 export interface Agreement {

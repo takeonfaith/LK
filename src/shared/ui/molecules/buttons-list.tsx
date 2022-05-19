@@ -1,13 +1,15 @@
 import { Title } from '@ui/atoms'
+import { Align, Direction } from '@ui/types'
 import React from 'react'
 import styled from 'styled-components'
 
 const ButtonsListWrapper = styled.div<{
-    direction: 'horizontal' | 'vertical'
+    direction: Direction
     width: string
     maxWidth: string
     background: string
     padding: string
+    align: Align
 }>`
     display: flex;
     flex-direction: column;
@@ -20,8 +22,9 @@ const ButtonsListWrapper = styled.div<{
 
     .list {
         display: flex;
-        flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
-        justify-content: center;
+        flex-direction: ${({ direction }) => (direction === 'vertical' ? 'column' : 'row')};
+        align-items: center;
+        justify-content: ${({ align }) => align ?? 'center'};
         gap: 5px;
         flex-wrap: wrap;
     }
@@ -30,6 +33,7 @@ const ButtonsListWrapper = styled.div<{
 interface Props {
     condition: boolean
     direction: 'horizontal' | 'vertical'
+    align?: Align
     children: React.ReactNode[] | React.ReactNode
     width?: string
     maxWidth?: string
@@ -43,6 +47,7 @@ const ButtonsList = ({
     direction,
     children,
     title,
+    align = 'left',
     background = 'transparent',
     padding = '0',
     width = '100%',
@@ -55,6 +60,7 @@ const ButtonsList = ({
             direction={direction}
             padding={padding}
             background={background}
+            align={align}
         >
             {!!title && (
                 <Title size={4} align="left" bottomGap>

@@ -20,6 +20,10 @@ const AreaTitleWrapper = styled.div`
         display: flex;
         align-items: center;
     }
+
+    @media (max-width: 1000px) {
+        background: transparent;
+    }
 `
 
 interface Props {

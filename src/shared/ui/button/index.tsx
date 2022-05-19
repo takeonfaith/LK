@@ -10,6 +10,7 @@ export type ButtonProps = BaseProps & {
     onClick?: (event: any) => void
     isChosen?: boolean
     width?: string
+    minWidth?: string
     background?: string
     textColor?: string
     shrinkTextInMobile?: boolean
@@ -17,6 +18,8 @@ export type ButtonProps = BaseProps & {
     align?: Align
     direction?: Direction
     isActive?: boolean
+    fixedInMobile?: boolean
+    height?: string
 }
 
 export function Button(props: ButtonProps) {
@@ -25,14 +28,17 @@ export function Button(props: ButtonProps) {
         text,
         onClick,
         width,
+        minWidth,
         background,
         textColor,
         hoverBackground,
         align,
         isChosen,
         shrinkTextInMobile,
+        fixedInMobile,
         direction = 'horizontal',
         isActive = true,
+        height,
         ...restProps
     } = props
 
@@ -42,6 +48,7 @@ export function Button(props: ButtonProps) {
             onClick={(e) => isActive && onClick?.(e)}
             isChosen={isChosen}
             width={width}
+            minWidth={minWidth}
             background={background}
             textColor={textColor}
             shrinkTextInMobile={shrinkTextInMobile}
@@ -49,6 +56,8 @@ export function Button(props: ButtonProps) {
             align={align}
             direction={direction}
             isActive={isActive}
+            fixedInMobile={fixedInMobile}
+            height={height}
             {...restProps}
         >
             {!!icon && icon}
