@@ -11,6 +11,8 @@ const Router = () => {
         data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
 
+    const { data } = adminLinksModel.selectors.useAdminLinks()
+
     useEffect(() => {
         if (isAuthenticated) {
             adminLinksModel.effects.getAdminLinksFx()
@@ -19,9 +21,9 @@ const Router = () => {
 
     useEffect(() => {
         if (user) {
-            menuModel.events.defineMenu({ user })
+            menuModel.events.defineMenu({ user, adminLinks: data })
         }
-    }, [user])
+    }, [user, data])
 
     return isAuthenticated ? (
         <Switch>

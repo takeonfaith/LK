@@ -36,7 +36,7 @@ const changePosition = createEvent<{ position: { x: number; y: number } }>()
 
 const $contextMenuStore = createStore(DEFAULT_STORE)
     .on(open, (oldData, { content, e, height, type = 'left-click' }) => ({
-        position: calcPosition(e, 170, height),
+        position: calcPosition(e, 190, height),
         open: true,
         content,
         type,

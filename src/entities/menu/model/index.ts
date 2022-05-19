@@ -1,4 +1,4 @@
-import { User } from '@api/model'
+import { AdminLinks, User } from '@api/model'
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 import { hiddenRoutes, privateRoutes } from '@app/routes/routes'
 import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teachers-routes'
@@ -19,17 +19,18 @@ const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payment
 
 export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
 const DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'acad-performance', 'payments', 'all']
-const DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG = [
-    'home',
-    'schedule',
-    'chat',
-    'download-agreements',
-    'all',
-    'download-agreements',
-]
+const DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'all']
 
-const getLeftsideBarConfig = (user: User | null) =>
-    user?.user_status === 'staff' ? DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG : DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG
+const getLeftsideBarConfig = (user: User | null, adminLinks: AdminLinks | null) => {
+    // console.log(adminLinks)
+
+    const shouldAddAdmin =
+        !!adminLinks?.accepts.length || !!adminLinks?.agreements.length || !!adminLinks?.checkdata.length
+    const teacherConfig = shouldAddAdmin
+        ? [...DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG, 'download-agreements']
+        : DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG
+    return user?.user_status === 'staff' ? teacherConfig : DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG
+}
 
 const DEFAULT_STORE: Menu = {
     allRoutes: null,
@@ -46,7 +47,7 @@ const useMenu = () => {
 
 const changeOpen = createEvent<{ isOpen: boolean; currentPage?: string }>()
 const clearStore = createEvent()
-const defineMenu = createEvent<{ user: User | null }>()
+const defineMenu = createEvent<{ user: User | null; adminLinks: AdminLinks | null }>()
 const changeNotifications = createEvent<{ page: string; notifications: ((prev: number) => number) | number }>()
 
 const getNewNotifications = (page: string, notifications: number, routes: IRoutes | null) => {
@@ -64,7 +65,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
-    .on(defineMenu, (oldData, { user }) => ({
+    .on(defineMenu, (oldData, { user, adminLinks }) => ({
         ...oldData,
         currentPage:
             user?.user_status === 'staff'
@@ -76,7 +77,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
                 : { ...privateRoutes(), ...hiddenRoutes },
         visibleRoutes: user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         leftsideBarRoutes: findRoutesByConfig(
-            getLeftsideBarConfig(user),
+            getLeftsideBarConfig(user, adminLinks),
             user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         ),
         homeRoutes: findRoutesByConfig(

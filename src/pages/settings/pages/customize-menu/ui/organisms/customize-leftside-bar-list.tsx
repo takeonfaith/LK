@@ -1,16 +1,12 @@
-import { IRoute, IRoutes } from '@app/routes/general-routes'
+import { IRoutes } from '@app/routes/general-routes'
 import { privateRoutes } from '@app/routes/routes'
 import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
-import { ShortCutLinksType, SHORT_CUT_LINKS_LIMIT_SIZE } from '@consts'
-import { popUpMessageModel } from '@entities/pop-up-message'
+import { ShortCutLinksType } from '@consts'
 import { userModel } from '@entities/user'
 import { useSettings } from '@utils/contexts/settings-context'
-import useIsAccessibleRoute from '@utils/hooks/use-is-accessible-route'
 import useResize from '@utils/hooks/use-resize'
-import React, { useMemo } from 'react'
-import getChosenRoutes from 'widgets/leftside-bar/lib/get-chosen-routes'
+import React from 'react'
 import LeftsideBarListWrapper from 'widgets/leftside-bar/ui/atoms/leftside-bar-list-wrapper'
-import { CustomizeLeftsideBarItem } from '../molecules'
 
 const CustomizeLeftsideBarList = () => {
     const { setting, change } = useSettings<number[]>('menu')
@@ -18,7 +14,7 @@ const CustomizeLeftsideBarList = () => {
     const { data } = userModel.selectors.useUser()
     const { height } = useResize()
     const currentRoute: IRoutes = !data?.user?.subdivisions ? privateRoutes() : teachersPrivateRoutes()
-    const isAccessible = useIsAccessibleRoute()
+
     // const enabledLeftsideBarItems = getChosenRoutes(setting, data)
     // const enabledShortCutMenu = useMemo(() => getChosenRoutes(shortCutMenu, data), [shortCutMenu])
 

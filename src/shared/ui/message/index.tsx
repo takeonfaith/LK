@@ -9,7 +9,7 @@ import { MessageWrapper } from './styles'
 export type MessageProps = {
     type: MessageType
     children?: ChildrenType
-    title: string
+    title: ChildrenType
     icon?: React.ReactNode
     visible?: boolean
     align?: Align

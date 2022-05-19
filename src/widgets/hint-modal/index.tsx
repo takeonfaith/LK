@@ -15,7 +15,7 @@ const HintModalWrapper = styled.div<{ left: number; top: number }>`
     align-items: flex-end;
     flex-direction: column;
     max-width: 300px;
-    box-shadow: 0 0 300px var(--reallyBlue);
+    box-shadow: 0 0 1px var(--reallyBlue);
     /* position:ab ; */
 
     .content {

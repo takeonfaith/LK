@@ -37,7 +37,7 @@ const ProfilePage = () => {
     return (
         <ProfileWrapper>
             <ProfileTop justifyContent="center" direction="vertical">
-                <UserBig size="120px" name={user.fullName} />
+                <UserBig size="120px" avatar={user.avatar} name={user.fullName} />
                 <Link to={SETTINGS_ROUTE}>
                     <Button icon={<FiSettings />} text={allRoutes['settings'].title} background="transparent" />
                 </Link>

@@ -15,7 +15,7 @@ const LeftsideBar = () => {
         data: { user },
     } = userModel.selectors.useUser()
 
-    const { visibleRoutes } = menuModel.selectors.useMenu()
+    const { visibleRoutes, currentPage } = menuModel.selectors.useMenu()
 
     const { theme, switchTheme } = useTheme()
     const [toggles, setToggles] = useState<ToggleItem[]>([
@@ -45,6 +45,7 @@ const LeftsideBar = () => {
                     avatar={user?.avatar}
                     name={user?.fullName ?? ''}
                     loading={!user}
+                    selected={currentPage?.id === 'profile'}
                 />
                 {/* <LocalSearch whereToSearch={currentRoute} setResult={setFoundRoutes} searchEngine={search} /> */}
                 <LeftsideBarList />

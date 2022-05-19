@@ -7,7 +7,6 @@ import { userModel } from '@entities/user'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { Divider, LinkButton } from '@ui/atoms'
 import { Button } from '@ui/button'
-import Notification from '@ui/notification'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { Title } from '@ui/title'
 import { useRender } from '@utils/hooks/use-render'
@@ -46,9 +45,10 @@ interface Props {
     loading?: boolean
     size?: string
     notifications?: number
+    selected?: boolean
 }
 
-const UserBig = ({ name, avatar, loading, size, notifications }: Props) => {
+const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props) => {
     useRender('user-big')
 
     if (loading)
@@ -120,17 +120,16 @@ const UserBig = ({ name, avatar, loading, size, notifications }: Props) => {
                     })
                 }}
             />
-            <Avatar width={size ?? '70px'} height={size ?? '70px'} avatar={avatar} name={name} marginRight="0" />
+            <Avatar
+                notifications={notifications}
+                width={size ?? '70px'}
+                height={size ?? '70px'}
+                avatar={avatar}
+                name={name}
+                marginRight="0"
+                selected={selected}
+            />
             <Title size={5}>{name}</Title>
-            <Notification
-                left="auto"
-                right="60px"
-                top="52%"
-                outline="5px solid var(--schedule)"
-                visible={!!notifications}
-            >
-                {notifications}
-            </Notification>
         </UserBigWrapper>
     )
 }

@@ -1,12 +1,21 @@
 import styled from 'styled-components'
 
-export const Container = styled.div<{ width?: string; height?: string; marginRight?: string; background?: string }>`
+export const Container = styled.div<{
+    selected?: boolean
+    width?: string
+    height?: string
+    marginRight?: string
+    background?: string
+}>`
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     background: ${({ background }) => background ?? 'var(--almostTransparent)'};
     color: var(--text);
+    border: ${({ selected }) => selected && '5px solid var(--schedule)'};
+    outline: ${({ selected }) => selected && '4px solid var(--reallyBlue)'};
+    position: relative;
 
     svg {
         width: 40%;
@@ -16,8 +25,6 @@ export const Container = styled.div<{ width?: string; height?: string; marginRig
     width: ${({ width }) => width ?? '160px'};
     min-width: ${({ width }) => width ?? '160px'};
     height: ${({ height }) => height ?? '160px'};
-
-    overflow: hidden;
 
     margin-right: ${({ marginRight }) => marginRight ?? '32px'};
 
