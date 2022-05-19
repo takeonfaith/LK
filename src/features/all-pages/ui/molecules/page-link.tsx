@@ -16,7 +16,7 @@ import getCorrectWordForm from '@utils/get-correct-word-form'
 import { Direction } from '@ui/types'
 
 const LinkWrapper = styled(Link)<{ width: number | string }>`
-    width: ${({ width }) => (typeof width === 'number' ? `calc(125px * ${width})` : width)};
+    width: ${({ width }) => (typeof width === 'number' ? `calc(125px * ${width} + ${(width - 1) * 10}px)` : width)};
 
     @media (max-width: 500px) {
         max-width: ${({ width }) => (typeof width === 'number' ? `calc(33vw * ${width} - 14px)` : width)};

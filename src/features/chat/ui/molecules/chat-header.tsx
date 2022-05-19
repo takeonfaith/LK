@@ -1,4 +1,5 @@
 import { CHAT_ROUTE } from '@app/routes/general-routes'
+import { contextMenuModel } from '@entities/context-menu'
 import { Button, ContextMenu } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
@@ -56,30 +57,40 @@ const ChatHeader = ({ avatar, name, loading }: Props) => {
             )}
             <Button
                 icon={<FiMoreVertical />}
-                onClick={() => setOpenMenu((prev) => !prev)}
+                onClick={(e) =>
+                    contextMenuModel.events.open({
+                        e,
+                        height: 80,
+                        content: (
+                            <>
+                                <Button
+                                    icon={<FiSearch />}
+                                    text={'Поиск'}
+                                    onClick={() => {
+                                        setSearchMode((prev) => !prev)
+                                        contextMenuModel.events.close()
+                                    }}
+                                    width="100%"
+                                    align="left"
+                                    background="transparent"
+                                />
+                                <Button
+                                    icon={<ImAttachment />}
+                                    text={'Вложения'}
+                                    onClick={() => {
+                                        contextMenuModel.events.close()
+                                        open(<Attachments />)
+                                    }}
+                                    width="100%"
+                                    align="left"
+                                    background="transparent"
+                                />
+                            </>
+                        ),
+                    })
+                }
                 background="var(--schedule)"
             />
-            <ContextMenu isVisible={openMenu}>
-                <Button
-                    icon={<FiSearch />}
-                    text={'Поиск по сообщениям'}
-                    onClick={() => {
-                        setSearchMode((prev) => !prev)
-                        setOpenMenu((prev) => !prev)
-                    }}
-                    width="100%"
-                    align="left"
-                    background="transparent"
-                />
-                <Button
-                    icon={<ImAttachment />}
-                    text={'Вложения'}
-                    onClick={() => open(<Attachments />)}
-                    width="100%"
-                    align="left"
-                    background="transparent"
-                />
-            </ContextMenu>
         </ChatHeaderWrapper>
     )
 }

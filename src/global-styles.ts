@@ -134,6 +134,8 @@ const GlobalStyles = createGlobalStyle`
 
 	a {
 		text-decoration: none;
+		color: var(--blue);
+		
 		&:focus {
         outline: 4px solid var(--almostTransparentOpposite);
     	}

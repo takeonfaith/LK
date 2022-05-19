@@ -1,5 +1,8 @@
 import { IGrade } from '@api/model/acad-performance'
-import { IndexedProperties } from '@utility-types/indexed-properties'
+import { MessageType } from '@ui/types'
+import { IconType } from 'react-icons'
+import { FiAlertCircle, FiCheck, FiInfo, FiXCircle } from 'react-icons/fi'
+import { HiOutlineLightBulb } from 'react-icons/hi'
 
 export type MenuType = number[]
 export type ShortCutLinksType = number[]
@@ -25,7 +28,7 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
 
 export const SETTINGS = 'settings'
 
-export interface IColors extends IndexedProperties {
+export interface IColors {
     green: IColorPalette
     lightGreen: IColorPalette
     blue: IColorPalette
@@ -171,7 +174,7 @@ export const Colors: IColors = {
         littleDarker: '#c75e1d',
     },
     grey: {
-        main: '#646464',
+        main: '#949494',
         transparent: '',
         lighter: '',
         darker: '',
@@ -180,7 +183,7 @@ export const Colors: IColors = {
         reallyTransparent: '',
         darkTransparent: '',
         transparentAF: '',
-        lightTransparent: '',
+        lightTransparent: '#80808014',
         littleDarker: '',
     },
 }
@@ -239,6 +242,34 @@ export const GradeByScore: IGrade = {
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
 export const LastUpdateWhatsNew = '2022-05-06T10:30:00'
+
+export const messageType: {
+    [key in MessageType]: {
+        icon: IconType
+        color: keyof IColors
+    }
+} = {
+    info: {
+        icon: FiInfo,
+        color: 'blue',
+    },
+    alert: {
+        icon: FiAlertCircle,
+        color: 'orange',
+    },
+    failure: {
+        icon: FiXCircle,
+        color: 'red',
+    },
+    success: {
+        icon: FiCheck,
+        color: 'green',
+    },
+    tip: {
+        icon: HiOutlineLightBulb,
+        color: 'grey',
+    },
+}
 
 interface LetterColorMatch {
     [key: string]: keyof IColors

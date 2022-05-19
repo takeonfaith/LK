@@ -1,11 +1,11 @@
-import { Colors } from '@consts'
+import { Colors, IColors, messageType } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { Button } from '@ui/atoms'
 import React, { useCallback, useEffect } from 'react'
 import { FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 
-const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string; isClickable: boolean }>`
+const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: keyof IColors; isClickable: boolean }>`
     width: 300px;
     border-radius: var(--brLight);
     background: ${({ color }) => Colors[color].dark};
@@ -75,7 +75,7 @@ const PopUpMessage = () => {
         <PopUpMessageWrapper
             isOpen={isOpen}
             isClickable={!!onClick}
-            color={type === 'success' ? 'green' : type === 'info' ? 'darkBlue' : 'red'}
+            color={messageType[type].color}
             onClick={handleOnClick}
         >
             <Button onClick={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })} icon={<FiX />} />

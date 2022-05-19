@@ -1,8 +1,8 @@
-import { Colors } from '@consts'
+import { Colors, IColors } from '@consts'
 import styled from 'styled-components'
 
 const Notification = styled.span<{
-    color: string
+    color?: keyof IColors
     outline?: string
     visible?: boolean
     top?: string
@@ -10,7 +10,7 @@ const Notification = styled.span<{
     right?: string
 }>`
     color: #fff;
-    background: ${({ color }) => Colors[color].main};
+    background: ${({ color }) => Colors[color ?? 'red'].main};
     position: absolute;
     top: ${({ top }) => top ?? '50%'};
     left: ${({ left }) => left ?? 'auto'};

@@ -1,5 +1,8 @@
+import { messageType } from '@consts'
+import { Button } from '@ui/button'
 import { Align, MessageType } from '@ui/types'
 import React from 'react'
+import { FiX } from 'react-icons/fi'
 import { Title } from '../title'
 import { MessageWrapper } from './styles'
 
@@ -12,6 +15,7 @@ export type MessageProps = {
     align?: Align
     width?: string
     maxWidth?: string
+    onClose?: () => void
 }
 
 export function Message({
@@ -21,18 +25,25 @@ export function Message({
     width,
     maxWidth,
     title,
+    onClose,
     align = 'left',
     visible = true,
 }: MessageProps) {
     if (!visible) return null
 
     return (
-        <MessageWrapper className="message" type={type} align={align} width={width} maxWidth={maxWidth}>
-            <div className="title-and-icon">
-                <Title size={4} align="left" icon={icon}>
-                    {title}
-                </Title>
-            </div>
+        <MessageWrapper
+            className="message"
+            closable={!!onClose}
+            type={type}
+            align={align}
+            width={width}
+            maxWidth={maxWidth}
+        >
+            <Title size={4} align="left" icon={icon ?? messageType[type].icon({})}>
+                {title}
+            </Title>
+            {onClose && <Button onClick={onClose} icon={<FiX />} className="close-button" background="transparent" />}
             {children && <div className="info-text">{children}</div>}
         </MessageWrapper>
     )

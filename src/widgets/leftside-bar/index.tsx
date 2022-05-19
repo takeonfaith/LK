@@ -15,6 +15,8 @@ const LeftsideBar = () => {
         data: { user },
     } = userModel.selectors.useUser()
 
+    const { visibleRoutes } = menuModel.selectors.useMenu()
+
     const { theme, switchTheme } = useTheme()
     const [toggles, setToggles] = useState<ToggleItem[]>([
         {
@@ -38,7 +40,12 @@ const LeftsideBar = () => {
         <LeftsideBarWrapper isOpen={isOpen} height={height}>
             <div className="top-wrapper">
                 <Logo />
-                <UserBig avatar={user?.avatar} name={user?.fullName ?? ''} loading={!user} />
+                <UserBig
+                    notifications={visibleRoutes?.profile.notifications}
+                    avatar={user?.avatar}
+                    name={user?.fullName ?? ''}
+                    loading={!user}
+                />
                 {/* <LocalSearch whereToSearch={currentRoute} setResult={setFoundRoutes} searchEngine={search} /> */}
                 <LeftsideBarList />
             </div>

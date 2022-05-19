@@ -1,10 +1,10 @@
-import { Colors } from '@consts'
+import { Colors, IColors } from '@consts'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const LeftsideBarItemWrapper = styled(Link)<{
     isCurrent: boolean
-    color: string
+    color: keyof IColors
 }>`
     position: relative;
     display: flex;

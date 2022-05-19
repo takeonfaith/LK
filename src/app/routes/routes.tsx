@@ -24,9 +24,6 @@ export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-a
 export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
 export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
 
-// eslint-disable-next-line no-console
-console.log({ generalRoutes })
-
 export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
     applications: {
@@ -35,7 +32,7 @@ export const privateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'acad-performance': {
@@ -53,7 +50,7 @@ export const privateRoutes: () => IRoutes = () => ({
         icon: <FiBriefcase />,
         path: JOB_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
 })
@@ -66,7 +63,7 @@ export const hiddenRoutes: IRoutes = {
         icon: <FiBriefcase />,
         path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
         Component: ClarificationOfPassportDataApplication,
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'arbitrary-request': {
@@ -75,7 +72,7 @@ export const hiddenRoutes: IRoutes = {
         icon: <FiBriefcase />,
         path: ARBITRARY_REQUEST_ROUTE,
         Component: ArbitrayRequestPage,
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
 
@@ -85,7 +82,7 @@ export const hiddenRoutes: IRoutes = {
         icon: <BiIdCard />,
         path: SOCIAL_SCOLLARSHIP,
         Component: ApplicationForSocialScrollarship,
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'certificate-of-attendance': {
@@ -94,7 +91,7 @@ export const hiddenRoutes: IRoutes = {
         icon: <BiIdCard />,
         path: CERTIFICATE_OF_ATTENDANCE,
         Component: ApplicationForСertificateOfAttendance,
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'social-agencies': {
@@ -103,7 +100,7 @@ export const hiddenRoutes: IRoutes = {
         icon: <BiIdCard />,
         path: SOCIAL_AGENCIES,
         Component: ApplicationSocialAgencies,
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'paper-call': {
@@ -112,7 +109,7 @@ export const hiddenRoutes: IRoutes = {
         icon: <BiIdCard />,
         path: PAPER_CALL,
         Component: ApplicationPaperCall,
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
 }

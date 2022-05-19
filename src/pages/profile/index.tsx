@@ -10,7 +10,6 @@ import { FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import UserBig from 'widgets/user-big'
-import getGreetingMessage from '../home/lib/get-greeting-message'
 
 const ProfileWrapper = styled.div`
     height: 100%;
@@ -35,7 +34,6 @@ const ProfilePage = () => {
 
     if (!!error) return <Error text={error} />
 
-    getGreetingMessage(user.name)
     return (
         <ProfileWrapper>
             <ProfileTop justifyContent="center" direction="vertical">

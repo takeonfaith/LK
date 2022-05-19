@@ -1,6 +1,6 @@
 import { Payments } from '@api/model'
 import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { Colors } from '@consts'
+import { Colors, IColors } from '@consts'
 import { paymentsModel } from '@entities/payments'
 import QrCode from '@features/payments/ui/atoms/qr-code'
 import { Button } from '@ui/button'
@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { SliderPage, useModal } from 'widgets'
 
-const PaymentsWidgetWrapper = styled.div<{ background?: string }>`
+const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     max-width: 400px;
     width: 100%;
     height: 156px;

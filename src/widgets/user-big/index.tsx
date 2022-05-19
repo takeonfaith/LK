@@ -7,8 +7,10 @@ import { userModel } from '@entities/user'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { Divider, LinkButton } from '@ui/atoms'
 import { Button } from '@ui/button'
+import Notification from '@ui/notification'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { Title } from '@ui/title'
+import { useRender } from '@utils/hooks/use-render'
 import React from 'react'
 import { FiArrowLeftCircle, FiLogOut, FiMoreVertical, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
@@ -43,10 +45,24 @@ interface Props {
     avatar?: string
     loading?: boolean
     size?: string
+    notifications?: number
 }
 
-const UserBig = ({ name, avatar, loading, size }: Props) => {
-    return !loading ? (
+const UserBig = ({ name, avatar, loading, size, notifications }: Props) => {
+    useRender('user-big')
+
+    if (loading)
+        return (
+            <SkeletonShape
+                shape={'circle'}
+                size={{
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+        )
+
+    return (
         <UserBigWrapper
             to={PROFILE_ROUTE}
             onClick={() => menuModel.events.changeOpen({ isOpen: false, currentPage: 'profile' })}
@@ -106,16 +122,17 @@ const UserBig = ({ name, avatar, loading, size }: Props) => {
             />
             <Avatar width={size ?? '70px'} height={size ?? '70px'} avatar={avatar} name={name} marginRight="0" />
             <Title size={5}>{name}</Title>
+            <Notification
+                left="auto"
+                right="60px"
+                top="52%"
+                outline="5px solid var(--schedule)"
+                visible={!!notifications}
+            >
+                {notifications}
+            </Notification>
         </UserBigWrapper>
-    ) : (
-        <SkeletonShape
-            shape={'circle'}
-            size={{
-                width: '40px',
-                height: '40px',
-            }}
-        />
     )
 }
 
-export default UserBig
+export default React.memo(UserBig)

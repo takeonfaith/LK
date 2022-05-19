@@ -1,3 +1,4 @@
+import { IColors } from '@consts'
 import AllPages from '@pages/all-pages'
 import ChatPage from '@pages/chat'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
@@ -46,6 +47,7 @@ export const ALL_TEACHERS_ROUTE = '/teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
 export const SETTINGS_ROUTE = '/settings'
+export const TEMPLATE_SETTINGS_ROUTE = SETTINGS_ROUTE + '/:id'
 export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
 export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
@@ -64,7 +66,7 @@ export interface IRoute {
     icon: ChildrenType
     path: string
     Component: () => JSX.Element | null
-    color: string
+    color: keyof IColors
     isTemplate: boolean
     isAdmin?: boolean
     isNew?: boolean
@@ -127,6 +129,7 @@ export const generalRoutes: IRoutes = {
         Component: ProfilePage,
         color: 'purple',
         isTemplate: false,
+        notifications: 2,
     },
     chat: {
         //ChatPage
@@ -190,7 +193,7 @@ export const generalRoutes: IRoutes = {
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     portfolio: {
@@ -199,7 +202,7 @@ export const generalRoutes: IRoutes = {
         icon: <BiIdCard />,
         path: PORTFOLIO_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PORTFOLIO_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: true,
     },
     feedback: {
@@ -208,7 +211,7 @@ export const generalRoutes: IRoutes = {
         icon: <BiHeadphone />,
         path: FEEDBACK_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/contact' }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
 }
@@ -220,7 +223,7 @@ export const generalHiddenRoutes: IRoutes = {
         icon: <BiIdCard />,
         path: TEACHER_SCHEDULE,
         Component: TeachersSchedule,
-        color: '',
+        color: 'blue',
         isTemplate: false,
         show: false,
     },

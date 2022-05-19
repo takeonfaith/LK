@@ -55,7 +55,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         path: DOCLIST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'download-agreements': {
@@ -64,7 +64,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiArrowDownCircle />,
         path: DOWNLOAD_AGREEMENTS_FILES_ROUTE,
         Component: DownloadAdminFilesPage,
-        color: '',
+        color: 'blue',
         isTemplate: false,
         isAdmin: true,
     },
@@ -74,7 +74,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiBell />,
         path: ALERTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'data-verification': {
@@ -83,7 +83,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <HiOutlineMenuAlt2 />,
         path: DATA_VERIFICATION_ROUTE,
         Component: DataVerificationPage,
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     instructions: {
@@ -92,7 +92,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiClipboard />,
         path: INSTRUCTIONS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: INSTRUCTIONS_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'students-logins': {
@@ -101,7 +101,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <BiGroup />,
         path: STUDENTS_LOGINS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: STUDENTS_LOGINS_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'contact-info-actualization': {
@@ -164,7 +164,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiBriefcase />,
         path: HELP_SERVICE_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: HELP_SERVICE_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     orders: {
@@ -173,7 +173,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         path: ORDERS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ORDERS_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'document-blanks': {
@@ -182,7 +182,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <BiGroup />,
         path: DOCUMENT_BLANKS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: DOCUMENT_BLANKS_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'personal-notifications': {
@@ -191,7 +191,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <BiNotification />,
         path: PERSONAL_NOTIFICATIONS,
         Component: PersonalNotificationsPage,
-        color: '',
+        color: 'blue',
         isNew: true,
         isTemplate: false,
     },
@@ -201,7 +201,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <BiHeadphone />,
         path: OOP_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: OOP_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     centers: {
@@ -210,7 +210,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <BiHeadphone />,
         path: CENTERS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: CENTERS_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     info: {
@@ -219,7 +219,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         path: INFO_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: INFO_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     vax: {
@@ -228,7 +228,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiBriefcase />,
         path: VAX_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: VAX_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'pps-contest': {
@@ -237,7 +237,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <BiIdCard />,
         path: PPS_CONTEST_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
     'pps-vote': {
@@ -246,7 +246,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <BiBookReader />,
         path: PPS_VOTE_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_VOTE_ROUTE }),
-        color: '',
+        color: 'blue',
         isTemplate: false,
     },
 })
