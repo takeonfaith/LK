@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-const CenterPage = styled.div<{ background?: string }>`
+const CenterPage = styled.div<{ background?: string; alignItems?: string }>`
     display: flex;
-    align-items: center;
+    align-items: ${({ alignItems }) => alignItems ?? 'center'};
     justify-content: center;
     height: 100%;
     color: var(--text);

@@ -185,6 +185,7 @@ const SubmitButton = ({
             width={width}
             height={height}
             repeatable={repeatable}
+            tabIndex={!(isActive && !isDone) ? -1 : 0}
         >
             <div className="inner-button">
                 {completed ? (

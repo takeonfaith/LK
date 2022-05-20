@@ -27,20 +27,24 @@ const ChatItem = ({ avatar, name, lastMessage, chatId, loading, amountOfUnreadMe
     return !loading ? (
         <ChatItemWrapper to={CHAT_ROUTE + `/${chatId}`} isChosen={params?.chatId === chatId} isOpen={isOpen}>
             <div className="chat-item-content">
-                <Notification
-                    top="45px"
-                    left="45px"
-                    outline="3px solid var(--theme)"
-                    color="red"
-                    visible={amountOfUnreadMessages !== 0}
-                >
-                    {amountOfUnreadMessages}
-                </Notification>
-
                 {isOpen ? (
-                    <Avatar name={name} avatar={avatar} width="40px" height="40px" marginRight="7px" />
+                    <Avatar
+                        name={name}
+                        avatar={avatar}
+                        width="40px"
+                        height="40px"
+                        marginRight="7px"
+                        notifications={amountOfUnreadMessages}
+                    />
                 ) : (
-                    <Avatar name={name} avatar={avatar} width="45px" height="45px" marginRight="0" />
+                    <Avatar
+                        name={name}
+                        avatar={avatar}
+                        width="45px"
+                        height="45px"
+                        marginRight="0"
+                        notifications={amountOfUnreadMessages}
+                    />
                 )}
                 {isOpen && (
                     <>

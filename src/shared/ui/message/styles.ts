@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 export const MessageWrapper = styled.div<{
     type: MessageType
+    solidBackground: boolean
     align?: Align
     width?: string
     maxWidth?: string
@@ -15,7 +16,8 @@ export const MessageWrapper = styled.div<{
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     color: ${({ type }) => Colors[messageType[type].color].main};
-    background: ${({ type }) => Colors[messageType[type].color].lightTransparent};
+    background: ${({ type, solidBackground }) =>
+        Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparentAF']};
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     font-size: ${({ fontSize }) => fontSize ?? '0.8em'};
@@ -38,5 +40,10 @@ export const MessageWrapper = styled.div<{
         display: flex;
         flex-direction: column;
         gap: ${({ gap }) => gap ?? 0};
+    }
+
+    a {
+        text-decoration: underline;
+        color: ${({ type }) => Colors[messageType[type].color].light};
     }
 `

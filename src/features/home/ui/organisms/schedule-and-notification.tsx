@@ -7,7 +7,7 @@ import PaymentsWidget from '../molecules/payments-widget'
 
 const ScheduleAndNotification = () => {
     const {
-        data: { schedule, currentDayString },
+        data: { schedule, currentDayString, error },
     } = scheduleModel.selectors.useSchedule()
 
     const lessons = useMemo(() => getLessons(schedule, currentDayString), [schedule, currentDayString])
@@ -20,6 +20,7 @@ const ScheduleAndNotification = () => {
                 height={156}
                 isCurrent
                 topInfo=""
+                error={error}
             />
             <PaymentsWidget />
         </List>

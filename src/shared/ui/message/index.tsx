@@ -9,7 +9,7 @@ import { MessageWrapper } from './styles'
 export type MessageProps = {
     type: MessageType
     children?: ChildrenType
-    title: ChildrenType
+    title?: ChildrenType
     icon?: React.ReactNode
     visible?: boolean
     align?: Align
@@ -19,6 +19,7 @@ export type MessageProps = {
     padding?: string
     fontSize?: string
     gap?: string
+    solidBackground?: boolean
 }
 
 export function Message({
@@ -29,11 +30,12 @@ export function Message({
     maxWidth,
     title,
     onClose,
-    align = 'left',
-    visible = true,
     padding,
     fontSize,
     gap,
+    solidBackground = false,
+    align = 'left',
+    visible = true,
 }: MessageProps) {
     if (!visible) return null
 
@@ -48,17 +50,12 @@ export function Message({
             padding={padding}
             fontSize={fontSize}
             gap={gap}
+            solidBackground={solidBackground}
         >
-            <Title size={4} align="left" icon={icon ?? messageType[type].icon({})}>
-                {title}
+            <Title size={4} align={align} icon={icon ?? messageType[type].icon({})}>
+                {title ?? messageType[type].title}
             </Title>
             {onClose && <Button onClick={onClose} icon={<FiX />} className="close-button" background="transparent" />}
-
-            <div className="title-and-icon">
-                <Title size={4} align="left" icon={icon}>
-                    {title}
-                </Title>
-            </div>
             {children && <div className="info-text">{children}</div>}
         </MessageWrapper>
     )

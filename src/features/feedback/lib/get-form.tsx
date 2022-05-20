@@ -54,6 +54,7 @@ const getForm = (data: Feedback): IInputArea => {
             },
         ],
         collapsed: false,
+        optional: true,
     }
 }
 

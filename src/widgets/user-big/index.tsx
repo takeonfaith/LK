@@ -9,7 +9,6 @@ import { Divider, LinkButton } from '@ui/atoms'
 import { Button } from '@ui/button'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { Title } from '@ui/title'
-import { useRender } from '@utils/hooks/use-render'
 import React from 'react'
 import { FiArrowLeftCircle, FiLogOut, FiMoreVertical, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
@@ -49,8 +48,6 @@ interface Props {
 }
 
 const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props) => {
-    useRender('user-big')
-
     if (loading)
         return (
             <SkeletonShape

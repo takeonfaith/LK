@@ -9,6 +9,7 @@ import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import ProfilePage from '@pages/profile'
 import SchedulePage from '@pages/schedule'
+import FeedbackPage from '@pages/feedback'
 import SettingsPage from '@pages/settings'
 import Account from '@pages/settings/pages/account'
 import Appearance from '@pages/settings/pages/appearance'
@@ -27,8 +28,9 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiHome, FiLayers, FiLock, FiSettings, FiUser } from 'react-icons/fi'
+import { FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
+import CantAccessPage from '@pages/cant-access'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -46,6 +48,7 @@ export const ALL_STUDENTS_ROUTE = '/students'
 export const ALL_TEACHERS_ROUTE = '/teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
+export const CANT_ACCESS_ROUTE = '/cant-access'
 export const SETTINGS_ROUTE = '/settings'
 export const TEMPLATE_SETTINGS_ROUTE = SETTINGS_ROUTE + '/:id'
 export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
@@ -89,6 +92,20 @@ export const publicRoutes = [
         path: FORGOT_PASSWORD_ROUTE,
         Component: ForgotPasswordPage,
     },
+    {
+        id: 2,
+        title: 'Обратная связь',
+        icon: <BiHeadphone />,
+        path: FEEDBACK_ROUTE,
+        Component: FeedbackPage,
+    },
+    {
+        id: 3,
+        title: 'Не получается войти в Личный кабинет',
+        icon: <FiXCircle />,
+        path: CANT_ACCESS_ROUTE,
+        Component: CantAccessPage,
+    },
 ]
 
 export const generalRoutes: IRoutes = {
@@ -114,7 +131,7 @@ export const generalRoutes: IRoutes = {
     },
     home: {
         id: 'home',
-        title: 'Главная',
+        title: 'Домой',
         icon: <FiHome />,
         path: HOME_ROUTE,
         Component: Home,
@@ -210,7 +227,7 @@ export const generalRoutes: IRoutes = {
         title: 'Обратная связь',
         icon: <BiHeadphone />,
         path: FEEDBACK_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/contact' }),
+        Component: FeedbackPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -259,7 +276,7 @@ export const generalHiddenRoutes: IRoutes = {
     },
     'settings-home-page': {
         id: 'settings-home-page',
-        title: 'Настройки. Главыйн экран',
+        title: 'Настройки. Домашний экран',
         icon: <FiHome />,
         path: SETTINGS_HOME_PAGE_ROUTE,
         Component: HomeSettings,

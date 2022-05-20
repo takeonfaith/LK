@@ -1,9 +1,7 @@
-import { LOGIN_ROUTE } from '@app/routes/general-routes'
-import { Button, CenterPage, Input, Message, SubmitButton } from '@ui/atoms'
+import { CenterPage, Input, Message, SubmitButton, Title } from '@ui/atoms'
 import Block from '@ui/block'
+import GoBackButton from '@ui/go-back-button'
 import React, { useState } from 'react'
-import { FiArrowLeft } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('')
@@ -19,15 +17,10 @@ const ForgotPasswordPage = () => {
                 justifyContent="flex-start"
                 gap="15px"
             >
-                <Link to={LOGIN_ROUTE}>
-                    <Button
-                        text="Назад"
-                        icon={<FiArrowLeft />}
-                        textColor="var(--reallyBlue)"
-                        background="transparent"
-                        height="20px"
-                    />
-                </Link>
+                <GoBackButton />
+                <Title size={4} align="left">
+                    Забыли пароль ЕУЗ
+                </Title>
                 <Message type="info" title="Восстановление доступа через ЕУЗ">
                     Данный сервис позволит сбросить пароль для единой учетной записи (ЕУЗ). Ссылка для сброса пароля
                     будет отправлена на вашу почту. Восстановление доступа к личному кабинету возможно только в том

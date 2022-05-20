@@ -51,9 +51,10 @@ export const Container = styled.div<{
     }
 `
 
-export const Img = styled.img`
+export const Img = styled.img<{ round?: boolean }>`
     width: 100%;
     height: 100%;
+    border-radius: ${({ round }) => round && '100%'};
 
     object-fit: cover;
     object-position: center;

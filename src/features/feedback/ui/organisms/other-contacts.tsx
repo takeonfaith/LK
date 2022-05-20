@@ -3,7 +3,7 @@ import React from 'react'
 
 export function OtherContacts() {
     return (
-        <Message title="Уважаемые коллеги!" type="alert" maxWidth="750px" padding="20px" fontSize="1rem" gap="0.5rem">
+        <Message title="Уважаемые коллеги!" type="info" gap="0.5rem" fontSize="0.9rem">
             <p>
                 Для удобства сотрудников в условиях дистанционной работы Московского Политеха мы запустили линию
                 консультирования по вопросам ИТ через приложение WhatsApp.

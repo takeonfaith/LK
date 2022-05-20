@@ -1,5 +1,5 @@
-import { APPLICATIONS_ROUTE, PAYMENTS_ROUTE } from '@app/routes/techers-routes'
-import Block from '@ui/block'
+import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
+import { ARBITRARY_REQUEST_ROUTE } from '@app/routes/routes'
 import { Message } from '@ui/message'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -13,8 +13,8 @@ export const Ul = styled.div`
 
 export function HelpLinks() {
     return (
-        <Block justifyContent="center" orientation="vertical" height="fit-content" gap="1rem">
-            <Message type="info" title="Внимание!">
+        <>
+            <Message type="alert" title="Внимание!">
                 Прежде, чем написать сообщение, убедитесь в том, что указанные ниже случаи не относятся к вашей
                 проблеме:
             </Message>
@@ -40,7 +40,7 @@ export function HelpLinks() {
                     <strong>Неточности в своих персональных данных</strong> (неправильные или отсутствующие ФИО, пол и
                     т.п.), а также <strong>успеваемости</strong>: обращайтесь в свое <strong>отделение ЦРС</strong>{' '}
                     лично или через произвольный запрос в разделе «
-                    {<Link to={APPLICATIONS_ROUTE}>Справки, заявления</Link>}».
+                    {<Link to={ARBITRARY_REQUEST_ROUTE}>Справки, заявления</Link>}».
                 </p>
                 <p>
                     <strong>Неправильные суммы в разделе</strong> «
@@ -48,6 +48,6 @@ export function HelpLinks() {
                     <strong>обратитесь в договорной отдел</strong>
                 </p>
             </Ul>
-        </Block>
+        </>
     )
 }

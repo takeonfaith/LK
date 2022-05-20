@@ -8,6 +8,9 @@ interface StyleProps {
     width?: string
     gap?: string
     justifyContent?: string
+    alignItems?: string
+    padding?: string
+    fontSize?: string
 }
 
 export const ListWrapper = styled.div<StyleProps>`
@@ -15,10 +18,13 @@ export const ListWrapper = styled.div<StyleProps>`
     flex-direction: ${({ direction }) => (direction ?? 'vertical') === 'vertical' && 'column'};
     align-items: center;
     justify-content: ${({ justifyContent }) => justifyContent ?? 'flex-start'};
+    align-items: ${({ alignItems }) => alignItems ?? 'flex-start'};
     gap: ${({ gap }) => gap ?? '5px'};
     width: ${({ width }) => width ?? '100%'};
     min-width: ${({ width }) => width ?? '100%'};
+    padding: ${({ padding }) => padding ?? '0'};
     color: var(--text);
+    font-size: ${({ fontSize }) => fontSize ?? '1em'};
 
     overflow-x: auto;
 `
@@ -28,13 +34,13 @@ type Props = StyleProps & {
     children: ChildrenType
 }
 
-const List = ({ title, children, direction, gap, width }: Props) => {
+const List = ({ title, children, direction, gap, width, padding, fontSize }: Props) => {
     return (
         <div>
             <Title size={4} align="left" bottomGap visible={!!title}>
                 {title}
             </Title>
-            <ListWrapper direction={direction} gap={gap} width={width}>
+            <ListWrapper direction={direction} gap={gap} width={width} padding={padding} fontSize={fontSize}>
                 {children}
             </ListWrapper>
         </div>

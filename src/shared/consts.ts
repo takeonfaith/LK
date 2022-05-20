@@ -144,7 +144,7 @@ export const Colors: IColors = {
         littleDarker: '#b33b3b',
         reallyTransparent: '',
         darkTransparent: '#511a1ea3',
-        transparentAF: '',
+        transparentAF: '#ec5f6b14',
         lightTransparent: '#e2799273',
     },
     yellow: {
@@ -165,11 +165,11 @@ export const Colors: IColors = {
         transparent: '#ff520014',
         lighter: '#ee9e44',
         darker: '#ae4a1b',
-        light: '',
+        light: '#ffd19d',
         dark: '#e97944',
         reallyTransparent: '',
         darkTransparent: '#511a1ea3',
-        transparentAF: '',
+        transparentAF: '#ee9e440f',
         lightTransparent: '#ffd7a67d',
         littleDarker: '#c75e1d',
     },
@@ -182,7 +182,7 @@ export const Colors: IColors = {
         dark: '',
         reallyTransparent: '',
         darkTransparent: '',
-        transparentAF: '',
+        transparentAF: '#9494940d',
         lightTransparent: '#80808014',
         littleDarker: '',
     },
@@ -247,27 +247,33 @@ export const messageType: {
     [key in MessageType]: {
         icon: IconType
         color: keyof IColors
+        title: string
     }
 } = {
     info: {
         icon: FiInfo,
         color: 'blue',
+        title: 'Информация',
     },
     alert: {
         icon: FiAlertCircle,
         color: 'orange',
+        title: 'Внимание!',
     },
     failure: {
         icon: FiXCircle,
         color: 'red',
+        title: 'Ошибка',
     },
     success: {
         icon: FiCheck,
         color: 'green',
+        title: 'Успешно',
     },
     tip: {
         icon: HiOutlineLightBulb,
         color: 'grey',
+        title: 'Подсказка',
     },
 }
 

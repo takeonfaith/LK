@@ -9,7 +9,7 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; isClickable: boolean }
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background: var(--schedule);
+    background: #434343;
     border-radius: var(--brLight);
     z-index: 100;
     transition: 0.2s transform, 0.2s opacity, 0.2s visibility;
@@ -19,9 +19,9 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; isClickable: boolean }
     font-weight: 600;
     cursor: ${({ isClickable }) => (isClickable ? 'pointer' : 'normal')};
 
-    a {
+    /* a {
         color: #fff;
-    }
+    } */
 
     button {
         position: absolute;
@@ -75,9 +75,12 @@ const PopUpMessage = () => {
         >
             <Message
                 type={type}
-                title={message}
+                fontSize="1em"
+                solidBackground
                 onClose={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })}
-            />
+            >
+                {message}
+            </Message>
         </PopUpMessageWrapper>
     )
 }

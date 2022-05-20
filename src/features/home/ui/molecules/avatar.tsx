@@ -29,17 +29,11 @@ function Avatar({ selected, name, avatar, width, height, marginRight, notificati
             background={getLettersColors(name)}
         >
             {avatar && isLoaded ? (
-                <Img onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />
+                <Img round onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />
             ) : (
                 <div className="name">{shortName}</div>
             )}
-            <Notification
-                left="auto"
-                right="-2px"
-                top="90%"
-                outline="5px solid var(--schedule)"
-                visible={!!notifications}
-            >
+            <Notification left="80%" top="90%" outline="5px solid var(--schedule)" visible={!!notifications}>
                 {notifications}
             </Notification>
         </Container>

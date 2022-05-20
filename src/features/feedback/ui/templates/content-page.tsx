@@ -1,21 +1,19 @@
+import { CenterPage, Title } from '@ui/atoms'
+import Block from '@ui/block'
 import React from 'react'
-import styled from 'styled-components'
 import { AskForm, HelpLinks, OtherContacts } from '../organisms'
-
-const Page = styled.div`
-    align-items: center;
-    gap: 1rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-`
 
 export function ContentPage() {
     return (
-        <Page>
-            <HelpLinks />
-            <OtherContacts />
-            <AskForm />
-        </Page>
+        <CenterPage alignItems="flex-start">
+            <Block orientation="vertical" height="fit-content" maxWidth="650px" gap="10px">
+                <Title size={3} align="left" bottomGap>
+                    Обратная связь
+                </Title>
+                <HelpLinks />
+                <OtherContacts />
+                <AskForm />
+            </Block>
+        </CenterPage>
     )
 }

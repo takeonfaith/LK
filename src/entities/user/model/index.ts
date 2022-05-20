@@ -31,7 +31,7 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
 
         return tokenResponse.data
     } catch (e) {
-        throw new Error('Неверный логин или пароль')
+        throw new Error(navigator.onLine ? 'Неверный логин или пароль' : 'Потеряно соединение с интернетом')
     }
 })
 
@@ -47,7 +47,7 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
         }
     } catch (error) {
         logout()
-        throw new Error('token expired')
+        throw new Error('Потеряно соединение с интернетом')
     }
 })
 
@@ -63,8 +63,6 @@ const useUser = () => {
 const logoutFx = createEffect(() => {
     localStorage.removeItem('token')
     clearAllStores()
-    // eslint-disable-next-line no-console
-    console.log('log out is successfull')
 })
 
 const login = createEvent<LoginData>()
