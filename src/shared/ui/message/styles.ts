@@ -28,6 +28,7 @@ export const MessageWrapper = styled.div<{
     flex-direction: column;
     gap: 10px;
     font-weight: 500;
+    justify-content: flex-end;
     align-items: ${({ align }) => (align === 'left' ? 'flex-start' : align === 'center' ? 'center' : 'flex-end')};
 
     .close-button {

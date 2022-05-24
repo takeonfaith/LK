@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Content = styled.div`
-    margin: 50px;
     /* display: flex;
 	justify-content: center; */
     display: flex;
@@ -9,6 +8,7 @@ export const Content = styled.div`
     gap: 20px;
     color: var(--text);
     height: 100%;
+    padding: var(--desktop-page-padding);
 
     .home-page-content-inner {
         display: flex;

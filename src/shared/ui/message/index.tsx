@@ -10,7 +10,7 @@ export type MessageProps = {
     type: MessageType
     children?: ChildrenType
     title?: ChildrenType
-    icon?: React.ReactNode
+    icon?: ChildrenType
     visible?: boolean
     align?: Align
     width?: string
@@ -52,11 +52,12 @@ export function Message({
             gap={gap}
             solidBackground={solidBackground}
         >
-            <Title size={4} align={align} icon={icon ?? messageType[type].icon({})}>
+            <Title size={4} align={align} icon={icon === null ? null : icon ?? messageType[type].icon({})}>
                 {title ?? messageType[type].title}
             </Title>
             {onClose && <Button onClick={onClose} icon={<FiX />} className="close-button" background="transparent" />}
             {children && <div className="info-text">{children}</div>}
+            {/* {type === 'hint' && <Button background="#ffffff10" text="Понятно!" textColor="#fff" />} */}
         </MessageWrapper>
     )
 }

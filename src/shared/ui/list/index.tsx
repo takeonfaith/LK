@@ -18,7 +18,7 @@ export const ListWrapper = styled.div<StyleProps>`
     flex-direction: ${({ direction }) => (direction ?? 'vertical') === 'vertical' && 'column'};
     align-items: center;
     justify-content: ${({ justifyContent }) => justifyContent ?? 'flex-start'};
-    align-items: ${({ alignItems }) => alignItems ?? 'flex-start'};
+    align-items: ${({ alignItems }) => alignItems ?? 'center'};
     gap: ${({ gap }) => gap ?? '5px'};
     width: ${({ width }) => width ?? '100%'};
     min-width: ${({ width }) => width ?? '100%'};

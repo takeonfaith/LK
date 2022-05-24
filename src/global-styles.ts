@@ -53,6 +53,8 @@ const GlobalStyles = createGlobalStyle`
 		--brBold: 30px;
 		--strong-shadow: 0 0 50px #000;
 		--very-mild-shadow: 0 0 32px rgb(0 0 0 / 8%);
+		--desktop-page-padding: 40px;
+		--mobile-page-padding: 5px;
 	}
 
 	html[data-theme=dark] {

@@ -39,6 +39,7 @@ export interface IColors {
     yellow: IColorPalette
     orange: IColorPalette
     grey: IColorPalette
+    white: IColorPalette
 }
 
 export interface IColorPalette {
@@ -186,6 +187,19 @@ export const Colors: IColors = {
         lightTransparent: '#80808014',
         littleDarker: '',
     },
+    white: {
+        main: '#fff',
+        transparent: '',
+        lighter: '',
+        darker: '',
+        light: '',
+        dark: '',
+        reallyTransparent: '',
+        darkTransparent: '',
+        transparentAF: '#9494940d',
+        lightTransparent: '#80808014',
+        littleDarker: '',
+    },
 }
 
 export interface IWeekDayName {
@@ -273,6 +287,11 @@ export const messageType: {
     tip: {
         icon: HiOutlineLightBulb,
         color: 'grey',
+        title: 'Подсказка',
+    },
+    hint: {
+        icon: HiOutlineLightBulb,
+        color: 'white',
         title: 'Подсказка',
     },
 }

@@ -12,6 +12,11 @@ const MobileBottomMenuWrapper = styled(ListWrapper)`
     background: var(--schedule);
     box-shadow: 0 0 1px;
     padding: 0px 10px;
+    display: none;
+
+    @media (max-width: 1000px) {
+        display: flex;
+    }
 `
 
 const MobileBottomMenu = () => {

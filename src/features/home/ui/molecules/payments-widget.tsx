@@ -103,7 +103,7 @@ const SkeletonLoading = () => {
 const ErrorMessage = () => {
     return (
         <PaymentsWidgetWrapper>
-            <Error text={'Ошибка '} />
+            <Error text={'Ошибка '} size="70px" />
         </PaymentsWidgetWrapper>
     )
 }

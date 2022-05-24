@@ -46,7 +46,7 @@ const Home = () => {
                 >
                     Вы можете менять ссылки вверху в <Link to={SETTINGS_HOME_PAGE_ROUTE}>настройках</Link>
                 </Message>
-                {/* <HintModal /> */}
+                <HintModal />
                 <ScheduleAndNotification />
                 <List title="Преподаватели" direction="horizontal" gap="0px">
                     <User type={'teacher'} name={'Долоз Констанстин'} orientation="vertical" />

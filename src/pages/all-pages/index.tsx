@@ -9,7 +9,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const AllPagesWrapper = styled.div`
-    padding: 40px;
+    padding: calc(var(--desktop-page-padding) + 10px);
     display: flex;
     align-items: center;
     justify-content: center;
