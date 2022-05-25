@@ -7,7 +7,7 @@ import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Confirm, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
+import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import WhatsNew from '../../widgets/whats-new'
@@ -63,10 +63,7 @@ const ContentLayout = () => {
 
     return (
         <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
-            <InitialLoader
-                loading={!user}
-                image="https://mospolytech.ru/local/templates/main/dist/img/logos/mospolytech-logo-white.png"
-            />
+            <InitialLoader loading={!user} />
             <LeftsideBar />
             <ContentWrapper>
                 {/* <Header /> */}
@@ -79,6 +76,7 @@ const ContentLayout = () => {
             <PopUpMessage />
             <Confirm />
             <ContextMenu />
+            <HintModal />
         </div>
     )
 }

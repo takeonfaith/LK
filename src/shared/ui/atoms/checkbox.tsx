@@ -33,9 +33,19 @@ export interface CheckboxProps {
     invisibleOnFalse?: boolean
     text?: string
     isActive?: boolean
+    visible?: boolean
 }
 
-const Checkbox = ({ text, checked, setChecked, isActive = true, invisibleOnFalse = false }: CheckboxProps) => {
+const Checkbox = ({
+    text,
+    checked,
+    setChecked,
+    visible = true,
+    isActive = true,
+    invisibleOnFalse = false,
+}: CheckboxProps) => {
+    if (!visible) return null
+
     return (
         <CheckboxWrapper
             checked={checked}
@@ -44,8 +54,11 @@ const Checkbox = ({ text, checked, setChecked, isActive = true, invisibleOnFalse
                 isActive && setChecked(!checked)
             }}
             isActive={isActive}
+            className="checkbox"
         >
             <Button
+                width="25px"
+                height="25px"
                 onClick={() => null}
                 icon={checked || invisibleOnFalse ? <BsCheckCircleFill /> : <FiCircle />}
                 background="transparent"

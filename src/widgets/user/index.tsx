@@ -1,16 +1,14 @@
-import { CHAT_ROUTE, SCHEDULE_ROUTE } from '@app/routes/general-routes'
-import { Colors } from '@consts'
 import Avatar from '@features/home/ui/molecules/avatar'
-import { Button } from '@ui/button'
-import { Direction } from '@ui/types'
+import { Direction, Size } from '@ui/types'
 import React from 'react'
-import { FiClock, FiMessageCircle } from 'react-icons/fi'
-import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { SkeletonLoading, UserModal } from './ui'
+import getFontSize from './lib/get-font-size'
+import getImageSize from './lib/get-image-size'
+import getWidth from './lib/get-width'
+import { SkeletonLoading, StudentModal, TeacherModal } from './ui'
 
-const UserWrapper = styled.div<{ orientation: Direction }>`
+const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     display: flex;
     align-items: center;
     flex-direction: ${({ orientation }) => orientation === 'vertical' && 'column'};
@@ -19,7 +17,7 @@ const UserWrapper = styled.div<{ orientation: Direction }>`
     color: var(--text);
     font-weight: 600;
     cursor: pointer;
-    width: ${({ orientation }) => orientation === 'vertical' && '90px'};
+    width: ${({ orientation, size }) => orientation === 'vertical' && getWidth(size)};
 
     &:hover {
         background: var(--search);
@@ -32,7 +30,7 @@ const UserWrapper = styled.div<{ orientation: Direction }>`
         margin-top: ${({ orientation }) => (orientation === 'vertical' ? '5px' : '0')};
 
         .name {
-            font-size: 0.85em;
+            font-size: ${({ size }) => getFontSize(size)};
             width: ${({ orientation }) => orientation === 'vertical' && '70px'};
             white-space: ${({ orientation }) => orientation === 'vertical' && 'nowrap'};
             overflow: ${({ orientation }) => orientation === 'vertical' && 'hidden'};
@@ -40,7 +38,7 @@ const UserWrapper = styled.div<{ orientation: Direction }>`
         }
 
         .status {
-            font-size: 0.7em;
+            font-size: ${({ size }) => `calc(${getFontSize(size)} - 0.1em)`};
             opacity: 0.6;
         }
     }
@@ -52,63 +50,57 @@ interface Props {
     avatar?: string
     name: string
     loading?: boolean
+    size?: Size
+    checked?: boolean
+    setChecked?: (value: boolean) => void
+    onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
-const User = ({ type, avatar, name, loading = false, orientation = 'horizontal' }: Props) => {
-    const { open, close } = useModal()
-    const history = useHistory()
+const User = ({
+    type,
+    avatar,
+    name,
+    checked,
+    onClick,
+    loading = false,
+    orientation = 'horizontal',
+    size = 'middle',
+}: Props) => {
+    const { open } = useModal()
 
-    return !loading ? (
+    if (loading) return <SkeletonLoading />
+
+    return (
         <UserWrapper
             orientation={orientation}
-            onClick={() =>
-                type === 'teacher'
-                    ? open(
-                          <UserModal avatar={avatar} name={name}>
-                              <Button
-                                  icon={<FiClock />}
-                                  text={'Расписание'}
-                                  onClick={() => {
-                                      history.push(`${SCHEDULE_ROUTE}/${name}`)
-                                      close()
-                                  }}
-                                  width="130px"
-                                  background={Colors.blue.light}
-                                  textColor="#fff"
-                              />
-                          </UserModal>,
-                      )
-                    : open(
-                          <UserModal avatar={avatar} name={name}>
-                              <Button
-                                  icon={<FiMessageCircle />}
-                                  text={'Написать'}
-                                  onClick={() => {
-                                      history.push(`${CHAT_ROUTE}/${name}`)
-                                      close()
-                                  }}
-                                  width="130px"
-                                  background={Colors.purple.light}
-                                  textColor="#fff"
-                              />
-                          </UserModal>,
-                      )
-            }
+            size={size}
+            onClick={(e) => {
+                if (onClick) {
+                    onClick(e)
+                } else {
+                    open(
+                        type === 'teacher' ? (
+                            <TeacherModal name={name} avatar={avatar} />
+                        ) : (
+                            <StudentModal name={name} avatar={avatar} />
+                        ),
+                    )
+                }
+            }}
         >
             <Avatar
                 name={name}
                 avatar={avatar}
-                width={orientation === 'horizontal' ? '30px' : '45px'}
-                height={orientation === 'horizontal' ? '30px' : '45px'}
+                width={getImageSize(orientation, size)}
+                height={getImageSize(orientation, size)}
                 marginRight={orientation === 'horizontal' ? '7px' : '0px'}
+                checked={checked}
             />
             <div className="name-and-status">
                 <span className="name">{name}</span>
                 <span className="status"> {type === 'teacher' ? 'Сотрудник' : 'Студент'}</span>
             </div>
         </UserWrapper>
-    ) : (
-        <SkeletonLoading />
     )
 }
 

@@ -1,9 +1,10 @@
 import { Colors } from '@consts'
+import { hintModel } from '@entities/hint'
 import { Message } from '@ui/message'
 import React from 'react'
 import styled from 'styled-components'
 
-const HintModalWrapper = styled.div<{ left: number; top: number }>`
+const HintModalWrapper = styled.div<{ open: boolean; left: number; top: number }>`
     left: ${({ left }) => left + 'px'};
     top: ${({ top }) => top + 'px'};
     /* padding: 10px; */
@@ -16,7 +17,13 @@ const HintModalWrapper = styled.div<{ left: number; top: number }>`
     flex-direction: column;
     max-width: 300px;
     box-shadow: 0 0 30px ${Colors.blue.transparent};
-    /* position:ab ; */
+    transition: 0.2s;
+    opacity: ${({ open }) => (open ? 1 : 0)};
+    visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
+    transform: ${({ open }) => (open ? 'translateY(0)' : 'translateY(20px)')};
+    position: absolute;
+    z-index: 5;
+    min-width: 150px;
 
     .message {
         &::before {
@@ -35,9 +42,20 @@ const HintModalWrapper = styled.div<{ left: number; top: number }>`
 `
 
 const HintModal = () => {
+    const { hints } = hintModel.selectors.useHint()
+    const currentHint = hints[0]
+
+    if (!currentHint) return null
+
     return (
-        <HintModalWrapper left={0} top={0}>
-            <Message type="hint" title={'Тут можно ничего не сделать'} onClose={() => null} width="100%" icon={null} />
+        <HintModalWrapper open={currentHint.isOpen} left={currentHint.position.x} top={currentHint.position.y}>
+            <Message
+                type="hint"
+                title={currentHint.message}
+                onClose={() => hintModel.events.close()}
+                width="100%"
+                icon={null}
+            />
         </HintModalWrapper>
     )
 }

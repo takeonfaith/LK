@@ -9,7 +9,7 @@ import { Message, Title, Wrapper } from '@ui/atoms'
 import List from '@ui/list'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { HintModal, User } from 'widgets'
+import { User } from 'widgets'
 import getGreetingMessage from './lib/get-greeting-message'
 import { Content } from './ui/atoms/content'
 
@@ -46,7 +46,6 @@ const Home = () => {
                 >
                     Вы можете менять ссылки вверху в <Link to={SETTINGS_HOME_PAGE_ROUTE}>настройках</Link>
                 </Message>
-                <HintModal />
                 <ScheduleAndNotification />
                 <List title="Преподаватели" direction="horizontal" gap="0px">
                     <User type={'teacher'} name={'Долоз Констанстин'} orientation="vertical" />

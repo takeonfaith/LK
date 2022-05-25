@@ -1,18 +1,16 @@
-import { PROFILE_ROUTE, SETTINGS_ROUTE } from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
-import { confirmModel } from '@entities/confirm'
+import { PROFILE_ROUTE } from '@app/routes/general-routes'
 import { contextMenuModel } from '@entities/context-menu'
+import { hintModel } from '@entities/hint'
 import { menuModel } from '@entities/menu'
-import { userModel } from '@entities/user'
 import Avatar from '@features/home/ui/molecules/avatar'
-import { Divider, LinkButton } from '@ui/atoms'
 import { Button } from '@ui/button'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { Title } from '@ui/title'
 import React from 'react'
-import { FiArrowLeftCircle, FiLogOut, FiMoreVertical, FiSettings } from 'react-icons/fi'
+import { FiMoreVertical } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { UserBigModal } from './ui'
 
 const UserBigWrapper = styled(Link)`
     display: flex;
@@ -65,6 +63,12 @@ const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props
             onClick={() => menuModel.events.changeOpen({ isOpen: false, currentPage: 'profile' })}
         >
             <Button
+                onLoadStart={(e) => {
+                    hintModel.events.evoke({
+                        message: 'Test',
+                        position: { x: (e as any).target.x, y: (e as any).target.y },
+                    })
+                }}
                 icon={<FiMoreVertical />}
                 className="more-button"
                 background="transparent"
@@ -74,46 +78,7 @@ const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props
                     contextMenuModel.events.open({
                         e,
                         height: 143,
-                        content: (
-                            <>
-                                <Link to={SETTINGS_ROUTE}>
-                                    <Button
-                                        text="Настройки"
-                                        background="var(--schedule)"
-                                        icon={<FiSettings />}
-                                        width="100%"
-                                        align="left"
-                                        onClick={() => contextMenuModel.events.close()}
-                                    />
-                                </Link>
-                                <LinkButton
-                                    text={'Cтарый дизайн'}
-                                    onClick={() => {
-                                        localStorage.setItem('useOldVersion', 'true')
-                                    }}
-                                    background="var(--schedule)"
-                                    icon={<FiArrowLeftCircle />}
-                                    width="100%"
-                                    align="left"
-                                    href={`${OLD_LK_URL}/index.php`}
-                                />
-                                <Divider />
-                                <Button
-                                    align="left"
-                                    icon={<FiLogOut />}
-                                    onClick={() => {
-                                        confirmModel.events.evokeConfirm({
-                                            message: 'Вы точно хотите выйти из аккаунта?',
-                                            onConfirm: userModel.events.logout,
-                                        })
-                                        contextMenuModel.events.close()
-                                    }}
-                                    text="Выйти"
-                                    width="100%"
-                                    background="var(--schedule)"
-                                />
-                            </>
-                        ),
+                        content: <UserBigModal />,
                     })
                 }}
             />

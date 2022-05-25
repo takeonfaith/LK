@@ -2,6 +2,7 @@ import { CANT_ACCESS_ROUTE, FEEDBACK_ROUTE, FORGOT_PASSWORD_ROUTE } from '@app/r
 import { OLD_LK_URL } from '@consts'
 import { userModel } from '@entities/user'
 import { Button, LinkButton, Message, Title } from '@ui/atoms'
+import Checkbox from '@ui/atoms/checkbox'
 import Input from '@ui/atoms/input'
 import SubmitButton from '@ui/atoms/submit-button'
 import BlockWrapper from '@ui/block/styles'
@@ -72,8 +73,15 @@ const LoginBlock = () => {
                 setCompleted={() => null}
                 isActive={!!password && !!login}
             />
-            <List padding="4px">
-                <List direction="horizontal" padding="4px">
+            <List padding="4px" scroll={false}>
+                <Checkbox
+                    text="Оставаться в системе"
+                    checked={data.savePassword}
+                    setChecked={(value) => {
+                        userModel.events.changeSavePassword({ savePassword: value })
+                    }}
+                />
+                <List scroll={false} direction="horizontal" padding="4px">
                     <Link to={FORGOT_PASSWORD_ROUTE} tabIndex={-1}>
                         <Button
                             text="Забыли пароль от ЕУЗ?"

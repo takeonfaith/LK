@@ -1,6 +1,7 @@
 import { Colors } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { Button, Title } from '@ui/atoms'
+import List from '@ui/list'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useRef } from 'react'
 import styled from 'styled-components'
@@ -23,17 +24,6 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
     transform: translateY(${({ isOpen }) => (isOpen ? '50%' : '51%')}) translateX(-50%)
         scale(${({ isOpen }) => (isOpen ? '1' : '0.95')});
-
-    & > .buttons {
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        width: 100%;
-
-        & > * + * {
-            margin-left: 10px;
-        }
-    }
 
     @media (max-width: 1000px) {
         bottom: 10px;
@@ -61,12 +51,20 @@ const ConfirmMessage = () => {
         <ModalWrapper isOpen={isOpen}>
             <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
                 <Title size={3}>{message ?? 'Хотите продолжить?'}</Title>
-                <div className="buttons">
+                <List
+                    width="100%"
+                    scroll={false}
+                    direction="horizontal"
+                    gap="5px"
+                    padding="10px 0 0 0"
+                    justifyContent="flex-end"
+                >
                     <Button
                         text="Да"
                         onClick={handleConfirm}
                         width="50%"
                         textColor="var(--red)"
+                        background={Colors.red.transparentAF}
                         hoverBackground={Colors.red.transparent}
                     />
                     <Button
@@ -74,9 +72,10 @@ const ConfirmMessage = () => {
                         onClick={onReject ?? handleReject}
                         width="50%"
                         textColor="var(--blue)"
+                        background={Colors.blue.transparentAF}
                         hoverBackground={Colors.blue.transparent}
                     />
-                </div>
+                </List>
             </ConfirmWrapper>
         </ModalWrapper>
     )

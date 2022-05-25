@@ -27,6 +27,7 @@ export interface User extends Record<string, unknown> {
     subdivisions?: Subdivision[]
     user_status: UserStatus
     lastaccess: string
+    available_accounts?: { name: string; avatar: string; token: string }[]
 }
 
 interface Subdivision {

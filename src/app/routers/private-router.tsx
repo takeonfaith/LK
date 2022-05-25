@@ -1,17 +1,12 @@
 import { HOME_ROUTE } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
-import { userModel } from '@entities/user'
-import { useRender } from '@utils/hooks/use-render'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Redirect, Route, Switch } from 'react-router'
 
 const PrivateRouter = () => {
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
     const { allRoutes } = menuModel.selectors.useMenu()
 
-    if (!user || !allRoutes) return null
+    if (!allRoutes) return null
 
     return (
         <Switch>

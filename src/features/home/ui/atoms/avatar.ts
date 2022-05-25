@@ -17,16 +17,17 @@ export const Container = styled.div<{
     outline: ${({ selected }) => selected && '4px solid var(--reallyBlue)'};
     position: relative;
 
-    svg {
-        width: 40%;
-        height: 40%;
-    }
-
     width: ${({ width }) => width ?? '160px'};
     min-width: ${({ width }) => width ?? '160px'};
     height: ${({ height }) => height ?? '160px'};
 
     margin-right: ${({ marginRight }) => marginRight ?? '32px'};
+
+    .checkbox {
+        position: absolute;
+        bottom: -9px;
+        right: -9px;
+    }
 
     .name {
         display: flex;

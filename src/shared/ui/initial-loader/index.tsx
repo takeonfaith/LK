@@ -88,11 +88,10 @@ const InitialLoaderWrapper = styled.div<{ loading: boolean }>`
 `
 
 interface Props {
-    image?: string
     loading: boolean
 }
 
-const InitialLoader = ({ image, loading }: Props) => {
+const InitialLoader = ({ loading }: Props) => {
     return (
         <InitialLoaderWrapper loading={loading}>
             <Logo short />

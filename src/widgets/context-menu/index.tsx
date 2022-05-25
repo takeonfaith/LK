@@ -1,4 +1,3 @@
-import Block from '@ui/block'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useRef } from 'react'
 import styled from 'styled-components'

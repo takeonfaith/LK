@@ -1,3 +1,4 @@
+import Checkbox from '@ui/atoms/checkbox'
 import Notification from '@ui/notification'
 import getLettersColors from '@utils/get-letters-colors'
 import getNameFirstLetters from '@utils/get-name-first-letters'
@@ -14,9 +15,10 @@ interface Props {
     marginRight?: string
     notifications?: number
     selected?: boolean
+    checked?: boolean
 }
 
-function Avatar({ selected, name, avatar, width, height, marginRight, notifications }: Props) {
+function Avatar({ selected, name, avatar, width, height, marginRight, notifications, checked }: Props) {
     const [isLoaded, setIsLoaded] = useState<boolean>(true)
     const shortName = getNameFirstLetters(name)[0] + (getNameFirstLetters(name)[1] ?? '')
 
@@ -33,6 +35,12 @@ function Avatar({ selected, name, avatar, width, height, marginRight, notificati
             ) : (
                 <div className="name">{shortName}</div>
             )}
+            <Checkbox
+                invisibleOnFalse
+                checked={checked ?? false}
+                visible={checked !== undefined}
+                setChecked={() => null}
+            />
             <Notification left="80%" top="90%" outline="5px solid var(--schedule)" visible={!!notifications}>
                 {notifications}
             </Notification>
