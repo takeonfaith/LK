@@ -1,4 +1,4 @@
-import { ListWrapper } from '@ui/list'
+import { ListWrapper, ModifiedAlign, ModifiedVerticalAlign } from '@ui/list'
 import { SkeletonShape, SkieletonShapeProps } from '@ui/skeleton-shape'
 import { Direction } from '@ui/types'
 import React from 'react'
@@ -11,12 +11,13 @@ const SkeletonListWrapper = styled(ListWrapper)`
 interface Props {
     direction: Direction
     shapes: SkieletonShapeProps[]
-    justifyContent?: string
+    horizontalAlign?: ModifiedAlign
+    verticalAlign?: ModifiedVerticalAlign
 }
 
-const SkeletonList = ({ direction, shapes, justifyContent }: Props) => {
+const SkeletonList = ({ direction, shapes, horizontalAlign, verticalAlign }: Props) => {
     return (
-        <SkeletonListWrapper direction={direction} justifyContent={justifyContent}>
+        <SkeletonListWrapper direction={direction} horizontalAlign={horizontalAlign} verticalAlign={verticalAlign}>
             {shapes.map((shape, i) => {
                 return <SkeletonShape {...shape} key={i} />
             })}

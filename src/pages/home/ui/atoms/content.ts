@@ -22,5 +22,6 @@ export const Content = styled.div`
 
     @media (max-width: 600px) {
         padding-top: 30px;
+        padding: var(--mobile-page-padding);
     }
 `

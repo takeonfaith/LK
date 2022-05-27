@@ -26,8 +26,9 @@ const UserBigModal = () => {
                 padding="10px"
                 title="Аккаунты"
                 direction="horizontal"
-                gap="0px"
-                justifyContent="flex-start"
+                gap={0}
+                showPages
+                horizontalAlign="left"
                 onAdd={() => {
                     open(<UserList />)
                     contextMenuModel.events.close()

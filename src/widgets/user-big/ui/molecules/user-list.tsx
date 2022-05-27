@@ -12,6 +12,7 @@ import getCorrectWordForm from '@utils/get-correct-word-form'
 const UserListWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    height: 100%;
 
     @media (min-width: 1001px) {
         width: 600px;

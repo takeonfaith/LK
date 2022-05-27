@@ -19,7 +19,7 @@ const CantAccessPage = () => {
                     Если не получается войти в Личный кабинет - обратитесь в службу технической поддержки: опишите
                     проблему, укажите ФИО, группу/место работы, логин, приложите скришноты.
                 </Message>
-                <List width="100%" gap="0" fontSize="0.9rem">
+                <List width="100%" gap={0} fontSize="0.9rem">
                     <KeyValue
                         keyStr="Напишите письмо"
                         value={<a href="mailto:help@mospolytech.ru">help@mospolytech.ru</a>}
@@ -36,7 +36,7 @@ const CantAccessPage = () => {
                         direction="vertical"
                         keyStr="Позвоните по телефону"
                         value={
-                            <List alignItems="flex-start">
+                            <List verticalAlign="top">
                                 <a href="tel:+7(495) 223-05-23">+7(495) 223-05-23 доб. 1111</a>
                                 <a href="tel:+7(985) 350-41-73">+7(985) 350-41-73</a>
                                 <a href="tel:+7(985) 350-39-44">+7(985) 350-39-44</a>

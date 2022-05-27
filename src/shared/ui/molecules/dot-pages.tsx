@@ -22,7 +22,7 @@ const DotPages = ({ amount, current, direction = 'horizontal' }: Props) => {
     if (amount <= 1) return null
 
     return (
-        <List direction={direction} gap="2px">
+        <List direction={direction} gap={2} width="100%" horizontalAlign="center">
             {Array(amount)
                 .fill(0)
                 .map((_, index) => {

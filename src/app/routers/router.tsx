@@ -1,6 +1,6 @@
+import { LOGIN_ROUTE, publicRoutes } from '@app/routes/general-routes'
 import { adminLinksModel } from '@entities/admin-links'
 import { menuModel } from '@entities/menu'
-import { LOGIN_ROUTE, publicRoutes } from '@app/routes/general-routes'
 import React, { useEffect } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'

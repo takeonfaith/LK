@@ -63,7 +63,9 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
         }
     } catch (error) {
         logout()
-        throw new Error('Потеряно соединение с интернетом')
+        console.log(error)
+
+        throw new Error('Возникла какая-то ошибка')
     }
 })
 
@@ -91,7 +93,6 @@ const changeSavePasswordFunc = (savePassword?: boolean) => {
     const localStorageValue = localStorage.getItem('savePassword')
     const value = savePassword ?? JSON.parse(localStorageValue ?? 'true')
     localStorage.setItem('savePassword', value.toString())
-    console.log(value)
 
     return value
 }
@@ -104,8 +105,6 @@ const changeSavePassword = createEvent<{ savePassword: boolean }>()
 forward({ from: login, to: getUserTokenFx })
 forward({ from: getUserTokenFx.doneData, to: getUserFx })
 forward({ from: logout, to: logoutFx })
-
-console.log(savePasswordInStorage())
 
 !!tokenInStorage && savePasswordInStorage() ? getUserFx(tokenInStorage) : logoutFx()
 

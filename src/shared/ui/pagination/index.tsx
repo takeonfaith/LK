@@ -1,5 +1,5 @@
 import { Button, Input } from '@ui/atoms'
-import ButtonsList from '@ui/molecules/buttons-list'
+import List from '@ui/list'
 import { Align } from '@ui/types'
 import limitNumber from '@utils/limit-number'
 import React, { useEffect, useState } from 'react'
@@ -26,7 +26,7 @@ const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'ce
     }, [currentPage])
 
     return (
-        <ButtonsList align={align} condition={condition} direction={'horizontal'} width="100%" padding="10px">
+        <List horizontalAlign={align} visible={condition} direction={'horizontal'} width="100%" padding="10px">
             <Button
                 background="var(--mild-theme)"
                 icon={<FiChevronLeft />}
@@ -51,7 +51,7 @@ const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'ce
                 icon={<FiChevronRight />}
                 onClick={() => setCurrentPageValue(limitNumber(currentPage + 1, pages).toString())}
             />
-        </ButtonsList>
+        </List>
     )
 }
 

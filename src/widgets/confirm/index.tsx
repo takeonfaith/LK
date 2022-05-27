@@ -55,9 +55,9 @@ const ConfirmMessage = () => {
                     width="100%"
                     scroll={false}
                     direction="horizontal"
-                    gap="5px"
+                    gap={5}
                     padding="10px 0 0 0"
-                    justifyContent="flex-end"
+                    horizontalAlign="center"
                 >
                     <Button
                         text="Да"

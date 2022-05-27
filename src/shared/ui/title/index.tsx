@@ -28,13 +28,15 @@ export function Title(props: TitleProps) {
         visible = true,
     } = props
 
-    return visible ? (
-        <TitleWrapper align={align} bottomGap={bottomGap} iconColor={iconColor}>
+    if (!visible) return null
+
+    return (
+        <TitleWrapper className="title-wrapper" align={align} bottomGap={bottomGap} iconColor={iconColor}>
             {icon}
             <CreateHeader size={size} width={width}>
                 {required && <RedStar>*</RedStar>}
                 <ChildrenWrapper width={width}>{children}</ChildrenWrapper>
             </CreateHeader>
         </TitleWrapper>
-    ) : null
+    )
 }

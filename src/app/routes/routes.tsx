@@ -55,7 +55,7 @@ export const privateRoutes: () => IRoutes = () => ({
     },
 })
 
-export const hiddenRoutes: IRoutes = {
+export const hiddenRoutes: () => IRoutes = () => ({
     ...generalHiddenRoutes,
     'clarification-of-passport-data': {
         id: 'clarification-of-passport-data',
@@ -112,4 +112,4 @@ export const hiddenRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
     },
-}
+})

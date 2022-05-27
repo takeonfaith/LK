@@ -1,6 +1,5 @@
 import { PROFILE_ROUTE } from '@app/routes/general-routes'
 import { contextMenuModel } from '@entities/context-menu'
-import { hintModel } from '@entities/hint'
 import { menuModel } from '@entities/menu'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { Button } from '@ui/button'
@@ -63,12 +62,6 @@ const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props
             onClick={() => menuModel.events.changeOpen({ isOpen: false, currentPage: 'profile' })}
         >
             <Button
-                onLoadStart={(e) => {
-                    hintModel.events.evoke({
-                        message: 'Test',
-                        position: { x: (e as any).target.x, y: (e as any).target.y },
-                    })
-                }}
                 icon={<FiMoreVertical />}
                 className="more-button"
                 background="transparent"

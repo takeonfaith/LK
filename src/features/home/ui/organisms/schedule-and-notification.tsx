@@ -13,7 +13,7 @@ const ScheduleAndNotification = () => {
     const lessons = useMemo(() => getLessons(schedule, currentDayString), [schedule, currentDayString])
 
     return (
-        <List direction="horizontal" title="Виджеты">
+        <List direction="horizontal" title="Виджеты" showPages gap={10}>
             <DaySchedule
                 lessons={!schedule && currentDayString === 'sunday' ? [] : lessons}
                 width={400}

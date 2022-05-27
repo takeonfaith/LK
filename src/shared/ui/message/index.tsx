@@ -1,5 +1,6 @@
 import { messageType } from '@consts'
 import { Button } from '@ui/button'
+import SkeletonList from '@ui/skeleton-list'
 import { Align, MessageType } from '@ui/types'
 import React from 'react'
 import { FiX } from 'react-icons/fi'
@@ -20,6 +21,33 @@ export type MessageProps = {
     fontSize?: string
     gap?: string
     solidBackground?: boolean
+    loading?: boolean
+}
+
+const Loading = () => {
+    return (
+        <SkeletonList
+            shapes={[
+                {
+                    shape: 'rect',
+                    size: { width: '200px', height: '13px' },
+                    margin: '0',
+                },
+                {
+                    shape: 'rect',
+                    size: { width: '100px', height: '12px' },
+                    margin: '5px 0',
+                },
+                {
+                    shape: 'rect',
+                    size: { width: '120px', height: '12px' },
+                    margin: '0',
+                },
+            ]}
+            direction="vertical"
+            horizontalAlign="left"
+        />
+    )
 }
 
 export function Message({
@@ -36,6 +64,7 @@ export function Message({
     solidBackground = false,
     align = 'left',
     visible = true,
+    loading = false,
 }: MessageProps) {
     if (!visible) return null
 
@@ -57,6 +86,7 @@ export function Message({
             </Title>
             {onClose && <Button onClick={onClose} icon={<FiX />} className="close-button" background="transparent" />}
             {children && <div className="info-text">{children}</div>}
+            {loading && <Loading />}
             {/* {type === 'hint' && <Button background="#ffffff10" text="Понятно!" textColor="#fff" />} */}
         </MessageWrapper>
     )

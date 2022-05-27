@@ -24,7 +24,7 @@ const MobileBottomMenu = () => {
 
     if (!allRoutes) {
         return (
-            <MobileBottomMenuWrapper direction="horizontal" justifyContent="space-evenly">
+            <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly">
                 <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
                 <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
                 <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
@@ -35,7 +35,7 @@ const MobileBottomMenu = () => {
     }
 
     return (
-        <MobileBottomMenuWrapper direction="horizontal" justifyContent="space-evenly">
+        <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly">
             {DEFAULT_MOBILE_CONFIG.map((id) => {
                 return <LeftsideBarItem key={id} {...allRoutes[id]} isCurrent={currentPage?.id === id} />
             })}

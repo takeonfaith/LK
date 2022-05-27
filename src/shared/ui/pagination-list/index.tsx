@@ -1,16 +1,9 @@
+import { ListWrapper } from '@ui/list'
 import { Loading } from '@ui/loading'
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
 
-const List = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-
+const List = styled(ListWrapper)`
     .scrolable-content {
         width: 100%;
     }
@@ -52,7 +45,7 @@ export function PagintaionList<T>({
     )
 
     return (
-        <List onScroll={scrollHandler}>
+        <List innerPadding="10px 0" width="100%" height="100%" onScroll={scrollHandler}>
             <div className="scrolable-content">{(items || []).map((item, index) => renderItem(item, index))}</div>
             {hasNext && isPending && <Loading width="40px" height="40px" />}
             {hasNext && !isPending && <div onClick={handleNext}>load</div>}

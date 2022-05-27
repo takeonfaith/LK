@@ -74,7 +74,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
         allRoutes:
             user?.user_status === 'staff'
                 ? { ...teachersPrivateRoutes(), ...teachersHiddenRoutes() }
-                : { ...privateRoutes(), ...hiddenRoutes },
+                : { ...privateRoutes(), ...hiddenRoutes() },
         visibleRoutes: user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         leftsideBarRoutes: findRoutesByConfig(
             getLeftsideBarConfig(user, adminLinks),

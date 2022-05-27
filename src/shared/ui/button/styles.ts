@@ -61,7 +61,7 @@ export const ButtonWrapper = styled.button<{
 
     @media (max-width: 1000px) {
         font-size: 12px;
-        height: 36px;
+        height: ${({ height = '36px' }) => height};
         position: ${({ fixedInMobile }) => fixedInMobile && 'absolute'};
         z-index: ${({ fixedInMobile }) => fixedInMobile && '5'};
         bottom: 10px;

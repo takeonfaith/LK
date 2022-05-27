@@ -1,21 +1,53 @@
 import { Colors } from '@consts'
 import { Button } from '@ui/button'
+import { DotPages } from '@ui/molecules'
 import { Title } from '@ui/title'
-import { Direction } from '@ui/types'
+import { Align, Direction, VerticalAlign } from '@ui/types'
+import limitNumber from '@utils/limit-number'
 import React, { useEffect, useRef, useState } from 'react'
 import { FiChevronLeft, FiChevronRight, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 
+export type ModifiedAlign = Align | 'evenly'
+export type ModifiedVerticalAlign = VerticalAlign | 'evenly'
+
 interface StyleProps {
     direction?: Direction
     width?: string
-    gap?: string
-    justifyContent?: string
-    alignItems?: string
+    height?: string
+    gap?: number
+    horizontalAlign?: ModifiedAlign
+    verticalAlign?: ModifiedVerticalAlign
     padding?: string
+    innerPadding?: string
     fontSize?: string
     scroll?: boolean
     wrap?: boolean
+    wrapOnMobile?: boolean
+}
+
+const convertAlign = (align?: ModifiedAlign) => {
+    switch (align) {
+        case 'center':
+            return 'center'
+        case 'right':
+            return 'flex-end'
+        case 'evenly':
+            return 'space-evenly'
+    }
+    return 'flex-start'
+}
+
+const convertVerticalAlign = (align?: ModifiedVerticalAlign) => {
+    switch (align) {
+        case 'center':
+            return 'center'
+        case 'bottom':
+            return 'flex-end'
+        case 'evenly':
+            return 'space-evenly'
+    }
+    return 'flex-start'
 }
 
 const Wrapper = styled.div<{ padding?: string }>`
@@ -24,7 +56,7 @@ const Wrapper = styled.div<{ padding?: string }>`
     .left-button,
     .right-button {
         position: absolute;
-        top: calc(50% + 10px);
+        top: 50%;
         z-index: 5;
         transform: translateY(-50%);
     }
@@ -40,21 +72,29 @@ const Wrapper = styled.div<{ padding?: string }>`
 
 export const ListWrapper = styled.div<StyleProps>`
     display: flex;
+    height: ${({ height }) => height ?? 'fit-content'};
     flex-direction: ${({ direction }) => (direction ?? 'vertical') === 'vertical' && 'column'};
     align-items: center;
-    justify-content: ${({ justifyContent }) => justifyContent ?? 'flex-start'};
-    align-items: ${({ alignItems }) => alignItems ?? 'center'};
-    gap: ${({ gap }) => gap ?? '5px'};
+    justify-content: ${({ direction, horizontalAlign, verticalAlign }) =>
+        (direction ?? 'vertical') === 'vertical' ? convertVerticalAlign(verticalAlign) : convertAlign(horizontalAlign)};
+    align-items: ${({ direction, horizontalAlign, verticalAlign }) =>
+        (direction ?? 'vertical') === 'vertical' ? convertAlign(horizontalAlign) : convertVerticalAlign(verticalAlign)};
+    gap: ${({ gap }) => (gap ?? 5) + 'px'};
     width: ${({ width }) => width ?? '100%'};
     min-width: ${({ width }) => width ?? '100%'};
     color: var(--text);
     font-size: ${({ fontSize }) => fontSize ?? '1em'};
     overflow-x: ${({ scroll }) => scroll && 'auto'};
     flex-wrap: ${({ wrap }) => wrap && 'wrap'};
-    /* scroll-behavior: smooth; */
+    padding: ${({ innerPadding }) => innerPadding ?? '0'};
+    scroll-behavior: smooth;
 
     ::-webkit-scrollbar {
         display: none;
+    }
+
+    @media (max-width: 1000px) {
+        flex-wrap: ${({ wrapOnMobile }) => (wrapOnMobile ? 'wrap' : 'nowrap')};
     }
 `
 
@@ -63,21 +103,26 @@ type Props = StyleProps & {
     children: ChildrenType
     onAdd?: () => void
     visible?: boolean
+    showPages?: boolean
 }
 
 const List = (props: Props) => {
     const {
         title,
         children,
-        direction,
         gap,
         width,
+        height,
         padding,
-        justifyContent,
-        alignItems,
         fontSize,
         wrap,
         onAdd,
+        showPages,
+        innerPadding,
+        wrapOnMobile,
+        direction = 'vertical',
+        verticalAlign = 'top',
+        horizontalAlign = 'left',
         scroll = true,
         visible = true,
     } = props
@@ -88,6 +133,11 @@ const List = (props: Props) => {
     const [leftArrow, setLeftArrow] = useState<boolean>(false)
     const [rightArrow, setRightArrow] = useState<boolean>(false)
     const [scrollLeft, setScrollLeft] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+    const pageOffset = listRef.current?.clientWidth ?? 1
+    const amountOfPages = Math.ceil((listRef.current?.scrollWidth ?? 0) / (pageOffset + (gap ?? 0)))
+
+    // console.log(amountOfPages)
 
     useEffect(() => {
         // console.log(listRef.current?.scrollLeft)
@@ -95,22 +145,20 @@ const List = (props: Props) => {
             listRef.current.scrollLeft = scrollLeft
 
             if (listRef.current.offsetWidth < listRef.current.scrollWidth) {
-                if (listRef.current.scrollLeft !== 0) {
+                if (scrollLeft !== 0) {
                     setLeftArrow(true)
                 } else {
                     setLeftArrow(false)
                 }
 
-                if (
-                    Math.ceil(listRef.current.scrollLeft + listRef.current.offsetWidth) !== listRef.current.scrollWidth
-                ) {
+                if (Math.ceil(scrollLeft + listRef.current.offsetWidth) < listRef.current.scrollWidth) {
                     setRightArrow(true)
                 } else {
                     setRightArrow(false)
                 }
             }
         }
-    }, [scrollLeft])
+    }, [scrollLeft, listRef.current?.scrollLeft])
 
     return (
         <Wrapper padding={padding}>
@@ -135,7 +183,10 @@ const List = (props: Props) => {
                     icon={<FiChevronLeft />}
                     className="left-button"
                     textColor={Colors.grey.main}
-                    onClick={() => setScrollLeft((prev) => prev - 100)}
+                    onClick={() => {
+                        setCurrentPage((prev) => limitNumber(prev - 1, amountOfPages))
+                        setScrollLeft((prev) => prev - pageOffset - (gap ?? 0))
+                    }}
                 />
             )}
             {rightArrow && (
@@ -147,25 +198,32 @@ const List = (props: Props) => {
                     className="right-button"
                     textColor={Colors.grey.main}
                     onClick={() => {
-                        setScrollLeft((prev) => prev + 100)
+                        setCurrentPage((prev) => limitNumber(prev + 1, amountOfPages))
+                        setScrollLeft((prev) => {
+                            return prev + pageOffset + (gap ?? 0)
+                        })
                     }}
                 />
             )}
             <ListWrapper
-                justifyContent={justifyContent}
-                alignItems={alignItems}
+                verticalAlign={verticalAlign}
+                horizontalAlign={horizontalAlign}
                 direction={direction}
                 ref={listRef}
                 gap={gap}
                 width={width}
+                height={height}
                 fontSize={fontSize}
                 wrap={wrap}
+                innerPadding={innerPadding}
                 scroll={scroll}
+                wrapOnMobile={wrapOnMobile}
             >
                 {children}
             </ListWrapper>
+            {showPages && <DotPages direction="horizontal" current={currentPage} amount={amountOfPages} />}
         </Wrapper>
     )
 }
 
-export default List
+export default React.memo(List)
