@@ -45,9 +45,9 @@ jobs:
             whoami
             ls
             cd client-app/LK
-            echo ${{ secrets.PASSWORD }} | sudo -S git pull
-            echo ${{ secrets.PASSWORD }} | sudo npm i
-            echo ${{ secrets.PASSWORD }} | sudo npm run build
+            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo -S git pull
+            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo npm i
+            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo npm run build
 
       - name: Kill VPN connection
         if: always()
