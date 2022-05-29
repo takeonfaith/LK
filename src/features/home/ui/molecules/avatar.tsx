@@ -3,6 +3,8 @@ import Notification from '@ui/notification'
 import getLettersColors from '@utils/get-letters-colors'
 import getNameFirstLetters from '@utils/get-name-first-letters'
 import React, { useState } from 'react'
+import { useModal } from 'widgets'
+import ChangeAvatar from 'widgets/user-big/ui/molecules/change-avatar'
 import { Container, Img } from '../atoms/avatar'
 
 export default Avatar
@@ -16,10 +18,22 @@ interface Props {
     notifications?: number
     selected?: boolean
     checked?: boolean
+    changable?: boolean
 }
 
-function Avatar({ selected, name, avatar, width, height, marginRight, notifications, checked }: Props) {
+function Avatar({
+    selected,
+    name,
+    avatar,
+    width,
+    height,
+    marginRight,
+    notifications,
+    checked,
+    changable = false,
+}: Props) {
     const [isLoaded, setIsLoaded] = useState<boolean>(true)
+    const { open } = useModal()
     const shortName = getNameFirstLetters(name)[0] + (getNameFirstLetters(name)[1] ?? '')
 
     return (
@@ -29,6 +43,7 @@ function Avatar({ selected, name, avatar, width, height, marginRight, notificati
             height={height}
             marginRight={marginRight}
             background={getLettersColors(name)}
+            onClick={() => changable && open(<ChangeAvatar />)}
         >
             {avatar && isLoaded ? (
                 <Img round onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />

@@ -8,17 +8,23 @@ import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
 import List from '@ui/list'
 import React from 'react'
-import { FiArrowLeftCircle, FiLogOut, FiSettings } from 'react-icons/fi'
+import { FiArrowLeftCircle, FiLogOut, FiSettings, FiUser } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import useModal from 'widgets/modal'
 import User from 'widgets/user'
 import { UserList } from '../molecules'
+import ChangeAvatar from '../molecules/change-avatar'
 
 const UserBigModal = () => {
     const { open } = useModal()
     const {
         data: { user },
     } = userModel.selectors.useUser()
+
+    const handleChangeAvatar = () => {
+        contextMenuModel.events.close()
+        open(<ChangeAvatar />)
+    }
     return (
         <>
             <List
@@ -61,6 +67,14 @@ const UserBigModal = () => {
                     )
                 })}
             </List>
+            <Button
+                text="Сменить аватар"
+                background="var(--schedule)"
+                icon={<FiUser />}
+                width="100%"
+                align="left"
+                onClick={handleChangeAvatar}
+            />
             <Link to={SETTINGS_ROUTE}>
                 <Button
                     text="Настройки"

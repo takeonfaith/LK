@@ -89,6 +89,14 @@ const logoutFx = createEffect(() => {
     clearAllStores()
 })
 
+const sendNewAvatarFx = createEffect(async (file: File): Promise<{ avatar: string }> => {
+    try {
+        return (await userApi.sendNewAvatar(file)).data
+    } catch (e) {
+        throw new Error('Не удалось отправить аватар')
+    }
+})
+
 const changeSavePasswordFunc = (savePassword?: boolean) => {
     const localStorageValue = localStorage.getItem('savePassword')
     const value = savePassword ?? JSON.parse(localStorageValue ?? 'true')
@@ -101,6 +109,7 @@ const login = createEvent<LoginData>()
 const logout = createEvent()
 const clear = createEvent()
 const changeSavePassword = createEvent<{ savePassword: boolean }>()
+const changeFile = createEvent<{ file: File }>()
 
 forward({ from: login, to: getUserTokenFx })
 forward({ from: getUserTokenFx.doneData, to: getUserFx })
@@ -116,6 +125,10 @@ const DEFAULT_STORE: UserStore = {
 }
 
 changeSavePasswordFunc()
+
+const $fileUploadStore = createStore<{ file: File | null }>({ file: null }).on(changeFile, (_, { file }) => ({
+    file,
+}))
 
 const $userStore = createStore(DEFAULT_STORE)
     .on(getUserFx, (oldData) => ({
@@ -149,6 +162,19 @@ const $userStore = createStore(DEFAULT_STORE)
         ...oldData,
         currentUser: null,
     }))
+    .on(sendNewAvatarFx.doneData, (oldData, { avatar }) => {
+        const newData = { ...oldData }
+
+        if (newData.currentUser) {
+            newData.currentUser.avatar = avatar
+        }
+
+        return newData
+    })
+    .on(sendNewAvatarFx.failData, (oldData, error) => ({
+        ...oldData,
+        error: error.message,
+    }))
 
 export const selectors = {
     useUser,
@@ -163,4 +189,5 @@ export const events = {
 
 export const effects = {
     getUserFx,
+    sendNewAvatarFx,
 }

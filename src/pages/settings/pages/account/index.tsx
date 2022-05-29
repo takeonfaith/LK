@@ -16,7 +16,7 @@ const Account = () => {
 
     return (
         <>
-            <Avatar name={user?.fullName} avatar={user?.avatar} />
+            <Avatar name={user?.fullName} avatar={user?.avatar} changable />
             <Button
                 icon={<FiLogOut />}
                 onClick={() =>

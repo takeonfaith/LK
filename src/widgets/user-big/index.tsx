@@ -42,9 +42,10 @@ interface Props {
     size?: string
     notifications?: number
     selected?: boolean
+    changable?: boolean
 }
 
-const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props) => {
+const UserBig = ({ name, avatar, loading, size, notifications, selected, changable }: Props) => {
     if (loading)
         return (
             <SkeletonShape
@@ -83,6 +84,7 @@ const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props
                 name={name}
                 marginRight="0"
                 selected={selected}
+                changable={changable}
             />
             <Title size={5}>{name}</Title>
         </UserBigWrapper>
