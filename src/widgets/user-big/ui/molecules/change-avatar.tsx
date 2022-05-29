@@ -4,6 +4,7 @@ import Avatar from '@features/home/ui/molecules/avatar'
 import { LoadFileButton, SubmitButton, Title } from '@ui/atoms'
 import List from '@ui/list'
 import prepareFormData from '@utils/prepare-form-data'
+import { useStore } from 'effector-react'
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import { sendNewAvatar } from 'widgets/user-big/lib/send-new-avatar'
@@ -16,6 +17,7 @@ const ModalWrapper = styled.div`
 `
 
 const ChangeAvatar = () => {
+    //  const { file } = useStore($fileUploadStore)
     const [files, setFiles] = useState<File[]>([])
     const [completed, setCompleted] = useState<boolean>(false)
     const [loading, setLoading] = useState<boolean>(false)

@@ -126,7 +126,7 @@ const DEFAULT_STORE: UserStore = {
 
 changeSavePasswordFunc()
 
-const $fileUploadStore = createStore<{ file: File | null }>({ file: null }).on(changeFile, (_, { file }) => ({
+export const $fileUploadStore = createStore<{ file: File | null }>({ file: null }).on(changeFile, (_, { file }) => ({
     file,
 }))
 
