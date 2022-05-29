@@ -73,7 +73,7 @@ const LoginBlock = () => {
                 setCompleted={() => null}
                 isActive={!!password && !!login}
             />
-            <List padding="4px" scroll={false}>
+            <List padding="4px" scroll={false} horizontalAlign="center">
                 <Checkbox
                     text="Оставаться в системе"
                     checked={data.savePassword}

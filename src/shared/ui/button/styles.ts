@@ -51,12 +51,23 @@ export const ButtonWrapper = styled.button<{
             hoverBackground ?? (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
     }
 
-    svg {
-        margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')} !important;
-        width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
-        min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
+    .icon {
+        margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')};
+        width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
+        min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
         height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
         margin-bottom: ${({ direction }) => direction === 'vertical' && '4px'};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            max-width: 16px;
+            max-height: 16px;
+            margin-right: 0 !important;
+        }
     }
 
     @media (max-width: 1000px) {
@@ -67,7 +78,7 @@ export const ButtonWrapper = styled.button<{
         bottom: 10px;
         right: 10px;
 
-        svg {
+        .icon {
             width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
             min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
             height: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};

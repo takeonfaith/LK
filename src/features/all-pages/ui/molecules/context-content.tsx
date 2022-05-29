@@ -45,14 +45,6 @@ const ContextContent = (props: IRoute) => {
                 align="left"
                 background="var(--schedule)"
             />
-            <Button
-                text="Еще что-то"
-                icon={<FiBook />}
-                //  onClick={() => open(<WhatsNew />)}
-                width="100%"
-                align="left"
-                background="var(--schedule)"
-            />
         </ContextContentWrapper>
     )
 }

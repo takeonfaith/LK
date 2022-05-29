@@ -3,7 +3,7 @@ import { OLD_LK_URL } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { contextMenuModel } from '@entities/context-menu'
 import { userModel } from '@entities/user'
-import { LinkButton } from '@ui/atoms'
+import { LinkButton, Message } from '@ui/atoms'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
 import List from '@ui/list'
@@ -12,6 +12,7 @@ import { FiArrowLeftCircle, FiLogOut, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import useModal from 'widgets/modal'
 import User from 'widgets/user'
+import WhatsNew from 'widgets/whats-new'
 import { UserList } from '../molecules'
 
 const UserBigModal = () => {
@@ -94,6 +95,18 @@ const UserBigModal = () => {
                     contextMenuModel.events.close()
                 }}
                 text="Выйти"
+                width="100%"
+                background="var(--schedule)"
+            />
+            <Divider />
+            <Button
+                align="left"
+                icon={<Message icon={null} type="info" title={'v2.0.0'} width="fit-content" />}
+                onClick={() => {
+                    contextMenuModel.events.close()
+                    open(<WhatsNew />)
+                }}
+                text="Что нового"
                 width="100%"
                 background="var(--schedule)"
             />

@@ -1,7 +1,12 @@
+import { UserToken } from '@api/model'
 import { Colors } from '@consts'
+import { userModel } from '@entities/user'
+import { Button } from '@ui/button'
+import { Error } from '@ui/error'
 import { Loading } from '@ui/loading'
 import { Logo } from '@ui/logo'
 import React from 'react'
+import { AiOutlineReload } from 'react-icons/ai'
 import styled from 'styled-components'
 
 const InitialLoaderWrapper = styled.div<{ loading: boolean }>`
@@ -92,6 +97,23 @@ interface Props {
 }
 
 const InitialLoader = ({ loading }: Props) => {
+    const { error } = userModel.selectors.useUser()
+
+    if (!!error)
+        return (
+            <InitialLoaderWrapper loading={true}>
+                <Error text="Нет подключения к интернету">
+                    <Button
+                        onClick={() =>
+                            userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)
+                        }
+                        text="Попробовать снова"
+                        icon={<AiOutlineReload />}
+                    />
+                </Error>
+            </InitialLoaderWrapper>
+        )
+
     return (
         <InitialLoaderWrapper loading={loading}>
             <Logo short />

@@ -25,6 +25,8 @@ const Router = () => {
         }
     }, [user, data])
 
+    console.log(isAuthenticated)
+
     return isAuthenticated ? (
         <Switch>
             <Route path="/" component={ContentLayout} />

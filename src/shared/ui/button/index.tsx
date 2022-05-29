@@ -60,7 +60,7 @@ export function Button(props: ButtonProps) {
             height={height}
             {...restProps}
         >
-            {!!icon && icon}
+            {!!icon && <div className="icon">{icon}</div>}
             <span>{text}</span>
         </ButtonWrapper>
     )

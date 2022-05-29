@@ -41,7 +41,7 @@ function Avatar({ selected, name, avatar, width, height, marginRight, notificati
                 visible={checked !== undefined}
                 setChecked={() => null}
             />
-            <Notification left="80%" top="90%" outline="5px solid var(--schedule)" visible={!!notifications}>
+            <Notification left="80%" top="90%" outline="4px solid var(--schedule)" visible={!!notifications}>
                 {notifications}
             </Notification>
         </Container>

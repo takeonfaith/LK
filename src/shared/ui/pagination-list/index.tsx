@@ -1,4 +1,4 @@
-import { ListWrapper } from '@ui/list'
+import { ListWrapper } from '@ui/list/styles'
 import { Loading } from '@ui/loading'
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
