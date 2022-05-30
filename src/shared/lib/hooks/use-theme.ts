@@ -18,7 +18,7 @@ const useTheme = () => {
         }
     }, [setting])
 
-    const switchTheme = useCallback((state) => {
+    const switchTheme = useCallback((state: any) => {
         setTheme(() => {
             const newTheme = state ? 'dark' : 'light'
 

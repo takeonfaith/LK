@@ -1,13 +1,5 @@
-import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
-import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
-import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
-import ApplicationPaperCall from '@pages/applications/pages/paper-call'
-import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
-import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
-import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import PaymentsPage from '@pages/payments'
-import TeachersSchedule from '@pages/teachers-schedule'
+import { LazyExoticComponent } from 'react'
 import {
     BiBookReader,
     BiCheckCircle,
@@ -23,10 +15,22 @@ import { FaRegLightbulb } from 'react-icons/fa'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import { HiOutlineClipboardCheck } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
-import AcadPerformance from '../../pages/acad-performance'
-import Home from '../../pages/home'
-import LoginPage from '../../pages/login'
-import SchedulePage from '../../pages/schedule'
+
+import {
+    AcadPerformance,
+    ApplicationForSocialScrollarship,
+    ApplicationForСertificateOfAttendance,
+    ApplicationPaperCall,
+    ApplicationSocialAgencies,
+    ArbitrayRequestPage,
+    ClarificationOfPassportDataApplication,
+    ElectronicInteractionAgreementPage,
+    Home,
+    LoginPage,
+    PaymentsPage,
+    SchedulePage,
+    TeachersSchedule,
+} from './pages'
 
 export const HOME_ROUTE = '/home'
 export const MESSAGES_ROUTE = '/messages'
@@ -68,7 +72,7 @@ export interface IRoute {
     title: string
     icon: IconType
     path: string
-    Component: () => JSX.Element | string
+    Component: (() => JSX.Element | string) | LazyExoticComponent<() => JSX.Element>
     isTemplate: boolean
     isAdmin?: boolean
 }
