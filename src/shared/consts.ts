@@ -23,6 +23,8 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
     shortCutLinks: [0, 1, 2, 3],
 }
 
+export const UNION_ORGANIZATION = 'https://lk.eseur.ru/signup'
+
 export const SETTINGS = 'settings'
 
 export interface IColors extends IndexedProperties {

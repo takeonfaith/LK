@@ -59,7 +59,7 @@ const ApplicationSocialAgencies = () => {
                             background="transparent"
                             textColor="var(--blue)"
                         />
-                        <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
+                        <InputArea {...form} collapsed={true} setData={setForm as LoadedState} />
                         {/* <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
                             Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
                             направлены Вам в срок до 30 марта 2022 года на указанную в заявке почту: {data?.email}

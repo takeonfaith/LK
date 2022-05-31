@@ -4,7 +4,7 @@ import { ColumnProps } from '@ui/table/types'
 import React from 'react'
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
-        { title: 'Запрос', field: 'requestTitle', priority: 'one', search: true },
+        { title: 'Запрос', field: 'requestTitle', priority: 'one', search: true, },
         { title: 'Дата', field: 'regDate', priority: 'two', sort: true },
         {
             title: 'Рег. номер',
@@ -19,6 +19,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
             title: 'Статус',
             field: 'status',
             priority: 'one',
+            width: '160px',
             catalogs: [
                 ...(Object.values(ApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
             ],

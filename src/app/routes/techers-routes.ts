@@ -36,6 +36,27 @@ import { HiOutlineClipboardCheck, HiOutlineMenuAlt2, HiOutlineUserGroup } from '
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
+import TeachersApplicationsPage from '@pages/teachers-applications'
+import IssuanceOfLicensesPage from '@pages/teachers-applications/pages/issuance-of-licenses'
+import GettingComputerEquipmentPage from '@pages/teachers-applications/pages/getting-computer-equipment'
+import QuestionSedPage from '@pages/teachers-applications/pages/question-sed'
+import PrinterMaintenancePage from '@pages/teachers-applications/pages/printer-maintenance'
+import ConnectingComputerPage from '@pages/teachers-applications/pages/connecting-computer'
+import QuestionPersonalAccountPage from '@pages/teachers-applications/pages/question-personal-account'
+import OtherItServicesPage from '@pages/teachers-applications/pages/other-it-services'
+import CertificateFromPlaceOfWorkPage from '@pages/teachers-applications/pages/certificate-from-the-place-of-work'
+import VisaCertificatePage from '@pages/teachers-applications/pages/visa-certificate'
+import CertificateOfWorkExperiencePage from '@pages/teachers-applications/pages/certificate-of-work-experience'
+import NumberOfUnusedVacationDaysPage from '@pages/teachers-applications/pages/number-of-unused-vacation-days'
+import CopyOfEmploymentRecordPage from '@pages/teachers-applications/pages/copy-of-the-employment-record'
+import CopiesOfDocumentsFromPersonalFilePage from '@pages/teachers-applications/pages/copies-of-documents-from-the-personal-file'
+import WorkOnTermsOfExternalConcurrencyPage from '@pages/teachers-applications/pages/work-on-the-terms-of-external-concurrency'
+import CertificateTimeParentalLeavePage from '@pages/teachers-applications/pages/certificate-time-parental-leave'
+import ArbitraryRequestPage from '@pages/teachers-applications/pages/arbitrary-request'
+import CourierPage from '@pages/teachers-applications/pages/courier'
+import PersonaIncomeTaxReferencePage from '@pages/teachers-applications/pages/persona-income-tax-reference'
+import PaymentOfChildBirthAllowancePage from '@pages/teachers-applications/pages/payment-of-child-birth-allowance'
+import PaymentForChildCarePage from '@pages/teachers-applications/pages/payment-for-child-care'
 
 export const LOGIN_ROUTE = '/login'
 
@@ -77,6 +98,26 @@ export const CONTACT_INFO_ACTUALIZATION = '/contact-info-actualization'
 
 //hidden routes
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
+export const ISSUANCE_OF_LICENSES = APPLICATIONS_ROUTE + '/issuance-of-licenses'
+export const GETTING_COMPUTER_EQUIPMENT = APPLICATIONS_ROUTE + '/getting-computer-equipment'
+export const CONNECTING_COMPUTER = APPLICATIONS_ROUTE + '/connecting-computer'
+export const PRINTER_MAINTENANCE = APPLICATIONS_ROUTE + '/printer-maintenance'
+export const QUESTION_SED = APPLICATIONS_ROUTE + '/question-sed'
+export const QUESTION_PERSONAL_ACCOUNT = APPLICATIONS_ROUTE + '/question-personal-account'
+export const OTHER_IT_SERVICES = APPLICATIONS_ROUTE + '/other-it-services'
+export const CERTIFICATE_FROM_PLACE_OF_WORK = APPLICATIONS_ROUTE + '/certificate-from-the-place-of-work'
+export const VISA_CERTIFICATE = APPLICATIONS_ROUTE + '/visa-certificate'
+export const CERTIFICATE_OF_WORK_EXPERIENCE = APPLICATIONS_ROUTE + '/certificate-of-work-experience'
+export const NUMBER_OF_UNUSED_VACATION_DAYS = APPLICATIONS_ROUTE + '/number-of-unused-vacation-days'
+export const COPY_OF_EMPLOYMENT_RECORD = APPLICATIONS_ROUTE + '/copy-of-the-employment-record'
+export const COPIES_OF_DOCUMENTS_FROM_PERSONAL_FILE = APPLICATIONS_ROUTE + '/copies-of-documents-from-the-personal-file'
+export const WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY = APPLICATIONS_ROUTE + '/work-on-the-terms-of-external-concurrency'
+export const CERTIFICATE_TIME_PARENTAL_LEAVE = APPLICATIONS_ROUTE + '/certificate-time-parental-leave'
+export const ARBITRARY_REQUEST = APPLICATIONS_ROUTE + '/arbitrary-request'
+export const COURIER = APPLICATIONS_ROUTE + '/courier'
+export const PERSONA_INCOME_TAX_REFERENCE = APPLICATIONS_ROUTE + '/persona-income-tax-reference'
+export const PAYMENT_OF_CHILD_BIRTH_ALLOWANCE = APPLICATIONS_ROUTE + '/payment-of-child-birth-allowance'
+export const PAYMENT_FOR_CHILD_CARE = APPLICATIONS_ROUTE + '/payment-for-child-care'
 
 export const publicRoutes = [
     {
@@ -371,6 +412,14 @@ export const teachersPrivateRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: PPS_VOTE_ROUTE }),
         isTemplate: false,
     },
+    36: {
+        id: 36,
+        title: 'Заявления',
+        icon: FiFileText,
+        path: APPLICATIONS_ROUTE,
+        Component: TeachersApplicationsPage,
+        isTemplate: false,
+    },
 }
 
 export const hiddenTeacherRoutes = {
@@ -380,6 +429,146 @@ export const hiddenTeacherRoutes = {
         icon: BiIdCard,
         path: TEACHER_SCHEDULE,
         Component: TeachersSchedule,
+        isTemplate: false,
+    },
+    37: {
+        id: 37,
+        title: 'Выдача лицензий',
+        path: ISSUANCE_OF_LICENSES,
+        Component: IssuanceOfLicensesPage,
+        isTemplate: false,
+    },
+    38: {
+        id: 38,
+        title: 'Получение нового компьютерного оборудования',
+        path: GETTING_COMPUTER_EQUIPMENT,
+        Component: GettingComputerEquipmentPage,
+        isTemplate: false,
+    },
+    39: {
+        id: 39,
+        title: 'Подключение компьютера, МФУ, телефона, WiFi',
+        path: CONNECTING_COMPUTER,
+        Component: ConnectingComputerPage,
+        isTemplate: false,
+    },
+    40: {
+        id: 40,
+        title: 'Обслуживание принтеров, МФУ',
+        path: PRINTER_MAINTENANCE,
+        Component: PrinterMaintenancePage,
+        isTemplate: false,
+    },
+    41: {
+        id: 41,
+        title: 'Вопрос по СЭД Directum и 1С',
+        path: QUESTION_SED,
+        Component: QuestionSedPage,
+        isTemplate: false,
+    },
+    42: {
+        id: 42,
+        title: 'Вопрос по Личному кабинету',
+        path: QUESTION_PERSONAL_ACCOUNT,
+        Component: QuestionPersonalAccountPage,
+        isTemplate: false,
+    },
+    43: {
+        id: 43,
+        title: 'Прочее ИТ-обслуживание',
+        path: OTHER_IT_SERVICES,
+        Component: OtherItServicesPage,
+        isTemplate: false,
+    },
+    44: {
+        id: 44,
+        title: 'Справка с места работы',
+        path: CERTIFICATE_FROM_PLACE_OF_WORK,
+        Component: CertificateFromPlaceOfWorkPage,
+        isTemplate: false,
+    },
+    45: {
+        id: 45,
+        title: 'Справка на визу',
+        path: VISA_CERTIFICATE,
+        Component: VisaCertificatePage,
+        isTemplate: false,
+    },
+    46: {
+        id: 46,
+        title: 'Справка о стаже работы',
+        path: CERTIFICATE_OF_WORK_EXPERIENCE,
+        Component: CertificateOfWorkExperiencePage,
+        isTemplate: false,
+    },
+    47: {
+        id: 47,
+        title: 'Справка о количестве неиспользованных дней отпуска',
+        path: NUMBER_OF_UNUSED_VACATION_DAYS,
+        Component: NumberOfUnusedVacationDaysPage,
+        isTemplate: false,
+    },
+    48: {
+        id: 48,
+        title: 'Копия трудовой книжки',
+        path: COPY_OF_EMPLOYMENT_RECORD,
+        Component: CopyOfEmploymentRecordPage,
+        isTemplate: false,
+    },
+    49: {
+        id: 49,
+        title: 'Копии документов из личного дела',
+        path: COPIES_OF_DOCUMENTS_FROM_PERSONAL_FILE,
+        Component: CopiesOfDocumentsFromPersonalFilePage,
+        isTemplate: false,
+    },
+    50: {
+        id: 50,
+        title: 'Справка о работе на условиях внешнего совместительства для внесения стажа в трудовую книжку',
+        path: WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY,
+        Component: WorkOnTermsOfExternalConcurrencyPage,
+        isTemplate: false,
+    },
+    51: {
+        id: 51,
+        title: 'Справка об отпуске по уходу за ребенком до 1,5 и 3 лет',
+        path: CERTIFICATE_TIME_PARENTAL_LEAVE,
+        Component: CertificateTimeParentalLeavePage,
+        isTemplate: false,
+    },
+    52: {
+        id: 52,
+        title: 'Произвольный запрос',
+        path: ARBITRARY_REQUEST,
+        Component: ArbitraryRequestPage,
+        isTemplate: false,
+    },
+    53: {
+        id: 53,
+        title: 'Курьер',
+        path: COURIER,
+        Component: CourierPage,
+        isTemplate: false,
+    },
+    54: {
+        id: 54,
+        title: 'Справка по форме 2-НДФЛ',
+        path: PERSONA_INCOME_TAX_REFERENCE,
+        Component: PersonaIncomeTaxReferencePage,
+        isTemplate: false,
+    },
+    55: {
+        id: 55,
+        title: 'Справка о выплате (не выплате) единовременного пособия на рождение ребенка',
+        path: PAYMENT_OF_CHILD_BIRTH_ALLOWANCE,
+        Component: PaymentOfChildBirthAllowancePage,
+        isTemplate: false,
+    },
+    56: {
+        id: 56,
+        title: 'Справка о ежемесячных выплатах сотрудника, находящегося в отпуске по уходу за ребенком (декрет)',
+        path: PAYMENT_FOR_CHILD_CARE,
+        Component: PaymentForChildCarePage,
         isTemplate: false,
     },
 }
