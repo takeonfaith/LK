@@ -79,8 +79,8 @@ export const ButtonWrapper = styled.button<{
         right: 10px;
 
         .icon {
-            width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
-            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
+            width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
+            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
             height: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};

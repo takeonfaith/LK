@@ -7,7 +7,6 @@ import { useModal } from 'widgets'
 import createFullName from '../../lib/create-full-name'
 import { Description, MoreInfoLink } from '../atoms/more-info'
 import Avatar from '../molecules/avatar'
-import MoreUserInfo from './more-user-info'
 
 export default UserInfo
 
@@ -21,7 +20,7 @@ function UserInfo({ user }: Props) {
     const { open } = useModal()
 
     const handleNodel = useCallback(() => {
-        open(<MoreUserInfo user={user} />)
+        open(<></>)
     }, [open])
 
     return (

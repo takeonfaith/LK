@@ -16,18 +16,10 @@ const useList = (gap?: number) => {
         if (listRef.current) {
             listRef.current.scrollLeft = scrollLeft
 
-            if (listRef.current.offsetWidth < listRef.current.scrollWidth) {
-                if (scrollLeft !== 0) {
-                    setLeftArrow(true)
-                } else {
-                    setLeftArrow(false)
-                }
+            if (listRef.current.clientWidth < listRef.current.scrollWidth) {
+                setLeftArrow(true)
 
-                if (Math.ceil(scrollLeft + listRef.current.offsetWidth) < listRef.current.scrollWidth) {
-                    setRightArrow(true)
-                } else {
-                    setRightArrow(false)
-                }
+                setRightArrow(true)
             }
         }
     }, [scrollLeft, listRef.current?.scrollLeft])

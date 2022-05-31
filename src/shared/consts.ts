@@ -196,7 +196,7 @@ export const Colors: IColors = {
         dark: '',
         reallyTransparent: '',
         darkTransparent: '',
-        transparentAF: '#9494940d',
+        transparentAF: '#ffffff17',
         lightTransparent: '#80808014',
         littleDarker: '',
     },

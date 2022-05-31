@@ -8,17 +8,18 @@ interface ISlider {
     currentPage: number
     setCurrentPage: (currentPage: number) => void
     sliderWidth?: string
+    appearance?: boolean
 }
 
-const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
+const SliderWrapper = styled.div<{ size: number; sliderWidth?: string; appearance: boolean }>`
     max-width: ${({ sliderWidth }) => sliderWidth ?? '100%'};
     width: 100%;
     min-height: 50px;
-    padding: 3px;
+    padding: ${({ appearance }) => appearance && '3px'};
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background: var(--search2);
+    background: ${({ appearance }) => appearance && 'var(--search2)'};
     border-radius: 17px;
     overflow-y: hidden;
     overflow-x: auto;
@@ -52,7 +53,7 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string }>`
     }
 `
 
-const Slider = ({ pages, currentPage, setCurrentPage, sliderWidth }: ISlider) => {
+const Slider = ({ pages, currentPage, setCurrentPage, sliderWidth, appearance = true }: ISlider) => {
     const [size, setSize] = useState(5)
 
     const { width } = useResize()
@@ -65,7 +66,7 @@ const Slider = ({ pages, currentPage, setCurrentPage, sliderWidth }: ISlider) =>
     }, [width])
 
     return (
-        <SliderWrapper size={size} sliderWidth={sliderWidth}>
+        <SliderWrapper size={size} sliderWidth={sliderWidth} appearance={appearance}>
             <div className="slider-body">
                 <CurrentPage pages={pages} currentPage={currentPage} size={size} />
                 {pages.map((page, index: number) => {

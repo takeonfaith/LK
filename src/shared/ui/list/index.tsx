@@ -4,21 +4,24 @@ import { DotPages } from '@ui/molecules'
 import { Title } from '@ui/title'
 import { Align } from '@ui/types'
 import limitNumber from '@utils/limit-number'
-import React from 'react'
+import React, { HtmlHTMLAttributes } from 'react'
 import { FiChevronLeft, FiChevronRight, FiPlus } from 'react-icons/fi'
 import useList from './hooks/use-list'
 import { ListWrapper, StyleProps, Wrapper } from './styles'
 
+type BaseProps = HtmlHTMLAttributes<HTMLDivElement>
+
 export type ModifiedAlign = Align | 'evenly'
 
-type Props = StyleProps & {
-    title?: string
-    children: ChildrenType
-    onAdd?: () => void
-    onWatchMore?: () => void
-    visible?: boolean
-    showPages?: boolean
-}
+type Props = StyleProps &
+    BaseProps & {
+        title?: string
+        children: ChildrenType
+        onAdd?: () => void
+        onWatchMore?: () => void
+        visible?: boolean
+        showPages?: boolean
+    }
 
 const List = (props: Props) => {
     const {
@@ -34,12 +37,14 @@ const List = (props: Props) => {
         onWatchMore,
         showPages,
         innerPadding,
+        minWidth,
         wrapOnMobile,
         direction = 'vertical',
         verticalAlign = 'top',
         horizontalAlign = 'left',
         scroll = true,
         visible = true,
+        ...restProps
     } = props
 
     if (!visible) return null
@@ -48,7 +53,7 @@ const List = (props: Props) => {
         useList(gap)
 
     return (
-        <Wrapper padding={padding}>
+        <Wrapper padding={padding} width={width} minWidth={minWidth} height={height}>
             <Title size={4} align="left" bottomGap visible={!!title} width="calc(fit-content + 50px)">
                 {title}
                 {onAdd && (
@@ -72,36 +77,7 @@ const List = (props: Props) => {
                     />
                 )}
             </Title>
-            {leftArrow && (
-                <Button
-                    background="var(--search)"
-                    width="30px"
-                    height="30px"
-                    icon={<FiChevronLeft />}
-                    className="left-button"
-                    textColor={Colors.grey.main}
-                    onClick={() => {
-                        setCurrentPage((prev) => limitNumber(prev - 1, amountOfPages))
-                        setScrollLeft((prev) => prev - pageOffset - (gap ?? 0))
-                    }}
-                />
-            )}
-            {rightArrow && (
-                <Button
-                    background="var(--search)"
-                    width="30px"
-                    height="30px"
-                    icon={<FiChevronRight />}
-                    className="right-button"
-                    textColor={Colors.grey.main}
-                    onClick={() => {
-                        setCurrentPage((prev) => limitNumber(prev + 1, amountOfPages))
-                        setScrollLeft((prev) => {
-                            return prev + pageOffset + (gap ?? 0)
-                        })
-                    }}
-                />
-            )}
+
             <ListWrapper
                 verticalAlign={verticalAlign}
                 horizontalAlign={horizontalAlign}
@@ -115,10 +91,47 @@ const List = (props: Props) => {
                 innerPadding={innerPadding}
                 scroll={scroll}
                 wrapOnMobile={wrapOnMobile}
+                {...restProps}
             >
                 {children}
             </ListWrapper>
-            {showPages && <DotPages direction="horizontal" current={currentPage} amount={amountOfPages} />}
+            {(rightArrow || leftArrow) && (
+                <div className="bottom-wrapper">
+                    {leftArrow && (
+                        <Button
+                            background={Colors.grey.transparentAF}
+                            minWidth="40px"
+                            height="25px"
+                            icon={<FiChevronLeft />}
+                            className="left-button"
+                            textColor={Colors.grey.main}
+                            onClick={() => {
+                                setCurrentPage((prev) => limitNumber(prev - 1, amountOfPages - 1))
+                                setScrollLeft((prev) =>
+                                    limitNumber(prev - pageOffset - (gap ?? 0), listRef.current?.scrollWidth ?? 0),
+                                )
+                            }}
+                        />
+                    )}
+                    {showPages && <DotPages direction="horizontal" current={currentPage} amount={amountOfPages} />}
+                    {rightArrow && (
+                        <Button
+                            background={Colors.grey.transparentAF}
+                            minWidth="40px"
+                            height="25px"
+                            icon={<FiChevronRight />}
+                            className="right-button"
+                            textColor={Colors.grey.main}
+                            onClick={() => {
+                                setCurrentPage((prev) => limitNumber(prev + 1, amountOfPages - 1))
+                                setScrollLeft((prev) =>
+                                    limitNumber(prev + pageOffset + (gap ?? 0), listRef.current?.scrollWidth ?? 0),
+                                )
+                            }}
+                        />
+                    )}
+                </div>
+            )}
         </Wrapper>
     )
 }

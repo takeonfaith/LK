@@ -7,6 +7,7 @@ import convertVerticalAlign from './lib/convert-vertical-align'
 export interface StyleProps {
     direction?: Direction
     width?: string
+    minWidth?: string
     height?: string
     gap?: number
     horizontalAlign?: ModifiedAlign
@@ -19,30 +20,26 @@ export interface StyleProps {
     wrapOnMobile?: boolean
 }
 
-export const Wrapper = styled.div<{ padding?: string }>`
+export const Wrapper = styled.div<{ padding?: string; width?: string; minWidth?: string; height?: string }>`
     padding: ${({ padding }) => padding ?? '0'};
     position: relative;
-    .left-button,
-    .right-button {
-        position: absolute;
-        top: 50%;
-        z-index: 5;
-        transform: translateY(-50%);
-    }
+    width: ${({ width }) => width ?? '100%'};
+    height: ${({ height }) => height ?? 'fit-content'};
+    min-width: ${({ minWidth }) => minWidth};
 
-    .left-button {
-        left: 0;
-    }
-
-    .right-button {
-        right: 0;
+    .bottom-wrapper {
+        margin-top: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
     }
 `
 
 export const ListWrapper = styled.div<StyleProps>`
     display: flex;
-    height: ${({ height }) => height ?? 'fit-content'};
     flex-direction: ${({ direction }) => (direction ?? 'vertical') === 'vertical' && 'column'};
+    max-height: 100%;
     align-items: center;
     justify-content: ${({ direction, horizontalAlign, verticalAlign }) =>
         (direction ?? 'vertical') === 'vertical'
@@ -54,7 +51,7 @@ export const ListWrapper = styled.div<StyleProps>`
             : convertVerticalAlign(verticalAlign)};
     gap: ${({ gap }) => (gap ?? 5) + 'px'};
     width: ${({ width }) => width ?? '100%'};
-    min-width: ${({ width }) => width ?? '100%'};
+    min-width: ${({ minWidth, width }) => minWidth ?? width};
     color: var(--text);
     font-size: ${({ fontSize }) => fontSize ?? '1em'};
     overflow-x: ${({ scroll }) => scroll && 'auto'};

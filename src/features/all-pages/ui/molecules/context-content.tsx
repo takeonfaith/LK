@@ -2,7 +2,7 @@ import { IRoute } from '@app/routes/general-routes'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
 import React from 'react'
-import { FiBook, FiMinusCircle } from 'react-icons/fi'
+import { FiMinusCircle } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
 

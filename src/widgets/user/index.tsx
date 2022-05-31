@@ -1,3 +1,4 @@
+import { Colors } from '@consts'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { Direction, Size } from '@ui/types'
 import React from 'react'
@@ -17,10 +18,10 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     color: var(--text);
     font-weight: 600;
     cursor: pointer;
-    width: ${({ orientation, size }) => orientation === 'vertical' && getWidth(size)};
+    width: ${({ orientation, size }) => (orientation === 'vertical' ? getWidth(size) : '100%')};
 
     &:hover {
-        background: var(--search);
+        background: ${Colors.grey.transparentAF};
     }
 
     .name-and-status {

@@ -12,7 +12,7 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     bottom: 50%;
     left: 50%;
     width: 100%;
-    max-width: 500px;
+    max-width: 390px;
     border-radius: var(--brLight);
     background: var(--schedule);
     box-shadow: 0 0 40px #0000002f;
@@ -50,30 +50,32 @@ const ConfirmMessage = () => {
     return (
         <ModalWrapper isOpen={isOpen}>
             <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
-                <Title size={3}>{message ?? 'Хотите продолжить?'}</Title>
+                <Title size={3} align="left">
+                    {message ?? 'Хотите продолжить?'}
+                </Title>
                 <List
                     width="100%"
                     scroll={false}
                     direction="horizontal"
                     gap={5}
                     padding="10px 0 0 0"
-                    horizontalAlign="center"
+                    horizontalAlign="right"
                 >
                     <Button
                         text="Да"
                         onClick={handleConfirm}
-                        width="50%"
+                        width="90px"
                         textColor="var(--red)"
-                        background={Colors.red.transparentAF}
-                        hoverBackground={Colors.red.transparent}
+                        background="transparent"
+                        hoverBackground={Colors.red.transparentAF}
                     />
                     <Button
                         text="Нет"
                         onClick={onReject ?? handleReject}
-                        width="50%"
+                        width="90px"
                         textColor="var(--blue)"
-                        background={Colors.blue.transparentAF}
-                        hoverBackground={Colors.blue.transparent}
+                        background="transparent"
+                        hoverBackground={Colors.blue.transparentAF}
                     />
                 </List>
             </ConfirmWrapper>

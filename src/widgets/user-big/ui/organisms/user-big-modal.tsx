@@ -6,62 +6,19 @@ import { userModel } from '@entities/user'
 import { LinkButton, Message } from '@ui/atoms'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
-import List from '@ui/list'
 import React from 'react'
 import { FiArrowLeftCircle, FiLogOut, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import AvailableAccounts from 'widgets/available-accounts'
 import useModal from 'widgets/modal'
-import User from 'widgets/user'
 import WhatsNew from 'widgets/whats-new'
-import { UserList } from '../molecules'
 
 const UserBigModal = () => {
     const { open } = useModal()
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
+
     return (
         <>
-            <List
-                visible={!!user?.available_accounts}
-                padding="10px"
-                title="Аккаунты"
-                direction="horizontal"
-                gap={0}
-                showPages
-                horizontalAlign="left"
-                onAdd={() => {
-                    open(<UserList />)
-                    contextMenuModel.events.close()
-                }}
-            >
-                {user?.available_accounts?.map((account) => {
-                    return (
-                        <User
-                            key={account.name}
-                            type={'teacher'}
-                            onClick={() => {
-                                confirmModel.events.evokeConfirm({
-                                    message: 'Вы уверены, что хотите сменить аккаунт?',
-                                    onConfirm: () => {
-                                        localStorage.setItem(
-                                            'token',
-                                            JSON.stringify({
-                                                token: account.token,
-                                            }),
-                                        )
-                                        location.reload()
-                                    },
-                                })
-                                contextMenuModel.events.close()
-                            }}
-                            size="small"
-                            name={account.name}
-                            orientation="vertical"
-                        />
-                    )
-                })}
-            </List>
+            <AvailableAccounts />
             <Link to={SETTINGS_ROUTE}>
                 <Button
                     text="Настройки"

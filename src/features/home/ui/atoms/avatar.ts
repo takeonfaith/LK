@@ -6,6 +6,7 @@ export const Container = styled.div<{
     height?: string
     marginRight?: string
     background?: string
+    boxShadow?: string
 }>`
     border-radius: 50%;
     display: flex;
@@ -22,6 +23,7 @@ export const Container = styled.div<{
     height: ${({ height }) => height ?? '160px'};
 
     margin-right: ${({ marginRight }) => marginRight ?? '32px'};
+    box-shadow: ${({ boxShadow }) => boxShadow ?? '0'};
 
     .checkbox {
         position: absolute;

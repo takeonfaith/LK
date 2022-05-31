@@ -14,7 +14,7 @@ const ContextMenuWrapper = styled.div<{
     visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
     transform: ${({ isVisible }) => (isVisible ? 'translateY(0)' : 'translateY(20px)')};
     position: absolute;
-    width: 200px;
+    width: 220px;
     left: ${({ left }) => left + 'px'};
     top: ${({ top }) => top + 'px'};
     background: var(--schedule);
