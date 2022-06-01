@@ -33,7 +33,7 @@ const LeftsideBarList = ({ searchList }: Props) => {
             })}
             <LeftsideBarDropdown
                 heading={<LeftsideBarItemButton key={0} id={0} icon={FiCompass} title={'Другое'} />}
-                height={Object.values(getNotChosenRoutes(setting, data)).length * 54}
+                height={Object.values(getNotChosenRoutes(setting, data)).length * 58}
             >
                 {Object.values(getNotChosenRoutes(setting, data)).map((props: IRoute) => {
                     return isAccessible(props.title) ? (

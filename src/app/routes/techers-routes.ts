@@ -2,6 +2,7 @@ import ContactInfoActualizationPage from '@pages/contact-info-actualization'
 import DataVerificationPage from '@pages/data-verification'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
+import InstructionsPage from '@pages/instructions'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import PersonalNotificationsPage from '@pages/personal-notifications'
@@ -143,7 +144,7 @@ export const teachersPrivateRoutes: IRoutes = {
         title: 'Инструкции, положения, правила',
         icon: FiClipboard,
         path: INSTRUCTIONS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: INSTRUCTIONS_ROUTE }),
+        Component: InstructionsPage,
         isTemplate: false,
     },
     6: {

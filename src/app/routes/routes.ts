@@ -5,6 +5,7 @@ import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
 import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
+import InstructionsPage from '@pages/instructions'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import TeachersSchedule from '@pages/teachers-schedule'
@@ -20,7 +21,7 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiBriefcase, FiFileText } from 'react-icons/fi'
+import { FiBriefcase, FiClipboard, FiFileText } from 'react-icons/fi'
 import { HiOutlineClipboardCheck } from 'react-icons/hi'
 import { IconType } from 'react-icons/lib'
 import AcadPerformance from '../../pages/acad-performance'
@@ -41,6 +42,7 @@ export const ALL_STUDENTS_ROUTE = '/students'
 export const ALL_TEACHERS_ROUTE = '/teachers'
 export const LOGIN_ROUTE = '/login'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
+export const INSTRUCTIONS_ROUTE = '/instructions'
 
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
@@ -153,10 +155,10 @@ export const privateRoutes: IRoutes = {
     },
     10: {
         id: 10,
-        title: 'Портфолио',
-        icon: BiIdCard,
-        path: '/portfolio',
-        Component: () => PageIsNotReady({ oldVersionUrl: '/myportfolio' }),
+        title: 'Инструкции, положения, правила',
+        icon: FiClipboard,
+        path: INSTRUCTIONS_ROUTE,
+        Component: InstructionsPage,
         isTemplate: false,
     },
     11: {
@@ -183,17 +185,17 @@ export const privateRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
         isTemplate: false,
     },
+    14: {
+        id: 14,
+        title: 'Портфолио',
+        icon: BiIdCard,
+        path: '/portfolio',
+        Component: () => PageIsNotReady({ oldVersionUrl: '/myportfolio' }),
+        isTemplate: false,
+    },
 }
 
 export const hiddenRoutes: IRoutes = {
-    14: {
-        id: 14,
-        title: 'Уточнение паспортных данных',
-        icon: FiBriefcase,
-        path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
-        Component: ClarificationOfPassportDataApplication,
-        isTemplate: false,
-    },
     15: {
         id: 15,
         title: 'Произвольный запрос',
@@ -240,6 +242,14 @@ export const hiddenRoutes: IRoutes = {
         icon: BiIdCard,
         path: PAPER_CALL,
         Component: ApplicationPaperCall,
+        isTemplate: false,
+    },
+    21: {
+        id: 21,
+        title: 'Уточнение паспортных данных',
+        icon: FiBriefcase,
+        path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
+        Component: ClarificationOfPassportDataApplication,
         isTemplate: false,
     },
 }
