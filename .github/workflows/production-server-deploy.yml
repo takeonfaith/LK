@@ -1,4 +1,4 @@
-name: Test server deploy
+name: Production server deploy
 
 on:
   push:
@@ -38,17 +38,16 @@ jobs:
       - name: multiple command
         uses: appleboy/ssh-action@master
         with:
-          username: ${{ secrets.TEST_SERVER_USERNAME }}
-          password: ${{ secrets.TEST_SERVER_PASSWORD }}
-          host: ${{ secrets.TEST_HOST_IP }}
+          username: ${{ secrets.PROD_SERVER_USERNAME }}
+          password: ${{ secrets.PROD_SERVER_PASSWORD }}
+          host: ${{ secrets.PROD_HOST_IP }}
           script: |
             whoami
-            ls
-            cd client-app/LK
-            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo -S git pull
-            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo git reset --hard origin/master
-            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo npm i
-            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo npm run build
+            cd var/www/client-app/LK
+            echo ${{ secrets.PROD_SERVER_PASSWORD }} | sudo -S git pull
+            echo ${{ secrets.PROD_SERVER_PASSWORD }} | sudo git reset --hard origin/master
+            echo ${{ secrets.PROD_SERVER_PASSWORD }} | sudo npm i
+            echo ${{ secrets.PROD_SERVER_PASSWORD }} | sudo npm run build
 
       - name: Kill VPN connection
         if: always()
