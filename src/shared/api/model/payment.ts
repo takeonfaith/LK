@@ -15,25 +15,34 @@ export type Paygraph = {
 }
 
 export interface PaymentsContract {
+    agreements: any[]
     balance: string
     balance_currdate: string
+    bill: string
+    can_sign: boolean
     contragent: string
+    dorm_num: string
+    dorm_room: string
     endDateFact: string
     endDatePlan: string
+    file: string
+    id: string
     lastPaymentDate: string
+    level: string
     name: string
     number: string
+    paygraph: Paygraph[]
     payments: IPaymentItem[]
+    qr_current: string
+    qr_total: string
+    sign_text: string
+    signed_user: boolean
+    signed_user_date: string
+    signed_user_time: string
     startDate: string
-    bill?: string
     student: string
     sum: string
     type: string
-    qr_current: string
-    qr_total: string
-    agreements: any[]
-    file?: string
-    paygraph?: Paygraph[]
 }
 
 export interface Agreement {
