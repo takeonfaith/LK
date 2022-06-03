@@ -32,7 +32,6 @@ const Contract = ({ contract }: Props) => {
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
     const { error } = paymentsModel.selectors.usePayments()
-    console.log(contract)
 
     const contractInfo = [
         {
