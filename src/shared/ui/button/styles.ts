@@ -64,8 +64,8 @@ export const ButtonWrapper = styled.button<{
         svg {
             width: 100%;
             height: 100%;
-            max-width: 16px;
-            max-height: 16px;
+            max-width: 20px;
+            max-height: 20px;
             margin-right: 0 !important;
         }
     }

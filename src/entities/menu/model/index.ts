@@ -22,8 +22,6 @@ const DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'acad-p
 const DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'all']
 
 const getLeftsideBarConfig = (user: User | null, adminLinks: AdminLinks | null) => {
-    // console.log(adminLinks)
-
     const shouldAddAdmin =
         !!adminLinks?.accepts.length || !!adminLinks?.agreements.length || !!adminLinks?.checkdata.length
     const teacherConfig = shouldAddAdmin

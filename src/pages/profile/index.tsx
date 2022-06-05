@@ -24,11 +24,11 @@ const ProfileWrapper = styled.div`
     align-items: center;
     padding: 80px 150px;
     color: var(--text);
-    background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 65%),
+    /* background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 65%),
         radial-gradient(farthest-side at top center, ${Colors.purple.main}, transparent 65%),
         radial-gradient(farthest-side at top right, ${Colors.orange.main}, transparent 65%),
         radial-gradient(farthest-side at top right, ${Colors.purple.main}, transparent 65%),
-        radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 65%);
+        radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 65%); */
 
     @media (max-width: 1000px) {
         padding: 40px;
@@ -64,6 +64,17 @@ const ProfileTop = styled(ListWrapper)`
     }
 `
 
+const GradientCircle = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 100%),
+        radial-gradient(farthest-side at top center, ${Colors.purple.main}, transparent 100%),
+        radial-gradient(farthest-side at top right, ${Colors.orange.main}, transparent 100%),
+        radial-gradient(farthest-side at top right, ${Colors.purple.main}, transparent 100%),
+        radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 100%);
+`
+
 const ProfilePage = () => {
     const {
         data: { user },
@@ -91,7 +102,7 @@ const ProfilePage = () => {
                     width="120px"
                     height="120px"
                     marginRight="0"
-                    boxShadow="0 0 100px #0000004b"
+                    boxShadow="0 0 100px #0000005c"
                 />
                 <List horizontalAlign="center">
                     <Title size={3} align="left">
@@ -109,6 +120,7 @@ const ProfilePage = () => {
                     height="100%"
                     padding="15px 0"
                 >
+                    <Button icon={<GradientCircle />} height="27px" background="transparent" />
                     <Link to={SETTINGS_APPEARANCE_ROUTE}>
                         <Button icon={<FiSun />} background={Colors.white.transparentAF} height="27px" />
                     </Link>
