@@ -4,6 +4,7 @@ import DataVerificationPage from '@pages/data-verification'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PersonalNotificationsPage from '@pages/personal-notifications'
+import VacationSchedule from '@pages/vacation-schedule'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
 import {
@@ -127,7 +128,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'График отпусков',
         icon: <FiCalendar />,
         path: VACATION_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: VACATION_ROUTE }),
+        Component: VacationSchedule,
         color: 'purple',
         isTemplate: false,
     },

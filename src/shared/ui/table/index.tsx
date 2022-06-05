@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import useFilter from './lib/hooks/use-filter'
 import { TableProps } from './types'
-import { Body, Header, Search } from './ui'
+import { Body, Header, Search, Footer } from './ui'
 
 const TableWrapper = styled.div`
     width: 100%;
@@ -12,7 +12,7 @@ const TableWrapper = styled.div`
     color: var(--text);
 `
 
-const Table = ({ columns, data, maxOnPage, onRowClick, loading = false }: TableProps) => {
+const Table = ({ columns, data, maxOnPage, onRowClick, footer, loading = false }: TableProps) => {
     const {
         sort,
         setSort,
@@ -54,6 +54,7 @@ const Table = ({ columns, data, maxOnPage, onRowClick, loading = false }: TableP
                 data={resultData}
                 maxOnPage={maxOnPage}
             />
+            <Footer footer={footer} data={data} columns={columns} />
         </TableWrapper>
     )
 }
