@@ -10,6 +10,8 @@ const TableWrapper = styled.div`
     box-shadow: var(--schedule-shadow);
     border-radius: var(--brLight);
     color: var(--text);
+    background: var(--form);
+    overflow: hidden;
 `
 
 const Table = ({ columns, data, maxOnPage, onRowClick, footer, loading = false }: TableProps) => {
