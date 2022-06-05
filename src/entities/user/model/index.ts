@@ -51,7 +51,6 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
         const userResponse = await userApi.getUser(data.token)
         const user = userResponse.data.user
         const { name, surname, patronymic } = user
-        console.log(data)
 
         return {
             currentUser: {
@@ -86,7 +85,6 @@ const logoutFx = createEffect(() => {
     } else {
         sessionStorage.removeItem('token')
     }
-    console.log('token removed')
 
     clearAllStores()
 })

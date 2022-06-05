@@ -20,7 +20,7 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string; appearanc
     align-items: center;
     justify-content: flex-start;
     background: ${({ appearance }) => appearance && 'var(--search2)'};
-    border-radius: 17px;
+    border-radius: ${({ appearance }) => appearance && '17px'};
     overflow-y: hidden;
     overflow-x: auto;
     scroll-snap-type: x proximity;
@@ -68,7 +68,7 @@ const Slider = ({ pages, currentPage, setCurrentPage, sliderWidth, appearance = 
     return (
         <SliderWrapper size={size} sliderWidth={sliderWidth} appearance={appearance}>
             <div className="slider-body">
-                <CurrentPage pages={pages} currentPage={currentPage} size={size} />
+                <CurrentPage appearance={appearance} pages={pages} currentPage={currentPage} size={size} />
                 {pages.map((page, index: number) => {
                     return (
                         <SliderItem

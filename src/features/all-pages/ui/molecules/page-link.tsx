@@ -71,7 +71,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
         gap: 15px;
         display: flex;
         flex-direction: ${({ isVertical }) => (isVertical ? 'column' : 'row')};
-        border-radius: var(--brSemi);
+        border-radius: ${({ isVertical }) => (isVertical ? 'var(--brSemi)' : 'var(--brLight)')};
         align-items: center;
         justify-content: ${({ isVertical }) => (isVertical ? 'center' : 'flex-start')};
         padding: 15px;

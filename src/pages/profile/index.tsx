@@ -64,10 +64,12 @@ const ProfileTop = styled(ListWrapper)`
     }
 `
 
-const GradientCircle = styled.div`
+const GradientCircle = styled.div<{ current: boolean }>`
     width: 20px;
     height: 20px;
     border-radius: 100px;
+    border: ${({ current }) => current && '2px solid var(--theme)'};
+    outline: ${({ current }) => current && '2px solid var(--reallyBlue)'};
     background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 100%),
         radial-gradient(farthest-side at top center, ${Colors.purple.main}, transparent 100%),
         radial-gradient(farthest-side at top right, ${Colors.orange.main}, transparent 100%),
@@ -108,9 +110,12 @@ const ProfilePage = () => {
                     <Title size={3} align="left">
                         {user.fullName}
                     </Title>
-                    <Subtext width="100%">Специальность: {user.specialty}</Subtext>
+                    <Subtext visible={!!user.specialty} width="100%">
+                        Специальность: {user.specialty}
+                    </Subtext>
                     <Subtext width="100%">
-                        {user.user_status === 'stud' ? 'Студент' : 'Сотрудник'} {user.course} Курс
+                        {user.user_status === 'stud' ? 'Студент' : 'Сотрудник'}{' '}
+                        {user.user_status === 'stud' && `${user.course} Курс`}
                     </Subtext>
                 </List>
                 <List
@@ -120,7 +125,7 @@ const ProfilePage = () => {
                     height="100%"
                     padding="15px 0"
                 >
-                    <Button icon={<GradientCircle />} height="27px" background="transparent" />
+                    <Button icon={<GradientCircle current />} height="27px" background="transparent" />
                     <Link to={SETTINGS_APPEARANCE_ROUTE}>
                         <Button icon={<FiSun />} background={Colors.white.transparentAF} height="27px" />
                     </Link>

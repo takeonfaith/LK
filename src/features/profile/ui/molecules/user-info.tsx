@@ -7,6 +7,7 @@ import { SliderPage } from 'widgets'
 
 const UserInfoWrapper = styled.div`
     font-size: 0.9em;
+    width: 100%;
 `
 
 const UserInfo = () => {

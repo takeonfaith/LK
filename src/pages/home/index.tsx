@@ -61,6 +61,9 @@ const Home = () => {
                     current={current}
                     onCircleClick={(id) => setCurrent(id)}
                 />
+                {/* <Card title="Производственный календарь при пятедневной рабочей неделе">
+                    <Button padding="10px 0" text="Подробнее" background="transparent" textColor="var(--reallyBlue)" />
+                </Card> */}
                 <Message
                     type={'tip'}
                     width="100%"

@@ -7,6 +7,7 @@ export const ButtonWrapper = styled.button<{
     width?: string
     minWidth?: string
     background?: string
+    padding?: string
     textColor?: string
     shrinkTextInMobile?: boolean
     hoverBackground?: string
@@ -22,7 +23,7 @@ export const ButtonWrapper = styled.button<{
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
-    padding: 10px;
+    padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
