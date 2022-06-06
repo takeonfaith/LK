@@ -120,7 +120,7 @@ const LoadFileButtonWrapper = styled.label<{ showPulse: boolean; isActive: boole
         align-items: center;
         flex-direction: column;
         opacity: 0.7;
-        color: ${Colors.blue.dark};
+        color: ${Colors.blue.lighter};
         pointer-events: none;
 
         svg {

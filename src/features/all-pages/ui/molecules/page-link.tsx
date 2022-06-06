@@ -187,7 +187,7 @@ const PageLink = (props: Props) => {
                         e.stopPropagation()
                         contextMenuModel.events.open({
                             e,
-                            height: 143,
+                            height: 105,
                             content: <ContextContent {...props} />,
                         })
                     }}

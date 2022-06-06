@@ -11,7 +11,7 @@ const PaymentOfChildBirthAllowanceWrapper = styled.div`
 const PaymentOfChildBirthAllowancePage = () => {
     return (
         <PaymentOfChildBirthAllowanceWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </PaymentOfChildBirthAllowanceWrapper>
     )
 }

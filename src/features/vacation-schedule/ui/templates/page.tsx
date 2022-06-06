@@ -56,6 +56,7 @@ const Page = () => {
                             />
                         </Card>
                     </List>
+                    <Divider />
                     <Title size={3} align="left">
                         Сведения о трудоустройстве
                     </Title>

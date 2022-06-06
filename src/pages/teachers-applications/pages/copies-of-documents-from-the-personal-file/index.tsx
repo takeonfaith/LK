@@ -11,7 +11,7 @@ const CopiesOfDocumentsFromPersonalFileWrapper = styled.div`
 const CopiesOfDocumentsFromPersonalFilePage = () => {
     return (
         <CopiesOfDocumentsFromPersonalFileWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </CopiesOfDocumentsFromPersonalFileWrapper>
     )
 }

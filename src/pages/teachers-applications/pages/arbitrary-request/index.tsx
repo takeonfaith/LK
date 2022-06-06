@@ -11,7 +11,7 @@ const ArbitraryRequestWrapper = styled.div`
 const ArbitraryRequestPage = () => {
     return (
         <ArbitraryRequestWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </ArbitraryRequestWrapper>
     )
 }

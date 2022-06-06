@@ -11,7 +11,7 @@ const NumberOfUnusedVacationDaysWrapper = styled.div`
 const NumberOfUnusedVacationDaysPage = () => {
     return (
         <NumberOfUnusedVacationDaysWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </NumberOfUnusedVacationDaysWrapper>
     )
 }

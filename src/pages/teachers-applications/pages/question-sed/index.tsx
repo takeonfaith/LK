@@ -11,7 +11,7 @@ const QuestionSedWrapper = styled.div`
 const QuestionSedPage = () => {
     return (
         <QuestionSedWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </QuestionSedWrapper>
     )
 }

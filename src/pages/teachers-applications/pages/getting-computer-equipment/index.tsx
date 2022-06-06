@@ -11,7 +11,7 @@ const GettingComputerEquipmentWrapper = styled.div`
 const GettingComputerEquipmentPage = () => {
     return (
         <GettingComputerEquipmentWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </GettingComputerEquipmentWrapper>
     )
 }

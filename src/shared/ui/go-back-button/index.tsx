@@ -4,10 +4,13 @@ import { FiArrowLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
 
 interface Props {
+    visible?: boolean
     text?: string
 }
 
-const GoBackButton = ({ text = 'Назад' }: Props) => {
+const GoBackButton = ({ visible, text = 'Назад' }: Props) => {
+    if (!visible) return null
+
     const history = useHistory()
     return (
         <Button

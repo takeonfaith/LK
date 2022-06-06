@@ -60,7 +60,7 @@ export const ListWrapper = styled.div<StyleProps>`
     scroll-behavior: smooth;
 
     ::-webkit-scrollbar {
-        display: none;
+        display: ${({ direction }) => direction === 'horizontal' && 'none'};
     }
 
     @media (max-width: 1000px) {

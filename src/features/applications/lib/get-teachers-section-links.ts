@@ -19,7 +19,7 @@ import {
     QUESTION_SED,
     VISA_CERTIFICATE,
     WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY,
-} from '@app/routes/techers-routes'
+} from '@app/routes/teachers-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
 const getTeachersSectionLinks = () => {

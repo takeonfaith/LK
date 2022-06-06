@@ -10,11 +10,15 @@ import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import AcadPerformance from '../../pages/acad-performance'
 import { generalHiddenRoutes, generalRoutes, IRoutes } from './general-routes'
 import React from 'react'
+import ApplicationsPage from '@pages/applications'
+import { FaRegLightbulb } from 'react-icons/fa'
+import ProjectActivitiesPage from '@pages/project-activities'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 export const ACAD_PERFORMANCE_ROUTE = '/acad-performance'
+export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
 
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
@@ -31,8 +35,17 @@ export const privateRoutes: () => IRoutes = () => ({
         title: 'Заявления',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
-        color: 'blue',
+        Component: ApplicationsPage,
+        color: 'red',
+        isTemplate: false,
+    },
+    'project-activity': {
+        id: 'project-activity',
+        title: 'Проектная деятельность',
+        icon: <FaRegLightbulb />,
+        path: PROJECT_ACTIVITIES_ROUTE,
+        Component: ProjectActivitiesPage,
+        color: 'yellow',
         isTemplate: false,
     },
     'acad-performance': {

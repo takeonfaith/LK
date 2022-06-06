@@ -11,7 +11,7 @@ const WorkOnTermsOfExternalConcurrencyWrapper = styled.div`
 const WorkOnTermsOfExternalConcurrencyPage = () => {
     return (
         <WorkOnTermsOfExternalConcurrencyWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </WorkOnTermsOfExternalConcurrencyWrapper>
     )
 }

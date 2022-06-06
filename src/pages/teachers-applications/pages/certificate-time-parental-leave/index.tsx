@@ -11,7 +11,7 @@ const CertificateTimeParentalLeaveWrapper = styled.div`
 const CertificateTimeParentalLeavePage = () => {
     return (
         <CertificateTimeParentalLeaveWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </CertificateTimeParentalLeaveWrapper>
     )
 }

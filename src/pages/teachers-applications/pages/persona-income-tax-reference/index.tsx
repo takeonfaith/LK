@@ -11,7 +11,7 @@ const PersonaIncomeTaxReferenceWrapper = styled.div`
 const PersonaIncomeTaxReferencePage = () => {
     return (
         <PersonaIncomeTaxReferenceWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </PersonaIncomeTaxReferenceWrapper>
     )
 }

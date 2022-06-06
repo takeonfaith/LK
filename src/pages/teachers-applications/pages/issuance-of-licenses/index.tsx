@@ -11,7 +11,7 @@ const IssuanceOfLicensesWrapper = styled.div`
 const IssuanceOfLicensesPage = () => {
     return (
         <IssuanceOfLicensesWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </IssuanceOfLicensesWrapper>
     )
 }

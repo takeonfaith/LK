@@ -11,7 +11,7 @@ const PaymentForChildCareWrapper = styled.div`
 const PaymentForChildCarePage = () => {
     return (
         <PaymentForChildCareWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </PaymentForChildCareWrapper>
     )
 }

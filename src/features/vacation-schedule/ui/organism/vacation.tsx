@@ -3,7 +3,6 @@ import { getTableComuns } from '@features/vacation-schedule/lib/get-table-column
 import KeyValue from '@ui/atoms/key-value'
 import List from '@ui/list'
 import Table from '@ui/table'
-import { Title } from '@ui/title'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import getCorrectWordForm, { Rules } from '@utils/get-correct-word-form'
 import React from 'react'
