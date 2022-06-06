@@ -15,6 +15,8 @@ interface Props {
 }
 
 const LinksList = ({ title, links, doNotShow, restricted, wrapOnMobile = true, align = 'center' }: Props) => {
+    console.log(Object.values(links))
+
     return (
         <List
             direction="horizontal"
@@ -26,7 +28,7 @@ const LinksList = ({ title, links, doNotShow, restricted, wrapOnMobile = true, a
             wrapOnMobile={wrapOnMobile}
         >
             {Object.values(links).map((el) => {
-                if (el?.show !== false && doNotShow !== el.id)
+                if (el?.show !== false && doNotShow !== el?.id)
                     return (
                         <PageLink
                             restricted={restricted}
