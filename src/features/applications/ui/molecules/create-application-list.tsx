@@ -7,6 +7,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
+import getTeachersSectionLinks from '@features/applications/lib/get-teachers-section-links'
 
 const CreateApplicationListWrapper = styled.div`
     @media (min-width: 1001px) {
@@ -68,12 +69,16 @@ const CreateApplicationListWrapper = styled.div`
 
 export interface Section {
     title: string
-    links: { title: string; link: string }[]
+    links: { title: string; link: string; isExternalLink?: boolean }[]
 }
 
-const CreateApplicationList = () => {
+interface Props {
+    isTeachers?: boolean
+}
+
+const CreateApplicationList = ({ isTeachers = false }: Props) => {
     const { close } = useModal()
-    const sections: Section[] = getSectionLinks()
+    const sections: Section[] = isTeachers ? getTeachersSectionLinks() : getSectionLinks()
     const [search, setSearch] = useState<string>('')
 
     const [foundSections, setFoundSections] = useState<Section[] | null>(sections)
@@ -98,13 +103,15 @@ const CreateApplicationList = () => {
                                     {section.title}
                                 </Title>
                                 <div className="links">
-                                    {section.links.map((link) => {
-                                        return (
+                                    {section.links.map((link) =>
+                                        link.isExternalLink ? (
+                                            <a href={link.link}>{link.title}</a>
+                                        ) : (
                                             <Link to={link.link} key={link.link} onClick={close}>
                                                 {link.title}
                                             </Link>
-                                        )
-                                    })}
+                                        ),
+                                    )}
                                 </div>
                             </div>
                         )
