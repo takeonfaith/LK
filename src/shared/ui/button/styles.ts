@@ -65,8 +65,8 @@ export const ButtonWrapper = styled.button<{
         svg {
             width: 100%;
             height: 100%;
-            max-width: 20px;
-            max-height: 20px;
+            max-width: 18px;
+            max-height: 18px;
             margin-right: 0 !important;
         }
     }
@@ -78,11 +78,12 @@ export const ButtonWrapper = styled.button<{
         z-index: ${({ fixedInMobile }) => fixedInMobile && '5'};
         bottom: 10px;
         right: 10px;
+        padding: 0;
 
         .icon {
             width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
             min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
-            height: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
+            height: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};
         }

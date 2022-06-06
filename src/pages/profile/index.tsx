@@ -104,7 +104,7 @@ const ProfilePage = () => {
                     width="120px"
                     height="120px"
                     marginRight="0"
-                    boxShadow="0 0 100px #0000005c"
+                    boxShadow="0 0 80px #00000030"
                 />
                 <List horizontalAlign="center">
                     <Title size={3} align="left">
