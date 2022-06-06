@@ -51,7 +51,6 @@ export const DOCUMENT_BLANKS_ROUTE = '/staff_blanks'
 export const STUDENTS_LOGINS_ROUTE = '/ad_logins'
 export const ALERTS_ROUTE = '/alerts'
 export const VAX_ROUTE = '/vaccination'
-export const INSTRUCTIONS_ROUTE = '/instructions'
 export const DOCLIST_ROUTE = '/doclist'
 export const PPS_VOTE_ROUTE = '/pps_vote2020'
 export const CHILDREN_ROUTE = '/children'
@@ -137,15 +136,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <HiOutlineMenuAlt2 />,
         path: DATA_VERIFICATION_ROUTE,
         Component: DataVerificationPage,
-        color: 'blue',
-        isTemplate: false,
-    },
-    instructions: {
-        id: 'instructions',
-        title: 'Инструкции, положения, правила',
-        icon: <FiClipboard />,
-        path: INSTRUCTIONS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: INSTRUCTIONS_ROUTE }),
         color: 'blue',
         isTemplate: false,
     },

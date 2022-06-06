@@ -8,6 +8,7 @@ import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-ag
 import FeedbackPage from '@pages/feedback'
 import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
+import InstructionsPage from '@pages/instructions'
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
@@ -30,7 +31,7 @@ import {
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
-import { FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
+import { FiClipboard, FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
@@ -55,6 +56,7 @@ export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
 export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
 export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
+export const INSTRUCTIONS_ROUTE = '/instructions'
 
 // hidden
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
@@ -219,6 +221,15 @@ export const generalRoutes: IRoutes = {
         icon: <BiHeadphone />,
         path: FEEDBACK_ROUTE,
         Component: FeedbackPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    instructions: {
+        id: 'instructions',
+        title: 'Инструкции, положения, правила',
+        icon: <FiClipboard />,
+        path: INSTRUCTIONS_ROUTE,
+        Component: InstructionsPage,
         color: 'blue',
         isTemplate: false,
     },

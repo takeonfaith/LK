@@ -18,6 +18,7 @@ const List = styled.div`
     overflow: auto;
     width: 100%;
     max-height: 100%;
+    height: 100%;
     .scrolable-content {
         width: 100%;
     }

@@ -1,5 +1,5 @@
 import { userModel } from '@entities/user'
-import { CenterPage, Divider, Message, Title } from '@ui/atoms'
+import { CenterPage, Divider, Message, Title, Error } from '@ui/atoms'
 import BlockWrapper from '@ui/block/styles'
 import { LocalSearch } from '@ui/molecules'
 import React, { useState } from 'react'
@@ -99,6 +99,8 @@ const InstructionsPage = () => {
                             </section>
                         )
                     })}
+
+                    {!(foundLinks ?? data).length && <Error text="Ничего не было найдено" />}
                 </div>
 
                 <Message title="Уважаемые коллеги!" type="info">
