@@ -26,7 +26,7 @@ const LinksList = ({ title, links, doNotShow, restricted, wrapOnMobile = true, a
             wrapOnMobile={wrapOnMobile}
         >
             {Object.values(links).map((el) => {
-                if (el.show !== false && doNotShow !== el.id)
+                if (el?.show !== false && doNotShow !== el.id)
                     return (
                         <PageLink
                             restricted={restricted}
