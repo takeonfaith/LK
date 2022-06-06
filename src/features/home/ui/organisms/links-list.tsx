@@ -1,7 +1,6 @@
 import { IRoutes } from '@app/routes/general-routes'
 import AllPagesLink from '@features/all-pages/ui/molecules/all-pages-link'
 import List from '@ui/list'
-import { Title } from '@ui/title'
 import { Align } from '@ui/types'
 import React from 'react'
 import PageLink from '../../../all-pages/ui/molecules/page-link'

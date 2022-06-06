@@ -24,7 +24,7 @@ const FoundPages = ({ pages }: Props) => {
         <FoundPagesWrapper>
             {Object.values(pages).map((page) => {
                 return (
-                    page.show !== false && <PageLink {...page} orientation="horizontal" shadow={false} key={page.id} />
+                    page?.show !== false && <PageLink {...page} orientation="horizontal" shadow={false} key={page.id} />
                 )
             })}
         </FoundPagesWrapper>
