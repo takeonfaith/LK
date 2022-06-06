@@ -57,6 +57,7 @@ export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
 export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
 export const INSTRUCTIONS_ROUTE = '/instructions'
+export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
 
 // hidden
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'

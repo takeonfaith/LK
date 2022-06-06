@@ -15,8 +15,6 @@ interface Props {
 }
 
 const LinksList = ({ title, links, doNotShow, restricted, wrapOnMobile = true, align = 'center' }: Props) => {
-    console.log(Object.values(links))
-
     return (
         <List
             direction="horizontal"
