@@ -1,3 +1,4 @@
+import { Coordinates } from '@ui/types'
 import { createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
 import React from 'react'
@@ -8,8 +9,8 @@ type ClickType = 'left-click' | 'right-click' | 'both'
 interface ContextMenuStore {
     open: boolean
     type: ClickType
-    content: React.ReactNode[] | React.ReactNode | null
-    position: { x: number; y: number }
+    content: ChildrenType
+    position: Coordinates
 }
 
 const DEFAULT_STORE: ContextMenuStore = {
@@ -36,7 +37,7 @@ const changePosition = createEvent<{ position: { x: number; y: number } }>()
 
 const $contextMenuStore = createStore(DEFAULT_STORE)
     .on(open, (oldData, { content, e, height, type = 'left-click' }) => ({
-        position: calcPosition(e, 170, height),
+        position: calcPosition(e, 220, height),
         open: true,
         content,
         type,

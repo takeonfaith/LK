@@ -2,7 +2,7 @@ import { Shape } from '@ui/types'
 import React from 'react'
 import { SkeletonShapeWrapper } from './styles'
 
-type SkieletonShapeProps = {
+export type SkieletonShapeProps = {
     shape: Shape
     margin?: string
     size: { width: string; height: string }

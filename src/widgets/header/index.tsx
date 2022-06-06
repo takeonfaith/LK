@@ -1,20 +1,16 @@
-import useCurrentPage from '@utils/hooks/use-current-page'
-import useResize from '@utils/hooks/use-resize'
+import { Button } from '@ui/button'
+import List from '@ui/list'
 import React from 'react'
-import MenuButton from 'widgets/header/ui/molecules/menu-button'
-import { HeaderWrapper, UserInfo } from './ui'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { useHistory } from 'react-router'
 
 const Header = () => {
-    const { width } = useResize()
-    const { title } = useCurrentPage()
+    const history = useHistory()
     return (
-        <HeaderWrapper>
-            <div className="header-button-and-title">
-                {width <= 1000 && <MenuButton />}
-                <h3>{title}</h3>
-            </div>
-            <UserInfo />
-        </HeaderWrapper>
+        <List direction="horizontal" width="100%" padding="10px 40px">
+            <Button icon={<FaChevronLeft />} onClick={() => history.goBack()} background="transparent" />
+            <Button icon={<FaChevronRight />} onClick={() => history.goForward()} background="transparent" />
+        </List>
     )
 }
 

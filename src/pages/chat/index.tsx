@@ -1,4 +1,4 @@
-import { TEMPLATE_CHAT_ROUTE } from '@app/routes/techers-routes'
+import { TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
 import { ChatWindow, ListOfChats } from '@features/chat'
 import EmptyHere from '@features/chat/ui/atoms/empty-here'
 import React from 'react'
@@ -12,7 +12,7 @@ const ChatPageWrapper = styled.div`
 `
 
 const ChatPage = () => {
-    const params = useRouteMatch('/messages/:chatId')?.params as { chatId: string | undefined }
+    const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { chatId: string | undefined }
 
     return (
         <ChatPageWrapper>

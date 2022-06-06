@@ -2,19 +2,6 @@ import { Loading } from '@ui/loading'
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
 
-const List = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: auto;
-    width: 100%;
-    max-height: 100%;
-
-    .scrolable-content {
-        width: 100%;
-    }
-`
-
 type PagintaionListProps<T> = {
     hasNext?: boolean
     isPending?: boolean
@@ -23,6 +10,19 @@ type PagintaionListProps<T> = {
     renderItem: (item: T, index?: number) => ChildrenType
     offset?: number
 }
+
+const List = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+    .scrolable-content {
+        width: 100%;
+    }
+`
 
 export const PAGINATION_OFFSET = 50
 

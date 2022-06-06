@@ -34,6 +34,7 @@ const Header = ({ columns, search, setSearch, filter, setFilter, sort, setSort }
                         clickable={column.search}
                         align={column.search ? 'space-between' : column.align}
                         key={column.title}
+                        showFull={column.showFull}
                         className={column.priority?.toString() ?? 'one'}
                         onClick={() => {
                             if (column.search) {

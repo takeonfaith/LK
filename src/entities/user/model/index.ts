@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { userApi } from '@api'
 import { LoginData } from '@api/user-api'
 import { createEffect, createEvent, createStore, forward } from 'effector/compat'
@@ -5,12 +6,19 @@ import { useStore } from 'effector-react/compat'
 import { User, UserToken } from '@api/model'
 import axios from 'axios'
 import clearAllStores from '../lib/clear-all-stores'
+import createFullName from '@features/home/lib/create-full-name'
 
 interface UserStore {
     currentUser: User | null
     isAuthenticated: boolean | null
     error: string | null
+    savePassword: boolean
 }
+
+//  In effector chat core-team describe something like this code (Perhaps a better solution can be found)
+// TODO: ask about token expires (Looks like it won't expire)
+const tokenInStorage = JSON.parse(localStorage.getItem('token') ?? 'null')
+const savePasswordInStorage = () => JSON.parse(localStorage.getItem('savePassword') ?? 'true')
 
 const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginData) => {
     try {
@@ -26,71 +34,119 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
             await axios.post('/old', form)
         } catch {}
 
-        localStorage.setItem('token', JSON.stringify(tokenResponse.data))
+        if (savePasswordInStorage()) {
+            localStorage.setItem('token', JSON.stringify(tokenResponse.data))
+        } else {
+            sessionStorage.setItem('token', JSON.stringify(tokenResponse.data))
+        }
 
         return tokenResponse.data
     } catch (e) {
-        throw new Error('Неверный логин или пароль')
+        throw new Error(navigator.onLine ? 'Неверный логин или пароль' : 'Потеряно соединение с интернетом')
     }
 })
 
 const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Promise<UserStore> => {
     try {
         const userResponse = await userApi.getUser(data.token)
+        const user = userResponse.data.user
+        const { name, surname, patronymic } = user
 
-        return { currentUser: userResponse.data.user, isAuthenticated: !!data, error: '' }
+        return {
+            currentUser: {
+                ...user,
+                fullName: createFullName({ name, surname, patronymic }),
+                available_accounts: [],
+            },
+            isAuthenticated: !!data,
+            error: null,
+            savePassword: savePasswordInStorage(),
+        }
     } catch (error) {
-        logout()
-        throw new Error('token expired')
+        // logout()
+        console.log(error)
+
+        throw new Error('Возникла какая-то ошибка')
     }
 })
 
 const useUser = () => {
-    const { currentUser: user, error, isAuthenticated } = useStore($userStore)
+    const { currentUser: user, error, isAuthenticated, savePassword } = useStore($userStore)
     return {
-        data: { user, isAuthenticated: isAuthenticated },
+        data: { user, isAuthenticated, savePassword },
         loading: useStore(getUserTokenFx.pending),
         error: error,
     }
 }
 
 const logoutFx = createEffect(() => {
-    localStorage.removeItem('token')
+    if (savePasswordInStorage()) {
+        localStorage.removeItem('token')
+    } else {
+        sessionStorage.removeItem('token')
+    }
+
     clearAllStores()
 })
 
+const changeSavePasswordFunc = (savePassword?: boolean) => {
+    const localStorageValue = localStorage.getItem('savePassword')
+    const value = savePassword ?? JSON.parse(localStorageValue ?? 'true')
+    localStorage.setItem('savePassword', value.toString())
+
+    return value
+}
+
 const login = createEvent<LoginData>()
 const logout = createEvent()
+const clear = createEvent()
+const changeSavePassword = createEvent<{ savePassword: boolean }>()
 
 forward({ from: login, to: getUserTokenFx })
 forward({ from: getUserTokenFx.doneData, to: getUserFx })
 forward({ from: logout, to: logoutFx })
 
-//  In effector chat core-team describe something like this code (Perhaps a better solution can be found)
-// TODO: ask about token expires (Looks like it won't expire)
-const tokenInStorage = JSON.parse(localStorage.getItem('token') ?? 'null')
+!!tokenInStorage && savePasswordInStorage() ? getUserFx(tokenInStorage) : logoutFx()
 
-!!tokenInStorage && getUserFx(tokenInStorage)
-
-const $userStore = createStore<UserStore>({
+const DEFAULT_STORE: UserStore = {
     currentUser: null,
     error: null,
-    isAuthenticated: !!tokenInStorage,
-})
+    isAuthenticated: !!tokenInStorage?.token?.length,
+    savePassword: savePasswordInStorage(),
+}
+
+changeSavePasswordFunc()
+
+const $userStore = createStore(DEFAULT_STORE)
     .on(getUserFx, (oldData) => ({
         ...oldData,
         error: null,
     }))
     .on(getUserFx.doneData, (_, newData) => newData)
-    .on(getUserFx.failData, (_, newData) => ({
-        error: newData.message,
+    .on(getUserFx.failData, (_, error) => ({
+        error: error.message,
         currentUser: null,
-        isAuthenticated: null,
+        isAuthenticated: !!tokenInStorage?.token?.length,
+        savePassword: savePasswordInStorage(),
     }))
-    .on(getUserTokenFx.failData, (_, error) => ({ isAuthenticated: null, currentUser: null, error: error.message }))
+    .on(getUserTokenFx.failData, (_, error) => ({
+        error: error.message,
+        isAuthenticated: null,
+        currentUser: null,
+        savePassword: savePasswordInStorage(),
+    }))
     .on(logout, () => ({
         error: '',
         isAuthenticated: null,
+        currentUser: null,
+        savePassword: savePasswordInStorage(),
+    }))
+    .on(changeSavePassword, (oldData, { savePassword }) => ({
+        ...oldData,
+        savePassword: changeSavePasswordFunc(savePassword),
+    }))
+    .on(clear, (oldData) => ({
+        ...oldData,
         currentUser: null,
     }))
 
@@ -101,6 +157,8 @@ export const selectors = {
 export const events = {
     login,
     logout,
+    changeSavePassword,
+    clear,
 }
 
 export const effects = {

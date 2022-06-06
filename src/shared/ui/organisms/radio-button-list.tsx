@@ -1,15 +1,7 @@
 import { Title } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
+import List from '@ui/list'
 import React from 'react'
-import styled from 'styled-components'
-
-const RadioButtonListWrapper = styled.div`
-    .buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-`
 
 export interface RadioButton {
     id: string | number
@@ -26,14 +18,12 @@ interface Props {
 
 const RadioButtonList = ({ title, buttons, required = false, current, setCurrent }: Props) => {
     return (
-        <RadioButtonListWrapper>
-            {title && (
-                <Title size={5} align="left" bottomGap required={required}>
-                    {title}
-                </Title>
-            )}
-            <Checkbox text={'Не выбрано'} key={-1} checked={current === null} setChecked={() => setCurrent(null)} />
-            <div className="buttons">
+        <div>
+            <Title visible={!!title} size={5} align="left" bottomGap required={required}>
+                {title}
+            </Title>
+            <List>
+                <Checkbox text={'Не выбрано'} key={-1} checked={current === null} setChecked={() => setCurrent(null)} />
                 {buttons.map((button) => {
                     const { id, title } = button
                     return (
@@ -45,8 +35,8 @@ const RadioButtonList = ({ title, buttons, required = false, current, setCurrent
                         />
                     )
                 })}
-            </div>
-        </RadioButtonListWrapper>
+            </List>
+        </div>
     )
 }
 

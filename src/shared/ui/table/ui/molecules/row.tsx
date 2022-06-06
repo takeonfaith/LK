@@ -22,6 +22,7 @@ const Row = ({ columns, el, index, onRowClick }: Props) => {
             {columns.map((column) => {
                 return (
                     <Column
+                        showFull={column.showFull}
                         width={column.width}
                         className={column.priority?.toString() ?? 'one'}
                         key={column.field}

@@ -1,4 +1,5 @@
 import KeyValue from '@ui/atoms/key-value'
+import displayWithType from '@ui/table/lib/display-with-type'
 import { ColumnProps } from '@ui/table/types'
 import { Title } from '@ui/title'
 import { IndexedProperties } from '@utility-types/indexed-properties'
@@ -27,7 +28,11 @@ const RowModal = ({ title, obj, columns }: Props) => {
                 return (
                     <KeyValue
                         keyStr={column.title}
-                        value={column.render ? column.render(obj[column.field], obj) : obj[column.field]}
+                        value={
+                            column.render
+                                ? column.render(obj[column.field], obj)
+                                : displayWithType(obj[column.field], column.type)
+                        }
                         key={column.title}
                     />
                 )

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const ErrorContainer = styled.div`
+export const ErrorContainer = styled.div<{ size?: string }>`
     width: 100%;
     height: 100%;
 
@@ -11,9 +11,9 @@ export const ErrorContainer = styled.div`
     color: var(--text);
 
     img {
-        min-width: 100px;
-        height: 100px;
-        margin-bottom: 20px;
+        min-width: ${({ size }) => size ?? '100px'};
+        height: ${({ size }) => size ?? '100px'};
+        margin-bottom: 5px;
     }
 
     .error-content {

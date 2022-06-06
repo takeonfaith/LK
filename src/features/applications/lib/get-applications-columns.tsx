@@ -19,6 +19,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
             title: 'Статус',
             field: 'status',
             priority: 'one',
+            width: '160px',
             catalogs: [
                 ...(Object.values(ApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
             ],
@@ -28,6 +29,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
                     title={value}
                     align="center"
                     width="100%"
+                    icon={null}
                     maxWidth="150px"
                 />
             ),
