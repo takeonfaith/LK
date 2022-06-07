@@ -31,6 +31,14 @@ import AcadPerformance from '../../pages/acad-performance'
 import Home from '../../pages/home'
 import LoginPage from '../../pages/login'
 import SchedulePage from '../../pages/schedule'
+import RelocationInsideHostelPage from '@pages/applications/pages/relocation-inside-hostel'
+import RegularAccommodationPage from '@pages/applications/pages/regular-accommodation'
+import AccommodationCorrespondenceFormPage from '@pages/applications/pages/accommodation-correspondence-form'
+import AcademicLeaveAccommodationPage from '@pages/applications/pages/academic-leave-accommodation'
+import PreferentialAccommodationPage from '@pages/applications/pages/preferential-accommodation'
+import FamilyRoomPage from '@pages/applications/pages/family-room'
+import TerminationOfEmploymentContractPage from '@pages/applications/pages/termination-of-employment-contract'
+import RelocationToAnotherHostelPage from '@pages/applications/pages/relocation-to-another-hostel'
 
 export const HOME_ROUTE = '/home'
 export const MESSAGES_ROUTE = '/messages'
@@ -54,6 +62,14 @@ export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-a
 export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
 export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
+export const REGULAR_ACCOMMODATION = APPLICATIONS_ROUTE + '/regular-accommodation'
+export const ACCOMMODATION_CORRESPONDENCE_FORM = APPLICATIONS_ROUTE + '/accommodation-correspondence-form'
+export const ACADEMIC_LEAVE_ACCOMMODATION = APPLICATIONS_ROUTE + '/academic-leave-accommodation'
+export const PREFERENTIAL_ACCOMMODATION = APPLICATIONS_ROUTE + '/preferential-accommodation'
+export const FAMILY_ROOM = APPLICATIONS_ROUTE + '/family-room'
+export const TERMINATION_OF_EMPLOYMENT_CONTRACT = APPLICATIONS_ROUTE + '/termination-of-employment-contract'
+export const RELOCATION_INSIDE_HOSTEL = APPLICATIONS_ROUTE + '/relocation-inside-hostel'
+export const RELOCATION_TO_ANOTHER_HOSTEL = APPLICATIONS_ROUTE + '/relocation-to-another-hostel'
 
 export const publicRoutes = [
     {
@@ -244,6 +260,70 @@ export const hiddenRoutes: IRoutes = {
         icon: BiIdCard,
         path: PAPER_CALL,
         Component: ApplicationPaperCall,
+        isTemplate: false,
+    },
+    21: {
+        id: 21,
+        title: 'Предоставление права проживания (очная и очно-заочная форма)',
+        icon: BiIdCard,
+        path: REGULAR_ACCOMMODATION,
+        Component: RegularAccommodationPage,
+        isTemplate: false,
+    },
+    22: {
+        id: 22,
+        title: 'Предоставление права проживания (заочная форма)',
+        icon: BiIdCard,
+        path: ACCOMMODATION_CORRESPONDENCE_FORM,
+        Component: AccommodationCorrespondenceFormPage,
+        isTemplate: false,
+    },
+    23: {
+        id: 23,
+        title: 'Предоставление права проживания в период академического отпуска',
+        icon: BiIdCard,
+        path: ACADEMIC_LEAVE_ACCOMMODATION,
+        Component: AcademicLeaveAccommodationPage,
+        isTemplate: false,
+    },
+    24: {
+        id: 24,
+        title: 'Предоставление права льготного проживания',
+        icon: BiIdCard,
+        path: PREFERENTIAL_ACCOMMODATION,
+        Component: PreferentialAccommodationPage,
+        isTemplate: false,
+    },
+    25: {
+        id: 25,
+        title: 'Предоставление права проживания в семейной комнате',
+        icon: BiIdCard,
+        path: FAMILY_ROOM,
+        Component: FamilyRoomPage,
+        isTemplate: false,
+    },
+    26: {
+        id: 26,
+        title: 'Расторжение договора найма',
+        icon: BiIdCard,
+        path: TERMINATION_OF_EMPLOYMENT_CONTRACT,
+        Component: TerminationOfEmploymentContractPage,
+        isTemplate: false,
+    },
+    27: {
+        id: 27,
+        title: 'Переселение внутри общежития',
+        icon: BiIdCard,
+        path: RELOCATION_INSIDE_HOSTEL,
+        Component: RelocationInsideHostelPage,
+        isTemplate: false,
+    },
+    28: {
+        id: 28,
+        title: 'Переселение в другое общежитие',
+        icon: BiIdCard,
+        path: RELOCATION_TO_ANOTHER_HOSTEL,
+        Component: RelocationToAnotherHostelPage,
         isTemplate: false,
     },
 }

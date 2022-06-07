@@ -208,6 +208,7 @@ const Input = ({
                     } else setValue(e.target.value)
                 }}
                 required={required}
+                readOnly={!isActive}
             />
             {type !== 'password' ? (
                 !!value?.length &&
