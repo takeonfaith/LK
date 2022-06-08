@@ -19,6 +19,10 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
     cursor: pointer;
     transition: 0.3s;
 
+    h5 {
+        font-size: 0.95em;
+    }
+
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);
     }

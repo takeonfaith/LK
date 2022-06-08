@@ -1,19 +1,27 @@
-import React from 'react'
-import { TooltipBox, TooltipWrapper } from './styles'
-import { Direction } from './types'
+import { Align, VerticalAlign } from '@ui/types'
+import React, { useState } from 'react'
+import { TooltipWrapper } from './styles'
 
-export type TooltipProps = {
+interface Props {
     children: ChildrenType
-    direction: Direction
-    text: string
-    width?: string
+    content: ChildrenType
+    direction?: VerticalAlign | Align
 }
 
-export function Tooltip({ children, direction, text, width }: TooltipProps) {
+const Tooltip = ({ children, content, direction }: Props) => {
+    const [active, setActive] = useState(false)
+
     return (
-        <TooltipWrapper direction={direction}>
-            <TooltipBox width={width}>{text}</TooltipBox>
+        <TooltipWrapper onMouseEnter={() => setActive(true)} onMouseLeave={() => setActive(false)}>
             {children}
+            {active && (
+                <div className={`box ${direction || 'top'}`}>
+                    {/* Content */}
+                    {content}
+                </div>
+            )}
         </TooltipWrapper>
     )
 }
+
+export default Tooltip

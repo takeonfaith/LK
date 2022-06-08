@@ -61,7 +61,7 @@ const useSelect = (props: SelectProps) => {
                 setRoute([...route])
             }
         },
-        [setSelected, route],
+        [selected, setSelected, route],
     )
 
     const goBack = useCallback(() => {

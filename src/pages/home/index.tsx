@@ -10,7 +10,7 @@ import List from '@ui/list'
 import Timeline, { TimelineItem } from '@ui/timeline'
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { User } from 'widgets'
+import { RateApp, useModal, User } from 'widgets'
 import getGreetingMessage from './lib/get-greeting-message'
 import { Content } from './ui/atoms/content'
 
@@ -24,6 +24,7 @@ const Home = () => {
     const history = useHistory()
 
     const { homeRoutes } = menuModel.selectors.useMenu()
+    const { open } = useModal()
 
     if (!user || !homeRoutes) return null
 
@@ -48,6 +49,9 @@ const Home = () => {
 
     const [current, setCurrent] = useState(timelineData.find((el) => el.filled !== undefined && el.filled !== 100)?.id)
 
+    useEffect(() => {
+        open(<RateApp />)
+    }, [])
     return (
         <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <Content>
@@ -79,6 +83,7 @@ const Home = () => {
                         </span>
                     )}
                 </Message>
+
                 <ScheduleAndNotification />
                 <List
                     title="Преподаватели"

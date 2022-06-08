@@ -34,7 +34,7 @@ const SelectHeader = styled.header<{ appearance: boolean }>`
     }
 
     .header-item {
-        background: ${Colors.blue.transparent};
+        background: ${Colors.blue.transparentAF};
         color: ${Colors.blue.main};
         border-radius: 6px;
         padding: 5px 10px;
