@@ -26,6 +26,8 @@ export const Wrapper = styled.div<{ padding?: string; width?: string; minWidth?:
     width: ${({ width }) => width ?? '100%'};
     height: ${({ height }) => height ?? 'fit-content'};
     min-width: ${({ minWidth }) => minWidth};
+    display: flex;
+    flex-direction: column;
 
     .bottom-wrapper {
         margin-top: 5px;
@@ -51,6 +53,7 @@ export const ListWrapper = styled.div<StyleProps>`
             : convertVerticalAlign(verticalAlign)};
     gap: ${({ gap }) => (gap ?? 5) + 'px'};
     width: ${({ width }) => width ?? '100%'};
+    height: ${({ height }) => height ?? 'fit-content'};
     min-width: ${({ minWidth, width }) => minWidth ?? width};
     color: var(--text);
     font-size: ${({ fontSize }) => fontSize ?? '1em'};

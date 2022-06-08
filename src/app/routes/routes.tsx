@@ -6,13 +6,14 @@ import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies
 import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import { BiCheckCircle, BiIdCard } from 'react-icons/bi'
-import { FiBriefcase, FiFileText } from 'react-icons/fi'
+import { FiBriefcase, FiFileText, FiHelpCircle } from 'react-icons/fi'
 import AcadPerformance from '../../pages/acad-performance'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
+import { generalHiddenRoutes, generalRoutes, HELP_ROUTE, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
 import React from 'react'
 import ApplicationsPage from '@pages/applications'
 import { FaRegLightbulb } from 'react-icons/fa'
 import ProjectActivitiesPage from '@pages/project-activities'
+import HelpPage from '@pages/help'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -62,6 +63,15 @@ export const privateRoutes: () => IRoutes = () => ({
         icon: <FiBriefcase />,
         path: JOB_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
+        color: 'blue',
+        isTemplate: false,
+    },
+    help: {
+        id: 'help',
+        title: 'Помощь',
+        icon: <FiHelpCircle />,
+        path: HELP_ROUTE,
+        Component: HelpPage,
         color: 'blue',
         isTemplate: false,
     },

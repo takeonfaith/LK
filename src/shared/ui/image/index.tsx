@@ -8,11 +8,12 @@ export type ImageProps = {
     height: string
     src: string
     alt?: string
+    borderRadius?: string
 }
 
-export function Image({ loading, src, height, width, alt = '' }: ImageProps) {
+export function Image({ loading, src, height, width, borderRadius, alt = '' }: ImageProps) {
     return !loading ? (
-        <ImageWrapper src={src} alt={alt} height={height} width={width} />
+        <ImageWrapper borderRadius={borderRadius} src={src} alt={alt} height={height} width={width} />
     ) : (
         <SkeletonShape
             shape={'rect'}
