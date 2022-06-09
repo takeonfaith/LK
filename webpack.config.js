@@ -12,8 +12,6 @@ const FriendlyErrorsWebpackPlugin = require('@soda/friendly-errors-webpack-plugi
 const ESLintPlugin = require('eslint-webpack-plugin')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const config = {
     entry: [
@@ -62,7 +60,6 @@ const config = {
             },
         }),
         new ESLintPlugin({extensions: ['ts']}),
-        new ReactRefreshWebpackPlugin()
     ],
     resolve: {
         extensions: [
