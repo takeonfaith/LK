@@ -10,7 +10,7 @@ type Props = {
 const style = (width?: string) => ({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     width: width,
 })
 

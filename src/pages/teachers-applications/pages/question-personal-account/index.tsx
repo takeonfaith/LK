@@ -11,7 +11,7 @@ const QuestionPersonalAccountWrapper = styled.div`
 const QuestionPersonalAccountPage = () => {
     return (
         <QuestionPersonalAccountWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </QuestionPersonalAccountWrapper>
     )
 }

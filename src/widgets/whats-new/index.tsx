@@ -8,8 +8,8 @@ import { WhatsNewTemplate } from './ui'
 import { BiNotification, BiRuble } from 'react-icons/bi'
 import { Colors } from '@consts'
 import { userModel } from '@entities/user'
-import { CONTACT_INFO_ACTUALIZATION, PERSONAL_NOTIFICATIONS } from '@app/routes/techers-routes'
-import { PAYMENTS_ROUTE } from '@app/routes/routes'
+import { CONTACT_INFO_ACTUALIZATION, PERSONAL_NOTIFICATIONS } from '@app/routes/teachers-routes'
+import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
 import { FiCheckSquare } from 'react-icons/fi'
 
 const WhatsNewWrapper = styled.div`

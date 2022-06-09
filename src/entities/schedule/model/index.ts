@@ -22,7 +22,7 @@ const useSchedule = () => {
 const getScheduleFx = createEffect(async (user: User | null): Promise<IModules> => {
     try {
         return getSchedule(user)
-    } catch {
+    } catch (error) {
         throw new Error('Не удалось загрузить расписание')
     }
 })
@@ -45,9 +45,9 @@ const $schedule = createStore<ISchedule>(DEFAULT_STORE)
         currentChosenDay: calcNextExamTime(newData['2']),
         currentDay: !!newData['0'] ? new Date().getDay() : calcNextExamTime(newData['2']),
     }))
-    .on(getScheduleFx.failData, (oldData, newData) => ({
+    .on(getScheduleFx.failData, (oldData) => ({
         ...oldData,
-        error: newData.message,
+        error: 'Не удалось загрузить расписание',
     }))
     .on(changeCurrentModule, (oldState, newState) => ({
         ...oldState,

@@ -11,7 +11,7 @@ const VisaCertificateWrapper = styled.div`
 const VisaCertificatePage = () => {
     return (
         <VisaCertificateWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </VisaCertificateWrapper>
     )
 }

@@ -1,9 +1,10 @@
 import { Colors } from '@consts'
 import React, { useCallback, useEffect, useState } from 'react'
-import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
+import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Title } from '@ui/title'
 import { Button } from '@ui/button'
+import { Message } from '.'
 
 const InputWrapper = styled.div<{
     leftIcon: boolean
@@ -22,13 +23,17 @@ const InputWrapper = styled.div<{
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
 
-    .icon {
+    .left-icon {
         position: absolute;
         left: 7px;
         top: 55%;
         transform: translateY(-50%);
         color: var(--text);
         opacity: 0.4;
+    }
+
+    .message {
+        margin-bottom: 5px;
     }
 
     input {
@@ -96,6 +101,7 @@ interface Props {
     minWidth?: string
     autocomplete?: boolean
     danger?: boolean
+    alertMessage?: string
 }
 
 const Input = ({
@@ -109,6 +115,7 @@ const Input = ({
     placeholder = 'Введите сюда',
     type = 'text',
     danger,
+    alertMessage,
     isActive = true,
     inputAppearance = true,
     mask = false,
@@ -191,7 +198,8 @@ const Input = ({
             <Title size={5} align="left" visible={!!title} bottomGap="5px" required={required}>
                 {title}
             </Title>
-            {leftIcon && <span className="icon">{leftIcon}</span>}
+            <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
+            {leftIcon && <span className="left-icon">{leftIcon}</span>}
             <input
                 type={inputType}
                 placeholder={placeholder}

@@ -1,7 +1,7 @@
 import {
     ARBITRARY_REQUEST_ROUTE,
     CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
-    SOCIAL_SCROLLARSHIP,
+    SOCIAL_SCOLLARSHIP,
     PAPER_CALL,
     CERTIFICATE_OF_ATTENDANCE,
     SOCIAL_AGENCIES,
@@ -38,7 +38,7 @@ const getSectionLinks = () => {
                 { link: '/', title: 'Вступить в Профсоюз' },
                 { link: '/', title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)' },
                 { link: '/', title: 'Заявка на материальную помощь' },
-                { link: SOCIAL_SCROLLARSHIP, title: 'Оформить социальную стипендию' },
+                { link: SOCIAL_SCOLLARSHIP, title: 'Оформить социальную стипендию' },
                 {
                     link: '/',
                     title: 'Отправить характеристику-рекомендацию на получение повышенной государственной академической стипендии',

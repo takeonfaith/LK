@@ -3,7 +3,6 @@ import { confirmModel } from '@entities/confirm'
 import { userModel } from '@entities/user'
 import createFullName from '@features/home/lib/create-full-name'
 import Avatar from '@features/home/ui/molecules/avatar'
-import SettingsPage from '@features/settings'
 import { Button, LinkButton } from '@ui/atoms'
 import { Divider } from '@ui/divider'
 import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
@@ -105,12 +104,12 @@ const HeaderContextMenu = () => {
                 </div>
 
                 <div className="buttons">
-                    <Button
+                    {/* <Button
                         icon={<FiEdit2 />}
                         onClick={() => open(<SettingsPage currentPage={3} />)}
                         text="Изменить"
                         shrinkTextInMobile
-                    />
+                    /> */}
                     {/* <Button icon={<FiCreditCard />} onClick={() => null} text="Оплатить" /> */}
                 </div>
             </div>

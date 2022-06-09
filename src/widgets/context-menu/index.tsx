@@ -1,4 +1,3 @@
-import Block from '@ui/block'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useRef } from 'react'
 import styled from 'styled-components'
@@ -15,7 +14,7 @@ const ContextMenuWrapper = styled.div<{
     visibility: ${({ isVisible }) => (isVisible ? 'visible' : 'hidden')};
     transform: ${({ isVisible }) => (isVisible ? 'translateY(0)' : 'translateY(20px)')};
     position: absolute;
-    width: 190px;
+    width: 220px;
     left: ${({ left }) => left + 'px'};
     top: ${({ top }) => top + 'px'};
     background: var(--schedule);

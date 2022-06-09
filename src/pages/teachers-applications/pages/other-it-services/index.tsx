@@ -11,7 +11,7 @@ const OtherItServicesWrapper = styled.div`
 const OtherItServicesPage = () => {
     return (
         <OtherItServicesWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </OtherItServicesWrapper>
     )
 }

@@ -1,4 +1,4 @@
-import { MESSAGES_ROUTE } from '@app/routes/techers-routes'
+import { CHAT_ROUTE } from '@app/routes/general-routes'
 import { Colors } from '@consts'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { Button } from '@ui/button'
@@ -63,7 +63,7 @@ const CuratorLeftSide = ({ img, name, title, id }: Props) => {
                     icon={<FiMessageCircle />}
                     text={'Написать'}
                     onClick={() => {
-                        history.push(`${MESSAGES_ROUTE}/${name}`)
+                        history.push(`${CHAT_ROUTE}/${name}`)
                     }}
                     width="130px"
                     background={Colors.purple.light}

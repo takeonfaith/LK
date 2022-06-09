@@ -1,7 +1,7 @@
 import { ILessons, ISubject } from '@api/model'
 import calcNextSubjectTime from '@features/schedule/lib/calc-next-subject-time'
 import isDayEnded from '@features/schedule/lib/is-day-ended'
-import { Title } from '@ui/atoms'
+import { Title, Error } from '@ui/atoms'
 import calcTimeLeft from '@utils/calc-time-left'
 import useOnScreen from '@utils/hooks/use-on-screen'
 import useResize from '@utils/hooks/use-resize'
@@ -17,9 +17,10 @@ type Props = ILessons & {
     width?: number
     height?: number
     topInfo: React.ReactNode | string
+    error?: string | null
 }
 
-const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo }: Props) => {
+const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo, error }: Props) => {
     const route: { params: { fio?: string } } = useRouteMatch()
     const dayRef = useRef<null | HTMLDivElement>(null)
     const isOnScreen = useOnScreen(dayRef)
@@ -65,7 +66,8 @@ const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo
                 height={screenHeight}
                 isTeacherSchedule={!!route.params.fio?.length}
             >
-                {!lessons && <SkeletonLoading />}
+                {!lessons && !error && <SkeletonLoading />}
+                {error && <Error text={'Ошибка'} size="70px" />}
                 {!!lessons &&
                     lessons.map((subject: ISubject, index) => {
                         return (

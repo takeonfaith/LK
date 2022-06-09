@@ -11,7 +11,7 @@ const ConnectingComputerWrapper = styled.div`
 const ConnectingComputerPage = () => {
     return (
         <ConnectingComputerWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </ConnectingComputerWrapper>
     )
 }

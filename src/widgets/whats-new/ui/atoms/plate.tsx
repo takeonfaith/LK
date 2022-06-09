@@ -1,6 +1,5 @@
 import { Colors, IColors } from '@consts'
 import { Button } from '@ui/button'
-import { Title } from '@ui/title'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -54,7 +53,7 @@ export interface WhatsNewPlate {
 const Plate = ({ icon, title, color, goTo, visible = true }: WhatsNewPlate) => {
     const { close } = useModal()
     return visible ? (
-        <PlateWrapper color={color as string}>
+        <PlateWrapper color={color}>
             <div className="icon">{icon}</div>
             <span className="title">{title}</span>
             {!!goTo && (

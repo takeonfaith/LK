@@ -11,7 +11,7 @@ const CopyOfEmploymentRecordWrapper = styled.div`
 const CopyOfEmploymentRecordPage = () => {
     return (
         <CopyOfEmploymentRecordWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </CopyOfEmploymentRecordWrapper>
     )
 }

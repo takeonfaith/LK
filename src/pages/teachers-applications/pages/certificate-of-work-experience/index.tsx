@@ -11,7 +11,7 @@ const CertificateOfWorkExperienceWrapper = styled.div`
 const CertificateOfWorkExperiencePage = () => {
     return (
         <CertificateOfWorkExperienceWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
+            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
         </CertificateOfWorkExperienceWrapper>
     )
 }

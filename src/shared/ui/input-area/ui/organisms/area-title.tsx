@@ -12,7 +12,7 @@ const AreaTitleWrapper = styled.div`
     cursor: pointer;
     position: sticky;
     top: -2px;
-    background: var(--form);
+    background: var(--schedule);
     z-index: 3;
     width: 100%;
 
