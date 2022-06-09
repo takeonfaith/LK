@@ -8,7 +8,7 @@ import getForm from './lib/get-form'
 import { BaseApplicationWrapper } from '@pages/applications/ui/base-application-wrapper'
 import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
-import { useHistory } from "react-router";
+import { useHistory } from 'react-router'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
