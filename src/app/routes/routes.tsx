@@ -13,6 +13,14 @@ import React from 'react'
 import ApplicationsPage from '@pages/applications'
 import { FaRegLightbulb } from 'react-icons/fa'
 import ProjectActivitiesPage from '@pages/project-activities'
+import RegularAccommodationPage from '@pages/applications/pages/regular-accommodation'
+import AccommodationCorrespondenceFormPage from '@pages/applications/pages/accommodation-correspondence-form'
+import AcademicLeaveAccommodationPage from '@pages/applications/pages/academic-leave-accommodation'
+import PreferentialAccommodationPage from '@pages/applications/pages/preferential-accommodation'
+import FamilyRoomPage from '@pages/applications/pages/family-room'
+import TerminationOfEmploymentContractPage from '@pages/applications/pages/termination-of-employment-contract'
+import RelocationInsideHostelPage from '@pages/applications/pages/relocation-inside-hostel'
+import RelocationToAnotherHostelPage from '@pages/applications/pages/relocation-to-another-hostel'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -26,6 +34,14 @@ export const SOCIAL_SCOLLARSHIP = APPLICATIONS_ROUTE + '/social-scollarship'
 export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-attendance'
 export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
 export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
+export const REGULAR_ACCOMMODATION = APPLICATIONS_ROUTE + '/regular-accommodation'
+export const ACCOMMODATION_CORRESPONDENCE_FORM = APPLICATIONS_ROUTE + '/accommodation-correspondence-form'
+export const ACADEMIC_LEAVE_ACCOMMODATION = APPLICATIONS_ROUTE + '/academic-leave-accommodation'
+export const PREFERENTIAL_ACCOMMODATION = APPLICATIONS_ROUTE + '/preferential-accommodation'
+export const FAMILY_ROOM = APPLICATIONS_ROUTE + '/family-room'
+export const TERMINATION_OF_EMPLOYMENT_CONTRACT = APPLICATIONS_ROUTE + '/termination-of-employment-contract'
+export const RELOCATION_INSIDE_HOSTEL = APPLICATIONS_ROUTE + '/relocation-inside-hostel'
+export const RELOCATION_TO_ANOTHER_HOSTEL = APPLICATIONS_ROUTE + '/relocation-to-another-hostel'
 
 export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
@@ -121,6 +137,78 @@ export const hiddenRoutes: () => IRoutes = () => ({
         icon: <BiIdCard />,
         path: PAPER_CALL,
         Component: ApplicationPaperCall,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'regular-accommodation': {
+        id: 'regular-accommodation',
+        title: 'Предоставление права проживания (очная и очно-заочная форма)',
+        icon: BiIdCard,
+        path: REGULAR_ACCOMMODATION,
+        Component: RegularAccommodationPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'accommodation-correspondence-form': {
+        id: 'accommodation-correspondence-form',
+        title: 'Предоставление права проживания (заочная форма)',
+        icon: BiIdCard,
+        path: ACCOMMODATION_CORRESPONDENCE_FORM,
+        Component: AccommodationCorrespondenceFormPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'academic-leave-accommodation': {
+        id: 'academic-leave-accommodation',
+        title: 'Предоставление права проживания в период академического отпуска',
+        icon: BiIdCard,
+        path: ACADEMIC_LEAVE_ACCOMMODATION,
+        Component: AcademicLeaveAccommodationPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'preferential-accommodation': {
+        id: 'preferential-accommodation',
+        title: 'Предоставление права льготного проживания',
+        icon: BiIdCard,
+        path: PREFERENTIAL_ACCOMMODATION,
+        Component: PreferentialAccommodationPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'family-room': {
+        id: 'family-room',
+        title: 'Предоставление права проживания в семейной комнате',
+        icon: BiIdCard,
+        path: FAMILY_ROOM,
+        Component: FamilyRoomPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'termination-of-employment-contract': {
+        id: 'termination-of-employment-contract',
+        title: 'Расторжение договора найма',
+        icon: BiIdCard,
+        path: TERMINATION_OF_EMPLOYMENT_CONTRACT,
+        Component: TerminationOfEmploymentContractPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'relocation-inside-hostel': {
+        id: 'relocation-inside-hostel',
+        title: 'Переселение внутри общежития',
+        icon: BiIdCard,
+        path: RELOCATION_INSIDE_HOSTEL,
+        Component: RelocationInsideHostelPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'relocation-to-another-hostel': {
+        id: 'relocation-to-another-hostel',
+        title: 'Переселение в другое общежитие',
+        icon: BiIdCard,
+        path: RELOCATION_TO_ANOTHER_HOSTEL,
+        Component: RelocationToAnotherHostelPage,
         color: 'blue',
         isTemplate: false,
     },
