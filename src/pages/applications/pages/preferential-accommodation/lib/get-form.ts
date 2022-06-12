@@ -4,6 +4,7 @@ import { User } from '@api/model'
 const getForm = (data: User): IInputArea => {
     return {
         title: 'Предоставление права льготного проживания',
+        hint: 'Необходимо прикрепить документ, подтверждающий соответствие льготной категории',
         data: [
             {
                 title: 'ФИО',
@@ -34,7 +35,31 @@ const getForm = (data: User): IInputArea => {
                 editable: true,
                 required: true,
             },
+            {
+                title: 'Категория',
+                fieldName: 'category',
+                value: '',
+                type: 'select',
+                width: '100%',
+                editable: true,
+                required: true,
+                items: [
+                    {
+                        id: 0,
+                        title: '1 категория',
+                    },
+                    {
+                        id: 1,
+                        title: '2 категория',
+                    },
+                    {
+                        id: 2,
+                        title: '3 категория',
+                    },
+                ],
+            },
         ],
+        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: true },
     }
 }
 

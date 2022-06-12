@@ -12,7 +12,7 @@ import { useHistory } from 'react-router'
 import getDisability from '@pages/applications/pages/regular-accommodation/lib/get-disability'
 import getDriverLicense from '@pages/applications/pages/regular-accommodation/lib/get-driver-license'
 import getRegistration from '@pages/applications/pages/regular-accommodation/lib/get-registration'
-import getMilitaryService from "@pages/applications/pages/accommodation-correspondence-form/lib/get-militar-service";
+import getMilitaryService from '@pages/applications/pages/regular-accommodation/lib/get-militar-service'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 

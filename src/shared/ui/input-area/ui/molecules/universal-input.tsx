@@ -34,7 +34,7 @@ const UniversalInput = (props: Props) => {
         autocomplete,
     } = props
 
-    const isActive = editable || (changeInputArea && !documents)
+    const isActive = editable ?? (changeInputArea && !documents)
 
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
         setData((area) => {

@@ -24,6 +24,7 @@ const getFamily = (): IInputArea => {
                     value: null,
                     type: 'select',
                     items: familyType,
+                    required: true,
                     width: '100%',
                 },
                 {
@@ -44,13 +45,6 @@ const getFamily = (): IInputArea => {
             ],
         ],
         addNew: true,
-        optionalCheckbox: {
-            fieldName: 'family_none',
-            title: 'Близкие родственники отсутствуют',
-            value: false,
-            required: true,
-        },
-        confirmed: false,
     }
 }
 

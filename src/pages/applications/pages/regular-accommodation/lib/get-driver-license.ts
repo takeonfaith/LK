@@ -10,7 +10,6 @@ const getDriverLicense = (): IInputArea => {
                 type: 'date',
                 value: '',
                 fieldName: 'beginning_of_benefit_period',
-                editable: true,
                 required: true,
             },
             {
@@ -18,7 +17,6 @@ const getDriverLicense = (): IInputArea => {
                 type: 'date',
                 value: '',
                 fieldName: 'end_of_benefit_period',
-                editable: true,
                 required: true,
             },
         ],

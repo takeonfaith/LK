@@ -10,7 +10,6 @@ const getMilitaryService = (): IInputArea => {
                 type: 'date',
                 value: '',
                 fieldName: 'beginning_of_benefit_period',
-                editable: true,
                 required: true,
             },
             {
@@ -18,13 +17,12 @@ const getMilitaryService = (): IInputArea => {
                 type: 'date',
                 value: '',
                 fieldName: 'end_of_benefit_period',
-                editable: true,
                 required: true,
             },
         ],
         optionalCheckbox: {
             fieldName: 'is_not_invalid',
-            value: true,
+            value: false,
             title: 'Нет документа о прохождении военной службы',
             required: true,
         },
