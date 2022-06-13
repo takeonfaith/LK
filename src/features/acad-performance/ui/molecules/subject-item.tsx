@@ -81,10 +81,11 @@ const Bar = styled.div`
 `
 
 const Grade = styled.div`
-    min-width: 100px;
+    min-width: 166px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: center;
 
     @media (max-width: 1000px) {
         display: none;
