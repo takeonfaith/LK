@@ -2,17 +2,23 @@ import { useStore } from 'effector-react/compat'
 import { createEvent, createStore } from 'effector/compat'
 import { createEffect } from 'effector'
 import { IDefaultSettings } from '@consts'
+import getDefaultSettings from '../lib/get-default-settings'
 
-type NameSettings = 'settings-home-page' | 'settings-personal' | 'settings-appearance' | 'settings-security' | string
+export enum NameSettings {
+    'settings-home-page' = 'settings-home-page',
+    'settings-personal' = 'settings-personal',
+    'settings-appearance' = 'settings-appearance',
+    'settings-security' = 'settings-security',
+}
 
-type Param = {
+export type Param = {
     [key in NameSettings]: {
         id: string
         property: IDefaultSettings
     }
 }
 
-type SettingsType = {
+export type SettingsType = {
     [key: string]: Param
 }
 
@@ -20,31 +26,6 @@ interface SettingsStore {
     settings: SettingsType
     error: string | null
     completed: boolean
-}
-
-const getDefaultSettings = (userId = ''): SettingsType => {
-    return {
-        [userId]: {
-            'settings-home-page': {
-                id: 'settings-home-page',
-                property: {},
-            },
-            'settings-security': {
-                id: 'settings-security',
-                property: {},
-            },
-            'settings-appearance': {
-                id: 'settings-appearance',
-                property: {
-                    theme: 'light',
-                },
-            },
-            'settings-personal': {
-                id: 'settings-personal',
-                property: {},
-            },
-        },
-    }
 }
 
 const DEFAULT_STORE: SettingsStore = {
@@ -75,7 +56,7 @@ const updateSettingFx = createEffect(
         nameParam,
         value,
     }: {
-        nameSettings: NameSettings
+        nameSettings: keyof typeof NameSettings
         nameParam: string
         value: string | boolean
     }): Param => {
