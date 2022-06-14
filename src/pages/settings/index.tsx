@@ -60,7 +60,7 @@ const SettingsPage = () => {
     return (
         <Wrapper>
             <ListOfSettings config={Object.keys(settings)} />
-            <Switch>{Object.keys(settings).map(renderList)}</Switch>
+            {/*<Switch>{Object.keys(settings).map(renderList)}</Switch>*/}
         </Wrapper>
     )
 }
