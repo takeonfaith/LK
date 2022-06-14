@@ -24,7 +24,7 @@ const ListOfSettingsWrapper = styled(ListWrapper)<{ open: boolean }>`
 `
 
 interface Props {
-    config: string[]
+    config: any[] | null
 }
 
 const ListOfSettings = ({ config }: Props) => {
@@ -38,17 +38,18 @@ const ListOfSettings = ({ config }: Props) => {
             <Title size={3} align="left" bottomGap>
                 Настройки
             </Title>
-            {config.map((id) => {
-                return (
-                    <PageLink
-                        {...allRoutes[id]}
-                        title={allRoutes[id].title.slice(11, allRoutes[id].title.length)}
-                        key={id}
-                        orientation="horizontal"
-                        shadow={false}
-                    />
-                )
-            })}
+            {!!config &&
+                config.map(({ name }) => {
+                    return (
+                        <PageLink
+                            {...allRoutes[name]}
+                            title={allRoutes[name].title.slice(11, allRoutes[name].title.length)}
+                            key={name}
+                            orientation="horizontal"
+                            shadow={false}
+                        />
+                    )
+                })}
         </ListOfSettingsWrapper>
     )
 }

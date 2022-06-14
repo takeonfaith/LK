@@ -1,9 +1,11 @@
 import { menuModel } from '@entities/menu'
+import { settingsModel } from '@entities/settings'
 import { ListOfSettings } from '@features/settings'
 import ContentWrapper from '@ui/content-wrapper'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router'
 import styled from 'styled-components'
+import { userModel } from '@entities/user'
 
 const Wrapper = styled.div`
     height: 100%;
@@ -28,25 +30,34 @@ const Wrapper = styled.div`
     }
 `
 
-const SETTINGS_CONFIG = ['settings-home-page', 'settings-personal', 'settings-appearance', 'settings-security']
+// const SETTINGS_CONFIG = ['settings-home-page', 'settings-personal', 'settings-appearance', 'settings-security']
 
 const SettingsPage = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
+    const { settings } = settingsModel.selectors.useSettings()
+
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
+
+    useEffect(() => {
+        if (user) settingsModel.effects.getLocalSettingsFx(user.id)
+    }, [user])
 
     if (!allRoutes) return null
 
     return (
         <Wrapper>
-            <ListOfSettings config={SETTINGS_CONFIG} />
-            <Switch>
-                {SETTINGS_CONFIG.map((id) => {
-                    return (
-                        <Route path={allRoutes[id].path} key={id}>
-                            <ContentWrapper>{allRoutes[id].Component()}</ContentWrapper>
-                        </Route>
-                    )
-                })}
-            </Switch>
+            <ListOfSettings config={settings} />
+            {/*<Switch>*/}
+            {/*    {settings.map(({ name }) => {*/}
+            {/*        return (*/}
+            {/*            <Route path={allRoutes[name].path} key={name}>*/}
+            {/*                <ContentWrapper>{allRoutes[name].Component()}</ContentWrapper>*/}
+            {/*            </Route>*/}
+            {/*        )*/}
+            {/*    })}*/}
+            {/*</Switch>*/}
             {/* <SliderPage
                 pages={[
                     { title: 'Общие', content: <General /> },

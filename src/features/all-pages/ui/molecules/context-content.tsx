@@ -5,6 +5,7 @@ import React from 'react'
 import { FiBook, FiMinusCircle } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
+import { settingsModel } from '@entities/settings'
 
 const ContextContentWrapper = styled.div`
     .top {
@@ -26,7 +27,7 @@ const ContextContentWrapper = styled.div`
 `
 
 const ContextContent = (props: IRoute) => {
-    const { icon, title, color } = props
+    const { id, icon, title, color } = props
 
     return (
         <ContextContentWrapper>
@@ -44,6 +45,7 @@ const ContextContent = (props: IRoute) => {
                 width="100%"
                 align="left"
                 background="var(--schedule)"
+                onClick={() => settingsModel.events.deleteElement({ nameElement: id })}
             />
             <Button
                 text="Еще что-то"
