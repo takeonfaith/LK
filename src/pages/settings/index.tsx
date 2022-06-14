@@ -30,8 +30,6 @@ const Wrapper = styled.div`
     }
 `
 
-// const SETTINGS_CONFIG = ['settings-home-page', 'settings-personal', 'settings-appearance', 'settings-security']
-
 const SettingsPage = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
     const { settings } = settingsModel.selectors.useSettings()
@@ -43,32 +41,26 @@ const SettingsPage = () => {
     useEffect(() => {
         if (user) settingsModel.effects.getLocalSettingsFx(user.id)
     }, [user])
-
     if (!allRoutes) return null
 
+    const renderList = (name: string) => {
+        const Wrapper = allRoutes[name].Component
+        return (
+            <Route path={allRoutes[name].path} key={name}>
+                <ContentWrapper>
+                    <Wrapper />
+                </ContentWrapper>
+            </Route>
+        )
+    }
+
+    if (settings === undefined) {
+        return null
+    }
     return (
         <Wrapper>
-            <ListOfSettings config={settings} />
-            {/*<Switch>*/}
-            {/*    {settings.map(({ name }) => {*/}
-            {/*        return (*/}
-            {/*            <Route path={allRoutes[name].path} key={name}>*/}
-            {/*                <ContentWrapper>{allRoutes[name].Component()}</ContentWrapper>*/}
-            {/*            </Route>*/}
-            {/*        )*/}
-            {/*    })}*/}
-            {/*</Switch>*/}
-            {/* <SliderPage
-                pages={[
-                    { title: 'Общие', content: <General /> },
-                    { title: 'Внешний вид', content: <Appearance /> },
-                    { title: 'Меню', content: <CustomizeMenu /> },
-                    { title: 'Аккаунт', content: <Account /> },
-                    { title: 'Безопасность', content: <Security /> },
-                ]}
-                className="settings-page"
-                currentPage={currentPage}
-            /> */}
+            <ListOfSettings config={Object.keys(settings)} />
+            <Switch>{Object.keys(settings).map(renderList)}</Switch>
         </Wrapper>
     )
 }

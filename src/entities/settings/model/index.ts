@@ -1,69 +1,102 @@
 import { useStore } from 'effector-react/compat'
 import { createEvent, createStore } from 'effector/compat'
 import { createEffect } from 'effector'
+import { IDefaultSettings } from '@consts'
 
-interface Param {
-    name: string
-    title: string
-    property: string
+type NameSettings = 'settings-home-page' | 'settings-personal' | 'settings-appearance' | 'settings-security' | string
+
+type Param = {
+    [key in NameSettings]: {
+        id: string
+        property: IDefaultSettings
+    }
 }
 
-let UR = ''
+type SettingsType = {
+    [key: string]: Param
+}
 
 interface SettingsStore {
-    settings: {
-        [key: string]: Param[]
-    }
+    settings: SettingsType
     error: string | null
     completed: boolean
 }
 
-const DEFAULT_SETTINGS = (userId = '0') => {
+const getDefaultSettings = (userId = ''): SettingsType => {
     return {
-        [userId]: [
-            {
-                name: 'settings-home-page',
-                title: 'Домашний экран',
-                property: '',
+        [userId]: {
+            'settings-home-page': {
+                id: 'settings-home-page',
+                property: {},
             },
-            {
-                name: 'settings-security',
-                title: 'Безопасность',
-                property: '',
+            'settings-security': {
+                id: 'settings-security',
+                property: {},
             },
-            {
-                name: 'settings-appearance',
-                title: 'Лялялялял',
-                property: '',
+            'settings-appearance': {
+                id: 'settings-appearance',
+                property: {
+                    theme: 'light',
+                },
             },
-        ],
+            'settings-personal': {
+                id: 'settings-personal',
+                property: {},
+            },
+        },
     }
 }
 
 const DEFAULT_STORE: SettingsStore = {
-    settings: DEFAULT_SETTINGS(),
+    settings: getDefaultSettings(),
     error: null,
     completed: false,
 }
 
+let currentUser: string
+
 const useSettings = () => {
     return {
-        settings: useStore($settingsStore).settings[UR],
+        settings: useStore($settingsStore).settings[currentUser],
         error: useStore($settingsStore).error,
         completed: useStore($settingsStore).completed,
     }
 }
 
-const getLocalSettingsFx = createEffect(async (userId: string): Promise<Param[]> => {
-    UR = userId
-    const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[UR]
-    return localSettings ?? DEFAULT_SETTINGS(userId)[userId]
+const getLocalSettingsFx = createEffect((userId: string): Param => {
+    currentUser = userId
+    const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser]
+    return localSettings ?? getDefaultSettings(userId)[userId]
 })
+
+const updateSettingFx = createEffect(
+    ({
+        nameSettings,
+        nameParam,
+        value,
+    }: {
+        nameSettings: NameSettings
+        nameParam: string
+        value: string | boolean
+    }): Param => {
+        const newParam = {
+            ...useSettings().settings[nameSettings].property,
+            [nameParam]: value,
+        }
+        return getDefaultSettings(currentUser)[currentUser] ?? newParam
+    },
+)
+
+const filterSettings = (oldSettings: Param, nameParam: NameSettings) => {
+    delete oldSettings[nameParam]
+    return oldSettings
+}
+
 const changeCompleted = createEvent<{ completed: boolean }>()
 
 const clearStore = createEvent()
 
-const deleteElement = createEvent<{ nameElement: string }>()
+const deleteElement = createEvent<{ nameElement: NameSettings }>()
 
 const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
     .on(changeCompleted, (oldData, newData) => ({
@@ -74,14 +107,21 @@ const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
         ...oldData,
         settings: {
             ...oldData.settings,
-            [UR]: newData,
+            [currentUser]: newData,
         },
     }))
     .on(deleteElement, (oldData, { nameElement }) => ({
         ...oldData,
         settings: {
             ...oldData.settings,
-            [UR]: oldData.settings[UR].filter((item) => item.name !== nameElement),
+            [currentUser]: filterSettings(oldData.settings[currentUser], nameElement),
+        },
+    }))
+    .on(updateSettingFx.doneData, (oldData, newData) => ({
+        ...oldData,
+        settings: {
+            ...oldData.settings,
+            [currentUser]: newData,
         },
     }))
     .on(clearStore, () => ({
@@ -89,9 +129,9 @@ const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
     }))
 
 $settingsStore.watch((state) => {
-    if (state !== DEFAULT_STORE && !!UR) {
+    if (state !== DEFAULT_STORE && !!currentUser) {
         const allSettings = JSON.parse(localStorage.getItem('new-settings') ?? JSON.stringify({}))
-        allSettings[UR] = state.settings[UR]
+        allSettings[currentUser] = state.settings[currentUser]
         localStorage.setItem('new-settings', JSON.stringify(allSettings))
     }
 })
@@ -108,4 +148,5 @@ export const events = {
 
 export const effects = {
     getLocalSettingsFx,
+    updateSettingFx,
 }

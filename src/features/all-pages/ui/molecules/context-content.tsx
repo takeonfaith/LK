@@ -45,7 +45,16 @@ const ContextContent = (props: IRoute) => {
                 width="100%"
                 align="left"
                 background="var(--schedule)"
-                onClick={() => settingsModel.events.deleteElement({ nameElement: id })}
+                // onClick={() => settingsModel.events.deleteElement({ nameElement: id })}
+                onClick={() => {
+                    // eslint-disable-next-line no-console
+                    console.log(123123)
+                    settingsModel.effects.updateSettingFx({
+                        nameSettings: 'settings-appearance',
+                        nameParam: 'theme',
+                        value: 'asdsad',
+                    })
+                }}
             />
             <Button
                 text="Еще что-то"
