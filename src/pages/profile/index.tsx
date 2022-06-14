@@ -2,6 +2,7 @@ import { SETTINGS_APPEARANCE_ROUTE, SETTINGS_ROUTE } from '@app/routes/general-r
 import { Colors } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { menuModel } from '@entities/menu'
+import { storyModel } from '@entities/story'
 import { userModel } from '@entities/user'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { UserInfo } from '@features/profile'
@@ -15,10 +16,10 @@ import React from 'react'
 import { FiLogOut, FiSettings, FiSun } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { AvailableAccounts } from 'widgets'
+import { AvailableAccounts, StoryCard } from 'widgets'
 
 const ProfileWrapper = styled.div`
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,7 +105,7 @@ const ProfilePage = () => {
                     width="120px"
                     height="120px"
                     marginRight="0"
-                    boxShadow="0 0 80px #00000030"
+                    boxShadow="0 0 80px #0000005a"
                 />
                 <List horizontalAlign="center">
                     <Title size={3} align="left">
@@ -145,6 +146,250 @@ const ProfilePage = () => {
                     />
                 </List>
             </ProfileTop>
+            <List direction="horizontal" innerPadding="20px">
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://cs4.pikabu.ru/post_img/big/2016/05/25/6/1464163350188194633.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Testвф',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://searchthisweb.com/wallpaper/thumb/main_ferrari_3840x2160_pbrox.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+            </List>
             <AvailableAccounts />
             <UserInfo />
         </ProfileWrapper>

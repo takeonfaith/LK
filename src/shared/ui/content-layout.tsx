@@ -7,11 +7,12 @@ import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
+import { Confirm, GreetingsScreen, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import WhatsNew from '../../widgets/whats-new'
 import InitialLoader from './initial-loader'
+import Story from './story'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -64,6 +65,8 @@ const ContentLayout = () => {
     return (
         <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
             <InitialLoader loading={!user} />
+            <GreetingsScreen />
+            <Story />
             <LeftsideBar />
             <ContentWrapper>
                 {/* <Header /> */}
