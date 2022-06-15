@@ -65,7 +65,7 @@ const ContentLayout = () => {
     return (
         <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
             <InitialLoader loading={!user} />
-            <GreetingsScreen />
+            {/* <GreetingsScreen /> */}
             <Story />
             <LeftsideBar />
             <ContentWrapper>

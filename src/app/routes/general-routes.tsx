@@ -66,6 +66,12 @@ export interface IRoutes {
     [id: string]: IRoute
 }
 
+export enum Groups {
+    GENERAL = 'Основные',
+    OTHER = 'Другое',
+    TEST = 'Тестовый раздел',
+}
+
 export interface IRoute {
     id: string
     title: string
@@ -78,6 +84,7 @@ export interface IRoute {
     isNew?: boolean
     show?: boolean
     notifications?: number
+    group: keyof typeof Groups
 }
 
 export const publicRoutes = [
@@ -121,6 +128,7 @@ export const generalRoutes: IRoutes = {
         color: 'lightGreen',
         isTemplate: false,
         show: false,
+        group: 'GENERAL',
     },
     settings: {
         id: 'settings',
@@ -131,6 +139,7 @@ export const generalRoutes: IRoutes = {
         color: 'grey',
         isTemplate: true,
         show: true,
+        group: 'GENERAL',
     },
     home: {
         id: 'home',
@@ -140,6 +149,7 @@ export const generalRoutes: IRoutes = {
         Component: Home,
         color: 'blue',
         isTemplate: false,
+        group: 'GENERAL',
     },
     profile: {
         id: 'profile',
@@ -150,6 +160,7 @@ export const generalRoutes: IRoutes = {
         color: 'purple',
         isTemplate: false,
         notifications: 2,
+        group: 'GENERAL',
     },
     chat: {
         //ChatPage
@@ -161,6 +172,7 @@ export const generalRoutes: IRoutes = {
         color: 'red',
         isTemplate: true,
         notifications: 4,
+        group: 'GENERAL',
     },
     schedule: {
         id: 'schedule',
@@ -170,6 +182,7 @@ export const generalRoutes: IRoutes = {
         Component: SchedulePage,
         color: 'pink',
         isTemplate: false,
+        group: 'GENERAL',
     },
     payments: {
         id: 'payments',
@@ -179,6 +192,7 @@ export const generalRoutes: IRoutes = {
         Component: PaymentsPage,
         color: 'lightGreen',
         isTemplate: false,
+        group: 'GENERAL',
     },
     'electronic-interaction-agreement': {
         id: 'electronic-interaction-agreement',
@@ -188,6 +202,7 @@ export const generalRoutes: IRoutes = {
         Component: ElectronicInteractionAgreementPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'all-students': {
         id: 'all-students',
@@ -197,6 +212,7 @@ export const generalRoutes: IRoutes = {
         Component: AllStudentsPage,
         color: 'darkBlue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'all-teachers': {
         id: 'all-teachers',
@@ -206,6 +222,7 @@ export const generalRoutes: IRoutes = {
         Component: AllTeachersPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     portfolio: {
         id: 'portfolio',
@@ -215,6 +232,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: PORTFOLIO_ROUTE }),
         color: 'blue',
         isTemplate: true,
+        group: 'OTHER',
     },
     feedback: {
         id: 'feedback',
@@ -224,6 +242,7 @@ export const generalRoutes: IRoutes = {
         Component: FeedbackPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     instructions: {
         id: 'instructions',
@@ -233,6 +252,7 @@ export const generalRoutes: IRoutes = {
         Component: InstructionsPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
 }
 
@@ -246,6 +266,7 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         show: false,
+        group: 'OTHER',
     },
     'settings-appearance': {
         id: 'settings-appearance',
@@ -256,6 +277,7 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'purple',
         isTemplate: true,
         show: true,
+        group: 'OTHER',
     },
     'settings-personal': {
         id: 'settings-personal',
@@ -266,6 +288,7 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'pink',
         isTemplate: true,
         show: true,
+        group: 'OTHER',
     },
     'settings-security': {
         id: 'settings-security',
@@ -276,6 +299,7 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'green',
         isTemplate: true,
         show: true,
+        group: 'OTHER',
     },
     'settings-home-page': {
         id: 'settings-home-page',
@@ -286,5 +310,6 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'blue',
         isTemplate: true,
         show: true,
+        group: 'OTHER',
     },
 }

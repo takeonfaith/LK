@@ -1,18 +1,14 @@
-import { IRoutes } from '@app/routes/general-routes'
-import { Colors } from '@consts'
-import { contextMenuModel } from '@entities/context-menu'
+import { Groups, IRoutes } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { FoundPages } from '@features/all-pages'
+import getGroupPages from '@features/all-pages/lib/get-group-pages'
 import search from '@features/all-pages/lib/search'
 import LinksList from '@features/home/ui/organisms/links-list'
-import { Button } from '@ui/button'
-import { Divider } from '@ui/divider'
-import List from '@ui/list'
 import { LocalSearch } from '@ui/molecules'
 import { Title } from '@ui/title'
-import React, { useState } from 'react'
-import { FiGrid, FiList, FiMoreVertical } from 'react-icons/fi'
+import { useMemo, useState } from 'react'
 import styled from 'styled-components'
+import React from 'react'
 
 const AllPagesWrapper = styled.div`
     padding: calc(var(--desktop-page-padding) + 10px);
@@ -31,6 +27,7 @@ const AllPages = () => {
     const { visibleRoutes, allRoutes } = menuModel.selectors.useMenu()
     const [foundPages, setFoundPages] = useState<IRoutes | null>(null)
     const [searchValue, setSearchValue] = useState<string>('')
+    const groupedPages = useMemo(() => getGroupPages(visibleRoutes), [visibleRoutes])
 
     if (!visibleRoutes) return null
 
@@ -58,7 +55,11 @@ const AllPages = () => {
                 setResult={setFoundPages}
                 setExternalValue={setSearchValue}
             />
-            {searchValue.length === 0 && <LinksList doNotShow="all" align="left" links={visibleRoutes} />}
+            {searchValue.length === 0 &&
+                Object.keys(groupedPages).map((group) => {
+                    const links = groupedPages[group as Groups]
+                    return <LinksList title={group} key={group} doNotShow="all" align="left" links={links} />
+                })}
             <FoundPages pages={foundPages} />
         </AllPagesWrapper>
     )
