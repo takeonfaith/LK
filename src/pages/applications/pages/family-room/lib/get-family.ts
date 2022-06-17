@@ -1,12 +1,8 @@
 import { IInputArea } from '@ui/input-area/model'
 
 const familyType = [
-    { id: 'mother', title: 'Мать' },
-    { id: 'father', title: 'Отец' },
     { id: 'wife', title: 'Жена' },
     { id: 'husband', title: 'Муж' },
-    { id: 'sister', title: 'Сестра' },
-    { id: 'brother', title: 'Брат' },
     { id: 'son', title: 'Сын' },
     { id: 'daughter', title: 'Дочь' },
 ]
