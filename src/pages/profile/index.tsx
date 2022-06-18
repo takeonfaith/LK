@@ -11,11 +11,11 @@ import List from '@ui/list'
 import { ListWrapper } from '@ui/list/styles'
 import Subtext from '@ui/subtext'
 import { Title } from '@ui/title'
-import React from 'react'
 import { FiLogOut, FiSettings, FiSun } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { AvailableAccounts } from 'widgets'
+import React from 'react'
 
 const ProfileWrapper = styled.div`
     height: 100%;

@@ -19,6 +19,7 @@ type Props = StyleProps &
         children: ChildrenType
         onAdd?: () => void
         onWatchMore?: () => void
+        onDelete?: () => void
         visible?: boolean
         showPages?: boolean
     }
@@ -35,6 +36,7 @@ const List = (props: Props) => {
         wrap,
         onAdd,
         onWatchMore,
+        onDelete,
         showPages,
         innerPadding,
         minWidth,
@@ -74,6 +76,16 @@ const List = (props: Props) => {
                         textColor="var(--reallyBlue)"
                         onClick={onWatchMore}
                         text="Ещё"
+                    />
+                )}
+                {onDelete && (
+                    <Button
+                        width="fit-content"
+                        height="15px"
+                        background={Colors.grey.transparentAF}
+                        textColor="var(--reallyBlue)"
+                        onClick={onDelete}
+                        text="Удалить"
                     />
                 )}
             </Title>
