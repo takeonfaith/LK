@@ -1,7 +1,7 @@
 import { messageApi } from '@api'
 import { Messages } from '@api/model'
-import { createEffect, createStore } from 'effector/compat'
-import { useStore } from 'effector-react/compat'
+import { createEffect, createStore } from 'effector'
+import { useStore } from 'effector-react'
 import { createEvent } from 'effector'
 
 interface MessagesStore {

@@ -1,6 +1,6 @@
 import { notificationApi } from '@api'
-import { useStore } from 'effector-react/compat'
-import { createEffect, createEvent, createStore } from 'effector/compat'
+import { useStore } from 'effector-react'
+import { createEffect, createEvent, createStore } from 'effector'
 import { Notifications } from '@api/model/notification'
 
 interface PersonalNotificationsStore {
