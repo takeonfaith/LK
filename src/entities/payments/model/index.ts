@@ -1,7 +1,7 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
-import { useStore, createEvent } from 'effector-react'
-import { createEffect, createStore } from 'effector'
+import { useStore } from 'effector-react'
+import { createEffect, createStore, createEvent } from 'effector'
 
 interface PaymentsStore {
     payments: Payments | null
