@@ -8,6 +8,7 @@ export const ApplicationForСertificateOfAttendance = lazy(
 export const ClarificationOfPassportDataApplication = lazy(
     () => import('@pages/applications/pages/clarification-of-passport-data/arbitrary-request'),
 )
+
 export const ApplicationPaperCall = lazy(() => import('@pages/applications/pages/paper-call'))
 export const ApplicationSocialAgencies = lazy(() => import('@pages/applications/pages/social-agencies'))
 export const ApplicationForSocialScrollarship = lazy(() => import('@pages/applications/pages/social-scollarship'))

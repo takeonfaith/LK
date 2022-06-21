@@ -1,6 +1,5 @@
 import { Colors, IColors } from '@consts'
 import { Button } from '@ui/button'
-import { Title } from '@ui/title'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'

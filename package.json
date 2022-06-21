@@ -19,8 +19,9 @@
         ]
     },
     "scripts": {
-        "start": "vite",
-        "build": "tsc && vite build",
+        "start": " vite",
+        "build": "set VITE_BUILD_MODE=PRODUCTION & vite build",
+        "build-test": "vite build",
         "preview": "vite preview"
     },
     "dependencies": {

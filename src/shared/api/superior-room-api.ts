@@ -1,13 +1,13 @@
-import token from '@utils/token'
+import getToken from '@utils/token'
 import { $api } from './config'
 
 export const get = () => {
-    return $api.get(`?getRequestHighComfort&token=${token()}`)
+    return $api.get(`?getRequestHighComfort&token=${getToken()}`)
 }
 
 export const post = (args: { [key: string]: any }) => {
     const formData = new FormData()
-    formData.set('token', token())
+    formData.set('token', getToken())
     formData.set('postRequestHighComfort', '1')
 
     for (const [key, value] of Object.entries(args)) {

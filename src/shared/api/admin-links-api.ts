@@ -1,7 +1,7 @@
-import token from '@utils/token'
+import getToken from '@utils/token'
 import { $api } from './config'
 import { AdminLinks } from './model'
 
 export const get = () => {
-    return $api.get<AdminLinks>(`?getAdminLinks&token=${token()}`)
+    return $api.get<AdminLinks>(`?getAdminLinks&token=${getToken()}`)
 }

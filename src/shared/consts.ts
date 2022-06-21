@@ -289,3 +289,5 @@ export const letterColorMatch: LetterColorMatch = {
     Y: 'red',
     Z: 'purple',
 }
+
+export const isProduction = (import.meta.env.VITE_BUILD_MODE as string).trimEnd() === 'PRODUCTION'

@@ -5,6 +5,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
+    server: {
+        open: true,
+    },
     plugins: [
         react(),
         checker({ typescript: true, eslint: { lintCommand: 'eslint "./src/**/*.{ts,tsx}"' } }),

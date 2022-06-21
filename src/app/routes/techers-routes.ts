@@ -1,3 +1,4 @@
+import { isProduction } from '@consts'
 import ContactInfoActualizationPage from '@pages/contact-info-actualization'
 import DataVerificationPage from '@pages/data-verification'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
@@ -102,7 +103,8 @@ export const teachersPrivateRoutes: IRoutes = {
         title: 'Соглашение об электронном взаимодействии',
         icon: HiOutlineClipboardCheck,
         path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
-        Component: () => ElectronicInteractionAgreementPage(),
+        // !!!example of production mode usage
+        Component: isProduction ? ElectronicInteractionAgreementPage : () => PageIsNotReady({}),
         isTemplate: false,
     },
     7: {
