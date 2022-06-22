@@ -1,5 +1,4 @@
-import { Loading } from '@ui/loading'
-import React, { Suspense } from 'react'
+import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { ModalProvider } from 'widgets/modal/lib'
 import SettingsProvider from '../shared/lib/contexts/settings-context'
@@ -10,9 +9,7 @@ const App = () => {
         <ModalProvider>
             <SettingsProvider>
                 <BrowserRouter basename="/">
-                    <Suspense fallback={() => null}>
-                        <Router />
-                    </Suspense>
+                    <Router />
                 </BrowserRouter>
             </SettingsProvider>
         </ModalProvider>

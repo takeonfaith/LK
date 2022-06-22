@@ -4,7 +4,7 @@ import { popUpMessageModel } from '@entities/pop-up-message'
 import { userModel } from '@entities/user'
 import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import styled from 'styled-components'
 import { Confirm, Header, LeftsideBar, PopUpMessage } from 'widgets'
 import { Modal } from 'widgets/modal'
@@ -59,6 +59,7 @@ const ContentLayout = () => {
         isShowNotification && open(<WhatsNew />)
     }, [isShowNotification])
 
+    // TODO: add fallback
     return (
         <div style={{ height, display: 'flex' }}>
             <InitialLoader
@@ -69,7 +70,9 @@ const ContentLayout = () => {
             <ContentWrapper>
                 <Header />
                 <div className="page-content">
-                    <PrivateRouter />
+                    <Suspense fallback={null}>
+                        <PrivateRouter />
+                    </Suspense>
                 </div>
             </ContentWrapper>
             <Modal />

@@ -19,7 +19,7 @@
         ]
     },
     "scripts": {
-        "start": " vite",
+        "start": "vite",
         "build": "set VITE_BUILD_MODE=PRODUCTION & vite build",
         "build-test": "vite build",
         "preview": "vite preview"
