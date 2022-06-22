@@ -1,15 +1,16 @@
-import { IRoute, IRoutes, privateRoutes } from '@app/routes/routes'
-import { teachersPrivateRoutes } from '@app/routes/techers-routes'
+import { IRoute, IRoutes } from '@app/routes/general-routes'
+import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
 
 const getNotChosenRoutes = (ids: number[], user: any): IRoutes => {
-    return Object.values(!user?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes).reduce(
-        (acc, route: IRoute) => {
-            if (!ids.includes(route.id)) acc[route.id] = route
+    return {}
+    // Object.values(!user?.user?.subdivisions ? privateRoutes : teachersPrivateRoutes).reduce(
+    //     (acc, route: IRoute) => {
+    //         if (!ids.includes(route.id)) acc[route.id] = route
 
-            return acc
-        },
-        {},
-    )
+    //         return acc
+    //     },
+    //     {},
+    // )
 }
 
 export default getNotChosenRoutes

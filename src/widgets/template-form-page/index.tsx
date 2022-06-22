@@ -1,4 +1,5 @@
 import { CenterPage, Error, FormBlock, SubmitButton, Title, Wrapper } from '@ui/atoms'
+import GoBackButton from '@ui/go-back-button'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import { Message } from '@ui/message'
@@ -18,6 +19,7 @@ interface Props<T extends { last_update?: string }> {
         isAvailable: boolean
         text?: string
     }
+    goBack?: string
     repeatable?: boolean
 }
 
@@ -27,6 +29,7 @@ const TemplateFormPage = <T extends { last_update?: string }>({
     model,
     getForm,
     successMessage,
+    goBack,
     pageAvailability,
     isAvailableToSend = true,
     repeatable = true,
@@ -51,6 +54,7 @@ const TemplateFormPage = <T extends { last_update?: string }>({
             <CenterPage>
                 {!!form && !!setForm && (
                     <FormBlock>
+                        <GoBackButton text={goBack} visible={!!goBack} />
                         <InputArea {...form} collapsed={isDone && !repeatable} setData={setForm as LoadedState} />
                         <Message
                             title="Информация по заявке"

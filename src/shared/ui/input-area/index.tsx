@@ -1,7 +1,7 @@
 import { Colors } from '@consts'
 import { Button, Divider, FileLink, LoadFileButton, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FiAlertCircle, FiInfo, FiMinusCircle, FiPlusCircle, FiSave } from 'react-icons/fi'
 import { HiOutlineCheckCircle, HiOutlinePencil } from 'react-icons/hi'
 import useInputArea from './lib/use-input-area'

@@ -68,7 +68,7 @@ export const createFormStore = <DataType, PostDataType>({
         try {
             const response = await api.get()
 
-            return response.data
+            return { ...response.data }
         } catch (error) {
             throw new Error(error as string)
         }

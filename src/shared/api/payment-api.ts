@@ -9,3 +9,7 @@ export const get = () => {
 export const agreementSubmit = (id: string) => {
     return $api.get(`?signAgreement=${id}&token=${getToken()}`)
 }
+
+export const signContract = (contractId: string) => {
+    return $api.get(`?signContract=${contractId}&token=${token()}`)
+}

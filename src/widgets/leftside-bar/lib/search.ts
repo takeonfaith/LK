@@ -1,4 +1,4 @@
-import { IRoute, IRoutes } from '@app/routes/routes'
+import { IRoute, IRoutes } from '@app/routes/general-routes'
 import normalizeString from '@utils/normalize-string'
 
 const search = (value: string, routes: IRoutes) => {

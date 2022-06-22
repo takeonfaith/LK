@@ -1,6 +1,6 @@
 import { Colors } from '@consts'
-import React, { useEffect, useState } from 'react'
-import { FiX } from 'react-icons/fi'
+import React from 'react'
+import { FiPlus, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import useFilterList from './lib/hooks/use-filter-list'
 
@@ -88,6 +88,8 @@ const Element = styled.div<{ color?: string; background?: string; remove?: boole
 const AddedElementsListWrapper = styled.div<{ removeAll?: boolean; padding?: string }>`
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 5px;
     transition: 0.2s;
     padding: ${({ padding }) => padding ?? '10px'};
     opacity: ${({ removeAll }) => (removeAll ? '0' : '1')};
@@ -110,18 +112,27 @@ export type FilterElementList = {
 
 interface Props {
     list: FilterElementList
+    onAddElement?: () => void
     onRemoveOne: (id: string) => void
     onRemoveAll: () => void
     padding?: string
     setList: React.Dispatch<React.SetStateAction<FilterElementList>>
 }
 
-const AddedElementsList = ({ list, onRemoveAll, onRemoveOne, padding, setList }: Props) => {
+const AddedElementsList = ({ list, onAddElement, onRemoveAll, onRemoveOne, padding, setList }: Props) => {
     const listKeys = Object.keys(list ?? {})
     const { removeAll, removeOne, setRemoveAll, setRemoveOne } = useFilterList(listKeys, setList)
 
-    return listKeys.length ? (
+    if (!listKeys.length) return null
+
+    return (
         <AddedElementsListWrapper removeAll={removeAll || closed} padding={padding}>
+            {!!onAddElement && (
+                <Element onClick={onAddElement} background={'var(--reallyBlue)'} color="#fff">
+                    <FiPlus />
+                    Добавить
+                </Element>
+            )}
             {Object.values(list ?? {}).map((el) => {
                 return (
                     <Element key={el.id} background={el.background} remove={removeOne === el.id}>
@@ -157,7 +168,7 @@ const AddedElementsList = ({ list, onRemoveAll, onRemoveOne, padding, setList }:
                 </Element>
             )}
         </AddedElementsListWrapper>
-    ) : null
+    )
 }
 
 export default AddedElementsList

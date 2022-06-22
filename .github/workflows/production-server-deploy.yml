@@ -1,0 +1,55 @@
+name: Production server deploy
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: Install OpenVPN
+        run: |
+          sudo apt-get update
+          sudo apt-get --assume-yes --no-install-recommends install openvpn          
+
+      - name: Setup VPN config
+        run: |
+          echo "${{ secrets.CA_CRT }}" > ca.crt
+          echo "${{ secrets.SECRET_USERNAME_PASSWORD }}" > secret.txt
+          echo "${{ secrets.TLS_KEY }}" > tls.key          
+          echo "${{ secrets.CONFIG }}" > config.ovpn          
+
+      - name: Connect VPN
+        run: sudo openvpn --config "config.ovpn" --log "vpn.log" --daemon
+
+      - name: Wait for a VPN connection
+        timeout-minutes: 1
+        run: until ping -c1 ${{ secrets.TEST_HOST_IP }}; do sleep 2; done
+  
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: multiple command
+        uses: appleboy/ssh-action@master
+        with:
+          username: ${{ secrets.PROD_SERVER_USERNAME }}
+          password: ${{ secrets.PROD_SERVER_PASSWORD }}
+          host: ${{ secrets.PROD_HOST_IP }}
+          script: |
+            whoami
+            cd var/www/client-app/LK
+            echo ${{ secrets.PROD_SERVER_PASSWORD }} | sudo -S git pull
+            echo ${{ secrets.PROD_SERVER_PASSWORD }} | sudo git reset --hard origin/master
+            echo ${{ secrets.PROD_SERVER_PASSWORD }} | sudo npm i
+            echo ${{ secrets.PROD_SERVER_PASSWORD }} | sudo npm run build
+
+      - name: Kill VPN connection
+        if: always()
+        run: sudo killall openvpn 
+        

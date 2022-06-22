@@ -53,7 +53,7 @@ export interface WhatsNewPlate {
 const Plate = ({ icon, title, color, goTo, visible = true }: WhatsNewPlate) => {
     const { close } = useModal()
     return visible ? (
-        <PlateWrapper color={color as string}>
+        <PlateWrapper color={color}>
             <div className="icon">{icon}</div>
             <span className="title">{title}</span>
             {!!goTo && (

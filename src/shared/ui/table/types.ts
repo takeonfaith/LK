@@ -24,8 +24,11 @@ export interface ColumnProps {
     render?: (value: any, obj: IndexedProperties) => ChildrenType
 }
 
+export type Footer = (props: { [key: string]: any[] } | null) => IndexedProperties
+
 export interface TableProps {
     columns: ColumnProps[]
+    footer?: Footer
     data: Nullable<IndexedProperties[]>
     maxOnPage?: number
     onRowClick?: (obj: IndexedProperties) => void
