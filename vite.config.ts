@@ -9,6 +9,7 @@ export default defineConfig({
     server: {
         open: true,
     },
+    preview: { port: 3000 },
     plugins: [
         react(),
         checker({ typescript: true, eslint: { lintCommand: 'eslint "./src/**/*.{ts,tsx}"' } }),

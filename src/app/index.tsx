@@ -1,5 +1,6 @@
-import React from 'react'
-import { HashRouter } from 'react-router-dom'
+import { Loading } from '@ui/loading'
+import React, { Suspense } from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { ModalProvider } from 'widgets/modal/lib'
 import SettingsProvider from '../shared/lib/contexts/settings-context'
 import Router from './routes/router'
@@ -8,9 +9,11 @@ const App = () => {
     return (
         <ModalProvider>
             <SettingsProvider>
-                <HashRouter basename="/">
-                    <Router />
-                </HashRouter>
+                <BrowserRouter basename="/">
+                    <Suspense fallback={() => null}>
+                        <Router />
+                    </Suspense>
+                </BrowserRouter>
             </SettingsProvider>
         </ModalProvider>
     )
