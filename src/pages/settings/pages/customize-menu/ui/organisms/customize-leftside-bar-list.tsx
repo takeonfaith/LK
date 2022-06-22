@@ -1,19 +1,13 @@
-import { IRoutes } from '@app/routes/general-routes'
-import { privateRoutes } from '@app/routes/routes'
-import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
-import { ShortCutLinksType } from '@consts'
-import { userModel } from '@entities/user'
-import { useSettings } from '@utils/contexts/settings-context'
-import useResize from '@utils/hooks/use-resize'
 import React from 'react'
+import useResize from '@utils/hooks/use-resize'
 import LeftsideBarListWrapper from 'widgets/leftside-bar/ui/atoms/leftside-bar-list-wrapper'
 
 const CustomizeLeftsideBarList = () => {
-    const { setting, change } = useSettings<number[]>('menu')
-    const { setting: shortCutMenu, change: shortCutChange } = useSettings<ShortCutLinksType>('shortCutLinks')
-    const { data } = userModel.selectors.useUser()
+    // const { setting, change } = useSettings<number[]>('menu')
+    // const { setting: shortCutMenu, change: shortCutChange } = useSettings<ShortCutLinksType>('shortCutLinks')
+    // const { data } = userModel.selectors.useUser()
     const { height } = useResize()
-    const currentRoute: IRoutes = !data?.user?.subdivisions ? privateRoutes() : teachersPrivateRoutes()
+    // const currentRoute: IRoutes = !data?.user?.subdivisions ? privateRoutes() : teachersPrivateRoutes()
 
     // const enabledLeftsideBarItems = getChosenRoutes(setting, data)
     // const enabledShortCutMenu = useMemo(() => getChosenRoutes(shortCutMenu, data), [shortCutMenu])

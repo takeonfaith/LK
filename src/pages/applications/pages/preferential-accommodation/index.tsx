@@ -1,13 +1,11 @@
 import { userModel } from '@entities/user'
+import { BaseApplicationWrapper } from '@pages/applications/ui/base-application-wrapper'
 import { FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import getForm from './lib/get-form'
-import { BaseApplicationWrapper } from '@pages/applications/ui/base-application-wrapper'
-import getFamily from '@pages/data-verification/lib/get-family'
-import getFamilyStatus from '@pages/data-verification/lib/get-family-status'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -17,9 +15,9 @@ const PreferentialAccommodationPage = () => {
         data: { user },
     } = userModel.selectors.useUser()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [familyStatus, setFamilyStatus] = useState<IInputArea | null>(null)
-    const [family, setFamily] = useState<IInputArea | null>(null)
+    const [loading] = useState(false)
+    // const [familyStatus, setFamilyStatus] = useState<IInputArea | null>(null)
+    // const [family, setFamily] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
 
     useEffect(() => {

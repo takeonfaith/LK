@@ -12,7 +12,7 @@ import { useHistory } from 'react-router'
 import getDisability from '@pages/applications/pages/regular-accommodation/lib/get-disability'
 import getDriverLicense from '@pages/applications/pages/regular-accommodation/lib/get-driver-license'
 import getRegistration from '@pages/applications/pages/regular-accommodation/lib/get-registration'
-import getMilitaryService from "@pages/applications/pages/accommodation-correspondence-form/lib/get-militar-service";
+import getMilitaryService from '@pages/applications/pages/accommodation-correspondence-form/lib/get-militar-service'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -22,7 +22,7 @@ const RegularAccommodationPage = () => {
         data: { user },
     } = userModel.selectors.useUser()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
     const [driveLicense, setDriveLicense] = useState<IInputArea | null>(null)
     const [registration, setRegistration] = useState<IInputArea | null>(null)

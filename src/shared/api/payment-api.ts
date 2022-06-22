@@ -11,5 +11,5 @@ export const agreementSubmit = (id: string) => {
 }
 
 export const signContract = (contractId: string) => {
-    return $api.get(`?signContract=${contractId}&token=${token()}`)
+    return $api.get(`?signContract=${contractId}&token=${getToken()}`)
 }

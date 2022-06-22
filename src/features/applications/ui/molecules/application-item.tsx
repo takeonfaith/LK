@@ -78,7 +78,7 @@ type Props = Application & { index: number }
 
 const ApplicationItem = (props: Props) => {
     const { open } = useModal()
-    const { regDate, notes, regNumber, requestBody, requestTitle, status, statusDate, structuralSubdivision } = props
+    const { regDate, notes, regNumber, requestTitle, status, structuralSubdivision } = props
     return (
         <ApplicationItemWrapper even={props.index % 2 === 0} onClick={() => open(<ApplicationModal {...props} />)}>
             <div className="name">{requestTitle}</div>

@@ -1,6 +1,5 @@
 import { APPLICATIONS_ROUTE } from '@app/routes/routes'
 import { superiorRoomModel } from '@entities/superior-room'
-import { userModel } from '@entities/user'
 import { Button, FormBlock, SubmitButton, Wrapper } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
@@ -32,11 +31,11 @@ const ApplicationForSuperiorRoom = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading] = useState(false)
     const isDone = (completed || !data?.is_avaliable) ?? false
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
+    // const {
+    //     data: { user },
+    // } = userModel.selectors.useUser()
     const history = useHistory()
 
     useEffect(() => {

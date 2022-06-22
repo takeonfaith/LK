@@ -143,7 +143,7 @@ export interface LoadFileProps {
 const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
 const MAX_FILE_SIZE = 20000000
 
-const LoadFileButton = ({ label, files, setFiles, isActive, maxFiles }: LoadFileProps) => {
+const LoadFileButton = ({ files, setFiles, isActive, maxFiles }: LoadFileProps) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
     const { open } = useModal()

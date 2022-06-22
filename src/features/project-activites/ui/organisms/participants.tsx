@@ -211,7 +211,7 @@ const Participants = ({ data }: Props) => {
                         placeholder={'Поиск участников'}
                     />
                     <div className="list">
-                        {(foundParticipants ?? participantsRenderList)?.map(({ img, name, id }, i) => {
+                        {(foundParticipants ?? participantsRenderList)?.map(({ img, name, id }) => {
                             return <User key={id} type={'student'} name={name} avatar={img} />
                         })}
                     </div>

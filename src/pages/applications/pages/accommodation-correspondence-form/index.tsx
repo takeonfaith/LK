@@ -1,19 +1,18 @@
 import { userModel } from '@entities/user'
+import getMilitaryService from '@pages/applications/pages/accommodation-correspondence-form/lib/get-militar-service'
+import getDisability from '@pages/applications/pages/regular-accommodation/lib/get-disability'
+import getDriverLicense from '@pages/applications/pages/regular-accommodation/lib/get-driver-license'
+import getRegistration from '@pages/applications/pages/regular-accommodation/lib/get-registration'
+import { BaseApplicationWrapper } from '@pages/applications/ui/base-application-wrapper'
+import { APPLICATIONS_ROUTE } from '@routes'
 import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import getForm from './lib/get-form'
-import { useHistory } from 'react-router'
-import { BaseApplicationWrapper } from '@pages/applications/ui/base-application-wrapper'
 import { FiChevronLeft } from 'react-icons/fi'
-import { APPLICATIONS_ROUTE } from '@routes'
-import getDisability from '@pages/applications/pages/regular-accommodation/lib/get-disability'
-import getDriverLicense from '@pages/applications/pages/regular-accommodation/lib/get-driver-license'
-import getRegistration from '@pages/applications/pages/regular-accommodation/lib/get-registration'
-import getMilitaryService from "@pages/applications/pages/accommodation-correspondence-form/lib/get-militar-service";
+import { useHistory } from 'react-router'
+import getForm from './lib/get-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -23,7 +22,7 @@ const AccommodationCorrespondenceFormPage = () => {
         data: { user },
     } = userModel.selectors.useUser()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
     const [driveLicense, setDriveLicense] = useState<IInputArea | null>(null)
     const [registration, setRegistration] = useState<IInputArea | null>(null)

@@ -1,9 +1,9 @@
 import { CHAT_ROUTE } from '@app/routes/general-routes'
 import { contextMenuModel } from '@entities/context-menu'
-import { Button, ContextMenu } from '@ui/atoms'
+import { Button } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { FiMoreVertical, FiSearch, FiX } from 'react-icons/fi'
 import { ImAttachment } from 'react-icons/im'
 import { useHistory } from 'react-router'
@@ -30,7 +30,7 @@ interface Props {
 }
 
 const ChatHeader = ({ avatar, name, loading }: Props) => {
-    const [openMenu, setOpenMenu] = useState(false)
+    const [, setOpenMenu] = useState(false)
     const menuRef = useRef<HTMLDivElement>(null)
     const [searchMode, setSearchMode] = useState(false)
     const { open } = useModal()

@@ -19,7 +19,7 @@ const CheckboxDocumentList = ({ title, items, setChecked, setFiles }: Props) => 
             <Title size={5} align="left" bottomGap>
                 {title}
             </Title>
-            {items.map(({ value, title, files, maxFiles, fieldName, checkboxCondition }, j) => {
+            {items.map(({ value, title, files, maxFiles, checkboxCondition }, j) => {
                 return (
                     <CheckboxDocument
                         checkbox={{ checked: value, setChecked: () => setChecked(value, j), text: title }}
