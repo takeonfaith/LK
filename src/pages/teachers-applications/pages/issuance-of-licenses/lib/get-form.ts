@@ -81,7 +81,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Период',
                 type: 'date-interval',
-                value: '',
+                value: ['', ''],
                 editable: true,
                 fieldName: 'period',
                 required: true,

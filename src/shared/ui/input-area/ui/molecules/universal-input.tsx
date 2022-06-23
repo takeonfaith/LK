@@ -5,7 +5,7 @@ import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData, IInput
 import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
-import React from 'react'
+import React, { useState } from 'react'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -33,7 +33,7 @@ const UniversalInput = (props: Props) => {
         placeholder,
         autocomplete,
     } = props
-
+    const [validDates, setValidDates] = useState(true)
     const isActive = editable || (changeInputArea && !documents)
 
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
@@ -76,6 +76,13 @@ const UniversalInput = (props: Props) => {
         })
     }
 
+    const handleDates = (dates: string[]) => {
+        setData((area) => {
+            ;(area.data[indexI] as IInputAreaData).value = dates
+            return { ...area }
+        })
+    }
+
     return (type !== 'select' && type !== 'multiselect') || !items ? (
         type === 'checkbox' ? (
             <Checkbox
@@ -106,10 +113,10 @@ const UniversalInput = (props: Props) => {
             <DateInterval
                 title={title}
                 required={required}
-                dates={['', '']}
-                setDates={() => null}
-                valid={false}
-                setValid={() => null}
+                dates={value as string[]}
+                setDates={(dates: string[]) => handleDates(dates)}
+                valid={validDates}
+                setValid={setValidDates}
             />
         ) : type === 'radio' ? (
             <RadioButtonList

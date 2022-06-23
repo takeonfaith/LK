@@ -30,6 +30,7 @@ const getForm = (data: User): IInputArea => {
                 title: 'Телефон',
                 fieldName: 'tel_mob_private',
                 type: 'tel',
+                mask: true,
                 value: '8 999 999 99 99',
                 editable: true,
                 required: true,
@@ -57,15 +58,12 @@ const getForm = (data: User): IInputArea => {
                 editable: true,
                 required: true,
             },
-            {
-                title: 'С порядком выселения ознакомлен(а)',
-                type: 'checkbox',
-                value: '',
-                fieldName: 'isFamiliar',
-                editable: true,
-                required: true,
-            },
         ],
+        optionalCheckbox: {
+            title: 'С порядком выселения ознакомлен(а)',
+            value: false,
+            fieldName: 'isFamiliar',
+        },
     }
 }
 export default getForm
