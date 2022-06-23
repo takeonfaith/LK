@@ -38,9 +38,6 @@ const SettingsPage = () => {
         data: { user },
     } = userModel.selectors.useUser()
 
-    useEffect(() => {
-        if (user) settingsModel.effects.getLocalSettingsFx(user.id)
-    }, [user])
     if (!allRoutes) return null
 
     const renderList = (name: string) => {
@@ -60,7 +57,7 @@ const SettingsPage = () => {
     return (
         <Wrapper>
             <ListOfSettings config={Object.keys(settings)} />
-            {/*<Switch>{Object.keys(settings).map(renderList)}</Switch>*/}
+            <Switch>{Object.keys(settings).map(renderList)}</Switch>
         </Wrapper>
     )
 }

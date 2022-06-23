@@ -45,7 +45,7 @@ const ContextContent = (props: IRoute) => {
                 width="100%"
                 align="left"
                 background="var(--schedule)"
-                onClick={() => settingsModel.events.deleteElement({ nameElement: id })}
+                // onClick={() => settingsModel.events.deleteElement({ nameElement: id })}
             />
             <Button
                 text="Еще что-то"

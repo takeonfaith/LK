@@ -1,7 +1,7 @@
 import { useStore } from 'effector-react/compat'
 import { createEvent, createStore } from 'effector/compat'
 import { createEffect } from 'effector'
-import { IDefaultSettings } from '@consts'
+import { ThemeType } from '@consts'
 import getDefaultSettings from '../lib/get-default-settings'
 
 export enum NameSettings {
@@ -14,7 +14,9 @@ export enum NameSettings {
 export type Param = {
     [key in NameSettings]: {
         id: string
-        property: IDefaultSettings
+        property: {
+            [key: string]: ThemeType
+        }
     }
 }
 
@@ -50,34 +52,15 @@ const getLocalSettingsFx = createEffect((userId: string): Param => {
     return localSettings ?? getDefaultSettings(userId)[userId]
 })
 
-const updateSettingFx = createEffect(
-    ({
-        nameSettings,
-        nameParam,
-        value,
-    }: {
-        nameSettings: keyof typeof NameSettings
-        nameParam: string
-        value: string | boolean
-    }): Param => {
-        const newParam = {
-            ...useSettings().settings[nameSettings].property,
-            [nameParam]: value,
-        }
-        return getDefaultSettings(currentUser)[currentUser] ?? newParam
-    },
-)
-
-const filterSettings = (oldSettings: Param, nameParam: NameSettings) => {
-    delete oldSettings[nameParam]
-    return oldSettings
-}
+const updateSetting = createEvent<{
+    nameSettings: keyof typeof NameSettings
+    nameParam: string
+    value: string | boolean
+}>()
 
 const changeCompleted = createEvent<{ completed: boolean }>()
 
 const clearStore = createEvent()
-
-const deleteElement = createEvent<{ nameElement: NameSettings }>()
 
 const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
     .on(changeCompleted, (oldData, newData) => ({
@@ -87,24 +70,26 @@ const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
     .on(getLocalSettingsFx.doneData, (oldData, newData) => ({
         ...oldData,
         settings: {
-            ...oldData.settings,
             [currentUser]: newData,
         },
     }))
-    .on(deleteElement, (oldData, { nameElement }) => ({
-        ...oldData,
-        settings: {
-            ...oldData.settings,
-            [currentUser]: filterSettings(oldData.settings[currentUser], nameElement),
-        },
-    }))
-    .on(updateSettingFx.doneData, (oldData, newData) => ({
-        ...oldData,
-        settings: {
-            ...oldData.settings,
-            [currentUser]: newData,
-        },
-    }))
+    .on(updateSetting, (oldData, { nameSettings, nameParam, value }) => {
+        return {
+            ...oldData,
+            settings: {
+                [currentUser]: {
+                    ...oldData.settings[currentUser],
+                    [nameSettings]: {
+                        ...oldData.settings[currentUser][nameSettings],
+                        property: {
+                            ...oldData.settings[currentUser][nameSettings].property,
+                            [nameParam]: value,
+                        },
+                    },
+                },
+            },
+        }
+    })
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
@@ -122,12 +107,11 @@ export const selectors = {
 }
 
 export const events = {
-    deleteElement,
+    updateSetting,
     changeCompleted,
     clearStore,
 }
 
 export const effects = {
     getLocalSettingsFx,
-    updateSettingFx,
 }
