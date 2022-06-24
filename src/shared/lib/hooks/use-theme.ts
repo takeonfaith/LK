@@ -7,7 +7,7 @@ const useTheme = () => {
 
     useEffect(() => {
         if (settings) {
-            const currentTheme = settings['settings-appearance'].property['theme']
+            const currentTheme = settings['settings-appearance'].property['theme'] as string
             if (!document.documentElement.getAttribute('data-theme')) {
                 document.documentElement.setAttribute('data-theme', currentTheme)
                 setTheme(currentTheme)

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const SecurityWrapper = styled.div``
 
 const Security = () => {
-    return <SecurityWrapper>ывпывп</SecurityWrapper>
+    return <SecurityWrapper></SecurityWrapper>
 }
 
 export default Security

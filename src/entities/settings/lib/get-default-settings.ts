@@ -10,20 +10,24 @@ const generateDefaultSettings = () => {
     }, {} as Param)
 }
 
-const getDefaultSettings = (userId = ''): SettingsType => {
-    const settings = {
-        [userId]: {
-            ...generateDefaultSettings(),
-            [NameSettings['settings-appearance']]: {
-                id: NameSettings['settings-appearance'],
-                property: {
-                    theme: 'dark',
-                },
+const getDefaultSettings = (userId = ''): SettingsType => ({
+    [userId]: {
+        ...generateDefaultSettings(),
+        [NameSettings['settings-appearance']]: {
+            id: NameSettings['settings-appearance'],
+            property: {
+                theme: 'dark',
             },
         },
-    }
-
-    return settings
-}
+        [NameSettings['settings-home-page']]: {
+            id: NameSettings['settings-home-page'],
+            property: {
+                pages: ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students'],
+                widgetSchedule: true,
+                widgetPayment: true,
+            },
+        },
+    },
+})
 
 export default getDefaultSettings

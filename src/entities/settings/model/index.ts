@@ -15,7 +15,7 @@ export type Param = {
     [key in NameSettings]: {
         id: string
         property: {
-            [key: string]: ThemeType
+            [key: string]: ThemeType | string[]
         }
     }
 }
@@ -55,7 +55,7 @@ const getLocalSettingsFx = createEffect((userId: string): Param => {
 const updateSetting = createEvent<{
     nameSettings: keyof typeof NameSettings
     nameParam: string
-    value: string | boolean
+    value: string | boolean | string[]
 }>()
 
 const changeCompleted = createEvent<{ completed: boolean }>()
@@ -73,23 +73,21 @@ const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
             [currentUser]: newData,
         },
     }))
-    .on(updateSetting, (oldData, { nameSettings, nameParam, value }) => {
-        return {
-            ...oldData,
-            settings: {
-                [currentUser]: {
-                    ...oldData.settings[currentUser],
-                    [nameSettings]: {
-                        ...oldData.settings[currentUser][nameSettings],
-                        property: {
-                            ...oldData.settings[currentUser][nameSettings].property,
-                            [nameParam]: value,
-                        },
+    .on(updateSetting, (oldData, { nameSettings, nameParam, value }) => ({
+        ...oldData,
+        settings: {
+            [currentUser]: {
+                ...oldData.settings[currentUser],
+                [nameSettings]: {
+                    ...oldData.settings[currentUser][nameSettings],
+                    property: {
+                        ...oldData.settings[currentUser][nameSettings].property,
+                        [nameParam]: value,
                     },
                 },
             },
-        }
-    })
+        },
+    }))
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
