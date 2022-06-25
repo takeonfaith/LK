@@ -46,7 +46,7 @@ export const VACATION_SCHEDULE_RESPONSE: VacationSchedule[] = [
         jobType: 'Основное место работы',
         wage: 1,
         post: 'Преподаватель',
-        subdivision: 'Кафедра “Инфроматика и информационные технологии”',
+        subdivision: 'Кафедра “Инфроматики”',
         vacations: [
             {
                 plannedVacationPeriods: '31 января - 6 февраля 2022 (7 дней)',

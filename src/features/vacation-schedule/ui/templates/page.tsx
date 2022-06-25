@@ -81,7 +81,9 @@ const Page = () => {
                     <Title size={3} align="left">
                         Сведения о трудоустройстве
                     </Title>
-                    {!!user?.id && <Select items={items} selected={selected} setSelected={setSelected} />}
+                    {!!user?.id && (
+                        <Select width="fit-content" items={items} selected={selected} setSelected={setSelected} />
+                    )}
                     {selectedVacation && <Vacation {...selectedVacation} />}
                     <Divider />
                     {selectedVacation?.oldVacations && (
@@ -96,5 +98,4 @@ const Page = () => {
     )
 }
 
-// getCorrectWordForm
 export default Page
