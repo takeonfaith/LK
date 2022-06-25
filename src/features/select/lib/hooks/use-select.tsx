@@ -1,6 +1,6 @@
 import { SelectPage } from '@features/select'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import findCurrentPage from '../find-current-page'
 
 type SingleSelect = React.Dispatch<React.SetStateAction<SelectPage | null>>
@@ -27,6 +27,10 @@ const useSelect = (props: SelectProps) => {
     const [route, setRoute] = useState<string[]>([])
     const [currentItems, setCurrentItems] = useState<SelectPage[]>(items)
     const [selectedRoute, setSelectedRoute] = useState<string>('')
+
+    useEffect(() => {
+        setCurrentItems(items)
+    })
 
     const handleOpen = useCallback(() => {
         setIsOpen((prev) => !prev)

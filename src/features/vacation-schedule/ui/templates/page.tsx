@@ -1,14 +1,35 @@
+import { userModel } from '@entities/user'
 import { vacationScheduleModel } from '@entities/vacation-schedule'
+import Select, { SelectPage } from '@features/select'
 import { CenterPage, Divider, LinkButton, Title, Wrapper } from '@ui/atoms'
 import Block from '@ui/block'
 import Card from '@ui/card'
 import List from '@ui/list'
 import Subtext from '@ui/subtext'
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Vacation } from '../organism'
+import OldVacation from '../organism/old-vacation'
 
 const Page = () => {
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const { data, error } = vacationScheduleModel.selectors.useVacationShedule()
+
+    const items: SelectPage[] = useMemo(
+        () => data?.map((value, index) => ({ id: index, title: value.subdivision })) || [],
+        [data],
+    )
+
+    const [selected, setSelected] = useState<SelectPage | null>(items[0] ?? {})
+
+    useEffect(() => {
+        if (!selected?.id) {
+            setSelected(items[0])
+        }
+    }, [selected?.id, setSelected, items])
+
+    const selectedVacation = data?.[Number(selected?.id || 0)]
 
     return (
         <Wrapper load={vacationScheduleModel.effects.getVacationScheduleFx} error={error} data={data}>
@@ -60,17 +81,15 @@ const Page = () => {
                     <Title size={3} align="left">
                         Сведения о трудоустройстве
                     </Title>
-                    {data?.map((vacation, index) => {
-                        if (index + 1 < data.length) {
-                            return (
-                                <>
-                                    <Vacation key={index} {...vacation} />
-                                    <Divider margin="30px 0" />
-                                </>
-                            )
-                        }
-                        return <Vacation key={index} {...vacation} />
-                    })}
+                    {!!user?.id && <Select items={items} selected={selected} setSelected={setSelected} />}
+                    {selectedVacation && <Vacation {...selectedVacation} />}
+                    <Divider />
+                    {selectedVacation?.oldVacations && (
+                        <OldVacation
+                            oldVacations={selectedVacation.oldVacations}
+                            oldAllVacationRest={selectedVacation?.oldAllVacationRest}
+                        />
+                    )}
                 </Block>
             </CenterPage>
         </Wrapper>
