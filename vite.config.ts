@@ -20,6 +20,9 @@ export default defineConfig({
         }),
         splitVendorChunkPlugin(),
     ],
+    build: {
+        outDir: 'build',
+    },
     // esbuild: {
     //     jsxInject: `import React from 'react'`,
     // },

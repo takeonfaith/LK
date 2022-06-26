@@ -1,26 +1,7 @@
-import { IColors, isProduction } from '@consts'
-import AllPages from '@pages/all-pages'
-import AllStudentsPage from '@pages/all-students'
-import AllTeachersPage from '@pages/all-teachers'
-import CantAccessPage from '@pages/cant-access'
-import ChatPage from '@pages/chat'
-import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
-import FeedbackPage from '@pages/feedback'
-import ForgotPasswordPage from '@pages/forgot-password'
-import Home from '@pages/home'
-import InstructionsPage from '@pages/instructions'
-import LoginPage from '@pages/login'
+import { IColors } from '@consts'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import PaymentsPage from '@pages/payments'
-import ProfilePage from '@pages/profile'
-import SchedulePage from '@pages/schedule'
-import SettingsPage from '@pages/settings'
-import Account from '@pages/settings/pages/account'
-import Appearance from '@pages/settings/pages/appearance'
-import HomeSettings from '@pages/settings/pages/home'
-import Security from '@pages/settings/pages/security'
-import TeachersSchedule from '@pages/teachers-schedule'
-import React from 'react'
+
+import React, { LazyExoticComponent } from 'react'
 import {
     BiBookReader,
     BiGroup,
@@ -33,6 +14,28 @@ import {
 } from 'react-icons/bi'
 import { FiClipboard, FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
+import {
+    LoginPage,
+    ForgotPasswordPage,
+    FeedbackPage,
+    CantAccessPage,
+    Home,
+    ProfilePage,
+    ChatPage,
+    SchedulePage,
+    PaymentsPage,
+    ElectronicInteractionAgreementPage,
+    AllStudentsPage,
+    AllTeachersPage,
+    InstructionsPage,
+    TeachersSchedule,
+    Appearance,
+    Account,
+    Security,
+    HomeSettings,
+    AllPages,
+    SettingsPage,
+} from './pages'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -71,7 +74,7 @@ export interface IRoute {
     title: string
     icon: ChildrenType
     path: string
-    Component: () => JSX.Element | null
+    Component: (() => JSX.Element | null) | LazyExoticComponent<() => JSX.Element | null>
     color: keyof IColors
     isTemplate: boolean
     isAdmin?: boolean

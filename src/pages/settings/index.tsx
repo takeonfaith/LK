@@ -41,9 +41,9 @@ const SettingsPage = () => {
             <Switch>
                 {SETTINGS_CONFIG.map((id) => {
                     return (
-                        <Route path={allRoutes[id].path} key={id}>
-                            <ContentWrapper>{allRoutes[id].Component()}</ContentWrapper>
-                        </Route>
+                        <ContentWrapper key={id}>
+                            <Route path={allRoutes[id].path} key={id} component={allRoutes[id].Component} />
+                        </ContentWrapper>
                     )
                 })}
             </Switch>

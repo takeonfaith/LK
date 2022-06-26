@@ -1,31 +1,4 @@
-/* eslint-disable no-console */
-import ContactInfoActualizationPage from '@pages/contact-info-actualization'
-import DataVerificationPage from '@pages/data-verification'
-import DownloadAdminFilesPage from '@pages/download-admin-files'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import PersonalNotificationsPage from '@pages/personal-notifications'
-import TeachersApplicationsPage from '@pages/teachers-applications'
-import ArbitraryRequestPage from '@pages/teachers-applications/pages/arbitrary-request'
-import CertificateFromPlaceOfWorkPage from '@pages/teachers-applications/pages/certificate-from-the-place-of-work'
-import CertificateOfWorkExperiencePage from '@pages/teachers-applications/pages/certificate-of-work-experience'
-import CertificateTimeParentalLeavePage from '@pages/teachers-applications/pages/certificate-time-parental-leave'
-import ConnectingComputerPage from '@pages/teachers-applications/pages/connecting-computer'
-import CopiesOfDocumentsFromPersonalFilePage from '@pages/teachers-applications/pages/copies-of-documents-from-the-personal-file'
-import CopyOfEmploymentRecordPage from '@pages/teachers-applications/pages/copy-of-the-employment-record'
-import CourierPage from '@pages/teachers-applications/pages/courier'
-import GettingComputerEquipmentPage from '@pages/teachers-applications/pages/getting-computer-equipment'
-import IssuanceOfLicensesPage from '@pages/teachers-applications/pages/issuance-of-licenses'
-import NumberOfUnusedVacationDaysPage from '@pages/teachers-applications/pages/number-of-unused-vacation-days'
-import OtherItServicesPage from '@pages/teachers-applications/pages/other-it-services'
-import PaymentForChildCarePage from '@pages/teachers-applications/pages/payment-for-child-care'
-import PaymentOfChildBirthAllowancePage from '@pages/teachers-applications/pages/payment-of-child-birth-allowance'
-import PersonaIncomeTaxReferencePage from '@pages/teachers-applications/pages/persona-income-tax-reference'
-import PrinterMaintenancePage from '@pages/teachers-applications/pages/printer-maintenance'
-import QuestionPersonalAccountPage from '@pages/teachers-applications/pages/question-personal-account'
-import QuestionSedPage from '@pages/teachers-applications/pages/question-sed'
-import VisaCertificatePage from '@pages/teachers-applications/pages/visa-certificate'
-import WorkOnTermsOfExternalConcurrencyPage from '@pages/teachers-applications/pages/work-on-the-terms-of-external-concurrency'
-import VacationSchedule from '@pages/vacation-schedule'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
@@ -41,7 +14,36 @@ import {
 } from 'react-icons/fi'
 import { HiOutlineMenuAlt2, HiOutlineUserGroup } from 'react-icons/hi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
+import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
+
+import {
+    TeachersApplicationsPage,
+    DownloadAdminFilesPage,
+    DataVerificationPage,
+    ContactInfoActualizationPage,
+    VacationSchedule,
+    PersonalNotificationsPage,
+    IssuanceOfLicensesPage,
+    GettingComputerEquipmentPage,
+    ConnectingComputerPage,
+    PrinterMaintenancePage,
+    QuestionSedPage,
+    QuestionPersonalAccountPage,
+    OtherItServicesPage,
+    CertificateFromPlaceOfWorkPage,
+    VisaCertificatePage,
+    CertificateOfWorkExperiencePage,
+    NumberOfUnusedVacationDaysPage,
+    CopyOfEmploymentRecordPage,
+    CopiesOfDocumentsFromPersonalFilePage,
+    WorkOnTermsOfExternalConcurrencyPage,
+    CertificateTimeParentalLeavePage,
+    ArbitraryRequestPage,
+    CourierPage,
+    PersonaIncomeTaxReferencePage,
+    PaymentOfChildBirthAllowancePage,
+    PaymentForChildCarePage,
+} from './pages'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'

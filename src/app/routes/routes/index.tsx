@@ -1,26 +1,28 @@
-import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
-import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
-import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
-import ApplicationPaperCall from '@pages/applications/pages/paper-call'
-import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
-import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import { BiCheckCircle, BiIdCard } from 'react-icons/bi'
-import { FiBriefcase, FiFileText } from 'react-icons/fi'
-import AcadPerformance from '../../pages/acad-performance'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
-import React from 'react'
-import ApplicationsPage from '@pages/applications'
 import { FaRegLightbulb } from 'react-icons/fa'
-import ProjectActivitiesPage from '@pages/project-activities'
-import RegularAccommodationPage from '@pages/applications/pages/regular-accommodation'
-import AccommodationCorrespondenceFormPage from '@pages/applications/pages/accommodation-correspondence-form'
-import AcademicLeaveAccommodationPage from '@pages/applications/pages/academic-leave-accommodation'
-import PreferentialAccommodationPage from '@pages/applications/pages/preferential-accommodation'
-import FamilyRoomPage from '@pages/applications/pages/family-room'
-import TerminationOfEmploymentContractPage from '@pages/applications/pages/termination-of-employment-contract'
-import RelocationInsideHostelPage from '@pages/applications/pages/relocation-inside-hostel'
-import RelocationToAnotherHostelPage from '@pages/applications/pages/relocation-to-another-hostel'
+import { FiBriefcase, FiFileText } from 'react-icons/fi'
+import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
+
+import {
+    AcademicLeaveAccommodationPage,
+    AcadPerformance,
+    AccommodationCorrespondenceFormPage,
+    ApplicationForSocialScrollarship,
+    ApplicationForСertificateOfAttendance,
+    ApplicationPaperCall,
+    ApplicationSocialAgencies,
+    ApplicationsPage,
+    ArbitrayRequestPage,
+    ClarificationOfPassportDataApplication,
+    FamilyRoomPage,
+    PreferentialAccommodationPage,
+    ProjectActivitiesPage,
+    RegularAccommodationPage,
+    RelocationInsideHostelPage,
+    RelocationToAnotherHostelPage,
+    TerminationOfEmploymentContractPage,
+} from './pages'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
