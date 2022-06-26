@@ -1,11 +1,13 @@
 import { Colors } from '@consts'
-import { Button, Divider, FileLink, LoadFileButton, Message } from '@ui/atoms'
+import { Button, Divider, FileLink, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
-import { FiAlertCircle, FiInfo, FiMinusCircle, FiPlusCircle, FiSave } from 'react-icons/fi'
-import { HiOutlineCheckCircle, HiOutlinePencil } from 'react-icons/hi'
+import FileInput from '@ui/file-input'
+import React from 'react'
+import { FiAlertCircle, FiInfo, FiMinusCircle, FiPlusCircle } from 'react-icons/fi'
 import useInputArea from './lib/use-input-area'
 import { IComplexInputAreaData, IInputArea, IInputAreaData } from './model'
 import { AreaTitle, InputAreaWrapper, UniversalInput } from './ui'
+import Buttons from './ui/organisms/buttons'
 
 //TODO: Should be rewritten as HOC, inputs should be children props
 const InputArea = ({
@@ -50,7 +52,7 @@ const InputArea = ({
                     collapsed={collapsed}
                 />
                 <div className="inputs">
-                    <Message type="alert" visible={!!alert} title={'Внимание'} icon={<FiAlertCircle />}>
+                    <Message type="alert" visible={!!alert} icon={<FiAlertCircle />}>
                         {alert}
                     </Message>
                     <Message
@@ -114,8 +116,7 @@ const InputArea = ({
                         />
                     )}
                     {!!documents && changeInputArea && (
-                        <LoadFileButton
-                            label={''}
+                        <FileInput
                             files={documents.files}
                             setFiles={(files: File[]) => handleLoadFiles(files)}
                             maxFileSizeInBytes={0}
@@ -133,73 +134,20 @@ const InputArea = ({
                         links.map((link) => {
                             return <FileLink {...link} key={link.title} />
                         })}
-                    {optionalCheckbox && (optionalCheckbox.visible ?? true) && (
-                        <Checkbox
-                            text={optionalCheckbox.title}
-                            isActive={optionalCheckbox.editable || changeInputArea}
-                            checked={optionalCheckbox.value}
-                            setChecked={handleCheckbox}
-                        />
-                    )}
-                    {confirmed !== undefined && (
-                        <div className="buttons">
-                            {!confirmed ? (
-                                !changeInputArea ? (
-                                    <>
-                                        <Button
-                                            onClick={handleConfirm}
-                                            text="Подтвердить"
-                                            icon={<HiOutlineCheckCircle />}
-                                            textColor={Colors.lightGreen.main}
-                                            background={Colors.lightGreen.transparent}
-                                            width="100%"
-                                        />
-                                        <Button
-                                            onClick={() => setChangeInputArea(true)}
-                                            text="Изменить"
-                                            icon={<HiOutlinePencil />}
-                                            textColor={Colors.blue.main}
-                                            background={Colors.blue.transparent}
-                                            width="100%"
-                                        />
-                                    </>
-                                ) : (
-                                    <>
-                                        <Button
-                                            onClick={handleConfirm}
-                                            text="Сохранить"
-                                            icon={<FiSave />}
-                                            textColor={Colors.blue.main}
-                                            background={Colors.blue.transparent}
-                                            width="100%"
-                                        />
-                                        <Button
-                                            onClick={() => setChangeInputArea(false)}
-                                            text="Отменить"
-                                            icon={<HiOutlinePencil />}
-                                            textColor={Colors.red.main}
-                                            background={Colors.red.transparent}
-                                            width="100%"
-                                        />
-                                    </>
-                                )
-                            ) : (
-                                <Button
-                                    onClick={() =>
-                                        setData((area: IInputArea) => {
-                                            area.confirmed = false
-                                            return { ...area }
-                                        })
-                                    }
-                                    text="Отменить"
-                                    icon={<HiOutlinePencil />}
-                                    textColor={Colors.red.main}
-                                    background={Colors.red.transparent}
-                                    width="100%"
-                                />
-                            )}
-                        </div>
-                    )}
+                    <Checkbox
+                        visible={!!optionalCheckbox && (optionalCheckbox.visible ?? true)}
+                        text={optionalCheckbox?.title}
+                        isActive={optionalCheckbox?.editable || changeInputArea}
+                        checked={optionalCheckbox?.value ?? false}
+                        setChecked={handleCheckbox}
+                    />
+                    <Buttons
+                        confirmed={confirmed}
+                        changeInputArea={changeInputArea}
+                        setData={setData}
+                        setChangeInputArea={setChangeInputArea}
+                        handleConfirm={handleConfirm}
+                    />
                 </div>
             </InputAreaWrapper>
             {divider && <Divider />}

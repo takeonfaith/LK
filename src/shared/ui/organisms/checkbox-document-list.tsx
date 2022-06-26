@@ -28,7 +28,6 @@ const CheckboxDocumentList = ({ title, items, setChecked, setFiles }: Props) => 
                             maxFiles,
                             maxFileSizeInBytes: 0,
                             isActive: true,
-                            label: '',
                             setFiles: (files) => setFiles(files, j),
                         }}
                         docVisible={checkboxCondition === 'straight' ? value : !value}

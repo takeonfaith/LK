@@ -1,4 +1,4 @@
-import { IColors } from '@consts'
+import { IColors, isProduction } from '@consts'
 import AllPages from '@pages/all-pages'
 import AllStudentsPage from '@pages/all-students'
 import AllTeachersPage from '@pages/all-teachers'
