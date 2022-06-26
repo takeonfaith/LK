@@ -1,4 +1,5 @@
 import { IColors } from '@consts'
+import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
 
 import React, { LazyExoticComponent } from 'react'
@@ -15,7 +16,6 @@ import {
 import { FiClipboard, FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 import {
-    LoginPage,
     ForgotPasswordPage,
     FeedbackPage,
     CantAccessPage,
