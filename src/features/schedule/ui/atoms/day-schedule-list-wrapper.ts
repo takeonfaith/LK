@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 
-const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number }>`
+const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number; isTeacherSchedule: boolean }>`
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: var(--schedule-shadow);
     padding: 6px;
     background: var(--scheduleBg);
     display: flex;
@@ -11,6 +10,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number }>`
     row-gap: 6px;
     overflow-y: auto;
     scroll-snap-type: y proximity;
+    height: 100%;
     max-height: ${({ height }) => `calc(${height}px - 325px)`};
 
     &::-webkit-scrollbar {
@@ -18,7 +18,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number }>`
     }
 
     @media (max-width: 1000px) {
-        max-height: ${({ height }) => `calc(${height}px - 240px)`};
+        max-height: ${({ height, isTeacherSchedule }) => `calc(${height}px - ${isTeacherSchedule ? 340 : 240}px)`};
     }
 `
 

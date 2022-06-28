@@ -4,7 +4,7 @@ const SelectItem = styled.li<{ isSelected: boolean; leadingToSelected?: boolean 
     list-style-type: none;
     background: var(${({ isSelected }) => (isSelected ? '--reallyBlue' : '')});
     color: ${({ isSelected }) => (isSelected ? '#fff' : '')};
-
+    height: 30px;
     padding: 5px 10px;
     display: flex;
     align-items: center;

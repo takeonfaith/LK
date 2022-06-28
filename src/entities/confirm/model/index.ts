@@ -8,7 +8,7 @@ export interface Confirm {
     onReject?: (params: any) => void
 }
 
-const defaultStore: Confirm = {
+const DEFAULT_STORE: Confirm = {
     isOpen: false,
     message: null,
     onConfirm: () => null,
@@ -22,8 +22,9 @@ const useConfirm = () => {
 const evokeConfirm = createEvent<{ message: string; onConfirm: () => void; onReject?: (params: any) => void }>()
 
 const closeConfirm = createEvent()
+const clearStore = createEvent()
 
-const $confirm = createStore<Confirm>(defaultStore)
+const $confirm = createStore<Confirm>(DEFAULT_STORE)
     .on(evokeConfirm, (oldState, { message, onReject, onConfirm }) => ({
         isOpen: true,
         message,
@@ -34,6 +35,9 @@ const $confirm = createStore<Confirm>(defaultStore)
         ...oldState,
         isOpen: false,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useConfirm,
@@ -42,4 +46,5 @@ export const selectors = {
 export const events = {
     evokeConfirm,
     closeConfirm,
+    clearStore,
 }

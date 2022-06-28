@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { AiOutlineReload } from 'react-icons/ai'
 import styled from 'styled-components'
-import { Button, Error, Loading, Title } from '.'
+import { Button, Error, Loading } from '.'
 import Thinking from '../../images/thinking-emoji.gif'
 
 const WrapperBlock = styled.div<{ loading: boolean }>`
@@ -22,6 +22,7 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 5;
 
         img {
             width: 40px;
@@ -52,16 +53,17 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
 interface Props {
     children?: JSX.Element[] | JSX.Element | string | null
     load: () => void
-    loading: boolean
+    loading?: boolean
     error: string | null
     data: any | null
     deps?: any[]
     noDataCheck?: boolean
+    loadEveryVisit?: boolean
 }
 
-const Wrapper = ({ children, load, error, data, loading = true, deps = [], noDataCheck = false }: Props) => {
+const Wrapper = ({ children, load, error, data, deps = [], noDataCheck = false, loadEveryVisit = false }: Props) => {
     useEffect(() => {
-        if (!data) load()
+        if (!data || loadEveryVisit) load()
     }, deps)
 
     return (

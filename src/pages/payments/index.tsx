@@ -12,10 +12,10 @@ const PaymentsPage = () => {
             loading={loading}
             load={paymentsModel.effects.getPaymentsFx}
             error={error}
-            data={data && data?.dormitory[0]}
+            data={data && (!!data?.dormitory.length || !!data?.education.length)}
             noDataCheck={!data?.dormitory.length}
         >
-            {
+            {!!data?.dormitory.length || !!data?.education.length ? (
                 <SliderPage
                     pages={[
                         {
@@ -31,9 +31,11 @@ const PaymentsPage = () => {
                         { title: 'Информация', condition: true, content: <InfoPayments /> },
                     ]}
                     sliderWidth={'600px'}
-                    currentPage={0}
+                    currentPage={!!data?.dormitory.length ? 0 : !!data?.education.length ? 1 : 0}
                 />
-            }
+            ) : (
+                <></>
+            )}
         </Wrapper>
     )
 }

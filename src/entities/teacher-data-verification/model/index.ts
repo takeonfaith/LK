@@ -4,20 +4,29 @@ import { createEffect, createStore, createEvent } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
 import { forward } from 'effector/effector.mjs'
 
+interface TeacherDataVerificationStore {
+    teacherDataVerification: TeacherDataVerification | null
+    error: string | null
+    completed: boolean
+}
+
+const DEFAULT_STORE: TeacherDataVerificationStore = {
+    teacherDataVerification: null,
+    error: null,
+    completed: false,
+}
+
 const useTeacherDataVerification = () => {
     return {
         data: useStore($teacherDataVerificationStore).teacherDataVerification,
         loading: useStore(getTeacherDataVerificationFx.pending),
         error: useStore($teacherDataVerificationStore).error,
+        completed: useStore($teacherDataVerificationStore).completed,
     }
 }
 
-interface TeacherDataVerificationStore {
-    teacherDataVerification: TeacherDataVerification | null
-    error: string | null
-}
-
 const postTeacherDataVerification = createEvent<TeacherDataVerification>()
+const changeCompleted = createEvent<{ completed: boolean }>()
 
 const postTeacherDataVerificationFx = createEffect(async (postData: TeacherDataVerification): Promise<void> => {
     try {
@@ -37,14 +46,13 @@ const getTeacherDataVerificationFx = createEffect(async (): Promise<TeacherDataV
 
         return response.data
     } catch (error) {
-        throw new Error(error as string)
+        throw new Error('Не удалось войти')
     }
 })
 
-const $teacherDataVerificationStore = createStore<TeacherDataVerificationStore>({
-    teacherDataVerification: null,
-    error: null,
-})
+const clearStore = createEvent()
+
+const $teacherDataVerificationStore = createStore<TeacherDataVerificationStore>(DEFAULT_STORE)
     .on(getTeacherDataVerificationFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -57,6 +65,13 @@ const $teacherDataVerificationStore = createStore<TeacherDataVerificationStore>(
         ...oldData,
         error: newData.message,
     }))
+    .on(changeCompleted, (oldData, newData) => ({
+        ...oldData,
+        completed: newData.completed,
+    }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useTeacherDataVerification,
@@ -65,6 +80,9 @@ export const selectors = {
 export const effects = {
     getTeacherDataVerificationFx,
 }
+
 export const events = {
     postTeacherDataVerification,
+    changeCompleted,
+    clearStore,
 }

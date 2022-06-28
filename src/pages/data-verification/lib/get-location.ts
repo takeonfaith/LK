@@ -1,7 +1,7 @@
 import { TeacherDataVerification } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
-const getLocation = (data: TeacherDataVerification): IInputArea => {
+const getLocation = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Проживание',
         hint: 'Необходимо указать фактический адрес проживания',
@@ -21,7 +21,7 @@ const getLocation = (data: TeacherDataVerification): IInputArea => {
             value: data.loc_match_reg,
             required: true,
         },
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 

@@ -15,6 +15,7 @@ interface Props {
 }
 
 const Wrapper = styled.div`
+    width: 100%;
     h2 {
         margin-top: 10px;
     }

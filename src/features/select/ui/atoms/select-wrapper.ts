@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: string }>`
+const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: string; appearance: boolean }>`
     max-width: ${({ width }) => width ?? '155px'};
     width: 100%;
     min-width: 50px;
@@ -10,7 +10,7 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
     user-select: none;
     font-weight: 599;
     white-space: nowrap;
-    font-size: 0.9em;
+    font-size: ${({ appearance }) => appearance && '0.9em'};
     z-index: ${({ isOpen }) => (isOpen ? 5 : 2)};
     opacity: ${({ isActive }) => !isActive && 0.7};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
@@ -18,12 +18,16 @@ const SelectWrapper = styled.div<{ isOpen: boolean; isActive: boolean; width?: s
     color: var(--text);
     cursor: pointer;
     transition: 0.3s;
-    &:active {
-        transform: translateY(3px);
+
+    &:focus {
+        outline: 4px solid var(--almostTransparentOpposite);
     }
 
-    h5 {
-        margin-bottom: 5px;
+    &:focus:not(:focus-visible) {
+        outline: none;
+    }
+    &:active {
+        transform: translateY(3px);
     }
 `
 

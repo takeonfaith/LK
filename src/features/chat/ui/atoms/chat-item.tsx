@@ -1,4 +1,6 @@
+import { CHAT_ROUTE, TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
 import Avatar from '@features/home/ui/molecules/avatar'
+import Notification from '@ui/notification'
 import React from 'react'
 import { useRouteMatch } from 'react-router'
 import { SkeletonLoading } from '.'
@@ -20,18 +22,29 @@ interface Props {
 }
 
 const ChatItem = ({ avatar, name, lastMessage, chatId, loading, amountOfUnreadMessages, isOpen }: Props) => {
-    const params = useRouteMatch('/messages/:chatId')?.params as { chatId: string | undefined }
+    const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { chatId: string | undefined }
 
     return !loading ? (
-        <ChatItemWrapper to={`/messages/${chatId}`} isChosen={params?.chatId === chatId} isOpen={isOpen}>
+        <ChatItemWrapper to={CHAT_ROUTE + `/${chatId}`} isChosen={params?.chatId === chatId} isOpen={isOpen}>
             <div className="chat-item-content">
-                {amountOfUnreadMessages !== 0 && (
-                    <div className="amount-of-unread-messages">{amountOfUnreadMessages}</div>
-                )}
                 {isOpen ? (
-                    <Avatar avatar={avatar} width="40px" height="40px" marginRight="7px" />
+                    <Avatar
+                        name={name}
+                        avatar={avatar}
+                        width="40px"
+                        height="40px"
+                        marginRight="7px"
+                        notifications={amountOfUnreadMessages}
+                    />
                 ) : (
-                    <Avatar avatar={avatar} width="45px" height="45px" marginRight="0" />
+                    <Avatar
+                        name={name}
+                        avatar={avatar}
+                        width="45px"
+                        height="45px"
+                        marginRight="0"
+                        notifications={amountOfUnreadMessages}
+                    />
                 )}
                 {isOpen && (
                     <>

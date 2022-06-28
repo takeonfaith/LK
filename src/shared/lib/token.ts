@@ -1,2 +1,3 @@
-const token = JSON.parse(localStorage.getItem('token') ?? 'null')?.token
-export default token
+export default function Token() {
+    return JSON.parse(localStorage.getItem('token') ?? sessionStorage.getItem('token') ?? 'null')?.token
+}

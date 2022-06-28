@@ -1,4 +1,4 @@
-import { AcadPerformance } from '../model'
+import { AcadPerformance } from '@api/model/acad-performance'
 
 export interface PreparedData {
     [key: string]: AcadPerformance[]
@@ -16,6 +16,7 @@ const MATCHES: Matches = {
     'Курсовая работа': EXAM,
     'Дипломный проект': EXAM,
     'Дипломная работа': EXAM,
+    'ГЭК. Защита ВКР': EXAM,
     Экзамен: EXAM,
     Практика: EXAM,
     'Дифференцированный зачет': EXAM,

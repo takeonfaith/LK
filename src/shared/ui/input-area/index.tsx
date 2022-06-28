@@ -1,25 +1,28 @@
 import { Colors } from '@consts'
-import { Button, Divider, InfoMessage, LoadFileButton } from '@ui/atoms'
+import { Button, Divider, FileLink, LoadFileButton, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import React from 'react'
-import { FiMinusCircle, FiPlusCircle, FiSave } from 'react-icons/fi'
+import { FiAlertCircle, FiInfo, FiMinusCircle, FiPlusCircle, FiSave } from 'react-icons/fi'
 import { HiOutlineCheckCircle, HiOutlinePencil } from 'react-icons/hi'
 import useInputArea from './lib/use-input-area'
 import { IComplexInputAreaData, IInputArea, IInputAreaData } from './model'
-import { UniversalInput, InputAreaWrapper, AreaTitle } from './ui'
+import { AreaTitle, InputAreaWrapper, UniversalInput } from './ui'
 
 //TODO: Should be rewritten as HOC, inputs should be children props
 const InputArea = ({
     title,
     hint,
+    alert,
     data,
     optionalCheckbox,
     documents,
     setData,
+    confirmed,
     optional = false,
-    confirmed = false,
     addNew = false,
     divider,
+    collapsed,
+    links,
 }: IInputArea & { setData: React.Dispatch<React.SetStateAction<IInputArea>>; divider?: boolean }) => {
     //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
@@ -34,17 +37,10 @@ const InputArea = ({
         handleLoadFiles,
         handleConfirm,
         handleCheckbox,
-    } = useInputArea({ documents, optionalCheckbox, data, setData, optional })
+    } = useInputArea({ documents, optionalCheckbox, data, setData, optional, collapsed, confirmed })
     return (
         <>
-            <InputAreaWrapper
-                openArea={openArea}
-                amount={data.length}
-                withLoadDoc={!!documents && changeInputArea}
-                hint={changeInputArea ? hint?.length ?? 0 : 0}
-                addNew={addNew && changeInputArea}
-                optionalCheckbox={!!optionalCheckbox}
-            >
+            <InputAreaWrapper openArea={openArea}>
                 <AreaTitle
                     title={title}
                     included={included}
@@ -52,9 +48,20 @@ const InputArea = ({
                     confirmed={confirmed}
                     setOpenArea={setOpenArea}
                     setIncluded={setIncluded}
+                    collapsed={collapsed}
                 />
                 <div className="inputs">
-                    <InfoMessage condition={!!hint && changeInputArea} title={'Как заполнить'} text={hint} />
+                    <Message type="alert" visible={!!alert} title={'Внимание'} icon={<FiAlertCircle />}>
+                        {alert}
+                    </Message>
+                    <Message
+                        type="info"
+                        visible={!!hint && (changeInputArea || confirmed === undefined)}
+                        title={'Как заполнить'}
+                        icon={<FiInfo />}
+                    >
+                        {hint}
+                    </Message>
                     {!Array.isArray(data[0])
                         ? (data as IInputAreaData[]).map((attr, index) => {
                               // TODO: Remove UniversalInput, inputs performing different tasks should be different components
@@ -123,15 +130,19 @@ const InputArea = ({
                             }
                         />
                     )}
-                    {optionalCheckbox && (
+                    {links?.length &&
+                        links.map((link) => {
+                            return <FileLink {...link} key={link.title} />
+                        })}
+                    {optionalCheckbox && (optionalCheckbox.visible ?? true) && (
                         <Checkbox
                             text={optionalCheckbox.title}
-                            isActive={changeInputArea}
+                            isActive={optionalCheckbox.editable || changeInputArea}
                             checked={optionalCheckbox.value}
                             setChecked={handleCheckbox}
                         />
                     )}
-                    {!!confirmed !== undefined && (
+                    {confirmed !== undefined && (
                         <div className="buttons">
                             {!confirmed ? (
                                 !changeInputArea ? (

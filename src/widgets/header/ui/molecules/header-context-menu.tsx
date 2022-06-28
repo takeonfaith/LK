@@ -3,9 +3,8 @@ import { confirmModel } from '@entities/confirm'
 import { userModel } from '@entities/user'
 import createFullName from '@features/home/lib/create-full-name'
 import Avatar from '@features/home/ui/molecules/avatar'
-import SettingsPage from '@features/settings'
 import { Button, LinkButton } from '@ui/atoms'
-import Divider from '@ui/atoms/divider'
+import { Divider } from '@ui/divider'
 import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect, useState } from 'react'
@@ -94,17 +93,23 @@ const HeaderContextMenu = () => {
         <HeaderContextMenuWrapper>
             <div className="user-info-plate">
                 <div className="avatar-and-name">
-                    <Avatar avatar={user?.avatar} width="35px" height="35px" marginRight={'8px'} />
+                    <Avatar
+                        name={createFullName({ name: user.name, patronymic: user.patronymic, surname: user.surname })}
+                        avatar={user?.avatar}
+                        width="35px"
+                        height="35px"
+                        marginRight={'8px'}
+                    />
                     <b>{createFullName({ name: user.name, surname: user.surname, patronymic: user.patronymic })}</b>
                 </div>
 
                 <div className="buttons">
-                    <Button
+                    {/* <Button
                         icon={<FiEdit2 />}
                         onClick={() => open(<SettingsPage currentPage={3} />)}
                         text="Изменить"
                         shrinkTextInMobile
-                    />
+                    /> */}
                     {/* <Button icon={<FiCreditCard />} onClick={() => null} text="Оплатить" /> */}
                 </div>
             </div>

@@ -1,7 +1,7 @@
 import { TeacherDataVerification } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
-const getPassport = (data: TeacherDataVerification): IInputArea => {
+const getPassport = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Паспортные данные',
         hint: 'Необходимо приложить скан-копию 2 и 3 страницы паспорта РФ. Для иностранных работников - страницу паспорта иностранного гражданина с серией и номером и нотариальный перевод паспорта иностранного гражданина.',
@@ -37,7 +37,7 @@ const getPassport = (data: TeacherDataVerification): IInputArea => {
             },
         ],
         documents: { files: [], required: true, fieldName: 'passportFiles', maxFiles: 1 },
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 

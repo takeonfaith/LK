@@ -1,70 +1,28 @@
+import { IRoute } from '@app/routes/general-routes'
+import { menuModel } from '@entities/menu'
+import { SkeletonShape } from '@ui/skeleton-shape'
 import React from 'react'
-import { FiCompass } from 'react-icons/fi'
-import { useSettings } from '@utils/contexts/settings-context'
-import useCurrentPage from '@utils/hooks/use-current-page'
-import getChosenRoutes from '../../lib/get-chosen-routes'
-import getNotChosenRoutes from '../../lib/get-not-chosen-routes'
 import LeftsideBarListWrapper from '../atoms/leftside-bar-list-wrapper'
 import LeftsideBarItem from '../molecules/leftside-bar-item'
-import LeftsideBarItemButton from '../molecules/leftside-bar-item-button'
-import LeftsideBarDropdown from './leftside-bar-dropdown'
-import { userModel } from '@entities/user'
-import { IRoutes } from '@app/routes/techers-routes'
 
-interface Props {
-    searchList: IRoutes | null
-}
+const LeftsideBarList = () => {
+    const { leftsideBarRoutes, currentPage } = menuModel.selectors.useMenu()
 
-const LeftsideBarList = ({ searchList }: Props) => {
-    const { data } = userModel.selectors.useUser()
-    const currentPage = useCurrentPage()
-    const { setting } = useSettings<number[]>('menu')
+    if (!leftsideBarRoutes)
+        return (
+            <SkeletonShape
+                shape={'rect'}
+                size={{
+                    width: '100%',
+                    height: '300px',
+                }}
+            />
+        )
 
-    return !searchList ? (
+    return (
         <LeftsideBarListWrapper>
-            {Object.values(getChosenRoutes(setting, data)).map(({ icon, id, title, path }) => {
-                return (
-                    <LeftsideBarItem
-                        key={id}
-                        id={id}
-                        icon={icon}
-                        title={title}
-                        path={path}
-                        isCurrent={currentPage.id === id}
-                    />
-                )
-            })}
-            <LeftsideBarDropdown
-                heading={<LeftsideBarItemButton key={0} id={0} icon={FiCompass} title={'Другое'} />}
-                height={Object.values(getNotChosenRoutes(setting, data)).length * 54}
-            >
-                {Object.values(getNotChosenRoutes(setting, data)).map(({ icon, id, title, path }) => {
-                    return (
-                        <LeftsideBarItem
-                            key={id}
-                            id={id}
-                            icon={icon}
-                            title={title}
-                            path={path}
-                            isCurrent={currentPage.id === id}
-                        />
-                    )
-                })}
-            </LeftsideBarDropdown>
-        </LeftsideBarListWrapper>
-    ) : (
-        <LeftsideBarListWrapper>
-            {Object.values(searchList).map(({ icon, id, title, path }) => {
-                return (
-                    <LeftsideBarItem
-                        key={id}
-                        id={id}
-                        icon={icon}
-                        title={title}
-                        path={path}
-                        isCurrent={currentPage.id === id}
-                    />
-                )
+            {Object.values(leftsideBarRoutes).map((props: IRoute) => {
+                return <LeftsideBarItem {...props} key={props.id} isCurrent={currentPage?.id === props.id} />
             })}
         </LeftsideBarListWrapper>
     )

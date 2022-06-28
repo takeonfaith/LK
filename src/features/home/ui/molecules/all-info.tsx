@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { User } from '@api/model'
 import transformSex from '@utils/transform-sex'
+import KeyValue from '@ui/atoms/key-value'
 
 export default memo(AllInfo)
 
@@ -89,16 +90,5 @@ function AllInfo({ user }: Props) {
             value: enterYear,
         },
     ]
-    return (
-        <div>
-            {items.map(
-                ({ key, value }) =>
-                    !!value && (
-                        <p key={key}>
-                            <b>{key}:</b> {value}
-                        </p>
-                    ),
-            )}
-        </div>
-    )
+    return <div>{items.map(({ key, value }) => !!value && <KeyValue keyStr={key} value={value} key={key} />)}</div>
 }

@@ -2,9 +2,10 @@ import { Sex } from '@utility-types/sex'
 
 type UserStatus = 'stud' | 'staff'
 
-export interface User {
+export interface User extends Record<string, unknown> {
     id: string
     name: string
+    fullName: string
     status: string
     avatar: string
     course: number
@@ -25,6 +26,8 @@ export interface User {
     enterYear: string
     subdivisions?: Subdivision[]
     user_status: UserStatus
+    lastaccess: string
+    available_accounts?: { name: string; avatar: string; token: string }[]
 }
 
 interface Subdivision {

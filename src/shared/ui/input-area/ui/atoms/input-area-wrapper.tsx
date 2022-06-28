@@ -1,13 +1,11 @@
 import styled from 'styled-components'
 
-const InputAreaWrapper = styled.div<{
+interface Args {
     openArea: boolean
-    amount: number
-    withLoadDoc: boolean
-    hint: number
-    addNew: boolean
-    optionalCheckbox: boolean
-}>`
+}
+
+const InputAreaWrapper = styled.div<Args>`
+    width: 100%;
     display: flex;
     flex-direction: column;
     transition: 0.2s row-gap;
@@ -18,18 +16,7 @@ const InputAreaWrapper = styled.div<{
         flex-direction: column;
         row-gap: 15px;
         transition: 0.2s height, 0.2s opacity, 0.2s visibility;
-        height: ${({ openArea, amount, withLoadDoc, hint, addNew, optionalCheckbox }) =>
-            openArea
-                ? amount * 57 +
-                  36 +
-                  15 * amount -
-                  1 +
-                  (addNew ? 80 : 0) +
-                  (withLoadDoc ? 150 : 0) +
-                  (hint ? (hint <= 70 ? hint : (hint / 120) * 50) : 0) +
-                  (optionalCheckbox ? 80 : 0) +
-                  'px'
-                : '0'};
+        height: ${({ openArea }) => (openArea ? 'auto' : '0')};
         opacity: ${({ openArea }) => (openArea ? '1' : '0')};
         visibility: ${({ openArea }) => (openArea ? 'visible' : 'hidden')};
         .buttons {

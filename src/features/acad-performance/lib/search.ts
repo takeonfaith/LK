@@ -1,5 +1,5 @@
 import { prepare } from '@entities/acad-performance/lib/prepare'
-import { AcadPerformance } from '@entities/acad-performance/model'
+import { AcadPerformance } from '@api/model/acad-performance'
 import localizeDate from '@utils/localize-date'
 import normalizeString from '@utils/normalize-string'
 

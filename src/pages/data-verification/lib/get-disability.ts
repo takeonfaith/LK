@@ -1,7 +1,7 @@
 import { TeacherDataVerification } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
-const getDisability = (data: TeacherDataVerification): IInputArea => {
+const getDisability = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Инвалидность',
         hint: 'Необходимо приложить скан-копию справки об инвалидности',
@@ -13,7 +13,7 @@ const getDisability = (data: TeacherDataVerification): IInputArea => {
             required: true,
         },
         documents: { files: [], required: true, checkboxCondition: 'reverse', fieldName: 'invalidFiles', maxFiles: 1 },
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 

@@ -1,19 +1,21 @@
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { SelectPage } from '@features/select'
 import React, { useEffect, useState } from 'react'
-import { IComplexInputAreaData, IInputArea, IInputAreaCheckbox, IInputAreaData } from '../model'
+import { IComplexInputAreaData, IInputArea, IInputAreaCheckbox, IInputAreaData, IInputAreaFiles } from '../model'
 
 interface Props {
-    documents?: { files: File[]; required: boolean; checkboxCondition?: 'straight' | 'reverse' }
+    documents?: IInputAreaFiles
     optionalCheckbox?: IInputAreaCheckbox
     data: IInputAreaData[] | IComplexInputAreaData
     optional?: boolean
     setData: React.Dispatch<React.SetStateAction<IInputArea>>
+    collapsed?: boolean
+    confirmed?: boolean
 }
 
-const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: Props) => {
-    const [changeInputArea, setChangeInputArea] = useState(false)
-    const [openArea, setOpenArea] = useState(true)
+const useInputArea = ({ documents, optionalCheckbox, data, setData, optional, collapsed, confirmed }: Props) => {
+    const [changeInputArea, setChangeInputArea] = useState(confirmed === undefined)
+    const [openArea, setOpenArea] = useState(!collapsed ? true : false)
     const [included, setIncluded] = useState(false)
 
     const handleConfirm = () => {
@@ -23,7 +25,7 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
                     (optionalCheckbox?.value && optionalCheckbox.required) ||
                     (!(data as IInputAreaData[]).find((el) => !el.value && el.required) &&
                         !(data as IInputAreaData[]).find(
-                            (el) => (el.value as SelectPage).id === 'not-chosen' && !!el.items?.length,
+                            (el) => (el.value as SelectPage) === null && !!el.items?.length,
                         ))
                 ) {
                     setData((area: IInputArea) => {
@@ -153,7 +155,7 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
                     //@ts-ignore
                     fieldName: field.fieldName ?? '',
                     title: field.title,
-                    value: field.type === 'select' && field?.items ? field?.items?.[0] : '',
+                    value: field.type === 'select' && (field?.items as SelectPage[]) ? null : '',
                     type: field.type,
                     items: field.items,
                     width: field.width,
@@ -189,9 +191,9 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional }: 
         if (!included && optional) {
             setOpenArea(false)
         } else {
-            setOpenArea(true)
+            setOpenArea(!collapsed ? true : false)
         }
-    }, [included])
+    }, [included, collapsed])
 
     return {
         openArea,

@@ -2,6 +2,17 @@ import { messageApi } from '@api'
 import { Messages } from '@api/model'
 import { createEffect, createStore } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
+import { createEvent } from 'effector'
+
+interface MessagesStore {
+    messages: Messages | null
+    error: string | null
+}
+
+const DEFAULT_STORE: MessagesStore = {
+    messages: null,
+    error: null,
+}
 
 const useMessages = () => {
     return {
@@ -9,11 +20,6 @@ const useMessages = () => {
         loading: useStore(getMessagesFx.pending),
         error: useStore($messagesStore).error,
     }
-}
-
-interface MessagesStore {
-    messages: Messages | null
-    error: string | null
 }
 
 const getMessagesFx = createEffect(async (): Promise<Messages> => {
@@ -26,7 +32,9 @@ const getMessagesFx = createEffect(async (): Promise<Messages> => {
     }
 })
 
-const $messagesStore = createStore<MessagesStore>({ messages: null, error: null })
+const clearStore = createEvent()
+
+const $messagesStore = createStore<MessagesStore>(DEFAULT_STORE)
     .on(getMessagesFx, (oldData) => ({
         ...oldData,
         error: null,
@@ -39,6 +47,9 @@ const $messagesStore = createStore<MessagesStore>({ messages: null, error: null 
         ...oldData,
         error: newData.message,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useMessages,
@@ -46,4 +57,8 @@ export const selectors = {
 
 export const effects = {
     getMessagesFx,
+}
+
+export const events = {
+    clearStore,
 }

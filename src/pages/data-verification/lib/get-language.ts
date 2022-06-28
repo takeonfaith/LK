@@ -8,7 +8,7 @@ const languageItems = [
     { id: 'с', title: 'Владею свободно' },
 ]
 
-const getLanguage = (data: TeacherDataVerification): IInputArea => {
+const getLanguage = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Знание иностранных языков',
         hint: 'Необходимо указать иностранные языки и степень владения ими',
@@ -52,7 +52,7 @@ const getLanguage = (data: TeacherDataVerification): IInputArea => {
             ],
         ],
         addNew: true,
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 

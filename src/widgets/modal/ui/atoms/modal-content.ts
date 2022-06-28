@@ -15,8 +15,8 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
         padding-top: 15px;
 
         /* Swipe bar on top */
-
-        /* &::after {
+        /* 
+        &::after {
             content: '';
             display: block;
             position: absolute;
@@ -42,7 +42,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
         height: 80%;
         bottom: 0;
         border-radius: 20px 20px 0 0;
-        transform: ${({ isOpen }) => (isOpen ? 'scale(1) translateY(0)' : 'scale(1) translateY(150px)')};
+        transform: ${({ isOpen }) => (isOpen ? `scale(1) translateY(0px)` : `scale(1) translateY(150px)`)};
         border-radius: var(--brLight) var(--brLight) 0 0;
     }
 `

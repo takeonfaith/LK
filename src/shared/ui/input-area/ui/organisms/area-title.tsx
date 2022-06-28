@@ -12,7 +12,7 @@ const AreaTitleWrapper = styled.div`
     cursor: pointer;
     position: sticky;
     top: -2px;
-    background: var(--form);
+    background: var(--schedule);
     z-index: 3;
     width: 100%;
 
@@ -20,25 +20,38 @@ const AreaTitleWrapper = styled.div`
         display: flex;
         align-items: center;
     }
+
+    @media (max-width: 1000px) {
+        background: transparent;
+    }
 `
 
 interface Props {
     title: string
     included: boolean
     optional: boolean
-    confirmed: boolean
+    confirmed?: boolean
     setOpenArea: React.Dispatch<React.SetStateAction<boolean>>
     setIncluded: React.Dispatch<React.SetStateAction<boolean>>
+    collapsed?: boolean
 }
 
-const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setIncluded }: Props) => {
+const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setIncluded, collapsed }: Props) => {
     return (
-        <AreaTitleWrapper onClick={() => (included || !optional) && setOpenArea((prev) => !prev)}>
+        <AreaTitleWrapper onClick={() => !collapsed && (included || !optional) && setOpenArea((prev) => !prev)}>
             <div className="title-and-icon">
                 <Title
                     size={4}
                     align="left"
-                    icon={confirmed ? <HiOutlineCheckCircle /> : <HiOutlineExclamationCircle />}
+                    icon={
+                        confirmed !== undefined ? (
+                            confirmed ? (
+                                <HiOutlineCheckCircle />
+                            ) : (
+                                <HiOutlineExclamationCircle />
+                            )
+                        ) : undefined
+                    }
                     iconColor={confirmed ? 'var(--green)' : 'var(--red)'}
                 >
                     {title}

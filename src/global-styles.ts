@@ -9,6 +9,10 @@ const GlobalStyles = createGlobalStyle`
 		-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 	}
 
+	#root {
+		height: 100vh;
+	}
+
 	body {
 		overflow: hidden;
 	}
@@ -47,12 +51,16 @@ const GlobalStyles = createGlobalStyle`
 		--brLight: 9px;
 		--brSemi: 19px;
 		--brBold: 30px;
+		--strong-shadow: 0 0 50px #000;
+		--very-mild-shadow: 0 0 32px rgb(0 0 0 / 8%);
+		--desktop-page-padding: 40px;
+		--mobile-page-padding: 5px;
 	}
 
 	html[data-theme=dark] {
 		--blue: #6d86e3;
 		--primary-background: rgb(34, 34, 34);
-		--mild-theme: #2e2e2e;
+		--mild-theme: #363636;
 		--leftside-bar: #3b3b3b;
 		--leftside-bar-shadow: 5px 5px 10px rgba(0,0,0,0.377);
 		--header: #373737;
@@ -63,6 +71,7 @@ const GlobalStyles = createGlobalStyle`
 		--select: #292929;
 		--content: #474747;
 		--invert: 0;
+		--double-invert: 1;
 		--closeToContent: #3a3a3a;
 		--theme: #3a3a3a;
 		--theme-mild-opposite: #d2d2d2;
@@ -99,6 +108,7 @@ const GlobalStyles = createGlobalStyle`
 		--select: #f3f3f3;
 		--content: #f1f1f1;
 		--invert: 1;
+		--double-invert: 0;
 		--closeToContent: #f3f3f3;
 		--theme: #fff;
 		--theme-mild-opposite: #565656;
@@ -122,6 +132,19 @@ const GlobalStyles = createGlobalStyle`
 		--schedule-shadow: 0 0 2px rgb(0 0 0 / 24%);
 		--info-blue: #133db8;
 		--form: #fff;
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--blue);
+		
+		&:focus {
+        outline: 4px solid var(--almostTransparentOpposite);
+    	}
+
+		&:focus:not(:focus-visible) {
+			outline: none;
+		}
 	}
 `
 

@@ -1,9 +1,10 @@
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
 import calcTimeLeft from '@utils/calc-time-left'
+import getShortString from '@utils/get-short-string'
 import React from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { Place, SubjectModal, Time, NextSubject } from '.'
+import { Place, SubjectModal, Time, NextSubject, Rooms, Groups } from '.'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean
@@ -14,8 +15,7 @@ const SubjectWrapper = styled.div<{
     isFull: boolean
 }>`
     width: 100%;
-    background: ${({ isCurrent, color }) =>
-        isCurrent ? `linear-gradient(45deg, ${color}, ${color})` : 'var(--schedule)'};
+    background: ${({ isCurrent, color }) => (isCurrent ? color : 'var(--schedule)')};
     color: ${({ isCurrent }) => (isCurrent ? '#fff' : 'var(--text)')};
     padding: 20px 15px;
     border-radius: 9px;
@@ -31,6 +31,7 @@ const SubjectWrapper = styled.div<{
         font-size: 0.7em;
         height: 21px;
         font-weight: bold;
+        column-gap: 3px;
 
         .place {
             color: var(--text);
@@ -59,16 +60,42 @@ const SubjectWrapper = styled.div<{
         text-overflow: ellipsis;
     }
 
-    .date-interval {
-        font-size: 0.7em;
-        opacity: 0.6;
+    .interval-and-groups {
+        display: flex;
+        align-items: ${({ isFull }) => (!isFull ? 'center' : 'flex-start')};
+        width: 100%;
+        flex-direction: ${({ isFull }) => (!isFull ? 'row' : 'column-reverse')};
+        font-size: 0.9em;
+
+        & > * + * {
+            margin: 4px 0;
+        }
+
+        .date-interval {
+            font-size: 0.7em;
+            opacity: 0.6;
+            white-space: nowrap;
+            margin-right: 5px;
+        }
     }
 `
 
 type Props = ISubject & { isCurrent: boolean; isNext?: boolean; view?: string }
 
 const Subject = (props: Props) => {
-    const { timeInterval, name, place, teachers, dateInterval, isCurrent, link, view, isNext = false } = props
+    const {
+        timeInterval,
+        name,
+        place,
+        teachers,
+        dateInterval,
+        isCurrent,
+        link,
+        view,
+        rooms,
+        groups,
+        isNext = false,
+    } = props
     const { open } = useModal()
 
     return (
@@ -88,15 +115,31 @@ const Subject = (props: Props) => {
                     differentTimeZone={new Date().getTimezoneOffset() / 60 + 3 !== 0}
                 />
                 <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
-                <Place place={place} link={link} />
+                {rooms.length ? (
+                    <Rooms
+                        rooms={rooms}
+                        isCurrent={isCurrent}
+                        color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].darker}
+                    />
+                ) : (
+                    <Place place={place} link={link} />
+                )}
             </div>
-            <h3>{name}</h3>
+            <h3>{getShortString(name, 70)}</h3>
             <p className="teachers">
-                {teachers.map((teacher: string) => {
-                    return teacher + ' '
+                {teachers.map((teacher: string, index) => {
+                    return (
+                        <>
+                            {teacher}
+                            {index !== teachers.length - 1 && ', '}
+                        </>
+                    )
                 })}
             </p>
-            <p className="date-interval">{dateInterval}</p>
+            <div className="interval-and-groups">
+                <p className="date-interval">{dateInterval}</p>
+                <Groups groups={groups} isCurrent={isCurrent} inModal={view === 'full'} />
+            </div>
         </SubjectWrapper>
     )
 }

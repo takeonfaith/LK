@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors, IColors } from '@consts'
 import React from 'react'
 import { IconType } from 'react-icons'
 import { ShortCutLinkContainer } from '../atoms/short-cut'
@@ -8,7 +8,7 @@ export default ShortCutLink
 interface Props {
     title: string
     icon: IconType
-    color: string
+    color: keyof IColors
     to: string
 }
 

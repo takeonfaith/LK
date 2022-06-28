@@ -1,6 +1,7 @@
 import { Colors } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { Button, Title } from '@ui/atoms'
+import List from '@ui/list'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useRef } from 'react'
 import styled from 'styled-components'
@@ -11,7 +12,7 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     bottom: 50%;
     left: 50%;
     width: 100%;
-    max-width: 500px;
+    max-width: 390px;
     border-radius: var(--brLight);
     background: var(--schedule);
     box-shadow: 0 0 40px #0000002f;
@@ -23,17 +24,6 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
     transform: translateY(${({ isOpen }) => (isOpen ? '50%' : '51%')}) translateX(-50%)
         scale(${({ isOpen }) => (isOpen ? '1' : '0.95')});
-
-    & > .buttons {
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        width: 100%;
-
-        & > * + * {
-            margin-left: 10px;
-        }
-    }
 
     @media (max-width: 1000px) {
         bottom: 10px;
@@ -48,29 +38,46 @@ const ConfirmMessage = () => {
 
     useOnClickOutside(confirmRef, () => confirmModel.events.closeConfirm())
 
+    const handleConfirm = () => {
+        onConfirm()
+        confirmModel.events.closeConfirm()
+    }
+
+    const handleReject = () => {
+        confirmModel.events.closeConfirm()
+    }
+
     return (
         <ModalWrapper isOpen={isOpen}>
             <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
-                <Title size={3}>{message ?? 'Хотите продолжить?'}</Title>
-                <div className="buttons">
+                <Title size={3} align="left">
+                    {message ?? 'Хотите продолжить?'}
+                </Title>
+                <List
+                    width="100%"
+                    scroll={false}
+                    direction="horizontal"
+                    gap={5}
+                    padding="10px 0 0 0"
+                    horizontalAlign="right"
+                >
                     <Button
                         text="Да"
-                        onClick={() => {
-                            onConfirm()
-                            confirmModel.events.closeConfirm()
-                        }}
-                        width="100%"
+                        onClick={handleConfirm}
+                        width="90px"
                         textColor="var(--red)"
-                        hoverBackground={Colors.red.transparent}
+                        background="transparent"
+                        hoverBackground={Colors.red.transparentAF}
                     />
                     <Button
                         text="Нет"
-                        onClick={onReject ?? confirmModel.events.closeConfirm}
-                        width="100%"
+                        onClick={onReject ?? handleReject}
+                        width="90px"
                         textColor="var(--blue)"
-                        hoverBackground={Colors.blue.transparent}
+                        background="transparent"
+                        hoverBackground={Colors.blue.transparentAF}
                     />
-                </div>
+                </List>
             </ConfirmWrapper>
         </ModalWrapper>
     )

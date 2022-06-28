@@ -1,6 +1,7 @@
-import useOnClickOutside from '@utils/hooks/use-on-click-outside'
-import React, { memo, useCallback, useRef, useState } from 'react'
-import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import { Title } from '@ui/atoms'
+import React, { memo } from 'react'
+import { FiCheck, FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import useSelect, { SelectProps } from './lib/hooks/use-select'
 import { SelectArrow, SelectHeader, SelectHeaderWrapper, SelectItem, SelectItems, SelectWrapper } from './ui/atoms'
 
 export interface SelectPage {
@@ -10,76 +11,61 @@ export interface SelectPage {
     children?: SelectPage[]
 }
 
-interface Props {
-    items: SelectPage[]
-    setSelected: React.Dispatch<React.SetStateAction<SelectPage>>
-    selected: SelectPage
-    isActive?: boolean
-    title?: string
-    width?: string
-}
-
-const findCurrentPage = (pages: SelectPage[], path: string[]): SelectPage[] | undefined => {
-    const page = pages.find((page) => page.id.toString() === path[0])
-
-    if (path.length && page?.children) {
-        path.shift()
-        return findCurrentPage(page.children, path)
-    } else return page ? page.children : pages
-}
-
-const Select = ({ items, setSelected, selected, title, width, isActive = true }: Props) => {
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const refElement = useRef<HTMLDivElement | null>(null)
-    const refItems = useRef<HTMLUListElement | null>(null)
-    const [route, setRoute] = useState<string[]>([])
-    const [currentItems, setCurrentItems] = useState<SelectPage[]>(items)
-    const [selectedRoute, setSelectedRoute] = useState<string>('')
-
-    const handleOpen = useCallback(() => {
-        setIsOpen((prev) => !prev)
-    }, [setIsOpen])
-
-    const handleSelect = useCallback(
-        (page: SelectPage) => {
-            if (!page.children) {
-                setSelected(page)
-                handleOpen()
-                setSelectedRoute(route.join('/'))
-                // setRoute([])
-            } else {
-                route.push(page.id.toString())
-                setCurrentItems(findCurrentPage(items, [...route]) ?? [])
-
-                setRoute([...route])
-            }
-        },
-        [setSelected, route],
-    )
-
-    const goBack = useCallback(() => {
-        route.pop()
-        setRoute([...route])
-        if (route.length === 0) {
-            setCurrentItems(items)
-        } else {
-            setCurrentItems(findCurrentPage(items, route) ?? [])
-        }
-    }, [route, setCurrentItems])
-
-    useOnClickOutside(refElement, () => {
-        if (isOpen) {
-            handleOpen()
-        }
-    })
+const Select = (props: SelectProps) => {
+    const {
+        handleOpen,
+        refElement,
+        isOpen,
+        multiple,
+        handleSelect,
+        selectedRoute,
+        currentItems,
+        route,
+        goBack,
+        refItems,
+        appearance,
+    } = useSelect(props)
+    const { isActive, width, title, required, selected, placeholder } = props
 
     return (
-        <SelectWrapper onClick={handleOpen} ref={refElement} isOpen={isOpen} isActive={isActive} width={width}>
-            {!!title && <h5>{title}</h5>}
-            <SelectHeaderWrapper>
-                <SelectHeader>
-                    {!!selected.icon && <span className="icon">{selected.icon}</span>}
-                    <span className="header-title">{selected.title}</span>
+        <SelectWrapper
+            onClick={handleOpen}
+            appearance={appearance}
+            ref={refElement}
+            isOpen={isOpen}
+            isActive={isActive ?? true}
+            width={width}
+        >
+            <Title size={5} align="left" bottomGap="5px" visible={!!title} required={required}>
+                {title}
+            </Title>
+            <SelectHeaderWrapper multiple={multiple} appearance={appearance}>
+                <SelectHeader appearance={appearance}>
+                    {!multiple ? (
+                        <div className="single-header">
+                            {!!selected ? (
+                                <>
+                                    {!!(selected as SelectPage).icon && (
+                                        <span className="icon">{(selected as SelectPage).icon}</span>
+                                    )}
+                                    <span className="header-title">{(selected as SelectPage).title}</span>
+                                </>
+                            ) : (
+                                <span className="not-chosen">{placeholder ?? 'Не выбрано'}</span>
+                            )}
+                        </div>
+                    ) : !!selected ? (
+                        (selected as SelectPage[]).map((page) => {
+                            return (
+                                <div className="header-item" key={page.id}>
+                                    {!!page.icon && <span className="icon">{page.icon}</span>}
+                                    <span className="header-title">{page.title}</span>
+                                </div>
+                            )
+                        })
+                    ) : (
+                        <span className="not-chosen multi">{placeholder ?? 'Не выбрано'}</span>
+                    )}
                 </SelectHeader>
                 <SelectArrow isOpen={isOpen} />
             </SelectHeaderWrapper>
@@ -106,14 +92,14 @@ const Select = ({ items, setSelected, selected, title, width, isActive = true }:
                         </span>
                     </SelectItem>
                 )}
-                {currentItems.map(({ id, icon, title, children }, i) => (
+                {currentItems.map(({ id, icon, title, children }) => (
                     <SelectItem
                         key={title}
                         onClick={(e) => {
                             e.stopPropagation()
                             handleSelect({ id, icon, title, children })
                         }}
-                        isSelected={selected.title.includes(title)}
+                        isSelected={!multiple && !!selected && (selected as SelectPage).title.includes(title)}
                         leadingToSelected={selectedRoute.includes(id.toString())}
                     >
                         {!!icon && <span className="icon">{icon}</span>}
@@ -123,6 +109,13 @@ const Select = ({ items, setSelected, selected, title, width, isActive = true }:
                                 <FiChevronRight />
                             </span>
                         )}
+                        {multiple &&
+                            !!selected &&
+                            !!(selected as SelectPage[]).find((page) => page.title.includes(title)) && (
+                                <span className="right-icon">
+                                    <FiCheck />
+                                </span>
+                            )}
                     </SelectItem>
                 ))}
             </SelectItems>

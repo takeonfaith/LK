@@ -1,37 +1,37 @@
 import { createStore, createEvent } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
-
-const usePopUpMessage = () => {
-    return useStore($popUpstore)
-}
-
-type PopUpMessageType = 'success' | 'failure' | 'info'
+import { MessageType } from '@ui/types'
 
 interface IPopUpMessage {
-    message: React.ReactNode[] | React.ReactNode | string
-    type: PopUpMessageType
+    message: ChildrenType
+    type: MessageType
     isOpen: boolean
     time?: number
     onClick?: () => void
 }
 
-const defaultStore: IPopUpMessage = {
+const DEFAULT_STORE: IPopUpMessage = {
     message: '',
     type: 'success',
     isOpen: false,
     time: 2000,
 }
 
+const usePopUpMessage = () => {
+    return useStore($popUpstore)
+}
+
 const evokePopUpMessage = createEvent<{
-    message: React.ReactNode[] | React.ReactNode | string
-    type: PopUpMessageType
+    message: ChildrenType
+    type: MessageType
     time?: number
     onClick?: () => void
 }>()
 
 const openPopUpMessage = createEvent<{ isOpen: boolean }>()
+const clearStore = createEvent()
 
-const $popUpstore = createStore(defaultStore)
+const $popUpstore = createStore<IPopUpMessage>(DEFAULT_STORE)
     .on(evokePopUpMessage, (_, { message, type, time = 2000, onClick }) => ({
         isOpen: true,
         message,
@@ -43,6 +43,9 @@ const $popUpstore = createStore(defaultStore)
         ...oldState,
         isOpen: isOpen,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     usePopUpMessage,
@@ -51,4 +54,5 @@ export const selectors = {
 export const events = {
     evokePopUpMessage,
     openPopUpMessage,
+    clearStore,
 }

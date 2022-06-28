@@ -1,6 +1,6 @@
+import { AcadPerformance as IAcadPerformance } from '@api/model/acad-performance'
 import { acadPerformanceModel } from '@entities/acad-performance'
 import { PreparedData } from '@entities/acad-performance/lib/prepare'
-import { AcadPerformance as IAcadPerformance } from '@entities/acad-performance/model'
 import { userModel } from '@entities/user'
 import createSelectItems from '@features/acad-performance/lib/create-select-items'
 import search from '@features/acad-performance/lib/search'
@@ -43,7 +43,7 @@ const AcadPerformance = () => {
     } = userModel.selectors.useUser()
     const items = useMemo(() => createSelectItems(user?.course ?? 0), [user])
 
-    const [selected, setSelected] = useState<SelectPage>({
+    const [selected, setSelected] = useState<SelectPage | null>({
         id: findSemestr(new Date().toString(), user?.course ?? 1),
         title: findSemestr(new Date().toString(), user?.course ?? 1).toString() + ' семестр',
     })
@@ -52,7 +52,7 @@ const AcadPerformance = () => {
 
     useEffect(() => {
         acadPerformanceModel.effects.getAcadPerformanceFx({
-            semestr: `${selected.id !== -1 ? selected.id : ''}`,
+            semestr: `${selected?.id !== -1 ? selected?.id : ''}`,
         })
     }, [selected])
 
@@ -61,7 +61,7 @@ const AcadPerformance = () => {
             loading={loading}
             load={() =>
                 acadPerformanceModel.effects.getAcadPerformanceFx({
-                    semestr: `${selected.id !== -1 ? selected.id : ''}`,
+                    semestr: `${selected?.id !== -1 ? selected?.id : ''}`,
                 })
             }
             error={error}

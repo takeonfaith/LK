@@ -6,7 +6,6 @@ const getFamilyStatusItems = (sex: 'Мужской' | 'Женский') => {
     switch (sex) {
         case 'Мужской':
             return [
-                { id: 'not-chosen', title: 'Не выбрано' },
                 { id: 'single', title: 'Холост' },
                 { id: 'married', title: 'Женат' },
                 { id: 'divorced', title: 'Разведен' },
@@ -15,7 +14,6 @@ const getFamilyStatusItems = (sex: 'Мужской' | 'Женский') => {
 
         case 'Женский':
             return [
-                { id: 'not-chosen', title: 'Не выбрано' },
                 { id: 'single', title: 'Не замужем' },
                 { id: 'married', title: 'Замужем' },
                 { id: 'divorced', title: 'Разведена' },
@@ -23,7 +21,6 @@ const getFamilyStatusItems = (sex: 'Мужской' | 'Женский') => {
             ]
         default:
             return [
-                { id: 'not-chosen', title: 'Не выбрано' },
                 { id: 'single', title: 'Холост/Не замужем' },
                 { id: 'married', title: 'Женат/Замужем' },
                 { id: 'divorced', title: 'Разведен/Разведена' },
@@ -32,7 +29,7 @@ const getFamilyStatusItems = (sex: 'Мужской' | 'Женский') => {
     }
 }
 
-const getFamilyStatus = (data: TeacherDataVerification): IInputArea => {
+const getFamilyStatus = (data: TeacherDataVerification, isDone: boolean): IInputArea => {
     return {
         title: 'Семейное положение',
         hint: 'Необходимо указать актуальную информацию',
@@ -47,7 +44,7 @@ const getFamilyStatus = (data: TeacherDataVerification): IInputArea => {
                 width: '100%',
             },
         ],
-        confirmed: false,
+        confirmed: isDone,
     }
 }
 

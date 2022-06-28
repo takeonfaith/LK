@@ -1,34 +1,39 @@
-import React, { useCallback, useState } from 'react'
-import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
+import { Colors } from '@consts'
+import React, { useCallback, useEffect, useState } from 'react'
+import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
-import Button from './button'
+import { Title } from '@ui/title'
+import { Button } from '@ui/button'
+import { Message } from '.'
 
-const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputAppearance: boolean; width?: string }>`
+const InputWrapper = styled.div<{
+    leftIcon: boolean
+    isActive: boolean
+    inputAppearance: boolean
+    width?: string
+    minWidth?: string
+    danger?: boolean
+}>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
     width: ${({ width }) => width ?? '100%'};
-    min-width: ${({ width }) => width};
+    min-width: ${({ minWidth, width }) => minWidth ?? width};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
 
-    h5 {
-        margin-bottom: 5px;
-
-        .red-star {
-            color: var(--red);
-            margin-right: 5px;
-        }
-    }
-
-    .icon {
+    .left-icon {
         position: absolute;
         left: 7px;
         top: 55%;
         transform: translateY(-50%);
         color: var(--text);
         opacity: 0.4;
+    }
+
+    .message {
+        margin-bottom: 5px;
     }
 
     input {
@@ -42,15 +47,16 @@ const InputWrapper = styled.div<{ leftIcon: boolean; isActive: boolean; inputApp
         font-weight: bold;
         border-radius: 7px;
         padding-left: ${({ leftIcon, inputAppearance }) => (leftIcon ? '30px' : inputAppearance ? '10px' : '0')};
-        padding-right: 35px;
+        padding-right: ${({ inputAppearance }) => (!inputAppearance ? '0' : '35px')};
         max-height: 36px;
+        border: ${({ danger }) => danger && `2px solid ${Colors.red.main}`};
 
         &::placeholder {
             font-weight: 500;
         }
 
         &:focus-visible {
-            outline: 4px solid var(--almostTransparentOpposite);
+            outline: ${({ inputAppearance }) => inputAppearance && '4px solid var(--almostTransparentOpposite)'};
         }
 
         &:focus:not(:focus-visible) {
@@ -92,6 +98,10 @@ interface Props {
     required?: boolean
     mask?: boolean
     width?: string
+    minWidth?: string
+    autocomplete?: boolean
+    danger?: boolean
+    alertMessage?: string
 }
 
 const Input = ({
@@ -101,22 +111,61 @@ const Input = ({
     title,
     required,
     width,
+    minWidth,
     placeholder = 'Введите сюда',
     type = 'text',
+    danger,
+    alertMessage,
     isActive = true,
     inputAppearance = true,
     mask = false,
+    autocomplete = true,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
 
+    useEffect(() => {
+        setInputType(type)
+    }, [type])
+
     const phoneMask = useCallback(
-        (phone: string) => {
-            return phone
-                .replace(/\D/g, '')
-                .replace(/^(\d)/, '+$1(')
-                .replace(/(\d{3})(\d{1,3})/, '$1) $2-')
-                .replace(/(\d{2})(\d{2,4})/, '$1-$2')
-                .slice(0, 17)
+        (e: React.ChangeEvent<HTMLInputElement>) => {
+            const russianNumberBeginnings = ['7', '8', '9']
+            const selectionStart = e.target.selectionStart
+            let phoneInput = e.target.value.replace(/\D/g, '')
+            let formattedPhone = ''
+
+            if (!phoneInput.length) return ''
+
+            if (e.target.value.length !== selectionStart) {
+                if (/\D/g.test((e.nativeEvent as InputEvent).data ?? '')) {
+                    return phoneInput
+                }
+                return e.target.value
+            }
+
+            if (russianNumberBeginnings.indexOf(phoneInput[0]) > -1) {
+                // russian number
+                if (phoneInput[0] === '9') phoneInput = '7' + phoneInput
+                const firstSymbols = phoneInput[0] === '8' ? '8' : '+7'
+                formattedPhone = firstSymbols + ' '
+                if (!!phoneInput.length) {
+                    formattedPhone += '(' + phoneInput.substring(1, 4)
+                }
+                if (phoneInput.length >= 5) {
+                    formattedPhone += ') ' + phoneInput.substring(4, 7)
+                }
+                if (phoneInput.length >= 8) {
+                    formattedPhone += '-' + phoneInput.substring(7, 9)
+                }
+                if (phoneInput.length >= 10) {
+                    formattedPhone += '-' + phoneInput.substring(9, 11)
+                }
+            } else {
+                // not russian number
+                formattedPhone = `+${phoneInput.substring(0, 16)}`
+            }
+
+            return formattedPhone
         },
         [type],
     )
@@ -128,23 +177,39 @@ const Input = ({
         [type],
     )
 
+    const phoneMaskKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (
+            e.key === 'Backspace' &&
+            ((value[1] === '7' && value.length <= 4) || (value[0] === '8' && value.length <= 3))
+        ) {
+            setValue('')
+        }
+    }
+
     return (
-        <InputWrapper leftIcon={!!leftIcon} isActive={isActive} inputAppearance={inputAppearance} width={width}>
-            {!!title && (
-                <h5>
-                    {required && <span className="red-star">*</span>}
-                    {title}
-                </h5>
-            )}
-            {leftIcon && <span className="icon">{leftIcon}</span>}
+        <InputWrapper
+            leftIcon={!!leftIcon}
+            isActive={isActive}
+            inputAppearance={inputAppearance}
+            width={width}
+            danger={danger}
+            minWidth={minWidth}
+        >
+            <Title size={5} align="left" visible={!!title} bottomGap="5px" required={required}>
+                {title}
+            </Title>
+            <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
+            {leftIcon && <span className="left-icon">{leftIcon}</span>}
             <input
                 type={inputType}
                 placeholder={placeholder}
                 value={value}
+                autoComplete={autocomplete ? 'on' : 'off'}
+                onKeyDown={(e) => type === 'tel' && phoneMaskKeyDown(e)}
                 onChange={(e) => {
                     if (mask) {
                         if (type === 'tel') {
-                            setValue(phoneMask(e.target.value))
+                            setValue(phoneMask(e))
                         } else if (type === 'email') {
                             setValue(emailMask(e.target.value))
                         } else setValue(e.target.value)
@@ -153,7 +218,7 @@ const Input = ({
                 required={required}
             />
             {type !== 'password' ? (
-                !!value.length &&
+                !!value?.length &&
                 inputAppearance && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
             ) : (
                 <Button

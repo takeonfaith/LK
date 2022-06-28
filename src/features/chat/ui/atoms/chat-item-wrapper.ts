@@ -22,23 +22,6 @@ const ChatItemWrapper = styled(Link)<{ isChosen: boolean; isOpen: boolean }>`
             filter: brightness(0.95);
         }
 
-        .amount-of-unread-messages {
-            position: absolute;
-            top: 10px;
-            left: ${({ isOpen }) => (!isOpen ? '47px' : '35px')};
-            min-width: 20px;
-            height: 20px;
-            background: ${Colors.red.main};
-            border-radius: 100%;
-            color: #fff;
-            border: 3px solid var(--theme);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6em;
-            font-weight: bold;
-        }
-
         .name-and-message {
             display: flex;
             flex-direction: column;

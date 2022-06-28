@@ -3,6 +3,7 @@ import { SubmitButton } from '@ui/atoms'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import localizeDate from '@utils/localize-date'
+import { paymentsModel } from '@entities/payments'
 
 const ContractWrapper = styled.div`
     display: flex;
@@ -28,6 +29,10 @@ interface Props {
 
 const Contract = ({ contract }: Props) => {
     const [copied, setCopied] = useState<boolean>(false)
+    const [loading, setLoading] = useState(false)
+    const [completed, setCompleted] = useState(false)
+    const { error } = paymentsModel.selectors.usePayments()
+
     const contractInfo = [
         {
             text: 'Номер договора: ',
@@ -36,6 +41,10 @@ const Contract = ({ contract }: Props) => {
         {
             text: 'Начало действия: ',
             info: localizeDate(contract?.startDate),
+        },
+        {
+            text: 'Действует до: ',
+            info: localizeDate(contract?.endDatePlan),
         },
         {
             text: 'Заказчик: ',
@@ -60,6 +69,15 @@ const Contract = ({ contract }: Props) => {
         setCopied(true)
     }
 
+    const handleSign = () => {
+        if (contract) {
+            setLoading(true)
+            paymentsModel.effects.signContractFx(contract.id)
+            setLoading(false)
+            setCompleted(true)
+        }
+    }
+
     return (
         <ContractWrapper>
             <div className="contract-info">
@@ -72,15 +90,33 @@ const Contract = ({ contract }: Props) => {
                     )
                 })}
             </div>
-            <SubmitButton
-                text="Скопировать номер договора"
-                action={handleCopy}
-                isLoading={false}
-                completed={copied}
-                setCompleted={setCopied}
-                popUpSuccessMessage="Номер договора скопирован в буфер"
-                isActive
-            />
+            {contract?.can_sign && (
+                <SubmitButton
+                    text="Подписать"
+                    buttonSuccessText="Подписан"
+                    action={handleSign}
+                    isLoading={loading}
+                    completed={completed}
+                    repeatable={false}
+                    popUpFailureMessage={error ?? 'Не удалось подписать договор'}
+                    setCompleted={setCompleted}
+                    popUpSuccessMessage="Договор подписан"
+                    isActive
+                    pulsing
+                />
+            )}
+
+            {!contract?.can_sign && (
+                <SubmitButton
+                    text="Скопировать номер договора"
+                    action={handleCopy}
+                    isLoading={false}
+                    completed={copied}
+                    setCompleted={setCopied}
+                    popUpSuccessMessage="Номер договора скопирован в буфер"
+                    isActive
+                />
+            )}
         </ContractWrapper>
     )
 }
