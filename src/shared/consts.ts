@@ -361,3 +361,7 @@ export const letterColorMatch: LetterColorMatch = {
     Y: 'red',
     Z: 'purple',
 }
+
+export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
+
+export const MAX_FILE_SIZE = 20000000

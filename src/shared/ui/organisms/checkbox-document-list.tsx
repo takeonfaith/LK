@@ -19,7 +19,7 @@ const CheckboxDocumentList = ({ title, items, setChecked, setFiles }: Props) => 
             <Title size={5} align="left" bottomGap>
                 {title}
             </Title>
-            {items.map(({ value, title, files, maxFiles, fieldName, checkboxCondition }, j) => {
+            {items.map(({ value, title, files, maxFiles, checkboxCondition }, j) => {
                 return (
                     <CheckboxDocument
                         checkbox={{ checked: value, setChecked: () => setChecked(value, j), text: title }}
@@ -28,7 +28,6 @@ const CheckboxDocumentList = ({ title, items, setChecked, setFiles }: Props) => 
                             maxFiles,
                             maxFileSizeInBytes: 0,
                             isActive: true,
-                            label: '',
                             setFiles: (files) => setFiles(files, j),
                         }}
                         docVisible={checkboxCondition === 'straight' ? value : !value}
