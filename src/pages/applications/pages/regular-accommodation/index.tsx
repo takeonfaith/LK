@@ -10,9 +10,8 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import { useHistory } from 'react-router'
 import getDisability from '@pages/applications/pages/regular-accommodation/lib/get-disability'
-import getDriverLicense from '@pages/applications/pages/regular-accommodation/lib/get-driver-license'
 import getRegistration from '@pages/applications/pages/regular-accommodation/lib/get-registration'
-import getMilitaryService from "@pages/applications/pages/accommodation-correspondence-form/lib/get-militar-service";
+import getAdditionally from "@pages/applications/pages/regular-accommodation/lib/get-additionally";
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -24,9 +23,8 @@ const RegularAccommodationPage = () => {
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
-    const [driveLicense, setDriveLicense] = useState<IInputArea | null>(null)
     const [registration, setRegistration] = useState<IInputArea | null>(null)
-    const [militaryService, setMilitaryService] = useState<IInputArea | null>(null)
+    const [additionally, setAdditionally] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
     const history = useHistory()
 
@@ -34,9 +32,8 @@ const RegularAccommodationPage = () => {
         if (!!user) {
             setForm(getForm(user))
             setDisability(getDisability())
-            setDriveLicense(getDriverLicense())
             setRegistration(getRegistration())
-            setMilitaryService(getMilitaryService())
+            setAdditionally(getAdditionally())
         }
     }, [user])
 
@@ -57,30 +54,13 @@ const RegularAccommodationPage = () => {
                             {...registration}
                             collapsed={isDone}
                             setData={setRegistration as LoadedState}
-                            divider
                         />
                     )}
-                    <Title size={4} align="left" bottomGap>
-                        Соответствие льготной категории граждан
-                    </Title>
                     {disability && (
-                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} divider />
+                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
                     )}
-                    {driveLicense && (
-                        <InputArea
-                            {...driveLicense}
-                            collapsed={isDone}
-                            setData={setDriveLicense as LoadedState}
-                            divider
-                        />
-                    )}
-                    {militaryService && (
-                        <InputArea
-                            {...militaryService}
-                            collapsed={isDone}
-                            setData={setMilitaryService as LoadedState}
-                            divider
-                        />
+                    {additionally && (
+                        <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />
                     )}
                     <SubmitButton
                         text={'Отправить'}

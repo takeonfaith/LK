@@ -50,15 +50,7 @@ const getForm = (data: User): IInputArea => {
                 editable: true,
                 required: true,
             },
-            {
-                title: 'Комментарий',
-                type: 'textarea',
-                fieldName: 'commentary',
-                value: '',
-                editable: true,
-            },
         ],
-        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: false },
     }
 }
 

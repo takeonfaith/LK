@@ -93,7 +93,12 @@ const getForm = (data: User): IInputArea => {
                 editable: true,
             },
         ],
-        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: false },
+        documents: {
+            files: [],
+            required: false,
+            fieldName: 'docs',
+            maxFiles: 2,
+        },
     }
 }
 

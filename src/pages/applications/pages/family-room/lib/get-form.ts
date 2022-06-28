@@ -35,8 +35,6 @@ const getForm = (data: User): IInputArea => {
                 required: true,
             },
         ],
-        hint: 'Необходимо приложить скан-копии документов, подтверждающие родство',
-        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: true },
     }
 }
 
