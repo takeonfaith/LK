@@ -9,6 +9,9 @@ const LinkButtonWrapper = styled.a<{
     textColor?: string
     align?: 'left' | 'center' | 'right'
     isActive: boolean
+    height?: string
+    minHeight?: string
+    padding?: string
 }>`
     display: flex;
     align-items: center;
@@ -16,7 +19,7 @@ const LinkButtonWrapper = styled.a<{
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
-    padding: 10px;
+    padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
@@ -24,8 +27,8 @@ const LinkButtonWrapper = styled.a<{
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;
     font-size: 0.8em;
-    height: 40px;
-    min-height: 40px;
+    height: ${({ height = '40px' }) => height};
+    min-height: ${({ minHeight = '40px' }) => minHeight};
     opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
 
@@ -73,6 +76,9 @@ interface Props {
     align?: 'left' | 'center' | 'right'
     isActive?: boolean
     href: string
+    height?: string
+    minHeight?: string
+    padding?: string
 }
 
 const LinkButton = ({
@@ -84,6 +90,9 @@ const LinkButton = ({
     textColor,
     align,
     href,
+    height,
+    minHeight,
+    padding,
     isActive = true,
     isChosen = false,
 }: Props) => {
@@ -98,6 +107,9 @@ const LinkButton = ({
             href={href}
             align={align}
             isActive={isActive}
+            height={height}
+            padding={padding}
+            minHeight={minHeight}
         >
             {!!icon && icon}
             <span>{text}</span>

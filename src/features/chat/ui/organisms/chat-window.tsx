@@ -1,3 +1,4 @@
+import { TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
 import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router'
 import styled from 'styled-components'
@@ -22,7 +23,7 @@ const ChatWindowWrapper = styled.div`
 `
 
 const ChatWindow = () => {
-    const params = useRouteMatch('/messages/:chatId')?.params as { chatId: string | undefined }
+    const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { chatId: string | undefined }
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {

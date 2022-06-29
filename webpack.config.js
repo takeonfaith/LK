@@ -59,7 +59,7 @@ const config = {
                 messages: ['You application is running here http://localhost:3000'],
             },
         }),
-        new ESLintPlugin({extensions: ['ts']})
+        new ESLintPlugin({extensions: ['ts']}),
     ],
     resolve: {
         extensions: [

@@ -71,6 +71,7 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                 <SchedulePageContent>
                     <div className="slider-wrapper">
                         <Slider
+                            appearance={false}
                             pages={[
                                 {
                                     title: 'Текущая неделя',

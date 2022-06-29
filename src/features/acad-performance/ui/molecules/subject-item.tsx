@@ -1,4 +1,4 @@
-import { AcadPerformance } from '@entities/acad-performance/model'
+import { AcadPerformance } from '@api/model/acad-performance'
 import localizeDate from '@utils/localize-date'
 import getShortName from '@utils/get-short-name'
 import React from 'react'

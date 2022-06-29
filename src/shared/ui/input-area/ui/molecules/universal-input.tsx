@@ -2,9 +2,10 @@ import Select, { SelectPage } from '@features/select'
 import { Input, TextArea } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData, IInputAreaFiles } from '@ui/input-area/model'
+import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
-import React from 'react'
+import React, { useState } from 'react'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -33,7 +34,9 @@ const UniversalInput = (props: Props) => {
         autocomplete,
     } = props
 
-    const isActive = editable || (changeInputArea && !documents)
+
+    const isActive = editable ?? (changeInputArea && !documents)
+    const [validDates, setValidDates] = useState(true)
 
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
         setData((area) => {
@@ -75,6 +78,13 @@ const UniversalInput = (props: Props) => {
         })
     }
 
+    const handleDates = (dates: string[]) => {
+        setData((area) => {
+            ;(area.data[indexI] as IInputAreaData).value = dates
+            return { ...area }
+        })
+    }
+
     return (type !== 'select' && type !== 'multiselect') || !items ? (
         type === 'checkbox' ? (
             <Checkbox
@@ -100,6 +110,15 @@ const UniversalInput = (props: Props) => {
                 items={items as CheckboxDocs[]}
                 setChecked={(value, j?: number) => handleChangeValue(!value, indexI, j)}
                 setFiles={(files, j?: number) => handleLoadFiles(files, indexI, j)}
+            />
+        ) : type === 'date-interval' ? (
+            <DateInterval
+                title={title}
+                required={required}
+                dates={value as string[]}
+                setDates={(dates: string[]) => handleDates(dates)}
+                valid={validDates}
+                setValid={setValidDates}
             />
         ) : type === 'radio' ? (
             <RadioButtonList

@@ -1,1 +1,1 @@
-export { default as WhatsNewTemplate } from './whats-new-template'
+export { default as Plate } from './plate'

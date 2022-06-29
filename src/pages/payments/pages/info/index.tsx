@@ -1,5 +1,7 @@
-import { LeftBlock, PageWrapper, RightBlock } from '@features/payments'
+import { PageWrapper } from '@features/payments'
 import { Button, Title } from '@ui/atoms'
+import Block from '@ui/block'
+import List from '@ui/list'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -19,23 +21,11 @@ const MapWrapper = styled.div`
     height: fit-content;
 `
 
-const ButtonList = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    justify-content: space-evenly;
-
-    @media (max-width: 1000px) {
-        height: 250px;
-    }
-`
-
 const InfoPayments = () => {
     return (
         <PageWrapper>
             <div className="blocks-wrapper">
-                <LeftBlock>
+                <Block orientation="vertical" maxWidth="800px">
                     <Title size={2} align="left">
                         Договорной отдел
                     </Title>
@@ -74,12 +64,12 @@ const InfoPayments = () => {
                             ></iframe>
                         </MapWrapper>
                     </div>
-                </LeftBlock>
-                <RightBlock>
+                </Block>
+                <Block orientation="vertical" maxWidth="380px">
                     <Title size={2} align="left">
                         Реквизиты договора
                     </Title>
-                    <ButtonList>
+                    <List gap={10} verticalAlign="center" height="100%" direction="horizontal" wrap>
                         <Button
                             onClick={() => null}
                             text="Банковские реквизиты"
@@ -104,8 +94,8 @@ const InfoPayments = () => {
                             width={'100%'}
                             background="var(--settings)"
                         />
-                    </ButtonList>
-                </RightBlock>
+                    </List>
+                </Block>
             </div>
         </PageWrapper>
     )

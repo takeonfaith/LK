@@ -23,6 +23,7 @@ type IInputAreaTypes =
     | 'number'
     | 'textarea'
     | 'checkbox-docs'
+    | 'date-interval'
 
 export interface IInputAreaFiles {
     files: File[]
@@ -46,7 +47,7 @@ export interface IInputAreaLink {
 export interface IInputAreaData {
     fieldName: string
     title: string
-    value: string | SelectPage | boolean | SelectPage[] | null | RadioButton
+    value: string | SelectPage | boolean | SelectPage[] | null | RadioButton | string[]
     type?: IInputAreaTypes
     items?: SelectPage[] | CheckboxDocs[] | RadioButton[]
     width?: string

@@ -1,4 +1,4 @@
-import { AcadPerformance } from '@entities/acad-performance/model'
+import { AcadPerformance } from '@api/model/acad-performance'
 import { SkeletonShape } from '@ui/atoms'
 import React, { memo } from 'react'
 import { SubjectItem } from '.'

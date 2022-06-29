@@ -12,13 +12,17 @@ const AreaTitleWrapper = styled.div`
     cursor: pointer;
     position: sticky;
     top: -2px;
-    background: var(--form);
+    background: var(--schedule);
     z-index: 3;
     width: 100%;
 
     .title-and-icon {
         display: flex;
         align-items: center;
+    }
+
+    @media (max-width: 1000px) {
+        background: transparent;
     }
 `
 

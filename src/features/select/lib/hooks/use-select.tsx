@@ -16,10 +16,11 @@ export interface SelectProps {
     multiple?: boolean
     required?: boolean
     placeholder?: string
+    appearance?: boolean
 }
 
 const useSelect = (props: SelectProps) => {
-    const { items, setSelected, selected, multiple = false } = props
+    const { items, setSelected, selected, appearance = true, multiple = false } = props
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const refElement = useRef<HTMLDivElement | null>(null)
     const refItems = useRef<HTMLUListElement | null>(null)
@@ -90,6 +91,7 @@ const useSelect = (props: SelectProps) => {
         route,
         goBack,
         refItems,
+        appearance,
     }
 }
 

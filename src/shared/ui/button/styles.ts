@@ -7,6 +7,7 @@ export const ButtonWrapper = styled.button<{
     width?: string
     minWidth?: string
     background?: string
+    padding?: string
     textColor?: string
     shrinkTextInMobile?: boolean
     hoverBackground?: string
@@ -14,6 +15,7 @@ export const ButtonWrapper = styled.button<{
     align?: Align
     isActive: boolean
     fixedInMobile?: boolean
+    height?: string
 }>`
     display: flex;
     align-items: center;
@@ -21,7 +23,7 @@ export const ButtonWrapper = styled.button<{
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
-    padding: 10px;
+    padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
@@ -31,6 +33,7 @@ export const ButtonWrapper = styled.button<{
     text-decoration: none;
     flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
     opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
+    height: ${({ height = '40px' }) => height};
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);
@@ -49,26 +52,38 @@ export const ButtonWrapper = styled.button<{
             hoverBackground ?? (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
     }
 
-    svg {
+    .icon {
         margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')};
-        width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
-        min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
+        width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
+        min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
         height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
         margin-bottom: ${({ direction }) => direction === 'vertical' && '4px'};
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 100%;
+            height: 100%;
+            max-width: 18px;
+            max-height: 18px;
+            margin-right: 0 !important;
+        }
     }
 
     @media (max-width: 1000px) {
         font-size: 12px;
-        height: 36px;
+        height: ${({ height = '36px' }) => height};
         position: ${({ fixedInMobile }) => fixedInMobile && 'absolute'};
         z-index: ${({ fixedInMobile }) => fixedInMobile && '5'};
         bottom: 10px;
         right: 10px;
+        padding: 0;
 
-        svg {
-            width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
-            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
-            height: ${({ direction }) => (direction === 'vertical' ? '30px' : '14px')};
+        .icon {
+            width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
+            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
+            height: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};
         }

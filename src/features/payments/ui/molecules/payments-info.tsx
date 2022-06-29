@@ -1,19 +1,15 @@
 import { Colors } from '@consts'
-import { Button } from '@ui/atoms'
+import { Button, LinkButton } from '@ui/atoms'
 import localizeDate from '@utils/localize-date'
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { SliderPage, useModal } from 'widgets'
+import { MoneyNeedToPay } from '../atoms'
 import QrCode from '../atoms/qr-code'
 
 const PaymentsInfoWrapper = styled.div<{ paymentDifference: number }>`
     display: flex;
     align-items: center;
-
-    .rest-money {
-        color: var(--red);
-        font-weight: bold;
-    }
 
     .monthly {
         color: var(--blue);
@@ -35,9 +31,10 @@ interface Props {
     balanceCurrDate: number
     qr_current: string
     qr_total: string
+    bill?: string
 }
 
-const PaymentsInfo = ({ endDate, sum, allPayments, balanceCurrDate, qr_current, qr_total }: Props) => {
+const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_current, qr_total }: Props) => {
     const { open } = useModal()
 
     const handleModal = useCallback(() => {
@@ -61,10 +58,7 @@ const PaymentsInfo = ({ endDate, sum, allPayments, balanceCurrDate, qr_current, 
                     <span className="monthly">{monthly} руб.</span> */}
                 </p>
                 <br />
-                <p>
-                    К выплате до конца действия договора (до {localizeDate(endDate)} г.):
-                    <span className="rest-money"> {(sum - allPayments).toFixed(2)} руб.</span> (без учета индексации)
-                </p>
+                <MoneyNeedToPay sum={sum} allPayments={allPayments} endDate={endDate} />
                 <br />
                 <Button
                     onClick={handleModal}
@@ -73,6 +67,17 @@ const PaymentsInfo = ({ endDate, sum, allPayments, balanceCurrDate, qr_current, 
                     background={Colors.green.main}
                     textColor="#fff"
                 />
+                {bill && (
+                    <LinkButton
+                        text="Сформировать квитанцию на оплату"
+                        background="transparent"
+                        textColor="var(--grey)"
+                        align="center"
+                        width="100%"
+                        href={bill}
+                        onClick={() => null}
+                    />
+                )}
             </div>
         </PaymentsInfoWrapper>
     )

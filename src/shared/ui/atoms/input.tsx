@@ -1,15 +1,17 @@
 import { Colors } from '@consts'
-import React, { useCallback, useState } from 'react'
-import { FiEye, FiEyeOff, FiX } from 'react-icons/fi'
+import React, { useCallback, useEffect, useState } from 'react'
+import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Title } from '@ui/title'
 import { Button } from '@ui/button'
+import { Message } from '.'
 
 const InputWrapper = styled.div<{
     leftIcon: boolean
     isActive: boolean
     inputAppearance: boolean
     width?: string
+    minWidth?: string
     danger?: boolean
 }>`
     display: flex;
@@ -17,17 +19,21 @@ const InputWrapper = styled.div<{
     justify-content: space-between;
     position: relative;
     width: ${({ width }) => width ?? '100%'};
-    min-width: ${({ width }) => width};
+    min-width: ${({ minWidth, width }) => minWidth ?? width};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
 
-    .icon {
+    .left-icon {
         position: absolute;
         left: 7px;
         top: 55%;
         transform: translateY(-50%);
         color: var(--text);
         opacity: 0.4;
+    }
+
+    .message {
+        margin-bottom: 5px;
     }
 
     input {
@@ -41,7 +47,7 @@ const InputWrapper = styled.div<{
         font-weight: bold;
         border-radius: 7px;
         padding-left: ${({ leftIcon, inputAppearance }) => (leftIcon ? '30px' : inputAppearance ? '10px' : '0')};
-        padding-right: 35px;
+        padding-right: ${({ inputAppearance }) => (!inputAppearance ? '0' : '35px')};
         max-height: 36px;
         border: ${({ danger }) => danger && `2px solid ${Colors.red.main}`};
 
@@ -50,7 +56,7 @@ const InputWrapper = styled.div<{
         }
 
         &:focus-visible {
-            outline: 4px solid var(--almostTransparentOpposite);
+            outline: ${({ inputAppearance }) => inputAppearance && '4px solid var(--almostTransparentOpposite)'};
         }
 
         &:focus:not(:focus-visible) {
@@ -92,8 +98,10 @@ interface Props {
     required?: boolean
     mask?: boolean
     width?: string
+    minWidth?: string
     autocomplete?: boolean
     danger?: boolean
+    alertMessage?: string
 }
 
 const Input = ({
@@ -103,15 +111,21 @@ const Input = ({
     title,
     required,
     width,
+    minWidth,
     placeholder = 'Введите сюда',
     type = 'text',
     danger,
+    alertMessage,
     isActive = true,
     inputAppearance = true,
     mask = false,
     autocomplete = true,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
+
+    useEffect(() => {
+        setInputType(type)
+    }, [type])
 
     const phoneMask = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -179,11 +193,13 @@ const Input = ({
             inputAppearance={inputAppearance}
             width={width}
             danger={danger}
+            minWidth={minWidth}
         >
             <Title size={5} align="left" visible={!!title} bottomGap="5px" required={required}>
                 {title}
             </Title>
-            {leftIcon && <span className="icon">{leftIcon}</span>}
+            <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
+            {leftIcon && <span className="left-icon">{leftIcon}</span>}
             <input
                 type={inputType}
                 placeholder={placeholder}
@@ -200,9 +216,10 @@ const Input = ({
                     } else setValue(e.target.value)
                 }}
                 required={required}
+                readOnly={!isActive}
             />
             {type !== 'password' ? (
-                !!value.length &&
+                !!value?.length &&
                 inputAppearance && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
             ) : (
                 <Button

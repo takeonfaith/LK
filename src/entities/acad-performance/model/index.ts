@@ -1,34 +1,21 @@
 import { acadPerformanceApi } from '@api'
-import { IGrade } from '@api/model/acad-performance'
+import { AcadPerformance } from '@api/model/acad-performance'
 import { createEffect, createStore } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
 import { prepare } from '../lib/prepare'
-
-export interface AcadPerformance {
-    bill_num: string
-    bill_type: string
-    chair: string
-    course: string
-    doc_type: string
-    exam_date: string
-    exam_time: string
-    exam_type: string
-    grade: keyof IGrade
-    id: string
-    name: string
-    teacher: string
-    ticket_num: string
-}
+import { createEvent } from 'effector'
 
 interface AcadPerformanceStore {
     data: NormalizedData | null
     error: string | null
 }
 
-const defaultStore: AcadPerformanceStore = {
+const DEFAULT_STORE: AcadPerformanceStore = {
     data: null,
     error: null,
 }
+
+const clearStore = createEvent()
 
 const useAcadPerformance = () => {
     return {
@@ -56,7 +43,7 @@ const getAcadPerformanceFx = createEffect(async ({ semestr }: FetchData): Promis
     }
 })
 
-const $acadPerformance = createStore<AcadPerformanceStore>(defaultStore)
+const $acadPerformance = createStore<AcadPerformanceStore>(DEFAULT_STORE)
     .on(getAcadPerformanceFx.doneData, (_, data) => ({
         data,
         error: null,
@@ -65,6 +52,9 @@ const $acadPerformance = createStore<AcadPerformanceStore>(defaultStore)
         error: newData?.message,
         data: null,
     }))
+    .on(clearStore, () => ({
+        ...DEFAULT_STORE,
+    }))
 
 export const selectors = {
     useAcadPerformance,
@@ -72,4 +62,8 @@ export const selectors = {
 
 export const effects = {
     getAcadPerformanceFx,
+}
+
+export const events = {
+    clearStore,
 }

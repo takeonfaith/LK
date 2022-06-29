@@ -6,11 +6,12 @@ import localizeDate from '@utils/localize-date'
 const PaymentItemWrapper = styled.div`
     width: 100%;
     padding: 15px;
-    border-radius: var(--brLight);
+    /* border-radius: var(--brLight); */
     background: var(--theme);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid var(--almostTransparent);
 
     .payment-item-date {
         font-weight: 500;

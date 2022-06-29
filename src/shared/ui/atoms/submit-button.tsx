@@ -4,14 +4,19 @@ import styled from 'styled-components'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { Loading } from '../loading'
 
-const SubmitButtonWrapper = styled.button<{
+type StyledProps = {
     isLoading: boolean
     completed: boolean
-    isActive: boolean
-    isDone: boolean
-    repeatable: boolean
-}>`
-    width: 100%;
+    isActive?: boolean
+    isDone?: boolean
+    repeatable?: boolean
+    width?: string
+    height?: string
+    pulsing?: boolean
+}
+
+const SubmitButtonWrapper = styled.button<StyledProps>`
+    width: ${({ width }) => width ?? '100%'};
     padding: 10px;
     box-sizing: border-box;
     opacity: ${(props) => (props.isLoading || !props.isActive ? 0.5 : 1)};
@@ -20,14 +25,24 @@ const SubmitButtonWrapper = styled.button<{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    min-height: 40px;
+    height: ${({ height }) => height ?? '40px'};
+    min-height: ${({ height }) => height ?? '40px'};
     border-radius: 10px;
     position: relative;
     overflow: hidden;
     border: none;
     cursor: pointer;
     background: ${({ isDone }) => (isDone ? 'var(--green)' : 'var(--blue)')};
+    animation: ${({ pulsing }) => pulsing && '1s pulsing infinite'};
+
+    @keyframes pulsing {
+        0% {
+            outline: 0px solid var(--blue);
+        }
+        100% {
+            outline: 10px solid transparent;
+        }
+    }
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);
@@ -117,27 +132,27 @@ const SubmitButtonWrapper = styled.button<{
     }
 `
 
-interface Props {
+type Props = StyledProps & {
     text: string
     action: () => void
-    isLoading: boolean
     completed: boolean
     setCompleted: (completed: boolean) => void
     buttonSuccessText?: string
     popUpSuccessMessage?: string
     popUpFailureMessage?: string
     isDone?: boolean
-    isActive: boolean
-    repeatable?: boolean
 }
 
 const SubmitButton = ({
     text,
     action,
+    width,
+    height,
     setCompleted,
     buttonSuccessText = 'Готово',
     popUpSuccessMessage = 'Успешно',
     popUpFailureMessage = 'Nope',
+    pulsing,
     isDone = false,
     isActive = true,
     isLoading = false,
@@ -173,10 +188,14 @@ const SubmitButton = ({
             isLoading={isLoading}
             className="submit-button"
             completed={completed}
-            isActive={isActive && !isDone}
+            isActive={isActive && !isDone && !completed}
             onClick={handleAction}
             isDone={isDone}
+            width={width}
+            height={height}
             repeatable={repeatable}
+            tabIndex={!(isActive && !isDone) ? -1 : 0}
+            pulsing={pulsing && !isDone}
         >
             <div className="inner-button">
                 {completed ? (

@@ -19,6 +19,13 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional, co
     const [included, setIncluded] = useState(false)
 
     const handleConfirm = () => {
+        if (data[0] === undefined && !optionalCheckbox?.value && optionalCheckbox?.required)
+            return popUpMessageModel.events.evokePopUpMessage({
+                message: 'Не все необходимые поля заполнены',
+                type: 'failure',
+                time: 5000,
+            })
+
         if (!Array.isArray(data[0])) {
             if (!documents) {
                 if (
@@ -84,6 +91,7 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional, co
             if (!documents) {
                 if (
                     (optionalCheckbox?.value && optionalCheckbox.required) ||
+                    !data.length ||
                     (!(data as IComplexInputAreaData).find((arr) => !!arr.find((el) => !el.value && el.required)) &&
                         !(data as IComplexInputAreaData).find(
                             (arr) =>
@@ -150,9 +158,7 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional, co
     const handleAddNew = () => {
         setData((area: IInputArea) => {
             const newFields = (area.default as IComplexInputAreaData)[0].map(
-                (field, index): IInputAreaData => ({
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    //@ts-ignore
+                (field): IInputAreaData => ({
                     fieldName: field.fieldName ?? '',
                     title: field.title,
                     value: field.type === 'select' && (field?.items as SelectPage[]) ? null : '',

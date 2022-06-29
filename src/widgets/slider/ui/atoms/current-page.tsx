@@ -1,3 +1,4 @@
+import { Colors } from '@consts'
 import React, { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
@@ -6,10 +7,11 @@ const CurrentPageWrapper = styled.span<{
     currentPage: number
     size: number
     moreThanNeeded: boolean
+    appearance?: boolean
 }>`
     min-width: 80px;
     height: calc(100% - 0px);
-    background: var(--theme);
+    background: ${({ appearance }) => (appearance ? 'var(--theme)' : 'var(--mild-theme)')};
     display: block;
     position: absolute;
     transition: 0.3s left, 0.2s transform;
@@ -30,12 +32,21 @@ interface Props {
     pages: { title: string; condition?: boolean }[]
     currentPage: number
     size: number
+    appearance?: boolean
 }
 
-const CurrentPage = ({ currentPage, pages, size }: Props) => {
+const CurrentPage = ({ currentPage, pages, size, appearance }: Props) => {
     const moreThanNeeded = useMemo(() => pages.length > size, [pages.length, size])
 
-    return <CurrentPageWrapper currentPage={currentPage} moreThanNeeded={moreThanNeeded} pages={pages} size={size} />
+    return (
+        <CurrentPageWrapper
+            currentPage={currentPage}
+            appearance={appearance}
+            moreThanNeeded={moreThanNeeded}
+            pages={pages}
+            size={size}
+        />
+    )
 }
 
 export default memo(CurrentPage)

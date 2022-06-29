@@ -9,6 +9,14 @@ import {
     MAGNET_RECOVERY,
     MILITARY_REGISTRATION,
     FINANCIAL_ASSISTANCE,
+    REGULAR_ACCOMMODATION,
+    ACCOMMODATION_CORRESPONDENCE_FORM,
+    ACADEMIC_LEAVE_ACCOMMODATION,
+    PREFERENTIAL_ACCOMMODATION,
+    FAMILY_ROOM,
+    TERMINATION_OF_EMPLOYMENT_CONTRACT,
+    RELOCATION_TO_ANOTHER_HOSTEL,
+    RELOCATION_INSIDE_HOSTEL,
 } from '@app/routes/routes'
 
 const getSectionLinks = () => {
@@ -56,7 +64,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: ' Отдел платных образовательных услуг',
+            title: 'Отдел платных образовательных услуг',
             links: [
                 { link: '/', title: 'Оформить дополнительное соглашение к договору об обучении' },
                 { link: '/', title: 'Отправить квитанцию об оплате обучения или пени' },
@@ -77,6 +85,43 @@ const getSectionLinks = () => {
                 {
                     link: ARBITRARY_REQUEST_ROUTE,
                     title: ' Произвольный запрос',
+                },
+            ],
+        },
+        {
+            title: 'Управление студенческого городка',
+            links: [
+                {
+                    link: REGULAR_ACCOMMODATION,
+                    title: 'Предоставление права проживания (очная и очно-заочная форма)',
+                },
+                {
+                    link: ACCOMMODATION_CORRESPONDENCE_FORM,
+                    title: 'Предоставление права проживания (заочная форма)',
+                },
+                {
+                    link: ACADEMIC_LEAVE_ACCOMMODATION,
+                    title: 'Предоставление права проживания в период академического отпуска',
+                },
+                {
+                    link: PREFERENTIAL_ACCOMMODATION,
+                    title: 'Предоставление права льготного проживания',
+                },
+                {
+                    link: FAMILY_ROOM,
+                    title: 'Предоставление права проживания в семейной комнате',
+                },
+                {
+                    link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
+                    title: 'Расторжение договора найма',
+                },
+                {
+                    link: RELOCATION_INSIDE_HOSTEL,
+                    title: 'Переселение внутри общежития',
+                },
+                {
+                    link: RELOCATION_TO_ANOTHER_HOSTEL,
+                    title: 'Переселение в другое общежитие',
                 },
             ],
         },
