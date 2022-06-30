@@ -34,7 +34,7 @@ const ApplicationSocialAgencies = () => {
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const isDone = (completed || !data?.is_avaliable) ?? false
+    const isDone = completed ?? false
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -59,13 +59,13 @@ const ApplicationSocialAgencies = () => {
                             background="transparent"
                             textColor="var(--blue)"
                         />
-                        <InputArea {...form} collapsed={true} setData={setForm as LoadedState} />
+                        <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                         {/* <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
                             Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
                             направлены Вам в срок до 30 марта 2022 года на указанную в заявке почту: {data?.email}
                         </Message> */}
                         <SubmitButton
-                            text={data?.is_avaliable ? 'Отправить' : 'Отправлено'}
+                            text={isDone ? 'Отправить' : 'Отправлено'}
                             // Функция отправки здесь
                             action={() => null}
                             isLoading={loading}

@@ -1,7 +1,7 @@
 import { APPLICATIONS_ROUTE } from '@app/routes/routes'
 import { superiorRoomModel } from '@entities/superior-room'
 import { userModel } from '@entities/user'
-import { Button, FormBlock, SubmitButton, Wrapper } from '@ui/atoms'
+import { Button, FormBlock, Message, SubmitButton, Wrapper } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
@@ -28,7 +28,7 @@ const ArbitrayRequestPageWrapper = styled.div<{ isDone: boolean }>`
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ApplicationForSocialScrollarship = () => {
+const ApplicationPaperCall = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
@@ -58,11 +58,10 @@ const ApplicationForSocialScrollarship = () => {
                             background="transparent"
                             textColor="var(--blue)"
                         />
-                        <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
-                        {/* <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
-                            Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
-                            направлены Вам в срок до 30 марта 2022 года на указанную в заявке почту: {data?.email}
-                        </Message> */}
+                        {/*<InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />*/}
+                        <Message title="Информация по заявке" type="info" visible={!isDone}>
+                            Данный вид услуги доступен только для студентов, обучающихся на платной договорной основе.
+                        </Message>
                         <SubmitButton
                             text={!isDone ? 'Отправить' : 'Отправлено'}
                             // Функция отправки здесь
@@ -89,4 +88,4 @@ const ApplicationForSocialScrollarship = () => {
     )
 }
 
-export default ApplicationForSocialScrollarship
+export default ApplicationPaperCall

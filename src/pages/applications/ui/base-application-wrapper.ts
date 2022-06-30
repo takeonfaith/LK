@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const BaseApplicationWrapper = styled.div<{ isDone: boolean }>`
+const BaseApplicationWrapper = styled.div<{ isDone: boolean }>`
     display: flex;
     align-items: ${({ isDone }) => (isDone ? 'center' : 'flex-start')};
     justify-content: center;
@@ -13,3 +13,4 @@ export const BaseApplicationWrapper = styled.div<{ isDone: boolean }>`
         padding: 0;
     }
 `
+export default BaseApplicationWrapper

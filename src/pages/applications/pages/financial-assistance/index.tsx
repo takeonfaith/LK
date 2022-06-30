@@ -28,7 +28,7 @@ const ArbitrayRequestPageWrapper = styled.div<{ isDone: boolean }>`
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ApplicationForSocialScrollarship = () => {
+const FinancialAssistance = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
@@ -89,4 +89,4 @@ const ApplicationForSocialScrollarship = () => {
     )
 }
 
-export default ApplicationForSocialScrollarship
+export default FinancialAssistance
