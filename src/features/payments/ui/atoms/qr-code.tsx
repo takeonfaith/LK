@@ -1,6 +1,5 @@
-import { paymentsModel } from '@entities/payments'
 import { Image } from '@ui/atoms'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const QrCodeWrapper = styled.div`

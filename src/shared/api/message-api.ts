@@ -1,6 +1,6 @@
 import { $api } from '@api/config'
-import token from '@utils/token'
+import getToken from '@utils/token'
 
 export const get = (id: string) => {
-    return $api.get(`?getMessages&token=${token()}&id=${id}`)
+    return $api.get(`?getMessages&token=${getToken()}&id=${id}`)
 }

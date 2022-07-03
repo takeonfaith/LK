@@ -1,14 +1,14 @@
 import { $api } from '@api/config'
-import token from '@utils/token'
+import getToken from '@utils/token'
 import { TeacherDataVerification } from '@api/model'
 
 export const get = () => {
-    return $api.get(`?getCheckData&token=${token()}`)
+    return $api.get(`?getCheckData&token=${getToken()}`)
 }
 
 export const post = (args: TeacherDataVerification) => {
     const formData = new FormData()
-    formData.set('token', token())
+    formData.set('token', getToken())
     formData.set('saveCheckData', '1')
 
     for (const [key, value] of Object.entries(args)) {

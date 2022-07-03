@@ -5,7 +5,7 @@ import { userModel } from '@entities/user'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import styled from 'styled-components'
 import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
@@ -61,6 +61,7 @@ const ContentLayout = () => {
         isShowNotification && open(<WhatsNew />)
     }, [isShowNotification])
 
+    // TODO: add fallback
     return (
         <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
             <InitialLoader loading={!user} />
@@ -68,7 +69,9 @@ const ContentLayout = () => {
             <ContentWrapper>
                 {/* <Header /> */}
                 <div className="page-content">
-                    <PrivateRouter />
+                    <Suspense fallback={null}>
+                        <PrivateRouter />
+                    </Suspense>
                 </div>
                 <MobileBottomMenu />
             </ContentWrapper>

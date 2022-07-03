@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { Effect, Event } from 'effector'
-import { useStore } from 'effector-react/compat'
-import { createEffect, createEvent, createStore } from 'effector/compat'
+import { useStore } from 'effector-react'
+import { createEffect, createEvent, createStore } from 'effector'
 
 export interface TemplateFormStore<DataType> {
     data: DataType | null

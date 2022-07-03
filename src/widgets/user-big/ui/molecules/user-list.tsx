@@ -72,7 +72,7 @@ const UserList = () => {
                 }}
                 isLoading={false}
                 completed={false}
-                setCompleted={function (completed: boolean): void {
+                setCompleted={function (): void {
                     throw new Error('Function not implemented.')
                 }}
                 isActive={!!chosenUsers.length}

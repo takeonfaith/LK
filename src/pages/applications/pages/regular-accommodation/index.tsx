@@ -1,5 +1,5 @@
 import { userModel } from '@entities/user'
-import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
+import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
@@ -11,7 +11,7 @@ import { APPLICATIONS_ROUTE } from '@routes'
 import { useHistory } from 'react-router'
 import getDisability from '@pages/applications/pages/regular-accommodation/lib/get-disability'
 import getRegistration from '@pages/applications/pages/regular-accommodation/lib/get-registration'
-import getAdditionally from "@pages/applications/pages/regular-accommodation/lib/get-additionally";
+import getAdditionally from '@pages/applications/pages/regular-accommodation/lib/get-additionally'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -21,7 +21,7 @@ const RegularAccommodationPage = () => {
         data: { user },
     } = userModel.selectors.useUser()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
     const [registration, setRegistration] = useState<IInputArea | null>(null)
     const [additionally, setAdditionally] = useState<IInputArea | null>(null)
@@ -50,11 +50,7 @@ const RegularAccommodationPage = () => {
                     />
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     {registration && (
-                        <InputArea
-                            {...registration}
-                            collapsed={isDone}
-                            setData={setRegistration as LoadedState}
-                        />
+                        <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
                     )}
                     {disability && (
                         <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />

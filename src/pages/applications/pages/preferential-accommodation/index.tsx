@@ -19,7 +19,7 @@ const PreferentialAccommodationPage = () => {
         data: { user },
     } = userModel.selectors.useUser()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading] = useState(false)
     const isDone = completed ?? false
 
     useEffect(() => {

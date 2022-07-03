@@ -1,11 +1,10 @@
 import { Divider } from '@ui/divider'
-import List from '@ui/list'
 import { ColumnProps, Footer as IFooter } from '@ui/table/types'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import React from 'react'
 import { Row } from '../molecules'
 
-type Props = {
+interface Props {
     columns: ColumnProps[]
     footer: IFooter | undefined
     data: Nullable<IndexedProperties[]>

@@ -1,5 +1,5 @@
-import { createStore, createEvent } from 'effector/compat'
-import { useStore } from 'effector-react/compat'
+import { createStore, createEvent } from 'effector'
+import { useStore } from 'effector-react'
 import { MessageType } from '@ui/types'
 
 interface IPopUpMessage {

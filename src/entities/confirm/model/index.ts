@@ -1,5 +1,5 @@
-import { createEvent, createStore } from 'effector/compat'
-import { useStore } from 'effector-react/compat'
+import { createEvent, createStore } from 'effector'
+import { useStore } from 'effector-react'
 
 export interface Confirm {
     isOpen: boolean

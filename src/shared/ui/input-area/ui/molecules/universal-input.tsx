@@ -34,7 +34,6 @@ const UniversalInput = (props: Props) => {
         autocomplete,
     } = props
 
-
     const isActive = editable ?? (changeInputArea && !documents)
     const [validDates, setValidDates] = useState(true)
 

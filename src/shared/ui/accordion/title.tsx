@@ -1,4 +1,4 @@
-import { Button, Title } from '@ui/atoms'
+import { Button } from '@ui/atoms'
 import React from 'react'
 import { HiChevronDown, HiOutlineCheckCircle, HiOutlineExclamationCircle } from 'react-icons/hi'
 import styled from 'styled-components'

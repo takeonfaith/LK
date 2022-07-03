@@ -1,5 +1,4 @@
-import { Colors } from '@consts'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import styled from 'styled-components'
 
 const CurrentPageWrapper = styled.span<{

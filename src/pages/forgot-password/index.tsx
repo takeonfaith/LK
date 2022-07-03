@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('')
-    const [loading, setLoading] = useState(false)
+    const [loading] = useState(false)
     const [completed, setCompleted] = useState(false)
     return (
         <CenterPage background="var(--theme)">
