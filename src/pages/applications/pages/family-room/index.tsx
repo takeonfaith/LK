@@ -10,7 +10,7 @@ import { useHistory } from 'react-router'
 import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import getFamily from '@pages/applications/pages/family-room/lib/get-family'
-import getAdditionally from "@pages/applications/pages/family-room/lib/get-additionally";
+import getAdditionally from '@pages/applications/pages/family-room/lib/get-additionally'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -47,7 +47,9 @@ const FamilyRoomPage = () => {
                     />
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     {family && <InputArea {...family} collapsed={isDone} setData={setFamily as LoadedState} />}
-                    {additionally && <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />}
+                    {additionally && (
+                        <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />
+                    )}
                     <SubmitButton
                         text={'Отправить'}
                         action={() => null}
