@@ -33,8 +33,10 @@ const UniversalInput = (props: Props) => {
         placeholder,
         autocomplete,
     } = props
+
+
+    const isActive = editable ?? (changeInputArea && !documents)
     const [validDates, setValidDates] = useState(true)
-    const isActive = editable || (changeInputArea && !documents)
 
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
         setData((area) => {

@@ -1,5 +1,5 @@
 import { VacationSchedule } from '@api/model/vacation-schedule'
-import { getTableComuns } from '@features/vacation-schedule/lib/get-table-columns'
+import { ColumnProps } from '@ui/table/types'
 import KeyValue from '@ui/atoms/key-value'
 import List from '@ui/list'
 import Table from '@ui/table'
@@ -17,6 +17,25 @@ const RULES: Rules = {
 function formFooterField(field?: number) {
     return `Всего: ${field} ${getCorrectWordForm(field ?? 0, RULES)}`
 }
+
+const tableColumns: ColumnProps[] = [
+    {
+        title: 'Плановые периоды отпуска',
+        field: 'plannedVacationPeriods',
+        showFull: true,
+    },
+    {
+        title: 'Фактические периоды отпуска',
+        field: 'actualVacationPeriods',
+        showFull: true,
+    },
+    {
+        title: 'Остаток отпуска',
+        field: 'vacationRest',
+        showFull: true,
+        render: (value) => (value !== '-' ? `${value} ${getCorrectWordForm(value, RULES)}` : value),
+    },
+]
 
 const Vacation = (props: VacationSchedule) => {
     const {
@@ -39,7 +58,7 @@ const Vacation = (props: VacationSchedule) => {
                 <KeyValue keyStr="Ставка" value={wage} />
             </List>
             <Table
-                columns={getTableComuns()}
+                columns={tableColumns}
                 data={vacations}
                 footer={() => {
                     const footer = {

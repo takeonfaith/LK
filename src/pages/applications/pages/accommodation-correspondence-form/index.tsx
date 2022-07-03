@@ -10,9 +10,14 @@ import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
-import { FiChevronLeft } from 'react-icons/fi'
-import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
+import { useHistory } from 'react-router'
+import { BaseApplicationWrapper } from '@pages/applications/ui/base-application-wrapper'
+import { FiChevronLeft } from 'react-icons/fi'
+import { APPLICATIONS_ROUTE } from '@routes'
+import getDisability from '@pages/applications/pages/accommodation-correspondence-form/lib/get-disability'
+import getRegistration from '@pages/applications/pages/accommodation-correspondence-form/lib/get-registration'
+import getAdditionally from '@pages/applications/pages/accommodation-correspondence-form/lib/get-additionally'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -24,9 +29,8 @@ const AccommodationCorrespondenceFormPage = () => {
     const [completed, setCompleted] = useState(false)
     const [loading] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
-    const [driveLicense, setDriveLicense] = useState<IInputArea | null>(null)
+    const [additionally, setAdditionally] = useState<IInputArea | null>(null)
     const [registration, setRegistration] = useState<IInputArea | null>(null)
-    const [militaryService, setMilitaryService] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
     const history = useHistory()
 
@@ -34,9 +38,8 @@ const AccommodationCorrespondenceFormPage = () => {
         if (!!user) {
             setForm(getForm(user))
             setDisability(getDisability())
-            setDriveLicense(getDriverLicense())
             setRegistration(getRegistration())
-            setMilitaryService(getMilitaryService())
+            setAdditionally(getAdditionally())
         }
     }, [user])
 
@@ -53,34 +56,13 @@ const AccommodationCorrespondenceFormPage = () => {
                     />
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     {registration && (
-                        <InputArea
-                            {...registration}
-                            collapsed={isDone}
-                            setData={setRegistration as LoadedState}
-                            divider
-                        />
+                        <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
                     )}
-                    <Title size={4} align="left" bottomGap>
-                        Соответствие льготной категории граждан
-                    </Title>
                     {disability && (
-                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} divider />
+                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
                     )}
-                    {driveLicense && (
-                        <InputArea
-                            {...driveLicense}
-                            collapsed={isDone}
-                            setData={setDriveLicense as LoadedState}
-                            divider
-                        />
-                    )}
-                    {militaryService && (
-                        <InputArea
-                            {...militaryService}
-                            collapsed={isDone}
-                            setData={setMilitaryService as LoadedState}
-                            divider
-                        />
+                    {additionally && (
+                        <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />
                     )}
                     <SubmitButton
                         text={'Отправить'}
