@@ -134,7 +134,7 @@ export const generalRoutes: IRoutes = {
     },
     home: {
         id: 'home',
-        title: 'Домой',
+        title: 'Главная',
         icon: <FiHome />,
         path: HOME_ROUTE,
         Component: Home,
@@ -191,7 +191,7 @@ export const generalRoutes: IRoutes = {
     },
     'all-students': {
         id: 'all-students',
-        title: 'Студенты',
+        title: 'Одногруппники',
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
         Component: AllStudentsPage,
@@ -200,7 +200,7 @@ export const generalRoutes: IRoutes = {
     },
     'all-teachers': {
         id: 'all-teachers',
-        title: 'Преподаватели, сотрудники',
+        title: 'Преподаватели',
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
         Component: AllTeachersPage,

@@ -47,7 +47,7 @@ export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
     applications: {
         id: 'applications',
-        title: 'Заявления',
+        title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
         Component: ApplicationsPage,
