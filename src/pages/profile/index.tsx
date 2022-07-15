@@ -111,7 +111,13 @@ const ProfilePage = () => {
                         {user.fullName}
                     </Title>
                     <Subtext visible={!!user.specialty} width="100%">
-                        Специальность: {user.specialty}
+                        Направление: {user.specialty}
+                    </Subtext>
+                    <Subtext visible={!!user.specialization} width="100%">
+                        Специализация: {user.specialization}
+                    </Subtext>
+                    <Subtext visible={!!user.group} width="100%">
+                        Группа: {user.group}
                     </Subtext>
                     <Subtext width="100%">
                         {user.user_status === 'stud' ? 'Студент' : 'Сотрудник'}{' '}

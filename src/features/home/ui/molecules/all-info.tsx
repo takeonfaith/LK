@@ -58,7 +58,7 @@ function AllInfo({ user }: Props) {
             value: group,
         },
         {
-            key: 'Специальность',
+            key: 'Направление',
             value: specialty,
         },
         {
