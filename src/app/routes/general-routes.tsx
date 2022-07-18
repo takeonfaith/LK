@@ -180,15 +180,6 @@ export const generalRoutes: IRoutes = {
         color: 'lightGreen',
         isTemplate: false,
     },
-    'electronic-interaction-agreement': {
-        id: 'electronic-interaction-agreement',
-        title: 'Соглашение об электронном взаимодействии',
-        icon: <HiOutlineClipboardCheck />,
-        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
-        Component: ElectronicInteractionAgreementPage,
-        color: 'blue',
-        isTemplate: false,
-    },
     'all-students': {
         id: 'all-students',
         title: 'Одногруппники',
