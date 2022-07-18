@@ -11,7 +11,7 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import getDisability from '@pages/applications/pages/accommodation-correspondence-form/lib/get-disability'
 import getRegistration from '@pages/applications/pages/accommodation-correspondence-form/lib/get-registration'
-import getAdditionally from "@pages/applications/pages/accommodation-correspondence-form/lib/get-additionally";
+import getAdditionally from '@pages/applications/pages/accommodation-correspondence-form/lib/get-additionally'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -42,7 +42,7 @@ const AccommodationCorrespondenceFormPage = () => {
             {!!form && !!setForm && (
                 <FormBlock>
                     <Button
-                        text="Назад к заявлениям"
+                        text="Назад к цифровым сервисам"
                         icon={<FiChevronLeft />}
                         onClick={() => history.push(APPLICATIONS_ROUTE)}
                         background="transparent"
@@ -50,11 +50,7 @@ const AccommodationCorrespondenceFormPage = () => {
                     />
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     {registration && (
-                        <InputArea
-                            {...registration}
-                            collapsed={isDone}
-                            setData={setRegistration as LoadedState}
-                        />
+                        <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
                     )}
                     {disability && (
                         <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
