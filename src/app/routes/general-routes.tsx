@@ -4,7 +4,6 @@ import AllStudentsPage from '@pages/all-students'
 import AllTeachersPage from '@pages/all-teachers'
 import CantAccessPage from '@pages/cant-access'
 import ChatPage from '@pages/chat'
-import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import FeedbackPage from '@pages/feedback'
 import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
@@ -32,7 +31,7 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 import { FiClipboard, FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
-import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
+import { HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'

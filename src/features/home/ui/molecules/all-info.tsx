@@ -101,6 +101,10 @@ function AllInfo({ user }: Props) {
             key: 'Год набора',
             value: enterYear,
         },
+        {
+            key: 'Авторские идентификаторы',
+            value: null,
+        },
     ]
 
     return (
