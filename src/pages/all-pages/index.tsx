@@ -40,7 +40,7 @@ const AllPages = () => {
                 setResult={setFoundPages}
                 setExternalValue={setSearchValue}
             />
-            {searchValue.length === 0 && <LinksList doNotShow="all" align="left" links={visibleRoutes} />}
+            {searchValue.length === 0 && <LinksList doNotShow="all" align="left" links={visibleRoutes} restricted />}
             <FoundPages pages={foundPages} />
         </AllPagesWrapper>
     )

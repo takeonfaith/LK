@@ -3,7 +3,7 @@ import { contextMenuModel } from '@entities/context-menu'
 import BlockWrapper from '@ui/block/styles'
 import { Button } from '@ui/button'
 import getShortStirng from '@utils/get-short-string'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
 import styled from 'styled-components'
 import ContextContent from './context-content'
@@ -132,7 +132,21 @@ const PageLink = (props: Props) => {
     } = props
     const isVertical = orientation === 'vertical'
     const maxWordLenght = restricted ? 20 : 50
-    const linkWidth = title.length > 23 && !restricted ? 2 : 1
+    const linkWidth = 1
+
+    const maxFirstWordLength = 12
+
+    const getHyphenatedTitle = useMemo(
+        () => (title: string, maxLength: number) => {
+            const firstWord = title.split(' ')[0]
+
+            return firstWord.length > maxLength && firstWord.length !== maxLength + 1 && isVertical
+                ? `${firstWord.substr(0, maxLength)}-${firstWord.substr(maxLength, firstWord.length)}`
+                : title
+        },
+        [],
+    )
+
     return (
         <LinkWrapper
             to={path}
@@ -164,7 +178,7 @@ const PageLink = (props: Props) => {
                 </Notification>
                 <div className="outside">
                     <Icon color={color.length ? color : 'blue'}>{icon}</Icon>
-                    <b>{getShortStirng(title, maxWordLenght)}</b>
+                    <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLenght)}</b>
                     {notifications && (
                         <span className="notifications-title">
                             {notifications}{' '}
