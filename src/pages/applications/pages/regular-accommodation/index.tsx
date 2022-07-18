@@ -1,5 +1,5 @@
 import { userModel } from '@entities/user'
-import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
+import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
@@ -12,10 +12,12 @@ import { useHistory } from 'react-router'
 import getDisability from '@pages/applications/pages/regular-accommodation/lib/get-disability'
 import getRegistration from '@pages/applications/pages/regular-accommodation/lib/get-registration'
 import getAdditionally from '@pages/applications/pages/regular-accommodation/lib/get-additionally'
+import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const RegularAccommodationPage = () => {
+    const currentFormId = 'usg_gethostel_ooz'
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
         data: { user },
@@ -39,7 +41,7 @@ const RegularAccommodationPage = () => {
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
-            {!!form && !!setForm && (
+            {!!form && !!setForm && !!registration && !!disability && !!additionally && (
                 <FormBlock>
                     <Button
                         text="Назад к заявлениям"
@@ -64,7 +66,14 @@ const RegularAccommodationPage = () => {
                     )}
                     <SubmitButton
                         text={'Отправить'}
-                        action={() => null}
+                        action={() =>
+                            globalAppSendForm(
+                                currentFormId,
+                                [form, registration, disability, additionally],
+                                setLoading,
+                                setCompleted,
+                            )
+                        }
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}

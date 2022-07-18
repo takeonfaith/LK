@@ -13,14 +13,14 @@ const getForm = (data: User): IInputArea => {
             },
             {
                 title: 'Учебная группа',
-                fieldName: '',
+                fieldName: 'group',
                 type: 'tel',
                 value: data.group,
                 editable: false,
             },
             {
                 title: 'Электронная почта',
-                fieldName: 'post',
+                fieldName: 'email',
                 type: 'email',
                 value: 'email',
                 editable: true,
@@ -28,7 +28,7 @@ const getForm = (data: User): IInputArea => {
             },
             {
                 title: 'Телефон',
-                fieldName: 'tel_mob_private',
+                fieldName: 'phone',
                 type: 'tel',
                 mask: true,
                 value: '8 999 999 99 99',

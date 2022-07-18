@@ -11,11 +11,13 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import getDisability from '@pages/applications/pages/accommodation-correspondence-form/lib/get-disability'
 import getRegistration from '@pages/applications/pages/accommodation-correspondence-form/lib/get-registration'
-import getAdditionally from "@pages/applications/pages/accommodation-correspondence-form/lib/get-additionally";
+import getAdditionally from '@pages/applications/pages/accommodation-correspondence-form/lib/get-additionally'
+import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const AccommodationCorrespondenceFormPage = () => {
+    const currentFormId = 'usg_gethostel_z'
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
         data: { user },
@@ -39,7 +41,7 @@ const AccommodationCorrespondenceFormPage = () => {
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
-            {!!form && !!setForm && (
+            {!!form && !!setForm && !!registration && !!disability && !!additionally && (
                 <FormBlock>
                     <Button
                         text="Назад к заявлениям"
@@ -50,11 +52,7 @@ const AccommodationCorrespondenceFormPage = () => {
                     />
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     {registration && (
-                        <InputArea
-                            {...registration}
-                            collapsed={isDone}
-                            setData={setRegistration as LoadedState}
-                        />
+                        <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
                     )}
                     {disability && (
                         <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
@@ -64,7 +62,14 @@ const AccommodationCorrespondenceFormPage = () => {
                     )}
                     <SubmitButton
                         text={'Отправить'}
-                        action={() => null}
+                        action={() =>
+                            globalAppSendForm(
+                                currentFormId,
+                                [form, registration, disability, additionally],
+                                setLoading,
+                                setCompleted,
+                            )
+                        }
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}

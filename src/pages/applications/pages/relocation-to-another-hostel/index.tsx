@@ -9,10 +9,12 @@ import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrap
 import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import { useHistory } from 'react-router'
+import globalAppSendForm from "@pages/applications/lib/global-app-send-form";
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const RelocationToAnotherHostelPage = () => {
+    const currentFormId = 'usg_relocation'
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
         data: { user },
@@ -42,7 +44,7 @@ const RelocationToAnotherHostelPage = () => {
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     <SubmitButton
                         text={'Отправить'}
-                        action={() => null}
+                        action={() => globalAppSendForm(currentFormId, [form], setLoading, setCompleted)}
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}

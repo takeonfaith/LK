@@ -74,7 +74,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Комментарий к заявке',
                 type: 'textarea',
-                fieldName: 'commentary',
+                fieldName: 'comment',
                 value: '',
                 editable: true,
             },
