@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { User } from '@api/model'
 import transformSex from '@utils/transform-sex'
 import KeyValue from '@ui/atoms/key-value'
+import { Divider } from '@ui/divider'
 
 export default memo(AllInfo)
 
@@ -79,7 +80,18 @@ function AllInfo({ user }: Props) {
         },
         {
             key: 'Сведения о трудоустройстве',
-            value: subdivisions?.map((t, index) => <div key={index}>{`${index + 1})${t.subdivision}`}</div>),
+            value:
+                !!subdivisions?.length &&
+                subdivisions?.map((t, index) => (
+                    <React.Fragment key={index}>
+                        <div style={{ marginTop: '5px' }}>
+                            {`${index + 1}) ${t.subdivision}`}
+                            <div>Должность: {t.jobType}</div>
+                            <div>Ставка: {t.wage}</div>
+                        </div>
+                        {index < subdivisions.length - 1 && <Divider />}
+                    </React.Fragment>
+                )),
         },
         {
             key: 'Уровень образования',
@@ -90,5 +102,20 @@ function AllInfo({ user }: Props) {
             value: enterYear,
         },
     ]
-    return <div>{items.map(({ key, value }) => !!value && <KeyValue keyStr={key} value={value} key={key} />)}</div>
+
+    return (
+        <div>
+            {items.map(
+                ({ key, value }) =>
+                    !!value && (
+                        <KeyValue
+                            keyStr={key}
+                            value={value}
+                            key={key}
+                            direction={typeof value === 'object' ? 'vertical' : 'horizontal'}
+                        />
+                    ),
+            )}
+        </div>
+    )
 }
