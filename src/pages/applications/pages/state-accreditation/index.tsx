@@ -8,27 +8,13 @@ import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router'
-import styled from 'styled-components'
 import getForm from './lib/get-form'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 // import sendForm from './lib/send-form'
-
-const ArbitrayRequestPageWrapper = styled.div<{ isDone: boolean }>`
-    display: flex;
-    align-items: ${({ isDone }) => (isDone ? 'center' : 'flex-start')};
-    justify-content: center;
-    width: 100%;
-    height: ${({ isDone }) => isDone && '100%'};
-    padding: 10px;
-    color: var(--text);
-
-    @media (max-width: 1000px) {
-        padding: 0;
-    }
-`
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ApplicationForSocialScrollarship = () => {
+const StateAccreditation = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
@@ -48,7 +34,7 @@ const ApplicationForSocialScrollarship = () => {
 
     return (
         <Wrapper load={() => superiorRoomModel.effects.getSuperiorRoomFx()} loading={!data} error={error} data={data}>
-            <ArbitrayRequestPageWrapper isDone={isDone}>
+            <BaseApplicationWrapper isDone={isDone}>
                 {!!form && !!setForm && (
                     <FormBlock>
                         <Button
@@ -59,10 +45,6 @@ const ApplicationForSocialScrollarship = () => {
                             textColor="var(--blue)"
                         />
                         <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
-                        {/* <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
-                            Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
-                            направлены Вам в срок до 30 марта 2022 года на указанную в заявке почту: {data?.email}
-                        </Message> */}
                         <SubmitButton
                             text={!isDone ? 'Отправить' : 'Отправлено'}
                             // Функция отправки здесь
@@ -84,9 +66,9 @@ const ApplicationForSocialScrollarship = () => {
                         />
                     </FormBlock>
                 )}
-            </ArbitrayRequestPageWrapper>
+            </BaseApplicationWrapper>
         </Wrapper>
     )
 }
 
-export default ApplicationForSocialScrollarship
+export default StateAccreditation

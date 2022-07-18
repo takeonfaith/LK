@@ -1,6 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 
-const reasons = [
+const justificationGrantOptions = [
     {
         id: 0,
         title: 'Нуждающиеся в дорогостоящем лечении и (или) восстановлении здоровья, в том числе в компенсации расходов на операцию, приобретение дорогостоящих медикаментов при наличии соответствующих медицинских рекомендаций, проведении необходимых платных медицинских осмотров и обследований, профилактических прививок',
@@ -55,6 +55,25 @@ const reasons = [
     { id: 24, title: 'Временно оказавшиеся в сложной жизненной ситуации, в иных ситуациях по решению Комиссии' },
 ]
 
+const structuralSubdivisionOptions = [
+    {
+        id: 0,
+        title: 'Отделение «На Большой Семеновской» Ул.Большая Семеновская, 38; ауд.В - 107. Тел. (495) 223-05 - 23, доб. 1105, 1175; crs- bs@mospolytech.ru',
+    },
+    {
+        id: 1,
+        title: 'Отделение «На Автозаводской» ул.Автозаводская, 16, ауд. 2315. Тел. (495) 223-05 - 23, доб. 2256, 2257, 2285, 2240; crs- av@mospolytech.ru',
+    },
+    {
+        id: 2,
+        title: 'Отделение «На Павла Корчагина» Ул.Павла Корчагина, 22, ауд. 213. Тел. (495) 223-05 - 23, доб. 3230, 3110, 3114, 3043, 3044, 4054, 4068; crs- pk@mospolytech.ru',
+    },
+    {
+        id: 3,
+        title: 'Отделение «На Прянишникова» ул.Прянишникова, 2а, ауд. 1311. Тел. (495) 223-05 - 23 доб. 4052, 4060, 4056, 4057, 4059, 4061; crs- pryaniki@mospolytech.ru, crs - mikhalka@mospolytech.ru',
+    },
+]
+
 const getForm = (): IInputArea => {
     return {
         title: 'Заявка на оказание материальной помощи',
@@ -64,11 +83,10 @@ const getForm = (): IInputArea => {
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
+                value: '',
                 editable: true,
                 required: true,
-                value: '',
             },
-
             {
                 title: 'Email',
                 type: 'email',
@@ -79,33 +97,42 @@ const getForm = (): IInputArea => {
             },
             {
                 title: 'Факультет (институт)/структурное подразделение:',
-                type: 'text',
-                value: '',
+                fieldName: 'structuralSubdivision',
+                type: 'radio',
+                value: null,
                 editable: true,
                 required: true,
-                fieldName: 'faculty',
+                items: structuralSubdivisionOptions,
             },
             {
                 title: 'Основания для получения материальной помощи:',
-                type: 'select',
-                value: null,
-                items: reasons,
+                fieldName: 'justificationGrant',
+                value: '',
+                type: 'multiselect',
                 width: '100%',
                 editable: true,
-                fieldName: 'reasons',
                 required: true,
+                items: justificationGrantOptions,
             },
             {
                 title: 'Прошу оказать мне материальную помощь из средств стипендиального фонда университета в связи:',
+                fieldName: 'reason',
                 type: 'textarea',
-                value: null,
+                value: '',
                 editable: true,
-                fieldName: 'reasons-text',
                 required: true,
+                placeholder: 'Укажите причину',
             },
         ],
-        documents: { files: [], fieldName: 'docs', maxFiles: 30, required: false },
-        hint: 'После получения положительного решения необходимо прийти в Профком за распечатанным заявлением и принести с собой все необходимые документы.',
+        links: [
+            {
+                title: 'Необходимо загрузить следующие документы',
+                link: 'https://e.mospolytech.ru/old/storage/files/matpom_docs.pdf',
+                type: 'document',
+            },
+        ],
+        documents: { files: [], fieldName: 'docs', maxFiles: 4, required: true },
+        alert: 'Загрузите документы, подтверждающие право на получение материальной помощи',
     }
 }
 

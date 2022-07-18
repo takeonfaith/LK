@@ -10,25 +10,12 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router'
 import styled from 'styled-components'
 import getForm from './lib/get-form'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 // import sendForm from './lib/send-form'
-
-const ArbitrayRequestPageWrapper = styled.div<{ isDone: boolean }>`
-    display: flex;
-    align-items: ${({ isDone }) => (isDone ? 'center' : 'flex-start')};
-    justify-content: center;
-    width: 100%;
-    height: ${({ isDone }) => isDone && '100%'};
-    padding: 10px;
-    color: var(--text);
-
-    @media (max-width: 1000px) {
-        padding: 0;
-    }
-`
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ApplicationForSocialScrollarship = () => {
+const IncreasedStateAcademicScholarship = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
@@ -48,7 +35,7 @@ const ApplicationForSocialScrollarship = () => {
 
     return (
         <Wrapper load={() => superiorRoomModel.effects.getSuperiorRoomFx()} loading={!data} error={error} data={data}>
-            <ArbitrayRequestPageWrapper isDone={isDone}>
+            <BaseApplicationWrapper isDone={isDone}>
                 {!!form && !!setForm && (
                     <FormBlock>
                         <Button
@@ -84,9 +71,9 @@ const ApplicationForSocialScrollarship = () => {
                         />
                     </FormBlock>
                 )}
-            </ArbitrayRequestPageWrapper>
+            </BaseApplicationWrapper>
         </Wrapper>
     )
 }
 
-export default ApplicationForSocialScrollarship
+export default IncreasedStateAcademicScholarship

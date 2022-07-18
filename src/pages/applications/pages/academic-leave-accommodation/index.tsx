@@ -5,10 +5,10 @@ import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import getForm from './lib/get-form'
-import { BaseApplicationWrapper } from '@pages/applications/ui/base-application-wrapper'
-import { useHistory } from "react-router";
-import { FiChevronLeft } from "react-icons/fi";
-import { APPLICATIONS_ROUTE } from "@routes";
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import { useHistory } from 'react-router'
+import { FiChevronLeft } from 'react-icons/fi'
+import { APPLICATIONS_ROUTE } from '@routes'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
