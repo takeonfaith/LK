@@ -7,7 +7,7 @@ const getAdditionally = (): IInputArea => {
             {
                 title: 'Комментарий',
                 type: 'textarea',
-                fieldName: 'commentary',
+                fieldName: 'comment',
                 value: '',
                 editable: true,
             },

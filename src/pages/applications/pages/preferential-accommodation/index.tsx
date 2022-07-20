@@ -5,14 +5,16 @@ import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import getForm from './lib/get-form'
-import { BaseApplicationWrapper } from '@pages/applications/ui/base-application-wrapper'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import { useHistory } from 'react-router'
+import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const PreferentialAccommodationPage = () => {
+    const currentFormId = 'usg_gethostel_benefit'
     const [form, setForm] = useState<IInputArea | null>(null)
     const history = useHistory()
     const {
@@ -42,7 +44,7 @@ const PreferentialAccommodationPage = () => {
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     <SubmitButton
                         text={'Отправить'}
-                        action={() => null}
+                        action={() => globalAppSendForm(currentFormId, [form], setLoading, setCompleted)}
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}

@@ -67,6 +67,7 @@ const getForm = (): IInputArea => {
                 mask: true,
                 fieldName: 'phone',
                 editable: true,
+                required: true,
                 value: '',
             },
 
@@ -83,8 +84,8 @@ const getForm = (): IInputArea => {
                 type: 'radio',
                 fieldName: 'reason',
                 value: null,
-                width: '100%',
                 items: reasons,
+                //TODO : полностью реализовать вложенные поля
                 editable: true,
                 required: true,
             },
