@@ -5,7 +5,7 @@ import ApplicationPaperCall from '@pages/applications/pages/paper-call'
 import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
 import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import { BiCheckCircle, BiIdCard } from 'react-icons/bi'
+import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import AcadPerformance from '../../pages/acad-performance'
 import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
@@ -32,6 +32,7 @@ import MilitaryRegistrationCard from '@pages/applications/pages/military-registr
 import StateAccreditation from '@pages/applications/pages/state-accreditation'
 import StudentStatus from '@pages/applications/pages/student-status'
 import ChangingPersonalData from '@pages/applications/pages/changing-personal-data'
+import HelpfulInformation from '@pages/helpful-information'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -64,6 +65,7 @@ export const CHANGING_PERSONAL_DATA = APPLICATIONS_ROUTE + '/changing-personal-d
 export const STUDENT_STATUS = APPLICATIONS_ROUTE + '/student-status'
 export const STATE_ACCREDITATION = APPLICATIONS_ROUTE + '/state-accreditation'
 export const MILITARY_REGISTRATION_CARD = APPLICATIONS_ROUTE + '/military-registration-card'
+export const HELPFUL_INFORMATION = APPLICATIONS_ROUTE + '/helpful-information'
 
 export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
@@ -330,6 +332,15 @@ export const hiddenRoutes: () => IRoutes = () => ({
         icon: BiIdCard,
         path: MILITARY_REGISTRATION_CARD,
         Component: MilitaryRegistrationCard,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'helpful-information': {
+        id: 'helpful-information',
+        title: 'Полезная информация',
+        icon: BiInfoCircle,
+        path: HELPFUL_INFORMATION,
+        Component: HelpfulInformation,
         color: 'blue',
         isTemplate: false,
     },
