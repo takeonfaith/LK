@@ -12,6 +12,7 @@ import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import WhatsNew from '../../widgets/whats-new'
 import InitialLoader from './initial-loader'
+import { settingsModel } from "@entities/settings";
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -43,6 +44,10 @@ const ContentLayout = () => {
     } = userModel.selectors.useUser()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
+
+    useEffect(() => {
+        if (user) settingsModel.effects.getLocalSettingsFx(user.id)
+    }, [user])
 
     useTheme()
     useEffect(() => {

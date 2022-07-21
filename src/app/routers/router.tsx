@@ -1,6 +1,7 @@
 import { LOGIN_ROUTE, publicRoutes } from '@app/routes/general-routes'
 import { adminLinksModel } from '@entities/admin-links'
 import { menuModel } from '@entities/menu'
+import { settingsModel } from '@entities/settings'
 import React, { useEffect } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'
@@ -12,6 +13,7 @@ const Router = () => {
     } = userModel.selectors.useUser()
 
     const { data } = adminLinksModel.selectors.useAdminLinks()
+    const { settings } = settingsModel.selectors.useSettings()
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -20,10 +22,14 @@ const Router = () => {
     }, [isAuthenticated])
 
     useEffect(() => {
-        if (user) {
-            menuModel.events.defineMenu({ user, adminLinks: data })
+        if (user && settings) {
+            menuModel.events.defineMenu({
+                user,
+                adminLinks: data,
+                homeRoutes: settings['settings-home-page'].property['pages'] as string[],
+            })
         }
-    }, [user, data])
+    }, [user, data, settings])
 
     return isAuthenticated ? (
         <Switch>

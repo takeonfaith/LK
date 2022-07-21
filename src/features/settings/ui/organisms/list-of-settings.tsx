@@ -24,26 +24,26 @@ const ListOfSettingsWrapper = styled(ListWrapper)<{ open: boolean }>`
 `
 
 interface Props {
-    config: string[]
+    config: any[] | null
 }
 
 const ListOfSettings = ({ config }: Props) => {
     const { allRoutes } = menuModel.selectors.useMenu()
     const params = useRouteMatch(TEMPLATE_SETTINGS_ROUTE)?.params as { id: string | undefined }
 
-    if (!allRoutes) return null
+    if (!allRoutes || !config) return null
 
     return (
         <ListOfSettingsWrapper width="320px" open={!params?.id}>
             <Title size={3} align="left" bottomGap>
                 Настройки
             </Title>
-            {config.map((id) => {
+            {config.map((name) => {
                 return (
                     <PageLink
-                        {...allRoutes[id]}
-                        title={allRoutes[id].title.slice(11, allRoutes[id].title.length)}
-                        key={id}
+                        {...allRoutes[name]}
+                        title={allRoutes[name].title.slice(11, allRoutes[name].title.length)}
+                        key={name}
                         orientation="horizontal"
                         shadow={false}
                     />

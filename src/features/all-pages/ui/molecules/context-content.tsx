@@ -2,9 +2,11 @@ import { IRoute } from '@app/routes/general-routes'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
 import React from 'react'
-import { FiMinusCircle } from 'react-icons/fi'
+import { FiBook, FiMinusCircle, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
+import { settingsModel } from '@entities/settings'
+import { contextMenuModel } from '@entities/context-menu'
 
 const ContextContentWrapper = styled.div`
     .top {
@@ -26,7 +28,32 @@ const ContextContentWrapper = styled.div`
 `
 
 const ContextContent = (props: IRoute) => {
-    const { icon, title, color } = props
+    const { id, icon, title, color } = props
+    const { settings } = settingsModel.selectors.useSettings()
+
+    const deleteElementContext = () => {
+        if (settings) {
+            const newPages = settings['settings-home-page'].property['pages'] as string[]
+            settingsModel.events.updateSetting({
+                nameSettings: 'settings-home-page',
+                nameParam: 'pages',
+                value: newPages.filter((item) => item !== id),
+            })
+            contextMenuModel.events.close()
+        }
+    }
+
+    const addElementContext = () => {
+        if (settings) {
+            const newPages = settings['settings-home-page'].property['pages'] as string[]
+            settingsModel.events.updateSetting({
+                nameSettings: 'settings-home-page',
+                nameParam: 'pages',
+                value: [...newPages, id],
+            })
+            contextMenuModel.events.close()
+        }
+    }
 
     return (
         <ContextContentWrapper>
@@ -40,6 +67,24 @@ const ContextContent = (props: IRoute) => {
             <Button
                 text="Убрать"
                 icon={<FiMinusCircle />}
+                //  onClick={() => open(<WhatsNew />)}
+                width="100%"
+                align="left"
+                background="var(--schedule)"
+                onClick={() => deleteElementContext()}
+            />
+            <Button
+                text="Добавить"
+                icon={<FiPlus />}
+                //  onClick={() => open(<WhatsNew />)}
+                width="100%"
+                align="left"
+                background="var(--schedule)"
+                onClick={() => addElementContext()}
+            />
+            <Button
+                text="Еще что-то"
+                icon={<FiBook />}
                 //  onClick={() => open(<WhatsNew />)}
                 width="100%"
                 align="left"

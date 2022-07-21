@@ -15,7 +15,7 @@ interface Menu {
     isOpen: boolean
 }
 
-const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students']
+// const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students']
 
 export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
 const DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'acad-performance', 'payments', 'all']
@@ -45,7 +45,7 @@ const useMenu = () => {
 
 const changeOpen = createEvent<{ isOpen: boolean; currentPage?: string }>()
 const clearStore = createEvent()
-const defineMenu = createEvent<{ user: User | null; adminLinks: AdminLinks | null }>()
+const defineMenu = createEvent<{ user: User | null; adminLinks: AdminLinks | null; homeRoutes: string[] | string }>()
 const changeNotifications = createEvent<{ page: string; notifications: ((prev: number) => number) | number }>()
 
 const getNewNotifications = (page: string, notifications: number, routes: IRoutes | null) => {
@@ -63,7 +63,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
-    .on(defineMenu, (oldData, { user, adminLinks }) => ({
+    .on(defineMenu, (oldData, { user, adminLinks, homeRoutes }) => ({
         ...oldData,
         currentPage:
             user?.user_status === 'staff'
@@ -79,7 +79,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
             user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         ),
         homeRoutes: findRoutesByConfig(
-            JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[],
+            homeRoutes as string[],
             user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         ),
     }))
