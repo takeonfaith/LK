@@ -6,7 +6,7 @@ import { FiBook, FiMinusCircle, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
 import { settingsModel } from '@entities/settings'
-import { contextMenuModel } from "@entities/context-menu";
+import { contextMenuModel } from '@entities/context-menu'
 
 const ContextContentWrapper = styled.div`
     .top {

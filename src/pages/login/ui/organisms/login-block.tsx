@@ -73,7 +73,7 @@ const LoginBlock = () => {
                 setCompleted={() => null}
                 isActive={!!password && !!login}
             />
-            <List padding="4px" scroll={false}>
+            <List padding="4px" scroll={false} horizontalAlign="center">
                 <Checkbox
                     text="Оставаться в системе"
                     checked={data.savePassword}
@@ -81,7 +81,7 @@ const LoginBlock = () => {
                         userModel.events.changeSavePassword({ savePassword: value })
                     }}
                 />
-                <List scroll={false} direction="horizontal" padding="4px">
+                <List scroll={false} direction="horizontal" padding="4px" horizontalAlign="center">
                     <Link to={FORGOT_PASSWORD_ROUTE} tabIndex={-1}>
                         <Button
                             text="Забыли пароль от ЕУЗ?"

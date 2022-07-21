@@ -60,7 +60,15 @@ const Checkbox = ({
                 width="25px"
                 height="25px"
                 onClick={() => null}
-                icon={checked || invisibleOnFalse ? <BsCheckCircleFill /> : <FiCircle />}
+                icon={
+                    checked || invisibleOnFalse ? (
+                        <BsCheckCircleFill
+                            style={{ maxWidth: '20px', width: '20px', height: '20px', maxHeight: '20px' }}
+                        />
+                    ) : (
+                        <FiCircle style={{ maxWidth: '20px', width: '20px', height: '20px', maxHeight: '20px' }} />
+                    )
+                }
                 background="transparent"
             />
             {text && <div className="checkbox-text">{text}</div>}

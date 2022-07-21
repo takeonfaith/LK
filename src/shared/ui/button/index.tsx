@@ -15,6 +15,7 @@ export type ButtonProps = BaseProps & {
     textColor?: string
     shrinkTextInMobile?: boolean
     hoverBackground?: string
+    padding?: string
     align?: Align
     direction?: Direction
     isActive?: boolean
@@ -34,6 +35,7 @@ export function Button(props: ButtonProps) {
         hoverBackground,
         align,
         isChosen,
+        padding,
         shrinkTextInMobile,
         fixedInMobile,
         direction = 'horizontal',
@@ -50,6 +52,7 @@ export function Button(props: ButtonProps) {
             width={width}
             minWidth={minWidth}
             background={background}
+            padding={padding}
             textColor={textColor}
             shrinkTextInMobile={shrinkTextInMobile}
             hoverBackground={hoverBackground}
@@ -60,7 +63,7 @@ export function Button(props: ButtonProps) {
             height={height}
             {...restProps}
         >
-            {!!icon && icon}
+            {!!icon && <div className="icon">{icon}</div>}
             <span>{text}</span>
         </ButtonWrapper>
     )

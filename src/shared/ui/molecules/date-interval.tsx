@@ -7,7 +7,7 @@ const DateIntervalWrapper = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     flex-direction: column;
 
     .date-interval-inputs {
@@ -28,7 +28,7 @@ interface Props {
     title?: string
     required?: boolean
     dates: string[]
-    setDates: React.Dispatch<React.SetStateAction<string[]>>
+    setDates: (dates: string[]) => void
     valid: boolean
     setValid: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -50,12 +50,12 @@ const DateInterval = ({ title, required, dates, setDates, valid, setValid }: Pro
                 <Input
                     value={dates[0]}
                     danger={!valid}
-                    setValue={(value: string) => setDates((prev) => [value, prev[1]])}
+                    setValue={(value: string) => setDates([value, dates[1]])}
                     type="date"
                 />
                 <Input
                     value={dates[1]}
-                    setValue={(value: string) => setDates((prev) => [prev[0], value])}
+                    setValue={(value: string) => setDates([dates[0], value])}
                     type="date"
                     danger={!valid}
                 />

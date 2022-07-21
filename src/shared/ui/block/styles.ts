@@ -52,7 +52,7 @@ const BlockWrapper = styled.div<StyledProps>`
 
     @media (max-width: 550px) {
         /* height: auto; */
-        max-height: 100%;
+        /* max-height: 100%; */
         flex-direction: column;
         gap: 1rem;
     }

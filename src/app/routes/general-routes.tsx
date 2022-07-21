@@ -1,15 +1,19 @@
 import { IColors } from '@consts'
 import AllPages from '@pages/all-pages'
+import AllStudentsPage from '@pages/all-students'
+import AllTeachersPage from '@pages/all-teachers'
+import CantAccessPage from '@pages/cant-access'
 import ChatPage from '@pages/chat'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
+import FeedbackPage from '@pages/feedback'
 import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
+import InstructionsPage from '@pages/instructions'
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PaymentsPage from '@pages/payments'
 import ProfilePage from '@pages/profile'
 import SchedulePage from '@pages/schedule'
-import FeedbackPage from '@pages/feedback'
 import SettingsPage from '@pages/settings'
 import Account from '@pages/settings/pages/account'
 import Appearance from '@pages/settings/pages/appearance'
@@ -27,10 +31,8 @@ import {
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
-import { FaRegLightbulb } from 'react-icons/fa'
-import { FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
+import { FiClipboard, FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
-import CantAccessPage from '@pages/cant-access'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -43,7 +45,6 @@ export const TEMPLATE_CHAT_ROUTE = CHAT_ROUTE + '/:chatId'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const PAYMENTS_ROUTE = '/payments'
 export const SCHEDULE_ROUTE = '/schedule'
-export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
 export const ALL_STUDENTS_ROUTE = '/students'
 export const ALL_TEACHERS_ROUTE = '/teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
@@ -55,6 +56,8 @@ export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
 export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
 export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
+export const INSTRUCTIONS_ROUTE = '/instructions'
+export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
 
 // hidden
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
@@ -186,21 +189,12 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
     },
-    'project-activity': {
-        id: 'project-activity',
-        title: 'Проектная деятельность',
-        icon: <FaRegLightbulb />,
-        path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
-        color: 'yellow',
-        isTemplate: false,
-    },
     'all-students': {
         id: 'all-students',
         title: 'Студенты',
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
+        Component: AllStudentsPage,
         color: 'darkBlue',
         isTemplate: false,
     },
@@ -209,7 +203,7 @@ export const generalRoutes: IRoutes = {
         title: 'Преподаватели, сотрудники',
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
+        Component: AllTeachersPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -228,6 +222,15 @@ export const generalRoutes: IRoutes = {
         icon: <BiHeadphone />,
         path: FEEDBACK_ROUTE,
         Component: FeedbackPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    instructions: {
+        id: 'instructions',
+        title: 'Инструкции, положения, правила',
+        icon: <FiClipboard />,
+        path: INSTRUCTIONS_ROUTE,
+        Component: InstructionsPage,
         color: 'blue',
         isTemplate: false,
     },

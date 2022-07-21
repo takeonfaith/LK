@@ -1,6 +1,7 @@
-import { ListWrapper, ModifiedAlign, ModifiedVerticalAlign } from '@ui/list'
+import { ModifiedAlign } from '@ui/list'
+import { ListWrapper } from '@ui/list/styles'
 import { SkeletonShape, SkieletonShapeProps } from '@ui/skeleton-shape'
-import { Direction } from '@ui/types'
+import { Direction, VerticalAlign } from '@ui/types'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -12,7 +13,7 @@ interface Props {
     direction: Direction
     shapes: SkieletonShapeProps[]
     horizontalAlign?: ModifiedAlign
-    verticalAlign?: ModifiedVerticalAlign
+    verticalAlign?: VerticalAlign
 }
 
 const SkeletonList = ({ direction, shapes, horizontalAlign, verticalAlign }: Props) => {

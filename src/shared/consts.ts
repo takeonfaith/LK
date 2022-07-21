@@ -26,6 +26,9 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
     shortCutLinks: [0, 1, 2, 3],
 }
 
+export const UNION_ORGANIZATION = 'https://lk.eseur.ru/signup'
+export const RECEPTION_COMMISSION = 'https://old.mospolytech.ru/index.php?id=3428'
+
 export const SETTINGS = 'settings'
 
 export interface IColors {
@@ -196,7 +199,7 @@ export const Colors: IColors = {
         dark: '',
         reallyTransparent: '',
         darkTransparent: '',
-        transparentAF: '#9494940d',
+        transparentAF: '#ffffff17',
         lightTransparent: '#80808014',
         littleDarker: '',
     },
@@ -255,7 +258,7 @@ export const GradeByScore: IGrade = {
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
-export const LastUpdateWhatsNew = '2022-05-06T10:30:00'
+export const LastUpdateWhatsNew = '2022-05-19T10:30:00'
 
 export const messageType: {
     [key in MessageType]: {
@@ -359,3 +362,7 @@ export const letterColorMatch: LetterColorMatch = {
     Y: 'red',
     Z: 'purple',
 }
+
+export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
+
+export const MAX_FILE_SIZE = 20000000

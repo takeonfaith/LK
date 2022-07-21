@@ -1,7 +1,7 @@
 import { TEMPLATE_SETTINGS_ROUTE } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { PageLink } from '@features/all-pages'
-import { ListWrapper } from '@ui/list'
+import { ListWrapper } from '@ui/list/styles'
 import { Title } from '@ui/title'
 import React from 'react'
 import { useRouteMatch } from 'react-router'

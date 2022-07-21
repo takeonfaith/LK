@@ -1,4 +1,4 @@
-interface Rules {
+export interface Rules {
     zero: string
     one: string
     twoToFour: string

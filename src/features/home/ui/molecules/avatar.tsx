@@ -16,9 +16,10 @@ interface Props {
     notifications?: number
     selected?: boolean
     checked?: boolean
+    boxShadow?: string
 }
 
-function Avatar({ selected, name, avatar, width, height, marginRight, notifications, checked }: Props) {
+function Avatar({ selected, name, avatar, width, height, marginRight, notifications, checked, boxShadow }: Props) {
     const [isLoaded, setIsLoaded] = useState<boolean>(true)
     const shortName = getNameFirstLetters(name)[0] + (getNameFirstLetters(name)[1] ?? '')
 
@@ -29,6 +30,7 @@ function Avatar({ selected, name, avatar, width, height, marginRight, notificati
             height={height}
             marginRight={marginRight}
             background={getLettersColors(name)}
+            boxShadow={boxShadow}
         >
             {avatar && isLoaded ? (
                 <Img round onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />
@@ -41,7 +43,7 @@ function Avatar({ selected, name, avatar, width, height, marginRight, notificati
                 visible={checked !== undefined}
                 setChecked={() => null}
             />
-            <Notification left="80%" top="90%" outline="5px solid var(--schedule)" visible={!!notifications}>
+            <Notification left="80%" top="90%" outline="4px solid var(--schedule)" visible={!!notifications}>
                 {notifications}
             </Notification>
         </Container>

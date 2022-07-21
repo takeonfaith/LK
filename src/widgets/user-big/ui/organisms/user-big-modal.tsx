@@ -3,64 +3,22 @@ import { OLD_LK_URL } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { contextMenuModel } from '@entities/context-menu'
 import { userModel } from '@entities/user'
-import { LinkButton } from '@ui/atoms'
+import { LinkButton, Message } from '@ui/atoms'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
-import List from '@ui/list'
 import React from 'react'
 import { FiArrowLeftCircle, FiLogOut, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import AvailableAccounts from 'widgets/available-accounts'
 import useModal from 'widgets/modal'
-import User from 'widgets/user'
-import { UserList } from '../molecules'
+import WhatsNew from 'widgets/whats-new'
 
 const UserBigModal = () => {
     const { open } = useModal()
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
+
     return (
         <>
-            <List
-                visible={!!user?.available_accounts}
-                padding="10px"
-                title="Аккаунты"
-                direction="horizontal"
-                gap={0}
-                showPages
-                horizontalAlign="left"
-                onAdd={() => {
-                    open(<UserList />)
-                    contextMenuModel.events.close()
-                }}
-            >
-                {user?.available_accounts?.map((account) => {
-                    return (
-                        <User
-                            key={account.name}
-                            type={'teacher'}
-                            onClick={() => {
-                                confirmModel.events.evokeConfirm({
-                                    message: 'Вы уверены, что хотите сменить аккаунт?',
-                                    onConfirm: () => {
-                                        localStorage.setItem(
-                                            'token',
-                                            JSON.stringify({
-                                                token: account.token,
-                                            }),
-                                        )
-                                        location.reload()
-                                    },
-                                })
-                                contextMenuModel.events.close()
-                            }}
-                            size="small"
-                            name={account.name}
-                            orientation="vertical"
-                        />
-                    )
-                })}
-            </List>
+            <AvailableAccounts />
             <Link to={SETTINGS_ROUTE}>
                 <Button
                     text="Настройки"
@@ -94,6 +52,18 @@ const UserBigModal = () => {
                     contextMenuModel.events.close()
                 }}
                 text="Выйти"
+                width="100%"
+                background="var(--schedule)"
+            />
+            <Divider />
+            <Button
+                align="left"
+                icon={<Message icon={null} type="info" title={'v2.0.0'} width="fit-content" />}
+                onClick={() => {
+                    contextMenuModel.events.close()
+                    open(<WhatsNew />)
+                }}
+                text="Что нового"
                 width="100%"
                 background="var(--schedule)"
             />

@@ -23,7 +23,7 @@ const InputWrapper = styled.div<{
     pointer-events: ${({ isActive }) => !isActive && 'none'};
     opacity: ${({ isActive }) => !isActive && 0.7};
 
-    .icon {
+    .left-icon {
         position: absolute;
         left: 7px;
         top: 55%;
@@ -199,7 +199,7 @@ const Input = ({
                 {title}
             </Title>
             <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
-            {leftIcon && <span className="icon">{leftIcon}</span>}
+            {leftIcon && <span className="left-icon">{leftIcon}</span>}
             <input
                 type={inputType}
                 placeholder={placeholder}
@@ -216,6 +216,7 @@ const Input = ({
                     } else setValue(e.target.value)
                 }}
                 required={required}
+                readOnly={!isActive}
             />
             {type !== 'password' ? (
                 !!value?.length &&
