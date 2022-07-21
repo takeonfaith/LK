@@ -25,7 +25,7 @@ const LinkWrapper = styled(Link)<{ width: number | string }>`
     }
 `
 
-export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean }>`
+export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean; hasNotifications: boolean }>`
     position: relative;
     cursor: pointer;
     text-decoration: none;
@@ -94,8 +94,8 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             }
 
             b {
-                opacity: ${({ isVertical }) => isVertical && 0};
-                transform: ${({ isVertical }) => isVertical && 'scale(0.95)'};
+                opacity: ${({ hasNotifications }) => hasNotifications && 0};
+                transform: ${({ isVertical }) => isVertical && 'scale(0.95) translateY(40%)'};
             }
 
             .notifications-title {
@@ -141,7 +141,7 @@ const PageLink = (props: Props) => {
             const firstWord = title.split(' ')[0]
 
             return firstWord.length > maxLength && firstWord.length !== maxLength + 1 && isVertical
-                ? `${firstWord.substr(0, maxLength)}-${firstWord.substr(maxLength, firstWord.length)}`
+                ? `${title.substr(0, maxLength)}-${title.substr(maxLength, title.length)}`
                 : title
         },
         [],
@@ -164,6 +164,7 @@ const PageLink = (props: Props) => {
                 justifyContent="center"
                 shadow={shadow}
                 color={color.length ? color : 'blue'}
+                hasNotifications={!!notifications}
             >
                 <Notification
                     outline="4px solid var(--schedule)"
