@@ -12,6 +12,7 @@ const StoryCardWrapper = styled(BlockWrapper)<{ color?: string; seen?: boolean }
     cursor: pointer;
     border-radius: var(--brLight);
     min-width: 110px;
+    height: 180px;
 
     .title {
         position: absolute;
