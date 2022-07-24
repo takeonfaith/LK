@@ -10,7 +10,6 @@ export const VACATION_SCHEDULE_RESPONSE: VacationSchedule[] = [
             {
                 actualVacationPeriods: '31 января - 6 февраля 2022 (7 дней)',
                 plannedVacationPeriods: '31 января - 6 февраля 2022 (7 дней)',
-                vacationRest: 49,
             },
             {
                 actualVacationPeriods: '31 января - 6 февраля 2022 (7 дней)',
@@ -18,7 +17,6 @@ export const VACATION_SCHEDULE_RESPONSE: VacationSchedule[] = [
             },
             {
                 actualVacationPeriods: '31 января - 6 февраля 2022 (7 дней)',
-                vacationRest: 12,
             },
             {
                 actualVacationPeriods: '31 января - 6 февраля 2022 (7 дней)',
@@ -40,7 +38,6 @@ export const VACATION_SCHEDULE_RESPONSE: VacationSchedule[] = [
         oldAllVacationRest: 17,
         allPlannedVacationPeriods: 56,
         allActualVacationPeriods: 7,
-        allVacationRest: 6.95,
     },
     {
         jobType: 'Основное место работы',
@@ -54,6 +51,5 @@ export const VACATION_SCHEDULE_RESPONSE: VacationSchedule[] = [
         ],
         allPlannedVacationPeriods: 56,
         allActualVacationPeriods: 7,
-        allVacationRest: 6.95,
     },
 ]

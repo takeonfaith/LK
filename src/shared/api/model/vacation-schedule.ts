@@ -7,7 +7,6 @@ export type VacationSchedule = {
     oldVacations?: OldVacation[]
     allPlannedVacationPeriods?: number
     allActualVacationPeriods?: number
-    allVacationRest?: number
     oldAllVacationRest?: number
 }
 
@@ -20,5 +19,4 @@ export type OldVacation = {
 export type Vacation = {
     plannedVacationPeriods?: string
     actualVacationPeriods?: string
-    vacationRest?: number
 }
