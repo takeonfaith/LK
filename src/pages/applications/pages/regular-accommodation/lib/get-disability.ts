@@ -2,7 +2,7 @@ import { IInputArea } from '@ui/input-area/model'
 
 const getDisability = (): IInputArea => {
     return {
-        title: 'Соответствие льготной категории граждан222',
+        title: 'Соответствие льготной категории граждан',
         optionalCheckbox: {
             fieldName: 'is_not_invalid',
             value: false,
