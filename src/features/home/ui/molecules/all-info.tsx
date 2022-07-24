@@ -27,6 +27,7 @@ function AllInfo({ user }: Props) {
         degreeLevel,
         enterYear,
         subdivisions,
+        authorIDs,
     } = user
 
     const items = [
@@ -85,9 +86,9 @@ function AllInfo({ user }: Props) {
                 subdivisions?.map((t, index) => (
                     <React.Fragment key={index}>
                         <div style={{ marginTop: '5px' }}>
-                            {`${index + 1}) ${t.subdivision}`}
-                            <div>Должность: {t.jobType}</div>
-                            <div>Ставка: {t.wage}</div>
+                            {`${index + 1}) ${t.subdivision ? t.subdivision : ''}`}
+                            {t.jobType && <div>Должность: {t.jobType}</div>}
+                            {t.wage && <div>Ставка: {t.wage}</div>}
                         </div>
                         {index < subdivisions.length - 1 && <Divider />}
                     </React.Fragment>
@@ -103,7 +104,13 @@ function AllInfo({ user }: Props) {
         },
         {
             key: 'Авторские идентификаторы',
-            value: null,
+            value: !!authorIDs && (
+                <div style={{ marginTop: '5px' }}>
+                    {authorIDs.wosReasearcher && <div>Web of Science Researcher ID: {authorIDs.wosReasearcher}</div>}
+                    {authorIDs.scopus && <div>Scopus Author ID: {authorIDs.scopus}</div>}
+                    {authorIDs.eLibrary && <div>eLibrary Author ID: {authorIDs.eLibrary}</div>}
+                </div>
+            ),
         },
     ]
 
