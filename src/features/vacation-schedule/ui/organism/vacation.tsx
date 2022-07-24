@@ -29,25 +29,10 @@ const tableColumns: ColumnProps[] = [
         field: 'actualVacationPeriods',
         showFull: true,
     },
-    {
-        title: 'Остаток отпуска',
-        field: 'vacationRest',
-        showFull: true,
-        render: (value) => (value !== '-' ? `${value} ${getCorrectWordForm(value, RULES)}` : value),
-    },
 ]
 
 const Vacation = (props: VacationSchedule) => {
-    const {
-        subdivision,
-        post,
-        jobType,
-        wage,
-        vacations,
-        allActualVacationPeriods,
-        allPlannedVacationPeriods,
-        allVacationRest,
-    } = props
+    const { subdivision, post, jobType, wage, vacations, allActualVacationPeriods, allPlannedVacationPeriods } = props
 
     return (
         <>
@@ -64,7 +49,6 @@ const Vacation = (props: VacationSchedule) => {
                     const footer = {
                         allPlannedVacationPeriods: formFooterField(allPlannedVacationPeriods),
                         allActualVacationPeriods: formFooterField(allActualVacationPeriods),
-                        allVacationRest: formFooterField(allVacationRest),
                     } as IndexedProperties
 
                     return footer
