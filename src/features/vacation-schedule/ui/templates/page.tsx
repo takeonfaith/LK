@@ -38,7 +38,9 @@ const Page = () => {
                     <Title size={2} align="left">
                         График отпусков
                     </Title>
-                    <Subtext width="100%">Производственный календарь на 2022 год</Subtext>
+                    <Subtext width="100%" maxWidth="100%">
+                        Производственный календарь на 2022 год
+                    </Subtext>
                     <List scroll={false} direction="horizontal" gap={12} wrapOnMobile>
                         <Card
                             title="Для пятидневной рабочей недели"

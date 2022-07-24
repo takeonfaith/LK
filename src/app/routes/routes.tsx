@@ -75,6 +75,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: ApplicationsPage,
         color: 'red',
         isTemplate: false,
+        group: 'GENERAL',
     },
     'project-activity': {
         id: 'project-activity',
@@ -84,6 +85,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: ProjectActivitiesPage,
         color: 'yellow',
         isTemplate: false,
+        group: 'GENERAL',
     },
     'acad-performance': {
         id: 'acad-performance',
@@ -93,6 +95,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: AcadPerformance,
         color: 'green',
         isTemplate: false,
+        group: 'GENERAL',
     },
     job: {
         id: 'job',
@@ -102,6 +105,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
 })
 
@@ -115,6 +119,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ClarificationOfPassportDataApplication,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'arbitrary-request': {
         id: 'arbitrary-request',
@@ -124,6 +129,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ArbitrayRequestPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
 
     'social-scollarship': {
@@ -134,6 +140,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationForSocialScrollarship,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'certificate-of-attendance': {
         id: 'certificate-of-attendance',
@@ -143,6 +150,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationForСertificateOfAttendance,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'social-agencies': {
         id: 'social-agencies',
@@ -152,6 +160,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationSocialAgencies,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'paper-call': {
         id: 'paper-call',
@@ -161,6 +170,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationPaperCall,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'regular-accommodation': {
         id: 'regular-accommodation',

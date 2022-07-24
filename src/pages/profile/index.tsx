@@ -14,11 +14,11 @@ import { Title } from '@ui/title'
 import { FiLogOut, FiSettings, FiSun } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { AvailableAccounts } from 'widgets'
+import { AvailableAccounts, StoryCard } from 'widgets'
 import React from 'react'
 
 const ProfileWrapper = styled.div`
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,7 +104,7 @@ const ProfilePage = () => {
                     width="120px"
                     height="120px"
                     marginRight="0"
-                    boxShadow="0 0 80px #00000030"
+                    boxShadow="0 0 80px #00000044"
                 />
                 <List horizontalAlign="center">
                     <Title size={3} align="left">
@@ -113,7 +113,7 @@ const ProfilePage = () => {
                     <Subtext visible={!!user.specialty} width="100%">
                         Специальность: {user.specialty}
                     </Subtext>
-                    <Subtext width="100%">
+                    <Subtext width="100%" maxWidth="100%">
                         {user.user_status === 'stud' ? 'Студент' : 'Сотрудник'}{' '}
                         {user.user_status === 'stud' && `${user.course} Курс`}
                     </Subtext>
@@ -145,6 +145,140 @@ const ProfilePage = () => {
                     />
                 </List>
             </ProfileTop>
+            <List direction="horizontal" innerPadding="20px" showPages>
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://cs4.pikabu.ru/post_img/big/2016/05/25/6/1464163350188194633.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Testвф',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://searchthisweb.com/wallpaper/thumb/main_ferrari_3840x2160_pbrox.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+                <StoryCard
+                    content={[
+                        {
+                            title: 'Test',
+                            text: 'Tewrekmqqkfmwdkmc',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            color: '#fff',
+                            image: 'https://fullhdoboi.ru/wp-content/uploads/_ph/6/350593964.jpg',
+                        },
+                        {
+                            title: 'Test2',
+                            align: {
+                                horizontal: 'left',
+                                vertical: 'bottom',
+                            },
+                            background: 'var(--theme)',
+                        },
+                    ]}
+                />
+            </List>
             <AvailableAccounts />
             <UserInfo />
         </ProfileWrapper>
