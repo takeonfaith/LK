@@ -15,7 +15,7 @@ export type Param = {
     [key in NameSettings]: {
         id: string
         property: {
-            [key: string]: ThemeType | string[]
+            [key: string]: ThemeType | string[] | boolean
         }
     }
 }

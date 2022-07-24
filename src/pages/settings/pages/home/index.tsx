@@ -39,7 +39,7 @@ const HomeSettings = () => {
                 },
                 {
                     title: 'Расписание',
-                    state: widgetSchedule as boolean,
+                    state: !!widgetSchedule,
                     action: (state) =>
                         settingsModel.events.updateSetting({
                             nameSettings: 'settings-home-page',
@@ -49,7 +49,7 @@ const HomeSettings = () => {
                 },
                 {
                     title: 'Оплата',
-                    state: widgetPayment as boolean,
+                    state: !!widgetPayment,
                     action: (state) =>
                         settingsModel.events.updateSetting({
                             nameSettings: 'settings-home-page',
