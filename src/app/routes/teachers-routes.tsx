@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import AllStudentsPage from '@pages/all-students'
 import AllTeachersPage from '@pages/all-teachers'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import PageIsNotReady from '@pages/page-is-not-ready'
@@ -31,6 +32,7 @@ import { FaRegLightbulb } from 'react-icons/fa'
 import { FiArrowDownCircle, FiBell, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import {
+    ALL_STUDENTS_ROUTE,
     ALL_TEACHERS_ROUTE,
     generalHiddenRoutes,
     generalRoutes,
@@ -168,6 +170,15 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         path: ORDERS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ORDERS_ROUTE }),
         color: 'blue',
+        isTemplate: false,
+    },
+    'all-students': {
+        id: 'all-students',
+        title: 'Студенты',
+        icon: <BiGroup />,
+        path: ALL_STUDENTS_ROUTE,
+        Component: AllStudentsPage,
+        color: 'darkBlue',
         isTemplate: false,
     },
     'all-teachers': {

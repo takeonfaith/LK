@@ -16,6 +16,7 @@ import SchedulePage from '@pages/schedule'
 import SettingsPage from '@pages/settings'
 import Account from '@pages/settings/pages/account'
 import Appearance from '@pages/settings/pages/appearance'
+import CustomizeMenu from '@pages/settings/pages/customize-menu'
 import HomeSettings from '@pages/settings/pages/home'
 import Security from '@pages/settings/pages/security'
 import TeachersSchedule from '@pages/teachers-schedule'
@@ -30,7 +31,7 @@ import {
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
-import { FiClipboard, FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
+import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
@@ -55,6 +56,7 @@ export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
 export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
 export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
+export const SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE = SETTINGS_ROUTE + '/customize-menu'
 export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
 
@@ -274,6 +276,16 @@ export const generalHiddenRoutes: IRoutes = {
         path: SETTINGS_HOME_PAGE_ROUTE,
         Component: HomeSettings,
         color: 'blue',
+        isTemplate: true,
+        show: true,
+    },
+    'settings-customize-menu': {
+        id: 'settings-customize-menu',
+        title: 'Настройки. Меню',
+        icon: <FiMenu />,
+        path: SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE,
+        Component: CustomizeMenu,
+        color: 'red',
         isTemplate: true,
         show: true,
     },
