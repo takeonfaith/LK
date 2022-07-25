@@ -4,7 +4,7 @@ import { Image } from '@ui/image'
 import Subtext from '@ui/subtext'
 import { Title } from '@ui/title'
 import React from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import StoryPageWrapper, { StyledProps } from './style'
 
 export type StoryProps = StyledProps & {
