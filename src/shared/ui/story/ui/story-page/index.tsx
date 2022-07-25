@@ -1,7 +1,10 @@
+import { storyModel } from '@entities/story'
+import { Button } from '@ui/button'
 import { Image } from '@ui/image'
 import Subtext from '@ui/subtext'
 import { Title } from '@ui/title'
 import React from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import StoryPageWrapper, { StyledProps } from './style'
 
 export type StoryProps = StyledProps & {
@@ -10,6 +13,10 @@ export type StoryProps = StyledProps & {
     image?: string
     children?: ChildrenType
     imageSize?: { width: string; height: string }
+    link?: {
+        text: string
+        to: string
+    }
 }
 
 const StoryPage = ({
@@ -21,10 +28,12 @@ const StoryPage = ({
     text,
     children,
     setPlaying,
+    link,
     imageAlign,
     imageSize = { width: 'auto', height: '100%' },
     textAlign = 'left',
 }: StoryProps & { currentPage: number; setPlaying: React.Dispatch<React.SetStateAction<boolean>> }) => {
+    const history = useHistory()
     return (
         <StoryPageWrapper
             imageAlign={imageAlign}
@@ -43,6 +52,15 @@ const StoryPage = ({
                 <Subtext fontSize="1.1em" align={textAlign}>
                     {text}
                 </Subtext>
+                {!!link?.text && (
+                    <Button
+                        onClick={() => {
+                            history.push(link.to)
+                            storyModel.events.close()
+                        }}
+                        text={link.text}
+                    />
+                )}
                 {children && <div className="content-children">{children}</div>}
             </div>
         </StoryPageWrapper>

@@ -1,17 +1,16 @@
-import { SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE, SETTINGS_HOME_PAGE_ROUTE } from '@app/routes/general-routes'
 import { Colors } from '@consts'
 import { storyModel } from '@entities/story'
 import { Button } from '@ui/button'
 import { StoryProps } from '@ui/story/ui/story-page'
-import React from 'react'
-import { Link } from 'react-router-dom'
-import MenuPic from '../images/menu.png'
 import AllPagesPic from '../images/all-pages.png'
-import CustomizeMenuPic from '../images/customize-menu.png'
-import SearchPic from '../images/search.png'
-import HomePic from '../images/home.png'
 import CustomizeHomeLinkPic from '../images/customize-home-links.png'
+import CustomizeMenuPic from '../images/customize-menu.png'
+import HomePic from '../images/home.png'
+import MenuPic from '../images/menu.png'
 import ProfilePic from '../images/profile.png'
+import SearchPic from '../images/search.png'
+import LogoWhite from '../images/mospolytech-logo-white.png'
+import React from 'react'
 
 export const TutorialStory: StoryProps[] = [
     {
@@ -23,6 +22,8 @@ export const TutorialStory: StoryProps[] = [
         },
         color: '#fff',
         background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%);',
+        image: LogoWhite,
+        imageSize: { width: '100px', height: 'auto' },
         children: (
             <Button
                 background={Colors.white.transparentAF}
@@ -85,11 +86,6 @@ export const TutorialStory: StoryProps[] = [
         image: CustomizeMenuPic,
         imageSize: { width: 'auto', height: '50%' },
         imageAlign: { horizontal: 'left' },
-        children: (
-            <Link onClick={() => storyModel.events.close()} to={SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE}>
-                Настройки меню
-            </Link>
-        ),
     },
     {
         title: 'Поиск',
@@ -99,7 +95,7 @@ export const TutorialStory: StoryProps[] = [
             vertical: 'bottom',
         },
         image: SearchPic,
-        imageSize: { width: '200px', height: 'auto' },
+        imageSize: { width: '100%', height: 'auto' },
         background: 'var(--theme)',
     },
     {
@@ -124,11 +120,6 @@ export const TutorialStory: StoryProps[] = [
         background: 'var(--theme)',
         image: CustomizeHomeLinkPic,
         imageSize: { width: '300px', height: 'auto' },
-        children: (
-            <Link onClick={() => storyModel.events.close()} to={SETTINGS_HOME_PAGE_ROUTE}>
-                Настройки главной страницы
-            </Link>
-        ),
     },
     {
         title: 'Личные данные',
@@ -144,7 +135,7 @@ export const TutorialStory: StoryProps[] = [
     },
     {
         title: 'Вы готовы, мой ученик!',
-        text: 'Базовый курс закончен. Удачи вам в использовании личного кабинета. Надеемся, он вам понравится',
+        text: 'Базовый курс окончен. Удачи вам в использовании личного кабинета. Надеемся, он вам понравится',
         align: {
             horizontal: 'left',
             vertical: 'bottom',
