@@ -12,6 +12,7 @@ const StoryWrapper = styled.div<{ isOpen: boolean }>`
     width: 100%;
     max-width: 400px;
     height: 100%;
+    max-height: 750px;
     transition: 0.2s;
     transform: scale(${({ isOpen }) => (isOpen ? 1 : 0.95)});
     opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
