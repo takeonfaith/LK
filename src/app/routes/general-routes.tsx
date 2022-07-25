@@ -1,10 +1,6 @@
 import { IColors } from '@consts'
 import AllPages from '@pages/all-pages'
-import AllStudentsPage from '@pages/all-students'
-import AllTeachersPage from '@pages/all-teachers'
 import CantAccessPage from '@pages/cant-access'
-import ChatPage from '@pages/chat'
-import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import FeedbackPage from '@pages/feedback'
 import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
@@ -17,6 +13,7 @@ import SchedulePage from '@pages/schedule'
 import SettingsPage from '@pages/settings'
 import Account from '@pages/settings/pages/account'
 import Appearance from '@pages/settings/pages/appearance'
+import CustomizeMenu from '@pages/settings/pages/customize-menu'
 import HomeSettings from '@pages/settings/pages/home'
 import Security from '@pages/settings/pages/security'
 import TeachersSchedule from '@pages/teachers-schedule'
@@ -31,8 +28,8 @@ import {
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
-import { FiClipboard, FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
-import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
+import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
+import { HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -56,6 +53,7 @@ export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
 export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
 export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
+export const SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE = SETTINGS_ROUTE + '/customize-menu'
 export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
 
@@ -64,6 +62,12 @@ export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
 
 export interface IRoutes {
     [id: string]: IRoute
+}
+
+export enum Groups {
+    GENERAL = 'Основные',
+    OTHER = 'Другое',
+    TEST = 'Тестовый раздел',
 }
 
 export interface IRoute {
@@ -78,6 +82,7 @@ export interface IRoute {
     isNew?: boolean
     show?: boolean
     notifications?: number
+    group?: keyof typeof Groups
 }
 
 export const publicRoutes = [
@@ -121,6 +126,7 @@ export const generalRoutes: IRoutes = {
         color: 'lightGreen',
         isTemplate: false,
         show: false,
+        group: 'GENERAL',
     },
     settings: {
         id: 'settings',
@@ -131,15 +137,17 @@ export const generalRoutes: IRoutes = {
         color: 'grey',
         isTemplate: true,
         show: true,
+        group: 'GENERAL',
     },
     home: {
         id: 'home',
-        title: 'Домой',
+        title: 'Главная',
         icon: <FiHome />,
         path: HOME_ROUTE,
         Component: Home,
         color: 'blue',
         isTemplate: false,
+        group: 'GENERAL',
     },
     profile: {
         id: 'profile',
@@ -149,7 +157,7 @@ export const generalRoutes: IRoutes = {
         Component: ProfilePage,
         color: 'purple',
         isTemplate: false,
-        notifications: 2,
+        group: 'GENERAL',
     },
     chat: {
         //ChatPage
@@ -157,10 +165,10 @@ export const generalRoutes: IRoutes = {
         title: 'Сообщения',
         icon: <BiMessageRounded />,
         path: CHAT_ROUTE,
-        Component: ChatPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
         color: 'red',
         isTemplate: true,
-        notifications: 4,
+        group: 'GENERAL',
     },
     schedule: {
         id: 'schedule',
@@ -170,6 +178,7 @@ export const generalRoutes: IRoutes = {
         Component: SchedulePage,
         color: 'pink',
         isTemplate: false,
+        group: 'GENERAL',
     },
     payments: {
         id: 'payments',
@@ -179,33 +188,27 @@ export const generalRoutes: IRoutes = {
         Component: PaymentsPage,
         color: 'lightGreen',
         isTemplate: false,
-    },
-    'electronic-interaction-agreement': {
-        id: 'electronic-interaction-agreement',
-        title: 'Соглашение об электронном взаимодействии',
-        icon: <HiOutlineClipboardCheck />,
-        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
-        Component: ElectronicInteractionAgreementPage,
-        color: 'blue',
-        isTemplate: false,
+        group: 'GENERAL',
     },
     'all-students': {
         id: 'all-students',
-        title: 'Студенты',
+        title: 'Одногруппники',
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
-        Component: AllStudentsPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
         color: 'darkBlue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'all-teachers': {
         id: 'all-teachers',
-        title: 'Преподаватели, сотрудники',
+        title: 'Преподаватели',
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
-        Component: AllTeachersPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     portfolio: {
         id: 'portfolio',
@@ -215,6 +218,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: PORTFOLIO_ROUTE }),
         color: 'blue',
         isTemplate: true,
+        group: 'OTHER',
     },
     feedback: {
         id: 'feedback',
@@ -224,6 +228,7 @@ export const generalRoutes: IRoutes = {
         Component: FeedbackPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     instructions: {
         id: 'instructions',
@@ -233,6 +238,7 @@ export const generalRoutes: IRoutes = {
         Component: InstructionsPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
 }
 
@@ -246,6 +252,7 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         show: false,
+        group: 'OTHER',
     },
     'settings-appearance': {
         id: 'settings-appearance',
@@ -256,6 +263,7 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'purple',
         isTemplate: true,
         show: true,
+        group: 'OTHER',
     },
     'settings-personal': {
         id: 'settings-personal',
@@ -266,6 +274,7 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'pink',
         isTemplate: true,
         show: true,
+        group: 'OTHER',
     },
     'settings-security': {
         id: 'settings-security',
@@ -276,6 +285,7 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'green',
         isTemplate: true,
         show: true,
+        group: 'OTHER',
     },
     'settings-home-page': {
         id: 'settings-home-page',
@@ -284,6 +294,17 @@ export const generalHiddenRoutes: IRoutes = {
         path: SETTINGS_HOME_PAGE_ROUTE,
         Component: HomeSettings,
         color: 'blue',
+        isTemplate: true,
+        show: true,
+        group: 'OTHER',
+    },
+    'settings-customize-menu': {
+        id: 'settings-customize-menu',
+        title: 'Настройки. Меню',
+        icon: <FiMenu />,
+        path: SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE,
+        Component: CustomizeMenu,
+        color: 'red',
         isTemplate: true,
         show: true,
     },

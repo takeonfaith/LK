@@ -18,7 +18,7 @@ const UserBigModal = () => {
 
     return (
         <>
-            <AvailableAccounts />
+            {/* <AvailableAccounts /> */}
             <Link to={SETTINGS_ROUTE}>
                 <Button
                     text="Настройки"

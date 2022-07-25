@@ -8,7 +8,7 @@ interface Props {
     text?: string
 }
 
-const GoBackButton = ({ visible, text = 'Назад' }: Props) => {
+const GoBackButton = ({ visible = true, text = 'Назад' }: Props) => {
     if (!visible) return null
 
     const history = useHistory()

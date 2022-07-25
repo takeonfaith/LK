@@ -12,7 +12,6 @@ import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE }
 import React from 'react'
 import ApplicationsPage from '@pages/applications'
 import { FaRegLightbulb } from 'react-icons/fa'
-import ProjectActivitiesPage from '@pages/project-activities'
 import RegularAccommodationPage from '@pages/applications/pages/regular-accommodation'
 import AccommodationCorrespondenceFormPage from '@pages/applications/pages/accommodation-correspondence-form'
 import AcademicLeaveAccommodationPage from '@pages/applications/pages/academic-leave-accommodation'
@@ -69,21 +68,24 @@ export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
     applications: {
         id: 'applications',
-        title: 'Заявления',
+        title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
         Component: ApplicationsPage,
         color: 'red',
         isTemplate: false,
+        isNew: true,
+        group: 'GENERAL',
     },
     'project-activity': {
         id: 'project-activity',
         title: 'Проектная деятельность',
         icon: <FaRegLightbulb />,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: ProjectActivitiesPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: PROJECT_ACTIVITIES_ROUTE }),
         color: 'yellow',
         isTemplate: false,
+        group: 'GENERAL',
     },
     'acad-performance': {
         id: 'acad-performance',
@@ -93,6 +95,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: AcadPerformance,
         color: 'green',
         isTemplate: false,
+        group: 'GENERAL',
     },
     job: {
         id: 'job',
@@ -102,6 +105,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
 })
 
@@ -115,6 +119,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ClarificationOfPassportDataApplication,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'arbitrary-request': {
         id: 'arbitrary-request',
@@ -124,6 +129,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ArbitrayRequestPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
 
     'social-scollarship': {
@@ -134,6 +140,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationForSocialScrollarship,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'certificate-of-attendance': {
         id: 'certificate-of-attendance',
@@ -143,6 +150,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationForСertificateOfAttendance,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'social-agencies': {
         id: 'social-agencies',
@@ -152,6 +160,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationSocialAgencies,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'paper-call': {
         id: 'paper-call',
@@ -161,6 +170,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationPaperCall,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'regular-accommodation': {
         id: 'regular-accommodation',

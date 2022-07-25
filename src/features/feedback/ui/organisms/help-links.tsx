@@ -40,7 +40,7 @@ export function HelpLinks() {
                     <strong>Неточности в своих персональных данных</strong> (неправильные или отсутствующие ФИО, пол и
                     т.п.), а также <strong>успеваемости</strong>: обращайтесь в свое <strong>отделение ЦРС</strong>{' '}
                     лично или через произвольный запрос в разделе «
-                    {<Link to={ARBITRARY_REQUEST_ROUTE}>Справки, заявления</Link>}».
+                    {<Link to={ARBITRARY_REQUEST_ROUTE}>Цифровые сервисы</Link>}».
                 </p>
                 <p>
                     <strong>Неправильные суммы в разделе</strong> «

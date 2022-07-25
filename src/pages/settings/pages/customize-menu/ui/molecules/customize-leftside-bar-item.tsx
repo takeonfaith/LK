@@ -1,45 +1,28 @@
-import React, { useCallback } from 'react'
-import { IconType } from 'react-icons/lib'
+import { PageLinkProps } from '@features/all-pages/ui/molecules/page-link'
+import PageLinkContent from '@features/all-pages/ui/molecules/page-link-content'
+import React from 'react'
 import { CustomizeLeftsideBarWrapper } from '../atoms'
-import AddToHomeButton from '../atoms/add-to-home-button'
 import AddToMenuButton from '../atoms/add-to-menu-buttom'
 
-interface Props {
-    id: string
-    title: string
-    icon: IconType
-    path: string
+type Props = PageLinkProps & {
     chosen: boolean
-    shortItemChosen: boolean
+    shortItemChosen?: boolean
     switchMenuItem: (id: string) => void
-    switchShortChosen: (id: string) => void
+    switchShortChosen?: (id: string) => void
 }
 
-const CustomizeLeftside = ({
-    id,
-    icon: Icon,
-    title,
-    chosen,
-    switchMenuItem,
-    shortItemChosen,
-    switchShortChosen,
-}: Props) => {
-    const handleShortChosen = useCallback(
-        (e?: React.MouseEvent<HTMLElement, MouseEvent> | undefined) => {
-            e?.stopPropagation()
-            switchShortChosen(id)
-        },
-        [id, switchShortChosen],
-    )
-
+const CustomizeLeftside = (props: Props) => {
+    const { id, chosen, switchMenuItem } = props
     return (
         <CustomizeLeftsideBarWrapper chosen={chosen} onClick={() => switchMenuItem(id)}>
-            <div className="icon-and-title">
-                <Icon />
-                <strong>{title}</strong>
-            </div>
+            <PageLinkContent
+                background="transparent"
+                maxWordLength={100}
+                orientation="horizontal"
+                shadow={false}
+                {...props}
+            />
             <div className="buttons">
-                <AddToHomeButton chosen={shortItemChosen} onClick={handleShortChosen} />
                 <AddToMenuButton
                     chosen={chosen}
                     onClick={() => {

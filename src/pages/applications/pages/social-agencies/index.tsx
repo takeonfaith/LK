@@ -53,7 +53,7 @@ const ApplicationSocialAgencies = () => {
                 {!!form && !!setForm && (
                     <FormBlock>
                         <Button
-                            text="Назад к заявлениям"
+                            text="Назад к цифровым сервисам"
                             icon={<FiChevronLeft />}
                             onClick={() => history.push(APPLICATIONS_ROUTE)}
                             background="transparent"

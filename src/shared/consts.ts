@@ -4,7 +4,7 @@ import { IconType } from 'react-icons'
 import { FiAlertCircle, FiCheck, FiInfo, FiXCircle } from 'react-icons/fi'
 import { HiOutlineLightBulb } from 'react-icons/hi'
 
-export type MenuType = number[]
+export type MenuType = string[]
 export type ShortCutLinksType = number[]
 export type ThemeType = string
 export type GeneralType = {
@@ -17,8 +17,13 @@ export interface IDefaultSettings {
 
 export const SHORT_CUT_LINKS_LIMIT_SIZE = 4
 
+export const ADDITIONAL_MENU_ITEMS_LIMIT_SIZE = 3
+
+export const REQUIRED_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'all']
+export const REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'download-agreements', 'all']
+
 export const DEFAULT_SETTINGS: IDefaultSettings = {
-    menu: [0, 1, 2, 3, 4, 5, 6, 7],
+    menu: REQUIRED_LEFTSIDE_BAR_CONFIG,
     theme: 'light',
     general: {
         notifications: false,

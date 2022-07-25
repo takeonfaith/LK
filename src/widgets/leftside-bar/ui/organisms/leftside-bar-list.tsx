@@ -19,10 +19,12 @@ const LeftsideBarList = () => {
             />
         )
 
+    console.log(Object.values(leftsideBarRoutes))
+
     return (
         <LeftsideBarListWrapper>
             {Object.values(leftsideBarRoutes).map((props: IRoute) => {
-                return <LeftsideBarItem {...props} key={props.id} isCurrent={currentPage?.id === props.id} />
+                return <LeftsideBarItem {...props} key={props?.id} isCurrent={currentPage?.id === props?.id} />
             })}
         </LeftsideBarListWrapper>
     )

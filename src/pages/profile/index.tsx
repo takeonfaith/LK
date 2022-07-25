@@ -14,11 +14,12 @@ import { Title } from '@ui/title'
 import { FiLogOut, FiSettings, FiSun } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { AvailableAccounts } from 'widgets'
+import { StoryCard } from 'widgets'
 import React from 'react'
+import { TutorialStory } from 'shared/stories/tutorial'
 
 const ProfileWrapper = styled.div`
-    height: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,14 +35,14 @@ const ProfileWrapper = styled.div`
         padding: 40px;
     }
 
-    @media (max-width: 600px) {
+    /* @media (max-width: 600px) {
         padding: 20px;
         background-image: radial-gradient(600px 600px at top left, ${Colors.blue.main}, transparent 45%),
             radial-gradient(600px 600px at top center, ${Colors.purple.main}, transparent 45%),
             radial-gradient(600px 600px at top right, ${Colors.orange.main}, transparent 45%),
             radial-gradient(600px 600px at top right, ${Colors.purple.main}, transparent 45%),
             radial-gradient(600px 600px at top right, ${Colors.red.main}, transparent 45%);
-    }
+    } */
 `
 
 const ProfileTop = styled(ListWrapper)`
@@ -104,16 +105,19 @@ const ProfilePage = () => {
                     width="120px"
                     height="120px"
                     marginRight="0"
-                    boxShadow="0 0 80px #00000030"
+                    boxShadow="0 0 80px #00000044"
                 />
                 <List horizontalAlign="center">
                     <Title size={3} align="left">
                         {user.fullName}
                     </Title>
                     <Subtext visible={!!user.specialty} width="100%">
-                        Специальность: {user.specialty}
+                        Направление: {user.specialty}
                     </Subtext>
-                    <Subtext width="100%">
+                    <Subtext visible={!!user.group} maxWidth="100%" width="100%" align="left">
+                        Группа: {user.group}
+                    </Subtext>
+                    <Subtext width="100%" maxWidth="100%">
                         {user.user_status === 'stud' ? 'Студент' : 'Сотрудник'}{' '}
                         {user.user_status === 'stud' && `${user.course} Курс`}
                     </Subtext>
@@ -125,12 +129,17 @@ const ProfilePage = () => {
                     height="100%"
                     padding="15px 0"
                 >
-                    <Button icon={<GradientCircle current />} height="27px" background="transparent" />
+                    {/* <Button icon={<GradientCircle current />} height="27px" background="transparent" /> */}
                     <Link to={SETTINGS_APPEARANCE_ROUTE}>
-                        <Button icon={<FiSun />} background={Colors.white.transparentAF} height="27px" />
+                        <Button icon={<FiSun />} background={Colors.white.transparentAF} height="27px" width="40px" />
                     </Link>
                     <Link to={SETTINGS_ROUTE}>
-                        <Button icon={<FiSettings />} background={Colors.white.transparentAF} height="27px" />
+                        <Button
+                            icon={<FiSettings />}
+                            background={Colors.white.transparentAF}
+                            height="27px"
+                            width="40px"
+                        />
                     </Link>
                     <Button
                         onClick={() =>
@@ -142,10 +151,14 @@ const ProfilePage = () => {
                         icon={<FiLogOut />}
                         background={Colors.white.transparentAF}
                         height="27px"
+                        width="40px"
                     />
                 </List>
             </ProfileTop>
-            <AvailableAccounts />
+            <List direction="horizontal" innerPadding="20px 0" showPages>
+                <StoryCard title="Обучение" content={TutorialStory} />
+            </List>
+            {/* <AvailableAccounts /> */}
             <UserInfo />
         </ProfileWrapper>
     )

@@ -15,6 +15,7 @@ import { useModal } from 'widgets'
 const ApplicationPageWrapper = styled.div`
     display: flex;
     align-items: center;
+    color: var(--text);
     justify-content: center;
 
     @media (max-width: 1000px) {
@@ -38,7 +39,7 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
             <ApplicationPageWrapper>
                 <FormBlock maxWidth="1500px">
                     <Title size={2} align="left">
-                        Заявления
+                        Цифровые сервисы
                     </Title>
                     <Message type="info" title="Информация" icon={<FiInfo />}>
                         Данный сервис позволяет заказать необходимую справку, подать заявление, запрос. Статус

@@ -41,6 +41,7 @@ export const ListWrapper = styled.div<StyleProps>`
     flex-direction: ${({ direction }) => (direction ?? 'vertical') === 'vertical' && 'column'};
     max-height: 100%;
     align-items: center;
+    height: ${({ height }) => height ?? 'fit-content'};
     justify-content: ${({ direction, horizontalAlign, verticalAlign }) =>
         (direction ?? 'vertical') === 'vertical'
             ? convertVerticalAlign(verticalAlign)
