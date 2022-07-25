@@ -44,11 +44,11 @@ const getForm = (data: User): IInputArea => {
                 required: true,
                 items: [
                     {
-                        id: 0,
+                        id: 'medical indications',
                         title: 'По медицинским показаниям',
                     },
                     {
-                        id: 1,
+                        id: 'personal circumstances',
                         title: 'По обстоятельствам личного характера',
                     },
                 ],
@@ -77,7 +77,13 @@ const getForm = (data: User): IInputArea => {
                 editable: true,
             },
         ],
-        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: false },
+        optionalCheckbox: {
+            fieldName: 'is_not_document',
+            value: false,
+            title: 'Нет подтверждающего документа',
+            required: true,
+        },
+        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: true },
     }
 }
 
