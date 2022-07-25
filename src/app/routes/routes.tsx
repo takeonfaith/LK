@@ -105,6 +105,15 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
     },
+    'helpful-information': {
+        id: 'helpful-information',
+        title: 'Полезная информация',
+        icon: BiInfoCircle,
+        path: HELPFUL_INFORMATION,
+        Component: HelpfulInformation,
+        color: 'blue',
+        isTemplate: false,
+    },
 })
 
 export const hiddenRoutes: () => IRoutes = () => ({
@@ -332,15 +341,6 @@ export const hiddenRoutes: () => IRoutes = () => ({
         icon: BiIdCard,
         path: MILITARY_REGISTRATION_CARD,
         Component: MilitaryRegistrationCard,
-        color: 'blue',
-        isTemplate: false,
-    },
-    'helpful-information': {
-        id: 'helpful-information',
-        title: 'Полезная информация',
-        icon: BiInfoCircle,
-        path: HELPFUL_INFORMATION,
-        Component: HelpfulInformation,
         color: 'blue',
         isTemplate: false,
     },
