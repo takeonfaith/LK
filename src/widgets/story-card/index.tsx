@@ -12,7 +12,7 @@ const StoryCardWrapper = styled(BlockWrapper)<{ color?: string; seen?: boolean; 
     background: ${({ background }) => background ?? 'var(--schedule)'};
     cursor: pointer;
     border-radius: var(--brLight);
-    min-width: 110px;
+    width: 110px;
     height: 180px;
 
     .title {

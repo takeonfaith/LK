@@ -2,7 +2,7 @@ import { storyModel } from '@entities/story'
 import { Button } from '@ui/button'
 import { ListWrapper } from '@ui/list/styles'
 import React from 'react'
-import { FiX } from 'react-icons/fi'
+import { FiPause, FiPlay, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Indicator from '../indicator'
 
@@ -12,6 +12,11 @@ const PagesIndicatorWrapper = styled(ListWrapper)`
     left: 0;
     padding: 0px 30px;
     z-index: 2;
+
+    svg {
+        min-width: 20px;
+        height: 20px;
+    }
 `
 
 interface Props {
@@ -37,6 +42,7 @@ const PagesIndicator = ({ playing, pages, onClose }: Props) => {
                         />
                     )
                 })}
+            {!playing ? <FiPlay /> : <FiPause />}
             <Button minWidth="25px" width="25px" height="25px" icon={<FiX />} onClick={onClose} />
         </PagesIndicatorWrapper>
     )

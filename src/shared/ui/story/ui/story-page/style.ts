@@ -7,6 +7,7 @@ export type StyledProps = {
     textAlign?: Align
     color?: string
     align: { horizontal: Align; vertical: VerticalAlign }
+    imageAlign?: { horizontal?: Align; vertical?: VerticalAlign }
     background?: string
 }
 
@@ -14,6 +15,11 @@ const StoryPageWrapper = styled(BlockWrapper)<StyledProps>`
     overflow: hidden;
     position: relative;
     background: ${({ background }) => background};
+    display: flex;
+    justify-content: ${({ imageAlign }) =>
+        imageAlign?.horizontal === 'left' ? 'flex-start' : imageAlign?.horizontal === 'right' ? 'flex-end' : 'center'};
+    align-items: center;
+    user-select: none;
 
     .text-content {
         width: 80%;

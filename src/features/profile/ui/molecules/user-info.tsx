@@ -67,6 +67,8 @@ const UserInfo = () => {
             <SliderPage
                 appearance={false}
                 align="left"
+                width="100%"
+                maxWidth="100%"
                 sliderWidth={user.user_status === 'stud' ? '50%' : '80%'}
                 pages={user.user_status === 'stud' ? studentPages : teacherPages}
             />

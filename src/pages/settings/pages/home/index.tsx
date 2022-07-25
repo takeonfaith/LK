@@ -55,7 +55,6 @@ const HomeSettings = () => {
             <AddedElementsList
                 list={homeRoutes}
                 onRemoveOne={(id) => deletePageFromHome(id, settings)}
-                onRemoveAll={() => null}
                 onAddElement={() => open(<AddPagesList />)}
                 setList={() => null}
                 padding="0"

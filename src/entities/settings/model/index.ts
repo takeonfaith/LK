@@ -8,7 +8,8 @@ export enum NameSettings {
     'settings-home-page' = 'settings-home-page',
     'settings-personal' = 'settings-personal',
     'settings-appearance' = 'settings-appearance',
-    'settings-security' = 'settings-security',
+    // 'settings-security' = 'settings-security',
+    'settings-customize-menu' = 'settings-customize-menu',
 }
 
 export type Param = {

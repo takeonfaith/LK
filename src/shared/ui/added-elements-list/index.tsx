@@ -36,7 +36,7 @@ const Element = styled.div<{ color?: string; background?: string; remove?: boole
         justify-content: center;
         min-width: 15px;
         height: 15px;
-        background: #fff;
+        background: var(--theme);
         color: var(--blue);
         border-radius: 100%;
 
@@ -114,7 +114,7 @@ interface Props {
     list: FilterElementList
     onAddElement?: () => void
     onRemoveOne: (id: string) => void
-    onRemoveAll: () => void
+    onRemoveAll?: () => void
     padding?: string
     setList: React.Dispatch<React.SetStateAction<FilterElementList>>
 }
@@ -142,7 +142,7 @@ const AddedElementsList = ({ list, onAddElement, onRemoveAll, onRemoveOne, paddi
                             onClick={() => {
                                 if (listKeys.length === 1) {
                                     setRemoveAll(true)
-                                    onRemoveAll()
+                                    onRemoveAll?.()
                                 } else {
                                     setRemoveOne(el.id)
 
@@ -155,7 +155,7 @@ const AddedElementsList = ({ list, onAddElement, onRemoveAll, onRemoveOne, paddi
                     </Element>
                 )
             })}
-            {listKeys.length && (
+            {listKeys.length && !!onRemoveAll && (
                 <Element
                     background={'var(--reallyBlue)'}
                     color="#fff"

@@ -16,15 +16,15 @@ interface Menu {
     isOpen: boolean
 }
 
-// const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students']
+const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students']
 
 export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
-// const DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'acad-performance', 'payments', 'all']
+const DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'acad-performance', 'payments', 'all']
 // const DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'all']
 
 const getLeftsideBarConfig = (user: User | null): MenuType => {
     const localSettings = JSON.parse(localStorage.getItem(SETTINGS) || '{}')
-    const settingsMenuData: MenuType = localSettings.menu
+    const settingsMenuData: MenuType = localSettings.menu ?? DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG
 
     const uniqueRequiredTeacherMenuItems = REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG.filter(
         (item) => !settingsMenuData.includes(item),
@@ -55,7 +55,7 @@ const useMenu = () => {
 
 const changeOpen = createEvent<{ isOpen: boolean; currentPage?: string }>()
 const clearStore = createEvent()
-const defineMenu = createEvent<{ user: User | null; adminLinks: AdminLinks | null; homeRoutes: string[] | string }>()
+const defineMenu = createEvent<{ user: User | null; adminLinks: AdminLinks | null; homeRoutes?: string[] }>()
 const changeNotifications = createEvent<{ page: string; notifications: ((prev: number) => number) | number }>()
 
 const getNewNotifications = (page: string, notifications: number, routes: IRoutes | null) => {
@@ -89,7 +89,8 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
             user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         ),
         homeRoutes: findRoutesByConfig(
-            homeRoutes as string[],
+            homeRoutes ??
+                (JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[]),
             user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         ),
     }))

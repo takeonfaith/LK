@@ -1,28 +1,27 @@
-import { IColors } from '@consts'
-import { Icon } from '@features/all-pages/ui/atoms'
+import { PageLinkProps } from '@features/all-pages/ui/molecules/page-link'
+import PageLinkContent from '@features/all-pages/ui/molecules/page-link-content'
 import React from 'react'
 import { CustomizeLeftsideBarWrapper } from '../atoms'
 import AddToMenuButton from '../atoms/add-to-menu-buttom'
 
-interface Props {
-    id: string
-    title: string
-    icon: ChildrenType
-    color: keyof IColors
-    path: string
+type Props = PageLinkProps & {
     chosen: boolean
     shortItemChosen?: boolean
     switchMenuItem: (id: string) => void
     switchShortChosen?: (id: string) => void
 }
 
-const CustomizeLeftside = ({ id, icon, color, title, chosen, switchMenuItem }: Props) => {
+const CustomizeLeftside = (props: Props) => {
+    const { id, chosen, switchMenuItem } = props
     return (
         <CustomizeLeftsideBarWrapper chosen={chosen} onClick={() => switchMenuItem(id)}>
-            <div className="icon-and-title">
-                <Icon color={color}>{icon}</Icon>
-                <strong>{title}</strong>
-            </div>
+            <PageLinkContent
+                background="transparent"
+                maxWordLength={100}
+                orientation="horizontal"
+                shadow={false}
+                {...props}
+            />
             <div className="buttons">
                 <AddToMenuButton
                     chosen={chosen}

@@ -1,10 +1,9 @@
 import { Colors } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { userModel } from '@entities/user'
-import Avatar from '@features/home/ui/molecules/avatar'
 import { Button } from '@ui/atoms'
-import React from 'react'
 import { FiLogOut } from 'react-icons/fi'
+import React from 'react'
 
 const Account = () => {
     const {
@@ -16,7 +15,7 @@ const Account = () => {
 
     return (
         <>
-            <Avatar name={user?.fullName} avatar={user?.avatar} />
+            {/* <Avatar name={user?.fullName} avatar={user?.avatar} /> */}
             <Button
                 icon={<FiLogOut />}
                 onClick={() =>

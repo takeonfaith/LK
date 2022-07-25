@@ -11,6 +11,7 @@ import { adminLinksModel } from '@entities/admin-links'
 import { menuModel } from '@entities/menu'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { userModel } from '@entities/user'
+import { Title } from '@ui/title'
 import { useSettings } from '@utils/contexts/settings-context'
 import useResize from '@utils/hooks/use-resize'
 import React from 'react'
@@ -102,6 +103,9 @@ const CustomizeLeftsideBarList = () => {
 
     return (
         <LeftsideBarListWrapper style={{ height }}>
+            <Title size={2} align="left" bottomGap>
+                Настройка меню
+            </Title>
             {Object.values(currentRoute).map((el: IRoute, index) => {
                 return (
                     <CustomizeLeftsideBarItem

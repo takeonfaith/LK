@@ -11,20 +11,23 @@ import styled from 'styled-components'
 import Icon from '../atoms/icon'
 import ContextContent from './context-content'
 import { PageLinkProps } from './page-link'
-import React from 'react'
+import React, { useMemo } from 'react'
 import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
 import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 
-export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean }>`
+export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean; hasNotifications: boolean }>`
     position: relative;
     cursor: pointer;
     text-decoration: none;
 
     .new {
         position: absolute;
-        top: 5px;
-        right: -5px;
-        border-radius: var(--brLight) calc(var(--brLight) - 4px) calc(var(--brLight) - 4px) var(--brLight);
+        top: ${({ isVertical }) => (isVertical ? '5px' : '18px')};
+        right: ${({ isVertical }) => (isVertical ? '-5px' : '50px')};
+        border-radius: ${({ isVertical }) =>
+            isVertical
+                ? 'var(--brLight) calc(var(--brLight) - 4px) calc(var(--brLight) - 4px) var(--brLight)'
+                : 'var(--brLight)'};
         background: ${Colors.red.lighter};
         font-size: 0.7em;
         font-weight: bold;
@@ -84,8 +87,8 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             }
 
             b {
-                opacity: ${({ isVertical }) => isVertical && 0};
-                transform: ${({ isVertical }) => isVertical && 'scale(0.95)'};
+                opacity: ${({ hasNotifications }) => hasNotifications && 0};
+                transform: ${({ isVertical }) => isVertical && 'scale(0.95) translateY(40%)'};
             }
 
             .notifications-title {
@@ -117,11 +120,27 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
         icon,
         mode,
         id,
+        background,
         orientation = 'vertical',
     } = props
+
     const isVertical = orientation === 'vertical'
     const { settings } = settingsModel.selectors.useSettings()
     const isAdded = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
+    const linkWidth = 1
+
+    const maxFirstWordLength = 12
+
+    const getHyphenatedTitle = useMemo(
+        () => (title: string, maxLength: number) => {
+            const firstWord = title.split(' ')[0]
+
+            return firstWord.length > maxLength && firstWord.length !== maxLength + 1 && isVertical
+                ? `${title.substr(0, maxLength)}-${title.substr(maxLength, title.length)}`
+                : title
+        },
+        [],
+    )
 
     return (
         <PageLinkWrapper
@@ -133,6 +152,8 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
             justifyContent="center"
             shadow={shadow}
             color={color.length ? color : 'blue'}
+            hasNotifications={!!notifications}
+            background={background}
         >
             <Notification
                 outline="4px solid var(--schedule)"
@@ -147,7 +168,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
             </Notification>
             <div className="outside">
                 <Icon color={color.length ? color : 'blue'}>{icon}</Icon>
-                <b>{getShortStirng(title, maxWordLength)}</b>
+                <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLength)}</b>
                 {notifications && (
                     <span className="notifications-title">
                         {notifications}{' '}

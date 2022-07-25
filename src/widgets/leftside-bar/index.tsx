@@ -47,7 +47,6 @@ const LeftsideBar = () => {
                     loading={!user}
                     selected={currentPage?.id === 'profile'}
                 />
-                {/* <LocalSearch whereToSearch={currentRoute} setResult={setFoundRoutes} searchEngine={search} /> */}
                 <LeftsideBarList />
             </div>
             <ToggleArea title={''} toggles={toggles} setToggles={setToggles} />

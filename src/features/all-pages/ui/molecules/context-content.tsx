@@ -45,7 +45,7 @@ const ContextContent = (props: IRoute) => {
             <Divider />
             {isAdded ? (
                 <Button
-                    text="Убрать"
+                    text="Убрать с главной"
                     icon={<FiMinusCircle />}
                     width="100%"
                     align="left"
@@ -57,7 +57,7 @@ const ContextContent = (props: IRoute) => {
                 />
             ) : (
                 <Button
-                    text="Добавить"
+                    text="Добавить на главную"
                     icon={<FiPlus />}
                     //  onClick={() => open(<WhatsNew />)}
                     width="100%"

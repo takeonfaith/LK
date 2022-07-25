@@ -15,6 +15,8 @@ const useTheme = () => {
                 document.documentElement.setAttribute('data-theme', currentTheme)
                 setTheme(currentTheme)
             }
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light')
         }
     }, [settings])
 

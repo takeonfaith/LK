@@ -30,7 +30,15 @@ const AddPagesList = () => {
                 Добавить страницы
             </Title>
             <div className="links-wrapper">
-                <LinksList orientation="horizontal" mode="add" doNotShow="all" align="left" links={visibleRoutes} />
+                <LinksList
+                    shadow={false}
+                    orientation="horizontal"
+                    mode="add"
+                    doNotShow="all"
+                    align="left"
+                    background="transparent"
+                    links={visibleRoutes}
+                />
             </div>
         </AddPagesListWrapper>
     )

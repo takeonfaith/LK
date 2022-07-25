@@ -19,8 +19,8 @@ export const SHORT_CUT_LINKS_LIMIT_SIZE = 4
 
 export const ADDITIONAL_MENU_ITEMS_LIMIT_SIZE = 3
 
-export const REQUIRED_LEFTSIDE_BAR_CONFIG = ['home', 'settings']
-export const REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'download-agreements']
+export const REQUIRED_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'all']
+export const REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'download-agreements', 'all']
 
 export const DEFAULT_SETTINGS: IDefaultSettings = {
     menu: REQUIRED_LEFTSIDE_BAR_CONFIG,

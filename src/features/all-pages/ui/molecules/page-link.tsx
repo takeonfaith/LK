@@ -27,6 +27,7 @@ export type PageLinkProps = IRoute & {
     shadow?: boolean
     restricted?: boolean
     mode?: PageLinkMode
+    background?: string
 }
 
 const PageLink = (props: PageLinkProps) => {

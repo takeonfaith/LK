@@ -15,6 +15,9 @@ import WhatsNew from '../../widgets/whats-new'
 import InitialLoader from './initial-loader'
 import Story from './story'
 import React from 'react'
+import useShowTutorial from '@utils/hooks/use-show-tutorial'
+import { storyModel } from '@entities/story'
+import { TutorialStory } from 'shared/stories/tutorial'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -46,6 +49,7 @@ const ContentLayout = () => {
     } = userModel.selectors.useUser()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
+    const { seen, setSeen } = useShowTutorial()
 
     useEffect(() => {
         if (user) settingsModel.effects.getLocalSettingsFx(user.id)
@@ -65,8 +69,17 @@ const ContentLayout = () => {
         })
     }, [])
     useEffect(() => {
-        isShowNotification && open(<WhatsNew />)
+        if (seen) {
+            isShowNotification && open(<WhatsNew />)
+        }
     }, [isShowNotification])
+
+    useEffect(() => {
+        if (!seen) {
+            storyModel.events.open({ pages: TutorialStory })
+            setSeen(true)
+        }
+    }, [])
 
     return (
         <div style={{ height, display: 'flex', background: 'var(--theme)' }}>

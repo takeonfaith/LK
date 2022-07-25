@@ -2,10 +2,9 @@ import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
 import { ListOfSettings } from '@features/settings'
 import ContentWrapper from '@ui/content-wrapper'
-import React, { useEffect } from 'react'
 import { Route, Switch } from 'react-router'
 import styled from 'styled-components'
-import { userModel } from '@entities/user'
+import React from 'react'
 
 const Wrapper = styled.div`
     height: 100%;
@@ -30,21 +29,9 @@ const Wrapper = styled.div`
     }
 `
 
-const SETTINGS_CONFIG = [
-    'settings-home-page',
-    'settings-personal',
-    'settings-appearance',
-    'settings-customize-menu',
-    'settings-security',
-]
-
 const SettingsPage = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
     const { settings } = settingsModel.selectors.useSettings()
-
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
 
     if (!allRoutes) return null
 
