@@ -1,12 +1,14 @@
 import { IRoute } from '@app/routes/general-routes'
+import { contextMenuModel } from '@entities/context-menu'
+import { settingsModel } from '@entities/settings'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
-import React from 'react'
-import { FiBook, FiMinusCircle, FiPlus } from 'react-icons/fi'
+import { FiMinusCircle, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
-import { settingsModel } from '@entities/settings'
-import { contextMenuModel } from '@entities/context-menu'
+import React from 'react'
+import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
+import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 
 const ContextContentWrapper = styled.div`
     .top {
@@ -30,30 +32,7 @@ const ContextContentWrapper = styled.div`
 const ContextContent = (props: IRoute) => {
     const { id, icon, title, color } = props
     const { settings } = settingsModel.selectors.useSettings()
-
-    const deleteElementContext = () => {
-        if (settings) {
-            const newPages = settings['settings-home-page'].property['pages'] as string[]
-            settingsModel.events.updateSetting({
-                nameSettings: 'settings-home-page',
-                nameParam: 'pages',
-                value: newPages.filter((item) => item !== id),
-            })
-            contextMenuModel.events.close()
-        }
-    }
-
-    const addElementContext = () => {
-        if (settings) {
-            const newPages = settings['settings-home-page'].property['pages'] as string[]
-            settingsModel.events.updateSetting({
-                nameSettings: 'settings-home-page',
-                nameParam: 'pages',
-                value: [...newPages, id],
-            })
-            contextMenuModel.events.close()
-        }
-    }
+    const isAdded = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
 
     return (
         <ContextContentWrapper>
@@ -64,32 +43,32 @@ const ContextContent = (props: IRoute) => {
                 <span>{title}</span>
             </div>
             <Divider />
-            <Button
-                text="Убрать"
-                icon={<FiMinusCircle />}
-                //  onClick={() => open(<WhatsNew />)}
-                width="100%"
-                align="left"
-                background="var(--schedule)"
-                onClick={() => deleteElementContext()}
-            />
-            <Button
-                text="Добавить"
-                icon={<FiPlus />}
-                //  onClick={() => open(<WhatsNew />)}
-                width="100%"
-                align="left"
-                background="var(--schedule)"
-                onClick={() => addElementContext()}
-            />
-            <Button
-                text="Еще что-то"
-                icon={<FiBook />}
-                //  onClick={() => open(<WhatsNew />)}
-                width="100%"
-                align="left"
-                background="var(--schedule)"
-            />
+            {isAdded ? (
+                <Button
+                    text="Убрать"
+                    icon={<FiMinusCircle />}
+                    width="100%"
+                    align="left"
+                    background="var(--schedule)"
+                    onClick={() => {
+                        deletePageFromHome(id, settings)
+                        contextMenuModel.events.close()
+                    }}
+                />
+            ) : (
+                <Button
+                    text="Добавить"
+                    icon={<FiPlus />}
+                    //  onClick={() => open(<WhatsNew />)}
+                    width="100%"
+                    align="left"
+                    background="var(--schedule)"
+                    onClick={() => {
+                        addPageToHome(id, settings)
+                        contextMenuModel.events.close()
+                    }}
+                />
+            )}
         </ContextContentWrapper>
     )
 }

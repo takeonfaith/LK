@@ -1,9 +1,9 @@
 import { IRoutes } from '@app/routes/general-routes'
 import AllPagesLink from '@features/all-pages/ui/molecules/all-pages-link'
 import List from '@ui/list'
-import { Align } from '@ui/types'
+import { Align, Direction } from '@ui/types'
 import React from 'react'
-import PageLink from '../../../all-pages/ui/molecules/page-link'
+import PageLink, { PageLinkMode } from '../../../all-pages/ui/molecules/page-link'
 
 interface Props {
     links: IRoutes
@@ -12,9 +12,20 @@ interface Props {
     doNotShow?: string
     restricted?: boolean
     wrapOnMobile?: boolean
+    orientation?: Direction
+    mode?: PageLinkMode
 }
 
-const LinksList = ({ title, links, doNotShow, restricted, wrapOnMobile = true, align = 'center' }: Props) => {
+const LinksList = ({
+    title,
+    links,
+    doNotShow,
+    restricted,
+    orientation,
+    wrapOnMobile = true,
+    align = 'center',
+    mode,
+}: Props) => {
     return (
         <List
             direction="horizontal"
@@ -29,8 +40,10 @@ const LinksList = ({ title, links, doNotShow, restricted, wrapOnMobile = true, a
                 if (el?.show !== false && doNotShow !== el?.id)
                     return (
                         <PageLink
+                            orientation={orientation}
                             restricted={restricted}
                             key={el.id}
+                            mode={mode}
                             {...el}
                             color={el.color.length ? el.color : 'blue'}
                         />

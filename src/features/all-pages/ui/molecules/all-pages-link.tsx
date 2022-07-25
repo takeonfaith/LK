@@ -5,7 +5,7 @@ import { FiArrowRight } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
-import { PageLinkWrapper } from './page-link'
+import { PageLinkWrapper } from './page-link-content'
 
 const AllPagesLinkWrapper = styled(PageLinkWrapper)`
     box-shadow: none;

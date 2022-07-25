@@ -6,9 +6,10 @@ import { Title } from '@ui/title'
 import React from 'react'
 import styled from 'styled-components'
 
-const StoryCardWrapper = styled(BlockWrapper)<{ color?: string; seen?: boolean }>`
+const StoryCardWrapper = styled(BlockWrapper)<{ color?: string; seen?: boolean; background?: string }>`
     overflow: hidden;
     position: relative;
+    background: ${({ background }) => background ?? 'var(--schedule)'};
     cursor: pointer;
     border-radius: var(--brLight);
     min-width: 110px;
@@ -25,15 +26,17 @@ const StoryCardWrapper = styled(BlockWrapper)<{ color?: string; seen?: boolean }
 interface Props {
     content: StoryProps[]
     seen?: boolean
+    title?: string
 }
 
-const StoryCard = ({ seen, content }: Props) => {
+const StoryCard = ({ seen, content, title }: Props) => {
     return (
         <StoryCardWrapper
             width="110px"
             padding="0px"
             height="160px"
             seen={seen}
+            background={content[0].background}
             color={content[0].color}
             onClick={() =>
                 storyModel.events.open({
@@ -43,7 +46,7 @@ const StoryCard = ({ seen, content }: Props) => {
         >
             {content[0].image && <Image loading={false} height="100%" width="auto" src={content[0].image} />}
             <div className="title">
-                <Title size={5}>{content[0].title}</Title>
+                <Title size={5}>{title ?? content[0].title}</Title>
             </div>
         </StoryCardWrapper>
     )

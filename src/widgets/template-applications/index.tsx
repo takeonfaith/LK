@@ -15,6 +15,7 @@ import { useModal } from 'widgets'
 const ApplicationPageWrapper = styled.div`
     display: flex;
     align-items: center;
+    color: var(--text);
     justify-content: center;
 
     @media (max-width: 1000px) {

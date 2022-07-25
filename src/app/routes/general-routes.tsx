@@ -3,7 +3,6 @@ import AllPages from '@pages/all-pages'
 import AllStudentsPage from '@pages/all-students'
 import AllTeachersPage from '@pages/all-teachers'
 import CantAccessPage from '@pages/cant-access'
-import ChatPage from '@pages/chat'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import FeedbackPage from '@pages/feedback'
 import ForgotPasswordPage from '@pages/forgot-password'
@@ -84,7 +83,7 @@ export interface IRoute {
     isNew?: boolean
     show?: boolean
     notifications?: number
-    group: keyof typeof Groups
+    group?: keyof typeof Groups
 }
 
 export const publicRoutes = [
@@ -159,7 +158,6 @@ export const generalRoutes: IRoutes = {
         Component: ProfilePage,
         color: 'purple',
         isTemplate: false,
-        notifications: 2,
         group: 'GENERAL',
     },
     chat: {
@@ -168,10 +166,9 @@ export const generalRoutes: IRoutes = {
         title: 'Сообщения',
         icon: <BiMessageRounded />,
         path: CHAT_ROUTE,
-        Component: ChatPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
         color: 'red',
         isTemplate: true,
-        notifications: 4,
         group: 'GENERAL',
     },
     schedule: {
@@ -209,7 +206,7 @@ export const generalRoutes: IRoutes = {
         title: 'Студенты',
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
-        Component: AllStudentsPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
         color: 'darkBlue',
         isTemplate: false,
         group: 'OTHER',
@@ -219,7 +216,7 @@ export const generalRoutes: IRoutes = {
         title: 'Преподаватели, сотрудники',
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
-        Component: AllTeachersPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',

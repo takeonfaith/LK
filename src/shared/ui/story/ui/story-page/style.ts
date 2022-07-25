@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import getTranslate from './lib/get-translate'
 
 export type StyledProps = {
+    textAlign?: Align
     color?: string
     align: { horizontal: Align; vertical: VerticalAlign }
     background?: string
@@ -15,7 +16,7 @@ const StoryPageWrapper = styled(BlockWrapper)<StyledProps>`
     background: ${({ background }) => background};
 
     .text-content {
-        width: fit-content;
+        width: 80%;
         height: fit-content;
         position: absolute;
         left: ${({ align }) => (align.horizontal === 'left' ? '30px' : align.horizontal === 'center' ? '50%' : 'auto')};
@@ -28,6 +29,7 @@ const StoryPageWrapper = styled(BlockWrapper)<StyledProps>`
         gap: 7px;
         color: ${({ color }) => color ?? 'var(--text)'};
         transform: ${({ align }) => getTranslate(align)};
+        text-align: ${({ textAlign }) => textAlign ?? 'left'};
     }
 
     @media (max-width: 700px) {

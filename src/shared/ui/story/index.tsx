@@ -28,10 +28,17 @@ const ClickField = styled.div<{ right?: string; left?: string }>`
     top: 50px;
     left: ${({ left }) => left ?? 'auto'};
     right: ${({ right }) => right ?? 'auto'};
-    height: calc(100% - 50px);
-    width: 30%;
+    height: calc(100% - 65px);
+    width: 25%;
     /* background: red; */
     z-index: 3;
+
+    &:hover {
+        background: ${({ left }) =>
+            left
+                ? 'linear-gradient(90deg, var(--almostTransparentOpposite), transparent)'
+                : 'linear-gradient(90deg, transparent, var(--almostTransparentOpposite))'};
+    }
 `
 
 const Story = () => {
@@ -53,14 +60,14 @@ const Story = () => {
                             playing={playing}
                         />
                         <ClickField
-                            left="0px"
+                            left="15px"
                             onClick={() =>
                                 currentPage !== 0 && storyModel.events.changeCurrentPage({ value: currentPage - 1 })
                             }
                         />
                         <StoryPage setPlaying={setPlaying} currentPage={currentPage} {...page} />
                         <ClickField
-                            right="0px"
+                            right="15px"
                             onClick={() =>
                                 currentPage !== pages.length - 1
                                     ? storyModel.events.changeCurrentPage({ value: currentPage + 1 })

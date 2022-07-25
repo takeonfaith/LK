@@ -12,7 +12,6 @@ import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE }
 import React from 'react'
 import ApplicationsPage from '@pages/applications'
 import { FaRegLightbulb } from 'react-icons/fa'
-import ProjectActivitiesPage from '@pages/project-activities'
 import RegularAccommodationPage from '@pages/applications/pages/regular-accommodation'
 import AccommodationCorrespondenceFormPage from '@pages/applications/pages/accommodation-correspondence-form'
 import AcademicLeaveAccommodationPage from '@pages/applications/pages/academic-leave-accommodation'
@@ -75,6 +74,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: ApplicationsPage,
         color: 'red',
         isTemplate: false,
+        isNew: true,
         group: 'GENERAL',
     },
     'project-activity': {
@@ -82,7 +82,7 @@ export const privateRoutes: () => IRoutes = () => ({
         title: 'Проектная деятельность',
         icon: <FaRegLightbulb />,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: ProjectActivitiesPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: PROJECT_ACTIVITIES_ROUTE }),
         color: 'yellow',
         isTemplate: false,
         group: 'GENERAL',

@@ -20,6 +20,7 @@ const StoryPage = ({
     text,
     children,
     setPlaying,
+    textAlign = 'left',
 }: StoryProps & { currentPage: number; setPlaying: React.Dispatch<React.SetStateAction<boolean>> }) => {
     return (
         <StoryPageWrapper
@@ -33,10 +34,12 @@ const StoryPage = ({
         >
             {image && <Image src={image} loading={false} width={'auto'} height={'100%'} />}
             <div className="text-content">
-                <Title size={3} align="left">
+                <Title size={3} align={textAlign}>
                     {title}
                 </Title>
-                <Subtext>{text}</Subtext>
+                <Subtext fontSize="1em" align={textAlign}>
+                    {text}
+                </Subtext>
                 {children && <div className="content-children">{children}</div>}
             </div>
         </StoryPageWrapper>

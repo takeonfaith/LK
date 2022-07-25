@@ -2,7 +2,6 @@ import { ApplicationsConstants } from '@entities/applications/consts'
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
-import localizeDate from '@utils/localize-date'
 
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
@@ -12,16 +11,12 @@ const getApplicationsColumns = (): ColumnProps[] => {
             field: 'created',
             priority: 'two',
             sort: true,
-            render: (value) => <>{localizeDate(value)}</>,
+            type: 'date',
         },
         {
             title: 'Рег. номер',
             field: 'num',
             priority: 'three',
-            catalogs: [
-                { id: 0, title: '3214141da' },
-                { id: 1, title: '3214141db' },
-            ],
         },
         {
             title: 'Статус',
