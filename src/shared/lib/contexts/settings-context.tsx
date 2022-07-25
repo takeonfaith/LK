@@ -1,7 +1,16 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
-import { DEFAULT_SETTINGS, IDefaultSettings, MenuType, GeneralType, SETTINGS, ThemeType } from '../../consts'
-import useLocalStorage from '../hooks/use-local-storage'
+import {
+    DEFAULT_SETTINGS,
+    IDefaultSettings,
+    MenuType,
+    GeneralType,
+    SETTINGS,
+    ThemeType,
+    REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG,
+} from '@consts'
+import useLocalStorage from '@utils/hooks/use-local-storage'
 import React from 'react'
+import { userModel } from '@entities/user'
 
 interface IAllSettings {
     settings: IDefaultSettings
@@ -41,6 +50,7 @@ interface Props {
 }
 
 const SettingsProvider = ({ children }: Props) => {
+    const { data } = userModel.selectors.useUser()
     const [settings, setSettings] = useState<IDefaultSettings>(DEFAULT_SETTINGS)
     const { get, set } = useLocalStorage()
 
@@ -48,11 +58,13 @@ const SettingsProvider = ({ children }: Props) => {
         const settings = get(SETTINGS)
 
         if (!settings) {
-            set(SETTINGS, JSON.stringify(DEFAULT_SETTINGS))
+            data?.user?.user_status === 'staff'
+                ? set(SETTINGS, JSON.stringify((DEFAULT_SETTINGS.menu = REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG)))
+                : set(SETTINGS, JSON.stringify(DEFAULT_SETTINGS))
         } else {
             setSettings(JSON.parse(settings))
         }
-    }, [])
+    }, [data?.user?.user_status])
 
     const update = useCallback(
         (newSettings: IDefaultSettings) => {

@@ -1,5 +1,5 @@
 import { userModel } from '@entities/user'
-import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
+import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
@@ -44,7 +44,7 @@ const AccommodationCorrespondenceFormPage = () => {
             {!!form && !!setForm && !!registration && !!disability && !!additionally && (
                 <FormBlock>
                     <Button
-                        text="Назад к заявлениям"
+                        text="Назад к цифровым сервисам"
                         icon={<FiChevronLeft />}
                         onClick={() => history.push(APPLICATIONS_ROUTE)}
                         background="transparent"

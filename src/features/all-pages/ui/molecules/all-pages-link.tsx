@@ -28,6 +28,7 @@ const AllPagesLink = () => {
                 isVertical={true}
                 justifyContent="center"
                 color={'blue'}
+                hasNotifications={false}
             >
                 <div className="outside">
                     <Icon color={'blue'}>

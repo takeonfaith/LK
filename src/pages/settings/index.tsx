@@ -30,6 +30,14 @@ const Wrapper = styled.div`
     }
 `
 
+const SETTINGS_CONFIG = [
+    'settings-home-page',
+    'settings-personal',
+    'settings-appearance',
+    'settings-customize-menu',
+    'settings-security',
+]
+
 const SettingsPage = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
     const { settings } = settingsModel.selectors.useSettings()

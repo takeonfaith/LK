@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import ContactInfoActualizationPage from '@pages/contact-info-actualization'
-import DataVerificationPage from '@pages/data-verification'
+import AllStudentsPage from '@pages/all-students'
+import AllTeachersPage from '@pages/all-teachers'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PersonalNotificationsPage from '@pages/personal-notifications'
@@ -29,19 +29,16 @@ import VacationSchedule from '@pages/vacation-schedule'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import {
-    FiArrowDownCircle,
-    FiBell,
-    FiBriefcase,
-    FiCalendar,
-    FiCheckSquare,
-    FiFileText,
-    FiMonitor,
-    FiStar,
-} from 'react-icons/fi'
-import { HiOutlineMenuAlt2, HiOutlineUserGroup } from 'react-icons/hi'
+import { FiArrowDownCircle, FiBell, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
+import {
+    ALL_STUDENTS_ROUTE,
+    ALL_TEACHERS_ROUTE,
+    generalHiddenRoutes,
+    generalRoutes,
+    IRoutes,
+    PROJECT_ACTIVITIES_ROUTE,
+} from './general-routes'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
@@ -104,7 +101,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
     },
     applications: {
         id: 'applications',
-        title: 'Заявления',
+        title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
         Component: TeachersApplicationsPage,
@@ -116,7 +113,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
     },
     'download-agreements': {
         id: 'download-agreements',
-        title: 'Скачать отчеты',
+        title: 'Административная панель',
         icon: <FiArrowDownCircle />,
         path: DOWNLOAD_AGREEMENTS_FILES_ROUTE,
         Component: DownloadAdminFilesPage,
@@ -133,46 +130,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         path: ALERTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-    },
-    'data-verification': {
-        id: 'data-verification',
-        title: 'Анкета для сверки данных',
-        icon: <HiOutlineMenuAlt2 />,
-        path: DATA_VERIFICATION_ROUTE,
-        Component: DataVerificationPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-    },
-    'students-logins': {
-        id: 'students-logins',
-        title: 'Логины студентов',
-        icon: <BiGroup />,
-        path: STUDENTS_LOGINS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: STUDENTS_LOGINS_ROUTE }),
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-    },
-    'contact-info-actualization': {
-        id: 'contact-info-actualization',
-        title: 'Актуализация контактных данных',
-        icon: <FiCheckSquare />,
-        path: CONTACT_INFO_ACTUALIZATION,
-        Component: ContactInfoActualizationPage,
-        color: 'orange',
-        isTemplate: false,
-        group: 'OTHER',
-    },
-    'children-route': {
-        id: 'children-route',
-        title: 'Дети и внуки',
-        icon: <HiOutlineUserGroup />,
-        path: CHILDREN_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: CHILDREN_ROUTE }),
-        color: 'green',
         isTemplate: false,
         group: 'OTHER',
     },
@@ -216,16 +173,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
     },
-    'help-service': {
-        id: 'help-service',
-        title: 'Цифровые сервисы',
-        icon: <FiBriefcase />,
-        path: HELP_SERVICE_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: HELP_SERVICE_ROUTE }),
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-    },
     orders: {
         id: 'orders',
         title: 'Приказы',
@@ -235,6 +182,24 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
+    },
+    'all-students': {
+        id: 'all-students',
+        title: 'Студенты',
+        icon: <BiGroup />,
+        path: ALL_STUDENTS_ROUTE,
+        Component: AllStudentsPage,
+        color: 'darkBlue',
+        isTemplate: false,
+    },
+    'all-teachers': {
+        id: 'all-teachers',
+        title: 'Сотрудники',
+        icon: <BiBookReader />,
+        path: ALL_TEACHERS_ROUTE,
+        Component: AllTeachersPage,
+        color: 'blue',
+        isTemplate: false,
     },
     'document-blanks': {
         id: 'document-blanks',
@@ -282,16 +247,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         path: INFO_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: INFO_ROUTE }),
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-    },
-    vax: {
-        id: 'vax',
-        title: 'Вакцинация',
-        icon: <FiBriefcase />,
-        path: VAX_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: VAX_ROUTE }),
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',

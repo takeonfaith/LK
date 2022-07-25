@@ -1,9 +1,6 @@
 import { IColors } from '@consts'
 import AllPages from '@pages/all-pages'
-import AllStudentsPage from '@pages/all-students'
-import AllTeachersPage from '@pages/all-teachers'
 import CantAccessPage from '@pages/cant-access'
-import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import FeedbackPage from '@pages/feedback'
 import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
@@ -16,6 +13,7 @@ import SchedulePage from '@pages/schedule'
 import SettingsPage from '@pages/settings'
 import Account from '@pages/settings/pages/account'
 import Appearance from '@pages/settings/pages/appearance'
+import CustomizeMenu from '@pages/settings/pages/customize-menu'
 import HomeSettings from '@pages/settings/pages/home'
 import Security from '@pages/settings/pages/security'
 import TeachersSchedule from '@pages/teachers-schedule'
@@ -30,8 +28,8 @@ import {
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
-import { FiClipboard, FiHome, FiLayers, FiLock, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
-import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
+import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
+import { HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -55,6 +53,7 @@ export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
 export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
 export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
+export const SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE = SETTINGS_ROUTE + '/customize-menu'
 export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
 
@@ -142,7 +141,7 @@ export const generalRoutes: IRoutes = {
     },
     home: {
         id: 'home',
-        title: 'Домой',
+        title: 'Главная',
         icon: <FiHome />,
         path: HOME_ROUTE,
         Component: Home,
@@ -191,19 +190,9 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'GENERAL',
     },
-    'electronic-interaction-agreement': {
-        id: 'electronic-interaction-agreement',
-        title: 'Соглашение об электронном взаимодействии',
-        icon: <HiOutlineClipboardCheck />,
-        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
-        Component: ElectronicInteractionAgreementPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-    },
     'all-students': {
         id: 'all-students',
-        title: 'Студенты',
+        title: 'Одногруппники',
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
@@ -213,7 +202,7 @@ export const generalRoutes: IRoutes = {
     },
     'all-teachers': {
         id: 'all-teachers',
-        title: 'Преподаватели, сотрудники',
+        title: 'Преподаватели',
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
@@ -308,5 +297,15 @@ export const generalHiddenRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'OTHER',
+    },
+    'settings-customize-menu': {
+        id: 'settings-customize-menu',
+        title: 'Настройки. Меню',
+        icon: <FiMenu />,
+        path: SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE,
+        Component: CustomizeMenu,
+        color: 'red',
+        isTemplate: true,
+        show: true,
     },
 }
