@@ -37,6 +37,7 @@ export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 export const ACAD_PERFORMANCE_ROUTE = '/acad-performance'
+export const HELPFUL_INFORMATION = '/helpful-information'
 
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
@@ -64,7 +65,6 @@ export const CHANGING_PERSONAL_DATA = APPLICATIONS_ROUTE + '/changing-personal-d
 export const STUDENT_STATUS = APPLICATIONS_ROUTE + '/student-status'
 export const STATE_ACCREDITATION = APPLICATIONS_ROUTE + '/state-accreditation'
 export const MILITARY_REGISTRATION_CARD = APPLICATIONS_ROUTE + '/military-registration-card'
-export const HELPFUL_INFORMATION = APPLICATIONS_ROUTE + '/helpful-information'
 
 export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
@@ -112,7 +112,7 @@ export const privateRoutes: () => IRoutes = () => ({
     'helpful-information': {
         id: 'helpful-information',
         title: 'Полезная информация',
-        icon: BiInfoCircle,
+        icon: <BiInfoCircle />,
         path: HELPFUL_INFORMATION,
         Component: HelpfulInformation,
         color: 'blue',
