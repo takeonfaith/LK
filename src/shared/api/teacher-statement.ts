@@ -3,7 +3,7 @@ import { TeacherStatement } from '@api/model'
 import token from '@utils/token'
 
 export const get = () => {
-    return $api.get<TeacherStatement>(`?getCheckData&token=${token()}`)
+    return $api.get<TeacherStatement>(`?getAppData&token=${token()}`)
 }
 
 export const post = (args: TeacherStatement) => {
