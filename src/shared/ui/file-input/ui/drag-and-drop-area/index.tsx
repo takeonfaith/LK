@@ -54,6 +54,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
             <div className="info">
                 <span className="info-item">Макс. размер файла: 15 MB</span>
                 {maxFiles && <span className="info-item">Макс. файлов: {maxFiles}</span>}
+                <span className="info-item">Форматы: jpg, png, pdf</span>
             </div>
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
             <div className="message">

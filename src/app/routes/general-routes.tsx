@@ -182,7 +182,7 @@ export const generalRoutes: IRoutes = {
     },
     payments: {
         id: 'payments',
-        title: 'Оплата',
+        title: 'Договоры и оплаты',
         icon: <BiRuble />,
         path: PAYMENTS_ROUTE,
         Component: PaymentsPage,
