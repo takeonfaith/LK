@@ -24,22 +24,22 @@ const UserInfo = () => {
 
     const teacherPages = [
         { title: 'Учетная карточка', content: <AllInfo user={user} /> },
-        {
-            title: 'Сведения о вакцинации',
-            content: (
-                <div style={{ justifyContent: 'start' }}>
-                    <PageIsNotReady oldVersionUrl={VAX_ROUTE} />
-                </div>
-            ),
-        },
-        {
-            title: 'Дети и внуки',
-            content: (
-                <div style={{ justifyContent: 'start' }}>
-                    <PageIsNotReady oldVersionUrl={CHILDREN_ROUTE} />
-                </div>
-            ),
-        },
+        // {
+        //     title: 'Сведения о вакцинации',
+        //     content: (
+        //         <div style={{ justifyContent: 'start' }}>
+        //             <PageIsNotReady oldVersionUrl={VAX_ROUTE} />
+        //         </div>
+        //     ),
+        // },
+        // {
+        //     title: 'Дети и внуки',
+        //     content: (
+        //         <div style={{ justifyContent: 'start' }}>
+        //             <PageIsNotReady oldVersionUrl={CHILDREN_ROUTE} />
+        //         </div>
+        //     ),
+        // },
         { title: 'Анкета для сверки данных', content: <DataVerificationPage /> },
         { title: 'Актуализация контактных данных', content: <ContactInfoActualizationPage /> },
         {

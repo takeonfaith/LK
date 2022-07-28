@@ -17,8 +17,7 @@ const SliderItemWrapper = styled.div<{ size: number; condition: boolean }>`
     color: var(--text);
 
     & > b {
-        overflow: hidden;
-        white-space: nowrap;
+        word-break: normal;
         text-overflow: ellipsis;
     }
 
@@ -45,6 +44,7 @@ interface Props {
 }
 
 const SliderItem = ({ id, currentPage, setCurrentPage, pageTitle, size, condition = true }: Props) => {
+    console.log(pageTitle)
     return (
         <SliderItemWrapper
             className={`SliderItem ${id === currentPage ? 'active' : ''}`}

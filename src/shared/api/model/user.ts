@@ -37,6 +37,7 @@ interface Subdivision {
     status?: string
     subdivision?: string
     wage?: string
+    post?: string
 }
 
 interface AuthorIDs {
