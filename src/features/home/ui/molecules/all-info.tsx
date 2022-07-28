@@ -83,16 +83,22 @@ function AllInfo({ user }: Props) {
             key: 'Сведения о трудоустройстве',
             value:
                 !!subdivisions?.length &&
-                subdivisions?.map((t, index) => (
-                    <React.Fragment key={index}>
-                        <div style={{ marginTop: '5px' }}>
-                            {`${index + 1}) ${t.subdivision ? t.subdivision : ''}`}
-                            {t.jobType && <div>Должность: {t.jobType}</div>}
-                            {t.wage && <div>Ставка: {t.wage}</div>}
-                        </div>
-                        {index < subdivisions.length - 1 && <Divider />}
-                    </React.Fragment>
-                )),
+                subdivisions?.map((t, index) => {
+                    return (
+                        <React.Fragment key={index}>
+                            <div style={{ marginTop: '5px' }}>
+                                {t.subdivision && <div>Подразделение: {t.subdivision}</div>}
+                                {t.post && <div>Должность: {t.post}</div>}
+                                {t.wage && t.jobType && (
+                                    <div>
+                                        Ставка: {t.wage}; {t.jobType}
+                                    </div>
+                                )}
+                            </div>
+                            {index < subdivisions.length - 1 && <Divider />}
+                        </React.Fragment>
+                    )
+                }),
         },
         {
             key: 'Уровень образования',

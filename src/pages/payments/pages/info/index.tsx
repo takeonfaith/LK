@@ -78,13 +78,13 @@ const InfoPayments = () => {
                         />
                         <Button
                             onClick={() => null}
-                            text="Блан квитанции оплаты неустойки"
+                            text="Бланк квитанции оплаты неустойки"
                             width={'100%'}
                             background="var(--settings)"
                         />
                         <Button
                             onClick={() => null}
-                            text="Блан квитанции оплаты обучения"
+                            text="Бланк квитанции оплаты обучения"
                             width={'100%'}
                             background="var(--settings)"
                         />
