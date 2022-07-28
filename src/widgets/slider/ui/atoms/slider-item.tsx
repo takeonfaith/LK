@@ -44,7 +44,6 @@ interface Props {
 }
 
 const SliderItem = ({ id, currentPage, setCurrentPage, pageTitle, size, condition = true }: Props) => {
-    console.log(pageTitle)
     return (
         <SliderItemWrapper
             className={`SliderItem ${id === currentPage ? 'active' : ''}`}
