@@ -2,6 +2,7 @@
 import AllStudentsPage from '@pages/all-students'
 import AllTeachersPage from '@pages/all-teachers'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
+import HelpfulInformation from '@pages/helpful-information'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PersonalNotificationsPage from '@pages/personal-notifications'
 import TeachersApplicationsPage from '@pages/teachers-applications'
@@ -246,7 +247,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Полезная информация',
         icon: <FiFileText />,
         path: INFO_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: INFO_ROUTE }),
+        Component: HelpfulInformation,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
