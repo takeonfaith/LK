@@ -1,7 +1,7 @@
 import { Groups, IRoutes } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { FoundPages } from '@features/all-pages'
-import getGroupPages from '@features/all-pages/lib/get-group-pages'
+import getGroupPages, { routesOrder } from '@features/all-pages/lib/get-group-pages'
 import search from '@features/all-pages/lib/search'
 import LinksList from '@features/home/ui/organisms/links-list'
 import { LocalSearch } from '@ui/molecules'
@@ -56,10 +56,14 @@ const AllPages = () => {
                 setExternalValue={setSearchValue}
             />
             {searchValue.length === 0 &&
-                Object.keys(groupedPages).map((group) => {
-                    const links = groupedPages[group as Groups]
-                    return <LinksList title={group} key={group} doNotShow="all" align="left" links={links} />
-                })}
+                Object.keys(groupedPages)
+                    .sort((a, b) => {
+                        return routesOrder[a as Groups] - routesOrder[b as Groups]
+                    })
+                    .map((group) => {
+                        const links = groupedPages[group as Groups]
+                        return <LinksList title={group} key={group} doNotShow="all" align="left" links={links} />
+                    })}
             <FoundPages pages={foundPages} />
         </AllPagesWrapper>
     )

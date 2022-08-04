@@ -3,7 +3,6 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { CenterPage, Title } from '@ui/atoms'
 import BlockWrapper from '@ui/block/styles'
-import { LocalSearch } from '@ui/molecules'
 import { Slider } from 'widgets'
 import pagesConfig from './config/pages-config'
 import { userModel } from '@entities/user'
@@ -18,7 +17,6 @@ const HelpfulInformation = () => {
         [stuffMode, pagesConfig],
     )
 
-    console.log(configs)
     const pageBlocks = configs[page]
 
     // TODO: add search (previous version had a gag)
@@ -67,19 +65,19 @@ const HelpfulInformation = () => {
                     setCurrentPage={setPage}
                 />
                 <ContentWrapper>
-                    {pageBlocks.map(({ title, links }) => (
-                        <ContentBlock>
+                    {pageBlocks.map(({ title, links }, index) => (
+                        <ContentBlock key={title + index}>
                             <Title size={3} align="left">
                                 {title}
                             </Title>
                             <div>
-                                {links.map(({ title: linkTitle, href, visible }) => {
+                                {links.map(({ title: linkTitle, href, visible }, index) => {
                                     if ((visible === 'staff' && !stuffMode) || (visible === 'student' && stuffMode)) {
                                         return null
                                     }
 
                                     return (
-                                        <CustomLink href={href} target="_blank">
+                                        <CustomLink key={linkTitle + index} href={href} target="_blank">
                                             {linkTitle}
                                         </CustomLink>
                                     )

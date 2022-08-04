@@ -98,7 +98,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     applications: {
         id: 'applications',
@@ -109,8 +109,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'OTHER',
-
-        isNew: true,
     },
     'download-agreements': {
         id: 'download-agreements',
@@ -132,7 +130,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     calendar: {
         id: 'calendar',
@@ -152,7 +150,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
         color: 'pink',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     'kpi-admin': {
         id: 'kpi-admin',
@@ -162,7 +160,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
         color: 'darkBlue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     'sc-news': {
         id: 'sc-news',
@@ -172,7 +170,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: SC_NEWS_ROUTE }),
         color: 'orange',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     orders: {
         id: 'orders',
@@ -182,7 +180,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: ORDERS_ROUTE }),
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     'all-students': {
         id: 'all-students',
@@ -192,6 +190,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: AllStudentsPage,
         color: 'darkBlue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'all-teachers': {
         id: 'all-teachers',
@@ -201,6 +200,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: AllTeachersPage,
         color: 'blue',
         isTemplate: false,
+        group: 'OTHER',
     },
     'document-blanks': {
         id: 'document-blanks',
@@ -280,7 +280,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
         color: 'yellow',
         isTemplate: false,
-        group: 'TEST',
+        group: 'IN_DEVELOPING',
     },
 })
 

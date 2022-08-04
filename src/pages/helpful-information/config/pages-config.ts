@@ -22,13 +22,18 @@ const pages: HelpfulPages = [
                 },
                 {
                     title: 'Библиотечно-информационный центр',
-                    visible: 'student',
+                    visible: 'all',
                     href: 'https://new.mospolytech.ru/obuchauschimsya/biblioteka/',
                 },
                 {
                     title: 'Электронный каталог библиотеки Электростальского института',
-                    visible: 'student',
-                    href: 'http://lib.elpol.ru/',
+                    visible: 'all',
+                    href: 'http://lib.elpol.ru',
+                },
+                {
+                    title: 'Образовательные программы',
+                    visible: 'all',
+                    href: 'https://mospolytech.ru/sveden/education/educationplan/',
                 },
             ],
         },
@@ -93,8 +98,8 @@ const pages: HelpfulPages = [
                 },
                 {
                     title: 'Многофункциональный центр',
-                    visible: 'staff',
-                    href: 'https://e.mospolytech.ru/old/index.php?p=centers',
+                    visible: 'all',
+                    href: 'https://mospolytech.ru/obuchauschimsya/mnogofunkcionalnyy-centr/',
                 },
             ],
         },
