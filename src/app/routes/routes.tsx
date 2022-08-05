@@ -77,6 +77,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'GENERAL',
+        show: false,
     },
     'project-activity': {
         id: 'project-activity',
@@ -96,7 +97,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: AcadPerformance,
         color: 'green',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'LEARNING_ACTIVITIES',
     },
     job: {
         id: 'job',

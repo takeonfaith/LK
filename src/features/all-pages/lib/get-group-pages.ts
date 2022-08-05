@@ -6,7 +6,7 @@ export const routesOrder: RoutesOrder = {
     Основное: 0,
     'Учебная деятельность': 1,
     'Финансы и документы': 2,
-    Другое: 3,
+    'Находится в разработке': 3,
 }
 
 const getGroupPages = (routes: IRoutes | null) => {

@@ -68,7 +68,7 @@ export enum Groups {
     GENERAL = 'Основное',
     FINANCES_DOCS = 'Финансы и документы',
     LEARNING_ACTIVITIES = 'Учебная деятельность',
-    OTHER = 'Другое',
+    OTHER = 'Находится в разработке',
 }
 
 export interface IRoute {
