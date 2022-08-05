@@ -65,9 +65,11 @@ export interface IRoutes {
 }
 
 export enum Groups {
-    GENERAL = 'Основные',
+    GENERAL = 'Основное',
+    FINANCES_DOCS = 'Финансы и документы',
+    LEARNING_ACTIVITIES = 'Учебная деятельность',
+    IN_DEVELOPING = 'Находятся в разработке',
     OTHER = 'Другое',
-    TEST = 'Тестовый раздел',
 }
 
 export interface IRoute {
@@ -168,7 +170,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
         color: 'red',
         isTemplate: true,
-        group: 'GENERAL',
+        group: 'IN_DEVELOPING',
     },
     schedule: {
         id: 'schedule',
@@ -178,7 +180,7 @@ export const generalRoutes: IRoutes = {
         Component: SchedulePage,
         color: 'pink',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'LEARNING_ACTIVITIES',
     },
     payments: {
         id: 'payments',
@@ -188,7 +190,7 @@ export const generalRoutes: IRoutes = {
         Component: PaymentsPage,
         color: 'lightGreen',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'FINANCES_DOCS',
     },
     'all-students': {
         id: 'all-students',
@@ -198,7 +200,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
         color: 'darkBlue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     'all-teachers': {
         id: 'all-teachers',
@@ -208,7 +210,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     portfolio: {
         id: 'portfolio',
@@ -218,7 +220,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: PORTFOLIO_ROUTE }),
         color: 'blue',
         isTemplate: true,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     feedback: {
         id: 'feedback',
@@ -228,7 +230,7 @@ export const generalRoutes: IRoutes = {
         Component: FeedbackPage,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'IN_DEVELOPING',
     },
     instructions: {
         id: 'instructions',
@@ -238,7 +240,7 @@ export const generalRoutes: IRoutes = {
         Component: InstructionsPage,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'GENERAL',
     },
 }
 
