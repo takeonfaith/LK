@@ -194,6 +194,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'darkBlue',
         isTemplate: false,
         group: 'OTHER',
+        show: false,
     },
     'all-teachers': {
         id: 'all-teachers',
@@ -204,6 +205,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
+        show: false,
     },
     'document-blanks': {
         id: 'document-blanks',
