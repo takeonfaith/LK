@@ -155,9 +155,9 @@ const ProfilePage = () => {
                     />
                 </List>
             </ProfileTop>
-            {/* <List direction="horizontal" innerPadding="20px 0" showPages>
+            <List direction="horizontal" innerPadding="20px 0" showPages>
                 <StoryCard title="Обучение" content={TutorialStory} />
-            </List>0 */}
+            </List>
             {/* <AvailableAccounts /> */}
             <UserInfo />
         </ProfileWrapper>
