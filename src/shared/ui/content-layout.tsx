@@ -74,12 +74,12 @@ const ContentLayout = () => {
         }
     }, [isShowNotification])
 
-    useEffect(() => {
-        if (!seen) {
-            storyModel.events.open({ pages: TutorialStory })
-            setSeen(true)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!seen) {
+    //         storyModel.events.open({ pages: TutorialStory })
+    //         setSeen(true)
+    //     }
+    // }, [])
 
     return (
         <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
