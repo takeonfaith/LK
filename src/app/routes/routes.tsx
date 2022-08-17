@@ -77,7 +77,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'GENERAL',
-        show: false,
+        // show: false,
     },
     'project-activity': {
         id: 'project-activity',
