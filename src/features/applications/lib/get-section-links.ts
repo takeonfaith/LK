@@ -51,7 +51,12 @@ const getSectionLinks = () => {
         {
             title: 'Профсоюзная организация',
             links: [
-                { link: UNION_ORGANIZATION, title: 'Вступить в Профсоюз', isExternalLink: true },
+                {
+                    link: UNION_ORGANIZATION,
+                    title: 'Вступить в Профсоюз',
+                    isExternalLink: true,
+                    isOpenInNewWindow: true,
+                },
                 {
                     link: FINANCIAL_SUPPORT,
                     title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)',

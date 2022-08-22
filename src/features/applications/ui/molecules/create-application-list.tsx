@@ -69,7 +69,7 @@ const CreateApplicationListWrapper = styled.div`
 
 export interface Section {
     title: string
-    links: { title: string; link: string; isExternalLink?: boolean }[]
+    links: { title: string; link: string; isExternalLink?: boolean; isOpenInNewWindow?: boolean }[]
 }
 
 interface Props {
@@ -105,7 +105,13 @@ const CreateApplicationList = ({ isTeachers = false }: Props) => {
                                 <div className="links">
                                     {section.links.map((link) =>
                                         link.isExternalLink ? (
-                                            <a href={link.link}>{link.title}</a>
+                                            <a
+                                                href={link.link}
+                                                target={link.isOpenInNewWindow ? '_blank' : '_self'}
+                                                rel="noreferrer"
+                                            >
+                                                {link.title}
+                                            </a>
                                         ) : (
                                             <Link to={link.link} key={link.link} onClick={close}>
                                                 {link.title}
