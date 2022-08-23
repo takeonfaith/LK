@@ -1,3 +1,4 @@
+import { UserApplication } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
 const justificationGrantOptions = [
@@ -74,7 +75,7 @@ const structuralSubdivisionOptions = [
     },
 ]
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
         title: 'Заявка на оказание материальной помощи',
         data: [
@@ -83,15 +84,16 @@ const getForm = (): IInputArea => {
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
-                value: '',
                 editable: true,
                 required: true,
+                value: dataUserApplication.phone,
             },
+
             {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },

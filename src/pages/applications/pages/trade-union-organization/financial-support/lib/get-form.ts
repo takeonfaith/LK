@@ -1,4 +1,5 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
 
 const justificationGrantOptions = [
     { id: 0, title: 'Сироты или оставшиеся без попечения родителей' },
@@ -16,7 +17,7 @@ const paymentMethodOptions = [
     { id: 1, title: 'Выплату производить безналичным путем на расчетный счет открытый в ПАО Сбербанк:' },
 ]
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
         title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)',
         data: [
@@ -25,15 +26,16 @@ const getForm = (): IInputArea => {
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
-                value: '',
                 editable: true,
                 required: true,
+                value: dataUserApplication.phone,
             },
+
             {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },

@@ -10,12 +10,11 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import { useHistory } from 'react-router'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
-import { ApplicationFormCodes } from "@utility-types/application-form-codes";
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const PreferentialAccommodationPage = () => {
-    const currentFormId = 'usg_gethostel_benefit'
     const [form, setForm] = useState<IInputArea | null>(null)
     const history = useHistory()
     const {

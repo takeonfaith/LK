@@ -1,7 +1,8 @@
 import { IInputArea } from '@ui/input-area/model'
-import { User } from '@api/model'
+import { UserApplication } from '@api/model'
 
-const getForm = (data: User): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
+    const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
         title: 'Предоставление права льготного проживания',
         hint: 'Необходимо прикрепить документ, подтверждающий соответствие льготной категории',
@@ -9,21 +10,21 @@ const getForm = (data: User): IInputArea => {
             {
                 title: 'ФИО',
                 fieldName: 'fio',
-                value: data.surname + ' ' + data.name + ' ' + data.patronymic,
+                value: surname + ' ' + name + ' ' + patronymic,
                 editable: false,
             },
             {
                 title: 'Учебная группа',
                 fieldName: 'group',
                 type: 'tel',
-                value: data.group,
+                value: group,
                 editable: false,
             },
             {
                 title: 'Электронная почта',
                 fieldName: 'email',
                 type: 'email',
-                value: 'email',
+                value: email,
                 editable: true,
                 required: true,
             },
@@ -31,7 +32,7 @@ const getForm = (data: User): IInputArea => {
                 title: 'Телефон',
                 fieldName: 'phone',
                 type: 'tel',
-                value: '8 999 999 99 99',
+                value: phone,
                 editable: true,
                 required: true,
             },

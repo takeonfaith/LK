@@ -17,7 +17,7 @@ export type TemplateFormProps<T extends { last_update?: string }> = {
     isAvailableToSend?: boolean
 }
 
-type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
+export type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const TemplateForm = <T extends { last_update?: string }>({
     model,

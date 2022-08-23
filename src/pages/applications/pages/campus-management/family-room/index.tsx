@@ -1,4 +1,3 @@
-import { userModel } from '@entities/user'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
@@ -12,16 +11,16 @@ import { APPLICATIONS_ROUTE } from '@routes'
 import getFamily from './lib/get-family'
 import getAdditionally from './lib/get-additionally'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
-import { ApplicationFormCodes } from "@utility-types/application-form-codes";
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const FamilyRoomPage = () => {
-    const currentFormId = 'usg_gethostel_family'
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
-        data: { user },
-    } = userModel.selectors.useUser()
+        data: { dataUserApplication },
+    } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [family, setFamily] = useState<IInputArea | null>(null)
@@ -30,12 +29,12 @@ const FamilyRoomPage = () => {
     const history = useHistory()
 
     useEffect(() => {
-        if (!!user) {
-            setForm(getForm(user))
+        if (!!dataUserApplication) {
+            setForm(getForm(dataUserApplication))
             setFamily(getFamily())
             setAdditionally(getAdditionally())
         }
-    }, [user])
+    }, [dataUserApplication])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>

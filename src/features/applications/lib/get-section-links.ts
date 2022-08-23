@@ -35,16 +35,16 @@ const getSectionLinks = () => {
                     link: CERTIFICATE_OF_ATTENDANCE,
                     title: 'Справка о прослушанных дисциплинах за период обучения (справка об обучении)',
                 },
-                { link: SOCIAL_AGENCIES, title: 'Справка в социальные учреждения (Пенсионный фонд, УСЗН и пр.)' },
-                { link: PAPER_CALL, title: 'Справка-вызов' },
-                { link: CHANGING_PERSONAL_DATA, title: 'Запрос на изменение персональных данных' },
-                { link: RESTORING_THE_MAGNETIC_PASS, title: 'Запрос на восстановление магнитного пропуска' },
-                { link: CLARIFICATION_OF_PASSPORT_DATA_ROUTE, title: 'Уточнение паспортных данных' },
-                { link: RETAKE_FOR_DIPLOMA, title: 'Заявление на пересдачу для получения диплома с отличием' },
                 {
                     link: STUDENT_STATUS,
                     title: 'Справка о прохождении обучения в университете (о статусе обучающегося) по месту требования',
                 },
+                { link: SOCIAL_AGENCIES, title: 'Справка в социальные учреждения (Пенсионный фонд, УСЗН и пр.)' },
+                { link: PAPER_CALL, title: 'Справка-вызов' },
+                { link: RETAKE_FOR_DIPLOMA, title: 'Заявление на пересдачу для получения диплома с отличием' },
+                { link: CHANGING_PERSONAL_DATA, title: 'Запрос на изменение персональных данных' },
+                { link: RESTORING_THE_MAGNETIC_PASS, title: 'Запрос на восстановление магнитного пропуска' },
+                { link: CLARIFICATION_OF_PASSPORT_DATA_ROUTE, title: 'Уточнение паспортных данных' },
                 { link: STATE_ACCREDITATION, title: 'Выдача лицензий и свидетельств о государственной аккредитации' },
             ],
         },
@@ -106,7 +106,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Управление студенческого городка',
+            title: 'Управление студенческим городком',
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,

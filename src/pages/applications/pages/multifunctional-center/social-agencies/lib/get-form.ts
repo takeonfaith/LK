@@ -1,23 +1,39 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
+import { NumberOfCopiesOptions } from '@entities/applications/consts'
 
-const getForm = (): IInputArea => {
+const SocialPlaceOfReferenceOptions = [
+    { id: 0, title: 'в Пенсионный фонд Российской Федерации (ПФР)' },
+    { id: 1, title: 'в Управление социальной защиты населения (УСЗН)' },
+    { id: 2, title: 'в военный комиссариат' },
+    { id: 3, title: 'в Многофункциональный центр (МФЦ)' },
+    { id: 4, title: 'в Федеральную налоговую службу (ФНС)' },
+    { id: 5, title: 'в банк' },
+    { id: 6, title: 'в Федеральную службу труда и занятости' },
+    { id: 7, title: 'в отдел/орган опеки и попечительства' },
+    { id: 8, title: 'в социальное учреждение' },
+    { id: 9, title: 'по месту требования' },
+]
+
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
-        title: 'Справка в соц.учреждения',
+        title: 'Справка в социальные учреждения',
         data: [
             {
                 title: 'Телефон',
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
-                value: '',
                 editable: true,
                 required: true,
+                value: dataUserApplication.phone,
             },
+
             {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },
@@ -48,28 +64,24 @@ const getForm = (): IInputArea => {
                 ],
             },
             {
-                title: 'Зачислена(а) по приказу от (эти сведения указаны в зачетной книжке а также в разделе «Учетная карточка» - Приказы) ',
-                type: 'text',
-                fieldName: 'enrollment',
-                value: '',
+                title: 'Место предоставления справки',
+                type: 'select',
+                width: '100',
+                fieldName: 'place_reference',
+                value: null,
                 editable: true,
                 required: true,
+                items: SocialPlaceOfReferenceOptions,
             },
             {
-                title: '№',
-                type: 'text',
-                fieldName: 'enrollment_no',
-                value: '',
+                title: 'Количество экземпляров справки',
+                type: 'select',
+                width: '100',
+                fieldName: 'number_copies',
+                value: null,
                 editable: true,
                 required: true,
-            },
-            {
-                title: 'Дана для предоставления:(укажите, куда, кому и т.п. Например: в Пенсионный фонд) ',
-                type: 'text',
-                fieldName: 'placement',
-                value: '',
-                editable: true,
-                required: true,
+                items: NumberOfCopiesOptions,
             },
             {
                 title: 'Комментарий к заявке',
@@ -79,7 +91,6 @@ const getForm = (): IInputArea => {
                 editable: true,
             },
         ],
-        hint: 'При необходимости получения скана готового документа по электронной почте или оригинала по обычной почте укажите это в поле комментария. Для получения оргигинала укажите также ваш почтовый адрес, включая индекс.',
     }
 }
 

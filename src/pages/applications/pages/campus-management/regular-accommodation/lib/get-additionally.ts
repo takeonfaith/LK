@@ -15,7 +15,7 @@ const getAdditionally = (): IInputArea => {
         documents: {
             files: [],
             required: true,
-            fieldName: 'personalDataFiles',
+            fieldName: 'docs',
             maxFiles: 5,
         },
     }

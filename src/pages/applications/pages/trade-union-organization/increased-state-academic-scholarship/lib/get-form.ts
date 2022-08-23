@@ -1,3 +1,4 @@
+import { UserApplication } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 
 const TypeOfActivityOptions = [
@@ -8,7 +9,7 @@ const TypeOfActivityOptions = [
     { id: 3, title: 'спортивная деятельность' },
 ]
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
         title: 'Характеристика-рекомендация на получение повышенной государственной академической стипендии',
         data: [
@@ -18,14 +19,15 @@ const getForm = (): IInputArea => {
                 mask: true,
                 fieldName: 'phone',
                 editable: true,
-                value: '',
+                required: true,
+                value: dataUserApplication.phone,
             },
 
             {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },

@@ -7,7 +7,7 @@ const getRegistration = (): IInputArea => {
         documents: {
             files: [],
             required: true,
-            fieldName: 'personalDataFiles',
+            fieldName: 'registrationFiles',
             maxFiles: 5,
         },
     }

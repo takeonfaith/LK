@@ -1,6 +1,7 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
         title: 'Уточнение паспортных данных',
         data: [
@@ -9,7 +10,7 @@ const getForm = (): IInputArea => {
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
-                value: '',
+                value: dataUserApplication.phone,
                 editable: true,
                 required: true,
             },
@@ -17,7 +18,7 @@ const getForm = (): IInputArea => {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },
@@ -25,7 +26,7 @@ const getForm = (): IInputArea => {
                 title: 'Фамилия',
                 type: 'text',
                 fieldName: 'surname',
-                value: '',
+                value: dataUserApplication.surname,
                 editable: true,
                 required: true,
             },
@@ -33,7 +34,7 @@ const getForm = (): IInputArea => {
                 title: 'Имя',
                 type: 'text',
                 fieldName: 'name',
-                value: '',
+                value: dataUserApplication.name,
                 editable: true,
                 required: true,
             },
@@ -41,7 +42,7 @@ const getForm = (): IInputArea => {
                 title: 'Отчество',
                 type: 'text',
                 fieldName: 'patronimyc',
-                value: '',
+                value: dataUserApplication.patronymic,
                 editable: true,
                 required: true,
             },
@@ -49,7 +50,7 @@ const getForm = (): IInputArea => {
                 title: 'Дата рождения',
                 type: 'date',
                 fieldName: 'birthday',
-                value: '',
+                value: dataUserApplication.birthday,
                 editable: true,
                 required: true,
             },
@@ -63,7 +64,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Серия',
                 type: 'text',
-                value: '',
+                value: dataUserApplication.passSer,
                 editable: true,
                 fieldName: 'series',
                 required: true,
@@ -71,7 +72,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Номер',
                 type: 'text',
-                value: '',
+                value: dataUserApplication.passNum,
                 editable: true,
                 fieldName: 'number',
                 required: true,
@@ -79,7 +80,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Кем выдан',
                 type: 'textarea',
-                value: '',
+                value: dataUserApplication.passDiv,
                 editable: true,
                 fieldName: 'issued_by',
                 required: true,
@@ -87,19 +88,19 @@ const getForm = (): IInputArea => {
             {
                 title: 'Дата выдачи',
                 type: 'date',
-                value: '',
+                value: dataUserApplication.passDate,
                 editable: true,
                 fieldName: 'date_of_issue',
                 required: true,
             },
-            {
-                title: 'Код подразделения',
-                type: 'text',
-                value: '',
-                editable: true,
-                fieldName: 'code',
-                required: true,
-            },
+            // {
+            //     title: 'Код подразделения',
+            //     type: 'text',
+            //     value: dataUserApplication.passSer,
+            //     editable: true,
+            //     fieldName: 'code',
+            //     required: true,
+            // },
             {
                 title: 'Комментарий к заявке',
                 type: 'textarea',

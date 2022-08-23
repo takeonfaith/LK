@@ -1,4 +1,5 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
 
 const methodOfObtainingOptions = [
     { id: 0, title: 'На электронную почту' },
@@ -15,6 +16,15 @@ const documentOptions = [
     },
 ]
 
+const universityOptions = [
+    { id: 0, title: 'Московский государственный машиностроительный университет» (МАМИ)' },
+    { id: 1, title: 'Московский государственный открытый университет им. В.С. Черномырдина» (МГОУ)' },
+    { id: 2, title: 'Московский государственный вечерний металлургический институт» (МГВМИ)' },
+    { id: 3, title: 'Московский государственный университет инженерной экологии» (МГУИЭ)' },
+    { id: 4, title: 'Московский государственный индустриальный университет» (МГИУ)' },
+    { id: 5, title: 'Московский государственный университет печати имени Ивана Фёдорова» (МГУП)' },
+]
+
 const NumberOfCopiesOptions = [
     { id: 1, title: '1' },
     { id: 2, title: '2' },
@@ -27,7 +37,7 @@ const NumberOfCopiesOptions = [
     { id: 9, title: '9' },
 ]
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
         title: 'Выдача лицензий и свидетельств о государственной аккредитации',
         data: [
@@ -36,15 +46,16 @@ const getForm = (): IInputArea => {
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
-                value: '',
                 editable: true,
                 required: true,
+                value: dataUserApplication.phone,
             },
+
             {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },
@@ -68,9 +79,19 @@ const getForm = (): IInputArea => {
                 items: documentOptions,
             },
             {
+                title: 'Университет',
+                type: 'select',
+                fieldName: 'university',
+                value: null,
+                editable: true,
+                required: true,
+                width: '100',
+                items: universityOptions,
+            },
+            {
                 title: 'Период',
-                type: 'date-interval',
-                value: ['', ''],
+                type: 'text',
+                value: '',
                 editable: true,
                 fieldName: 'period',
                 required: true,

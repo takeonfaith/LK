@@ -1,6 +1,7 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
 
-const methodOfObtainingOptions = [
+const methodObtainingOptions = [
     { id: 0, title: 'На электронную почту' },
     { id: 1, title: 'Лично' },
     { id: 3, title: 'На почтовый адрес' },
@@ -27,7 +28,7 @@ const NumberOfCopiesOptions = [
     { id: 3, title: '3' },
 ]
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
         title: 'Справка о прохождении обучения в университете (о статусе обучающегося) по месту требования',
         data: [
@@ -36,15 +37,16 @@ const getForm = (): IInputArea => {
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
-                value: '',
                 editable: true,
                 required: true,
+                value: dataUserApplication.phone,
             },
+
             {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },
@@ -52,10 +54,10 @@ const getForm = (): IInputArea => {
                 title: 'Способ получения справки',
                 type: 'radio',
                 fieldName: 'method_obtaining',
-                value: null,
+                value: '',
                 editable: true,
                 required: true,
-                items: methodOfObtainingOptions,
+                items: methodObtainingOptions,
             },
             {
                 title: 'Место предоставления справки:',

@@ -1,15 +1,16 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
-        title: 'Справка в соц.учреждения',
+        title: 'Справка в социальные учреждения',
         data: [
             {
                 title: 'Телефон',
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
-                value: '',
+                value: dataUserApplication.phone,
                 editable: true,
                 required: true,
             },
@@ -17,7 +18,7 @@ const getForm = (): IInputArea => {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },

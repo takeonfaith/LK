@@ -1,6 +1,8 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
+import { NumberOfCopiesOptions } from '@entities/applications/consts'
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
         title: 'Справка-вызов',
         data: [
@@ -9,15 +11,16 @@ const getForm = (): IInputArea => {
                 type: 'tel',
                 mask: true,
                 fieldName: 'phone',
-                value: '',
                 editable: true,
                 required: true,
+                value: dataUserApplication.phone,
             },
+
             {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },
@@ -48,7 +51,24 @@ const getForm = (): IInputArea => {
                 ],
             },
             {
-                title: 'Перидо времени - с:',
+                title: 'Количество экземпляров справки',
+                type: 'select',
+                width: '100',
+                fieldName: 'number_copies',
+                value: null,
+                editable: true,
+                required: true,
+                items: NumberOfCopiesOptions,
+            },
+            {
+                title: 'Место предоставления справки',
+                fieldName: 'place_reference',
+                value: null,
+                editable: true,
+                required: true,
+            },
+            {
+                title: 'Период времени - с:',
                 type: 'date',
                 fieldName: 'time-before',
                 value: '',
@@ -71,7 +91,6 @@ const getForm = (): IInputArea => {
                 editable: true,
             },
         ],
-        hint: 'При необходимости получения скана готового документа по электронной почте или оригинала по обычной почте укажите это в поле комментария. Для получения оргигинала укажите также ваш почтовый адрес, включая индекс.',
     }
 }
 

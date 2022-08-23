@@ -165,7 +165,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     },
     'social-agencies': {
         id: 'social-agencies',
-        title: 'Справка в соц.учреждения',
+        title: 'Справка в социальные учреждения',
         icon: <BiIdCard />,
         path: SOCIAL_AGENCIES,
         Component: ApplicationSocialAgencies,

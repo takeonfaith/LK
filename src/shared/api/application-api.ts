@@ -1,10 +1,14 @@
 import { AxiosResponse } from 'axios'
-import { Application } from './model'
+import { Application, UserApplication } from './model'
 import token from '@utils/token'
 import { $api } from '@api/config'
 
 export const get = (): Promise<AxiosResponse<Application[]>> => {
     return $api.get(`?getAppRequests&token=${token()}`)
+}
+
+export const getAppData = (): Promise<AxiosResponse<UserApplication>> => {
+    return $api.get(`?getAppData&token=${token()}`)
 }
 
 export const post = async (formId: string, args: { [key: string]: any }) => {

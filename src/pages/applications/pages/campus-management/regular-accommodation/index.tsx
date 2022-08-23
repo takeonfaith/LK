@@ -14,15 +14,15 @@ import getRegistration from './lib/get-registration'
 import getAdditionally from './lib/get-additionally'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const RegularAccommodationPage = () => {
-    const currentFormId = 'usg_gethostel_ooz'
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
-        data: { user },
-    } = userModel.selectors.useUser()
+        data: { dataUserApplication },
+    } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
@@ -32,13 +32,13 @@ const RegularAccommodationPage = () => {
     const history = useHistory()
 
     useEffect(() => {
-        if (!!user) {
-            setForm(getForm(user))
+        if (!!dataUserApplication) {
+            setForm(getForm(dataUserApplication))
             setDisability(getDisability())
             setRegistration(getRegistration())
             setAdditionally(getAdditionally())
         }
-    }, [user])
+    }, [dataUserApplication])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>

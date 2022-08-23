@@ -1,4 +1,3 @@
-import { userModel } from '@entities/user'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
@@ -10,26 +9,26 @@ import { useHistory } from 'react-router'
 import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
-import { ApplicationFormCodes } from "@utility-types/application-form-codes";
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const TerminationOfEmploymentContractPage = () => {
-    const currentFormId = 'usg_contr_termination'
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
-        data: { user },
-    } = userModel.selectors.useUser()
+        data: { dataUserApplication },
+    } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const isDone = completed ?? false
     const history = useHistory()
 
     useEffect(() => {
-        if (!!user) {
-            setForm(getForm(user))
+        if (!!dataUserApplication) {
+            setForm(getForm(dataUserApplication))
         }
-    }, [user])
+    }, [dataUserApplication])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
@@ -45,7 +44,14 @@ const TerminationOfEmploymentContractPage = () => {
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     <SubmitButton
                         text={'Отправить'}
-                        action={() => globalAppSendForm(ApplicationFormCodes.USG_CONTR_TERMINATION, [form], setLoading, setCompleted)}
+                        action={() =>
+                            globalAppSendForm(
+                                ApplicationFormCodes.USG_CONTR_TERMINATION,
+                                [form],
+                                setLoading,
+                                setCompleted,
+                            )
+                        }
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}

@@ -30,12 +30,15 @@ interface Props {
 }
 
 const TeachersApplicationsPage = ({ isTeachers }: Props) => {
-    const { data, error } = applicationsModel.selectors.useApplications()
+    const {
+        data: { listApplication },
+        error,
+    } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
     const [applications, setApplications] = useState<Application[] | null>(null)
 
     return (
-        <Wrapper load={() => applicationsModel.effects.getApplicationsFx()} loading={!data} error={error} data={data}>
+        <Wrapper load={() => applicationsModel.effects.getApplicationsFx()} loading={!listApplication} error={error} data={listApplication}>
             <ApplicationPageWrapper>
                 <FormBlock maxWidth="1500px">
                     <Title size={2} align="left">
@@ -60,16 +63,16 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
                             fixedInMobile
                         />
                         <LocalSearch<Application[], Application[]>
-                            whereToSearch={data ?? []}
+                            whereToSearch={listApplication ?? []}
                             searchEngine={search}
                             setResult={setApplications}
                             placeholder={'Поиск заявлений'}
                         />
                     </List>
                     <Table
-                        loading={!data}
+                        loading={!listApplication}
                         columns={getApplicationsColumns()}
-                        data={applications ?? data}
+                        data={applications ?? listApplication}
                         maxOnPage={7}
                     />
                 </FormBlock>

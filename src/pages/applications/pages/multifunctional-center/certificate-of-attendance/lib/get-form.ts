@@ -1,4 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
+import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
 const expelled_uni = [
     {
         title: 'отчислением из',
@@ -21,16 +23,16 @@ const expelled_uni = [
     },
 ]
 const academic_form = [
-    { id: 0, title: 'очная' },
-    { id: 1, title: 'заочная' },
-    { id: 2, title: 'очно-заочная' },
-    { id: 3, title: 'очная сокращённая' },
-    { id: 4, title: 'заочная сокращённая' },
-    { id: 5, title: 'очно-заочная сокращённая' },
+    { id: 0, title: 'Очная' },
+    { id: 1, title: 'Заочная' },
+    { id: 2, title: 'Очно-заочная' },
+    { id: 3, title: 'Очная сокращённая' },
+    { id: 4, title: 'Заочная сокращённая' },
+    { id: 5, title: 'Очно-заочная сокращённая' },
 ]
 const contract = [
-    { id: 0, title: 'бюджетная' },
-    { id: 1, title: 'с оплатой обучения' },
+    { id: 0, title: 'Бюджетная' },
+    { id: 1, title: 'С оплатой обучения' },
 ]
 const list = [
     { id: 0, title: 'аттестат о среднем (полном) общем образовании' },
@@ -57,7 +59,7 @@ const reasons = [
     },
 ]
 
-const getForm = (): IInputArea => {
+const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
         title: 'Справка о прослушанных дисциплинах за период обучения (справка об обучении)',
         data: [
@@ -68,20 +70,21 @@ const getForm = (): IInputArea => {
                 fieldName: 'phone',
                 editable: true,
                 required: true,
-                value: '',
+                value: dataUserApplication.phone,
             },
 
             {
                 title: 'Email',
                 type: 'email',
                 fieldName: 'email',
-                value: '',
+                value: dataUserApplication.email,
                 editable: true,
                 required: true,
             },
             {
                 title: 'Прошу выдать мне справку об обучении в связи с:',
-                type: 'radio',
+                type: 'select',
+                width: '100',
                 fieldName: 'reason',
                 value: null,
                 items: reasons,
@@ -92,7 +95,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Код направления подготовки',
                 type: 'text',
-                value: '',
+                value: dataUserApplication.specialty_code,
                 editable: true,
                 fieldName: 'specialty_code',
                 required: true,
@@ -100,7 +103,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Наименование направления подготовки:',
                 type: 'text',
-                value: '',
+                value: dataUserApplication.specialty_name,
                 editable: true,
                 fieldName: 'specialty_name',
                 required: true,
@@ -108,7 +111,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Форма обучения:',
                 type: 'select',
-                value: null,
+                value: findCurrentInSelect(academic_form, dataUserApplication.educationForm),
                 items: academic_form,
                 editable: true,
                 width: '100',
@@ -118,7 +121,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Основа обучения:',
                 type: 'select',
-                value: null,
+                value: findCurrentInSelect(contract, dataUserApplication.finance),
                 editable: true,
                 items: contract,
                 width: '100',
@@ -146,7 +149,7 @@ const getForm = (): IInputArea => {
                 required: true,
             },
             {
-                title: 'В (название вуза в момент зачисления)(укажите тип документа, сданного при зачислении):',
+                title: 'Наименование вуза в момент зачисления',
                 type: 'text',
                 value: '',
                 editable: true,
@@ -154,7 +157,7 @@ const getForm = (): IInputArea => {
                 required: true,
             },
             {
-                title: 'зачислен(а) в году:',
+                title: 'Год зачисления',
                 type: 'text',
                 value: '',
                 editable: true,
@@ -169,7 +172,6 @@ const getForm = (): IInputArea => {
                 editable: true,
             },
         ],
-        hint: 'При необходимости получения скана готового документа по электронной почте или оригинала по обычной почте укажите это в поле комментария. Для получения оргигинала укажите также ваш почтовый адрес, включая индекс',
     }
 }
 
