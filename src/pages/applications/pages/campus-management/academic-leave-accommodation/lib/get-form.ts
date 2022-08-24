@@ -29,9 +29,9 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Телефон',
-                fieldName: phone,
+                fieldName: 'phone',
                 type: 'tel',
-                value: '8 999 999 99 99',
+                value: phone,
                 editable: true,
                 required: true,
             },

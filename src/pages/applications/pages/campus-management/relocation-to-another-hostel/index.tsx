@@ -45,7 +45,13 @@ const RelocationToAnotherHostelPage = () => {
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>
-                            globalAppSendForm(ApplicationFormCodes.USG_RELOCATION, [form], setLoading, setCompleted)
+                            globalAppSendForm(
+                                ApplicationFormCodes.USG_RELOCATION,
+                                [form],
+                                setLoading,
+                                setCompleted,
+                                true,
+                            )
                         }
                         isLoading={loading}
                         completed={completed}
