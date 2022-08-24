@@ -9,6 +9,8 @@ import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
+import globalAppSendForm from "@pages/applications/lib/global-app-send-form";
+import { ApplicationFormCodes } from "@utility-types/application-form-codes";
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -44,7 +46,9 @@ const ApplicationForSocialScrollarship = () => {
 
                     <SubmitButton
                         text={!isDone ? 'Отправить' : 'Отправлено'}
-                        action={() => null}
+                        action={() =>
+                            globalAppSendForm(ApplicationFormCodes.PR_SOCSTIP, [form], setLoading, setCompleted)
+                        }
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}
