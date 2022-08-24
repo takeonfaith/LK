@@ -23,6 +23,10 @@ import {
     CHANGING_PERSONAL_DATA,
     STATE_ACCREDITATION,
     STUDENT_STATUS,
+    HOLIDAYS_AFTER_TRAINING,
+    PROVISION_ACADEMIC_LEAVE,
+    INDEPENDENTLY_DEDUCTED,
+    EXTENSION_ATTESTATION,
 } from '@app/routes/routes'
 import { RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
 
@@ -46,6 +50,10 @@ const getSectionLinks = () => {
                 { link: RESTORING_THE_MAGNETIC_PASS, title: 'Запрос на восстановление магнитного пропуска' },
                 { link: CLARIFICATION_OF_PASSPORT_DATA_ROUTE, title: 'Уточнение паспортных данных' },
                 { link: STATE_ACCREDITATION, title: 'Выдача лицензий и свидетельств о государственной аккредитации' },
+                { link: HOLIDAYS_AFTER_TRAINING, title: 'Предоставление каникул в связи с окончанием университета' },
+                { link: PROVISION_ACADEMIC_LEAVE, title: 'Предоставление академического отпуска' },
+                { link: INDEPENDENTLY_DEDUCTED, title: 'Отчисление по инициативе обучающегося' },
+                { link: EXTENSION_ATTESTATION, title: 'Продление промежуточной аттестации или ГИА' },
             ],
         },
         {

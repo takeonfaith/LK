@@ -32,6 +32,10 @@ import StudentStatus from '@pages/applications/pages/multifunctional-center/stud
 import ChangingPersonalData from '@pages/applications/pages/multifunctional-center/changing-personal-data'
 import HelpfulInformation from '@pages/helpful-information'
 import ClarificationOfPassportDataApplication from '@pages/applications/pages/multifunctional-center/clarification-of-passport-data'
+import ApplicationHolidaysAfterTraining from '@pages/applications/pages/multifunctional-center/holidays-after-training'
+import ApplicationProvisionAcademicLeave from '@pages/applications/pages/multifunctional-center/provision-academic-leave'
+import ApplicationIndependentlyDeduction from '@pages/applications/pages/multifunctional-center/independently-deducted'
+import ApplicationExtensionAttestation from '@pages/applications/pages/multifunctional-center/extension-attestation'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -65,6 +69,10 @@ export const CHANGING_PERSONAL_DATA = APPLICATIONS_ROUTE + '/changing-personal-d
 export const STUDENT_STATUS = APPLICATIONS_ROUTE + '/student-status'
 export const STATE_ACCREDITATION = APPLICATIONS_ROUTE + '/state-accreditation'
 export const MILITARY_REGISTRATION_CARD = APPLICATIONS_ROUTE + '/military-registration-card'
+export const HOLIDAYS_AFTER_TRAINING = APPLICATIONS_ROUTE + '/holidays-after-training'
+export const PROVISION_ACADEMIC_LEAVE = APPLICATIONS_ROUTE + '/provision-academic-leave'
+export const INDEPENDENTLY_DEDUCTED = APPLICATIONS_ROUTE + '/independently-deducted'
+export const EXTENSION_ATTESTATION = APPLICATIONS_ROUTE + '/extension-attestation'
 
 export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
@@ -344,6 +352,46 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: StateAccreditation,
         color: 'blue',
         isTemplate: false,
+    },
+    'holidays-after-training': {
+        id: 'holidays-after-training',
+        title: 'Предоставление каникул',
+        icon: <BiIdCard />,
+        path: HOLIDAYS_AFTER_TRAINING,
+        Component: ApplicationHolidaysAfterTraining,
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'provision-academic-leave': {
+        id: 'provision-academic-leave',
+        title: 'Предоставление академического отпуска',
+        icon: <BiIdCard />,
+        path: PROVISION_ACADEMIC_LEAVE,
+        Component: ApplicationProvisionAcademicLeave,
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'independently-deducted': {
+        id: 'independently-deducted',
+        title: 'Отчисление по инициативе обучающегося',
+        icon: <BiIdCard />,
+        path: INDEPENDENTLY_DEDUCTED,
+        Component: ApplicationIndependentlyDeduction,
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'extension-attestation': {
+        id: 'extension-attestation',
+        title: 'Продление промежуточной аттестации ',
+        icon: <BiIdCard />,
+        path: EXTENSION_ATTESTATION,
+        Component: ApplicationExtensionAttestation,
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
     },
     'military-registration-card': {
         id: 'military-registration-card',

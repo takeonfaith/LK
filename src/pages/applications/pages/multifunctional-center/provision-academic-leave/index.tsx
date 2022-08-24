@@ -7,14 +7,15 @@ import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
-import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ChangingPersonalData = () => {
+const ApplicationProvisionAcademicLeave = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -36,7 +37,7 @@ const ChangingPersonalData = () => {
             {!!form && !!setForm && (
                 <FormBlock>
                     <Button
-                        text="Назад к заявлениям"
+                        text="Назад к цифровым сервисам"
                         icon={<FiChevronLeft />}
                         onClick={() => history.push(APPLICATIONS_ROUTE)}
                         background="transparent"
@@ -46,7 +47,7 @@ const ChangingPersonalData = () => {
                     <SubmitButton
                         text={!isDone ? 'Отправить' : 'Отправлено'}
                         action={() =>
-                            globalAppSendForm(ApplicationFormCodes.PERS_DATA, [form], setLoading, setCompleted)
+                            globalAppSendForm(ApplicationFormCodes.CRS_ACADEMVAC, [form], setLoading, setCompleted)
                         }
                         isLoading={loading}
                         completed={completed}
@@ -64,4 +65,4 @@ const ChangingPersonalData = () => {
     )
 }
 
-export default ChangingPersonalData
+export default ApplicationProvisionAcademicLeave

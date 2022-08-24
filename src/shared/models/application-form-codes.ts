@@ -25,4 +25,8 @@ export enum ApplicationFormCodes {
     DOP_SOGL = 'dop_sogl',
     SEND_PAYMENT_EDU = 'send_payment_edu',
     FREE_REQUEST = 'free_request',
+    CRS_VACATIONS = 'crs_vacations',
+    CRS_ACADEMVAC = 'crs_academvac',
+    CRS_EXPULSION = 'crs_expulsion',
+    CRS_ATTESTAT = 'crs_attestat',
 }

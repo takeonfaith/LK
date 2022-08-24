@@ -1,4 +1,3 @@
-import { userModel } from '@entities/user'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
@@ -11,6 +10,7 @@ import { APPLICATIONS_ROUTE } from '@routes'
 import { useHistory } from 'react-router'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import { applicationsModel } from "@entities/applications";
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -18,17 +18,17 @@ const PreferentialAccommodationPage = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const history = useHistory()
     const {
-        data: { user },
-    } = userModel.selectors.useUser()
+        data: { dataUserApplication },
+    } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const isDone = completed ?? false
 
     useEffect(() => {
-        if (!!user) {
-            setForm(getForm(user))
+        if (!!dataUserApplication) {
+            setForm(getForm(dataUserApplication))
         }
-    }, [user])
+    }, [dataUserApplication])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
