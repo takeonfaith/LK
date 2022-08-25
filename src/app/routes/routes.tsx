@@ -5,6 +5,7 @@ import ApplicationSocialAgencies from '@pages/applications/pages/multifunctional
 import ApplicationForSocialScrollarship from '@pages/applications/pages/trade-union-organization/social-scollarship'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
+import { MdOutlineBedroomChild } from 'react-icons/md'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import AcadPerformance from '../../pages/acad-performance'
 import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
@@ -36,6 +37,7 @@ import ApplicationHolidaysAfterTraining from '@pages/applications/pages/multifun
 import ApplicationProvisionAcademicLeave from '@pages/applications/pages/multifunctional-center/provision-academic-leave'
 import ApplicationIndependentlyDeduction from '@pages/applications/pages/multifunctional-center/independently-deducted'
 import ApplicationExtensionAttestation from '@pages/applications/pages/multifunctional-center/extension-attestation'
+import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -85,7 +87,6 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'GENERAL',
-        show: false,
     },
     'project-activity': {
         id: 'project-activity',
@@ -123,6 +124,16 @@ export const privateRoutes: () => IRoutes = () => ({
         icon: <BiInfoCircle />,
         path: HELPFUL_INFORMATION,
         Component: HelpfulInformation,
+        color: 'blue',
+        isTemplate: false,
+        group: 'GENERAL',
+    },
+    'application-for-superior-room': {
+        id: 'application-for-superior-room',
+        title: 'Заявка на комнату повышенной комфортности',
+        icon: <MdOutlineBedroomChild />,
+        path: APPLICATION_FOR_SUPERIOR_ROOM_ROUTE,
+        Component: ApplicationForSuperiorRoom,
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',

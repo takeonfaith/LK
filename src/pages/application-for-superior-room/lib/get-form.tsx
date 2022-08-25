@@ -5,7 +5,7 @@ import React from 'react'
 const allocationTypes = [
     { id: 0, title: 'Один в комнате' },
     { id: 1, title: 'Двое в комнате' },
-    { id: 2, title: 'Один в блоке' },
+    // { id: 2, title: 'Один в блоке' },
 ]
 
 const dormLocations = [
@@ -95,6 +95,16 @@ const getForm = (data: SuperiorRoom): IInputArea => {
                 required: true,
             },
             {
+                title: 'Альтернативный тип размещения',
+                value: null,
+                fieldName: 'alternative-allocation',
+                type: 'select',
+                items: allocationTypes,
+                width: '100%',
+                editable: true,
+                required: true,
+            },
+            {
                 title: 'Адрес общежития',
                 value: null,
                 fieldName: 'address',
@@ -104,22 +114,22 @@ const getForm = (data: SuperiorRoom): IInputArea => {
                 editable: true,
                 required: true,
             },
-            {
-                title: 'Я проживаю в комнате повышенной комфортности в настоящее время',
-                value: false,
-                fieldName: 'inSuperiorRoom',
-                type: 'checkbox',
-                editable: true,
-            },
-            {
-                title: 'Участие во внеучебной деятельности',
-                value: null,
-                fieldName: 'extracurricular',
-                type: 'checkbox-docs',
-                items: extracurricularActivities,
-                width: '100%',
-                editable: true,
-            },
+            // {
+            //     title: 'Я проживаю в комнате повышенной комфортности в настоящее время',
+            //     value: false,
+            //     fieldName: 'inSuperiorRoom',
+            //     type: 'checkbox',
+            //     editable: true,
+            // },
+            // {
+            //     title: 'Участие во внеучебной деятельности',
+            //     value: null,
+            //     fieldName: 'extracurricular',
+            //     type: 'checkbox-docs',
+            //     items: extracurricularActivities,
+            //     width: '100%',
+            //     editable: true,
+            // },
             {
                 title: 'Дополнительная информация',
                 value: '',
@@ -129,15 +139,7 @@ const getForm = (data: SuperiorRoom): IInputArea => {
                 placeholder: 'Желание проживать с другом и т.д.',
             },
         ],
-        alert: (
-            <>
-                Подача заявок открыта с 16 марта по 21 марта включительно.
-                <br />
-                <br />
-                Если Вы уже проживаете в комнате повышенной комфортности и не планируете переселяться, то подавать
-                заявку повторно не требуется.
-            </>
-        ),
+        alert: <>Подача заявок открыта с 12:00 29 августа до 12:00 31 августа!</>,
         hint: 'Перед отправкой заявки обязательно проверьте указанную в форме контактную информацию (мобильный телефон и адрес электронной почты) и при необходимости внесите изменения.',
         optionalCheckbox: {
             title: `С приказами об изменении размеров платы за дополнительные услуги № 0597-ОД от 08.06.2021 и № 0032-АХД от 09.03.2022 ознакомлен(а)`,
