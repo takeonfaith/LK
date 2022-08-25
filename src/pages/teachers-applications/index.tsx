@@ -1,8 +1,10 @@
+import PageIsNotReady from '@pages/page-is-not-ready'
 import React from 'react'
 import { TemplateApplications } from 'widgets'
 
 const TeachersApplicationsPage = () => {
-    return <TemplateApplications isTeachers={true} />
+    return <PageIsNotReady oldVersionUrl="/sprav" />
+    // return <TemplateApplications isTeachers={true} />
 }
 
 export default TeachersApplicationsPage

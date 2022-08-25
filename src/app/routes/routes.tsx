@@ -85,6 +85,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'GENERAL',
+        show: false,
     },
     'project-activity': {
         id: 'project-activity',
@@ -94,7 +95,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: PROJECT_ACTIVITIES_ROUTE }),
         color: 'yellow',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     'acad-performance': {
         id: 'acad-performance',
@@ -104,7 +105,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: AcadPerformance,
         color: 'green',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'LEARNING_ACTIVITIES',
     },
     job: {
         id: 'job',
@@ -114,7 +115,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
         color: 'blue',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     'helpful-information': {
         id: 'helpful-information',
