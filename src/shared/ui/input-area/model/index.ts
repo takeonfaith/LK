@@ -38,6 +38,13 @@ export type CheckboxDocs = IInputAreaFiles & {
     value: boolean
 }
 
+export type RadioChildrenForm = {
+    title: string
+    value: boolean
+    data: IInputAreaData[]
+    fieldName: string
+}
+
 export interface IInputAreaLink {
     title: string
     link: string
@@ -49,13 +56,14 @@ export interface IInputAreaData {
     title: string
     value: string | SelectPage | boolean | SelectPage[] | null | RadioButton | string[]
     type?: IInputAreaTypes
-    items?: SelectPage[] | CheckboxDocs[] | RadioButton[]
+    items?: SelectPage[] | CheckboxDocs[] | RadioButton[] | RadioChildrenForm[]
     width?: string
     required?: boolean
     mask?: boolean
     editable?: boolean
     placeholder?: string
     autocomplete?: boolean
+    isSpecificRadio?: boolean
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]

@@ -1,11 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
-
-const methodOfObtainingOptions = [
-    { id: 0, title: 'На электронную почту' },
-    { id: 1, title: 'Лично' },
-    { id: 3, title: 'На почтовый адрес' },
-]
+import { MethodObtainingOptions } from '@entities/applications/consts'
 
 const documentOptions = [
     { id: 0, title: 'Лицензия на право ведения образовательной деятельности' },
@@ -66,7 +61,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 value: null,
                 editable: true,
                 required: true,
-                items: methodOfObtainingOptions,
+                items: MethodObtainingOptions,
             },
             {
                 title: 'Документ',

@@ -1,6 +1,7 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
 import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
+import { MethodObtainingOptions } from '@entities/applications/consts'
 const expelled_uni = [
     {
         title: 'отчислением из',
@@ -80,6 +81,15 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 value: dataUserApplication.email,
                 editable: true,
                 required: true,
+            },
+            {
+                title: 'Способ получения справки',
+                type: 'radio',
+                fieldName: 'method_obtaining',
+                value: null,
+                editable: true,
+                required: true,
+                items: MethodObtainingOptions,
             },
             {
                 title: 'Прошу выдать мне справку об обучении в связи с:',

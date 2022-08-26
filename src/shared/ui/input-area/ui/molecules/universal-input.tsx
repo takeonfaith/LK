@@ -32,6 +32,7 @@ const UniversalInput = (props: Props) => {
         editable,
         placeholder,
         autocomplete,
+        isSpecificRadio
     } = props
 
 
@@ -129,6 +130,7 @@ const UniversalInput = (props: Props) => {
                 required={required}
                 current={value as RadioButton}
                 setCurrent={handleRadio}
+                isSpecificRadio={isSpecificRadio}
             />
         ) : (
             <Input
