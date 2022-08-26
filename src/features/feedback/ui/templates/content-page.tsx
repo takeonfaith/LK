@@ -1,7 +1,7 @@
 import { CenterPage, Title } from '@ui/atoms'
 import Block from '@ui/block'
 import React from 'react'
-import { AskForm, HelpLinks, OtherContacts } from '../organisms'
+import { HelpLinks, OtherContacts } from '../organisms'
 
 export function ContentPage() {
     return (
@@ -12,7 +12,7 @@ export function ContentPage() {
                 </Title>
                 <HelpLinks />
                 <OtherContacts />
-                <AskForm />
+                {/*<AskForm />*/}
             </Block>
         </CenterPage>
     )

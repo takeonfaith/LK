@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'
 import ContentLayout from '../../shared/ui/content-layout'
-import { applicationsModel } from "@entities/applications";
+import { applicationsModel } from '@entities/applications'
 
 const Router = () => {
     const {
