@@ -34,7 +34,7 @@ const contract = [
     { id: 0, title: 'Бюджетная' },
     { id: 1, title: 'С оплатой обучения' },
 ]
-const list = [
+const listPreviousDoc = [
     { id: 0, title: 'аттестат о среднем (полном) общем образовании' },
     { id: 1, title: 'диплом о среднем профессиональном образовании' },
     { id: 2, title: 'диплом о начальном профессиональном образовании' },
@@ -129,8 +129,8 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Предыдущий документ об образовании, выданный в году:',
-                placeholder: 'Укажите год',
+                title: 'Предыдущий документ об образовании',
+                placeholder: 'Укажите год выдачи',
                 type: 'number',
                 fieldName: 'previous_doc_year',
                 value: '',
@@ -139,12 +139,12 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: '',
-                type: 'radio',
+                title: 'Тип документа об образовании',
+                type: 'select',
                 fieldName: 'previous_doc_year_type',
                 value: '',
                 width: '100%',
-                items: list,
+                items: listPreviousDoc,
                 editable: true,
                 required: true,
             },

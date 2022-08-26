@@ -11,7 +11,7 @@ import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ApplicationPaperCall = () => {
+const PaymentRecipient = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -24,7 +24,7 @@ const ApplicationPaperCall = () => {
 
     useEffect(() => {
         if (!!dataUserApplication) {
-            setForm(getForm(dataUserApplication))
+            setForm(getForm())
         }
     }, [dataUserApplication])
 
@@ -62,4 +62,4 @@ const ApplicationPaperCall = () => {
     )
 }
 
-export default ApplicationPaperCall
+export default PaymentRecipient

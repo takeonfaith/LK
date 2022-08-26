@@ -1,11 +1,12 @@
-import { applicationApi } from '@api'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { IInputArea } from '@ui/input-area/model'
 import prepareFormData from '@utils/prepare-form-data'
 import { IndexedProperties } from '@utility-types/indexed-properties'
+import { applicationsModel } from '@entities/applications'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 const globalAppSendForm = async (
-    formId: string,
+    formId: ApplicationFormCodes,
     inputAreas: IInputArea[],
     setLoading: (loading: boolean) => void,
     setCompleted: (loading: boolean) => void,
@@ -75,7 +76,7 @@ const globalAppSendForm = async (
 
     const result = Object.assign({}, ...form, ...files, ...checkboxes)
     try {
-        await applicationApi.post(formId, result)
+        await applicationsModel.effects.postApplicationFx({ formId: formId, args: result })
         setLoading(false)
         setCompleted(true)
     } catch (error) {

@@ -1,12 +1,19 @@
 import { applicationApi } from '@api'
 import { Application, UserApplication } from '@api/model'
-import { createEvent } from 'effector'
+import { createEvent, forward } from 'effector'
 import { useStore } from 'effector-react/compat'
-import { createEffect, createStore, forward } from 'effector/compat'
+import { createEffect, createStore } from 'effector/compat'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+
 interface ApplicationsStore {
     listApplication: Application[] | null
     dataUserApplication: UserApplication | null
     error: string | null
+}
+
+export interface ApplicationCreating {
+    formId: ApplicationFormCodes
+    args: { [key: string]: any }
 }
 
 const DEFAULT_STORE = { listApplication: null, error: null, dataUserApplication: null }
@@ -21,9 +28,8 @@ const useApplications = () => {
 }
 const getApplicationsFx = createEffect(async (): Promise<Application[]> => {
     const response = await applicationApi.get()
-
     try {
-        return response.data
+        return response.data.reverse()
     } catch (_) {
         throw new Error('Не удалось загрузить заявления')
     }
@@ -39,9 +45,19 @@ const getUserDataApplicationsFx = createEffect(async (): Promise<UserApplication
     }
 })
 
+const postApplicationFx = createEffect(async (data: ApplicationCreating): Promise<string> => {
+    const resultAddApplication = await applicationApi.post(data)
+
+    if (resultAddApplication === 'ok') {
+        return 'ok'
+    } else {
+        throw new Error(resultAddApplication)
+    }
+})
+
 const clearStore = createEvent()
 
-forward({ from: getApplicationsFx.doneData, to: getUserDataApplicationsFx })
+forward({ from: postApplicationFx.doneData, to: getApplicationsFx })
 
 const $applicationsStore = createStore<ApplicationsStore>(DEFAULT_STORE)
     .on(getUserDataApplicationsFx, (oldData) => ({
@@ -79,6 +95,7 @@ export const selectors = {
 export const effects = {
     getApplicationsFx,
     getUserDataApplicationsFx,
+    postApplicationFx,
 }
 
 export const events = {
