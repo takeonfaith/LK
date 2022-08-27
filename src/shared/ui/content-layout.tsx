@@ -68,18 +68,19 @@ const ContentLayout = () => {
             time: 5000,
         })
     }, [])
+
     useEffect(() => {
         if (seen) {
             isShowNotification && open(<WhatsNew />)
         }
     }, [isShowNotification])
 
-    useEffect(() => {
-        if (!seen) {
-            storyModel.events.open({ pages: TutorialStory })
-            setSeen(true)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!seen) {
+    //         storyModel.events.open({ pages: TutorialStory })
+    //         setSeen(true)
+    //     }
+    // }, [])
 
     return (
         <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
