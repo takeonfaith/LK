@@ -52,6 +52,7 @@ const GetYourLoginPage = () => {
                     setValue={setPassportNumber}
                     title="Последние 4 цифры номера паспорта"
                     placeholder="1234"
+                    type={'password'}
                 />
                 <SubmitButton
                     text="Узнать логин ЕУЗ"

@@ -125,7 +125,7 @@ const DEFAULT_STORE: UserStore = {
     error: null,
     isAuthenticated: !!tokenInStorage?.token?.length,
     savePassword: savePasswordInStorage(),
-    loginEuz: 'Логин студента: m.s.seregin',
+    loginEuz: '',
 }
 
 changeSavePasswordFunc()
