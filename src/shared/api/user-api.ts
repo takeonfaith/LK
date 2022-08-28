@@ -1,5 +1,5 @@
 import { $api } from '@api/config'
-import { User, UserToken } from './model'
+import { ADName, User, UserToken } from './model'
 
 export type LoginData = { login: string; password: string }
 
@@ -9,4 +9,8 @@ export const getUserToken = ({ login, password }: LoginData) => {
 
 export const getUser = (token: string) => {
     return $api.get<{ user: User }>(`?getUser&token=${token}`)
+}
+
+export const getADName = (data: ADName) => {
+    return $api.get<any>(`?getADName&fio=${data.fio}&pn=${data.pn}`)
 }

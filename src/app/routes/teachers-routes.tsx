@@ -53,6 +53,7 @@ export const DOCLIST_ROUTE = '/doclist'
 export const PPS_VOTE_ROUTE = '/pps_vote2020'
 export const CHILDREN_ROUTE = '/children'
 export const PPS_CONTEST_ROUTE = '/pps_contest'
+export const ElECTRONIC_STATEMENTS = '/electronic-statements'
 export const VACATION_ROUTE = '/vacation'
 export const KPI_PPS_ROUTE = '/kpi_pss'
 export const KPI_ADMIN_ROUTE = '/kpi_admin'
@@ -98,7 +99,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
         color: 'blue',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     applications: {
         id: 'applications',
@@ -108,7 +109,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: TeachersApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'GENERAL',
     },
     'download-agreements': {
         id: 'download-agreements',
@@ -118,7 +119,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: DownloadAdminFilesPage,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'GENERAL',
 
         isAdmin: true,
     },
@@ -130,7 +131,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
         color: 'blue',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     calendar: {
         id: 'calendar',
@@ -150,7 +151,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
         color: 'pink',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     'kpi-admin': {
         id: 'kpi-admin',
@@ -160,7 +161,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
         color: 'darkBlue',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     'sc-news': {
         id: 'sc-news',
@@ -170,7 +171,8 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: SC_NEWS_ROUTE }),
         color: 'orange',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
+        show: false,
     },
     orders: {
         id: 'orders',
@@ -180,7 +182,8 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: ORDERS_ROUTE }),
         color: 'blue',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
+        show: false,
     },
     'all-students': {
         id: 'all-students',
@@ -191,6 +194,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'darkBlue',
         isTemplate: false,
         group: 'OTHER',
+        show: false,
     },
     'all-teachers': {
         id: 'all-teachers',
@@ -201,6 +205,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
+        show: false,
     },
     'document-blanks': {
         id: 'document-blanks',
@@ -210,6 +215,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: DOCUMENT_BLANKS_ROUTE }),
         color: 'blue',
         isTemplate: false,
+        show: false,
         group: 'OTHER',
     },
     'personal-notifications': {
@@ -220,7 +226,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: PersonalNotificationsPage,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
     },
     oop: {
         id: 'oop',
@@ -231,6 +237,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
+        show: false,
     },
     centers: {
         id: 'centers',
@@ -241,6 +248,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
+        show: false,
     },
     info: {
         id: 'info',
@@ -250,17 +258,39 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: HelpfulInformation,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'GENERAL',
     },
     'pps-contest': {
         id: 'pps-contest',
         title: 'Конкурс ППС',
         icon: <BiIdCard />,
         path: PPS_CONTEST_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PPS_CONTEST_ROUTE }),
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace('https://mospolytech.ru/contest-pps/')
+            }, [])
+
+            return null
+        },
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
+    },
+    'electronic-statements': {
+        id: 'electronic-statements',
+        title: 'Электронные ведомости',
+        icon: <BiIdCard />,
+        path: ElECTRONIC_STATEMENTS,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(' https://e.mospolytech.ru/old/stats.php?m=items&act=st_list')
+            }, [])
+
+            return null
+        },
+        color: 'blue',
+        isTemplate: false,
+        group: 'LEARNING_ACTIVITIES',
     },
     'pps-vote': {
         id: 'pps-vote',
@@ -271,6 +301,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
+        show: false,
     },
     'project-activity': {
         id: 'project-activity',
@@ -280,7 +311,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
         color: 'yellow',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
 })
 

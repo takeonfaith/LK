@@ -81,8 +81,8 @@ const getForm = (): IInputArea => {
             {
                 title: 'Способ получения справки',
                 type: 'radio',
-                fieldName: 'methodOfObtaining',
-                value: null,
+                fieldName: 'method_of_obtaining',
+                value: '',
                 editable: true,
                 required: true,
                 items: [

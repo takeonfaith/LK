@@ -3,7 +3,7 @@ import { userApi } from '@api'
 import { LoginData } from '@api/user-api'
 import { createEffect, createEvent, createStore, forward } from 'effector/compat'
 import { useStore } from 'effector-react/compat'
-import { User, UserToken } from '@api/model'
+import { ADName, User, UserToken } from '@api/model'
 import axios from 'axios'
 import clearAllStores from '../lib/clear-all-stores'
 import createFullName from '@features/home/lib/create-full-name'
@@ -13,6 +13,7 @@ interface UserStore {
     isAuthenticated: boolean | null
     error: string | null
     savePassword: boolean
+    loginEuz?: string
 }
 
 //  In effector chat core-team describe something like this code (Perhaps a better solution can be found)
@@ -70,10 +71,21 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
     }
 })
 
+const getLoginEuzFx = createEffect(async (data: ADName): Promise<string> => {
+    try {
+        const userResponse = await userApi.getADName(data)
+        return userResponse.data
+    } catch (error) {
+        console.log(error)
+
+        throw new Error('Возникла какая-то ошибка')
+    }
+})
+
 const useUser = () => {
-    const { currentUser: user, error, isAuthenticated, savePassword } = useStore($userStore)
+    const { currentUser: user, error, isAuthenticated, savePassword, loginEuz } = useStore($userStore)
     return {
-        data: { user, isAuthenticated, savePassword },
+        data: { user, isAuthenticated, savePassword, loginEuz },
         loading: useStore(getUserTokenFx.pending),
         error: error,
     }
@@ -113,6 +125,7 @@ const DEFAULT_STORE: UserStore = {
     error: null,
     isAuthenticated: !!tokenInStorage?.token?.length,
     savePassword: savePasswordInStorage(),
+    loginEuz: '',
 }
 
 changeSavePasswordFunc()
@@ -145,6 +158,18 @@ const $userStore = createStore(DEFAULT_STORE)
         ...oldData,
         savePassword: changeSavePasswordFunc(savePassword),
     }))
+    .on(getLoginEuzFx, (oldData) => ({
+        ...oldData,
+        error: null,
+    }))
+    .on(getLoginEuzFx.doneData, (oldData, newData) => ({
+        ...oldData,
+        loginEuz: newData,
+    }))
+    .on(getUserFx.failData, (oldData, error) => ({
+        ...oldData,
+        error: error.message,
+    }))
     .on(clear, (oldData) => ({
         ...oldData,
         currentUser: null,
@@ -163,4 +188,5 @@ export const events = {
 
 export const effects = {
     getUserFx,
+    getLoginEuzFx,
 }

@@ -15,7 +15,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Cтруктурное подразделение',
                 type: 'radio',
-                fieldName: 'stucturalSubdivision',
+                fieldName: 'structural_subdivision',
                 value: null,
                 editable: true,
                 required: true,
@@ -82,7 +82,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Количество копий',
                 value: null,
-                fieldName: 'numberOfCopies',
+                fieldName: 'number_copies',
                 type: 'number',
                 editable: true,
                 required: true,
@@ -90,17 +90,17 @@ const getForm = (): IInputArea => {
             {
                 title: 'Способ получения справки',
                 type: 'radio',
-                fieldName: 'methodOfObtaining',
-                value: null,
+                fieldName: 'method_obtaining',
+                value: '',
                 editable: true,
                 required: true,
                 items: [
                     {
-                        id: 7,
+                        id: 0,
                         title: 'На электронную почту',
                     },
                     {
-                        id: 10,
+                        id: 1,
                         title: 'Получить в МФЦ/отделе',
                     },
                 ],

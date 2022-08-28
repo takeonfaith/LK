@@ -1,19 +1,24 @@
-import { applicationApi } from '@api'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { IInputArea } from '@ui/input-area/model'
+import prepareFormData from '@utils/prepare-form-data'
+import { IndexedProperties } from '@utility-types/indexed-properties'
+import { applicationsModel } from '@entities/applications'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 const globalAppSendForm = async (
-    formId: string,
+    formId: ApplicationFormCodes,
     inputAreas: IInputArea[],
     setLoading: (loading: boolean) => void,
     setCompleted: (loading: boolean) => void,
+    isAttachedFiles = false,
 ) => {
     setLoading(true)
 
     const form = inputAreas
-        .map((t) => {
-            if (!Array.isArray(t.data[0])) {
-                return t.data.map((l) => {
+        .map((itemForm) => {
+            if (isAttachedFiles) return prepareFormData<IndexedProperties>(itemForm)
+            if (!Array.isArray(itemForm.data[0])) {
+                return itemForm.data.map((l) => {
                     const obj = {}
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
@@ -21,7 +26,7 @@ const globalAppSendForm = async (
                     return obj
                 })
             } else {
-                const r = t.data.map((c) => {
+                const r = itemForm.data.map((c) => {
                     return Object.assign(
                         {},
                         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -70,15 +75,14 @@ const globalAppSendForm = async (
     })
 
     const result = Object.assign({}, ...form, ...files, ...checkboxes)
-
     try {
-        await applicationApi.post(formId, result)
+        await applicationsModel.effects.postApplicationFx({ formId: formId, args: result })
         setLoading(false)
         setCompleted(true)
     } catch (error) {
         setLoading(false)
         popUpMessageModel.events.evokePopUpMessage({
-            message: `Не удалось отправить форму. Ошибка: ${error as string}`,
+            message: `Не удалось отправить форму. Ошибка2: ${error as string}`,
             type: 'failure',
             time: 30000,
         })

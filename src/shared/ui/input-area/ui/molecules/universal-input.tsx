@@ -32,6 +32,7 @@ const UniversalInput = (props: Props) => {
         editable,
         placeholder,
         autocomplete,
+        isSpecificRadio
     } = props
 
 
@@ -40,6 +41,8 @@ const UniversalInput = (props: Props) => {
 
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
         setData((area) => {
+            // eslint-disable-next-line no-console
+            console.log('areaarea', area, value, i, j)
             if (Array.isArray(area.data[0])) {
                 ;(area.data as IComplexInputAreaData)[i][j ?? 0].value = value
             } else {
@@ -127,6 +130,7 @@ const UniversalInput = (props: Props) => {
                 required={required}
                 current={value as RadioButton}
                 setCurrent={handleRadio}
+                isSpecificRadio={isSpecificRadio}
             />
         ) : (
             <Input

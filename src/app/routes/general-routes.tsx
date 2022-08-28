@@ -2,6 +2,8 @@ import { IColors } from '@consts'
 import AllPages from '@pages/all-pages'
 import CantAccessPage from '@pages/cant-access'
 import FeedbackPage from '@pages/feedback'
+import GetYourLoginPage from '@pages/get-your-login'
+import MemoFreshmenPage from '@pages/memo-freshmen'
 import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
 import InstructionsPage from '@pages/instructions'
@@ -47,6 +49,8 @@ export const ALL_TEACHERS_ROUTE = '/teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
 export const CANT_ACCESS_ROUTE = '/cant-access'
+export const MEMO_FRESHMEN_ROUTE = '/memo-freshmen'
+export const GET_YOUR_LOGIN_ROUTE = '/GET-YOUR-LOGIN'
 export const SETTINGS_ROUTE = '/settings'
 export const TEMPLATE_SETTINGS_ROUTE = SETTINGS_ROUTE + '/:id'
 export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
@@ -68,8 +72,7 @@ export enum Groups {
     GENERAL = 'Основное',
     FINANCES_DOCS = 'Финансы и документы',
     LEARNING_ACTIVITIES = 'Учебная деятельность',
-    IN_DEVELOPING = 'Находятся в разработке',
-    OTHER = 'Другое',
+    OTHER = 'Находится в разработке',
 }
 
 export interface IRoute {
@@ -115,6 +118,20 @@ export const publicRoutes = [
         icon: <FiXCircle />,
         path: CANT_ACCESS_ROUTE,
         Component: CantAccessPage,
+    },
+    {
+        id: 4,
+        title: 'Узнать свой логин ЕУЗ',
+        icon: '',
+        path: GET_YOUR_LOGIN_ROUTE,
+        Component: GetYourLoginPage,
+    },
+    {
+        id: 5,
+        title: 'Вниманию студентов 1 курса!',
+        icon: '',
+        path: MEMO_FRESHMEN_ROUTE,
+        Component: MemoFreshmenPage,
     },
 ]
 
@@ -170,7 +187,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
         color: 'red',
         isTemplate: true,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     schedule: {
         id: 'schedule',
@@ -200,7 +217,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
         color: 'darkBlue',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     'all-teachers': {
         id: 'all-teachers',
@@ -210,7 +227,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
         color: 'blue',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     portfolio: {
         id: 'portfolio',
@@ -220,7 +237,7 @@ export const generalRoutes: IRoutes = {
         Component: () => PageIsNotReady({ oldVersionUrl: PORTFOLIO_ROUTE }),
         color: 'blue',
         isTemplate: true,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     feedback: {
         id: 'feedback',
@@ -230,7 +247,7 @@ export const generalRoutes: IRoutes = {
         Component: FeedbackPage,
         color: 'blue',
         isTemplate: false,
-        group: 'IN_DEVELOPING',
+        group: 'OTHER',
     },
     instructions: {
         id: 'instructions',
@@ -241,6 +258,7 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
+        show: false,
     },
 }
 
