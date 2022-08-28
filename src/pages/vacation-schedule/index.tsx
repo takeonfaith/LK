@@ -1,10 +1,8 @@
 import React from 'react'
-import PageIsNotReady from '@pages/page-is-not-ready'
-// import { Page } from '@features/vacation-schedule'
+import { Page } from '@features/vacation-schedule'
 
 const VacationSchedule = () => {
-    // return <Page />
-    return <PageIsNotReady oldVersionUrl="/vacation" />
+    return <Page />
 }
 
 export default VacationSchedule
