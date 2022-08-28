@@ -1,4 +1,4 @@
-import { VacationSchedule } from '@api/model/vacation-schedule'
+import { Vacation as VacationType, VacationSchedule } from '@api/model/vacation-schedule'
 import { ColumnProps } from '@ui/table/types'
 import KeyValue from '@ui/atoms/key-value'
 import List from '@ui/list'
@@ -14,10 +14,6 @@ const RULES: Rules = {
     zero: 'дней',
 }
 
-function formFooterField(field?: number) {
-    return `Всего: ${field} ${getCorrectWordForm(field ?? 0, RULES)}`
-}
-
 const tableColumns: ColumnProps[] = [
     {
         title: 'Плановые периоды отпуска',
@@ -31,16 +27,26 @@ const tableColumns: ColumnProps[] = [
     },
 ]
 
+export type OldVacationChedule = {
+    division: string
+    post: string
+    vacations?: {
+        plannedVacationPeriods?: string
+        actualVacationPeriods?: string
+    }[]
+    allPlannedVacationPeriods?: number
+    allActualVacationPeriods?: number
+    oldAllVacationRest?: number
+}
+
 const Vacation = (props: VacationSchedule) => {
-    const { subdivision, post, jobType, wage, vacations, allActualVacationPeriods, allPlannedVacationPeriods } = props
+    const { division, post, vacations, allActualVacationPeriods, allPlannedVacationPeriods } = mapper(props)
 
     return (
         <>
             <List>
-                <KeyValue keyStr="Подразделение" value={subdivision} />
+                <KeyValue keyStr="Подразделение" value={division} />
                 <KeyValue keyStr="Должность" value={post} />
-                <KeyValue keyStr="Занятость" value={jobType} />
-                <KeyValue keyStr="Ставка" value={wage} />
             </List>
             <Table
                 columns={tableColumns}
@@ -59,3 +65,53 @@ const Vacation = (props: VacationSchedule) => {
 }
 
 export default Vacation
+
+function formFooterField(field?: number) {
+    return `Всего: ${field} ${getCorrectWordForm(field ?? 0, RULES)}`
+}
+
+function mapper(newVacation: VacationSchedule): OldVacationChedule {
+    const { fact, plan, division, post } = newVacation
+
+    return {
+        division,
+        post,
+        vacations: getVacations(fact, plan),
+        allActualVacationPeriods: fact.reduce<number>((acc, { numdays }) => {
+            acc += +numdays
+
+            return acc
+        }, 0),
+        allPlannedVacationPeriods: plan.reduce<number>((acc, { numdays }) => {
+            acc += +numdays
+
+            return acc
+        }, 0),
+    }
+}
+
+function getVacations(fact: VacationType[], plan: VacationType[]) {
+    const maxVacationLength = Math.max(fact.length, plan.length)
+    const vacations = []
+
+    for (let i = 0; i < maxVacationLength; i++) {
+        const factVacation = fact[i]
+        const planVacation = plan[i]
+        const vacation = { actualVacationPeriods: '', plannedVacationPeriods: '' }
+
+        if (factVacation) {
+            vacation.actualVacationPeriods = `${factVacation.from} - ${factVacation.to} (${
+                factVacation.numdays
+            } ${getCorrectWordForm(Number(factVacation.numdays) || 0, RULES)})`
+        }
+
+        if (planVacation) {
+            vacation.plannedVacationPeriods = `${planVacation.from} - ${planVacation.to} (${
+                planVacation.numdays
+            } ${getCorrectWordForm(Number(planVacation.numdays) || 0, RULES)})`
+        }
+        vacations.push(vacation)
+    }
+
+    return vacations
+}
