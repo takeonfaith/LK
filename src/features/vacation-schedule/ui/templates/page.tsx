@@ -8,7 +8,6 @@ import List from '@ui/list'
 import Subtext from '@ui/subtext'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Vacation } from '../organism'
-import OldVacation from '../organism/old-vacation'
 
 const Page = () => {
     const {
@@ -16,10 +15,10 @@ const Page = () => {
     } = userModel.selectors.useUser()
     const { data, error } = vacationScheduleModel.selectors.useVacationShedule()
 
-    const items: SelectPage[] = useMemo(
-        () => data?.map((value, index) => ({ id: index, title: value.subdivision })) || [],
-        [data],
-    )
+    const items: SelectPage[] = useMemo(() => {
+        console.log(data)
+        return data?.map((value, index) => ({ id: index, title: value.division })) || []
+    }, [data])
 
     const [selected, setSelected] = useState<SelectPage | null>(items[0] ?? {})
 
@@ -87,13 +86,6 @@ const Page = () => {
                         <Select width="fit-content" items={items} selected={selected} setSelected={setSelected} />
                     )}
                     {selectedVacation && <Vacation {...selectedVacation} />}
-                    <Divider />
-                    {selectedVacation?.oldVacations && (
-                        <OldVacation
-                            oldVacations={selectedVacation.oldVacations}
-                            oldAllVacationRest={selectedVacation?.oldAllVacationRest}
-                        />
-                    )}
                 </Block>
             </CenterPage>
         </Wrapper>

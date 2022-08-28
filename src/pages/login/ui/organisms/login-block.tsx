@@ -1,4 +1,9 @@
-import { CANT_ACCESS_ROUTE, FEEDBACK_ROUTE, FORGOT_PASSWORD_ROUTE } from '@app/routes/general-routes'
+import {
+    CANT_ACCESS_ROUTE,
+    FEEDBACK_ROUTE,
+    FORGOT_PASSWORD_ROUTE,
+    GET_YOUR_LOGIN_ROUTE, MEMO_FRESHMEN_ROUTE
+} from '@app/routes/general-routes'
 import { OLD_LK_URL } from '@consts'
 import { userModel } from '@entities/user'
 import { Button, LinkButton, Message, Title } from '@ui/atoms'
@@ -82,14 +87,14 @@ const LoginBlock = () => {
                     }}
                 />
                 <List scroll={false} direction="horizontal" padding="4px" horizontalAlign="center">
-                    <Link to={FORGOT_PASSWORD_ROUTE} tabIndex={-1}>
-                        <Button
-                            text="Забыли пароль от ЕУЗ?"
-                            height="25px"
-                            background="transparent"
-                            textColor="var(--reallyBlue)"
-                        />
-                    </Link>
+                    {/*<Link to={FORGOT_PASSWORD_ROUTE} tabIndex={-1}>*/}
+                    {/*    <Button*/}
+                    {/*        text="Забыли пароль от ЕУЗ?"*/}
+                    {/*        height="25px"*/}
+                    {/*        background="transparent"*/}
+                    {/*        textColor="var(--reallyBlue)"*/}
+                    {/*    />*/}
+                    {/*</Link>*/}
                     <Link to={FEEDBACK_ROUTE} tabIndex={-1}>
                         <Button
                             text="Обратная связь"
@@ -98,7 +103,23 @@ const LoginBlock = () => {
                             textColor="var(--reallyBlue)"
                         />
                     </Link>
+                    <Link to={GET_YOUR_LOGIN_ROUTE} tabIndex={-1}>
+                        <Button
+                            text="Узнать свой логин ЕУЗ"
+                            height="25px"
+                            background="transparent"
+                            textColor="var(--reallyBlue)"
+                        />
+                    </Link>
                 </List>
+                <Link to={MEMO_FRESHMEN_ROUTE} tabIndex={-1}>
+                    <Button
+                        text="Вниманию студентов 1 курса!"
+                        height="25px"
+                        background="transparent"
+                        textColor="var(--reallyBlue)"
+                    />
+                </Link>
                 <Link to={CANT_ACCESS_ROUTE} tabIndex={-1}>
                     <Button
                         text="Если не получается войти в Личный кабинет"

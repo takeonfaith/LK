@@ -23,6 +23,10 @@ import {
     CHANGING_PERSONAL_DATA,
     STATE_ACCREDITATION,
     STUDENT_STATUS,
+    HOLIDAYS_AFTER_TRAINING,
+    PROVISION_ACADEMIC_LEAVE,
+    INDEPENDENTLY_DEDUCTED,
+    EXTENSION_ATTESTATION,
 } from '@app/routes/routes'
 import { RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
 
@@ -35,23 +39,32 @@ const getSectionLinks = () => {
                     link: CERTIFICATE_OF_ATTENDANCE,
                     title: 'Справка о прослушанных дисциплинах за период обучения (справка об обучении)',
                 },
-                { link: SOCIAL_AGENCIES, title: 'Справка в социальные учреждения (Пенсионный фонд, УСЗН и пр.)' },
-                { link: PAPER_CALL, title: 'Справка-вызов' },
-                { link: CHANGING_PERSONAL_DATA, title: 'Запрос на изменение персональных данных' },
-                { link: RESTORING_THE_MAGNETIC_PASS, title: 'Запрос на восстановление магнитного пропуска' },
-                { link: CLARIFICATION_OF_PASSPORT_DATA_ROUTE, title: 'Уточнение паспортных данных' },
-                { link: RETAKE_FOR_DIPLOMA, title: 'Заявление на пересдачу для получения диплома с отличием' },
                 {
                     link: STUDENT_STATUS,
                     title: 'Справка о прохождении обучения в университете (о статусе обучающегося) по месту требования',
                 },
+                { link: SOCIAL_AGENCIES, title: 'Справка в социальные учреждения (Пенсионный фонд, УСЗН и пр.)' },
+                { link: PAPER_CALL, title: 'Справка-вызов' },
+                { link: RETAKE_FOR_DIPLOMA, title: 'Заявление на пересдачу для получения диплома с отличием' },
+                { link: CHANGING_PERSONAL_DATA, title: 'Запрос на изменение персональных данных' },
+                { link: RESTORING_THE_MAGNETIC_PASS, title: 'Запрос на восстановление магнитного пропуска' },
+                { link: CLARIFICATION_OF_PASSPORT_DATA_ROUTE, title: 'Уточнение паспортных данных' },
                 { link: STATE_ACCREDITATION, title: 'Выдача лицензий и свидетельств о государственной аккредитации' },
+                { link: HOLIDAYS_AFTER_TRAINING, title: 'Предоставление каникул в связи с окончанием университета' },
+                { link: PROVISION_ACADEMIC_LEAVE, title: 'Предоставление академического отпуска' },
+                { link: INDEPENDENTLY_DEDUCTED, title: 'Отчисление по инициативе обучающегося' },
+                { link: EXTENSION_ATTESTATION, title: 'Продление промежуточной аттестации или ГИА' },
             ],
         },
         {
             title: 'Профсоюзная организация',
             links: [
-                { link: UNION_ORGANIZATION, title: 'Вступить в Профсоюз', isExternalLink: true },
+                {
+                    link: UNION_ORGANIZATION,
+                    title: 'Вступить в Профсоюз',
+                    isExternalLink: true,
+                    isOpenInNewWindow: true,
+                },
                 {
                     link: FINANCIAL_SUPPORT,
                     title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)',
@@ -101,7 +114,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Управление студенческого городка',
+            title: 'Управление студенческим городком',
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,

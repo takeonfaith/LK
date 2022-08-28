@@ -3,8 +3,8 @@ import React from 'react'
 import { TemplateApplications } from 'widgets'
 
 const TeachersApplicationsPage = () => {
-    return <PageIsNotReady oldVersionUrl="/sprav" />
-    // return <TemplateApplications isTeachers={true} />
+    // return <PageIsNotReady oldVersionUrl="/sprav" />
+    return <TemplateApplications isTeachers={true} />
 }
 
 export default TeachersApplicationsPage

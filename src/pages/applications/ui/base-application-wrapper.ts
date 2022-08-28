@@ -8,9 +8,5 @@ const BaseApplicationWrapper = styled.div<{ isDone: boolean }>`
     height: ${({ isDone }) => isDone && '100%'};
     padding: 10px;
     color: var(--text);
-
-    @media (max-width: 1000px) {
-        padding: 0;
-    }
 `
 export default BaseApplicationWrapper

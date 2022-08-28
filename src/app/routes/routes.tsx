@@ -1,37 +1,49 @@
-import ArbitrayRequestPage from '@pages/applications/pages/arbitrary-request'
-import ApplicationForСertificateOfAttendance from '@pages/applications/pages/certificate-of-attendance'
-import ClarificationOfPassportDataApplication from '@pages/applications/pages/clarification-of-passport-data/arbitrary-request'
-import ApplicationPaperCall from '@pages/applications/pages/paper-call'
-import ApplicationSocialAgencies from '@pages/applications/pages/social-agencies'
-import ApplicationForSocialScrollarship from '@pages/applications/pages/social-scollarship'
+import ArbitrayRequestPage from '@pages/applications/pages/other/arbitrary-request'
+import ApplicationForCertificateOfAttendance from '@pages/applications/pages/multifunctional-center/certificate-of-attendance'
+import ApplicationPaperCall from '@pages/applications/pages/multifunctional-center/paper-call'
+import ApplicationSocialAgencies from '@pages/applications/pages/multifunctional-center/social-agencies'
+import ApplicationForSocialScrollarship from '@pages/applications/pages/trade-union-organization/social-scollarship'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
+import { MdOutlineBedroomChild } from 'react-icons/md'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import AcadPerformance from '../../pages/acad-performance'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
+import {
+    ALL_TEACHERS_ROUTE,
+    generalHiddenRoutes,
+    generalRoutes,
+    IRoutes,
+    PROJECT_ACTIVITIES_ROUTE
+} from './general-routes'
 import React from 'react'
 import ApplicationsPage from '@pages/applications'
 import { FaRegLightbulb } from 'react-icons/fa'
-import RegularAccommodationPage from '@pages/applications/pages/regular-accommodation'
-import AccommodationCorrespondenceFormPage from '@pages/applications/pages/accommodation-correspondence-form'
-import AcademicLeaveAccommodationPage from '@pages/applications/pages/academic-leave-accommodation'
-import PreferentialAccommodationPage from '@pages/applications/pages/preferential-accommodation'
-import FamilyRoomPage from '@pages/applications/pages/family-room'
-import TerminationOfEmploymentContractPage from '@pages/applications/pages/termination-of-employment-contract'
-import RelocationInsideHostelPage from '@pages/applications/pages/relocation-inside-hostel'
-import RelocationToAnotherHostelPage from '@pages/applications/pages/relocation-to-another-hostel'
-import PaymentRecipient from '@pages/applications/pages/paymnet-recipient'
-import RestoringTheMagneticPass from '@pages/applications/pages/restoring-the-magnetic-pass'
-import MilitaryRegistrationDocuments from '@pages/applications/pages/military-registration-documents'
-import IncreasedStateAcademicScholarship from '@pages/applications/pages/increased-state-academic-scholarship'
-import RetakeForDiploma from '@pages/applications/pages/retake-for-diploma'
-import FinancialSupport from '@pages/applications/pages/financial-support'
-import FinancialAssistance from '@pages/applications/pages/financial-assistance'
-import MilitaryRegistrationCard from '@pages/applications/pages/military-registration-card'
-import StateAccreditation from '@pages/applications/pages/state-accreditation'
-import StudentStatus from '@pages/applications/pages/student-status'
-import ChangingPersonalData from '@pages/applications/pages/changing-personal-data'
+import RegularAccommodationPage from '@pages/applications/pages/campus-management/regular-accommodation'
+import AccommodationCorrespondenceFormPage from '@pages/applications/pages/campus-management/accommodation-correspondence-form'
+import AcademicLeaveAccommodationPage from '@pages/applications/pages/campus-management/academic-leave-accommodation'
+import PreferentialAccommodationPage from '@pages/applications/pages/campus-management/preferential-accommodation'
+import FamilyRoomPage from '@pages/applications/pages/campus-management/family-room'
+import TerminationOfEmploymentContractPage from '@pages/applications/pages/campus-management/termination-of-employment-contract'
+import RelocationInsideHostelPage from '@pages/applications/pages/campus-management/relocation-inside-hostel'
+import RelocationToAnotherHostelPage from '@pages/applications/pages/campus-management/relocation-to-another-hostel'
+import PaymentRecipient from '@pages/applications/pages/department-of-paid-services/paymnet-recipient'
+import RestoringTheMagneticPass from '@pages/applications/pages/multifunctional-center/restoring-the-magnetic-pass'
+import MilitaryRegistrationDocuments from '@pages/applications/pages/mobilization-department/military-registration-documents'
+import IncreasedStateAcademicScholarship from '@pages/applications/pages/trade-union-organization/increased-state-academic-scholarship'
+import RetakeForDiploma from '@pages/applications/pages/multifunctional-center/retake-for-diploma'
+import FinancialSupport from '@pages/applications/pages/trade-union-organization/financial-support'
+import FinancialAssistance from '@pages/applications/pages/trade-union-organization/financial-assistance'
+import MilitaryRegistrationCard from '@pages/applications/pages/mobilization-department/military-registration-card'
+import StateAccreditation from '@pages/applications/pages/multifunctional-center/state-accreditation'
+import StudentStatus from '@pages/applications/pages/multifunctional-center/student-status'
+import ChangingPersonalData from '@pages/applications/pages/multifunctional-center/changing-personal-data'
 import HelpfulInformation from '@pages/helpful-information'
+import ClarificationOfPassportDataApplication from '@pages/applications/pages/multifunctional-center/clarification-of-passport-data'
+import ApplicationHolidaysAfterTraining from '@pages/applications/pages/multifunctional-center/holidays-after-training'
+import ApplicationProvisionAcademicLeave from '@pages/applications/pages/multifunctional-center/provision-academic-leave'
+import ApplicationIndependentlyDeduction from '@pages/applications/pages/multifunctional-center/independently-deducted'
+import ApplicationExtensionAttestation from '@pages/applications/pages/multifunctional-center/extension-attestation'
+import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -65,6 +77,10 @@ export const CHANGING_PERSONAL_DATA = APPLICATIONS_ROUTE + '/changing-personal-d
 export const STUDENT_STATUS = APPLICATIONS_ROUTE + '/student-status'
 export const STATE_ACCREDITATION = APPLICATIONS_ROUTE + '/state-accreditation'
 export const MILITARY_REGISTRATION_CARD = APPLICATIONS_ROUTE + '/military-registration-card'
+export const HOLIDAYS_AFTER_TRAINING = APPLICATIONS_ROUTE + '/holidays-after-training'
+export const PROVISION_ACADEMIC_LEAVE = APPLICATIONS_ROUTE + '/provision-academic-leave'
+export const INDEPENDENTLY_DEDUCTED = APPLICATIONS_ROUTE + '/independently-deducted'
+export const EXTENSION_ATTESTATION = APPLICATIONS_ROUTE + '/extension-attestation'
 
 export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
@@ -118,6 +134,16 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'GENERAL',
     },
+    'application-for-superior-room': {
+        id: 'application-for-superior-room',
+        title: 'Заявка на комнату повышенной комфортности',
+        icon: <MdOutlineBedroomChild />,
+        path: APPLICATION_FOR_SUPERIOR_ROOM_ROUTE,
+        Component: ApplicationForSuperiorRoom,
+        color: 'blue',
+        isTemplate: false,
+        group: 'GENERAL',
+    },
 })
 
 export const hiddenRoutes: () => IRoutes = () => ({
@@ -127,7 +153,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Уточнение паспортных данных',
         icon: <FiBriefcase />,
         path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
-        Component: ClarificationOfPassportDataApplication,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -137,7 +163,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Произвольный запрос',
         icon: <FiBriefcase />,
         path: ARBITRARY_REQUEST_ROUTE,
-        Component: ArbitrayRequestPage,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -148,7 +174,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Социальная стипендия',
         icon: <BiIdCard />,
         path: SOCIAL_SCOLLARSHIP,
-        Component: ApplicationForSocialScrollarship,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -158,17 +184,17 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Сертификат об обучении',
         icon: <BiIdCard />,
         path: CERTIFICATE_OF_ATTENDANCE,
-        Component: ApplicationForСertificateOfAttendance,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
     },
     'social-agencies': {
         id: 'social-agencies',
-        title: 'Справка в соц.учреждения',
+        title: 'Справка в социальные учреждения',
         icon: <BiIdCard />,
         path: SOCIAL_AGENCIES,
-        Component: ApplicationSocialAgencies,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -178,7 +204,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Справка-вызов',
         icon: <BiIdCard />,
         path: PAPER_CALL,
-        Component: ApplicationPaperCall,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -260,7 +286,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Отправка квитанции об оплате',
         icon: BiIdCard,
         path: PAYMENT_RECIPIENT,
-        Component: PaymentRecipient,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -269,7 +295,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Запрос на восстановление магнитного пропуска',
         icon: BiIdCard,
         path: RESTORING_THE_MAGNETIC_PASS,
-        Component: RestoringTheMagneticPass,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -278,7 +304,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Отправить документы воинского учета',
         icon: BiIdCard,
         path: MILITARY_REGISTRATION_DOCUMENTS,
-        Component: MilitaryRegistrationDocuments,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -287,7 +313,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Заявление на пересдачу для получения диплома с отличием',
         icon: BiIdCard,
         path: RETAKE_FOR_DIPLOMA,
-        Component: RetakeForDiploma,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -296,7 +322,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Получение повышенной государственной академической стипендии',
         icon: BiIdCard,
         path: INCREASED_STATE_ACADEMIC_SCHOLARSHIP,
-        Component: IncreasedStateAcademicScholarship,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -305,7 +331,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)',
         icon: BiIdCard,
         path: FINANCIAL_SUPPORT,
-        Component: FinancialSupport,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -314,7 +340,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'IncreasedStateAcademicScholarship',
         icon: BiIdCard,
         path: FINANCIAL_ASSISTANCE,
-        Component: FinancialAssistance,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -323,7 +349,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Запрос на изменение персональных данных',
         icon: BiIdCard,
         path: CHANGING_PERSONAL_DATA,
-        Component: ChangingPersonalData,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -332,7 +358,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Справка о прохождении обучения в университете (о статусе обучающегося) по месту требования',
         icon: BiIdCard,
         path: STUDENT_STATUS,
-        Component: StudentStatus,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },
@@ -341,16 +367,56 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Выдача лицензий и свидетельств о государственной аккредитации',
         icon: BiIdCard,
         path: STATE_ACCREDITATION,
-        Component: StateAccreditation,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
+    },
+    'holidays-after-training': {
+        id: 'holidays-after-training',
+        title: 'Предоставление каникул',
+        icon: <BiIdCard />,
+        path: HOLIDAYS_AFTER_TRAINING,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'provision-academic-leave': {
+        id: 'provision-academic-leave',
+        title: 'Предоставление академического отпуска',
+        icon: <BiIdCard />,
+        path: PROVISION_ACADEMIC_LEAVE,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'independently-deducted': {
+        id: 'independently-deducted',
+        title: 'Отчисление по инициативе обучающегося',
+        icon: <BiIdCard />,
+        path: INDEPENDENTLY_DEDUCTED,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'extension-attestation': {
+        id: 'extension-attestation',
+        title: 'Продление промежуточной аттестации ',
+        icon: <BiIdCard />,
+        path: EXTENSION_ATTESTATION,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
     },
     'military-registration-card': {
         id: 'military-registration-card',
         title: 'Заполнить личную карточку обучающегося по воинскому учету для получения отсрочки от призыва на военную службу',
         icon: BiIdCard,
         path: MILITARY_REGISTRATION_CARD,
-        Component: MilitaryRegistrationCard,
+        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
         color: 'blue',
         isTemplate: false,
     },

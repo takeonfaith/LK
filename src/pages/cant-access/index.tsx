@@ -1,4 +1,3 @@
-import { FEEDBACK_ROUTE } from '@app/routes/general-routes'
 import { CenterPage, Message, Title } from '@ui/atoms'
 import KeyValue from '@ui/atoms/key-value'
 import Block from '@ui/block'
@@ -23,14 +22,6 @@ const CantAccessPage = () => {
                     <KeyValue
                         keyStr="Напишите письмо"
                         value={<a href="mailto:help@mospolytech.ru">help@mospolytech.ru</a>}
-                    />
-                    <KeyValue
-                        keyStr=" Заполните форму в личном кабинете"
-                        value={
-                            <a href={`https://e.mospolytech.ru/#${FEEDBACK_ROUTE}`}>
-                                https://e.mospolytech.ru/#{FEEDBACK_ROUTE}
-                            </a>
-                        }
                     />
                     <KeyValue
                         direction="vertical"

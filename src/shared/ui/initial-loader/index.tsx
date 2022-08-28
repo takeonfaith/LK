@@ -103,13 +103,13 @@ const InitialLoader = ({ loading }: Props) => {
         return (
             <InitialLoaderWrapper loading={true}>
                 <Error text="Нет подключения к интернету">
-                    <Button
-                        onClick={() =>
-                            userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)
-                        }
-                        text="Попробовать снова"
-                        icon={<AiOutlineReload />}
-                    />
+                    {/*<Button*/}
+                    {/*    onClick={() =>*/}
+                    {/*        userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)*/}
+                    {/*    }*/}
+                    {/*    text="Попробовать снова"*/}
+                    {/*    icon={<AiOutlineReload />}*/}
+                    {/*/>*/}
                 </Error>
             </InitialLoaderWrapper>
         )

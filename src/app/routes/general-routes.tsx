@@ -2,6 +2,8 @@ import { IColors } from '@consts'
 import AllPages from '@pages/all-pages'
 import CantAccessPage from '@pages/cant-access'
 import FeedbackPage from '@pages/feedback'
+import GetYourLoginPage from '@pages/get-your-login'
+import MemoFreshmenPage from '@pages/memo-freshmen'
 import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
 import InstructionsPage from '@pages/instructions'
@@ -47,6 +49,8 @@ export const ALL_TEACHERS_ROUTE = '/teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
 export const CANT_ACCESS_ROUTE = '/cant-access'
+export const MEMO_FRESHMEN_ROUTE = '/memo-freshmen'
+export const GET_YOUR_LOGIN_ROUTE = '/GET-YOUR-LOGIN'
 export const SETTINGS_ROUTE = '/settings'
 export const TEMPLATE_SETTINGS_ROUTE = SETTINGS_ROUTE + '/:id'
 export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
@@ -114,6 +118,20 @@ export const publicRoutes = [
         icon: <FiXCircle />,
         path: CANT_ACCESS_ROUTE,
         Component: CantAccessPage,
+    },
+    {
+        id: 4,
+        title: 'Узнать свой логин ЕУЗ',
+        icon: '',
+        path: GET_YOUR_LOGIN_ROUTE,
+        Component: GetYourLoginPage,
+    },
+    {
+        id: 5,
+        title: 'Вниманию студентов 1 курса!',
+        icon: '',
+        path: MEMO_FRESHMEN_ROUTE,
+        Component: MemoFreshmenPage,
     },
 ]
 
