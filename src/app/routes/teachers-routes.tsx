@@ -141,7 +141,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: VacationSchedule,
         color: 'purple',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
     },
     'kpi-pps': {
         id: 'kpi-pps',
