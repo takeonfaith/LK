@@ -109,7 +109,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: TeachersApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'OTHER',
     },
     'download-agreements': {
         id: 'download-agreements',
