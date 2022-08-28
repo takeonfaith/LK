@@ -9,6 +9,7 @@ import { FiInfo } from 'react-icons/fi'
 import styled from 'styled-components'
 import getForm from './lib/get-form'
 import sendForm from './lib/send-form'
+import getStatusFormSuperiorRoom from '@pages/application-for-superior-room/lib/get-status'
 
 const ApplicationForSuperiorRoomWrapper = styled.div<{ isDone: boolean }>`
     display: flex;
@@ -38,6 +39,11 @@ const ApplicationForSuperiorRoom = () => {
 
     if (user?.educationForm !== 'Очная') {
         return <Error text={'Данный раздел недоступен для вашей формы обучения'} />
+    }
+
+    const statusForm = getStatusFormSuperiorRoom(user)
+    if (!!statusForm) {
+        return <Error text={statusForm} />
     }
 
     useEffect(() => {
