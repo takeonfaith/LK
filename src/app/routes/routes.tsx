@@ -13,7 +13,7 @@ import {
     generalHiddenRoutes,
     generalRoutes,
     IRoutes,
-    PROJECT_ACTIVITIES_ROUTE
+    PROJECT_ACTIVITIES_ROUTE,
 } from './general-routes'
 import React from 'react'
 import ApplicationsPage from '@pages/applications'
@@ -143,6 +143,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
+        show: false,
     },
 })
 
