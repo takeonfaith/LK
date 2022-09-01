@@ -114,7 +114,7 @@ const pages: HelpfulPages = [
                     visible: 'all',
                 },
                 {
-                    title: 'Памятка «Террористическая атака по захвату заложников»',
+                    title: 'Если оказались на территории вуза в момент наступившей чрезвычайной ситуации',
                     href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_2_Esli_okazalis_na_territorii_vuza_v_moment_nastupivshej_chrezvychajnoj_situatsii.pdf',
                     visible: 'all',
                 },
