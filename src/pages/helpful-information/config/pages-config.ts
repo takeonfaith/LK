@@ -115,7 +115,7 @@ const pages: HelpfulPages = [
                 },
                 {
                     title: 'Памятка «Террористическая атака по захвату заложников»',
-                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_2_Terroristicheskaya_ataka_po_zahvatu_zalozhnikov.pdf',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_2_Esli_okazalis_na_territorii_vuza_v_moment_nastupivshej_chrezvychajnoj_situatsii.pdf',
                     visible: 'all',
                 },
                 {
