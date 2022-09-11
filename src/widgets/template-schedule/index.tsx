@@ -23,7 +23,7 @@ const SchedulePageContent = styled.div`
 
     .slider-wrapper {
         width: 100%;
-        max-width: 600px;
+        max-width: 650px;
     }
 
     .buttons-and-search {
@@ -84,6 +84,10 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                                 {
                                     title: 'Сессия',
                                     condition: !!schedule['2'],
+                                },
+                                {
+                                    title: 'Пересдачи',
+                                    condition: !!schedule['3'],
                                 },
                             ]}
                             currentPage={parseInt(currentModule)}
