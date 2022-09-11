@@ -98,7 +98,6 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 fieldName: 'reason',
                 value: null,
                 items: reasons,
-                //TODO : полностью реализовать вложенные поля
                 editable: true,
                 required: true,
             },

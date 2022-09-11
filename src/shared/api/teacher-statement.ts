@@ -1,12 +1,12 @@
 import { $api } from '@api/config'
-import { TeacherStatement } from '@api/model'
+import { UserApplication } from '@api/model'
 import token from '@utils/token'
 
 export const get = () => {
-    return $api.get<TeacherStatement>(`?getAppData&token=${token()}`)
+    return $api.get<UserApplication>(`?getAppData&token=${token()}`)
 }
 
-export const post = (args: TeacherStatement) => {
+export const post = (args: { [key: string]: any }) => {
     const formData = new FormData()
     formData.set('token', token())
 

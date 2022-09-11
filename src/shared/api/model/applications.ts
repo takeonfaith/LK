@@ -76,4 +76,5 @@ export interface UserApplication extends User {
     group: string
     order?: Order[]
     contracts?: Contract[]
+    last_update: string
 }
