@@ -40,7 +40,9 @@ const RadioButtonList = ({ title, buttons, required = false, current, setCurrent
                                 text={title}
                                 key={id}
                                 checked={id === current?.id}
-                                setChecked={() => setCurrent({ id, title })}
+                                setChecked={() =>
+                                    setCurrent({ id: id, title: !isSpecificRadio ? title : id.toString() })
+                                }
                             />
                         </>
                     )

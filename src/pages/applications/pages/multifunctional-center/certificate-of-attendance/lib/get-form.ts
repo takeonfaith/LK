@@ -2,6 +2,8 @@ import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
 import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
 import { MethodObtainingOptions } from '@entities/applications/consts'
+import { getDivisionsCrs } from '@features/applications/lib/get-divisions'
+import getAddressFields from '@features/applications/lib/get-address-fields'
 const expelled_uni = [
     {
         title: 'отчислением из',
@@ -91,6 +93,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
                 items: MethodObtainingOptions,
             },
+            {
+                title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
+                type: 'radio',
+                fieldName: 'structural-subdivision',
+                value: null,
+                editable: true,
+                items: getDivisionsCrs(dataUserApplication.divisions_crs),
+                isSpecificRadio: true,
+                specialType: 'personalMethod',
+            },
+            ...getAddressFields(),
             {
                 title: 'Прошу выдать мне справку об обучении в связи с:',
                 type: 'select',

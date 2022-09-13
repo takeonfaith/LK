@@ -6,6 +6,7 @@ import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
 import React, { useState } from 'react'
+import { specialFieldsNameT } from "@entities/applications/consts";
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -13,6 +14,7 @@ type Props = IInputAreaData & {
     setData: React.Dispatch<React.SetStateAction<IInputArea>>
     indexI: number
     indexJ?: number
+    specialFieldsName?: specialFieldsNameT
 }
 
 const UniversalInput = (props: Props) => {
@@ -32,9 +34,10 @@ const UniversalInput = (props: Props) => {
         editable,
         placeholder,
         autocomplete,
-        isSpecificRadio
+        isSpecificRadio,
+        specialType,
+        specialFieldsName,
     } = props
-
 
     const isActive = editable ?? (changeInputArea && !documents)
     const [validDates, setValidDates] = useState(true)
@@ -84,6 +87,9 @@ const UniversalInput = (props: Props) => {
             ;(area.data[indexI] as IInputAreaData).value = dates
             return { ...area }
         })
+    }
+    if (!!specialType && specialType !== specialFieldsName) {
+        return null
     }
 
     return (type !== 'select' && type !== 'multiselect') || !items ? (

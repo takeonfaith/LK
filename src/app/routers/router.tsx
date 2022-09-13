@@ -19,7 +19,7 @@ const Router = () => {
     useEffect(() => {
         if (isAuthenticated) {
             adminLinksModel.effects.getAdminLinksFx()
-            // applicationsModel.effects.getUserDataApplicationsFx()
+            applicationsModel.effects.getUserDataApplicationsFx()
         }
     }, [isAuthenticated])
 

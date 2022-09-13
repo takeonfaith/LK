@@ -10,7 +10,7 @@ const ArbitraryRequestPage = () => {
             model={teacherStatementModel}
             getForm={getForm}
             goBack="Назад к цифровым сервисам"
-            // formId={TeacherApplicationFormCodes.FREE_REQUEST}
+            formId={TeacherApplicationFormCodes.FREE_REQUEST}
         />
     )
 }

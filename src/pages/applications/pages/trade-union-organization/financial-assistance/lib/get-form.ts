@@ -100,7 +100,6 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             {
                 title: 'Факультет (институт)/структурное подразделение:',
                 fieldName: 'structural_subdivision',
-                type: 'radio',
                 value: null,
                 editable: true,
                 required: true,
@@ -109,7 +108,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             {
                 title: 'Основания для получения материальной помощи:',
                 fieldName: 'justification_grant',
-                value: '',
+                value: null,
                 type: 'multiselect',
                 width: '100%',
                 editable: true,

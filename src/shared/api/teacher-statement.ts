@@ -14,7 +14,7 @@ export const post = (args: { [key: string]: any }) => {
         formData.set(key, value)
     }
 
-    return $api.post('', formData, {
+    return $api.post(`?saveAppData=${args.formId}`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
