@@ -51,6 +51,12 @@ const CreateApplicationListWrapper = styled.div`
                         text-decoration: none;
                         color: var(--blue);
                     }
+                    .disabled-link {
+                        cursor: not-allowed;
+                        opacity: 0.5;
+                        text-decoration: none;
+                        pointer-events: none;
+                    }
                 }
             }
         }
@@ -69,6 +75,7 @@ const CreateApplicationListWrapper = styled.div`
 
 export interface Section {
     title: string
+    disabled?: boolean
     links: { title: string; link: string; isExternalLink?: boolean; isOpenInNewWindow?: boolean }[]
 }
 
@@ -113,7 +120,12 @@ const CreateApplicationList = ({ isTeachers = false }: Props) => {
                                                 {link.title}
                                             </a>
                                         ) : (
-                                            <Link to={link.link} key={link.link} onClick={close}>
+                                            <Link
+                                                className={section.disabled ? 'disabled-link' : undefined}
+                                                to={link.link}
+                                                key={link.link}
+                                                onClick={close}
+                                            >
                                                 {link.title}
                                             </Link>
                                         ),

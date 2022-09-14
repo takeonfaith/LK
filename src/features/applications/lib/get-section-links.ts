@@ -114,7 +114,8 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Управление студенческим городком',
+            title: 'Управление студенческим городком (Сервис временно недоступен)',
+            disabled: true,
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,
