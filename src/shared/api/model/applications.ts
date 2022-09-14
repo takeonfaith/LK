@@ -1,4 +1,5 @@
 import { User } from '@api/model/user'
+import { divisionT } from '@features/applications/lib/get-divisions'
 
 export interface Application {
     regDate: string
@@ -76,4 +77,7 @@ export interface UserApplication extends User {
     group: string
     order?: Order[]
     contracts?: Contract[]
+    last_update: string
+    divisions_crs: divisionT[]
+    divisions_all: divisionT[]
 }

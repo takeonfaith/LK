@@ -15,6 +15,7 @@ export type TemplateFormProps<T extends { last_update?: string }> = {
     repeatable?: boolean
     successMessage?: string
     isAvailableToSend?: boolean
+    formId?: string
 }
 
 export type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
@@ -26,6 +27,7 @@ const TemplateForm = <T extends { last_update?: string }>({
     outerForm,
     isAvailableToSend = true,
     repeatable = true,
+    formId
 }: TemplateFormProps<T> & { outerForm?: IInputArea | null }) => {
     const { data, completed } = model.selectors.useForm()
     const [loading, setLoading] = useState(false)
@@ -49,7 +51,7 @@ const TemplateForm = <T extends { last_update?: string }>({
             {data?.last_update && <Title size={5}>Дата последней отправки: {localizeDate(data.last_update)}</Title>}
             <SubmitButton
                 text={isAvailableToSend ? 'Отправить' : 'Отправлено'}
-                action={() => sendForm<T>(form, model.effects.postFormFx, setLoading, model.events.changeCompleted)}
+                action={() => sendForm<T>(form, model.effects.postFormFx, setLoading, model.events.changeCompleted, formId)}
                 isLoading={loading}
                 completed={completed}
                 setCompleted={(completed: boolean) => model.events.changeCompleted({ completed })}

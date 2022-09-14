@@ -12,6 +12,8 @@ import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 import getSubdivision from '@pages/applications/pages/multifunctional-center/student-status/lib/get-subdivision'
+import { specialFieldsNameT } from '@entities/applications/consts'
+import getMethodObtaining from '@features/applications/lib/get-method-obstaing'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -20,6 +22,7 @@ const StudentStatus = () => {
     const [subdivision, setSubdivision] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const isDone = completed ?? false
     const {
         data: { dataUserApplication },
@@ -33,6 +36,11 @@ const StudentStatus = () => {
             setSubdivision(getSubdivision())
         }
     }, [dataUserApplication])
+    useEffect(() => {
+        if (!!form && !!dataUserApplication) {
+            setSpecialFieldsName(getMethodObtaining(form.data as IInputAreaData[]))
+        }
+    }, [form])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
@@ -45,10 +53,7 @@ const StudentStatus = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
-                    {/*{(subdivision && (((form.data[2] as IInputAreaData).value as RadioButton)?.title === 'Лично')) && (*/}
-                    {/*    <InputArea {...subdivision} collapsed={isDone} setData={setSubdivision as LoadedState} />*/}
-                    {/*)}*/}
+                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} specialFieldsName={specialFieldsName} />
                     <SubmitButton
                         text={!isDone ? 'Отправить' : 'Отправлено'}
                         action={() =>

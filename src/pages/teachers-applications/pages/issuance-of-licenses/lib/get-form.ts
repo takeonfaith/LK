@@ -1,25 +1,12 @@
 import { IInputArea } from '@ui/input-area/model'
+import getBasicFieldsApplicationTeacher from '@pages/teachers-applications/lib/get-basic-fields-application-teacher'
+import { UserApplication } from '@api/model'
 
-const getForm = (): IInputArea => {
+const getForm = (data: UserApplication): IInputArea => {
     return {
         title: 'Выдача лицензий и свидетельств о государственной аккредитации',
         data: [
-            {
-                title: 'ФИО',
-                value: null,
-                fieldName: 'fio',
-                mask: true,
-                editable: true,
-                required: true,
-            },
-            {
-                title: 'Должность',
-                value: null,
-                fieldName: 'post',
-                editable: true,
-                mask: true,
-                required: true,
-            },
+            ...getBasicFieldsApplicationTeacher(data),
             {
                 title: 'Документ',
                 type: 'select',
@@ -89,7 +76,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Количество копий',
                 value: null,
-                fieldName: 'numberOfCopies',
+                fieldName: 'number_copies',
                 type: 'number',
                 editable: true,
                 required: true,
@@ -97,7 +84,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Способ получения справки',
                 type: 'radio',
-                fieldName: 'methodOfObtaining',
+                fieldName: 'method_obtaining',
                 value: null,
                 editable: true,
                 required: true,

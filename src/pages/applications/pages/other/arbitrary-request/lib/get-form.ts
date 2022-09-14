@@ -23,6 +23,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 required: true,
             },
+            // TODO Подразделения брать из divisions_all и отправлять id подразделения
             {
                 title: 'Выберите структурное подразделение для обращения',
                 type: 'radio',

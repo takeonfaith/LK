@@ -1,30 +1,16 @@
 import { IInputArea } from '@ui/input-area/model'
+import { UserApplication } from '@api/model'
+import getBasicFieldsApplicationTeacher from '@pages/teachers-applications/lib/get-basic-fields-application-teacher'
 
-const getForm = (): IInputArea => {
+const getForm = (data: UserApplication): IInputArea => {
     return {
         title: 'Произвольный запрос',
         data: [
-            {
-                title: 'E-mail',
-                type: 'email',
-                value: '',
-                editable: true,
-                fieldName: 'email_private',
-                required: true,
-            },
-            {
-                title: 'Личный мобильный телефон',
-                type: 'tel',
-                value: '',
-                fieldName: 'tel_mob_private',
-                editable: true,
-                mask: true,
-                required: true,
-            },
+            ...getBasicFieldsApplicationTeacher(data),
             {
                 title: 'Выберите структурное подразделение для обращения',
                 type: 'radio',
-                fieldName: 'stucturalSubdivision',
+                fieldName: 'stuctural_subdivision',
                 value: null,
                 editable: true,
                 required: true,
@@ -66,14 +52,14 @@ const getForm = (): IInputArea => {
             {
                 title: 'Тематика обращения',
                 type: 'textarea',
-                fieldName: 'subjectAppeal',
+                fieldName: 'subject_appeal',
                 value: '',
                 editable: true,
             },
             {
                 title: 'Суть обращения',
                 type: 'textarea',
-                fieldName: 'essenceAppeal',
+                fieldName: 'essence_appeal',
                 value: '',
                 editable: true,
             },
