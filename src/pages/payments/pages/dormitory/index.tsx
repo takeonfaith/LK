@@ -8,12 +8,12 @@ import {
     PaymentsInfo,
 } from '@features/payments'
 import getDormitoryPaygraphColumns from '@pages/payments/lib/get-dormitory-paygraph-columns'
-import { Divider, Title } from '@ui/atoms'
+import { Divider, Message, Title } from '@ui/atoms'
 import { LinkButton } from '@ui/atoms'
 import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
-import { FiDownload } from 'react-icons/fi'
+import { FiDownload, FiInfo } from 'react-icons/fi'
 
 const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
@@ -25,6 +25,10 @@ const DormitoryPayments = () => {
             {data.dormitory.map((dormitory, i) => {
                 return (
                     <React.Fragment key={dormitory.number}>
+                        <Message type="info" title="Информация" icon={<FiInfo />}>
+                        По возникновении технических проблем при подписании договоров и дополнительных соглашений
+                        в Личном кабинете просим обращаться на почту <a href='mailto:info@mospolytech.ru'>info@mospolytech.ru</a>
+                        </Message>
                         <div className="blocks-wrapper" key={i}>
                             <Block orientation="vertical" maxWidth="800px">
                                 <Title size={2} align="left" bottomGap>
