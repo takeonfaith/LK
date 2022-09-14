@@ -11,7 +11,6 @@ import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrap
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
-import getSubdivision from '@pages/applications/pages/multifunctional-center/student-status/lib/get-subdivision'
 import { specialFieldsNameT } from '@entities/applications/consts'
 import getMethodObtaining from '@features/applications/lib/get-method-obstaing'
 
@@ -19,7 +18,6 @@ type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const StudentStatus = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
-    const [subdivision, setSubdivision] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
@@ -33,7 +31,6 @@ const StudentStatus = () => {
     useEffect(() => {
         if (!!dataUserApplication) {
             setForm(getForm(dataUserApplication))
-            setSubdivision(getSubdivision())
         }
     }, [dataUserApplication])
     useEffect(() => {
