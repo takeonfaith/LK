@@ -4,27 +4,27 @@ import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
 import { MethodObtainingOptions } from '@entities/applications/consts'
 import { getDivisionsCrs } from '@features/applications/lib/get-divisions'
 import getAddressFields from '@features/applications/lib/get-address-fields'
-const expelled_uni = [
-    {
-        title: 'отчислением из',
-        type: 'text',
-        value: '',
-        editable: true,
-        fieldName: 'expelled_university',
-        required: true,
-    },
-    {
-        title: 'в',
-        type: 'text',
-        value: '',
-        editable: true,
-        fieldName: 'year',
-        required: true,
-    },
-    {
-        title: 'году',
-    },
-]
+// const expelled_uni = [
+//     {
+//         title: 'отчислением из',
+//         type: 'text',
+//         value: '',
+//         editable: true,
+//         fieldName: 'expelled_university',
+//         required: true,
+//     },
+//     {
+//         title: 'в',
+//         type: 'text',
+//         value: '',
+//         editable: true,
+//         fieldName: 'year',
+//         required: true,
+//     },
+//     {
+//         title: 'году',
+//     },
+// ]
 const academic_form = [
     { id: 0, title: 'Очная' },
     { id: 1, title: 'Заочная' },
@@ -53,12 +53,6 @@ const reasons = [
     {
         id: 1,
         title: 'отчислением из',
-        items: expelled_uni,
-        type: 'text',
-        value: 'text',
-        editable: true,
-        fieldName: 'expelled_university',
-        required: true,
     },
 ]
 
