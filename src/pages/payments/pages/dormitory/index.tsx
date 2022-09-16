@@ -14,11 +14,22 @@ import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import { FiDownload, FiInfo } from 'react-icons/fi'
+import { userModel } from '@entities/user'
 
 const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
+    const { data: dataUser } = userModel.selectors.useUser()
 
     if (!data?.dormitory) return null
+
+    if (dataUser?.user && +dataUser.user.course === 1) {
+        return (
+            <Message type="failure" title="Внимание!" align={'center'} width={'400'}>
+                Отображение информации об оплатах для учащихся первых курсов временно недоступно. Для уточнения статуса
+                оплаты обратитесь в договорной отдел.
+            </Message>
+        )
+    }
 
     return (
         <PageWrapper>
@@ -26,8 +37,9 @@ const DormitoryPayments = () => {
                 return (
                     <React.Fragment key={dormitory.number}>
                         <Message type="info" title="Информация" icon={<FiInfo />}>
-                        По возникновении технических проблем при подписании договоров и дополнительных соглашений
-                        в Личном кабинете просим обращаться на почту <a href='mailto:info@mospolytech.ru'>info@mospolytech.ru</a>
+                            По возникновении технических проблем при подписании договоров и дополнительных соглашений в
+                            Личном кабинете просим обращаться на почту{' '}
+                            <a href="mailto:info@mospolytech.ru">info@mospolytech.ru</a>
                         </Message>
                         <div className="blocks-wrapper" key={i}>
                             <Block orientation="vertical" maxWidth="800px">
