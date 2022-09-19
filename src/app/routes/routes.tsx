@@ -44,12 +44,14 @@ import ApplicationProvisionAcademicLeave from '@pages/applications/pages/multifu
 import ApplicationIndependentlyDeduction from '@pages/applications/pages/multifunctional-center/independently-deducted'
 import ApplicationExtensionAttestation from '@pages/applications/pages/multifunctional-center/extension-attestation'
 import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
+import DormitoryPage from '@pages/dormitory'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 export const ACAD_PERFORMANCE_ROUTE = '/acad-performance'
 export const HELPFUL_INFORMATION = '/helpful-information'
+export const DORMITORY = '/dormitory'
 
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
@@ -144,6 +146,17 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'GENERAL',
         show: false,
+    },
+    dormitory: {
+        id: 'dormitory',
+        title: 'Общежитие',
+        icon: <MdOutlineBedroomChild />,
+        path: DORMITORY,
+        Component: DormitoryPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'GENERAL',
+        show: true,
     },
 })
 
