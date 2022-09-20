@@ -4,6 +4,7 @@ import CantAccessPage from '@pages/cant-access'
 import FeedbackPage from '@pages/feedback'
 import GetYourLoginPage from '@pages/get-your-login'
 import MemoFreshmenPage from '@pages/memo-freshmen'
+import MemoTeacherPage from '@pages/memo-teacher'
 import ForgotPasswordPage from '@pages/forgot-password'
 import Home from '@pages/home'
 import InstructionsPage from '@pages/instructions'
@@ -50,6 +51,7 @@ export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
 export const CANT_ACCESS_ROUTE = '/cant-access'
 export const MEMO_FRESHMEN_ROUTE = '/memo-freshmen'
+export const MEMO_TEACHER_ROUTE = '/memo-teacher'
 export const GET_YOUR_LOGIN_ROUTE = '/GET-YOUR-LOGIN'
 export const SETTINGS_ROUTE = '/settings'
 export const TEMPLATE_SETTINGS_ROUTE = SETTINGS_ROUTE + '/:id'
@@ -132,6 +134,13 @@ export const publicRoutes = [
         icon: '',
         path: MEMO_FRESHMEN_ROUTE,
         Component: MemoFreshmenPage,
+    },
+    {
+        id: 6,
+        title: 'Вниманию сотрудников!',
+        icon: '',
+        path: MEMO_TEACHER_ROUTE,
+        Component: MemoTeacherPage,
     },
 ]
 

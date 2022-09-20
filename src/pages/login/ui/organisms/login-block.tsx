@@ -4,6 +4,7 @@ import {
     FORGOT_PASSWORD_ROUTE,
     GET_YOUR_LOGIN_ROUTE,
     MEMO_FRESHMEN_ROUTE,
+    MEMO_TEACHER_ROUTE,
 } from '@app/routes/general-routes'
 import { OLD_LK_URL } from '@consts'
 import { userModel } from '@entities/user'
@@ -111,6 +112,7 @@ const LoginBlock = () => {
                             height="25px"
                             background="transparent"
                             textColor="var(--reallyBlue)"
+                            width="144px"
                         />
                     </Link>
                     <Link to={GET_YOUR_LOGIN_ROUTE} tabIndex={-1}>
@@ -125,6 +127,14 @@ const LoginBlock = () => {
                 <Link to={MEMO_FRESHMEN_ROUTE} tabIndex={-1}>
                     <Button
                         text="Вниманию студентов 1 курса!"
+                        height="25px"
+                        background="transparent"
+                        textColor="var(--reallyBlue)"
+                    />
+                </Link>
+                <Link to={MEMO_TEACHER_ROUTE} tabIndex={-1}>
+                    <Button
+                        text="Вниманию сотрудников!"
                         height="25px"
                         background="transparent"
                         textColor="var(--reallyBlue)"
