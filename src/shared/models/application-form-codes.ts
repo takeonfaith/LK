@@ -30,3 +30,7 @@ export enum ApplicationFormCodes {
     CRS_EXPULSION = 'crs_expulsion',
     CRS_ATTESTAT = 'crs_attestat',
 }
+
+export enum TeacherApplicationFormCodes {
+    FREE_REQUEST = 'free_request',
+}

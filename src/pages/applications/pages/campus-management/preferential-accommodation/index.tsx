@@ -10,7 +10,7 @@ import { APPLICATIONS_ROUTE } from '@routes'
 import { useHistory } from 'react-router'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
-import { applicationsModel } from "@entities/applications";
+import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
