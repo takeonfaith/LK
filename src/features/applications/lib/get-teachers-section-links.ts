@@ -19,6 +19,13 @@ import {
     QUESTION_SED,
     VISA_CERTIFICATE,
     WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY,
+    PARTTIME_EMPLOYMENT,
+    HOLIDAY_POSTPONED,
+    DISMISSAL,
+    WORK_TRANSFER,
+    EXTRA_HOLIDAY_COLL,
+    HOLIDAY_PLANNING,
+    HOLIDAY_WORK,
 } from '@app/routes/teachers-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
@@ -28,6 +35,16 @@ const getTeachersSectionLinks = () => {
             title: 'Многофункциональный центр',
             links: [
                 { link: ISSUANCE_OF_LICENSES, title: 'Выдача лицензий и свидетельств о государственной аккредитации' },
+                { link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
+                { link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
+                { link: DISMISSAL, title: 'Заявление на увольнение' },
+                { link: HOLIDAY_WORK, title: 'ВЗаявление о привлечении к работе в выходной день' },
+                { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
+                { link: WORK_TRANSFER, title: 'Заявление на перевод' },
+                {
+                    link: EXTRA_HOLIDAY_COLL,
+                    title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
+                },
             ],
         },
         {
