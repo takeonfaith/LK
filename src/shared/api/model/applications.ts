@@ -6,7 +6,7 @@ export interface Application {
     regNumber: string
     requestTitle: string
     requestBody: string
-    status: 'Готово' | 'Принято в работу' | 'Отклонено'
+    status: 'Готово' | 'Принято в работу' | 'Отклонено' | 'Получено'
     statusDate: string
     structuralSubdivision: string
     notes: string

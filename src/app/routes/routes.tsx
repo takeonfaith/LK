@@ -45,6 +45,7 @@ import ApplicationIndependentlyDeduction from '@pages/applications/pages/multifu
 import ApplicationExtensionAttestation from '@pages/applications/pages/multifunctional-center/extension-attestation'
 import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
 import DormitoryPage from '@pages/dormitory'
+import FullTimePartTimeFormPage from "@pages/applications/pages/campus-management/full-time-part-time-form";
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -61,6 +62,7 @@ export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-a
 export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
 export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
 export const REGULAR_ACCOMMODATION = APPLICATIONS_ROUTE + '/regular-accommodation'
+export const FULL_TIME_PART_TIME_FORM = APPLICATIONS_ROUTE + '/full-time-part-time-form'
 export const ACCOMMODATION_CORRESPONDENCE_FORM = APPLICATIONS_ROUTE + '/accommodation-correspondence-form'
 export const ACADEMIC_LEAVE_ACCOMMODATION = APPLICATIONS_ROUTE + '/academic-leave-accommodation'
 export const PREFERENTIAL_ACCOMMODATION = APPLICATIONS_ROUTE + '/preferential-accommodation'
@@ -231,10 +233,19 @@ export const hiddenRoutes: () => IRoutes = () => ({
     },
     'regular-accommodation': {
         id: 'regular-accommodation',
-        title: 'Предоставление права проживания (очная и очно-заочная форма)',
+        title: 'Предоставление права проживания (очная форма)',
         icon: BiIdCard,
         path: REGULAR_ACCOMMODATION,
         Component: RegularAccommodationPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'full-time-part-time-form': {
+        id: 'full-time-part-time-form',
+        title: 'Предоставление права проживания (очно-заочная форма)',
+        icon: BiIdCard,
+        path: FULL_TIME_PART_TIME_FORM,
+        Component: FullTimePartTimeFormPage,
         color: 'blue',
         isTemplate: false,
     },

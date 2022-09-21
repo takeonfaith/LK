@@ -27,6 +27,7 @@ import {
     PROVISION_ACADEMIC_LEAVE,
     INDEPENDENTLY_DEDUCTED,
     EXTENSION_ATTESTATION,
+    FULL_TIME_PART_TIME_FORM,
 } from '@app/routes/routes'
 import { RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
 
@@ -119,7 +120,11 @@ const getSectionLinks = () => {
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,
-                    title: 'Предоставление права проживания (очная и очно-заочная форма)',
+                    title: 'Предоставление права проживания (очная форма)',
+                },
+                {
+                    link: FULL_TIME_PART_TIME_FORM,
+                    title: 'Предоставление права проживания (очно-заочная форма)',
                 },
                 {
                     link: ACCOMMODATION_CORRESPONDENCE_FORM,

@@ -4,7 +4,7 @@ import { UserApplication } from '@api/model'
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Предоставление права проживания (очная форма)',
+        title: 'Предоставление права проживания (очно-заочная форма)',
         data: [
             {
                 title: 'ФИО',
