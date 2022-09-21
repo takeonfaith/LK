@@ -30,11 +30,14 @@ import {
     FULL_TIME_PART_TIME_FORM,
 } from '@app/routes/routes'
 import { RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
+import useIsTestEnv from '@utils/hooks/use-is-test-env'
 
 const getSectionLinks = () => {
+    const isProdEnv = !useIsTestEnv()
     return [
         {
             title: 'Многофункциональный центр',
+            disabled: isProdEnv,
             links: [
                 {
                     link: CERTIFICATE_OF_ATTENDANCE,
@@ -59,6 +62,7 @@ const getSectionLinks = () => {
         },
         {
             title: 'Профсоюзная организация',
+            disabled: isProdEnv,
             links: [
                 {
                     link: UNION_ORGANIZATION,
@@ -80,6 +84,7 @@ const getSectionLinks = () => {
         },
         {
             title: 'Мобилизационный отдел',
+            disabled: isProdEnv,
             links: [
                 { link: MILITARY_REGISTRATION_DOCUMENTS, title: 'Отправить документы воинского учета' },
                 {
@@ -90,6 +95,7 @@ const getSectionLinks = () => {
         },
         {
             title: 'Отдел платных образовательных услуг',
+            disabled: isProdEnv,
             links: [
                 { link: PAYMENT_RECIPIENT, title: 'Оформить дополнительное соглашение к договору об обучении' },
                 { link: PAYMENT_RECIPIENT, title: 'Отправить квитанцию об оплате обучения или пени' },
@@ -97,6 +103,7 @@ const getSectionLinks = () => {
         },
         {
             title: 'Приемная комиссия',
+            disabled: isProdEnv,
             links: [
                 {
                     link: RECEPTION_COMMISSION,
@@ -107,6 +114,7 @@ const getSectionLinks = () => {
         },
         {
             title: 'Прочее',
+            disabled: isProdEnv,
             links: [
                 {
                     link: ARBITRARY_REQUEST_ROUTE,
@@ -116,7 +124,7 @@ const getSectionLinks = () => {
         },
         {
             title: 'Управление студенческим городком (Сервис временно недоступен)',
-            disabled: true,
+            disabled: isProdEnv,
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,

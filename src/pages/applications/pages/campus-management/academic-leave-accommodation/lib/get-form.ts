@@ -36,11 +36,11 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Причина предоставления',
+                title: 'Причина предоставления академического отпуска',
                 type: 'select',
                 width: '100%',
                 value: '',
-                fieldName: 'reason_for_providing',
+                fieldName: 'reason',
                 editable: true,
                 required: true,
                 items: [
