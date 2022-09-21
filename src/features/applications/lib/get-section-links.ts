@@ -34,9 +34,10 @@ import useIsTestEnv from '@utils/hooks/use-is-test-env'
 
 const getSectionLinks = () => {
     const isProdEnv = !useIsTestEnv()
+    const additionalHeaderClosedService = isProdEnv ? ' (Сервис временно недоступен)' : ''
     return [
         {
-            title: 'Многофункциональный центр',
+            title: 'Многофункциональный центр' + additionalHeaderClosedService,
             disabled: isProdEnv,
             links: [
                 {
@@ -61,7 +62,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Профсоюзная организация',
+            title: 'Профсоюзная организация' + additionalHeaderClosedService,
             disabled: isProdEnv,
             links: [
                 {
@@ -83,7 +84,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Мобилизационный отдел',
+            title: 'Мобилизационный отдел' + additionalHeaderClosedService,
             disabled: isProdEnv,
             links: [
                 { link: MILITARY_REGISTRATION_DOCUMENTS, title: 'Отправить документы воинского учета' },
@@ -94,7 +95,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Отдел платных образовательных услуг',
+            title: 'Отдел платных образовательных услуг' + additionalHeaderClosedService,
             disabled: isProdEnv,
             links: [
                 { link: PAYMENT_RECIPIENT, title: 'Оформить дополнительное соглашение к договору об обучении' },
@@ -102,7 +103,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Приемная комиссия',
+            title: 'Приемная комиссия' + additionalHeaderClosedService,
             disabled: isProdEnv,
             links: [
                 {
@@ -113,7 +114,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Прочее',
+            title: 'Прочее' + additionalHeaderClosedService,
             disabled: isProdEnv,
             links: [
                 {
@@ -123,7 +124,7 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Управление студенческим городком (Сервис временно недоступен)',
+            title: 'Управление студенческим городком' + additionalHeaderClosedService,
             disabled: isProdEnv,
             links: [
                 {
