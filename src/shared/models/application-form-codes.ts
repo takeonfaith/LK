@@ -29,8 +29,11 @@ export enum ApplicationFormCodes {
     CRS_ACADEMVAC = 'crs_academvac',
     CRS_EXPULSION = 'crs_expulsion',
     CRS_ATTESTAT = 'crs_attestat',
-}
-
-export enum TeacherApplicationFormCodes {
-    FREE_REQUEST = 'free_request',
+    WORK_TRANSFER = '',
+    EXTRA_HOLIDAY_COLL = '',
+    HOLIDAY_PLANNING = '',
+    HOLIDAY_WORK = '',
+    DISMISSAL = '',
+    HOLIDAY_POSTPONED = '',
+    PART_TIME_EMPLOYMENT = '',
 }
