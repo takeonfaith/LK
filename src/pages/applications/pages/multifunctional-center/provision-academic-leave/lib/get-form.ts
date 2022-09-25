@@ -56,7 +56,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 items: ReasonProvidingOptions,
             },
             {
-                title: 'Количество подтверждающих документов',
+                title: 'Количество листов подтверждающих документов',
                 type: 'text',
                 fieldName: 'num_sheets',
                 value: null,
