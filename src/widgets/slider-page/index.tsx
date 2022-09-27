@@ -17,7 +17,7 @@ const SliderPageWrapper = styled.div<{ width?: string; align: Align; maxWidth?: 
     & > div {
         display: flex;
         width: 100%;
-        max-width: 100%;
+        max-width: ${({ maxWidth }) => maxWidth ?? '100%'};
         overflow-x: auto;
         scroll-snap-type: x mandatory;
 

@@ -13,7 +13,7 @@ import {
     generalHiddenRoutes,
     generalRoutes,
     IRoutes,
-    PROJECT_ACTIVITIES_ROUTE
+    PROJECT_ACTIVITIES_ROUTE,
 } from './general-routes'
 import React from 'react'
 import ApplicationsPage from '@pages/applications'
@@ -337,7 +337,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     },
     'financial-assistance': {
         id: 'financial-assistance',
-        title: 'IncreasedStateAcademicScholarship',
+        title: 'Финансовая поддержка',
         icon: BiIdCard,
         path: FINANCIAL_ASSISTANCE,
         Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),

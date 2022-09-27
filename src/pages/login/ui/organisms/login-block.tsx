@@ -1,8 +1,8 @@
 import {
     CANT_ACCESS_ROUTE,
     FEEDBACK_ROUTE,
-    FORGOT_PASSWORD_ROUTE,
-    GET_YOUR_LOGIN_ROUTE, MEMO_FRESHMEN_ROUTE
+    GET_YOUR_LOGIN_ROUTE,
+    MEMO_FRESHMEN_ROUTE,
 } from '@app/routes/general-routes'
 import { OLD_LK_URL } from '@consts'
 import { userModel } from '@entities/user'

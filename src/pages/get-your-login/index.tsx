@@ -29,7 +29,7 @@ const GetYourLoginPage = () => {
     }
 
     return (
-        <CenterPage>
+        <CenterPage height="100%" alignItems="center">
             <Block
                 height="fit-content"
                 maxWidth="500px"
@@ -61,7 +61,7 @@ const GetYourLoginPage = () => {
                     completed={completed}
                     setCompleted={setCompleted}
                     isActive={!!fio.length && passportNumber.length === 4}
-                    width={'150px'}
+                    width="100%"
                 />
                 {!!loginEuz && (
                     <ADNameElement>

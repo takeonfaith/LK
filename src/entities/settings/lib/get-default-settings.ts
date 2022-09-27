@@ -1,3 +1,4 @@
+import { ThemeType, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@consts'
 import { NameSettings, Param, SettingsType } from '../model'
 
 const generateDefaultSettings = () => {
@@ -16,7 +17,7 @@ const getDefaultSettings = (userId = ''): SettingsType => ({
         [NameSettings['settings-appearance']]: {
             id: NameSettings['settings-appearance'],
             property: {
-                theme: 'dark',
+                theme: 'dark' as ThemeType,
             },
         },
         [NameSettings['settings-home-page']]: {
@@ -25,6 +26,12 @@ const getDefaultSettings = (userId = ''): SettingsType => ({
                 pages: ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students'],
                 widgetSchedule: true,
                 widgetPayment: true,
+            },
+        },
+        [NameSettings['settings-customize-menu']]: {
+            id: NameSettings['settings-customize-menu'],
+            property: {
+                pages: REQUIRED_LEFTSIDE_BAR_CONFIG,
             },
         },
     },

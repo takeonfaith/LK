@@ -25,6 +25,12 @@ const ApplicationPageWrapper = styled.div`
     }
 `
 
+const CustomList = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+`
+
 interface Props {
     isTeachers: boolean
 }
@@ -38,7 +44,12 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
     const [applications, setApplications] = useState<Application[] | null>(null)
 
     return (
-        <Wrapper load={() => applicationsModel.effects.getApplicationsFx()} loading={!listApplication} error={error} data={listApplication}>
+        <Wrapper
+            load={() => applicationsModel.effects.getApplicationsFx()}
+            loading={!listApplication}
+            error={error}
+            data={listApplication}
+        >
             <ApplicationPageWrapper>
                 <FormBlock maxWidth="1500px">
                     <Title size={2} align="left">
@@ -50,7 +61,7 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
                         колонке «Структурное подразделение, адрес» указывается название подразделения и адрес, куда
                         необходимо приехать за готовым документом.
                     </Message>
-                    <List direction="horizontal" gap={10} scroll={false}>
+                    <CustomList>
                         <Button
                             onClick={() => open(<CreateApplicationList isTeachers={isTeachers} />)}
                             text="Подать заявку"
@@ -68,7 +79,7 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
                             setResult={setApplications}
                             placeholder={'Поиск заявлений'}
                         />
-                    </List>
+                    </CustomList>
                     <Table
                         loading={!listApplication}
                         columns={getApplicationsColumns()}

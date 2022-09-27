@@ -7,7 +7,7 @@ import Thinking from '../../images/thinking-emoji.gif'
 const WrapperBlock = styled.div<{ loading: boolean }>`
     width: 100%;
     padding: 10px;
-    height: auto;
+    height: 100%;
 
     .loading {
         width: 100%;
