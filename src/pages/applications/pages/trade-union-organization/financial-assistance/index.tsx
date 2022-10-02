@@ -55,7 +55,7 @@ const ApplicationForFinancialAssistance = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form) && !!form?.documents?.files.length}
+                        isActive={checkFormFields(form)}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

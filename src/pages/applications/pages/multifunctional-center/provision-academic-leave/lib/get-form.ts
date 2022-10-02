@@ -56,6 +56,16 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 items: ReasonProvidingOptions,
             },
             {
+                title: 'Академический отпуск по обстоятельствам личного характера необходим по следующей(-им) причине(-ам):',
+                type: 'textarea',
+                fieldName: 'pers-cases',
+                value: '',
+                editable: true,
+                placeholder: 'укажите причины личного характера',
+                specialType: 'personalNature',
+                required: true,
+            },
+            {
                 title: 'Количество листов подтверждающих документов',
                 type: 'text',
                 fieldName: 'num_sheets',

@@ -28,8 +28,9 @@ const globalAppSendForm = async (
                     if (l.type === 'multiselect') {
                         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                         // @ts-ignore
-                        obj[l?.fieldName ?? ''] = l?.value
+                        obj[l?.fieldName ?? ''] = JSON.stringify(l?.value.map((itemSelect) => itemSelect.title))
                     }
+
                     return obj
                 })
             } else {

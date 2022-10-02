@@ -54,6 +54,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                     },
                 ],
             },
+
+            //            {
+            //                 title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
+            //                 type: 'radio',
+            //                 fieldName: 'structural-subdivision',
+            //                 value: null,
+            //                 editable: true,
+            //                 items: getDivisionsCrs(dataUserApplication.divisions_crs),
+            //                 isSpecificRadio: true,
+            //                 specialType: 'personalMethod',
+            //             },
             {
                 title: 'Период академического отпуска - с:',
                 type: 'date',

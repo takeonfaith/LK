@@ -12,3 +12,12 @@ export const getDivisionsCrs = (divisionsCrs: divisionT[]) => {
         }
     })
 }
+
+export const getDivisionsAll = (divisionsAll: divisionT[]) => {
+    return divisionsAll.map((division) => {
+        return {
+            id: +division.id,
+            title: division.name + ' ' + division.contact,
+        }
+    })
+}
