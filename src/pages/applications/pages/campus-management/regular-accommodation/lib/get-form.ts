@@ -4,7 +4,7 @@ import { UserApplication } from '@api/model'
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Предоставление права проживания (очная и очно-заочная форма)',
+        title: 'Предоставление права проживания (очная форма)',
         data: [
             {
                 title: 'ФИО',
@@ -32,6 +32,15 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 fieldName: 'phone',
                 type: 'tel',
                 value: phone,
+                editable: true,
+                required: true,
+            },
+            {
+                title: 'Причина предоставления (в связи с)',
+                width: '100%',
+                value: '',
+                fieldName: 'reason',
+                placeholder: 'укажите причину',
                 editable: true,
                 required: true,
             },

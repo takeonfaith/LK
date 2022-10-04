@@ -75,13 +75,22 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
+                title: 'Причина предоставления (в связи с)',
+                width: '100%',
+                value: '',
+                fieldName: 'reason',
+                placeholder: 'укажите причину',
+                editable: true,
+                required: true,
+            },
+            {
                 title: 'Общежитие',
                 fieldName: 'hostel',
                 value: '',
                 type: 'select',
                 width: '100%',
                 editable: true,
-                required: true,
+                required: false,
                 items: [
                     {
                         id: 0,
@@ -130,14 +139,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 fieldName: 'room',
                 value: '',
                 editable: true,
-                required: true,
-            },
-            {
-                title: 'Причина переселения',
-                value: '',
-                fieldName: 'reason_for_relocation',
-                editable: true,
-                required: true,
+                required: false,
             },
             {
                 title: 'Участие во внеучебной деятельности',

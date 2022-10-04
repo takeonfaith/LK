@@ -36,6 +36,15 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
+                title: 'Причина предоставления (в связи с)',
+                width: '100%',
+                value: '',
+                fieldName: 'reason',
+                placeholder: 'укажите причину',
+                editable: true,
+                required: true,
+            },
+            {
                 title: 'Период проживания - с:',
                 type: 'date',
                 value: '',

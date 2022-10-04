@@ -36,11 +36,11 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Причина предоставления',
+                title: 'Причина предоставления академического отпуска',
                 type: 'select',
                 width: '100%',
                 value: '',
-                fieldName: 'reason_for_providing',
+                fieldName: 'reason',
                 editable: true,
                 required: true,
                 items: [
@@ -54,6 +54,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                     },
                 ],
             },
+
+            //            {
+            //                 title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
+            //                 type: 'radio',
+            //                 fieldName: 'structural-subdivision',
+            //                 value: null,
+            //                 editable: true,
+            //                 items: getDivisionsCrs(dataUserApplication.divisions_crs),
+            //                 isSpecificRadio: true,
+            //                 specialType: 'personalMethod',
+            //             },
             {
                 title: 'Период академического отпуска - с:',
                 type: 'date',

@@ -109,28 +109,25 @@ const CreateApplicationList = ({ isTeachers = false }: Props) => {
                                 <Title size={4} align="left" bottomGap>
                                     {section.title}
                                 </Title>
-                                <div className="links">
-                                    {section.links.map((link) =>
-                                        link.isExternalLink ? (
-                                            <a
-                                                href={link.link}
-                                                target={link.isOpenInNewWindow ? '_blank' : '_self'}
-                                                rel="noreferrer"
-                                            >
-                                                {link.title}
-                                            </a>
-                                        ) : (
-                                            <Link
-                                                className={section.disabled ? 'disabled-link' : undefined}
-                                                to={link.link}
-                                                key={link.link}
-                                                onClick={close}
-                                            >
-                                                {link.title}
-                                            </Link>
-                                        ),
-                                    )}
-                                </div>
+                                {!section.disabled && (
+                                    <div className="links">
+                                        {section.links.map((link) =>
+                                            link.isExternalLink ? (
+                                                <a
+                                                    href={link.link}
+                                                    target={link.isOpenInNewWindow ? '_blank' : '_self'}
+                                                    rel="noreferrer"
+                                                >
+                                                    {link.title}
+                                                </a>
+                                            ) : (
+                                                <Link to={link.link} key={link.link} onClick={close}>
+                                                    {link.title}
+                                                </Link>
+                                            ),
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         )
                     })}

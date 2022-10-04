@@ -4,8 +4,7 @@ import { UserApplication } from '@api/model'
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Предоставление права льготного проживания',
-        hint: 'Необходимо прикрепить документ, подтверждающий соответствие льготной категории',
+        title: 'Предоставление права проживания (очно-заочная форма)',
         data: [
             {
                 title: 'ФИО',
@@ -46,8 +45,8 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Категория',
-                fieldName: 'category',
+                title: 'Приоритетное общежитие',
+                fieldName: 'priority_hostel',
                 value: '',
                 type: 'select',
                 width: '100%',
@@ -56,20 +55,47 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 items: [
                     {
                         id: 0,
-                        title: '1 категория',
+                        title: '1 общежитие',
                     },
                     {
                         id: 1,
-                        title: '2 категория',
+                        title: '2 общежитие',
                     },
                     {
                         id: 2,
-                        title: '3 категория',
+                        title: '3 общежитие',
+                    },
+                    {
+                        id: 3,
+                        title: '4 общежитие',
+                    },
+                    {
+                        id: 4,
+                        title: '5 общежитие',
+                    },
+                    {
+                        id: 5,
+                        title: '6 общежитие',
+                    },
+                    {
+                        id: 6,
+                        title: '7 общежитие',
+                    },
+                    {
+                        id: 7,
+                        title: '8 общежитие',
+                    },
+                    {
+                        id: 8,
+                        title: '9 общежитие',
+                    },
+                    {
+                        id: 9,
+                        title: '10 общежитие',
                     },
                 ],
             },
         ],
-        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: true },
     }
 }
 

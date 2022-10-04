@@ -1,53 +1,75 @@
-import { APPLICATIONS_ROUTE } from '@app/routes/routes'
+import { userModel } from '@entities/user'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
-import { FiChevronLeft } from 'react-icons/fi'
-import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import { FiChevronLeft } from 'react-icons/fi'
+import { APPLICATIONS_ROUTE } from '@routes'
+import { useHistory } from 'react-router'
+import getDisability from './lib/get-disability'
+import getRegistration from './lib/get-registration'
+import getAdditionally from './lib/get-additionally'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
-import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ApplicationForFinancialAssistance = () => {
+const FullTimePartTimeFormPage = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
-    const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const isDone = completed ?? false
     const {
         data: { dataUserApplication },
     } = applicationsModel.selectors.useApplications()
-
+    const [completed, setCompleted] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [disability, setDisability] = useState<IInputArea | null>(null)
+    const [registration, setRegistration] = useState<IInputArea | null>(null)
+    const [additionally, setAdditionally] = useState<IInputArea | null>(null)
+    const isDone = completed ?? false
     const history = useHistory()
 
     useEffect(() => {
         if (!!dataUserApplication) {
             setForm(getForm(dataUserApplication))
+            setDisability(getDisability())
+            setRegistration(getRegistration())
+            setAdditionally(getAdditionally())
         }
     }, [dataUserApplication])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
-            {!!form && !!setForm && (
+            {!!form && !!setForm && !!registration && !!disability && !!additionally && (
                 <FormBlock>
                     <Button
-                        text="Назад к заявлениям"
+                        text="Назад к цифровым сервисам"
                         icon={<FiChevronLeft />}
                         onClick={() => history.push(APPLICATIONS_ROUTE)}
                         background="transparent"
                         textColor="var(--blue)"
                     />
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
-
+                    {registration && (
+                        <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
+                    )}
+                    {disability && (
+                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
+                    )}
+                    {additionally && (
+                        <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />
+                    )}
                     <SubmitButton
-                        text={!isDone ? 'Отправить' : 'Отправлено'}
+                        text={'Отправить'}
                         action={() =>
-                            globalAppSendForm(ApplicationFormCodes.PR_MATPOM, [form], setLoading, setCompleted)
+                            globalAppSendForm(
+                                ApplicationFormCodes.USG_GETHOSTEL_OOZ,
+                                [form, registration, disability, additionally],
+                                setLoading,
+                                setCompleted,
+                            )
                         }
                         isLoading={loading}
                         completed={completed}
@@ -55,7 +77,7 @@ const ApplicationForFinancialAssistance = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form)}
+                        isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />
@@ -65,4 +87,4 @@ const ApplicationForFinancialAssistance = () => {
     )
 }
 
-export default ApplicationForFinancialAssistance
+export default FullTimePartTimeFormPage
