@@ -85,6 +85,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 mask: true,
                 required: false,
+                specialType: 'Compensation',
             },
             {
                 title: 'Комментарий к заявке',

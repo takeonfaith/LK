@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import InputArea from '@ui/input-area'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
-import { IInputArea } from '@ui/input-area/model'
+import { IInputArea, IInputAreaData } from '@ui/input-area/model'
 import { useHistory } from 'react-router'
 import TemplateFormPage from 'widgets/template-form-page'
 import getForm from './lib/get-form'
@@ -13,6 +13,8 @@ import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrap
 import checkFormFields from '@utils/check-form-fields'
 import { APPLICATIONS_ROUTE } from '@app/routes/teachers-routes'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { specialFieldsNameT } from "@entities/applications/consts";
+import getCompensation from './lib/get-compenstion'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -23,6 +25,7 @@ const HolidayWork = () => {
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const isDone = completed ?? false
     const history = useHistory()
 
@@ -31,6 +34,12 @@ const HolidayWork = () => {
             
        
     }, [dataUserApplication])
+
+    useEffect(() => {
+        if (!!form && !!dataUserApplication) {
+            setSpecialFieldsName(getCompensation(form.data as IInputAreaData[]))
+        }
+    }, [form])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
@@ -43,7 +52,11 @@ const HolidayWork = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
+                    <InputArea {...form} 
+                    collapsed={isDone} 
+                    setData={setForm as LoadedState} 
+                    specialFieldsName={specialFieldsName}
+                    />
                     
                     
                     <SubmitButton
