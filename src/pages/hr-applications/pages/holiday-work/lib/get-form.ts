@@ -40,6 +40,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
+                title: 'Количество часов',
+                type: 'number',
+                value: '',
+                fieldName: 'holiday_work_hours',
+                editable: true,
+                mask: true,
+                required: true,
+                minValueInput: 1,
+                maxValueInput: 8,
+            },
+            {
                 title: 'Причина',
                 value: null,
                 fieldName: 'reason',
@@ -74,6 +85,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 mask: true,
                 required: false,
+                specialType: 'Compensation',
             },
             {
                 title: 'Комментарий к заявке',

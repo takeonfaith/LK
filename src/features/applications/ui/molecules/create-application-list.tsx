@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import getTeachersSectionLinks from '@features/applications/lib/get-teachers-section-links'
+import {getTeachersSectionLinks} from '@features/applications/lib/get-teachers-section-links'
 
 const CreateApplicationListWrapper = styled.div`
     @media (min-width: 1001px) {

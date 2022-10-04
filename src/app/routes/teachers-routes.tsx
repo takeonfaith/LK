@@ -27,14 +27,14 @@ import QuestionPersonalAccountPage from '@pages/teachers-applications/pages/ques
 import QuestionSedPage from '@pages/teachers-applications/pages/question-sed'
 import VisaCertificatePage from '@pages/teachers-applications/pages/visa-certificate'
 import WorkOnTermsOfExternalConcurrencyPage from '@pages/teachers-applications/pages/work-on-the-terms-of-external-concurrency'
-import PartTimeEmployment from '@pages/teachers-applications/pages/part-time-deployment'
-import HolidayPostponed from '@pages/teachers-applications/pages/holiday-postponed'
-import Dismissal from '@pages/teachers-applications/pages/dismissal'
+import PartTimeEmployment from '@pages/hr-applications/pages/part-time-deployment'
+import HolidayPostponed from '@pages/hr-applications/pages/holiday-postponed'
+import Dismissal from '@pages/hr-applications/pages/dismissal'
 import VacationSchedule from '@pages/vacation-schedule'
-import ExtraHolidayColl from '@pages/teachers-applications/pages/extra-holiday-coll'
-import HolidayWork from '@pages/teachers-applications/pages/holiday-work'
-import HolidayPlanning from '@pages/teachers-applications/pages/holiday-planning'
-import WorkTransfer from '@pages/teachers-applications/pages/work-transfer'
+import ExtraHolidayColl from '@pages/hr-applications/pages/extra-holiday-coll'
+import HolidayWork from '@pages/hr-applications/pages/holiday-work'
+import HolidayPlanning from '@pages/hr-applications/pages/holiday-planning'
+import WorkTransfer from '@pages/hr-applications/pages/work-transfer'
 
 
 import React from 'react'
@@ -100,13 +100,13 @@ export const COURIER = APPLICATIONS_ROUTE + '/courier'
 export const PERSONA_INCOME_TAX_REFERENCE = APPLICATIONS_ROUTE + '/persona-income-tax-reference'
 export const PAYMENT_OF_CHILD_BIRTH_ALLOWANCE = APPLICATIONS_ROUTE + '/payment-of-child-birth-allowance'
 export const PAYMENT_FOR_CHILD_CARE = APPLICATIONS_ROUTE + '/payment-for-child-care'
-export const PARTTIME_EMPLOYMENT = APPLICATIONS_ROUTE + '/part-time-deployment'
-export const HOLIDAY_POSTPONED = APPLICATIONS_ROUTE + '/holiday-postponed'
-export const DISMISSAL = APPLICATIONS_ROUTE + '/dismissal'
-export const WORK_TRANSFER = APPLICATIONS_ROUTE + '/work-transfer'
-export const EXTRA_HOLIDAY_COLL = APPLICATIONS_ROUTE + '/extra-holiday-coll'
-export const HOLIDAY_PLANNING = APPLICATIONS_ROUTE + '/holiday-planning'
-export const HOLIDAY_WORK = APPLICATIONS_ROUTE + '/holiday-work'
+export const PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/part-time-deployment'
+export const HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/holiday-postponed'
+export const DISMISSAL = HR_APPLICATIONS_ROUTE + '/dismissal'
+export const WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/work-transfer'
+export const EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/extra-holiday-coll'
+export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning'
+export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work'
 
 const isProdEnv = !useIsTestEnv()
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
@@ -139,7 +139,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         path: HR_APPLICATIONS_ROUTE,
         Component: HrApplicationsPage,
-        color: 'red',
+        color: 'green',
         isTemplate: false,
         group: 'FINANCES_DOCS',
     },

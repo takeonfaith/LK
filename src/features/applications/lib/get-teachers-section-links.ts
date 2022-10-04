@@ -32,28 +32,9 @@ import { UNION_ORGANIZATION } from '@consts'
 const getTeachersSectionLinks = () => {
     return [
         {
-            title: 'Многофункциональный центр',
-            links: [
-                { link: ISSUANCE_OF_LICENSES, title: 'Выдача лицензий и свидетельств о государственной аккредитации' },
-                { link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
-                { link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
-                { link: DISMISSAL, title: 'Заявление на увольнение' },
-                { link: HOLIDAY_WORK, title: 'ВЗаявление о привлечении к работе в выходной день' },
-                { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
-                { link: WORK_TRANSFER, title: 'Заявление на перевод' },
-                {
-                    link: EXTRA_HOLIDAY_COLL,
-                    title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
-                },
-            ],
-        },
-        {
-            title: 'Экспедиция отдела контроля и делопроизводства',
-            links: [{ link: COURIER, title: 'Курьер' }],
-        },
-        {
             title: 'Цифровые сервисы',
             links: [
+                { link: ISSUANCE_OF_LICENSES, title: 'Выдача лицензий и свидетельств о государственной аккредитации' },
                 { link: GETTING_COMPUTER_EQUIPMENT, title: 'Получение нового компьютерного оборудования' },
                 { link: CONNECTING_COMPUTER, title: 'Подключение компьютера, МФУ, телефона, WiFi' },
                 { link: PRINTER_MAINTENANCE, title: 'Обслуживание принтеров, МФУ' },
@@ -99,7 +80,29 @@ const getTeachersSectionLinks = () => {
                 },
             ],
         },
+        {
+            title: 'Экспедиция отдела контроля и делопроизводства',
+            links: [{ link: COURIER, title: 'Курьер' }],
+        },
     ]
 }
-
-export default getTeachersSectionLinks
+const getTeachersHRSectionLinks = () => {
+    return [
+        {
+            title: '',
+            links: [
+                { link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
+                { link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
+                { link: DISMISSAL, title: 'Заявление на увольнение' },
+                { link: HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
+                { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
+                { link: WORK_TRANSFER, title: 'Заявление на перевод' },
+                {
+                    link: EXTRA_HOLIDAY_COLL,
+                    title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
+                },
+            ],
+        },
+    ]
+}
+export { getTeachersSectionLinks, getTeachersHRSectionLinks }

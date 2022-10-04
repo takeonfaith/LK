@@ -11,7 +11,7 @@ import { applicationsModel } from '@entities/applications'
 import { FiChevronLeft } from 'react-icons/fi'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import checkFormFields from '@utils/check-form-fields'
-import { APPLICATIONS_ROUTE } from '@app/routes/teachers-routes'
+import { HR_APPLICATIONS_ROUTE } from '@app/routes/teachers-routes'
 import getEmployment from './lib/get-employment'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 
@@ -40,9 +40,9 @@ const PartTimeEmployment = () => {
             {!!form && !!setForm && !!employment && (
                 <FormBlock>
                     <Button
-                        text="Назад к цифровым сервисам"
+                        text="Назад к кадровым заявлениям"
                         icon={<FiChevronLeft />}
-                        onClick={() => history.push(APPLICATIONS_ROUTE)}
+                        onClick={() => history.push(HR_APPLICATIONS_ROUTE)}
                         background="transparent"
                         textColor="var(--blue)"
                     />
