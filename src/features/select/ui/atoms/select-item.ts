@@ -5,7 +5,7 @@ const SelectItem = styled.li<{ isSelected: boolean; leadingToSelected?: boolean 
     background: var(${({ isSelected }) => (isSelected ? '--reallyBlue' : '')});
     color: ${({ isSelected }) => (isSelected ? '#fff' : '')};
     height: 30px;
-    padding: 5px 10px;
+    padding: 7px 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,7 +19,7 @@ const SelectItem = styled.li<{ isSelected: boolean; leadingToSelected?: boolean 
 
     .select-item-title {
         overflow: hidden;
-        white-space: nowrap;
+        white-space: pre-line;
         width: 100%;
         text-overflow: ellipsis;
     }

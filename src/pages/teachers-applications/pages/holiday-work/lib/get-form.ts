@@ -16,7 +16,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Должность',
-                value: null,
+                value: 'Лаборант',
                 fieldName: 'post',
                 editable: true,
                 mask: true,
@@ -24,7 +24,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Наименование структурного подразделения',
-                value: null,
+                value: 'Кафедра информационных систем и технологий',
                 fieldName: 'structure',
                 editable: true,
                 mask: true,
@@ -38,6 +38,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 mask: true,
                 required: true,
+            },
+            {
+                title: 'Количество часов',
+                type: 'number',
+                value: '',
+                fieldName: 'holiday_work_hours',
+                editable: true,
+                mask: true,
+                required: true,
+                minValueInput: 1,
+                maxValueInput: 8,
             },
             {
                 title: 'Причина',

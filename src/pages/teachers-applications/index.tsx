@@ -1,8 +1,8 @@
 import React from 'react'
 import { TemplateApplications } from 'widgets'
 
-const TeachersApplicationsPage = () => {
+const TeachersHrApplicationsPage = () => {
     return <TemplateApplications isTeachers={true} />
 }
 
-export default TeachersApplicationsPage
+export default TeachersHrApplicationsPage

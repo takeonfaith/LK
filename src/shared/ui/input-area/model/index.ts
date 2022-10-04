@@ -66,6 +66,8 @@ export interface IInputAreaData {
     autocomplete?: boolean
     isSpecificRadio?: boolean
     specialType?: specialFieldsNameT
+    minValueInput?: number
+    maxValueInput?: number
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]

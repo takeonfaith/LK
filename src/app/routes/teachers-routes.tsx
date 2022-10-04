@@ -6,6 +6,7 @@ import HelpfulInformation from '@pages/helpful-information'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import PersonalNotificationsPage from '@pages/personal-notifications'
 import TeachersApplicationsPage from '@pages/teachers-applications'
+import HrApplicationsPage from '@pages/hr-applications'
 import ArbitraryRequestPage from '@pages/teachers-applications/pages/arbitrary-request'
 import CertificateFromPlaceOfWorkPage from '@pages/teachers-applications/pages/certificate-from-the-place-of-work'
 import CertificateOfWorkExperiencePage from '@pages/teachers-applications/pages/certificate-of-work-experience'
@@ -52,6 +53,7 @@ import {
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
+export const HR_APPLICATIONS_ROUTE = '/hr-applications'
 export const JOB_ROUTE = '/job'
 export const ORDERS_ROUTE = '/staff_orders'
 export const DOCUMENT_BLANKS_ROUTE = '/staff_blanks'
@@ -127,6 +129,16 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'GENERAL',
+    },
+    'hr-applications': {
+        id: 'hr-applications',
+        title: 'Кадровые заявления',
+        icon: <FiFileText />,
+        path: HR_APPLICATIONS_ROUTE,
+        Component: HrApplicationsPage,
+        color: 'red',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
     },
     'download-agreements': {
         id: 'download-agreements',
