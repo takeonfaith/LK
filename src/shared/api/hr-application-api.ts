@@ -13,16 +13,6 @@ export const getAppData = (): Promise<AxiosResponse<UserApplication>> => {
 }
 
 export const post = async (data: ApplicationCreating) => {
-    const formData = new FormData()
-
-    for (const [key, value] of Object.entries(data)) {
-        formData.set(key, value)
-    }
-
-    const { data: resultRequest } = await $hrApi.post(`WeekendRequest`, formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    })
+    const { data: resultRequest } = await $hrApi.post(`WeekendRequest`, data)
     return resultRequest.result
 }
