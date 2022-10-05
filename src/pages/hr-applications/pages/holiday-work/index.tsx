@@ -12,7 +12,7 @@ import { FiChevronLeft } from 'react-icons/fi'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import checkFormFields from '@utils/check-form-fields'
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teachers-routes'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import SendHrFormHolidayWork from '@pages/hr-applications/lib/send-hr-form-holiday-work'
 import { specialFieldsNameT } from "@entities/applications/consts";
 import getCompensation from './lib/get-compenstion'
 
@@ -61,8 +61,8 @@ const HolidayWork = () => {
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>
-                            globalAppSendForm(
-                                ApplicationFormCodes.DISMISSAL,
+                            SendHrFormHolidayWork(
+                                '1b131564-041c-11e2-92bb-18f46ae63d1e',
                                 [form],
                                 setLoading,
                                 setCompleted,
