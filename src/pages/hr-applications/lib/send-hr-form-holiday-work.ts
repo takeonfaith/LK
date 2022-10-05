@@ -58,12 +58,12 @@ const SendHrFormHolidayWork = async (
         const aaa = {
             Title: result.reason,
             Employee: employeeId,
-            WorkDays: JSON.stringify([
+            WorkDays: [
                 {
                     DateOfEmployment: result.holiday_work_date,
                     DayOfRest: result.extra_holiday_date,
                 },
-            ]),
+            ],
         }
         await applicationsModel.effects.postApplicationFx(aaa)
         setLoading(false)

@@ -13,7 +13,7 @@ export const $hrApi = axios.create({
     httpsAgent: new https.Agent({
         rejectUnauthorized: false,
     }),
-    timeout: 5000,
+    timeout: 90000,
 })
 
 export function isAxiosError(error: Error): error is AxiosError {
