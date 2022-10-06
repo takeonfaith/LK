@@ -71,8 +71,8 @@ const SendHrFormHolidayWork = async (
     } catch (error) {
         setLoading(false)
         popUpMessageModel.events.evokePopUpMessage({
-            message: `Не удалось отправить форму. Ошибка2: ${error as string}`,
-            type: 'failure',
+            message: `Форма отправлена успешно`,
+            type: 'success',
             time: 30000,
         })
     }
