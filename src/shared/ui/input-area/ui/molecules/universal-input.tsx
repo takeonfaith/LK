@@ -6,7 +6,7 @@ import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
 import React, { useState } from 'react'
-import { specialFieldsNameT } from "@entities/applications/consts";
+import { specialFieldsNameT } from '@entities/applications/consts'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles

@@ -16,8 +16,7 @@ import InitialLoader from './initial-loader'
 import Story from './story'
 import React from 'react'
 import useShowTutorial from '@utils/hooks/use-show-tutorial'
-import { storyModel } from '@entities/story'
-import { TutorialStory } from 'shared/stories/tutorial'
+import InstallApp from '@utils/install-app'
 
 const ContentWrapper = styled.div`
     width: 100%;
