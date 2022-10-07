@@ -1,29 +1,35 @@
+import { settingsModel } from '@entities/settings'
 import { useCallback, useEffect, useState } from 'react'
-import { useSettings } from '../contexts/settings-context'
-
 const useTheme = () => {
-    const { setting, change } = useSettings<string>('theme')
+    const { settings } = settingsModel.selectors.useSettings()
 
     const [theme, setTheme] = useState<string>('light')
 
     useEffect(() => {
-        if (!setting) {
+        if (settings) {
+            const currentTheme = settings['settings-appearance'].property['theme'] as string
             if (!document.documentElement.getAttribute('data-theme')) {
-                document.documentElement.setAttribute('data-theme', setting)
-                setTheme(setting)
+                document.documentElement.setAttribute('data-theme', currentTheme)
+                setTheme(currentTheme)
+            } else {
+                document.documentElement.setAttribute('data-theme', currentTheme)
+                setTheme(currentTheme)
             }
         } else {
-            document.documentElement.setAttribute('data-theme', setting)
-            setTheme(setting)
+            document.documentElement.setAttribute('data-theme', 'light')
         }
-    }, [setting])
+    }, [settings])
 
     const switchTheme = useCallback((state) => {
         setTheme(() => {
             const newTheme = state ? 'dark' : 'light'
 
             document.documentElement.setAttribute('data-theme', newTheme)
-            change(newTheme)
+            settingsModel.events.updateSetting({
+                nameSettings: 'settings-appearance',
+                nameParam: 'theme',
+                value: newTheme,
+            })
 
             return newTheme
         })

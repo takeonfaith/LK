@@ -34,7 +34,7 @@ const Content = () => {
 
     return (
         <PageWrapper>
-            <Block maxWidth="1000px" orientation="vertical" height="100%" maxHeight="100%" justifyContent="none">
+            <Block maxWidth="800px" orientation="vertical" height="100%" maxHeight="100%" justifyContent="none">
                 <div className="search-and-filter">
                     <LocalSearch
                         whereToSearch={undefined}

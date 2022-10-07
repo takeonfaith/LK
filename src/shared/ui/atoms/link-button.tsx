@@ -11,6 +11,7 @@ const LinkButtonWrapper = styled.a<{
     isActive: boolean
     height?: string
     minHeight?: string
+    padding?: string
 }>`
     display: flex;
     align-items: center;
@@ -18,7 +19,7 @@ const LinkButtonWrapper = styled.a<{
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
     background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
-    padding: 10px;
+    padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
@@ -67,7 +68,7 @@ const LinkButtonWrapper = styled.a<{
 interface Props {
     icon?: JSX.Element
     text?: React.ReactNode | string
-    onClick: (event: any) => void
+    onClick?: (event: any) => void
     isChosen?: boolean
     width?: string
     background?: string
@@ -77,6 +78,7 @@ interface Props {
     href: string
     height?: string
     minHeight?: string
+    padding?: string
 }
 
 const LinkButton = ({
@@ -90,13 +92,14 @@ const LinkButton = ({
     href,
     height,
     minHeight,
+    padding,
     isActive = true,
     isChosen = false,
 }: Props) => {
     return (
         <LinkButtonWrapper
             text={!!text}
-            onClick={(e) => isActive && onClick(e)}
+            onClick={(e) => isActive && onClick && onClick(e)}
             isChosen={isChosen}
             width={width}
             background={background}
@@ -105,6 +108,7 @@ const LinkButton = ({
             align={align}
             isActive={isActive}
             height={height}
+            padding={padding}
             minHeight={minHeight}
         >
             {!!icon && icon}

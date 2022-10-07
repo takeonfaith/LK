@@ -1,8 +1,7 @@
-import { LoadFileButton } from '@ui/atoms'
 import Checkbox, { CheckboxProps } from '@ui/atoms/checkbox'
-import { LoadFileProps } from '@ui/atoms/load-file-button'
-import React from 'react'
+import FileInput, { FileInputProps } from '@ui/file-input'
 import styled from 'styled-components'
+import React from 'react'
 
 const CheckboxDocumentWrapper = styled.div`
     display: flex;
@@ -10,13 +9,13 @@ const CheckboxDocumentWrapper = styled.div`
     justify-content: center;
 `
 
-type Props = { checkbox: CheckboxProps; loadfile: LoadFileProps; docVisible: boolean }
+type Props = { checkbox: CheckboxProps; loadfile: FileInputProps; docVisible: boolean }
 
 const CheckboxDocument = ({ checkbox, loadfile, docVisible }: Props) => {
     return (
         <CheckboxDocumentWrapper>
             <Checkbox {...checkbox} />
-            {docVisible && <LoadFileButton {...loadfile} />}
+            {docVisible && <FileInput {...loadfile} />}
         </CheckboxDocumentWrapper>
     )
 }

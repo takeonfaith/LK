@@ -5,6 +5,7 @@ type UserStatus = 'stud' | 'staff'
 export interface User extends Record<string, unknown> {
     id: string
     name: string
+    fullName: string
     status: string
     avatar: string
     course: number
@@ -26,6 +27,8 @@ export interface User extends Record<string, unknown> {
     subdivisions?: Subdivision[]
     user_status: UserStatus
     lastaccess: string
+    available_accounts?: { name: string; avatar: string; token: string }[]
+    authorIDs?: AuthorIDs
 }
 
 interface Subdivision {
@@ -34,4 +37,11 @@ interface Subdivision {
     status?: string
     subdivision?: string
     wage?: string
+    post?: string
+}
+
+interface AuthorIDs {
+    wosReasearcher?: string
+    scopus?: string
+    eLibrary?: string
 }

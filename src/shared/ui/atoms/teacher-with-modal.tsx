@@ -1,4 +1,4 @@
-import { SCHEDULE_ROUTE } from '@app/routes/routes'
+import { SCHEDULE_ROUTE } from '@app/routes/general-routes'
 import { Colors } from '@consts'
 import React from 'react'
 import { FiClock } from 'react-icons/fi'

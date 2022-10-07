@@ -1,3 +1,4 @@
+import { TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
 import searchChats from '@features/chat/lib/search-chats'
 import { Button, Divider, Title } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
@@ -52,7 +53,7 @@ const ListOfChatsWrapper = styled.div<{ isOpen: boolean; chatId?: string }>`
 const ListOfChats = () => {
     const [foundChats, setFoundChats] = useState<any[] | null>(null)
     const [isOpen, setIsOpen] = useState(true)
-    const params = useRouteMatch('/messages/:chatId')?.params as { chatId: string | undefined }
+    const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { chatId: string | undefined }
 
     const chats: any[] = [
         {

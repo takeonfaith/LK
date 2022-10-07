@@ -5,7 +5,8 @@ import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData, IInput
 import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
-import React from 'react'
+import React, { useState } from 'react'
+import { specialFieldsNameT } from "@entities/applications/consts";
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -13,6 +14,7 @@ type Props = IInputAreaData & {
     setData: React.Dispatch<React.SetStateAction<IInputArea>>
     indexI: number
     indexJ?: number
+    specialFieldsName?: specialFieldsNameT
 }
 
 const UniversalInput = (props: Props) => {
@@ -32,9 +34,15 @@ const UniversalInput = (props: Props) => {
         editable,
         placeholder,
         autocomplete,
+        isSpecificRadio,
+        specialType,
+        specialFieldsName,
+        minValueInput,
+        maxValueInput
     } = props
 
-    const isActive = editable || (changeInputArea && !documents)
+    const isActive = editable ?? (changeInputArea && !documents)
+    const [validDates, setValidDates] = useState(true)
 
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
         setData((area) => {
@@ -76,6 +84,16 @@ const UniversalInput = (props: Props) => {
         })
     }
 
+    const handleDates = (dates: string[]) => {
+        setData((area) => {
+            ;(area.data[indexI] as IInputAreaData).value = dates
+            return { ...area }
+        })
+    }
+    if (!!specialType && specialType !== specialFieldsName) {
+        return null
+    }
+
     return (type !== 'select' && type !== 'multiselect') || !items ? (
         type === 'checkbox' ? (
             <Checkbox
@@ -106,10 +124,10 @@ const UniversalInput = (props: Props) => {
             <DateInterval
                 title={title}
                 required={required}
-                dates={['', '']}
-                setDates={() => null}
-                valid={false}
-                setValid={() => null}
+                dates={value as string[]}
+                setDates={(dates: string[]) => handleDates(dates)}
+                valid={validDates}
+                setValid={setValidDates}
             />
         ) : type === 'radio' ? (
             <RadioButtonList
@@ -118,11 +136,14 @@ const UniversalInput = (props: Props) => {
                 required={required}
                 current={value as RadioButton}
                 setCurrent={handleRadio}
+                isSpecificRadio={isSpecificRadio}
             />
         ) : (
             <Input
                 value={value as string}
                 title={title}
+                minValue = {minValueInput}
+                maxValue = {maxValueInput}
                 setValue={(value) => handleChangeValue(value, indexI, indexJ)}
                 type={type}
                 isActive={isActive}

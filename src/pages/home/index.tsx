@@ -1,14 +1,14 @@
+import { menuModel } from '@entities/menu'
+import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
+import LinksList from '@features/home/ui/organisms/links-list'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
-import ShortCutLinks from '@features/home/ui/organisms/short-cut-links'
-import UserInfo from '@features/home/ui/organisms/user-info'
-import LinksList from '@features/home/ui/test/links-list'
-import PageLink from '@features/home/ui/test/page-link'
-import { Wrapper } from '@ui/atoms'
-import React, { useEffect } from 'react'
-import { FiCalendar, FiCheck, FiCheckSquare } from 'react-icons/fi'
+import { Title, Wrapper } from '@ui/atoms'
+import { useEffect } from 'react'
+import getGreetingMessage from './lib/get-greeting-message'
 import { Content } from './ui/atoms/content'
+import React from 'react'
 
 const Home = () => {
     const {
@@ -16,56 +16,23 @@ const Home = () => {
         error,
     } = userModel.selectors.useUser()
 
+    const { homeRoutes } = menuModel.selectors.useMenu()
+
+    if (!user || !homeRoutes) return null
+
     useEffect(() => {
         scheduleModel.effects.getScheduleFx(user)
+        paymentsModel.effects.getPaymentsFx()
     }, [])
 
     return (
         <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <Content>
-                {!!user && (
-                    <div className="home-page-content-inner">
-                        <UserInfo user={user} />
-                        <ScheduleAndNotification />
-                        <ShortCutLinks />
-                        <LinksList
-                            title="Разделы"
-                            links={[
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'purple',
-                                    isNew: true,
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Расписание',
-                                    color: 'blue',
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'red',
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'green',
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'orange',
-                                },
-                                {
-                                    icon: <FiCheckSquare />,
-                                    title: 'Соглашение об электронном взаимодействии',
-                                    color: 'lightGreen',
-                                },
-                            ]}
-                        />
-                    </div>
-                )}
+                <Title size={2} align="left" bottomGap>
+                    {getGreetingMessage(user.name)}
+                </Title>
+                <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
+                <ScheduleAndNotification />
             </Content>
         </Wrapper>
     )

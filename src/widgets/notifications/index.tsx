@@ -62,7 +62,6 @@ const NotificationsPage = ({ title }: Props) => {
 
     return (
         <Wrapper
-            loading={true}
             load={() => personalNotificationModel.effects.getPersonalNotificationsFx()}
             error={error}
             data={foundNotification}

@@ -1,4 +1,4 @@
-import { SCHEDULE_ROUTE } from '@app/routes/routes'
+import { SCHEDULE_ROUTE } from '@app/routes/general-routes'
 import { Button, TeacherWidthModal } from '@ui/atoms'
 import React from 'react'
 import { useHistory } from 'react-router'

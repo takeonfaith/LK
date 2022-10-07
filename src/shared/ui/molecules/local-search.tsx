@@ -22,8 +22,13 @@ const LocalSearch = <T, R>({
     const [value, setValue] = useState('')
 
     useEffect(() => {
-        if (value.length) setResult(searchEngine(value, whereToSearch))
-        else setResult(null)
+        if (value.length) {
+            const delayedSearch = setTimeout(() => {
+                setResult(searchEngine(value, whereToSearch))
+            }, 300)
+
+            return () => clearTimeout(delayedSearch)
+        } else setResult(null)
     }, [value])
 
     return (

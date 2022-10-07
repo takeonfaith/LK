@@ -51,7 +51,7 @@
         "./shared/consts.ts"
       ],
       "@routes": [
-        "./app/routes/routes.ts"
+        "./app/routes/routes.tsx"
       ],
       "@widgets": [
         "./app/widgets"

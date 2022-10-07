@@ -3,6 +3,7 @@ import { Payments } from '@api/model'
 import { createEvent } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector/compat'
+import changeCanSign from '../lib/change-can-sign'
 
 interface PaymentsStore {
     payments: Payments | null
@@ -30,6 +31,15 @@ const getPaymentsFx = createEffect(async (): Promise<Payments> => {
     }
 })
 
+const signContractFx = createEffect(async (contractId: string) => {
+    try {
+        await paymentApi.signContract(contractId)
+        return contractId
+    } catch (error) {
+        throw new Error('Не удалось подписать конкракт. Причина: ' + error)
+    }
+})
+
 const clearStore = createEvent()
 
 const $paymentsStore = createStore<PaymentsStore>(DEFAULT_STORE)
@@ -45,6 +55,14 @@ const $paymentsStore = createStore<PaymentsStore>(DEFAULT_STORE)
         ...oldData,
         error: newData.message,
     }))
+    .on(signContractFx.doneData, (oldData, contractId) => ({
+        ...oldData,
+        payments: changeCanSign(oldData.payments, contractId, false),
+    }))
+    .on(signContractFx.failData, (oldData, newData) => ({
+        ...oldData,
+        error: newData.message,
+    }))
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
@@ -55,6 +73,7 @@ export const selectors = {
 
 export const effects = {
     getPaymentsFx,
+    signContractFx,
 }
 
 export const events = {

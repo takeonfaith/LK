@@ -1,6 +1,6 @@
-import { HOME_ROUTE } from '@app/routes/routes'
 import React from 'react'
 import LogoPicture from '../../images/logo.png'
+import LogoShort from '../../images/mospolytech-logo-white.png'
 import { LogoWrapper } from './styles'
 
 interface Props {
@@ -9,15 +9,8 @@ interface Props {
 
 export function Logo({ short = false }: Props) {
     return (
-        <LogoWrapper to={HOME_ROUTE}>
-            <img
-                src={
-                    !short
-                        ? LogoPicture
-                        : 'https://mospolytech.ru/local/templates/main/dist/img/logos/mospolytech-logo-white.png'
-                }
-                alt="Logo"
-            />
+        <LogoWrapper>
+            <img src={!short ? LogoPicture : LogoShort} alt="Logo" />
         </LogoWrapper>
     )
 }

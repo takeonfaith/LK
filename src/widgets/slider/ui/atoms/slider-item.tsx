@@ -17,8 +17,7 @@ const SliderItemWrapper = styled.div<{ size: number; condition: boolean }>`
     color: var(--text);
 
     & > b {
-        overflow: hidden;
-        white-space: nowrap;
+        word-break: normal;
         text-overflow: ellipsis;
     }
 

@@ -63,15 +63,6 @@ const getSchedule = async (user: User | string | null): Promise<IModules> => {
             }
         }
     }
-    // // eslint-disable-next-line no-console
-    // console.log(sessionSchedule)
-
-    // // eslint-disable-next-line no-console
-    // console.log(
-    //     Object.keys(sessionResponse.data).length,
-    //     !!Object.values(sessionSchedule).find((el) => !!el.lessons.length),
-    //     sessionResponse.data.status !== 'error',
-    // )
 
     return {
         '0':
@@ -88,6 +79,7 @@ const getSchedule = async (user: User | string | null): Promise<IModules> => {
             sessionResponse.data.status !== 'error'
                 ? (sessionSchedule as ISessionSchedule)
                 : null,
+        '3': null,
     }
 }
 
