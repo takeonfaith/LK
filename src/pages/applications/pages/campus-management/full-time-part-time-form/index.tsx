@@ -1,5 +1,5 @@
 import { userModel } from '@entities/user'
-import { Button, FormBlock, SubmitButton } from '@ui/atoms'
+import { Button, Error, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
@@ -23,6 +23,9 @@ const FullTimePartTimeFormPage = () => {
     const {
         data: { dataUserApplication },
     } = applicationsModel.selectors.useApplications()
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
@@ -30,6 +33,10 @@ const FullTimePartTimeFormPage = () => {
     const [additionally, setAdditionally] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
     const history = useHistory()
+
+    if (user?.educationForm !== 'Очно-заочная') {
+        return <Error text={'Сервис доступен только для обучающихся очно-заочной формы'} />
+    }
 
     useEffect(() => {
         if (!!dataUserApplication) {

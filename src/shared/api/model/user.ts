@@ -2,6 +2,8 @@ import { Sex } from '@utility-types/sex'
 
 type UserStatus = 'stud' | 'staff'
 
+type EducationFormT = 'Очная' | 'Очно-заочная' | 'Заочная'
+
 export interface User extends Record<string, unknown> {
     id: string
     name: string
@@ -20,7 +22,7 @@ export interface User extends Record<string, unknown> {
     specialty: string
     specialization: string
     degreeLength: number
-    educationForm: string
+    educationForm: EducationFormT
     finance: string
     degreeLevel: string
     enterYear: string
