@@ -142,6 +142,33 @@ const pages: HelpfulPages = [
     ],
     [
         {
+            title: 'Бланки документов',
+            links: [
+                {
+                    title: 'Бланк квитанции оплаты за обучение',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_edu2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты неустойки за обучение',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_edu_penny2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты за общежитие',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_hostel2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты неустойки за общежитие',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_hostel_penny2021.doc?1',
+                },
+            ],
+        },
+    ],
+    [
+        {
             title: 'Положения',
             links: [...instructionsTeacherData[2].links.map((l): Link => ({ ...l, href: l.link, visible: 'staff' }))],
         },

@@ -59,6 +59,9 @@ const HelpfulInformation = () => {
                                   {
                                       title: 'Курсы',
                                   },
+                                  {
+                                      title: 'Бланки документов',
+                                  }
                               ]
                     }
                     currentPage={page}
