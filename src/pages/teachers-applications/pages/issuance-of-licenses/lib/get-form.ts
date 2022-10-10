@@ -2,7 +2,7 @@ import { IInputArea } from '@ui/input-area/model'
 import getBasicFieldsApplicationTeacher from '@pages/teachers-applications/lib/get-basic-fields-application-teacher'
 import { UserApplication } from '@api/model'
 import { MethodObtainingOptions } from '@entities/applications/consts'
-import { getDivisionsCrs } from '@features/applications/lib/get-divisions'
+import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
 import getAddressFields from '@features/applications/lib/get-address-fields'
 
 const getForm = (data: UserApplication): IInputArea => {
@@ -99,7 +99,7 @@ const getForm = (data: UserApplication): IInputArea => {
                 fieldName: 'structural-subdivision',
                 value: null,
                 editable: true,
-                items: getDivisionsCrs(data.divisions_crs),
+                items: getFormattedDivisions(data.divisions_crs),
                 isSpecificRadio: true,
                 specialType: 'personalMethod',
             },

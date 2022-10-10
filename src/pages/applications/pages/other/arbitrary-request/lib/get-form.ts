@@ -1,6 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
-import { getDivisionsAll } from '@features/applications/lib/get-divisions'
+import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
 
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
@@ -29,7 +29,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 fieldName: 'structural-subdivision',
                 value: null,
                 editable: true,
-                items: getDivisionsAll(dataUserApplication.divisions_all),
+                items: getFormattedDivisions(dataUserApplication.divisions_all),
                 isSpecificRadio: true,
             },
             {
