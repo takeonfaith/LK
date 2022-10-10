@@ -2,10 +2,15 @@ import { Colors } from '@consts'
 import { Button } from '@ui/atoms'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useMemo, useRef } from 'react'
+import styled from 'styled-components'
 import { FiChevronLeft, FiX } from 'react-icons/fi'
 import useCoreModal from '../lib/hooks/use-core-modal'
 import ModalContent from './atoms/modal-content'
 import ModalWrapper from './atoms/modal-wrapper'
+
+const Content = styled.div`
+    padding-top: 30px;
+`
 
 const Modal = () => {
     const { isOpen, component: Component, canBack, back, close } = useCoreModal()
@@ -32,7 +37,7 @@ const Modal = () => {
                 )}
                 <Button onClick={close} icon={<FiX />} className="close-button" background="transparent" />
 
-                <>{Component}</>
+                <Content>{Component}</Content>
             </ModalContent>
         </ModalWrapper>
     )
