@@ -34,8 +34,8 @@ const FullTimePartTimeFormPage = () => {
     const isDone = completed ?? false
     const history = useHistory()
 
-    if (user?.educationForm !== 'Очно-заочная') {
-        return <Error text={'Сервис доступен только для обучающихся очно-заочной формы'} />
+    if (user?.educationForm !== 'Недоступен') {
+        return <Error text={'Сервис временно недоступен в связи с отсутствием свободных мест'} />
     }
 
     useEffect(() => {

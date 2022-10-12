@@ -267,7 +267,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     },
     'preferential-accommodation': {
         id: 'preferential-accommodation',
-        title: 'Предоставление права льготного проживания',
+        title: 'Предоставление права проживания льготной категории граждан',
         icon: BiIdCard,
         path: PREFERENTIAL_ACCOMMODATION,
         Component: isProdEnv ? ApplicationRedirect : PreferentialAccommodationPage,

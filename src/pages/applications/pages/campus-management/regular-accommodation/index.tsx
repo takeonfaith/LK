@@ -62,9 +62,9 @@ const RegularAccommodationPage = () => {
                     {registration && (
                         <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
                     )}
-                    {disability && (
-                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
-                    )}
+                    {/*{disability && (*/}
+                    {/*    <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />*/}
+                    {/*)}*/}
                     {additionally && (
                         <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />
                     )}
@@ -84,7 +84,7 @@ const RegularAccommodationPage = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
+                        isActive={checkFormFields(form) && !!registration?.documents?.files.length}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

@@ -2,7 +2,7 @@ import { Sex } from '@utility-types/sex'
 
 type UserStatus = 'stud' | 'staff'
 
-type EducationFormT = 'Очная' | 'Очно-заочная' | 'Заочная'
+type EducationFormT = 'Очная' | 'Очно-заочная' | 'Заочная' | 'Недоступен'
 
 export interface User extends Record<string, unknown> {
     id: string

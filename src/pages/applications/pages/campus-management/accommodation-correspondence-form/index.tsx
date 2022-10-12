@@ -34,8 +34,8 @@ const AccommodationCorrespondenceFormPage = () => {
     const isDone = completed ?? false
     const history = useHistory()
 
-    if (user?.educationForm !== 'Заочная') {
-        return <Error text={'Сервис доступен только для обучающихся заочной формы'} />
+    if (user?.educationForm !== 'Недоступен') {
+        return <Error text={'Сервис временно недоступен в связи с отсутствием свободных мест'} />
     }
 
     useEffect(() => {

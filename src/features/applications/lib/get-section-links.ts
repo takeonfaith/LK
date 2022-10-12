@@ -145,7 +145,7 @@ const getSectionLinks = () => {
                 },
                 {
                     link: PREFERENTIAL_ACCOMMODATION,
-                    title: 'Предоставление права льготного проживания',
+                    title: 'Предоставление права проживания льготной категории граждан',
                 },
                 {
                     link: FAMILY_ROOM,
