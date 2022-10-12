@@ -66,34 +66,26 @@ const InfoPayments = () => {
                     </div>
                 </Block>
                 <Block orientation="vertical" maxWidth="380px">
-                    <Title size={2} align="left">
-                        Реквизиты договора
+                    <Title size={2} align="left" bottomGap='20px'>
+                        Дополнительно
                     </Title>
-                    <List gap={10} verticalAlign="center" height="100%" direction="horizontal" wrap>
-                        <Button
-                            onClick={() => null}
-                            text="Банковские реквизиты"
-                            width={'100%'}
-                            background="var(--settings)"
-                        />
-                        <Button
-                            onClick={() => null}
-                            text="Бланк квитанции оплаты неустойки"
-                            width={'100%'}
-                            background="var(--settings)"
-                        />
-                        <Button
-                            onClick={() => null}
-                            text="Бланк квитанции оплаты обучения"
-                            width={'100%'}
-                            background="var(--settings)"
-                        />
-                        <Button
-                            onClick={() => null}
-                            text="Информация об оплате обучения"
-                            width={'100%'}
-                            background="var(--settings)"
-                        />
+                    <List gap={10} verticalAlign="top" horizontalAlign = 'left' height='100%' wrap >
+                        <a href='https://mospolytech.ru/ob-universitete/adresa-i-kontakty/uchetnaya-kartochka-i-bankovskie-rekvizity/' target='_blank'>
+                            <Button
+                                onClick={() => null}
+                                text="Банковские реквизиты"
+                                width={'100%'}
+                                background="var(--settings)"
+                            />
+                        </a>
+                        <a href='https://mospolytech.ru/obuchauschimsya/oplata-obucheniya/' target='_blank'>
+                            <Button
+                                onClick={() => null}
+                                text="Информация об оплате обучения"
+                                width={'100%'}
+                                background="var(--settings)"
+                            />
+                        </a>
                     </List>
                 </Block>
             </div>
