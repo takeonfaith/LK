@@ -20,6 +20,9 @@ const MapWrapper = styled.div`
     border-radius: var(--brSemi);
     height: fit-content;
 `
+const LinkWrapper = styled.a`
+    width: 100%;
+`
 
 const InfoPayments = () => {
     return (
@@ -70,22 +73,22 @@ const InfoPayments = () => {
                         Дополнительно
                     </Title>
                     <List gap={10} verticalAlign="top" horizontalAlign = 'left' height='100%' wrap >
-                        <a href='https://mospolytech.ru/ob-universitete/adresa-i-kontakty/uchetnaya-kartochka-i-bankovskie-rekvizity/' target='_blank'>
+                        <LinkWrapper href='https://mospolytech.ru/ob-universitete/adresa-i-kontakty/uchetnaya-kartochka-i-bankovskie-rekvizity/' target='_blank' >
                             <Button
                                 onClick={() => null}
                                 text="Банковские реквизиты"
                                 width={'100%'}
                                 background="var(--settings)"
                             />
-                        </a>
-                        <a href='https://mospolytech.ru/obuchauschimsya/oplata-obucheniya/' target='_blank'>
+                        </LinkWrapper>
+                        <LinkWrapper href='https://mospolytech.ru/obuchauschimsya/oplata-obucheniya/' target='_blank'>
                             <Button
                                 onClick={() => null}
                                 text="Информация об оплате обучения"
                                 width={'100%'}
                                 background="var(--settings)"
                             />
-                        </a>
+                        </LinkWrapper>
                     </List>
                 </Block>
             </div>
