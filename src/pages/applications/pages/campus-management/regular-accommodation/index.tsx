@@ -72,7 +72,7 @@ const RegularAccommodationPage = () => {
                         text={'Отправить'}
                         action={() =>
                             globalAppSendForm(
-                                ApplicationFormCodes.USG_GETHOSTEL_OOZ,
+                                ApplicationFormCodes.USG_GETHOSTEL_O,
                                 [form, registration, disability, additionally],
                                 setLoading,
                                 setCompleted,
