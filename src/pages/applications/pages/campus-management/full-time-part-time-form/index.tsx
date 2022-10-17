@@ -62,9 +62,9 @@ const FullTimePartTimeFormPage = () => {
                     {registration && (
                         <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
                     )}
-                    {disability && (
-                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
-                    )}
+                    {/*{disability && (*/}
+                    {/*    <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />*/}
+                    {/*)}*/}
                     {additionally && (
                         <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />
                     )}

@@ -76,8 +76,11 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 fieldName: 'comment',
                 value: '',
                 editable: true,
+                placeholder: 'Разъясните необходимость проживания в общежитии в период академического отпуска',
+                required: true,
             },
         ],
+        hint: 'В случае предоставления академического отпуска по медицинским показаниям необходимо загрузить подтверждающие медицинские документы.',
         optionalCheckbox: {
             fieldName: 'is_not_document',
             value: false,

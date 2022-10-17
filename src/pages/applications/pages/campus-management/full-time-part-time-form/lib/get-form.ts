@@ -1,6 +1,17 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
 
+const reasonItems = [
+    {
+        id: 0,
+        title: 'имею постоянную регистрацию за пределами А-107 или не имею постоянную регистрацию',
+    },
+    {
+        id: 1,
+        title: 'имею постоянную регистрацию в пределах А-107',
+    },
+]
+
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
@@ -37,12 +48,14 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Причина предоставления (в связи с)',
+                type: 'select',
                 width: '100%',
-                value: '',
+                value: null,
                 fieldName: 'reason',
                 placeholder: 'укажите причину',
                 editable: true,
                 required: true,
+                items: reasonItems,
             },
             {
                 title: 'Приоритетное общежитие',

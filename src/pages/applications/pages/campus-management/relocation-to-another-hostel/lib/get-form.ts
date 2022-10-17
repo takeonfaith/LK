@@ -75,15 +75,6 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Причина предоставления (в связи с)',
-                width: '100%',
-                value: '',
-                fieldName: 'reason',
-                placeholder: 'укажите причину',
-                editable: true,
-                required: true,
-            },
-            {
                 title: 'Общежитие',
                 fieldName: 'hostel',
                 value: '',
@@ -150,7 +141,16 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 width: '100%',
                 editable: true,
             },
+            {
+                title: 'Комментарий',
+                type: 'textarea',
+                fieldName: 'comment',
+                value: '',
+                editable: true,
+                required: true,
+            },
         ],
+        hint: 'Приложите грамоты, дипломы и другие документы, подтверждающие Вашу активную деятельность в университете.',
     }
 }
 
