@@ -36,15 +36,11 @@ export interface ISessionSchedule {
     [key: string]: ILessons
 }
 
-export interface IRetakeSchedule {
-    [key: string]: ILessons
-}
-
 export interface IModules {
     '0': IWeekSchedule | null
     '1': IWeekSchedule | null
     '2': ISessionSchedule | null
-    '3': IRetakeSchedule | null
+    '3': JSX.Element | null
 }
 
 export type ViewType = 'full' | 'big'
