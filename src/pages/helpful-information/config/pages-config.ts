@@ -11,7 +11,8 @@ const pages: HelpfulPages = [
                     visible: 'student',
                     href: 'https://e.mospolytech.ru/old/storage/files/Vremennoe_polozhenie_o_provedenii_tekuschego_kontrolya_uspevaemosti_i_promezhutochnoj_attestatsii_obuchajuschihsya_v_usloviyah_obespecheniya_rezhima_izolyatsii_v_tselyah_predotvrascheniya_rasprostraneniya_koronavirusnoj_infektsii.pdf',
                 },
-                { title: 'Оплата обучения', visible: 'student', href: 'https://mospolytech.ru/?id=2042' },
+                { title: 'Информация об оплате обучения', visible: 'all', href: 'https://mospolytech.ru/obuchauschimsya/oplata-obucheniya/' },
+                { title: 'Банковские реквизиты', visible: 'student', href: 'https://mospolytech.ru/ob-universitete/adresa-i-kontakty/uchetnaya-kartochka-i-bankovskie-rekvizity/' },
                 { title: 'Международные программы', visible: 'student', href: 'https://mospolytech.ru/?id=8' },
                 { title: 'Дополнительное образование', visible: 'student', href: 'https://mospolytech.ru/?id=92' },
 
