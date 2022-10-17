@@ -6,7 +6,7 @@ import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
 import React, { useState } from 'react'
-import { specialFieldsNameT } from "@entities/applications/consts";
+import { specialFieldsNameT } from '@entities/applications/consts'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -38,7 +38,7 @@ const UniversalInput = (props: Props) => {
         specialType,
         specialFieldsName,
         minValueInput,
-        maxValueInput
+        maxValueInput,
     } = props
 
     const isActive = editable ?? (changeInputArea && !documents)
@@ -142,8 +142,8 @@ const UniversalInput = (props: Props) => {
             <Input
                 value={value as string}
                 title={title}
-                minValue = {minValueInput}
-                maxValue = {maxValueInput}
+                minValue={minValueInput}
+                maxValue={maxValueInput}
                 setValue={(value) => handleChangeValue(value, indexI, indexJ)}
                 type={type}
                 isActive={isActive}

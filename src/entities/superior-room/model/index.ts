@@ -1,6 +1,6 @@
 import { superiorRoomApi } from '@api'
 import { SuperiorRoom } from '@api/model'
-import { createEffect, createStore, createEvent } from 'effector/compat'
+import { createEffect, createStore, createEvent } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { forward } from 'effector/effector.mjs'
 

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 const useFilterList = (listKeys: string[], setList: React.Dispatch<React.SetStateAction<FilterElementList>>) => {
     const [removeAll, setRemoveAll] = useState(false)
     const [removeOne, setRemoveOne] = useState<string | null>(null)
-    const [closed, setClosed] = useState(true)
+    // const [closed, setClosed] = useState(true)
 
     useEffect(() => {
         if (removeAll) {

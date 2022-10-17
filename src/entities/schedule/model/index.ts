@@ -1,7 +1,7 @@
 import { IModules, ISchedule, User, ViewType } from '@api/model'
 import calcNextExamTime from '@features/schedule/lib/calc-next-exam.time'
 import { useStore } from 'effector-react/compat'
-import { createEffect, createEvent, createStore } from 'effector/compat'
+import { createEffect, createEvent, createStore } from 'effector'
 import getCurrentDayString from '../lib/get-current-day-string'
 import getSchedule from '../lib/get-schedule'
 

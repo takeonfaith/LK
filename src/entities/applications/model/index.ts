@@ -2,7 +2,7 @@ import { applicationApi } from '@api'
 import { Application, UserApplication } from '@api/model'
 import { createEvent, forward } from 'effector'
 import { useStore } from 'effector-react/compat'
-import { createEffect, createStore } from 'effector/compat'
+import { createEffect, createStore } from 'effector'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 interface ApplicationsStore {

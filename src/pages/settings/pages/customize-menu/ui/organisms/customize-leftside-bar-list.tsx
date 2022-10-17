@@ -1,6 +1,6 @@
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 import { privateRoutes } from '@app/routes/routes'
-import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
+import { teachersPrivateRoutes } from '@app/routes/teacher-routes'
 import {
     ADDITIONAL_MENU_ITEMS_LIMIT_SIZE,
     MenuType,

@@ -1,7 +1,7 @@
 import { User } from '@api/model'
 import { IRoutes } from '@app/routes/general-routes'
 import { privateRoutes } from '@app/routes/routes'
-import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
+import { teachersPrivateRoutes } from '@app/routes/teacher-routes'
 
 interface UserData {
     user: User | null

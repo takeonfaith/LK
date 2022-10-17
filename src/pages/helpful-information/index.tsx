@@ -67,7 +67,7 @@ const HelpfulInformation = () => {
                                   },
                                   {
                                       title: 'Бланки документов',
-                                  }
+                                  },
                               ]
                     }
                     currentPage={page}

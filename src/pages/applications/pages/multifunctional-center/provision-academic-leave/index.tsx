@@ -12,9 +12,8 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
-import getReasonAcademic
-    from "@pages/applications/pages/multifunctional-center/provision-academic-leave/lib/get-reason-academic";
-import { specialFieldsNameT } from "@entities/applications/consts";
+import getReasonAcademic from '@pages/applications/pages/multifunctional-center/provision-academic-leave/lib/get-reason-academic'
+import { specialFieldsNameT } from '@entities/applications/consts'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
