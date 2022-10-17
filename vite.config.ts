@@ -15,6 +15,9 @@ export default defineConfig({
         checker({ typescript: true, eslint: { lintCommand: 'eslint "./src/**/*.{ts,tsx}"' } }),
         tsconfigPaths(),
         svgr(),
+        // build time
+        // 23s - with
+        // 43 - without
         legacy({
             targets: ['IE >= 11'],
         }),
