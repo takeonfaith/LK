@@ -11,7 +11,16 @@ const pages: HelpfulPages = [
                     visible: 'student',
                     href: 'https://e.mospolytech.ru/old/storage/files/Vremennoe_polozhenie_o_provedenii_tekuschego_kontrolya_uspevaemosti_i_promezhutochnoj_attestatsii_obuchajuschihsya_v_usloviyah_obespecheniya_rezhima_izolyatsii_v_tselyah_predotvrascheniya_rasprostraneniya_koronavirusnoj_infektsii.pdf',
                 },
-                { title: 'Оплата обучения', visible: 'student', href: 'https://mospolytech.ru/?id=2042' },
+                {
+                    title: 'Информация об оплате обучения',
+                    visible: 'all',
+                    href: 'https://mospolytech.ru/obuchauschimsya/oplata-obucheniya/',
+                },
+                {
+                    title: 'Банковские реквизиты',
+                    visible: 'student',
+                    href: 'https://mospolytech.ru/ob-universitete/adresa-i-kontakty/uchetnaya-kartochka-i-bankovskie-rekvizity/',
+                },
                 { title: 'Международные программы', visible: 'student', href: 'https://mospolytech.ru/?id=8' },
                 { title: 'Дополнительное образование', visible: 'student', href: 'https://mospolytech.ru/?id=92' },
 
@@ -106,6 +115,68 @@ const pages: HelpfulPages = [
     ],
     [
         {
+            title: 'Безопасность',
+            links: [
+                {
+                    title: 'Памятка «Подозрительный предмет или бесхозная вещь»',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_1_Podozritelnyj_predmet_ili_beshoznaya_vesch.pdf',
+                    visible: 'all',
+                },
+                {
+                    title: 'Если оказались на территории вуза в момент наступившей чрезвычайной ситуации',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_2_Esli_okazalis_na_territorii_vuza_v_moment_nastupivshej_chrezvychajnoj_situatsii.pdf',
+                    visible: 'all',
+                },
+                {
+                    title: 'Памятка «Подозрительный предмет»',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_3_Podozritelnyj_predmet.pdf',
+                    visible: 'all',
+                },
+                {
+                    title: 'Памятка студента по действиям в экстремальных ситуациях',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_4_Pamyatka_studenta_po_dejstviyam_v_ekstremalnyh_situatsiyah.pdf',
+                    visible: 'all',
+                },
+                {
+                    title: 'Алгоритм действий при возникновении паники в толпе или в месте массового пребывания людей',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_5_Algoritm_dejstvij_pri_vozniknovenii_paniki_v_tolpe_ili_v_meste_massovogo_prebyvaniya_ljudej.PDF',
+                    visible: 'all',
+                },
+                {
+                    title: 'Безопасность в экстремальных и чрезвычайных ситуациях',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_6_Bezopasnost_v_ekstremalnyh_i_chrezvychajnyh_situatsiyah.PDF',
+                    visible: 'all',
+                },
+                {
+                    title: 'Как понять, что материал экстремистский, и что с этим делать',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_7_Kak_ponyat__chto_material_ekstremistskij__i_chto_s_etim_delat.PDF',
+                    visible: 'all',
+                },
+                {
+                    title: 'Последствия и ответственность за ложное сообщение об акте терроризма',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_8_Posledstviya_i_otvetstvennost_za_lozhnoe_soobschenie_ob_akte_terrorizma.PDF',
+                    visible: 'all',
+                },
+                {
+                    title: 'Последствия участия в несогласованных митингах и протестных акциях',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_9_Posledstviya_uchastiya_v_nesoglasovannyh_mitingah_i_protestnyh_aktsiyah.PDF',
+                    visible: 'all',
+                },
+                {
+                    title: 'Признаки вербовки в экстремистскую организацию и как с этим справиться',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_10_Priznaki_verbovki_v_ekstremistskuju_organizatsiju_i_kak_s_etim_spravitsya.PDF',
+                    visible: 'all',
+                },
+                {
+                    title: 'Что делать, если вы обнаружили бесхозный предмет',
+                    href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_11_Chto_delat__esli_vy_obnaruzhili_beshoznyj_predmet.PDF',
+                    visible: 'all',
+                },
+            ],
+        },
+    ],
+    [
+        {
             title: 'Инструкции',
             links: [
                 {
@@ -136,6 +207,33 @@ const pages: HelpfulPages = [
                     title: 'Современного курсостроения',
                     visible: 'student',
                     href: 'https://project.lektorium.tv/howtomooc',
+                },
+            ],
+        },
+    ],
+    [
+        {
+            title: 'Бланки документов',
+            links: [
+                {
+                    title: 'Бланк квитанции оплаты за обучение',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_edu2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты неустойки за обучение',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_edu_penny2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты за общежитие',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_hostel2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты неустойки за общежитие',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_hostel_penny2021.doc?1',
                 },
             ],
         },

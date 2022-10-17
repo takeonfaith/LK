@@ -61,7 +61,9 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
         ],
         optionalCheckbox: {
-            title: 'С порядком выселения ознакомлен(а)',
+            title:
+                'С порядком выселения ознакомлен(а).\n' +
+                'Обязуюсь вывезти личные вещи в указанную дату и передать жилое помещение в надлежащем состоянии администрации общежития по акту приема-передачи (подписать документ)',
             value: false,
             fieldName: 'isFamiliar',
         },

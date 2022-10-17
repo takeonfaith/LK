@@ -41,7 +41,6 @@ const getApplicationsColumns = (): ColumnProps[] => {
         },
         { title: 'Структурное подразделение, адрес', priority: 'five', field: 'response_div', width: '360px' },
         { title: 'Примечание', field: 'comment', priority: 'five' },
-
     ]
 }
 

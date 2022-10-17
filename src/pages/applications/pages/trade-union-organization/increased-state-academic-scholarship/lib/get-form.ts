@@ -5,8 +5,8 @@ const TypeOfActivityOptions = [
     { id: 0, title: 'учебная деятельность' },
     { id: 1, title: 'научно-исследовательская деятельность' },
     { id: 3, title: 'общественная деятельность' },
-    { id: 3, title: 'культурно-творческая деятельность' },
-    { id: 3, title: 'спортивная деятельность' },
+    { id: 4, title: 'культурно-творческая деятельность' },
+    { id: 5, title: 'спортивная деятельность' },
 ]
 
 const getForm = (dataUserApplication: UserApplication): IInputArea => {

@@ -41,8 +41,8 @@ const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_cur
         open(
             <SliderPage
                 pages={[
-                    { title: 'Текущая залолженность', content: <QrCode qrCode={qr_current} /> },
-                    { title: 'Общая залолженность', content: <QrCode qrCode={qr_total} /> },
+                    { title: 'Текущая задолженность', content: <QrCode qrCode={qr_current} /> },
+                    { title: 'Общая задолженность', content: <QrCode qrCode={qr_total} /> },
                 ]}
             />,
         )

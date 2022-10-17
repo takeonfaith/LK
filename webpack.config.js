@@ -67,6 +67,12 @@ const config = {
             '.ts',
             '.js'
         ],
+        fallback: { 
+            "https": require.resolve("https-browserify"),
+            "url": require.resolve("url/"),
+            "http": require.resolve("stream-http"),
+            "buffer": require.resolve("buffer/"),
+     },
         alias:
             {
                 'react-dom':

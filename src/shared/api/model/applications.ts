@@ -1,11 +1,12 @@
 import { User } from '@api/model/user'
+import { divisionT } from '@features/applications/lib/get-divisions'
 
 export interface Application {
     regDate: string
     regNumber: string
     requestTitle: string
     requestBody: string
-    status: 'Готово' | 'Принято в работу' | 'Отклонено'
+    status: 'Готово' | 'Принято в работу' | 'Отклонено' | 'Получено'
     statusDate: string
     structuralSubdivision: string
     notes: string
@@ -69,11 +70,13 @@ export interface UserApplication extends User {
     specialty_code: string
     specialty_name: string
     specialization: string
-    educationForm: string
     finance: string
     degreeLevel: string
     enterYear: string
     group: string
     order?: Order[]
     contracts?: Contract[]
+    last_update: string
+    divisions_crs: divisionT[]
+    divisions_all: divisionT[]
 }

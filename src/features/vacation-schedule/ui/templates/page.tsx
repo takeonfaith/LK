@@ -16,7 +16,6 @@ const Page = () => {
     const { data, error } = vacationScheduleModel.selectors.useVacationShedule()
 
     const items: SelectPage[] = useMemo(() => {
-        console.log(data)
         return data?.map((value, index) => ({ id: index, title: value.division })) || []
     }, [data])
 

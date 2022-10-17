@@ -7,12 +7,12 @@ import {
     SOCIAL_AGENCIES,
     REGULAR_ACCOMMODATION,
     ACCOMMODATION_CORRESPONDENCE_FORM,
-    ACADEMIC_LEAVE_ACCOMMODATION,
-    PREFERENTIAL_ACCOMMODATION,
-    FAMILY_ROOM,
-    TERMINATION_OF_EMPLOYMENT_CONTRACT,
-    RELOCATION_TO_ANOTHER_HOSTEL,
-    RELOCATION_INSIDE_HOSTEL,
+    // ACADEMIC_LEAVE_ACCOMMODATION,
+    // PREFERENTIAL_ACCOMMODATION,
+    // FAMILY_ROOM,
+    // TERMINATION_OF_EMPLOYMENT_CONTRACT,
+    // RELOCATION_TO_ANOTHER_HOSTEL,
+    // RELOCATION_INSIDE_HOSTEL,
     PAYMENT_RECIPIENT,
     MILITARY_REGISTRATION_DOCUMENTS,
     RETAKE_FOR_DIPLOMA,
@@ -27,13 +27,18 @@ import {
     PROVISION_ACADEMIC_LEAVE,
     INDEPENDENTLY_DEDUCTED,
     EXTENSION_ATTESTATION,
+    FULL_TIME_PART_TIME_FORM,
 } from '@app/routes/routes'
 import { RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
+import useIsTestEnv from '@utils/hooks/use-is-test-env'
 
 const getSectionLinks = () => {
+    const isProdEnv = !useIsTestEnv()
+    const additionalHeaderClosedService = isProdEnv ? ' (Сервис временно недоступен)' : ''
     return [
         {
-            title: 'Многофункциональный центр',
+            title: 'Многофункциональный центр' + additionalHeaderClosedService,
+            disabled: isProdEnv,
             links: [
                 {
                     link: CERTIFICATE_OF_ATTENDANCE,
@@ -57,7 +62,8 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Профсоюзная организация',
+            title: 'Профсоюзная организация' + additionalHeaderClosedService,
+            disabled: isProdEnv,
             links: [
                 {
                     link: UNION_ORGANIZATION,
@@ -78,7 +84,8 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Мобилизационный отдел',
+            title: 'Мобилизационный отдел' + additionalHeaderClosedService,
+            disabled: isProdEnv,
             links: [
                 { link: MILITARY_REGISTRATION_DOCUMENTS, title: 'Отправить документы воинского учета' },
                 {
@@ -88,14 +95,16 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Отдел платных образовательных услуг',
+            title: 'Отдел платных образовательных услуг' + additionalHeaderClosedService,
+            disabled: isProdEnv,
             links: [
                 { link: PAYMENT_RECIPIENT, title: 'Оформить дополнительное соглашение к договору об обучении' },
                 { link: PAYMENT_RECIPIENT, title: 'Отправить квитанцию об оплате обучения или пени' },
             ],
         },
         {
-            title: 'Приемная комиссия',
+            title: 'Приемная комиссия' + additionalHeaderClosedService,
+            disabled: isProdEnv,
             links: [
                 {
                     link: RECEPTION_COMMISSION,
@@ -105,7 +114,8 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Прочее',
+            title: 'Прочее' + additionalHeaderClosedService,
+            disabled: isProdEnv,
             links: [
                 {
                     link: ARBITRARY_REQUEST_ROUTE,
@@ -114,40 +124,45 @@ const getSectionLinks = () => {
             ],
         },
         {
-            title: 'Управление студенческим городком',
+            title: 'Управление студенческим городком' + additionalHeaderClosedService,
+            disabled: isProdEnv,
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,
-                    title: 'Предоставление права проживания (очная и очно-заочная форма)',
+                    title: 'Предоставление права проживания (очная форма)',
+                },
+                {
+                    link: FULL_TIME_PART_TIME_FORM,
+                    title: 'Предоставление права проживания (очно-заочная форма)',
                 },
                 {
                     link: ACCOMMODATION_CORRESPONDENCE_FORM,
                     title: 'Предоставление права проживания (заочная форма)',
                 },
-                {
-                    link: ACADEMIC_LEAVE_ACCOMMODATION,
-                    title: 'Предоставление права проживания в период академического отпуска',
-                },
-                {
-                    link: PREFERENTIAL_ACCOMMODATION,
-                    title: 'Предоставление права льготного проживания',
-                },
-                {
-                    link: FAMILY_ROOM,
-                    title: 'Предоставление права проживания в семейной комнате',
-                },
-                {
-                    link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
-                    title: 'Расторжение договора найма',
-                },
-                {
-                    link: RELOCATION_INSIDE_HOSTEL,
-                    title: 'Переселение внутри общежития',
-                },
-                {
-                    link: RELOCATION_TO_ANOTHER_HOSTEL,
-                    title: 'Переселение в другое общежитие',
-                },
+                // {
+                //     link: ACADEMIC_LEAVE_ACCOMMODATION,
+                //     title: 'Предоставление права проживания в период академического отпуска',
+                // },
+                // {
+                //     link: PREFERENTIAL_ACCOMMODATION,
+                //     title: 'Предоставление права проживания льготной категории граждан',
+                // },
+                // {
+                //     link: FAMILY_ROOM,
+                //     title: 'Предоставление права проживания в семейной комнате',
+                // },
+                // {
+                //     link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
+                //     title: 'Расторжение договора найма',
+                // },
+                // {
+                //     link: RELOCATION_INSIDE_HOSTEL,
+                //     title: 'Переселение внутри общежития',
+                // },
+                // {
+                //     link: RELOCATION_TO_ANOTHER_HOSTEL,
+                //     title: 'Переселение в другое общежитие',
+                // },
             ],
         },
     ]

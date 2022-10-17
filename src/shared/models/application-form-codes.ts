@@ -1,12 +1,13 @@
 export enum ApplicationFormCodes {
-    USG_GETHOSTEL_OOZ = 'usg_gethostel_ooz',
-    USG_GETHOSTEL_Z = 'usg_gethostel_z',
-    USG_GETHOSTEL_AO = 'usg_gethostel_ao',
-    USG_GETHOSTEL_BENEFIT = 'usg_gethostel_benefit',
-    USG_GETHOSTEL_FAMILY = 'usg_gethostel_family',
-    USG_CONTR_TERMINATION = 'usg_contr_termination',
-    USG_RELOCATION_INNER = 'usg_relocation_inner',
-    USG_RELOCATION = 'usg_relocation',
+    USG_GETHOSTEL_O = 'usg_gethostel_o', // Предоставление права проживания (очная форма)
+    USG_GETHOSTEL_OOZ = 'usg_gethostel_ooz', // Предоставление права проживания (очно-заочная форма)
+    USG_GETHOSTEL_Z = 'usg_gethostel_z', // Предоставление права проживания (заочная форма)
+    USG_GETHOSTEL_AO = 'usg_gethostel_ao', // Предоставление права проживания в период академического отпуска
+    USG_GETHOSTEL_BENEFIT = 'usg_gethostel_benefit', // Предоставление права льготного проживания
+    USG_GETHOSTEL_FAMILY = 'usg_gethostel_family', // Предоставление права проживания в семейной комнате
+    USG_CONTR_TERMINATION = 'usg_contr_termination', // Расторжение договора найма
+    USG_RELOCATION_INNER = 'usg_relocation_inner', // Переселение внутри общежития
+    USG_RELOCATION = 'usg_relocation', // Переселение в другое общежитие
     OBUCH = 'obuch',
     STATUS_SOBES = 'status_sobes',
     SPRVIZOV = 'sprvizov',
@@ -29,4 +30,11 @@ export enum ApplicationFormCodes {
     CRS_ACADEMVAC = 'crs_academvac',
     CRS_EXPULSION = 'crs_expulsion',
     CRS_ATTESTAT = 'crs_attestat',
+    WORK_TRANSFER = '',
+    EXTRA_HOLIDAY_COLL = '',
+    HOLIDAY_PLANNING = '',
+    HOLIDAY_WORK = '',
+    DISMISSAL = '',
+    HOLIDAY_POSTPONED = '',
+    PART_TIME_EMPLOYMENT = '',
 }
