@@ -9,6 +9,10 @@ const GlobalStyles = createGlobalStyle`
 		-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 	}
 
+	#root {
+		height: 100vh;
+	}
+
 	body {
 		overflow: hidden;
 	}
@@ -49,12 +53,14 @@ const GlobalStyles = createGlobalStyle`
 		--brBold: 30px;
 		--strong-shadow: 0 0 50px #000;
 		--very-mild-shadow: 0 0 32px rgb(0 0 0 / 8%);
+		--desktop-page-padding: 40px;
+		--mobile-page-padding: 5px;
 	}
 
 	html[data-theme=dark] {
 		--blue: #6d86e3;
 		--primary-background: rgb(34, 34, 34);
-		--mild-theme: #2e2e2e;
+		--mild-theme: #363636;
 		--leftside-bar: #3b3b3b;
 		--leftside-bar-shadow: 5px 5px 10px rgba(0,0,0,0.377);
 		--header: #373737;
@@ -126,6 +132,30 @@ const GlobalStyles = createGlobalStyle`
 		--schedule-shadow: 0 0 2px rgb(0 0 0 / 24%);
 		--info-blue: #133db8;
 		--form: #fff;
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--blue);
+		
+		&:focus {
+        outline: 4px solid var(--almostTransparentOpposite);
+    	}
+
+		&:focus:not(:focus-visible) {
+			outline: none;
+		}
+	}
+
+	@keyframes defaultFadeIn {
+		0%{
+			transform: translateY(20px);
+			opacity: 0;
+		}
+		100%{
+			transform: translateY(0px);
+			opacity: 1;
+		}
 	}
 `
 

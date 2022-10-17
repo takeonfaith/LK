@@ -46,7 +46,7 @@ jobs:
             ls
             cd client-app/LK
             echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo -S git pull
-            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo git reset --hard origin/master
+            echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo git reset --hard origin/develop
             echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo npm i
             echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo npm run build
 

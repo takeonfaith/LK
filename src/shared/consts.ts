@@ -1,7 +1,10 @@
 import { IGrade } from '@api/model/acad-performance'
-import { IndexedProperties } from '@utility-types/indexed-properties'
+import { MessageType } from '@ui/types'
+import { IconType } from 'react-icons'
+import { FiAlertCircle, FiCheck, FiInfo, FiXCircle } from 'react-icons/fi'
+import { HiOutlineLightBulb } from 'react-icons/hi'
 
-export type MenuType = number[]
+export type MenuType = string[]
 export type ShortCutLinksType = number[]
 export type ThemeType = string
 export type GeneralType = {
@@ -14,8 +17,13 @@ export interface IDefaultSettings {
 
 export const SHORT_CUT_LINKS_LIMIT_SIZE = 4
 
+export const ADDITIONAL_MENU_ITEMS_LIMIT_SIZE = 3
+
+export const REQUIRED_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'all']
+export const REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'download-agreements', 'all']
+
 export const DEFAULT_SETTINGS: IDefaultSettings = {
-    menu: [0, 1, 2, 3, 4, 5, 6, 7],
+    menu: REQUIRED_LEFTSIDE_BAR_CONFIG,
     theme: 'light',
     general: {
         notifications: false,
@@ -23,9 +31,12 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
     shortCutLinks: [0, 1, 2, 3],
 }
 
+export const UNION_ORGANIZATION = 'https://lk.eseur.ru/signup'
+export const RECEPTION_COMMISSION = 'https://old.mospolytech.ru/index.php?id=3428'
+
 export const SETTINGS = 'settings'
 
-export interface IColors extends IndexedProperties {
+export interface IColors {
     green: IColorPalette
     lightGreen: IColorPalette
     blue: IColorPalette
@@ -35,6 +46,8 @@ export interface IColors extends IndexedProperties {
     red: IColorPalette
     yellow: IColorPalette
     orange: IColorPalette
+    grey: IColorPalette
+    white: IColorPalette
 }
 
 export interface IColorPalette {
@@ -140,7 +153,7 @@ export const Colors: IColors = {
         littleDarker: '#b33b3b',
         reallyTransparent: '',
         darkTransparent: '#511a1ea3',
-        transparentAF: '',
+        transparentAF: '#ec5f6b14',
         lightTransparent: '#e2799273',
     },
     yellow: {
@@ -161,13 +174,39 @@ export const Colors: IColors = {
         transparent: '#ff520014',
         lighter: '#ee9e44',
         darker: '#ae4a1b',
-        light: '',
+        light: '#ffd19d',
         dark: '#e97944',
         reallyTransparent: '',
         darkTransparent: '#511a1ea3',
-        transparentAF: '',
+        transparentAF: '#ee9e440f',
         lightTransparent: '#ffd7a67d',
         littleDarker: '#c75e1d',
+    },
+    grey: {
+        main: '#949494',
+        transparent: '',
+        lighter: '',
+        darker: '',
+        light: '',
+        dark: '',
+        reallyTransparent: '',
+        darkTransparent: '',
+        transparentAF: '#9494940d',
+        lightTransparent: '#80808014',
+        littleDarker: '',
+    },
+    white: {
+        main: '#fff',
+        transparent: '',
+        lighter: '',
+        darker: '',
+        light: '',
+        dark: '',
+        reallyTransparent: '',
+        darkTransparent: '',
+        transparentAF: '#ffffff17',
+        lightTransparent: '#80808014',
+        littleDarker: '',
     },
 }
 
@@ -225,6 +264,45 @@ export const GradeByScore: IGrade = {
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
 export const LastUpdateWhatsNew = '2022-05-19T10:30:00'
+
+export const messageType: {
+    [key in MessageType]: {
+        icon: IconType
+        color: keyof IColors
+        title: string
+    }
+} = {
+    info: {
+        icon: FiInfo,
+        color: 'blue',
+        title: 'Информация',
+    },
+    alert: {
+        icon: FiAlertCircle,
+        color: 'orange',
+        title: 'Внимание!',
+    },
+    failure: {
+        icon: FiXCircle,
+        color: 'red',
+        title: 'Ошибка',
+    },
+    success: {
+        icon: FiCheck,
+        color: 'green',
+        title: 'Успешно',
+    },
+    tip: {
+        icon: HiOutlineLightBulb,
+        color: 'grey',
+        title: 'Подсказка',
+    },
+    hint: {
+        icon: HiOutlineLightBulb,
+        color: 'white',
+        title: 'Подсказка',
+    },
+}
 
 interface LetterColorMatch {
     [key: string]: keyof IColors
@@ -289,3 +367,7 @@ export const letterColorMatch: LetterColorMatch = {
     Y: 'red',
     Z: 'purple',
 }
+
+export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
+
+export const MAX_FILE_SIZE = 11000000

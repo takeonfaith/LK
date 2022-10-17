@@ -23,7 +23,7 @@ const getRegistration = (data: TeacherDataVerification, isDone: boolean): IInput
         documents: {
             files: [],
             required: true,
-            fieldName: 'personalDataFiles',
+            fieldName: 'registrationFiles',
             maxFiles: 2,
         },
         optionalCheckbox: {

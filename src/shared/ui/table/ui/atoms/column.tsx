@@ -8,6 +8,7 @@ const Column = styled.div<{
     padding?: string
     width?: string
     overflow?: string
+    showFull?: boolean
 }>`
     width: ${({ width }) => width ?? '100%'};
     min-width: ${({ width }) => width ?? 'auto'};
@@ -16,8 +17,8 @@ const Column = styled.div<{
     cursor: ${({ clickable }) => clickable && 'pointer'};
     overflow: ${({ overflow }) => overflow ?? 'hidden'};
     display: block;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    white-space: ${({ showFull }) => (showFull ? 'wrap' : 'nowrap')};
+    text-overflow: ${({ showFull }) => (showFull ? 'clip' : 'ellipsis')};
     position: relative;
 
     @media (max-width: 700px) {

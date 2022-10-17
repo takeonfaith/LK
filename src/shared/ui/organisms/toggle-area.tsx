@@ -15,6 +15,7 @@ interface Props {
 }
 
 const Wrapper = styled.div`
+    width: 100%;
     h2 {
         margin-top: 10px;
     }
@@ -48,7 +49,6 @@ const ToggleArea = ({ title, toggles, setToggles }: Props) => {
     const handleChange = useCallback(
         (id: number) => {
             toggles[id].state = !toggles[id].state
-
             setToggles([...toggles])
         },
         [toggles, setToggles],
@@ -63,13 +63,13 @@ const ToggleArea = ({ title, toggles, setToggles }: Props) => {
                         <label>
                             <h4>{title}</h4>
                             <SwitchToggle
-                                id={i.toString()}
+                                id={title}
                                 isToggled={state}
                                 setIsToggled={() => {
                                     handleChange(i)
                                     action && action(!state)
                                 }}
-                                key={i.toString()}
+                                key={title}
                             />
                         </label>
                     </ToggleItemBlock>

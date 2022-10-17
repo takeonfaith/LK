@@ -1,15 +1,7 @@
 import { Title } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
+import List from '@ui/list'
 import React from 'react'
-import styled from 'styled-components'
-
-const RadioButtonListWrapper = styled.div`
-    .buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-`
 
 export interface RadioButton {
     id: string | number
@@ -22,31 +14,41 @@ interface Props {
     required?: boolean
     current: RadioButton | null
     setCurrent: (button: RadioButton | null) => void
+    isSpecificRadio?: boolean
 }
 
-const RadioButtonList = ({ title, buttons, required = false, current, setCurrent }: Props) => {
+const RadioButtonList = ({ title, buttons, required = false, current, setCurrent, isSpecificRadio = false }: Props) => {
     return (
-        <RadioButtonListWrapper>
-            {title && (
-                <Title size={5} align="left" bottomGap required={required}>
-                    {title}
-                </Title>
-            )}
-            <Checkbox text={'Не выбрано'} key={-1} checked={current === null} setChecked={() => setCurrent(null)} />
-            <div className="buttons">
+        <div>
+            <Title visible={!!title} size={5} align="left" bottomGap required={required}>
+                {title}
+            </Title>
+            <List>
+                {!isSpecificRadio && (
+                    <Checkbox
+                        text={'Не выбрано'}
+                        key={-1}
+                        checked={current === null}
+                        setChecked={() => setCurrent(null)}
+                    />
+                )}
                 {buttons.map((button) => {
                     const { id, title } = button
                     return (
-                        <Checkbox
-                            text={title}
-                            key={id}
-                            checked={id === current?.id}
-                            setChecked={() => setCurrent({ id, title })}
-                        />
+                        <>
+                            <Checkbox
+                                text={title}
+                                key={id}
+                                checked={id === current?.id}
+                                setChecked={() =>
+                                    setCurrent({ id: id, title: !isSpecificRadio ? title : id.toString() })
+                                }
+                            />
+                        </>
                     )
                 })}
-            </div>
-        </RadioButtonListWrapper>
+            </List>
+        </div>
     )
 }
 

@@ -1,32 +1,27 @@
-import { Colors } from '@consts'
+import { messageType } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
-import { Button } from '@ui/atoms'
+import { Message } from '@ui/atoms'
 import React, { useCallback, useEffect } from 'react'
-import { FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 
-const PopUpMessageWrapper = styled.div<{ isOpen: boolean; color: string; isClickable: boolean }>`
+const PopUpMessageWrapper = styled.div<{ isOpen: boolean; isClickable: boolean }>`
     width: 300px;
-    border-radius: var(--brLight);
-    background: ${({ color }) => Colors[color].dark};
     position: absolute;
     bottom: 20px;
     right: 20px;
+    background: #434343;
+    border-radius: var(--brLight);
     z-index: 100;
     transition: 0.2s transform, 0.2s opacity, 0.2s visibility;
     transform: translateY(${({ isOpen }) => (isOpen ? '0px' : '-20px')});
     opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
-    padding: 10px;
-    padding-right: 30px;
-    text-align: left;
-    color: ${({ color }) => Colors[color].main};
     font-weight: 600;
     cursor: ${({ isClickable }) => (isClickable ? 'pointer' : 'normal')};
 
-    a {
+    /* a {
         color: #fff;
-    }
+    } */
 
     button {
         position: absolute;
@@ -75,11 +70,17 @@ const PopUpMessage = () => {
         <PopUpMessageWrapper
             isOpen={isOpen}
             isClickable={!!onClick}
-            color={type === 'success' ? 'green' : type === 'info' ? 'darkBlue' : 'red'}
+            color={messageType[type].color}
             onClick={handleOnClick}
         >
-            <Button onClick={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })} icon={<FiX />} />
-            {message}
+            <Message
+                type={type}
+                fontSize="1em"
+                solidBackground
+                onClose={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })}
+            >
+                {message}
+            </Message>
         </PopUpMessageWrapper>
     )
 }

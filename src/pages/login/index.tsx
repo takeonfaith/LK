@@ -20,10 +20,6 @@ const LoginWrapper = styled.div`
         left: 50%;
         transform: translateX(-50%);
     }
-
-    @media (max-width: 1000px) {
-        align-items: flex-end;
-    }
 `
 
 const LoginPage = () => {

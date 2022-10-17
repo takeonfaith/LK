@@ -1,5 +1,6 @@
 import { SelectPage } from '@features/select'
 import { RadioButton } from '@ui/organisms/radio-button-list'
+import { specialFieldsNameT } from '@entities/applications/consts'
 
 export interface IInputAreaCheckbox {
     fieldName: string
@@ -38,6 +39,13 @@ export type CheckboxDocs = IInputAreaFiles & {
     value: boolean
 }
 
+export type RadioChildrenForm = {
+    title: string
+    value: boolean
+    data: IInputAreaData[]
+    fieldName: string
+}
+
 export interface IInputAreaLink {
     title: string
     link: string
@@ -47,15 +55,19 @@ export interface IInputAreaLink {
 export interface IInputAreaData {
     fieldName: string
     title: string
-    value: string | SelectPage | boolean | SelectPage[] | null | RadioButton
+    value: string | SelectPage | boolean | SelectPage[] | null | RadioButton | string[]
     type?: IInputAreaTypes
-    items?: SelectPage[] | CheckboxDocs[] | RadioButton[]
+    items?: SelectPage[] | CheckboxDocs[] | RadioButton[] | RadioChildrenForm[]
     width?: string
     required?: boolean
     mask?: boolean
     editable?: boolean
     placeholder?: string
     autocomplete?: boolean
+    isSpecificRadio?: boolean
+    specialType?: specialFieldsNameT
+    minValueInput?: number
+    maxValueInput?: number
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]
@@ -73,4 +85,5 @@ export interface IInputArea {
     optionalCheckbox?: IInputAreaCheckbox
     collapsed?: boolean
     links?: IInputAreaLink[]
+    specialFieldsName?: specialFieldsNameT
 }

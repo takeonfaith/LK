@@ -1,19 +1,23 @@
 import { Error } from '@ui/atoms'
+import convertHorizontalAlign from '@ui/list/lib/convert-horizontal-align'
+import { Align } from '@ui/types'
 import useResize from '@utils/hooks/use-resize'
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Slider } from 'widgets'
 
-const SliderPageWrapper = styled.div<{ width?: string }>`
+const SliderPageWrapper = styled.div<{ width?: string; align: Align; maxWidth?: string }>`
     display: flex;
-    align-items: center;
+    align-items: ${({ align }) => convertHorizontalAlign(align)};
     flex-direction: column;
     width: ${({ width }) => width ?? '100%'};
+    max-width: ${({ maxWidth }) => maxWidth ?? '100%'};
     height: 100%;
 
     & > div {
         display: flex;
         width: 100%;
+        max-width: 100%;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
 
@@ -60,11 +64,23 @@ interface Props {
     pages: Page[]
     currentPage?: number
     width?: string
+    maxWidth?: string
     className?: string
     sliderWidth?: string
+    appearance?: boolean
+    align?: Align
 }
 
-const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: Props) => {
+const SliderPage = ({
+    pages,
+    currentPage = 0,
+    width,
+    className,
+    maxWidth,
+    sliderWidth,
+    align = 'center',
+    appearance = true,
+}: Props) => {
     const [page, setPage] = useState(currentPage)
     const { width: screenWidth } = useResize()
     const sliderContentRef = useRef<HTMLDivElement | null>(null)
@@ -88,7 +104,7 @@ const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: P
     }, [currentPage, screenWidth])
 
     return (
-        <SliderPageWrapper width={width}>
+        <SliderPageWrapper width={width} align={align} maxWidth={maxWidth}>
             <Slider
                 pages={pages.map(({ title, condition }) => ({
                     title,
@@ -97,6 +113,7 @@ const SliderPage = ({ pages, currentPage = 0, width, className, sliderWidth }: P
                 currentPage={page}
                 setCurrentPage={handleChangePage}
                 sliderWidth={sliderWidth}
+                appearance={appearance}
             />
             <div className={className ?? 'slider-content'} ref={sliderContentRef} onScroll={handleScroll}>
                 {pages.map((page) =>

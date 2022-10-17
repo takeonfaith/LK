@@ -17,6 +17,7 @@ const CheckboxWrapper = styled.div<{
     opacity: ${({ isActive }) => !isActive && 0.7};
     .checkbox-text {
         user-select: none;
+        white-space: pre-wrap;
     }
 
     svg {
@@ -33,9 +34,19 @@ export interface CheckboxProps {
     invisibleOnFalse?: boolean
     text?: string
     isActive?: boolean
+    visible?: boolean
 }
 
-const Checkbox = ({ text, checked, setChecked, isActive = true, invisibleOnFalse = false }: CheckboxProps) => {
+const Checkbox = ({
+    text,
+    checked,
+    setChecked,
+    visible = true,
+    isActive = true,
+    invisibleOnFalse = false,
+}: CheckboxProps) => {
+    if (!visible) return null
+
     return (
         <CheckboxWrapper
             checked={checked}
@@ -44,10 +55,21 @@ const Checkbox = ({ text, checked, setChecked, isActive = true, invisibleOnFalse
                 isActive && setChecked(!checked)
             }}
             isActive={isActive}
+            className="checkbox"
         >
             <Button
+                width="25px"
+                height="25px"
                 onClick={() => null}
-                icon={checked || invisibleOnFalse ? <BsCheckCircleFill /> : <FiCircle />}
+                icon={
+                    checked || invisibleOnFalse ? (
+                        <BsCheckCircleFill
+                            style={{ maxWidth: '20px', width: '20px', height: '20px', maxHeight: '20px' }}
+                        />
+                    ) : (
+                        <FiCircle style={{ maxWidth: '20px', width: '20px', height: '20px', maxHeight: '20px' }} />
+                    )
+                }
                 background="transparent"
             />
             {text && <div className="checkbox-text">{text}</div>}

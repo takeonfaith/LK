@@ -1,18 +1,23 @@
-import PrivateRouter from '@app/routes/private-router'
+import PrivateRouter from '@app/routers/private-router'
 import { OLD_LK_URL } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
+import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
+import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import styled from 'styled-components'
-import { Confirm, Header, LeftsideBar, PopUpMessage } from 'widgets'
-import { Modal } from 'widgets/modal'
-import InitialLoader from './initial-loader'
-import useIsShowNotification from '@utils/hooks/use-is-show-notification'
-import { useModal } from 'widgets'
-import WhatsNew from '../../widgets/whats-new'
+import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
+import { Modal } from 'widgets/modal'
+import WhatsNew from '../../widgets/whats-new'
+import InitialLoader from './initial-loader'
+import Story from './story'
+import React from 'react'
+import useShowTutorial from '@utils/hooks/use-show-tutorial'
+import { storyModel } from '@entities/story'
+import { TutorialStory } from 'shared/stories/tutorial'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -26,11 +31,14 @@ const ContentWrapper = styled.div`
         overflow-x: hidden;
         overflow-y: auto;
         width: 100%;
-        height: calc(100% - 45px);
+        height: 100%;
     }
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
+        .page-content {
+            height: calc(100% - 60px);
+        }
     }
 `
 
@@ -41,6 +49,11 @@ const ContentLayout = () => {
     } = userModel.selectors.useUser()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
+    const { seen, setSeen } = useShowTutorial()
+
+    useEffect(() => {
+        if (user) settingsModel.effects.getLocalSettingsFx(user.id)
+    }, [user])
 
     useTheme()
     useEffect(() => {
@@ -55,27 +68,38 @@ const ContentLayout = () => {
             time: 5000,
         })
     }, [])
+
     useEffect(() => {
-        isShowNotification && open(<WhatsNew />)
+        if (seen) {
+            isShowNotification && open(<WhatsNew />)
+        }
     }, [isShowNotification])
 
+    // useEffect(() => {
+    //     if (!seen) {
+    //         storyModel.events.open({ pages: TutorialStory })
+    //         setSeen(true)
+    //     }
+    // }, [])
+
     return (
-        <div style={{ height, display: 'flex' }}>
-            <InitialLoader
-                loading={!user}
-                image="https://mospolytech.ru/local/templates/main/dist/img/logos/mospolytech-logo-white.png"
-            />
+        <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
+            <InitialLoader loading={!user} />
+            {/* <GreetingsScreen /> */}
+            <Story />
             <LeftsideBar />
             <ContentWrapper>
-                <Header />
+                {/* <Header /> */}
                 <div className="page-content">
                     <PrivateRouter />
                 </div>
+                <MobileBottomMenu />
             </ContentWrapper>
             <Modal />
             <PopUpMessage />
             <Confirm />
             <ContextMenu />
+            <HintModal />
         </div>
     )
 }

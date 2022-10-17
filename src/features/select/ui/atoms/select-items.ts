@@ -4,7 +4,10 @@ const SelectItems = styled.ul<{ isOpen: boolean; itemsAmount: number; width?: st
     max-width: ${({ width }) => width ?? '155px'};
     width: 100%;
     min-width: 50px;
-    height: ${({ itemsAmount }) => itemsAmount * 30 + 'px'};
+    min-height: 60px;
+    /**
+    *height: ${({ itemsAmount }) => itemsAmount * 30 + 'px'};
+    */
 
     position: absolute;
     top: ${({ title }) => (!!title ? '80px' : '46px')};

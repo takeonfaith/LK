@@ -59,7 +59,7 @@ const config = {
                 messages: ['You application is running here http://localhost:3000'],
             },
         }),
-        new ESLintPlugin({extensions: ['ts']})
+        new ESLintPlugin({extensions: ['ts']}),
     ],
     resolve: {
         extensions: [
@@ -67,6 +67,12 @@ const config = {
             '.ts',
             '.js'
         ],
+        fallback: { 
+            "https": require.resolve("https-browserify"),
+            "url": require.resolve("url/"),
+            "http": require.resolve("stream-http"),
+            "buffer": require.resolve("buffer/"),
+     },
         alias:
             {
                 'react-dom':

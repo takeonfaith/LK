@@ -4,6 +4,7 @@ import { contextMenuModel } from '@entities/context-menu'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
 import styled from 'styled-components'
+import { MessageContextMenu } from '.'
 
 const MessageItemWrapper = styled.div<{ isYourMessage: boolean; isLast: boolean }>`
     display: flex;
@@ -69,7 +70,7 @@ const MessageItem = ({ name, message, isLast }: Props) => {
             isYourMessage={name === 'Kostya Doloz'}
             isLast={isLast}
             onContextMenu={(e) => {
-                contextMenuModel.events.open({ e, content: 'TEst', height: 70 })
+                contextMenuModel.events.open({ e, content: <MessageContextMenu message={message} />, height: 70 })
             }}
         >
             <div className="name-and-message">

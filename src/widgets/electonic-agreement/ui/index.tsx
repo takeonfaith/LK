@@ -51,7 +51,9 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
         setData,
     })
 
-    return !!data ? (
+    if (!data) return null
+
+    return (
         <CenterSection
             showInfoText={!data.status && !done}
             maxWidth="500px"
@@ -104,8 +106,6 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
                 />
             )}
         </CenterSection>
-    ) : (
-        <></>
     )
 }
 

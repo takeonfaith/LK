@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const LogoWrapper = styled(Link)`
+export const LogoWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;

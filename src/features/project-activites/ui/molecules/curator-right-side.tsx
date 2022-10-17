@@ -1,4 +1,4 @@
-import { MESSAGES_ROUTE } from '@app/routes/routes'
+import { CHAT_ROUTE } from '@app/routes/general-routes'
 import { Colors } from '@consts'
 import { Button } from '@ui/button'
 import { Title } from '@ui/title'
@@ -71,7 +71,7 @@ const CuratorRightSide = ({ describe, name }: Props) => {
                     icon={<FiMessageCircle />}
                     text={'Написать'}
                     onClick={() => {
-                        history.push(`${MESSAGES_ROUTE}/${name}`)
+                        history.push(`${CHAT_ROUTE}/${name}`)
                     }}
                     width="100%"
                     background={Colors.purple.light}
