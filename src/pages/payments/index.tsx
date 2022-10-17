@@ -2,7 +2,7 @@ import { paymentsModel } from '@entities/payments'
 import { Wrapper } from '@ui/atoms'
 import React from 'react'
 import { SliderPage } from 'widgets'
-import { DormitoryPayments, EducationPayments} from './pages'
+import { DormitoryPayments, EducationPayments } from './pages'
 
 const PaymentsPage = () => {
     const { data, loading, error } = paymentsModel.selectors.usePayments()

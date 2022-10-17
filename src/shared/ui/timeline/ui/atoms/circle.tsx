@@ -40,10 +40,10 @@ const CircleWrapper = styled.div<StyledProps & HiddenProps>`
     .circle {
         min-width: ${({ type }) => (type === 'big' ? '30px' : '20px')};
         min-height: ${({ type }) => (type === 'big' ? '30px' : '20px')};
-        background: ${({ reached, current, id }) =>
+        background: ${({ reached, current }) =>
             current ? `var(--reallyBlue)` : reached ? Colors.green.main : Colors.grey.main};
         outline: 6px solid
-            ${({ reached, current, id }) =>
+            ${({ reached, current }) =>
                 current ? Colors.blue.transparentAF : reached ? Colors.green.transparentAF : Colors.grey.transparentAF};
         margin: 6px;
         border-radius: 100%;

@@ -1,64 +1,26 @@
 {
   "compilerOptions": {
-    "baseUrl": "/src",
-    "paths": {
-      "@features/*": [
-        "features/*"
-      ],
-      "@config/*": [
-        "./shared/config/*"
-      ],
-      "@utils/*": [
-        "./shared/lib/*"
-      ],
-      "@pages/*": [
-        "./pages/*"
-      ],
-      "@pages": [
-        "./pages"
-      ],
-      "@ui": [
-        "./shared/ui"
-      ],
-      "@ui/*": [
-        "./shared/ui/*"
-      ],
-      "@utility-types/*": [
-        "./shared/models/*"
-      ],
-      "@theme": [
-        "./shared/ui/theme"
-      ],
-      "@ui/icons": [
-        "./shared/ui/icons"
-      ],
-      "@models/*": [
-        "./shared/api/models/*"
-      ],
-      "@entities/*": [
-        "./entities/*"
-      ],
-      "@api": [
-        "./shared/api/"
-      ],
-      "@api/*": [
-        "./shared/api/*"
-      ],
-      "@app/*": [
-        "./app/*"
-      ],
-      "@consts": [
-        "./shared/consts.ts"
-      ],
-      "@routes": [
-        "./app/routes/routes.tsx"
-      ],
-      "@widgets": [
-        "./app/widgets"
-      ],
-      "@widgets/": [
-        "./app/widgets/*"
-      ]
-    }
+      "baseUrl": "/src",
+      "paths": {
+          "@features/*": ["features/*"],
+          "@config/*": ["./shared/config/*"],
+          "@utils/*": ["./shared/lib/*"],
+          "@pages/*": ["./pages/*"],
+          "@pages": ["./pages"],
+          "@ui": ["./shared/ui"],
+          "@ui/*": ["./shared/ui/*"],
+          "@utility-types/*": ["./shared/models/*"],
+          "@theme": ["./shared/ui/theme"],
+          "@ui/icons": ["./shared/ui/icons"],
+          "@models/*": ["./shared/api/models/*"],
+          "@entities/*": ["./entities/*"],
+          "@api": ["./shared/api/"],
+          "@api/*": ["./shared/api/*"],
+          "@app/*": ["./app/*"],
+          "@consts": ["./shared/consts"],
+          "@routes": ["./app/routes/routes"],
+          "@widgets": ["./app/widgets"],
+          "@widgets/": ["./app/widgets/*"]
+      }
   }
 }

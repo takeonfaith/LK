@@ -1,7 +1,6 @@
 import {
     CANT_ACCESS_ROUTE,
     FEEDBACK_ROUTE,
-    FORGOT_PASSWORD_ROUTE,
     GET_YOUR_LOGIN_ROUTE,
     MEMO_FRESHMEN_ROUTE,
     MEMO_TEACHER_ROUTE,
@@ -27,13 +26,13 @@ const LoginBlock = () => {
 
     const [login, setLogin] = useState(queryLogin ?? '')
     const [password, setPassword] = useState(queryPassword ?? '')
-    const [capslock, setCapslock] = useState(false)
+    const [capsLock, setCapsLock] = useState(false)
     const loginFunc = userModel.events.login
     useTheme()
     const { loading, error, data } = userModel.selectors.useUser()
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        setCapslock(e.getModifierState('CapsLock'))
+        setCapsLock(e.getModifierState('CapsLock'))
 
         if (e.key === 'Enter') {
             loginFunc({ login, password })
@@ -79,7 +78,7 @@ const LoginBlock = () => {
                 title="Пароль"
                 placeholder="Введите пароль"
                 type="password"
-                alertMessage={capslock ? 'Включен Capslock' : undefined}
+                alertMessage={capsLock ? 'Включен Capslock' : undefined}
             />
             <SubmitButton
                 text="Вход"

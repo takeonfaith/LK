@@ -26,7 +26,7 @@ import {
     EXTRA_HOLIDAY_COLL,
     HOLIDAY_PLANNING,
     HOLIDAY_WORK,
-} from '@app/routes/teachers-routes'
+} from '@app/routes/teacher-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
 const getTeachersSectionLinks = () => {

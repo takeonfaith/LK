@@ -1,10 +1,10 @@
 import { AdminLinks, User } from '@api/model'
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 import { hiddenRoutes, privateRoutes } from '@app/routes/routes'
-import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teachers-routes'
+import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teacher-routes'
 import { MenuType, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG, SETTINGS } from '@consts'
 import { useStore } from 'effector-react/compat'
-import { createEvent, createStore } from 'effector/compat'
+import { createEvent, createStore } from 'effector'
 import findRoutesByConfig from '../lib/find-routes-by-config'
 
 interface Menu {

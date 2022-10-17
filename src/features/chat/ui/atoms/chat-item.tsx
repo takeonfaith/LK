@@ -1,7 +1,5 @@
 import { CHAT_ROUTE, TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
 import Avatar from '@features/home/ui/molecules/avatar'
-import Notification from '@ui/notification'
-import React from 'react'
 import { useRouteMatch } from 'react-router'
 import { SkeletonLoading } from '.'
 import ChatItemWrapper from './chat-item-wrapper'
