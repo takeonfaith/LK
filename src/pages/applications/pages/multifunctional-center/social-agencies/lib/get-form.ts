@@ -1,6 +1,8 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
 import { MethodObtainingOptions, NumberOfCopiesOptions } from '@entities/applications/consts'
+import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
+import getAddressFields from '@features/applications/lib/get-address-fields'
 
 const SocialPlaceOfReferenceOptions = [
     { id: 0, title: 'в Пенсионный фонд Российской Федерации (ПФР)' },
@@ -46,6 +48,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
                 items: MethodObtainingOptions,
             },
+            {
+                title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
+                type: 'radio',
+                fieldName: 'structural-subdivision',
+                value: null,
+                editable: true,
+                items: getFormattedDivisions(dataUserApplication.divisions_crs),
+                isSpecificRadio: true,
+                specialType: 'personalMethod',
+            },
+            ...getAddressFields(),
             {
                 title: 'Место предоставления справки',
                 type: 'select',

@@ -1,33 +1,12 @@
 import { IInputArea } from '@ui/input-area/model'
+import getBasicFieldsApplicationTeacher from '@pages/teachers-applications/lib/get-basic-fields-application-teacher'
+import { UserApplication } from '@api/model'
 
-const getForm = (): IInputArea => {
+const getForm = (data: UserApplication): IInputArea => {
     return {
         title: 'Курьер',
         data: [
-            {
-                title: 'E-mail',
-                type: 'email',
-                value: '',
-                editable: true,
-                fieldName: 'email_private',
-                required: true,
-            },
-            {
-                title: 'Личный мобильный телефон',
-                type: 'tel',
-                value: '',
-                fieldName: 'tel_mob_private',
-                editable: true,
-                mask: true,
-                required: true,
-            },
-            {
-                title: 'Должность',
-                value: null,
-                fieldName: 'post',
-                editable: true,
-                required: true,
-            },
+            ...getBasicFieldsApplicationTeacher(data),
             {
                 title: 'Наименование организации',
                 value: null,
@@ -38,7 +17,7 @@ const getForm = (): IInputArea => {
             {
                 title: 'Полный адрес доставки',
                 type: 'textarea',
-                fieldName: 'fullDeliveryAddress',
+                fieldName: 'full_delivery_address',
                 value: '',
                 editable: true,
                 required: true,
@@ -54,7 +33,7 @@ const getForm = (): IInputArea => {
                 title: 'Контактный телефон принимающей стороны',
                 type: 'tel',
                 value: '',
-                fieldName: 'tel_receiving_party',
+                fieldName: 'phone_receiving_party',
                 editable: true,
                 mask: true,
                 required: true,
@@ -63,6 +42,7 @@ const getForm = (): IInputArea => {
                 title: 'Вид документа',
                 value: '',
                 fieldName: 'type_document',
+                placeholder: '(конверт, пакет, коробка и т.п.) и ее примерные размеры',
                 editable: true,
                 required: true,
             },
@@ -79,6 +59,13 @@ const getForm = (): IInputArea => {
                 type: 'date',
                 value: '',
                 fieldName: 'delivery_date',
+                editable: true,
+                required: true,
+            },
+            {
+                title: 'Интервал доставки',
+                value: '',
+                fieldName: 'type_document',
                 editable: true,
                 required: true,
             },

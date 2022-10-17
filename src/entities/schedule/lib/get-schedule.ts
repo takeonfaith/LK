@@ -79,6 +79,7 @@ const getSchedule = async (user: User | string | null): Promise<IModules> => {
             sessionResponse.data.status !== 'error'
                 ? (sessionSchedule as ISessionSchedule)
                 : null,
+        '3': null,
     }
 }
 

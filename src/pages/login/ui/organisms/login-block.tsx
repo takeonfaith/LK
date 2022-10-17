@@ -2,7 +2,9 @@ import {
     CANT_ACCESS_ROUTE,
     FEEDBACK_ROUTE,
     FORGOT_PASSWORD_ROUTE,
-    GET_YOUR_LOGIN_ROUTE, MEMO_FRESHMEN_ROUTE
+    GET_YOUR_LOGIN_ROUTE,
+    MEMO_FRESHMEN_ROUTE,
+    MEMO_TEACHER_ROUTE,
 } from '@app/routes/general-routes'
 import { OLD_LK_URL } from '@consts'
 import { userModel } from '@entities/user'
@@ -12,14 +14,19 @@ import Input from '@ui/atoms/input'
 import SubmitButton from '@ui/atoms/submit-button'
 import BlockWrapper from '@ui/block/styles'
 import List from '@ui/list'
+import useQueryParams from '@utils/hooks/use-query-params'
 import useTheme from '@utils/hooks/use-theme'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiArrowLeftCircle } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 const LoginBlock = () => {
-    const [login, setLogin] = useState('')
-    const [password, setPassword] = useState('')
+    const queryParams = useQueryParams()
+    const queryLogin = queryParams.get('login')
+    const queryPassword = queryParams.get('password')
+
+    const [login, setLogin] = useState(queryLogin ?? '')
+    const [password, setPassword] = useState(queryPassword ?? '')
     const [capslock, setCapslock] = useState(false)
     const loginFunc = userModel.events.login
     useTheme()
@@ -32,6 +39,10 @@ const LoginBlock = () => {
             loginFunc({ login, password })
         }
     }
+
+    useEffect(() => {
+        queryLogin && queryPassword && loginFunc({ login: queryLogin, password: queryPassword })
+    }, [queryLogin, queryPassword])
 
     return (
         <BlockWrapper
@@ -101,6 +112,7 @@ const LoginBlock = () => {
                             height="25px"
                             background="transparent"
                             textColor="var(--reallyBlue)"
+                            width="144px"
                         />
                     </Link>
                     <Link to={GET_YOUR_LOGIN_ROUTE} tabIndex={-1}>
@@ -115,6 +127,14 @@ const LoginBlock = () => {
                 <Link to={MEMO_FRESHMEN_ROUTE} tabIndex={-1}>
                     <Button
                         text="Вниманию студентов 1 курса!"
+                        height="25px"
+                        background="transparent"
+                        textColor="var(--reallyBlue)"
+                    />
+                </Link>
+                <Link to={MEMO_TEACHER_ROUTE} tabIndex={-1}>
+                    <Button
+                        text="Вниманию сотрудников!"
                         height="25px"
                         background="transparent"
                         textColor="var(--reallyBlue)"

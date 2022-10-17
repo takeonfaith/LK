@@ -13,7 +13,7 @@ const HelpfulInformation = () => {
     const stuffMode = useMemo(() => userData?.user?.user_status === 'staff', [userData])
 
     const configs = useMemo(
-        () => (stuffMode ? pagesConfig.filter((_, index) => index !== 2) : pagesConfig),
+        () => (stuffMode ? pagesConfig.filter((_, index) => index !== 3) : pagesConfig),
         [stuffMode, pagesConfig],
     )
 
@@ -40,6 +40,9 @@ const HelpfulInformation = () => {
                                       title: 'Полезная информация',
                                   },
                                   {
+                                      title: 'Безопасность',
+                                  },
+                                  {
                                       title: 'Инструкции',
                                   },
                                   {
@@ -54,11 +57,17 @@ const HelpfulInformation = () => {
                                       title: 'Полезная информация',
                                   },
                                   {
+                                      title: 'Безопасность',
+                                  },
+                                  {
                                       title: 'Инструкции',
                                   },
                                   {
                                       title: 'Курсы',
                                   },
+                                  {
+                                      title: 'Бланки документов',
+                                  }
                               ]
                     }
                     currentPage={page}

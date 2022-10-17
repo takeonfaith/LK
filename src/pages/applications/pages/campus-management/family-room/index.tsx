@@ -69,7 +69,9 @@ const FamilyRoomPage = () => {
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
                         isActive={
-                            checkFormFields(form) && (form.optionalCheckbox?.value ?? true) && !!family?.data.length
+                            checkFormFields(form) &&
+                            (additionally.optionalCheckbox?.value ?? true) &&
+                            !!family?.data.length
                         }
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"

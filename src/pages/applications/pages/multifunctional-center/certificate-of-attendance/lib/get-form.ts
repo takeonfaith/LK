@@ -2,27 +2,29 @@ import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
 import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
 import { MethodObtainingOptions } from '@entities/applications/consts'
-const expelled_uni = [
-    {
-        title: 'отчислением из',
-        type: 'text',
-        value: '',
-        editable: true,
-        fieldName: 'expelled_university',
-        required: true,
-    },
-    {
-        title: 'в',
-        type: 'text',
-        value: '',
-        editable: true,
-        fieldName: 'year',
-        required: true,
-    },
-    {
-        title: 'году',
-    },
-]
+import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
+import getAddressFields from '@features/applications/lib/get-address-fields'
+// const expelled_uni = [
+//     {
+//         title: 'отчислением из',
+//         type: 'text',
+//         value: '',
+//         editable: true,
+//         fieldName: 'expelled_university',
+//         required: true,
+//     },
+//     {
+//         title: 'в',
+//         type: 'text',
+//         value: '',
+//         editable: true,
+//         fieldName: 'year',
+//         required: true,
+//     },
+//     {
+//         title: 'году',
+//     },
+// ]
 const academic_form = [
     { id: 0, title: 'Очная' },
     { id: 1, title: 'Заочная' },
@@ -51,12 +53,6 @@ const reasons = [
     {
         id: 1,
         title: 'отчислением из',
-        items: expelled_uni,
-        type: 'text',
-        value: 'text',
-        editable: true,
-        fieldName: 'expelled_university',
-        required: true,
     },
 ]
 
@@ -92,13 +88,23 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 items: MethodObtainingOptions,
             },
             {
+                title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
+                type: 'radio',
+                fieldName: 'structural-subdivision',
+                value: null,
+                editable: true,
+                items: getFormattedDivisions(dataUserApplication.divisions_crs),
+                isSpecificRadio: true,
+                specialType: 'personalMethod',
+            },
+            ...getAddressFields(),
+            {
                 title: 'Прошу выдать мне справку об обучении в связи с:',
                 type: 'select',
                 width: '100',
                 fieldName: 'reason',
                 value: null,
                 items: reasons,
-                //TODO : полностью реализовать вложенные поля
                 editable: true,
                 required: true,
             },

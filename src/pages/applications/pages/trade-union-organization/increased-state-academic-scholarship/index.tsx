@@ -9,6 +9,8 @@ import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
+import globalAppSendForm from "@pages/applications/lib/global-app-send-form";
+import { ApplicationFormCodes } from "@utility-types/application-form-codes";
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -44,14 +46,16 @@ const IncreasedStateAcademicScholarship = () => {
 
                     <SubmitButton
                         text={!isDone ? 'Отправить' : 'Отправлено'}
-                        action={() => null}
+                        action={() =>
+                            globalAppSendForm(ApplicationFormCodes.HIGH_SCHOLARSHIP, [form], setLoading, setCompleted)
+                        }
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form) && !!form?.documents?.files.length}
+                        isActive={checkFormFields(form)}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

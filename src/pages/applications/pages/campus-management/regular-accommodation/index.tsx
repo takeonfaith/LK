@@ -1,5 +1,5 @@
 import { userModel } from '@entities/user'
-import { Button, FormBlock, SubmitButton } from '@ui/atoms'
+import { Button, Error, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
@@ -23,6 +23,9 @@ const RegularAccommodationPage = () => {
     const {
         data: { dataUserApplication },
     } = applicationsModel.selectors.useApplications()
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
@@ -30,6 +33,10 @@ const RegularAccommodationPage = () => {
     const [additionally, setAdditionally] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
     const history = useHistory()
+
+    if (user?.educationForm !== 'Очная') {
+        return <Error text={'Сервис доступен только для обучающихся очной формы'} />
+    }
 
     useEffect(() => {
         if (!!dataUserApplication) {
@@ -55,9 +62,9 @@ const RegularAccommodationPage = () => {
                     {registration && (
                         <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
                     )}
-                    {disability && (
-                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
-                    )}
+                    {/*{disability && (*/}
+                    {/*    <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />*/}
+                    {/*)}*/}
                     {additionally && (
                         <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />
                     )}
@@ -65,7 +72,7 @@ const RegularAccommodationPage = () => {
                         text={'Отправить'}
                         action={() =>
                             globalAppSendForm(
-                                ApplicationFormCodes.USG_GETHOSTEL_OOZ,
+                                ApplicationFormCodes.USG_GETHOSTEL_O,
                                 [form, registration, disability, additionally],
                                 setLoading,
                                 setCompleted,
@@ -77,7 +84,7 @@ const RegularAccommodationPage = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
+                        isActive={checkFormFields(form) && !!registration?.documents?.files.length}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

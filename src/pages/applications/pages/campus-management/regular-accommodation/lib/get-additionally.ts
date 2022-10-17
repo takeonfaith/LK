@@ -12,12 +12,6 @@ const getAdditionally = (): IInputArea => {
                 editable: true,
             },
         ],
-        documents: {
-            files: [],
-            required: true,
-            fieldName: 'docs',
-            maxFiles: 5,
-        },
     }
 }
 

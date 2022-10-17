@@ -1,6 +1,8 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
 import { MethodObtainingOptions } from '@entities/applications/consts'
+import getAddressFields from '@features/applications/lib/get-address-fields'
+import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
 
 const PlaceOfReferenceOptions = [
     { id: 0, title: 'по месту требования' },
@@ -53,15 +55,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
                 items: MethodObtainingOptions,
             },
-            // {
-            //     title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
-            //     type: 'radio',
-            //     fieldName: 'structural-subdivision',
-            //     value: StructuralSubdivisionOptions[0],
-            //     editable: true,
-            //     items: StructuralSubdivisionOptions,
-            //     isSpecificRadio: true,
-            // },
+            {
+                title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
+                type: 'radio',
+                fieldName: 'structural-subdivision',
+                value: null,
+                editable: true,
+                items: getFormattedDivisions(dataUserApplication.divisions_crs),
+                isSpecificRadio: true,
+                specialType: 'personalMethod',
+            },
+            ...getAddressFields(),
             {
                 title: 'Место предоставления справки:',
                 type: 'select',

@@ -68,6 +68,7 @@ const ContentLayout = () => {
             time: 5000,
         })
     }, [])
+
     useEffect(() => {
         if (seen) {
             isShowNotification && open(<WhatsNew />)

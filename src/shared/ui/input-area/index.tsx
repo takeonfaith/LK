@@ -24,6 +24,7 @@ const InputArea = ({
     divider,
     collapsed,
     links,
+    specialFieldsName,
 }: IInputArea & { setData: React.Dispatch<React.SetStateAction<IInputArea>>; divider?: boolean }) => {
     //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
@@ -73,6 +74,7 @@ const InputArea = ({
                                       changeInputArea={changeInputArea && !optionalCheckbox?.value}
                                       setData={setData}
                                       indexI={index}
+                                      specialFieldsName={specialFieldsName}
                                       {...attr}
                                   />
                               )
@@ -89,6 +91,7 @@ const InputArea = ({
                                                   setData={setData}
                                                   indexI={i}
                                                   indexJ={j}
+                                                  specialFieldsName={specialFieldsName}
                                                   {...attr}
                                               />
                                           )
