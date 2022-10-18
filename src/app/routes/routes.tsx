@@ -246,7 +246,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания (заочная форма)',
         icon: BiIdCard,
         path: ACCOMMODATION_CORRESPONDENCE_FORM,
-        Component: isProdEnv ? ApplicationRedirect : AccommodationCorrespondenceFormPage,
+        Component: AccommodationCorrespondenceFormPage,
         color: 'blue',
         isTemplate: false,
     },
