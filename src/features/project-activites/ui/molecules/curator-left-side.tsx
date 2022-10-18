@@ -49,7 +49,7 @@ const LeftSide = styled.div`
     }
 `
 
-const CuratorLeftSide = ({ img, name, title, id }: Props) => {
+const CuratorLeftSide = ({ img, name, title }: Props) => {
     const history = useHistory()
     return (
         <LeftSide>

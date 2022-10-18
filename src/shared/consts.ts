@@ -371,3 +371,11 @@ export const letterColorMatch: LetterColorMatch = {
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
 
 export const MAX_FILE_SIZE = 11000000
+
+/**
+ * @constant
+ * use when you need to hide some functionality on the production
+ * @example
+ * Component: () => isProduction ? PageIsNotReady : SettingsPage
+ **/
+export const isProduction = (import.meta.env.VITE_BUILD_MODE as string)?.trimEnd() === 'PRODUCTION'

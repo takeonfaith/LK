@@ -38,7 +38,12 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
     const [applications, setApplications] = useState<Application[] | null>(null)
 
     return (
-        <Wrapper load={() => applicationsModel.effects.getApplicationsFx()} loading={!listApplication} error={error} data={listApplication}>
+        <Wrapper
+            load={() => applicationsModel.effects.getApplicationsFx()}
+            loading={!listApplication}
+            error={error}
+            data={listApplication}
+        >
             <ApplicationPageWrapper>
                 <FormBlock maxWidth="1500px">
                     <Title size={2} align="left">

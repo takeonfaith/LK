@@ -50,7 +50,12 @@ const StudentStatus = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} specialFieldsName={specialFieldsName} />
+                    <InputArea
+                        {...form}
+                        collapsed={isDone}
+                        setData={setForm as LoadedState}
+                        specialFieldsName={specialFieldsName}
+                    />
                     <SubmitButton
                         text={!isDone ? 'Отправить' : 'Отправлено'}
                         action={() =>

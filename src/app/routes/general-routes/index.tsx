@@ -1,26 +1,8 @@
+import React, { LazyExoticComponent } from 'react'
 import { IColors } from '@consts'
-import AllPages from '@pages/all-pages'
-import CantAccessPage from '@pages/cant-access'
-import FeedbackPage from '@pages/feedback'
-import GetYourLoginPage from '@pages/get-your-login'
-import MemoFreshmenPage from '@pages/memo-freshmen'
-import MemoTeacherPage from '@pages/memo-teacher'
-import ForgotPasswordPage from '@pages/forgot-password'
-import Home from '@pages/home'
-import InstructionsPage from '@pages/instructions'
+
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import PaymentsPage from '@pages/payments'
-import ProfilePage from '@pages/profile'
-import SchedulePage from '@pages/schedule'
-import SettingsPage from '@pages/settings'
-import Account from '@pages/settings/pages/account'
-import Appearance from '@pages/settings/pages/appearance'
-import CustomizeMenu from '@pages/settings/pages/customize-menu'
-import HomeSettings from '@pages/settings/pages/home'
-import Security from '@pages/settings/pages/security'
-import TeachersSchedule from '@pages/teachers-schedule'
-import React from 'react'
 import {
     BiBookReader,
     BiGroup,
@@ -31,6 +13,33 @@ import {
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
+
+import {
+    ForgotPasswordPage,
+    FeedbackPage,
+    CantAccessPage,
+    Home,
+    GetYourLoginPage,
+    MemoFreshmenPage,
+    MemoTeacherPage,
+    CustomizeMenu,
+    ProfilePage,
+    // ChatPage,
+    SchedulePage,
+    PaymentsPage,
+    // ElectronicInteractionAgreementPage,
+    // AllStudentsPage,
+    // AllTeachersPage,
+    InstructionsPage,
+    TeachersSchedule,
+    Appearance,
+    Account,
+    Security,
+    HomeSettings,
+    AllPages,
+    SettingsPage,
+} from './pages'
+
 import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineViewGrid } from 'react-icons/hi'
 
@@ -82,7 +91,7 @@ export interface IRoute {
     title: string
     icon: ChildrenType
     path: string
-    Component: () => JSX.Element | null
+    Component: (() => JSX.Element | null) | LazyExoticComponent<() => JSX.Element | null>
     color: keyof IColors
     isTemplate: boolean
     isAdmin?: boolean

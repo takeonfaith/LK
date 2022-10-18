@@ -2,7 +2,7 @@ import { hrApplicationApi } from '@api'
 import { HrApplication, HrUserApplication } from '@api/model'
 import { createEvent, forward } from 'effector'
 import { useStore } from 'effector-react/compat'
-import { createEffect, createStore } from 'effector/compat'
+import { createEffect, createStore } from 'effector'
 
 interface ApplicationsStore {
     listApplication: HrApplication[] | null

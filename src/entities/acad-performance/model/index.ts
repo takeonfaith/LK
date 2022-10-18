@@ -1,6 +1,6 @@
 import { acadPerformanceApi } from '@api'
 import { AcadPerformance } from '@api/model/acad-performance'
-import { createEffect, createStore } from 'effector/compat'
+import { createEffect, createStore } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { prepare } from '../lib/prepare'
 import { createEvent } from 'effector'

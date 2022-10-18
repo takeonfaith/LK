@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { privateRoutes } from '@app/routes/routes'
 import { userModel } from '@entities/user'
-import { teachersPrivateRoutes } from '@app/routes/teachers-routes'
+import { teachersPrivateRoutes } from '@app/routes/teacher-routes'
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 
 const useCurrentPage = () => {

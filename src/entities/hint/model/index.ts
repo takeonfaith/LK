@@ -1,6 +1,6 @@
 import { Coordinates } from '@ui/types'
 import { useStore } from 'effector-react/compat'
-import { createEvent, createStore } from 'effector/compat'
+import { createEvent, createStore } from 'effector'
 
 export interface Hint {
     isOpen: boolean

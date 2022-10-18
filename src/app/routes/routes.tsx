@@ -1,3 +1,4 @@
+import React from 'react'
 import ArbitrayRequestPage from '@pages/applications/pages/other/arbitrary-request'
 import ApplicationForCertificateOfAttendance from '@pages/applications/pages/multifunctional-center/certificate-of-attendance'
 import ApplicationPaperCall from '@pages/applications/pages/multifunctional-center/paper-call'
@@ -8,14 +9,7 @@ import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
 import { MdOutlineBedroomChild } from 'react-icons/md'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import AcadPerformance from '../../pages/acad-performance'
-import {
-    ALL_TEACHERS_ROUTE,
-    generalHiddenRoutes,
-    generalRoutes,
-    IRoutes,
-    PROJECT_ACTIVITIES_ROUTE,
-} from './general-routes'
-import React from 'react'
+import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
 import ApplicationsPage from '@pages/applications'
 import { FaRegLightbulb } from 'react-icons/fa'
 import RegularAccommodationPage from '@pages/applications/pages/campus-management/regular-accommodation'
@@ -97,7 +91,7 @@ export const privateRoutes: () => IRoutes = () => ({
         title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationsPage,
+        Component: ApplicationsPage,
         color: 'red',
         isTemplate: false,
         group: 'GENERAL',
