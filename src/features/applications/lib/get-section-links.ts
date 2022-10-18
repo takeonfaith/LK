@@ -125,7 +125,6 @@ const getSectionLinks = () => {
         },
         {
             title: 'Управление студенческим городком' + additionalHeaderClosedService,
-            disabled: isProdEnv,
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,
