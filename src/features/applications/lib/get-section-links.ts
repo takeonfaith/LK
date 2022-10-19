@@ -140,27 +140,34 @@ const getSectionLinks = () => {
                 },
                 {
                     link: ACADEMIC_LEAVE_ACCOMMODATION,
+
                     title: 'Предоставление права проживания в период академического отпуска',
+                    disabled: isProdEnv,
                 },
                 {
                     link: PREFERENTIAL_ACCOMMODATION,
                     title: 'Предоставление права проживания льготной категории граждан',
+                    disabled: isProdEnv,
                 },
                 {
                     link: FAMILY_ROOM,
                     title: 'Предоставление права проживания в семейной комнате',
+                    disabled: isProdEnv,
                 },
                 {
                     link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
                     title: 'Расторжение договора найма',
+                    disabled: isProdEnv,
                 },
                 {
                     link: RELOCATION_INSIDE_HOSTEL,
                     title: 'Переселение внутри общежития',
+                    disabled: isProdEnv,
                 },
                 {
                     link: RELOCATION_TO_ANOTHER_HOSTEL,
                     title: 'Переселение в другое общежитие',
+                    disabled: isProdEnv,
                 },
             ],
         },
