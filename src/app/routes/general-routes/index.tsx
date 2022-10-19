@@ -19,7 +19,6 @@ import {
     FeedbackPage,
     CantAccessPage,
     Home,
-    GetYourLoginPage,
     MemoFreshmenPage,
     MemoTeacherPage,
     CustomizeMenu,
@@ -38,6 +37,7 @@ import {
     HomeSettings,
     AllPages,
     SettingsPage,
+    GetYourLoginPage,
 } from './pages'
 
 import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'

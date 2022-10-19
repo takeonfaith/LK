@@ -332,6 +332,7 @@ export const letterColorMatch: LetterColorMatch = {
     Ф: 'blue',
     Х: 'green',
     Ч: 'purple',
+    Ц: 'green',
     Ш: 'red',
     Щ: 'red',
     Ъ: 'purple',
