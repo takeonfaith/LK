@@ -75,11 +75,6 @@ const retakeLinks: RetakeLink[] = [
         links: [],
     },
     {
-        title: 'Полиграфический институт',
-        href: 'https://e.mospolytech.ru/old/storage/files/arrears/IIDiZh.zip?1',
-        links: [],
-    },
-    {
         title: 'Институт издательского дела и журналистики',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/IIDiZh.zip?1',
         links: [],
