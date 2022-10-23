@@ -194,6 +194,11 @@ const pages: HelpfulPages = [
                     visible: 'student',
                     href: 'https://e.mospolytech.ru/old/storage/files/Gde_najti_kovorkingi_-_tam_est_WiFi__stoly__pufy_i_rozetki.pdf',
                 },
+                {
+                    title: 'Инструкции по мобильному приложению',
+                    visible: 'all',
+                    href: 'https://e.mospolytech.ru/old/storage/files/MP_mobile_app_instruction.pdf',
+                },
 
                 ...instructionsTeacherData[0].links.map((l): Link => ({ ...l, href: l.link, visible: 'staff' })),
             ],
