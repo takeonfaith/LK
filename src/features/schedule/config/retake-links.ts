@@ -1,38 +1,38 @@
-import RetakeLink from '../types/retake-links'
+import { RetakeLink } from '../types/retake-types'
 
-const retakeLinks: RetakeLink[] = [
-    {
-        title: 'Факультет экономики и управления',
+const RETAKE_LINKS: Record<string, RetakeLink> = {
+    feiu: {
+        fullTitle: 'Факультет экономики и управления',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/FEU.zip?2',
         links: [],
     },
-    {
-        title: 'Факультет урбанистики и городского хозяйства',
+    fuigh: {
+        fullTitle: 'Факультет урбанистики и городского хозяйства',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/FUiGH.zip',
         links: [],
     },
-    {
-        title: 'Факультет базовых компетенций',
+    fbk: {
+        fullTitle: 'Факультет базовых компетенций',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/FBK.zip?4',
         links: [],
     },
-    {
-        title: 'Факультет химической технологии и биотехнологии',
+    fhtib: {
+        fullTitle: 'Факультет химической технологии и биотехнологии',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/FHTiB.zip?1',
         links: [],
     },
-    {
-        title: 'Транспортный факультет',
+    tf: {
+        fullTitle: 'Транспортный факультет',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/TF.zip?1',
         links: [],
     },
-    {
-        title: 'Факультет машиностроения',
+    fm: {
+        fullTitle: 'Факультет машиностроения',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/FM.zip?1',
         links: [],
     },
-    {
-        title: 'Факультет информационных технологий',
+    fit: {
+        fullTitle: 'Факультет информационных технологий',
         links: [
             {
                 title: 'ФИТ 2021-2022-лето, кафедра ИБ, бак+спец',
@@ -69,36 +69,36 @@ const retakeLinks: RetakeLink[] = [
         ],
         href: '',
     },
-    {
-        title: 'Полиграфический институт',
+    pi: {
+        fullTitle: 'Полиграфический институт',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/PI.zip?2',
         links: [],
     },
-    {
-        title: 'Институт издательского дела и журналистики',
+    iidizh: {
+        fullTitle: 'Институт издательского дела и журналистики',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/IIDiZh.zip?1',
         links: [],
     },
-    {
-        title: 'Институт графики и искусства книги имени В.А.Фаворского',
+    igrik: {
+        fullTitle: 'Институт графики и искусства книги имени В.А.Фаворского',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/IGRIK.zip?1',
         links: [],
     },
-    {
-        title: 'Центр проектной деятельности',
+    cpd: {
+        fullTitle: 'Центр проектной деятельности',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/TsPD.zip?2',
         links: [],
     },
-    {
-        title: 'График приема задолженностей по НИД (аспиранты)',
+    nid: {
+        fullTitle: 'График приема задолженностей по НИД (аспиранты)',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/Grafik_priema_zadolzhennostej_po_NID_(aspiranty).doc?1',
         links: [],
     },
-    {
-        title: 'График приема задолженностей по научным исследования выпускного курса (аспиранты)',
+    nivk: {
+        fullTitle: 'График приема задолженностей по научным исследования выпускного курса (аспиранты)',
         href: 'https://e.mospolytech.ru/old/storage/files/arrears/Grafik_priema_zadolzhennostej_po_nauchnym_issledovaniya_vypusknogo_kursa_(aspiranty).doc',
         links: [],
     },
-]
+}
 
-export default retakeLinks
+export default RETAKE_LINKS
