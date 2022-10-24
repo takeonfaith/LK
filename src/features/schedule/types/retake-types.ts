@@ -3,10 +3,8 @@ type Link = {
     href: string
 }
 
-type RetakeLink = {
-    title: string
+export type RetakeLink = {
+    fullTitle: string
     href: string
     links: Link[]
 }
-
-export default RetakeLink
