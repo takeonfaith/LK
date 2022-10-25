@@ -13,20 +13,11 @@ import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import { FiDownload, FiInfo } from 'react-icons/fi'
-import { userModel } from '@entities/user'
 
 const EducationPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
-    const { data: dataUser } = userModel.selectors.useUser()
 
     if (!data?.education) return null
-    if (dataUser?.user && +dataUser.user.course === 1) {
-        return (
-            <Message type="failure" title="Внимание!" align={'center'} width={'400'}>
-                Отображение информации об оплатах для учащихся первых курсов временно недоступно.
-            </Message>
-        )
-    }
 
     return (
         <PageWrapper>

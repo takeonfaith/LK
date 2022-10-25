@@ -19,7 +19,7 @@ export type RetakeLinkProps = Omit<PageLinkProps, 'restricted' | 'mode'>
 const RetakeLink = (props: RetakeLinkProps) => {
     const { path, Component: RetakeModal } = props
     const { open } = useModal()
-    const hasModal = !!RetakeModal()
+    const hasModal = !!RetakeModal({})
 
     return (
         <>
