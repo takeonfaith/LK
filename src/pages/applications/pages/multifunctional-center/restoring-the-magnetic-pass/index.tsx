@@ -1,6 +1,6 @@
 import { APPLICATIONS_ROUTE } from '@app/routes/routes'
 import { applicationsModel } from '@entities/applications'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { globalAppSendForm } from '@pages/applications/lib'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
