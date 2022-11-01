@@ -31,8 +31,9 @@ import {
 } from '@app/routes/routes'
 import { RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
 import useIsTestEnv from '@utils/hooks/use-is-test-env'
+import { Section } from '@features/applications/ui/molecules/create-application-list'
 
-const getSectionLinks = () => {
+const getSectionLinks = (): Section[] => {
     const isProdEnv = !useIsTestEnv()
     const additionalHeaderClosedService = isProdEnv ? ' (Сервис временно недоступен)' : ''
     return [
@@ -129,20 +130,17 @@ const getSectionLinks = () => {
                 {
                     link: REGULAR_ACCOMMODATION,
                     title: 'Предоставление права проживания (очная форма)',
+                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
                 },
                 {
                     link: FULL_TIME_PART_TIME_FORM,
                     title: 'Предоставление права проживания (очно-заочная форма)',
+                    exceptionalFormEducationList: ['Очная', 'Заочная'],
                 },
                 {
                     link: ACCOMMODATION_CORRESPONDENCE_FORM,
                     title: 'Предоставление права проживания (заочная форма)',
-                },
-                {
-                    link: ACADEMIC_LEAVE_ACCOMMODATION,
-
-                    title: 'Предоставление права проживания в период академического отпуска',
-                    disabled: isProdEnv,
+                    exceptionalFormEducationList: ['Очная', 'Очно-заочная'],
                 },
                 {
                     link: PREFERENTIAL_ACCOMMODATION,
@@ -150,23 +148,33 @@ const getSectionLinks = () => {
                     disabled: isProdEnv,
                 },
                 {
+                    link: ACADEMIC_LEAVE_ACCOMMODATION,
+
+                    title: 'Предоставление права проживания в период академического отпуска',
+                    disabled: isProdEnv,
+                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
+                },
+                {
                     link: FAMILY_ROOM,
                     title: 'Предоставление права проживания в семейной комнате',
                     disabled: isProdEnv,
-                },
-                {
-                    link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
-                    title: 'Расторжение договора найма',
-                    disabled: isProdEnv,
+                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
                 },
                 {
                     link: RELOCATION_INSIDE_HOSTEL,
                     title: 'Переселение внутри общежития',
                     disabled: isProdEnv,
+                    exceptionalFormEducationList: ['Заочная'],
                 },
                 {
                     link: RELOCATION_TO_ANOTHER_HOSTEL,
                     title: 'Переселение в другое общежитие',
+                    disabled: isProdEnv,
+                    exceptionalFormEducationList: ['Заочная'],
+                },
+                {
+                    link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
+                    title: 'Расторжение договора найма',
                     disabled: isProdEnv,
                 },
             ],
