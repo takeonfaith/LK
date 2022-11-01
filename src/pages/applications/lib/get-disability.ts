@@ -2,7 +2,8 @@ import { IInputArea } from '@ui/input-area/model'
 
 const getDisability = (): IInputArea => {
     return {
-        title: 'Соответствие льготной категории граждан',
+        title: 'Период предоставления льготы',
+        hint: 'Период предоставления льготы по плате за пользование жилым помещением соответствует дате подачи заявки и дате окончания действия документа',
         optionalCheckbox: {
             fieldName: 'is_not_invalid',
             value: true,

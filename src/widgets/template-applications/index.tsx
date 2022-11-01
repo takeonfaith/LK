@@ -31,7 +31,7 @@ interface Props {
 
 const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
     const {
-        data: { listApplication },
+        data: { listApplication, dataUserApplication },
         error,
     } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
@@ -57,7 +57,14 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
                     </Message>
                     <List direction="horizontal" gap={10} scroll={false}>
                         <Button
-                            onClick={() => open(<CreateApplicationList isTeachers={isTeachers} />)}
+                            onClick={() =>
+                                open(
+                                    <CreateApplicationList
+                                        isTeachers={isTeachers}
+                                        currentFormEducation={dataUserApplication?.educationForm}
+                                    />,
+                                )
+                            }
                             text="Подать заявку"
                             background="var(--reallyBlue)"
                             textColor="#fff"
