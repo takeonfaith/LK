@@ -2,7 +2,7 @@ import { IInputAreaData } from '@ui/input-area/model'
 
 type radioType = { id: number; title: string }
 
-type specialReasonFieldsNameT = 'Address' | null
+type specialReasonFieldsNameT = 'Address' | 'Structure1' | 'Structure2' | null
 
 const getAddress = (data: IInputAreaData[]): specialReasonFieldsNameT => {
     const reasonField = data.find((item: IInputAreaData) => item.fieldName === 'get_tk')

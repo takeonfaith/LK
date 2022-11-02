@@ -12,9 +12,11 @@ import { FiChevronLeft } from 'react-icons/fi'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import checkFormFields from '@utils/check-form-fields'
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teachers-routes'
-import { specialFieldsNameT } from "@entities/applications/consts";
+import { specialFieldsNameT } from '@entities/applications/consts'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import getAddress from './lib/get-address'
+import getStructure from './lib/get-structure'
+import SendHrFormDismissal from '@pages/hr-applications/lib/send-hr-form-dismissal'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -30,9 +32,7 @@ const Dismissal = () => {
     const history = useHistory()
 
     useEffect(() => {
-        if (!!dataUserApplication)     setForm(getForm(dataUserApplication))
-            
-       
+        if (!!dataUserApplication) setForm(getForm(dataUserApplication))
     }, [dataUserApplication])
 
     useEffect(() => {
@@ -40,9 +40,10 @@ const Dismissal = () => {
             setSpecialFieldsName(getAddress(form.data as IInputAreaData[]))
         }
     }, [form])
+
     return (
         <BaseApplicationWrapper isDone={isDone}>
-            {!!form && !!setForm  && (
+            {!!form && !!setForm && (
                 <FormBlock>
                     <Button
                         text="Назад к кадровым заявлениям"
@@ -51,21 +52,17 @@ const Dismissal = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <InputArea {...form} 
-                    collapsed={isDone} 
-                    setData={setForm as LoadedState} 
-                    specialFieldsName={specialFieldsName}/>
-                    
-                    
+                    <InputArea
+                        {...form}
+                        collapsed={isDone}
+                        setData={setForm as LoadedState}
+                        specialFieldsName={specialFieldsName}
+                    />
+
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>
-                            globalAppSendForm(
-                                ApplicationFormCodes.DISMISSAL,
-                                [form],
-                                setLoading,
-                                setCompleted,
-                            )
+                            SendHrFormDismissal(ApplicationFormCodes.DISMISSAL, [form], setLoading, setCompleted)
                         }
                         isLoading={loading}
                         completed={completed}
@@ -80,12 +77,10 @@ const Dismissal = () => {
                 </FormBlock>
             )}
         </BaseApplicationWrapper>
-    
     )
 }
 
 export default Dismissal
-
 
 /*<TemplateFormPage model={teacherStatementModel} 
             getForm={getForm(dataUserApplication)} 

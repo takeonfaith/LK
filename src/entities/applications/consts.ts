@@ -46,4 +46,6 @@ export type specialFieldsNameT =
     | 'collHoliday3'
     | 'collHoliday4'
     | 'collHoliday5'
+    | 'Structure1'
+    | 'Structure2'
     | null

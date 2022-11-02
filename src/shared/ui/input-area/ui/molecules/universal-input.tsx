@@ -95,7 +95,6 @@ const UniversalInput = (props: Props) => {
     if (!!specialType && specialType !== specialFieldsName) {
         return null
     }
-
     return (type !== 'select' && type !== 'multiselect') || !items ? (
         type === 'checkbox' ? (
             <Checkbox

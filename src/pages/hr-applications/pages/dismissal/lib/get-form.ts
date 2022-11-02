@@ -17,20 +17,24 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Должность',
-                value: null,
+                type: 'select',
                 fieldName: 'post',
-                editable: true,
-                mask: true,
-                required: true,
-            },
-            {
-                title: 'Наименование структурного подразделения',
                 value: null,
-                fieldName: 'structure',
                 editable: true,
-                mask: true,
                 required: true,
+                width: '100%',
+                items: [
+                    {
+                        id: '7b741f98-cd43-11e8-9419-b4b52f5f5348',
+                        title: 'Старший преподаватель (Кафедра "Инфокогнитивные технологии")',
+                    },
+                    {
+                        id: '8t2f6a98-cd43-11e8-9419-b4b52f5f3496',
+                        title: 'Директор по цифровой трансформации (Ректорат)',
+                    },
+                ],
             },
+
             {
                 title: 'Дата увольнения (последний рабочий день)',
                 type: 'date',
@@ -43,6 +47,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Причина',
+                type: 'text',
                 value: null,
                 fieldName: 'reason',
                 editable: true,
