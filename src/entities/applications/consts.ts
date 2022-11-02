@@ -35,4 +35,15 @@ export const MethodObtainingOptions = [
     { id: 3, title: 'На почтовый адрес' },
 ]
 
-export type specialFieldsNameT = 'personalMethod' | 'postMethod' | 'personalNature' | 'Compensation' | null
+export type specialFieldsNameT =
+    | 'personalMethod'
+    | 'postMethod'
+    | 'personalNature'
+    | 'Compensation'
+    | 'Address'
+    | 'collHoliday1'
+    | 'collHoliday2'
+    | 'collHoliday3'
+    | 'collHoliday4'
+    | 'collHoliday5'
+    | null

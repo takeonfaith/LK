@@ -7,6 +7,7 @@ import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
 import React, { useState } from 'react'
 import { specialFieldsNameT } from "@entities/applications/consts";
+import { MdOutlinePersonRemoveAlt1 } from 'react-icons/md'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -38,7 +39,8 @@ const UniversalInput = (props: Props) => {
         specialType,
         specialFieldsName,
         minValueInput,
-        maxValueInput
+        maxValueInput,
+        Diff
     } = props
 
     const isActive = editable ?? (changeInputArea && !documents)
@@ -128,6 +130,9 @@ const UniversalInput = (props: Props) => {
                 setDates={(dates: string[]) => handleDates(dates)}
                 valid={validDates}
                 setValid={setValidDates}
+                minValue = {minValueInput}
+                Diff={Diff}
+
             />
         ) : type === 'radio' ? (
             <RadioButtonList

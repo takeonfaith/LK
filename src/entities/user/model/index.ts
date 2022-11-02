@@ -37,10 +37,11 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
 
         if (savePasswordInStorage()) {
             localStorage.setItem('token', JSON.stringify(tokenResponse.data))
+            // localStorage.setItem('jwt', JSON.stringify(tokenResponse.data.jwt))
         } else {
             sessionStorage.setItem('token', JSON.stringify(tokenResponse.data))
         }
-
+        console.log(tokenResponse.headers)
         return tokenResponse.data
     } catch (e) {
         throw new Error(navigator.onLine ? 'Неверный логин или пароль' : 'Потеряно соединение с интернетом')

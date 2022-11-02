@@ -66,8 +66,9 @@ export interface IInputAreaData {
     autocomplete?: boolean
     isSpecificRadio?: boolean
     specialType?: specialFieldsNameT
-    minValueInput?: number
-    maxValueInput?: number
+    minValueInput?: number | string
+    maxValueInput?: number | string
+    Diff?: number
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]
