@@ -57,12 +57,12 @@ const SendHrFormDismissal = async (
     try {
         const aaa = {
             guid:
-                result.post == 'Старший преподаватель (Кафедра "Инфокогнитивные технологии")'
+                result.post == 'Старший преподаватель/Кафедра "Инфокогнитивные технологии" (Основное место работы)'
                     ? '7b741f98-cd43-11e8-9419-b4b52f5f5348'
-                    : 'test',
-            dateofDismissal: result.last_day,
+                    : 'ff5ee79e-0725-11ec-bba0-f3424449f339',
+            dateOfDismissal: result.last_day,
             isSendMail: result.get_tk == 'По почте',
-            isRetirement: result.reason == 'Выход на пенсию',
+            isRetirement: result.reason == 'Выходом на пенсию',
             address: result.get_tk_address,
         }
         await applicationsModel.effects.postApplicationFx(aaa)

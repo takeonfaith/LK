@@ -1,6 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
-import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
+//import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
@@ -26,11 +26,11 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 items: [
                     {
                         id: '7b741f98-cd43-11e8-9419-b4b52f5f5348',
-                        title: 'Старший преподаватель (Кафедра "Инфокогнитивные технологии")',
+                        title: 'Старший преподаватель/Кафедра "Инфокогнитивные технологии" (Основное место работы)',
                     },
                     {
                         id: '8t2f6a98-cd43-11e8-9419-b4b52f5f3496',
-                        title: 'Директор по цифровой трансформации (Ректорат)',
+                        title: 'Директор по цифровой трансформации/Ректорат (Внутреннее совместительство)',
                     },
                 ],
             },
@@ -43,10 +43,10 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 mask: true,
                 required: true,
-                minValueInput: getDelayInDays(14),
+                //minValueInput: getDelayInDays(14),
             },
             {
-                title: 'Причина',
+                title: 'Причина (В связи с...)',
                 type: 'text',
                 value: null,
                 fieldName: 'reason',
