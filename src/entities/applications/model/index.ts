@@ -54,6 +54,15 @@ const postApplicationFx = createEffect(async (data: ApplicationCreating): Promis
         throw new Error(resultAddApplication)
     }
 })
+const getWorkerPosts = createEffect(async (): Promise<UserApplication> => {
+    const response = await applicationApi.getWorkerData()
+
+    try {
+        return response.data
+    } catch (_) {
+        throw new Error('Не удалось загрузить информацию о пользователе')
+    }
+})
 
 const clearStore = createEvent()
 
@@ -96,6 +105,7 @@ export const effects = {
     getApplicationsFx,
     getUserDataApplicationsFx,
     postApplicationFx,
+    getWorkerPosts,
 }
 
 export const events = {

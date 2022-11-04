@@ -17,6 +17,7 @@ import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import getAddress from './lib/get-address'
 import getStructure from './lib/get-structure'
 import SendHrFormDismissal from '@pages/hr-applications/lib/send-hr-form-dismissal'
+import { applicationApi } from '@api/index'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -40,7 +41,7 @@ const Dismissal = () => {
             setSpecialFieldsName(getAddress(form.data as IInputAreaData[]))
         }
     }, [form])
-
+    applicationApi.getWorkerData()
     return (
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && !!setForm && (
