@@ -6,8 +6,9 @@ import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
 import React, { useState } from 'react'
-import { specialFieldsNameT } from "@entities/applications/consts";
+import { specialFieldsNameT } from '@entities/applications/consts'
 import { MdOutlinePersonRemoveAlt1 } from 'react-icons/md'
+import SimpleText from '@ui/molecules/simple-text'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -40,7 +41,8 @@ const UniversalInput = (props: Props) => {
         specialFieldsName,
         minValueInput,
         maxValueInput,
-        Diff
+        Diff,
+        visible
     } = props
 
     const isActive = editable ?? (changeInputArea && !documents)
@@ -129,10 +131,11 @@ const UniversalInput = (props: Props) => {
                 setDates={(dates: string[]) => handleDates(dates)}
                 valid={validDates}
                 setValid={setValidDates}
-                minValue = {minValueInput}
+                minValue={minValueInput}
                 Diff={Diff}
-
             />
+        ) : type === 'simple-text' ? (
+            <SimpleText title={title} value={value as string} visible={visible}/>
         ) : type === 'radio' ? (
             <RadioButtonList
                 buttons={items as RadioButton[]}
@@ -146,8 +149,8 @@ const UniversalInput = (props: Props) => {
             <Input
                 value={value as string}
                 title={title}
-                minValue = {minValueInput}
-                maxValue = {maxValueInput}
+                minValue={minValueInput}
+                maxValue={maxValueInput}
                 setValue={(value) => handleChangeValue(value, indexI, indexJ)}
                 type={type}
                 isActive={isActive}

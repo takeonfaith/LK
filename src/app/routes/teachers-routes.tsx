@@ -51,6 +51,8 @@ import {
     PROJECT_ACTIVITIES_ROUTE,
 } from './general-routes'
 import useIsTestEnv from "@utils/hooks/use-is-test-env";
+import ApplicationsPage from '@pages/hr-applications/pages/buffer-page'
+import TeachersBufferPage from '@pages/hr-applications/pages/buffer-page'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
@@ -107,6 +109,7 @@ export const WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/work-transfer'
 export const EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/extra-holiday-coll'
 export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning'
 export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work'
+export const BUFFER_PAGE = HR_APPLICATIONS_ROUTE + '/buffer-page'
 
 const isProdEnv = !useIsTestEnv()
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
@@ -376,6 +379,16 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         Component: isProdEnv ? ApplicationRedirect : HolidayPostponed,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    dismissal2: {
+        id: 'dismissal2',
+        title: 'Заявление на увольнение2',
+        path: BUFFER_PAGE,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProdEnv ? ApplicationRedirect : TeachersBufferPage,
         isTemplate: false,
         group: 'OTHER',
     },

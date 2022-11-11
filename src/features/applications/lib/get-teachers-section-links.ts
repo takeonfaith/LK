@@ -26,6 +26,7 @@ import {
     EXTRA_HOLIDAY_COLL,
     HOLIDAY_PLANNING,
     HOLIDAY_WORK,
+    BUFFER_PAGE,
 } from '@app/routes/teachers-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
@@ -93,6 +94,7 @@ const getTeachersHRSectionLinks = () => {
             links: [
                 { link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
                 { link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
+                { link: BUFFER_PAGE, title: 'Заявление на увольнение2' },
                 { link: DISMISSAL, title: 'Заявление на увольнение' },
                 { link: HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
                 { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },

@@ -80,3 +80,13 @@ export interface UserApplication extends User {
     divisions_crs: divisionT[]
     divisions_all: divisionT[]
 }
+
+export interface WorkerApplication {
+    jobTitle: string
+    subDivision: string
+    subDivisionGuid: string
+    employerGuid: string
+    division: string
+    jobType: string
+    rateOfSalary: number
+}

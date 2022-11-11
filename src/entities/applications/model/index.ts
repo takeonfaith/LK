@@ -1,5 +1,5 @@
 import { applicationApi } from '@api'
-import { Application, UserApplication } from '@api/model'
+import { Application, UserApplication, WorkerApplication } from '@api/model'
 import { createEvent, forward } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector/compat'
@@ -8,6 +8,7 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 interface ApplicationsStore {
     listApplication: Application[] | null
     dataUserApplication: UserApplication | null
+    dataWorkerApplication: WorkerApplication[] | null
     error: string | null
 }
 
@@ -16,12 +17,12 @@ export interface ApplicationCreating {
     args: { [key: string]: any }
 }
 
-const DEFAULT_STORE = { listApplication: null, error: null, dataUserApplication: null }
+const DEFAULT_STORE = { listApplication: null, error: null, dataUserApplication: null, dataWorkerApplication: null }
 
 const useApplications = () => {
-    const { listApplication, dataUserApplication, error } = useStore($applicationsStore)
+    const { listApplication, dataUserApplication, dataWorkerApplication, error } = useStore($applicationsStore)
     return {
-        data: { listApplication, dataUserApplication },
+        data: { listApplication, dataUserApplication, dataWorkerApplication },
         loading: useStore(getUserDataApplicationsFx.pending),
         error: error,
     }
@@ -54,11 +55,10 @@ const postApplicationFx = createEffect(async (data: ApplicationCreating): Promis
         throw new Error(resultAddApplication)
     }
 })
-const getWorkerPosts = createEffect(async (): Promise<UserApplication> => {
+const getWorkerPosts = createEffect(async (): Promise<any[]> => {
     const response = await applicationApi.getWorkerData()
-
     try {
-        return response.data
+        return response.data.jobs
     } catch (_) {
         throw new Error('Не удалось загрузить информацию о пользователе')
     }
@@ -90,6 +90,18 @@ const $applicationsStore = createStore<ApplicationsStore>(DEFAULT_STORE)
         listApplication: newData,
     }))
     .on(getApplicationsFx.failData, (oldData, newData) => ({
+        ...oldData,
+        error: newData.message,
+    }))
+    .on(getWorkerPosts, (oldData) => ({
+        ...oldData,
+        error: null,
+    }))
+    .on(getWorkerPosts.doneData, (oldData, newData) => ({
+        ...oldData,
+        dataWorkerApplication: newData,
+    }))
+    .on(getWorkerPosts.failData, (oldData, newData) => ({
         ...oldData,
         error: newData.message,
     }))
