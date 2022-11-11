@@ -17,23 +17,29 @@ import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import getAddress from './lib/get-address'
 import getStructure from './lib/get-structure'
 import SendHrFormDismissal from '@pages/hr-applications/lib/send-hr-form-dismissal'
+import { applicationApi } from '@api/index'
+import { SelectPage } from '@features/select'
+import { getCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const Dismissal = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
-        data: { dataUserApplication },
+        data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
     const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const isDone = completed ?? false
     const history = useHistory()
-
+    const currentIndex = getCurrentIndex()
+    //const [currentIndex, setCurrentIndex] = useState<number>(0)
     useEffect(() => {
-        if (!!dataUserApplication) setForm(getForm(dataUserApplication))
-    }, [dataUserApplication])
+        if (!!dataUserApplication && !!dataWorkerApplication) {
+            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
+        }
+    }, [dataUserApplication, currentIndex])
 
     useEffect(() => {
         if (!!form && !!dataUserApplication) {

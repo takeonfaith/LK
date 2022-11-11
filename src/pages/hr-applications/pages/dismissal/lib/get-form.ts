@@ -1,9 +1,19 @@
 import { IInputArea } from '@ui/input-area/model'
-import { UserApplication } from '@api/model'
+import { UserApplication, WorkerApplication } from '@api/model'
+//import { SelectPage } from '@features/select'
 //import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
-
-const getForm = (dataUserApplication: UserApplication): IInputArea => {
+// const parseJobs = (dataWorkerApplication: WorkerApplication[]): SelectPage[] => {
+//     return dataWorkerApplication.map((item, key) => {
+//         return { id: key, title: item.jobTitle }
+//     })
+// }
+const getForm = (
+    dataUserApplication: UserApplication,
+    dataWorkerApplication: WorkerApplication[],
+    currentIndex: number,
+): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
+
     return {
         title: 'Заявление на увольнение',
         data: [
@@ -12,29 +22,69 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
                 mask: true,
-                editable: true,
+                editable: false,
                 required: true,
             },
+            // {
+            //     title: 'Должность',
+            //     value: dataWorkerApplication[currentIndex].jobTitle.toString(),
+            //     fieldName: 'post',
+            //     mask: true,
+            //     editable: false,
+            //     required: true,
+            // },
+            // {
+            //     title: 'Структурное подразделение',
+            //     value: dataWorkerApplication[currentIndex].subDivision.toString(),
+            //     fieldName: 'subDivision',
+            //     mask: true,
+            //     editable: false,
+            //     required: true,
+            // },
+            // {
+            //     title: 'Ставка',
+            //     value: dataWorkerApplication[currentIndex].rateOfSalary.toString(),
+            //     fieldName: 'rateOfSalary',
+            //     mask: true,
+            //     editable: false,
+            //     required: true,
+            // },
+            // {
+            //     title: 'Вид места работы',
+            //     value: dataWorkerApplication[currentIndex].jobType.toString(),
+            //     fieldName: 'jobType',
+            //     mask: true,
+            //     editable: false,
+            //     required: true,
+            //},
             {
                 title: 'Должность',
-                type: 'select',
+                type: 'simple-text',
                 fieldName: 'post',
-                value: null,
-                editable: true,
-                required: true,
-                width: '100%',
-                items: [
-                    {
-                        id: '7b741f98-cd43-11e8-9419-b4b52f5f5348',
-                        title: 'Старший преподаватель/Кафедра "Инфокогнитивные технологии" (Основное место работы)',
-                    },
-                    {
-                        id: '8t2f6a98-cd43-11e8-9419-b4b52f5f3496',
-                        title: 'Директор по цифровой трансформации/Ректорат (Внутреннее совместительство)',
-                    },
-                ],
+                value: dataWorkerApplication[currentIndex].jobTitle.toString(),
+                visible: true,
             },
-
+            {
+                title: 'Структурное подразделение',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].subDivision.toString(),
+                fieldName: 'subDivision',
+                visible: true,
+            },
+            {
+                title: 'Ставка',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].rateOfSalary.toString(),
+                fieldName: 'rateOfSalary',
+                visible: true,
+            },
+            {
+                title: 'Вид места работы',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].jobType.toString(),
+                fieldName: 'jobType',
+                visible: true,
+            },
             {
                 title: 'Дата увольнения (последний рабочий день)',
                 type: 'date',

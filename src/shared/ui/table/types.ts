@@ -8,7 +8,7 @@ export type TableSearchType = { value: string; column: Nullable<ColumnProps> } |
 export type TableCatalogType = { [field: string]: { value: SelectPage; column: Nullable<ColumnProps> } } | null
 export type TableSortType = { value: SortType; column: Nullable<ColumnProps> } | null
 
-export type ColumnType = 'date' | 'rub'
+export type ColumnType = 'date' | 'rub' | 'file'
 
 export interface ColumnProps {
     title: string
