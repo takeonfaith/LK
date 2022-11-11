@@ -27,7 +27,9 @@ const ApplicationPageWrapper = styled.div`
     justify-content: center;
     .text {
         line-height: 1.5em;
-        margin-top: 10px;
+        margin-top: 0px;
+        font-weight: normal;
+        font-size: 0.9em;
     }
     .message {
         margin-bottom: -15px;
@@ -86,11 +88,7 @@ const parseJobs = () => {
                                     background="transparent"
                                 />
                             </div>
-                        </div>
-
-                        <Collapse isOpened={opened[i]} className="collapseс">
-                            <div className="collapsed">
-                                <div className="text">
+                            <div className="text">
                                     Структурное подразделение: {object.subDivision}
                                     <br />
                                     Ставка: {object.rateOfSalary}
@@ -98,6 +96,11 @@ const parseJobs = () => {
                                     Вид места работы: {object.jobType}
                                     <br />
                                 </div>
+                        </div>
+
+                        <Collapse isOpened={opened[i]} className="collapseс">
+                            <div className="collapsed">
+                                
                                 <div className="buttonBlock">
                                     <a href="#/hr-applications/dismissal">
                                         <Button
