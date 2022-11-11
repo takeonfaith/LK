@@ -382,9 +382,9 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
     },
-    dismissal2: {
+    dismissal: {
         id: 'dismissal2',
-        title: 'Заявление на увольнение2',
+        title: 'Заявление на увольнение',
         path: BUFFER_PAGE,
         icon: <FiFileText />,
         color: 'blue',
@@ -392,7 +392,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
     },
-    dismissal: {
+    dismissal_form: {
         id: 'dismissal',
         title: 'Заявление на увольнение',
         path: DISMISSAL,

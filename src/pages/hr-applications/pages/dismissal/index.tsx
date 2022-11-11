@@ -34,19 +34,16 @@ const Dismissal = () => {
     const isDone = completed ?? false
     const history = useHistory()
     const currentIndex = getCurrentIndex()
-    console.log(currentIndex)
     //const [currentIndex, setCurrentIndex] = useState<number>(0)
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication) {
             setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
-            
         }
     }, [dataUserApplication, currentIndex])
 
     useEffect(() => {
         if (!!form && !!dataUserApplication) {
             setSpecialFieldsName(getAddress(form.data as IInputAreaData[]))
-           
         }
     }, [form])
 

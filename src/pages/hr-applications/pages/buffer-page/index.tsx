@@ -151,8 +151,6 @@ const TeachersBufferPage = () => {
                         необходимо приехать за готовым документом.
                     </Message>
                     {parseJobs()}
-                    
-    {console.log(listApplication)}
                     <List direction="horizontal" gap={10} scroll={false}>
                         <LocalSearch<Application[], Application[]>
                             whereToSearch={listApplication ?? []}
