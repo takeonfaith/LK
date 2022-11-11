@@ -1,43 +1,39 @@
 module.exports = {
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    createDefaultProgram: true,
-    ecmaFeatures: {
-      jsx: true
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        project: 'tsconfig.json',
+        sourceType: 'module',
+        tsconfigRootDir: __dirname,
     },
-    ecmaVersion: 2018,
-    tsconfigRootDir: __dirname,
-    sourceType: 'module',
-    project: './tsconfig.json'
-  },
-  extends: ['plugin:@typescript-eslint/recommended', 'plugin:react/recommended', 'plugin:boundaries/recommended', 'plugin:prettier/recommended', 'plugin:storybook/recommended'],
-  settings: {
-    react: {
-      version: 'detect'
-    }
-  },
-  plugins: ['prettier', 'boundaries'],
-  env: {
-    browser: true,
-    amd: true,
-    node: true
-  },
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
-  },
-  rules: {
-    'linebreak-style': 'off',
-    'prettier/prettier': ['error', {
-      endOfLine: 'auto'
-    }, {
-      usePrettierrc: true
-    }],
-    'no-console': 'warn',
-    '@typescript-eslint/no-empty-function': 'off',
-    'no-eval': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-explicit-any': 'off'
-  }
-};
+    extends: ['plugin:@typescript-eslint/recommended', 'plugin:react/recommended', 'plugin:prettier/recommended'],
+    settings: {
+        react: {
+            version: 'detect',
+        },
+    },
+    plugins: ['prettier', '@typescript-eslint'],
+    env: {
+        browser: true,
+        es6: true,
+    },
+    rules: {
+        'linebreak-style': 'off',
+        'prettier/prettier': [
+            'error',
+            {
+                endOfLine: 'auto',
+            },
+            {
+                usePrettierrc: true,
+            },
+        ],
+        'no-console': 'warn',
+        '@typescript-eslint/no-empty-function': 'off',
+        'no-eval': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        'react/jsx-key': 1,
+        "react/react-in-jsx-scope": "off",  
+    },
+}

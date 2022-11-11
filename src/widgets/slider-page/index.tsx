@@ -6,16 +6,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { Slider } from 'widgets'
 
-const SliderPageWrapper = styled.div<{ width?: string; align: Align }>`
+const SliderPageWrapper = styled.div<{ width?: string; align: Align; maxWidth?: string }>`
     display: flex;
     align-items: ${({ align }) => convertHorizontalAlign(align)};
     flex-direction: column;
     width: ${({ width }) => width ?? '100%'};
+    max-width: ${({ maxWidth }) => maxWidth ?? '100%'};
     height: 100%;
 
     & > div {
         display: flex;
         width: 100%;
+        max-width: 100%;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
 
@@ -62,6 +64,7 @@ interface Props {
     pages: Page[]
     currentPage?: number
     width?: string
+    maxWidth?: string
     className?: string
     sliderWidth?: string
     appearance?: boolean
@@ -73,6 +76,7 @@ const SliderPage = ({
     currentPage = 0,
     width,
     className,
+    maxWidth,
     sliderWidth,
     align = 'center',
     appearance = true,
@@ -100,7 +104,7 @@ const SliderPage = ({
     }, [currentPage, screenWidth])
 
     return (
-        <SliderPageWrapper width={width} align={align}>
+        <SliderPageWrapper width={width} align={align} maxWidth={maxWidth}>
             <Slider
                 pages={pages.map(({ title, condition }) => ({
                     title,

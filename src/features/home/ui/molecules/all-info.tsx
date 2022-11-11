@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { User } from '@api/model'
 import transformSex from '@utils/transform-sex'
 import KeyValue from '@ui/atoms/key-value'
+import { Divider } from '@ui/divider'
 
 export default memo(AllInfo)
 
@@ -26,6 +27,7 @@ function AllInfo({ user }: Props) {
         degreeLevel,
         enterYear,
         subdivisions,
+        authorIDs,
     } = user
 
     const items = [
@@ -58,7 +60,7 @@ function AllInfo({ user }: Props) {
             value: group,
         },
         {
-            key: 'Специальность',
+            key: 'Направление',
             value: specialty,
         },
         {
@@ -79,7 +81,24 @@ function AllInfo({ user }: Props) {
         },
         {
             key: 'Сведения о трудоустройстве',
-            value: subdivisions?.map((t, index) => <div key={index}>{`${index + 1})${t.subdivision}`}</div>),
+            value:
+                !!subdivisions?.length &&
+                subdivisions?.map((t, index) => {
+                    return (
+                        <React.Fragment key={index}>
+                            <div style={{ marginTop: '5px' }}>
+                                {t.subdivision && <div>Подразделение: {t.subdivision}</div>}
+                                {t.post && <div>Должность: {t.post}</div>}
+                                {t.wage && t.jobType && (
+                                    <div>
+                                        Ставка: {t.wage}; {t.jobType}
+                                    </div>
+                                )}
+                            </div>
+                            {index < subdivisions.length - 1 && <Divider />}
+                        </React.Fragment>
+                    )
+                }),
         },
         {
             key: 'Уровень образования',
@@ -89,6 +108,31 @@ function AllInfo({ user }: Props) {
             key: 'Год набора',
             value: enterYear,
         },
+        {
+            key: 'Авторские идентификаторы',
+            value: !!authorIDs && (
+                <div style={{ marginTop: '5px' }}>
+                    {authorIDs.wosReasearcher && <div>Web of Science Researcher ID: {authorIDs.wosReasearcher}</div>}
+                    {authorIDs.scopus && <div>Scopus Author ID: {authorIDs.scopus}</div>}
+                    {authorIDs.eLibrary && <div>eLibrary Author ID: {authorIDs.eLibrary}</div>}
+                </div>
+            ),
+        },
     ]
-    return <div>{items.map(({ key, value }) => !!value && <KeyValue keyStr={key} value={value} key={key} />)}</div>
+
+    return (
+        <div>
+            {items.map(
+                ({ key, value }) =>
+                    !!value && (
+                        <KeyValue
+                            keyStr={key}
+                            value={value}
+                            key={key}
+                            direction={typeof value === 'object' ? 'vertical' : 'horizontal'}
+                        />
+                    ),
+            )}
+        </div>
+    )
 }

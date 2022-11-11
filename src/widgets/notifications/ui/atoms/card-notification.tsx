@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
 import { baseNotification, businesstripNotification } from '@api/model/notification'
-import { Button, LinkButton, SubmitButton } from '@ui/atoms'
-import { personalNotificationModel } from '@entities/notification'
-import { FiDownload } from 'react-icons/fi'
 import { Colors } from '@consts'
-import localizeDate from '@utils/localize-date'
-import getRightGenderWord from '@utils/get-right-gender-word'
+import { personalNotificationModel } from '@entities/notification'
 import { userModel } from '@entities/user'
+import { LinkButton, SubmitButton } from '@ui/atoms'
+import getRightGenderWord from '@utils/get-right-gender-word'
+import localizeDate from '@utils/localize-date'
+import { useState } from 'react'
+import { FiDownload } from 'react-icons/fi'
+import styled from 'styled-components'
 
 const CardNotificationWrapper = styled.div`
     display: flex;
@@ -53,7 +53,7 @@ interface Props {
     type: 'businesstrip' | 'fire' | 'vacation'
 }
 
-const CardNotification = ({ data, type }: Props) => {
+const CardNotification = ({ data }: Props) => {
     const {
         data: { user },
     } = userModel.selectors.useUser()

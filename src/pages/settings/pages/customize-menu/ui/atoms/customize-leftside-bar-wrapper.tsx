@@ -20,17 +20,12 @@ const LeftsideBarItemWrapper = styled.div<{
     .icon-and-title {
         display: flex;
         align-items: center;
-
-        svg,
-        strong {
-            color: ${({ chosen }) => (chosen ? 'var(--blue)' : 'var(--text)')};
-        }
+        gap: 15px;
     }
 
     svg {
         width: 22px;
         height: 22px;
-        margin-right: 7px;
     }
 
     .buttons {

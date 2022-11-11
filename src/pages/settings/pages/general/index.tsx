@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
-import { GeneralType, OLD_LK_URL } from '@consts'
-import { useSettings } from '@utils/contexts/settings-context'
-import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
-import { Button, LinkButton } from '@ui/atoms'
+import React from 'react'
+import { OLD_LK_URL } from '@consts'
+import { LinkButton } from '@ui/atoms'
 
 const General = () => {
-    const { setting, change } = useSettings<GeneralType>('general')
+    // const { setting, change } = useSettings<GeneralType>('general')
 
     // const [toggles, setToggles] = useState<ToggleItem[]>([
     //     {

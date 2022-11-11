@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { Effect, Event } from 'effector'
 import { useStore } from 'effector-react/compat'
-import { createEffect, createEvent, createStore } from 'effector/compat'
+import { createEffect, createEvent, createStore } from 'effector'
 
 export interface TemplateFormStore<DataType> {
     data: DataType | null
@@ -28,7 +28,7 @@ export interface TemplateFormStoreOutput<DataType, PostDataType> {
 
 interface APIType<DataType, PostDataType> {
     get: () => Promise<AxiosResponse<DataType>>
-    post: (postData: PostDataType) => Promise<AxiosResponse<any, any>>
+    post: (postData: PostDataType, formId?: string) => Promise<AxiosResponse<any, any>>
     put?: () => void
 }
 

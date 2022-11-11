@@ -15,6 +15,7 @@ import { useModal } from 'widgets'
 const ApplicationPageWrapper = styled.div`
     display: flex;
     align-items: center;
+    color: var(--text);
     justify-content: center;
 
     @media (max-width: 1000px) {
@@ -28,17 +29,25 @@ interface Props {
     isTeachers: boolean
 }
 
-const TeachersApplicationsPage = ({ isTeachers }: Props) => {
-    const { data, error } = applicationsModel.selectors.useApplications()
+const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
+    const {
+        data: { listApplication, dataUserApplication },
+        error,
+    } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
     const [applications, setApplications] = useState<Application[] | null>(null)
 
     return (
-        <Wrapper load={() => applicationsModel.effects.getApplicationsFx()} loading={!data} error={error} data={data}>
+        <Wrapper
+            load={() => applicationsModel.effects.getApplicationsFx()}
+            loading={!listApplication}
+            error={error}
+            data={listApplication}
+        >
             <ApplicationPageWrapper>
                 <FormBlock maxWidth="1500px">
                     <Title size={2} align="left">
-                        Заявления
+                        Цифровые сервисы
                     </Title>
                     <Message type="info" title="Информация" icon={<FiInfo />}>
                         Данный сервис позволяет заказать необходимую справку, подать заявление, запрос. Статус
@@ -48,7 +57,14 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
                     </Message>
                     <List direction="horizontal" gap={10} scroll={false}>
                         <Button
-                            onClick={() => open(<CreateApplicationList isTeachers={isTeachers} />)}
+                            onClick={() =>
+                                open(
+                                    <CreateApplicationList
+                                        isTeachers={isTeachers}
+                                        currentFormEducation={dataUserApplication?.educationForm}
+                                    />,
+                                )
+                            }
                             text="Подать заявку"
                             background="var(--reallyBlue)"
                             textColor="#fff"
@@ -59,16 +75,16 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
                             fixedInMobile
                         />
                         <LocalSearch<Application[], Application[]>
-                            whereToSearch={data ?? []}
+                            whereToSearch={listApplication ?? []}
                             searchEngine={search}
                             setResult={setApplications}
                             placeholder={'Поиск заявлений'}
                         />
                     </List>
                     <Table
-                        loading={!data}
+                        loading={!listApplication}
                         columns={getApplicationsColumns()}
-                        data={applications ?? data}
+                        data={applications ?? listApplication}
                         maxOnPage={7}
                     />
                 </FormBlock>
@@ -77,4 +93,4 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
     )
 }
 
-export default TeachersApplicationsPage
+export default TeachersHrApplicationsPage

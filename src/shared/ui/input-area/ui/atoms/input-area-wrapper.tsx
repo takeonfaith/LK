@@ -19,11 +19,6 @@ const InputAreaWrapper = styled.div<Args>`
         height: ${({ openArea }) => (openArea ? 'auto' : '0')};
         opacity: ${({ openArea }) => (openArea ? '1' : '0')};
         visibility: ${({ openArea }) => (openArea ? 'visible' : 'hidden')};
-        .buttons {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
 
         .data-line {
             display: flex;

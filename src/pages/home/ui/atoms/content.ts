@@ -7,7 +7,6 @@ export const Content = styled.div`
     flex-direction: column;
     gap: 20px;
     color: var(--text);
-    height: 100%;
     padding: var(--desktop-page-padding);
 
     .home-page-content-inner {

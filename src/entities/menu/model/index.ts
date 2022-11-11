@@ -1,9 +1,10 @@
 import { AdminLinks, User } from '@api/model'
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 import { hiddenRoutes, privateRoutes } from '@app/routes/routes'
-import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teachers-routes'
+import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teacher-routes'
+import { MenuType, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG, SETTINGS } from '@consts'
 import { useStore } from 'effector-react/compat'
-import { createEvent, createStore } from 'effector/compat'
+import { createEvent, createStore } from 'effector'
 import findRoutesByConfig from '../lib/find-routes-by-config'
 
 interface Menu {
@@ -19,15 +20,24 @@ const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payment
 
 export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
 const DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'acad-performance', 'payments', 'all']
-const DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'all']
+// const DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'all']
 
-const getLeftsideBarConfig = (user: User | null, adminLinks: AdminLinks | null) => {
-    const shouldAddAdmin =
-        !!adminLinks?.accepts.length || !!adminLinks?.agreements.length || !!adminLinks?.checkdata.length
-    const teacherConfig = shouldAddAdmin
-        ? [...DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG, 'download-agreements']
-        : DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG
-    return user?.user_status === 'staff' ? teacherConfig : DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG
+const getLeftsideBarConfig = (user: User | null): MenuType => {
+    const localSettings = JSON.parse(localStorage.getItem(SETTINGS) || '{}')
+    const settingsMenuData: MenuType = localSettings.menu ?? DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG
+
+    const uniqueRequiredTeacherMenuItems = REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG.filter(
+        (item) => !settingsMenuData.includes(item),
+    )
+
+    const settingsDataToBeSet =
+        user?.user_status === 'staff' && settingsMenuData.some((item) => !uniqueRequiredTeacherMenuItems.includes(item))
+            ? [...settingsMenuData, ...uniqueRequiredTeacherMenuItems]
+            : settingsMenuData
+
+    localStorage.setItem(SETTINGS, JSON.stringify({ ...localSettings, menu: settingsDataToBeSet }))
+
+    return settingsMenuData
 }
 
 const DEFAULT_STORE: Menu = {
@@ -45,7 +55,7 @@ const useMenu = () => {
 
 const changeOpen = createEvent<{ isOpen: boolean; currentPage?: string }>()
 const clearStore = createEvent()
-const defineMenu = createEvent<{ user: User | null; adminLinks: AdminLinks | null }>()
+const defineMenu = createEvent<{ user: User | null; adminLinks: AdminLinks | null; homeRoutes?: string[] }>()
 const changeNotifications = createEvent<{ page: string; notifications: ((prev: number) => number) | number }>()
 
 const getNewNotifications = (page: string, notifications: number, routes: IRoutes | null) => {
@@ -63,7 +73,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
-    .on(defineMenu, (oldData, { user, adminLinks }) => ({
+    .on(defineMenu, (oldData, { user, homeRoutes }) => ({
         ...oldData,
         currentPage:
             user?.user_status === 'staff'
@@ -75,11 +85,12 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
                 : { ...privateRoutes(), ...hiddenRoutes() },
         visibleRoutes: user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         leftsideBarRoutes: findRoutesByConfig(
-            getLeftsideBarConfig(user, adminLinks),
+            getLeftsideBarConfig(user),
             user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         ),
         homeRoutes: findRoutesByConfig(
-            JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[],
+            homeRoutes ??
+                (JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[]),
             user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         ),
     }))

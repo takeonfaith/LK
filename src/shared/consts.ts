@@ -4,7 +4,7 @@ import { IconType } from 'react-icons'
 import { FiAlertCircle, FiCheck, FiInfo, FiXCircle } from 'react-icons/fi'
 import { HiOutlineLightBulb } from 'react-icons/hi'
 
-export type MenuType = number[]
+export type MenuType = string[]
 export type ShortCutLinksType = number[]
 export type ThemeType = string
 export type GeneralType = {
@@ -17,8 +17,13 @@ export interface IDefaultSettings {
 
 export const SHORT_CUT_LINKS_LIMIT_SIZE = 4
 
+export const ADDITIONAL_MENU_ITEMS_LIMIT_SIZE = 3
+
+export const REQUIRED_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'all']
+export const REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'settings', 'download-agreements', 'all']
+
 export const DEFAULT_SETTINGS: IDefaultSettings = {
-    menu: [0, 1, 2, 3, 4, 5, 6, 7],
+    menu: REQUIRED_LEFTSIDE_BAR_CONFIG,
     theme: 'light',
     general: {
         notifications: false,
@@ -27,6 +32,7 @@ export const DEFAULT_SETTINGS: IDefaultSettings = {
 }
 
 export const UNION_ORGANIZATION = 'https://lk.eseur.ru/signup'
+export const RECEPTION_COMMISSION = 'https://old.mospolytech.ru/index.php?id=3428'
 
 export const SETTINGS = 'settings'
 
@@ -326,6 +332,7 @@ export const letterColorMatch: LetterColorMatch = {
     Ф: 'blue',
     Х: 'green',
     Ч: 'purple',
+    Ц: 'green',
     Ш: 'red',
     Щ: 'red',
     Ъ: 'purple',
@@ -361,3 +368,15 @@ export const letterColorMatch: LetterColorMatch = {
     Y: 'red',
     Z: 'purple',
 }
+
+export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
+
+export const MAX_FILE_SIZE = 11000000
+
+/**
+ * @constant
+ * use when you need to hide some functionality on the production
+ * @example
+ * Component: () => isProduction ? PageIsNotReady : SettingsPage
+ **/
+export const isProduction = (import.meta.env.VITE_BUILD_MODE as string)?.trimEnd() === 'PRODUCTION'

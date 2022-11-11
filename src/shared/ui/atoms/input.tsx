@@ -102,6 +102,8 @@ interface Props {
     autocomplete?: boolean
     danger?: boolean
     alertMessage?: string
+    minValue?: number
+    maxValue?: number
 }
 
 const Input = ({
@@ -120,6 +122,8 @@ const Input = ({
     inputAppearance = true,
     mask = false,
     autocomplete = true,
+    minValue = undefined,
+    maxValue = undefined,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
 
@@ -201,6 +205,9 @@ const Input = ({
             <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
             {leftIcon && <span className="left-icon">{leftIcon}</span>}
             <input
+                min={minValue}
+                max={maxValue}
+                step={maxValue ? 0.1 : undefined}
                 type={inputType}
                 placeholder={placeholder}
                 value={value}
@@ -216,6 +223,7 @@ const Input = ({
                     } else setValue(e.target.value)
                 }}
                 required={required}
+                readOnly={!isActive}
             />
             {type !== 'password' ? (
                 !!value?.length &&

@@ -2,6 +2,8 @@ import { Sex } from '@utility-types/sex'
 
 type UserStatus = 'stud' | 'staff'
 
+type EducationFormT = 'Очная' | 'Очно-заочная' | 'Заочная' | 'Недоступен'
+
 export interface User extends Record<string, unknown> {
     id: string
     name: string
@@ -20,7 +22,7 @@ export interface User extends Record<string, unknown> {
     specialty: string
     specialization: string
     degreeLength: number
-    educationForm: string
+    educationForm: EducationFormT
     finance: string
     degreeLevel: string
     enterYear: string
@@ -28,6 +30,7 @@ export interface User extends Record<string, unknown> {
     user_status: UserStatus
     lastaccess: string
     available_accounts?: { name: string; avatar: string; token: string }[]
+    authorIDs?: AuthorIDs
 }
 
 interface Subdivision {
@@ -36,4 +39,11 @@ interface Subdivision {
     status?: string
     subdivision?: string
     wage?: string
+    post?: string
+}
+
+interface AuthorIDs {
+    wosReasearcher?: string
+    scopus?: string
+    eLibrary?: string
 }

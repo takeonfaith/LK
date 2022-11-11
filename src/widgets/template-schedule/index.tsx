@@ -1,6 +1,7 @@
 import { IModules, ISchedule, ViewType } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
+import retakeRoutes from '@features/schedule/config'
 import getSessionStats from '@features/schedule/lib/get-session-stats'
 import {
     ScheduleViewButtonsList,
@@ -9,6 +10,7 @@ import {
     WeekSchedule,
 } from '@features/schedule/ui'
 import ExamStats from '@features/schedule/ui/atoms/exam-stats'
+import RetakeSchedule from '@features/schedule/ui/organisms/retake-schedule'
 import SessionSchedule from '@features/schedule/ui/organisms/session-schedule'
 import { Wrapper } from '@ui/atoms'
 import React, { useMemo, useRef } from 'react'
@@ -23,7 +25,7 @@ const SchedulePageContent = styled.div`
 
     .slider-wrapper {
         width: 100%;
-        max-width: 600px;
+        max-width: 650px;
     }
 
     .buttons-and-search {
@@ -61,6 +63,7 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                     <ExamStats {...getSessionStats(schedule['2'])} />
                     <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['2']} />
                 </React.Fragment>,
+                <RetakeSchedule links={retakeRoutes} key={3} />,
             ]
         )
     }, [schedule, view])
@@ -85,6 +88,10 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                                     title: 'Сессия',
                                     condition: !!schedule['2'],
                                 },
+                                {
+                                    title: 'Пересдачи',
+                                    condition: true,
+                                },
                             ]}
                             currentPage={parseInt(currentModule)}
                             setCurrentPage={(currentPage: number) =>
@@ -94,20 +101,22 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                             }
                         />
                     </div>
-                    <div className="buttons-and-search">
-                        <ScheduleViewButtonsList
-                            view={view}
-                            setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
-                        />
-                        {/*<Input*/}
-                        {/*    value={value}*/}
-                        {/*    setValue={setValue}*/}
-                        {/*    placeholder="Номер группы"*/}
-                        {/*    leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}*/}
-                        {/*/>*/}
-                    </div>
+                    {currentModule !== '3' && (
+                        <div className="buttons-and-search">
+                            <ScheduleViewButtonsList
+                                view={view}
+                                setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
+                            />
+                            {/*<Input*/}
+                            {/*    value={value}*/}
+                            {/*    setValue={setValue}*/}
+                            {/*    placeholder="Номер группы"*/}
+                            {/*    leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}*/}
+                            {/*/>*/}
+                        </div>
+                    )}
                     {teacherName && <TeacherScheduleIndicator fio={teacherName} />}
-                    <WeekDayButtonsList wrapperRef={wrapperRef} data={data} />
+                    {currentModule !== '3' && <WeekDayButtonsList wrapperRef={wrapperRef} data={data} />}
                     {!!pages && pages[currentModule as keyof IModules]}
                 </SchedulePageContent>
             ) : null}

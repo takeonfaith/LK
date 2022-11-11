@@ -16,6 +16,20 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
     @media (max-width: 800px) {
         align-items: flex-end;
     }
+
+    .close-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+
+        padding: 0;
+        height: 20px;
+        width: 20px;
+
+        &:hover {
+            filter: brightness(0.8);
+        }
+    }
 `
 
 export default ModalWrapper

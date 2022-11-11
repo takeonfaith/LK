@@ -1,4 +1,6 @@
+import { STUDENTS_LOGINS_ROUTE } from '@app/routes/teacher-routes'
 import { adminLinksModel } from '@entities/admin-links'
+import PageIsNotReady from '@pages/page-is-not-ready'
 import { FormBlock } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
@@ -29,6 +31,11 @@ const DownloadAdminFilesPage = () => {
                             title: 'Доп. соглашения',
                             content: <AdditionalAgreements />,
                             condition: !!data?.agreements.length,
+                        },
+                        {
+                            title: 'Логины студентов',
+                            content: <PageIsNotReady oldVersionUrl={STUDENTS_LOGINS_ROUTE} />,
+                            condition: !!data?.studLogins?.length,
                         },
                     ]}
                 />

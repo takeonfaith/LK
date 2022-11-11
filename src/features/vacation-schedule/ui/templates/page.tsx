@@ -8,7 +8,6 @@ import List from '@ui/list'
 import Subtext from '@ui/subtext'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Vacation } from '../organism'
-import OldVacation from '../organism/old-vacation'
 
 const Page = () => {
     const {
@@ -16,10 +15,9 @@ const Page = () => {
     } = userModel.selectors.useUser()
     const { data, error } = vacationScheduleModel.selectors.useVacationShedule()
 
-    const items: SelectPage[] = useMemo(
-        () => data?.map((value, index) => ({ id: index, title: value.subdivision })) || [],
-        [data],
-    )
+    const items: SelectPage[] = useMemo(() => {
+        return data?.map((value, index) => ({ id: index, title: value.division })) || []
+    }, [data])
 
     const [selected, setSelected] = useState<SelectPage | null>(items[0] ?? {})
 
@@ -38,7 +36,9 @@ const Page = () => {
                     <Title size={2} align="left">
                         График отпусков
                     </Title>
-                    <Subtext width="100%">Производственный календарь на 2022 год</Subtext>
+                    <Subtext width="100%" maxWidth="100%">
+                        Производственный календарь на 2022 год
+                    </Subtext>
                     <List scroll={false} direction="horizontal" gap={12} wrapOnMobile>
                         <Card
                             title="Для пятидневной рабочей недели"
@@ -85,13 +85,6 @@ const Page = () => {
                         <Select width="fit-content" items={items} selected={selected} setSelected={setSelected} />
                     )}
                     {selectedVacation && <Vacation {...selectedVacation} />}
-                    <Divider />
-                    {selectedVacation?.oldVacations && (
-                        <OldVacation
-                            oldVacations={selectedVacation.oldVacations}
-                            oldAllVacationRest={selectedVacation?.oldAllVacationRest}
-                        />
-                    )}
                 </Block>
             </CenterPage>
         </Wrapper>

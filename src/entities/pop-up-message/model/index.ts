@@ -1,4 +1,4 @@
-import { createStore, createEvent } from 'effector/compat'
+import { createStore, createEvent } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { MessageType } from '@ui/types'
 

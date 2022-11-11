@@ -9,7 +9,6 @@ import { Divider } from '@ui/divider'
 import React from 'react'
 import { FiArrowLeftCircle, FiLogOut, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
-import AvailableAccounts from 'widgets/available-accounts'
 import useModal from 'widgets/modal'
 import WhatsNew from 'widgets/whats-new'
 
@@ -18,7 +17,7 @@ const UserBigModal = () => {
 
     return (
         <>
-            <AvailableAccounts />
+            {/* <AvailableAccounts /> */}
             <Link to={SETTINGS_ROUTE}>
                 <Button
                     text="Настройки"

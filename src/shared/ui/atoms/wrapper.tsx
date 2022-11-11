@@ -7,7 +7,7 @@ import Thinking from '../../images/thinking-emoji.gif'
 const WrapperBlock = styled.div<{ loading: boolean }>`
     width: 100%;
     padding: 10px;
-    height: 100%;
+    height: auto;
 
     .loading {
         width: 100%;
@@ -33,7 +33,7 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
         transition: 0.2s;
         opacity: ${({ loading }) => (loading ? 0 : 1)};
         visibility: ${({ loading }) => (loading ? 'hidden' : 'visible')};
-        transform: scale(${({ loading }) => (loading ? '0.98' : '1')});
+        /* transform: scale(${({ loading }) => (loading ? '0.98' : '1')}); */
         height: 100%;
     }
 

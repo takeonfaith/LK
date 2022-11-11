@@ -2,7 +2,7 @@ import { paymentsModel } from '@entities/payments'
 import { Wrapper } from '@ui/atoms'
 import React from 'react'
 import { SliderPage } from 'widgets'
-import { DormitoryPayments, EducationPayments, InfoPayments } from './pages'
+import { DormitoryPayments, EducationPayments } from './pages'
 
 const PaymentsPage = () => {
     const { data, loading, error } = paymentsModel.selectors.usePayments()
@@ -28,7 +28,6 @@ const PaymentsPage = () => {
                             condition: !!data?.education.length,
                             content: <EducationPayments />,
                         },
-                        { title: 'Информация', condition: true, content: <InfoPayments /> },
                     ]}
                     sliderWidth={'600px'}
                     currentPage={!!data?.dormitory.length ? 0 : !!data?.education.length ? 1 : 0}

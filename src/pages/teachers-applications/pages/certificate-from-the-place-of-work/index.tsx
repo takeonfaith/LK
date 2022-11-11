@@ -1,19 +1,10 @@
-import React from 'react'
+import { teacherStatementModel } from '@entities/teachers-statement'
 import TemplateFormPage from 'widgets/template-form-page'
 import getForm from './lib/get-form'
-import { teacherStatementModel } from '@entities/teachers-statement'
-import styled from 'styled-components'
-
-const CertificateFromPlaceOfWorkWrapper = styled.div`
-    height: auto;
-`
+import React from 'react'
 
 const CertificateFromPlaceOfWorkPage = () => {
-    return (
-        <CertificateFromPlaceOfWorkWrapper>
-            <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к заявлениям" />
-        </CertificateFromPlaceOfWorkWrapper>
-    )
+    return <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к цифровым сервисам" />
 }
 
 export default CertificateFromPlaceOfWorkPage

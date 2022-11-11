@@ -21,9 +21,11 @@ const LeftsideBarList = () => {
 
     return (
         <LeftsideBarListWrapper>
-            {Object.values(leftsideBarRoutes).map((props: IRoute) => {
-                return <LeftsideBarItem {...props} key={props.id} isCurrent={currentPage?.id === props.id} />
-            })}
+            {Object.values(leftsideBarRoutes)
+                .filter((el) => el !== undefined)
+                .map((props: IRoute) => {
+                    return <LeftsideBarItem {...props} key={props?.id} isCurrent={currentPage?.id === props?.id} />
+                })}
         </LeftsideBarListWrapper>
     )
 }

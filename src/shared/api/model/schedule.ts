@@ -40,13 +40,14 @@ export interface IModules {
     '0': IWeekSchedule | null
     '1': IWeekSchedule | null
     '2': ISessionSchedule | null
+    '3': JSX.Element | null
 }
 
 export type ViewType = 'full' | 'big'
 
 export interface ISchedule {
     schedule: IModules | null
-    currentModule: '0' | '1' | '2'
+    currentModule: '0' | '1' | '2' | '3'
     currentDay: number
     currentDayString: string
     currentChosenDay: number

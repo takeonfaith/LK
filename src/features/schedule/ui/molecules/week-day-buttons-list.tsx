@@ -69,7 +69,7 @@ const WeekDayButtonsList = ({
 
     return (
         <WeekDayButtonsListWrapper isFull={isFull}>
-            {currentModule !== '2'
+            {currentModule !== '2' && currentModule !== '3'
                 ? Object.keys(WeekDays).map((day, index) => {
                       return (
                           <WeekDayButton
@@ -83,7 +83,8 @@ const WeekDayButtonsList = ({
                           />
                       )
                   })
-                : !!schedule['2'] &&
+                : currentModule === '2' &&
+                  !!schedule['2'] &&
                   Object.keys(schedule['2']).map((day, index) => {
                       return (
                           <WeekDayButton

@@ -17,6 +17,7 @@ const CheckboxWrapper = styled.div<{
     opacity: ${({ isActive }) => !isActive && 0.7};
     .checkbox-text {
         user-select: none;
+        white-space: pre-wrap;
     }
 
     svg {
