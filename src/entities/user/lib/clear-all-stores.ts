@@ -4,7 +4,6 @@ import { applicationsModel } from '@entities/applications'
 import { confirmModel } from '@entities/confirm'
 import { contactInfoActualizationModel } from '@entities/contact-info-actualization'
 import { electronicInteractionModel } from '@entities/electronic-interaction'
-import { messagesModel } from '@entities/messages'
 import { personalNotificationModel } from '@entities/notification'
 import { paymentsModel } from '@entities/payments'
 import { popUpMessageModel } from '@entities/pop-up-message'
@@ -19,7 +18,6 @@ const stores = [
     applicationsModel,
     confirmModel,
     electronicInteractionModel,
-    messagesModel,
     personalNotificationModel,
     paymentsModel,
     popUpMessageModel,

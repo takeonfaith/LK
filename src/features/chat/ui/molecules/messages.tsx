@@ -1,5 +1,5 @@
-import { Message } from '@api/model'
 import scrollToBottom from '@features/chat/lib/scroll-to-bottom'
+import { chatMessagesModel } from '@features/chat/model'
 import { Button, Wrapper } from '@ui/atoms'
 import React, { useEffect, useRef, useState } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
@@ -47,78 +47,7 @@ interface Props {
 }
 
 const Messages = ({ loading }: Props) => {
-    const messages: Message[] = [
-        {
-            message:
-                'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias, non. Laboriosam aliquid animi magni sit perferendis, et minima maxime totam eos corporis saepe est sunt facilis? Quae iste nobis sapiente?',
-            sender: 'Kostya Doloz',
-            sentTime: 'January 5, 2022 21:12',
-        },
-        {
-            message:
-                'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias, non. Laboriosam aliquid animi magni sit perferendis, et minima maxime totam eos corporis saepe est sunt facilis? Quae iste nobis sapiente?',
-            sender: 'Kostya Doloz',
-            sentTime: 'January 5, 2022 21:12',
-        },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        {
-            message: 'TestTestTestTestTestTest',
-            sender: 'Kostya Doloz',
-            sentTime: 'January 5, 2022 21:12',
-        },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 5, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 6, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 6, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 6, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 6, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 6, 2022 21:12' },
-        { message: 'Test', sender: 'Peter Parker', sentTime: 'January 6, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 7, 2022 21:12' },
-        {
-            message:
-                'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias, non. Laboriosam aliquid animi magni sit perferendis, et minima maxime totam eos corporis saepe est sunt facilis? Quae iste nobis sapiente?',
-            sender: 'Kostya Doloz',
-            sentTime: 'January 7, 2022 21:12',
-        },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 7, 2022 21:12' },
-        {
-            message:
-                'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias, non. Laboriosam aliquid animi magni sit perferendis, et minima maxime totam eos corporis saepe est sunt facilis? Quae iste nobis sapiente?',
-            sender: 'Kostya Doloz',
-            sentTime: 'January 7, 2022 21:12',
-        },
-        {
-            message:
-                'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias, non. Laboriosam aliquid animi magni sit perferendis, et minima maxime totam eos corporis saepe est sunt facilis? Quae iste nobis sapiente?',
-            sender: 'Kostya Doloz',
-            sentTime: 'January 7, 2022 21:12',
-        },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 8, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 9, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 9, 2022 21:12' },
-        { message: 'Test', sender: 'Kostya Doloz', sentTime: 'January 10, 2022 21:12' },
-    ]
-
+    const messages = chatMessagesModel.selectors.useMessages()
     const listRef = useRef<HTMLDivElement>(null)
 
     const [buttonVisible, setButtonVisible] = useState(false)

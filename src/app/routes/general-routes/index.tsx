@@ -38,6 +38,7 @@ import {
     AllPages,
     SettingsPage,
     GetYourLoginPage,
+    ChatPage,
 } from './pages'
 
 import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
@@ -202,7 +203,7 @@ export const generalRoutes: IRoutes = {
         title: 'Сообщения',
         icon: <BiMessageRounded />,
         path: CHAT_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
+        Component: ChatPage,
         color: 'red',
         isTemplate: true,
         group: 'OTHER',
