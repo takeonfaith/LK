@@ -18,7 +18,7 @@ const isCurrentWeekSubject = (subject: ISubject): boolean => {
     const [endDay, endMonth] = endDate?.split(' ') ?? [null, null]
 
     const parsedStartDateMonth = Months[startMonth as keyof typeof Months]
-    const parsedEndDateMonth = Months[endMonth as keyof typeof Months]
+    const parsedEndDateMonth = Months[endMonth as keyof typeof Months] || parsedStartDateMonth
 
     const fullStartDate = new Date(
         `${parsedStartDateMonth}/${startDay}/${
