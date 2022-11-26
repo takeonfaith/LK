@@ -80,13 +80,39 @@ export interface UserApplication extends User {
     divisions_crs: divisionT[]
     divisions_all: divisionT[]
 }
+export interface dismissalOrder {
+    orderNumber: string
+    display: boolean
+    displayDate: boolean
+    isError: boolean
+    error: string
+    orderDate: string
+    status: string
+    downloadable: boolean
+    registrationStatus: string
+    displayRegistration: boolean
+}
+
+export interface dismissalApplications {
+    applicationGuid: string
+    dismissalDate: string
+    display: boolean
+    displayDate: boolean
+    isError: boolean
+    error: string
+    status: string
+    signDate: string
+    employeeSigningStatus: string
+    downloadable: boolean
+    dismissalOrder: dismissalOrder
+}
 
 export interface WorkerApplication {
+    jobGuid: string
     jobTitle: string
     subDivision: string
-    subDivisionGuid: string
-    employerGuid: string
-    division: string
-    jobType: string
-    rateOfSalary: number
+    rate: string
+    isDismissal: boolean
+    canBeRepeated: boolean
+    dismissalApplications: dismissalApplications[]
 }

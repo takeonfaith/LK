@@ -58,7 +58,7 @@ const postApplicationFx = createEffect(async (data: ApplicationCreating): Promis
 const getWorkerPosts = createEffect(async (): Promise<any[]> => {
     const response = await applicationApi.getWorkerData()
     try {
-        return response.data.jobs
+        return response.data
     } catch (_) {
         throw new Error('Не удалось загрузить информацию о пользователе')
     }

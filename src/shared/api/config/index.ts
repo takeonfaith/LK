@@ -5,13 +5,20 @@ import axios, { AxiosError } from 'axios'
 
 export const API_BASE_URL = `${OLD_LK_URL}/lk_api.php`
 export const API_HR_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/`
-export const API_WORKER_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/GeneralInformation.Get`
+export const API_WORKER_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/Dismissal.GetAllHistory`
+export const API_WORKER_STATUSES_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/Dismissal.AllHistory`
 
 export const $api = axios.create({ baseURL: API_BASE_URL, withCredentials: true })
 export const $workerApi = axios.create({ baseURL: API_WORKER_URL, timeout: 30000 })
+export const $workerStatusesApi = axios.create({ baseURL: API_WORKER_STATUSES_URL })
 export const $hrApi = axios.create({ baseURL: API_HR_URL })
 
 $workerApi.interceptors.request.use((config) => {
+    if (!config.headers) config.headers = {}
+    config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
+    return config
+})
+$workerStatusesApi.interceptors.request.use((config) => {
     if (!config.headers) config.headers = {}
     config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
     return config
