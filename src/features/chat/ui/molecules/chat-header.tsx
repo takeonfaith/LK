@@ -26,10 +26,9 @@ const ChatHeaderWrapper = styled.div`
 interface Props {
     avatar?: string
     name: string
-    loading: boolean
 }
 
-const ChatHeader = ({ avatar, name, loading }: Props) => {
+const ChatHeader = ({ avatar, name }: Props) => {
     const [, setOpenMenu] = useState(false)
     const menuRef = useRef<HTMLDivElement>(null)
     const [searchMode, setSearchMode] = useState(false)
@@ -46,7 +45,7 @@ const ChatHeader = ({ avatar, name, loading }: Props) => {
         <ChatHeaderWrapper ref={menuRef}>
             <Button icon={<FiX />} onClick={handleClick} background="var(--schedule)" />
             {!searchMode ? (
-                <User type={'teacher'} avatar={avatar} name={name} loading={loading} />
+                <User type={'teacher'} avatar={avatar} name={name} />
             ) : (
                 <LocalSearch
                     whereToSearch={[]}

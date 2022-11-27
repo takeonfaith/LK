@@ -37,7 +37,7 @@ const DEFAULT_STORE: SettingsStore = {
     completed: false,
 }
 
-let currentUser: string
+let currentUser: number
 
 const useSettings = () => {
     return {
@@ -47,10 +47,10 @@ const useSettings = () => {
     }
 }
 
-const getLocalSettingsFx = createEffect((userId: string): Param => {
+const getLocalSettingsFx = createEffect((userId: number): Param => {
     currentUser = userId
     const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser]
-    return localSettings ?? getDefaultSettings(userId)[userId]
+    return localSettings ?? getDefaultSettings(userId.toString())[userId]
 })
 
 const updateSetting = createEvent<{

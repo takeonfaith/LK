@@ -1,6 +1,10 @@
+import { signalRConnection } from '@api/config'
 import { Message } from '@api/model'
+import { chatModel } from '@entities/chat'
+import { $userStore } from '@entities/user/model'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
+import { LoadChat } from '../types/load-chat'
 import { $message } from './message'
 
 const inital: Message[] = [
@@ -76,20 +80,52 @@ const inital: Message[] = [
 ]
 
 const sendMessage = createEvent()
+const onReceivedMessage = createEvent<{ senderId: string; message: string }>()
 
-const sendFx = createEffect((message: string): Message => {
-    return { message, sender: 'me', sentTime: new Date().toISOString() }
+const sendFx = createEffect<string, Omit<Message, 'sender'>>(async (message) => {
+    await signalRConnection.invoke('SendMessage', message)
+    return { message, sentTime: new Date().toISOString() }
+})
+
+signalRConnection.on('ReceiveMessage', (senderId: string, message: string) => onReceivedMessage({ senderId, message }))
+
+const loadChatMessagesFx = createEffect<LoadChat, Message[]>(({ chatId }) => {
+    return inital
+})
+
+sample({
+    clock: chatModel.stores.$chat,
+    filter: Boolean,
+    fn: (chat) => ({ chatId: chat.id }),
+    target: loadChatMessagesFx,
 })
 
 sample({ clock: sendMessage, source: $message, fn: (message) => message, target: sendFx })
 
-const $messages = createStore<Message[]>(inital)
+const $chatMessages = createStore<Message[]>(inital)
+
+sample({
+    clock: onReceivedMessage,
+    source: $chatMessages,
+    fn: (messages, { message, senderId }): Message[] => [
+        ...messages,
+        {
+            sender: senderId.toString(),
+            message,
+            sentTime: new Date().toISOString(),
+        },
+    ],
+    target: $chatMessages,
+})
+
+sample({ clock: loadChatMessagesFx.doneData, target: $chatMessages })
 
 sample({
     clock: sendFx.doneData,
-    source: $messages,
-    fn: (messages, message) => [...messages, message],
-    target: $messages,
+    source: { messages: $chatMessages, user: $userStore },
+    filter: ({ user }) => !!user.currentUser?.id,
+    fn: ({ messages, user }, message) => [...messages, { ...message, sender: user.currentUser!.id.toString() }],
+    target: $chatMessages,
 })
 
 export const events = {
@@ -97,5 +133,5 @@ export const events = {
 }
 
 export const selectors = {
-    useMessages: () => useStore($messages),
+    useChatMessages: () => useStore($chatMessages),
 }

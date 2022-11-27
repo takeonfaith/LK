@@ -1,4 +1,5 @@
 import { TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
+import { chatsModel } from '@entities/chat'
 import searchChats from '@features/chat/lib/search-chats'
 import { Button, Divider, Title } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
@@ -51,7 +52,7 @@ const ListOfChatsWrapper = styled.div<{ isOpen: boolean; chatId?: string }>`
 `
 
 const ListOfChats = () => {
-    const [foundChats, setFoundChats] = useState<any[] | null>(null)
+    const chats = chatsModel.selectors.useChats()
     const [isOpen, setIsOpen] = useState(true)
     const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { chatId: string | undefined }
 
@@ -66,14 +67,14 @@ const ListOfChats = () => {
                     icon={isOpen ? <FiChevronLeft /> : <FiChevronRight />}
                 />
             </div>
-            <LocalSearch
+            {/* <LocalSearch
                 whereToSearch={chats}
                 searchEngine={searchChats}
                 setResult={setFoundChats}
                 placeholder="Поиск чатов"
-            />
+            /> */}
             <Divider margin="10px auto" />
-            <ChatItems chats={foundChats ?? chats} isOpen={isOpen} />
+            <ChatItems chats={chats} isOpen={isOpen} />
         </ListOfChatsWrapper>
     )
 }

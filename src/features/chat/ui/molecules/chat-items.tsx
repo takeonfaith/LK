@@ -1,3 +1,4 @@
+import { Chats } from '@entities/chat/types/chat'
 import { Title } from '@ui/atoms'
 import useResize from '@utils/hooks/use-resize'
 import React from 'react'
@@ -10,7 +11,7 @@ const ChatItemsWrapper = styled.div<{ height: number }>`
 `
 
 interface Props {
-    chats: any[]
+    chats: Chats
     isOpen: boolean
 }
 
@@ -20,8 +21,23 @@ const ChatItems = ({ chats, isOpen }: Props) => {
     return (
         <ChatItemsWrapper height={height}>
             {!chats.length && <Title size={3}>Нет чатов</Title>}
-            {chats.map((chat) => (
-                <ChatItem {...chat} key={chat.name} loading={false} isOpen={isOpen} />
+            {Object.values(chats).map((chat) => (
+                <ChatItem
+                    id={chat.id}
+                    amountOfUnreadMessages={chat.amountOfUnreadMessages}
+                    key={chat.companion.name}
+                    loading={false}
+                    isOpen={isOpen}
+                    companion={{
+                        id: 'ada',
+                        name: 'ddd',
+                        avatar: undefined,
+                    }}
+                    lastMessage={{
+                        message: '',
+                        sentTime: '',
+                    }}
+                />
             ))}
         </ChatItemsWrapper>
     )

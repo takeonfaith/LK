@@ -4,6 +4,6 @@ export function createTeachersResponse(limit: number | undefined): ServerListRes
     return {
         results: new Array(limit)
             .fill({})
-            .map((_, index) => ({ id: index.toString(), name: 'Зубенко Михаил Петрович' } as Partial<User>)),
+            .map((_, index) => ({ id: index, name: 'Зубенко Михаил Петрович' } as Partial<User>)),
     }
 }

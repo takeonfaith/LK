@@ -24,7 +24,7 @@ const UserList = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const [chosenUsers, setChosenUsers] = useState<string[]>([])
+    const [chosenUsers, setChosenUsers] = useState<number[]>([])
 
     const handleCheck = (user: UserType) => {
         if (chosenUsers.includes(user.id)) {

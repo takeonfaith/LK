@@ -1,2 +1,2 @@
 export * as chatMessageModel from './message'
-export * as chatMessagesModel from './messages'
+export * as chatMessagesModel from './chat-messages'

@@ -1,12 +1,18 @@
+import { signalRConnection } from '@api/config'
 import { TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
+import { chatsModel } from '@entities/chat'
 import { ChatWindow, ListOfChats } from '@features/chat'
 import EmptyHere from '@features/chat/ui/atoms/empty-here'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router'
 import styled from 'styled-components'
 
 const ChatPage = () => {
     const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { chatId: string | undefined }
+
+    useEffect(() => {
+        chatsModel.events.loadChats()
+    }, [])
 
     return (
         <ChatPageWrapper>

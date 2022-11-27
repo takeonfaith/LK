@@ -8,7 +8,7 @@ import { Container, Img } from '../atoms/avatar'
 export default Avatar
 
 interface Props {
-    avatar?: string
+    avatar?: string | null
     name: string
     width?: string
     height?: string

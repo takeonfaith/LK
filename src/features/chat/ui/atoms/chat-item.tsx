@@ -1,29 +1,22 @@
 import { CHAT_ROUTE, TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
+import { Chat } from '@entities/chat/types/chat'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { useRouteMatch } from 'react-router'
 import { SkeletonLoading } from '.'
 import ChatItemWrapper from './chat-item-wrapper'
 
-interface LastMessage {
-    message: string | null
-    sentTime: string | null
-}
-
-interface Props {
-    avatar?: string
-    name: string
-    lastMessage: LastMessage
-    chatId: string
-    amountOfUnreadMessages: number
+type Props = Chat & {
     loading: boolean
     isOpen: boolean
 }
 
-const ChatItem = ({ avatar, name, lastMessage, chatId, loading, amountOfUnreadMessages, isOpen }: Props) => {
-    const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { chatId: string | undefined }
+const ChatItem = ({ companion, lastMessage, loading, amountOfUnreadMessages, isOpen, id }: Props) => {
+    const params = useRouteMatch(TEMPLATE_CHAT_ROUTE)?.params as { id: string | undefined }
+
+    const { avatar, name } = companion
 
     return !loading ? (
-        <ChatItemWrapper to={CHAT_ROUTE + `/${chatId}`} isChosen={params?.chatId === chatId} isOpen={isOpen}>
+        <ChatItemWrapper to={CHAT_ROUTE + `/${id}`} isChosen={params?.id === id} isOpen={isOpen}>
             <div className="chat-item-content">
                 {isOpen ? (
                     <Avatar

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { appInit } from 'shared/effector/app-init'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'
 import SettingsProvider from '../shared/lib/contexts/settings-context'
@@ -12,6 +13,10 @@ const Background = styled.div`
 `
 
 const App = () => {
+    useEffect(() => {
+        appInit()
+    })
+
     return (
         <ModalProvider>
             <SettingsProvider>

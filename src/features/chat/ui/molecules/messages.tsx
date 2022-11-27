@@ -47,7 +47,7 @@ interface Props {
 }
 
 const Messages = ({ loading }: Props) => {
-    const messages = chatMessagesModel.selectors.useMessages()
+    const messages = chatMessagesModel.selectors.useChatMessages()
     const listRef = useRef<HTMLDivElement>(null)
 
     const [buttonVisible, setButtonVisible] = useState(false)
