@@ -59,7 +59,7 @@ const UserInfo = () => {
                 align="left"
                 width="100%"
                 maxWidth="100%"
-                sliderWidth={user.user_status === 'stud' ? '50%' : '80%'}
+                sliderWidth={user.user_status === 'stud' ? '100%' : '80%'}
                 pages={user.user_status === 'stud' ? studentPages : teacherPages}
             />
         </UserInfoWrapper>

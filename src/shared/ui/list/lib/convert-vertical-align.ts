@@ -6,6 +6,8 @@ const convertVerticalAlign = (align?: VerticalAlign) => {
             return 'center'
         case 'bottom':
             return 'flex-end'
+        case 'space-between':
+            return 'space-between'
     }
     return 'flex-start'
 }

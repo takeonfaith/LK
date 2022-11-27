@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
-export const LogoWrapper = styled.div`
-    width: 100%;
+export const LogoWrapper = styled.div<{ width?: string }>`
+    width: ${({ width }) => width ?? '100%'};
+    height: fit-content;
     display: flex;
     justify-content: center;
 

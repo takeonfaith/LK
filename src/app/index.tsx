@@ -1,3 +1,4 @@
+import useTheme from '@utils/hooks/use-theme'
 import { BrowserRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'
@@ -10,6 +11,8 @@ const Background = styled.div`
 `
 
 const App = () => {
+    useTheme()
+
     return (
         <ModalProvider>
             <BrowserRouter basename="/">

@@ -25,7 +25,7 @@ const DormitoryPayments = () => {
             {data.dormitory.map((dormitory, i) => {
                 return (
                     <React.Fragment key={dormitory.number}>
-                        <Message type="info" title="Информация" icon={<FiInfo />}>
+                        <Message maxWidth="1190px" type="info" title="Информация" icon={<FiInfo />}>
                             По возникновении технических проблем при подписании договоров и дополнительных соглашений в
                             Личном кабинете просим обращаться на почту{' '}
                             <a href="mailto:info@mospolytech.ru">info@mospolytech.ru</a>

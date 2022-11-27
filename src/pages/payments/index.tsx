@@ -30,6 +30,7 @@ const PaymentsPage = () => {
                         },
                     ]}
                     sliderWidth={'600px'}
+                    appearance={false}
                     currentPage={!!data?.dormitory.length ? 0 : !!data?.education.length ? 1 : 0}
                 />
             ) : (
