@@ -1,18 +1,16 @@
 import { APPLICATIONS_ROUTE } from '@app/routes/routes'
-import { superiorRoomModel } from '@entities/superior-room'
-import { userModel } from '@entities/user'
-import { Button, FormBlock, SubmitButton, Wrapper } from '@ui/atoms'
+import { applicationsModel } from '@entities/applications'
+import { globalAppSendForm } from '@pages/applications/lib'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
-import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
-import { ApplicationFormCodes } from '@utility-types/application-form-codes'
-import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 

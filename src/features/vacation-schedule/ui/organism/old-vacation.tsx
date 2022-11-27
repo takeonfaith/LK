@@ -1,10 +1,11 @@
+export {}
 // import { OldVacation as OldVacationType } from '@api/model/vacation-schedule'
-import Table from '@ui/table'
-import { ColumnProps } from '@ui/table/types'
-import { Title } from '@ui/title'
-import { IndexedProperties } from '@utility-types/indexed-properties'
-import getCorrectWordForm, { Rules } from '@utils/get-correct-word-form'
-import React from 'react'
+// import Table from '@ui/table'
+// import { ColumnProps } from '@ui/table/types'
+// import { Title } from '@ui/title'
+// import { IndexedProperties } from '@utility-types/indexed-properties'
+// import getCorrectWordForm, { Rules } from '@utils/get-correct-word-form'
+// import React from 'react'
 
 // interface Props {
 //     oldVacations: OldVacationType[]

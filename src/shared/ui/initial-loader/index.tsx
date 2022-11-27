@@ -1,12 +1,9 @@
-import { UserToken } from '@api/model'
+import React from 'react'
 import { Colors } from '@consts'
 import { userModel } from '@entities/user'
-import { Button } from '@ui/button'
 import { Error } from '@ui/error'
 import { Loading } from '@ui/loading'
 import { Logo } from '@ui/logo'
-import React from 'react'
-import { AiOutlineReload } from 'react-icons/ai'
 import styled from 'styled-components'
 
 const InitialLoaderWrapper = styled.div<{ loading: boolean }>`

@@ -128,7 +128,6 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
     const isVertical = orientation === 'vertical'
     const { settings } = settingsModel.selectors.useSettings()
     const isAdded = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
-    const linkWidth = 1
 
     const maxFirstWordLength = 12
 

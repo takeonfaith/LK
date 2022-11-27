@@ -1,5 +1,5 @@
 import { useStore } from 'effector-react/compat'
-import { createEvent, createStore } from 'effector/compat'
+import { createEvent, createStore } from 'effector'
 import { createEffect } from 'effector'
 import { ThemeType } from '@consts'
 import getDefaultSettings from '../lib/get-default-settings'

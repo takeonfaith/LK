@@ -35,9 +35,9 @@ interface Props {
     isTeachers: boolean
 }
 
-const TeachersApplicationsPage = ({ isTeachers }: Props) => {
+const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
     const {
-        data: { listApplication },
+        data: { listApplication, dataUserApplication },
         error,
     } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
@@ -63,7 +63,14 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
                     </Message>
                     <CustomList>
                         <Button
-                            onClick={() => open(<CreateApplicationList isTeachers={isTeachers} />)}
+                            onClick={() =>
+                                open(
+                                    <CreateApplicationList
+                                        isTeachers={isTeachers}
+                                        currentFormEducation={dataUserApplication?.educationForm}
+                                    />,
+                                )
+                            }
                             text="Подать заявку"
                             background="var(--reallyBlue)"
                             textColor="#fff"
@@ -92,4 +99,4 @@ const TeachersApplicationsPage = ({ isTeachers }: Props) => {
     )
 }
 
-export default TeachersApplicationsPage
+export default TeachersHrApplicationsPage

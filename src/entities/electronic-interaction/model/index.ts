@@ -1,7 +1,7 @@
 import { pepApi } from '@api'
 import { ElectronicInteraction } from '@api/model'
 import { useStore } from 'effector-react/compat'
-import { createEffect, createEvent, createStore } from 'effector/compat'
+import { createEffect, createEvent, createStore } from 'effector'
 
 interface ElectronicInteractionStore {
     electronicInteraction: ElectronicInteraction | null

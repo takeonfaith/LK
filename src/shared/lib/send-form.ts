@@ -10,12 +10,14 @@ const sendForm = async <T>(
     setCompleted: Event<{
         completed: boolean
     }>,
+    formId?: string,
 ) => {
     setLoading(true)
     const data = prepareFormData<T>(form)
 
     try {
-        await post(data)
+        await post({ ...data, formId: formId })
+        // await post(data)
         setLoading(false)
         setCompleted({ completed: true })
     } catch (error) {

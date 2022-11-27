@@ -68,7 +68,7 @@ const LinkButtonWrapper = styled.a<{
 interface Props {
     icon?: JSX.Element
     text?: React.ReactNode | string
-    onClick: (event: any) => void
+    onClick?: (event: any) => void
     isChosen?: boolean
     width?: string
     background?: string
@@ -99,7 +99,7 @@ const LinkButton = ({
     return (
         <LinkButtonWrapper
             text={!!text}
-            onClick={(e) => isActive && onClick(e)}
+            onClick={(e) => isActive && onClick && onClick(e)}
             isChosen={isChosen}
             width={width}
             background={background}

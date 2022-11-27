@@ -52,14 +52,6 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 items: TypesAttestationOptions,
             },
             {
-                title: 'Дата отчисления c:',
-                type: 'date',
-                fieldName: 'time-before',
-                value: '',
-                editable: true,
-                required: true,
-            },
-            {
                 title: 'Причина продления, в связи с',
                 type: 'textarea',
                 fieldName: 'reason',
@@ -68,7 +60,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Количество подтверждающих документов',
+                title: 'Количество листов подтверждающих документов',
                 type: 'text',
                 fieldName: 'num_sheets',
                 value: null,

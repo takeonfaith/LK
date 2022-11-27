@@ -81,7 +81,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 type: 'select',
                 width: '100%',
                 editable: true,
-                required: true,
+                required: false,
                 items: [
                     {
                         id: 0,
@@ -127,17 +127,11 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Комната',
+                placeholder: 'Укажите номер комнаты, в которую хотите переселиться',
                 fieldName: 'room',
                 value: '',
                 editable: true,
-                required: true,
-            },
-            {
-                title: 'Причина переселения',
-                value: '',
-                fieldName: 'reason_for_relocation',
-                editable: true,
-                required: true,
+                required: false,
             },
             {
                 title: 'Участие во внеучебной деятельности',
@@ -148,7 +142,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 width: '100%',
                 editable: true,
             },
+            {
+                title: 'Комментарий',
+                placeholder: 'Укажите необходимость переселения',
+                type: 'textarea',
+                fieldName: 'comment',
+                value: '',
+                editable: true,
+                required: true,
+            },
         ],
+        hint: 'Приложите грамоты, дипломы и другие документы, подтверждающие Вашу активную деятельность в университете.',
     }
 }
 

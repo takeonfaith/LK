@@ -52,7 +52,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
             topPadding={!!maxFiles}
         >
             <div className="info">
-                <span className="info-item">Макс. размер файла: 15 MB</span>
+                <span className="info-item">Макс. размер файла: 10 MB</span>
                 {maxFiles && <span className="info-item">Макс. файлов: {maxFiles}</span>}
                 <span className="info-item">Форматы: jpg, png, pdf</span>
             </div>

@@ -1,3 +1,4 @@
+import React from 'react'
 import ArbitrayRequestPage from '@pages/applications/pages/other/arbitrary-request'
 import ApplicationForCertificateOfAttendance from '@pages/applications/pages/multifunctional-center/certificate-of-attendance'
 import ApplicationPaperCall from '@pages/applications/pages/multifunctional-center/paper-call'
@@ -8,14 +9,7 @@ import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
 import { MdOutlineBedroomChild } from 'react-icons/md'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import AcadPerformance from '../../pages/acad-performance'
-import {
-    ALL_TEACHERS_ROUTE,
-    generalHiddenRoutes,
-    generalRoutes,
-    IRoutes,
-    PROJECT_ACTIVITIES_ROUTE,
-} from './general-routes'
-import React from 'react'
+import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
 import ApplicationsPage from '@pages/applications'
 import { FaRegLightbulb } from 'react-icons/fa'
 import RegularAccommodationPage from '@pages/applications/pages/campus-management/regular-accommodation'
@@ -44,12 +38,16 @@ import ApplicationProvisionAcademicLeave from '@pages/applications/pages/multifu
 import ApplicationIndependentlyDeduction from '@pages/applications/pages/multifunctional-center/independently-deducted'
 import ApplicationExtensionAttestation from '@pages/applications/pages/multifunctional-center/extension-attestation'
 import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
+import DormitoryPage from '@pages/dormitory'
+import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
+import useIsTestEnv from '@utils/hooks/use-is-test-env'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 export const ACAD_PERFORMANCE_ROUTE = '/acad-performance'
 export const HELPFUL_INFORMATION = '/helpful-information'
+export const DORMITORY = '/dormitory'
 
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
@@ -59,6 +57,7 @@ export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-a
 export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
 export const PAPER_CALL = APPLICATIONS_ROUTE + '/paper-call'
 export const REGULAR_ACCOMMODATION = APPLICATIONS_ROUTE + '/regular-accommodation'
+export const FULL_TIME_PART_TIME_FORM = APPLICATIONS_ROUTE + '/full-time-part-time-form'
 export const ACCOMMODATION_CORRESPONDENCE_FORM = APPLICATIONS_ROUTE + '/accommodation-correspondence-form'
 export const ACADEMIC_LEAVE_ACCOMMODATION = APPLICATIONS_ROUTE + '/academic-leave-accommodation'
 export const PREFERENTIAL_ACCOMMODATION = APPLICATIONS_ROUTE + '/preferential-accommodation'
@@ -81,6 +80,9 @@ export const HOLIDAYS_AFTER_TRAINING = APPLICATIONS_ROUTE + '/holidays-after-tra
 export const PROVISION_ACADEMIC_LEAVE = APPLICATIONS_ROUTE + '/provision-academic-leave'
 export const INDEPENDENTLY_DEDUCTED = APPLICATIONS_ROUTE + '/independently-deducted'
 export const EXTENSION_ATTESTATION = APPLICATIONS_ROUTE + '/extension-attestation'
+
+const isProdEnv = !useIsTestEnv()
+const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const privateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
@@ -143,6 +145,18 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
+        show: false,
+    },
+    dormitory: {
+        id: 'dormitory',
+        title: 'Общежитие',
+        icon: <MdOutlineBedroomChild />,
+        path: DORMITORY,
+        Component: DormitoryPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'GENERAL',
+        show: true,
     },
 })
 
@@ -153,7 +167,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Уточнение паспортных данных',
         icon: <FiBriefcase />,
         path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ClarificationOfPassportDataApplication,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -163,7 +177,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Произвольный запрос',
         icon: <FiBriefcase />,
         path: ARBITRARY_REQUEST_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ArbitrayRequestPage,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -174,7 +188,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Социальная стипендия',
         icon: <BiIdCard />,
         path: SOCIAL_SCOLLARSHIP,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ApplicationForSocialScrollarship,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -184,7 +198,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Сертификат об обучении',
         icon: <BiIdCard />,
         path: CERTIFICATE_OF_ATTENDANCE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ApplicationForCertificateOfAttendance,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -194,7 +208,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Справка в социальные учреждения',
         icon: <BiIdCard />,
         path: SOCIAL_AGENCIES,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ApplicationSocialAgencies,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -204,17 +218,26 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Справка-вызов',
         icon: <BiIdCard />,
         path: PAPER_CALL,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ApplicationPaperCall,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
     },
     'regular-accommodation': {
         id: 'regular-accommodation',
-        title: 'Предоставление права проживания (очная и очно-заочная форма)',
+        title: 'Предоставление права проживания (очная форма)',
         icon: BiIdCard,
         path: REGULAR_ACCOMMODATION,
         Component: RegularAccommodationPage,
+        color: 'blue',
+        isTemplate: false,
+    },
+    'full-time-part-time-form': {
+        id: 'full-time-part-time-form',
+        title: 'Предоставление права проживания (очно-заочная форма)',
+        icon: BiIdCard,
+        path: FULL_TIME_PART_TIME_FORM,
+        Component: FullTimePartTimeFormPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -232,16 +255,16 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания в период академического отпуска',
         icon: BiIdCard,
         path: ACADEMIC_LEAVE_ACCOMMODATION,
-        Component: AcademicLeaveAccommodationPage,
+        Component: isProdEnv ? ApplicationRedirect : AcademicLeaveAccommodationPage,
         color: 'blue',
         isTemplate: false,
     },
     'preferential-accommodation': {
         id: 'preferential-accommodation',
-        title: 'Предоставление права льготного проживания',
+        title: 'Предоставление права проживания льготной категории граждан',
         icon: BiIdCard,
         path: PREFERENTIAL_ACCOMMODATION,
-        Component: PreferentialAccommodationPage,
+        Component: isProdEnv ? ApplicationRedirect : PreferentialAccommodationPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -250,7 +273,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания в семейной комнате',
         icon: BiIdCard,
         path: FAMILY_ROOM,
-        Component: FamilyRoomPage,
+        Component: isProdEnv ? ApplicationRedirect : FamilyRoomPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -259,7 +282,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Расторжение договора найма',
         icon: BiIdCard,
         path: TERMINATION_OF_EMPLOYMENT_CONTRACT,
-        Component: TerminationOfEmploymentContractPage,
+        Component: isProdEnv ? ApplicationRedirect : TerminationOfEmploymentContractPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -268,7 +291,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение внутри общежития',
         icon: BiIdCard,
         path: RELOCATION_INSIDE_HOSTEL,
-        Component: RelocationInsideHostelPage,
+        Component: isProdEnv ? ApplicationRedirect : RelocationInsideHostelPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -277,7 +300,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение в другое общежитие',
         icon: BiIdCard,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
-        Component: RelocationToAnotherHostelPage,
+        Component: isProdEnv ? ApplicationRedirect : RelocationToAnotherHostelPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -286,7 +309,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Отправка квитанции об оплате',
         icon: BiIdCard,
         path: PAYMENT_RECIPIENT,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: PaymentRecipient,
         color: 'blue',
         isTemplate: false,
     },
@@ -295,7 +318,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Запрос на восстановление магнитного пропуска',
         icon: BiIdCard,
         path: RESTORING_THE_MAGNETIC_PASS,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : RestoringTheMagneticPass,
         color: 'blue',
         isTemplate: false,
     },
@@ -304,7 +327,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Отправить документы воинского учета',
         icon: BiIdCard,
         path: MILITARY_REGISTRATION_DOCUMENTS,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : MilitaryRegistrationDocuments,
         color: 'blue',
         isTemplate: false,
     },
@@ -313,7 +336,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Заявление на пересдачу для получения диплома с отличием',
         icon: BiIdCard,
         path: RETAKE_FOR_DIPLOMA,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : RetakeForDiploma,
         color: 'blue',
         isTemplate: false,
     },
@@ -322,7 +345,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Получение повышенной государственной академической стипендии',
         icon: BiIdCard,
         path: INCREASED_STATE_ACADEMIC_SCHOLARSHIP,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : IncreasedStateAcademicScholarship,
         color: 'blue',
         isTemplate: false,
     },
@@ -331,7 +354,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)',
         icon: BiIdCard,
         path: FINANCIAL_SUPPORT,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : FinancialSupport,
         color: 'blue',
         isTemplate: false,
     },
@@ -340,7 +363,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Финансовая поддержка',
         icon: BiIdCard,
         path: FINANCIAL_ASSISTANCE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : FinancialAssistance,
         color: 'blue',
         isTemplate: false,
     },
@@ -349,7 +372,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Запрос на изменение персональных данных',
         icon: BiIdCard,
         path: CHANGING_PERSONAL_DATA,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ChangingPersonalData,
         color: 'blue',
         isTemplate: false,
     },
@@ -358,7 +381,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Справка о прохождении обучения в университете (о статусе обучающегося) по месту требования',
         icon: BiIdCard,
         path: STUDENT_STATUS,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : StudentStatus,
         color: 'blue',
         isTemplate: false,
     },
@@ -367,7 +390,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Выдача лицензий и свидетельств о государственной аккредитации',
         icon: BiIdCard,
         path: STATE_ACCREDITATION,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : StateAccreditation,
         color: 'blue',
         isTemplate: false,
     },
@@ -376,7 +399,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление каникул',
         icon: <BiIdCard />,
         path: HOLIDAYS_AFTER_TRAINING,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ApplicationHolidaysAfterTraining,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -386,7 +409,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление академического отпуска',
         icon: <BiIdCard />,
         path: PROVISION_ACADEMIC_LEAVE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ApplicationProvisionAcademicLeave,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -396,7 +419,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Отчисление по инициативе обучающегося',
         icon: <BiIdCard />,
         path: INDEPENDENTLY_DEDUCTED,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ApplicationIndependentlyDeduction,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -406,7 +429,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Продление промежуточной аттестации ',
         icon: <BiIdCard />,
         path: EXTENSION_ATTESTATION,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : ApplicationExtensionAttestation,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -416,7 +439,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Заполнить личную карточку обучающегося по воинскому учету для получения отсрочки от призыва на военную службу',
         icon: BiIdCard,
         path: MILITARY_REGISTRATION_CARD,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/sprav' }),
+        Component: isProdEnv ? ApplicationRedirect : MilitaryRegistrationCard,
         color: 'blue',
         isTemplate: false,
     },

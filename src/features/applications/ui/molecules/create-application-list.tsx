@@ -7,7 +7,9 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import getTeachersSectionLinks from '@features/applications/lib/get-teachers-section-links'
+import { getTeachersSectionLinks } from '@features/applications/lib/get-teachers-section-links'
+import { User } from '@api/model'
+import isEnabledForEducationForm from '@features/applications/ui/lib/isEnabledForEducationForm'
 
 const CreateApplicationListWrapper = styled.div`
     @media (min-width: 1001px) {
@@ -51,6 +53,12 @@ const CreateApplicationListWrapper = styled.div`
                         text-decoration: none;
                         color: var(--blue);
                     }
+                    .disabled-link {
+                        cursor: not-allowed;
+                        opacity: 0.5;
+                        text-decoration: none;
+                        pointer-events: none;
+                    }
                 }
             }
         }
@@ -69,19 +77,29 @@ const CreateApplicationListWrapper = styled.div`
 
 export interface Section {
     title: string
-    links: { title: string; link: string; isExternalLink?: boolean; isOpenInNewWindow?: boolean }[]
+    disabled?: boolean
+    links: {
+        title: string
+        link: string
+        isExternalLink?: boolean
+        isOpenInNewWindow?: boolean
+        disabled?: boolean
+        exceptionalFormEducationList?: User['educationForm'][]
+    }[]
 }
 
 interface Props {
     isTeachers?: boolean
+    currentFormEducation?: User['educationForm']
 }
 
-const CreateApplicationList = ({ isTeachers = false }: Props) => {
+const CreateApplicationList = ({ isTeachers = false, currentFormEducation }: Props) => {
     const { close } = useModal()
     const sections: Section[] = isTeachers ? getTeachersSectionLinks() : getSectionLinks()
     const [search, setSearch] = useState<string>('')
 
     const [foundSections, setFoundSections] = useState<Section[] | null>(sections)
+
     return (
         <CreateApplicationListWrapper>
             <Title size={3} align="left" bottomGap>
@@ -102,23 +120,34 @@ const CreateApplicationList = ({ isTeachers = false }: Props) => {
                                 <Title size={4} align="left" bottomGap>
                                     {section.title}
                                 </Title>
-                                <div className="links">
-                                    {section.links.map((link) =>
-                                        link.isExternalLink ? (
-                                            <a
-                                                href={link.link}
-                                                target={link.isOpenInNewWindow ? '_blank' : '_self'}
-                                                rel="noreferrer"
-                                            >
-                                                {link.title}
-                                            </a>
-                                        ) : (
-                                            <Link to={link.link} key={link.link} onClick={close}>
-                                                {link.title}
-                                            </Link>
-                                        ),
-                                    )}
-                                </div>
+                                {!section.disabled && (
+                                    <div className="links">
+                                        {section.links.map((link) => {
+                                            if (
+                                                link.disabled ||
+                                                !isEnabledForEducationForm(
+                                                    currentFormEducation,
+                                                    link.exceptionalFormEducationList,
+                                                )
+                                            )
+                                                return
+
+                                            return link.isExternalLink ? (
+                                                <a
+                                                    href={link.link}
+                                                    target={link.isOpenInNewWindow ? '_blank' : '_self'}
+                                                    rel="noreferrer"
+                                                >
+                                                    {link.title}
+                                                </a>
+                                            ) : (
+                                                <Link to={link.link} key={link.link} onClick={close}>
+                                                    {link.title}
+                                                </Link>
+                                            )
+                                        })}
+                                    </div>
+                                )}
                             </div>
                         )
                     })}
