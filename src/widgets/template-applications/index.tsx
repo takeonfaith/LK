@@ -4,10 +4,9 @@ import getApplicationsColumns from '@features/applications/lib/get-applications-
 import search from '@features/applications/lib/search'
 import CreateApplicationList from '@features/applications/ui/molecules/create-application-list'
 import { Button, FormBlock, Message, Title, Wrapper } from '@ui/atoms'
-import List from '@ui/list'
 import { LocalSearch } from '@ui/molecules'
 import Table from '@ui/table'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FiInfo, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
@@ -23,6 +22,12 @@ const ApplicationPageWrapper = styled.div`
         overflow-y: auto;
         height: 100%;
     }
+`
+
+const CustomList = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
 `
 
 interface Props {
@@ -55,7 +60,7 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
                         колонке «Структурное подразделение, адрес» указывается название подразделения и адрес, куда
                         необходимо приехать за готовым документом.
                     </Message>
-                    <List direction="horizontal" gap={10} scroll={false}>
+                    <CustomList>
                         <Button
                             onClick={() =>
                                 open(
@@ -80,7 +85,7 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
                             setResult={setApplications}
                             placeholder={'Поиск заявлений'}
                         />
-                    </List>
+                    </CustomList>
                     <Table
                         loading={!listApplication}
                         columns={getApplicationsColumns()}

@@ -5,6 +5,9 @@ import { Error } from '@ui/error'
 import { Loading } from '@ui/loading'
 import { Logo } from '@ui/logo'
 import styled from 'styled-components'
+import { Button } from '@ui/button'
+import { AiOutlineReload } from 'react-icons/ai'
+import { UserToken } from '@api/model'
 
 const InitialLoaderWrapper = styled.div<{ loading: boolean }>`
     position: absolute;
@@ -100,13 +103,13 @@ const InitialLoader = ({ loading }: Props) => {
         return (
             <InitialLoaderWrapper loading={true}>
                 <Error text="Нет подключения к интернету">
-                    {/*<Button*/}
-                    {/*    onClick={() =>*/}
-                    {/*        userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)*/}
-                    {/*    }*/}
-                    {/*    text="Попробовать снова"*/}
-                    {/*    icon={<AiOutlineReload />}*/}
-                    {/*/>*/}
+                    <Button
+                        onClick={() =>
+                            userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)
+                        }
+                        text="Попробовать снова"
+                        icon={<AiOutlineReload />}
+                    />
                 </Error>
             </InitialLoaderWrapper>
         )

@@ -28,6 +28,8 @@ const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'ce
     return (
         <List horizontalAlign={align} visible={condition} direction={'horizontal'} width="100%" padding="10px">
             <Button
+                minWidth="42px"
+                height="42px"
                 background="var(--mild-theme)"
                 icon={<FiChevronLeft />}
                 onClick={() => setCurrentPageValue(limitNumber(currentPage - 1, pages).toString())}
@@ -47,6 +49,8 @@ const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'ce
                 / {pages + 1}
             </div>
             <Button
+                minWidth="42px"
+                height="42px"
                 background="var(--mild-theme)"
                 icon={<FiChevronRight />}
                 onClick={() => setCurrentPageValue(limitNumber(currentPage + 1, pages).toString())}

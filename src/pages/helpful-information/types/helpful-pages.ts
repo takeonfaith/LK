@@ -1,14 +1,18 @@
-export interface Link {
+type Visibility = 'all' | 'student' | 'staff'
+
+export type Link = {
     title: string
     href: string
-    visible: 'all' | 'student' | 'staff'
+    visible: Visibility
 }
 
-type HelpfulPages = Array<
-    {
-        title: string
-        links: Link[]
-    }[]
->
+export type HelpfulPage = {
+    title: string
+    links: Link[]
+}
 
-export default HelpfulPages
+export type HelpfulPages = {
+    title: string
+    visible: Visibility
+    content: HelpfulPage[]
+}[]

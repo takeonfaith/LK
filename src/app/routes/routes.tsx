@@ -360,7 +360,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     },
     'financial-assistance': {
         id: 'financial-assistance',
-        title: 'Заявка на материальную помощь',
+        title: 'Финансовая поддержка',
         icon: BiIdCard,
         path: FINANCIAL_ASSISTANCE,
         Component: isProdEnv ? ApplicationRedirect : FinancialAssistance,

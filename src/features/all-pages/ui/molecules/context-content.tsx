@@ -3,12 +3,17 @@ import { contextMenuModel } from '@entities/context-menu'
 import { settingsModel } from '@entities/settings'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
-import { FiMinusCircle, FiPlus } from 'react-icons/fi'
+import { FiMinus, FiMinusCircle, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
 import React from 'react'
 import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
 import addPageToHome from '@features/all-pages/lib/add-page-to-home'
+import addPageToSidebar from '@features/all-pages/lib/add-page-to-sidebar'
+import { menuModel } from '@entities/menu'
+import deletePageFromSidebar from '@features/all-pages/lib/delete-page-from-sidebar'
+import { REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { userModel } from '@entities/user'
 
 const ContextContentWrapper = styled.div`
     .top {
@@ -32,7 +37,12 @@ const ContextContentWrapper = styled.div`
 const ContextContent = (props: IRoute) => {
     const { id, icon, title, color } = props
     const { settings } = settingsModel.selectors.useSettings()
-    const isAdded = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
+    const { data } = userModel.selectors.useUser()
+    const menu = menuModel.selectors.useMenu()
+    const isAddedToHome = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
+    const isAddedToMenu = (settings['settings-customize-menu'].property.pages as string[]).find((el) => el === id)
+    const requiredLeftsideBarItems =
+        data.user?.user_status === 'staff' ? REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG : REQUIRED_LEFTSIDE_BAR_CONFIG
 
     return (
         <ContextContentWrapper>
@@ -43,7 +53,7 @@ const ContextContent = (props: IRoute) => {
                 <span>{title}</span>
             </div>
             <Divider />
-            {isAdded ? (
+            {isAddedToHome ? (
                 <Button
                     text="Убрать с главной"
                     icon={<FiMinusCircle />}
@@ -59,7 +69,6 @@ const ContextContent = (props: IRoute) => {
                 <Button
                     text="Добавить на главную"
                     icon={<FiPlus />}
-                    //  onClick={() => open(<WhatsNew />)}
                     width="100%"
                     align="left"
                     background="var(--schedule)"
@@ -67,6 +76,32 @@ const ContextContent = (props: IRoute) => {
                         addPageToHome(id, settings)
                         contextMenuModel.events.close()
                     }}
+                />
+            )}
+            {!isAddedToMenu ? (
+                <Button
+                    text="Добавить в меню"
+                    icon={<FiPlus />}
+                    width="100%"
+                    align="left"
+                    background="var(--schedule)"
+                    onClick={() =>
+                        addPageToSidebar(
+                            id,
+                            settings,
+                            Object.keys(menu.leftsideBarRoutes ?? {}).length ?? 0,
+                            requiredLeftsideBarItems,
+                        )
+                    }
+                />
+            ) : (
+                <Button
+                    text="Убрать из меню"
+                    icon={<FiMinus />}
+                    width="100%"
+                    align="left"
+                    background="var(--schedule)"
+                    onClick={() => deletePageFromSidebar(id, settings, requiredLeftsideBarItems)}
                 />
             )}
         </ContextContentWrapper>

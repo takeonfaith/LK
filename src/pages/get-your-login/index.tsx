@@ -1,11 +1,11 @@
-import { CenterPage, Input, Message, SubmitButton, Title } from '@ui/atoms'
-import BlockWrapper from '@ui/block/styles'
-import GoBackButton from '@ui/go-back-button'
-import React, { useState } from 'react'
-import useTheme from '@utils/hooks/use-theme'
 import { userModel } from '@entities/user'
-import styled from 'styled-components'
+import { CenterPage, Input, Message, SubmitButton, Title } from '@ui/atoms'
+import Block from '@ui/block'
+import GoBackButton from '@ui/go-back-button'
+import useTheme from '@utils/hooks/use-theme'
 import { useStore } from 'effector-react'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import { USER_NOT_FOUND } from './config/ad-result-status'
 
 const ADNameElement = styled.span`
@@ -51,8 +51,8 @@ const GetYourLoginPage = () => {
     }
 
     return (
-        <CenterPage>
-            <BlockWrapper
+        <CenterPage height="100%" alignItems="center">
+            <Block
                 height="fit-content"
                 maxWidth="500px"
                 orientation="vertical"
@@ -85,12 +85,13 @@ const GetYourLoginPage = () => {
                     completed={completed}
                     setCompleted={setCompleted}
                     isActive={!!fio.length && passportNumber.length === 4}
+                    width="100%"
                 />
                 {!!loginEuz && getADNameElements().map((el, i) => <React.Fragment key={i}>{el}</React.Fragment>)}
                 {!!loginEuz && loginEuz === USER_NOT_FOUND && (
                     <Message type="failure" title="Не удалось найти пользователя" />
                 )}
-            </BlockWrapper>
+            </Block>
         </CenterPage>
     )
 }
