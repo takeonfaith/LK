@@ -1,4 +1,3 @@
-import React from 'react'
 import { IRoute } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
@@ -8,7 +7,6 @@ import { CustomizeLeftsideBarItem } from '@pages/settings/pages/customize-menu/u
 import { Error } from '@ui/error'
 import { Title } from '@ui/title'
 import styled from 'styled-components'
-import { popUpMessageModel } from '@entities/pop-up-message'
 
 const AddPagesListWrapper = styled.div`
     display: flex;
