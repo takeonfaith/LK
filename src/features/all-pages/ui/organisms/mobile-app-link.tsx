@@ -1,14 +1,13 @@
 import Block from '@ui/block'
 import { Title } from '@ui/title'
 import styled from 'styled-components'
-import AppStoreIcon from '../../../../shared/images/app-store.svg'
-import GooglePlayIcon from '../../../../shared/images/google-play.svg'
+import AppStoreIcon from '@shared/images/app-store.svg'
+import GooglePlayIcon from '@shared/images/google-play.svg'
 
 const CustomLink = styled.a`
     display: block;
     font-size: 18px;
     line-height: 22px;
-    margin-top: 20px;
 `
 
 const WrapperAppLink = styled.div`

@@ -29,17 +29,15 @@ import {
     EXTENSION_ATTESTATION,
     FULL_TIME_PART_TIME_FORM,
 } from '@app/routes/routes'
-import { RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
-import useIsTestEnv from '@utils/hooks/use-is-test-env'
+import { isProduction, RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
 import { Section } from '@features/applications/ui/molecules/create-application-list'
 
 const getSectionLinks = (): Section[] => {
-    const isProdEnv = !useIsTestEnv()
-    const additionalHeaderClosedService = isProdEnv ? ' (Сервис временно недоступен)' : ''
+    const additionalHeaderClosedService = isProduction ? ' (Сервис временно недоступен)' : ''
     return [
         {
             title: 'Многофункциональный центр' + additionalHeaderClosedService,
-            disabled: isProdEnv,
+            disabled: isProduction,
             links: [
                 {
                     link: CERTIFICATE_OF_ATTENDANCE,
@@ -64,7 +62,7 @@ const getSectionLinks = (): Section[] => {
         },
         {
             title: 'Профсоюзная организация' + additionalHeaderClosedService,
-            disabled: isProdEnv,
+            disabled: isProduction,
             links: [
                 {
                     link: UNION_ORGANIZATION,
@@ -86,7 +84,7 @@ const getSectionLinks = (): Section[] => {
         },
         {
             title: 'Мобилизационный отдел' + additionalHeaderClosedService,
-            disabled: isProdEnv,
+            disabled: isProduction,
             links: [
                 { link: MILITARY_REGISTRATION_DOCUMENTS, title: 'Отправить документы воинского учета' },
                 {
@@ -97,7 +95,7 @@ const getSectionLinks = (): Section[] => {
         },
         {
             title: 'Отдел платных образовательных услуг' + additionalHeaderClosedService,
-            disabled: isProdEnv,
+            disabled: isProduction,
             links: [
                 { link: PAYMENT_RECIPIENT, title: 'Оформить дополнительное соглашение к договору об обучении' },
                 { link: PAYMENT_RECIPIENT, title: 'Отправить квитанцию об оплате обучения или пени' },
@@ -105,7 +103,7 @@ const getSectionLinks = (): Section[] => {
         },
         {
             title: 'Приемная комиссия' + additionalHeaderClosedService,
-            disabled: isProdEnv,
+            disabled: isProduction,
             links: [
                 {
                     link: RECEPTION_COMMISSION,
@@ -116,7 +114,7 @@ const getSectionLinks = (): Section[] => {
         },
         {
             title: 'Прочее' + additionalHeaderClosedService,
-            disabled: isProdEnv,
+            disabled: isProduction,
             links: [
                 {
                     link: ARBITRARY_REQUEST_ROUTE,
@@ -145,37 +143,37 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: PREFERENTIAL_ACCOMMODATION,
                     title: 'Предоставление права проживания льготной категории граждан',
-                    disabled: isProdEnv,
+                    disabled: isProduction,
                 },
                 {
                     link: ACADEMIC_LEAVE_ACCOMMODATION,
 
                     title: 'Предоставление права проживания в период академического отпуска',
-                    disabled: isProdEnv,
+                    disabled: isProduction,
                     exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
                 },
                 {
                     link: FAMILY_ROOM,
                     title: 'Предоставление права проживания в семейной комнате',
-                    disabled: isProdEnv,
+                    disabled: isProduction,
                     exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
                 },
                 {
                     link: RELOCATION_INSIDE_HOSTEL,
                     title: 'Переселение внутри общежития',
-                    disabled: isProdEnv,
+                    disabled: isProduction,
                     exceptionalFormEducationList: ['Заочная'],
                 },
                 {
                     link: RELOCATION_TO_ANOTHER_HOSTEL,
                     title: 'Переселение в другое общежитие',
-                    disabled: isProdEnv,
+                    disabled: isProduction,
                     exceptionalFormEducationList: ['Заочная'],
                 },
                 {
                     link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
                     title: 'Расторжение договора найма',
-                    disabled: isProdEnv,
+                    disabled: isProduction,
                 },
             ],
         },
