@@ -3,6 +3,7 @@
       "baseUrl": "/src",
       "paths": {
           "@features/*": ["features/*"],
+          "@shared/*": ["shared/*"],
           "@config/*": ["./shared/config/*"],
           "@utils/*": ["./shared/lib/*"],
           "@pages/*": ["./pages/*"],
