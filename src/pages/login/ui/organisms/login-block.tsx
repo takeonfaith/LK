@@ -24,6 +24,38 @@ const LoginBlockStyled = styled(BlockWrapper)`
         width: 320px;
         background: var(--theme-mild-xxl);
     }
+
+    .logo.second {
+        display: none;
+    }
+
+    @media (max-width: 675px) {
+        max-width: 400px;
+        max-height: 90%;
+        flex-direction: column-reverse;
+        overflow-y: auto;
+        justify-content: flex-start;
+
+        .logo.first {
+            display: none;
+        }
+
+        .logo.second {
+            display: block;
+        }
+
+        .left,
+        .right {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 400px) {
+        box-shadow: none;
+        border-radius: 0px;
+        height: 100%;
+        max-height: 100%;
+    }
 `
 
 const LoginBlock = () => {

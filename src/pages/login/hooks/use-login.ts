@@ -10,6 +10,7 @@ const useLogin = () => {
     const [login, setLogin] = useState(queryLogin ?? '')
     const [password, setPassword] = useState(queryPassword ?? '')
     const [capsLock, setCapsLock] = useState(false)
+    const isSubmitActive = !!password && !!login
     const loginFunc = userModel.events.login
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -31,6 +32,7 @@ const useLogin = () => {
     }, [queryLogin, queryPassword])
 
     return {
+        isSubmitActive,
         handleSavePassword,
         handleKeyPress,
         handleLogin,

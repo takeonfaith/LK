@@ -1,6 +1,6 @@
 import { userModel } from '@entities/user'
 import useLogin from '@pages/login/hooks/use-login'
-import { Input, SubmitButton } from '@ui/atoms'
+import { Input, Logo, SubmitButton } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import List from '@ui/list'
 import { Message } from '@ui/message'
@@ -10,11 +10,22 @@ import React from 'react'
 
 const Inputs = () => {
     const { loading, error, data } = userModel.selectors.useUser()
-    const { handleKeyPress, handleSavePassword, handleLogin, password, setPassword, capsLock, login, setLogin } =
-        useLogin()
+    const {
+        isSubmitActive,
+        handleKeyPress,
+        handleSavePassword,
+        handleLogin,
+        password,
+        setPassword,
+        capsLock,
+        login,
+        setLogin,
+    } = useLogin()
     return (
         <div className="right" onKeyDown={handleKeyPress}>
             <List gap={16} horizontalAlign="center" verticalAlign="space-between" height="100%" scroll={false}>
+                <Logo width="60px" short className="logo second" />
+
                 <Title size={3} align="left">
                     Личный кабинет
                 </Title>
@@ -46,7 +57,7 @@ const Inputs = () => {
                     isLoading={loading}
                     completed={false}
                     setCompleted={() => null}
-                    isActive={!!password && !!login}
+                    isActive={isSubmitActive}
                 />
             </List>
         </div>
