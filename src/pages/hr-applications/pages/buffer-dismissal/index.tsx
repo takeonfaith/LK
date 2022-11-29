@@ -104,6 +104,7 @@ const parseJobs = () => {
         const [opened, setOpened] = useState(Array(dataWorkerApplication.length).fill(false))
         const [openedHistory, setOpenedHistory] = useState(false)
         const [openedHisJob, setOpenedHisJob] = useState(Array(dataWorkerApplication.length).fill(false))
+        let openedButton: boolean
 
         return (
             <div className="jobBlocks">
@@ -114,6 +115,7 @@ const parseJobs = () => {
                             <div className="block">
                                 <div className="label">
                                     {object.jobTitle}
+
                                     <Button
                                         icon={opened[i] ? <HiChevronUp /> : <HiChevronDown />}
                                         onClick={() => {
@@ -133,24 +135,37 @@ const parseJobs = () => {
                                     Вид места работы: добавим
                                     <br />
                                 </div>
+                                {
+                                    (openedButton =
+                                        object?.dismissalApplications[object.dismissalApplications.length - 1]
+                                            ?.status == 'Не согласовано' ||
+                                        object?.dismissalApplications[object.dismissalApplications.length - 1]
+                                            ?.dismissalOrder?.orderStatus == 'Не согласован' ||
+                                        object?.dismissalApplications.length == 0
+                                            ? true
+                                            : false)
+                                }
 
                                 <Collapse isOpened={opened[i]} className="collapseс">
                                     <div className="collapsed">
                                         <div className="buttonBlock">
-                                            <a href="#/hr-applications/dismissal">
-                                                <Button
-                                                    text="Уволиться с этой должности"
-                                                    background="rgb(236,95,107)"
-                                                    textColor="#fff"
-                                                    onClick={() => {
-                                                        setCurrentIndex(i)
-                                                    }}
-                                                    width={'250px'}
-                                                    minWidth={'150px'}
-                                                    height="36px"
-                                                    fixedInMobile
-                                                />
-                                            </a>
+                                            {console.log(openedButton)}
+                                            <Collapse isOpened={openedButton}>
+                                                <a href="#/hr-applications/dismissal">
+                                                    <Button
+                                                        text="Уволиться с этой должности"
+                                                        background="rgb(236,95,107)"
+                                                        textColor="#fff"
+                                                        onClick={() => {
+                                                            setCurrentIndex(i)
+                                                        }}
+                                                        width={'250px'}
+                                                        minWidth={'150px'}
+                                                        height="36px"
+                                                        fixedInMobile
+                                                    />
+                                                </a>
+                                            </Collapse>
                                         </div>
                                         <Collapse isOpened={object.dismissalApplications.length == 0 ? false : true}>
                                             <div>
@@ -242,31 +257,33 @@ const parseJobs = () => {
                                                     Вид места работы: добавим
                                                     <br />
                                                 </div>
-                                                <Collapse isOpened={object.dismissalApplications.length == 0 ? false : true}>
-                                                <div className="text">
-                                                    <TableHr
-                                                        loading={!dataWorkerApplication}
-                                                        columns={getHrApplicationsColumns()}
-                                                        data={object.dismissalApplications.map(
-                                                            ({
-                                                                status,
-                                                                signDate,
-                                                                dismissalOrder: {
+                                                <Collapse
+                                                    isOpened={object.dismissalApplications.length == 0 ? false : true}
+                                                >
+                                                    <div className="text">
+                                                        <TableHr
+                                                            loading={!dataWorkerApplication}
+                                                            columns={getHrApplicationsColumns()}
+                                                            data={object.dismissalApplications.map(
+                                                                ({
+                                                                    status,
+                                                                    signDate,
+                                                                    dismissalOrder: {
+                                                                        orderNumber,
+                                                                        orderDate,
+                                                                        registrationStatus,
+                                                                    },
+                                                                }) => ({
+                                                                    status,
+                                                                    signDate,
                                                                     orderNumber,
                                                                     orderDate,
                                                                     registrationStatus,
-                                                                },
-                                                            }) => ({
-                                                                status,
-                                                                signDate,
-                                                                orderNumber,
-                                                                orderDate,
-                                                                registrationStatus,
-                                                            }),
-                                                        )}
-                                                        maxOnPage={10}
-                                                    />
-                                                </div>
+                                                                }),
+                                                            )}
+                                                            maxOnPage={10}
+                                                        />
+                                                    </div>
                                                 </Collapse>
                                             </div>
                                         </Collapse>

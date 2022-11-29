@@ -5,11 +5,17 @@ export const ApplicationsConstants = {
 }
 
 export const hrApplicationsConstants = {
-    ready: 'Готово',
-    pending: 'В работе',
-    registrating: 'На регистрации',
-    fixing: 'На доработку',
+    agreeding: 'На согласовании',
+    notAgreed: 'Не согласовано',
+    agreed: 'Согласовано',
+    empty: 'Не создано',
     rejected: 'Отклонено',
+}
+export const hrOrderConstants = {
+    signed: 'Подписан',
+    agreeding: 'На согласовании',
+    fixing: 'На доработке',
+    empty: 'Не создан',
 }
 
 export const NumberOfCopiesOptions = [

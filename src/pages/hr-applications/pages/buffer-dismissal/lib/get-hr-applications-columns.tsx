@@ -1,4 +1,4 @@
-import { ApplicationsConstants } from '@entities/applications/consts'
+import { ApplicationsConstants, hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
@@ -11,9 +11,9 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
             title: 'Статус заявления',
             field: 'status',
             priority: 'one',
-            width: '160px',
+            width: '200px',
             catalogs: [
-                ...(Object.values(ApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
+                ...(Object.values(hrApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
             ],
             render: (value) => (
                 <Message
@@ -60,9 +60,9 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
             title: 'Статус приказа',
             field: 'orderStatus',
             priority: 'one',
-            width: '160px',
+            width: '200px',
             catalogs: [
-                ...(Object.values(ApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
+                ...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
             ],
             render: (value) => (
                 <Message
