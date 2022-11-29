@@ -1,6 +1,7 @@
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { IInputArea } from '@ui/input-area/model'
 import { applicationsModel } from '@entities/hr-applications'
+import { getJwtToken, parseJwt } from '@entities/user/lib/jwt-token'
 
 const SendHrFormDismissal = async (
     employeeId: string,
@@ -56,10 +57,8 @@ const SendHrFormDismissal = async (
     const result = Object.assign({}, ...form)
     try {
         const aaa = {
-            guid:
-                result.post == 'Старший преподаватель/Кафедра "Инфокогнитивные технологии" (Основное место работы)'
-                    ? '7b741f98-cd43-11e8-9419-b4b52f5f5348'
-                    : 'ff5ee79e-0725-11ec-bba0-f3424449f339',
+            guid: parseJwt(JSON.parse(getJwtToken() || '{}'))['IndividualGuid'],
+            jobGuid: result.jobGuid,
             dateOfDismissal: result.last_day,
             isSendMail: result.get_tk == 'По почте',
             isRetirement: result.reason == 'Выходом на пенсию',

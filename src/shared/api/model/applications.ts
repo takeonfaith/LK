@@ -87,7 +87,7 @@ export interface dismissalOrder {
     isError: boolean
     error: string
     orderDate: string
-    status: string
+    orderStatus: string
     downloadable: boolean
     registrationStatus: string
     displayRegistration: boolean

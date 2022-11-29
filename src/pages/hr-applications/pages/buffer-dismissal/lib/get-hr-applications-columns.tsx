@@ -5,7 +5,7 @@ import React from 'react'
 
 const getHrApplicationsColumns = (): ColumnProps[] => {
     return [
-        { title: 'Название', field: 'title', priority: 'one', search: true },
+        //{ title: 'Название', field: 'title', priority: 'one', search: true, },
 
         {
             title: 'Статус заявления',
@@ -45,10 +45,20 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
             type: 'date',
             priority: 'one',
             align: 'center',
+            render: (value) => (
+                <Message
+                    type={value === 'Готово' ? 'success' : value === 'Отклонено' ? 'failure' : 'alert'}
+                    title={value}
+                    align="center"
+                    width="100%"
+                    icon={null}
+                    maxWidth="150px"
+                />
+            ),
         },
         {
             title: 'Статус приказа',
-            field: 'statusOrder',
+            field: 'orderStatus',
             priority: 'one',
             width: '160px',
             catalogs: [

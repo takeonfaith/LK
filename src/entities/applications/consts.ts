@@ -4,6 +4,14 @@ export const ApplicationsConstants = {
     rejected: 'Отклонено',
 }
 
+export const hrApplicationsConstants = {
+    ready: 'Готово',
+    pending: 'В работе',
+    registrating: 'На регистрации',
+    fixing: 'На доработку',
+    rejected: 'Отклонено',
+}
+
 export const NumberOfCopiesOptions = [
     { id: 1, title: '1' },
     { id: 2, title: '2' },

@@ -72,6 +72,13 @@ const getForm = (
                 visible: true,
             },
             {
+                title: '',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].jobGuid.toString(),
+                fieldName: 'jobGuid',
+                visible: false,
+            },
+            {
                 title: 'Ставка',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].rate.toString(),

@@ -31,6 +31,7 @@ const ApplicationPageWrapper = styled.div`
         margin-top: 0px;
         font-weight: normal;
         font-size: 0.9em;
+        margin-top: 15px;
     }
     .message {
         margin-bottom: -15px;
@@ -92,30 +93,6 @@ const ApplicationPageWrapper = styled.div`
         min-height: 30px;
     }
 `
-const dataForTable = [
-    {
-        title: '7d5eda96-6d83-11ed-90f8-d00d1e7ca9da',
-        status: 'На согласовании',
-        signDate: '0001-01-01T00:00:00',
-        employeeSigningStatus: '',
-        orderNumber: '1',
-        orderDate: '0001-01-01T00:00:00',
-        statusOrder: 'Согласовано',
-        file: '',
-        registrationStatus: 'На региcтрации',
-    },
-    {
-        title: '2',
-        status: 'На согласовании',
-        signDate: '0001-01-01T00:00:00',
-        employeeSigningStatus: '',
-        orderNumber: '2',
-        orderDate: '0001-01-01T00:00:00',
-        statusOrder: 'Согласовано',
-        file: '',
-        registrationStatus: 'На региcтрации',
-    },
-]
 interface Props {
     isTeachers: boolean
 }
@@ -123,7 +100,6 @@ const parseJobs = () => {
     const {
         data: { dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
-    console.log(dataWorkerApplication)
     if (!!dataWorkerApplication) {
         const [opened, setOpened] = useState(Array(dataWorkerApplication.length).fill(false))
         const [openedHistory, setOpenedHistory] = useState(false)
@@ -132,7 +108,7 @@ const parseJobs = () => {
         return (
             <div className="jobBlocks">
                 {dataWorkerApplication.map((object, i) => {
-                    if (!object.isDismissal) return null
+                    if (object.isDismissal) return null
                     else
                         return (
                             <div className="block">
@@ -176,71 +152,36 @@ const parseJobs = () => {
                                                 />
                                             </a>
                                         </div>
-
-                                        <div>
-                                            <div className="text">
-                                                <TableHr
-                                                    loading={!dataWorkerApplication}
-                                                    columns={getHrApplicationsColumns()}
-                                                    data={object.dismissalApplications}
-                                                    maxOnPage={10}
-                                                />
-                                                {console.log(object.dismissalApplications.flat())}
-                                                
-                                                {object.dismissalApplications.map((object2, i2) => {
-                                                    if (!object2.display) return null
-                                                    else
-                                                        return (
-                                                            <div>
-                                                                <div>Заявление на увольнение</div>
-                                                                {object2.displayDate ? (
-                                                                    <div>Дата заявления: {object2.displayDate}</div>
-                                                                ) : (
-                                                                    ''
-                                                                )}
-                                                                {object2.status ? (
-                                                                    <div>Статус: {object2.status}</div>
-                                                                ) : (
-                                                                    ''
-                                                                )}
-                                                                <div>Дата подписи: {object2.signDate}</div>
-
-                                                                <div className="order">
-                                                                    {object2.dismissalOrder.display ? (
-                                                                        <div>
-                                                                            <div>
-                                                                                Номер приказа:{' '}
-                                                                                {object2.dismissalOrder.orderNumber}
-                                                                            </div>
-                                                                            {object2.dismissalOrder.displayDate ? (
-                                                                                <div>
-                                                                                    Дата приказа:{' '}
-                                                                                    {object2.dismissalOrder.orderDate}
-                                                                                </div>
-                                                                            ) : (
-                                                                                ''
-                                                                            )}
-                                                                            {object2.dismissalOrder.status ? (
-                                                                                <div>
-                                                                                    Статус приказа:{' '}
-                                                                                    {object2.dismissalOrder.status}
-                                                                                </div>
-                                                                            ) : (
-                                                                                ''
-                                                                            )}
-                                                                        </div>
-                                                                    ) : (
-                                                                        <div>
-                                                                            Статус приказа:{' '}
-                                                                            {object2.dismissalOrder.registrationStatus}
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                        )
-                                                })}
+                                        <Collapse isOpened={object.dismissalApplications.length == 0 ? false : true}>
+                                            <div>
+                                                <div className="text">
+                                                    <TableHr
+                                                        loading={!object.dismissalApplications}
+                                                        columns={getHrApplicationsColumns()}
+                                                        data={object.dismissalApplications.map(
+                                                            ({
+                                                                status,
+                                                                signDate,
+                                                                dismissalOrder: {
+                                                                    orderNumber,
+                                                                    orderDate,
+                                                                    registrationStatus,
+                                                                    orderStatus,
+                                                                },
+                                                            }) => ({
+                                                                status,
+                                                                signDate,
+                                                                orderNumber,
+                                                                orderDate,
+                                                                orderStatus,
+                                                                registrationStatus,
+                                                            }),
+                                                        )}
+                                                        maxOnPage={10}
+                                                    />
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Collapse>
                                     </div>
                                 </Collapse>
                                 <div className="moreButton">
@@ -267,6 +208,7 @@ const parseJobs = () => {
                             background="transparent"
                         />
                     </div>
+
                     <Collapse isOpened={openedHistory} className="collapseс">
                         {dataWorkerApplication.map((object, i) => {
                             if (!object.isDismissal) return null
@@ -299,57 +241,33 @@ const parseJobs = () => {
                                                     <br />
                                                     Вид места работы: добавим
                                                     <br />
-                                                    <br />
-                                                    <table className="historyTable">
-                                                        <tr>
-                                                            <td>Название</td>
-                                                            <td>Статус заявления</td>
-                                                            <td>Дата подписи</td>
-                                                            <td>Номер приказа</td>
-                                                            <td>Дата приказа</td>
-                                                            <td>Статус приказа</td>
-                                                        </tr>
-                                                        {object.dismissalApplications.map((object2, i2) => {
-                                                            if (!object2.display) return null
-                                                            else
-                                                                return (
-                                                                    <tr>
-                                                                        <td>Заявление на увольнение</td>
-                                                                        <td>
-                                                                            {object2.displayDate ? (
-                                                                                <div>{object2.displayDate}</div>
-                                                                            ) : (
-                                                                                ''
-                                                                            )}
-                                                                        </td>
-                                                                        <td>
-                                                                            {object2.status ? (
-                                                                                <div>{object2.status}</div>
-                                                                            ) : (
-                                                                                ''
-                                                                            )}
-                                                                        </td>
-                                                                        <td>{object2.signDate}</td>
-                                                                        <td>
-                                                                            {object2.dismissalOrder.orderNumber
-                                                                                ? object2.dismissalOrder.orderNumber
-                                                                                : ''}
-                                                                        </td>
-                                                                        <td>
-                                                                            {object2.dismissalOrder.displayDate
-                                                                                ? object2.dismissalOrder.displayDate
-                                                                                : ''}
-                                                                        </td>
-                                                                        <td>
-                                                                            {object2.dismissalOrder.status
-                                                                                ? object2.dismissalOrder.status
-                                                                                : ''}
-                                                                        </td>
-                                                                    </tr>
-                                                                )
-                                                        })}
-                                                    </table>
                                                 </div>
+                                                <Collapse isOpened={object.dismissalApplications.length == 0 ? false : true}>
+                                                <div className="text">
+                                                    <TableHr
+                                                        loading={!dataWorkerApplication}
+                                                        columns={getHrApplicationsColumns()}
+                                                        data={object.dismissalApplications.map(
+                                                            ({
+                                                                status,
+                                                                signDate,
+                                                                dismissalOrder: {
+                                                                    orderNumber,
+                                                                    orderDate,
+                                                                    registrationStatus,
+                                                                },
+                                                            }) => ({
+                                                                status,
+                                                                signDate,
+                                                                orderNumber,
+                                                                orderDate,
+                                                                registrationStatus,
+                                                            }),
+                                                        )}
+                                                        maxOnPage={10}
+                                                    />
+                                                </div>
+                                                </Collapse>
                                             </div>
                                         </Collapse>
                                     </div>
