@@ -30,6 +30,7 @@ const SliderPageWrapper = styled.div<{ width?: string; align: Align; maxWidth?: 
         }
 
         .slider-page {
+            height: 100%;
             min-width: 100%;
             scroll-snap-align: center;
         }

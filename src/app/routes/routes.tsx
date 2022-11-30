@@ -1,46 +1,47 @@
 import React from 'react'
-import ArbitrayRequestPage from '@pages/applications/pages/other/arbitrary-request'
-import ApplicationForCertificateOfAttendance from '@pages/applications/pages/multifunctional-center/certificate-of-attendance'
-import ApplicationPaperCall from '@pages/applications/pages/multifunctional-center/paper-call'
-import ApplicationSocialAgencies from '@pages/applications/pages/multifunctional-center/social-agencies'
-import ApplicationForSocialScrollarship from '@pages/applications/pages/trade-union-organization/social-scollarship'
-import PageIsNotReady from '@pages/page-is-not-ready'
-import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
-import { MdOutlineBedroomChild } from 'react-icons/md'
-import { FiBriefcase, FiFileText } from 'react-icons/fi'
-import AcadPerformance from '../../pages/acad-performance'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
-import ApplicationsPage from '@pages/applications'
-import { FaRegLightbulb } from 'react-icons/fa'
-import RegularAccommodationPage from '@pages/applications/pages/campus-management/regular-accommodation'
-import AccommodationCorrespondenceFormPage from '@pages/applications/pages/campus-management/accommodation-correspondence-form'
-import AcademicLeaveAccommodationPage from '@pages/applications/pages/campus-management/academic-leave-accommodation'
-import PreferentialAccommodationPage from '@pages/applications/pages/campus-management/preferential-accommodation'
-import FamilyRoomPage from '@pages/applications/pages/campus-management/family-room'
-import TerminationOfEmploymentContractPage from '@pages/applications/pages/campus-management/termination-of-employment-contract'
-import RelocationInsideHostelPage from '@pages/applications/pages/campus-management/relocation-inside-hostel'
-import RelocationToAnotherHostelPage from '@pages/applications/pages/campus-management/relocation-to-another-hostel'
-import PaymentRecipient from '@pages/applications/pages/department-of-paid-services/paymnet-recipient'
-import RestoringTheMagneticPass from '@pages/applications/pages/multifunctional-center/restoring-the-magnetic-pass'
-import MilitaryRegistrationDocuments from '@pages/applications/pages/mobilization-department/military-registration-documents'
-import IncreasedStateAcademicScholarship from '@pages/applications/pages/trade-union-organization/increased-state-academic-scholarship'
-import RetakeForDiploma from '@pages/applications/pages/multifunctional-center/retake-for-diploma'
-import FinancialSupport from '@pages/applications/pages/trade-union-organization/financial-support'
-import FinancialAssistance from '@pages/applications/pages/trade-union-organization/financial-assistance'
-import MilitaryRegistrationCard from '@pages/applications/pages/mobilization-department/military-registration-card'
-import StateAccreditation from '@pages/applications/pages/multifunctional-center/state-accreditation'
-import StudentStatus from '@pages/applications/pages/multifunctional-center/student-status'
-import ChangingPersonalData from '@pages/applications/pages/multifunctional-center/changing-personal-data'
-import HelpfulInformation from '@pages/helpful-information'
-import ClarificationOfPassportDataApplication from '@pages/applications/pages/multifunctional-center/clarification-of-passport-data'
-import ApplicationHolidaysAfterTraining from '@pages/applications/pages/multifunctional-center/holidays-after-training'
-import ApplicationProvisionAcademicLeave from '@pages/applications/pages/multifunctional-center/provision-academic-leave'
-import ApplicationIndependentlyDeduction from '@pages/applications/pages/multifunctional-center/independently-deducted'
-import ApplicationExtensionAttestation from '@pages/applications/pages/multifunctional-center/extension-attestation'
-import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
-import DormitoryPage from '@pages/dormitory'
 import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
 import { isProduction } from '@consts'
+import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
+import PageIsNotReady from '@pages/page-is-not-ready'
+import { FiBriefcase, FiFileText } from 'react-icons/fi'
+import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
+import { MdOutlineBedroomChild } from 'react-icons/md'
+import { ArbitraryRequestPage, HelpfulInformation } from './teacher-routes/pages'
+import { FaRegLightbulb } from 'react-icons/fa'
+import {
+    AcademicLeaveAccommodationPage,
+    AcadPerformance,
+    ApplicationForCertificateOfAttendance,
+    ApplicationForSocialScrollarship,
+    ApplicationForSuperiorRoom,
+    ApplicationPaperCall,
+    ApplicationSocialAgencies,
+    ClarificationOfPassportDataApplication,
+    DormitoryPage,
+    RegularAccommodationPage,
+    PreferentialAccommodationPage,
+    FamilyRoomPage,
+    TerminationOfEmploymentContractPage,
+    RelocationInsideHostelPage,
+    RelocationToAnotherHostelPage,
+    PaymentRecipient,
+    RestoringTheMagneticPass,
+    MilitaryRegistrationDocuments,
+    RetakeForDiploma,
+    IncreasedStateAcademicScholarship,
+    FinancialSupport,
+    ApplicationForFinancialAssistance,
+    ChangingPersonalData,
+    StudentStatus,
+    StateAccreditation,
+    ApplicationHolidaysAfterTraining,
+    ApplicationProvisionAcademicLeave,
+    ApplicationIndependentlyDeduction,
+    ApplicationExtensionAttestation,
+    MilitaryRegistrationCard,
+    AccommodationCorrespondenceFormPage,
+    ApplicationsPage,
+} from './other-routes/pages'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -176,7 +177,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Произвольный запрос',
         icon: <FiBriefcase />,
         path: ARBITRARY_REQUEST_ROUTE,
-        Component: isProduction ? ApplicationRedirect : ArbitrayRequestPage,
+        Component: isProduction ? ApplicationRedirect : ArbitraryRequestPage,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -362,7 +363,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Финансовая поддержка',
         icon: BiIdCard,
         path: FINANCIAL_ASSISTANCE,
-        Component: isProduction ? ApplicationRedirect : FinancialAssistance,
+        Component: isProduction ? ApplicationRedirect : ApplicationForFinancialAssistance,
         color: 'blue',
         isTemplate: false,
     },
