@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react'
-import InputArea from '@ui/input-area'
-import { Button, FormBlock, SubmitButton } from '@ui/atoms'
-import { IInputArea } from '@ui/input-area/model'
-import { useHistory } from 'react-router'
-import TemplateFormPage from 'widgets/template-form-page'
-import getForm from './lib/get-form'
-import { teacherStatementModel } from '@entities/teachers-statement'
-import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import { FiChevronLeft } from 'react-icons/fi'
-import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import checkFormFields from '@utils/check-form-fields'
-import { HR_APPLICATIONS_ROUTE } from '@app/routes/teachers-routes'
-import getEmployment from './lib/get-employment'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import { Button, FormBlock, SubmitButton } from '@ui/atoms'
+import InputArea from '@ui/input-area'
+import { IInputArea } from '@ui/input-area/model'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import checkFormFields from '@utils/check-form-fields'
+import React, { useEffect, useState } from 'react'
+import { FiChevronLeft } from 'react-icons/fi'
+import { useHistory } from 'react-router'
+import getEmployment from './lib/get-employment'
+import getForm from './lib/get-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -50,7 +48,7 @@ const PartTimeEmployment = () => {
                     {employment && (
                         <InputArea {...employment} collapsed={isDone} setData={setEmployment as LoadedState} />
                     )}
-                    
+
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>
@@ -74,12 +72,10 @@ const PartTimeEmployment = () => {
                 </FormBlock>
             )}
         </BaseApplicationWrapper>
-    
     )
 }
 
 export default PartTimeEmployment
-
 
 /*<TemplateFormPage model={teacherStatementModel} 
             getForm={getForm(dataUserApplication)} 

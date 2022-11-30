@@ -70,7 +70,6 @@ export interface UserApplication extends User {
     specialty_code: string
     specialty_name: string
     specialization: string
-    educationForm: string
     finance: string
     degreeLevel: string
     enterYear: string

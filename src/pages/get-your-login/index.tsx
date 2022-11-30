@@ -1,5 +1,5 @@
 import { CenterPage, Input, Message, SubmitButton, Title } from '@ui/atoms'
-import Block from '@ui/block'
+import BlockWrapper from '@ui/block/styles'
 import GoBackButton from '@ui/go-back-button'
 import React, { useState } from 'react'
 import useTheme from '@utils/hooks/use-theme'
@@ -28,15 +28,37 @@ const GetYourLoginPage = () => {
         userModel.effects.getLoginEuzFx({ fio: fio, pn: passportNumber }).then(() => setLoading(false))
     }
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.key === 'Enter') {
+            getADName()
+        }
+    }
+
+    const getADNameElements = () => {
+        const euzLogins = loginEuz!.split('Логин ').slice(1)
+        const loginElements = []
+
+        for (const login of euzLogins) {
+            loginElements.push(
+                <ADNameElement>
+                    Логин {login.split(':')[0]} <strong>{login.split(':')[1]}</strong>
+                </ADNameElement>,
+            )
+        }
+
+        return loginElements
+    }
+
     return (
         <CenterPage>
-            <Block
+            <BlockWrapper
                 height="fit-content"
                 maxWidth="500px"
                 orientation="vertical"
                 alignItems="flex-start"
                 justifyContent="flex-start"
                 gap="15px"
+                onKeyDown={handleKeyPress}
             >
                 <GoBackButton />
                 <Title size={4} align="left">
@@ -61,14 +83,9 @@ const GetYourLoginPage = () => {
                     completed={completed}
                     setCompleted={setCompleted}
                     isActive={!!fio.length && passportNumber.length === 4}
-                    width={'150px'}
                 />
-                {!!loginEuz && (
-                    <ADNameElement>
-                        {loginEuz.split(':')[0]} <strong>{loginEuz.split(':')[1]}</strong>
-                    </ADNameElement>
-                )}
-            </Block>
+                {!!loginEuz && getADNameElements().map((el, i) => <React.Fragment key={i}>{el}</React.Fragment>)}
+            </BlockWrapper>
         </CenterPage>
     )
 }

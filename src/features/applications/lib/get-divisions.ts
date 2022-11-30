@@ -4,17 +4,8 @@ export type divisionT = {
     contact: string
 }
 
-export const getDivisionsCrs = (divisionsCrs: divisionT[]) => {
-    return divisionsCrs.map((division) => {
-        return {
-            id: +division.id,
-            title: division.name + ' ' + division.contact,
-        }
-    })
-}
-
-export const getDivisionsAll = (divisionsAll: divisionT[]) => {
-    return divisionsAll.map((division) => {
+export const getFormattedDivisions = (divisions: divisionT[]) => {
+    return divisions.map((division) => {
         return {
             id: +division.id,
             title: division.name + ' ' + division.contact,

@@ -54,17 +54,6 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                     },
                 ],
             },
-
-            //            {
-            //                 title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
-            //                 type: 'radio',
-            //                 fieldName: 'structural-subdivision',
-            //                 value: null,
-            //                 editable: true,
-            //                 items: getDivisionsCrs(dataUserApplication.divisions_crs),
-            //                 isSpecificRadio: true,
-            //                 specialType: 'personalMethod',
-            //             },
             {
                 title: 'Период академического отпуска - с:',
                 type: 'date',
@@ -87,8 +76,11 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 fieldName: 'comment',
                 value: '',
                 editable: true,
+                placeholder: 'Разъясните необходимость проживания в общежитии в период академического отпуска',
+                required: true,
             },
         ],
+        hint: 'В случае предоставления академического отпуска по медицинским показаниям необходимо загрузить подтверждающие медицинские документы.',
         optionalCheckbox: {
             fieldName: 'is_not_document',
             value: false,

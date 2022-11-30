@@ -38,7 +38,7 @@ const UniversalInput = (props: Props) => {
         specialType,
         specialFieldsName,
         minValueInput,
-        maxValueInput
+        maxValueInput,
     } = props
 
     const isActive = editable ?? (changeInputArea && !documents)
@@ -142,8 +142,8 @@ const UniversalInput = (props: Props) => {
             <Input
                 value={value as string}
                 title={title}
-                minValue = {minValueInput}
-                maxValue = {maxValueInput}
+                minValue={minValueInput}
+                maxValue={maxValueInput}
                 setValue={(value) => handleChangeValue(value, indexI, indexJ)}
                 type={type}
                 isActive={isActive}

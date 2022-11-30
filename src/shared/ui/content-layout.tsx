@@ -6,7 +6,7 @@ import { userModel } from '@entities/user'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 import styled from 'styled-components'
 import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
@@ -48,7 +48,7 @@ const ContentLayout = () => {
     } = userModel.selectors.useUser()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
-    const { seen, setSeen } = useShowTutorial()
+    const { seen } = useShowTutorial()
 
     useEffect(() => {
         if (user) settingsModel.effects.getLocalSettingsFx(user.id)
@@ -91,7 +91,9 @@ const ContentLayout = () => {
             <ContentWrapper>
                 {/* <Header /> */}
                 <div className="page-content">
-                    <PrivateRouter />
+                    <Suspense fallback={null}>
+                        <PrivateRouter />
+                    </Suspense>
                 </div>
                 <MobileBottomMenu />
             </ContentWrapper>

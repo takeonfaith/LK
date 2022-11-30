@@ -7,12 +7,12 @@ import {
     SOCIAL_AGENCIES,
     REGULAR_ACCOMMODATION,
     ACCOMMODATION_CORRESPONDENCE_FORM,
-    ACADEMIC_LEAVE_ACCOMMODATION,
-    PREFERENTIAL_ACCOMMODATION,
-    FAMILY_ROOM,
-    TERMINATION_OF_EMPLOYMENT_CONTRACT,
-    RELOCATION_TO_ANOTHER_HOSTEL,
-    RELOCATION_INSIDE_HOSTEL,
+    // ACADEMIC_LEAVE_ACCOMMODATION,
+    // PREFERENTIAL_ACCOMMODATION,
+    // FAMILY_ROOM,
+    // TERMINATION_OF_EMPLOYMENT_CONTRACT,
+    // RELOCATION_TO_ANOTHER_HOSTEL,
+    // RELOCATION_INSIDE_HOSTEL,
     PAYMENT_RECIPIENT,
     MILITARY_REGISTRATION_DOCUMENTS,
     RETAKE_FOR_DIPLOMA,
@@ -139,30 +139,30 @@ const getSectionLinks = () => {
                     link: ACCOMMODATION_CORRESPONDENCE_FORM,
                     title: 'Предоставление права проживания (заочная форма)',
                 },
-                {
-                    link: ACADEMIC_LEAVE_ACCOMMODATION,
-                    title: 'Предоставление права проживания в период академического отпуска',
-                },
-                {
-                    link: PREFERENTIAL_ACCOMMODATION,
-                    title: 'Предоставление права льготного проживания',
-                },
-                {
-                    link: FAMILY_ROOM,
-                    title: 'Предоставление права проживания в семейной комнате',
-                },
-                {
-                    link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
-                    title: 'Расторжение договора найма',
-                },
-                {
-                    link: RELOCATION_INSIDE_HOSTEL,
-                    title: 'Переселение внутри общежития',
-                },
-                {
-                    link: RELOCATION_TO_ANOTHER_HOSTEL,
-                    title: 'Переселение в другое общежитие',
-                },
+                // {
+                //     link: ACADEMIC_LEAVE_ACCOMMODATION,
+                //     title: 'Предоставление права проживания в период академического отпуска',
+                // },
+                // {
+                //     link: PREFERENTIAL_ACCOMMODATION,
+                //     title: 'Предоставление права проживания льготной категории граждан',
+                // },
+                // {
+                //     link: FAMILY_ROOM,
+                //     title: 'Предоставление права проживания в семейной комнате',
+                // },
+                // {
+                //     link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
+                //     title: 'Расторжение договора найма',
+                // },
+                // {
+                //     link: RELOCATION_INSIDE_HOSTEL,
+                //     title: 'Переселение внутри общежития',
+                // },
+                // {
+                //     link: RELOCATION_TO_ANOTHER_HOSTEL,
+                //     title: 'Переселение в другое общежитие',
+                // },
             ],
         },
     ]

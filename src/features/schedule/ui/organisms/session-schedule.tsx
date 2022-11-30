@@ -1,6 +1,5 @@
 import { ISessionSchedule } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
-import getSessionStats from '@features/schedule/lib/get-session-stats'
 import useResize from '@utils/hooks/use-resize'
 import localizeDate from '@utils/localize-date'
 import React, { memo, useEffect } from 'react'

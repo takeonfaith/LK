@@ -11,7 +11,16 @@ const pages: HelpfulPages = [
                     visible: 'student',
                     href: 'https://e.mospolytech.ru/old/storage/files/Vremennoe_polozhenie_o_provedenii_tekuschego_kontrolya_uspevaemosti_i_promezhutochnoj_attestatsii_obuchajuschihsya_v_usloviyah_obespecheniya_rezhima_izolyatsii_v_tselyah_predotvrascheniya_rasprostraneniya_koronavirusnoj_infektsii.pdf',
                 },
-                { title: 'Оплата обучения', visible: 'student', href: 'https://mospolytech.ru/?id=2042' },
+                {
+                    title: 'Информация об оплате обучения',
+                    visible: 'all',
+                    href: 'https://mospolytech.ru/obuchauschimsya/oplata-obucheniya/',
+                },
+                {
+                    title: 'Банковские реквизиты',
+                    visible: 'student',
+                    href: 'https://mospolytech.ru/ob-universitete/adresa-i-kontakty/uchetnaya-kartochka-i-bankovskie-rekvizity/',
+                },
                 { title: 'Международные программы', visible: 'student', href: 'https://mospolytech.ru/?id=8' },
                 { title: 'Дополнительное образование', visible: 'student', href: 'https://mospolytech.ru/?id=92' },
 
@@ -198,6 +207,33 @@ const pages: HelpfulPages = [
                     title: 'Современного курсостроения',
                     visible: 'student',
                     href: 'https://project.lektorium.tv/howtomooc',
+                },
+            ],
+        },
+    ],
+    [
+        {
+            title: 'Бланки документов',
+            links: [
+                {
+                    title: 'Бланк квитанции оплаты за обучение',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_edu2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты неустойки за обучение',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_edu_penny2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты за общежитие',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_hostel2021.doc?1',
+                },
+                {
+                    title: 'Бланк квитанции оплаты неустойки за общежитие',
+                    visible: 'student',
+                    href: 'https://e.mospolytech.ru/old/files/site/bill_hostel_penny2021.doc?1',
                 },
             ],
         },

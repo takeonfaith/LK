@@ -11,6 +11,7 @@ import { useHistory } from 'react-router'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
+import getDisability from './lib/get-disability'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -21,12 +22,14 @@ const PreferentialAccommodationPage = () => {
         data: { dataUserApplication },
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
+    const [disability, setDisability] = useState<IInputArea | null>(null)
     const [loading, setLoading] = useState(false)
     const isDone = completed ?? false
 
     useEffect(() => {
         if (!!dataUserApplication) {
             setForm(getForm(dataUserApplication))
+            setDisability(getDisability())
         }
     }, [dataUserApplication])
 
@@ -42,6 +45,9 @@ const PreferentialAccommodationPage = () => {
                         textColor="var(--blue)"
                     />
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
+                    {disability && (
+                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
+                    )}
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>

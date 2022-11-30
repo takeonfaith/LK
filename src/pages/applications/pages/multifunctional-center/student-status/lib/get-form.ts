@@ -2,7 +2,7 @@ import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
 import { MethodObtainingOptions } from '@entities/applications/consts'
 import getAddressFields from '@features/applications/lib/get-address-fields'
-import { getDivisionsCrs } from '@features/applications/lib/get-divisions'
+import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
 
 const PlaceOfReferenceOptions = [
     { id: 0, title: 'по месту требования' },
@@ -61,7 +61,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 fieldName: 'structural-subdivision',
                 value: null,
                 editable: true,
-                items: getDivisionsCrs(dataUserApplication.divisions_crs),
+                items: getFormattedDivisions(dataUserApplication.divisions_crs),
                 isSpecificRadio: true,
                 specialType: 'personalMethod',
             },

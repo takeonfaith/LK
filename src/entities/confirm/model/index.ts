@@ -1,4 +1,4 @@
-import { createEvent, createStore } from 'effector/compat'
+import { createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react/compat'
 
 export interface Confirm {

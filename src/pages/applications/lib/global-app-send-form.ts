@@ -1,9 +1,10 @@
 import { popUpMessageModel } from '@entities/pop-up-message'
-import { IInputArea } from '@ui/input-area/model'
+import { IComplexInputAreaData, IInputArea, IInputAreaData } from '@ui/input-area/model'
 import prepareFormData from '@utils/prepare-form-data'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import { applicationsModel } from '@entities/applications'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import { SelectPage } from '@features/select'
 
 const globalAppSendForm = async (
     formId: ApplicationFormCodes,
@@ -14,44 +15,28 @@ const globalAppSendForm = async (
 ) => {
     setLoading(true)
 
-    const form = inputAreas
-        .map((itemForm) => {
-            if (isAttachedFiles) return prepareFormData<IndexedProperties>(itemForm)
-            if (!Array.isArray(itemForm.data[0])) {
-                return itemForm.data.map((l) => {
-                    const obj = {}
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignore
-                    if (!!l?.fieldName) obj[l?.fieldName ?? ''] = typeof l.value !== 'object' ? l?.value : l.value.title
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignore
-                    if (l.type === 'multiselect') {
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-ignore
-                        obj[l?.fieldName ?? ''] = JSON.stringify(l?.value.map((itemSelect) => itemSelect.title))
-                    }
+    const inputs = inputAreas
+        .map((listElementForm) => {
+            if (isAttachedFiles) return prepareFormData<IndexedProperties>(listElementForm)
 
-                    return obj
+            if (!Array.isArray(listElementForm.data[0])) {
+                return (listElementForm.data as IInputAreaData[]).map((elementForm) => {
+                    return createResultElementForm(elementForm)
                 })
             } else {
-                const r = itemForm.data.map((c) => {
-                    return Object.assign(
-                        {},
-                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                        // @ts-ignore
-                        ...c?.map((r) => {
-                            const obj = {}
-                            if (!!r?.fieldName)
-                                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                                // @ts-ignore
-                                obj[r?.fieldName] = !!r?.value?.title ? r?.value?.title : r?.value
-                            return obj
-                        }),
-                    )
-                })
-                const obj = {} as any
+                const resultNestedElementForm = (listElementForm.data as IComplexInputAreaData).map(
+                    (nestedListElementForm) => {
+                        return Object.assign(
+                            {},
+                            ...nestedListElementForm?.map((elementForm) => {
+                                return createResultElementForm(elementForm)
+                            }),
+                        )
+                    },
+                )
+                const obj = {} as IndexedProperties
 
-                obj[formId] = JSON.stringify(r)
+                obj[formId] = JSON.stringify(resultNestedElementForm)
 
                 return obj
             }
@@ -59,11 +44,9 @@ const globalAppSendForm = async (
         .flat()
 
     const files = inputAreas.map((area) => {
-        const obj = {}
+        const obj: IndexedProperties = {}
         if (area.documents?.fieldName) {
             for (let fileIndex = 0; fileIndex < area.documents.files.length; fileIndex++) {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
                 obj[area.documents?.fieldName + `[${fileIndex}]`] = area.documents.files[fileIndex]
             }
         }
@@ -72,17 +55,16 @@ const globalAppSendForm = async (
     })
 
     const checkboxes = inputAreas.map((area) => {
-        const obj = {}
+        const obj: IndexedProperties = {}
         if (area.optionalCheckbox?.fieldName) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
             obj[area.optionalCheckbox?.fieldName] = area.optionalCheckbox.value
         }
 
         return obj
     })
 
-    const result = Object.assign({}, ...form, ...files, ...checkboxes)
+    const result = Object.assign({}, ...inputs, ...files, ...checkboxes)
+
     try {
         await applicationsModel.effects.postApplicationFx({ formId: formId, args: result })
         setLoading(false)
@@ -90,11 +72,29 @@ const globalAppSendForm = async (
     } catch (error) {
         setLoading(false)
         popUpMessageModel.events.evokePopUpMessage({
-            message: `Не удалось отправить форму. Ошибка2: ${error as string}`,
+            message: `Не удалось отправить форму. Ошибка: ${error as string}`,
             type: 'failure',
             time: 30000,
         })
     }
+}
+
+const createResultElementForm = (elementForm: IInputAreaData) => {
+    const obj: IndexedProperties = {}
+
+    obj[elementForm?.fieldName ?? ''] = getValueElementForm(elementForm)
+
+    if (elementForm.type === 'multiselect') {
+        obj[elementForm?.fieldName ?? ''] = JSON.stringify(
+            (elementForm?.value as SelectPage[]).map((itemSelect) => itemSelect.title),
+        )
+    }
+
+    return obj
+}
+
+const getValueElementForm = (elementForm: IInputAreaData) => {
+    return typeof elementForm.value !== 'object' ? elementForm?.value : (elementForm.value as SelectPage).title
 }
 
 export default globalAppSendForm
