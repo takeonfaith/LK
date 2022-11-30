@@ -4,6 +4,7 @@ import checker from 'vite-plugin-checker'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'
 import legacy from '@vitejs/plugin-legacy'
+import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
     server: {
@@ -22,9 +23,11 @@ export default defineConfig({
             targets: ['IE >= 11'],
         }),
         splitVendorChunkPlugin(),
+        VitePWA({ registerType: 'autoUpdate' })
     ],
     build: {
         outDir: 'build',
+        manifest: true,
     },
     // esbuild: {
     //     jsxInject: `import React from 'react'`,
