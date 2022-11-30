@@ -52,7 +52,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Причина',
-                value: null,
+                value: 'Служебная необходимость',
                 fieldName: 'reason',
                 editable: true,
                 mask: true,

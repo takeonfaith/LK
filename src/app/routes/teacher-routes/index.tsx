@@ -54,6 +54,7 @@ import {
 } from '../general-routes'
 import AllStudentsPage from '@pages/all-students'
 import { isProduction } from '@consts'
+import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
@@ -110,6 +111,13 @@ export const WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/work-transfer'
 export const EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/extra-holiday-coll'
 export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning'
 export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work'
+export const BUFFER_DISMISSAL = HR_APPLICATIONS_ROUTE + '/buffer-dismissal'
+export const BUFFER_WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/buffer-work-transfer'
+export const BUFFER_EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/buffer-extra-holiday-coll'
+export const BUFFER_HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/buffer-holiday-planning'
+export const BUFFER_HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/buffer-holiday-work'
+export const BUFFER_PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/buffer-part-time-deployment'
+export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday-postponed'
 
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
@@ -364,7 +372,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
     'part-time-deployment': {
         id: 'part-time-deployment',
         title: 'Заявление на трудоустройство по совместительству',
-        path: PARTTIME_EMPLOYMENT,
+        path: BUFFER_PARTTIME_EMPLOYMENT,
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : PartTimeEmployment,
@@ -374,7 +382,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
     'holiday-postponed': {
         id: 'holiday-postponed',
         title: 'Заявление на перенос отпуска',
-        path: HOLIDAY_POSTPONED,
+        path: BUFFER_HOLIDAY_POSTPONED,
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : HolidayPostponed,
@@ -382,19 +390,19 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         group: 'OTHER',
     },
     dismissal: {
-        id: 'dismissal',
+        id: 'dismissal2',
         title: 'Заявление на увольнение',
-        path: DISMISSAL,
+        path: BUFFER_DISMISSAL,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProduction ? ApplicationRedirect : Dismissal,
+        Component: isProduction ? ApplicationRedirect : DismissalBufferPage,
         isTemplate: false,
         group: 'OTHER',
     },
     'holiday-work': {
         id: 'part-time-deployment',
         title: 'Заявление о привлечении к работе в выходной день',
-        path: HOLIDAY_WORK,
+        path: BUFFER_HOLIDAY_WORK,
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : HolidayWork,
@@ -404,7 +412,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
     'holiday-planning': {
         id: 'holiday-postponed',
         title: 'Заявление о предоставлении отпуска',
-        path: HOLIDAY_PLANNING,
+        path: BUFFER_HOLIDAY_PLANNING,
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : HolidayPlanning,
@@ -414,7 +422,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
     'extra-holiday-coll': {
         id: 'dismissal',
         title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
-        path: EXTRA_HOLIDAY_COLL,
+        path: BUFFER_EXTRA_HOLIDAY_COLL,
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : ExtraHolidayColl,
@@ -424,10 +432,20 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
     'work-transfer': {
         id: 'dismissal',
         title: 'Заявление на перевод',
-        path: WORK_TRANSFER,
+        path: BUFFER_WORK_TRANSFER,
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : WorkTransfer,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    dismissal_form: {
+        id: 'dismissal',
+        title: 'Заявление на увольнение',
+        path: DISMISSAL,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : Dismissal,
         isTemplate: false,
         group: 'OTHER',
     },
