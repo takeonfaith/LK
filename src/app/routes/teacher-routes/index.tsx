@@ -148,10 +148,10 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Кадровые заявления',
         icon: <FiFileText />,
         path: HR_APPLICATIONS_ROUTE,
-        Component: HrApplicationsPage,
+        Component: isProduction ? ApplicationRedirect : HrApplicationsPage,
         color: 'green',
         isTemplate: false,
-        group: 'FINANCES_DOCS',
+        group: 'OTHER',
     },
     'download-agreements': {
         id: 'download-agreements',
@@ -180,7 +180,14 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'График отпусков',
         icon: <FiCalendar />,
         path: VACATION_ROUTE,
-        Component: VacationSchedule,
+        Component: isProduction
+            ? () =>
+                  PageIsNotReady({
+                      oldVersionUrl: VACATION_ROUTE,
+                      buttonText: 'Перейти к заполнению',
+                      errorText: 'Для заполнения графика отпусков на 2023 год перейдите в старую версию.',
+                  })
+            : VacationSchedule,
         color: 'purple',
         isTemplate: false,
         group: 'OTHER',

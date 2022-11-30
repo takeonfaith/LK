@@ -10,6 +10,7 @@ import getGreetingMessage from './lib/get-greeting-message'
 import { Content } from './ui/atoms/content'
 import React from 'react'
 import MobileAppLink from '@features/all-pages/ui/organisms/mobile-app-link'
+import { isProduction } from '@shared/consts'
 
 const Home = () => {
     const {
@@ -34,7 +35,7 @@ const Home = () => {
                 </Title>
                 <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
                 <ScheduleAndNotification />
-                <MobileAppLink />
+                {!isProduction && <MobileAppLink />}
             </Content>
         </Wrapper>
     )
