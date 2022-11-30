@@ -1196,14 +1196,6 @@
     "@rollup/pluginutils" "^3.1.0"
     "magic-string" "^0.25.7"
 
-"@rollup/plugin-replace@^4.0.0":
-  "integrity" "sha512-+rumQFiaNac9y64OHtkHGmdjm7us9bo1PlbgQfdihQtuNxzjpaB064HbRnewUOggLQxVCCyINfStkgmBeQpv1g=="
-  "resolved" "https://registry.npmjs.org/@rollup/plugin-replace/-/plugin-replace-4.0.0.tgz"
-  "version" "4.0.0"
-  dependencies:
-    "@rollup/pluginutils" "^3.1.0"
-    "magic-string" "^0.25.7"
-
 "@rollup/pluginutils@^3.1.0":
   "integrity" "sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg=="
   "resolved" "https://registry.npmjs.org/@rollup/pluginutils/-/pluginutils-3.1.0.tgz"
@@ -3464,7 +3456,7 @@
     "serialize-javascript" "^4.0.0"
     "terser" "^5.0.0"
 
-"rollup@^2.43.1", "rollup@^2.79.0":
+"rollup@^2.43.1", "rollup@^2.75.7":
   "integrity" "sha512-uKxbd0IhMZOhjAiD5oAFp7BqvkA4Dv47qpOCtaNvng4HBwdbWtdOh8f5nZNuk2rp51PMGk3bzfWu5oayNEuYnw=="
   "resolved" "https://registry.npmjs.org/rollup/-/rollup-2.79.1.tgz"
   "version" "2.79.1"
@@ -3907,18 +3899,17 @@
     "vscode-languageserver-textdocument" "^1.0.1"
     "vscode-uri" "^3.0.2"
 
-"vite-plugin-pwa@^0.13.3":
-  "integrity" "sha512-cjWXpZ7slAY14OKz7M8XdgTIi9wjf6OD6NkhiMAc+ogxnbUrecUwLdRtfGPCPsN2ftut5gaN1jTghb11p6IQAA=="
-  "resolved" "https://registry.npmjs.org/vite-plugin-pwa/-/vite-plugin-pwa-0.13.3.tgz"
-  "version" "0.13.3"
+"vite-plugin-pwa@^0.12.0":
+  "integrity" "sha512-pSiFHmnJGMQJJL8aJzQ8SaraZBSBPMGvGUkCNzheIq9UQCEk/eP3UmANNmS9eupuhIpTK8AdxTOHcaMcAqAbCA=="
+  "resolved" "https://registry.npmjs.org/vite-plugin-pwa/-/vite-plugin-pwa-0.12.8.tgz"
+  "version" "0.12.8"
   dependencies:
-    "@rollup/plugin-replace" "^4.0.0"
     "debug" "^4.3.4"
     "fast-glob" "^3.2.11"
     "pretty-bytes" "^6.0.0"
-    "rollup" "^2.79.0"
-    "workbox-build" "^6.5.4"
-    "workbox-window" "^6.5.4"
+    "rollup" "^2.75.7"
+    "workbox-build" "^6.5.3"
+    "workbox-window" "^6.5.3"
 
 "vite-plugin-svgr@^2.1.0":
   "integrity" "sha512-u8Ac27uZmDHTVGawpAhvLMJMuzbGeZGhe61TGeHoRQLxVhmQfIYCefa0iLbjC0ui1zFo6XZnS8EkzPITCYp85g=="
@@ -4046,7 +4037,7 @@
   dependencies:
     "workbox-core" "6.5.4"
 
-"workbox-build@^6.5.4":
+"workbox-build@^6.5.3":
   "integrity" "sha512-kgRevLXEYvUW9WS4XoziYqZ8Q9j/2ziJYEtTrjdz5/L/cTUa2XfyMP2i7c3p34lgqJ03+mTiz13SdFef2POwbA=="
   "resolved" "https://registry.npmjs.org/workbox-build/-/workbox-build-6.5.4.tgz"
   "version" "6.5.4"
@@ -4181,7 +4172,7 @@
   "resolved" "https://registry.npmjs.org/workbox-sw/-/workbox-sw-6.5.4.tgz"
   "version" "6.5.4"
 
-"workbox-window@^6.5.4", "workbox-window@6.5.4":
+"workbox-window@^6.5.3", "workbox-window@6.5.4":
   "integrity" "sha512-HnLZJDwYBE+hpG25AQBO8RUWBJRaCsI9ksQJEp3aCOFCaG5kqaToAYXFRAHxzRluM2cQbGzdQF5rjKPWPA1fug=="
   "resolved" "https://registry.npmjs.org/workbox-window/-/workbox-window-6.5.4.tgz"
   "version" "6.5.4"
