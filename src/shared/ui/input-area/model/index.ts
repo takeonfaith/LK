@@ -25,6 +25,7 @@ type IInputAreaTypes =
     | 'textarea'
     | 'checkbox-docs'
     | 'date-interval'
+    | 'simple-text'
 
 export interface IInputAreaFiles {
     files: File[]
@@ -66,8 +67,10 @@ export interface IInputAreaData {
     autocomplete?: boolean
     isSpecificRadio?: boolean
     specialType?: specialFieldsNameT
-    minValueInput?: number
-    maxValueInput?: number
+    minValueInput?: number | string
+    maxValueInput?: number | string
+    Diff?: number
+    visible?: boolean
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]

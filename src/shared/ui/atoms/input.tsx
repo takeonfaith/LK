@@ -102,8 +102,8 @@ interface Props {
     autocomplete?: boolean
     danger?: boolean
     alertMessage?: string
-    minValue?: number
-    maxValue?: number
+    minValue?: number | string
+    maxValue?: number | string
 }
 
 const Input = ({
