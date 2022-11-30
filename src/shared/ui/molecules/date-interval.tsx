@@ -32,19 +32,19 @@ interface Props {
     setDates: (dates: string[]) => void
     valid: boolean
     setValid: React.Dispatch<React.SetStateAction<boolean>>
-    Diff?: number
+    diff?: number
     minValue?: number | string
 }
 
-const DateInterval = ({ title, required, dates, setDates, valid, setValid, Diff, minValue }: Props) => {
+const DateInterval = ({ title, required, dates, setDates, valid, setValid, diff, minValue }: Props) => {
     useEffect(() => {
         setValid(new Date(dates[0]) <= new Date(dates[1]) || !dates[0].length || !dates[1].length)
     }, [dates])
-    
-    if (Diff != undefined) {
-        var firstDate = new Date(dates[0])
-        var newDate = new Date(firstDate)
-        newDate.setDate(firstDate.getDate() + Diff)
+
+    if (diff != undefined) {
+        const firstDate = new Date(dates[0])
+        const newDate = new Date(firstDate)
+        newDate.setDate(firstDate.getDate() + diff)
         dates[1] = localizeDate(newDate, 'extraWeird')
     }
 

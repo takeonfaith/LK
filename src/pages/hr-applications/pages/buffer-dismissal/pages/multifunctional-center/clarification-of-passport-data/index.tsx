@@ -1,5 +1,5 @@
 import { APPLICATIONS_ROUTE } from '@app/routes/routes'
-import { Button, FormBlock, SubmitButton, Wrapper } from '@ui/atoms'
+import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
@@ -55,8 +55,7 @@ const ClarificationOfPassportDataApplication = () => {
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
                         isActive={checkFormFields(form)}
-                        popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'
-                        }
+                        popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />
                 </FormBlock>

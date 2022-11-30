@@ -54,9 +54,6 @@ import {
 } from '../general-routes'
 import AllStudentsPage from '@pages/all-students'
 import { isProduction } from '@consts'
-} from './general-routes'
-import ApplicationsPage from '@pages/hr-applications/pages/buffer-dismissal'
-import TeachersBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'

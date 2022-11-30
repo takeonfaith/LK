@@ -1,4 +1,4 @@
-import { ApplicationsConstants, hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
+import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
@@ -61,9 +61,7 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
             field: 'orderStatus',
             priority: 'one',
             width: '200px',
-            catalogs: [
-                ...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
-            ],
+            catalogs: [...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
             render: (value) => (
                 <Message
                     type={value === 'Готово' ? 'success' : value === 'Отклонено' ? 'failure' : 'alert'}
