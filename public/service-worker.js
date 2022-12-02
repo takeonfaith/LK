@@ -26,7 +26,6 @@ self.addEventListener('controllerchange', () => window.location.reload());
 // The first time the user starts up the PWA, 'install' is triggered.
 // eslint-disable-next-line no-restricted-globals
 self.addEventListener('install', function(event) {
-    console.log(event)
     if (doCache) {
         event.waitUntil(
             caches.open(CACHE_NAME)
@@ -63,9 +62,5 @@ self.addEventListener('fetch', function(event) {
                 return response || fetch(event.request);
             })
         );
-    }
-
-    if(event.request.url == '{{url}}' ) {
-        return;
     }
 });
