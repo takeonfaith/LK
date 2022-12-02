@@ -12,6 +12,7 @@ const Background = styled.div`
 `
 
 const App = () => {
+    alert('test')
     return (
         <ModalProvider>
             <SettingsProvider>
