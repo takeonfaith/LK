@@ -2,7 +2,7 @@ import { LOGIN_ROUTE, publicRoutes } from '@app/routes/general-routes'
 import { adminLinksModel } from '@entities/admin-links'
 import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
-import React, { useEffect } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 import { userModel } from '../../entities/user'
 import ContentLayout from '../../shared/ui/content-layout'
@@ -36,10 +36,12 @@ const Router = () => {
         <ContentLayout />
     ) : (
         <Switch>
-            {publicRoutes.map(({ path, Component }, i) => {
-                return <Route path={path} component={Component} exact={true} key={i} />
-            })}
-            <Redirect exact to={LOGIN_ROUTE} />
+            <Suspense fallback={null}>
+                {publicRoutes.map(({ path, Component }, i) => {
+                    return <Route path={path} component={Component} exact={true} key={i} />
+                })}
+                <Redirect exact to={LOGIN_ROUTE} />
+            </Suspense>
         </Switch>
     )
 }
