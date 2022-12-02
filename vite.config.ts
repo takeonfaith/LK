@@ -23,7 +23,7 @@ export default defineConfig({
             targets: ['IE >= 11'],
         }),
         splitVendorChunkPlugin(),
-        VitePWA({ registerType: 'autoUpdate' })
+        // VitePWA({ registerType: 'autoUpdate' })
     ],
     build: {
         outDir: 'build',
