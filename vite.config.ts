@@ -4,10 +4,10 @@ import checker from 'vite-plugin-checker'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import svgr from 'vite-plugin-svgr'
 import legacy from '@vitejs/plugin-legacy'
-import {hash} from './src/shared/lib/hash'
+import { hash } from './src/shared/lib/hash'
 
 export default defineConfig((conf) => {
-    var outDir = conf.mode === 'development' ? 'dist' : 'build'
+    var outDir = 'dist'
     return {
         server: {
             open: true,
