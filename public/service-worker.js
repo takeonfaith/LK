@@ -21,15 +21,13 @@ self.addEventListener("activate", event => {
     );
 });
 
-self.addEventListener('controllerchange', () => window.location.reload());
-
 // The first time the user starts up the PWA, 'install' is triggered.
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('install', function (event) {
+self.addEventListener('install', function(event) {
     if (doCache) {
         event.waitUntil(
             caches.open(CACHE_NAME)
-                .then(function (cache) {
+                .then(function(cache) {
                     // Get the assets manifest so we can see what our js file is named
                     // This is because webpack hashes it
                     fetch("asset-manifest.json")
@@ -55,10 +53,10 @@ self.addEventListener('install', function (event) {
 // When the webpage goes to fetch files, we intercept that request and serve up the matching files
 // if we have them
 // eslint-disable-next-line no-restricted-globals
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', function(event) {
     if (doCache) {
         event.respondWith(
-            caches.match(event.request).then(function (response) {
+            caches.match(event.request).then(function(response) {
                 return response || fetch(event.request);
             })
         );

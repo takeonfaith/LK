@@ -12,29 +12,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap"
-        rel="stylesheet" />
+          rel="stylesheet" />
     <title>Личный кабинет</title>
 </head>
 
 <body>
-    <noscript>Чтобы это приложение работало, вам необходимо включить JavaScript</noscript>
-    <div id="root"></div>
-    <script type="module" src="/src/index.tsx"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('./service-worker.js', { scope: '/'}).then(function (registration) {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }, function (err) {
-                    console.log('ServiceWorker registration failed: ', err);
-                }).catch(function (err) {
-                    console.log(err)
-                });
+<noscript>Чтобы это приложение работало, вам необходимо включить JavaScript</noscript>
+<div id="root"></div>
+<script type="module" src="/src/index.tsx"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('service-worker.js', { scope: '/'}).then(function (registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function (err) {
+                console.log('ServiceWorker registration failed: ', err);
+            }).catch(function (err) {
+                console.log(err)
             });
-        } else {
-            console.log('service worker is not supported');
-        }
-    </script>
+        });
+    } else {
+        console.log('service worker is not supported');
+    }
+</script>
 </body>
 
 </html>
