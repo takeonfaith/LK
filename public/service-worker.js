@@ -2,7 +2,7 @@
 let doCache = false;
 
 // Name our cache
-let CACHE_NAME = 'my-pwa-cache-v1';
+let CACHE_NAME = 'my-pwa-cache-v2';
 
 // Delete old caches that are not our current one!
 // eslint-disable-next-line no-restricted-globals
