@@ -34,15 +34,13 @@ const Router = () => {
     }, [user, data, settings])
 
     return isAuthenticated ? (
-        <Switch>
-            <Route path="/" component={ContentLayout} />
-        </Switch>
+        <ContentLayout />
     ) : (
         <Switch>
             {publicRoutes.map(({ path, Component }, i) => {
                 return <Route path={path} component={Component} exact={true} key={i} />
             })}
-            <Redirect to={LOGIN_ROUTE} />
+            <Redirect exact to={LOGIN_ROUTE} />
         </Switch>
     )
 }

@@ -15,7 +15,7 @@ const App = () => {
     return (
         <ModalProvider>
             <SettingsProvider>
-                <HashRouter basename="/new">
+                <HashRouter basename="/">
                     <Background>
                         <Router />
                     </Background>
