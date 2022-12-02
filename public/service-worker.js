@@ -58,7 +58,7 @@ self.addEventListener('fetch', function(event) {
     if (doCache) {
         event.respondWith(
             caches.match(event.request).then(function(response) {
-                return response || fetch(event.request);
+                return fetch(event.request);
             })
         );
     }
