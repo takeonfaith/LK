@@ -12,7 +12,7 @@ const Background = styled.div`
 const App = () => {
     return (
         <ModalProvider>
-            <HashRouter basename="/new">
+            <HashRouter basename="/">
                 <Background>
                     <Router />
                 </Background>
