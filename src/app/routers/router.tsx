@@ -7,6 +7,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'
 import ContentLayout from '../../shared/ui/content-layout'
 import { applicationsModel } from '@entities/applications'
+import { OLD_LK_URL } from '@consts'
 
 const Router = () => {
     const {
@@ -40,6 +41,7 @@ const Router = () => {
             {publicRoutes.map(({ path, Component }, i) => {
                 return <Route path={path} component={Component} exact={true} key={i} />
             })}
+            <Redirect from="/old" to={`${OLD_LK_URL}/index.php`} />
             <Redirect exact to={LOGIN_ROUTE} />
         </Switch>
     )
