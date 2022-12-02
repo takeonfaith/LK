@@ -33,6 +33,8 @@ const Router = () => {
         }
     }, [user, data, settings])
 
+    console.log('test')
+
     return isAuthenticated ? (
         <ContentLayout />
     ) : (
