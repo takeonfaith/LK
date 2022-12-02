@@ -6,7 +6,7 @@ import svgr from 'vite-plugin-svgr'
 import legacy from '@vitejs/plugin-legacy'
 
 export default defineConfig((conf) => {
-    var outDir = conf.mode === 'development' ? 'dist' : 'build'
+    // var outDir = conf.mode === 'development' ? 'dist' : 'build'
     return {
         server: {
             open: true,
@@ -26,7 +26,7 @@ export default defineConfig((conf) => {
             splitVendorChunkPlugin(),
         ],
         build: {
-            outDir,
+            outDir: 'dist',
         },
         // esbuild: {
         //     jsxInject: `import React from 'react'`,
