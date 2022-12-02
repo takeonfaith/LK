@@ -40,13 +40,6 @@ const Router = () => {
             {publicRoutes.map(({ path, Component }, i) => {
                 return <Route path={path} component={Component} exact={true} key={i} />
             })}
-            <Route
-                path="/old"
-                component={() => {
-                    console.log('old')
-                    return null
-                }}
-            />
             <Redirect exact to={LOGIN_ROUTE} />
         </Switch>
     )

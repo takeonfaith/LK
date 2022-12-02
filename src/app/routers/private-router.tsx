@@ -1,5 +1,4 @@
 import { HOME_ROUTE } from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
 import { menuModel } from '@entities/menu'
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router'
