@@ -3,16 +3,17 @@ import { adminLinksModel } from '@entities/admin-links'
 import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
 import React, { useEffect } from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
 import { userModel } from '../../entities/user'
 import ContentLayout from '../../shared/ui/content-layout'
 import { applicationsModel } from '@entities/applications'
 
 const Router = () => {
+    const location = useLocation()
+
     const {
         data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
-
     const { data } = adminLinksModel.selectors.useAdminLinks()
     const { settings } = settingsModel.selectors.useSettings()
 
@@ -32,6 +33,8 @@ const Router = () => {
             })
         }
     }, [user, data, settings])
+
+    console.log(location)
 
     return isAuthenticated ? (
         <ContentLayout />
