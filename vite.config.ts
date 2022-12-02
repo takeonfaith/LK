@@ -27,6 +27,11 @@ export default defineConfig((conf) => {
         ],
         build: {
             outDir: 'dist',
+            rollupOptions: {
+                input: {
+                    app: './update.html',
+                },
+            },
         },
         // esbuild: {
         //     jsxInject: `import React from 'react'`,
