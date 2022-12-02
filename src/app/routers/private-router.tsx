@@ -14,7 +14,6 @@ const PrivateRouter = () => {
             {Object.values(allRoutes).map(({ path, Component, isTemplate }) => {
                 return <Route path={path} component={Component} exact={!isTemplate} key={path} />
             })}
-            <Redirect from="/old" to={`${OLD_LK_URL}/index.php`} />
             <Redirect exact to={HOME_ROUTE} />
         </Switch>
     )

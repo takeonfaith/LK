@@ -41,7 +41,6 @@ const Router = () => {
             {publicRoutes.map(({ path, Component }, i) => {
                 return <Route path={path} component={Component} exact={true} key={i} />
             })}
-            <Redirect from="/old" to={`${OLD_LK_URL}/index.php`} />
             <Redirect exact to={LOGIN_ROUTE} />
         </Switch>
     )
