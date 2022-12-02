@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'
 import SettingsProvider from '../shared/lib/contexts/settings-context'
@@ -15,11 +15,11 @@ const App = () => {
     return (
         <ModalProvider>
             <SettingsProvider>
-                <BrowserRouter basename="/">
+                <HashRouter basename="/">
                     <Background>
                         <Router />
                     </Background>
-                </BrowserRouter>
+                </HashRouter>
             </SettingsProvider>
         </ModalProvider>
     )
