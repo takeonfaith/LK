@@ -9,8 +9,6 @@ import ContentLayout from '../../shared/ui/content-layout'
 import { applicationsModel } from '@entities/applications'
 
 const Router = () => {
-    const location = useLocation()
-
     const {
         data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
@@ -33,8 +31,6 @@ const Router = () => {
             })
         }
     }, [user, data, settings])
-
-    console.log(location)
 
     return isAuthenticated ? (
         <ContentLayout />
