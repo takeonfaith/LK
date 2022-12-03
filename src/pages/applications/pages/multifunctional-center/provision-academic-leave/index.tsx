@@ -7,14 +7,13 @@ import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { globalAppSendForm } from '@pages/applications/lib'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
-import getReasonAcademic
-    from "@pages/applications/pages/multifunctional-center/provision-academic-leave/lib/get-reason-academic";
-import { specialFieldsNameT } from "@entities/applications/consts";
+import getReasonAcademic from '@pages/applications/pages/multifunctional-center/provision-academic-leave/lib/get-reason-academic'
+import { specialFieldsNameT } from '@entities/applications/consts'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 

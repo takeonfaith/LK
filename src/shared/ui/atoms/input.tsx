@@ -122,7 +122,7 @@ const Input = ({
     inputAppearance = true,
     mask = false,
     autocomplete = true,
-    minValue = undefined, 
+    minValue = undefined,
     maxValue = undefined,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
@@ -207,7 +207,7 @@ const Input = ({
             <input
                 min={minValue}
                 max={maxValue}
-                step={maxValue? 0.1: undefined}
+                step={maxValue ? 0.1 : undefined}
                 type={inputType}
                 placeholder={placeholder}
                 value={value}

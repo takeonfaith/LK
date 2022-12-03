@@ -58,7 +58,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Категория',
+                title: 'Отношусь к льготной категории граждан:',
                 fieldName: 'category',
                 value: '',
                 type: 'select',
@@ -68,7 +68,6 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 items: itemsCategory,
             },
         ],
-        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: true },
     }
 }
 

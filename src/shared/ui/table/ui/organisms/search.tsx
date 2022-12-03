@@ -1,8 +1,7 @@
-import { Input } from '@ui/atoms'
-import { ColumnProps, ColumnType, TableSearchType } from '@ui/table/types'
 import React from 'react'
-import { FiSearch, FiX } from 'react-icons/fi'
-import { Button } from '@ui/button'
+import { Input } from '@ui/atoms'
+import { ColumnType, TableSearchType } from '@ui/table/types'
+import { FiSearch } from 'react-icons/fi'
 import styled from 'styled-components'
 
 const SearchWrapper = styled.div<{ closed: boolean }>`
@@ -34,11 +33,11 @@ const getType = (type?: ColumnType) => {
 }
 
 const Search = ({ search, setSearch }: Props) => {
-    const handleCloseSearch = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.stopPropagation()
-        e.preventDefault()
-        setSearch(null)
-    }
+    // const handleCloseSearch = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    //     e.stopPropagation()
+    //     e.preventDefault()
+    //     setSearch(null)
+    // }
 
     return (
         <SearchWrapper closed={!search?.column}>

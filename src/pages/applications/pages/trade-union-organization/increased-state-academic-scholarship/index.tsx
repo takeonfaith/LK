@@ -9,8 +9,8 @@ import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
-import globalAppSendForm from "@pages/applications/lib/global-app-send-form";
-import { ApplicationFormCodes } from "@utility-types/application-form-codes";
+import { globalAppSendForm } from '@pages/applications/lib'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 

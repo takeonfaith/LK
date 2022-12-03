@@ -1,4 +1,4 @@
-import { STUDENTS_LOGINS_ROUTE } from '@app/routes/teachers-routes'
+import { STUDENTS_LOGINS_ROUTE } from '@app/routes/teacher-routes'
 import { adminLinksModel } from '@entities/admin-links'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import { FormBlock } from '@ui/atoms'

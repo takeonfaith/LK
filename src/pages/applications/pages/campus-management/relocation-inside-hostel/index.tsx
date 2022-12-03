@@ -1,4 +1,3 @@
-import { userModel } from '@entities/user'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
@@ -9,7 +8,7 @@ import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrap
 import { useHistory } from 'react-router'
 import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { globalAppSendForm } from '@pages/applications/lib'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 

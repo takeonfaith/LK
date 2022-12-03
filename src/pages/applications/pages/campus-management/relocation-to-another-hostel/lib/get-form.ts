@@ -127,6 +127,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Комната',
+                placeholder: 'Укажите номер комнаты, в которую хотите переселиться',
                 fieldName: 'room',
                 value: '',
                 editable: true,
@@ -143,6 +144,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Комментарий',
+                placeholder: 'Укажите необходимость переселения',
                 type: 'textarea',
                 fieldName: 'comment',
                 value: '',

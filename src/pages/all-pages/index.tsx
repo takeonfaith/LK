@@ -54,6 +54,7 @@ const AllPages = () => {
                 searchEngine={search}
                 setResult={setFoundPages}
                 setExternalValue={setSearchValue}
+                validationCheck
             />
             {searchValue.length === 0 &&
                 Object.keys(groupedPages)

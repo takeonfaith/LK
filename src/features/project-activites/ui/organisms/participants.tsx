@@ -4,7 +4,7 @@ import Block from '@ui/block'
 import { LocalSearch } from '@ui/molecules'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { Title } from '@ui/title'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { User } from 'widgets'
 import { LoadingWrapper } from '../atoms'
@@ -211,7 +211,7 @@ const Participants = ({ data }: Props) => {
                         placeholder={'Поиск участников'}
                     />
                     <div className="list">
-                        {(foundParticipants ?? participantsRenderList)?.map(({ img, name, id }, i) => {
+                        {(foundParticipants ?? participantsRenderList)?.map(({ img, name, id }) => {
                             return <User key={id} type={'student'} name={name} avatar={img} />
                         })}
                     </div>

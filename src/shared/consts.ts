@@ -6,7 +6,7 @@ import { HiOutlineLightBulb } from 'react-icons/hi'
 
 export type MenuType = string[]
 export type ShortCutLinksType = number[]
-export type ThemeType = string
+export type ThemeType = 'dark' | 'light'
 export type GeneralType = {
     [key: string]: boolean
 }
@@ -183,7 +183,7 @@ export const Colors: IColors = {
         littleDarker: '#c75e1d',
     },
     grey: {
-        main: '#949494',
+        main: '#797979',
         transparent: '',
         lighter: '',
         darker: '',
@@ -265,13 +265,15 @@ export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
 export const LastUpdateWhatsNew = '2022-05-19T10:30:00'
 
-export const messageType: {
+type MessageTypeObj = {
     [key in MessageType]: {
         icon: IconType
         color: keyof IColors
         title: string
     }
-} = {
+}
+
+export const messageType: MessageTypeObj = {
     info: {
         icon: FiInfo,
         color: 'blue',
@@ -332,6 +334,7 @@ export const letterColorMatch: LetterColorMatch = {
     Ф: 'blue',
     Х: 'green',
     Ч: 'purple',
+    Ц: 'green',
     Ш: 'red',
     Щ: 'red',
     Ъ: 'purple',
@@ -371,3 +374,11 @@ export const letterColorMatch: LetterColorMatch = {
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
 
 export const MAX_FILE_SIZE = 11000000
+
+/**
+ * @constant
+ * use when you need to hide some functionality on the production
+ * @example
+ * Component: () => isProduction ? PageIsNotReady : SettingsPage
+ **/
+export const isProduction = import.meta.env.MODE !== 'development'

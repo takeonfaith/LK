@@ -19,6 +19,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
     position: relative;
     cursor: pointer;
     text-decoration: none;
+    border-radius: var(--brLight);
 
     .new {
         position: absolute;
@@ -64,7 +65,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
         gap: 15px;
         display: flex;
         flex-direction: ${({ isVertical }) => (isVertical ? 'column' : 'row')};
-        border-radius: ${({ isVertical }) => (isVertical ? 'var(--brSemi)' : 'var(--brLight)')};
+        border-radius: var(--brLight);
         align-items: center;
         justify-content: ${({ isVertical }) => (isVertical ? 'center' : 'flex-start')};
         padding: 15px;
@@ -127,7 +128,6 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
     const isVertical = orientation === 'vertical'
     const { settings } = settingsModel.selectors.useSettings()
     const isAdded = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
-    const linkWidth = 1
 
     const maxFirstWordLength = 12
 

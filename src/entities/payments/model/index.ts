@@ -2,7 +2,7 @@ import { paymentApi } from '@api'
 import { Payments } from '@api/model'
 import { createEvent } from 'effector'
 import { useStore } from 'effector-react/compat'
-import { createEffect, createStore } from 'effector/compat'
+import { createEffect, createStore } from 'effector'
 import changeCanSign from '../lib/change-can-sign'
 
 interface PaymentsStore {

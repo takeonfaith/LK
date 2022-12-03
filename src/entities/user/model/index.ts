@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { userApi } from '@api'
 import { LoginData } from '@api/user-api'
-import { createEffect, createEvent, createStore, forward } from 'effector/compat'
+import { createEffect, createEvent, createStore, forward } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { ADName, User, UserToken } from '@api/model'
 import axios from 'axios'

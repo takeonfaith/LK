@@ -1,3 +1,4 @@
+import React from 'react'
 import { SETTINGS_APPEARANCE_ROUTE, SETTINGS_ROUTE } from '@app/routes/general-routes'
 import { Colors } from '@consts'
 import { confirmModel } from '@entities/confirm'
@@ -14,9 +15,6 @@ import { Title } from '@ui/title'
 import { FiLogOut, FiSettings, FiSun } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { StoryCard } from 'widgets'
-import React from 'react'
-import { TutorialStory } from 'shared/stories/tutorial'
 
 const ProfileWrapper = styled.div`
     height: auto;
@@ -65,18 +63,18 @@ const ProfileTop = styled(ListWrapper)`
     }
 `
 
-const GradientCircle = styled.div<{ current: boolean }>`
-    width: 20px;
-    height: 20px;
-    border-radius: 100px;
-    border: ${({ current }) => current && '2px solid var(--theme)'};
-    outline: ${({ current }) => current && '2px solid var(--reallyBlue)'};
-    background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 100%),
-        radial-gradient(farthest-side at top center, ${Colors.purple.main}, transparent 100%),
-        radial-gradient(farthest-side at top right, ${Colors.orange.main}, transparent 100%),
-        radial-gradient(farthest-side at top right, ${Colors.purple.main}, transparent 100%),
-        radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 100%);
-`
+// const GradientCircle = styled.div<{ current: boolean }>`
+//     width: 20px;
+//     height: 20px;
+//     border-radius: 100px;
+//     border: ${({ current }) => current && '2px solid var(--theme)'};
+//     outline: ${({ current }) => current && '2px solid var(--reallyBlue)'};
+//     background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 100%),
+//         radial-gradient(farthest-side at top center, ${Colors.purple.main}, transparent 100%),
+//         radial-gradient(farthest-side at top right, ${Colors.orange.main}, transparent 100%),
+//         radial-gradient(farthest-side at top right, ${Colors.purple.main}, transparent 100%),
+//         radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 100%);
+// `
 
 const ProfilePage = () => {
     const {

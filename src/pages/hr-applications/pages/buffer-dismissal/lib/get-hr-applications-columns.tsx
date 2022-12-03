@@ -1,4 +1,6 @@
+
 import { ApplicationsConstants, hrApplicationsConstants, hrOrderConstants, hrOrderRegisterConstants } from '@entities/applications/consts'
+
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
@@ -70,9 +72,11 @@ const getHrApplicationsColumns = (data?: any): ColumnProps[] => {
             title: 'Статус регистрации приказа',
             field: 'dismissalOrder',
             priority: 'one',
+
             catalogs: [...(Object.values(hrOrderRegisterConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
             render: (value, elements) => (
                 elements.dismissalOrder.orderStatus == "Подписан" &&
+
                 <Message
                     type={value.registrationStatus === 'Зарегистрирован' ? 'success' : value.registrationStatus === 'Не зарегистрирован' ? 'failure' : 'alert'}
                     title={value.registrationStatus}

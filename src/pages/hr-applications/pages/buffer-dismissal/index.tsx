@@ -1,21 +1,14 @@
-import { Application, WorkerApplication } from '@api/model'
 import { applicationsModel } from '@entities/applications'
-import getApplicationsColumns from '@features/applications/lib/get-applications-columns'
-import search from '@features/applications/lib/search'
-import CreateApplicationList from '@features/applications/ui/molecules/create-application-list'
-import { Button, FormBlock, Message, Title, Wrapper, HrBlock } from '@ui/atoms'
-import List from '@ui/list'
-import { LocalSearch } from '@ui/molecules'
+import { setCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
+import { Button, HrBlock, Message, Title, Wrapper } from '@ui/atoms'
 import TableHr from '@ui/table-hr'
-import React, { useState } from 'react'
-import { FiInfo, FiPlus } from 'react-icons/fi'
-import styled from 'styled-components'
-import { useModal } from 'widgets'
-import { Collapse, UnmountClosed } from 'react-collapse'
-import { SelectPage } from '@features/select'
-import InputArea from '@ui/input-area'
+import { useState } from 'react'
+import { Collapse } from 'react-collapse'
+import { FiInfo } from 'react-icons/fi'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
+import styled from 'styled-components'
 import getHrApplicationsColumns from './lib/get-hr-applications-columns'
+
 import Dismissal from '../dismissal'
 import { useHistory } from 'react-router'
 import { setCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
@@ -23,6 +16,7 @@ import { getWorkerData, postWorkerStatuses } from '@api/application-api'
 import getExHrApplicationsColumns from './lib/get-ex-hr-applications-columns'
 import { RiContactsBookLine } from 'react-icons/ri'
 import localizeDate from '@utils/localize-date'
+
 
 const ApplicationPageWrapper = styled.div`
     display: flex;
@@ -96,9 +90,6 @@ const ApplicationPageWrapper = styled.div`
         min-height: 30px;
     }
 `
-interface Props {
-    isTeachers: boolean
-}
 
 const parseJobs = () => {
     const {
@@ -142,6 +133,7 @@ const parseJobs = () => {
                                 <Collapse isOpened={opened[i]} className="collapseс">
                                     <div className="collapsed">
                                         <div className="buttonBlock">
+
                                             <Collapse
                                                 isOpened={
                                                     (openedButton =
@@ -156,6 +148,7 @@ const parseJobs = () => {
                                                             : false)
                                                 }
                                             >
+
                                                 <a href="#/hr-applications/dismissal">
                                                     <Button
                                                         text="Уволиться с этой должности"
@@ -258,6 +251,7 @@ const DismissalBufferPage = () => {
         data: { listApplication },
         error,
     } = applicationsModel.selectors.useApplications()
+
     return (
         <Wrapper
             load={() => applicationsModel.effects.getApplicationsFx()}
@@ -286,6 +280,3 @@ const DismissalBufferPage = () => {
 }
 
 export default DismissalBufferPage
-function getWorkerPosts(): any {
-    throw new Error('Function not implemented.')
-}

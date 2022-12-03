@@ -8,7 +8,7 @@ import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { globalAppSendForm } from '@pages/applications/lib'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 import getMethodObtaining from '@features/applications/lib/get-method-obstaing'
@@ -51,7 +51,12 @@ const StateAccreditation = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} specialFieldsName={specialFieldsName} />
+                    <InputArea
+                        {...form}
+                        collapsed={isDone}
+                        setData={setForm as LoadedState}
+                        specialFieldsName={specialFieldsName}
+                    />
                     <SubmitButton
                         text={!isDone ? 'Отправить' : 'Отправлено'}
                         action={() =>

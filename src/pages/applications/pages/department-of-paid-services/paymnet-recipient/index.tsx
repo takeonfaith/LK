@@ -9,12 +9,12 @@ import getForm from './lib/get-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
 
-type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
+// type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const PaymentRecipient = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading] = useState(false)
     const isDone = completed ?? false
     const {
         data: { dataUserApplication },

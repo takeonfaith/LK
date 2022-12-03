@@ -19,13 +19,6 @@ import {
     QUESTION_SED,
     VISA_CERTIFICATE,
     WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY,
-    // PARTTIME_EMPLOYMENT,
-    // HOLIDAY_POSTPONED,
-    // DISMISSAL,
-    // WORK_TRANSFER,
-    // EXTRA_HOLIDAY_COLL,
-    // HOLIDAY_PLANNING,
-    // HOLIDAY_WORK,
     BUFFER_DISMISSAL,
     BUFFER_PARTTIME_EMPLOYMENT,
     BUFFER_HOLIDAY_POSTPONED,
@@ -33,7 +26,7 @@ import {
     BUFFER_EXTRA_HOLIDAY_COLL,
     BUFFER_HOLIDAY_PLANNING,
     BUFFER_HOLIDAY_WORK,
-} from '@app/routes/teachers-routes'
+} from '@app/routes/teacher-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
 const getTeachersSectionLinks = () => {

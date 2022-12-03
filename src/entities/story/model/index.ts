@@ -1,4 +1,4 @@
-import { createEvent, createStore } from 'effector/compat'
+import { createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { StoryProps } from '@ui/story/ui/story-page'
 

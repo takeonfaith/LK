@@ -1,10 +1,11 @@
 import { AdminLinks, User } from '@api/model'
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 import { hiddenRoutes, privateRoutes } from '@app/routes/routes'
-import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teachers-routes'
-import { MenuType, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG, SETTINGS } from '@consts'
+import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teacher-routes'
+import { MenuType, REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { SettingsType } from '@entities/settings/model'
 import { useStore } from 'effector-react/compat'
-import { createEvent, createStore } from 'effector/compat'
+import { createEvent, createStore } from 'effector'
 import findRoutesByConfig from '../lib/find-routes-by-config'
 
 interface Menu {
@@ -19,25 +20,27 @@ interface Menu {
 const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students']
 
 export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
-const DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'acad-performance', 'payments', 'all']
-// const DEFAULT_TEACHER_LEFTSIDE_BAR_CONFIG = ['home', 'schedule', 'chat', 'all']
 
-const getLeftsideBarConfig = (user: User | null): MenuType => {
-    const localSettings = JSON.parse(localStorage.getItem(SETTINGS) || '{}')
-    const settingsMenuData: MenuType = localSettings.menu ?? DEFAULT_STUDENT_LEFTSIDE_BAR_CONFIG
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getLeftsideBarConfig = (user: User | null, _adminLinks?: boolean): MenuType => {
+    if (!user) return []
+
+    const localSettings = JSON.parse(localStorage.getItem('new-settings') || '{}') as SettingsType
+    const settingsMenuData =
+        (localSettings[user.id]['settings-customize-menu'].property.pages as unknown as string[]) ??
+        REQUIRED_LEFTSIDE_BAR_CONFIG
 
     const uniqueRequiredTeacherMenuItems = REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG.filter(
         (item) => !settingsMenuData.includes(item),
     )
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const settingsDataToBeSet =
         user?.user_status === 'staff' && settingsMenuData.some((item) => !uniqueRequiredTeacherMenuItems.includes(item))
             ? [...settingsMenuData, ...uniqueRequiredTeacherMenuItems]
             : settingsMenuData
 
-    localStorage.setItem(SETTINGS, JSON.stringify({ ...localSettings, menu: settingsDataToBeSet }))
-
-    return settingsMenuData
+    return settingsDataToBeSet
 }
 
 const DEFAULT_STORE: Menu = {
@@ -85,13 +88,15 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
                 : { ...privateRoutes(), ...hiddenRoutes() },
         visibleRoutes: user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         leftsideBarRoutes: findRoutesByConfig(
-            getLeftsideBarConfig(user),
+            getLeftsideBarConfig(user, false),
             user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
         ),
         homeRoutes: findRoutesByConfig(
             homeRoutes ??
                 (JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[]),
-            user?.user_status === 'staff' ? teachersPrivateRoutes() : privateRoutes(),
+            user?.user_status === 'staff'
+                ? { ...teachersPrivateRoutes(), ...teachersHiddenRoutes() }
+                : { ...privateRoutes(), ...hiddenRoutes() },
         ),
     }))
     .on(changeNotifications, (oldData, { page, notifications }) => ({

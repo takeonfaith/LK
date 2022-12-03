@@ -6,12 +6,11 @@ const useResize = () => {
     const handleResize = () => setSize({ width: window.innerWidth, height: window.innerHeight })
 
     useEffect(() => {
-        window.addEventListener('resize', handleResize)
-
         handleResize()
+        window.addEventListener('resize', () => handleResize())
 
         return () => {
-            window.removeEventListener('resize', handleResize)
+            window.removeEventListener('resize', () => handleResize())
         }
     }, [])
 

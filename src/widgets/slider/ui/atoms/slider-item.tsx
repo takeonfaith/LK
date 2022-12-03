@@ -9,6 +9,7 @@ const SliderItemWrapper = styled.div<{ size: number; condition: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     opacity: ${({ condition }) => (condition ? 0.7 : 0.3)};
     transition: 0.2s opacity, 0.2s transform;
     z-index: 1;

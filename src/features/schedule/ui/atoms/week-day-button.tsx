@@ -107,10 +107,11 @@ const WeekDayButton = ({ weekDay, lessons, isCurrent, isChosen, index, onClick }
             <Title size={4}>{weekDay}</Title>
             <span className="marker-circles">
                 {currentModule !== '1' &&
-                    lessons.map((lesson) => {
+                    lessons.map((lesson, index) => {
                         if (TimeIntervalColor[lesson.timeInterval as keyof ITimeIntervalColor]) {
                             return (
                                 <span
+                                    key={index}
                                     className="marker-circle"
                                     style={{
                                         background:

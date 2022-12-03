@@ -8,10 +8,9 @@ import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrap
 import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import { useHistory } from 'react-router'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { globalAppSendForm, getRegistration, getDisability } from '@pages/applications/lib'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
-import getDisability from './lib/get-disability'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -23,6 +22,7 @@ const PreferentialAccommodationPage = () => {
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [disability, setDisability] = useState<IInputArea | null>(null)
+    const [registration, setRegistration] = useState<IInputArea | null>(null)
     const [loading, setLoading] = useState(false)
     const isDone = completed ?? false
 
@@ -30,12 +30,13 @@ const PreferentialAccommodationPage = () => {
         if (!!dataUserApplication) {
             setForm(getForm(dataUserApplication))
             setDisability(getDisability())
+            setRegistration(getRegistration())
         }
     }, [dataUserApplication])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
-            {!!form && !!setForm && (
+            {!!form && !!setForm && !!registration && !!disability && (
                 <FormBlock>
                     <Button
                         text="Назад к цифровым сервисам"
@@ -48,12 +49,15 @@ const PreferentialAccommodationPage = () => {
                     {disability && (
                         <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
                     )}
+                    {registration && (
+                        <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
+                    )}
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>
                             globalAppSendForm(
                                 ApplicationFormCodes.USG_GETHOSTEL_BENEFIT,
-                                [form],
+                                [form, registration, disability],
                                 setLoading,
                                 setCompleted,
                             )
@@ -64,7 +68,7 @@ const PreferentialAccommodationPage = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form) && !!form?.documents?.files.length}
+                        isActive={checkFormFields(form)}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

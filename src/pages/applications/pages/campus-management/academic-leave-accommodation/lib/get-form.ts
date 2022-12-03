@@ -37,6 +37,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Причина предоставления академического отпуска',
+                placeholder: 'Укажите причину в соответствии с приказом о предоставлении академического отпуска',
                 type: 'select',
                 width: '100%',
                 value: '',
@@ -55,7 +56,8 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 ],
             },
             {
-                title: 'Период академического отпуска - с:',
+                title: 'Дата начала академического отпуска',
+                placeholder: 'Укажите дату в соответствии с приказом о предоставлении академического отпуска',
                 type: 'date',
                 value: '',
                 fieldName: 'begin_academic_leave_period',
@@ -63,7 +65,8 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'по:',
+                title: 'Дата окончания академического отпуска',
+                placeholder: 'Укажите дату в соответствии с приказом о предоставлении академического отпуска',
                 type: 'date',
                 value: '',
                 fieldName: 'end_academic_leave_period',
