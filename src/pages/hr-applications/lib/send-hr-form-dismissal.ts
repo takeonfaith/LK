@@ -59,6 +59,7 @@ const SendHrFormDismissal = async (
         const aaa = {
             guid: parseJwt(JSON.parse(getJwtToken() || '{}'))['IndividualGuid'],
             jobGuid: result.jobGuid,
+            signingDate: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
             dateOfDismissal: result.last_day,
             isSendMail: result.get_tk == 'По почте',
             isRetirement: result.reason == 'Выходом на пенсию',
