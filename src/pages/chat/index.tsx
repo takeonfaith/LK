@@ -1,4 +1,3 @@
-import { signalRConnection } from '@api/config'
 import { TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
 import { chatsModel } from '@entities/chat'
 import { ChatWindow, ListOfChats } from '@features/chat'

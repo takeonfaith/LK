@@ -1,4 +1,3 @@
-import { signalRConnection } from '@api/config'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
 import { Chat, Chats } from '../types/chat'
