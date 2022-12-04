@@ -1,5 +1,4 @@
 import { applicationsModel } from '@entities/applications'
-import { setCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
 import { Button, HrBlock, Message, Title, Wrapper } from '@ui/atoms'
 import TableHr from '@ui/table-hr'
 import { useState } from 'react'
