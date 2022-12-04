@@ -16,7 +16,6 @@ import getExHrApplicationsColumns from './lib/get-ex-hr-applications-columns'
 import { RiContactsBookLine } from 'react-icons/ri'
 import localizeDate from '@utils/localize-date'
 
-
 const ApplicationPageWrapper = styled.div`
     display: flex;
     align-items: center;
@@ -97,8 +96,7 @@ const parseJobs = () => {
     if (!!dataWorkerApplication) {
         const [opened, setOpened] = useState(Array(dataWorkerApplication.length).fill(false))
         const [openedHistory, setOpenedHistory] = useState(false)
-        let openedButton: boolean
-        let counter: boolean = false
+        let counter = false
         return (
             <div className="jobBlocks">
                 {dataWorkerApplication.map((object, i) => {
@@ -132,22 +130,19 @@ const parseJobs = () => {
                                 <Collapse isOpened={opened[i]} className="collapseс">
                                     <div className="collapsed">
                                         <div className="buttonBlock">
-
                                             <Collapse
                                                 isOpened={
-                                                    (openedButton =
-                                                        object?.dismissalApplications[
-                                                            object.dismissalApplications.length - 1
-                                                        ]?.status == 'Не согласовано' ||
-                                                        object?.dismissalApplications[
-                                                            object.dismissalApplications.length - 1
-                                                        ]?.dismissalOrder?.orderStatus == 'Не согласован' ||
-                                                        object?.dismissalApplications.length == 0
-                                                            ? true
-                                                            : false)
+                                                    object?.dismissalApplications[
+                                                        object.dismissalApplications.length - 1
+                                                    ]?.status == 'Не согласовано' ||
+                                                    object?.dismissalApplications[
+                                                        object.dismissalApplications.length - 1
+                                                    ]?.dismissalOrder?.orderStatus == 'Не согласован' ||
+                                                    object?.dismissalApplications.length == 0
+                                                        ? true
+                                                        : false
                                                 }
                                             >
-
                                                 <a href="#/hr-applications/dismissal">
                                                     <Button
                                                         text="Уволиться с этой должности"
