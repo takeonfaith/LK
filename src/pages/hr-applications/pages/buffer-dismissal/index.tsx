@@ -90,14 +90,14 @@ const ApplicationPageWrapper = styled.div`
     }
 `
 
-const parseJobs = () => {
+const ParseJobs = () => {
     const {
         data: { dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
+    const [opened, setOpened] = useState(Array(dataWorkerApplication?.length).fill(false))
+    const [openedHistory, setOpenedHistory] = useState(false)
+    let counter = false
     if (!!dataWorkerApplication) {
-        const [opened, setOpened] = useState(Array(dataWorkerApplication.length).fill(false))
-        const [openedHistory, setOpenedHistory] = useState(false)
-        let counter = false
         return (
             <div className="jobBlocks">
                 {dataWorkerApplication.map((object, i) => {
@@ -267,7 +267,7 @@ const DismissalBufferPage = () => {
                             куда необходимо приехать за готовым документом.
                         </Message>
                     </div>
-                    {parseJobs()}
+                    <ParseJobs />
                 </HrBlock>
             </ApplicationPageWrapper>
         </Wrapper>
