@@ -41,8 +41,8 @@ export function createPaginationList<
 
     sample({
         clock: next,
-        source: [$lastArgs, $page],
-        fn: ([lastArgs = {}, page]) => ({ ...lastArgs, limit: limit, page }),
+        source: { lastArgs: $lastArgs, page: $page },
+        fn: ({ lastArgs = {}, page }) => ({ ...lastArgs, limit: limit, page }),
         target: getFx,
     })
 

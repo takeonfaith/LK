@@ -11,5 +11,3 @@ export interface Chat {
     }
     amountOfUnreadMessages: number
 }
-
-export type Chats = Record<string, Chat>

@@ -4,8 +4,8 @@ import { chatModel } from '@entities/chat'
 import { $userStore } from '@entities/user/model'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
+import { chatsMessageModel } from '.'
 import { LoadChat } from '../types/load-chat'
-import { $message } from './message'
 
 const inital: Message[] = [
     {
@@ -100,7 +100,13 @@ sample({
     target: loadChatMessagesFx,
 })
 
-sample({ clock: sendMessage, source: $message, fn: (message) => message, target: sendFx })
+sample({
+    clock: sendMessage,
+    source: chatsMessageModel.stores.$currentChatMessage,
+    filter: (message) => !!message,
+    fn: (message) => message!,
+    target: sendFx,
+})
 
 const $chatMessages = createStore<Message[]>(inital)
 

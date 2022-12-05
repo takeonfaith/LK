@@ -1,15 +1,15 @@
-import { chatMessageModel, chatMessagesModel } from '@features/chat/model'
+import { chatsMessageModel, chatMessagesModel } from '@features/chat/model'
 import { Button, Input } from '@ui/atoms'
 import { ImAttachment } from 'react-icons/im'
 import { IoMdSend } from 'react-icons/io'
 import styled from 'styled-components'
 
 const ChatInput = () => {
-    const message = chatMessageModel.selectors.useMessage()
+    const message = chatsMessageModel.selectors.useMessage()
     return (
         <ChatInputWrapper>
             <Button icon={<ImAttachment />} onClick={() => null} background="transparent" />
-            <Input value={message} setValue={chatMessageModel.events.update} placeholder="Введите сообщение..." />
+            <Input value={message} setValue={chatsMessageModel.events.update} placeholder="Введите сообщение..." />
             <Button
                 icon={<IoMdSend />}
                 onClick={() => chatMessagesModel.events.sendMessage()}

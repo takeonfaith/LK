@@ -1,4 +1,4 @@
-import { Chats } from '@entities/chat/types/chat'
+import { Chat } from '@entities/chat/types/chat'
 import { Title } from '@ui/atoms'
 import useResize from '@utils/hooks/use-resize'
 import React from 'react'
@@ -11,7 +11,7 @@ const ChatItemsWrapper = styled.div<{ height: number }>`
 `
 
 interface Props {
-    chats: Chats
+    chats: Record<string, Chat>
     isOpen: boolean
 }
 

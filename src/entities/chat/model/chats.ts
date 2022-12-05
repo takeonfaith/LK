@@ -1,6 +1,6 @@
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
-import { Chat, Chats } from '../types/chat'
+import { Chat } from '../types/chat'
 
 const chats: Chat[] = [
     {
@@ -22,7 +22,7 @@ const loadChatsFx = createEffect(async (): Promise<Chat[]> => {
 
 sample({ clock: loadChats, target: loadChatsFx })
 
-const $chats = createStore<Chats>({})
+const $chats = createStore<Record<string, Chat>>({})
 
 sample({
     clock: loadChatsFx.doneData,
