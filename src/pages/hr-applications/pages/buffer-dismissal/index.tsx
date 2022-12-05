@@ -15,6 +15,7 @@ import { getWorkerData, postWorkerStatuses } from '@api/application-api'
 import getExHrApplicationsColumns from './lib/get-ex-hr-applications-columns'
 import { RiContactsBookLine } from 'react-icons/ri'
 import localizeDate from '@utils/localize-date'
+import { Link } from 'react-router-dom'
 
 const ApplicationPageWrapper = styled.div`
     display: flex;
@@ -143,7 +144,7 @@ const parseJobs = () => {
                                                         : false
                                                 }
                                             >
-                                                <a href="#/hr-applications/dismissal">
+                                                <Link to="/hr-applications/dismissal">
                                                     <Button
                                                         text="Уволиться с этой должности"
                                                         background="rgb(236,95,107)"
@@ -156,7 +157,7 @@ const parseJobs = () => {
                                                         height="36px"
                                                         fixedInMobile
                                                     />
-                                                </a>
+                                                </Link>
                                             </Collapse>
                                         </div>
                                         <Collapse isOpened={object.dismissalApplications.length == 0 ? false : true}>
