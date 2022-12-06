@@ -91,12 +91,15 @@ const ParseJobs = () => {
     const [opened, setOpened] = useState(Array(dataWorkerApplication?.length).fill(false))
     const [openedHistory, setOpenedHistory] = useState(false)
     let counter = false
+
     if (!!dataWorkerApplication) {
         return (
             <div className="jobBlocks">
                 {dataWorkerApplication.map((object, i) => {
-                    if (object.isDismissal) return (counter = true)
-                    else
+                    if (object.isDismissal) {
+                        counter = true
+                        return null
+                    } else
                         return (
                             <div className="block">
                                 <div className="label">
@@ -118,26 +121,14 @@ const ParseJobs = () => {
                                     <br />
                                     Ставка: {object.rate}
                                     <br />
-                                    Вид места работы: добавим
+                                    {/* Вид места работы: добавим */}
                                     <br />
                                 </div>
 
                                 <Collapse isOpened={opened[i]} className="collapseс">
                                     <div className="collapsed">
                                         <div className="buttonBlock">
-                                            <Collapse
-                                                isOpened={
-                                                    object?.dismissalApplications[
-                                                        object.dismissalApplications.length - 1
-                                                    ]?.status == 'Не согласовано' ||
-                                                    object?.dismissalApplications[
-                                                        object.dismissalApplications.length - 1
-                                                    ]?.dismissalOrder?.orderStatus == 'Не согласован' ||
-                                                    object?.dismissalApplications.length == 0
-                                                        ? true
-                                                        : false
-                                                }
-                                            >
+                                            {object.canBeRepeated && (
                                                 <Link to="/hr-applications/dismissal">
                                                     <Button
                                                         text="Уволиться с этой должности"
@@ -152,7 +143,7 @@ const ParseJobs = () => {
                                                         fixedInMobile
                                                     />
                                                 </Link>
-                                            </Collapse>
+                                            )}
                                         </div>
                                         <Collapse isOpened={object.dismissalApplications.length == 0 ? false : true}>
                                             <div>
