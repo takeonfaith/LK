@@ -68,11 +68,17 @@ const SendHrFormDismissal = async (
         await applicationsModel.effects.postApplicationFx(aaa)
         setLoading(false)
         setCompleted(true)
-    } catch (error) {
-        setLoading(false)
         popUpMessageModel.events.evokePopUpMessage({
             message: `Форма отправлена успешно`,
-            type: 'success',
+            type: 'alert',
+            time: 30000,
+        })
+    } catch (error) {
+        setLoading(false)
+
+        popUpMessageModel.events.evokePopUpMessage({
+            message: `Не удалось отправить форму`,
+            type: 'failure',
             time: 30000,
         })
     }
