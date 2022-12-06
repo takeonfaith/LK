@@ -7,14 +7,8 @@ import { FiInfo } from 'react-icons/fi'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
 import getHrApplicationsColumns from './lib/get-hr-applications-columns'
-
-import Dismissal from '../dismissal'
-import { useHistory } from 'react-router'
 import { setCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
-import { getWorkerData, postWorkerStatuses } from '@api/application-api'
 import getExHrApplicationsColumns from './lib/get-ex-hr-applications-columns'
-import { RiContactsBookLine } from 'react-icons/ri'
-import localizeDate from '@utils/localize-date'
 import { Link } from 'react-router-dom'
 
 const ApplicationPageWrapper = styled.div`
@@ -200,7 +194,7 @@ const ParseJobs = () => {
                     </div>
 
                     <Collapse isOpened={openedHistory} className="collapseс">
-                        {dataWorkerApplication.map((object, i) => {
+                        {dataWorkerApplication.map((object) => {
                             if (!object.isDismissal) return null
                             else
                                 return (
@@ -215,6 +209,7 @@ const ParseJobs = () => {
                                                             ...item,
                                                             jobGuid: object.jobGuid,
                                                             jobTitle: object.jobTitle,
+                                                            jobDivision: object.jobTitle + ', ' + object.subDivision,
                                                             subDivision: object.subDivision,
                                                             rate: object.rate,
                                                         }

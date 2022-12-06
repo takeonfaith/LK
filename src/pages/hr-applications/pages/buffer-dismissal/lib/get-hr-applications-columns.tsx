@@ -1,15 +1,9 @@
-import {
-    ApplicationsConstants,
-    hrApplicationsConstants,
-    hrOrderConstants,
-    hrOrderRegisterConstants,
-} from '@entities/applications/consts'
+import { hrApplicationsConstants, hrOrderConstants, hrOrderRegisterConstants } from '@entities/applications/consts'
 
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
-type dataKey = 'orderDate' | 'orderNumber' | 'orderStatus' | 'registrationStatus'
-const getHrApplicationsColumns = (data?: any): ColumnProps[] => {
+const getHrApplicationsColumns = (): ColumnProps[] => {
     return [
         //{ title: 'Название', field: 'title', priority: 'one', search: true, },
 
