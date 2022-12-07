@@ -65,6 +65,7 @@ const ContentLayout = () => {
             type: 'info',
             time: 5000,
         })
+        // InstallApp()
     }, [])
 
     useEffect(() => {

@@ -1,3 +1,4 @@
+import React from 'react'
 import { HashRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'

@@ -1,3 +1,4 @@
+import React from 'react'
 import { IPaymentItem } from '@api/model'
 import { PaymentItem } from '@features/payments'
 import { Title } from '@ui/atoms'

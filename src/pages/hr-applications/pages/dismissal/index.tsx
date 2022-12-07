@@ -1,3 +1,4 @@
+import React from 'react'
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
 import { specialFieldsNameT } from '@entities/applications/consts'

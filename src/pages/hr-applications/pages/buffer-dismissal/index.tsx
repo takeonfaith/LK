@@ -1,13 +1,14 @@
+import React from 'react'
 import { applicationsModel } from '@entities/applications'
 import { setCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
 import { Button, HrBlock, Message, Title, Wrapper } from '@ui/atoms'
 import TableHr from '@ui/table-hr'
 import { useState } from 'react'
-import { Collapse } from 'react-collapse'
 import { FiInfo } from 'react-icons/fi'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
 import getHrApplicationsColumns from './lib/get-hr-applications-columns'
+import { Collapse } from 'react-collapse'
 
 const ApplicationPageWrapper = styled.div`
     display: flex;

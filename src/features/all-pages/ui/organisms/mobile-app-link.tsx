@@ -1,3 +1,4 @@
+import React from 'react'
 import Block from '@ui/block'
 import { Title } from '@ui/title'
 import styled from 'styled-components'

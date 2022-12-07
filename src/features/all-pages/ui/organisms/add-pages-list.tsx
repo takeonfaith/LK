@@ -1,3 +1,4 @@
+import React from 'react'
 import { IRoute } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
