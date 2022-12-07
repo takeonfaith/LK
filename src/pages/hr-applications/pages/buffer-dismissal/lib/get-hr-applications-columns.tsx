@@ -70,9 +70,7 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
             catalogs: [...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
             render: (value, data) => {
                 if (!value.orderStatus) return null
-                const title = data?.dismissalOrder?.registrationStatus
-                    ? `${value.orderStatus} / ${data.dismissalOrder.registrationStatus}`
-                    : value.orderStatus
+                const title = value.orderStatus + data.dismissalOrder.registrationStatus
                 return (
                     <Message
                         type={
