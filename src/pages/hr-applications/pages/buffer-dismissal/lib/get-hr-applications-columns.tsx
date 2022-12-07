@@ -1,4 +1,4 @@
-import { hrApplicationsConstants, hrOrderConstants, hrOrderRegisterConstants } from '@entities/applications/consts'
+import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
 
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
@@ -38,6 +38,14 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
             type: 'date',
             priority: 'one',
             align: 'center',
+            render: () => {
+                const today = new Date()
+                const yyyy = today.getFullYear()
+                const mm = today.getMonth() + 1
+                const dd = today.getDate()
+
+                return dd + '.' + mm + '.' + yyyy
+            },
         },
         {
             title: 'Номер приказа',
@@ -60,51 +68,54 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
             priority: 'one',
             width: '200px',
             catalogs: [...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
-            render: (value) =>
-                value.orderStatus && (
-                    <Message
-                        type={
-                            value.orderStatus === 'Подписан'
-                                ? 'success'
-                                : value.orderStatus === 'Не создан'
-                                ? 'failure'
-                                : 'alert'
-                        }
-                        title={value.orderStatus}
-                        align="center"
-                        width="100%"
-                        icon={null}
-                        maxWidth="150px"
-                    />
-                ),
+            render: (value, data) => {
+                return (
+                    value.orderStatus && (
+                        <Message
+                            type={
+                                value.orderStatus === 'Подписан'
+                                    ? 'success'
+                                    : value.orderStatus === 'Не создан'
+                                    ? 'failure'
+                                    : 'alert'
+                            }
+                            title={`${value.orderStatus} / ${data.dismissalOrder.status}`}
+                            align="center"
+                            width="100%"
+                            icon={null}
+                            maxWidth="150px"
+                        />
+                    )
+                )
+            },
         },
         { title: 'Файл заявления', priority: 'one', field: 'file', type: 'file' },
-        {
-            title: 'Статус регистрации приказа',
-            field: 'dismissalOrder',
-            priority: 'one',
+        // {
+        //     title: 'Статус регистрации приказа',
+        //     field: 'dismissalOrder',
+        //     priority: 'one',
 
-            catalogs: [
-                ...(Object.values(hrOrderRegisterConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
-            ],
-            render: (value, elements) =>
-                elements.dismissalOrder.orderStatus == 'Подписан' && (
-                    <Message
-                        type={
-                            value.registrationStatus === 'Зарегистрирован'
-                                ? 'success'
-                                : value.registrationStatus === 'Не зарегистрирован'
-                                ? 'failure'
-                                : 'alert'
-                        }
-                        title={value.registrationStatus}
-                        align="center"
-                        width="100%"
-                        icon={null}
-                        maxWidth="150px"
-                    />
-                ),
-        },
+        //     catalogs: [
+        //         ...(Object.values(hrOrderRegisterConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
+        //     ],
+        //     render: (value, elements) =>
+        //         elements.dismissalOrder.orderStatus == 'Подписан' && (
+        //             <Message
+        //                 type={
+        //                     value.registrationStatus === 'Зарегистрирован'
+        //                         ? 'success'
+        //                         : value.registrationStatus === 'Не зарегистрирован'
+        //                         ? 'failure'
+        //                         : 'alert'
+        //                 }
+        //                 title={value.registrationStatus}
+        //                 align="center"
+        //                 width="100%"
+        //                 icon={null}
+        //                 maxWidth="150px"
+        //             />
+        //         ),
+        // },
     ]
 }
 
