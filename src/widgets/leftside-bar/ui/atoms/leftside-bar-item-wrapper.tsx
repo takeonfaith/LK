@@ -75,8 +75,8 @@ const LeftsideBarItemWrapper = styled(Link)<{
         }
 
         &::before {
-            top: auto;
-            bottom: 0px;
+            display: none;
+            top: -2px;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -87,7 +87,13 @@ const LeftsideBarItemWrapper = styled(Link)<{
         }
 
         .title {
-            display: none;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            bottom: -5px;
+            font-size: 0.65em;
+            width: 100%;
+            text-align: center;
         }
     }
 `

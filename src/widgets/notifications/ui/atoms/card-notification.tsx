@@ -1,3 +1,4 @@
+import React from 'react'
 import { baseNotification, businesstripNotification } from '@api/model/notification'
 import { Colors } from '@consts'
 import { personalNotificationModel } from '@entities/notification'

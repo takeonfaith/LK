@@ -1,3 +1,4 @@
+import React from 'react'
 import { CHAT_ROUTE } from '@app/routes/general-routes'
 import { contextMenuModel } from '@entities/context-menu'
 import { Button } from '@ui/atoms'

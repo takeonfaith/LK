@@ -3,7 +3,7 @@ import { adminLinksModel } from '@entities/admin-links'
 import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
 import React, { Suspense, useEffect } from 'react'
-import { Redirect, Route, Switch, useLocation } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'
 import ContentLayout from '../../shared/ui/content-layout'
 import { applicationsModel } from '@entities/applications'
@@ -19,6 +19,7 @@ const Router = () => {
         if (isAuthenticated) {
             adminLinksModel.effects.getAdminLinksFx()
             applicationsModel.effects.getUserDataApplicationsFx()
+            applicationsModel.effects.getWorkerPosts()
         }
     }, [isAuthenticated])
 
@@ -35,14 +36,14 @@ const Router = () => {
     return isAuthenticated ? (
         <ContentLayout />
     ) : (
-        <Switch>
-            <Suspense fallback={null}>
+        <Suspense fallback={null}>
+            <Switch>
                 {publicRoutes.map(({ path, Component }, i) => {
                     return <Route path={path} component={Component} exact={true} key={i} />
                 })}
                 <Redirect exact to={LOGIN_ROUTE} />
-            </Suspense>
-        </Switch>
+            </Switch>
+        </Suspense>
     )
 }
 

@@ -9,7 +9,7 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; isClickable: boolean }
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background: #434343;
+    background: #3e3e3e;
     border-radius: var(--brLight);
     z-index: 100;
     transition: 0.2s transform, 0.2s opacity, 0.2s visibility;

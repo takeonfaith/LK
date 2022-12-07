@@ -10,6 +10,7 @@ const Line = styled.div<{ direction: Direction }>`
     align-items: ${({ direction }) => (direction === 'vertical' ? 'flex-start' : 'center')};
     width: 100%;
     column-gap: 5px;
+    row-gap: 5px;
     margin-top: 10px;
 `
 

@@ -1,10 +1,10 @@
+import React from 'react'
 import { userModel } from '@entities/user'
 import AllInfo from '@features/home/ui/molecules/all-info'
 import Orders from '@features/home/ui/molecules/orders'
 import ContactInfoActualizationPage from '@pages/contact-info-actualization'
 import DataVerificationPage from '@pages/data-verification'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
-import PageIsNotReady from '@pages/page-is-not-ready'
 import styled from 'styled-components'
 import { SliderPage } from 'widgets'
 
@@ -49,14 +49,6 @@ const UserInfo = () => {
     const studentPages = [
         { title: 'Учетная карточка', content: <AllInfo user={user} /> },
         { title: 'Приказы', content: <Orders orders={user.orders} /> },
-        {
-            title: 'Актуализация контактных данных',
-            content: (
-                <div style={{ justifyContent: 'start' }}>
-                    <PageIsNotReady oldVersionUrl={''} />
-                </div>
-            ),
-        },
         { title: 'Соглашение об электронном взаимодействии', content: <ElectronicInteractionAgreementPage /> },
     ]
 

@@ -1,6 +1,7 @@
 import { IModules, ISchedule, ViewType } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
+import retakeRoutes from '@features/schedule/config'
 import getSessionStats from '@features/schedule/lib/get-session-stats'
 import {
     ScheduleViewButtonsList,
@@ -62,7 +63,7 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                     <ExamStats {...getSessionStats(schedule['2'])} />
                     <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['2']} />
                 </React.Fragment>,
-                <RetakeSchedule key={3} />,
+                <RetakeSchedule links={retakeRoutes} key={3} />,
             ]
         )
     }, [schedule, view])

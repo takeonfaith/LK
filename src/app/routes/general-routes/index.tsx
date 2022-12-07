@@ -19,7 +19,6 @@ import {
     FeedbackPage,
     CantAccessPage,
     Home,
-    GetYourLoginPage,
     MemoFreshmenPage,
     MemoTeacherPage,
     CustomizeMenu,
@@ -38,6 +37,7 @@ import {
     HomeSettings,
     AllPages,
     SettingsPage,
+    GetYourLoginPage,
 } from './pages'
 
 import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
@@ -60,8 +60,8 @@ export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
 export const CANT_ACCESS_ROUTE = '/cant-access'
 export const MEMO_FRESHMEN_ROUTE = '/memo-freshmen'
+export const GET_YOUR_LOGIN_ROUTE = '/get-your-login'
 export const MEMO_TEACHER_ROUTE = '/memo-teacher'
-export const GET_YOUR_LOGIN_ROUTE = '/GET-YOUR-LOGIN'
 export const SETTINGS_ROUTE = '/settings'
 export const TEMPLATE_SETTINGS_ROUTE = SETTINGS_ROUTE + '/:id'
 export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'

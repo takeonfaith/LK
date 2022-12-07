@@ -9,10 +9,9 @@ import { useHistory } from 'react-router'
 import { FiChevronLeft } from 'react-icons/fi'
 import { APPLICATIONS_ROUTE } from '@routes'
 import getFamily from './lib/get-family'
-import getAdditionally from './lib/get-additionally'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
+import { getAdditionally, globalAppSendForm } from '@pages/applications/lib'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 

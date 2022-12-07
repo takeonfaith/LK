@@ -1,81 +1,59 @@
-import retakeLinks from '@features/schedule/config/retakeLinks'
-import { CenterPage } from '@ui/atoms'
-import BlockWrapper from '@ui/block/styles'
-import List from '@ui/list'
-import { Title } from '@ui/title'
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
+import List from '@ui/list'
+import { IRoutes } from '@app/routes/general-routes'
+import RetakeLink from '../molecules/retake-link'
 
-const RetakeSchedule = () => {
+const LinksListWrapper = styled.div`
+    width: 745px;
+    padding: var(--desktop-page-padding);
+    display: flex;
+    justify-content: center;
+    color: var(--text);
+
+    @media (max-width: 1220px) {
+        width: 610px;
+    }
+
+    @media (max-width: 820px) {
+        width: 475px;
+    }
+
+    @media (max-width: 600px) {
+        padding: 10px;
+        width: 415px;
+    }
+
+    @media (max-width: 500px) {
+        width: calc((33vw * 2) + 5px);
+    }
+
+    @media (max-width: 350px) {
+        width: calc((33vw * 1) + 5px);
+    }
+`
+
+type Props = {
+    links: IRoutes
+}
+
+const RetakeSchedule = ({ links }: Props) => {
     return (
-        <CenterPage>
-            <BlockWrapper alignItems="flex-start" height="fit-content">
-                <ContentBlock>
-                    {retakeLinks.map(({ title, links, href }, index) => {
-                        if (href) {
-                            return (
-                                <CustomLink key={title + index} href={href}>
-                                    {title}
-                                </CustomLink>
-                            )
-                        }
-                        if (links.length) {
-                            return (
-                                <LinksBlock key={title + index}>
-                                    <Title size={3} align="left">
-                                        {title}
-                                    </Title>
-                                    <List>
-                                        {links.map(({ title, href }, index) => {
-                                            return (
-                                                <LinkListItem key={title + index}>
-                                                    <CustomLink href={href} target="_blank" rel="noreferrer">
-                                                        {title}
-                                                    </CustomLink>
-                                                </LinkListItem>
-                                            )
-                                        })}
-                                    </List>
-                                </LinksBlock>
-                            )
-                        }
-                    })}
-                </ContentBlock>
-            </BlockWrapper>
-        </CenterPage>
+        <LinksListWrapper>
+            <List
+                direction="horizontal"
+                gap={10}
+                horizontalAlign={'left'}
+                scroll={false}
+                wrap={true}
+                wrapOnMobile={true}
+            >
+                {Object.values(links).map((el) => {
+                    return <RetakeLink key={el.id} {...el} />
+                })}
+            </List>
+        </LinksListWrapper>
     )
 }
 
-const ContentBlock = styled.div`
-    flex: 1 1 auto;
-    background: var(--theme);
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 24px;
-`
-
-const LinksBlock = styled.div`
-    margin-top: 20px;
-`
-
-const LinkListItem = styled.li`
-    list-style: disc;
-    a {
-        display: inline-block;
-        margin-top: 10px;
-    }
-    :first-child a {
-        margin-top: 20px;
-    }
-`
-
-const CustomLink = styled.a`
-    display: block;
-    font-size: 18px;
-    line-height: 22px;
-    :not(:first-child) {
-        margin-top: 20px;
-    }
-`
-
-export default RetakeSchedule
+export default memo(RetakeSchedule)

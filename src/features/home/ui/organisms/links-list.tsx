@@ -29,10 +29,10 @@ const LinksList = ({
     return (
         <List
             direction="horizontal"
+            scroll={false}
             gap={10}
             horizontalAlign={align}
             title={title}
-            scroll={false}
             wrap
             wrapOnMobile={wrapOnMobile}
         >

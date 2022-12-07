@@ -13,6 +13,6 @@ export const getAppData = (): Promise<AxiosResponse<UserApplication>> => {
 }
 
 export const post = async (data: ApplicationCreating) => {
-    const { data: resultRequest } = await $hrApi.post(`WeekendRequest`, data)
+    const { data: resultRequest } = await $hrApi.post(`Dismissal.Post`, data)
     return resultRequest.result
 }

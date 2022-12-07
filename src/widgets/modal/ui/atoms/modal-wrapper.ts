@@ -1,3 +1,4 @@
+import { Colors } from '@consts'
 import styled from 'styled-components'
 
 const ModalWrapper = styled.div<{ isOpen: boolean }>`
@@ -19,15 +20,14 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
 
     .close-button {
         position: absolute;
-        top: 20px;
+        top: 12px;
         right: 20px;
-
-        padding: 0;
-        height: 20px;
-        width: 20px;
+        z-index: 100;
+        padding: 8px;
 
         &:hover {
             filter: brightness(0.8);
+            background: ${Colors.grey.transparentAF};
         }
     }
 `

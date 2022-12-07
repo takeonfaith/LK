@@ -4,16 +4,22 @@ import React from 'react'
 
 interface Props {
     oldVersionUrl?: string
+    errorText?: string
+    buttonText?: string
 }
 
-const PageIsNotReady = ({ oldVersionUrl }: Props) => {
+const PageIsNotReady = ({
+    oldVersionUrl,
+    errorText = 'Страница еще находится в разработке. Если вам она нужна, вернитесь к старому дизайну',
+    buttonText = 'Перейти к старому дизайну',
+}: Props) => {
     // useEffect(() => {
     //     window.location.href = `/old/?p=${oldVersionUrl?.slice(1, oldVersionUrl.length)}`
     // }, [])
     return (
-        <Error text={'Страница еще находится в разработке. Если вам она нужна, вернитесь к старому дизайну'}>
+        <Error text={errorText}>
             <LinkButton
-                text={'Перейти к старому дизайну'}
+                text={buttonText}
                 onClick={() => {
                     localStorage.setItem('useOldVersion', 'true')
                 }}

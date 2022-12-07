@@ -8,7 +8,7 @@ import { FiInfo } from 'react-icons/fi'
 
 const CantAccessPage = () => {
     return (
-        <CenterPage>
+        <CenterPage alignItems="center" height="100%">
             <Block height="fit-content" orientation="vertical" maxWidth="500px" gap="10px">
                 <GoBackButton />
                 <Title size={4} align="left">

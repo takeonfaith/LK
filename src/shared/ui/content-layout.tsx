@@ -16,7 +16,6 @@ import InitialLoader from './initial-loader'
 import Story from './story'
 import React from 'react'
 import useShowTutorial from '@utils/hooks/use-show-tutorial'
-import InstallApp from '@utils/install-app'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -66,7 +65,7 @@ const ContentLayout = () => {
             type: 'info',
             time: 5000,
         })
-        InstallApp()
+        // InstallApp()
     }, [])
 
     useEffect(() => {

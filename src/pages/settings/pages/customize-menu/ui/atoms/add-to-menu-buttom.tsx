@@ -10,6 +10,7 @@ interface Props {
 const AddToMenuButton = ({ chosen, onClick }: Props) => {
     return (
         <Button
+            minWidth="35px"
             icon={chosen ? <IoIosCheckmarkCircle style={{ color: 'var(--blue)' }} /> : <IoIosRadioButtonOff />}
             onClick={onClick}
         />

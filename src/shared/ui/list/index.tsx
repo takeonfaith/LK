@@ -148,4 +148,4 @@ const List = (props: Props) => {
     )
 }
 
-export default React.memo(List)
+export default React.memo(List) as typeof List
