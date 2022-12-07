@@ -1,12 +1,17 @@
 import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
-
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
-const getHrApplicationsColumns = (): ColumnProps[] => {
+const getExHrApplicationsColumns = (): ColumnProps[] => {
     return [
         //{ title: 'Название', field: 'title', priority: 'one', search: true, },
 
+        {
+            title: 'Должность, Структурное подразделение',
+            field: 'jobDivision',
+            priority: 'one',
+            width: '200px',
+        },
         {
             title: 'Статус заявления',
             field: 'status',
@@ -119,4 +124,4 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
     ]
 }
 
-export default getHrApplicationsColumns
+export default getExHrApplicationsColumns

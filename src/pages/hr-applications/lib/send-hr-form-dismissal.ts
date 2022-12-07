@@ -59,6 +59,7 @@ const SendHrFormDismissal = async (
         const aaa = {
             guid: parseJwt(JSON.parse(getJwtToken() || '{}'))['IndividualGuid'],
             jobGuid: result.jobGuid,
+            signingDate: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
             dateOfDismissal: result.last_day,
             isSendMail: result.get_tk == 'По почте',
             isRetirement: result.reason == 'Выходом на пенсию',
@@ -67,11 +68,17 @@ const SendHrFormDismissal = async (
         await applicationsModel.effects.postApplicationFx(aaa)
         setLoading(false)
         setCompleted(true)
-    } catch (error) {
-        setLoading(false)
         popUpMessageModel.events.evokePopUpMessage({
             message: `Форма отправлена успешно`,
-            type: 'success',
+            type: 'alert',
+            time: 30000,
+        })
+    } catch (error) {
+        setLoading(false)
+
+        popUpMessageModel.events.evokePopUpMessage({
+            message: `Не удалось отправить форму`,
+            type: 'failure',
             time: 30000,
         })
     }

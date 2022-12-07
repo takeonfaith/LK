@@ -1,5 +1,4 @@
 import { applicationsModel } from '@entities/applications'
-import { setCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
 import { Button, HrBlock, Message, Title, Wrapper } from '@ui/atoms'
 import TableHr from '@ui/table-hr'
 import { useState } from 'react'
@@ -8,6 +7,9 @@ import { FiInfo } from 'react-icons/fi'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
 import getHrApplicationsColumns from './lib/get-hr-applications-columns'
+import { setCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
+import getExHrApplicationsColumns from './lib/get-ex-hr-applications-columns'
+import { Link } from 'react-router-dom'
 
 const ApplicationPageWrapper = styled.div`
     display: flex;
@@ -70,8 +72,8 @@ const ApplicationPageWrapper = styled.div`
         margin-bottom: 15px;
     }
     .moreButton {
-        margin: -10px;
-        margin-top: -30px;
+        margin-top: -20px;
+        margin-left: -10px;
     }
     .historyTable {
         width: 100%;
@@ -82,21 +84,22 @@ const ApplicationPageWrapper = styled.div`
     }
 `
 
-const parseJobs = () => {
+const ParseJobs = () => {
     const {
         data: { dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
-    if (!!dataWorkerApplication) {
-        const [opened, setOpened] = useState(Array(dataWorkerApplication.length).fill(false))
-        const [openedHistory, setOpenedHistory] = useState(false)
-        const [openedHisJob, setOpenedHisJob] = useState(Array(dataWorkerApplication.length).fill(false))
-        let openedButton: boolean
+    const [opened, setOpened] = useState(Array(dataWorkerApplication?.length).fill(false))
+    const [openedHistory, setOpenedHistory] = useState(false)
+    let counter = false
 
+    if (!!dataWorkerApplication) {
         return (
             <div className="jobBlocks">
                 {dataWorkerApplication.map((object, i) => {
-                    if (object.isDismissal) return null
-                    else
+                    if (object.isDismissal) {
+                        counter = true
+                        return null
+                    } else
                         return (
                             <div className="block">
                                 <div className="label">
@@ -118,25 +121,15 @@ const parseJobs = () => {
                                     <br />
                                     Ставка: {object.rate}
                                     <br />
-                                    Вид места работы: добавим
+                                    {/* Вид места работы: добавим */}
                                     <br />
                                 </div>
-                                {
-                                    (openedButton =
-                                        object?.dismissalApplications[object.dismissalApplications.length - 1]
-                                            ?.status == 'Не согласовано' ||
-                                        object?.dismissalApplications[object.dismissalApplications.length - 1]
-                                            ?.dismissalOrder?.orderStatus == 'Не согласован' ||
-                                        object?.dismissalApplications.length == 0
-                                            ? true
-                                            : false)
-                                }
 
                                 <Collapse isOpened={opened[i]} className="collapseс">
                                     <div className="collapsed">
                                         <div className="buttonBlock">
-                                            <Collapse isOpened={openedButton}>
-                                                <a href="#/hr-applications/dismissal">
+                                            {object.canBeRepeated && (
+                                                <Link to="/hr-applications/dismissal">
                                                     <Button
                                                         text="Уволиться с этой должности"
                                                         background="rgb(236,95,107)"
@@ -149,8 +142,8 @@ const parseJobs = () => {
                                                         height="36px"
                                                         fixedInMobile
                                                     />
-                                                </a>
-                                            </Collapse>
+                                                </Link>
+                                            )}
                                         </div>
                                         <Collapse isOpened={object.dismissalApplications.length == 0 ? false : true}>
                                             <div>
@@ -158,25 +151,7 @@ const parseJobs = () => {
                                                     <TableHr
                                                         loading={!object.dismissalApplications}
                                                         columns={getHrApplicationsColumns()}
-                                                        data={object.dismissalApplications.map(
-                                                            ({
-                                                                status,
-                                                                signDate,
-                                                                dismissalOrder: {
-                                                                    orderNumber,
-                                                                    orderDate,
-                                                                    registrationStatus,
-                                                                    orderStatus,
-                                                                },
-                                                            }) => ({
-                                                                status,
-                                                                signDate,
-                                                                orderNumber,
-                                                                orderDate,
-                                                                orderStatus,
-                                                                registrationStatus,
-                                                            }),
-                                                        )}
+                                                        data={object.dismissalApplications}
                                                         maxOnPage={10}
                                                     />
                                                 </div>
@@ -204,78 +179,49 @@ const parseJobs = () => {
                         История должностей:
                         <Button
                             icon={openedHistory ? <HiChevronUp /> : <HiChevronDown />}
-                            onClick={() => setOpenedHistory(!openedHistory)}
+                            onClick={() => counter && setOpenedHistory(!openedHistory)}
                             background="transparent"
                         />
                     </div>
 
                     <Collapse isOpened={openedHistory} className="collapseс">
-                        {dataWorkerApplication.map((object, i) => {
+                        {dataWorkerApplication.map((object) => {
                             if (!object.isDismissal) return null
                             else
                                 return (
                                     <div>
-                                        <div className="config">
-                                            <div className="label">
-                                                {object.jobTitle}
-                                                <Button
-                                                    icon={openedHisJob[i] ? <HiChevronUp /> : <HiChevronDown />}
-                                                    onClick={() =>
-                                                        setOpenedHisJob((prevState) =>
-                                                            prevState.map((openedHisJob, idx) =>
-                                                                idx === i ? !openedHisJob : openedHisJob,
-                                                            ),
-                                                        )
-                                                    }
-                                                    background="transparent"
+                                        <Collapse isOpened={object.dismissalApplications.length == 0 ? false : true}>
+                                            <div className="text">
+                                                <TableHr
+                                                    loading={!dataWorkerApplication}
+                                                    columns={getExHrApplicationsColumns()}
+                                                    data={object.dismissalApplications.map((item) => {
+                                                        return {
+                                                            ...item,
+                                                            jobGuid: object.jobGuid,
+                                                            jobTitle: object.jobTitle,
+                                                            jobDivision: object.jobTitle + ', ' + object.subDivision,
+                                                            subDivision: object.subDivision,
+                                                            rate: object.rate,
+                                                        }
+                                                    })}
+                                                    maxOnPage={10}
                                                 />
-                                            </div>
-                                        </div>
-
-                                        <Collapse isOpened={openedHisJob[i]} className="collapseс">
-                                            <div className="collapsed">
-                                                <div className="text">
-                                                    Структурное подразделение: {object.subDivision}
-                                                    <br />
-                                                    Ставка: {object.rate}
-                                                    <br />
-                                                    Вид места работы: добавим
-                                                    <br />
-                                                </div>
-                                                <Collapse
-                                                    isOpened={object.dismissalApplications.length == 0 ? false : true}
-                                                >
-                                                    <div className="text">
-                                                        <TableHr
-                                                            loading={!dataWorkerApplication}
-                                                            columns={getHrApplicationsColumns()}
-                                                            data={object.dismissalApplications.map(
-                                                                ({
-                                                                    status,
-                                                                    signDate,
-                                                                    dismissalOrder: {
-                                                                        orderNumber,
-                                                                        orderDate,
-                                                                        registrationStatus,
-                                                                    },
-                                                                }) => ({
-                                                                    status,
-                                                                    signDate,
-                                                                    orderNumber,
-                                                                    orderDate,
-                                                                    registrationStatus,
-                                                                }),
-                                                            )}
-                                                            maxOnPage={10}
-                                                        />
-                                                    </div>
-                                                </Collapse>
                                             </div>
                                         </Collapse>
                                     </div>
                                 )
                         })}
                     </Collapse>
+                    <div className="moreButton">
+                        <Button
+                            onClick={() => {
+                                counter && setOpenedHistory(!openedHistory)
+                            }}
+                            text={!counter ? 'История пуста' : openedHistory ? 'Скрыть' : 'Подробнее'}
+                            background="transparent"
+                        />
+                    </div>
                 </div>
             </div>
         )
@@ -286,8 +232,7 @@ const DismissalBufferPage = () => {
         data: { listApplication },
         error,
     } = applicationsModel.selectors.useApplications()
-    // const { open } = useModal()
-    // const [applications, setApplications] = useState<Application[] | null>(null)
+
     return (
         <Wrapper
             load={() => applicationsModel.effects.getApplicationsFx()}
@@ -308,7 +253,7 @@ const DismissalBufferPage = () => {
                             куда необходимо приехать за готовым документом.
                         </Message>
                     </div>
-                    {parseJobs()}
+                    <ParseJobs />
                 </HrBlock>
             </ApplicationPageWrapper>
         </Wrapper>
