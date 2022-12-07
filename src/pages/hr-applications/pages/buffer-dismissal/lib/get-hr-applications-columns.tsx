@@ -69,23 +69,25 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
             width: '200px',
             catalogs: [...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
             render: (value, data) => {
+                if (!value.orderStatus) return null
+                const title = data?.dismissalOrder?.status
+                    ? `${value.orderStatus} / ${data.dismissalOrder.status}`
+                    : value.orderStatus
                 return (
-                    value.orderStatus && (
-                        <Message
-                            type={
-                                value.orderStatus === 'Подписан'
-                                    ? 'success'
-                                    : value.orderStatus === 'Не создан'
-                                    ? 'failure'
-                                    : 'alert'
-                            }
-                            title={`${value.orderStatus} / ${data.dismissalOrder.status}`}
-                            align="center"
-                            width="100%"
-                            icon={null}
-                            maxWidth="150px"
-                        />
-                    )
+                    <Message
+                        type={
+                            value.orderStatus === 'Подписан'
+                                ? 'success'
+                                : value.orderStatus === 'Не создан'
+                                ? 'failure'
+                                : 'alert'
+                        }
+                        title={title}
+                        align="center"
+                        width="100%"
+                        icon={null}
+                        maxWidth="150px"
+                    />
                 )
             },
         },
