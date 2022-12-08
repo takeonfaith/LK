@@ -24,10 +24,16 @@ const EducationPayments = () => {
             {data?.education.map((education, i) => {
                 return (
                     <React.Fragment key={education.number}>
-                        <Message type="info" title="Информация" icon={<FiInfo />}>
-                            По возникновении технических проблем при подписании договоров и дополнительных соглашений в
-                            Личном кабинете просим обращаться на почту{' '}
-                            <a href="mailto:info@mospolytech.ru">info@mospolytech.ru</a>
+                        <Message type="info" title="Информация" icon={<FiInfo />} gap="12px">
+                            <p>
+                                По возникновении технических проблем при подписании договоров и дополнительных
+                                соглашений в Личном кабинете просим обращаться на почту{' '}
+                                <a href="mailto:info@mospolytech.ru">info@mospolytech.ru</a>
+                            </p>
+                            <p>
+                                Обращаем Ваше внимание на то, что произведенная оплата отображается в этом разделе не
+                                сразу, а обычно в течение 3-4 дней со дня платежа.
+                            </p>
                         </Message>
                         <div className="blocks-wrapper" key={i}>
                             <Block orientation="vertical" maxWidth="800px">
