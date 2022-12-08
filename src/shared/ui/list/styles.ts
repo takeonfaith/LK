@@ -36,7 +36,18 @@ export const Wrapper = styled.div<{ padding?: string; width?: string; minWidth?:
     }
 `
 
-export const ListWrapper = styled.div<StyleProps>`
+const styledPropsArray: Array<keyof StyleProps> = [
+    'wrap',
+    'horizontalAlign',
+    'verticalAlign',
+    'innerPadding',
+    'scroll',
+    'wrapOnMobile',
+]
+
+export const ListWrapper = styled.div.withConfig({
+    shouldForwardProp: (prop) => !styledPropsArray.includes(prop as keyof StyleProps),
+})<StyleProps>`
     display: flex;
     flex-direction: ${({ direction }) => (direction ?? 'vertical') === 'vertical' && 'column'};
     max-height: 100%;

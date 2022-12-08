@@ -14,6 +14,7 @@ const CustomLink = styled.a`
 const WrapperAppLink = styled.div`
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 `
 
 const GooglePlay = styled.img`
@@ -25,7 +26,7 @@ const AppStore = styled.img`
 `
 
 const MobileAppLink = () => (
-    <Block maxWidth={'330px'} orientation="vertical" gap="10px" height="fit-content" alignItems={'left'}>
+    <Block maxWidth="330px" orientation="vertical" gap="10px" height="fit-content" alignItems="left">
         <Title size={3} align="left" bottomGap>
             Мобильное приложение Московского Политеха
         </Title>
@@ -33,10 +34,14 @@ const MobileAppLink = () => (
             Инструкция по применению
         </CustomLink>
         <WrapperAppLink>
-            <a href="https://play.google.com/store/apps/details?id=ru.mospolytech.mobilecampus&hl=en_US&gl=U">
+            <a
+                href="https://play.google.com/store/apps/details?id=ru.mospolytech.mobilecampus&hl=en_US&gl=US"
+                target="_blank"
+                rel="noreferrer"
+            >
                 <GooglePlay src={GooglePlayIcon} />
             </a>
-            <a href="https://play.google.com/store/apps/details?id=ru.mospolytech.mobilecampus&hl=en_US&gl=US">
+            <a href="https://apps.apple.com/ru/app/mospolytech/id1640231782" target="_blank" rel="noreferrer">
                 <AppStore src={AppStoreIcon} />
             </a>
         </WrapperAppLink>
