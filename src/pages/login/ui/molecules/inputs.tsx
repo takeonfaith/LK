@@ -23,8 +23,15 @@ const Inputs = () => {
     } = useLogin()
     return (
         <div className="right" onKeyDown={handleKeyPress}>
-            <List gap={16} horizontalAlign="center" verticalAlign="space-between" height="100%" scroll={false}>
-                <Logo width="60px" short className="logo second" />
+            <List
+                gap={16}
+                horizontalAlign="center"
+                position="static"
+                verticalAlign="space-between"
+                height="100%"
+                scroll={false}
+            >
+                <Logo width="50px" short className="logo second" />
 
                 <Title size={3} align="left">
                     Личный кабинет

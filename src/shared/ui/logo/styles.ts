@@ -8,6 +8,6 @@ export const LogoWrapper = styled.div<{ width?: string }>`
 
     img {
         filter: invert(var(--invert));
-        width: 80%;
+        width: 100%;
     }
 `

@@ -42,7 +42,7 @@ const LeftsideBar = () => {
         <LeftsideBarWrapper isOpen={isOpen} height={height}>
             <div className="top-wrapper">
                 <Link to={HOME_ROUTE}>
-                    <Logo />
+                    <Logo width="165px" />
                 </Link>
                 <UserBig
                     notifications={visibleRoutes?.profile.notifications}

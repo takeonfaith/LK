@@ -19,8 +19,8 @@ import { Link } from 'react-router-dom'
 const Information = () => {
     return (
         <div className="left">
-            <List scroll={false} height="100%" verticalAlign="space-between">
-                <Logo width="60px" short className="logo first" />
+            <List scroll={false} height="100%" verticalAlign="space-between" position="static">
+                <Logo width="50px" short className="logo first" />
                 <List gap={12} scroll={false} height="100%" verticalAlign="center">
                     <Link to={FEEDBACK_ROUTE} tabIndex={-1}>
                         <Button

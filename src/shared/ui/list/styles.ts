@@ -17,12 +17,19 @@ export interface StyleProps {
     fontSize?: string
     scroll?: boolean
     wrap?: boolean
+    position?: string
     wrapOnMobile?: boolean
 }
 
-export const Wrapper = styled.div<{ padding?: string; width?: string; minWidth?: string; height?: string }>`
+export const Wrapper = styled.div<{
+    padding?: string
+    width?: string
+    minWidth?: string
+    height?: string
+    position?: string
+}>`
     padding: ${({ padding }) => padding ?? '0'};
-    position: relative;
+    position: ${({ position }) => position ?? 'relative'};
     width: ${({ width }) => width ?? '100%'};
     height: ${({ height }) => height ?? 'fit-content'};
     min-width: ${({ minWidth }) => minWidth};

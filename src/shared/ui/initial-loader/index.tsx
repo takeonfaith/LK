@@ -116,7 +116,7 @@ const InitialLoader = ({ loading }: Props) => {
 
     return (
         <InitialLoaderWrapper loading={loading}>
-            <Logo short />
+            <Logo short width="100px" />
             {loading && <Loading />}
         </InitialLoaderWrapper>
     )
