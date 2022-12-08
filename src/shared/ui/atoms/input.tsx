@@ -210,7 +210,7 @@ const Input = ({
                 step={maxValue ? 0.1 : undefined}
                 type={inputType}
                 placeholder={placeholder}
-                value={value}
+                value={value ?? ''}
                 autoComplete={autocomplete ? 'on' : 'off'}
                 onKeyDown={(e) => type === 'tel' && phoneMaskKeyDown(e)}
                 onChange={(e) => {
