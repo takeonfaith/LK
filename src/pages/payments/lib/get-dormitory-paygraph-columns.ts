@@ -1,43 +1,53 @@
 import { ColumnProps } from '@ui/table/types'
+import capitalizeFirstLetter from '@utils/capitalize-first-letter'
+
+import renderPayStatus from './render-pay-status'
 
 const getDormitoryPaygraphColumns = (): ColumnProps[] => {
     return [
         {
             title: 'Год',
             field: 'year',
-            search: true,
+            width: '15%',
+            render: (_, row) => {
+                const dateStart = row?.date_start
+                if (!dateStart) {
+                    return '-'
+                }
+
+                return new Date(dateStart).toLocaleDateString('ru', {
+                    year: 'numeric',
+                })
+            },
         },
         {
-            title: 'Дата начала',
-            field: 'date_start',
-            type: 'date',
-            priority: 'five',
-            sort: true,
+            title: 'Месяц',
+            field: 'month',
+            width: '20%',
+            render: (_, row) => {
+                const dateStart = row?.date_start
+                if (!dateStart) {
+                    return '-'
+                }
+
+                const monthString = new Date(dateStart).toLocaleDateString('ru', {
+                    month: 'long',
+                })
+
+                return capitalizeFirstLetter(monthString)
+            },
         },
         {
-            title: 'План. дата окончания',
+            title: 'Оплатить до',
             field: 'date_plan',
             type: 'date',
-            priority: 'five',
+            width: '25%',
             sort: true,
         },
         {
-            title: 'Дата окончания',
-            field: 'date_end',
-            type: 'date',
-            priority: 'five',
-        },
-        {
-            title: 'Cумма к оплате',
-            field: 'sum',
-            type: 'rub',
-            priority: 'one',
-        },
-        {
-            title: 'Оплачено',
+            title: 'Статус',
             field: 'sum_pay',
-            type: 'rub',
-            priority: 'one',
+            render: renderPayStatus,
         },
     ]
 }
