@@ -56,6 +56,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 value: null,
                 editable: true,
                 required: false,
+                specialType: 'PartTime',
                 width: '100%',
                 items: [
                     {

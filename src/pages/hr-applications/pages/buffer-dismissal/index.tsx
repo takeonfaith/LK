@@ -21,10 +21,6 @@ const ApplicationPageWrapper = styled.div`
         margin-top: 0px;
         font-weight: normal;
         font-size: 0.9em;
-        margin-top: 15px;
-    }
-    .message {
-        margin-bottom: -15px;
     }
     .config {
         margin-top: 15px;
@@ -122,7 +118,6 @@ const ParseJobs = () => {
                                     Ставка: {object.rate}
                                     <br />
                                     {/* Вид места работы: добавим */}
-                                    <br />
                                 </div>
 
                                 <Collapse isOpened={opened[i]} className="collapseс">
@@ -140,7 +135,6 @@ const ParseJobs = () => {
                                                         width={'250px'}
                                                         minWidth={'150px'}
                                                         height="36px"
-                                                        fixedInMobile
                                                     />
                                                 </Link>
                                             )}

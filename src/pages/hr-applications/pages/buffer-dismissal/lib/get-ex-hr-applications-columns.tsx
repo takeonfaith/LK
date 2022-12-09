@@ -71,7 +71,7 @@ const getExHrApplicationsColumns = (): ColumnProps[] => {
             title: 'Статус приказа',
             field: 'dismissalOrder',
             priority: 'one',
-            width: '200px',
+            width: '220px',
             catalogs: [...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
             render: (value, data) => {
                 if (!value.orderStatus) return null
@@ -89,7 +89,7 @@ const getExHrApplicationsColumns = (): ColumnProps[] => {
                         align="center"
                         width="100%"
                         icon={null}
-                        maxWidth="150px"
+                        maxWidth="220px"
                     />
                 )
             },
