@@ -4,15 +4,14 @@ import { Title } from '@shared/ui/title'
 import { LocalSearch } from '@ui/molecules'
 import PagintaionList from '@ui/pagination-list'
 import { Event, Store } from 'effector'
-import { useStore } from 'effector-react'
+import { Gate, useStore } from 'effector-react'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { User } from 'widgets'
 
 const ListWrapper = styled.div`
     width: 100%;
-    height: fit-content;
-    overflow-y: auto;
+    height: 100%;
     display: flex;
     flex-direction: column;
 
@@ -38,17 +37,27 @@ type Props<T extends TUser> = {
         $items: Store<T[] | null>
         $isPending: Store<boolean>
         $hasNext: Store<boolean>
-        next: Event<void>
-        load: Event<ServerListRequest<EmptyObject>>
+        next: Event<ServerListRequest<SelectPage | null>>
+        load: Event<ServerListRequest<SelectPage | null>>
     }
+    filters?: SelectPage[]
+    gate: Gate<SelectPage | null>
 }
 
-const ListOfPeople = <T extends TUser>({ title, searchPlaceholder, paginationList }: Props<T>) => {
-    const { $items, $isPending, $hasNext, next } = paginationList
+const ListOfPeople = <T extends TUser>({ title, searchPlaceholder, paginationList, filters }: Props<T>) => {
+    const { $items, $isPending, $hasNext, next, load } = paginationList
     const isPending = useStore($isPending)
     const hasNext = useStore($hasNext)
 
-    const [filters, setFilters] = useState<SelectPage[] | null>(null)
+    const [filter, setFilter] = useState<SelectPage | null>(filters?.[0] ?? null)
+
+    const handleNext = () => {
+        next({ filter })
+    }
+
+    const handleReload = () => {
+        load({ filter })
+    }
 
     return (
         <ListWrapper>
@@ -62,36 +71,17 @@ const ListOfPeople = <T extends TUser>({ title, searchPlaceholder, paginationLis
                     setResult={() => null}
                     placeholder={searchPlaceholder ?? 'Поиск'}
                 />
-                <Select
-                    items={[
-                        {
-                            id: 0,
-                            title: 'Сфера',
-                            children: [
-                                { id: 1, title: 'Сфера 1' },
-                                { id: 2, title: 'Сфера 2' },
-                            ],
-                        },
-                        {
-                            id: 1,
-                            title: 'Группа',
-                            children: [
-                                { id: 3, title: 'Моя группа' },
-                                { id: 4, title: 'Сфера' },
-                            ],
-                        },
-                    ]}
-                    multiple
-                    setSelected={(data: any) => setFilters(data)}
-                    selected={filters}
-                />
+                {filters && <Select items={filters} setSelected={(data: any) => setFilter(data)} selected={filter} />}
             </div>
             <PagintaionList
                 items={$items.getState()}
                 renderItem={renderItem}
-                handleNext={next}
+                handleNext={handleNext}
                 isPending={isPending}
                 hasNext={hasNext}
+                filter={filter}
+                handleReload={handleReload}
+                showAlphabetLetters
             />
         </ListWrapper>
     )
@@ -99,6 +89,6 @@ const ListOfPeople = <T extends TUser>({ title, searchPlaceholder, paginationLis
 
 export default ListOfPeople
 
-function renderItem<T extends TUser>(item: T, index?: number) {
-    return <User name={item.fio} type={item.division ? 'teacher' : 'student'} key={index} />
+function renderItem<T extends TUser>(item: T, isMe: boolean, index?: number) {
+    return <User name={item.fio} type={item.division ? 'teacher' : 'student'} key={index} isMe={isMe} />
 }

@@ -27,6 +27,9 @@ const Select = (props: SelectProps) => {
     } = useSelect(props)
     const { isActive, width, title, required, selected, placeholder } = props
 
+    // eslint-disable-next-line no-console
+    console.log(currentItems)
+
     return (
         <SelectWrapper
             onClick={handleOpen}

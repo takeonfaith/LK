@@ -52,6 +52,7 @@ interface Props {
     name: string
     loading?: boolean
     size?: Size
+    isMe?: boolean
     checked?: boolean
     setChecked?: (value: boolean) => void
     onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
@@ -63,6 +64,7 @@ const User = ({
     name,
     checked,
     onClick,
+    isMe = false,
     loading = false,
     orientation = 'horizontal',
     size = 'middle',
@@ -79,13 +81,15 @@ const User = ({
                 if (onClick) {
                     onClick(e)
                 } else {
-                    open(
-                        type === 'teacher' ? (
-                            <TeacherModal name={name} avatar={avatar} />
-                        ) : (
-                            <StudentModal name={name} avatar={avatar} />
-                        ),
-                    )
+                    if (!isMe) {
+                        open(
+                            type === 'teacher' ? (
+                                <TeacherModal name={name} avatar={avatar} />
+                            ) : (
+                                <StudentModal name={name} avatar={avatar} />
+                            ),
+                        )
+                    }
                 }
             }}
         >
@@ -99,7 +103,7 @@ const User = ({
             />
             <div className="name-and-status">
                 <span className="name">{name}</span>
-                <span className="status"> {type === 'teacher' ? 'Сотрудник' : 'Студент'}</span>
+                <span className="status"> {isMe ? 'Я' : type === 'teacher' ? 'Сотрудник' : 'Студент'}</span>
             </div>
         </UserWrapper>
     )
