@@ -1,3 +1,4 @@
+import React from 'react'
 import { Application } from '@api/model'
 import { applicationsModel } from '@entities/applications'
 import getApplicationsColumns from '@features/applications/lib/get-applications-columns'

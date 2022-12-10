@@ -1,3 +1,4 @@
+import React from 'react'
 import { CHAT_ROUTE, TEMPLATE_CHAT_ROUTE } from '@app/routes/general-routes'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { useRouteMatch } from 'react-router'

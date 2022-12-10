@@ -13,7 +13,7 @@ const PrivateRouter = () => {
             {Object.values(allRoutes).map(({ path, Component, isTemplate }) => {
                 return <Route path={path} component={Component} exact={!isTemplate} key={path} />
             })}
-            <Redirect to={HOME_ROUTE} />
+            <Redirect exact to={HOME_ROUTE} />
         </Switch>
     )
 }

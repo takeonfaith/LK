@@ -122,7 +122,7 @@ const CreateApplicationList = ({ isTeachers = false, currentFormEducation }: Pro
                                 </Title>
                                 {!section.disabled && (
                                     <div className="links">
-                                        {section.links.map((link) => {
+                                        {section.links.map((link, index) => {
                                             if (
                                                 link.disabled ||
                                                 !isEnabledForEducationForm(
@@ -134,6 +134,7 @@ const CreateApplicationList = ({ isTeachers = false, currentFormEducation }: Pro
 
                                             return link.isExternalLink ? (
                                                 <a
+                                                    key={link.link + index}
                                                     href={link.link}
                                                     target={link.isOpenInNewWindow ? '_blank' : '_self'}
                                                     rel="noreferrer"
@@ -141,7 +142,7 @@ const CreateApplicationList = ({ isTeachers = false, currentFormEducation }: Pro
                                                     {link.title}
                                                 </a>
                                             ) : (
-                                                <Link to={link.link} key={link.link} onClick={close}>
+                                                <Link to={link.link} key={link.link + index} onClick={close}>
                                                     {link.title}
                                                 </Link>
                                             )

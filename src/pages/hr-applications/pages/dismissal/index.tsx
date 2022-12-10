@@ -1,15 +1,19 @@
+import React from 'react'
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { specialFieldsNameT } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import { getCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
+import SendHrFormDismissal from '@pages/hr-applications/lib/send-hr-form-dismissal'
+import InputArea from '@shared/ui/input-area'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
-import InputArea from '@ui/input-area'
-import { IInputArea } from '@ui/input-area/model'
+import { IInputArea, IInputAreaData } from '@ui/input-area/model'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import checkFormFields from '@utils/check-form-fields'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router'
+import getAddress from './lib/get-address'
 import getForm from './lib/get-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
@@ -17,16 +21,26 @@ type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 const Dismissal = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
-        data: { dataUserApplication },
+        data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const isDone = completed ?? false
     const history = useHistory()
+    const currentIndex = getCurrentIndex()
+    //const [currentIndex, setCurrentIndex] = useState<number>(0)
+    useEffect(() => {
+        if (!!dataUserApplication && !!dataWorkerApplication) {
+            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
+        }
+    }, [dataUserApplication, currentIndex])
 
     useEffect(() => {
-        if (!!dataUserApplication) setForm(getForm(dataUserApplication))
-    }, [dataUserApplication])
+        if (!!form && !!dataUserApplication) {
+            setSpecialFieldsName(getAddress(form.data as IInputAreaData[]))
+        }
+    }, [form])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
@@ -39,12 +53,17 @@ const Dismissal = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
+                    <InputArea
+                        {...form}
+                        collapsed={isDone}
+                        setData={setForm as LoadedState}
+                        specialFieldsName={specialFieldsName}
+                    />
 
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>
-                            globalAppSendForm(ApplicationFormCodes.DISMISSAL, [form], setLoading, setCompleted)
+                            SendHrFormDismissal(ApplicationFormCodes.DISMISSAL, [form], setLoading, setCompleted)
                         }
                         isLoading={loading}
                         completed={completed}

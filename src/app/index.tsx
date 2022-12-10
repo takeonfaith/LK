@@ -1,4 +1,5 @@
-import { BrowserRouter } from 'react-router-dom'
+import React from 'react'
+import { HashRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'
 import Router from './routers/router'
@@ -12,11 +13,11 @@ const Background = styled.div`
 const App = () => {
     return (
         <ModalProvider>
-            <BrowserRouter basename="/">
+            <HashRouter basename="/">
                 <Background>
                     <Router />
                 </Background>
-            </BrowserRouter>
+            </HashRouter>
         </ModalProvider>
     )
 }

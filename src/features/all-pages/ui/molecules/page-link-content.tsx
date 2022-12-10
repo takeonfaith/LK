@@ -102,7 +102,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             display: flex;
             align-items: center;
             font-size: 0.8em;
-            text-align: center;
+            text-align: ${({ isVertical }) => (isVertical ? 'center' : 'left')};
             color: var(--text);
             transition: 0.2s;
             height: 30px;

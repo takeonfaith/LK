@@ -381,4 +381,4 @@ export const MAX_FILE_SIZE = 11000000
  * @example
  * Component: () => isProduction ? PageIsNotReady : SettingsPage
  **/
-export const isProduction = (import.meta.env.VITE_BUILD_MODE as string)?.trimEnd() === 'PRODUCTION'
+export const isProduction = import.meta.env.MODE !== 'development'

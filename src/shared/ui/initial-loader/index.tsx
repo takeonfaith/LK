@@ -9,7 +9,11 @@ import { Button } from '@ui/button'
 import { AiOutlineReload } from 'react-icons/ai'
 import { UserToken } from '@api/model'
 
-const InitialLoaderWrapper = styled.div<{ loading: boolean }>`
+const styledPropsArray: Array<keyof Props> = ['loading']
+
+const InitialLoaderWrapper = styled.div.withConfig({
+    shouldForwardProp: (prop) => !styledPropsArray.includes(prop as keyof Props),
+})<{ loading: boolean }>`
     position: absolute;
     top: 0;
     left: 0;

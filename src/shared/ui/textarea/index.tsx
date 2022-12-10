@@ -20,9 +20,12 @@ export function TextArea(props: TextAreaProps) {
             <Title size={5} required={required} align="left" bottomGap="5px" visible={!!title}>
                 {title}
             </Title>
-            <textarea onChange={(e) => setValue(e.target.value)} placeholder={placeholder} required={required}>
-                {value}
-            </textarea>
+            <textarea
+                onChange={(e) => setValue(e.target.value)}
+                placeholder={placeholder}
+                required={required}
+                value={value}
+            />
         </TextAreaWrapper>
     )
 }

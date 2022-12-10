@@ -59,3 +59,4 @@ export const ExtraHolidayColl = lazy(() => import('@pages/hr-applications/pages/
 export const HolidayWork = lazy(() => import('@pages/hr-applications/pages/holiday-work'))
 export const HolidayPlanning = lazy(() => import('@pages/hr-applications/pages/holiday-planning'))
 export const WorkTransfer = lazy(() => import('@pages/hr-applications/pages/work-transfer'))
+export const DismissalBufferPage = lazy(() => import('@pages/hr-applications/pages/buffer-dismissal'))

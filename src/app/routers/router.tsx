@@ -12,7 +12,6 @@ const Router = () => {
     const {
         data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
-
     const { data } = adminLinksModel.selectors.useAdminLinks()
     const { settings } = settingsModel.selectors.useSettings()
 
@@ -20,6 +19,7 @@ const Router = () => {
         if (isAuthenticated) {
             adminLinksModel.effects.getAdminLinksFx()
             applicationsModel.effects.getUserDataApplicationsFx()
+            applicationsModel.effects.getWorkerPosts()
         }
     }, [isAuthenticated])
 
@@ -34,16 +34,14 @@ const Router = () => {
     }, [user, data, settings])
 
     return isAuthenticated ? (
-        <Switch>
-            <Route path="/" component={ContentLayout} />
-        </Switch>
+        <ContentLayout />
     ) : (
         <Suspense fallback={null}>
             <Switch>
                 {publicRoutes.map(({ path, Component }, i) => {
                     return <Route path={path} component={Component} exact={true} key={i} />
                 })}
-                <Redirect to={LOGIN_ROUTE} />
+                <Redirect exact to={LOGIN_ROUTE} />
             </Switch>
         </Suspense>
     )
