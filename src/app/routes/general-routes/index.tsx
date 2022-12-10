@@ -38,6 +38,8 @@ import {
     AllPages,
     SettingsPage,
     GetYourLoginPage,
+    AllStudentsPage,
+    AllTeachersPage,
 } from './pages'
 
 import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
@@ -232,7 +234,7 @@ export const generalRoutes: IRoutes = {
         title: 'Одногруппники',
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
+        Component: AllStudentsPage,
         color: 'darkBlue',
         isTemplate: false,
         group: 'OTHER',
@@ -242,7 +244,7 @@ export const generalRoutes: IRoutes = {
         title: 'Преподаватели',
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
+        Component: AllTeachersPage,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',

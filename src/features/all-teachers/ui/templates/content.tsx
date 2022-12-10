@@ -1,6 +1,7 @@
 import { User as UserType } from '@api/model'
 import paginationList from '@features/all-teachers/model'
 import Select, { SelectPage } from '@features/select'
+import { Title } from '@shared/ui/title'
 import Block from '@ui/block'
 import { LocalSearch } from '@ui/molecules'
 import PagintaionList from '@ui/pagination-list'
@@ -24,7 +25,13 @@ const PageWrapper = styled.div`
         margin-bottom: 0.5rem;
     }
 `
-const Content = () => {
+
+type Props = {
+    title: string
+    searchPlaceholder?: string
+}
+
+const Content = ({ title, searchPlaceholder }: Props) => {
     const { $items, $isPending, $hasNext, next } = paginationList
     const items = useStore($items)
     const isPending = useStore($isPending)
@@ -34,13 +41,16 @@ const Content = () => {
 
     return (
         <PageWrapper>
-            <Block maxWidth="800px" orientation="vertical" height="100%" maxHeight="100%" justifyContent="none">
+            <Block maxWidth="700px" orientation="vertical" height="100%" maxHeight="100%" justifyContent="none">
+                <Title size={2} align="left" bottomGap>
+                    {title}
+                </Title>
                 <div className="search-and-filter">
                     <LocalSearch
                         whereToSearch={undefined}
                         searchEngine={() => null}
                         setResult={() => null}
-                        placeholder="Поиск учетелей"
+                        placeholder={searchPlaceholder ?? 'Поиск'}
                     />
                     <Select
                         items={[

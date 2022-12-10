@@ -9,7 +9,7 @@ declare global {
         results?: T[]
     }
 
-    type ServerListRequest<TFilter extends Record<string, unknown> | EmptyObject> = {
+    type ServerListRequest<TFilter extends Record<string, unknown> | EmptyObject | never> = {
         filter?: TFilter
         limit?: number
         page?: number

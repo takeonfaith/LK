@@ -1,6 +1,7 @@
 import { Loading } from '@ui/loading'
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
+import { Button } from '../button'
 
 type PagintaionListProps<T> = {
     hasNext?: boolean
@@ -54,7 +55,7 @@ export function PagintaionList<T>({
         <List onScroll={scrollHandler}>
             <div className="scrolable-content">{(items || []).map((item, index) => renderItem(item, index))}</div>
             {hasNext && isPending && <Loading width="40px" height="40px" />}
-            {hasNext && !isPending && <div onClick={handleNext}>load</div>}
+            {hasNext && !isPending && <Button onClick={handleNext} text="Загрузить еще" />}
         </List>
     )
 }

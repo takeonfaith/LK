@@ -12,7 +12,7 @@ const AllTeachersPage = () => {
     useGate(PageGate)
     return (
         <Wrapper load={function () {}} loading={isPending} error={null} data={items}>
-            <Content />
+            <Content title="Преподаватели" />
         </Wrapper>
     )
 }
