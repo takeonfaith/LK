@@ -90,7 +90,6 @@ const Block = (props: Props) => {
     const { children, skeleton = <DefaultSkeleton />, loading = false, ...restProps } = props
     return (
         <BlockWrapper {...restProps} className="block">
-            <div></div>
             {!loading ? children : skeleton}
         </BlockWrapper>
     )

@@ -1,8 +1,8 @@
+import React from 'react'
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
 import { specialFieldsNameT } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { getCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
 import SendHrFormDismissal from '@pages/hr-applications/lib/send-hr-form-dismissal'
 import InputArea from '@shared/ui/input-area'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
@@ -11,7 +11,7 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import checkFormFields from '@utils/check-form-fields'
 import { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import getAddress from './lib/get-address'
 import getForm from './lib/get-form'
 
@@ -27,8 +27,8 @@ const Dismissal = () => {
     const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const isDone = completed ?? false
     const history = useHistory()
-    const currentIndex = getCurrentIndex()
-    //const [currentIndex, setCurrentIndex] = useState<number>(0)
+    const { id } = useParams<{ id: string }>()
+    const currentIndex = +id
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication) {
             setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))

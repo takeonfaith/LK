@@ -1,3 +1,4 @@
+import React from 'react'
 import { Divider } from '@ui/divider'
 import { ColumnProps, Footer as IFooter } from '@ui/table/types'
 import { IndexedProperties } from '@utility-types/indexed-properties'

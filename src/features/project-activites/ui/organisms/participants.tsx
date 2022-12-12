@@ -1,3 +1,4 @@
+import React from 'react'
 import { Participant } from '@api/model/project-activites'
 import { search } from '@features/project-activites/lib/search-participants'
 import Block from '@ui/block'

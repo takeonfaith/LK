@@ -1,3 +1,4 @@
+import React from 'react'
 import { OLD_LK_URL } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { userModel } from '@entities/user'
