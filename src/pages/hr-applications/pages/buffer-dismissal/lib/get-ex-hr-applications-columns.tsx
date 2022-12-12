@@ -40,21 +40,6 @@ const getExHrApplicationsColumns = (): ColumnProps[] => {
         },
         {
             title: 'Дата заявления',
-            field: 'signDate',
-            type: 'date',
-            priority: 'one',
-            align: 'center',
-            render: () => {
-                const today = new Date()
-                const yyyy = today.getFullYear()
-                const mm = today.getMonth() + 1
-                const dd = today.getDate()
-
-                return dd + '.' + mm + '.' + yyyy
-            },
-        },
-        {
-            title: 'Дата создания карточки приказа',
             field: 'creationDate',
             type: 'date',
             priority: 'one',

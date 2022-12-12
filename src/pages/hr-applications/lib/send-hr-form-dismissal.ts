@@ -64,6 +64,7 @@ const SendHrFormDismissal = async (
             isSendMail: result.get_tk == 'По почте',
             isRetirement: result.reason == 'Выходом на пенсию',
             address: result.get_tk_address,
+            reason: result.reason,
         }
         await applicationsModel.effects.postApplicationFx(aaa)
         setLoading(false)
