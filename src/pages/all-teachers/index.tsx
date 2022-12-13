@@ -1,5 +1,5 @@
 import React from 'react'
-import paginationList from '@features/all-teachers/model'
+import { paginationList } from '@entities/all-teachers'
 import Block from '@shared/ui/block'
 import { CenterPage, Wrapper } from '@ui/atoms'
 import { useStore } from 'effector-react'
