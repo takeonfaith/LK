@@ -241,7 +241,7 @@ export const generalRoutes: IRoutes = {
     },
     'all-teachers': {
         id: 'all-teachers',
-        title: 'Преподаватели',
+        title: 'Сотрудники',
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
         Component: AllTeachersPage,
