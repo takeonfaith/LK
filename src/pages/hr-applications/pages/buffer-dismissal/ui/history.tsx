@@ -33,7 +33,6 @@ const History: React.FC<Props> = ({ historyIsEmpty, historyDataWorkerApplication
                     background="transparent"
                 />
             </BlockHeader>
-
             {openedHistory &&
                 historyDataWorkerApplication.map((object, index) => {
                     if (!object.dismissalApplications.length) return null
@@ -57,7 +56,7 @@ const History: React.FC<Props> = ({ historyIsEmpty, historyDataWorkerApplication
                 onClick={() => {
                     !historyIsEmpty && setOpenedHistory((prev) => !prev)
                 }}
-                text={!historyIsEmpty ? 'История пуста' : openedHistory ? 'Скрыть' : 'Подробнее'}
+                text={historyIsEmpty ? 'История пуста' : openedHistory ? 'Скрыть' : 'Подробнее'}
                 background="transparent"
             />
         </Block>

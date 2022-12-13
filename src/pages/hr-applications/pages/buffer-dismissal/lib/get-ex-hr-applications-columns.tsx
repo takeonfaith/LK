@@ -1,5 +1,5 @@
 import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
-import localizeDate from '@shared/lib/localize-date'
+//import localizeDate from '@shared/lib/localize-date'
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
@@ -55,10 +55,10 @@ const getExHrApplicationsColumns = (): ColumnProps[] => {
         {
             title: 'Дата приказа',
             field: 'dismissalOrder',
-            type: 'date',
             priority: 'one',
             align: 'center',
-            render: (value) => localizeDate(value.orderDate, 'numeric'),
+            // render: (value) => localizeDate(value.orderDate, 'numeric'),
+            render: (value) => value.formatedOrderDate,
         },
         {
             title: 'Статус приказа',
