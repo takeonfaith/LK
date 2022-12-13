@@ -7,10 +7,10 @@ import { createPaginationList } from 'shared/effector/create-pagination-list'
 
 const getFetchTeachersFx = createEffect(
     async (request: ServerListRequest<SelectPage | null>): Promise<ServerListResponse<TTeacher>> => {
-        const filter = request?.filter
+        const { search, page, limit, filter } = request
         const group = filter?.title === 'Все' ? '' : filter?.title ?? ''
 
-        const data = (await teacherApi.get(group, request.page, request.limit)).data.items
+        const data = (await teacherApi.get(search ?? '', group, page, limit)).data.items
         return { results: data }
     },
 )

@@ -1,10 +1,11 @@
 import { userModel } from '@entities/user'
 import { SelectPage } from '@features/select'
 import { Loading } from '@ui/loading'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { Button } from '../button'
 import { Divider } from '../divider'
+import { Error } from '../error'
 import { Title } from '../title'
 
 type PagintaionListProps<T> = {
@@ -52,7 +53,6 @@ export function PagintaionList<T extends { id: string; fio?: string }>({
     hasNext,
     isPending,
     handleNext,
-    handleReload,
     filter,
     showAlphabetLetters,
     offset = PAGINATION_OFFSET,
@@ -77,17 +77,14 @@ export function PagintaionList<T extends { id: string; fio?: string }>({
         [handleNext, hasNext, isPending, filter],
     )
 
-    useEffect(() => {
-        handleReload?.(filter ?? null)
-    }, [filter?.id])
+    if (!isPending && (!items || items?.length === 0)) return <Error text="Нет результатов" />
 
     return (
         <List onScroll={scrollHandler}>
             <div className="scrolable-content">
                 {(items || []).map((item, index) => {
                     const showLetter = showAlphabetLetters ? lastLetter !== item.fio?.charAt(0) : false
-                    // eslint-disable-next-line no-console
-                    console.log(showAlphabetLetters)
+
                     if (showLetter) lastLetter = item.fio?.charAt(0) ?? '-'
                     return (
                         <>

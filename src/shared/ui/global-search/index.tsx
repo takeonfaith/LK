@@ -1,39 +1,37 @@
+import React, { useEffect } from 'react'
 import useDebounce from '@shared/lib/hooks/use-debounce'
-import React from 'react'
 import Search from '../search'
 
-interface Props<T, R> {
-    whereToSearch: T
-    searchEngine: (value: string, whereToSearch: T) => R
-    setResult: (res: R | null) => void
+type GlobalSearchProps = {
+    setExternalValue?: (value: string) => void
     placeholder?: string
     inputAppearance?: boolean
-    setExternalValue?: (value: string) => void
     validationCheck?: boolean
+    searchApi: (value: string) => void
+    triggerSearchOn?: string[]
 }
 
-const LocalSearch = <T, R>({
-    whereToSearch,
-    searchEngine,
-    setResult,
-    inputAppearance,
+const GlobalSearch = ({
     setExternalValue,
-    placeholder = 'Поиск по меню',
-    validationCheck = false,
-}: Props<T, R>) => {
+    inputAppearance,
+    placeholder,
+    validationCheck,
+    searchApi,
+    triggerSearchOn,
+}: GlobalSearchProps) => {
     const onDebounce = (value: string) => {
-        setResult(searchEngine(value, whereToSearch))
-    }
-    const onClear = () => {
-        setResult(null)
+        searchApi(value)
     }
 
-    const [value, setValue] = useDebounce({ onDebounce, onClear })
-
+    const [value, setValue] = useDebounce({ onDebounce, onClear: onDebounce, delay: 400 })
     const handleChangeValue = (v: string) => {
         setValue(v)
         setExternalValue && setExternalValue(v)
     }
+
+    useEffect(() => {
+        onDebounce(value ?? '')
+    }, [...(triggerSearchOn ?? [])])
 
     return (
         <Search
@@ -46,4 +44,4 @@ const LocalSearch = <T, R>({
     )
 }
 
-export default LocalSearch
+export default GlobalSearch

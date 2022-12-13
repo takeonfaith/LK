@@ -11,6 +11,7 @@ declare global {
 
     type ServerListRequest<TFilter extends Record<string, unknown> | unknown> = {
         filter?: TFilter
+        search?: string
         limit?: number
         page?: number
     }

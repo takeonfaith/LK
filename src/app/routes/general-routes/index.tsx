@@ -57,7 +57,7 @@ export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-a
 export const PAYMENTS_ROUTE = '/payments'
 export const SCHEDULE_ROUTE = '/schedule'
 export const ALL_STUDENTS_ROUTE = '/all-students'
-export const ALL_TEACHERS_ROUTE = '/teachers'
+export const ALL_TEACHERS_ROUTE = '/all-teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
 export const CANT_ACCESS_ROUTE = '/cant-access'
@@ -245,7 +245,7 @@ export const generalRoutes: IRoutes = {
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
         Component: AllTeachersPage,
-        color: 'blue',
+        color: 'orange',
         isTemplate: false,
         group: 'GENERAL',
     },

@@ -1,5 +1,5 @@
 import React from 'react'
-import paginationList, { PageGate } from '@features/all-students/model'
+import paginationList from '@features/all-students/model'
 import { SelectPage } from '@features/select'
 import Block from '@shared/ui/block'
 import { CenterPage, Wrapper } from '@ui/atoms'
@@ -30,6 +30,11 @@ const AllStudentsPage = () => {
         { id: user?.group ?? '', title: 'Моя группа' },
         { id: '1', title: 'Все' },
     ]
+    const underSearchText = (filter: SelectPage | null) => {
+        if (filter?.title === 'Все') return null
+
+        return `Группа: ${filter?.id} • Всего: ${items?.length ?? 0}`
+    }
 
     return (
         <Wrapper load={function () {}} loading={isPending} error={null} data={items}>
@@ -40,8 +45,8 @@ const AllStudentsPage = () => {
                             title="Студенты"
                             searchPlaceholder="Поиск студентов"
                             paginationList={paginationList}
-                            gate={PageGate}
                             filters={user?.user_status === 'stud' ? filter : undefined}
+                            underSearchText={underSearchText}
                         />
                     </Block>
                 </PageWrapper>

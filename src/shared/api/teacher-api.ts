@@ -9,6 +9,8 @@ type TeacherResponse = {
     per_page: string
 }
 
-export const get = (division: string, page: number | undefined, limit: number | undefined) => {
-    return $api.get<TeacherResponse>(`?getStaff&division=${division}&page=${page}&perpage=${limit}&token=${token()}`)
+export const get = (search: string, division: string, page: number | undefined, limit: number | undefined) => {
+    return $api.get<TeacherResponse>(
+        `?getStaff&search=${search}&division=${division}&page=${page}&perpage=${limit}&token=${token()}`,
+    )
 }

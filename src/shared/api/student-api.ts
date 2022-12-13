@@ -10,6 +10,8 @@ type StudentResponse = {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const get = (group: string, page: number | undefined, limit: number | undefined) => {
-    return $api.get<StudentResponse>(`?getStudents&group=${group}&page=${page}&perpage=${limit}&token=${token()}`)
+export const get = (search: string, group: string, page: number | undefined, limit: number | undefined) => {
+    return $api.get<StudentResponse>(
+        `?getStudents&search=${search}&group=${group}&page=${page}&perpage=${limit}&token=${token()}`,
+    )
 }
