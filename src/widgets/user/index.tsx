@@ -20,6 +20,15 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     cursor: pointer;
     width: ${({ orientation, size }) => (orientation === 'vertical' ? getWidth(size) : '100%')};
 
+    .index {
+        min-width: 30px;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 0.85rem;
+        color: var(--theme-mild-opposite);
+    }
+
     &:hover {
         background: ${Colors.grey.transparentAF};
     }
@@ -29,6 +38,7 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
         flex-direction: column;
         text-align: ${({ orientation }) => (orientation === 'vertical' ? 'center' : 'left')};
         margin-top: ${({ orientation }) => (orientation === 'vertical' ? '5px' : '0')};
+        width: calc(100% - 60px);
 
         .name {
             font-size: ${({ size }) => getFontSize(size)};
@@ -41,6 +51,10 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
         .status {
             font-size: ${({ size }) => `calc(${getFontSize(size)} - 0.1em)`};
             opacity: 0.6;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 90%;
         }
     }
 `
@@ -49,10 +63,13 @@ interface Props {
     type: 'student' | 'teacher'
     orientation?: Direction
     avatar?: string
+    division?: string
     name: string
     loading?: boolean
     size?: Size
+    isMe?: boolean
     checked?: boolean
+    indexNumber?: number
     setChecked?: (value: boolean) => void
     onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
@@ -63,11 +80,15 @@ const User = ({
     name,
     checked,
     onClick,
+    indexNumber,
+    division,
+    isMe = false,
     loading = false,
     orientation = 'horizontal',
     size = 'middle',
 }: Props) => {
     const { open } = useModal()
+    const status = isMe ? 'Я' : type === 'teacher' ? 'Сотрудник' + (division ? ` • ${division}` : '') : 'Студент'
 
     if (loading) return <SkeletonLoading />
 
@@ -79,16 +100,19 @@ const User = ({
                 if (onClick) {
                     onClick(e)
                 } else {
-                    open(
-                        type === 'teacher' ? (
-                            <TeacherModal name={name} avatar={avatar} />
-                        ) : (
-                            <StudentModal name={name} avatar={avatar} />
-                        ),
-                    )
+                    if (!isMe) {
+                        open(
+                            type === 'teacher' ? (
+                                <TeacherModal name={name} avatar={avatar} />
+                            ) : (
+                                <StudentModal name={name} avatar={avatar} />
+                            ),
+                        )
+                    }
                 }
             }}
         >
+            {indexNumber && <div className="index">{indexNumber}</div>}
             <Avatar
                 name={name}
                 avatar={avatar}
@@ -99,7 +123,7 @@ const User = ({
             />
             <div className="name-and-status">
                 <span className="name">{name}</span>
-                <span className="status"> {type === 'teacher' ? 'Сотрудник' : 'Студент'}</span>
+                <span className="status"> {status}</span>
             </div>
         </UserWrapper>
     )

@@ -38,6 +38,8 @@ import {
     AllPages,
     SettingsPage,
     GetYourLoginPage,
+    AllStudentsPage,
+    AllTeachersPage,
 } from './pages'
 
 import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
@@ -54,8 +56,8 @@ export const TEMPLATE_CHAT_ROUTE = CHAT_ROUTE + '/:chatId'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const PAYMENTS_ROUTE = '/payments'
 export const SCHEDULE_ROUTE = '/schedule'
-export const ALL_STUDENTS_ROUTE = '/students'
-export const ALL_TEACHERS_ROUTE = '/teachers'
+export const ALL_STUDENTS_ROUTE = '/all-students'
+export const ALL_TEACHERS_ROUTE = '/all-teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const FEEDBACK_ROUTE = '/feedback'
 export const CANT_ACCESS_ROUTE = '/cant-access'
@@ -229,23 +231,23 @@ export const generalRoutes: IRoutes = {
     },
     'all-students': {
         id: 'all-students',
-        title: 'Одногруппники',
+        title: 'Студенты',
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALL_STUDENTS_ROUTE }),
+        Component: AllStudentsPage,
         color: 'darkBlue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'GENERAL',
     },
     'all-teachers': {
         id: 'all-teachers',
-        title: 'Преподаватели',
+        title: 'Сотрудники',
         icon: <BiBookReader />,
         path: ALL_TEACHERS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALL_TEACHERS_ROUTE }),
-        color: 'blue',
+        Component: AllTeachersPage,
+        color: 'orange',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'GENERAL',
     },
     portfolio: {
         id: 'portfolio',
