@@ -26,6 +26,7 @@ type IInputAreaTypes =
     | 'checkbox-docs'
     | 'date-interval'
     | 'simple-text'
+    | 'hr-checkbox'
 
 export interface IInputAreaFiles {
     files: File[]

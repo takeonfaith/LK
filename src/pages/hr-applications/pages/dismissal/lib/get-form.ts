@@ -115,7 +115,7 @@ const getForm = (
             },
             {
                 title: 'В связи с выходом на пенсию',
-                type: 'checkbox',
+                type: 'hr-checkbox',
                 value: '',
                 fieldName: 'isRetirement',
                 editable: true,
