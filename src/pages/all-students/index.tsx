@@ -31,7 +31,7 @@ const AllStudentsPage = () => {
         { id: '1', title: 'Все' },
     ]
     const underSearchText = (filter: SelectPage | null) => {
-        if (filter?.title === 'Все') return null
+        if (filter?.title === 'Все' || !filter?.id) return null
 
         return `Группа: ${filter?.id} • Всего: ${items?.length ?? 0}`
     }

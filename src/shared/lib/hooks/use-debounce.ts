@@ -16,14 +16,17 @@ const useDebounce = ({
     onClear,
     deps = [],
     delay = DEFAULT_DELAY,
-}: Props): [string | null, React.Dispatch<React.SetStateAction<string | null>>] => {
+}: Props): [string | null, React.Dispatch<React.SetStateAction<string | null>>, boolean] => {
     const [value, setValue] = useState<string | null>(defaultValue ?? null)
+    const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
         if (value !== null) {
             if (value.length) {
+                setLoading(true)
                 const delayedSearch = setTimeout(() => {
                     onDebounce(value)
+                    setLoading(false)
                 }, delay)
 
                 return () => clearTimeout(delayedSearch)
@@ -41,7 +44,7 @@ const useDebounce = ({
         }
     }, [...deps])
 
-    return [value, setValue]
+    return [value, setValue, loading]
 }
 
 export default useDebounce

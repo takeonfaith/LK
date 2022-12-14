@@ -19,9 +19,10 @@ type SearchProps = {
     placeholder?: string
     inputAppearance?: boolean
     validationCheck?: boolean
+    loading?: boolean
 }
 
-const Search = ({ value, setValue, placeholder, inputAppearance, validationCheck }: SearchProps) => {
+const Search = ({ value, setValue, placeholder, inputAppearance, validationCheck, loading }: SearchProps) => {
     const handleSuggestions = useCallback(() => {
         setValue(englishToRussianKeyboard(value))
     }, [value, setValue])
@@ -34,6 +35,7 @@ const Search = ({ value, setValue, placeholder, inputAppearance, validationCheck
                 leftIcon={<FiSearch />}
                 inputAppearance={inputAppearance}
                 setValue={setValue}
+                loading={loading}
             />
             {value.length > 0 && validationCheck && isValidEnglishText(value) && (
                 <Subtext width="100%" maxWidth="100%" onClick={handleSuggestions}>

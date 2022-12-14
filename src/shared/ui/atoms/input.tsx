@@ -4,7 +4,7 @@ import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Title } from '@ui/title'
 import { Button } from '@ui/button'
-import { Message } from '.'
+import { Loading, Message } from '.'
 
 const InputWrapper = styled.div<{
     leftIcon: boolean
@@ -64,6 +64,14 @@ const InputWrapper = styled.div<{
         }
     }
 
+    .loading-circle {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 25px;
+        height: 25px;
+    }
+
     button {
         position: absolute;
         bottom: 5px;
@@ -104,6 +112,7 @@ interface Props {
     alertMessage?: string
     minValue?: number | string
     maxValue?: number | string
+    loading?: boolean
 }
 
 const Input = ({
@@ -118,6 +127,7 @@ const Input = ({
     type = 'text',
     danger,
     alertMessage,
+    loading = false,
     isActive = true,
     inputAppearance = true,
     mask = false,
@@ -227,7 +237,8 @@ const Input = ({
             />
             {type !== 'password' ? (
                 !!value?.length &&
-                inputAppearance && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
+                inputAppearance &&
+                (loading ? <Loading /> : <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />)
             ) : (
                 <Button
                     icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}

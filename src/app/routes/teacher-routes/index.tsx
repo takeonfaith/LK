@@ -3,7 +3,6 @@ import PageIsNotReady from '@pages/page-is-not-ready'
 import {
     TeachersApplicationsPage,
     DownloadAdminFilesPage,
-    AllTeachersPage,
     HelpfulInformation,
     HrApplicationsPage,
     PartTimeEmployment,
@@ -44,15 +43,7 @@ import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 're
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiArrowDownCircle, FiBell, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
-import {
-    ALL_STUDENTS_ROUTE,
-    ALL_TEACHERS_ROUTE,
-    generalHiddenRoutes,
-    generalRoutes,
-    IRoutes,
-    PROJECT_ACTIVITIES_ROUTE,
-} from '../general-routes'
-import AllStudentsPage from '@pages/all-students'
+import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
 import { isProduction } from '@consts'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 
@@ -229,28 +220,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         path: ORDERS_ROUTE,
         Component: () => PageIsNotReady({ oldVersionUrl: ORDERS_ROUTE }),
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-        show: false,
-    },
-    'all-students': {
-        id: 'all-students',
-        title: 'Студенты',
-        icon: <BiGroup />,
-        path: ALL_STUDENTS_ROUTE,
-        Component: AllStudentsPage,
-        color: 'darkBlue',
-        isTemplate: false,
-        group: 'OTHER',
-        show: false,
-    },
-    'all-teachers': {
-        id: 'all-teachers',
-        title: 'Сотрудники',
-        icon: <BiBookReader />,
-        path: ALL_TEACHERS_ROUTE,
-        Component: AllTeachersPage,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',

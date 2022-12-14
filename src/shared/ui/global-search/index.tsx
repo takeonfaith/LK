@@ -19,18 +19,19 @@ const GlobalSearch = ({
     searchApi,
     triggerSearchOn,
 }: GlobalSearchProps) => {
-    const onDebounce = (value: string) => {
+    const onSearch = (value: string) => {
         searchApi(value)
     }
 
-    const [value, setValue] = useDebounce({ onDebounce, onClear: onDebounce, delay: 400 })
+    const [value, setValue, loading] = useDebounce({ onDebounce: onSearch, onClear: onSearch, delay: 500 })
+
     const handleChangeValue = (v: string) => {
         setValue(v)
         setExternalValue && setExternalValue(v)
     }
 
     useEffect(() => {
-        onDebounce(value ?? '')
+        onSearch(value ?? '')
     }, [...(triggerSearchOn ?? [])])
 
     return (
@@ -40,6 +41,7 @@ const GlobalSearch = ({
             inputAppearance={inputAppearance}
             placeholder={placeholder}
             validationCheck={validationCheck}
+            loading={loading}
         />
     )
 }

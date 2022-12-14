@@ -7,6 +7,7 @@ import ListOfPeople from 'widgets/list-of-people'
 import styled from 'styled-components'
 import { SelectPage } from '@features/select'
 import { DIVISIONS } from './const'
+import prepareFilters from './lib/prepare-filters'
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -18,19 +19,6 @@ const PageWrapper = styled.div`
         height: calc(100vh - 80px);
     }
 `
-
-const prepareFilters = (divisions: string[]): SelectPage[] => {
-    const filters = [{ id: 'Все', title: 'Все' }]
-
-    const sorted = divisions.sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0))
-
-    for (let i = 0; i < sorted.length; i++) {
-        const division = sorted[i]
-        filters.push({ id: division, title: division })
-    }
-
-    return filters
-}
 
 const AllTeachersPage = () => {
     const { $isPending, $items } = paginationList
