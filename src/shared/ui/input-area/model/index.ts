@@ -69,6 +69,7 @@ export interface IInputAreaData {
     specialType?: specialFieldsNameT
     minValueInput?: number | string
     maxValueInput?: number | string
+    maxValueLength?: number | undefined
     diff?: number
     visible?: boolean
 }

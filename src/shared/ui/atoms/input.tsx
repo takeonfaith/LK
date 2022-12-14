@@ -104,8 +104,8 @@ interface Props {
     alertMessage?: string
     minValue?: number | string
     maxValue?: number | string
+    maxLength?: number | undefined
 }
-
 const Input = ({
     value,
     setValue,
@@ -124,6 +124,7 @@ const Input = ({
     autocomplete = true,
     minValue = undefined,
     maxValue = undefined,
+    maxLength = undefined,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
 
@@ -207,6 +208,7 @@ const Input = ({
             <input
                 min={minValue}
                 max={maxValue}
+                maxLength={maxLength}
                 step={maxValue ? 0.1 : undefined}
                 type={inputType}
                 placeholder={placeholder}
