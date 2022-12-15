@@ -6,15 +6,21 @@ const checkNotifications = (search: string, selected: string | number, notificat
     let listNotification: ItemNotification[] = []
 
     const checkNotification = (notification: ItemNotification) => {
+        if ('document' in notification) {
+            const { viewed, name } = notification
+            const searchResult = name?.includes(search) || !search.length
+            if (selected === 'all' && searchResult) return true
+            return !viewed && selected !== 'all' && searchResult
+        }
+
         const { viewed, post, event } = notification
         const searchResult = event?.includes(search) || post?.includes(search) || !search.length
-
         if (selected === 'all' && searchResult) return true
         return !viewed && selected !== 'all' && searchResult
     }
-    Object.keys(notifications).map((key: string) => {
+    Object.entries(notifications).map(([key, items]) => {
         listNotification = []
-        notifications[key].map((notification: ItemNotification) => {
+        items.map((notification: ItemNotification) => {
             if (checkNotification(notification)) {
                 listNotification.push(notification)
             }

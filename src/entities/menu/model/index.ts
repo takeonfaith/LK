@@ -27,7 +27,7 @@ const getLeftsideBarConfig = (user: User | null, _adminLinks?: boolean): MenuTyp
 
     const localSettings = JSON.parse(localStorage.getItem('new-settings') || '{}') as SettingsType
     const settingsMenuData =
-        (localSettings[user.id]['settings-customize-menu'].property.pages as unknown as string[]) ??
+        (localSettings[user.id]['settings-customize-menu']?.property.pages as unknown as string[]) ??
         REQUIRED_LEFTSIDE_BAR_CONFIG
 
     const uniqueRequiredTeacherMenuItems = REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG.filter(
