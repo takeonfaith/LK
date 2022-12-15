@@ -39,6 +39,7 @@ import {
     SettingsPage,
     GetYourLoginPage,
 } from './pages'
+import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 
 import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineViewGrid } from 'react-icons/hi'
@@ -72,8 +73,11 @@ export const SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE = SETTINGS_ROUTE + '/customize-m
 export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activities'
 
+export const USEFUL_INFO_ROUTE = '/helpful-information'
+
 // hidden
 export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
+export const TEMPLATE_USEFUL_INFO_ROUTE = USEFUL_INFO_ROUTE + '/:infoType'
 
 export interface IRoutes {
     [id: string]: IRoute
@@ -343,6 +347,16 @@ export const generalHiddenRoutes: IRoutes = {
         path: SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE,
         Component: CustomizeMenu,
         color: 'red',
+        isTemplate: true,
+        show: true,
+    },
+    'useful-info-template': {
+        id: `useful-info-template`,
+        title: `Полезная информация`,
+        icon: '',
+        path: TEMPLATE_USEFUL_INFO_ROUTE,
+        Component: HelpfulInformation,
+        color: 'grey',
         isTemplate: true,
         show: true,
     },

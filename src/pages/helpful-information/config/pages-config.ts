@@ -1,9 +1,11 @@
 import instructionsTeacherData from '@pages/instructions/data/teacher-data'
+import { HelpfulInfoEnum, helpfulInfoName } from '@entities/useful-information'
 import { HelpfulPages, Link } from '../types/helpful-pages'
 
 const pages: HelpfulPages = [
     {
-        title: 'Полезная информация',
+        id: HelpfulInfoEnum.information,
+        title: helpfulInfoName[HelpfulInfoEnum.information],
         visible: 'all',
         content: [
             {
@@ -118,7 +120,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Безопасность',
+        id: HelpfulInfoEnum.security,
+        title: helpfulInfoName[HelpfulInfoEnum.security],
         visible: 'student',
         content: [
             {
@@ -179,7 +182,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Инструкции',
+        id: HelpfulInfoEnum.instructions,
+        title: helpfulInfoName[HelpfulInfoEnum.instructions],
         visible: 'all',
         content: [
             {
@@ -207,7 +211,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Положения',
+        id: HelpfulInfoEnum.regulations,
+        title: helpfulInfoName[HelpfulInfoEnum.regulations],
         visible: 'staff',
         content: [
             {
@@ -219,7 +224,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Приказы',
+        id: HelpfulInfoEnum.orders,
+        title: helpfulInfoName[HelpfulInfoEnum.orders],
         visible: 'staff',
         content: [
             {
@@ -231,7 +237,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Курсы',
+        id: HelpfulInfoEnum.courses,
+        title: helpfulInfoName[HelpfulInfoEnum.courses],
         visible: 'student',
         content: [
             {

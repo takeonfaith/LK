@@ -56,6 +56,7 @@ const SliderPageWrapper = styled.div<{ width?: string; align: Align; maxWidth?: 
 `
 
 interface Page {
+    id?: string
     title: string
     condition?: boolean
     content: React.ReactNode
@@ -70,6 +71,7 @@ interface Props {
     sliderWidth?: string
     appearance?: boolean
     align?: Align
+    onChangePage?: (pageId?: string) => void
 }
 
 const SliderPage = ({
@@ -79,6 +81,7 @@ const SliderPage = ({
     className,
     maxWidth,
     sliderWidth,
+    onChangePage,
     align = 'center',
     appearance = true,
 }: Props) => {
@@ -94,6 +97,7 @@ const SliderPage = ({
 
     const handleChangePage = (page: number) => {
         setPage(page)
+        onChangePage?.(pages[page]?.id)
 
         if (sliderContentRef?.current) {
             sliderContentRef.current.scrollLeft = sliderContentRef.current.clientWidth * page
