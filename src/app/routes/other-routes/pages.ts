@@ -25,6 +25,8 @@ export const RegularAccommodationPage = lazy(
 
 export const ApplicationsPage = lazy(() => import('@pages/applications'))
 
+export const ProjectActivitiesPage = lazy(() => import('@pages/project-activities'))
+
 export const AcademicLeaveAccommodationPage = lazy(
     () => import('@pages/applications/pages/campus-management/academic-leave-accommodation'),
 )

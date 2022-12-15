@@ -41,6 +41,7 @@ import {
     MilitaryRegistrationCard,
     AccommodationCorrespondenceFormPage,
     ApplicationsPage,
+    ProjectActivitiesPage,
 } from './other-routes/pages'
 
 export const APPLICATIONS_ROUTE = '/applications'
@@ -101,7 +102,7 @@ export const privateRoutes: () => IRoutes = () => ({
         title: 'Проектная деятельность',
         icon: <FaRegLightbulb />,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PROJECT_ACTIVITIES_ROUTE }),
+        Component: ProjectActivitiesPage,
         color: 'yellow',
         isTemplate: false,
         group: 'OTHER',
