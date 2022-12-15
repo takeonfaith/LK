@@ -1,12 +1,13 @@
 import { projectActivitesApi } from '@api'
-import { Projects } from '@api/model/project-activites'
+import { Project } from '@api/model/project-activites'
+import { DEFAULT_API_LOAD_ERROR_MESSAGE } from '@shared/consts'
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react'
 
 interface Store {
     loading?: boolean
     error?: string | null
-    data?: Projects | null
+    data?: Project | null
 }
 
 const DEFAULT_STORE: Store = {
@@ -22,8 +23,13 @@ const useProjectActivites = (): Store => {
     }
 }
 
-const getProjectActivitesFx = createEffect(async (semestr: string): Promise<Projects> => {
-    return projectActivitesApi.get(semestr)
+const getProjectActivitesFx = createEffect(async (semestr: string): Promise<Project> => {
+    try {
+        const data = await projectActivitesApi.get(semestr)
+        return data
+    } catch (error) {
+        throw new Error(DEFAULT_API_LOAD_ERROR_MESSAGE)
+    }
 })
 
 const clearStore = createEvent()

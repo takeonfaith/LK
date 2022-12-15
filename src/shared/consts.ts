@@ -15,6 +15,9 @@ export interface IDefaultSettings {
     [key: string]: MenuType | ThemeType | GeneralType | ShortCutLinksType
 }
 
+export const DEFAULT_API_LOAD_ERROR_MESSAGE =
+    'Не удалось загрузить информацию. Проверьте соединение и попробуйте ещё раз'
+
 export const SHORT_CUT_LINKS_LIMIT_SIZE = 4
 
 export const ADDITIONAL_MENU_ITEMS_LIMIT_SIZE = 3
