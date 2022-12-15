@@ -1,7 +1,13 @@
 import React from 'react'
 import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
 import { isProduction } from '@consts'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
+import {
+    generalHiddenRoutes,
+    generalRoutes,
+    IRoutes,
+    PROJECT_ACTIVITIES_ROUTE,
+    USEFUL_INFO_ROUTE,
+} from './general-routes'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
@@ -48,7 +54,6 @@ export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 export const ACAD_PERFORMANCE_ROUTE = '/acad-performance'
-export const HELPFUL_INFORMATION = '/helpful-information'
 export const DORMITORY = '/dormitory'
 
 //hidden routes
@@ -131,10 +136,10 @@ export const privateRoutes: () => IRoutes = () => ({
         id: 'helpful-information',
         title: 'Полезная информация',
         icon: <BiInfoCircle />,
-        path: HELPFUL_INFORMATION,
+        path: USEFUL_INFO_ROUTE,
         Component: HelpfulInformation,
         color: 'blue',
-        isTemplate: false,
+        isTemplate: true,
         group: 'GENERAL',
     },
     'application-for-superior-room': {
