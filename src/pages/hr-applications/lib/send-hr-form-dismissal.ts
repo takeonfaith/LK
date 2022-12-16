@@ -62,7 +62,7 @@ const SendHrFormDismissal = async (
             signingDate: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
             dateOfDismissal: result.last_day,
             isSendMail: result.get_tk == 'По почте',
-            isRetirement: result.isRetirement,
+            isRetirement: result.isRetirement == true ? true : false,
             address: result.get_tk_address,
             reason: result.reason,
         }
