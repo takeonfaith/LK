@@ -36,6 +36,7 @@ import {
     PersonaIncomeTaxReferencePage,
     PaymentOfChildBirthAllowancePage,
     PaymentForChildCarePage,
+    DecreisDirectivesPage,
 } from './pages'
 
 import React from 'react'
@@ -119,10 +120,10 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Ознакомление с документами',
         icon: <FiFileText />,
         path: DOCLIST_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
+        Component: DecreisDirectivesPage,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'GENERAL',
     },
     applications: {
         id: 'applications',

@@ -37,9 +37,10 @@ const PersonalNotifications = styled.div`
 
 interface Props {
     title: string
+    type: 'notifications' | 'docs'
 }
 
-const NotificationsPage = ({ title }: Props) => {
+const NotificationsPage = ({ title, type }: Props) => {
     const { data: notifications, error } = personalNotificationModel.selectors.usePersonalNotifications()
     const [foundNotification, setFoundNotification] = useState<Notifications>()
     const [searchValue, setSearchValue] = useState<string>('')
@@ -62,7 +63,10 @@ const NotificationsPage = ({ title }: Props) => {
 
     return (
         <Wrapper
-            load={() => personalNotificationModel.effects.getPersonalNotificationsFx()}
+            load={() => {
+                personalNotificationModel.effects.setNotificationsType(type)
+                personalNotificationModel.effects.getPersonalNotificationsFx()
+            }}
             error={error}
             data={foundNotification}
         >
@@ -80,38 +84,42 @@ const NotificationsPage = ({ title }: Props) => {
                         />
                         <Select items={items} selected={selected} setSelected={setSelected} />
                     </ElementsControlNotification>
-                    <SliderPage
-                        pages={[
-                            {
-                                title: 'Отпуск',
-                                condition: !!notifications?.vacation.length,
-                                content: foundNotification?.vacation && (
-                                    <ListNotification
-                                        listNotification={foundNotification?.vacation}
-                                        typeList="vacation"
-                                    />
-                                ),
-                            },
-                            {
-                                title: 'Увольнение',
-                                condition: !!notifications?.fire.length,
-                                content: foundNotification?.fire && (
-                                    <ListNotification listNotification={foundNotification?.fire} typeList="fire" />
-                                ),
-                            },
-                            {
-                                title: 'Командировка',
-                                condition: !!notifications?.businesstrip.length,
-                                content: foundNotification?.businesstrip && (
-                                    <ListNotification
-                                        listNotification={foundNotification?.businesstrip}
-                                        typeList="businesstrip"
-                                    />
-                                ),
-                            },
-                        ]}
-                        className="slider-list-notification"
-                    />
+                    {type === 'docs' && foundNotification?.docs ? (
+                        <ListNotification listNotification={foundNotification?.docs} typeList="docs" />
+                    ) : (
+                        <SliderPage
+                            pages={[
+                                {
+                                    title: 'Отпуск',
+                                    condition: !!notifications?.vacation?.length,
+                                    content: foundNotification?.vacation && (
+                                        <ListNotification
+                                            listNotification={foundNotification?.vacation}
+                                            typeList="vacation"
+                                        />
+                                    ),
+                                },
+                                {
+                                    title: 'Увольнение',
+                                    condition: !!notifications?.fire?.length,
+                                    content: foundNotification?.fire && (
+                                        <ListNotification listNotification={foundNotification?.fire} typeList="fire" />
+                                    ),
+                                },
+                                {
+                                    title: 'Командировка',
+                                    condition: !!notifications?.businesstrip?.length,
+                                    content: foundNotification?.businesstrip && (
+                                        <ListNotification
+                                            listNotification={foundNotification?.businesstrip}
+                                            typeList="businesstrip"
+                                        />
+                                    ),
+                                },
+                            ]}
+                            className="slider-list-notification"
+                        />
+                    )}
                 </Block>
             </PersonalNotifications>
         </Wrapper>

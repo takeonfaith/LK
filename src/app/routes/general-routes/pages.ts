@@ -19,7 +19,7 @@ export const Appearance = lazy(() => import('@pages/settings/pages/appearance'))
 export const HomeSettings = lazy(() => import('@pages/settings/pages/home'))
 export const Security = lazy(() => import('@pages/settings/pages/security'))
 export const TeachersSchedule = lazy(() => import('@pages/teachers-schedule'))
-
+export const DecreisDirectivesPage = lazy(() => import('@pages/decreis-directives'))
 export const GetYourLoginPage = lazy(() => import('@pages/get-your-login'))
 export const MemoFreshmenPage = lazy(() => import('@pages/memo-freshmen'))
 export const MemoTeacherPage = lazy(() => import('@pages/memo-teacher'))

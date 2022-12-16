@@ -1,5 +1,5 @@
 import React from 'react'
-import { baseNotification, businesstripNotification, NameListNotification } from '@api/model/notification'
+import { docsNotification, NameListNotification } from '@api/model/notification'
 import { Colors } from '@consts'
 import { personalNotificationModel } from '@entities/notification'
 import { userModel } from '@entities/user'
@@ -7,10 +7,10 @@ import { LinkButton, SubmitButton } from '@ui/atoms'
 import getRightGenderWord from '@utils/get-right-gender-word'
 import localizeDate from '@utils/localize-date'
 import { useState } from 'react'
-import { FiDownload } from 'react-icons/fi'
+import { FiLink } from 'react-icons/fi'
 import styled from 'styled-components'
 
-const CardNotificationWrapper = styled.div`
+const CardDocumentWrapper = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
@@ -23,7 +23,7 @@ const CardNotificationWrapper = styled.div`
     min-height: 70px;
 `
 
-const InfoNotification = styled.div`
+const InfoDocument = styled.div`
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -35,7 +35,7 @@ const BlockButtons = styled.div`
     align-self: end;
 `
 
-const TitleCardNotification = styled.div`
+const TitleCardDocument = styled.div`
     font-style: normal;
     font-weight: 500;
     font-size: 15px;
@@ -50,34 +50,30 @@ const DateCardNotification = styled.div`
 `
 
 interface Props {
-    data: baseNotification | businesstripNotification
+    data: docsNotification
     type: NameListNotification
 }
 
-const CardNotification = ({ data }: Props) => {
+const CardDocument = ({ data }: Props) => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
     return (
-        <CardNotificationWrapper>
-            <InfoNotification>
-                <TitleCardNotification>{data.event || data.post}</TitleCardNotification>
-                {data.startDate && (
-                    <DateCardNotification>
-                        Период: {localizeDate(data.startDate, 'numeric')} - {localizeDate(data.endDate, 'numeric')}
-                    </DateCardNotification>
-                )}
-            </InfoNotification>
+        <CardDocumentWrapper>
+            <InfoDocument>
+                <TitleCardDocument>{data.name}</TitleCardDocument>
+                {data.date && <DateCardNotification>Дата: {localizeDate(data.date, 'numeric')}</DateCardNotification>}
+            </InfoDocument>
             <BlockButtons>
-                {data.file && (
+                {data.link && (
                     <LinkButton
-                        href={data.file}
+                        href={data.link}
                         onClick={() => null}
-                        text="Скачать"
+                        text="Подробнее"
                         width="150px"
-                        icon={<FiDownload />}
+                        icon={<FiLink />}
                         height="35px"
                         minHeight="30px"
                         textColor="white"
@@ -104,8 +100,8 @@ const CardNotification = ({ data }: Props) => {
                     popUpFailureMessage="Вы уже ознакомились"
                 />
             </BlockButtons>
-        </CardNotificationWrapper>
+        </CardDocumentWrapper>
     )
 }
 
-export default CardNotification
+export default CardDocument

@@ -40,6 +40,7 @@ import {
     GetYourLoginPage,
     AllStudentsPage,
     AllTeachersPage,
+    DecreisDirectivesPage,
 } from './pages'
 import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 
@@ -60,6 +61,7 @@ export const SCHEDULE_ROUTE = '/schedule'
 export const ALL_STUDENTS_ROUTE = '/all-students'
 export const ALL_TEACHERS_ROUTE = '/all-teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
+export const DECREIS_DIRECTIVES = '/decreis-directives'
 export const FEEDBACK_ROUTE = '/feedback'
 export const CANT_ACCESS_ROUTE = '/cant-access'
 export const MEMO_FRESHMEN_ROUTE = '/memo-freshmen'
@@ -272,6 +274,16 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
+    },
+    'personal-notifications': {
+        id: 'personal-notifications',
+        title: 'Приказы и распоряжения',
+        icon: <BiIdCard />,
+        path: DECREIS_DIRECTIVES,
+        Component: DecreisDirectivesPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'GENERAL',
     },
     instructions: {
         id: 'instructions',
