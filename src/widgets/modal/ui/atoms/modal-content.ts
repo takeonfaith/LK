@@ -8,7 +8,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
     max-height: 90vh;
     border-radius: var(--brSemi);
     transition: 0.2s opacity, 0.2s transform;
-    overflow: hidden;
+    overflow: auto;
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
