@@ -1,5 +1,5 @@
 import React, { LazyExoticComponent } from 'react'
-import { IColors } from '@consts'
+import { IColors, isProduction } from '@consts'
 
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
@@ -41,10 +41,11 @@ import {
     AllStudentsPage,
     AllTeachersPage,
     DecreisDirectivesPage,
+    AlertsPage,
 } from './pages'
 import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 
-import { FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
+import { FiBell, FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineViewGrid } from 'react-icons/hi'
 
 export const LOGIN_ROUTE = '/login'
@@ -76,6 +77,7 @@ export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
 export const SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE = SETTINGS_ROUTE + '/customize-menu'
 export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activity'
+export const ALERTS_ROUTE = '/alerts'
 
 export const USEFUL_INFO_ROUTE = '/helpful-information'
 
@@ -183,6 +185,16 @@ export const generalRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'GENERAL',
+    },
+    alerts: {
+        id: 'alerts',
+        title: 'Оповещения',
+        icon: <FiBell />,
+        path: ALERTS_ROUTE,
+        Component: isProduction ? () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }) : AlertsPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
     },
     home: {
         id: 'home',

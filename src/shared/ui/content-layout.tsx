@@ -16,6 +16,8 @@ import InitialLoader from './initial-loader'
 import Story from './story'
 import React from 'react'
 import useShowTutorial from '@utils/hooks/use-show-tutorial'
+import { Link } from 'react-router-dom'
+import { ALERTS_ROUTE } from '@app/routes/general-routes'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -65,8 +67,20 @@ const ContentLayout = () => {
             type: 'info',
             time: 5000,
         })
+
+        // TODO: popUpMessageModel add stack of alerts
+        user?.hasAlerts &&
+            setTimeout(
+                () =>
+                    popUpMessageModel.events.evokePopUpMessage({
+                        message: <Link to={ALERTS_ROUTE}>У вас есть новые оповещения</Link>,
+                        type: 'tip',
+                        time: 5000,
+                    }),
+                5000,
+            )
         // InstallApp()
-    }, [])
+    }, [user])
 
     useEffect(() => {
         if (seen) {

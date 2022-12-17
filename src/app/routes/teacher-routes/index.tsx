@@ -1,52 +1,52 @@
 import PageIsNotReady from '@pages/page-is-not-ready'
 
 import {
-    TeachersApplicationsPage,
-    DownloadAdminFilesPage,
-    HelpfulInformation,
-    HrApplicationsPage,
-    PartTimeEmployment,
-    HolidayPostponed,
+    ArbitraryRequestPage,
+    CertificateFromPlaceOfWorkPage,
+    CertificateOfWorkExperiencePage,
+    CertificateTimeParentalLeavePage,
+    ConnectingComputerPage,
+    CopiesOfDocumentsFromPersonalFilePage,
+    CopyOfEmploymentRecordPage,
+    CourierPage,
+    DecreisDirectivesPage,
     Dismissal,
+    DownloadAdminFilesPage,
     ExtraHolidayColl,
-    HolidayWork,
+    GettingComputerEquipmentPage,
+    HelpfulInformation,
     HolidayPlanning,
-    WorkTransfer,
+    HolidayPostponed,
+    HolidayWork,
+    HrApplicationsPage,
+    IssuanceOfLicensesPage,
+    NumberOfUnusedVacationDaysPage,
+    OtherItServicesPage,
+    PartTimeEmployment,
+    PaymentForChildCarePage,
+    PaymentOfChildBirthAllowancePage,
+    PersonaIncomeTaxReferencePage,
+    PersonalNotificationsPage,
+    PrinterMaintenancePage,
+    QuestionPersonalAccountPage,
+    QuestionSedPage,
+    TeachersApplicationsPage,
     // DataVerificationPage,
     // ContactInfoActualizationPage,
     VacationSchedule,
-    PersonalNotificationsPage,
-    IssuanceOfLicensesPage,
-    GettingComputerEquipmentPage,
-    ConnectingComputerPage,
-    PrinterMaintenancePage,
-    QuestionSedPage,
-    QuestionPersonalAccountPage,
-    OtherItServicesPage,
-    CertificateFromPlaceOfWorkPage,
     VisaCertificatePage,
-    CertificateOfWorkExperiencePage,
-    NumberOfUnusedVacationDaysPage,
-    CopyOfEmploymentRecordPage,
-    CopiesOfDocumentsFromPersonalFilePage,
     WorkOnTermsOfExternalConcurrencyPage,
-    CertificateTimeParentalLeavePage,
-    ArbitraryRequestPage,
-    CourierPage,
-    PersonaIncomeTaxReferencePage,
-    PaymentOfChildBirthAllowancePage,
-    PaymentForChildCarePage,
-    DecreisDirectivesPage,
+    WorkTransfer,
 } from './pages'
 
+import { isProduction } from '@consts'
+import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiArrowDownCircle, FiBell, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
+import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
-import { isProduction } from '@consts'
-import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
@@ -55,7 +55,6 @@ export const JOB_ROUTE = '/job'
 export const ORDERS_ROUTE = '/staff_orders'
 export const DOCUMENT_BLANKS_ROUTE = '/staff_blanks'
 export const STUDENTS_LOGINS_ROUTE = '/ad_logins'
-export const ALERTS_ROUTE = '/alerts'
 export const VAX_ROUTE = '/vaccination'
 export const DOCLIST_ROUTE = '/doclist'
 export const PPS_VOTE_ROUTE = '/pps_vote2020'
@@ -156,16 +155,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         group: 'GENERAL',
 
         isAdmin: true,
-    },
-    alerts: {
-        id: 'alerts',
-        title: 'Оповещения',
-        icon: <FiBell />,
-        path: ALERTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
     },
     calendar: {
         id: 'calendar',
