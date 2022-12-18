@@ -55,6 +55,7 @@ const SendHrFormDismissal = async (
         .flat()
 
     const result = Object.assign({}, ...form)
+    let response
     try {
         const aaa = {
             guid: parseJwt(JSON.parse(getJwtToken() || '{}'))['IndividualGuid'],
@@ -66,19 +67,25 @@ const SendHrFormDismissal = async (
             address: result.get_tk_address,
             reason: result.reason,
         }
-        await applicationsModel.effects.postApplicationFx(aaa)
+        response = await applicationsModel.effects.postApplicationFx(aaa)
+        response = JSON.parse(response).dismissalResponse
+        console.log(response)
+
         setLoading(false)
         setCompleted(true)
+        if (response.isError) throw new Error()
         popUpMessageModel.events.evokePopUpMessage({
             message: `Форма отправлена успешно`,
             type: 'alert',
             time: 30000,
         })
     } catch (error) {
+        console.log('in error')
+
         setLoading(false)
 
         popUpMessageModel.events.evokePopUpMessage({
-            message: `Не удалось отправить форму`,
+            message: response.errorString,
             type: 'failure',
             time: 30000,
         })

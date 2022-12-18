@@ -44,9 +44,9 @@ const getUserDataApplicationsFx = createEffect(async (): Promise<HrUserApplicati
 })
 
 const postApplicationFx = createEffect(async (data: ApplicationCreating) => {
-    await hrApplicationApi.post(data)
-
-    return 'ok'
+    return await (
+        await hrApplicationApi.post(data)
+    ).request.response
 })
 
 const clearStore = createEvent()
