@@ -141,6 +141,7 @@ type Props = StyledProps & {
     popUpSuccessMessage?: string
     popUpFailureMessage?: string
     isDone?: boolean
+    alerts?: boolean
 }
 
 const SubmitButton = ({
@@ -158,9 +159,10 @@ const SubmitButton = ({
     isLoading = false,
     completed = false,
     repeatable = true,
+    alerts = true,
 }: Props) => {
     useEffect(() => {
-        if (completed) {
+        if (completed && alerts) {
             popUpMessageModel.events.evokePopUpMessage({
                 message: popUpSuccessMessage,
                 type: 'success',
@@ -177,10 +179,11 @@ const SubmitButton = ({
     const handleAction = () => {
         if (isActive && !isDone && !isLoading) return action()
 
-        popUpMessageModel.events.evokePopUpMessage({
-            message: popUpFailureMessage,
-            type: 'failure',
-        })
+        alerts &&
+            popUpMessageModel.events.evokePopUpMessage({
+                message: popUpFailureMessage,
+                type: 'failure',
+            })
     }
 
     return (

@@ -1,16 +1,13 @@
-import { popUpMessageModel } from '@entities/pop-up-message'
-import { IInputArea } from '@ui/input-area/model'
 import { applicationsModel } from '@entities/hr-applications'
 import { getJwtToken, parseJwt } from '@entities/user/lib/jwt-token'
+import { IInputArea } from '@ui/input-area/model'
 
-const SendHrFormDismissal = async (
+const sendHrFormDismissal = async (
     employeeId: string,
     inputAreas: IInputArea[],
-    setLoading: (loading: boolean) => void,
     setCompleted: (loading: boolean) => void,
 ) => {
-    setLoading(true)
-
+    setCompleted(false)
     const form = inputAreas
         .map((itemForm) => {
             if (!Array.isArray(itemForm.data[0])) {
@@ -55,41 +52,19 @@ const SendHrFormDismissal = async (
         .flat()
 
     const result = Object.assign({}, ...form)
-    let response
-    try {
-        const aaa = {
-            guid: parseJwt(JSON.parse(getJwtToken() || '{}'))['IndividualGuid'],
-            jobGuid: result.jobGuid,
-            signingDate: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
-            dateOfDismissal: result.last_day,
-            isSendMail: result.get_tk == 'По почте',
-            isRetirement: result.isRetirement == true ? true : false,
-            address: result.get_tk_address,
-            reason: result.reason,
-        }
-        response = await applicationsModel.effects.postApplicationFx(aaa)
-        response = JSON.parse(response).dismissalResponse
-        console.log(response)
 
-        setLoading(false)
-        setCompleted(true)
-        if (response.isError) throw new Error()
-        popUpMessageModel.events.evokePopUpMessage({
-            message: `Форма отправлена успешно`,
-            type: 'alert',
-            time: 30000,
-        })
-    } catch (error) {
-        console.log('in error')
+    const response = await applicationsModel.effects.postApplicationFx({
+        guid: parseJwt(JSON.parse(getJwtToken() || '{}'))['IndividualGuid'],
+        jobGuid: result.jobGuid,
+        signingDate: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
+        dateOfDismissal: result.last_day,
+        isSendMail: result.get_tk === 'По почте',
+        isRetirement: !!result.isRetirement,
+        address: result.get_tk_address,
+        reason: result.reason,
+    })
 
-        setLoading(false)
-
-        popUpMessageModel.events.evokePopUpMessage({
-            message: response.errorString,
-            type: 'failure',
-            time: 30000,
-        })
-    }
+    !response?.data?.dismissalResponse?.isError && setCompleted(true)
 }
 
-export default SendHrFormDismissal
+export default sendHrFormDismissal

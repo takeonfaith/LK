@@ -1,8 +1,10 @@
 import { hrApplicationApi } from '@api'
 import { HrApplication, HrUserApplication } from '@api/model'
-import { createEvent, forward } from 'effector'
+import { createEvent, forward, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector'
+import { popUpMessageModel } from '@entities/pop-up-message'
+import { MessageType } from '@shared/ui/types'
 
 interface ApplicationsStore {
     listApplication: HrApplication[] | null
@@ -44,9 +46,35 @@ const getUserDataApplicationsFx = createEffect(async (): Promise<HrUserApplicati
 })
 
 const postApplicationFx = createEffect(async (data: ApplicationCreating) => {
-    return await (
-        await hrApplicationApi.post(data)
-    ).request.response
+    return await hrApplicationApi.post(data)
+})
+
+sample({
+    clock: postApplicationFx.doneData,
+    fn: (response) => {
+        const result = response.data.dismissalResponse
+
+        if (result.isError) return { message: result.errorString, type: 'failure' as MessageType, time: 30000 }
+
+        return {
+            message: `Форма отправлена успешно`,
+            type: 'success' as MessageType,
+            time: 30000,
+        }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
+})
+
+sample({
+    clock: postApplicationFx.fail,
+    fn: () => {
+        return {
+            message: 'Не удалось отправить форму. Попробуйте позже',
+            type: 'failure' as MessageType,
+            time: 30000,
+        }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
 })
 
 const clearStore = createEvent()
