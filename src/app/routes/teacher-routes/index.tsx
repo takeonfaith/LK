@@ -31,8 +31,8 @@ import {
     QuestionPersonalAccountPage,
     QuestionSedPage,
     TeachersApplicationsPage,
-    // DataVerificationPage,
-    // ContactInfoActualizationPage,
+    DataVerificationPage,
+    ContactInfoActualizationPage,
     VacationSchedule,
     VisaCertificatePage,
     WorkOnTermsOfExternalConcurrencyPage,
@@ -48,7 +48,6 @@ import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 're
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
 
-export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
 export const HR_APPLICATIONS_ROUTE = '/hr-applications'
 export const JOB_ROUTE = '/job'
@@ -72,9 +71,10 @@ export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const DOWNLOAD_AGREEMENTS_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
-export const CONTACT_INFO_ACTUALIZATION = '/contact-info-actualization'
 
 //hidden routes
+export const CONTACT_INFO_ACTUALIZATION = APPLICATIONS_ROUTE + '/contact-info-actualization'
+export const DATA_VERIFICATION_ROUTE = APPLICATIONS_ROUTE + '/data-verification'
 export const ISSUANCE_OF_LICENSES = APPLICATIONS_ROUTE + '/issuance-of-licenses'
 export const GETTING_COMPUTER_EQUIPMENT = APPLICATIONS_ROUTE + '/getting-computer-equipment'
 export const CONNECTING_COMPUTER = APPLICATIONS_ROUTE + '/connecting-computer'
@@ -595,6 +595,26 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         color: 'blue',
         path: PAYMENT_FOR_CHILD_CARE,
         Component: isProduction ? ApplicationRedirect : PaymentForChildCarePage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'contact-info-actualization': {
+        id: 'contact-info-actualization',
+        title: 'Актуализация контактных данных',
+        icon: <FiFileText />,
+        color: 'blue',
+        path: CONTACT_INFO_ACTUALIZATION,
+        Component: ContactInfoActualizationPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'data-verification': {
+        id: 'data-verification',
+        title: 'Анкета для сверки данных',
+        icon: <FiFileText />,
+        color: 'blue',
+        path: DATA_VERIFICATION_ROUTE,
+        Component: DataVerificationPage,
         isTemplate: false,
         group: 'OTHER',
     },
