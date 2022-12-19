@@ -100,7 +100,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: ApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'FINANCES_DOCS',
     },
     'project-activity': {
         id: 'project-activity',
@@ -110,7 +110,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: ProjectActivitiesPage,
         color: 'yellow',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
     'acad-performance': {
         id: 'acad-performance',
@@ -121,16 +121,6 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'green',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
-    },
-    job: {
-        id: 'job',
-        title: 'Работа',
-        icon: <FiBriefcase />,
-        path: JOB_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
     },
     'helpful-information': {
         id: 'helpful-information',
@@ -161,7 +151,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: DormitoryPage,
         color: 'blue',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'FINANCES_DOCS',
         show: true,
     },
 })

@@ -26,7 +26,7 @@ import {
     // ChatPage,
     SchedulePage,
     PaymentsPage,
-    // ElectronicInteractionAgreementPage,
+    ElectronicInteractionAgreementPage,
     // AllStudentsPage,
     // AllTeachersPage,
     InstructionsPage,
@@ -45,8 +45,20 @@ import {
 } from './pages'
 import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 
-import { FiBell, FiClipboard, FiHome, FiLayers, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
-import { HiOutlineViewGrid } from 'react-icons/hi'
+import {
+    FiBell,
+    FiClipboard,
+    FiFileText,
+    FiHome,
+    FiLayers,
+    FiLock,
+    FiMenu,
+    FiSettings,
+    FiUser,
+    FiXCircle,
+} from 'react-icons/fi'
+import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
+import { DOCLIST_ROUTE } from '../teacher-routes'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -94,8 +106,8 @@ export enum Groups {
     FINANCES_DOCS = 'Финансы и документы',
     LEARNING_ACTIVITIES = 'Учебная деятельность',
     OTHER = 'Находится в разработке',
+    COMMUNICATION = 'Коммуникация',
 }
-
 export interface IRoute {
     id: string
     title: string
@@ -186,6 +198,18 @@ export const generalRoutes: IRoutes = {
         show: true,
         group: 'GENERAL',
     },
+
+    doclist: {
+        id: 'doclist',
+        // title: 'Ознакомление с документами',
+        title: 'Ознакомление с док...',
+        icon: <FiFileText />,
+        path: DOCLIST_ROUTE,
+        Component: DecreisDirectivesPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
     alerts: {
         id: 'alerts',
         title: 'Оповещения',
@@ -194,7 +218,7 @@ export const generalRoutes: IRoutes = {
         Component: isProduction ? () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }) : AlertsPage,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'COMMUNICATION',
     },
     home: {
         id: 'home',
@@ -255,7 +279,7 @@ export const generalRoutes: IRoutes = {
         Component: AllStudentsPage,
         color: 'darkBlue',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'COMMUNICATION',
     },
     'all-teachers': {
         id: 'all-teachers',
@@ -265,17 +289,7 @@ export const generalRoutes: IRoutes = {
         Component: AllTeachersPage,
         color: 'orange',
         isTemplate: false,
-        group: 'GENERAL',
-    },
-    portfolio: {
-        id: 'portfolio',
-        title: 'Портфолио',
-        icon: <BiIdCard />,
-        path: PORTFOLIO_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PORTFOLIO_ROUTE }),
-        color: 'blue',
-        isTemplate: true,
-        group: 'OTHER',
+        group: 'COMMUNICATION',
     },
     feedback: {
         id: 'feedback',
@@ -285,7 +299,7 @@ export const generalRoutes: IRoutes = {
         Component: FeedbackPage,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'COMMUNICATION',
     },
     'personal-notifications': {
         id: 'personal-notifications',
@@ -295,7 +309,18 @@ export const generalRoutes: IRoutes = {
         Component: DecreisDirectivesPage,
         color: 'blue',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'FINANCES_DOCS',
+    },
+    'electronic-interaction-agreement': {
+        id: 'electronic-interaction-agreement',
+        title: 'Соглашение об электр...',
+        // title: 'Соглашение об электронном взаимодействии',
+        icon: <HiOutlineClipboardCheck />,
+        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
+        Component: ElectronicInteractionAgreementPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
     },
     instructions: {
         id: 'instructions',

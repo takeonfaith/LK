@@ -1,21 +1,23 @@
 import { OLD_LK_URL } from '@consts'
 import { Error, LinkButton } from '@ui/atoms'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface Props {
     oldVersionUrl?: string
     errorText?: string
     buttonText?: string
+    forceForward?: boolean
 }
 
 const PageIsNotReady = ({
     oldVersionUrl,
     errorText = 'Страница еще находится в разработке. Если вам она нужна, вернитесь к старому дизайну',
     buttonText = 'Перейти к старому дизайну',
+    forceForward = false,
 }: Props) => {
-    // useEffect(() => {
-    //     window.location.href = `/old/?p=${oldVersionUrl?.slice(1, oldVersionUrl.length)}`
-    // }, [])
+    useEffect(() => {
+        if (forceForward) window.location.href = `/old/?p=${oldVersionUrl?.slice(1, oldVersionUrl.length)}`
+    }, [])
     return (
         <Error text={errorText}>
             <LinkButton

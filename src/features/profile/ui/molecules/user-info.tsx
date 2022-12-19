@@ -2,7 +2,6 @@ import React from 'react'
 import { userModel } from '@entities/user'
 import AllInfo from '@features/home/ui/molecules/all-info'
 import Orders from '@features/home/ui/molecules/orders'
-import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import styled from 'styled-components'
 import { SliderPage } from 'widgets'
 
@@ -36,16 +35,11 @@ const UserInfo = () => {
         //         </div>
         //     ),
         // },
-        {
-            title: 'Соглашение об электронном взаимодействии',
-            content: <ElectronicInteractionAgreementPage />,
-        },
     ]
 
     const studentPages = [
         { title: 'Учетная карточка', content: <AllInfo user={user} /> },
         { title: 'Приказы', content: <Orders orders={user.orders} /> },
-        { title: 'Соглашение об электронном взаимодействии', content: <ElectronicInteractionAgreementPage /> },
     ]
 
     return (
