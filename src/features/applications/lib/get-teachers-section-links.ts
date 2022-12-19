@@ -26,6 +26,8 @@ import {
     BUFFER_EXTRA_HOLIDAY_COLL,
     BUFFER_HOLIDAY_PLANNING,
     BUFFER_HOLIDAY_WORK,
+    DATA_VERIFICATION_ROUTE,
+    CONTACT_INFO_ACTUALIZATION,
 } from '@app/routes/teacher-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
@@ -34,6 +36,8 @@ const getTeachersSectionLinks = () => {
         {
             title: 'Цифровые сервисы',
             links: [
+                { link: CONTACT_INFO_ACTUALIZATION, title: 'Актуализация контактных данных' },
+                { link: DATA_VERIFICATION_ROUTE, title: 'Анкета для сверки данных' },
                 { link: ISSUANCE_OF_LICENSES, title: 'Выдача лицензий и свидетельств о государственной аккредитации' },
                 { link: GETTING_COMPUTER_EQUIPMENT, title: 'Получение нового компьютерного оборудования' },
                 { link: CONNECTING_COMPUTER, title: 'Подключение компьютера, МФУ, телефона, WiFi' },

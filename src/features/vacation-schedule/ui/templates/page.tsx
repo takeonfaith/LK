@@ -9,6 +9,13 @@ import Subtext from '@ui/subtext'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Vacation } from '../organism'
 
+const calendarUrls = {
+    fiveWorkDays:
+        'https://e.mospolytech.ru/old/storage/files/Proizvodstvennyj_kalendar_2023_pyatidnevnya_rabochaya_nedelya.pdf',
+    sixWorkDays:
+        'https://e.mospolytech.ru/old/storage/files/Proizvodstvennyj_kalendar_2023_shestidnevnaya_rabochaya_nedelya.pdf',
+}
+
 const Page = () => {
     const {
         data: { user },
@@ -37,7 +44,7 @@ const Page = () => {
                         График отпусков
                     </Title>
                     <Subtext width="100%" maxWidth="100%">
-                        Производственный календарь на 2022 год
+                        Производственный календарь на 2023 год
                     </Subtext>
                     <List scroll={false} direction="horizontal" gap={12} wrapOnMobile>
                         <Card
@@ -49,9 +56,7 @@ const Page = () => {
                         >
                             <LinkButton
                                 onClick={() => null}
-                                href={
-                                    'https://e.mospolytech.ru/old/storage/files/Proizvodstvennyj_kalendar_na_2022_god_(pyatidnevka).pdf'
-                                }
+                                href={calendarUrls.fiveWorkDays}
                                 textColor="var(--reallyBlue)"
                                 text="Подробнее"
                                 background="transparent"
@@ -67,9 +72,7 @@ const Page = () => {
                         >
                             <LinkButton
                                 onClick={() => null}
-                                href={
-                                    'https://e.mospolytech.ru/old/storage/files/Proizvodstvennyj_kalendar_na_2022_god_(shestidnevka).pdf'
-                                }
+                                href={calendarUrls.sixWorkDays}
                                 textColor="var(--reallyBlue)"
                                 text="Подробнее"
                                 background="transparent"

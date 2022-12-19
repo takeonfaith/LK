@@ -2,8 +2,6 @@ import React from 'react'
 import { userModel } from '@entities/user'
 import AllInfo from '@features/home/ui/molecules/all-info'
 import Orders from '@features/home/ui/molecules/orders'
-import ContactInfoActualizationPage from '@pages/contact-info-actualization'
-import DataVerificationPage from '@pages/data-verification'
 import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import styled from 'styled-components'
 import { SliderPage } from 'widgets'
@@ -38,8 +36,6 @@ const UserInfo = () => {
         //         </div>
         //     ),
         // },
-        { title: 'Анкета для сверки данных', content: <DataVerificationPage /> },
-        { title: 'Актуализация контактных данных', content: <ContactInfoActualizationPage /> },
         {
             title: 'Соглашение об электронном взаимодействии',
             content: <ElectronicInteractionAgreementPage />,
