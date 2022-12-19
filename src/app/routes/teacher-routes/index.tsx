@@ -161,14 +161,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'График отпусков',
         icon: <FiCalendar />,
         path: VACATION_ROUTE,
-        Component: isProduction
-            ? () =>
-                  PageIsNotReady({
-                      oldVersionUrl: VACATION_ROUTE,
-                      buttonText: 'Перейти к заполнению',
-                      errorText: 'Для заполнения графика отпусков на 2023 год перейдите в старую версию.',
-                  })
-            : VacationSchedule,
+        Component: VacationSchedule,
         color: 'purple',
         isTemplate: false,
         group: 'OTHER',
