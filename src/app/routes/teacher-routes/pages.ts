@@ -6,8 +6,10 @@ export const CertificateFromPlaceOfWorkPage = lazy(
 export const CopiesOfDocumentsFromPersonalFilePage = lazy(
     () => import('@pages/teachers-applications/pages/copies-of-documents-from-the-personal-file'),
 )
-export const ContactInfoActualizationPage = lazy(() => import('@pages/contact-info-actualization'))
-export const DataVerificationPage = lazy(() => import('@pages/data-verification'))
+export const ContactInfoActualizationPage = lazy(
+    () => import('@pages/teachers-applications/pages/contact-info-actualization'),
+)
+export const DataVerificationPage = lazy(() => import('@pages/teachers-applications/pages/data-verification'))
 export const DownloadAdminFilesPage = lazy(() => import('@pages/download-admin-files'))
 export const PersonalNotificationsPage = lazy(() => import('@pages/personal-notifications'))
 export const TeachersApplicationsPage = lazy(() => import('@pages/teachers-applications'))
