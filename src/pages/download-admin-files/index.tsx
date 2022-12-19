@@ -19,7 +19,7 @@ const DownloadAdminFilesPageWrapper = styled.div`
 `
 
 const DownloadAdminFilesPage = () => {
-    const { data } = adminLinksModel.selectors.useAdminLinks()
+    const { data } = adminLinksModel.selectors.use()
     return (
         <DownloadAdminFilesPageWrapper>
             <FormBlock>

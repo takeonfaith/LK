@@ -109,7 +109,7 @@ const Arrows = styled.div`
 `
 
 const GraphicInfo = () => {
-    const { data, loading } = acadPerformanceModel.selectors.useAcadPerformance()
+    const { data, loading } = acadPerformanceModel.selectors.use()
 
     const [circleMode, setCircleMode] = useState(0)
     const examPercentage = data?.exam.length ? findPercentage(data.exam, circleMode) : 0

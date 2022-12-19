@@ -20,7 +20,7 @@ const Page = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { data, error } = vacationScheduleModel.selectors.useVacationShedule()
+    const { data, error } = vacationScheduleModel.selectors.use()
 
     const items: SelectPage[] = useMemo(() => {
         return data?.map((value, index) => ({ id: index, title: value.division })) || []
@@ -37,7 +37,7 @@ const Page = () => {
     const selectedVacation = data?.[Number(selected?.id || 0)]
 
     return (
-        <Wrapper load={vacationScheduleModel.effects.getVacationScheduleFx} error={error} data={data}>
+        <Wrapper load={vacationScheduleModel.effects.getFx} error={error} data={data}>
             <CenterPage alignItems="flex-start">
                 <Block orientation="vertical" height="fit-content" gap="1rem">
                     <Title size={2} align="left">

@@ -8,18 +8,6 @@ import { Divider } from '../divider'
 import { Error } from '../error'
 import { Title } from '../title'
 
-type PagintaionListProps<T> = {
-    hasNext?: boolean
-    isPending?: boolean
-    handleNext?: (filter: SelectPage | null) => void
-    handleReload?: (filter: SelectPage | null) => void
-    items: Nullable<T[]>
-    renderItem: (item: T, isMe: boolean, index?: number) => ChildrenType
-    offset?: number
-    filter?: SelectPage | null
-    showAlphabetLetters?: boolean
-}
-
 const List = styled.div`
     display: flex;
     flex-direction: column;
@@ -45,6 +33,19 @@ const List = styled.div`
     }
 `
 
+type PagintaionListProps<T> = {
+    hasNext?: boolean
+    isPending?: boolean
+    handleNext?: (filter: SelectPage | null) => void
+    handleReload?: (filter: SelectPage | null) => void
+    items: Nullable<T[]>
+    renderItem: (item: T, isMe: boolean, index?: number) => ChildrenType
+    offset?: number
+    filter?: SelectPage | null
+    showAlphabetLetters?: boolean
+    noResultContent?: JSX.Element | null
+}
+
 export const PAGINATION_OFFSET = 50
 
 export function PagintaionList<T extends { id: string; fio?: string }>({
@@ -55,6 +56,7 @@ export function PagintaionList<T extends { id: string; fio?: string }>({
     handleNext,
     filter,
     showAlphabetLetters,
+    noResultContent,
     offset = PAGINATION_OFFSET,
 }: PagintaionListProps<T>) {
     const {
@@ -77,7 +79,7 @@ export function PagintaionList<T extends { id: string; fio?: string }>({
         [handleNext, hasNext, isPending, filter],
     )
 
-    if (!isPending && (!items || items?.length === 0)) return <Error text="Нет результатов" />
+    if (!isPending && (!items || items?.length === 0)) return <Error text="Нет результатов">{noResultContent}</Error>
 
     return (
         <List onScroll={scrollHandler}>

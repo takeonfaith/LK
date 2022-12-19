@@ -7,7 +7,7 @@ import { Message } from '@shared/ui/message'
 import Block from '@shared/ui/block'
 import { Colors } from '@shared/consts'
 import { FiInfo } from 'react-icons/fi'
-import { useModal, User } from 'widgets'
+import { useModal } from 'widgets'
 import InfoModal from './ui/project-info/info-modal'
 import CurrentSemestr from './ui/current-semestr'
 import LastSemestr from './ui/last-semestr'
@@ -40,7 +40,7 @@ const ProjectActivitiesPage = () => {
     // const {
     //     data: { user },
     // } = userModel.selectors.useUser()
-    const { data, loading, error } = projectActivitesModel.selectors.useProjectActivites()
+    const { data, loading, error } = projectActivitesModel.selectors.use()
     const { open } = useModal()
 
     // const [selected, setSelected] = useState<SelectPage | null>({
@@ -62,7 +62,7 @@ const ProjectActivitiesPage = () => {
 
     return (
         <Wrapper
-            load={() => projectActivitesModel.effects.getProjectActivitesFx('1')}
+            load={() => projectActivitesModel.effects.getFx('1')}
             loading={loading || false}
             error={error || null}
             data={data}
@@ -106,9 +106,8 @@ const ProjectActivitiesPage = () => {
                             <br />
                             Подпроект: {data?.subproject.length ? data?.subproject : '-'}
                             <br />
-                            Куратор:
+                            Куратор: {data?.curator.length === 0 ? '-' : data?.curator}
                         </Subtext>
-                        {data?.curator && <User name={data?.curator} type="teacher" />}
                         <Button
                             icon={<FiInfo />}
                             onClick={handleOpenModal}

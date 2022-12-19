@@ -10,13 +10,15 @@ import { UserModal } from '../atoms'
 interface Props {
     name: string
     avatar?: string
+    isMe: boolean
+    group?: string
 }
 
-const StudentModal = ({ name, avatar }: Props) => {
+const StudentModal = ({ name, avatar, isMe, group }: Props) => {
     const { close } = useModal()
 
     return (
-        <UserModal avatar={avatar} name={name}>
+        <UserModal avatar={avatar} name={name} isMe={isMe} type="student" group={group}>
             <Link to={`${CHAT_ROUTE}/${name}`}>
                 <Button
                     icon={<FiMessageCircle />}

@@ -23,7 +23,7 @@ const CurrentSemestr = ({ data }: Props) => {
             <Title size={4} align="left" bottomGap>
                 Результат аттестации за текущий семестр
             </Title>
-            <Message type="failure" visible={data?.last_semestr_result === 'не зачтено'} title={'Внимание'} icon={null}>
+            <Message type="failure" visible={data?.arrear_result === 'не зачтено'} title={'Внимание'} icon={null}>
                 Перенос баллов с прошлого семестра: {lastSemestr}. Для закрытия задолженности необходимо в этом семестре
                 набрать дополнительно {60 - lastSemestr} баллов.
             </Message>

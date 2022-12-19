@@ -1,62 +1,29 @@
+import React from 'react'
 import { alertModel } from '@entities/alert'
-import { Alert } from '@shared/api/model/alert'
-import localizeDate from '@shared/lib/localize-date'
+import { CenterPage, Error, Wrapper } from '@shared/ui/atoms'
 import Block from '@shared/ui/block'
 import { Title } from '@shared/ui/title'
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { useModal } from 'widgets'
-import AlertModal from './ui/alert-modal'
+import Alerts from './ui/alerts'
 
 const AlertsPage = () => {
-    const { alerts } = alertModel.selectors.useAlerts()
+    const { data, error, loading } = alertModel.selectors.use()
 
-    const { open } = useModal()
-
-    useEffect(() => {
-        alertModel.events.load()
-    }, [])
-
-    const handleAlertClick = (alert: Alert) => {
-        open(<AlertModal alert={alert} />)
+    const handleLoad = () => {
+        alertModel.effects.getFx()
     }
 
     return (
-        <Wrapper>
-            <Block height="fit-content">
-                <Title size={2} align="left">
-                    Оповещения
-                </Title>
-            </Block>
-            {alerts.map((alert) => {
-                return (
-                    <Block
-                        height="fit-content"
-                        justifyContent="flex-start"
-                        gap="10px"
-                        style={{ cursor: 'pointer', overflow: 'auto' }}
-                        key={alert.id}
-                        onClick={() => handleAlertClick(alert)}
-                    >
-                        <Date>{localizeDate(alert.date, 'numeric')}</Date>
-                        <AlertTitle>{alert.title}</AlertTitle>
-                    </Block>
-                )
-            })}
+        <Wrapper load={handleLoad} error={error} loading={loading} data={data}>
+            <CenterPage>
+                <Block height="100%" maxWidth="700px" orientation="vertical" gap="8px">
+                    <Title size={2} align="left" bottomGap>
+                        Оповещения
+                    </Title>
+                    {data ? <Alerts alerts={data} /> : <Error text="У вас нет оповещений" />}
+                </Block>
+            </CenterPage>
         </Wrapper>
     )
 }
-
-const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 20px;
-`
-
-const Date = styled.div``
-
-const AlertTitle = styled.div``
 
 export default AlertsPage

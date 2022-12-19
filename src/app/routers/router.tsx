@@ -12,12 +12,12 @@ const Router = () => {
     const {
         data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
-    const { data } = adminLinksModel.selectors.useAdminLinks()
+    const { data } = adminLinksModel.selectors.use()
     const { settings } = settingsModel.selectors.useSettings()
 
     useEffect(() => {
         if (isAuthenticated) {
-            adminLinksModel.effects.getAdminLinksFx()
+            adminLinksModel.effects.getFx()
             applicationsModel.effects.getUserDataApplicationsFx()
             applicationsModel.effects.getWorkerPosts()
         }

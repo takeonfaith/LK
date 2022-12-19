@@ -3,7 +3,7 @@ import React from 'react'
 import AdminLinksTemplate from 'widgets/admin-links-template'
 
 const AdditionalAgreements = () => {
-    const { data } = adminLinksModel.selectors.useAdminLinks()
+    const { data } = adminLinksModel.selectors.use()
     return <AdminLinksTemplate title={'Скачать отчеты по доп.соглашениям'} links={data?.agreements} />
 }
 

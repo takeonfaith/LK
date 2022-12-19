@@ -10,13 +10,15 @@ import { UserModal } from '../atoms'
 interface Props {
     name: string
     avatar?: string
+    isMe: boolean
+    division?: string
 }
 
-const TeacherModal = ({ name, avatar }: Props) => {
+const TeacherModal = ({ name, avatar, isMe, division }: Props) => {
     const { close } = useModal()
 
     return (
-        <UserModal avatar={avatar} name={name}>
+        <UserModal avatar={avatar} name={name} type={'teacher'} isMe={isMe} division={division}>
             <Link to={`${SCHEDULE_ROUTE}/${name}`}>
                 <Button
                     icon={<FiClock />}
