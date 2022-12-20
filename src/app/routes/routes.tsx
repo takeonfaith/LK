@@ -111,6 +111,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'yellow',
         isTemplate: false,
         group: 'OTHER',
+        isNew: true,
     },
     'acad-performance': {
         id: 'acad-performance',

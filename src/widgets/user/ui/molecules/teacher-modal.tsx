@@ -1,8 +1,7 @@
 import { SCHEDULE_ROUTE } from '@app/routes/general-routes'
-import { Colors } from '@consts'
 import { Button } from '@ui/button'
 import React from 'react'
-import { FiClock } from 'react-icons/fi'
+import { FiClock, FiMessageCircle } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import useModal from 'widgets/modal'
 import { UserModal } from '../atoms'
@@ -26,9 +25,16 @@ const TeacherModal = ({ name, avatar, isMe, division }: Props) => {
                     onClick={() => {
                         close()
                     }}
-                    width="130px"
-                    background={Colors.blue.light}
-                    textColor="#fff"
+                    width="100%"
+                />
+            </Link>
+            <Link to={`${SCHEDULE_ROUTE}/${name}`}>
+                <Button
+                    icon={<FiMessageCircle />}
+                    text={'Написать'}
+                    onClick={() => close()}
+                    minWidth="100%"
+                    width="100%"
                 />
             </Link>
         </UserModal>

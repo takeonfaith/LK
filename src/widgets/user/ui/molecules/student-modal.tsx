@@ -1,5 +1,4 @@
 import { CHAT_ROUTE } from '@app/routes/general-routes'
-import { Colors } from '@consts'
 import { Button } from '@ui/button'
 import React from 'react'
 import { FiMessageCircle } from 'react-icons/fi'
@@ -24,9 +23,8 @@ const StudentModal = ({ name, avatar, isMe, group }: Props) => {
                     icon={<FiMessageCircle />}
                     text={'Написать'}
                     onClick={() => close()}
-                    width="130px"
-                    background={Colors.purple.light}
-                    textColor="#fff"
+                    minWidth="100%"
+                    width="100%"
                 />
             </Link>
         </UserModal>

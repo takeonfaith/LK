@@ -1,7 +1,7 @@
 import { Alert } from '@shared/api/model/alert'
 
 type Year = string
-export type PreparedAlert = Record<Year, Alert[]>
+export type PreparedAlerts = Record<Year, Alert[]>
 
 const prepareData = (alerts: Alert[]) =>
     alerts.reduce((acc, alert) => {
@@ -9,6 +9,6 @@ const prepareData = (alerts: Alert[]) =>
         if (acc[year]) acc[year].push(alert)
         else acc[year] = [alert]
         return acc
-    }, {} as PreparedAlert)
+    }, {} as PreparedAlerts)
 
 export default prepareData

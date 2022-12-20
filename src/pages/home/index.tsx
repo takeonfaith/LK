@@ -11,6 +11,7 @@ import { Content } from './ui/atoms/content'
 import React from 'react'
 import MobileAppLink from '@features/all-pages/ui/organisms/mobile-app-link'
 import { isProduction } from '@shared/consts'
+import HomeTopSection from '@features/home/ui/organisms/home-top-section'
 
 const Home = () => {
     const {
@@ -30,9 +31,12 @@ const Home = () => {
     return (
         <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <Content>
-                <Title size={2} align="left" bottomGap>
-                    {getGreetingMessage(user.name)}
-                </Title>
+                <div className="top">
+                    <Title size={2} align="left">
+                        {getGreetingMessage(user.name)}
+                    </Title>
+                    <HomeTopSection />
+                </div>
                 <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
                 <ScheduleAndNotification />
                 {!isProduction && <MobileAppLink />}

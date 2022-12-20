@@ -72,7 +72,7 @@ export const Colors: IColors = {
         main: '#3cd288',
         transparent: 'rgba(64, 197, 197, .3)',
         lighter: '#3cd2d2',
-        darker: '#258787',
+        darker: '#24a365',
         littleDarker: '#27b56e',
         light: '',
         dark: '#2a4f2f',

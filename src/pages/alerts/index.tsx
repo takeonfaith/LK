@@ -8,12 +8,8 @@ import Alerts from './ui/alerts'
 const AlertsPage = () => {
     const { data, error, loading } = alertModel.selectors.use()
 
-    const handleLoad = () => {
-        alertModel.effects.getFx()
-    }
-
     return (
-        <Wrapper load={handleLoad} error={error} loading={loading} data={data}>
+        <Wrapper load={alertModel.effects.getFx} error={error} loading={loading} data={data}>
             <CenterPage>
                 <Block height="100%" maxWidth="700px" orientation="vertical" gap="8px">
                     <Title size={2} align="left" bottomGap>

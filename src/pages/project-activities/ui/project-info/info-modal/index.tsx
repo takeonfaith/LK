@@ -15,8 +15,6 @@ type Props = {
 
 const InfoModal = ({ data }: Props) => {
     const splitted = data?.project_info.split(' ')
-    // eslint-disable-next-line no-console
-    console.log(splitted)
     return (
         <ModalStyled>
             <Title size={4} bottomGap align="left">

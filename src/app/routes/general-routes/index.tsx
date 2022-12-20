@@ -195,6 +195,7 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
+        isNew: true,
     },
     home: {
         id: 'home',
@@ -256,6 +257,7 @@ export const generalRoutes: IRoutes = {
         color: 'darkBlue',
         isTemplate: false,
         group: 'GENERAL',
+        isNew: true,
     },
     'all-teachers': {
         id: 'all-teachers',
@@ -266,6 +268,7 @@ export const generalRoutes: IRoutes = {
         color: 'orange',
         isTemplate: false,
         group: 'GENERAL',
+        isNew: true,
     },
     portfolio: {
         id: 'portfolio',

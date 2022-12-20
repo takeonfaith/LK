@@ -10,6 +10,7 @@ interface Props<T, R> {
     inputAppearance?: boolean
     setExternalValue?: (value: string) => void
     validationCheck?: boolean
+    loadingOnType?: boolean
 }
 
 const LocalSearch = <T, R>({
@@ -18,6 +19,7 @@ const LocalSearch = <T, R>({
     setResult,
     inputAppearance,
     setExternalValue,
+    loadingOnType = false,
     placeholder = 'Поиск по меню',
     validationCheck = false,
 }: Props<T, R>) => {
@@ -28,7 +30,7 @@ const LocalSearch = <T, R>({
         setResult(null)
     }
 
-    const [value, setValue] = useDebounce({ onDebounce, onClear })
+    const [value, setValue, loading] = useDebounce({ onDebounce, onClear })
 
     const handleChangeValue = (v: string) => {
         setValue(v)
@@ -42,6 +44,7 @@ const LocalSearch = <T, R>({
             inputAppearance={inputAppearance}
             placeholder={placeholder}
             validationCheck={validationCheck}
+            loading={loadingOnType ? loading : false}
         />
     )
 }

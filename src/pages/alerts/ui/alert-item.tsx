@@ -39,7 +39,7 @@ const AlertItem = ({ alert, onClick }: Props) => {
             <div className="content">
                 <div dangerouslySetInnerHTML={{ __html: getShortString(content, 200) }} />
             </div>
-            <Button text="Подробнее" />
+            <Button text="Подробнее" minWidth="120px" />
         </AlertItemStyled>
     )
 }
