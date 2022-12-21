@@ -9,7 +9,6 @@ import {
     CopiesOfDocumentsFromPersonalFilePage,
     CopyOfEmploymentRecordPage,
     CourierPage,
-    DecreisDirectivesPage,
     Dismissal,
     DownloadAdminFilesPage,
     ExtraHolidayColl,
@@ -114,16 +113,7 @@ const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const teachersPrivateRoutes: () => IRoutes = () => ({
     ...generalRoutes,
-    doclist: {
-        id: 'doclist',
-        title: 'Ознакомление с документами',
-        icon: <FiFileText />,
-        path: DOCLIST_ROUTE,
-        Component: DecreisDirectivesPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'GENERAL',
-    },
+
     applications: {
         id: 'applications',
         title: 'Цифровые сервисы',
@@ -132,7 +122,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : TeachersApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'FINANCES_DOCS',
     },
     'hr-applications': {
         id: 'hr-applications',
@@ -164,27 +154,28 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: VacationSchedule,
         color: 'purple',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
     },
     'kpi-pps': {
         id: 'kpi-pps',
         title: 'Рейтинговая система ППС',
         icon: <FiStar />,
         path: KPI_PPS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
+        Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE, forceForward: true }),
         color: 'pink',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
     'kpi-admin': {
         id: 'kpi-admin',
-        title: 'Экспертиза рейтинговой системы ППС',
+        // title: 'Экспертиза рейтинговой системы ППС',
+        title: 'Экспертиза рейтинго...',
         icon: <FiMonitor />,
         path: KPI_ADMIN_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
+        Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE, forceForward: true }),
         color: 'darkBlue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
     'sc-news': {
         id: 'sc-news',
@@ -309,10 +300,10 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Проектная деятельность',
         icon: <FaRegLightbulb />,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
+        Component: () => PageIsNotReady({ oldVersionUrl: '/projects', forceForward: true }),
         color: 'yellow',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
 })
 

@@ -62,4 +62,3 @@ export const HolidayWork = lazy(() => import('@pages/hr-applications/pages/holid
 export const HolidayPlanning = lazy(() => import('@pages/hr-applications/pages/holiday-planning'))
 export const WorkTransfer = lazy(() => import('@pages/hr-applications/pages/work-transfer'))
 export const DismissalBufferPage = lazy(() => import('@pages/hr-applications/pages/buffer-dismissal'))
-export const DecreisDirectivesPage = lazy(() => import('@pages/decreis-directives'))
