@@ -35,7 +35,6 @@ import {
     VacationSchedule,
     VisaCertificatePage,
     WorkOnTermsOfExternalConcurrencyPage,
-    WorkTransfer,
 } from './pages'
 
 import { isProduction, OLD_LK_URL } from '@consts'
