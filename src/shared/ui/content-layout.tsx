@@ -15,7 +15,7 @@ import WhatsNew from '../../widgets/whats-new'
 import InitialLoader from './initial-loader'
 import Story from './story'
 import React from 'react'
-import useShowTutorial from '@utils/hooks/use-show-tutorial'
+// import useShowTutorial from '@utils/hooks/use-show-tutorial'
 import { Link } from 'react-router-dom'
 import { ALERTS_ROUTE } from '@app/routes/general-routes'
 
@@ -49,7 +49,7 @@ const ContentLayout = () => {
     } = userModel.selectors.useUser()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
-    const { seen } = useShowTutorial()
+    // const { seen } = useShowTutorial()
 
     useEffect(() => {
         if (user) settingsModel.effects.getLocalSettingsFx(user.id)
@@ -83,7 +83,7 @@ const ContentLayout = () => {
     }, [user])
 
     useEffect(() => {
-        if (seen) {
+        if (isShowNotification) {
             isShowNotification && open(<WhatsNew />)
         }
     }, [isShowNotification])

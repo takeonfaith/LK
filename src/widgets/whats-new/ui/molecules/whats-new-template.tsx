@@ -29,7 +29,7 @@ const WhatsNewTemplateWrapper = styled.div`
 
 const PlateWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
 `

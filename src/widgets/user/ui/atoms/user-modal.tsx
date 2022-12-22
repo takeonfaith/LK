@@ -22,6 +22,7 @@ const UserModalWrapper = styled.div<{ background?: string }>`
     .user {
         display: flex;
         justify-content: center;
+        width: 100%;
 
         &::before {
             content: '';
@@ -30,7 +31,7 @@ const UserModalWrapper = styled.div<{ background?: string }>`
             position: absolute;
             top: 0;
             left: 0;
-            background: ${({ background }) => background ?? 'red'};
+            background: ${({ background }) => background ?? 'var(--scheduleBg)'};
             z-index: -1;
         }
 
@@ -39,6 +40,7 @@ const UserModalWrapper = styled.div<{ background?: string }>`
             flex-direction: column;
             margin-left: 10px;
             margin-top: 20px;
+            width: 100%;
 
             b {
                 margin-bottom: 20px;
@@ -60,6 +62,17 @@ const UserModalWrapper = styled.div<{ background?: string }>`
 
         a {
             width: 100%;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .user {
+            .info b {
+                width: 90%;
+            }
+            &::before {
+                height: 110px;
+            }
         }
     }
 `

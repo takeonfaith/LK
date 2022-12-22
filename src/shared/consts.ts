@@ -266,7 +266,7 @@ export const GradeByScore: IGrade = {
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
-export const LastUpdateWhatsNew = '2022-05-19T10:30:00'
+export const LastUpdateWhatsNew = '2022-12-22T10:00:00'
 
 type MessageTypeObj = {
     [key in MessageType]: {
