@@ -1,5 +1,5 @@
 import React, { LazyExoticComponent } from 'react'
-import { IColors, isProduction } from '@consts'
+import { IColors } from '@consts'
 
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
@@ -198,7 +198,27 @@ export const generalRoutes: IRoutes = {
         show: true,
         group: 'GENERAL',
     },
-
+    'electronic-interaction-agreement': {
+        id: 'electronic-interaction-agreement',
+        title: 'Соглашение об электр...',
+        // title: 'Соглашение об электронном взаимодействии',
+        icon: <HiOutlineClipboardCheck />,
+        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
+        Component: ElectronicInteractionAgreementPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
+    payments: {
+        id: 'payments',
+        title: 'Договоры и оплаты',
+        icon: <BiRuble />,
+        path: PAYMENTS_ROUTE,
+        Component: PaymentsPage,
+        color: 'lightGreen',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
     doclist: {
         id: 'doclist',
         // title: 'Ознакомление с документами',
@@ -215,7 +235,7 @@ export const generalRoutes: IRoutes = {
         title: 'Оповещения',
         icon: <FiBell />,
         path: ALERTS_ROUTE,
-        Component: isProduction ? () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }) : AlertsPage,
+        Component: AlertsPage,
         color: 'blue',
         isTemplate: false,
         group: 'COMMUNICATION',
@@ -261,16 +281,6 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
     },
-    payments: {
-        id: 'payments',
-        title: 'Договоры и оплаты',
-        icon: <BiRuble />,
-        path: PAYMENTS_ROUTE,
-        Component: PaymentsPage,
-        color: 'lightGreen',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
-    },
     'all-students': {
         id: 'all-students',
         title: 'Студенты',
@@ -300,17 +310,6 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'COMMUNICATION',
-    },
-    'electronic-interaction-agreement': {
-        id: 'electronic-interaction-agreement',
-        title: 'Соглашение об электр...',
-        // title: 'Соглашение об электронном взаимодействии',
-        icon: <HiOutlineClipboardCheck />,
-        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
-        Component: ElectronicInteractionAgreementPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
     },
     instructions: {
         id: 'instructions',
