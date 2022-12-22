@@ -97,7 +97,7 @@ export const privateRoutes: () => IRoutes = () => ({
         title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
-        Component: ApplicationsPage,
+        Component: isProduction ? ApplicationRedirect : ApplicationsPage,
         color: 'red',
         isTemplate: false,
         group: 'OTHER',

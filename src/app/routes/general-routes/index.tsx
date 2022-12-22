@@ -1,5 +1,5 @@
 import React, { LazyExoticComponent } from 'react'
-import { IColors, isProduction } from '@consts'
+import { IColors } from '@consts'
 
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
@@ -235,7 +235,7 @@ export const generalRoutes: IRoutes = {
         title: 'Оповещения',
         icon: <FiBell />,
         path: ALERTS_ROUTE,
-        Component: isProduction ? () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }) : AlertsPage,
+        Component: AlertsPage,
         color: 'blue',
         isTemplate: false,
         group: 'COMMUNICATION',
@@ -311,16 +311,6 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'COMMUNICATION',
     },
-    // 'personal-notifications': {
-    //     id: 'personal-notifications',
-    //     title: 'Приказы и распоряжения',
-    //     icon: <BiIdCard />,
-    //     path: DECREIS_DIRECTIVES,
-    //     Component: DecreisDirectivesPage,
-    //     color: 'blue',
-    //     isTemplate: false,
-    //     group: 'FINANCES_DOCS',
-    // },
     instructions: {
         id: 'instructions',
         title: 'Инструкции, положения, правила',
