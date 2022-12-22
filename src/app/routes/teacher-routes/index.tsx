@@ -38,7 +38,7 @@ import {
     WorkTransfer,
 } from './pages'
 
-import { isProduction } from '@consts'
+import { isProduction, OLD_LK_URL } from '@consts'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
@@ -167,7 +167,13 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Проектная деятельность',
         icon: <FaRegLightbulb />,
         path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/projects', forceForward: true }),
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=proj_main`)
+            }, [])
+
+            return null
+        },
         color: 'yellow',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
@@ -193,7 +199,13 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Рейтинговая система ППС',
         icon: <FiStar />,
         path: KPI_PPS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE, forceForward: true }),
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=${KPI_PPS_ROUTE?.slice(1, KPI_PPS_ROUTE.length)}`)
+            }, [])
+
+            return null
+        },
         color: 'pink',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
@@ -204,7 +216,13 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Экспертиза рейтинго...',
         icon: <FiMonitor />,
         path: KPI_ADMIN_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE, forceForward: true }),
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=${KPI_ADMIN_ROUTE?.slice(1, KPI_ADMIN_ROUTE.length)}`)
+            }, [])
+
+            return null
+        },
         color: 'darkBlue',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
