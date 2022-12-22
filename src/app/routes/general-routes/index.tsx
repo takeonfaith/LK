@@ -301,16 +301,6 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'COMMUNICATION',
     },
-    'personal-notifications': {
-        id: 'personal-notifications',
-        title: 'Приказы и распоряжения',
-        icon: <BiIdCard />,
-        path: DECREIS_DIRECTIVES,
-        Component: DecreisDirectivesPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
-    },
     'electronic-interaction-agreement': {
         id: 'electronic-interaction-agreement',
         title: 'Соглашение об электр...',
