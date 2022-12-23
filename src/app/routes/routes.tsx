@@ -91,27 +91,29 @@ export const EXTENSION_ATTESTATION = APPLICATIONS_ROUTE + '/extension-attestatio
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const privateRoutes: () => IRoutes = () => ({
-    ...generalRoutes,
+    // On this position just to make necessary order
     applications: {
         id: 'applications',
         title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
-        Component: ApplicationsPage,
+        Component: isProduction ? ApplicationRedirect : ApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'GENERAL',
-    },
-    'project-activity': {
-        id: 'project-activity',
-        title: 'Проектная деятельность',
-        icon: <FaRegLightbulb />,
-        path: PROJECT_ACTIVITIES_ROUTE,
-        Component: ProjectActivitiesPage,
-        color: 'yellow',
-        isTemplate: false,
         group: 'OTHER',
+    },
+    ...generalRoutes,
+    dormitory: {
+        id: 'dormitory',
+        title: 'Общежитие',
+        icon: <MdOutlineBedroomChild />,
+        path: DORMITORY,
+        Component: DormitoryPage,
+        color: 'blue',
+        isTemplate: false,
         isNew: true,
+        group: 'FINANCES_DOCS',
+        show: true,
     },
     'acad-performance': {
         id: 'acad-performance',
@@ -123,16 +125,17 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
     },
-    job: {
-        id: 'job',
-        title: 'Работа',
-        icon: <FiBriefcase />,
-        path: JOB_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
-        color: 'blue',
+    'project-activity': {
+        id: 'project-activity',
+        title: 'Проектная деятельность',
+        icon: <FaRegLightbulb />,
+        path: PROJECT_ACTIVITIES_ROUTE,
+        Component: ProjectActivitiesPage,
+        color: 'yellow',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
+
     'helpful-information': {
         id: 'helpful-information',
         title: 'Полезная информация',
@@ -153,17 +156,6 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'GENERAL',
         show: false,
-    },
-    dormitory: {
-        id: 'dormitory',
-        title: 'Общежитие',
-        icon: <MdOutlineBedroomChild />,
-        path: DORMITORY,
-        Component: DormitoryPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'GENERAL',
-        show: true,
     },
 })
 

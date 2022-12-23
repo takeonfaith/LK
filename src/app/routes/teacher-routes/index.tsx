@@ -9,7 +9,6 @@ import {
     CopiesOfDocumentsFromPersonalFilePage,
     CopyOfEmploymentRecordPage,
     CourierPage,
-    DecreisDirectivesPage,
     Dismissal,
     DownloadAdminFilesPage,
     ExtraHolidayColl,
@@ -39,7 +38,7 @@ import {
     WorkTransfer,
 } from './pages'
 
-import { isProduction } from '@consts'
+import { isProduction, OLD_LK_URL } from '@consts'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
@@ -61,7 +60,7 @@ export const CHILDREN_ROUTE = '/children'
 export const PPS_CONTEST_ROUTE = '/pps_contest'
 export const ElECTRONIC_STATEMENTS = '/electronic-statements'
 export const VACATION_ROUTE = '/vacation'
-export const KPI_PPS_ROUTE = '/kpi_pss'
+export const KPI_PPS_ROUTE = '/kpi_pps'
 export const KPI_ADMIN_ROUTE = '/kpi_admin'
 export const SC_NEWS_ROUTE = '/sc_news'
 export const OOP_ROUTE = '/oop'
@@ -113,17 +112,7 @@ export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const teachersPrivateRoutes: () => IRoutes = () => ({
-    ...generalRoutes,
-    doclist: {
-        id: 'doclist',
-        title: 'Ознакомление с документами',
-        icon: <FiFileText />,
-        path: DOCLIST_ROUTE,
-        Component: DecreisDirectivesPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'GENERAL',
-    },
+    // On this position just to make necessary order
     applications: {
         id: 'applications',
         title: 'Цифровые сервисы',
@@ -132,8 +121,9 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : TeachersApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'OTHER',
     },
+    ...generalRoutes,
     'hr-applications': {
         id: 'hr-applications',
         title: 'Кадровые заявления',
@@ -156,35 +146,86 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
 
         isAdmin: true,
     },
-    calendar: {
-        id: 'calendar',
-        title: 'График отпусков',
-        icon: <FiCalendar />,
-        path: VACATION_ROUTE,
-        Component: VacationSchedule,
-        color: 'purple',
+    'electronic-statements': {
+        id: 'electronic-statements',
+        title: 'Электронные ведомости',
+        icon: <BiIdCard />,
+        path: ElECTRONIC_STATEMENTS,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(' https://e.mospolytech.ru/old/stats.php?m=items&act=st_list')
+            }, [])
+
+            return null
+        },
+        color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
+    },
+    'project-activity': {
+        id: 'project-activity',
+        title: 'Проектная деятельность',
+        icon: <FaRegLightbulb />,
+        path: PROJECT_ACTIVITIES_ROUTE,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=proj_main`)
+            }, [])
+
+            return null
+        },
+        color: 'yellow',
+        isTemplate: false,
+        group: 'LEARNING_ACTIVITIES',
+    },
+    'pps-contest': {
+        id: 'pps-contest',
+        title: 'Конкурс ППС',
+        icon: <BiIdCard />,
+        path: PPS_CONTEST_ROUTE,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace('https://mospolytech.ru/contest-pps/')
+            }, [])
+
+            return null
+        },
+        color: 'blue',
+        isTemplate: false,
+        group: 'LEARNING_ACTIVITIES',
     },
     'kpi-pps': {
         id: 'kpi-pps',
         title: 'Рейтинговая система ППС',
         icon: <FiStar />,
         path: KPI_PPS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=${KPI_PPS_ROUTE?.slice(1, KPI_PPS_ROUTE.length)}`)
+            }, [])
+
+            return null
+        },
         color: 'pink',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
     'kpi-admin': {
         id: 'kpi-admin',
-        title: 'Экспертиза рейтинговой системы ППС',
+        // title: 'Экспертиза рейтинговой системы ППС',
+        title: 'Экспертиза рейтинго...',
         icon: <FiMonitor />,
         path: KPI_ADMIN_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=${KPI_ADMIN_ROUTE?.slice(1, KPI_ADMIN_ROUTE.length)}`)
+            }, [])
+
+            return null
+        },
         color: 'darkBlue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
     'sc-news': {
         id: 'sc-news',
@@ -229,6 +270,16 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'FINANCES_DOCS',
     },
+    calendar: {
+        id: 'calendar',
+        title: 'График отпусков',
+        icon: <FiCalendar />,
+        path: VACATION_ROUTE,
+        Component: VacationSchedule,
+        color: 'purple',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
     oop: {
         id: 'oop',
         title: 'Образовательные программы',
@@ -261,38 +312,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'GENERAL',
     },
-    'pps-contest': {
-        id: 'pps-contest',
-        title: 'Конкурс ППС',
-        icon: <BiIdCard />,
-        path: PPS_CONTEST_ROUTE,
-        Component: () => {
-            React.useEffect(() => {
-                window.location.replace('https://mospolytech.ru/contest-pps/')
-            }, [])
-
-            return null
-        },
-        color: 'blue',
-        isTemplate: false,
-        group: 'LEARNING_ACTIVITIES',
-    },
-    'electronic-statements': {
-        id: 'electronic-statements',
-        title: 'Электронные ведомости',
-        icon: <BiIdCard />,
-        path: ElECTRONIC_STATEMENTS,
-        Component: () => {
-            React.useEffect(() => {
-                window.location.replace(' https://e.mospolytech.ru/old/stats.php?m=items&act=st_list')
-            }, [])
-
-            return null
-        },
-        color: 'blue',
-        isTemplate: false,
-        group: 'LEARNING_ACTIVITIES',
-    },
     'pps-vote': {
         id: 'pps-vote',
         title: 'Опрос для проверки уровня цифровой грамотности',
@@ -303,16 +322,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
         show: false,
-    },
-    'project-activity': {
-        id: 'project-activity',
-        title: 'Проектная деятельность',
-        icon: <FaRegLightbulb />,
-        path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
-        color: 'yellow',
-        isTemplate: false,
-        group: 'OTHER',
     },
 })
 
