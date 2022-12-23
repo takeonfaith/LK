@@ -1,7 +1,7 @@
 import { Notifications } from '@api/model/notification'
 import { personalNotificationModel } from '@entities/notification'
 import Select, { SelectPage } from '@features/select'
-import { Title, Wrapper } from '@ui/atoms'
+import { CenterPage, Title, Wrapper } from '@ui/atoms'
 import Block from '@ui/block'
 import React, { useEffect, useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
@@ -16,23 +16,6 @@ const ElementsControlNotification = styled.div`
     justify-content: center;
     gap: 10px;
     width: 100%;
-`
-
-const PersonalNotifications = styled.div`
-    width: 800px;
-    margin: 10px auto;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-
-    @media (max-width: 900px) {
-        width: 95%;
-        padding: 0;
-    }
-
-    .slider-list-notification {
-        margin-top: 10px;
-    }
 `
 
 interface Props {
@@ -70,8 +53,8 @@ const NotificationsPage = ({ title, type }: Props) => {
             error={error}
             data={foundNotification}
         >
-            <PersonalNotifications>
-                <Block maxWidth={'725px'} orientation="vertical" gap="10px" height="fit-content">
+            <CenterPage padding="0 0 10px 0">
+                <Block maxWidth={'725px'} orientation="vertical" gap="10px" height="fit-content" noAppearanceInMobile>
                     <Title size={2} align="left">
                         {title}
                     </Title>
@@ -121,7 +104,7 @@ const NotificationsPage = ({ title, type }: Props) => {
                         />
                     )}
                 </Block>
-            </PersonalNotifications>
+            </CenterPage>
         </Wrapper>
     )
 }

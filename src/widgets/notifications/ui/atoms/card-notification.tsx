@@ -16,7 +16,7 @@ const CardNotificationWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    border-radius: var(--brSemi);
+    border-radius: var(--brLight);
     background: var(--form);
     box-shadow: var(--schedule-shadow);
     row-gap: 20px;

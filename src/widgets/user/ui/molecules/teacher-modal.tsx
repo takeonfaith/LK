@@ -28,15 +28,15 @@ const TeacherModal = ({ name, avatar, isMe, division }: Props) => {
                     width="100%"
                 />
             </Link>
-            <Link to={`${SCHEDULE_ROUTE}/${name}`}>
-                <Button
-                    icon={<FiMessageCircle />}
-                    text={'Написать'}
-                    onClick={() => close()}
-                    minWidth="100%"
-                    width="100%"
-                />
-            </Link>
+            {/* <Link to={`${CHAT_ROUTE}/${name}`}> */}
+            <Button
+                icon={<FiMessageCircle />}
+                text={'Написать'}
+                onClick={() => close()}
+                width="100%"
+                isActive={false}
+            />
+            {/* </Link> */}
         </UserModal>
     )
 }

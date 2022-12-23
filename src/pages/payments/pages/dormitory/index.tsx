@@ -37,7 +37,7 @@ const DormitoryPayments = () => {
                             </p>
                         </Message>
                         <div className="blocks-wrapper" key={i}>
-                            <Block orientation="vertical" maxWidth="800px">
+                            <Block orientation="vertical" maxWidth="800px" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap>
                                     Оплата за общежитие
                                 </Title>
@@ -60,7 +60,7 @@ const DormitoryPayments = () => {
                                     />
                                 </div>
                             </Block>
-                            <Block orientation="vertical" maxWidth="380px">
+                            <Block orientation="vertical" maxWidth="380px" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap width="100%">
                                     Реквизиты договора
                                     <LinkButton
@@ -74,7 +74,7 @@ const DormitoryPayments = () => {
                             </Block>
                         </div>
                         <div className="blocks-wrapper">
-                            <Block orientation="vertical" maxWidth="1190px" height="fit-content">
+                            <Block orientation="vertical" maxWidth="1190px" height="fit-content" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap>
                                     График платежей
                                 </Title>
@@ -86,7 +86,12 @@ const DormitoryPayments = () => {
                         </div>
                         {!!dormitory.agreements && !!dormitory.agreements.length && (
                             <div className="blocks-wrapper">
-                                <Block orientation="vertical" maxWidth="1190px" height="fit-content">
+                                <Block
+                                    orientation="vertical"
+                                    maxWidth="1190px"
+                                    height="fit-content"
+                                    noAppearanceInMobile
+                                >
                                     <Title size={2} align="left" bottomGap>
                                         Доп. соглашение
                                     </Title>

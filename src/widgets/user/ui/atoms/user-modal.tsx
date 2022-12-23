@@ -43,8 +43,11 @@ const UserModalWrapper = styled.div<{ background?: string }>`
             width: 100%;
 
             b {
-                margin-bottom: 20px;
+                margin-bottom: 15px;
                 color: #fff;
+                display: flex;
+                align-items: flex-end;
+                height: 42px;
             }
         }
     }
@@ -69,6 +72,7 @@ const UserModalWrapper = styled.div<{ background?: string }>`
         .user {
             .info b {
                 width: 90%;
+                height: 35px;
             }
             &::before {
                 height: 110px;

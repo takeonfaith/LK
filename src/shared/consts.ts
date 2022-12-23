@@ -314,6 +314,7 @@ interface LetterColorMatch {
 }
 
 export const letterColorMatch: LetterColorMatch = {
+    '-': 'red',
     А: 'lightGreen',
     Б: 'purple',
     В: 'green',
@@ -324,6 +325,7 @@ export const letterColorMatch: LetterColorMatch = {
     Ж: 'blue',
     З: 'lightGreen',
     И: 'pink',
+    Й: 'darkBlue',
     К: 'lightGreen',
     Л: 'green',
     М: 'red',

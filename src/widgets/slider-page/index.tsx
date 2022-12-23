@@ -14,7 +14,7 @@ const SliderPageWrapper = styled.div<{ width?: string; align: Align; maxWidth?: 
     max-width: ${({ maxWidth }) => maxWidth ?? '100%'};
     height: 100%;
 
-    & > div {
+    & > .slider-content {
         display: flex;
         width: 100%;
         max-width: ${({ maxWidth }) => maxWidth ?? '100%'};

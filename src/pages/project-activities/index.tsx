@@ -68,7 +68,7 @@ const ProjectActivitiesPage = () => {
             data={data}
         >
             <Container>
-                <Block maxWidth="700px" orientation="vertical" gap="16px" height="100%">
+                <Block maxWidth="700px" orientation="vertical" gap="16px" height="100%" noAppearanceInMobile>
                     <Title size={2} align="left">
                         Проектная деятельность
                     </Title>

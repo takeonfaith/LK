@@ -33,7 +33,7 @@ const HelpfulInformation = () => {
 
     return (
         <CenterPage alignItems="flex-start" padding="10px">
-            <Block orientation="vertical" gap="10px" maxWidth="750px" height="fit-content">
+            <Block orientation="vertical" gap="10px" maxWidth="750px" height="fit-content" noAppearanceInMobile>
                 <Title size={2} align="left">
                     Полезная информация
                 </Title>

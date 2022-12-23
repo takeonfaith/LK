@@ -37,7 +37,14 @@ const AllTeachersPage = () => {
         <Wrapper load={function () {}} loading={isPending} error={null} data={items}>
             <CenterPage>
                 <PageWrapper>
-                    <Block maxWidth="700px" orientation="vertical" height="100%" maxHeight="100%" justifyContent="none">
+                    <Block
+                        maxWidth="700px"
+                        orientation="vertical"
+                        height="100%"
+                        maxHeight="100%"
+                        justifyContent="none"
+                        noAppearanceInMobile
+                    >
                         <ListOfPeople
                             title="Сотрудники"
                             searchPlaceholder="Поиск сотрудников"

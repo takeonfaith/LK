@@ -25,6 +25,12 @@ const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'ce
         setCurrentPageValue(currentPage.toString())
     }, [currentPage])
 
+    const handleValue = (value: string) => {
+        if (!!value.length) {
+            if (+value >= 1 && +value <= pages + 1) setCurrentPageValue((+value - 1).toString())
+        } else setCurrentPageValue('')
+    }
+
     return (
         <List horizontalAlign={align} visible={condition} direction={'horizontal'} width="100%" padding="10px">
             <Button
@@ -39,11 +45,7 @@ const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'ce
                     width="12px"
                     placeholder=""
                     value={!!currentPageValue.length ? (+currentPageValue + 1).toString() : ''}
-                    setValue={(value: string) => {
-                        if (!!value.length) {
-                            if (+value >= 1 && +value <= pages + 1) setCurrentPageValue((+value - 1).toString())
-                        } else setCurrentPageValue('')
-                    }}
+                    setValue={handleValue}
                     inputAppearance={false}
                 />
                 / {pages + 1}
