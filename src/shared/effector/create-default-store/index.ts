@@ -20,7 +20,7 @@ export const createDefaultStore = <APIDataType, OutputDataType = void, APIGetArg
 > => {
     const defaultStore = initialStore ?? DEFAULT_STORE
 
-    const use = () => {
+    const useData = () => {
         return {
             data: useStore($store).data,
             loading: useStore(getFx.pending),
@@ -59,7 +59,7 @@ export const createDefaultStore = <APIDataType, OutputDataType = void, APIGetArg
 
     return {
         selectors: {
-            use,
+            useData,
         },
         effects: {
             getFx,

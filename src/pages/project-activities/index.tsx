@@ -40,7 +40,7 @@ const ProjectActivitiesPage = () => {
     // const {
     //     data: { user },
     // } = userModel.selectors.useUser()
-    const { data, loading, error } = projectActivitesModel.selectors.use()
+    const { data, loading, error } = projectActivitesModel.selectors.useData()
     const { open } = useModal()
 
     // const [selected, setSelected] = useState<SelectPage | null>({

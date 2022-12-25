@@ -6,7 +6,7 @@ import { Title } from '@shared/ui/title'
 import Alerts from './ui/alerts'
 
 const AlertsPage = () => {
-    const { data, error, loading } = alertModel.selectors.use()
+    const { data, error, loading } = alertModel.selectors.useData()
 
     return (
         <Wrapper load={alertModel.effects.getFx} error={error} loading={loading} data={data}>

@@ -1,4 +1,5 @@
 import { messageType } from '@consts'
+import useTheme from '@shared/lib/hooks/use-theme'
 import { Button } from '@ui/button'
 import SkeletonList from '@ui/skeleton-list'
 import { Align, MessageType } from '@ui/types'
@@ -67,9 +68,11 @@ export function Message({
     loading = false,
 }: MessageProps) {
     if (!visible) return null
+    const { theme } = useTheme()
 
     return (
         <MessageWrapper
+            isLightTheme={theme === 'light'}
             className="message"
             closable={!!onClose}
             type={type}

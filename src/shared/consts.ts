@@ -71,7 +71,7 @@ export const Colors: IColors = {
     green: {
         main: '#3cd288',
         transparent: 'rgba(64, 197, 197, .3)',
-        lighter: '#3cd2d2',
+        lighter: '#82e49a',
         darker: '#24a365',
         littleDarker: '#27b56e',
         light: '',
@@ -97,7 +97,8 @@ export const Colors: IColors = {
     blue: {
         main: 'rgb(95, 109, 236)',
         transparent: 'rgba(95, 109, 236, .3)',
-        lighter: '#7884ec',
+        // aaaaaaaaaaaaaaaaaaaaaaaaaa i love maria))))for real what competetive adv
+        lighter: '#9ea7f5',
         darker: '#414ca8',
         light: '#4a93ff',
         dark: '#3f457f',

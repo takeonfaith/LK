@@ -12,7 +12,7 @@ const Router = () => {
     const {
         data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
-    const { data } = adminLinksModel.selectors.use()
+    const { data } = adminLinksModel.selectors.useData()
     const { settings } = settingsModel.selectors.useSettings()
 
     useEffect(() => {

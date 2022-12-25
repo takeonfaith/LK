@@ -13,7 +13,7 @@ export interface TemplateStore<DataType> {
 
 export interface TemplateStoreOutput<DataType, APIGetArgs> {
     selectors: {
-        use: () => TemplateStore<DataType>
+        useData: () => TemplateStore<DataType>
     }
     effects: {
         getFx: Effect<APIGetArgs, DataType, Error>

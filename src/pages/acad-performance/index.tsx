@@ -37,7 +37,7 @@ const AcadPerformanceWrapper = styled.div`
 `
 
 const AcadPerformance = () => {
-    const { data, loading, error } = acadPerformanceModel.selectors.use()
+    const { data, loading, error } = acadPerformanceModel.selectors.useData()
     const {
         data: { user },
     } = userModel.selectors.useUser()

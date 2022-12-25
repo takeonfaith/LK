@@ -9,7 +9,7 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; isClickable: boolean }
     position: absolute;
     bottom: 20px;
     right: 20px;
-    background: #3e3e3e;
+    background: var(--theme);
     border-radius: var(--brLight);
     z-index: 100;
     transition: 0.2s transform, 0.2s opacity, 0.2s visibility;
@@ -76,7 +76,6 @@ const PopUpMessage = () => {
             <Message
                 type={type}
                 fontSize="1em"
-                solidBackground
                 onClose={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })}
             >
                 {message}

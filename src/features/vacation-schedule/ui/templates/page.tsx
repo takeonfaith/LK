@@ -20,7 +20,7 @@ const Page = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { data, error } = vacationScheduleModel.selectors.use()
+    const { data, error } = vacationScheduleModel.selectors.useData()
 
     const items: SelectPage[] = useMemo(() => {
         return data?.map((value, index) => ({ id: index, title: value.division })) || []
