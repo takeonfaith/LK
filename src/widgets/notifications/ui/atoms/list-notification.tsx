@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import {
     baseNotification,
     businesstripNotification,
@@ -10,14 +9,7 @@ import {
 import { CardNotification, CardDocument } from './index'
 import { Error } from '@ui/error'
 import { personalNotificationModel } from '@entities/notification'
-
-const ListNotificationsWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 10px 1px;
-    row-gap: 20px;
-`
+import List from '@shared/ui/list'
 
 interface Props {
     listNotification: ItemNotification[]
@@ -28,7 +20,7 @@ const ListNotifications = ({ listNotification, typeList }: Props) => {
     const type = personalNotificationModel.selectors.useType()
 
     return (
-        <ListNotificationsWrapper>
+        <List direction="vertical" gap={8} scroll={false}>
             {listNotification.length ? (
                 listNotification.map((notification) =>
                     type === 'notifications' ? (
@@ -44,7 +36,7 @@ const ListNotifications = ({ listNotification, typeList }: Props) => {
             ) : (
                 <Error text={'По заданным параметрам документ не найден'} />
             )}
-        </ListNotificationsWrapper>
+        </List>
     )
 }
 

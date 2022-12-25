@@ -57,7 +57,7 @@ const UserBigModal = () => {
             <Divider />
             <Button
                 align="left"
-                icon={<Message icon={null} type="info" title={'v2.0.0'} width="fit-content" />}
+                icon={<Message icon={null} type="info" title={'v2.1.0'} width="fit-content" />}
                 onClick={() => {
                     contextMenuModel.events.close()
                     open(<WhatsNew />)

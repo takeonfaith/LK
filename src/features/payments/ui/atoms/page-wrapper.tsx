@@ -39,6 +39,9 @@ const PageWrapper = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            border-top: 1px solid var(--almostTransparent);
+            margin-top: 20px;
+            padding-top: 20px;
 
             & > * + * {
                 margin-left: 0px;

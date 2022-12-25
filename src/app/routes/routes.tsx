@@ -111,6 +111,7 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: DormitoryPage,
         color: 'blue',
         isTemplate: false,
+        isNew: true,
         group: 'FINANCES_DOCS',
         show: true,
     },
@@ -133,6 +134,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'yellow',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
+        isNew: true,
     },
 
     'helpful-information': {

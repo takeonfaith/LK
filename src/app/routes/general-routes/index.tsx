@@ -238,6 +238,7 @@ export const generalRoutes: IRoutes = {
         Component: AlertsPage,
         color: 'blue',
         isTemplate: false,
+        isNew: true,
         group: 'COMMUNICATION',
     },
     home: {
@@ -289,6 +290,7 @@ export const generalRoutes: IRoutes = {
         Component: AllStudentsPage,
         color: 'darkBlue',
         isTemplate: false,
+        isNew: true,
         group: 'COMMUNICATION',
     },
     'all-teachers': {
@@ -299,8 +301,19 @@ export const generalRoutes: IRoutes = {
         Component: AllTeachersPage,
         color: 'orange',
         isTemplate: false,
-        group: 'COMMUNICATION',
+        group: 'GENERAL',
+        isNew: true,
     },
+    // portfolio: {
+    //     id: 'portfolio',
+    //     title: 'Портфолио',
+    //     icon: <BiIdCard />,
+    //     path: PORTFOLIO_ROUTE,
+    //     Component: () => PageIsNotReady({ oldVersionUrl: PORTFOLIO_ROUTE }),
+    //     color: 'blue',
+    //     isTemplate: true,
+    //     group: 'COMMUNICATION',
+    // },
     feedback: {
         id: 'feedback',
         title: 'Обратная связь',

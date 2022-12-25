@@ -6,7 +6,9 @@ import styled from 'styled-components'
 import { useModal } from 'widgets'
 import getFontSize from './lib/get-font-size'
 import getImageSize from './lib/get-image-size'
+import getStatus from './lib/get-status'
 import getWidth from './lib/get-width'
+import { UserProps } from './types'
 import { SkeletonLoading, StudentModal, TeacherModal } from './ui'
 
 const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
@@ -59,21 +61,6 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     }
 `
 
-interface Props {
-    type: 'student' | 'teacher'
-    orientation?: Direction
-    avatar?: string
-    division?: string
-    name: string
-    loading?: boolean
-    size?: Size
-    isMe?: boolean
-    checked?: boolean
-    indexNumber?: number
-    setChecked?: (value: boolean) => void
-    onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-}
-
 const User = ({
     type,
     avatar,
@@ -82,36 +69,35 @@ const User = ({
     onClick,
     indexNumber,
     division,
+    group,
     isMe = false,
     loading = false,
     orientation = 'horizontal',
     size = 'middle',
-}: Props) => {
+}: UserProps) => {
     const { open } = useModal()
-    const status = isMe ? 'Я' : type === 'teacher' ? 'Сотрудник' + (division ? ` • ${division}` : '') : 'Студент'
+    const status = getStatus(isMe, type, division, group)
 
     if (loading) return <SkeletonLoading />
 
+    const handleUserClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (onClick) {
+            onClick(e)
+        } else {
+            if (!isMe) {
+                open(
+                    type === 'teacher' ? (
+                        <TeacherModal name={name} avatar={avatar} isMe={isMe} division={division} />
+                    ) : (
+                        <StudentModal name={name} avatar={avatar} isMe={isMe} group={group} />
+                    ),
+                )
+            }
+        }
+    }
+
     return (
-        <UserWrapper
-            orientation={orientation}
-            size={size}
-            onClick={(e) => {
-                if (onClick) {
-                    onClick(e)
-                } else {
-                    if (!isMe) {
-                        open(
-                            type === 'teacher' ? (
-                                <TeacherModal name={name} avatar={avatar} />
-                            ) : (
-                                <StudentModal name={name} avatar={avatar} />
-                            ),
-                        )
-                    }
-                }
-            }}
-        >
+        <UserWrapper orientation={orientation} size={size} onClick={handleUserClick}>
             {indexNumber && <div className="index">{indexNumber}</div>}
             <Avatar
                 name={name}

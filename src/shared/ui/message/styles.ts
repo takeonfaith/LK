@@ -2,6 +2,14 @@ import { Colors, messageType } from '@consts'
 import { Align, MessageType } from '@ui/types'
 import styled from 'styled-components'
 
+// const getBackground = (isLightTheme: boolean, type: MessageType, solidBackground: boolean) =>
+//     isLightTheme
+//         ? Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparentAF']
+//         : Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparentAF']
+
+const getColor = (isLightTheme: boolean, type: MessageType) =>
+    isLightTheme ? Colors[messageType[type].color].darker : Colors[messageType[type].color].lighter
+
 export const MessageWrapper = styled.div<{
     type: MessageType
     solidBackground: boolean
@@ -12,10 +20,11 @@ export const MessageWrapper = styled.div<{
     fontSize?: string
     padding?: string
     gap?: string
+    isLightTheme: boolean
 }>`
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
-    color: ${({ type }) => Colors[messageType[type].color].main};
+    color: ${({ type, isLightTheme }) => getColor(isLightTheme, type)};
     background: ${({ type, solidBackground }) =>
         Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparentAF']};
     width: ${({ width }) => width ?? '100%'};

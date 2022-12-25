@@ -17,9 +17,21 @@ interface Props {
     selected?: boolean
     checked?: boolean
     boxShadow?: string
+    border?: boolean
 }
 
-function Avatar({ selected, name, avatar, width, height, marginRight, notifications, checked, boxShadow }: Props) {
+function Avatar({
+    selected,
+    name,
+    avatar,
+    width,
+    height,
+    marginRight,
+    notifications,
+    checked,
+    boxShadow,
+    border,
+}: Props) {
     const [isLoaded, setIsLoaded] = useState<boolean>(true)
     const shortName = getNameFirstLetters(name)[0] + (getNameFirstLetters(name)[1] ?? '')
 
@@ -31,6 +43,7 @@ function Avatar({ selected, name, avatar, width, height, marginRight, notificati
             marginRight={marginRight}
             background={getLettersColors(name)}
             boxShadow={boxShadow}
+            border={border}
         >
             {avatar && isLoaded ? (
                 <Img round onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />

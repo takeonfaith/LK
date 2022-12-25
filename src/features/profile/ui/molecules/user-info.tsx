@@ -47,9 +47,9 @@ const UserInfo = () => {
             <SliderPage
                 appearance={false}
                 align="left"
-                width="100%"
+                width="fit-content"
                 maxWidth="100%"
-                sliderWidth={user.user_status === 'stud' ? '50%' : '80%'}
+                sliderWidth="500px"
                 pages={user.user_status === 'stud' ? studentPages : teacherPages}
             />
         </UserInfoWrapper>

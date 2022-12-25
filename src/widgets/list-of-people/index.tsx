@@ -27,6 +27,7 @@ const ListWrapper = styled.div`
 type TUser = {
     id: string
     division?: string
+    group?: string
     fio: string
 }
 
@@ -42,12 +43,14 @@ type Props<T extends TUser> = {
     }
     filters?: SelectPage[]
     underSearchText?: (filter: SelectPage | null) => string | null
+    noResultContent?: JSX.Element | null
 }
 
 const ListOfPeople = <T extends TUser>({
     title,
     searchPlaceholder,
     paginationList,
+    noResultContent,
     filters,
     underSearchText,
 }: Props<T>) => {
@@ -70,6 +73,8 @@ const ListOfPeople = <T extends TUser>({
         load({ filter, search: value })
     }
 
+    const handleSelected = (data: any) => setFilter(data)
+
     return (
         <ListWrapper>
             <Title size={2} align="left" bottomGap>
@@ -82,7 +87,7 @@ const ListOfPeople = <T extends TUser>({
                     searchApi={handleSearch}
                     validationCheck
                 />
-                {filters && <Select items={filters} setSelected={(data: any) => setFilter(data)} selected={filter} />}
+                {filters && <Select items={filters} setSelected={handleSelected} selected={filter} />}
             </div>
             <Subtext visible={!!under}>{under}</Subtext>
             <PagintaionList
@@ -94,6 +99,7 @@ const ListOfPeople = <T extends TUser>({
                 filter={filter}
                 handleReload={handleReload}
                 showAlphabetLetters
+                noResultContent={noResultContent}
             />
         </ListWrapper>
     )
@@ -107,6 +113,7 @@ function renderItem<T extends TUser>(item: T, isMe: boolean, index?: number) {
             name={item.fio}
             type={item.division ? 'teacher' : 'student'}
             key={index}
+            group={item.group}
             isMe={isMe}
             division={item.division}
             indexNumber={(index ?? 0) + 1}

@@ -11,8 +11,10 @@ interface Props {
 const AlertModal: React.FC<Props> = ({ alert }) => {
     return (
         <Wrapper>
-            <Title size={3}>{alert.title}</Title>
-            <Divider />
+            <Title size={3} align="left">
+                {alert.title}
+            </Title>
+            <Divider margin="8px 0" width="100%" />
             <div dangerouslySetInnerHTML={{ __html: alert.content }} />
         </Wrapper>
     )
@@ -22,7 +24,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    max-width: 1000px;
+    max-width: 600px;
 `
 
 export default AlertModal

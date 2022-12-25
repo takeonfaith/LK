@@ -13,13 +13,16 @@ const CustomBlock = styled.div`
     border-radius: var(--brLight);
     background: ${Colors.grey.transparentAF};
     padding: 16px;
+    a {
+        font-size: 0.95rem;
+    }
 `
 
 const LinksList = ({ title, blocks, isStaff }: { title: string; blocks: HelpfulPage[]; isStaff: boolean }) => {
     const [searchBlocks, setSearchBlocks] = useState<HelpfulPage[] | null>(null)
 
     return (
-        <List padding="4px">
+        <List>
             <LocalSearch
                 placeholder={`Поиск по ${title}`}
                 whereToSearch={blocks}
@@ -30,7 +33,7 @@ const LinksList = ({ title, blocks, isStaff }: { title: string; blocks: HelpfulP
             {(searchBlocks ?? blocks).map(({ title, links }, index) => {
                 return (
                     <CustomBlock key={title + index}>
-                        <Title size={3} align="left" bottomGap="16px">
+                        <Title size={4} align="left" bottomGap="16px">
                             {title}
                         </Title>
                         <List gap={16}>

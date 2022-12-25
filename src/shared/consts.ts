@@ -71,8 +71,8 @@ export const Colors: IColors = {
     green: {
         main: '#3cd288',
         transparent: 'rgba(64, 197, 197, .3)',
-        lighter: '#3cd2d2',
-        darker: '#258787',
+        lighter: '#82e49a',
+        darker: '#24a365',
         littleDarker: '#27b56e',
         light: '',
         dark: '#2a4f2f',
@@ -97,7 +97,8 @@ export const Colors: IColors = {
     blue: {
         main: 'rgb(95, 109, 236)',
         transparent: 'rgba(95, 109, 236, .3)',
-        lighter: '#7884ec',
+        // aaaaaaaaaaaaaaaaaaaaaaaaaa i love maria))))for real what competetive adv
+        lighter: '#9ea7f5',
         darker: '#414ca8',
         light: '#4a93ff',
         dark: '#3f457f',
@@ -266,7 +267,7 @@ export const GradeByScore: IGrade = {
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
-export const LastUpdateWhatsNew = '2022-05-19T10:30:00'
+export const LastUpdateWhatsNew = '2022-12-22T10:00:00'
 
 type MessageTypeObj = {
     [key in MessageType]: {
@@ -314,6 +315,7 @@ interface LetterColorMatch {
 }
 
 export const letterColorMatch: LetterColorMatch = {
+    '-': 'red',
     А: 'lightGreen',
     Б: 'purple',
     В: 'green',
@@ -324,6 +326,7 @@ export const letterColorMatch: LetterColorMatch = {
     Ж: 'blue',
     З: 'lightGreen',
     И: 'pink',
+    Й: 'darkBlue',
     К: 'lightGreen',
     Л: 'green',
     М: 'red',

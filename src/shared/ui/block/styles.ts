@@ -14,6 +14,7 @@ export interface StyledProps {
     alignItems?: string
     padding?: string
     shadow?: boolean
+    noAppearanceInMobile?: boolean
 }
 
 const BlockWrapper = styled.div<StyledProps>`
@@ -57,6 +58,10 @@ const BlockWrapper = styled.div<StyledProps>`
         /* max-height: 100%; */
         flex-direction: column;
         gap: 1rem;
+        box-shadow: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'none'};
+        border-radius: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'none'};
+        padding: ${({ noAppearanceInMobile }) => noAppearanceInMobile && '0'};
+        /* background: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'transparent'}; */
     }
 `
 export default BlockWrapper

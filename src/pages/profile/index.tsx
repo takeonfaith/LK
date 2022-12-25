@@ -30,7 +30,7 @@ const ProfileWrapper = styled.div`
         radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 65%); */
 
     @media (max-width: 1000px) {
-        padding: 40px;
+        padding: 20px;
     }
 
     /* @media (max-width: 600px) {
