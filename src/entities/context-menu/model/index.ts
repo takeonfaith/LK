@@ -13,6 +13,8 @@ interface ContextMenuStore {
     position: Coordinates
 }
 
+export type ClickEvent = React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<HTMLButtonElement, MouseEvent>
+
 const DEFAULT_STORE: ContextMenuStore = {
     open: false,
     content: null,
@@ -25,7 +27,7 @@ const useContextMenu = () => {
 }
 
 const open = createEvent<{
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: ClickEvent
     content: ChildrenType
     height: number
     type?: ClickType

@@ -19,6 +19,7 @@ const SliderPageWrapper = styled.div<{ width?: string; align: Align; maxWidth?: 
         width: 100%;
         max-width: ${({ maxWidth }) => maxWidth ?? '100%'};
         overflow-x: auto;
+        margin-top: 10px;
         scroll-snap-type: x mandatory;
 
         &::-webkit-scrollbar {
@@ -34,13 +35,6 @@ const SliderPageWrapper = styled.div<{ width?: string; align: Align; maxWidth?: 
             min-width: 100%;
             scroll-snap-align: center;
         }
-    }
-
-    .slider-content {
-        height: 100%;
-        overflow-y: auto;
-        margin-top: 10px;
-        width: 100%;
     }
 
     @media (max-width: 1000px) {

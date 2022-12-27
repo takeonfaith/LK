@@ -19,7 +19,7 @@ const InitialLoaderWrapper = styled.div.withConfig({
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, var(--theme), var(--theme), var(--theme), ${Colors.blue.main}, var(--theme));
+    background: linear-gradient(45deg, var(--theme), var(--theme), var(--theme), ${Colors.darkBlue.main}, var(--theme));
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -120,7 +120,7 @@ const InitialLoader = ({ loading }: Props) => {
 
     return (
         <InitialLoaderWrapper loading={loading}>
-            <Logo short />
+            <Logo short width="100px" />
             {loading && <Loading />}
         </InitialLoaderWrapper>
     )

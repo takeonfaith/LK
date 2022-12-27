@@ -1,4 +1,6 @@
-const calcPosition = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, width = 265, height = 200) => {
+import { ClickEvent } from '@entities/context-menu/model'
+
+const calcPosition = (e: ClickEvent, width = 265, height = 200) => {
     e.preventDefault()
 
     return {

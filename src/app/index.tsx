@@ -1,3 +1,4 @@
+import useTheme from '@shared/lib/hooks/use-theme'
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
 import styled from 'styled-components'
@@ -11,6 +12,8 @@ const Background = styled.div`
 `
 
 const App = () => {
+    useTheme()
+
     return (
         <ModalProvider>
             <HashRouter basename="/">

@@ -381,6 +381,11 @@ export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'applicati
 
 export const MAX_FILE_SIZE = 11000000
 
+export const SCREEN_IPHONE_SE = '376px'
+export const SCREEN_IPHONE_12 = '391px'
+export const SCREEN_IPHONE_XR = '415px'
+export const SCREEN_IPAD_AIR = '821px'
+
 /**
  * @constant
  * use when you need to hide some functionality on the production

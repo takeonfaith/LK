@@ -7,7 +7,7 @@ type BaseProps = HtmlHTMLAttributes<HTMLButtonElement>
 export type ButtonProps = BaseProps & {
     icon?: JSX.Element
     text?: React.ReactNode | string
-    onClick?: (event: any) => void
+    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
     isChosen?: boolean
     width?: string
     minWidth?: string

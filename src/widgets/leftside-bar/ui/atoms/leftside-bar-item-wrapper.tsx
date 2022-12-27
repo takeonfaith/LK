@@ -25,6 +25,14 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
     border-radius: var(--brLight);
     color: ${({ color, isCurrent }) => (color && isCurrent ? Colors[color].main : 'var(--text)')};
 
+    & > button {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        transform: translateY(-50%);
+    }
+
     .title {
         opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
         width: 130px;
@@ -49,6 +57,10 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
         outline: none;
     }
 
+    &:hover > button {
+        opacity: 1;
+    }
+
     &::before {
         content: '';
         width: 8px;
@@ -65,6 +77,9 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
     }
 
     @media (max-width: 1000px) {
+        & > button {
+            display: none;
+        }
         /* span {
             width: 100%;
             display: block;

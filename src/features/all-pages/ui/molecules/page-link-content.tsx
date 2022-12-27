@@ -1,19 +1,19 @@
+import React from 'react'
 import { Colors, IColors } from '@consts'
-import { contextMenuModel } from '@entities/context-menu'
 import { settingsModel } from '@entities/settings'
+import addPageToHome from '@features/all-pages/lib/add-page-to-home'
+import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
+import LinkMoreButton from '@features/link-more-button'
 import BlockWrapper from '@ui/block/styles'
 import { Button } from '@ui/button'
 import Notification from '@ui/notification'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import getShortStirng from '@utils/get-short-string'
-import { FiMoreVertical, FiPlus, FiX } from 'react-icons/fi'
+import { useMemo } from 'react'
+import { FiPlus, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
-import ContextContent from './context-content'
 import { PageLinkProps } from './page-link'
-import React, { useMemo } from 'react'
-import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
-import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 
 export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean; hasNotifications: boolean }>`
     position: relative;
@@ -167,7 +167,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
                 {notifications}
             </Notification>
             <div className="outside">
-                <Icon color={color.length ? color : 'blue'}>{icon}</Icon>
+                <Icon color={color.length ? color : 'blue'}>{icon ?? <FiPlus />}</Icon>
                 <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLength)}</b>
                 {notifications && (
                     <span className="notifications-title">
@@ -181,23 +181,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
                     </span>
                 )}
             </div>
-            {mode === 'use' && (
-                <Button
-                    icon={<FiMoreVertical />}
-                    textColor={Colors[(color.length ? color : 'blue') as keyof IColors].main}
-                    className="more-button"
-                    background="transparent"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        contextMenuModel.events.open({
-                            e,
-                            height: 105,
-                            content: <ContextContent {...props} />,
-                        })
-                    }}
-                />
-            )}
+            {mode === 'use' && <LinkMoreButton route={props} />}
             {mode === 'add' ? (
                 isAdded ? (
                     <Button

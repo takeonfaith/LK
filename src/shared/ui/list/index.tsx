@@ -41,6 +41,7 @@ const List = (props: Props) => {
         innerPadding,
         minWidth,
         wrapOnMobile,
+        position,
         direction = 'vertical',
         verticalAlign = 'top',
         horizontalAlign = 'left',
@@ -55,7 +56,7 @@ const List = (props: Props) => {
         useList(gap)
 
     return (
-        <Wrapper padding={padding} width={width} minWidth={minWidth} height={height}>
+        <Wrapper padding={padding} position={position} width={width} minWidth={minWidth} height={height}>
             <Title size={4} align="left" bottomGap visible={!!title} width="calc(fit-content + 50px)">
                 {title}
                 {onAdd && (

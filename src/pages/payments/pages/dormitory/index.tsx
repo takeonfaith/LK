@@ -25,7 +25,7 @@ const DormitoryPayments = () => {
             {data.dormitory.map((dormitory, i) => {
                 return (
                     <React.Fragment key={dormitory.number}>
-                        <Message type="info" title="Информация" icon={<FiInfo />} gap="12px">
+                        <Message type="info" title="Информация" icon={<FiInfo />} gap="12px" maxWidth="1190px">
                             <p>
                                 По возникновении технических проблем при подписании договоров и дополнительных
                                 соглашений в Личном кабинете просим обращаться на почту{' '}
