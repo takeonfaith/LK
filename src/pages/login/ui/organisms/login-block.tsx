@@ -71,6 +71,14 @@ const LoginBlockStyled = styled(BlockWrapper)<{ isAuthenticated: boolean }>`
         overflow-y: auto;
         justify-content: flex-start;
 
+        .right {
+            opacity: 1;
+
+            & > * > * > *:not(.logo) {
+                opacity: ${({ isAuthenticated }) => +!isAuthenticated};
+            }
+        }
+
         .left {
             padding-top: 22px;
         }
@@ -95,7 +103,7 @@ const LoginBlockStyled = styled(BlockWrapper)<{ isAuthenticated: boolean }>`
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    transform: scale(2) translateY(-50%) translateX(-50%);
+                    transform: scale(2) translateY(-25%) translateX(-50%);
                 }
             }
         }

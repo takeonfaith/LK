@@ -43,7 +43,7 @@ const BlockWrapper = styled.div<StyledProps>`
     }
 
     @media (max-width: 1400px) {
-        max-width: 800px;
+        max-width: ${({ maxWidth }) => maxWidth ?? '800px'};
         width: 100%;
     }
 
