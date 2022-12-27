@@ -1,12 +1,14 @@
 import { IRoute } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
+import LinkMoreButton from '@features/link-more-button'
 import Notification from '@ui/notification'
 import React from 'react'
 import LeftsideBarItemWrapper from '../atoms/leftside-bar-item-wrapper'
 
 type Props = IRoute & { isCurrent: boolean }
 
-const LeftsideBarItem = ({ path, icon, title, isCurrent, isAdmin, color, notifications }: Props) => {
+const LeftsideBarItem = (props: Props) => {
+    const { path, icon, title, isCurrent, isAdmin, color, notifications } = props
     // const { isOpen } = menuModel.selectors.useMenu()
 
     return (
@@ -34,6 +36,7 @@ const LeftsideBarItem = ({ path, icon, title, isCurrent, isAdmin, color, notific
             </Notification>
             {icon}
             <span className="title">{title}</span>
+            <LinkMoreButton route={props} />
         </LeftsideBarItemWrapper>
     )
 }

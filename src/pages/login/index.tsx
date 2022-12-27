@@ -1,3 +1,4 @@
+import React from 'react'
 import { SCREEN_IPHONE_SE } from '@consts'
 import styled from 'styled-components'
 import LoginBlock from './ui/organisms/login-block'

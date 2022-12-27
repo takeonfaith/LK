@@ -20,6 +20,8 @@ const GoBackButton = ({ visible = true, text = 'Назад' }: Props) => {
             textColor="var(--reallyBlue)"
             background="transparent"
             width="100%"
+            padding="0"
+            height="20px"
             align="left"
         />
     )

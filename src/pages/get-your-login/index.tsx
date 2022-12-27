@@ -51,7 +51,7 @@ const GetYourLoginPage = () => {
     }
 
     return (
-        <CenterPage height="100%" alignItems="center">
+        <CenterPage height="100%" alignItems="center" padding="15px">
             <Block
                 height="fit-content"
                 maxWidth="500px"
@@ -60,6 +60,7 @@ const GetYourLoginPage = () => {
                 justifyContent="flex-start"
                 gap="15px"
                 onKeyDown={handleKeyPress}
+                noAppearanceInMobile
             >
                 <GoBackButton />
                 <Title size={4} align="left">

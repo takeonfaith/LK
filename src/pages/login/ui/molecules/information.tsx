@@ -1,3 +1,4 @@
+import React from 'react'
 import {
     CANT_ACCESS_ROUTE,
     FEEDBACK_ROUTE,

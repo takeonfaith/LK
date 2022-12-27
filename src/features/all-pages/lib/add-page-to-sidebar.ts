@@ -1,4 +1,4 @@
-import { ADDITIONAL_MENU_ITEMS_LIMIT_SIZE } from '@consts'
+import { ADDITIONAL_MENU_ITEMS_LIMIT_SIZE, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { settingsModel } from '@entities/settings'
 
@@ -16,7 +16,8 @@ const addPageToSidebar = (
                 message: 'Элемент добавлен в навигационное меню',
                 type: 'success',
             })
-            const newPages = settings['settings-customize-menu'].property['pages'] as string[]
+            const newPages = (settings['settings-customize-menu'].property['pages'] ??
+                REQUIRED_LEFTSIDE_BAR_CONFIG) as string[]
             settingsModel.events.updateSetting({
                 nameSettings: 'settings-customize-menu',
                 nameParam: 'pages',

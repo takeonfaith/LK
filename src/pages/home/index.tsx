@@ -4,7 +4,7 @@ import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import LinksList from '@features/home/ui/organisms/links-list'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
-import { Message, Title, Wrapper } from '@ui/atoms'
+import { Title, Wrapper } from '@ui/atoms'
 import { useEffect } from 'react'
 import getGreetingMessage from './lib/get-greeting-message'
 import { Content } from './ui/atoms/content'
@@ -37,12 +37,6 @@ const Home = () => {
                     </Title>
                     <HomeTopSection />
                 </div>
-                <Message type="alert">Test</Message>
-                <Message type="success">Test</Message>
-                <Message type="failure">Test</Message>
-                <Message type="hint">Test</Message>
-                <Message type="info">Test</Message>
-                <Message type="tip">Test</Message>
                 <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
                 <ScheduleAndNotification />
                 {!isProduction && <MobileAppLink />}

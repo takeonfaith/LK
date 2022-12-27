@@ -3,9 +3,9 @@ import { contextMenuModel } from '@entities/context-menu'
 import { settingsModel } from '@entities/settings'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
-import { FiMinus, FiMinusCircle, FiPlus } from 'react-icons/fi'
+import { FiPlus, FiXCircle } from 'react-icons/fi'
 import styled from 'styled-components'
-import Icon from '../atoms/icon'
+import Icon from '../all-pages/ui/atoms/icon'
 import React from 'react'
 import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
 import addPageToHome from '@features/all-pages/lib/add-page-to-home'
@@ -39,10 +39,20 @@ const ContextContent = (props: IRoute) => {
     const { settings } = settingsModel.selectors.useSettings()
     const { data } = userModel.selectors.useUser()
     const menu = menuModel.selectors.useMenu()
-    const isAddedToHome = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
-    const isAddedToMenu = (settings['settings-customize-menu'].property.pages as string[]).find((el) => el === id)
+    const isAddedToHome = (settings['settings-home-page'].property.pages as string[])?.find((el) => el === id)
+    const isAddedToMenu = (settings['settings-customize-menu'].property.pages as string[])?.find((el) => el === id)
     const requiredLeftsideBarItems =
         data.user?.user_status === 'staff' ? REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG : REQUIRED_LEFTSIDE_BAR_CONFIG
+
+    const handleAddToHome = () => {
+        addPageToHome(id, settings)
+        contextMenuModel.events.close()
+    }
+
+    const handleAddToMenu = () => {
+        addPageToSidebar(id, settings, Object.keys(menu.leftsideBarRoutes ?? {}).length ?? 0, requiredLeftsideBarItems)
+        contextMenuModel.events.close()
+    }
 
     return (
         <ContextContentWrapper>
@@ -56,7 +66,7 @@ const ContextContent = (props: IRoute) => {
             {isAddedToHome ? (
                 <Button
                     text="Убрать с главной"
-                    icon={<FiMinusCircle />}
+                    icon={<FiXCircle />}
                     width="100%"
                     align="left"
                     background="var(--schedule)"
@@ -72,10 +82,7 @@ const ContextContent = (props: IRoute) => {
                     width="100%"
                     align="left"
                     background="var(--schedule)"
-                    onClick={() => {
-                        addPageToHome(id, settings)
-                        contextMenuModel.events.close()
-                    }}
+                    onClick={handleAddToHome}
                 />
             )}
             {!isAddedToMenu ? (
@@ -85,19 +92,12 @@ const ContextContent = (props: IRoute) => {
                     width="100%"
                     align="left"
                     background="var(--schedule)"
-                    onClick={() =>
-                        addPageToSidebar(
-                            id,
-                            settings,
-                            Object.keys(menu.leftsideBarRoutes ?? {}).length ?? 0,
-                            requiredLeftsideBarItems,
-                        )
-                    }
+                    onClick={handleAddToMenu}
                 />
             ) : (
                 <Button
                     text="Убрать из меню"
-                    icon={<FiMinus />}
+                    icon={<FiXCircle />}
                     width="100%"
                     align="left"
                     background="var(--schedule)"

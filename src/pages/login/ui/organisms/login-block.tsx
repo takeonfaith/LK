@@ -1,3 +1,4 @@
+import React from 'react'
 import { userModel } from '@entities/user'
 import BlockWrapper from '@ui/block/styles'
 import styled from 'styled-components'
