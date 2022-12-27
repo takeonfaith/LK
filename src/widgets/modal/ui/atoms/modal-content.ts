@@ -8,7 +8,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
     max-height: 90vh;
     border-radius: var(--brSemi);
     transition: 0.2s opacity, 0.2s transform;
-    overflow: hidden;
+    overflow: auto;
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
@@ -39,7 +39,8 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
         padding-top: 15px;
 
         width: 100%;
-        height: 80%;
+        max-height: 80%;
+        height: fit-content;
         bottom: 0;
         border-radius: 20px 20px 0 0;
         transform: ${({ isOpen }) => (isOpen ? `scale(1) translateY(0px)` : `scale(1) translateY(150px)`)};

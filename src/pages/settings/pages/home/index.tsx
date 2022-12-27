@@ -66,7 +66,8 @@ const HomeSettings = () => {
                 onRemoveOne={(id) => deletePageFromHome(id, settings)}
                 onAddElement={() => open(<AddPagesList />)}
                 setList={setList as React.Dispatch<React.SetStateAction<FilterElementList>>}
-                padding="0"
+                padding="10px 0"
+                height="fit-content"
             />
             <Divider margin="30px 0" />
             <ToggleArea title={'Виджеты'} toggles={toggles} setToggles={setToggles} />

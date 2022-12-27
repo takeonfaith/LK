@@ -7,7 +7,7 @@ const PageWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    height: 100%;
+    height: fit-content;
     padding: 10px;
 `
 

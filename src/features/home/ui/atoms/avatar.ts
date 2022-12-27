@@ -7,6 +7,7 @@ export const Container = styled.div<{
     marginRight?: string
     background?: string
     boxShadow?: string
+    border?: boolean
 }>`
     border-radius: 50%;
     display: flex;
@@ -14,7 +15,7 @@ export const Container = styled.div<{
     justify-content: center;
     background: ${({ background }) => background ?? 'var(--almostTransparent)'};
     color: var(--text);
-    border: ${({ selected }) => selected && '5px solid var(--schedule)'};
+    border: ${({ selected, border }) => (selected || border) && '5px solid var(--schedule)'};
     outline: ${({ selected }) => selected && '4px solid var(--reallyBlue)'};
     position: relative;
 

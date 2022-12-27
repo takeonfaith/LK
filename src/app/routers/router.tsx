@@ -12,8 +12,7 @@ const Router = () => {
     const {
         data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
-
-    const { data } = adminLinksModel.selectors.useAdminLinks()
+    const { data } = adminLinksModel.selectors.useData()
     const { settings } = settingsModel.selectors.useSettings()
     const [delayedAuth, setDelayedAuth] = useState(isAuthenticated)
 
@@ -22,8 +21,9 @@ const Router = () => {
             setTimeout(() => {
                 setDelayedAuth(true)
             }, 1000)
-            adminLinksModel.effects.getAdminLinksFx()
+            adminLinksModel.effects.getFx()
             applicationsModel.effects.getUserDataApplicationsFx()
+            applicationsModel.effects.getWorkerPosts()
         } else {
             setDelayedAuth(false)
         }
@@ -43,16 +43,14 @@ const Router = () => {
     }, [user, data, settings])
 
     return isAuthenticated && delayedAuth ? (
-        <Switch>
-            <Route path="/" component={ContentLayout} />
-        </Switch>
+        <ContentLayout />
     ) : (
         <Suspense fallback={null}>
             <Switch>
                 {publicRoutes.map(({ path, Component }, i) => {
                     return <Route path={path} component={Component} exact={true} key={i} />
                 })}
-                <Redirect to={LOGIN_ROUTE} />
+                <Redirect exact to={LOGIN_ROUTE} />
             </Switch>
         </Suspense>
     )

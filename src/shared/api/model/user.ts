@@ -15,6 +15,7 @@ export interface User extends Record<string, unknown> {
     birthday: string
     patronymic: string
     orders: string[]
+    hasAlerts: boolean
     sex: Sex
     code: string
     faculty: string

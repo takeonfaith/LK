@@ -4,12 +4,14 @@ import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import LinksList from '@features/home/ui/organisms/links-list'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
-import { Title, Wrapper } from '@ui/atoms'
+import { Message, Title, Wrapper } from '@ui/atoms'
 import { useEffect } from 'react'
 import getGreetingMessage from './lib/get-greeting-message'
 import { Content } from './ui/atoms/content'
 import React from 'react'
 import MobileAppLink from '@features/all-pages/ui/organisms/mobile-app-link'
+import { isProduction } from '@shared/consts'
+import HomeTopSection from '@features/home/ui/organisms/home-top-section'
 
 const Home = () => {
     const {
@@ -29,12 +31,21 @@ const Home = () => {
     return (
         <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <Content>
-                <Title size={2} align="left" bottomGap>
-                    {getGreetingMessage(user.name)}
-                </Title>
+                <div className="top">
+                    <Title size={2} align="left">
+                        {getGreetingMessage(user.name)}
+                    </Title>
+                    <HomeTopSection />
+                </div>
+                <Message type="alert">Test</Message>
+                <Message type="success">Test</Message>
+                <Message type="failure">Test</Message>
+                <Message type="hint">Test</Message>
+                <Message type="info">Test</Message>
+                <Message type="tip">Test</Message>
                 <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
                 <ScheduleAndNotification />
-                <MobileAppLink />
+                {!isProduction && <MobileAppLink />}
             </Content>
         </Wrapper>
     )

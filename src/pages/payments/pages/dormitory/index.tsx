@@ -25,13 +25,19 @@ const DormitoryPayments = () => {
             {data.dormitory.map((dormitory, i) => {
                 return (
                     <React.Fragment key={dormitory.number}>
-                        <Message maxWidth="1190px" type="info" title="Информация" icon={<FiInfo />}>
-                            По возникновении технических проблем при подписании договоров и дополнительных соглашений в
-                            Личном кабинете просим обращаться на почту{' '}
-                            <a href="mailto:info@mospolytech.ru">info@mospolytech.ru</a>
+                        <Message type="info" title="Информация" icon={<FiInfo />} gap="12px" maxWidth="1190px">
+                            <p>
+                                По возникновении технических проблем при подписании договоров и дополнительных
+                                соглашений в Личном кабинете просим обращаться на почту{' '}
+                                <a href="mailto:info@mospolytech.ru">info@mospolytech.ru</a>
+                            </p>
+                            <p>
+                                Обращаем Ваше внимание на то, что произведенная оплата отображается в этом разделе не
+                                сразу, а обычно в течение 3-4 дней со дня платежа.
+                            </p>
                         </Message>
                         <div className="blocks-wrapper" key={i}>
-                            <Block orientation="vertical" maxWidth="800px">
+                            <Block orientation="vertical" maxWidth="800px" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap>
                                     Оплата за общежитие
                                 </Title>
@@ -54,7 +60,7 @@ const DormitoryPayments = () => {
                                     />
                                 </div>
                             </Block>
-                            <Block orientation="vertical" maxWidth="380px">
+                            <Block orientation="vertical" maxWidth="380px" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap width="100%">
                                     Реквизиты договора
                                     <LinkButton
@@ -68,7 +74,7 @@ const DormitoryPayments = () => {
                             </Block>
                         </div>
                         <div className="blocks-wrapper">
-                            <Block orientation="vertical" maxWidth="1190px" height="fit-content">
+                            <Block orientation="vertical" maxWidth="1190px" height="fit-content" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap>
                                     График платежей
                                 </Title>
@@ -80,7 +86,12 @@ const DormitoryPayments = () => {
                         </div>
                         {!!dormitory.agreements && !!dormitory.agreements.length && (
                             <div className="blocks-wrapper">
-                                <Block orientation="vertical" maxWidth="1190px" height="fit-content">
+                                <Block
+                                    orientation="vertical"
+                                    maxWidth="1190px"
+                                    height="fit-content"
+                                    noAppearanceInMobile
+                                >
                                     <Title size={2} align="left" bottomGap>
                                         Доп. соглашение
                                     </Title>

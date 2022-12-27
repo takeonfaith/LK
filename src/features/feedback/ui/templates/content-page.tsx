@@ -6,8 +6,8 @@ import { HelpLinks, OtherContacts } from '../organisms'
 export function ContentPage() {
     return (
         <CenterPage alignItems="flex-start">
-            <Block orientation="vertical" height="fit-content" maxWidth="650px" gap="10px">
-                <Title size={3} align="left" bottomGap>
+            <Block orientation="vertical" height="fit-content" maxWidth="700px" gap="10px" noAppearanceInMobile>
+                <Title size={2} align="left" bottomGap>
                     Обратная связь
                 </Title>
                 <HelpLinks />

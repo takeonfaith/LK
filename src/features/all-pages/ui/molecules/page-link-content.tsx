@@ -102,7 +102,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             display: flex;
             align-items: center;
             font-size: 0.8em;
-            text-align: center;
+            text-align: ${({ isVertical }) => (isVertical ? 'center' : 'left')};
             color: var(--text);
             transition: 0.2s;
             height: 30px;
@@ -127,7 +127,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
 
     const isVertical = orientation === 'vertical'
     const { settings } = settingsModel.selectors.useSettings()
-    const isAdded = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
+    const isAdded = !!(settings['settings-home-page'].property.pages as string[])?.find((el) => el === id)
 
     const maxFirstWordLength = 12
 

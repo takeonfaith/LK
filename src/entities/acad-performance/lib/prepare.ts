@@ -23,7 +23,7 @@ const MATCHES: Matches = {
     Зачет: TEST,
 }
 
-export function prepare(data: AcadPerformance[]): PreparedData {
+export function prepareData(data: AcadPerformance[]): PreparedData {
     const result: PreparedData = {
         [EXAM]: [],
         [TEST]: [],

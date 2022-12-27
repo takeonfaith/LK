@@ -9,6 +9,17 @@ export const Content = styled.div`
     color: var(--text);
     padding: var(--desktop-page-padding);
 
+    .top {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        column-gap: 32px;
+
+        .title-wrapper {
+            width: fit-content;
+        }
+    }
+
     .home-page-content-inner {
         display: flex;
         flex-direction: column;
@@ -17,6 +28,9 @@ export const Content = styled.div`
 
     @media (max-width: 1000px) {
         margin: 0;
+        .top {
+            justify-content: space-between;
+        }
     }
 
     @media (max-width: 600px) {

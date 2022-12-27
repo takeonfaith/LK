@@ -4,6 +4,20 @@ export const ApplicationsConstants = {
     rejected: 'Отклонено',
 }
 
+export const hrApplicationsConstants = {
+    agreeding: 'На согласовании',
+    notAgreed: 'Не согласовано',
+    agreed: 'Согласовано',
+    empty: 'Не создано',
+    rejected: 'Отклонено',
+}
+export const hrOrderConstants = {
+    signed: 'Подписан',
+    agreeding: 'На согласовании',
+    fixing: 'На доработке',
+    empty: 'Не создан',
+}
+
 export const NumberOfCopiesOptions = [
     { id: 1, title: '1' },
     { id: 2, title: '2' },
@@ -35,4 +49,17 @@ export const MethodObtainingOptions = [
     { id: 3, title: 'На почтовый адрес' },
 ]
 
-export type specialFieldsNameT = 'personalMethod' | 'postMethod' | 'personalNature' | 'Compensation' | null
+export type specialFieldsNameT =
+    | 'personalMethod'
+    | 'postMethod'
+    | 'personalNature'
+    | 'Compensation'
+    | 'Address'
+    | 'collHoliday1'
+    | 'collHoliday2'
+    | 'collHoliday3'
+    | 'collHoliday4'
+    | 'collHoliday5'
+    | 'Structure1'
+    | 'Structure2'
+    | null

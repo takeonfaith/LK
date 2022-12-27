@@ -35,16 +35,12 @@ const RadioButtonList = ({ title, buttons, required = false, current, setCurrent
                 {buttons.map((button) => {
                     const { id, title } = button
                     return (
-                        <>
-                            <Checkbox
-                                text={title}
-                                key={id}
-                                checked={id === current?.id}
-                                setChecked={() =>
-                                    setCurrent({ id: id, title: !isSpecificRadio ? title : id.toString() })
-                                }
-                            />
-                        </>
+                        <Checkbox
+                            text={title}
+                            key={id}
+                            checked={id === current?.id}
+                            setChecked={() => setCurrent({ id: id, title: !isSpecificRadio ? title : id.toString() })}
+                        />
                     )
                 })}
             </List>

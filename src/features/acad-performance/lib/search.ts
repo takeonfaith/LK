@@ -1,10 +1,10 @@
-import { prepare } from '@entities/acad-performance/lib/prepare'
+import { prepareData } from '@entities/acad-performance/lib/prepare'
 import { AcadPerformance } from '@api/model/acad-performance'
 import localizeDate from '@utils/localize-date'
 import normalizeString from '@utils/normalize-string'
 
 const search = (value: string, subjects: AcadPerformance[]) => {
-    return prepare(
+    return prepareData(
         subjects.filter(
             (subject) =>
                 normalizeString(subject.name).includes(normalizeString(value)) ||

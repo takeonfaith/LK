@@ -129,10 +129,10 @@ const Subject = (props: Props) => {
             <p className="teachers">
                 {teachers.map((teacher: string, index) => {
                     return (
-                        <>
+                        <React.Fragment key={teacher + index}>
                             {teacher}
                             {index !== teachers.length - 1 && ', '}
-                        </>
+                        </React.Fragment>
                     )
                 })}
             </p>

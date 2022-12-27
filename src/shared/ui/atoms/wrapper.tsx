@@ -4,7 +4,11 @@ import styled from 'styled-components'
 import { Button, Error, Loading } from '.'
 import Thinking from '../../images/thinking-emoji.gif'
 
-const WrapperBlock = styled.div<{ loading: boolean }>`
+const styledPropsArray: Array<keyof Props> = ['loading']
+
+const WrapperBlock = styled.div.withConfig({
+    shouldForwardProp: (prop) => !styledPropsArray.includes(prop as keyof Props),
+})<{ loading: boolean }>`
     width: 100%;
     padding: 10px;
     height: 100%;
@@ -47,6 +51,10 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
         & > * + * {
             margin-top: 10px;
         }
+    }
+
+    @media (max-width: 550px) {
+        padding: 15px;
     }
 `
 

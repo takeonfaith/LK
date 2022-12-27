@@ -1,3 +1,4 @@
+import React from 'react'
 import { SuperiorRoom } from '@api/model'
 import { IInputArea } from '@ui/input-area/model'
 

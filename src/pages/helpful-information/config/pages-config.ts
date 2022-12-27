@@ -1,9 +1,11 @@
 import instructionsTeacherData from '@pages/instructions/data/teacher-data'
+import { HelpfulInfoEnum, helpfulInfoName } from '@entities/useful-information'
 import { HelpfulPages, Link } from '../types/helpful-pages'
 
 const pages: HelpfulPages = [
     {
-        title: 'Полезная информация',
+        id: HelpfulInfoEnum.information,
+        title: helpfulInfoName[HelpfulInfoEnum.information],
         visible: 'all',
         content: [
             {
@@ -15,6 +17,11 @@ const pages: HelpfulPages = [
                         href: 'https://e.mospolytech.ru/old/storage/files/Vremennoe_polozhenie_o_provedenii_tekuschego_kontrolya_uspevaemosti_i_promezhutochnoj_attestatsii_obuchajuschihsya_v_usloviyah_obespecheniya_rezhima_izolyatsii_v_tselyah_predotvrascheniya_rasprostraneniya_koronavirusnoj_infektsii.pdf',
                     },
                     { title: 'Оплата обучения', visible: 'student', href: 'https://mospolytech.ru/?id=2042' },
+                    {
+                        title: 'Программы дополнительного профессионального образования',
+                        visible: 'all',
+                        href: 'https://study.mospolytech.ru/dpo',
+                    },
                     { title: 'Международные программы', visible: 'student', href: 'https://mospolytech.ru/?id=8' },
                     { title: 'Дополнительное образование', visible: 'student', href: 'https://mospolytech.ru/?id=92' },
 
@@ -113,60 +120,61 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Безопасность',
-        visible: 'student',
+        id: HelpfulInfoEnum.security,
+        title: helpfulInfoName[HelpfulInfoEnum.security],
+        visible: 'all',
         content: [
             {
                 title: 'Безопасность',
                 links: [
                     {
                         title: 'Если оказались на территории вуза в момент наступившей чрезвычайной ситуации',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_2_Esli_okazalis_na_territorii_vuza_v_moment_nastupivshej_chrezvychajnoj_situatsii.pdf',
                     },
                     {
                         title: 'Памятка «Подозрительный предмет»',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_3_Podozritelnyj_predmet.pdf',
                     },
                     {
                         title: 'Памятка студента по действиям в экстремальных ситуациях',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_4_Pamyatka_studenta_po_dejstviyam_v_ekstremalnyh_situatsiyah.pdf',
                     },
                     {
                         title: 'Алгоритм действий при возникновении паники в толпе или в месте массового пребывания людей',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_5_Algoritm_dejstvij_pri_vozniknovenii_paniki_v_tolpe_ili_v_meste_massovogo_prebyvaniya_ljudej.PDF',
                     },
                     {
                         title: 'Безопасность в экстремальных и чрезвычайных ситуациях',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_6_Bezopasnost_v_ekstremalnyh_i_chrezvychajnyh_situatsiyah.PDF',
                     },
                     {
                         title: 'Как понять, что материал экстремистский, и что с этим делать',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_7_Kak_ponyat__chto_material_ekstremistskij__i_chto_s_etim_delat.PDF',
                     },
                     {
                         title: 'Последствия и ответственность за ложное сообщение об акте терроризма',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_8_Posledstviya_i_otvetstvennost_za_lozhnoe_soobschenie_ob_akte_terrorizma.PDF',
                     },
                     {
                         title: 'Последствия участия в несогласованных митингах и протестных акциях',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_9_Posledstviya_uchastiya_v_nesoglasovannyh_mitingah_i_protestnyh_aktsiyah.PDF',
                     },
                     {
                         title: 'Признаки вербовки в экстремистскую организацию и как с этим справиться',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_10_Priznaki_verbovki_v_ekstremistskuju_organizatsiju_i_kak_s_etim_spravitsya.PDF',
                     },
                     {
                         title: 'Что делать, если вы обнаружили бесхозный предмет',
-                        visible: 'student',
+                        visible: 'all',
                         href: 'https://e.mospolytech.ru/old/storage/files/notes/Metodicheskie_ukazaniya_i_pamyatki_11_Chto_delat__esli_vy_obnaruzhili_beshoznyj_predmet.PDF',
                     },
                 ],
@@ -174,7 +182,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Инструкции',
+        id: HelpfulInfoEnum.instructions,
+        title: helpfulInfoName[HelpfulInfoEnum.instructions],
         visible: 'all',
         content: [
             {
@@ -202,7 +211,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Положения',
+        id: HelpfulInfoEnum.regulations,
+        title: helpfulInfoName[HelpfulInfoEnum.regulations],
         visible: 'staff',
         content: [
             {
@@ -214,7 +224,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Приказы',
+        id: HelpfulInfoEnum.orders,
+        title: helpfulInfoName[HelpfulInfoEnum.orders],
         visible: 'staff',
         content: [
             {
@@ -226,7 +237,8 @@ const pages: HelpfulPages = [
         ],
     },
     {
-        title: 'Курсы',
+        id: HelpfulInfoEnum.courses,
+        title: helpfulInfoName[HelpfulInfoEnum.courses],
         visible: 'student',
         content: [
             {

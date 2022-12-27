@@ -12,6 +12,7 @@ export type HelpfulPage = {
 }
 
 export type HelpfulPages = {
+    id: string
     title: string
     visible: Visibility
     content: HelpfulPage[]

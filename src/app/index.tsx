@@ -1,5 +1,6 @@
-import useTheme from '@utils/hooks/use-theme'
-import { BrowserRouter } from 'react-router-dom'
+import useTheme from '@shared/lib/hooks/use-theme'
+import React from 'react'
+import { HashRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'
 import Router from './routers/router'
@@ -15,11 +16,11 @@ const App = () => {
 
     return (
         <ModalProvider>
-            <BrowserRouter basename="/">
+            <HashRouter basename="/">
                 <Background>
                     <Router />
                 </Background>
-            </BrowserRouter>
+            </HashRouter>
         </ModalProvider>
     )
 }

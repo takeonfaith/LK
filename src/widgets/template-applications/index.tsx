@@ -1,12 +1,9 @@
-import { Application } from '@api/model'
+import React from 'react'
 import { applicationsModel } from '@entities/applications'
 import getApplicationsColumns from '@features/applications/lib/get-applications-columns'
-import search from '@features/applications/lib/search'
 import CreateApplicationList from '@features/applications/ui/molecules/create-application-list'
 import { Button, FormBlock, Message, Title, Wrapper } from '@ui/atoms'
-import { LocalSearch } from '@ui/molecules'
 import Table from '@ui/table'
-import { useState } from 'react'
 import { FiInfo, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
@@ -28,6 +25,10 @@ const CustomList = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
+
+    @media (max-width: 1000px) {
+        display: none;
+    }
 `
 
 interface Props {
@@ -40,7 +41,6 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
         error,
     } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
-    const [applications, setApplications] = useState<Application[] | null>(null)
 
     return (
         <Wrapper
@@ -79,17 +79,11 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
                             height="36px"
                             fixedInMobile
                         />
-                        <LocalSearch<Application[], Application[]>
-                            whereToSearch={listApplication ?? []}
-                            searchEngine={search}
-                            setResult={setApplications}
-                            placeholder={'Поиск заявлений'}
-                        />
                     </CustomList>
                     <Table
                         loading={!listApplication}
                         columns={getApplicationsColumns()}
-                        data={applications ?? listApplication}
+                        data={listApplication}
                         maxOnPage={7}
                     />
                 </FormBlock>

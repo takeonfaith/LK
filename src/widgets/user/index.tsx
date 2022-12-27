@@ -6,7 +6,9 @@ import styled from 'styled-components'
 import { useModal } from 'widgets'
 import getFontSize from './lib/get-font-size'
 import getImageSize from './lib/get-image-size'
+import getStatus from './lib/get-status'
 import getWidth from './lib/get-width'
+import { UserProps } from './types'
 import { SkeletonLoading, StudentModal, TeacherModal } from './ui'
 
 const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
@@ -20,6 +22,15 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     cursor: pointer;
     width: ${({ orientation, size }) => (orientation === 'vertical' ? getWidth(size) : '100%')};
 
+    .index {
+        min-width: 30px;
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 0.85rem;
+        color: var(--theme-mild-opposite);
+    }
+
     &:hover {
         background: ${Colors.grey.transparentAF};
     }
@@ -29,6 +40,7 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
         flex-direction: column;
         text-align: ${({ orientation }) => (orientation === 'vertical' ? 'center' : 'left')};
         margin-top: ${({ orientation }) => (orientation === 'vertical' ? '5px' : '0')};
+        width: calc(100% - 60px);
 
         .name {
             font-size: ${({ size }) => getFontSize(size)};
@@ -41,21 +53,13 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
         .status {
             font-size: ${({ size }) => `calc(${getFontSize(size)} - 0.1em)`};
             opacity: 0.6;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 90%;
         }
     }
 `
-
-interface Props {
-    type: 'student' | 'teacher'
-    orientation?: Direction
-    avatar?: string
-    name: string
-    loading?: boolean
-    size?: Size
-    checked?: boolean
-    setChecked?: (value: boolean) => void
-    onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-}
 
 const User = ({
     type,
@@ -63,32 +67,38 @@ const User = ({
     name,
     checked,
     onClick,
+    indexNumber,
+    division,
+    group,
+    isMe = false,
     loading = false,
     orientation = 'horizontal',
     size = 'middle',
-}: Props) => {
+}: UserProps) => {
     const { open } = useModal()
+    const status = getStatus(isMe, type, division, group)
 
     if (loading) return <SkeletonLoading />
 
+    const handleUserClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (onClick) {
+            onClick(e)
+        } else {
+            if (!isMe) {
+                open(
+                    type === 'teacher' ? (
+                        <TeacherModal name={name} avatar={avatar} isMe={isMe} division={division} />
+                    ) : (
+                        <StudentModal name={name} avatar={avatar} isMe={isMe} group={group} />
+                    ),
+                )
+            }
+        }
+    }
+
     return (
-        <UserWrapper
-            orientation={orientation}
-            size={size}
-            onClick={(e) => {
-                if (onClick) {
-                    onClick(e)
-                } else {
-                    open(
-                        type === 'teacher' ? (
-                            <TeacherModal name={name} avatar={avatar} />
-                        ) : (
-                            <StudentModal name={name} avatar={avatar} />
-                        ),
-                    )
-                }
-            }}
-        >
+        <UserWrapper orientation={orientation} size={size} onClick={handleUserClick}>
+            {indexNumber && <div className="index">{indexNumber}</div>}
             <Avatar
                 name={name}
                 avatar={avatar}
@@ -99,7 +109,7 @@ const User = ({
             />
             <div className="name-and-status">
                 <span className="name">{name}</span>
-                <span className="status"> {type === 'teacher' ? 'Сотрудник' : 'Студент'}</span>
+                <span className="status"> {status}</span>
             </div>
         </UserWrapper>
     )

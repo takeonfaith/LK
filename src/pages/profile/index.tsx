@@ -30,7 +30,7 @@ const ProfileWrapper = styled.div`
         radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 65%); */
 
     @media (max-width: 1000px) {
-        padding: 40px;
+        padding: 20px;
     }
 
     /* @media (max-width: 600px) {
@@ -109,7 +109,7 @@ const ProfilePage = () => {
                     <Title size={3} align="left">
                         {user.fullName}
                     </Title>
-                    <Subtext visible={!!user.specialty} width="100%">
+                    <Subtext visible={!!user.specialty} maxWidth="100%" width="100%">
                         Направление: {user.specialty}
                     </Subtext>
                     <Subtext visible={!!user.group} maxWidth="100%" width="100%" align="left">

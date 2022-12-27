@@ -33,12 +33,23 @@ export interface baseNotification {
     event?: string
 }
 
-export type ItemNotification = baseNotification | businesstripNotification
+export interface docsNotification {
+    id: string
+    type: string
+    date: string
+    name: string
+    number: string
+    link: string
+    viewed: boolean
+    document: boolean
+}
 
-export type NameListNotification = 'businesstrip' | 'fire' | 'vacation'
+export type ItemNotification = baseNotification | businesstripNotification | docsNotification
 
-export interface Notifications {
-    [index: string]: ItemNotification[]
+export type NameListNotification = 'businesstrip' | 'fire' | 'vacation' | 'docs'
+
+export type Notifications = {
+    [key in NameListNotification]?: ItemNotification[]
 }
 
 export interface viewNotificationResponse {

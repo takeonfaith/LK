@@ -1,5 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
+import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
@@ -38,6 +39,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 mask: true,
                 required: true,
+                minValueInput: getDelayInDays(14),
             },
             {
                 title: 'Период отпуска (после переноса):',
@@ -47,6 +49,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 mask: true,
                 required: true,
+                minValueInput: getDelayInDays(14),
             },
             {
                 title: 'Место работы',

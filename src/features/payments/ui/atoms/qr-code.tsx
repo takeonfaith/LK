@@ -1,3 +1,4 @@
+import React from 'react'
 import { Image } from '@ui/atoms'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'

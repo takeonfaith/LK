@@ -27,10 +27,8 @@ export default defineConfig((conf) => {
         ],
         build: {
             outDir,
+            manifest: true,
         },
-        // esbuild: {
-        //     jsxInject: `import React from 'react'`,
-        // },
         esbuild: {
             logOverride: { 'this-is-undefined-in-esm': 'silent' },
         },

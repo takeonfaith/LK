@@ -1,52 +1,59 @@
 import React from 'react'
-import ArbitrayRequestPage from '@pages/applications/pages/other/arbitrary-request'
-import ApplicationForCertificateOfAttendance from '@pages/applications/pages/multifunctional-center/certificate-of-attendance'
-import ApplicationPaperCall from '@pages/applications/pages/multifunctional-center/paper-call'
-import ApplicationSocialAgencies from '@pages/applications/pages/multifunctional-center/social-agencies'
-import ApplicationForSocialScrollarship from '@pages/applications/pages/trade-union-organization/social-scollarship'
+import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
+import { isProduction } from '@consts'
+import {
+    generalHiddenRoutes,
+    generalRoutes,
+    IRoutes,
+    PROJECT_ACTIVITIES_ROUTE,
+    USEFUL_INFO_ROUTE,
+} from './general-routes'
 import PageIsNotReady from '@pages/page-is-not-ready'
+import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
 import { MdOutlineBedroomChild } from 'react-icons/md'
-import { FiBriefcase, FiFileText } from 'react-icons/fi'
-import AcadPerformance from '../../pages/acad-performance'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from './general-routes'
-import ApplicationsPage from '@pages/applications'
+import { ArbitraryRequestPage, HelpfulInformation } from './teacher-routes/pages'
 import { FaRegLightbulb } from 'react-icons/fa'
-import RegularAccommodationPage from '@pages/applications/pages/campus-management/regular-accommodation'
-import AccommodationCorrespondenceFormPage from '@pages/applications/pages/campus-management/accommodation-correspondence-form'
-import AcademicLeaveAccommodationPage from '@pages/applications/pages/campus-management/academic-leave-accommodation'
-import PreferentialAccommodationPage from '@pages/applications/pages/campus-management/preferential-accommodation'
-import FamilyRoomPage from '@pages/applications/pages/campus-management/family-room'
-import TerminationOfEmploymentContractPage from '@pages/applications/pages/campus-management/termination-of-employment-contract'
-import RelocationInsideHostelPage from '@pages/applications/pages/campus-management/relocation-inside-hostel'
-import RelocationToAnotherHostelPage from '@pages/applications/pages/campus-management/relocation-to-another-hostel'
-import PaymentRecipient from '@pages/applications/pages/department-of-paid-services/paymnet-recipient'
-import RestoringTheMagneticPass from '@pages/applications/pages/multifunctional-center/restoring-the-magnetic-pass'
-import MilitaryRegistrationDocuments from '@pages/applications/pages/mobilization-department/military-registration-documents'
-import IncreasedStateAcademicScholarship from '@pages/applications/pages/trade-union-organization/increased-state-academic-scholarship'
-import RetakeForDiploma from '@pages/applications/pages/multifunctional-center/retake-for-diploma'
-import FinancialSupport from '@pages/applications/pages/trade-union-organization/financial-support'
-import FinancialAssistance from '@pages/applications/pages/trade-union-organization/financial-assistance'
-import MilitaryRegistrationCard from '@pages/applications/pages/mobilization-department/military-registration-card'
-import StateAccreditation from '@pages/applications/pages/multifunctional-center/state-accreditation'
-import StudentStatus from '@pages/applications/pages/multifunctional-center/student-status'
-import ChangingPersonalData from '@pages/applications/pages/multifunctional-center/changing-personal-data'
-import HelpfulInformation from '@pages/helpful-information'
-import ClarificationOfPassportDataApplication from '@pages/applications/pages/multifunctional-center/clarification-of-passport-data'
-import ApplicationHolidaysAfterTraining from '@pages/applications/pages/multifunctional-center/holidays-after-training'
-import ApplicationProvisionAcademicLeave from '@pages/applications/pages/multifunctional-center/provision-academic-leave'
-import ApplicationIndependentlyDeduction from '@pages/applications/pages/multifunctional-center/independently-deducted'
-import ApplicationExtensionAttestation from '@pages/applications/pages/multifunctional-center/extension-attestation'
-import ApplicationForSuperiorRoom from '@pages/application-for-superior-room'
-import DormitoryPage from '@pages/dormitory'
-import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
-import useIsTestEnv from '@utils/hooks/use-is-test-env'
+import {
+    AcademicLeaveAccommodationPage,
+    AcadPerformance,
+    ApplicationForCertificateOfAttendance,
+    ApplicationForSocialScrollarship,
+    ApplicationForSuperiorRoom,
+    ApplicationPaperCall,
+    ApplicationSocialAgencies,
+    ClarificationOfPassportDataApplication,
+    DormitoryPage,
+    RegularAccommodationPage,
+    PreferentialAccommodationPage,
+    FamilyRoomPage,
+    TerminationOfEmploymentContractPage,
+    RelocationInsideHostelPage,
+    RelocationToAnotherHostelPage,
+    PaymentRecipient,
+    RestoringTheMagneticPass,
+    MilitaryRegistrationDocuments,
+    RetakeForDiploma,
+    IncreasedStateAcademicScholarship,
+    FinancialSupport,
+    ApplicationForFinancialAssistance,
+    ChangingPersonalData,
+    StudentStatus,
+    StateAccreditation,
+    ApplicationHolidaysAfterTraining,
+    ApplicationProvisionAcademicLeave,
+    ApplicationIndependentlyDeduction,
+    ApplicationExtensionAttestation,
+    MilitaryRegistrationCard,
+    AccommodationCorrespondenceFormPage,
+    ApplicationsPage,
+    ProjectActivitiesPage,
+} from './other-routes/pages'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 export const ACAD_PERFORMANCE_ROUTE = '/acad-performance'
-export const HELPFUL_INFORMATION = '/helpful-information'
 export const DORMITORY = '/dormitory'
 
 //hidden routes
@@ -81,30 +88,32 @@ export const PROVISION_ACADEMIC_LEAVE = APPLICATIONS_ROUTE + '/provision-academi
 export const INDEPENDENTLY_DEDUCTED = APPLICATIONS_ROUTE + '/independently-deducted'
 export const EXTENSION_ATTESTATION = APPLICATIONS_ROUTE + '/extension-attestation'
 
-const isProdEnv = !useIsTestEnv()
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const privateRoutes: () => IRoutes = () => ({
-    ...generalRoutes,
+    // On this position just to make necessary order
     applications: {
         id: 'applications',
         title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
-        Component: ApplicationsPage,
+        Component: isProduction ? ApplicationRedirect : ApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'GENERAL',
-    },
-    'project-activity': {
-        id: 'project-activity',
-        title: 'Проектная деятельность',
-        icon: <FaRegLightbulb />,
-        path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: PROJECT_ACTIVITIES_ROUTE }),
-        color: 'yellow',
-        isTemplate: false,
         group: 'OTHER',
+    },
+    ...generalRoutes,
+    dormitory: {
+        id: 'dormitory',
+        title: 'Общежитие',
+        icon: <MdOutlineBedroomChild />,
+        path: DORMITORY,
+        Component: DormitoryPage,
+        color: 'blue',
+        isTemplate: false,
+        isNew: true,
+        group: 'FINANCES_DOCS',
+        show: true,
     },
     'acad-performance': {
         id: 'acad-performance',
@@ -116,24 +125,26 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
     },
-    job: {
-        id: 'job',
-        title: 'Работа',
-        icon: <FiBriefcase />,
-        path: JOB_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/job' }),
-        color: 'blue',
+    'project-activity': {
+        id: 'project-activity',
+        title: 'Проектная деятельность',
+        icon: <FaRegLightbulb />,
+        path: PROJECT_ACTIVITIES_ROUTE,
+        Component: ProjectActivitiesPage,
+        color: 'yellow',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
+        isNew: true,
     },
+
     'helpful-information': {
         id: 'helpful-information',
         title: 'Полезная информация',
         icon: <BiInfoCircle />,
-        path: HELPFUL_INFORMATION,
+        path: USEFUL_INFO_ROUTE,
         Component: HelpfulInformation,
         color: 'blue',
-        isTemplate: false,
+        isTemplate: true,
         group: 'GENERAL',
     },
     'application-for-superior-room': {
@@ -147,17 +158,6 @@ export const privateRoutes: () => IRoutes = () => ({
         group: 'GENERAL',
         show: false,
     },
-    dormitory: {
-        id: 'dormitory',
-        title: 'Общежитие',
-        icon: <MdOutlineBedroomChild />,
-        path: DORMITORY,
-        Component: DormitoryPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'GENERAL',
-        show: true,
-    },
 })
 
 export const hiddenRoutes: () => IRoutes = () => ({
@@ -167,7 +167,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Уточнение паспортных данных',
         icon: <FiBriefcase />,
         path: CLARIFICATION_OF_PASSPORT_DATA_ROUTE,
-        Component: isProdEnv ? ApplicationRedirect : ClarificationOfPassportDataApplication,
+        Component: isProduction ? ApplicationRedirect : ClarificationOfPassportDataApplication,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -177,7 +177,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Произвольный запрос',
         icon: <FiBriefcase />,
         path: ARBITRARY_REQUEST_ROUTE,
-        Component: isProdEnv ? ApplicationRedirect : ArbitrayRequestPage,
+        Component: isProduction ? ApplicationRedirect : ArbitraryRequestPage,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -188,7 +188,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Социальная стипендия',
         icon: <BiIdCard />,
         path: SOCIAL_SCOLLARSHIP,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationForSocialScrollarship,
+        Component: isProduction ? ApplicationRedirect : ApplicationForSocialScrollarship,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -198,7 +198,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Сертификат об обучении',
         icon: <BiIdCard />,
         path: CERTIFICATE_OF_ATTENDANCE,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationForCertificateOfAttendance,
+        Component: isProduction ? ApplicationRedirect : ApplicationForCertificateOfAttendance,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -208,7 +208,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Справка в социальные учреждения',
         icon: <BiIdCard />,
         path: SOCIAL_AGENCIES,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationSocialAgencies,
+        Component: isProduction ? ApplicationRedirect : ApplicationSocialAgencies,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -218,7 +218,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Справка-вызов',
         icon: <BiIdCard />,
         path: PAPER_CALL,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationPaperCall,
+        Component: isProduction ? ApplicationRedirect : ApplicationPaperCall,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -255,7 +255,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания в период академического отпуска',
         icon: BiIdCard,
         path: ACADEMIC_LEAVE_ACCOMMODATION,
-        Component: isProdEnv ? ApplicationRedirect : AcademicLeaveAccommodationPage,
+        Component: isProduction ? ApplicationRedirect : AcademicLeaveAccommodationPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -264,7 +264,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания льготной категории граждан',
         icon: BiIdCard,
         path: PREFERENTIAL_ACCOMMODATION,
-        Component: isProdEnv ? ApplicationRedirect : PreferentialAccommodationPage,
+        Component: isProduction ? ApplicationRedirect : PreferentialAccommodationPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -273,7 +273,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания в семейной комнате',
         icon: BiIdCard,
         path: FAMILY_ROOM,
-        Component: isProdEnv ? ApplicationRedirect : FamilyRoomPage,
+        Component: isProduction ? ApplicationRedirect : FamilyRoomPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -282,7 +282,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Расторжение договора найма',
         icon: BiIdCard,
         path: TERMINATION_OF_EMPLOYMENT_CONTRACT,
-        Component: isProdEnv ? ApplicationRedirect : TerminationOfEmploymentContractPage,
+        Component: isProduction ? ApplicationRedirect : TerminationOfEmploymentContractPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -291,7 +291,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение внутри общежития',
         icon: BiIdCard,
         path: RELOCATION_INSIDE_HOSTEL,
-        Component: isProdEnv ? ApplicationRedirect : RelocationInsideHostelPage,
+        Component: isProduction ? ApplicationRedirect : RelocationInsideHostelPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -300,7 +300,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение в другое общежитие',
         icon: BiIdCard,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
-        Component: isProdEnv ? ApplicationRedirect : RelocationToAnotherHostelPage,
+        Component: isProduction ? ApplicationRedirect : RelocationToAnotherHostelPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -318,7 +318,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Запрос на восстановление магнитного пропуска',
         icon: BiIdCard,
         path: RESTORING_THE_MAGNETIC_PASS,
-        Component: isProdEnv ? ApplicationRedirect : RestoringTheMagneticPass,
+        Component: isProduction ? ApplicationRedirect : RestoringTheMagneticPass,
         color: 'blue',
         isTemplate: false,
     },
@@ -327,7 +327,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Отправить документы воинского учета',
         icon: BiIdCard,
         path: MILITARY_REGISTRATION_DOCUMENTS,
-        Component: isProdEnv ? ApplicationRedirect : MilitaryRegistrationDocuments,
+        Component: isProduction ? ApplicationRedirect : MilitaryRegistrationDocuments,
         color: 'blue',
         isTemplate: false,
     },
@@ -336,7 +336,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Заявление на пересдачу для получения диплома с отличием',
         icon: BiIdCard,
         path: RETAKE_FOR_DIPLOMA,
-        Component: isProdEnv ? ApplicationRedirect : RetakeForDiploma,
+        Component: isProduction ? ApplicationRedirect : RetakeForDiploma,
         color: 'blue',
         isTemplate: false,
     },
@@ -345,7 +345,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Получение повышенной государственной академической стипендии',
         icon: BiIdCard,
         path: INCREASED_STATE_ACADEMIC_SCHOLARSHIP,
-        Component: isProdEnv ? ApplicationRedirect : IncreasedStateAcademicScholarship,
+        Component: isProduction ? ApplicationRedirect : IncreasedStateAcademicScholarship,
         color: 'blue',
         isTemplate: false,
     },
@@ -354,7 +354,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)',
         icon: BiIdCard,
         path: FINANCIAL_SUPPORT,
-        Component: isProdEnv ? ApplicationRedirect : FinancialSupport,
+        Component: isProduction ? ApplicationRedirect : FinancialSupport,
         color: 'blue',
         isTemplate: false,
     },
@@ -363,7 +363,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Финансовая поддержка',
         icon: BiIdCard,
         path: FINANCIAL_ASSISTANCE,
-        Component: isProdEnv ? ApplicationRedirect : FinancialAssistance,
+        Component: isProduction ? ApplicationRedirect : ApplicationForFinancialAssistance,
         color: 'blue',
         isTemplate: false,
     },
@@ -372,7 +372,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Запрос на изменение персональных данных',
         icon: BiIdCard,
         path: CHANGING_PERSONAL_DATA,
-        Component: isProdEnv ? ApplicationRedirect : ChangingPersonalData,
+        Component: isProduction ? ApplicationRedirect : ChangingPersonalData,
         color: 'blue',
         isTemplate: false,
     },
@@ -381,7 +381,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Справка о прохождении обучения в университете (о статусе обучающегося) по месту требования',
         icon: BiIdCard,
         path: STUDENT_STATUS,
-        Component: isProdEnv ? ApplicationRedirect : StudentStatus,
+        Component: isProduction ? ApplicationRedirect : StudentStatus,
         color: 'blue',
         isTemplate: false,
     },
@@ -390,7 +390,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Выдача лицензий и свидетельств о государственной аккредитации',
         icon: BiIdCard,
         path: STATE_ACCREDITATION,
-        Component: isProdEnv ? ApplicationRedirect : StateAccreditation,
+        Component: isProduction ? ApplicationRedirect : StateAccreditation,
         color: 'blue',
         isTemplate: false,
     },
@@ -399,7 +399,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление каникул',
         icon: <BiIdCard />,
         path: HOLIDAYS_AFTER_TRAINING,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationHolidaysAfterTraining,
+        Component: isProduction ? ApplicationRedirect : ApplicationHolidaysAfterTraining,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -409,7 +409,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление академического отпуска',
         icon: <BiIdCard />,
         path: PROVISION_ACADEMIC_LEAVE,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationProvisionAcademicLeave,
+        Component: isProduction ? ApplicationRedirect : ApplicationProvisionAcademicLeave,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -419,7 +419,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Отчисление по инициативе обучающегося',
         icon: <BiIdCard />,
         path: INDEPENDENTLY_DEDUCTED,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationIndependentlyDeduction,
+        Component: isProduction ? ApplicationRedirect : ApplicationIndependentlyDeduction,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -429,7 +429,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Продление промежуточной аттестации ',
         icon: <BiIdCard />,
         path: EXTENSION_ATTESTATION,
-        Component: isProdEnv ? ApplicationRedirect : ApplicationExtensionAttestation,
+        Component: isProduction ? ApplicationRedirect : ApplicationExtensionAttestation,
         color: 'blue',
         isTemplate: false,
         group: 'OTHER',
@@ -439,7 +439,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Заполнить личную карточку обучающегося по воинскому учету для получения отсрочки от призыва на военную службу',
         icon: BiIdCard,
         path: MILITARY_REGISTRATION_CARD,
-        Component: isProdEnv ? ApplicationRedirect : MilitaryRegistrationCard,
+        Component: isProduction ? ApplicationRedirect : MilitaryRegistrationCard,
         color: 'blue',
         isTemplate: false,
     },

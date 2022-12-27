@@ -2,9 +2,6 @@ import React from 'react'
 import { userModel } from '@entities/user'
 import AllInfo from '@features/home/ui/molecules/all-info'
 import Orders from '@features/home/ui/molecules/orders'
-import ContactInfoActualizationPage from '@pages/contact-info-actualization'
-import DataVerificationPage from '@pages/data-verification'
-import ElectronicInteractionAgreementPage from '@pages/electronic-interaction-agreement'
 import styled from 'styled-components'
 import { SliderPage } from 'widgets'
 
@@ -38,18 +35,11 @@ const UserInfo = () => {
         //         </div>
         //     ),
         // },
-        { title: 'Анкета для сверки данных', content: <DataVerificationPage /> },
-        { title: 'Актуализация контактных данных', content: <ContactInfoActualizationPage /> },
-        {
-            title: 'Соглашение об электронном взаимодействии',
-            content: <ElectronicInteractionAgreementPage />,
-        },
     ]
 
     const studentPages = [
         { title: 'Учетная карточка', content: <AllInfo user={user} /> },
         { title: 'Приказы', content: <Orders orders={user.orders} /> },
-        { title: 'Соглашение об электронном взаимодействии', content: <ElectronicInteractionAgreementPage /> },
     ]
 
     return (
@@ -57,9 +47,9 @@ const UserInfo = () => {
             <SliderPage
                 appearance={false}
                 align="left"
-                width="100%"
+                width="fit-content"
                 maxWidth="100%"
-                sliderWidth={user.user_status === 'stud' ? '100%' : '80%'}
+                sliderWidth="500px"
                 pages={user.user_status === 'stud' ? studentPages : teacherPages}
             />
         </UserInfoWrapper>

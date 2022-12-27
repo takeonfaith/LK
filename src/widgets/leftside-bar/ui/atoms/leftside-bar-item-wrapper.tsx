@@ -2,7 +2,11 @@ import { Colors, IColors } from '@consts'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const LeftsideBarItemWrapper = styled(Link)<{
+const styledPropsArray = ['isCurrent', 'color']
+
+const LeftsideBarItemWrapper = styled(Link).withConfig({
+    shouldForwardProp: (prop) => !styledPropsArray.includes(prop),
+})<{
     isCurrent: boolean
     color: keyof IColors
 }>`

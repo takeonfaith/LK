@@ -1,5 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
+import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
@@ -53,7 +54,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                     },
                     {
                         id: 3,
-                        title: 'В случаях рождения ребенка, регистрации брака, смерти близких родственников;',
+                        title: 'В случаях рождения ребенка, регистрации брака, смерти близких родственников',
                     },
                     {
                         id: 4,
@@ -78,22 +79,64 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 ],
             },
             {
-                title: 'Период отпуска с:',
-                type: 'date',
-                value: '',
-                fieldName: 'begin_coll_holiday',
+                title: 'Период отпуска',
+                type: 'date-interval',
+                value: ['', ''],
+                fieldName: 'coll-holiday1',
                 editable: true,
                 mask: true,
                 required: true,
+                diff: 0,
+                specialType: 'collHoliday1',
+                minValueInput: getDelayInDays(14),
             },
             {
-                title: 'по',
-                type: 'date',
-                value: '',
-                fieldName: 'end_coll_holiday',
+                title: 'Период отпуска',
+                type: 'date-interval',
+                value: ['', ''],
+                fieldName: 'coll-holiday2',
                 editable: true,
                 mask: true,
                 required: true,
+                diff: 1,
+                specialType: 'collHoliday2',
+                minValueInput: getDelayInDays(14),
+            },
+            {
+                title: 'Период отпуска',
+                type: 'date-interval',
+                value: ['', ''],
+                fieldName: 'coll-holiday3',
+                editable: true,
+                mask: true,
+                required: true,
+                diff: 2,
+                specialType: 'collHoliday3',
+                minValueInput: getDelayInDays(14),
+            },
+            {
+                title: 'Период отпуска',
+                type: 'date-interval',
+                value: ['', ''],
+                fieldName: 'coll-holiday4',
+                editable: true,
+                mask: true,
+                required: true,
+                diff: 3,
+                specialType: 'collHoliday4',
+                minValueInput: getDelayInDays(14),
+            },
+            {
+                title: 'Период отпуска',
+                type: 'date-interval',
+                value: ['', ''],
+                fieldName: 'coll-holiday5',
+                editable: true,
+                mask: true,
+                required: true,
+                diff: 4,
+                specialType: 'collHoliday5',
+                minValueInput: getDelayInDays(14),
             },
             {
                 title: 'Место работы',
