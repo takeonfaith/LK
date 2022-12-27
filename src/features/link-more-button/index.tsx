@@ -27,9 +27,6 @@ const LinkMoreButton = ({ route }: Props) => {
         <Button
             icon={<FiMoreVertical />}
             textColor={textColor}
-            width="20px"
-            height="20px"
-            padding="0"
             className="more-button"
             background="transparent"
             onClick={handleClick}
