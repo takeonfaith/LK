@@ -9,6 +9,7 @@ export const API_WORKER_URL = `https://api.mospolytech.ru/serviceforfrontpersonn
 export const API_WORKER_STATUSES_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/Dismissal.AllHistory`
 
 export const $api = axios.create({ baseURL: API_BASE_URL, withCredentials: true })
+export const $noTokenApi = axios.create({ baseURL: API_BASE_URL })
 export const $workerApi = axios.create({ baseURL: API_WORKER_URL, timeout: 30000 })
 export const $workerStatusesApi = axios.create({ baseURL: API_WORKER_STATUSES_URL })
 export const $hrApi = axios.create({ baseURL: API_HR_URL })

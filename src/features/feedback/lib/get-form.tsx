@@ -24,15 +24,15 @@ const getForm = (data: Feedback): IInputArea => {
             {
                 title: 'Почта',
                 type: 'email',
-                value: data?.email_private ?? '',
-                fieldName: 'email_private',
+                value: data?.email ?? '',
+                fieldName: 'email',
                 required: true,
             },
             {
                 title: 'Телефон',
                 type: 'tel',
-                value: data?.tel_mob_private ?? '',
-                fieldName: 'tel_mob_private',
+                value: data?.phone ?? '',
+                fieldName: 'phone',
                 mask: true,
                 required: true,
             },
@@ -42,7 +42,7 @@ const getForm = (data: Feedback): IInputArea => {
                 width: '100%',
                 value: SELECT_OPTIONS[0],
                 items: SELECT_OPTIONS,
-                fieldName: 'theme',
+                fieldName: 'subject',
                 required: true,
             },
             {
