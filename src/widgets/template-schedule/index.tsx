@@ -86,7 +86,7 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                                 },
                                 {
                                     title: 'Сессия',
-                                    condition: !!schedule['2'],
+                                    condition: !!schedule['2'] && user?.user_status !== 'staff',
                                 },
                                 {
                                     title: 'Пересдачи',
