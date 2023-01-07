@@ -8,7 +8,7 @@ import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import { Suspense, useEffect } from 'react'
 import styled from 'styled-components'
-import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
+import { Confirm, Header, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import WhatsNew from '../../widgets/whats-new'
@@ -31,13 +31,15 @@ const ContentWrapper = styled.div`
         overflow-x: hidden;
         overflow-y: auto;
         width: 100%;
-        height: 100%;
+        height: calc(100% - var(--header-height));
+        margin-top: var(--header-height);
     }
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
         .page-content {
-            height: calc(100% - 60px);
+            height: calc(100% - var(--mobile-bottom-menu-height) - var(--header-height));
+            margin-bottom: var(--mobile-bottom-menu-height);
         }
     }
 `
@@ -102,7 +104,7 @@ const ContentLayout = () => {
             <Story />
             <LeftsideBar />
             <ContentWrapper>
-                {/* <Header /> */}
+                <Header />
                 <div className="page-content">
                     <Suspense fallback={null}>
                         <PrivateRouter />

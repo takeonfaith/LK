@@ -1,15 +1,18 @@
 import styled from 'styled-components'
 
 const HeaderWrapper = styled.header`
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    height: 45px;
+    height: var(--header-height);
     background: var(--theme);
     box-shadow: var(--header-box-shadow);
     z-index: 12;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 40px;
+    padding: 0 40px;
 
     & > .buttons {
         display: flex;
