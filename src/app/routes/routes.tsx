@@ -48,13 +48,16 @@ import {
     AccommodationCorrespondenceFormPage,
     ApplicationsPage,
     ProjectActivitiesPage,
+    MedicalCertificate,
 } from './other-routes/pages'
+import { BsFileMedical } from 'react-icons/bs'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 export const ACAD_PERFORMANCE_ROUTE = '/acad-performance'
 export const DORMITORY = '/dormitory'
+export const MEDICAL_CERTIFICATE = '/medical-certificate'
 
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
@@ -157,6 +160,16 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'GENERAL',
         show: false,
+    },
+    'medical-certificate': {
+        id: 'medical-certificate',
+        title: 'Загрузка медицинской справки',
+        icon: <BsFileMedical />,
+        path: MEDICAL_CERTIFICATE,
+        Component: MedicalCertificate,
+        color: 'blue',
+        isTemplate: false,
+        group: 'COMMUNICATION',
     },
 })
 

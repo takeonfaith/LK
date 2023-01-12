@@ -9,6 +9,8 @@ export const ClarificationOfPassportDataApplication = lazy(
 export const ApplicationForSocialScrollarship = lazy(
     () => import('@pages/applications/pages/trade-union-organization/social-scollarship'),
 )
+
+export const MedicalCertificate = lazy(() => import('@pages/medical-certificate'))
 export const ApplicationForCertificateOfAttendance = lazy(
     () => import('@pages/applications/pages/multifunctional-center/certificate-of-attendance'),
 )
