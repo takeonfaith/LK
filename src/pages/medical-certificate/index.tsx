@@ -1,6 +1,8 @@
 import { applicationsModel } from '@entities/applications'
+import { medicalCertificateModel } from '@entities/medical-certificate'
 import { globalAppSendForm } from '@pages/applications/lib'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import checkFormFields from '@shared/lib/check-form-fields'
 import { ApplicationFormCodes } from '@shared/models/application-form-codes'
 import { FormBlock, SubmitButton } from '@shared/ui/atoms'
 import InputArea from '@shared/ui/input-area'
@@ -28,6 +30,8 @@ const MedicalCertificate = () => {
     }, [dataUserApplication])
 
     useEffect(() => {
+        medicalCertificateModel.events.load()
+
         setKvdCert(
             getCertForm({
                 config: {
@@ -74,20 +78,20 @@ const MedicalCertificate = () => {
     }, [])
 
     return (
-        <BaseApplicationWrapper isDone={isDone}>
+        <BaseApplicationWrapper isDone={false}>
             <FormBlock>
-                {form && setForm && <InputArea {...form} setData={setForm as any} />}
-                {kvdCert && setKvdCert && <InputArea {...kvdCert} setData={setKvdCert as any} />}
+                {form && setForm && <InputArea {...form} setData={setForm} />}
+                {kvdCert && setKvdCert && <InputArea {...kvdCert} setData={setKvdCert} />}
                 {fluorographyCert && setFluorographyCert && (
-                    <InputArea {...fluorographyCert} setData={setFluorographyCert as any} />
+                    <InputArea {...fluorographyCert} setData={setFluorographyCert} />
                 )}
-                {vichRwCert && setVichRwCert && <InputArea {...vichRwCert} setData={setVichRwCert as any} />}
-                {graftCert && setGraftCert && <InputArea {...graftCert} setData={setGraftCert as any} />}
+                {vichRwCert && setVichRwCert && <InputArea {...vichRwCert} setData={setVichRwCert} />}
+                {graftCert && setGraftCert && <InputArea {...graftCert} setData={setGraftCert} />}
                 <SubmitButton
                     text={!isDone ? 'Отправить' : 'Отправлено'}
                     action={() => {
                         globalAppSendForm(
-                            'postRequestMedicalCertificate' as any,
+                            ApplicationFormCodes.MEDICAL_CERT,
                             [form, kvdCert, fluorographyCert, vichRwCert, graftCert] as IInputArea[],
                             setLoading,
                             setCompleted,
@@ -99,6 +103,18 @@ const MedicalCertificate = () => {
                     repeatable={false}
                     buttonSuccessText="Отправлено"
                     isDone={isDone}
+                    isActive={
+                        !!form &&
+                        !!fluorographyCert &&
+                        !!vichRwCert &&
+                        !!graftCert &&
+                        !!kvdCert &&
+                        checkFormFields(form) &&
+                        checkFormFields(fluorographyCert) &&
+                        checkFormFields(vichRwCert) &&
+                        checkFormFields(graftCert) &&
+                        checkFormFields(kvdCert)
+                    }
                     popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                     popUpSuccessMessage="Данные формы успешно отправлены"
                 />

@@ -30,6 +30,7 @@ export enum ApplicationFormCodes {
     CRS_ACADEMVAC = 'crs_academvac',
     CRS_EXPULSION = 'crs_expulsion',
     CRS_ATTESTAT = 'crs_attestat',
+    MEDICAL_CERT = 'postRequestMedicalCertificate',
     WORK_TRANSFER = '',
     EXTRA_HOLIDAY_COLL = '',
     HOLIDAY_PLANNING = '',
