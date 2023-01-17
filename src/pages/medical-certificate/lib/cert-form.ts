@@ -1,3 +1,4 @@
+import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 import { IInputArea } from '@shared/ui/input-area/model'
 
 // add data
@@ -21,6 +22,8 @@ export const getCertForm = ({ config }: Args): IInputArea => {
                 editable: true,
                 fieldName: config.issueDateFieldName,
                 required: true,
+                minValueInput: getDelayInDays(-30 * 11),
+                maxValueInput: getDelayInDays(0),
             },
             {
                 title: 'Организация, выдавшая справку',

@@ -2,15 +2,23 @@ import { UserApplication } from '@shared/api/model'
 import { IInputArea } from '@shared/ui/input-area/model'
 
 const dormLocations = [
-    { id: 0, title: 'ул. Михалковская, д. 7, корп. 3' },
-    { id: 1, title: 'ул. Малая Семеновская, д. 12' },
+    { id: 0, title: 'ул. Малая Семеновская, д. 12' },
+    { id: 1, title: 'г. Москва, ул. 7-я Парковая, д. 9/26' },
+    { id: 2, title: 'г. Москва, ул. 1-я Дубровская, д. 16А, стр. 2' },
+    { id: 3, title: 'г. Москва, ул. 800-летия Москвы, д. 28, к.' },
+    { id: 4, title: 'ул. Михалковская, д. 7, корп. 3' },
+    { id: 5, title: 'г. Москва, ул. Бориса Галушкина, д. 9' },
+    { id: 6, title: 'г. Москва, ул. Павла Корчагина, д. 20А, к. 3' },
+    { id: 7, title: 'г. Москва, Рижский проезд, д. 15, к. 2' },
+    { id: 8, title: 'г. Москва, Рижский проезд, д. 15, к. 1' },
+    { id: 9, title: 'г. Москва, 1-й Балтийский переулок, д. 6/21, к. 3' },
 ]
 
 export const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { phone, email } = dataUserApplication
 
     return {
-        title: 'Загрузка медицинских справок',
+        title: 'Предоставление медицинских справок',
         data: [
             {
                 title: 'ФИО',

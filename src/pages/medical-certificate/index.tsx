@@ -5,6 +5,7 @@ import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrap
 import checkFormFields from '@shared/lib/check-form-fields'
 import { ApplicationFormCodes } from '@shared/models/application-form-codes'
 import { FormBlock, SubmitButton } from '@shared/ui/atoms'
+import Checkbox from '@shared/ui/atoms/checkbox'
 import InputArea from '@shared/ui/input-area'
 import { IInputArea } from '@shared/ui/input-area/model'
 import React, { useEffect, useState } from 'react'
@@ -16,6 +17,8 @@ const MedicalCertificate = () => {
     const [kvdCert, setKvdCert] = useState<IInputArea | null>(null)
     const [fluorographyCert, setFluorographyCert] = useState<IInputArea | null>(null)
     const [vichRwCert, setVichRwCert] = useState<IInputArea | null>(null)
+    const [confirmed, setConfirmed] = useState<boolean>(false)
+
     const [graftCert, setGraftCert] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -35,7 +38,7 @@ const MedicalCertificate = () => {
         setKvdCert(
             getCertForm({
                 config: {
-                    title: 'Справка из кожно-венерологического диспансера (КВД)',
+                    title: 'Справка из кожно-венерологического диспансера',
                     issueDateFieldName: 'kvd_date_of_issue',
                     organizationFieldName: 'kvd_organization',
                     docsFieldName: 'kvd_docs',
@@ -57,7 +60,7 @@ const MedicalCertificate = () => {
         setVichRwCert(
             getCertForm({
                 config: {
-                    title: 'ВИЧ, сифилиc',
+                    title: 'Результаты лабораторного исследования на ВИЧ, RW',
                     issueDateFieldName: 'vichrw_date_of_issue',
                     organizationFieldName: 'vichrw_organization',
                     docsFieldName: 'vichrw_docs',
@@ -68,7 +71,7 @@ const MedicalCertificate = () => {
         setGraftCert(
             getCertForm({
                 config: {
-                    title: 'Сертификат о прививках',
+                    title: 'Сертификат о профилактических прививках',
                     issueDateFieldName: 'graft_date_of_issue',
                     organizationFieldName: 'graft_organization',
                     docsFieldName: 'graft_docs',
@@ -87,6 +90,11 @@ const MedicalCertificate = () => {
                 )}
                 {vichRwCert && setVichRwCert && <InputArea {...vichRwCert} setData={setVichRwCert} />}
                 {graftCert && setGraftCert && <InputArea {...graftCert} setData={setGraftCert} />}
+                <Checkbox
+                    checked={confirmed}
+                    setChecked={setConfirmed}
+                    text={'Я подтверждаю корректность указанных данных'}
+                />
                 <SubmitButton
                     text={!isDone ? 'Отправить' : 'Отправлено'}
                     action={() => {
@@ -104,6 +112,7 @@ const MedicalCertificate = () => {
                     buttonSuccessText="Отправлено"
                     isDone={isDone}
                     isActive={
+                        !!confirmed &&
                         !!form &&
                         !!fluorographyCert &&
                         !!vichRwCert &&

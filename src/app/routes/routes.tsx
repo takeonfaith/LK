@@ -163,7 +163,7 @@ export const privateRoutes: () => IRoutes = () => ({
     },
     'medical-certificate': {
         id: 'medical-certificate',
-        title: 'Загрузка медицинской справки',
+        title: 'Предоставление медицинских справок',
         icon: <BsFileMedical />,
         path: MEDICAL_CERTIFICATE,
         Component: MedicalCertificate,
