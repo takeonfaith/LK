@@ -136,6 +136,7 @@ const InputArea = ({
                             setFiles={(files: File[]) => handleLoadFiles(files)}
                             maxFileSizeInBytes={0}
                             maxFiles={documents.maxFiles}
+                            allowedTypes={documents.allowedTypes}
                             isActive={
                                 documents.checkboxCondition
                                     ? documents.checkboxCondition === 'straight'

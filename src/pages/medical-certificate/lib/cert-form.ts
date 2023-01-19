@@ -34,6 +34,12 @@ export const getCertForm = ({ config }: Args): IInputArea => {
                 required: true,
             },
         ],
-        documents: { files: [], fieldName: config.docsFieldName, required: true, maxFiles: 1 },
+        documents: {
+            files: [],
+            fieldName: config.docsFieldName,
+            required: true,
+            maxFiles: 1,
+            allowedTypes: ['application/pdf'],
+        },
     }
 }
