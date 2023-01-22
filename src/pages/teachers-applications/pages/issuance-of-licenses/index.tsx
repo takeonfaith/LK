@@ -4,14 +4,7 @@ import getForm from './lib/get-form'
 import { teacherStatementModel } from '@entities/teachers-statement'
 
 const IssuanceOfLicensesPage = () => {
-    return (
-        <TemplateFormPage
-            model={teacherStatementModel}
-            getForm={getForm}
-            goBack="Назад к цифровым сервисам"
-            isSpecialField={true}
-        />
-    )
+    return <TemplateFormPage model={teacherStatementModel} getForm={getForm} isSpecialField={true} />
 }
 
 export default IssuanceOfLicensesPage

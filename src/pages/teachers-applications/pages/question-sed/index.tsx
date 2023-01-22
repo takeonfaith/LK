@@ -4,7 +4,7 @@ import getForm from './lib/get-form'
 import { teacherStatementModel } from '@entities/teachers-statement'
 
 const QuestionSedPage = () => {
-    return <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к цифровым сервисам" />
+    return <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
 }
 
 export default QuestionSedPage

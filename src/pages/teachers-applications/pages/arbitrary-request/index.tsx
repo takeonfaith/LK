@@ -6,12 +6,7 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 const ArbitraryRequestPage = () => {
     return (
-        <TemplateFormPage
-            model={teacherStatementModel}
-            getForm={getForm}
-            goBack="Назад к цифровым сервисам"
-            formId={ApplicationFormCodes.FREE_REQUEST}
-        />
+        <TemplateFormPage model={teacherStatementModel} getForm={getForm} formId={ApplicationFormCodes.FREE_REQUEST} />
     )
 }
 

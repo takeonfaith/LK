@@ -1,13 +1,10 @@
-import { Button, FormBlock, SubmitButton } from '@ui/atoms'
+import { FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import getForm from './lib/get-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { useHistory } from 'react-router'
-import { FiChevronLeft } from 'react-icons/fi'
-import { APPLICATIONS_ROUTE } from '@routes'
 import getFamily from './lib/get-family'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
@@ -25,7 +22,6 @@ const FamilyRoomPage = () => {
     const [family, setFamily] = useState<IInputArea | null>(null)
     const [additionally, setAdditionally] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
-    const history = useHistory()
 
     useEffect(() => {
         if (!!dataUserApplication) {
@@ -39,13 +35,6 @@ const FamilyRoomPage = () => {
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && !!setForm && !!family && !!additionally && (
                 <FormBlock>
-                    <Button
-                        text="Назад к цифровым сервисам"
-                        icon={<FiChevronLeft />}
-                        onClick={() => history.push(APPLICATIONS_ROUTE)}
-                        background="transparent"
-                        textColor="var(--blue)"
-                    />
                     <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                     {family && <InputArea {...family} collapsed={isDone} setData={setFamily as LoadedState} />}
                     {additionally && (

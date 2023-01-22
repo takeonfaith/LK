@@ -4,7 +4,7 @@ import getForm from './lib/get-form'
 import React from 'react'
 
 const CertificateFromPlaceOfWorkPage = () => {
-    return <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к цифровым сервисам" />
+    return <TemplateFormPage model={teacherStatementModel} getForm={getForm} />
 }
 
 export default CertificateFromPlaceOfWorkPage
