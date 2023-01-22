@@ -26,6 +26,7 @@ const HeaderContextMenuWrapper = styled.div`
         color: var(--text);
 
         .avatar-and-name {
+            width: 100%;
             padding: 7px;
             display: flex;
             align-items: center;
