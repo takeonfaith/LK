@@ -19,7 +19,7 @@ const ElementsControlNotification = styled.div`
 `
 
 interface Props {
-    title: string
+    title?: string
     type: 'notifications' | 'docs'
 }
 
@@ -55,9 +55,11 @@ const NotificationsPage = ({ title, type }: Props) => {
         >
             <CenterPage padding="0 0 10px 0">
                 <Block maxWidth={'725px'} orientation="vertical" gap="10px" height="fit-content" noAppearanceInMobile>
-                    <Title size={2} align="left">
-                        {title}
-                    </Title>
+                    {title && (
+                        <Title size={2} align="left">
+                            {title}
+                        </Title>
+                    )}
                     <ElementsControlNotification>
                         <Input
                             value={searchValue}
