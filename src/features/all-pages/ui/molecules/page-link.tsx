@@ -31,9 +31,9 @@ export type PageLinkProps = IRoute & {
 }
 
 const PageLink = (props: PageLinkProps) => {
-    const { title, path, orientation = 'vertical', restricted = false, mode = 'use' } = props
+    const { title, shortTitle, path, orientation = 'vertical', restricted = false, mode = 'use' } = props
     const maxWordLength = restricted ? 20 : 50
-    const linkWidth = title.length > 23 && !restricted ? 2 : 1
+    const linkWidth = (shortTitle ?? title).length > 23 && !restricted ? 2 : 1
 
     if (mode === 'add')
         return (

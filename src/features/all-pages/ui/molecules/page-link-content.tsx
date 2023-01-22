@@ -117,6 +117,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
         notifications,
         maxWordLength,
         title,
+        shortTitle,
         isNew,
         icon,
         mode,
@@ -168,7 +169,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
             </Notification>
             <div className="outside">
                 <Icon color={color.length ? color : 'blue'}>{icon ?? <FiPlus />}</Icon>
-                <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLength)}</b>
+                <b>{getShortStirng(getHyphenatedTitle(shortTitle ?? title, maxFirstWordLength), maxWordLength)}</b>
                 {notifications && (
                     <span className="notifications-title">
                         {notifications}{' '}
