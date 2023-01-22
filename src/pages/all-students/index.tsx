@@ -49,7 +49,6 @@ const AllStudentsPage = () => {
                         noAppearanceInMobile
                     >
                         <ListOfPeople
-                            title="Студенты"
                             searchPlaceholder="Поиск студентов"
                             paginationList={paginationList}
                             filters={user?.user_status === 'stud' ? filter : undefined}

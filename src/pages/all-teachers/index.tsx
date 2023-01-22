@@ -46,7 +46,6 @@ const AllTeachersPage = () => {
                         noAppearanceInMobile
                     >
                         <ListOfPeople
-                            title="Сотрудники"
                             searchPlaceholder="Поиск сотрудников"
                             paginationList={paginationList}
                             filters={filters}

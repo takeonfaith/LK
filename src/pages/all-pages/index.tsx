@@ -5,7 +5,6 @@ import getGroupPages, { routesOrder } from '@features/all-pages/lib/get-group-pa
 import search from '@features/all-pages/lib/search'
 import LinksList from '@features/home/ui/organisms/links-list'
 import { LocalSearch } from '@ui/molecules'
-import { Title } from '@ui/title'
 import { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import React from 'react'
@@ -32,9 +31,9 @@ const AllPages = () => {
 
     return (
         <AllPagesWrapper>
-            <Title size={2} align="left" width="100%" bottomGap>
-                Все разделы
-                {/* <List direction="horizontal" verticalAlign="center" width="fit-content" height="40px">
+            {/*<Title size={2} align="left" width="100%" bottomGap>*/}
+            {/*Все разделы*/}
+            {/* <List direction="horizontal" verticalAlign="center" width="fit-content" height="40px">
                     <Button icon={<FiGrid />} height="28px" width="45px" background={Colors.grey.transparentAF} />
                     <Button icon={<FiList />} height="28px" width="45px" background={Colors.grey.transparentAF} />
                     <Divider margin="0px 10px" direction="horizontal" />
@@ -46,7 +45,7 @@ const AllPages = () => {
                         background={Colors.grey.transparentAF}
                     />
                 </List> */}
-            </Title>
+            {/*</Title>*/}
             <LocalSearch
                 placeholder="Поиск разделов"
                 whereToSearch={allRoutes ?? {}}
