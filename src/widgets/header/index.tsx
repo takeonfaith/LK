@@ -56,7 +56,7 @@ const Header: React.FC<Props> = ({ currentPagePair: { currentPage, exactCurrentP
             ) : (
                 <Button icon={<FaChevronLeft />} onClick={onClickBackButton()} background="transparent" />
             ),
-        [exactCurrentPage],
+        [exactCurrentPage, historyStack, onClickBackButton],
     )
 
     return (
