@@ -118,7 +118,7 @@ const ContentLayout = () => {
             {/* <GreetingsScreen /> */}
             <Story />
             <LeftsideBar />
-            <ContentWrapper withHeader={!(exactCurrentPage ?? currentPage).withoutHeader}>
+            <ContentWrapper withHeader={!(exactCurrentPage ?? currentPage)?.withoutHeader}>
                 <Header currentPagePair={{ currentPage, exactCurrentPage }} />
                 <div className="page-content">
                     <Suspense fallback={null}>

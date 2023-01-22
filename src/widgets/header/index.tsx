@@ -35,7 +35,7 @@ const Header: React.FC<Props> = ({ currentPagePair: { currentPage, exactCurrentP
                 ? exactCurrentPage.isSubPage
                     ? exactCurrentPage.subPageHeaderTitle
                     : exactCurrentPage.title
-                : currentPage.title,
+                : currentPage?.title,
         [currentPage, exactCurrentPage],
     )
 
@@ -60,7 +60,7 @@ const Header: React.FC<Props> = ({ currentPagePair: { currentPage, exactCurrentP
     )
 
     return (
-        <HeaderWrapper hidden={(exactCurrentPage ?? currentPage).withoutHeader}>
+        <HeaderWrapper hidden={(exactCurrentPage ?? currentPage)?.withoutHeader}>
             <div className="header-button-and-title">
                 {backButton}
 
