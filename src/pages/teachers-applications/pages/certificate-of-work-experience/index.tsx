@@ -2,9 +2,18 @@ import { teacherStatementModel } from '@entities/teachers-statement'
 import TemplateFormPage from 'widgets/template-form-page'
 import getForm from './lib/get-form'
 import React from 'react'
+import { ApplicationTeachersFormCodes } from '@shared/models/application-form-codes'
 
 const CertificateOfWorkExperiencePage = () => {
-    return <TemplateFormPage model={teacherStatementModel} getForm={getForm} goBack="Назад к цифровым сервисам" />
+    return (
+        <TemplateFormPage
+            model={teacherStatementModel}
+            getForm={getForm}
+            goBack="Назад к цифровым сервисам"
+            isSpecialField={true}
+            formId={ApplicationTeachersFormCodes.CERTIFICATE_OF_WORK_EXPERIENCE}
+        />
+    )
 }
 
 export default CertificateOfWorkExperiencePage

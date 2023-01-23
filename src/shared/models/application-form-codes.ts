@@ -38,3 +38,27 @@ export enum ApplicationFormCodes {
     HOLIDAY_POSTPONED = '',
     PART_TIME_EMPLOYMENT = '',
 }
+
+export enum ApplicationTeachersFormCodes {
+    CONTACT_INFO_ACTUALIZATION = 'contact-info-actualization',
+    DATA_VERIFICATION_ROUTE = 'data-verification',
+    ISSUANCE_OF_LICENSES = 'issuance-of-licenses',
+    GETTING_COMPUTER_EQUIPMENT = 'getting-computer-equipment',
+    CONNECTING_COMPUTER = 'connecting-computer',
+    PRINTER_MAINTENANCE = 'printer-maintenance',
+    QUESTION_SED = 'question-sed',
+    QUESTION_PERSONAL_ACCOUNT = 'question-personal-account',
+    OTHER_IT_SERVICES = 'other-it-services',
+    CERTIFICATE_FROM_PLACE_OF_WORK = 'certificate-from-the-place-of-work',
+    VISA_CERTIFICATE = 'visa-certificate',
+    CERTIFICATE_OF_WORK_EXPERIENCE = 'certificate-of-work-experience',
+    NUMBER_OF_UNUSED_VACATION_DAYS = 'number-of-unused-vacation-days',
+    COPY_OF_EMPLOYMENT_RECORD = 'copy-of-the-employment-record',
+    COPIES_OF_DOCUMENTS_FROM_PERSONAL_FILE = 'copies-of-documents-from-the-personal-file',
+    WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY = 'work-on-the-terms-of-external-concurrency',
+    CERTIFICATE_TIME_PARENTAL_LEAVE = 'certificate-time-parental-leave',
+    COURIER = 'courier',
+    PERSONA_INCOME_TAX_REFERENCE = 'persona-income-tax-reference',
+    PAYMENT_OF_CHILD_BIRTH_ALLOWANCE = 'payment-of-child-birth-allowance',
+    PAYMENT_FOR_CHILD_CARE = 'payment-for-child-care',
+}
