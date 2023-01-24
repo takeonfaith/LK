@@ -124,7 +124,7 @@ const getSectionLinks = (): Section[] => {
         },
         {
             title: 'Управление студенческим городком' + additionalHeaderClosedService,
-            disabled: true,
+            disabled: isProduction,
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,
