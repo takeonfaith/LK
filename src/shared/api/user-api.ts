@@ -1,4 +1,5 @@
 import { $api } from '@api/config'
+import axios from 'axios'
 import { ADName, User, UserToken } from './model'
 
 export type LoginData = { login: string; password: string }
@@ -13,4 +14,10 @@ export const getUser = (token: string) => {
 
 export const getADName = (data: ADName) => {
     return $api.get<any>(`?getADName&fio=${data.fio}&pn=${data.pn}`)
+}
+
+export const refreshToken = () => {
+    return axios.post<void, { access_token: string; refresh_token: string }>(
+        'https://api.mospolytech.ru/frontendtokenservice/Token/Refresh',
+    )
 }

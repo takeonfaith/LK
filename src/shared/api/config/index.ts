@@ -1,7 +1,8 @@
 //import { getUserToken } from '@api/user-api'
 import { OLD_LK_URL } from '@consts'
-import { getJwtToken } from '@entities/user/lib/jwt-token'
-import axios, { AxiosError } from 'axios'
+import { getJwtToken, setJwtToken } from '@entities/user/lib/jwt-token'
+import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import { refreshToken } from '../user-api'
 
 export const API_BASE_URL = `${OLD_LK_URL}/lk_api.php`
 export const API_HR_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/`
@@ -13,22 +14,37 @@ export const $workerApi = axios.create({ baseURL: API_WORKER_URL, timeout: 30000
 export const $workerStatusesApi = axios.create({ baseURL: API_WORKER_STATUSES_URL })
 export const $hrApi = axios.create({ baseURL: API_HR_URL })
 
-$workerApi.interceptors.request.use((config) => {
+const addAuthHeaderToRequests = (config: AxiosRequestConfig) => {
     if (!config.headers) config.headers = {}
     config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
     return config
-})
-$workerStatusesApi.interceptors.request.use((config) => {
-    if (!config.headers) config.headers = {}
-    config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
-    return config
-})
+}
 
-$hrApi.interceptors.request.use((config) => {
-    if (!config.headers) config.headers = {}
-    config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
-    return config
-})
+// const addTokenRefreshToResponses = (config: unknown) => {}
+
+$workerApi.interceptors.request.use(addAuthHeaderToRequests)
+$workerStatusesApi.interceptors.request.use(addAuthHeaderToRequests)
+
+$hrApi.interceptors.request.use(addAuthHeaderToRequests)
+
+$workerApi.interceptors.response.use(
+    (response) => {
+        return response
+    },
+    async function (error) {
+        const originalRequest = error.config
+        if (error.response.status === 403 && !originalRequest._retry) {
+            originalRequest._retry = true
+            const { access_token, refresh_token } = await refreshToken()
+
+            console.log({ access_token, refresh_token })
+
+            setJwtToken(refresh_token)
+            return $workerApi(originalRequest)
+        }
+        return Promise.reject(error)
+    },
+)
 
 export function isAxiosError(error: Error): error is AxiosError {
     return (error as AxiosError).isAxiosError
