@@ -2,16 +2,12 @@
 import { OLD_LK_URL } from '@consts'
 import { getJwtToken, setJwtToken } from '@entities/user/lib/jwt-token'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
-import { refreshToken } from '../user-api'
+import { refreshAccessToken } from '../user-api'
 
 export const API_BASE_URL = `${OLD_LK_URL}/lk_api.php`
-export const API_HR_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/`
-export const API_WORKER_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/Dismissal.GetAllHistory`
-export const API_WORKER_STATUSES_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/Dismissal.AllHistory`
+export const API_HR_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders`
 
 export const $api = axios.create({ baseURL: API_BASE_URL, withCredentials: true })
-export const $workerApi = axios.create({ baseURL: API_WORKER_URL, timeout: 30000 })
-export const $workerStatusesApi = axios.create({ baseURL: API_WORKER_STATUSES_URL })
 export const $hrApi = axios.create({ baseURL: API_HR_URL })
 
 const addAuthHeaderToRequests = (config: AxiosRequestConfig) => {
@@ -20,27 +16,20 @@ const addAuthHeaderToRequests = (config: AxiosRequestConfig) => {
     return config
 }
 
-// const addTokenRefreshToResponses = (config: unknown) => {}
-
-$workerApi.interceptors.request.use(addAuthHeaderToRequests)
-$workerStatusesApi.interceptors.request.use(addAuthHeaderToRequests)
-
 $hrApi.interceptors.request.use(addAuthHeaderToRequests)
 
-$workerApi.interceptors.response.use(
+$hrApi.interceptors.response.use(
     (response) => {
         return response
     },
     async function (error) {
         const originalRequest = error.config
-        if (error.response.status === 403 && !originalRequest._retry) {
+        if (error.request.status === 403 && !originalRequest._retry) {
             originalRequest._retry = true
-            const { access_token, refresh_token } = await refreshToken()
+            const { access_token } = await refreshAccessToken()
 
-            console.log({ access_token, refresh_token })
-
-            setJwtToken(refresh_token)
-            return $workerApi(originalRequest)
+            setJwtToken(access_token)
+            return $hrApi(originalRequest)
         }
         return Promise.reject(error)
     },
