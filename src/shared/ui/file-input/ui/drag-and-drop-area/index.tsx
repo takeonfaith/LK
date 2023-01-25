@@ -55,7 +55,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, allowedTypes }: 
                 <span className="info-item">Макс. размер файла: 10 MB</span>
                 {maxFiles && <span className="info-item">Макс. файлов: {maxFiles}</span>}
                 <span className="info-item">
-                    Форматы: {!allowedTypes ? 'jpg, png, pdf' : allowedTypes.map((t) => t.split('/')[1]).join(', ƒ')}
+                    Форматы: {!allowedTypes ? 'jpg, png, pdf' : allowedTypes.map((t) => t.split('/')[1]).join(', ')}
                 </span>
             </div>
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
