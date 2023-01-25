@@ -10,6 +10,7 @@ export interface Application {
     statusDate: string
     structuralSubdivision: string
     notes: string
+    files_output?: ApplicationFileOutput
 }
 
 export interface Subdivision {
@@ -115,4 +116,9 @@ export interface WorkerApplication {
     isDismissal: boolean
     canBeRepeated: boolean
     dismissalApplications: dismissalApplications[]
+}
+
+export interface ApplicationFileOutput {
+    url: string
+    name: string
 }

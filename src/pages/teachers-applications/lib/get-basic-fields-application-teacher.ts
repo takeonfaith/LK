@@ -1,8 +1,9 @@
 import { UserApplication } from '@api/model'
 import { IInputAreaData } from '@ui/input-area/model'
+import { getFormattedSubDivisions } from '@features/applications/lib/get-subdivisions'
 
 const getBasicFieldsApplicationTeacher = (dataForm: UserApplication): IInputAreaData[] => {
-    const { surname, name, patronymic, email, phone } = dataForm
+    const { surname, name, patronymic, email, phone, subdivisions } = dataForm
     return [
         {
             title: 'ФИО',
@@ -15,10 +16,12 @@ const getBasicFieldsApplicationTeacher = (dataForm: UserApplication): IInputArea
         {
             title: 'Подразделение/должность',
             value: null,
-            fieldName: 'post',
+            fieldName: 'guid_worker',
             editable: true,
-            mask: true,
-            required: true,
+            width: '100',
+            required: !!subdivisions?.length,
+            type: 'select',
+            items: getFormattedSubDivisions(subdivisions),
         },
         {
             title: 'E-mail',

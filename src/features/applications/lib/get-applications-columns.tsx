@@ -2,6 +2,9 @@ import { ApplicationsConstants } from '@entities/applications/consts'
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
+import { ApplicationFileOutput } from '@api/model'
+import { Button } from '@ui/button'
+import { Colors } from '@consts'
 
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
@@ -41,7 +44,33 @@ const getApplicationsColumns = (): ColumnProps[] => {
         },
         { title: 'Структурное подразделение, адрес', priority: 'five', field: 'response_div', width: '360px' },
         { title: 'Примечание', field: 'comment', priority: 'five' },
+        {
+            title: 'Файлы',
+            align: 'center',
+            field: 'files_input',
+            render: (value) =>
+                !!value.length && (
+                    <Button
+                        onClick={() => downloadFiles(value)}
+                        text={'Скачать'}
+                        background="transparent"
+                        textColor={Colors.green.main}
+                        width={'100%'}
+                    />
+                ),
+        },
     ]
+}
+
+const downloadFiles = (links: ApplicationFileOutput[]) => {
+    links.map((item) => {
+        const a = document.createElement('a')
+        a.href = item.url
+        a.download = item.name
+        a.target = '_blank'
+        a.click()
+        a.remove()
+    })
 }
 
 export default getApplicationsColumns
