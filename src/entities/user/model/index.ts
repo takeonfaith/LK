@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 import { userApi } from '@api'
+import { ADName, User, UserToken } from '@api/model'
 import { LoginData } from '@api/user-api'
+import createFullName from '@features/home/lib/create-full-name'
+import axios from 'axios'
 import { createEffect, createEvent, createStore, forward } from 'effector'
 import { useStore } from 'effector-react/compat'
-import { ADName, User, UserToken } from '@api/model'
-import axios from 'axios'
 import clearAllStores from '../lib/clear-all-stores'
-import createFullName from '@features/home/lib/create-full-name'
 
 interface UserStore {
     currentUser: User | null
@@ -37,10 +37,11 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
 
         if (savePasswordInStorage()) {
             localStorage.setItem('token', JSON.stringify(tokenResponse.data))
-            localStorage.setItem('jwt', JSON.stringify(tokenResponse.data.jwt))
+            localStorage.setItem('jwt', tokenResponse.data.jwt)
+            localStorage.setItem('jwt_refresh', tokenResponse.data.jwt_refresh)
         } else {
             sessionStorage.setItem('token', JSON.stringify(tokenResponse.data))
-            sessionStorage.setItem('jwt', JSON.stringify(tokenResponse.data.jwt))
+            sessionStorage.setItem('jwt', tokenResponse.data.jwt)
         }
         return tokenResponse.data
     } catch (e) {

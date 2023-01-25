@@ -1,6 +1,6 @@
 //import { getUserToken } from '@api/user-api'
 import { OLD_LK_URL } from '@consts'
-import { getJwtToken, setJwtToken } from '@entities/user/lib/jwt-token'
+import { getJwtToken } from '@entities/user/lib/jwt-token'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import { refreshAccessToken } from '../user-api'
 
@@ -26,9 +26,13 @@ $hrApi.interceptors.response.use(
         const originalRequest = error.config
         if (error.request.status === 403 && !originalRequest._retry) {
             originalRequest._retry = true
-            const { access_token } = await refreshAccessToken()
+            const refreshToken = localStorage.getItem('jwt_refresh')
 
-            setJwtToken(access_token)
+            const { access_token, refresh_token } = await refreshAccessToken(refreshToken ?? '')
+
+            localStorage.setItem('jwt', access_token)
+            localStorage.setItem('jwt_refresh', refresh_token)
+
             return $hrApi(originalRequest)
         }
         return Promise.reject(error)
