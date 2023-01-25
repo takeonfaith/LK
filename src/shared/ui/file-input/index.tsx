@@ -10,6 +10,7 @@ export interface FileInputProps {
     setFiles: (args: any) => void
     isActive: boolean
     maxFiles?: number
+    allowedTypes?: string[]
 }
 
 const FileInput = (props: FileInputProps) => {

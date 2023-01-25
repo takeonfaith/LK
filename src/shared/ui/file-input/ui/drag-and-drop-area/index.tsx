@@ -6,7 +6,7 @@ import DragAndDropAreaWrapper from './style'
 
 type Props = FileInputProps
 
-const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
+const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, allowedTypes }: Props) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
 
@@ -14,7 +14,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
         const loadedFiles = e.target.files as FileList
 
         if (loadedFiles?.length) {
-            setFiles(loadFiles(loadedFiles, files, maxFiles))
+            setFiles(loadFiles(loadedFiles, files, maxFiles, allowedTypes))
         }
     }
 
@@ -28,7 +28,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
         const loadedFiles = e.dataTransfer.files
 
         if (loadedFiles.length) {
-            setFiles(loadFiles(loadedFiles, files, maxFiles))
+            setFiles(loadFiles(loadedFiles, files, maxFiles, allowedTypes))
         }
     }
 
@@ -54,7 +54,9 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
             <div className="info">
                 <span className="info-item">Макс. размер файла: 10 MB</span>
                 {maxFiles && <span className="info-item">Макс. файлов: {maxFiles}</span>}
-                <span className="info-item">Форматы: jpg, png, pdf</span>
+                <span className="info-item">
+                    Форматы: {!allowedTypes ? 'jpg, png, pdf' : allowedTypes.map((t) => t.split('/')[1]).join(', ')}
+                </span>
             </div>
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
             <div className="message">
