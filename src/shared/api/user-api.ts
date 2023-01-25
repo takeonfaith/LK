@@ -17,9 +17,9 @@ export const getADName = (data: ADName) => {
 }
 
 export const refreshAccessToken = async (refreshToken: string) => {
-    const { data } = await axios.post<{ access_token: string; refresh_token: string }>(
+    const { data } = await axios.post<{ accessToken: string; refreshToken: string }>(
         'https://api.mospolytech.ru/frontendtokenservice/Token/Refresh',
-        { refresh_token: refreshToken },
+        { refreshToken },
     )
 
     return data

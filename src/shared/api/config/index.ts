@@ -12,7 +12,7 @@ export const $hrApi = axios.create({ baseURL: API_HR_URL })
 
 const addAuthHeaderToRequests = (config: AxiosRequestConfig) => {
     if (!config.headers) config.headers = {}
-    config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
+    config.headers.Authorization = `Bearer ${getJwtToken()}`
     return config
 }
 
@@ -24,14 +24,14 @@ $hrApi.interceptors.response.use(
     },
     async function (error) {
         const originalRequest = error.config
-        if (error.request.status === 403 && !originalRequest._retry) {
+        if ((error.request.status === 403 || error.request.status === 401) && !originalRequest._retry) {
             originalRequest._retry = true
             const refreshToken = localStorage.getItem('jwt_refresh')
 
-            const { access_token, refresh_token } = await refreshAccessToken(refreshToken ?? '')
+            const { accessToken, refreshToken: newRefreshToken } = await refreshAccessToken(refreshToken ?? '')
 
-            localStorage.setItem('jwt', access_token)
-            localStorage.setItem('jwt_refresh', refresh_token)
+            localStorage.setItem('jwt', accessToken)
+            localStorage.setItem('jwt_refresh', newRefreshToken)
 
             return $hrApi(originalRequest)
         }

@@ -1,10 +1,9 @@
 import { applicationApi } from '@api'
 import { Application, UserApplication, WorkerApplication } from '@api/model'
-import { combine, createEvent, forward } from 'effector'
-import { useStore } from 'effector-react/compat'
-import { createEffect, createStore } from 'effector'
-import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/hr-applications'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import { combine, createEffect, createEvent, createStore, forward } from 'effector'
+import { useStore } from 'effector-react/compat'
 
 interface ApplicationsStore {
     listApplication: Application[] | null
