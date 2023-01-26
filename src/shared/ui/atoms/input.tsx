@@ -125,7 +125,7 @@ const Input = ({
     minWidth,
     placeholder = 'Введите сюда',
     type = 'text',
-    danger,
+    danger: initDanger,
     alertMessage,
     loading = false,
     isActive = true,
@@ -136,6 +136,7 @@ const Input = ({
     maxValue = undefined,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
+    const [danger, setDanger] = useState<boolean>(initDanger ?? false)
 
     useEffect(() => {
         setInputType(type)
@@ -231,6 +232,26 @@ const Input = ({
                             setValue(emailMask(e.target.value))
                         } else setValue(e.target.value)
                     } else setValue(e.target.value)
+
+                    if (type === 'date') {
+                        if (minValue || maxValue) {
+                            const parsedDate = new Date(e.target.value)
+
+                            let result = false
+                            if (minValue) {
+                                const parsedMinDate = new Date(minValue)
+
+                                result = parsedDate < parsedMinDate
+                            }
+                            if (maxValue && !result) {
+                                const parsedMaxDate = new Date(maxValue)
+
+                                result = parsedDate > parsedMaxDate
+                            }
+
+                            setDanger(result)
+                        }
+                    }
                 }}
                 required={required}
                 readOnly={!isActive}

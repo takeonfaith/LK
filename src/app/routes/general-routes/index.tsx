@@ -305,7 +305,7 @@ export const generalRoutes: IRoutes = {
         Component: AllTeachersPage,
         color: 'orange',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'COMMUNICATION',
         isNew: true,
     },
     // portfolio: {
@@ -347,7 +347,7 @@ export const generalRoutes: IRoutes = {
         Component: MedicalCertificate,
         color: 'blue',
         isTemplate: false,
-        group: 'COMMUNICATION',
+        group: 'GENERAL',
     },
 }
 
