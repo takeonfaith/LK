@@ -70,9 +70,11 @@ const PaymentList = ({ payments }: Props) => {
             <div className="all-payments">
                 <span>Поступившие платежи</span>
                 <span>
-                    {payments?.reduce((acc, curr) => {
-                        return acc + getCorrectNumberFormat(curr.value)
-                    }, 0)}{' '}
+                    {payments
+                        ?.reduce((acc, curr) => {
+                            return acc + getCorrectNumberFormat(curr.value)
+                        }, 0)
+                        .toFixed(1)}{' '}
                     руб.
                 </span>
             </div>

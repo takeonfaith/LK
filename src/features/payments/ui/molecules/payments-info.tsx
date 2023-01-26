@@ -1,8 +1,9 @@
+import React from 'react'
 import { Colors } from '@consts'
 import { Button, LinkButton } from '@ui/atoms'
 import List from '@ui/list'
 import localizeDate from '@utils/localize-date'
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import styled from 'styled-components'
 import { SliderPage, useModal } from 'widgets'
 import { MoneyNeedToPay } from '../atoms'
@@ -24,7 +25,6 @@ const PaymentsInfoWrapper = styled.div<{ paymentDifference: number }>`
 `
 
 interface Props {
-    monthly: number
     endDate?: string
     startDate?: string
     sum: number

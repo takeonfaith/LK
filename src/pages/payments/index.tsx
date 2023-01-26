@@ -1,6 +1,6 @@
+import React from 'react'
 import { paymentsModel } from '@entities/payments'
 import { Wrapper } from '@ui/atoms'
-import React from 'react'
 import { SliderPage } from 'widgets'
 import { DormitoryPayments, EducationPayments } from './pages'
 
