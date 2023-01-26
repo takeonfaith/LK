@@ -8,8 +8,7 @@ import {
     PaymentsInfo,
 } from '@features/payments'
 import getDormitoryPaygraphColumns from '@pages/payments/lib/get-dormitory-paygraph-columns'
-import { Divider, Message, Title } from '@ui/atoms'
-import { LinkButton } from '@ui/atoms'
+import { Divider, LinkButton, Message, Title } from '@ui/atoms'
 import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
@@ -45,7 +44,6 @@ const DormitoryPayments = () => {
                                     <PaymentList payments={dormitory?.payments ?? []} />
                                     <PaymentsInfo
                                         balanceCurrDate={getCorrectNumberFormat(dormitory?.balance_currdate ?? '0')}
-                                        monthly={650}
                                         bill={dormitory?.bill}
                                         startDate={dormitory?.startDate}
                                         endDate={dormitory?.endDatePlan}
