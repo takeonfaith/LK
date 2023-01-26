@@ -93,7 +93,7 @@ const MedicalCertificate = () => {
                 <Checkbox
                     checked={confirmed}
                     setChecked={setConfirmed}
-                    text={'Я подтверждаю корректность указанных данных'}
+                    text={'Я подтверждаю подлинность предоставленных документов'}
                 />
                 <SubmitButton
                     text={!isDone ? 'Отправить' : 'Отправлено'}

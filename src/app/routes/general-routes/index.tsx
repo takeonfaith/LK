@@ -1,5 +1,6 @@
-import React, { LazyExoticComponent } from 'react'
+import React from 'react'
 import { IColors } from '@consts'
+import { LazyExoticComponent } from 'react'
 
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
@@ -14,37 +15,39 @@ import {
     BiUserCircle,
 } from 'react-icons/bi'
 
+import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 import {
-    ForgotPasswordPage,
-    FeedbackPage,
+    Account,
+    AlertsPage,
+    AllPages,
+    AllStudentsPage,
+    AllTeachersPage,
+    Appearance,
     CantAccessPage,
-    Home,
-    MemoFreshmenPage,
-    MemoTeacherPage,
     CustomizeMenu,
-    ProfilePage,
-    // ChatPage,
-    SchedulePage,
-    PaymentsPage,
+    DecreisDirectivesPage,
     ElectronicInteractionAgreementPage,
+    FeedbackPage,
+    ForgotPasswordPage,
+    GetYourLoginPage,
+    Home,
+    HomeSettings,
     // AllStudentsPage,
     // AllTeachersPage,
     InstructionsPage,
-    TeachersSchedule,
-    Appearance,
-    Account,
+    MedicalCertificate,
+    MemoFreshmenPage,
+    MemoTeacherPage,
+    PaymentsPage,
+    ProfilePage,
+    // ChatPage,
+    SchedulePage,
     Security,
-    HomeSettings,
-    AllPages,
     SettingsPage,
-    GetYourLoginPage,
-    AllStudentsPage,
-    AllTeachersPage,
-    DecreisDirectivesPage,
-    AlertsPage,
+    TeachersSchedule,
 } from './pages'
-import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 
+import { BsFileMedical } from 'react-icons/bs'
 import {
     FiBell,
     FiClipboard,
@@ -62,6 +65,7 @@ import { DOCLIST_ROUTE } from '../teacher-routes'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
+export const MEDICAL_CERTIFICATE = '/medical-certificate'
 
 export const ALL_ROUTE = '/all'
 export const HOME_ROUTE = '/home'
@@ -334,6 +338,16 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'GENERAL',
         show: false,
+    },
+    'medical-certificate': {
+        id: 'medical-certificate',
+        title: 'Предоставление медицинских справок',
+        icon: <BsFileMedical />,
+        path: MEDICAL_CERTIFICATE,
+        Component: MedicalCertificate,
+        color: 'blue',
+        isTemplate: false,
+        group: 'COMMUNICATION',
     },
 }
 
