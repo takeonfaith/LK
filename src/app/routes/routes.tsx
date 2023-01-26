@@ -1,6 +1,11 @@
 import React from 'react'
-import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
 import { isProduction } from '@consts'
+import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
+import PageIsNotReady from '@pages/page-is-not-ready'
+import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
+import { FaRegLightbulb } from 'react-icons/fa'
+import { FiBriefcase, FiFileText } from 'react-icons/fi'
+import { MdOutlineBedroomChild } from 'react-icons/md'
 import {
     generalHiddenRoutes,
     generalRoutes,
@@ -8,56 +13,48 @@ import {
     PROJECT_ACTIVITIES_ROUTE,
     USEFUL_INFO_ROUTE,
 } from './general-routes'
-import PageIsNotReady from '@pages/page-is-not-ready'
-import { FiBriefcase, FiFileText } from 'react-icons/fi'
-import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
-import { MdOutlineBedroomChild } from 'react-icons/md'
-import { ArbitraryRequestPage, HelpfulInformation } from './teacher-routes/pages'
-import { FaRegLightbulb } from 'react-icons/fa'
 import {
     AcademicLeaveAccommodationPage,
     AcadPerformance,
+    AccommodationCorrespondenceFormPage,
+    ApplicationExtensionAttestation,
     ApplicationForCertificateOfAttendance,
+    ApplicationForFinancialAssistance,
     ApplicationForSocialScrollarship,
     ApplicationForSuperiorRoom,
+    ApplicationHolidaysAfterTraining,
+    ApplicationIndependentlyDeduction,
     ApplicationPaperCall,
+    ApplicationProvisionAcademicLeave,
     ApplicationSocialAgencies,
+    ApplicationsPage,
+    ChangingPersonalData,
     ClarificationOfPassportDataApplication,
     DormitoryPage,
-    RegularAccommodationPage,
-    PreferentialAccommodationPage,
     FamilyRoomPage,
-    TerminationOfEmploymentContractPage,
+    FinancialSupport,
+    IncreasedStateAcademicScholarship,
+    MilitaryRegistrationCard,
+    MilitaryRegistrationDocuments,
+    PaymentRecipient,
+    PreferentialAccommodationPage,
+    ProjectActivitiesPage,
+    RegularAccommodationPage,
     RelocationInsideHostelPage,
     RelocationToAnotherHostelPage,
-    PaymentRecipient,
     RestoringTheMagneticPass,
-    MilitaryRegistrationDocuments,
     RetakeForDiploma,
-    IncreasedStateAcademicScholarship,
-    FinancialSupport,
-    ApplicationForFinancialAssistance,
-    ChangingPersonalData,
-    StudentStatus,
     StateAccreditation,
-    ApplicationHolidaysAfterTraining,
-    ApplicationProvisionAcademicLeave,
-    ApplicationIndependentlyDeduction,
-    ApplicationExtensionAttestation,
-    MilitaryRegistrationCard,
-    AccommodationCorrespondenceFormPage,
-    ApplicationsPage,
-    ProjectActivitiesPage,
-    MedicalCertificate,
+    StudentStatus,
+    TerminationOfEmploymentContractPage,
 } from './other-routes/pages'
-import { BsFileMedical } from 'react-icons/bs'
+import { ArbitraryRequestPage, HelpfulInformation } from './teacher-routes/pages'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
 export const APPLICATION_FOR_SUPERIOR_ROOM_ROUTE = '/application-for-superior-room'
 export const ACAD_PERFORMANCE_ROUTE = '/acad-performance'
 export const DORMITORY = '/dormitory'
-export const MEDICAL_CERTIFICATE = '/medical-certificate'
 
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
@@ -160,16 +157,6 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'GENERAL',
         show: false,
-    },
-    'medical-certificate': {
-        id: 'medical-certificate',
-        title: 'Предоставление медицинских справок',
-        icon: <BsFileMedical />,
-        path: MEDICAL_CERTIFICATE,
-        Component: MedicalCertificate,
-        color: 'blue',
-        isTemplate: false,
-        group: 'COMMUNICATION',
     },
 })
 
