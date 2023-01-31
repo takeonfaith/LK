@@ -28,7 +28,14 @@ const getDisability = (): IInputArea => {
                 required: true,
             },
         ],
-        documents: { files: [], required: true, checkboxCondition: 'reverse', fieldName: 'invalidFiles', maxFiles: 1 },
+        documents: {
+            files: [],
+            required: true,
+            checkboxCondition: 'reverse',
+            fieldName: 'invalidFiles',
+            maxFiles: 1,
+            allowedTypes: ['application/pdf'],
+        },
     }
 }
 
