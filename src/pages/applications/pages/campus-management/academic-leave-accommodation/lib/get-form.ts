@@ -90,7 +90,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             title: 'Нет подтверждающего документа',
             required: true,
         },
-        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: true },
+        documents: { files: [], fieldName: 'docs', required: true, maxFiles: 1, allowedTypes: ['application/pdf'] },
     }
 }
 

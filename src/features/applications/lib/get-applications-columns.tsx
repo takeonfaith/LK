@@ -47,7 +47,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
         {
             title: 'Файлы',
             align: 'center',
-            field: 'files_input',
+            field: 'files_output',
             render: (value) =>
                 !!value.length && (
                     <Button
