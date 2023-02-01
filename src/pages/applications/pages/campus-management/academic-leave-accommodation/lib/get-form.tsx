@@ -1,5 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
+import React from 'react'
 
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
@@ -37,10 +38,10 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Причина предоставления академического отпуска',
-                placeholder: 'Укажите причину в соответствии с приказом о предоставлении академического отпуска',
+                placeholder: 'В соответствии с приказом о предоставлении академического отпуска',
                 type: 'select',
                 width: '100%',
-                value: '',
+                value: null,
                 fieldName: 'reason',
                 editable: true,
                 required: true,
@@ -59,7 +60,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 title: 'Дата начала академического отпуска',
                 placeholder: 'Укажите дату в соответствии с приказом о предоставлении академического отпуска',
                 type: 'date',
-                value: '',
+                value: null,
                 fieldName: 'begin_academic_leave_period',
                 editable: true,
                 required: true,
@@ -83,14 +84,22 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
         ],
-        hint: 'В случае предоставления академического отпуска по медицинским показаниям необходимо загрузить подтверждающие медицинские документы.',
+        hint: (
+            <>
+                В случае предоставления академического отпуска по медицинским показаниям необходимо загрузить
+                подтверждающие медицинские документы.
+                <br />
+                <br />
+                Даты и причину необходимо указать в соответствии с приказом о предоставлении академического отпуска
+            </>
+        ),
         optionalCheckbox: {
             fieldName: 'is_not_document',
             value: false,
             title: 'Нет подтверждающего документа',
-            required: true,
+            required: false,
         },
-        documents: { files: [], fieldName: 'docs', required: true, maxFiles: 1, allowedTypes: ['application/pdf'] },
+        documents: { files: [], fieldName: 'docs', required: false, maxFiles: 1, allowedTypes: ['application/pdf'] },
     }
 }
 
