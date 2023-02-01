@@ -21,6 +21,14 @@ const getDisability = (): IInputArea => {
                 editable: true,
                 required: true,
             },
+            {
+                title: 'Отсутствует срок действия документа (бессрочный)',
+                type: 'checkbox',
+                value: '',
+                fieldName: 'is_indefinite',
+                editable: true,
+                required: false,
+            },
         ],
         documents: {
             files: [],
