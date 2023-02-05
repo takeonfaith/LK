@@ -43,7 +43,8 @@ const HomeTopSection = () => {
         <HomeTopSectionStyled>
             <Link className="notification" to={ALERTS_ROUTE}>
                 <Notification
-                    outline="3px solid var(--schedule)"
+                    outline="none"
+                    box-shadow="0px 0px 0px 3px var(--schedule)"
                     color="red"
                     top="13px"
                     right="4px"
