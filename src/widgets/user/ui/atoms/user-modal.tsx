@@ -93,7 +93,7 @@ interface Props {
 
 const UserModal = ({ avatar, name, isMe, type, division, group, children }: Props) => {
     return (
-        <UserModalWrapper background={getLettersColors(name, 'darker')}>
+        <UserModalWrapper background={getLettersColors(name, 'dark1')}>
             <div className="user">
                 <Avatar border name={name} avatar={avatar} width="110px" height="110px" marginRight="0" />
                 <div className="info">

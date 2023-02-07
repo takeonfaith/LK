@@ -6,7 +6,7 @@ import useFilterList from './lib/hooks/use-filter-list'
 
 const Element = styled.div<{ color?: string; background?: string; remove?: boolean }>`
     padding: ${({ remove }) => (remove ? '0px' : '5px 10px')};
-    background: ${({ background }) => background ?? Colors.blue.transparentAF};
+    background: ${({ background }) => background ?? Colors.blue.transparent3};
     font-size: 0.7em;
     font-weight: 600;
     color: ${({ color }) => color ?? 'var(--reallyBlue)'};

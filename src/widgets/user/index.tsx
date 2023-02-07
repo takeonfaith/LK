@@ -32,7 +32,7 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     }
 
     &:hover {
-        background: ${Colors.grey.transparentAF};
+        background: ${Colors.grey.transparent3};
     }
 
     .name-and-status {

@@ -30,7 +30,7 @@ const ApplicationItemWrapper = styled.div<{ even: boolean }>`
     }
 
     &:hover {
-        background: ${Colors.blue.reallyTransparent};
+        background: ${Colors.blue.transparent2};
     }
 
     & > * {

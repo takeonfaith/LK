@@ -20,7 +20,7 @@ const useTheme = () => {
         }
     }, [settings])
 
-    const switchTheme = useCallback((state) => {
+    const switchTheme = useCallback((state: boolean) => {
         setTheme(() => {
             const newTheme = state ? 'dark' : 'light'
 

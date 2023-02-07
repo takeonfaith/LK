@@ -101,10 +101,10 @@ const Subject = (props: Props) => {
     return (
         <SubjectWrapper
             isCurrent={isCurrent}
-            color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].darker}
-            color2={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].lighter}
-            darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark}
-            transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent}
+            color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].main}
+            color2={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].light2}
+            darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark2}
+            transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent2}
             isFull={view === 'full'}
             onClick={() => open(<SubjectModal {...props} />)}
         >
@@ -119,7 +119,7 @@ const Subject = (props: Props) => {
                     <Rooms
                         rooms={rooms}
                         isCurrent={isCurrent}
-                        color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].darker}
+                        color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark2}
                     />
                 ) : (
                     <Place place={place} link={link} />

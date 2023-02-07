@@ -4,7 +4,7 @@ import { FiCheck } from 'react-icons/fi'
 import styled from 'styled-components'
 
 const SignedWrapper = styled.div<{ show: boolean }>`
-    background: ${Colors.green.transparent};
+    background: ${Colors.green.transparent2};
     color: ${Colors.green.main};
     display: flex;
     align-items: center;

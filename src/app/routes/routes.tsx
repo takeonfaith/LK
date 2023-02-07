@@ -131,7 +131,7 @@ export const privateRoutes: () => IRoutes = () => ({
         icon: <FaRegLightbulb />,
         path: PROJECT_ACTIVITIES_ROUTE,
         Component: ProjectActivitiesPage,
-        color: 'yellow',
+        color: 'orange',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
         isNew: true,

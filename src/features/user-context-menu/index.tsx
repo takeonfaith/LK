@@ -1,19 +1,34 @@
 import { SETTINGS_ROUTE } from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
 import { confirmModel } from '@entities/confirm'
 import { contextMenuModel } from '@entities/context-menu'
 import { userModel } from '@entities/user'
-import { LinkButton, Message } from '@ui/atoms'
-import { Button } from '@ui/button'
-import { Divider } from '@ui/divider'
+import { OLD_LK_URL } from '@shared/consts'
+import { Divider, LinkButton, Message } from '@shared/ui/atoms'
+import { Button } from '@shared/ui/button'
 import React from 'react'
 import { FiArrowLeftCircle, FiLogOut, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
-import useModal from 'widgets/modal'
-import WhatsNew from 'widgets/whats-new'
+import { useModal, WhatsNew } from 'widgets'
 
-const UserBigModal = () => {
+const UserContextMenu = () => {
     const { open } = useModal()
+
+    const handleClose = () => contextMenuModel.events.close()
+
+    const handleOldLK = () => localStorage.setItem('useOldVersion', 'true')
+
+    const logout = () => {
+        confirmModel.events.evokeConfirm({
+            message: 'Вы точно хотите выйти из аккаунта?',
+            onConfirm: userModel.events.logout,
+        })
+        handleClose()
+    }
+
+    const handleWhatsNew = () => {
+        contextMenuModel.events.close()
+        open(<WhatsNew />)
+    }
 
     return (
         <>
@@ -25,14 +40,12 @@ const UserBigModal = () => {
                     icon={<FiSettings />}
                     width="100%"
                     align="left"
-                    onClick={() => contextMenuModel.events.close()}
+                    onClick={handleClose}
                 />
             </Link>
             <LinkButton
                 text={'Cтарый дизайн'}
-                onClick={() => {
-                    localStorage.setItem('useOldVersion', 'true')
-                }}
+                onClick={handleOldLK}
                 background="var(--schedule)"
                 icon={<FiArrowLeftCircle />}
                 width="100%"
@@ -43,13 +56,7 @@ const UserBigModal = () => {
             <Button
                 align="left"
                 icon={<FiLogOut />}
-                onClick={() => {
-                    confirmModel.events.evokeConfirm({
-                        message: 'Вы точно хотите выйти из аккаунта?',
-                        onConfirm: userModel.events.logout,
-                    })
-                    contextMenuModel.events.close()
-                }}
+                onClick={logout}
                 text="Выйти"
                 width="100%"
                 background="var(--schedule)"
@@ -58,10 +65,7 @@ const UserBigModal = () => {
             <Button
                 align="left"
                 icon={<Message icon={null} type="info" title={'v2.1.0'} width="fit-content" />}
-                onClick={() => {
-                    contextMenuModel.events.close()
-                    open(<WhatsNew />)
-                }}
+                onClick={handleWhatsNew}
                 text="Что нового"
                 width="100%"
                 background="var(--schedule)"
@@ -70,4 +74,4 @@ const UserBigModal = () => {
     )
 }
 
-export default UserBigModal
+export default UserContextMenu

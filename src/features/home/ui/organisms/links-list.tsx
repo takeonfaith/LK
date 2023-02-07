@@ -29,7 +29,7 @@ const LinksList = ({
     return (
         <List
             direction="horizontal"
-            scroll={false}
+            scroll={true}
             gap={10}
             horizontalAlign={align}
             title={title}

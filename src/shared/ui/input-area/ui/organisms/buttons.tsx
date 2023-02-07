@@ -24,7 +24,7 @@ const GetButtons = ({ confirmed, changeInputArea, setData, setChangeInputArea, h
                 text="Отменить"
                 icon={<FiXCircle />}
                 textColor={Colors.red.main}
-                hoverBackground={Colors.red.transparentAF}
+                hoverBackground={Colors.red.transparent3}
                 background="transparent"
                 width="130px"
             />
@@ -38,7 +38,7 @@ const GetButtons = ({ confirmed, changeInputArea, setData, setChangeInputArea, h
                     text="Сохранить"
                     icon={<FiSave />}
                     textColor={Colors.blue.main}
-                    hoverBackground={Colors.blue.transparentAF}
+                    hoverBackground={Colors.blue.transparent3}
                     background="transparent"
                     width="130px"
                 />
@@ -47,7 +47,7 @@ const GetButtons = ({ confirmed, changeInputArea, setData, setChangeInputArea, h
                     text="Отменить"
                     icon={<FiXCircle />}
                     textColor={Colors.red.main}
-                    hoverBackground={Colors.red.transparentAF}
+                    hoverBackground={Colors.red.transparent3}
                     background="transparent"
                     width="130px"
                 />
@@ -61,7 +61,7 @@ const GetButtons = ({ confirmed, changeInputArea, setData, setChangeInputArea, h
                 text="Подтвердить"
                 icon={<FiCheckCircle />}
                 textColor={Colors.green.main}
-                hoverBackground={Colors.green.transparentAF}
+                hoverBackground={Colors.green.transparent3}
                 background="transparent"
                 width="130px"
             />
@@ -70,7 +70,7 @@ const GetButtons = ({ confirmed, changeInputArea, setData, setChangeInputArea, h
                 text="Изменить"
                 icon={<FiEdit3 />}
                 textColor={Colors.blue.main}
-                hoverBackground={Colors.blue.transparentAF}
+                hoverBackground={Colors.blue.transparent3}
                 background="transparent"
                 width="130px"
             />

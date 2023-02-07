@@ -27,7 +27,7 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
 
         &:hover {
             filter: brightness(0.8);
-            background: ${Colors.grey.transparentAF};
+            background: ${Colors.grey.transparent3};
         }
     }
 `

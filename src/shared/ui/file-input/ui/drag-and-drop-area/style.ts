@@ -5,7 +5,7 @@ const DragAndDropAreaWrapper = styled.label<{ showPulse: boolean; isActive: bool
     width: 100%;
     min-height: 150px;
     border-radius: var(--brLight);
-    background: ${Colors.blue.reallyTransparent};
+    background: ${Colors.blue.transparent2};
     border: ${({ showPulse }) => (!showPulse ? `3px dashed ${Colors.blue.main}` : `5px solid ${Colors.blue.main}`)};
     display: flex;
     justify-content: center;
@@ -47,7 +47,7 @@ const DragAndDropAreaWrapper = styled.label<{ showPulse: boolean; isActive: bool
         align-items: center;
         flex-direction: column;
         opacity: 0.7;
-        color: ${Colors.blue.lighter};
+        color: ${Colors.blue.light2};
         pointer-events: none;
 
         svg {
