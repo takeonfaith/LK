@@ -282,7 +282,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Расторжение договора найма',
         icon: BiIdCard,
         path: TERMINATION_OF_EMPLOYMENT_CONTRACT,
-        Component: isProduction ? ApplicationRedirect : TerminationOfEmploymentContractPage,
+        Component: TerminationOfEmploymentContractPage,
         color: 'blue',
         isTemplate: false,
     },
