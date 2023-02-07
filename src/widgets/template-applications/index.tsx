@@ -25,10 +25,6 @@ const CustomList = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
-
-    @media (max-width: 1000px) {
-        display: none;
-    }
 `
 
 interface Props {

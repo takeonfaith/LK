@@ -169,7 +169,6 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
                     title: 'Расторжение договора найма',
-                    disabled: isProduction,
                 },
             ],
         },

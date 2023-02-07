@@ -48,6 +48,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
             title: 'Файлы',
             align: 'center',
             field: 'files_output',
+            priority: 'five',
             render: (value) =>
                 !!value.length && (
                     <Button
