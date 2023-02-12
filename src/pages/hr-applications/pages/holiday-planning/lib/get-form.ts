@@ -1,8 +1,12 @@
 import { IInputArea } from '@ui/input-area/model'
-import { UserApplication } from '@api/model'
+import { UserApplication, WorkerApplication } from '@api/model'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 
-const getForm = (dataUserApplication: UserApplication): IInputArea => {
+const getForm = (
+    dataUserApplication: UserApplication,
+    dataWorkerApplication: WorkerApplication[],
+    currentIndex: number,
+): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
         title: 'Заявление о предоставлении отпуска',
@@ -17,19 +21,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Должность',
-                value: null,
+                type: 'simple-text',
                 fieldName: 'post',
-                editable: true,
-                mask: true,
-                required: true,
+                value: dataWorkerApplication[currentIndex].jobTitle.toString(),
+                visible: true,
             },
             {
-                title: 'Наименование структурного подразделения',
-                value: null,
-                fieldName: 'structure',
-                editable: true,
-                mask: true,
-                required: true,
+                title: 'Структурное подразделение',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].subDivision.toString(),
+                fieldName: 'subDivision',
+                visible: true,
             },
             {
                 title: 'Вид отпуска',

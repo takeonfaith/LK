@@ -24,15 +24,13 @@ import {
     // BUFFER_HOLIDAY_POSTPONED,
     // BUFFER_WORK_TRANSFER,
     // BUFFER_EXTRA_HOLIDAY_COLL,
-    // BUFFER_HOLIDAY_PLANNING,
-    // BUFFER_HOLIDAY_WORK,
+    BUFFER_HOLIDAY_PLANNING,
+    BUFFER_HOLIDAY_WORK,
     // DISMISSAL,
     PARTTIME_EMPLOYMENT,
     HOLIDAY_POSTPONED,
     WORK_TRANSFER,
     EXTRA_HOLIDAY_COLL,
-    HOLIDAY_PLANNING,
-    HOLIDAY_WORK,
 } from '@app/routes/teacher-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
@@ -103,16 +101,16 @@ const getTeachersHRSectionLinks = () => {
                 // { link: BUFFER_PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
                 // { link: BUFFER_HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
                 { link: BUFFER_DISMISSAL, title: 'Заявление на увольнение' },
-                // { link: BUFFER_HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
-                // { link: BUFFER_HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
+                { link: BUFFER_HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
+                { link: BUFFER_HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
                 // { link: BUFFER_WORK_TRANSFER, title: 'Заявление на перевод' },
                 // {
                 //     link: BUFFER_EXTRA_HOLIDAY_COLL,
                 //     title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
                 // },
                 // { link: DISMISSAL, title: 'Заявление на увольнение' },
-                { link: HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
-                { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
+                //{ link: HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
+                // { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
                 { link: WORK_TRANSFER, title: 'Заявление на перевод' },
                 {
                     link: EXTRA_HOLIDAY_COLL,

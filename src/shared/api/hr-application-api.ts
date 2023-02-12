@@ -12,4 +12,6 @@ export const getAppData = (): Promise<AxiosResponse<UserApplication>> => {
     return $hrApi.get(`?getAppData&token=${token()}`)
 }
 
-export const post = (data: ApplicationCreating) => $hrApi.post(`Dismissal.Post`, data)
+export const post = (data: ApplicationCreating, address: string) => $hrApi.post(`${address}`, data)
+// export const dismissalPost = (data: ApplicationCreating) => $hrApi.post(`Dismissal.Post`, data)
+// export const addWeekend = (data: ApplicationCreating) => $hrApi.post(`Weekend.AddWeekend`, data)

@@ -54,7 +54,7 @@ const sendHrFormDismissal = async (
     const result = Object.assign({}, ...form)
 
     const response = await applicationsModel.effects.postApplicationFx({
-        guid: parseJwt(JSON.parse(getJwtToken() || '{}'))['IndividualGuid'],
+        guid: parseJwt(getJwtToken() || '{}')['IndividualGuid'],
         jobGuid: result.jobGuid,
         signingDate: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
         dateOfDismissal: result.last_day,
@@ -62,6 +62,7 @@ const sendHrFormDismissal = async (
         isRetirement: !!result.isRetirement,
         address: result.get_tk_address,
         reason: result.reason.charAt(0).toLowerCase() + result.reason.slice(1),
+        serviceAddress: 'Dismissal.Post',
     })
 
     !response?.data?.dismissalResponse?.isError && setCompleted(true)

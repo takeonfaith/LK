@@ -48,6 +48,7 @@ export interface IColors {
     orange: IColorPalette
     grey: IColorPalette
     white: IColorPalette
+    none: IColorPalette
 }
 
 export interface IColorPalette {
@@ -208,6 +209,19 @@ export const Colors: IColors = {
         lightTransparent: '#80808014',
         littleDarker: '',
     },
+    none: {
+        main: '#fff',
+        transparent: '',
+        lighter: '',
+        darker: '',
+        light: '',
+        dark: '',
+        reallyTransparent: '',
+        darkTransparent: '',
+        transparentAF: '#ffffff17',
+        lightTransparent: '#80808014',
+        littleDarker: '',
+    },
 }
 
 export interface IWeekDayName {
@@ -303,6 +317,11 @@ export const messageType: MessageTypeObj = {
         icon: HiOutlineLightBulb,
         color: 'white',
         title: 'Подсказка',
+    },
+    hrFailure: {
+        icon: FiXCircle,
+        color: 'none',
+        title: 'Ошибка',
     },
 }
 

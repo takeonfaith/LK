@@ -3,7 +3,7 @@ import { HrApplication, HrUserApplication } from '@api/model'
 import { createEvent, forward, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector'
-import { popUpMessageModel } from '@entities/pop-up-message'
+import { popUpMessageModelHr } from '@entities/pop-up-message-hr'
 import { MessageType } from '@shared/ui/types'
 
 interface ApplicationsStore {
@@ -14,6 +14,7 @@ interface ApplicationsStore {
 
 export interface ApplicationCreating {
     [key: string]: any
+    serviceAddress: string
 }
 
 const DEFAULT_STORE = { listApplication: null, error: null, dataUserApplication: null }
@@ -46,7 +47,7 @@ const getUserDataApplicationsFx = createEffect(async (): Promise<HrUserApplicati
 })
 
 const postApplicationFx = createEffect(async (data: ApplicationCreating) => {
-    return await hrApplicationApi.post(data)
+    return await hrApplicationApi.post(data, data.serviceAddress)
 })
 
 sample({
@@ -54,7 +55,9 @@ sample({
     fn: (response) => {
         const result = response.data.dismissalResponse
 
-        if (result.isError) return { message: result.errorString, type: 'failure' as MessageType, time: 30000 }
+        if (result.isError) {
+            return { message: result.errorString, type: 'hrFailure' as MessageType, time: 300000 }
+        }
 
         return {
             message: `Форма отправлена успешно`,
@@ -62,7 +65,7 @@ sample({
             time: 30000,
         }
     },
-    target: popUpMessageModel.events.evokePopUpMessage,
+    target: popUpMessageModelHr.events.evokePopUpMessage,
 })
 
 sample({
@@ -70,11 +73,11 @@ sample({
     fn: () => {
         return {
             message: 'Не удалось отправить форму. Попробуйте позже',
-            type: 'failure' as MessageType,
-            time: 30000,
+            type: 'hrFailure' as MessageType,
+            time: 300000,
         }
     },
-    target: popUpMessageModel.events.evokePopUpMessage,
+    target: popUpMessageModelHr.events.evokePopUpMessage,
 })
 
 const clearStore = createEvent()

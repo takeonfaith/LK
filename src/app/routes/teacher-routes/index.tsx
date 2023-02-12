@@ -55,6 +55,8 @@ import {
 import AllStudentsPage from '@pages/all-students'
 import { isProduction } from '@consts'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
+import HolidayWorkBufferPage from '@pages/hr-applications/pages/buffer-holiday-work'
+import HolidayPlanningBufferPage from '@pages/hr-applications/pages/buffer-holiday-planning'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
@@ -109,13 +111,13 @@ export const HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/holiday-postponed'
 export const DISMISSAL = HR_APPLICATIONS_ROUTE + '/dismissal/:id'
 export const WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/work-transfer'
 export const EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/extra-holiday-coll'
-export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning'
-export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work'
+export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning/:id'
+export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work/:id'
 export const BUFFER_DISMISSAL = HR_APPLICATIONS_ROUTE + '/buffer-dismissal'
 // export const BUFFER_WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/buffer-work-transfer'
 // export const BUFFER_EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/buffer-extra-holiday-coll'
-// export const BUFFER_HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/buffer-holiday-planning'
-// export const BUFFER_HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/buffer-holiday-work'
+export const BUFFER_HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/buffer-holiday-planning'
+export const BUFFER_HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/buffer-holiday-work'
 // export const BUFFER_PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/buffer-part-time-deployment'
 // export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday-postponed'
 
@@ -409,6 +411,26 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
     'holiday-work': {
         id: 'part-time-deployment',
         title: 'Заявление о привлечении к работе в выходной день',
+        path: BUFFER_HOLIDAY_WORK,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : HolidayWorkBufferPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'holiday-planning': {
+        id: 'holiday-postponed',
+        title: 'Заявление о предоставлении отпуска',
+        path: BUFFER_HOLIDAY_PLANNING,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : HolidayPlanningBufferPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'holiday-work-form': {
+        id: 'part-time-deployment',
+        title: 'Заявление о привлечении к работе в выходной день',
         path: HOLIDAY_WORK,
         icon: <FiFileText />,
         color: 'blue',
@@ -416,7 +438,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
     },
-    'holiday-planning': {
+    'holiday-planning-form': {
         id: 'holiday-postponed',
         title: 'Заявление о предоставлении отпуска',
         path: HOLIDAY_PLANNING,

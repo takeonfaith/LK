@@ -8,7 +8,7 @@ import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import { Suspense, useEffect } from 'react'
 import styled from 'styled-components'
-import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
+import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal, PopUpMessageHr } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import WhatsNew from '../../widgets/whats-new'
@@ -97,6 +97,7 @@ const ContentLayout = () => {
             </ContentWrapper>
             <Modal />
             <PopUpMessage />
+            <PopUpMessageHr />
             <Confirm />
             <ContextMenu />
             <HintModal />

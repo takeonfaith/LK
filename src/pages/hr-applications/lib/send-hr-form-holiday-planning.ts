@@ -2,13 +2,12 @@ import { applicationsModel } from '@entities/hr-applications'
 import { getJwtToken, parseJwt } from '@entities/user/lib/jwt-token'
 import { IInputArea } from '@ui/input-area/model'
 
-const SendHrFormHolidayWork = async (
+const sendHrFormHolidayPlanning = async (
     employeeId: string,
     inputAreas: IInputArea[],
     setCompleted: (loading: boolean) => void,
 ) => {
     setCompleted(false)
-
     const form = inputAreas
         .map((itemForm) => {
             if (!Array.isArray(itemForm.data[0])) {
@@ -45,6 +44,8 @@ const SendHrFormHolidayWork = async (
                 })
                 const obj = {} as any
 
+                obj[employeeId] = JSON.stringify(r)
+
                 return obj
             }
         })
@@ -53,18 +54,18 @@ const SendHrFormHolidayWork = async (
     const result = Object.assign({}, ...form)
 
     const response = await applicationsModel.effects.postApplicationFx({
-        employeeGuid: parseJwt(getJwtToken() || '{}')['IndividualGuid'],
-        dates: [
-            {
-                date: result.holiday_work_date,
-                dayOff: result.extra_holiday_date,
-                hours: result.holiday_work_hours,
-            },
-        ],
-        serviceAddress: 'Weekend.AddWeekend',
+        guid: parseJwt(getJwtToken() || '{}')['IndividualGuid'],
+        jobGuid: result.jobGuid,
+        signingDate: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
+        dateOfDismissal: result.last_day,
+        isSendMail: result.get_tk === 'По почте',
+        isRetirement: !!result.isRetirement,
+        address: result.get_tk_address,
+        reason: result.reason.charAt(0).toLowerCase() + result.reason.slice(1),
+        serviceAddress: '',
     })
 
     !response?.data?.dismissalResponse?.isError && setCompleted(true)
 }
 
-export default SendHrFormHolidayWork
+export default sendHrFormHolidayPlanning

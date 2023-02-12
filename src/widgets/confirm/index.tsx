@@ -5,7 +5,6 @@ import List from '@ui/list'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useRef } from 'react'
 import styled from 'styled-components'
-import ModalWrapper from '../../widgets/modal/ui/atoms/modal-wrapper'
 
 const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     position: absolute;
@@ -48,38 +47,36 @@ const ConfirmMessage = () => {
     }
 
     return (
-        <ModalWrapper isOpen={isOpen}>
-            <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
-                <Title size={3} align="left">
-                    {message ?? 'Хотите продолжить?'}
-                </Title>
-                <List
-                    width="100%"
-                    scroll={false}
-                    direction="horizontal"
-                    gap={5}
-                    padding="10px 0 0 0"
-                    horizontalAlign="right"
-                >
-                    <Button
-                        text="Да"
-                        onClick={handleConfirm}
-                        width="90px"
-                        textColor="var(--red)"
-                        background="transparent"
-                        hoverBackground={Colors.red.transparentAF}
-                    />
-                    <Button
-                        text="Нет"
-                        onClick={onReject ?? handleReject}
-                        width="90px"
-                        textColor="var(--blue)"
-                        background="transparent"
-                        hoverBackground={Colors.blue.transparentAF}
-                    />
-                </List>
-            </ConfirmWrapper>
-        </ModalWrapper>
+        <ConfirmWrapper isOpen={isOpen} ref={confirmRef}>
+            <Title size={3} align="left">
+                {message ?? 'Хотите продолжить?'}
+            </Title>
+            <List
+                width="100%"
+                scroll={false}
+                direction="horizontal"
+                gap={5}
+                padding="10px 0 0 0"
+                horizontalAlign="right"
+            >
+                <Button
+                    text="Да"
+                    onClick={handleConfirm}
+                    width="90px"
+                    textColor="var(--red)"
+                    background="transparent"
+                    hoverBackground={Colors.red.transparentAF}
+                />
+                <Button
+                    text="Нет"
+                    onClick={onReject ?? handleReject}
+                    width="90px"
+                    textColor="var(--blue)"
+                    background="transparent"
+                    hoverBackground={Colors.blue.transparentAF}
+                />
+            </List>
+        </ConfirmWrapper>
     )
 }
 

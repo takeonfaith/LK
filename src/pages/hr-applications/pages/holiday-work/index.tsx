@@ -3,13 +3,14 @@ import { applicationsModel } from '@entities/applications'
 import { specialFieldsNameT } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import SendHrFormHolidayWork from '@pages/hr-applications/lib/send-hr-form-holiday-work'
+import { ApplicationFormCodes } from '@shared/models/application-form-codes'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea, IInputAreaData } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import getCompensation from './lib/get-compenstion'
 import getForm from './lib/get-form'
 
@@ -18,18 +19,21 @@ type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 const HolidayWork = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
-        data: { dataUserApplication },
+        data: { dataUserApplication, dataWorkerApplication },
+        workerLoading: loading,
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
+
     const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const isDone = completed ?? false
     const history = useHistory()
-
+    const { id } = useParams<{ id: string }>()
+    const currentIndex = +id
     useEffect(() => {
-        if (!!dataUserApplication) setForm(getForm(dataUserApplication))
-    }, [dataUserApplication])
-
+        if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
+            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
+        }
+    }, [dataUserApplication, currentIndex, loading])
     useEffect(() => {
         if (!!form && !!dataUserApplication) {
             setSpecialFieldsName(getCompensation(form.data as IInputAreaData[]))
@@ -56,14 +60,7 @@ const HolidayWork = () => {
 
                     <SubmitButton
                         text={'Отправить'}
-                        action={() =>
-                            SendHrFormHolidayWork(
-                                '1b131564-041c-11e2-92bb-18f46ae63d1e',
-                                [form],
-                                setLoading,
-                                setCompleted,
-                            )
-                        }
+                        action={() => SendHrFormHolidayWork(ApplicationFormCodes.HOLIDAY_WORK, [form], setCompleted)}
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}
@@ -71,8 +68,7 @@ const HolidayWork = () => {
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
                         isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
-                        popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
-                        popUpSuccessMessage="Данные формы успешно отправлены"
+                        alerts={false}
                     />
                 </FormBlock>
             )}
