@@ -17,6 +17,7 @@ const PopUpMessageHrWrapper = styled.div<{ isOpen: boolean; isClickable: boolean
     box-shadow: 0 0 40px #0000002f;
     color: var(--text);
     z-index: 10000;
+    white-space: pre-line;
     padding: 15px;
     transition: 0.2s;
     opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
