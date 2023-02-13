@@ -44,7 +44,7 @@ const SendHrFormHolidayWork = async (
                     )
                 })
                 const obj = {} as any
-
+                obj[employeeId] = JSON.stringify(r)
                 return obj
             }
         })

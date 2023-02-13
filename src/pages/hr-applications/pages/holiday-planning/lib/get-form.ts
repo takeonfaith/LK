@@ -13,11 +13,10 @@ const getForm = (
         data: [
             {
                 title: 'ФИО',
+                type: 'simple-text',
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
-                mask: true,
-                editable: true,
-                required: true,
+                visible: true,
             },
             {
                 title: 'Должность',
@@ -32,6 +31,16 @@ const getForm = (
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
                 visible: true,
+            },
+            {
+                title: 'Период отпуска:',
+                type: 'date-interval',
+                value: ['', ''],
+                fieldName: 'holiday_dates',
+                editable: true,
+                mask: true,
+                required: true,
+                minValueInput: getDelayInDays(5),
             },
             {
                 title: 'Вид отпуска',
@@ -64,16 +73,7 @@ const getForm = (
                     },
                 ],
             },
-            {
-                title: 'Период отпуска:',
-                type: 'date-interval',
-                value: ['', ''],
-                fieldName: 'holiday_dates',
-                editable: true,
-                mask: true,
-                required: true,
-                minValueInput: getDelayInDays(5),
-            },
+
             {
                 title: 'Комментарий к заявке',
                 type: 'textarea',
@@ -84,7 +84,7 @@ const getForm = (
         ],
         documents: {
             files: [],
-            required: true,
+            required: false,
             fieldName: 'holidayFiles',
             maxFiles: 10,
         },
