@@ -4,29 +4,21 @@ import { useState } from 'react'
 import History from './history'
 import JobTitle from './job-title'
 import styled from 'styled-components'
+import { bufferHolidayPlanningModel } from '../model'
 
 const Content = () => {
-    const {
-        data: { dataWorkerApplication },
-    } = applicationsModel.selectors.useApplications()
-    const [historyIsEmpty, setHistoryIsEmpty] = useState<boolean>(true)
+    const { data } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
 
-    if (!dataWorkerApplication) {
+    if (!data) {
         return null
     }
 
     return (
         <Wrapper>
-            {dataWorkerApplication.map((jobTitleInfo, index) => {
-                if (jobTitleInfo.isDismissal) {
-                    historyIsEmpty && setHistoryIsEmpty(false)
-                    return null
-                } else return <JobTitle jobTitleInfo={jobTitleInfo} index={index} />
+            {data.map((info, index) => {
+                return <JobTitle info={info} index={index} />
             })}
-            <History
-                historyIsEmpty={historyIsEmpty}
-                historyDataWorkerApplication={dataWorkerApplication.filter(({ isDismissal }) => isDismissal)}
-            />
+            <History />
         </Wrapper>
     )
 }

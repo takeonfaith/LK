@@ -1,6 +1,7 @@
 import { applicationsModel } from '@entities/hr-applications'
 import { getJwtToken, parseJwt } from '@entities/user/lib/jwt-token'
 import { IInputArea } from '@ui/input-area/model'
+import { bufferHolidayPlanningModel } from '../pages/buffer-holiday-planning/model'
 
 const sendHrFormHolidayPlanning = async (
     employeeId: string,
@@ -53,14 +54,14 @@ const sendHrFormHolidayPlanning = async (
 
     const result = Object.assign({}, ...form)
 
-    const response = await applicationsModel.effects.postApplicationFx({
+    const response = await bufferHolidayPlanningModel.effects.sendBufferHolidayPlanningFx({
         employeeGuid: parseJwt(getJwtToken() || '{}')['IndividualGuid'],
         type: 8,
         start: '2023-02-15T17:41:59.685Z',
         end: '2023-02-15T17:41:59.685Z',
     })
 
-    !response?.data?.dismissalResponse?.isError && setCompleted(true)
+    !response.isError && setCompleted(true)
 }
 
 export default sendHrFormHolidayPlanning

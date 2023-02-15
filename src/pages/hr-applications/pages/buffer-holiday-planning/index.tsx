@@ -1,22 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { applicationsModel } from '@entities/applications'
 import { HrBlock, Message, Title, Wrapper } from '@ui/atoms'
 import { FiInfo } from 'react-icons/fi'
 import styled from 'styled-components'
 import Content from './ui/content'
+import { bufferHolidayPlanningModel } from './model'
 
 const HolidayPlanningBufferPage = () => {
-    const {
-        data: { listApplication },
-        error,
-    } = applicationsModel.selectors.useApplications()
+    const { data, loading } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
+
+    useEffect(() => {
+        bufferHolidayPlanningModel.events.loadBufferHolidayPlanning()
+    }, [])
 
     return (
         <Wrapper
-            load={() => applicationsModel.effects.getApplicationsFx()}
-            loading={!listApplication}
-            error={error}
-            data={listApplication}
+            load={bufferHolidayPlanningModel.events.loadBufferHolidayPlanning}
+            loading={loading}
+            error={null}
+            data={data}
         >
             <ApplicationPageWrapper>
                 <HrBlock maxWidth="1500px">

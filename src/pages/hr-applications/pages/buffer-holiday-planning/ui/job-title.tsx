@@ -7,16 +7,19 @@ import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import getHrApplicationsColumns from '../lib/get-hr-applications-columns'
+import { BufferHolidayPlanning } from '../types'
 
 interface Props {
-    jobTitleInfo: WorkerApplication
+    info: BufferHolidayPlanning
     index: number
 }
 
-const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
-    const { jobTitle, subDivision, rate, canBeRepeated, dismissalApplications } = jobTitleInfo
+const JobTitle: React.FC<Props> = ({ info, index }) => {
+    // const { jobTitle, subDivision, rate, canBeRepeated, dismissalApplications } = info
 
     const [opened, setOpened] = useState<boolean>(false)
+
+    console.log(info)
     return (
         <Block
             orientation={'vertical'}
@@ -28,7 +31,7 @@ const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
             height="fit-content"
         >
             <BlockHeader>
-                <span>{jobTitle}</span>
+                <span>{'jobTitle'}</span>
                 <Button
                     icon={opened ? <HiChevronUp /> : <HiChevronDown />}
                     onClick={() => {
@@ -38,15 +41,15 @@ const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {subDivision}
+                Структурное подразделение: {'subDivision'}
                 <br />
-                Ставка: {rate}
+                Ставка: {'rate'}
                 <br />
                 {/* Вид места работы: добавим */}
             </JobDescription>
             {opened && (
                 <ActionBlock>
-                    {canBeRepeated && (
+                    {true && (
                         <Link to={`/hr-applications/holiday-planning/${index}`}>
                             <Button
                                 text="Отпуск по этой должности"
@@ -58,9 +61,9 @@ const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
                             />
                         </Link>
                     )}
-                    {!!dismissalApplications.length && (
+                    {/* {!!dismissalApplications.length && (
                         <StyledTable columns={getHrApplicationsColumns()} data={dismissalApplications} maxOnPage={10} />
-                    )}
+                    )} */}
                 </ActionBlock>
             )}
             <Button
