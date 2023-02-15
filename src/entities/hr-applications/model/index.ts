@@ -14,7 +14,6 @@ interface ApplicationsStore {
 
 export interface ApplicationCreating {
     [key: string]: any
-    serviceAddress: string
 }
 
 const DEFAULT_STORE = { listApplication: null, error: null, dataUserApplication: null }
@@ -47,7 +46,7 @@ const getUserDataApplicationsFx = createEffect(async (): Promise<HrUserApplicati
 })
 
 const postApplicationFx = createEffect(async (data: ApplicationCreating) => {
-    return await hrApplicationApi.post(data, data.serviceAddress)
+    return await hrApplicationApi.post(data)
 })
 
 sample({

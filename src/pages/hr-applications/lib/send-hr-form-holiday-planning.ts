@@ -55,10 +55,9 @@ const sendHrFormHolidayPlanning = async (
 
     const response = await applicationsModel.effects.postApplicationFx({
         employeeGuid: parseJwt(getJwtToken() || '{}')['IndividualGuid'],
-        type: result.holiday_type,
-        start: result.holiday_dates[0],
-        end: result.holiday_dates[1],
-        serviceAddress: 'Vacation.AddVacation',
+        type: 8,
+        start: '2023-02-15T17:41:59.685Z',
+        end: '2023-02-15T17:41:59.685Z',
     })
 
     !response?.data?.dismissalResponse?.isError && setCompleted(true)

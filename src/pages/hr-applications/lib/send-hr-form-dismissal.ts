@@ -62,7 +62,6 @@ const sendHrFormDismissal = async (
         isRetirement: !!result.isRetirement,
         address: result.get_tk_address,
         reason: result.reason.charAt(0).toLowerCase() + result.reason.slice(1),
-        serviceAddress: 'Dismissal.Post',
     })
 
     !response?.data?.dismissalResponse?.isError && setCompleted(true)

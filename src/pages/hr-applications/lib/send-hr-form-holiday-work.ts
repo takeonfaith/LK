@@ -61,7 +61,6 @@ const SendHrFormHolidayWork = async (
                 hours: result.holiday_work_hours,
             },
         ],
-        serviceAddress: 'Weekend.AddWeekend',
     })
 
     !response?.data?.dismissalResponse?.isError && setCompleted(true)
