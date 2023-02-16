@@ -7,17 +7,29 @@ import styled from 'styled-components'
 import { bufferHolidayPlanningModel } from '../model'
 
 const Content = () => {
+    const {
+        data: { dataWorkerApplication },
+    } = applicationsModel.selectors.useApplications()
     const { data } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
+    const [historyIsEmpty, setHistoryIsEmpty] = useState<boolean>(true)
 
     if (!data) {
         return null
     }
-
+    if (!dataWorkerApplication) {
+        return null
+    }
     return (
         <Wrapper>
-            {data.map((info, index) => {
-                return <JobTitle info={info} index={index} />
+            {dataWorkerApplication.map((jobTitleInfo, index) => {
+                if (jobTitleInfo.isDismissal) {
+                    historyIsEmpty && setHistoryIsEmpty(false)
+                    return null
+                } else return <JobTitle info={jobTitleInfo} index={index} />
             })}
+            {/* {data.map((info, index) => {
+                return <JobTitle info={info} index={index} />
+            })} */}
             <History />
         </Wrapper>
     )

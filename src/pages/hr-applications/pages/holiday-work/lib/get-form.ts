@@ -90,6 +90,13 @@ const getForm = (
                 specialType: 'Compensation',
             },
             {
+                title: '',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].jobGuid.toString(),
+                fieldName: 'jobGuid',
+                visible: false,
+            },
+            {
                 title: 'Комментарий к заявке',
                 type: 'textarea',
                 fieldName: 'commentary',

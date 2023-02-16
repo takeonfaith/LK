@@ -1,4 +1,3 @@
-import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
 import Table from '@shared/ui/table'
@@ -13,8 +12,6 @@ const History = () => {
 
     const { data } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
     const historyIsEmpty = !!data.every((d) => !d.employeeVacations)
-
-    console.log(data)
 
     return (
         <Block

@@ -21,12 +21,12 @@ const Content = () => {
                 if (jobTitleInfo.isDismissal) {
                     historyIsEmpty && setHistoryIsEmpty(false)
                     return null
-                } else return <JobTitle jobTitleInfo={jobTitleInfo} index={index} />
+                } else return <JobTitle info={jobTitleInfo} index={index} />
             })}
-            <History
-                historyIsEmpty={historyIsEmpty}
-                historyDataWorkerApplication={dataWorkerApplication.filter(({ isDismissal }) => isDismissal)}
-            />
+            {/* {data.map((info, index) => {
+                return <JobTitle info={info} index={index} />
+            })} */}
+            <History />
         </Wrapper>
     )
 }

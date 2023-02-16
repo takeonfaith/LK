@@ -1,25 +1,23 @@
 import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
-import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import getHrApplicationsColumns from '../lib/get-hr-applications-columns'
-import { BufferHolidayPlanning } from '../types'
 
 interface Props {
-    info: BufferHolidayPlanning
+    //info?: BufferHolidayPlanning
+    // jobTitleInfo: WorkerApplication
+    info: WorkerApplication
     index: number
 }
 
 const JobTitle: React.FC<Props> = ({ info, index }) => {
-    // const { jobTitle, subDivision, rate, canBeRepeated, dismissalApplications } = info
+    const { jobTitle, subDivision, rate } = info
 
     const [opened, setOpened] = useState<boolean>(false)
 
-    console.log(info)
     return (
         <Block
             orientation={'vertical'}
@@ -31,7 +29,7 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
             height="fit-content"
         >
             <BlockHeader>
-                <span>{'jobTitle'}</span>
+                <span>{jobTitle}</span>
                 <Button
                     icon={opened ? <HiChevronUp /> : <HiChevronDown />}
                     onClick={() => {
@@ -41,9 +39,9 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {'subDivision'}
+                Структурное подразделение: {subDivision}
                 <br />
-                Ставка: {'rate'}
+                Ставка: {rate}
                 <br />
                 {/* Вид места работы: добавим */}
             </JobDescription>
@@ -94,9 +92,9 @@ const BlockHeader = styled.div`
     align-items: center;
 `
 
-const StyledTable = styled(Table)`
-    width: 100%;
-`
+// const StyledTable = styled(Table)`
+//     width: 100%;
+// `
 
 const ActionBlock = styled.div`
     display: flex;

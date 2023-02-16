@@ -1,5 +1,3 @@
-import { applicationsModel } from '@entities/hr-applications'
-import { getJwtToken, parseJwt } from '@entities/user/lib/jwt-token'
 import { IInputArea } from '@ui/input-area/model'
 import { bufferHolidayPlanningModel } from '../pages/buffer-holiday-planning/model'
 
@@ -54,11 +52,18 @@ const sendHrFormHolidayPlanning = async (
 
     const result = Object.assign({}, ...form)
 
+    if (result.holiday_type == 'Ежегодный (основной) оплачиваемый отпуск') result.holiday_type = 1
+    else if (result.holiday_type == 'Ежегодный дополнительный оплачиваемый отпуск (в т.ч. учебный)')
+        result.holiday_type = 2
+    else if (result.holiday_type == 'Отпуск без сохранения заработной платы') result.holiday_type = 3
+    else if (result.holiday_type == 'Отпуск по беременности и родам (декретный отпуск)') result.holiday_type = 4
+    else if (result.holiday_type == 'Отпуск по уходу за ребенком') result.holiday_type = 5
+
     const response = await bufferHolidayPlanningModel.effects.sendBufferHolidayPlanningFx({
-        employeeGuid: parseJwt(getJwtToken() || '{}')['IndividualGuid'],
-        type: 8,
-        start: '2023-02-15T17:41:59.685Z',
-        end: '2023-02-15T17:41:59.685Z',
+        employeeGuid: result.jobGuid,
+        type: result.holiday_type,
+        start: result.holiday_start,
+        end: result.holiday_end,
     })
 
     !response.isError && setCompleted(true)

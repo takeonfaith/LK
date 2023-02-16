@@ -1,4 +1,3 @@
-import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
 import Table from '@shared/ui/table'
@@ -6,14 +5,13 @@ import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
 import getExHrApplicationsColumns from '../lib/get-ex-hr-applications-columns'
+import { bufferHolidayWorkModel } from '../model'
 
-interface Props {
-    historyIsEmpty: boolean
-    historyDataWorkerApplication: WorkerApplication[]
-}
-
-const History: React.FC<Props> = ({ historyIsEmpty, historyDataWorkerApplication }) => {
+const History = () => {
     const [openedHistory, setOpenedHistory] = useState<boolean>(false)
+
+    const { data } = bufferHolidayWorkModel.selectors.useBufferHolidayWork()
+    const historyIsEmpty = !!data.every((d) => !d.orders)
 
     return (
         <Block
@@ -34,23 +32,10 @@ const History: React.FC<Props> = ({ historyIsEmpty, historyDataWorkerApplication
                 />
             </BlockHeader>
             {openedHistory &&
-                historyDataWorkerApplication.map((object, index) => {
-                    if (!object.dismissalApplications.length) return null
+                data.map((object, index) => {
+                    // if (!object.dismissalApplications.length) return null
 
-                    return (
-                        <StyledTable
-                            key={index}
-                            columns={getExHrApplicationsColumns()}
-                            data={object.dismissalApplications.map((item) => {
-                                return {
-                                    ...item,
-                                    ...object,
-                                    jobDivision: object.jobTitle + ', ' + object.subDivision,
-                                }
-                            })}
-                            maxOnPage={10}
-                        />
-                    )
+                    return <StyledTable key={index} columns={getExHrApplicationsColumns()} data={[]} maxOnPage={10} />
                 })}
             <Button
                 onClick={() => {

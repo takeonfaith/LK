@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { applicationsModel } from '@entities/applications'
 import { HrBlock, Message, Title, Wrapper } from '@ui/atoms'
 import { FiInfo } from 'react-icons/fi'
 import styled from 'styled-components'

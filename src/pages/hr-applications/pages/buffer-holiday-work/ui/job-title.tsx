@@ -1,22 +1,26 @@
 import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
-import Table from '@shared/ui/table'
+// import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import getHrApplicationsColumns from '../lib/get-hr-applications-columns'
+// import getHrApplicationsColumns from '../lib/get-hr-applications-columns'
+// import { BufferHolidayWork } from '../types'
 
 interface Props {
-    jobTitleInfo: WorkerApplication
+    //info?: BufferHolidayPlanning
+    // jobTitleInfo: WorkerApplication
+    info: WorkerApplication
     index: number
 }
 
-const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
-    const { jobTitle, subDivision, rate, canBeRepeated, dismissalApplications } = jobTitleInfo
+const JobTitle: React.FC<Props> = ({ info, index }) => {
+    const { jobTitle, subDivision, rate } = info
 
     const [opened, setOpened] = useState<boolean>(false)
+
     return (
         <Block
             orientation={'vertical'}
@@ -46,7 +50,7 @@ const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
             </JobDescription>
             {opened && (
                 <ActionBlock>
-                    {canBeRepeated && (
+                    {true && (
                         <Link to={`/hr-applications/holiday-work/${index}`}>
                             <Button
                                 text="Выйти в выходной день"
@@ -58,9 +62,9 @@ const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
                             />
                         </Link>
                     )}
-                    {!!dismissalApplications.length && (
+                    {/* {!!dismissalApplications.length && (
                         <StyledTable columns={getHrApplicationsColumns()} data={dismissalApplications} maxOnPage={10} />
-                    )}
+                    )} */}
                 </ActionBlock>
             )}
             <Button
@@ -91,9 +95,9 @@ const BlockHeader = styled.div`
     align-items: center;
 `
 
-const StyledTable = styled(Table)`
-    width: 100%;
-`
+// const StyledTable = styled(Table)`
+//     width: 100%;
+// `
 
 const ActionBlock = styled.div`
     display: flex;
