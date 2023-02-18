@@ -1,5 +1,6 @@
+import { popUpMessageModel } from '@entities/pop-up-message'
 import { popUpMessageModelHr } from '@entities/pop-up-message-hr'
-import { $hrApi } from '@shared/api/config'
+import { $hrApi, isAxiosError } from '@shared/api/config'
 import { MessageType } from '@shared/ui/types'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
@@ -10,9 +11,9 @@ const sendBufferHolidayPlanning = createEvent<BufferHolidayPlanningForm>()
 
 const loadBufferHolidayPlanningFx = createEffect(async () => {
     const { data } = await $hrApi.get<BufferHolidayPlanning[]>('Vacation.GetAllHistory')
-
     return data
 })
+
 sample({ clock: loadBufferHolidayPlanning, target: loadBufferHolidayPlanningFx })
 
 const sendBufferHolidayPlanningFx = createEffect(async (data: BufferHolidayPlanningForm) => {
@@ -30,8 +31,7 @@ sample({ clock: loadBufferHolidayPlanningFx.doneData, target: $bufferHolidayPlan
 
 sample({
     clock: sendBufferHolidayPlanningFx.doneData,
-    fn: (response) => {
-        const result = response
+    fn: (result) => {
         if (result.isError) {
             return { message: result.error, type: 'hrFailure' as MessageType, time: 300000 }
         }
@@ -44,20 +44,37 @@ sample({
     },
     target: popUpMessageModelHr.events.evokePopUpMessage,
 })
-// sample({
-//     clock: sendBufferHolidayPlanningFx.doneData,
-//     source: $bufferHolidayPlanning,
-//     fn: (source, clock) => {
-//         return [...source, clock]
-//     },
-//     target: $bufferHolidayPlanning,
-// })
 
 sample({
-    clock: sendBufferHolidayPlanningFx.fail,
-    fn: () => {
+    clock: sendBufferHolidayPlanningFx.doneData,
+    source: $bufferHolidayPlanning,
+    fn: (source, clock) => {
+        return [...source, clock]
+    },
+    target: $bufferHolidayPlanning,
+})
+
+sample({
+    clock: loadBufferHolidayPlanningFx.failData,
+    fn: (response) => {
+        const message = isAxiosError(response) ? response.response?.data.error : 'Не удалось загрузить данные'
+
         return {
-            message: 'Не удалось отправить форму.',
+            message,
+            type: 'failure' as MessageType,
+            time: 300000,
+        }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
+})
+
+sample({
+    clock: sendBufferHolidayPlanningFx.failData,
+    fn: (response) => {
+        const message = isAxiosError(response) ? response.response?.data.error : 'Не удалось отправить данные'
+
+        return {
+            message,
             type: 'hrFailure' as MessageType,
             time: 300000,
         }
