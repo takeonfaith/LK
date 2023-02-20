@@ -13,7 +13,6 @@ const getForm = (
     currentIndex: number,
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
-
     return {
         title: 'Заявление на увольнение',
         data: [
@@ -147,7 +146,7 @@ const getForm = (
                 fieldName: 'get_tk_address',
                 editable: true,
                 mask: true,
-                required: false,
+                required: true,
                 specialType: 'Address',
             },
             {
