@@ -36,6 +36,7 @@ import {
     VisaCertificatePage,
     WorkOnTermsOfExternalConcurrencyPage,
     WorkTransfer,
+    PrintOrderPage,
 } from './pages'
 
 import { isProduction, OLD_LK_URL } from '@consts'
@@ -625,6 +626,16 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         color: 'blue',
         path: DATA_VERIFICATION_ROUTE,
         Component: DataVerificationPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'print-order': {
+        id: 'print-order',
+        title: 'Заказ в отдел оперативной печати',
+        icon: <FiFileText />,
+        color: 'blue',
+        path: PRINT_ORDER_ROUTE,
+        Component: isProduction ? ApplicationRedirect : PrintOrderPage,
         isTemplate: false,
         group: 'OTHER',
     },

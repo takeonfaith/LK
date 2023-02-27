@@ -38,6 +38,8 @@ export enum ApplicationFormCodes {
     DISMISSAL = '',
     HOLIDAY_POSTPONED = '',
     PART_TIME_EMPLOYMENT = '',
+    // Todo: Edit PRINT_ORDER form id when api will be available
+    PRINT_ORDER = 'mock_print_order_form_id',
 }
 
 export enum ApplicationTeachersFormCodes {
