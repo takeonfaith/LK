@@ -39,7 +39,7 @@ export const getOrderParamsForm = (): IInputArea => {
 
 export const getForm = (data: UserApplication): IInputArea => {
     return {
-        title: 'Заказ в отдел оперативной печати',
+        title: 'Заказ в отдел оперативной полиграфии',
         data: [
             ...getBasicFieldsApplicationTeacher(
                 // Todo: Delete the Тест Тестович id check after testings

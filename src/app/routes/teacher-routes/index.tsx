@@ -631,7 +631,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
     },
     'print-order': {
         id: 'print-order',
-        title: 'Заказ в отдел оперативной печати',
+        title: 'Заказ в отдел оперативной полиграфии',
         icon: <FiFileText />,
         color: 'blue',
         path: PRINT_ORDER_ROUTE,
