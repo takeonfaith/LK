@@ -10,10 +10,12 @@ export const ErrorContainer = styled.div<{ size?: string }>`
     align-items: center;
     color: var(--text);
 
-    img {
-        min-width: ${({ size }) => size ?? '100px'};
-        height: ${({ size }) => size ?? '100px'};
-        margin-bottom: 5px;
+    .image {
+        margin-bottom: 10px;
+        img {
+            min-width: ${({ size }) => size ?? '100px'};
+            height: ${({ size }) => size ?? '100px'};
+        }
     }
 
     .error-content {

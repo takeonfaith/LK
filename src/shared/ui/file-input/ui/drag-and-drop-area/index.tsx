@@ -1,6 +1,7 @@
+import Subtext from '@shared/ui/subtext'
 import { FileInputProps } from '@ui/file-input'
 import React, { useRef, useState } from 'react'
-import { FiUploadCloud } from 'react-icons/fi'
+import { FcFolder } from 'react-icons/fc'
 import loadFiles from './lib/load-files'
 import DragAndDropAreaWrapper from './style'
 
@@ -51,17 +52,18 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, allowedTypes }: 
             onDrop={(e) => isActive && handleDrop(e)}
             topPadding={!!maxFiles}
         >
-            <div className="info">
-                <span className="info-item">Макс. размер файла: 10 MB</span>
-                {maxFiles && <span className="info-item">Макс. файлов: {maxFiles}</span>}
-                <span className="info-item">
-                    Форматы: {!allowedTypes ? 'jpg, png, pdf' : allowedTypes.map((t) => t.split('/')[1]).join(', ')}
-                </span>
-            </div>
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
             <div className="message">
-                <FiUploadCloud />
+                <FcFolder className="front-icon" />
+                <div className="icons-behind">
+                    <FcFolder className="icon-1" />
+                    <FcFolder className="icon-2" />
+                </div>
                 <b>Нажмите сюда или перетащите файл</b>
+                <Subtext align="center">
+                    Форматы: {!allowedTypes ? 'jpg, png, pdf' : allowedTypes.map((t) => t.split('/')[1]).join(', ')} •
+                    Макс. файлов: {maxFiles}
+                </Subtext>
             </div>
         </DragAndDropAreaWrapper>
     )

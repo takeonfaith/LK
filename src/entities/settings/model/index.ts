@@ -49,7 +49,9 @@ const useSettings = () => {
 
 const getLocalSettingsFx = createEffect((userId: string): Param => {
     currentUser = userId
-    const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser]
+    // TODO: change logic so that it supports an update of settings config.
+    // Now doesn't update local storage if u add something to object of default settings
+    const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser] as Param
     return localSettings ?? getDefaultSettings(userId)[userId]
 })
 
@@ -95,6 +97,8 @@ const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
 
 $settingsStore.watch((state) => {
     if (state !== DEFAULT_STORE && !!currentUser) {
+        // eslint-disable-next-line no-console
+        console.log('testsdad')
         const allSettings = JSON.parse(localStorage.getItem('new-settings') ?? JSON.stringify({}))
         allSettings[currentUser] = state.settings[currentUser]
         localStorage.setItem('new-settings', JSON.stringify(allSettings))

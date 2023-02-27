@@ -13,6 +13,7 @@ type StyledProps = {
     width?: string
     height?: string
     pulsing?: boolean
+    background?: string
 }
 
 const SubmitButtonWrapper = styled.button<StyledProps>`
@@ -32,7 +33,7 @@ const SubmitButtonWrapper = styled.button<StyledProps>`
     overflow: hidden;
     border: none;
     cursor: pointer;
-    background: ${({ isDone }) => (isDone ? 'var(--green)' : 'var(--blue)')};
+    background: ${({ isDone, background }) => (isDone ? 'var(--green)' : background ?? 'var(--blue)')};
     animation: ${({ pulsing }) => pulsing && '1s pulsing infinite'};
 
     @keyframes pulsing {
@@ -135,6 +136,7 @@ const SubmitButtonWrapper = styled.button<StyledProps>`
 type Props = StyledProps & {
     text: string
     action: () => void
+    background?: string
     completed: boolean
     setCompleted: (completed: boolean) => void
     buttonSuccessText?: string
@@ -149,6 +151,7 @@ const SubmitButton = ({
     width,
     height,
     setCompleted,
+    background,
     buttonSuccessText = 'Готово',
     popUpSuccessMessage = 'Успешно',
     popUpFailureMessage = 'Nope',
@@ -186,6 +189,7 @@ const SubmitButton = ({
     return (
         <SubmitButtonWrapper
             isLoading={isLoading}
+            background={background}
             className="submit-button"
             completed={completed}
             isActive={isActive && !isDone && !completed}

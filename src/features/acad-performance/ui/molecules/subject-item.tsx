@@ -1,11 +1,14 @@
-import { AcadPerformance } from '@api/model/acad-performance'
+import { AcadPerformance, IGrade } from '@api/model/acad-performance'
 import localizeDate from '@utils/localize-date'
 import getShortName from '@utils/get-short-name'
 import React from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import { SubjectModal } from '.'
-import { SubjectCheker, SubjectProgresssBar } from '../atoms'
+import { SubjectCheker } from '../atoms'
+import ProgressBar from '@shared/ui/progress-bar'
+import { GradeByScore, WidthByGrade } from '@shared/consts'
+import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 
 interface Props {
     item: AcadPerformance
@@ -114,6 +117,16 @@ const Teacher = styled.div`
     }
 `
 
+export const GradeScore = styled.div<{ grade: keyof IGrade }>`
+    display: none;
+
+    @media (max-width: 1000px) {
+        display: block;
+        font-weight: 600;
+        color: ${({ grade }) => findProgressBarColor(grade)};
+    }
+`
+
 const SubjectItem = ({ item, number, type }: Props) => {
     const { open } = useModal()
     return (
@@ -123,7 +136,14 @@ const SubjectItem = ({ item, number, type }: Props) => {
                 <div>{item.name}</div>
             </Name>
             <Bar>
-                {type === 'exam' ? <SubjectProgresssBar grade={item.grade} /> : <SubjectCheker grade={item.grade} />}
+                {type === 'exam' ? (
+                    <>
+                        <ProgressBar value={WidthByGrade[item.grade]} coloring />
+                        <GradeScore grade={item.grade}>{GradeByScore[item.grade]}</GradeScore>
+                    </>
+                ) : (
+                    <SubjectCheker grade={item.grade} />
+                )}
             </Bar>
             <Grade>{item.grade}</Grade>
             <ExamDate>{localizeDate(item.exam_date)}</ExamDate>
