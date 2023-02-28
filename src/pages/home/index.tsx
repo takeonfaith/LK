@@ -24,7 +24,7 @@ const Home = () => {
     if (!user || !homeRoutes) return null
 
     useEffect(() => {
-        scheduleModel.effects.getScheduleFx(user)
+        scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
     }, [])
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import useDebounce from '@shared/lib/hooks/use-debounce'
-import Search from '../search'
+import Search, { Hint } from '../search'
 
 type GlobalSearchProps = {
     setExternalValue?: (value: string) => void
@@ -9,6 +9,7 @@ type GlobalSearchProps = {
     validationCheck?: boolean
     searchApi: (value: string) => void
     triggerSearchOn?: string[]
+    hints?: Hint[]
 }
 
 const GlobalSearch = ({
@@ -18,6 +19,7 @@ const GlobalSearch = ({
     validationCheck,
     searchApi,
     triggerSearchOn,
+    hints,
 }: GlobalSearchProps) => {
     const onSearch = (value: string) => {
         searchApi(value)
@@ -42,6 +44,7 @@ const GlobalSearch = ({
             placeholder={placeholder}
             validationCheck={validationCheck}
             loading={loading}
+            hints={hints}
         />
     )
 }

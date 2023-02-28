@@ -1,5 +1,5 @@
 import React from 'react'
-import Select, { SelectPage } from '@features/select'
+import { SelectPage } from '@features/select'
 import { Title } from '@shared/ui/title'
 import PagintaionList from '@ui/pagination-list'
 import { Event, Store } from 'effector'
@@ -9,6 +9,8 @@ import styled from 'styled-components'
 import { User } from 'widgets'
 import GlobalSearch from '@shared/ui/global-search'
 import Subtext from '@shared/ui/subtext'
+import { Hint } from '@shared/ui/search'
+import SearchWithHints from '@features/search-with-hints'
 
 const ListWrapper = styled.div`
     width: 100%;
@@ -41,24 +43,29 @@ type Props<T extends TUser> = {
         next: Event<ServerListRequest<SelectPage | null>>
         load: Event<ServerListRequest<SelectPage | null>>
     }
-    filters?: SelectPage[]
+    filter?: string
     underSearchText?: (filter: SelectPage | null) => string | null
     noResultContent?: JSX.Element | null
+    defaultFilter: string
+    filterPlaceholder?: string
+    filterRequest: (value: string) => Promise<string[]>
 }
 
 const ListOfPeople = <T extends TUser>({
     title,
     searchPlaceholder,
     paginationList,
+    defaultFilter,
     noResultContent,
-    filters,
+    filterRequest,
+    filterPlaceholder,
     underSearchText,
 }: Props<T>) => {
     const { $items, $isPending, $hasNext, next, load } = paginationList
     const isPending = useStore($isPending)
     const hasNext = useStore($hasNext)
-
-    const [filter, setFilter] = useState<SelectPage | null>(filters?.[0] ?? null)
+    const [groupSearch, setGroupSearch] = useState(defaultFilter)
+    const [filter, setFilter] = useState<Hint | null>({ id: groupSearch, value: groupSearch, title: groupSearch })
     const under = underSearchText?.(filter)
 
     const handleNext = () => {
@@ -73,7 +80,13 @@ const ListOfPeople = <T extends TUser>({
         load({ filter, search: value })
     }
 
-    const handleSelected = (data: any) => setFilter(data)
+    const onHintClick = (hint: Hint | undefined) => {
+        setFilter(hint ?? null)
+    }
+
+    const onValueEmpty = () => {
+        setFilter(null)
+    }
 
     return (
         <ListWrapper>
@@ -82,12 +95,21 @@ const ListOfPeople = <T extends TUser>({
             </Title>
             <div className="search-and-filter">
                 <GlobalSearch
-                    triggerSearchOn={[filter?.id.toString() ?? '']}
+                    triggerSearchOn={[filter?.id ?? '']}
                     placeholder={searchPlaceholder ?? 'Поиск'}
                     searchApi={handleSearch}
                     validationCheck
                 />
-                {filters && <Select items={filters} setSelected={handleSelected} selected={filter} />}
+                {filterRequest && (
+                    <SearchWithHints
+                        value={groupSearch}
+                        setValue={setGroupSearch}
+                        onHintClick={onHintClick}
+                        onValueEmpty={onValueEmpty}
+                        placeholder={filterPlaceholder ?? 'Поиск'}
+                        request={filterRequest}
+                    />
+                )}
             </div>
             <Subtext visible={!!under}>{under}</Subtext>
             <PagintaionList
