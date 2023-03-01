@@ -1,4 +1,5 @@
 import Search, { Hint } from '@shared/ui/search'
+import { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
 
 type Props = {
@@ -9,7 +10,8 @@ type Props = {
     setValue: React.Dispatch<React.SetStateAction<string>>
     onHintClick: (hint: Hint | undefined) => void
     onValueEmpty?: () => void
-    request: (value: string) => Promise<string[]>
+    request: (value: string) => Promise<AxiosResponse<{ items: string[] }, any>>
+    customMask?: (value: string, prevValue?: string) => string
 }
 
 const SeachDivisions = ({
@@ -20,6 +22,7 @@ const SeachDivisions = ({
     request,
     onHintClick,
     hintIcon,
+    customMask,
     leftIcon,
 }: Props) => {
     const [hints, setHints] = useState<Hint[]>([])
@@ -28,10 +31,15 @@ const SeachDivisions = ({
     useEffect(() => {
         if (value.length > 0) {
             setLoadingHints(true)
-            request(value).then((groups) => {
-                setHints(groups.map((hint) => ({ id: hint, title: hint, value: hint, icon: hintIcon })))
-                setLoadingHints(false)
-            })
+            request(value)
+                .then((groups) => {
+                    setHints(groups.data.items.map((hint) => ({ id: hint, title: hint, value: hint, icon: hintIcon })))
+                    setLoadingHints(false)
+                })
+                .catch(() => {
+                    setLoadingHints(false)
+                    setHints([])
+                })
         } else {
             setLoadingHints(false)
             setHints([])
@@ -49,6 +57,7 @@ const SeachDivisions = ({
             leftIcon={leftIcon}
             loading={loadingHints}
             onHintClick={onHintClick}
+            customMask={customMask}
         />
     )
 }

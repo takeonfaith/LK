@@ -14,6 +14,7 @@ import RetakeSchedule from '@features/schedule/ui/organisms/retake-schedule'
 import SessionSchedule from '@features/schedule/ui/organisms/session-schedule'
 import SearchWithHints from '@features/search-with-hints'
 import { getGroups } from '@shared/api/student-api'
+import Masks from '@shared/lib/masks'
 import { Hint } from '@shared/ui/search'
 import { Wrapper } from '@ui/atoms'
 import React, { useMemo, useRef, useState } from 'react'
@@ -132,6 +133,7 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                                     setValue={setGroupSearch}
                                     onHintClick={onHintClick}
                                     placeholder={'Группа'}
+                                    customMask={Masks.groupMask}
                                     request={getGroups}
                                     leftIcon={<FiUsers />}
                                     onValueEmpty={user?.user_status === 'staff' ? onValueEmpty : undefined}

@@ -11,6 +11,7 @@ import GlobalSearch from '@shared/ui/global-search'
 import Subtext from '@shared/ui/subtext'
 import { Hint } from '@shared/ui/search'
 import SearchWithHints from '@features/search-with-hints'
+import { AxiosResponse } from 'axios'
 
 const ListWrapper = styled.div`
     width: 100%;
@@ -48,7 +49,8 @@ type Props<T extends TUser> = {
     noResultContent?: JSX.Element | null
     defaultFilter: string
     filterPlaceholder?: string
-    filterRequest: (value: string) => Promise<string[]>
+    customMask?: (value: string, prevValue?: string) => string
+    filterRequest: (value: string) => Promise<AxiosResponse<{ items: string[] }, any>>
 }
 
 const ListOfPeople = <T extends TUser>({
@@ -57,9 +59,10 @@ const ListOfPeople = <T extends TUser>({
     paginationList,
     defaultFilter,
     noResultContent,
-    filterRequest,
     filterPlaceholder,
+    filterRequest,
     underSearchText,
+    customMask,
 }: Props<T>) => {
     const { $items, $isPending, $hasNext, next, load } = paginationList
     const isPending = useStore($isPending)
@@ -106,6 +109,7 @@ const ListOfPeople = <T extends TUser>({
                         setValue={setGroupSearch}
                         onHintClick={onHintClick}
                         onValueEmpty={onValueEmpty}
+                        customMask={customMask}
                         placeholder={filterPlaceholder ?? 'Поиск'}
                         request={filterRequest}
                     />

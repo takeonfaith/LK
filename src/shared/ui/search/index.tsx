@@ -72,6 +72,7 @@ type SearchProps = {
     hints?: Hint[]
     leftIcon?: ChildrenType
     onHintClick?: (hint: Hint | undefined) => void
+    customMask?: (value: string, prevValue?: string) => string
 }
 
 const Search = ({
@@ -84,6 +85,7 @@ const Search = ({
     loading,
     hints,
     leftIcon,
+    customMask,
     onHintClick,
 }: SearchProps) => {
     const handleSuggestions = useCallback(() => {
@@ -93,17 +95,18 @@ const Search = ({
     const [currentSelectedHint, setCurrentSelectedHint] = useState<number | null>(0)
     const [openHints, setOpenHints] = useState(false)
     const hintsRef = useRef<HTMLDivElement>(null)
+    const selectedRef = useRef<HTMLDivElement>(null)
     useOnClickOutside(hintsRef, () => setOpenHints(false))
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
         if ((hints?.length ?? 0) > 0 || loading) setOpenHints(true)
 
         if (e.key === 'ArrowDown') {
-            e.preventDefault()
+            selectedRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' })
             if (typeof currentSelectedHint === 'number')
                 setCurrentSelectedHint(limitNumber(currentSelectedHint + 1, (hints?.length ?? 1) - 1, 0))
         } else if (e.key === 'ArrowUp') {
-            e.preventDefault()
+            selectedRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' })
             if (typeof currentSelectedHint === 'number')
                 setCurrentSelectedHint(limitNumber(currentSelectedHint - 1, (hints?.length ?? 1) - 1, 0))
         } else if (e.key === 'Enter') {
@@ -136,6 +139,8 @@ const Search = ({
                 setValue={setValue}
                 loading={loading}
                 width={width}
+                mask
+                customMask={customMask}
             />
             {value.length > 0 && validationCheck && isValidEnglishText(value) && (
                 <Subtext width="100%" maxWidth="100%" onClick={handleSuggestions}>
@@ -156,11 +161,13 @@ const Search = ({
                     orientation="vertical"
                 >
                     {hints?.map(({ title, icon }, index) => {
+                        const selected = currentSelectedHint === index
                         return (
                             <HintItem
                                 onClick={handleItemClick(index)}
                                 key={title + index}
-                                selected={currentSelectedHint === index}
+                                ref={selected ? selectedRef : null}
+                                selected={selected}
                             >
                                 {icon && <div className="icon">{icon}</div>}
                                 <span>{title}</span>

@@ -8,6 +8,7 @@ import ListOfPeople from 'widgets/list-of-people'
 import { userModel } from '@entities/user'
 import styled from 'styled-components'
 import { getGroups } from '@shared/api/student-api'
+import Masks from '@shared/lib/masks'
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -54,6 +55,7 @@ const AllStudentsPage = () => {
                             filterPlaceholder="Группа"
                             defaultFilter={user?.group ?? ''}
                             filter={user?.user_status === 'stud' ? user.group ?? '' : undefined}
+                            customMask={Masks.groupMask}
                             underSearchText={underSearchText}
                         />
                     </Block>

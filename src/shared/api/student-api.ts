@@ -1,7 +1,6 @@
 import { $api } from './config'
 import token from '@utils/token'
 import { TStudent } from './model'
-import emulateRequest from '@shared/lib/emulate-request'
 
 type StudentResponse = {
     current_page: string
@@ -18,25 +17,5 @@ export const get = (search: string, group: string, page: number | undefined, lim
 }
 
 export const getGroups = (value: string) => {
-    const TEMP_GROUPS = [
-        '191-721',
-        '191-722',
-        '191-723',
-        '191-724',
-        '191-725',
-        '191-726',
-        '201-721',
-        '201-722',
-        '201-723',
-        '201-724',
-        '201-725',
-        '221-112',
-        '224-631',
-        '211-728',
-        '301-725',
-    ]
-    return emulateRequest(
-        TEMP_GROUPS.filter((group) => group.includes(value)),
-        300,
-    )
+    return $api.get(`?getGroups=${value}&perpage=${30}&page=${1}&token=${token()}`)
 }
