@@ -20,6 +20,7 @@ export const FormStyled = styled.div`
     gap: 10px;
     min-height: 100%;
     min-width: 280px;
+    width: 100%;
 `
 
 export const LeftSide = styled.div`

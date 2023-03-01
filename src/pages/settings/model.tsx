@@ -26,6 +26,7 @@ export type TSettingsFields = {
     icon?: React.ReactNode
     visible?: boolean
     subfields?: TSettingsFields[]
+    searchable?: boolean
 }
 
 type TSettingsSection = {
@@ -40,6 +41,7 @@ type SettingsFullProps = {
     email: Prop<string>
     phone: Prop<string>
     avatar: Prop<string | undefined>
+    menu: Prop<FilterElementList>
     homepage: { widgets: { schedule: Prop<boolean>; payments: Prop<boolean> }; sections: Prop<FilterElementList> }
 }
 
@@ -51,7 +53,7 @@ export type FieldProps = TSettingsFields
 
 export type TSettingsModel = (props: SettingsFullProps) => TFullSettingsModel
 
-const getSettingsModel: TSettingsModel = ({ theme, email, avatar, homepage, phone }) => ({
+const getSettingsModel: TSettingsModel = ({ theme, email, avatar, homepage, phone, menu }) => ({
     'settings-appearance': [
         {
             title: 'Тема',
@@ -79,7 +81,19 @@ const getSettingsModel: TSettingsModel = ({ theme, email, avatar, homepage, phon
             ],
         },
     ],
-    'settings-customize-menu': [],
+    'settings-customize-menu': [
+        {
+            title: 'Настройка меню',
+            fields: [
+                {
+                    title: '',
+                    type: 'choices',
+                    value: menu.value,
+                    additionalActions: menu.additionalActions,
+                },
+            ],
+        },
+    ],
     'settings-home-page': [
         {
             title: 'Разделы быстрого доступа',

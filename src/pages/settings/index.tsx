@@ -1,11 +1,11 @@
 import React from 'react'
 import { ListOfSettings } from '@features/settings'
 import { CenterPage } from '@shared/ui/atoms'
-import Block from '@shared/ui/block'
 import { useState } from 'react'
 import styled from 'styled-components'
 import useSettings from './hooks/use-settings'
 import SettingsContent from './settings-content'
+import BlockWrapper from '@shared/ui/block/styles'
 
 const Wrapper = styled.div`
     padding: 10px;
@@ -14,9 +14,18 @@ const Wrapper = styled.div`
 
     @media (max-width: 800px) {
         width: 100%;
+        padding: 0;
+        height: calc(100vh - 60px);
+        gap: 0 !important;
         .settings-page {
             font-size: 0.8em;
         }
+    }
+`
+
+const SettingsBlock = styled(BlockWrapper)`
+    @media (max-width: 768px) {
+        flex-direction: row;
     }
 `
 
@@ -29,9 +38,10 @@ const SettingsPage = () => {
     return (
         <Wrapper>
             <CenterPage height="100%">
-                <Block
+                <SettingsBlock
                     width="100%"
                     maxWidth="1000px"
+                    noAppearanceInMobile
                     height="700px"
                     maxHeight="100vh"
                     gap="0"
@@ -48,7 +58,7 @@ const SettingsPage = () => {
                         searchResult={searchResult}
                         settingsConfig={fullSettings}
                     />
-                </Block>
+                </SettingsBlock>
             </CenterPage>
         </Wrapper>
     )

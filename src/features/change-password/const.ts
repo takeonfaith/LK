@@ -28,9 +28,4 @@ export const RULES: TRules = [
         visible: false,
         test: (value1, value2) => value1.length > 0 && value2.length > 0 && value1 === value2,
     },
-    {
-        text: 'Нет последовательностей по типу 123 и qwerty',
-        visible: false,
-        test: (value1) => value1.length > 0 && !/123/g.test(value1) && !/qwerty/g.test(value1),
-    },
 ]

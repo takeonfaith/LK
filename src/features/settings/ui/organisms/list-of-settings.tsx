@@ -19,11 +19,11 @@ const ListOfSettingsWrapper = styled(ListWrapper)<{ open: boolean }>`
 
     @media (max-width: 600px) {
         transition: 0.2s;
+        box-shadow: none;
         width: ${({ open }) => (open ? '100%' : '0')};
         max-width: ${({ open }) => (open ? '100%' : '0')};
         min-width: 0;
-        padding: ${({ open }) => (open ? '20px' : '0')};
-        opacity: ${({ open }) => (open ? '1' : '0')};
+        display: ${({ open }) => (open ? 'flex' : 'none')};
     }
 `
 
