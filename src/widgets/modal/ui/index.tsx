@@ -29,10 +29,12 @@ const Modal = () => {
                         onClick={back}
                         icon={<FiChevronLeft />}
                         text="Назад"
-                        background="transparent"
+                        background="var(--theme)"
                         textColor={Colors.blue.main}
-                        width="100%"
+                        width="fit-content"
                         align="left"
+                        padding="5px 10px"
+                        height="fit-content"
                     />
                 )}
                 <Button onClick={close} icon={<FiX />} className="close-button" background="transparent" />

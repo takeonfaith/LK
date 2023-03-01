@@ -15,3 +15,7 @@ export const get = (search: string, group: string, page: number | undefined, lim
         `?getStudents&search=${search}&group=${group}&page=${page}&perpage=${limit}&token=${token()}`,
     )
 }
+
+export const getGroups = (value: string) => {
+    return $api.get(`?getGroups=${value}&perpage=${30}&page=${1}&token=${token()}`)
+}

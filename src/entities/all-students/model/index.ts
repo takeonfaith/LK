@@ -7,8 +7,7 @@ import { createPaginationList } from 'shared/effector/create-pagination-list'
 const getFetchStudentsFx = createEffect(
     async (request: ServerListRequest<SelectPage | null>): Promise<ServerListResponse<TStudent>> => {
         const { search = '', page, limit, filter } = request
-        const group = filter?.title === 'Моя группа' ? filter.id.toString() : ''
-        const { data } = await studentApi.get(search, group, page, limit)
+        const { data } = await studentApi.get(search, filter?.id.toString() ?? '', page, limit)
         return { results: data.items }
     },
 )

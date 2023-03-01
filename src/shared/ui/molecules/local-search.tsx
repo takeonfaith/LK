@@ -1,6 +1,6 @@
 import useDebounce from '@shared/lib/hooks/use-debounce'
 import React from 'react'
-import Search from '../search'
+import Search, { Hint } from '../search'
 
 interface Props<T, R> {
     whereToSearch: T
@@ -11,6 +11,7 @@ interface Props<T, R> {
     setExternalValue?: (value: string) => void
     validationCheck?: boolean
     loadingOnType?: boolean
+    hints?: Hint[]
 }
 
 const LocalSearch = <T, R>({
@@ -19,6 +20,7 @@ const LocalSearch = <T, R>({
     setResult,
     inputAppearance,
     setExternalValue,
+    hints,
     loadingOnType = false,
     placeholder = 'Поиск по меню',
     validationCheck = false,
@@ -45,6 +47,7 @@ const LocalSearch = <T, R>({
             placeholder={placeholder}
             validationCheck={validationCheck}
             loading={loadingOnType ? loading : false}
+            hints={hints}
         />
     )
 }
