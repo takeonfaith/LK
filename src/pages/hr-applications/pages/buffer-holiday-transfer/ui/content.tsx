@@ -4,18 +4,21 @@ import { useState } from 'react'
 import History from './history'
 import JobTitle from './job-title'
 import styled from 'styled-components'
-//import HWAssesment from './holiday-work-affirmation'
+import { bufferHolidayTransferModel } from '../model'
 
 const Content = () => {
     const {
         data: { dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
+    const { data } = bufferHolidayTransferModel.selectors.useBufferHolidayTransfer()
     const [historyIsEmpty, setHistoryIsEmpty] = useState<boolean>(true)
 
+    if (!data) {
+        return null
+    }
     if (!dataWorkerApplication) {
         return null
     }
-
     return (
         <Wrapper>
             {dataWorkerApplication.map((jobTitleInfo, index) => {

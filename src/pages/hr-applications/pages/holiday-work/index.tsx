@@ -11,6 +11,7 @@ import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory, useParams } from 'react-router'
+import { bufferHolidayWorkModel } from '../buffer-holiday-work/model'
 import getCompensation from './lib/get-compenstion'
 import getForm from './lib/get-form'
 
@@ -20,10 +21,9 @@ const HolidayWork = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
         data: { dataUserApplication, dataWorkerApplication },
-        workerLoading: loading,
     } = applicationsModel.selectors.useApplications()
+    const { loading: loading } = bufferHolidayWorkModel.selectors.useBufferHolidayWork()
     const [completed, setCompleted] = useState(false)
-
     const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const isDone = completed ?? false
     const history = useHistory()

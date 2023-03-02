@@ -15,10 +15,11 @@ interface Props {
 }
 
 const Row = ({ columns, el, index, onRowClick }: Props) => {
-    const { open } = useModal()
-    const defaultOnClick = () => open(<RowModal title={'Информация'} obj={el} columns={columns} />)
+    //const { open } = useModal()
+    //const defaultOnClick = () => open(<RowModal title={'Информация'} obj={el} columns={columns} />)
+    //onClick={() => (onRowClick ? onRowClick(el) : defaultOnClick())}
     return (
-        <RowWrapper even={index % 2 === 0} onClick={() => (onRowClick ? onRowClick(el) : defaultOnClick())}>
+        <RowWrapper even={index % 2 === 0}>
             {columns.map((column) => {
                 return (
                     <Column

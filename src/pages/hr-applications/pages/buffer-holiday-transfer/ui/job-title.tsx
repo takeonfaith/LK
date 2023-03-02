@@ -1,13 +1,10 @@
 import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
-// import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-// import getHrApplicationsColumns from '../lib/get-hr-applications-columns'
-// import { BufferHolidayWork } from '../types'
 
 interface Props {
     //info?: BufferHolidayPlanning
@@ -51,9 +48,9 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
             {opened && (
                 <ActionBlock>
                     {true && (
-                        <Link to={`/hr-applications/holiday-work/${index}`}>
+                        <Link to={`/hr-applications/holiday-transfer/${index}`}>
                             <Button
-                                text="Выйти в выходной день"
+                                text="Перенос отпуска"
                                 background="rgb(236,95,107)"
                                 textColor="#fff"
                                 width={'250px'}
@@ -74,7 +71,6 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                 }}
                 text={opened ? 'Скрыть' : 'Подробнее'}
                 background="transparent"
-                padding="0px"
             />
         </Block>
     )

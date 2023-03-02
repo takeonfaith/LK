@@ -1,7 +1,7 @@
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import sendHrFormHolidayTransfer from '@pages/hr-applications/lib/send-hr-form-holiday-transfer'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
@@ -9,24 +9,28 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
-import { useHistory } from 'react-router'
+import { useHistory, useParams } from 'react-router'
+import { bufferHolidayTransferModel } from '../buffer-holiday-transfer/model'
 import getForm from './lib/get-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const HolidayPostponed = () => {
+const HolidayTransfer = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
-        data: { dataUserApplication },
+        data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
+    const { loading: loading } = bufferHolidayTransferModel.selectors.useBufferHolidayTransfer()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
     const isDone = completed ?? false
     const history = useHistory()
-
+    const { id } = useParams<{ id: string }>()
+    const currentIndex = +id
     useEffect(() => {
-        if (!!dataUserApplication) setForm(getForm(dataUserApplication))
-    }, [dataUserApplication])
+        if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
+            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
+        }
+    }, [dataUserApplication, currentIndex, loading])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
@@ -43,9 +47,7 @@ const HolidayPostponed = () => {
 
                     <SubmitButton
                         text={'Отправить'}
-                        action={() =>
-                            globalAppSendForm(ApplicationFormCodes.HOLIDAY_POSTPONED, [form], setLoading, setCompleted)
-                        }
+                        action={() => sendHrFormHolidayTransfer(ApplicationFormCodes.DISMISSAL, [form], setCompleted)}
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}
@@ -53,8 +55,7 @@ const HolidayPostponed = () => {
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
                         isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
-                        popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
-                        popUpSuccessMessage="Данные формы успешно отправлены"
+                        alerts={false}
                     />
                 </FormBlock>
             )}
@@ -62,7 +63,7 @@ const HolidayPostponed = () => {
     )
 }
 
-export default HolidayPostponed
+export default HolidayTransfer
 
 /*<TemplateFormPage model={teacherStatementModel} 
             getForm={getForm(dataUserApplication)} 

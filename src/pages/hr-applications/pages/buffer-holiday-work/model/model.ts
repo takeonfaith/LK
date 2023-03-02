@@ -1,17 +1,19 @@
 import { popUpMessageModelHr } from '@entities/pop-up-message-hr'
+import { getJwtToken, parseJwt } from '@entities/user/lib/jwt-token'
 import { $hrApi } from '@shared/api/config'
 import { MessageType } from '@shared/ui/types'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
-import { BufferHolidayWork, BufferHolidayWorkForm } from '../types'
+import { BufferHolidayWork, BufferHolidayWorkForm, BufferHolidayWorkOrder } from '../types'
 
 const loadBufferHolidayWork = createEvent()
 const sendBufferHolidayWork = createEvent<BufferHolidayWorkForm>()
 
 const loadBufferHolidayWorkFx = createEffect(async () => {
-    const { data } = await $hrApi.get<BufferHolidayWork[]>('Weekend.GetAllHistory')
-
-    return data
+    const { data } = await $hrApi.get<BufferHolidayWork>(
+        `Weekend.GetAllHistory?PersonalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
+    )
+    return data.orders
 })
 sample({ clock: loadBufferHolidayWork, target: loadBufferHolidayWorkFx })
 
@@ -23,10 +25,10 @@ const sendBufferHolidayWorkFx = createEffect(async (data: BufferHolidayWorkForm)
 
 sample({ clock: sendBufferHolidayWork, target: sendBufferHolidayWorkFx })
 
-const $bufferHolidayWork = createStore<BufferHolidayWork[]>([])
+const $bufferHolidayWorkOrders = createStore<BufferHolidayWorkOrder[]>([])
 const $bufferHolidayWorkLoading = sendBufferHolidayWorkFx.pending
 
-sample({ clock: loadBufferHolidayWorkFx.doneData, target: $bufferHolidayWork })
+sample({ clock: loadBufferHolidayWorkFx.doneData, target: $bufferHolidayWorkOrders })
 sample({
     clock: sendBufferHolidayWorkFx.doneData,
     fn: (response) => {
@@ -38,7 +40,7 @@ sample({
         return {
             message: `Форма отправлена успешно`,
             type: 'success' as MessageType,
-            time: 30000,
+            time: 0,
         }
     },
     target: popUpMessageModelHr.events.evokePopUpMessage,
@@ -72,7 +74,7 @@ export const effects = {
 }
 export const selectors = {
     useBufferHolidayWork: () => ({
-        data: useStore($bufferHolidayWork),
+        data: useStore($bufferHolidayWorkOrders),
         loading: useStore($bufferHolidayWorkLoading),
     }),
 }

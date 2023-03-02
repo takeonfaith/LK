@@ -8,6 +8,7 @@ type Props = StyledProps &
         children: ChildrenType
         loading?: boolean
         skeleton?: ChildrenType
+        background?: string
     }
 
 const SkeletonWrapper = styled.div`

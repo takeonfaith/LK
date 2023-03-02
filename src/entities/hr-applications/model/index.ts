@@ -57,11 +57,10 @@ sample({
         if (result.isError) {
             return { message: result.errorString, type: 'hrFailure' as MessageType, time: 300000 }
         }
-
         return {
             message: `Форма отправлена успешно`,
             type: 'success' as MessageType,
-            time: 30000,
+            time: 0,
         }
     },
     target: popUpMessageModelHr.events.evokePopUpMessage,

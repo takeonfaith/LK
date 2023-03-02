@@ -1,17 +1,18 @@
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
 import Table from '@shared/ui/table'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
-import getHolidayWorkHistoryColumns from '../../buffer-holiday-transfer/lib/get-holiday-work-history-columns'
-import { bufferHolidayWorkModel } from '../model'
+import getExHrApplicationsColumns from '../lib/get-ex-hr-applications-columns'
+import { bufferHolidayTransferModel } from '../model'
 
 const History = () => {
     const [openedHistory, setOpenedHistory] = useState<boolean>(false)
-    useEffect(bufferHolidayWorkModel.events.loadBufferHolidayWork, [])
-    const { data } = bufferHolidayWorkModel.selectors.useBufferHolidayWork()
-    const historyIsEmpty = !!data.every((d) => !d)
+
+    const { data } = bufferHolidayTransferModel.selectors.useBufferHolidayTransfer()
+    const historyIsEmpty = !!data.every((d) => !d.employeeVacations)
+
     return (
         <Block
             orientation={'vertical'}
@@ -23,26 +24,19 @@ const History = () => {
             height="fit-content"
         >
             <BlockHeader>
-                История заявлений на выход в выходной день:
+                История заявлений отпуск:
                 <Button
                     icon={openedHistory ? <HiChevronUp /> : <HiChevronDown />}
                     onClick={() => !historyIsEmpty && setOpenedHistory((prev) => !prev)}
                     background="transparent"
                 />
             </BlockHeader>
-            {openedHistory && (
-                // if (!object.dismissalApplications.length) return null
+            {openedHistory &&
+                data.map((object, index) => {
+                    // if (!object.dismissalApplications.length) return null
 
-                <StyledTable
-                    columns={getHolidayWorkHistoryColumns()}
-                    data={data.map((object) => {
-                        return {
-                            ...object,
-                        }
-                    })}
-                    maxOnPage={5}
-                />
-            )}
+                    return <StyledTable key={index} columns={getExHrApplicationsColumns()} data={[]} maxOnPage={10} />
+                })}
             <Button
                 onClick={() => {
                     !historyIsEmpty && setOpenedHistory((prev) => !prev)

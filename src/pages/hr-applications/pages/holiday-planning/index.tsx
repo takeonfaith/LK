@@ -10,6 +10,7 @@ import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory, useParams } from 'react-router'
+import { bufferHolidayPlanningModel } from '../buffer-holiday-planning/model'
 import getForm from './lib/get-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
@@ -18,8 +19,8 @@ const HolidayPlanning = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
         data: { dataUserApplication, dataWorkerApplication },
-        workerLoading: loading,
     } = applicationsModel.selectors.useApplications()
+    const { loading: loading } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
     const [completed, setCompleted] = useState(false)
     const isDone = completed ?? false
     const history = useHistory()

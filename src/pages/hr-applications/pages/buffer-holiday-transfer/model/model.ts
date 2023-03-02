@@ -5,35 +5,35 @@ import { $hrApi, isAxiosError } from '@shared/api/config'
 import { MessageType } from '@shared/ui/types'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
-import { BufferHolidayPlanning, BufferHolidayPlanningForm } from '../types'
+import { BufferHolidayTransfer, BufferHolidayTransferForm } from '../types'
 
-const loadBufferHolidayPlanning = createEvent()
-const sendBufferHolidayPlanning = createEvent<BufferHolidayPlanningForm>()
+const loadBufferHolidayTransfer = createEvent()
+const sendBufferHolidayTransfer = createEvent<BufferHolidayTransferForm>()
 
-const loadBufferHolidayPlanningFx = createEffect(async () => {
-    const { data } = await $hrApi.get<BufferHolidayPlanning[]>(
+const loadBufferHolidayTransferFx = createEffect(async () => {
+    const { data } = await $hrApi.get<BufferHolidayTransfer[]>(
         `Vacation.GetAllHistory?employeeGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
     )
     return data
 })
 
-sample({ clock: loadBufferHolidayPlanning, target: loadBufferHolidayPlanningFx })
+sample({ clock: loadBufferHolidayTransfer, target: loadBufferHolidayTransferFx })
 
-const sendBufferHolidayPlanningFx = createEffect(async (data: BufferHolidayPlanningForm) => {
-    const result = await $hrApi.post<BufferHolidayPlanning>('Vacation.AddVacation', data)
+const sendBufferHolidayTransferFx = createEffect(async (data: BufferHolidayTransferForm) => {
+    const result = await $hrApi.post<BufferHolidayTransfer>('Vacation.AddVacation', data)
 
     return result.data
 })
 
-sample({ clock: sendBufferHolidayPlanning, target: sendBufferHolidayPlanningFx })
+sample({ clock: sendBufferHolidayTransfer, target: sendBufferHolidayTransferFx })
 
-const $bufferHolidayPlanning = createStore<BufferHolidayPlanning[]>([])
-const $bufferHolidayPlanningLoading = sendBufferHolidayPlanningFx.pending
+const $bufferHolidayTransfer = createStore<BufferHolidayTransfer[]>([])
+const $bufferHolidayTransferLoading = sendBufferHolidayTransferFx.pending
 
-sample({ clock: loadBufferHolidayPlanningFx.doneData, target: $bufferHolidayPlanning })
+sample({ clock: loadBufferHolidayTransferFx.doneData, target: $bufferHolidayTransfer })
 
 sample({
-    clock: sendBufferHolidayPlanningFx.doneData,
+    clock: sendBufferHolidayTransferFx.doneData,
     fn: (result) => {
         if (result.isError) {
             return { message: result.error, type: 'hrFailure' as MessageType, time: 300000 }
@@ -49,16 +49,16 @@ sample({
 })
 
 sample({
-    clock: sendBufferHolidayPlanningFx.doneData,
-    source: $bufferHolidayPlanning,
+    clock: sendBufferHolidayTransferFx.doneData,
+    source: $bufferHolidayTransfer,
     fn: (source, clock) => {
         return [...source, clock]
     },
-    target: $bufferHolidayPlanning,
+    target: $bufferHolidayTransfer,
 })
 
 sample({
-    clock: loadBufferHolidayPlanningFx.failData,
+    clock: loadBufferHolidayTransferFx.failData,
     fn: (response) => {
         const message = isAxiosError(response) ? response.response?.data.error : 'Не удалось загрузить данные'
 
@@ -72,7 +72,7 @@ sample({
 })
 
 sample({
-    clock: sendBufferHolidayPlanningFx.failData,
+    clock: sendBufferHolidayTransferFx.failData,
     fn: (response) => {
         const message = isAxiosError(response) ? response.response?.data.error : 'Не удалось отправить данные'
 
@@ -86,16 +86,16 @@ sample({
 })
 
 export const events = {
-    loadBufferHolidayPlanning,
-    sendBufferHolidayPlanning,
+    loadBufferHolidayTransfer,
+    sendBufferHolidayTransfer,
 }
 
 export const effects = {
-    sendBufferHolidayPlanningFx,
+    sendBufferHolidayTransferFx,
 }
 export const selectors = {
-    useBufferHolidayPlanning: () => ({
-        data: useStore($bufferHolidayPlanning),
-        loading: useStore($bufferHolidayPlanningLoading),
+    useBufferHolidayTransfer: () => ({
+        data: useStore($bufferHolidayTransfer),
+        loading: useStore($bufferHolidayTransferLoading),
     }),
 }

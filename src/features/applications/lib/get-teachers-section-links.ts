@@ -25,10 +25,11 @@ import {
     // BUFFER_WORK_TRANSFER,
     // BUFFER_EXTRA_HOLIDAY_COLL,
     BUFFER_HOLIDAY_PLANNING,
+    BUFFER_HOLIDAY_TRANSFER,
     BUFFER_HOLIDAY_WORK,
     // DISMISSAL,
     PARTTIME_EMPLOYMENT,
-    HOLIDAY_POSTPONED,
+    //HOLIDAY_POSTPONED,
     WORK_TRANSFER,
     EXTRA_HOLIDAY_COLL,
 } from '@app/routes/teacher-routes'
@@ -97,12 +98,13 @@ const getTeachersHRSectionLinks = () => {
             title: '',
             links: [
                 { link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
-                { link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
+                //{ link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
                 // { link: BUFFER_PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
                 // { link: BUFFER_HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
                 { link: BUFFER_DISMISSAL, title: 'Заявление на увольнение' },
                 { link: BUFFER_HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
                 { link: BUFFER_HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
+                { link: BUFFER_HOLIDAY_TRANSFER, title: 'Заявление о переносе отпуска' },
                 // { link: BUFFER_WORK_TRANSFER, title: 'Заявление на перевод' },
                 // {
                 //     link: BUFFER_EXTRA_HOLIDAY_COLL,

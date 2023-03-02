@@ -36,7 +36,6 @@ const getApplicationsFx = createEffect(async (): Promise<Application[]> => {
         throw new Error('Не удалось загрузить заявления')
     }
 })
-
 const getUserDataApplicationsFx = createEffect(async (): Promise<UserApplication> => {
     const response = await applicationApi.getAppData()
 

@@ -1,18 +1,21 @@
 import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
-import downloadFile from '@pages/hr-applications/lib/get-file-dismissal'
 import localizeDate from '@shared/lib/localize-date'
-import { Button } from '@shared/ui/button'
-
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
-const getHrApplicationsColumns = (): ColumnProps[] => {
+const getHolidayWorkHistoryColumns = (): ColumnProps[] => {
     return [
         //{ title: 'Название', field: 'title', priority: 'one', search: true, },
 
         {
+            title: 'Должность, Структурное подразделение',
+            field: 'jobDivision',
+            priority: 'one',
+            width: '200px',
+        },
+        {
             title: 'Статус заявления',
-            field: 'status',
+            field: 'orderRegistrationStatus',
             priority: 'one',
             width: '200px',
             catalogs: [
@@ -44,71 +47,55 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
         },
         {
             title: 'Номер приказа',
-            field: 'dismissalOrder',
+            field: 'weekends',
             priority: 'one',
             align: 'center',
-            render: (value) => value.orderNumber,
+            render: (value) => value[0].type,
         },
         {
-            title: 'Дата приказа',
-            field: 'dismissalOrder',
-            type: 'date',
+            title: 'Дата выхода',
+            field: 'weekends',
             priority: 'one',
             align: 'center',
-            render: (value) => localizeDate(value.orderDate, 'numeric'),
+            // render: (value) => localizeDate(value.orderDate, 'numeric'),
+            render: (value) => localizeDate(value[0].dates[0].date, 'numeric'),
         },
         {
-            title: 'Статус приказа',
-            field: 'dismissalOrder',
+            title: 'Количество часов',
+            field: 'weekends',
             priority: 'one',
-            width: '200px',
-            catalogs: [...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
-            render: (value, data) => {
-                if (!value.orderStatus) return null
-                const title = value.orderStatus + data.dismissalOrder.registrationStatus
-                return (
-                    <Message
-                        type={
-                            value.orderStatus === 'Подписан'
-                                ? 'success'
-                                : value.orderStatus === 'Не создан'
-                                ? 'failure'
-                                : 'alert'
-                        }
-                        title={title}
-                        align="center"
-                        width="100%"
-                        icon={null}
-                        maxWidth="150px"
-                    />
-                )
-            },
-        },
-        {
-            title: 'Файл заявления',
-            priority: 'one',
-            field: 'downloadable',
-            type: 'file',
-            width: '200px',
             align: 'center',
-            render: (value, data) => {
-                if (value)
-                    return (
-                        <Button
-                            text="Скачать файл"
-                            background="rgb(60,210,136)"
-                            textColor="#fff"
-                            width={'150px'}
-                            align="center"
-                            minWidth={'150px'}
-                            height="30px"
-                            onClick={() => {
-                                downloadFile(data.applicationGuid)
-                            }}
-                        />
-                    )
-            },
+            // render: (value) => localizeDate(value.orderDate, 'numeric'),
+            render: (value) => value[0].dates[0].hours,
         },
+        // {
+        //     title: 'Статус приказа',
+        //     field: 'dismissalOrder',
+        //     priority: 'one',
+        //     width: '220px',
+        //     catalogs: [...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
+        //     render: (value, data) => {
+        //         if (!value.orderStatus) return null
+        //         const title = value.orderStatus + data.dismissalOrder.registrationStatus
+        //         return (
+        //             <Message
+        //                 type={
+        //                     value.orderStatus === 'Подписан'
+        //                         ? 'success'
+        //                         : value.orderStatus === 'Не создан'
+        //                         ? 'failure'
+        //                         : 'alert'
+        //                 }
+        //                 title={title}
+        //                 align="center"
+        //                 width="100%"
+        //                 icon={null}
+        //                 maxWidth="220px"
+        //             />
+        //         )
+        //     },
+        // },
+        { title: 'Файл заявления', priority: 'one', field: 'file', type: 'file' },
         // {
         //     title: 'Статус регистрации приказа',
         //     field: 'dismissalOrder',
@@ -138,4 +125,4 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
     ]
 }
 
-export default getHrApplicationsColumns
+export default getHolidayWorkHistoryColumns

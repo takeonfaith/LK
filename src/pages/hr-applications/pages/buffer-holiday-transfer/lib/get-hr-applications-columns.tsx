@@ -1,7 +1,5 @@
 import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
-import downloadFile from '@pages/hr-applications/lib/get-file-dismissal'
 import localizeDate from '@shared/lib/localize-date'
-import { Button } from '@shared/ui/button'
 
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
@@ -84,31 +82,7 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
                 )
             },
         },
-        {
-            title: 'Файл заявления',
-            priority: 'one',
-            field: 'downloadable',
-            type: 'file',
-            width: '200px',
-            align: 'center',
-            render: (value, data) => {
-                if (value)
-                    return (
-                        <Button
-                            text="Скачать файл"
-                            background="rgb(60,210,136)"
-                            textColor="#fff"
-                            width={'150px'}
-                            align="center"
-                            minWidth={'150px'}
-                            height="30px"
-                            onClick={() => {
-                                downloadFile(data.applicationGuid)
-                            }}
-                        />
-                    )
-            },
-        },
+        { title: 'Файл заявления', priority: 'one', field: 'file', type: 'file' },
         // {
         //     title: 'Статус регистрации приказа',
         //     field: 'dismissalOrder',

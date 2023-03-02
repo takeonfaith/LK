@@ -14,7 +14,6 @@ interface Props {
 
 const History: React.FC<Props> = ({ historyIsEmpty, historyDataWorkerApplication }) => {
     const [openedHistory, setOpenedHistory] = useState<boolean>(false)
-
     return (
         <Block
             orientation={'vertical'}
