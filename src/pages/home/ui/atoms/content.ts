@@ -13,6 +13,7 @@ export const Content = styled.div`
         width: 100%;
         display: flex;
         align-items: center;
+        column-gap: 10px;
 
         .title-wrapper {
             width: fit-content;

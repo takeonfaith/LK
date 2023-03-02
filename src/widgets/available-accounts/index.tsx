@@ -1,6 +1,7 @@
 import { confirmModel } from '@entities/confirm'
 import { contextMenuModel } from '@entities/context-menu'
 import { userModel } from '@entities/user'
+import Subtext from '@shared/ui/subtext'
 import List from '@ui/list'
 import React from 'react'
 import { useModal, User } from 'widgets'
@@ -11,6 +12,13 @@ const AvailableAccounts = () => {
         data: { user },
     } = userModel.selectors.useUser()
     const { open } = useModal()
+    const isAdmin = false
+
+    const onAdd = () => {
+        open(<UserList />)
+        contextMenuModel.events.close()
+    }
+
     return (
         <List
             visible={!!user?.available_accounts}
@@ -20,11 +28,9 @@ const AvailableAccounts = () => {
             gap={0}
             showPages
             horizontalAlign="left"
-            onAdd={() => {
-                open(<UserList />)
-                contextMenuModel.events.close()
-            }}
+            onAdd={isAdmin ? onAdd : undefined}
         >
+            {!user?.available_accounts?.length && <Subtext>Нет доступных аккаунтов</Subtext>}
             {user?.available_accounts?.map((account) => {
                 return (
                     <User

@@ -68,7 +68,7 @@ const ProfilePage = () => {
             </List> */}
                 {!isProduction && (
                     <CenterPage>
-                        <Block height="100%" noAppearanceInMobile maxWidth="750px">
+                        <Block height="100%" maxWidth="750px">
                             <AvailableAccounts />
                         </Block>
                     </CenterPage>
