@@ -21,7 +21,8 @@ const SearchStyled = styled.div<{ width?: string }>`
 const Hints = styled(BlockWrapper)`
     position: absolute;
     top: 45px;
-    z-index: 2;
+    z-index: 10;
+    height: auto;
     width: 100%;
     left: 0;
     overflow-y: auto;
@@ -113,7 +114,7 @@ const Search = ({
             setValue(hints?.[currentSelectedHint ?? 0].title ?? '')
             setOpenHints(false)
             onHintClick?.(hints?.[currentSelectedHint ?? 0])
-        }
+        } else setCurrentSelectedHint(0)
     }
 
     const handleItemClick = (index: number) => {

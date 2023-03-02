@@ -62,4 +62,8 @@ export const InputsStyled = styled.div`
     gap: 12px;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 1001px) {
+        height: fit-content;
+    }
 `
