@@ -35,7 +35,7 @@ const useInputArea = ({ documents, optionalCheckbox, data, setData, optional, co
                             (el) => (el.value as SelectPage) === null && !!el.items?.length,
                         ))
                 ) {
-                    setData((area: IInputArea) => {
+                    setData((area) => {
                         area.confirmed = true
                         return { ...area }
                     })

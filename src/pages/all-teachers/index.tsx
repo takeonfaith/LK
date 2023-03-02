@@ -6,8 +6,8 @@ import { useStore } from 'effector-react'
 import ListOfPeople from 'widgets/list-of-people'
 import styled from 'styled-components'
 import { SelectPage } from '@features/select'
-import { DIVISIONS } from './const'
-import prepareFilters from './lib/prepare-filters'
+import { getDivisions } from '@shared/api/teacher-api'
+import { userModel } from '@entities/user'
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -21,14 +21,15 @@ const PageWrapper = styled.div`
 `
 
 const AllTeachersPage = () => {
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const { $isPending, $items } = paginationList
     const isPending = useStore($isPending)
     const items = useStore($items)
 
-    const filters: SelectPage[] = prepareFilters(DIVISIONS)
-
     const underSearchText = (filter: SelectPage | null) => {
-        if (filter?.title === 'Все') return null
+        if (!filter?.title) return null
 
         return `Кафедра: ${filter?.title} • Всего: ${items?.length ?? 0}`
     }
@@ -49,7 +50,9 @@ const AllTeachersPage = () => {
                             title="Сотрудники"
                             searchPlaceholder="Поиск сотрудников"
                             paginationList={paginationList}
-                            filters={filters}
+                            filterRequest={getDivisions}
+                            defaultFilter={user?.subdivisions?.[0].subdivision ?? ''}
+                            filterPlaceholder="Подразделения"
                             underSearchText={underSearchText}
                         />
                     </Block>

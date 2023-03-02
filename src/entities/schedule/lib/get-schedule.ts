@@ -3,29 +3,28 @@ import { IModules, ISessionSchedule, IWeekSchedule, User } from '@api/model'
 import createFullName from '@features/home/lib/create-full-name'
 import getCurrentDaySubjects from './get-current-day-schedule'
 
-const getSchedule = async (user: User | string | null): Promise<IModules> => {
+const getSchedule = async (user: User | string | null, group?: string): Promise<IModules> => {
     const isName = typeof user === 'string'
-    const response =
-        !isName && !user?.subdivisions
-            ? await scheduleApi.get()
-            : isName
-            ? await scheduleApi.getTeachers(user)
-            : await scheduleApi.getTeachers(
-                  createFullName({ name: user.name, surname: user.surname, patronymic: user.patronymic }),
-              )
+    const shouldLoadStudentSchedule = (!isName && !user?.subdivisions) || !!group?.length
+    const response = shouldLoadStudentSchedule
+        ? await scheduleApi.get(group ?? (user as User).group ?? '')
+        : isName
+        ? await scheduleApi.getTeachers(user)
+        : await scheduleApi.getTeachers(
+              createFullName({ name: user.name, surname: user.surname, patronymic: user.patronymic }),
+          )
 
-    const sessionResponse =
-        !isName && !user?.subdivisions
-            ? await scheduleApi.getSession()
-            : isName
-            ? await scheduleApi.getTeachersSession(user)
-            : await scheduleApi.getTeachersSession(
-                  createFullName({
-                      name: user?.name ?? '',
-                      surname: user?.surname ?? '',
-                      patronymic: user?.patronymic ?? '',
-                  }),
-              )
+    const sessionResponse = shouldLoadStudentSchedule
+        ? await scheduleApi.getSession()
+        : isName
+        ? await scheduleApi.getTeachersSession(user)
+        : await scheduleApi.getTeachersSession(
+              createFullName({
+                  name: user?.name ?? '',
+                  surname: user?.surname ?? '',
+                  patronymic: user?.patronymic ?? '',
+              }),
+          )
     const sessionSchedule: { [key: string]: any } | null = {}
     const fullSchedule: { [key: string]: any } = {}
     const currentWeekSchedule: IWeekSchedule = {
@@ -42,8 +41,9 @@ const getSchedule = async (user: User | string | null): Promise<IModules> => {
             if (key !== 'Sunday') {
                 const transformedKey = key.charAt(0).toLowerCase() + key.slice(1)
 
-                fullSchedule[transformedKey] =
-                    !isName && !user?.subdivisions ? response.data[key] : { lessons: response.data[key] }
+                fullSchedule[transformedKey] = shouldLoadStudentSchedule
+                    ? response.data[key]
+                    : { lessons: response.data[key] }
             }
         }
 
@@ -54,7 +54,7 @@ const getSchedule = async (user: User | string | null): Promise<IModules> => {
 
     if (sessionResponse.data.status !== 'error') {
         for (const key in sessionResponse.data) {
-            if (!isName && !user?.subdivisions) {
+            if (shouldLoadStudentSchedule) {
                 sessionSchedule[key] = sessionResponse.data[key]
             } else {
                 if (sessionResponse.data[key].length) {

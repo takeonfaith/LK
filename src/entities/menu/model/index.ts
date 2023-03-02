@@ -8,7 +8,7 @@ import { useStore } from 'effector-react/compat'
 import { createEvent, createStore } from 'effector'
 import findRoutesByConfig from '../lib/find-routes-by-config'
 
-interface Menu {
+export interface Menu {
     allRoutes: IRoutes | null
     visibleRoutes: IRoutes | null
     leftsideBarRoutes: IRoutes | null

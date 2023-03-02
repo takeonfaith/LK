@@ -1,5 +1,6 @@
-import React, { LazyExoticComponent } from 'react'
+import React from 'react'
 import { IColors } from '@consts'
+import { LazyExoticComponent } from 'react'
 
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
@@ -9,59 +10,51 @@ import {
     BiHeadphone,
     BiIdCard,
     BiMessageRounded,
+    BiPalette,
     BiRuble,
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
 
+import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 import {
-    ForgotPasswordPage,
-    FeedbackPage,
+    Account,
+    AlertsPage,
+    AllPages,
+    AllStudentsPage,
+    AllTeachersPage,
+    Appearance,
     CantAccessPage,
-    Home,
-    MemoFreshmenPage,
-    MemoTeacherPage,
-    CustomizeMenu,
-    ProfilePage,
-    // ChatPage,
-    SchedulePage,
-    PaymentsPage,
+    DecreisDirectivesPage,
     ElectronicInteractionAgreementPage,
+    FeedbackPage,
+    ForgotPasswordPage,
+    GetYourLoginPage,
+    Home,
+    HomeSettings,
     // AllStudentsPage,
     // AllTeachersPage,
     InstructionsPage,
-    TeachersSchedule,
-    Appearance,
-    Account,
+    MedicalCertificate,
+    MemoFreshmenPage,
+    MemoTeacherPage,
+    PaymentsPage,
+    ProfilePage,
+    // ChatPage,
+    SchedulePage,
     Security,
-    HomeSettings,
-    AllPages,
     SettingsPage,
-    GetYourLoginPage,
-    AllStudentsPage,
-    AllTeachersPage,
-    DecreisDirectivesPage,
-    AlertsPage,
+    TeachersSchedule,
 } from './pages'
-import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 
-import {
-    FiBell,
-    FiClipboard,
-    FiFileText,
-    FiHome,
-    FiLayers,
-    FiLock,
-    FiMenu,
-    FiSettings,
-    FiUser,
-    FiXCircle,
-} from 'react-icons/fi'
+import { BsFileMedical } from 'react-icons/bs'
+import { FiBell, FiClipboard, FiFileText, FiHome, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 import { DOCLIST_ROUTE } from '../teacher-routes'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
+export const MEDICAL_CERTIFICATE = '/medical-certificate'
 
 export const ALL_ROUTE = '/all'
 export const HOME_ROUTE = '/home'
@@ -85,7 +78,7 @@ export const TEMPLATE_SETTINGS_ROUTE = SETTINGS_ROUTE + '/:id'
 export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
 export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
-export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
+export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home-page'
 export const SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE = SETTINGS_ROUTE + '/customize-menu'
 export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activity'
@@ -301,7 +294,7 @@ export const generalRoutes: IRoutes = {
         Component: AllTeachersPage,
         color: 'orange',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'COMMUNICATION',
         isNew: true,
     },
     // portfolio: {
@@ -335,6 +328,16 @@ export const generalRoutes: IRoutes = {
         group: 'GENERAL',
         show: false,
     },
+    'medical-certificate': {
+        id: 'medical-certificate',
+        title: 'Предоставление медицинских справок',
+        icon: <BsFileMedical />,
+        path: MEDICAL_CERTIFICATE,
+        Component: MedicalCertificate,
+        color: 'blue',
+        isTemplate: false,
+        group: 'GENERAL',
+    },
 }
 
 export const generalHiddenRoutes: IRoutes = {
@@ -352,7 +355,7 @@ export const generalHiddenRoutes: IRoutes = {
     'settings-appearance': {
         id: 'settings-appearance',
         title: 'Настройки. Внешний вид',
-        icon: <FiLayers />,
+        icon: <BiPalette />,
         path: SETTINGS_APPEARANCE_ROUTE,
         Component: Appearance,
         color: 'purple',
@@ -398,7 +401,7 @@ export const generalHiddenRoutes: IRoutes = {
         title: 'Настройки. Меню',
         icon: <FiMenu />,
         path: SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE,
-        Component: CustomizeMenu,
+        Component: () => <></>,
         color: 'red',
         isTemplate: true,
         show: true,

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { privateRoutes } from '@app/routes/routes'

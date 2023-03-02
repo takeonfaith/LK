@@ -123,8 +123,7 @@ const getSectionLinks = (): Section[] => {
             ],
         },
         {
-            title: 'Управление студенческим городком' + additionalHeaderClosedService,
-            disabled: true,
+            title: 'Управление студенческим городком',
             links: [
                 {
                     link: REGULAR_ACCOMMODATION,
@@ -144,13 +143,10 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: PREFERENTIAL_ACCOMMODATION,
                     title: 'Предоставление права проживания льготной категории граждан',
-                    disabled: isProduction,
                 },
                 {
                     link: ACADEMIC_LEAVE_ACCOMMODATION,
-
                     title: 'Предоставление права проживания в период академического отпуска',
-                    disabled: isProduction,
                     exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
                 },
                 {
@@ -162,7 +158,6 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: RELOCATION_INSIDE_HOSTEL,
                     title: 'Переселение внутри общежития',
-                    disabled: isProduction,
                     exceptionalFormEducationList: ['Заочная'],
                 },
                 {
@@ -174,7 +169,6 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
                     title: 'Расторжение договора найма',
-                    disabled: isProduction,
                 },
             ],
         },

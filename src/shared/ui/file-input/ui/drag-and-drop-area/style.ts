@@ -5,8 +5,9 @@ const DragAndDropAreaWrapper = styled.label<{ showPulse: boolean; isActive: bool
     width: 100%;
     min-height: 150px;
     border-radius: var(--brLight);
-    background: ${Colors.blue.transparent2};
-    border: ${({ showPulse }) => (!showPulse ? `3px dashed ${Colors.blue.main}` : `5px solid ${Colors.blue.main}`)};
+    transition: 0.2s border;
+    border: ${({ showPulse }) => (!showPulse ? `2px dashed ${Colors.grey.main}` : `2px dashed ${Colors.blue.main}`)};
+    background: ${({ showPulse }) => (showPulse ? Colors.blue.transparent3 : '')};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,12 +18,14 @@ const DragAndDropAreaWrapper = styled.label<{ showPulse: boolean; isActive: bool
     position: relative;
 
     .info {
-        left: 10px;
-        top: 10px;
-        position: absolute;
         display: flex;
+        flex-wrap: wrap;
         gap: 5px;
+        padding: 4px;
+        border-radius: var(--brLight);
+        background: red;
         pointer-events: none;
+        width: calc(100% + 6px);
 
         .info-item {
             padding: 5px 10px;
@@ -47,13 +50,66 @@ const DragAndDropAreaWrapper = styled.label<{ showPulse: boolean; isActive: bool
         align-items: center;
         flex-direction: column;
         opacity: 0.7;
-        color: ${Colors.blue.light2};
+        color: var(--text);
         pointer-events: none;
+
+        .front-icon {
+            z-index: 2;
+        }
+
+        .icons-behind {
+            z-index: 1;
+            position: absolute;
+            filter: grayscale(1);
+            opacity: 0.7;
+            transform: scale(0.8);
+
+            & .icon-1 {
+                opacity: 0;
+                animation: ${({ showPulse }) => (showPulse ? 'behind-1 0.5s forwards' : '')};
+            }
+            & .icon-2 {
+                opacity: 0;
+                animation: ${({ showPulse }) => (showPulse ? 'behind-2 0.5s forwards' : '')};
+            }
+
+            @keyframes behind-1 {
+                0% {
+                    opacity: 0;
+                    transform: translate(10px, -15px) rotate(0deg);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translate(-3px, -15px) rotate(-10deg);
+                }
+            }
+            @keyframes behind-2 {
+                0% {
+                    opacity: 0;
+                    transform: translate(-10px, -15px) rotate(0deg);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translate(3px, -15px) rotate(10deg);
+                }
+            }
+        }
 
         svg {
             width: 40px;
             height: 40px;
             margin-bottom: 10px;
+            transition: 0.2s;
+            animation: ${({ showPulse }) => (showPulse ? 'jumping 1s forwards' : '')};
+
+            @keyframes jumping {
+                0% {
+                    transform: translateY(0%);
+                }
+                100% {
+                    transform: translateY(-5%) scale(1.1);
+                }
+            }
         }
     }
 `

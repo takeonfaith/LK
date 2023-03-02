@@ -44,7 +44,6 @@ const EducationPayments = () => {
                                     <PaymentList payments={education?.payments ?? []} />
                                     <PaymentsInfo
                                         balanceCurrDate={getCorrectNumberFormat(education?.balance_currdate ?? '0')}
-                                        monthly={100000}
                                         startDate={education?.startDate ?? ''}
                                         endDate={education?.endDatePlan ?? ''}
                                         sum={Number(education?.sum) ?? 0}

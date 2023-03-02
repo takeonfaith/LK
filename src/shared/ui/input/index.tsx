@@ -1,10 +1,11 @@
 import { Colors } from '@consts'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { HTMLInputTypeAttribute } from 'react'
 import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Title } from '@ui/title'
 import { Button } from '@ui/button'
-import { Loading, Message } from '.'
+import { Loading, Message } from '../atoms'
+import useInput from './hooks/use-input'
 
 const InputWrapper = styled.div<{
     leftIcon: boolean
@@ -94,13 +95,15 @@ const InputWrapper = styled.div<{
     }
 `
 
+type InputType = 'tel' | 'text' | 'number' | 'date' | 'email' | 'password' | HTMLInputTypeAttribute
+
 interface Props {
     value: string
     setValue: (value: string) => void
     leftIcon?: React.ReactNode
     title?: string
     placeholder?: string
-    type?: string
+    type?: InputType
     isActive?: boolean
     inputAppearance?: boolean
     required?: boolean
@@ -113,6 +116,7 @@ interface Props {
     minValue?: number | string
     maxValue?: number | string
     loading?: boolean
+    customMask?: (value: string, prevValue?: string) => string
 }
 
 const Input = ({
@@ -123,9 +127,10 @@ const Input = ({
     required,
     width,
     minWidth,
+    customMask,
     placeholder = 'Введите сюда',
     type = 'text',
-    danger,
+    danger: initDanger,
     alertMessage,
     loading = false,
     isActive = true,
@@ -135,70 +140,16 @@ const Input = ({
     minValue = undefined,
     maxValue = undefined,
 }: Props) => {
-    const [inputType, setInputType] = useState(type)
-
-    useEffect(() => {
-        setInputType(type)
-    }, [type])
-
-    const phoneMask = useCallback(
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            const russianNumberBeginnings = ['7', '8', '9']
-            const selectionStart = e.target.selectionStart
-            let phoneInput = e.target.value.replace(/\D/g, '')
-            let formattedPhone = ''
-
-            if (!phoneInput.length) return ''
-
-            if (e.target.value.length !== selectionStart) {
-                if (/\D/g.test((e.nativeEvent as InputEvent).data ?? '')) {
-                    return phoneInput
-                }
-                return e.target.value
-            }
-
-            if (russianNumberBeginnings.indexOf(phoneInput[0]) > -1) {
-                // russian number
-                if (phoneInput[0] === '9') phoneInput = '7' + phoneInput
-                const firstSymbols = phoneInput[0] === '8' ? '8' : '+7'
-                formattedPhone = firstSymbols + ' '
-                if (!!phoneInput.length) {
-                    formattedPhone += '(' + phoneInput.substring(1, 4)
-                }
-                if (phoneInput.length >= 5) {
-                    formattedPhone += ') ' + phoneInput.substring(4, 7)
-                }
-                if (phoneInput.length >= 8) {
-                    formattedPhone += '-' + phoneInput.substring(7, 9)
-                }
-                if (phoneInput.length >= 10) {
-                    formattedPhone += '-' + phoneInput.substring(9, 11)
-                }
-            } else {
-                // not russian number
-                formattedPhone = `+${phoneInput.substring(0, 16)}`
-            }
-
-            return formattedPhone
-        },
-        [type],
+    const { inputType, buttonOnClick, danger, handleOnChange, phoneMaskKeyDown } = useInput(
+        value,
+        setValue,
+        type,
+        initDanger,
+        minValue,
+        maxValue,
+        customMask,
+        mask,
     )
-
-    const emailMask = useCallback(
-        (email: string) => {
-            return email.replace(/@\.*/, '@mospolytech.ru').replace(/mospolytech.ru?/, '')
-        },
-        [type],
-    )
-
-    const phoneMaskKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (
-            e.key === 'Backspace' &&
-            ((value[1] === '7' && value.length <= 4) || (value[0] === '8' && value.length <= 3))
-        ) {
-            setValue('')
-        }
-    }
 
     return (
         <InputWrapper
@@ -223,15 +174,7 @@ const Input = ({
                 value={value ?? ''}
                 autoComplete={autocomplete ? 'on' : 'off'}
                 onKeyDown={(e) => type === 'tel' && phoneMaskKeyDown(e)}
-                onChange={(e) => {
-                    if (mask) {
-                        if (type === 'tel') {
-                            setValue(phoneMask(e))
-                        } else if (type === 'email') {
-                            setValue(emailMask(e.target.value))
-                        } else setValue(e.target.value)
-                    } else setValue(e.target.value)
-                }}
+                onChange={handleOnChange}
                 required={required}
                 readOnly={!isActive}
             />
@@ -243,7 +186,7 @@ const Input = ({
                 <Button
                     icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}
                     tabIndex={-1}
-                    onClick={() => setInputType((prev) => (prev === 'password' ? 'text' : 'password'))}
+                    onClick={buttonOnClick}
                 />
             )}
         </InputWrapper>

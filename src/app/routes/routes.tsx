@@ -1,6 +1,11 @@
 import React from 'react'
-import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
 import { isProduction } from '@consts'
+import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
+import PageIsNotReady from '@pages/page-is-not-ready'
+import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
+import { FaRegLightbulb } from 'react-icons/fa'
+import { FiBriefcase, FiFileText } from 'react-icons/fi'
+import { MdOutlineBedroomChild } from 'react-icons/md'
 import {
     generalHiddenRoutes,
     generalRoutes,
@@ -8,47 +13,42 @@ import {
     PROJECT_ACTIVITIES_ROUTE,
     USEFUL_INFO_ROUTE,
 } from './general-routes'
-import PageIsNotReady from '@pages/page-is-not-ready'
-import { FiBriefcase, FiFileText } from 'react-icons/fi'
-import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
-import { MdOutlineBedroomChild } from 'react-icons/md'
-import { ArbitraryRequestPage, HelpfulInformation } from './teacher-routes/pages'
-import { FaRegLightbulb } from 'react-icons/fa'
 import {
     AcademicLeaveAccommodationPage,
     AcadPerformance,
+    AccommodationCorrespondenceFormPage,
+    ApplicationExtensionAttestation,
     ApplicationForCertificateOfAttendance,
+    ApplicationForFinancialAssistance,
     ApplicationForSocialScrollarship,
     ApplicationForSuperiorRoom,
+    ApplicationHolidaysAfterTraining,
+    ApplicationIndependentlyDeduction,
     ApplicationPaperCall,
+    ApplicationProvisionAcademicLeave,
     ApplicationSocialAgencies,
+    ApplicationsPage,
+    ChangingPersonalData,
     ClarificationOfPassportDataApplication,
     DormitoryPage,
-    RegularAccommodationPage,
-    PreferentialAccommodationPage,
     FamilyRoomPage,
-    TerminationOfEmploymentContractPage,
+    FinancialSupport,
+    IncreasedStateAcademicScholarship,
+    MilitaryRegistrationCard,
+    MilitaryRegistrationDocuments,
+    PaymentRecipient,
+    PreferentialAccommodationPage,
+    ProjectActivitiesPage,
+    RegularAccommodationPage,
     RelocationInsideHostelPage,
     RelocationToAnotherHostelPage,
-    PaymentRecipient,
     RestoringTheMagneticPass,
-    MilitaryRegistrationDocuments,
     RetakeForDiploma,
-    IncreasedStateAcademicScholarship,
-    FinancialSupport,
-    ApplicationForFinancialAssistance,
-    ChangingPersonalData,
-    StudentStatus,
     StateAccreditation,
-    ApplicationHolidaysAfterTraining,
-    ApplicationProvisionAcademicLeave,
-    ApplicationIndependentlyDeduction,
-    ApplicationExtensionAttestation,
-    MilitaryRegistrationCard,
-    AccommodationCorrespondenceFormPage,
-    ApplicationsPage,
-    ProjectActivitiesPage,
+    StudentStatus,
+    TerminationOfEmploymentContractPage,
 } from './other-routes/pages'
+import { ArbitraryRequestPage, HelpfulInformation } from './teacher-routes/pages'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -97,7 +97,7 @@ export const privateRoutes: () => IRoutes = () => ({
         title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
-        Component: isProduction ? ApplicationRedirect : ApplicationsPage,
+        Component: ApplicationsPage,
         color: 'red',
         isTemplate: false,
         group: 'OTHER',
@@ -255,7 +255,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания в период академического отпуска',
         icon: BiIdCard,
         path: ACADEMIC_LEAVE_ACCOMMODATION,
-        Component: isProduction ? ApplicationRedirect : AcademicLeaveAccommodationPage,
+        Component: AcademicLeaveAccommodationPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -264,7 +264,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания льготной категории граждан',
         icon: BiIdCard,
         path: PREFERENTIAL_ACCOMMODATION,
-        Component: isProduction ? ApplicationRedirect : PreferentialAccommodationPage,
+        Component: PreferentialAccommodationPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -282,7 +282,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Расторжение договора найма',
         icon: BiIdCard,
         path: TERMINATION_OF_EMPLOYMENT_CONTRACT,
-        Component: isProduction ? ApplicationRedirect : TerminationOfEmploymentContractPage,
+        Component: TerminationOfEmploymentContractPage,
         color: 'blue',
         isTemplate: false,
     },
@@ -291,7 +291,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение внутри общежития',
         icon: BiIdCard,
         path: RELOCATION_INSIDE_HOSTEL,
-        Component: isProduction ? ApplicationRedirect : RelocationInsideHostelPage,
+        Component: RelocationInsideHostelPage,
         color: 'blue',
         isTemplate: false,
     },

@@ -25,10 +25,6 @@ const CustomList = styled.div`
     display: flex;
     gap: 10px;
     align-items: center;
-
-    @media (max-width: 1000px) {
-        display: none;
-    }
 `
 
 interface Props {
@@ -77,7 +73,7 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
                             width={'150px'}
                             minWidth={'150px'}
                             height="36px"
-                            fixedInMobile
+                            fixedInMobile={false}
                         />
                     </CustomList>
                     <Table

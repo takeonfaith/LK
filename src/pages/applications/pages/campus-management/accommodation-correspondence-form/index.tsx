@@ -12,11 +12,16 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 import { userModel } from '@entities/user'
 import { getAdditionally, getRegistration, getDisability, globalAppSendForm } from '@pages/applications/lib'
+import { listConfigCert } from '@features/applications/lib/get-list-configs-certificate'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const AccommodationCorrespondenceFormPage = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
+    const [kvdCert, setKvdCert] = useState<IInputArea | null>(listConfigCert.kvdCert)
+    const [fluorographyCert, setFluorographyCert] = useState<IInputArea | null>(listConfigCert.fluorographyCert)
+    const [vichRwCert, setVichRwCert] = useState<IInputArea | null>(listConfigCert.vichRwCert)
+    const [graftCert, setGraftCert] = useState<IInputArea | null>(listConfigCert.graftCert)
     const {
         data: { dataUserApplication },
     } = applicationsModel.selectors.useApplications()
@@ -59,6 +64,12 @@ const AccommodationCorrespondenceFormPage = () => {
                     {registration && (
                         <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
                     )}
+                    {kvdCert && setKvdCert && <InputArea {...kvdCert} setData={setKvdCert} />}
+                    {fluorographyCert && setFluorographyCert && (
+                        <InputArea {...fluorographyCert} setData={setFluorographyCert} />
+                    )}
+                    {vichRwCert && setVichRwCert && <InputArea {...vichRwCert} setData={setVichRwCert} />}
+                    {graftCert && setGraftCert && <InputArea {...graftCert} setData={setGraftCert} />}
                     {additionally && (
                         <InputArea {...additionally} collapsed={isDone} setData={setAdditionally as LoadedState} />
                     )}
@@ -67,7 +78,16 @@ const AccommodationCorrespondenceFormPage = () => {
                         action={() =>
                             globalAppSendForm(
                                 ApplicationFormCodes.USG_GETHOSTEL_Z,
-                                [form, registration, disability, additionally],
+                                [
+                                    form,
+                                    registration,
+                                    disability,
+                                    additionally,
+                                    kvdCert,
+                                    fluorographyCert,
+                                    vichRwCert,
+                                    graftCert,
+                                ] as IInputArea[],
                                 setLoading,
                                 setCompleted,
                             )
@@ -78,7 +98,19 @@ const AccommodationCorrespondenceFormPage = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
+                        isActive={
+                            checkFormFields(form) &&
+                            (form.optionalCheckbox?.value ?? true) &&
+                            !!fluorographyCert &&
+                            !!vichRwCert &&
+                            !!graftCert &&
+                            !!kvdCert &&
+                            checkFormFields(form) &&
+                            checkFormFields(fluorographyCert) &&
+                            checkFormFields(vichRwCert) &&
+                            checkFormFields(graftCert) &&
+                            checkFormFields(kvdCert)
+                        }
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

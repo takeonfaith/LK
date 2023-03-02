@@ -14,7 +14,7 @@ import { RiBarChartFill, RiFlaskLine } from 'react-icons/ri'
 import { BiBookBookmark } from 'react-icons/bi'
 import { FiTruck } from 'react-icons/fi'
 import { TiBrush } from 'react-icons/ti'
-import { MdCarRepair } from 'react-icons/md'
+import { MdCarRepair, MdEvStation } from 'react-icons/md'
 
 type RetakeRouteRaw = Pick<IRoute, 'id' | 'title' | 'icon' | 'color'>
 
@@ -80,6 +80,12 @@ const retakeRoutesRaw: RetakeRouteRaw[] = [
         color: 'orange',
     },
     {
+        id: 'pishe',
+        title: 'ПИШЭ',
+        icon: <MdEvStation />,
+        color: 'lightGreen',
+    },
+    {
         id: 'cpd',
         title: 'ЦПД',
         icon: <FaRegLightbulb />,
@@ -100,6 +106,10 @@ const retakeRoutesRaw: RetakeRouteRaw[] = [
 ]
 
 const retakeRoutes: IRoutes = retakeRoutesRaw.reduce((routes: IRoutes, { id, ...rest }: RetakeRouteRaw) => {
+    if (!RETAKE_LINKS[id]) {
+        return { ...routes }
+    }
+
     const { href, links, fullTitle } = RETAKE_LINKS[id]
 
     const path = href && !links.length ? href : ''

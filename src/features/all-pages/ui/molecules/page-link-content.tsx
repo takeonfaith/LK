@@ -129,7 +129,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
     const { settings } = settingsModel.selectors.useSettings()
     const isAdded = !!(settings['settings-home-page'].property.pages as string[])?.find((el) => el === id)
 
-    const maxFirstWordLength = 12
+    const maxFirstWordLength = 13
 
     const getHyphenatedTitle = useMemo(
         () => (title: string, maxLength: number) => {

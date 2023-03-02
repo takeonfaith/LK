@@ -33,6 +33,7 @@ export interface IInputAreaFiles {
     checkboxCondition?: 'straight' | 'reverse'
     fieldName: string
     maxFiles?: number
+    allowedTypes?: string[]
 }
 
 export type CheckboxDocs = IInputAreaFiles & {

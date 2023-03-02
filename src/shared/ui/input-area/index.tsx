@@ -1,13 +1,17 @@
-import { Colors } from '@consts'
+import { Colors, FileFormats } from '@consts'
 import { Button, Divider, FileLink, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import FileInput from '@ui/file-input'
 import React from 'react'
 import { FiAlertCircle, FiInfo, FiMinusCircle, FiPlusCircle } from 'react-icons/fi'
+import { LoadedState } from 'widgets/template-form'
 import useInputArea from './lib/use-input-area'
 import { IComplexInputAreaData, IInputArea, IInputAreaData } from './model'
 import { AreaTitle, InputAreaWrapper, UniversalInput } from './ui'
 import Buttons from './ui/organisms/buttons'
+type SetData =
+    | React.Dispatch<React.SetStateAction<IInputArea | null>>
+    | React.Dispatch<React.SetStateAction<IInputArea>>
 
 //TODO: Should be rewritten as HOC, inputs should be children props
 const InputArea = ({
@@ -25,7 +29,7 @@ const InputArea = ({
     collapsed,
     links,
     specialFieldsName,
-}: IInputArea & { setData: React.Dispatch<React.SetStateAction<IInputArea>>; divider?: boolean }) => {
+}: IInputArea & { setData: SetData; divider?: boolean }) => {
     //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
         openArea,
@@ -39,7 +43,15 @@ const InputArea = ({
         handleLoadFiles,
         handleConfirm,
         handleCheckbox,
-    } = useInputArea({ documents, optionalCheckbox, data, setData, optional, collapsed, confirmed })
+    } = useInputArea({
+        documents,
+        optionalCheckbox,
+        data,
+        setData: setData as React.Dispatch<React.SetStateAction<IInputArea>>,
+        optional,
+        collapsed,
+        confirmed,
+    })
     return (
         <>
             <InputAreaWrapper openArea={openArea}>
@@ -72,7 +84,7 @@ const InputArea = ({
                                       key={index}
                                       documents={documents}
                                       changeInputArea={changeInputArea && !optionalCheckbox?.value}
-                                      setData={setData}
+                                      setData={setData as LoadedState}
                                       indexI={index}
                                       specialFieldsName={specialFieldsName}
                                       {...attr}
@@ -88,7 +100,7 @@ const InputArea = ({
                                                   key={j}
                                                   documents={documents}
                                                   changeInputArea={changeInputArea && !optionalCheckbox?.value}
-                                                  setData={setData}
+                                                  setData={setData as LoadedState}
                                                   indexI={i}
                                                   indexJ={j}
                                                   specialFieldsName={specialFieldsName}
@@ -124,6 +136,7 @@ const InputArea = ({
                             setFiles={(files: File[]) => handleLoadFiles(files)}
                             maxFileSizeInBytes={0}
                             maxFiles={documents.maxFiles}
+                            allowedTypes={documents.allowedTypes as FileFormats}
                             isActive={
                                 documents.checkboxCondition
                                     ? documents.checkboxCondition === 'straight'
@@ -147,7 +160,7 @@ const InputArea = ({
                     <Buttons
                         confirmed={confirmed}
                         changeInputArea={changeInputArea}
-                        setData={setData}
+                        setData={setData as LoadedState}
                         setChangeInputArea={setChangeInputArea}
                         handleConfirm={handleConfirm}
                     />

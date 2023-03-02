@@ -93,7 +93,7 @@ const AddedElementsListWrapper = styled.div<{ removeAll?: boolean; padding?: str
     transition: 0.2s;
     padding: ${({ padding }) => padding ?? '10px'};
     opacity: ${({ removeAll }) => (removeAll ? '0' : '1')};
-    height: ${({ removeAll, height }) => (removeAll ? '0px' : height ? height : '46px')};
+    min-height: ${({ removeAll, height }) => (removeAll ? '0px' : height ? height : '46px')};
     visibility: ${({ removeAll }) => (removeAll ? 'hidden' : 'visible')};
     transform: scale(${({ removeAll }) => (removeAll ? '0.95' : '1')})
         translate(${({ removeAll }) => (removeAll ? '-30px, 20px' : '0, 0')});

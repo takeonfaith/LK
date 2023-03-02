@@ -5,7 +5,7 @@ import { ErrorContainer } from './styles'
 
 export type ErrorProps = {
     text: string
-    image?: string
+    image?: string | JSX.Element
     size?: string
     children?: ChildrenType
 }
@@ -13,7 +13,9 @@ export type ErrorProps = {
 export function Error({ text, image, size, children }: ErrorProps) {
     return (
         <ErrorContainer size={size}>
-            <img src={image || Sad} alt="груфтим(" />
+            <div className="image">
+                {typeof image === 'string' || !image ? <img src={image || Sad} alt="груфтим(" /> : image}
+            </div>
             <Title size={3} bottomGap="20px">
                 {text}
             </Title>

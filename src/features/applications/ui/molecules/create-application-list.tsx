@@ -21,7 +21,7 @@ const CreateApplicationListWrapper = styled.div`
 
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 70vh;
 
     .list {
         padding: 5px;

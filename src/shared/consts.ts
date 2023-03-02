@@ -224,12 +224,12 @@ export const ColorsByGrade = {
 }
 
 export const WidthByGrade = {
-    Зачтено: '100%',
-    Отлично: '100%',
-    Хорошо: '80%',
-    Удовлетворительно: '60%',
-    Неудовлетворительно: '40%',
-    default: '40%',
+    Зачтено: 100,
+    Отлично: 100,
+    Хорошо: 80,
+    Удовлетворительно: 60,
+    Неудовлетворительно: 40,
+    default: 40,
 }
 
 export const GradeByScore: IGrade = {
@@ -352,7 +352,8 @@ export const letterColorMatch: LetterColorMatch = {
     Z: 'purple',
 }
 
-export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
+export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
+export type FileFormats = typeof VALID_FORMATS[number][]
 
 export enum ValidFormats {
     'jpeg' = 'image/jpeg',
