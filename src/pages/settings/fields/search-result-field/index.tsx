@@ -1,15 +1,9 @@
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { IRoutes } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
-import { TFullSettingsModel } from '@pages/settings/model'
 import SettingsSection from '@pages/settings/settings-section'
-import normalizeString from '@shared/lib/normalize-string'
 import { Error } from '@shared/ui/error'
 import List from '@shared/ui/list'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
-import { BiChevronRight, BiRightArrowAlt } from 'react-icons/bi'
 import styled from 'styled-components'
 
 const SearchResultItem = styled.div`

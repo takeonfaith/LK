@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { userApi } from '@api'
 import { LoginData } from '@api/user-api'
 import { createEffect, createEvent, createStore, forward } from 'effector'
@@ -65,7 +64,7 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
             savePassword: savePasswordInStorage(),
         }
     } catch (error) {
-        // logout()
+        // eslint-disable-next-line no-console
         console.log(error)
 
         throw new Error('Возникла какая-то ошибка')
@@ -77,6 +76,7 @@ const getLoginEuzFx = createEffect(async (data: ADName): Promise<string> => {
         const userResponse = await userApi.getADName(data)
         return userResponse.data
     } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error)
 
         throw new Error('Возникла какая-то ошибка')

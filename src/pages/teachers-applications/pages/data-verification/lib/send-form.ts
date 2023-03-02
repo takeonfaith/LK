@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import { IInputArea } from '@ui/input-area/model'
