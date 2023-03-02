@@ -7,7 +7,6 @@ export const TopStyled = styled.header`
     padding-top: 100px;
     position: relative;
     margin: 0 auto;
-    margin-bottom: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -25,43 +24,6 @@ export const TopStyled = styled.header`
         & > .info {
             display: none;
         }
-    }
-`
-
-export const BackgroundPlate = styled.div<{ color: string; color2: string }>`
-    width: calc(100% + 20px);
-    height: 210px;
-    top: -10px;
-    left: -10px;
-    position: absolute;
-    background: ${({ color }) => color};
-    z-index: -1;
-    overflow: hidden;
-    top: -16px;
-    left: -16px;
-    width: calc(100% + 32px);
-
-    svg {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translateX(50%);
-        filter: drop-shadow(0 0 34px #00000054);
-    }
-
-    & svg:nth-child(1) {
-        transform: scale(3);
-        z-index: -3;
-    }
-
-    & svg:nth-child(2) {
-        z-index: -2;
-        transform: scale(2);
-    }
-
-    & svg:nth-child(3) {
-        z-index: -1;
-        transform: scale(1.5);
     }
 `
 

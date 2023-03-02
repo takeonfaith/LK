@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const GroupsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean }>`
+const GroupsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean; color: string }>`
     display: flex;
     align-items: center;
     column-gap: 5px;
@@ -41,11 +41,12 @@ interface Props {
     groups?: string
     isCurrent: boolean
     inModal?: boolean
+    color: string
 }
 
-const Groups = ({ groups, isCurrent, inModal = false }: Props) => {
+const Groups = ({ color, groups, isCurrent, inModal = false }: Props) => {
     return groups ? (
-        <GroupsWrapper isCurrent={isCurrent} inModal={inModal}>
+        <GroupsWrapper isCurrent={isCurrent} inModal={inModal} color={color}>
             {groups.split(',').map((group) => {
                 return <span key={group}>{group}</span>
             })}

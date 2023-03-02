@@ -67,7 +67,7 @@ export interface IColorPalette {
 
 export const Colors: IColors = {
     green: {
-        dark3: '#2a4f2f',
+        dark3: '#106c3f',
         dark2: '#188851',
         dark1: '#27b56e',
         main: '#3cd288',
@@ -79,7 +79,7 @@ export const Colors: IColors = {
         transparent3: '#a7ffd30f',
     },
     lightGreen: {
-        dark3: '#1a5a5a',
+        dark3: '#166363',
         dark2: '#207878',
         dark1: '#2e9b9b',
         main: '#40c5c5',
@@ -91,8 +91,8 @@ export const Colors: IColors = {
         transparent3: '#a3fbfb29',
     },
     blue: {
-        dark3: '#242d82',
-        dark2: '#313ca3',
+        dark3: '#29349c',
+        dark2: '#3742b1',
         dark1: '#4552c9',
         main: '#5f6dec',
         light1: '#7c88f5',
@@ -104,8 +104,8 @@ export const Colors: IColors = {
         transparent3: '#bac0ff17',
     },
     lightBlue: {
-        dark3: '#2d51a0',
-        dark2: '#4c75cf',
+        dark3: '#5278cd',
+        dark2: '#668de4',
         dark1: '#789ff6',
         main: '#9cbbff',
         light1: '#b9cfff',
@@ -128,7 +128,7 @@ export const Colors: IColors = {
         transparent3: '#dcb7ff2b',
     },
     pink: {
-        dark3: '#851a5c',
+        dark3: '#932066',
         dark2: '#a62b77',
         dark1: '#c34191',
         main: '#ec5fb6',
@@ -140,9 +140,9 @@ export const Colors: IColors = {
         transparent3: '#ffbce530',
     },
     red: {
-        dark3: '#681819',
-        dark2: '#8c1e1e',
-        dark1: '#c73c48',
+        dark3: '#a3252f',
+        dark2: '#bf3641',
+        dark1: '#cf4b56',
         main: '#ec5f6b',
         light1: '#ff7b86',
         light2: '#ff98a1',
@@ -152,7 +152,7 @@ export const Colors: IColors = {
         transparent3: '#ffbbc133',
     },
     orange: {
-        dark3: '#804e15',
+        dark3: '#985e1d',
         dark2: '#a76821',
         dark1: '#ca8231',
         main: '#ee9e44',

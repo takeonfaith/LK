@@ -4,26 +4,16 @@ import { userModel } from '@entities/user'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { User } from '@shared/api/model'
 import { Colors } from '@shared/consts'
-import getLettersColors from '@shared/lib/get-letters-colors'
 import useTheme from '@shared/lib/hooks/use-theme'
 import { Button } from '@shared/ui/button'
 import Subtext from '@shared/ui/subtext'
+import UserHeaderBackground from '@shared/ui/user-header/user-header-background'
 import React, { useEffect, useState } from 'react'
 import { FiEdit2, FiLogOut, FiMoon, FiSettings, FiSun } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import Slider from 'widgets/slider'
 
-import {
-    AvatarWrapper,
-    BackgroundPlate,
-    BlocksList,
-    Buttons,
-    IconWrapper,
-    Info,
-    InfoWrapper,
-    TopInfoBlock,
-    TopStyled,
-} from './styles'
+import { AvatarWrapper, BlocksList, Buttons, IconWrapper, Info, InfoWrapper, TopInfoBlock, TopStyled } from './styles'
 
 type Props = {
     pages: { title: string }[]
@@ -68,36 +58,19 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
 
     return (
         <TopStyled>
-            <BackgroundPlate color={getLettersColors(fullName, 'dark2')} color2={getLettersColors(fullName, 'light1')}>
-                <svg width="620" height="570" viewBox="0 0 620 570" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M333.676 1.93177C428.781 13.6788 480.842 107.607 535.05 186.629C582.329 255.551 636.893 330.791 614.509 411.318C592.853 489.225 508.9 525.549 433.05 553.571C368.009 577.6 301.213 573.07 235.35 551.397C151.615 523.841 56.0559 499.684 22.0945 418.336C-17.4711 323.565 -3.03744 209.993 58.4905 127.766C122.067 42.801 228.358 -11.0768 333.676 1.93177Z"
-                        fill={getLettersColors(fullName, 'dark1')}
-                    />
-                </svg>
-                <svg width="620" height="570" viewBox="0 0 620 570" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M333.676 1.93177C428.781 13.6788 480.842 107.607 535.05 186.629C582.329 255.551 636.893 330.791 614.509 411.318C592.853 489.225 508.9 525.549 433.05 553.571C368.009 577.6 301.213 573.07 235.35 551.397C151.615 523.841 56.0559 499.684 22.0945 418.336C-17.4711 323.565 -3.03744 209.993 58.4905 127.766C122.067 42.801 228.358 -11.0768 333.676 1.93177Z"
-                        fill={getLettersColors(fullName, 'main')}
-                    />
-                </svg>
-                <svg width="620" height="570" viewBox="0 0 620 570" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M333.676 1.93177C428.781 13.6788 480.842 107.607 535.05 186.629C582.329 255.551 636.893 330.791 614.509 411.318C592.853 489.225 508.9 525.549 433.05 553.571C368.009 577.6 301.213 573.07 235.35 551.397C151.615 523.841 56.0559 499.684 22.0945 418.336C-17.4711 323.565 -3.03744 209.993 58.4905 127.766C122.067 42.801 228.358 -11.0768 333.676 1.93177Z"
-                        fill={getLettersColors(fullName, 'light1')}
-                    />
-                </svg>
-            </BackgroundPlate>
+            <UserHeaderBackground fullName={fullName} width="calc(100% + 32px)" height="210px" baseScale={1.5} />
             <BlocksList>
                 <TopInfoBlock maxWidth="530px" height="180px" orientation="vertical">
                     <AvatarWrapper>
-                        <Avatar name={fullName} avatar={avatar} width="110px" height="110px" marginRight="0" border />
+                        <Avatar
+                            name={fullName}
+                            avatar={avatar}
+                            width="110px"
+                            height="110px"
+                            marginRight="0"
+                            border
+                            avatarModal
+                        />
                     </AvatarWrapper>
                     <InfoWrapper>
                         <Info>

@@ -14,7 +14,7 @@ const AvailableAccounts = () => {
     return (
         <List
             visible={!!user?.available_accounts}
-            padding="10px"
+            padding="0px"
             title="Аккаунты"
             direction="horizontal"
             gap={0}

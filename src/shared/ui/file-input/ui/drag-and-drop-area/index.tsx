@@ -2,6 +2,7 @@ import Subtext from '@shared/ui/subtext'
 import { FileInputProps } from '@ui/file-input'
 import React, { useRef, useState } from 'react'
 import { FcFolder } from 'react-icons/fc'
+import getFormatName from './lib/get-format-name'
 import loadFiles from './lib/load-files'
 import DragAndDropAreaWrapper from './style'
 
@@ -61,7 +62,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, formats }: Props
                 </div>
                 <b>Нажмите сюда или перетащите файл</b>
                 <Subtext align="center">
-                    Форматы: {!formats ? 'jpg, png, pdf' : formats.map((t) => t.split('/')[1]).join(', ')} • Макс.
+                    Форматы: {!formats ? 'jpg, png, pdf' : formats.map((t) => getFormatName(t)).join(', ')} • Макс.
                     файлов: {maxFiles}
                 </Subtext>
             </div>

@@ -13,10 +13,14 @@ export const Content = styled.div`
         width: 100%;
         display: flex;
         align-items: center;
-        column-gap: 32px;
 
         .title-wrapper {
             width: fit-content;
+        }
+
+        .user {
+            display: flex;
+            align-items: center;
         }
     }
 

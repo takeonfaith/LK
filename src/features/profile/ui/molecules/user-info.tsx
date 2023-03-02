@@ -19,6 +19,7 @@ const UserInfo = ({ pages, currentPage }: Props) => {
         <CenterPage>
             <Block height="100%" noAppearanceInMobile maxWidth="750px">
                 {pages[currentPage]}
+                {/* <ColorsWidget /> */}
             </Block>
         </CenterPage>
     )

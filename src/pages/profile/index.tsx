@@ -4,22 +4,21 @@ import { userModel } from '@entities/user'
 import { UserInfo } from '@features/profile'
 import { Error } from '@ui/error'
 import Top from './ui/top'
-import { Wrapper } from '@shared/ui/atoms'
+import { CenterPage, Wrapper } from '@shared/ui/atoms'
 import AllInfo from '@features/home/ui/molecules/all-info'
 import Orders from '@features/home/ui/molecules/orders'
+import { AvailableAccounts } from 'widgets'
+import Block from '@shared/ui/block'
+import styled from 'styled-components'
+import { isProduction } from '@shared/consts'
 
-// const GradientCircle = styled.div<{ current: boolean }>`
-//     width: 20px;
-//     height: 20px;
-//     border-radius: 100px;
-//     border: ${({ current }) => current && '2px solid var(--theme)'};
-//     outline: ${({ current }) => current && '2px solid var(--reallyBlue)'};
-//     background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 100%),
-//         radial-gradient(farthest-side at top center, ${Colors.purple.main}, transparent 100%),
-//         radial-gradient(farthest-side at top right, ${Colors.orange.main}, transparent 100%),
-//         radial-gradient(farthest-side at top right, ${Colors.purple.main}, transparent 100%),
-//         radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 100%);
-// `
+const ContentList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    align-items: center;
+`
 
 const ProfilePage = () => {
     const {
@@ -62,12 +61,20 @@ const ProfilePage = () => {
 
     return (
         <Wrapper load={function () {}} loading={false} data={[]} error={null}>
-            <Top user={user} currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} />
-            {/* <List direction="horizontal" innerPadding="0px 0vw 10px 0vw" showPages>
+            <ContentList>
+                <Top user={user} currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} />
+                {/* <List direction="horizontal" innerPadding="0px 0vw 10px 0vw" showPages>
                 <StoryCard title="Обучение" content={TutorialStory} />
             </List> */}
-            {/* <AvailableAccounts /> */}
-            <UserInfo currentPage={currentPage} pages={pages.map((p) => p.content)} />
+                {!isProduction && (
+                    <CenterPage>
+                        <Block height="100%" noAppearanceInMobile maxWidth="750px">
+                            <AvailableAccounts />
+                        </Block>
+                    </CenterPage>
+                )}
+                <UserInfo currentPage={currentPage} pages={pages.map((p) => p.content)} />
+            </ContentList>
         </Wrapper>
     )
 }
