@@ -11,7 +11,7 @@ export interface FileInputProps {
     setFiles: (args: any) => void
     isActive: boolean
     maxFiles?: number
-    allowedTypes?: FileFormats
+    formats?: FileFormats
 }
 
 const FileInput = (props: FileInputProps) => {

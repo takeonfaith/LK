@@ -52,7 +52,7 @@ interface Props {
 const UserHeader = ({ avatar, name, isMe, type, division, group, noInfo = false }: Props) => {
     const size = noInfo ? '140px' : '110px'
     return (
-        <UserHeaderStyled background={getLettersColors(name, 'darker')}>
+        <UserHeaderStyled background={getLettersColors(name, 'dark2')}>
             <Avatar border name={name} avatar={avatar} width={size} height={size} marginRight="0" />
             {!noInfo && (
                 <div className="info">

@@ -355,13 +355,6 @@ export const letterColorMatch: LetterColorMatch = {
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
 export type FileFormats = typeof VALID_FORMATS[number][]
 
-export enum ValidFormats {
-    'jpeg' = 'image/jpeg',
-    'jpg' = 'image/jpg',
-    'png' = 'image/png',
-    'pdf' = 'application/pdf',
-}
-
 export const MAX_FILE_SIZE = 11000000
 
 export const SCREEN_IPHONE_SE = '376px'

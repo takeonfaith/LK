@@ -82,7 +82,7 @@ const SettingsContent = ({ searchValue, searchResult, settingsConfig }: Props) =
                             height="30px"
                             onClick={goBack}
                             background="transparent"
-                            hoverBackground={Colors.grey.transparentAF}
+                            hoverBackground={Colors.grey.transparent3}
                         />
                     )}
                     {searchValue ? `Результаты поиска по запросу "${searchValue}"` : title}

@@ -1,5 +1,4 @@
 import { settingsAccountModel } from '@entities/settings-account'
-import { ValidFormats } from '@shared/consts'
 import { SubmitButton } from '@shared/ui/atoms'
 import FileInput from '@shared/ui/file-input'
 import React from 'react'
@@ -29,7 +28,7 @@ const ChangeAvatar = () => {
                 setFiles={settingsAccountModel.events.avatar.changeAvatar}
                 isActive={true}
                 maxFiles={1}
-                formats={[ValidFormats.jpeg, ValidFormats.jpg]}
+                formats={['image/jpeg', 'image/jpg']}
             />
             <SubmitButton
                 text="Изменить фотографию"
