@@ -16,7 +16,6 @@ const search = (value: string, settingsConfig: TFullSettingsModel, allRoutes: IR
 
         for (const section of sections) {
             for (const field of section.fields) {
-                //  console.log(field.title, value, normalizeString(field.title).includes(normalizeString(value)))
                 if (normalizeString(field.title).includes(normalizeString(value))) {
                     if (found) {
                         result.push([...result[lastIndex].slice(0, result[lastIndex].length - 1), field.title])
