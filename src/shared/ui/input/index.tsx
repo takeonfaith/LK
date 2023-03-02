@@ -1,5 +1,5 @@
 import { Colors } from '@consts'
-import React from 'react'
+import React, { HTMLInputTypeAttribute } from 'react'
 import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Title } from '@ui/title'
@@ -95,13 +95,15 @@ const InputWrapper = styled.div<{
     }
 `
 
+type InputType = 'tel' | 'text' | 'number' | 'date' | 'email' | 'password' | HTMLInputTypeAttribute
+
 interface Props {
     value: string
     setValue: (value: string) => void
     leftIcon?: React.ReactNode
     title?: string
     placeholder?: string
-    type?: string
+    type?: InputType
     isActive?: boolean
     inputAppearance?: boolean
     required?: boolean

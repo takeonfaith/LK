@@ -10,6 +10,7 @@ import {
     BiHeadphone,
     BiIdCard,
     BiMessageRounded,
+    BiPalette,
     BiRuble,
     BiTimeFive,
     BiUserCircle,
@@ -24,7 +25,6 @@ import {
     AllTeachersPage,
     Appearance,
     CantAccessPage,
-    CustomizeMenu,
     DecreisDirectivesPage,
     ElectronicInteractionAgreementPage,
     FeedbackPage,
@@ -48,18 +48,7 @@ import {
 } from './pages'
 
 import { BsFileMedical } from 'react-icons/bs'
-import {
-    FiBell,
-    FiClipboard,
-    FiFileText,
-    FiHome,
-    FiLayers,
-    FiLock,
-    FiMenu,
-    FiSettings,
-    FiUser,
-    FiXCircle,
-} from 'react-icons/fi'
+import { FiBell, FiClipboard, FiFileText, FiHome, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 import { DOCLIST_ROUTE } from '../teacher-routes'
 
@@ -89,7 +78,7 @@ export const TEMPLATE_SETTINGS_ROUTE = SETTINGS_ROUTE + '/:id'
 export const SETTINGS_APPEARANCE_ROUTE = SETTINGS_ROUTE + '/appearance'
 export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
-export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home'
+export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home-page'
 export const SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE = SETTINGS_ROUTE + '/customize-menu'
 export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activity'
@@ -366,7 +355,7 @@ export const generalHiddenRoutes: IRoutes = {
     'settings-appearance': {
         id: 'settings-appearance',
         title: 'Настройки. Внешний вид',
-        icon: <FiLayers />,
+        icon: <BiPalette />,
         path: SETTINGS_APPEARANCE_ROUTE,
         Component: Appearance,
         color: 'purple',
@@ -412,7 +401,7 @@ export const generalHiddenRoutes: IRoutes = {
         title: 'Настройки. Меню',
         icon: <FiMenu />,
         path: SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE,
-        Component: CustomizeMenu,
+        Component: () => <></>,
         color: 'red',
         isTemplate: true,
         show: true,

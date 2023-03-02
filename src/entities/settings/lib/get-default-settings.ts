@@ -18,6 +18,8 @@ const getDefaultSettings = (userId = ''): SettingsType => ({
             id: NameSettings['settings-appearance'],
             property: {
                 theme: 'dark' as ThemeType,
+                scheduledLightTheme: false,
+                lightThemeRange: ['300', '1140'],
             },
         },
         [NameSettings['settings-home-page']]: {

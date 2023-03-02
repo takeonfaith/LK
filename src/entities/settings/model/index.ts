@@ -49,7 +49,9 @@ const useSettings = () => {
 
 const getLocalSettingsFx = createEffect((userId: string): Param => {
     currentUser = userId
-    const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser]
+    // TODO: change logic so that it supports an update of settings config.
+    // Now doesn't update local storage if u add something to object of default settings
+    const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser] as Param
     return localSettings ?? getDefaultSettings(userId)[userId]
 })
 

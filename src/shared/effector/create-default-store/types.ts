@@ -1,10 +1,5 @@
 import { Effect, Event } from 'effector'
 
-/**
- * Выбор типа. Если первый существует, финальный тип будет такой же. Если же нет - как второй
- */
-export type TypeChoice<Prefered, Second> = Prefered extends void ? Second : Prefered
-
 export interface TemplateStore<DataType> {
     data: DataType | null
     error: string | null

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const FileWrapper = styled.div`
     width: 100%;
-    padding: 5px;
+    padding: 6px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +12,7 @@ const FileWrapper = styled.div`
 
     .file-body {
         display: flex;
-        gap: 5px;
+        gap: 8px;
         align-items: center;
 
         .name-and-size {
@@ -24,9 +24,18 @@ const FileWrapper = styled.div`
             }
         }
 
-        svg {
-            width: 22px;
-            height: 22px;
+        .image-container {
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--theme);
+            border-radius: var(--brLight);
+
+            svg {
+                width: 20px;
+                height: 20px;
+            }
         }
     }
 `

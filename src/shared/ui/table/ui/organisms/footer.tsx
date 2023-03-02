@@ -53,23 +53,6 @@ const aggregateColumns = (data: Nullable<IndexedProperties[]>, columns: ColumnPr
     })
 
     return fields
-    //  console.log(columns)
-
-    //  return columns.reduce((acc, el) => {
-    //      console.log(acc, el.field)
-
-    //      if (acc[el.field]) {
-    //          const value = data[acc[el.field].length][el.field]
-
-    //          acc[el.field].push(value)
-    //      } else {
-    //          const value = data[0][el.field]
-
-    //          acc[el.field] = [value]
-    //      }
-
-    //      return acc
-    //  }, {} as { [key: string]: any[] })
 }
 
 function prepareAggregateData(data: IndexedProperties): ColumnProps[] {

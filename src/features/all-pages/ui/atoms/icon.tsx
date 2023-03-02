@@ -7,7 +7,7 @@ const IconWrapper = styled.div<{ color: string; size: number }>`
     min-height: ${({ size }) => size + 'px'};
     max-width: ${({ size }) => size + 'px'};
     max-height: ${({ size }) => size + 'px'};
-    border-radius: 100%;
+    border-radius: 17px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -4,7 +4,7 @@ type UserStatus = 'stud' | 'staff'
 
 type EducationFormT = 'Очная' | 'Очно-заочная' | 'Заочная' | 'Недоступен'
 
-export interface User extends Record<string, unknown> {
+export interface User {
     id: string
     name: string
     fullName: string
@@ -14,6 +14,8 @@ export interface User extends Record<string, unknown> {
     surname: string
     birthday: string
     patronymic: string
+    email?: string
+    phone?: string
     orders: string[]
     hasAlerts: boolean
     sex: Sex
