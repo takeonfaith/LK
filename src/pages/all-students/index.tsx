@@ -7,6 +7,8 @@ import { useStore } from 'effector-react'
 import ListOfPeople from 'widgets/list-of-people'
 import { userModel } from '@entities/user'
 import styled from 'styled-components'
+import { getGroups } from '@shared/api/student-api'
+import Masks from '@shared/lib/masks'
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -26,10 +28,7 @@ const AllStudentsPage = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const filter: SelectPage[] = [
-        { id: user?.group ?? '', title: 'Моя группа' },
-        { id: '1', title: 'Все' },
-    ]
+
     const underSearchText = (filter: SelectPage | null) => {
         if (filter?.title === 'Все' || !filter?.id) return null
 
@@ -52,7 +51,11 @@ const AllStudentsPage = () => {
                             title="Студенты"
                             searchPlaceholder="Поиск студентов"
                             paginationList={paginationList}
-                            filters={user?.user_status === 'stud' ? filter : undefined}
+                            filterRequest={getGroups}
+                            filterPlaceholder="Группа"
+                            defaultFilter={user?.group ?? ''}
+                            filter={user?.user_status === 'stud' ? user.group ?? '' : undefined}
+                            customMask={Masks.groupMask}
                             underSearchText={underSearchText}
                         />
                     </Block>

@@ -73,7 +73,7 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
                             width={'150px'}
                             minWidth={'150px'}
                             height="36px"
-                            fixedInMobile
+                            fixedInMobile={false}
                         />
                     </CustomList>
                     <Table
