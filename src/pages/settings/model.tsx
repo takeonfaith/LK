@@ -7,7 +7,16 @@ import { userModel } from '@entities/user'
 import { FilterElementList } from '@shared/ui/added-elements-list'
 import { MessageType } from '@shared/ui/types'
 
-type TSettingsFieldType = 'link' | 'toggle' | 'display' | 'text' | 'photo' | 'choices' | 'interval' | 'password' | 'tel'
+export type TSettingsFieldType =
+    | 'link'
+    | 'toggle'
+    | 'display'
+    | 'text'
+    | 'photo'
+    | 'choices'
+    | 'interval'
+    | 'password'
+    | 'tel'
 type TValueFieldType = FilterElementList | string[] | number[] | string | boolean
 export type TSettingsFields = {
     title: string
