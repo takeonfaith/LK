@@ -4,7 +4,7 @@ import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import LinksList from '@features/home/ui/organisms/links-list'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
-import { Divider, Title, Wrapper } from '@ui/atoms'
+import { Title, Wrapper } from '@ui/atoms'
 import { useEffect } from 'react'
 import { Content } from './ui/atoms/content'
 import React from 'react'
@@ -57,7 +57,6 @@ const Home = () => {
                             {user.name}
                         </Title>
                     </div>
-                    <Divider direction="horizontal" />
                     <HomeTopSection />
                 </div>
                 <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
