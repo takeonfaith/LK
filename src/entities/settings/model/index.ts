@@ -97,8 +97,6 @@ const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
 
 $settingsStore.watch((state) => {
     if (state !== DEFAULT_STORE && !!currentUser) {
-        // eslint-disable-next-line no-console
-        console.log('testsdad')
         const allSettings = JSON.parse(localStorage.getItem('new-settings') ?? JSON.stringify({}))
         allSettings[currentUser] = state.settings[currentUser]
         localStorage.setItem('new-settings', JSON.stringify(allSettings))

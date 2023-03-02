@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 const getPercent = (value: number, max: number) => {
-    // eslint-disable-next-line no-console
-    console.log(value, max, (value / max) * 100)
     return (value / max) * 100
 }
 

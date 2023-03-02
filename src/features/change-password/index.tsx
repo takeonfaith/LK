@@ -42,8 +42,6 @@ const ChangePassword = () => {
             setOld('')
         } catch (error) {
             const normalizedError = (error as Error).message ?? error
-            // eslint-disable-next-line no-console
-            console.log(normalizedError)
             setError('Возникла ошибка: ' + normalizedError)
             setLoading(false)
         }
