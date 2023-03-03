@@ -62,26 +62,22 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     }
 `
 
-const User = ({
-    type,
-    avatar,
-    name,
-    checked,
-    onClick,
-    indexNumber,
-    division,
-    group,
-    finance,
-    degreeLevel,
-    course,
-    educationForm,
-    token,
-    isMe = false,
-    loading = false,
-    orientation = 'horizontal',
-    size = 'middle',
-}: UserProps) => {
+const User = (props: UserProps) => {
     const { open } = useModal()
+    const {
+        type,
+        avatar,
+        name,
+        checked,
+        onClick,
+        indexNumber,
+        division,
+        group,
+        isMe = false,
+        loading = false,
+        orientation = 'horizontal',
+        size = 'middle',
+    } = props
     const status = getStatus(isMe, type, division, group)
 
     if (loading) return <SkeletonLoading />
@@ -91,23 +87,7 @@ const User = ({
             onClick(e)
         } else {
             if (!isMe) {
-                open(
-                    type === 'staff' ? (
-                        <TeacherModal name={name} avatar={avatar} isMe={isMe} division={division} />
-                    ) : (
-                        <StudentModal
-                            name={name}
-                            avatar={avatar}
-                            isMe={isMe}
-                            group={group}
-                            finance={finance}
-                            degreeLevel={degreeLevel}
-                            course={course}
-                            educationForm={educationForm}
-                            token={token}
-                        />
-                    ),
-                )
+                open(type === 'staff' ? <TeacherModal {...props} /> : <StudentModal {...props} />)
             }
         }
     }

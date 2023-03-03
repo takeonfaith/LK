@@ -32,7 +32,7 @@ const UserContextMenu = () => {
 
     return (
         <>
-            <AvailableAccounts padding="8px" />
+            <AvailableAccounts padding="8px" size="small" />
             <Divider />
             <Link to={SETTINGS_ROUTE}>
                 <Button

@@ -5,10 +5,11 @@ type Props = {
 }
 
 const DotSeparatedWords = ({ words }: Props) => {
+    const normalizedWords = words.filter((el) => el.length !== 0)
     return (
         <>
-            {words.map((word, index) => {
-                return word + (index === words.length - 1 ? '' : ' • ')
+            {normalizedWords.map((word, index) => {
+                return word + (index === normalizedWords.length - 1 ? '' : ' • ')
             })}
         </>
     )

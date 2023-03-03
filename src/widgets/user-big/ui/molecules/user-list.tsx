@@ -39,6 +39,7 @@ const UserList = () => {
             <User
                 checked={!!chosenUsers.find((el) => el === item.id)}
                 name={item.fullName}
+                avatar={item?.avatar}
                 type={item.user_status}
                 key={index}
                 onClick={() => handleCheck(item)}

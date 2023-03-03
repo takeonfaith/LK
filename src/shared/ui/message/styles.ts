@@ -26,7 +26,7 @@ export const MessageWrapper = styled.div<{
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     color: ${({ type, isLightTheme }) => getColor(isLightTheme, type)};
     background: ${({ type, solidBackground }) =>
-        Colors[messageType[type].color][solidBackground ? 'transparent1' : 'transparent3']};
+        Colors[messageType[type].color][solidBackground ? 'transparent1' : 'transparent2']};
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     font-size: ${({ fontSize }) => fontSize ?? '0.8em'};

@@ -1,8 +1,7 @@
-import { confirmModel } from '@entities/confirm'
 import { contextMenuModel } from '@entities/context-menu'
 import { userModel } from '@entities/user'
-import { GeneralAccount } from '@shared/api/model'
 import Subtext from '@shared/ui/subtext'
+import { Size } from '@shared/ui/types'
 import List from '@ui/list'
 import React from 'react'
 import { useModal, User } from 'widgets'
@@ -10,9 +9,10 @@ import { UserList } from 'widgets/user-big/ui'
 
 type Props = {
     padding?: string
+    size?: Size
 }
 
-const AvailableAccounts = ({ padding }: Props) => {
+const AvailableAccounts = ({ padding, size = 'middle' }: Props) => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -22,24 +22,6 @@ const AvailableAccounts = ({ padding }: Props) => {
     const onAdd = () => {
         open(<UserList />)
         contextMenuModel.events.close()
-    }
-
-    const handleChangeAccount = (account: GeneralAccount) => {
-        return () => {
-            confirmModel.events.evokeConfirm({
-                message: 'Вы уверены, что хотите сменить аккаунт?',
-                onConfirm: () => {
-                    localStorage.setItem(
-                        'token',
-                        JSON.stringify({
-                            token: account.token,
-                        }),
-                    )
-                    location.reload()
-                },
-            })
-            contextMenuModel.events.close()
-        }
     }
 
     return (
@@ -59,9 +41,12 @@ const AvailableAccounts = ({ padding }: Props) => {
                     <User
                         key={account.fio}
                         type={account.user_status}
-                        onClick={handleChangeAccount(account)}
-                        size="middle"
-                        name={account.fio}
+                        size={size}
+                        name={account.fio ?? user.fullName}
+                        token={account.token}
+                        division={account.work_place}
+                        group={account.group}
+                        degreeLevel={account.degreeLevel}
                         orientation="vertical"
                     />
                 )

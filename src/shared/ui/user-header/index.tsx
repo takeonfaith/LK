@@ -79,7 +79,6 @@ const UserHeader = ({
                     <Subtext fontSize="0.9rem">
                         <DotSeparatedWords words={status} />
                     </Subtext>
-
                     <KeyValue fontSize="0.9rem" visible={!!finance} keyStr={'Уровень финансирование'} value={finance} />
                     <KeyValue
                         fontSize="0.9rem"
