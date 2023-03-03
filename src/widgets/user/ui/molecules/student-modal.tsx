@@ -3,19 +3,17 @@ import { Button } from '@ui/button'
 import { FiMessageCircle } from 'react-icons/fi'
 import useModal from 'widgets/modal'
 import { UserModal } from '../atoms'
+import { UserProps } from 'widgets/user/types'
 
-interface Props {
-    name: string
-    avatar?: string
-    isMe: boolean
-    group?: string
-}
+type Props = Pick<
+    UserProps,
+    'finance' | 'educationForm' | 'degreeLevel' | 'course' | 'group' | 'token' | 'isMe' | 'avatar' | 'name'
+>
 
-const StudentModal = ({ name, avatar, isMe, group }: Props) => {
+const StudentModal = (props: Props) => {
     const { close } = useModal()
-
     return (
-        <UserModal avatar={avatar} name={name} isMe={isMe} type="student" group={group}>
+        <UserModal {...props} type="stud">
             {/* <Link to={`${CHAT_ROUTE}/${name}`}> */}
             <Button
                 icon={<FiMessageCircle />}

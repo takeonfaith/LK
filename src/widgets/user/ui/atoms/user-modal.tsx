@@ -1,7 +1,7 @@
 import UserHeader from '@shared/ui/user-header'
 import React from 'react'
 import styled from 'styled-components'
-import { UserType } from 'widgets/user/types'
+import { UserProps } from 'widgets/user/types'
 
 const UserModalWrapper = styled.div`
     @media (min-width: 1001px) {
@@ -45,17 +45,16 @@ const UserModalWrapper = styled.div`
     }
 `
 
-interface Props {
-    avatar?: string
-    name: string
-    children: ChildrenType
-    isMe: boolean
-    type: UserType
-    division?: string
-    group?: string
-}
+type Props = Pick<
+    UserProps,
+    'finance' | 'educationForm' | 'degreeLevel' | 'course' | 'group' | 'type' | 'division' | 'isMe' | 'avatar' | 'name'
+>
 
-const UserModal = (props: Props) => {
+const UserModal = (
+    props: Props & {
+        children: ChildrenType
+    },
+) => {
     const { children } = props
     return (
         <UserModalWrapper>

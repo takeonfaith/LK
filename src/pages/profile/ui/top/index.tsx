@@ -6,6 +6,7 @@ import { User } from '@shared/api/model'
 import { Colors } from '@shared/consts'
 import useTheme from '@shared/lib/hooks/use-theme'
 import { Button } from '@shared/ui/button'
+import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Subtext from '@shared/ui/subtext'
 import UserHeaderBackground from '@shared/ui/user-header/user-header-background'
 import React, { useEffect, useState } from 'react'
@@ -23,7 +24,7 @@ type Props = {
 }
 
 const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
-    const { fullName, avatar, user_status } = user
+    const { fullName, avatar, user_status, degreeLevel } = user
     const userStatus = user_status === 'stud' ? 'Студент' : 'Сотрудник'
 
     // const handleMore = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -76,7 +77,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                         <Info>
                             <b>{fullName}</b>
                             <Subtext maxWidth="100%" width="100%" align="center" fontSize="0.9rem">
-                                {userStatus}
+                                <DotSeparatedWords words={[userStatus, degreeLevel ?? '']} />
                             </Subtext>
                         </Info>
                         <Slider

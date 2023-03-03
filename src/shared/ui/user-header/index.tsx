@@ -2,7 +2,9 @@ import Avatar from '@features/home/ui/molecules/avatar'
 import React from 'react'
 import styled from 'styled-components'
 import getStatus from 'widgets/user/lib/get-status'
-import { UserType } from 'widgets/user/types'
+import { UserProps } from 'widgets/user/types'
+import KeyValue from '../atoms/key-value'
+import DotSeparatedWords from '../dot-separated-words'
 import Subtext from '../subtext'
 import UserHeaderBackground from './user-header-background'
 
@@ -28,18 +30,39 @@ const UserHeaderStyled = styled.div`
     }
 `
 
-interface Props {
-    avatar?: string
-    name: string
-    isMe: boolean
-    type: UserType
-    division?: string
-    group?: string
+interface Props
+    extends Pick<
+        UserProps,
+        | 'finance'
+        | 'educationForm'
+        | 'degreeLevel'
+        | 'course'
+        | 'group'
+        | 'type'
+        | 'division'
+        | 'isMe'
+        | 'avatar'
+        | 'name'
+    > {
     noInfo?: boolean
 }
 
-const UserHeader = ({ avatar, name, isMe, type, division, group, noInfo = false }: Props) => {
+const UserHeader = ({
+    avatar,
+    name,
+    type,
+    division,
+    group,
+    finance,
+    educationForm,
+    degreeLevel,
+    course,
+    isMe = false,
+    noInfo = false,
+}: Props) => {
     const size = noInfo ? '140px' : '110px'
+    const status = getStatus(isMe, type, division, group)
+
     return (
         <UserHeaderStyled>
             <UserHeaderBackground
@@ -53,7 +76,24 @@ const UserHeader = ({ avatar, name, isMe, type, division, group, noInfo = false 
             {!noInfo && (
                 <div className="info">
                     <b>{name}</b>
-                    <Subtext fontSize="0.9rem">{getStatus(isMe, type, division, group)}</Subtext>
+                    <Subtext fontSize="0.9rem">
+                        <DotSeparatedWords words={status} />
+                    </Subtext>
+
+                    <KeyValue fontSize="0.9rem" visible={!!finance} keyStr={'Уровень финансирование'} value={finance} />
+                    <KeyValue
+                        fontSize="0.9rem"
+                        visible={!!degreeLevel}
+                        keyStr={'Уровень образования'}
+                        value={degreeLevel}
+                    />
+                    <KeyValue fontSize="0.9rem" visible={!!course} keyStr={'Курс'} value={course} />
+                    <KeyValue
+                        fontSize="0.9rem"
+                        visible={!!educationForm}
+                        keyStr={'Форма образования'}
+                        value={educationForm}
+                    />
                 </div>
             )}
         </UserHeaderStyled>

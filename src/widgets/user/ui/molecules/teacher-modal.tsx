@@ -17,7 +17,7 @@ const TeacherModal = ({ name, avatar, isMe, division }: Props) => {
     const { close } = useModal()
 
     return (
-        <UserModal avatar={avatar} name={name} type={'teacher'} isMe={isMe} division={division}>
+        <UserModal avatar={avatar} name={name} type={'staff'} isMe={isMe} division={division}>
             <Link to={`${SCHEDULE_ROUTE}/${name}`}>
                 <Button
                     icon={<FiClock />}

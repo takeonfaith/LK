@@ -137,7 +137,7 @@ function renderItem<T extends TUser>(item: T, isMe: boolean, index?: number) {
     return (
         <User
             name={item.fio}
-            type={item.division ? 'teacher' : 'student'}
+            type={item.division ? 'staff' : 'stud'}
             key={index}
             group={item.group}
             isMe={isMe}

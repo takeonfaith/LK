@@ -127,7 +127,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             {
                 title: 'Форма обучения:',
                 type: 'select',
-                value: findCurrentInSelect(academic_form, dataUserApplication.educationForm),
+                value: findCurrentInSelect(academic_form, dataUserApplication.educationForm as string),
                 items: academic_form,
                 editable: true,
                 width: '100',

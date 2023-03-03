@@ -1,5 +1,6 @@
 import { Colors } from '@consts'
 import Avatar from '@features/home/ui/molecules/avatar'
+import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import { Direction, Size } from '@ui/types'
 import React from 'react'
 import styled from 'styled-components'
@@ -40,7 +41,7 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
         flex-direction: column;
         text-align: ${({ orientation }) => (orientation === 'vertical' ? 'center' : 'left')};
         margin-top: ${({ orientation }) => (orientation === 'vertical' ? '5px' : '0')};
-        width: calc(100% - 60px);
+        width: ${({ orientation }) => (orientation === 'vertical' ? '100%' : 'calc(100% - 60px)')};
 
         .name {
             font-size: ${({ size }) => getFontSize(size)};
@@ -70,6 +71,11 @@ const User = ({
     indexNumber,
     division,
     group,
+    finance,
+    degreeLevel,
+    course,
+    educationForm,
+    token,
     isMe = false,
     loading = false,
     orientation = 'horizontal',
@@ -86,10 +92,20 @@ const User = ({
         } else {
             if (!isMe) {
                 open(
-                    type === 'teacher' ? (
+                    type === 'staff' ? (
                         <TeacherModal name={name} avatar={avatar} isMe={isMe} division={division} />
                     ) : (
-                        <StudentModal name={name} avatar={avatar} isMe={isMe} group={group} />
+                        <StudentModal
+                            name={name}
+                            avatar={avatar}
+                            isMe={isMe}
+                            group={group}
+                            finance={finance}
+                            degreeLevel={degreeLevel}
+                            course={course}
+                            educationForm={educationForm}
+                            token={token}
+                        />
                     ),
                 )
             }
@@ -109,7 +125,9 @@ const User = ({
             />
             <div className="name-and-status">
                 <span className="name">{name}</span>
-                <span className="status"> {status}</span>
+                <span className="status">
+                    <DotSeparatedWords words={status} />
+                </span>
             </div>
         </UserWrapper>
     )

@@ -8,7 +8,7 @@ import { Button } from '@shared/ui/button'
 import React from 'react'
 import { FiArrowLeftCircle, FiLogOut, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
-import { useModal, WhatsNew } from 'widgets'
+import { AvailableAccounts, useModal, WhatsNew } from 'widgets'
 
 const UserContextMenu = () => {
     const { open } = useModal()
@@ -32,7 +32,8 @@ const UserContextMenu = () => {
 
     return (
         <>
-            {/* <AvailableAccounts /> */}
+            <AvailableAccounts padding="8px" />
+            <Divider />
             <Link to={SETTINGS_ROUTE}>
                 <Button
                     text="Настройки"
