@@ -57,7 +57,6 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
             currentUser: {
                 ...user,
                 fullName: createFullName({ name, surname, patronymic }),
-                available_accounts: [],
             },
             isAuthenticated: !!data,
             error: null,

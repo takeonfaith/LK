@@ -70,7 +70,7 @@ const SubjectModal = (props: Props) => {
 
                     <div className="teachers">
                         {teachers.map((teacher) => {
-                            return <User type={'teacher'} name={teacher} key={teacher} />
+                            return <User type="staff" name={teacher} key={teacher} />
                         })}
                     </div>
                 </>

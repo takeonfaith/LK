@@ -48,7 +48,7 @@ type PagintaionListProps<T> = {
 
 export const PAGINATION_OFFSET = 50
 
-export function PagintaionList<T extends { id: string; fio?: string }>({
+export function PagintaionList<T extends { id: string; fio?: string; avatar?: string }>({
     items,
     renderItem,
     hasNext,
@@ -86,7 +86,6 @@ export function PagintaionList<T extends { id: string; fio?: string }>({
             <div className="scrolable-content">
                 {(items || []).map((item, index) => {
                     const showLetter = showAlphabetLetters ? lastLetter !== item.fio?.charAt(0) : false
-
                     if (showLetter) lastLetter = item.fio?.charAt(0) ?? '-'
                     return (
                         <>

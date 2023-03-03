@@ -47,7 +47,7 @@ const ChatHeader = ({ avatar, name, loading }: Props) => {
         <ChatHeaderWrapper ref={menuRef}>
             <Button icon={<FiX />} onClick={handleClick} background="var(--schedule)" />
             {!searchMode ? (
-                <User type={'teacher'} avatar={avatar} name={name} loading={loading} />
+                <User type="staff" avatar={avatar} name={name} loading={loading} />
             ) : (
                 <LocalSearch
                     whereToSearch={[]}

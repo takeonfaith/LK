@@ -32,6 +32,7 @@ type TUser = {
     division?: string
     group?: string
     fio: string
+    avatar?: string
 }
 
 type Props<T extends TUser> = {
@@ -137,8 +138,9 @@ function renderItem<T extends TUser>(item: T, isMe: boolean, index?: number) {
     return (
         <User
             name={item.fio}
-            type={item.division ? 'teacher' : 'student'}
+            type={item.division ? 'staff' : 'stud'}
             key={index}
+            avatar={item.avatar}
             group={item.group}
             isMe={isMe}
             division={item.division}

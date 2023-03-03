@@ -41,6 +41,17 @@ export const BackgroundPlate = styled.div<{
         z-index: -1;
         transform: ${({ baseScale }) => `scale(${baseScale})`};
     }
+
+    &::before {
+        content: '';
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(0deg, #00000024, transparent);
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+    }
 `
 
 type Props = {

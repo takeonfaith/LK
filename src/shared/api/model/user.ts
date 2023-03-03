@@ -1,16 +1,41 @@
 import { Sex } from '@utility-types/sex'
 
-type UserStatus = 'stud' | 'staff'
+export type UserStatus = 'stud' | 'staff'
 
 type EducationFormT = 'Очная' | 'Очно-заочная' | 'Заочная' | 'Недоступен'
 
-export interface User {
+type TechicalAccount = {
+    token: string
+    jwt: string
+    jwt_refresh: string
+}
+
+type GeneralAccountFields = {
+    user_status: UserStatus
+    fio: string
+    avatar: string
+}
+
+export type StudentAccount = {
+    status?: string
+    group?: string
+    course?: number
+    educationForm?: EducationFormT
+    finance?: string
+    degreeLevel?: string
+}
+
+export type StaffAccount = {
+    work_place?: string
+}
+
+export type GeneralAccount = GeneralAccountFields & StudentAccount & StaffAccount & TechicalAccount
+
+export type User = StudentAccount & {
     id: string
     name: string
     fullName: string
-    status: string
     avatar: string
-    course: number
     surname: string
     birthday: string
     patronymic: string
@@ -21,18 +46,14 @@ export interface User {
     sex: Sex
     code: string
     faculty: string
-    group: string
     specialty: string
     specialization: string
     degreeLength: number
-    educationForm: EducationFormT
-    finance: string
-    degreeLevel: string
     enterYear: string
     subdivisions?: Subdivision[]
     user_status: UserStatus
     lastaccess: string
-    available_accounts?: { name: string; avatar: string; token: string }[]
+    accounts?: GeneralAccount[]
     authorIDs?: AuthorIDs
 }
 

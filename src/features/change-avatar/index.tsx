@@ -25,6 +25,9 @@ const ChangeAvatar = (props: FieldProps) => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+
+    if (!user) return null
+
     const [files, setFiles] = useState<File[]>([])
     const [loadedAvatar, setLoadedAvatar] = useState<string | null>(null)
     const {
@@ -86,7 +89,7 @@ const ChangeAvatar = (props: FieldProps) => {
                 avatar={loadedAvatar ?? user?.avatar}
                 name={user?.fullName ?? ''}
                 isMe={false}
-                type={user?.user_status === 'stud' ? 'student' : 'teacher'}
+                type={user?.user_status}
                 noInfo
             />
 
