@@ -97,7 +97,7 @@ const ChangeAvatar = (props: FieldProps) => {
                 maxFileSizeInBytes={0}
                 files={files}
                 maxFiles={1}
-                allowedTypes={['image/jpeg']}
+                formats={['image/jpeg']}
                 setFiles={setFiles}
                 isActive
             />

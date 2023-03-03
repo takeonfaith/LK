@@ -1,26 +1,15 @@
 import Avatar from '@features/home/ui/molecules/avatar'
-import getLettersColors from '@shared/lib/get-letters-colors'
 import React from 'react'
 import styled from 'styled-components'
 import getStatus from 'widgets/user/lib/get-status'
 import { UserType } from 'widgets/user/types'
 import Subtext from '../subtext'
+import UserHeaderBackground from './user-header-background'
 
-const UserHeaderStyled = styled.div<{ background?: string }>`
+const UserHeaderStyled = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-
-    &::before {
-        content: '';
-        width: 100%;
-        height: 120px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background: ${({ background }) => background ?? 'var(--scheduleBg)'};
-        z-index: -1;
-    }
 
     .info {
         display: flex;
@@ -52,7 +41,14 @@ interface Props {
 const UserHeader = ({ avatar, name, isMe, type, division, group, noInfo = false }: Props) => {
     const size = noInfo ? '140px' : '110px'
     return (
-        <UserHeaderStyled background={getLettersColors(name, 'darker')}>
+        <UserHeaderStyled>
+            <UserHeaderBackground
+                fullName={name}
+                height="136px"
+                width="calc(100% + 16px)"
+                baseScale={1}
+                baseScaleDelta={0.5}
+            />
             <Avatar border name={name} avatar={avatar} width={size} height={size} marginRight="0" />
             {!noInfo && (
                 <div className="info">

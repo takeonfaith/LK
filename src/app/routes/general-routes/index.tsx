@@ -281,7 +281,7 @@ export const generalRoutes: IRoutes = {
         icon: <BiGroup />,
         path: ALL_STUDENTS_ROUTE,
         Component: AllStudentsPage,
-        color: 'darkBlue',
+        color: 'lightBlue',
         isTemplate: false,
         isNew: true,
         group: 'COMMUNICATION',

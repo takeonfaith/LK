@@ -7,7 +7,7 @@ const DragAndDropAreaWrapper = styled.label<{ showPulse: boolean; isActive: bool
     border-radius: var(--brLight);
     transition: 0.2s border;
     border: ${({ showPulse }) => (!showPulse ? `2px dashed ${Colors.grey.main}` : `2px dashed ${Colors.blue.main}`)};
-    background: ${({ showPulse }) => (showPulse ? Colors.blue.transparentAF : '')};
+    background: ${({ showPulse }) => (showPulse ? Colors.blue.transparent3 : '')};
     display: flex;
     justify-content: center;
     align-items: center;

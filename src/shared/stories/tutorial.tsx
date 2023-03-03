@@ -26,7 +26,7 @@ export const TutorialStory: StoryProps[] = [
         imageSize: { width: '100px', height: 'auto' },
         children: (
             <Button
-                background={Colors.white.transparentAF}
+                background={Colors.white.transparent3}
                 textColor="#ffffffa6"
                 onClick={() => storyModel.events.close()}
                 text="Пропустить обучение"

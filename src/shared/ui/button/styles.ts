@@ -57,7 +57,7 @@ export const ButtonWrapper = styled.button<{
         width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
         min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
         height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
-        margin-bottom: ${({ direction }) => direction === 'vertical' && '4px'};
+        margin-bottom: ${({ direction, text }) => direction === 'vertical' && text && '4px'};
         display: flex;
         align-items: center;
         justify-content: center;
@@ -83,9 +83,11 @@ export const ButtonWrapper = styled.button<{
         .icon {
             width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
             min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
-            height: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
+            margin-bottom: ${({ direction, shrinkTextInMobile }) =>
+                direction === 'vertical' && !shrinkTextInMobile ? '4px' : '0px'};
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};
+            height: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
         }
 
         span {

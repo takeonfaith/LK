@@ -6,7 +6,7 @@ const RowWrapper = styled.div<{ even?: boolean }>`
     align-items: center;
     width: 100%;
     font-size: 0.9em;
-    background: ${({ even }) => (!even ? 'transparent' : `${Colors.blue.transparentAF}`)};
+    background: ${({ even }) => (!even ? 'transparent' : `${Colors.blue.transparent3}`)};
 
     @media (max-width: 1200px) {
         .five {

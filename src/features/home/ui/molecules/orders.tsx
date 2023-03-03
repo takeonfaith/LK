@@ -1,4 +1,13 @@
 import React, { memo } from 'react'
+import styled from 'styled-components'
+
+const OrderList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+`
+
+const OrderItem = styled.div``
 
 interface Props {
     orders: string[]
@@ -6,16 +15,12 @@ interface Props {
 
 const Orders = ({ orders }: Props) => {
     return (
-        <div>
+        <OrderList>
             {orders?.map((order) => (
-                <p key={order}>{order}</p>
+                <OrderItem key={order}>{order}</OrderItem>
             ))}
-        </div>
+        </OrderList>
     )
-}
-
-interface Props {
-    orders: string[]
 }
 
 export default memo(Orders)

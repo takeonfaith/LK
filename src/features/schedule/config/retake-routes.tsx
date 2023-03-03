@@ -77,7 +77,7 @@ const retakeRoutesRaw: RetakeRouteRaw[] = [
         id: 'igrik',
         title: 'ИГРИК',
         icon: <TiBrush />,
-        color: 'yellow',
+        color: 'orange',
     },
     {
         id: 'pishe',
@@ -101,7 +101,7 @@ const retakeRoutesRaw: RetakeRouteRaw[] = [
         id: 'nivk',
         title: 'НИВК (Аспиранты)',
         icon: <HiOutlineDocumentSearch />,
-        color: 'darkBlue',
+        color: 'lightBlue',
     },
 ]
 

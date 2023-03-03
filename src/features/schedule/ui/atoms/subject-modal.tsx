@@ -49,7 +49,7 @@ const SubjectModal = (props: Props) => {
 
     return (
         <SubjectModalWrapper>
-            <Groups groups={groups} isCurrent={false} />
+            <Groups groups={groups} isCurrent={false} color={'var(--schedule)'} />
             <span className="date-interval">{dateInterval}</span>
             <Title size={3} align="left">
                 {name}

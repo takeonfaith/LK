@@ -7,7 +7,7 @@ const FileWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: ${Colors.grey.transparentAF};
+    background: ${Colors.grey.transparent3};
     border-radius: var(--brLight);
 
     .file-body {

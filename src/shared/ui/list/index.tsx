@@ -64,7 +64,7 @@ const List = (props: Props) => {
                         icon={<FiPlus />}
                         width="35px"
                         height="15px"
-                        background={Colors.grey.transparentAF}
+                        background={Colors.grey.transparent3}
                         textColor="var(--reallyBlue)"
                         onClick={onAdd}
                     />
@@ -73,7 +73,7 @@ const List = (props: Props) => {
                     <Button
                         width="fit-content"
                         height="15px"
-                        background={Colors.grey.transparentAF}
+                        background={Colors.grey.transparent3}
                         textColor="var(--reallyBlue)"
                         onClick={onWatchMore}
                         text="Ещё"
@@ -83,7 +83,7 @@ const List = (props: Props) => {
                     <Button
                         width="fit-content"
                         height="15px"
-                        background={Colors.grey.transparentAF}
+                        background={Colors.grey.transparent3}
                         textColor="var(--reallyBlue)"
                         onClick={onDelete}
                         text="Удалить"
@@ -112,7 +112,7 @@ const List = (props: Props) => {
                 <div className="bottom-wrapper">
                     {leftArrow && (
                         <Button
-                            background={Colors.grey.transparentAF}
+                            background={Colors.grey.transparent3}
                             minWidth="40px"
                             height="25px"
                             icon={<FiChevronLeft />}
@@ -129,7 +129,7 @@ const List = (props: Props) => {
                     {showPages && <DotPages direction="horizontal" current={currentPage} amount={amountOfPages} />}
                     {rightArrow && (
                         <Button
-                            background={Colors.grey.transparentAF}
+                            background={Colors.grey.transparent3}
                             minWidth="40px"
                             height="25px"
                             icon={<FiChevronRight />}

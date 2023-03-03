@@ -31,12 +31,12 @@ type Props = {
 const CustomizeMenu = ({ title, enabledList, requiredList, add, remove }: Props) => {
     const { settings } = settingsModel.selectors.useSettings()
     const menu = menuModel.selectors.useMenu()
-    const { allRoutes } = menuModel.selectors.useMenu()
+    const { visibleRoutes } = menuModel.selectors.useMenu()
     const [searchResult, setSearchResult] = useState<IRoutes | null>(null)
 
     const enabled = menu[enabledList]
 
-    if (!enabled || !allRoutes) return null
+    if (!enabled || !visibleRoutes) return null
 
     const switchChosen = (id: string) => {
         if (enabled[id]) {
@@ -53,11 +53,11 @@ const CustomizeMenu = ({ title, enabledList, requiredList, add, remove }: Props)
             </Title>
             <LocalSearch
                 placeholder="Поиск"
-                whereToSearch={allRoutes}
+                whereToSearch={visibleRoutes}
                 searchEngine={search}
                 setResult={setSearchResult}
             />
-            {Object.values(searchResult ?? allRoutes).map((el: IRoute, index) => {
+            {Object.values(searchResult ?? visibleRoutes).map((el: IRoute, index) => {
                 return (
                     <CustomizeLeftsideBarItem
                         {...el}
