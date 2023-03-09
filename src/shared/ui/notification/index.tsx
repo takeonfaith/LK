@@ -8,6 +8,7 @@ const Notification = styled.span<{
     top?: string
     left?: string
     right?: string
+    pulsing?: boolean
 }>`
     color: #fff;
     background: ${({ color }) => Colors[color ?? 'red'].main};
@@ -27,6 +28,19 @@ const Notification = styled.span<{
     font-weight: bold;
     height: 17px;
     display: ${({ visible }) => !visible && 'none'};
+    animation: ${({ pulsing }) => pulsing && '2s pulsing infinite'};
+
+    @keyframes pulsing {
+        0% {
+            outline: 0px solid ${({ color }) => Colors[color ?? 'red'].main};
+        }
+        50% {
+            outline: 10px solid transparent;
+        }
+        100% {
+            outline: 0px solid transparent;
+        }
+    }
 `
 
 export default Notification

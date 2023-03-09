@@ -10,6 +10,10 @@ export const ErrorContainer = styled.div<{ size?: string }>`
     align-items: center;
     color: var(--text);
 
+    h3 {
+        opacity: 0.8;
+    }
+
     .image {
         margin-bottom: 10px;
         img {

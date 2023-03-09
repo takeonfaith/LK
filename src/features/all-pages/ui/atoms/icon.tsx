@@ -23,7 +23,7 @@ const IconWrapper = styled.div<{ color: string; size: number }>`
 
 interface Props {
     children: ChildrenType
-    color: string
+    color: keyof IColors
     size?: number
 }
 

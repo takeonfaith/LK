@@ -1,9 +1,30 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IRoutes } from '@app/routes/general-routes'
 import AllPagesLink from '@features/all-pages/ui/molecules/all-pages-link'
 import List from '@ui/list'
 import { Align } from '@ui/types'
 import PageLink, { PageLinkProps } from '../../../all-pages/ui/molecules/page-link'
 import React from 'react'
+import styled from 'styled-components'
+
+const LinksListStyled = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    max-width: 800px;
+
+    @media (max-width: 500px) {
+        overflow-x: auto;
+        width: calc(100% + 28px);
+        padding: 0 14px;
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    }
+`
 
 type Props = Pick<PageLinkProps, 'orientation' | 'shadow' | 'mode' | 'background'> & {
     links: IRoutes
@@ -27,15 +48,7 @@ const LinksList = ({
     mode,
 }: Props) => {
     return (
-        <List
-            direction="horizontal"
-            scroll={false}
-            gap={10}
-            horizontalAlign={align}
-            title={title}
-            wrap
-            wrapOnMobile={wrapOnMobile}
-        >
+        <LinksListStyled>
             {Object.values(links).map((el) => {
                 if (el?.show !== false && doNotShow !== el?.id)
                     return (
@@ -52,7 +65,7 @@ const LinksList = ({
                     )
             })}
             {doNotShow !== 'all' && <AllPagesLink />}
-        </List>
+        </LinksListStyled>
     )
 }
 

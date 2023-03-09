@@ -44,7 +44,7 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
         bottom: 0;
         border-radius: 20px 20px 0 0;
         transform: ${({ isOpen }) => (isOpen ? `scale(1) translateY(0px)` : `scale(1) translateY(150px)`)};
-        border-radius: var(--brLight) var(--brLight) 0 0;
+        border-radius: var(--brLight);
     }
 `
 

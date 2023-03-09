@@ -14,6 +14,7 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
     transition: 0.2s opacity, 0.2s visibility;
 
     @media (max-width: 800px) {
+        padding: 8px;
         align-items: flex-end;
     }
 

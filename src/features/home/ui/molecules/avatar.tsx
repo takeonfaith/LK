@@ -20,6 +20,7 @@ interface Props {
     boxShadow?: string
     border?: boolean
     avatarModal?: boolean
+    icon?: ChildrenType
 }
 
 function Avatar({
@@ -33,6 +34,7 @@ function Avatar({
     checked,
     boxShadow,
     border,
+    icon,
     avatarModal,
 }: Props) {
     const [isLoaded, setIsLoaded] = useState<boolean>(true)
@@ -61,6 +63,7 @@ function Avatar({
             ) : (
                 <div className="name">{shortName}</div>
             )}
+            {icon && <span className="icon">{icon}</span>}
             <Checkbox
                 invisibleOnFalse
                 checked={checked ?? false}

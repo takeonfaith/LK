@@ -27,7 +27,7 @@ const BlockWrapper = styled.div<StyledProps>`
     box-shadow: ${({ shadow }) => (shadow ?? true) && 'var(--very-mild-shadow)'};
     padding: ${({ padding }) => padding ?? '20px'};
     height: ${({ height }) => height ?? '330px'};
-    max-width: ${({ maxWidth }) => maxWidth ?? '750px'};
+    max-width: ${({ maxWidth }) => maxWidth ?? '800px'};
     width: ${({ width }) => width ?? '100%'};
     color: var(--text);
     gap: ${({ gap }) => gap ?? '0'};

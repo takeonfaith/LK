@@ -18,6 +18,7 @@ import React from 'react'
 // import useShowTutorial from '@utils/hooks/use-show-tutorial'
 import { Link } from 'react-router-dom'
 import { ALERTS_ROUTE } from '@app/routes/general-routes'
+import PopUpNotifications from 'widgets/pop-up-notifications'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -115,6 +116,7 @@ const ContentLayout = () => {
             <Confirm />
             <ContextMenu />
             <HintModal />
+            <PopUpNotifications />
         </div>
     )
 }

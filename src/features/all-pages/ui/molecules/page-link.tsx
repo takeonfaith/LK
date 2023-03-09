@@ -7,12 +7,12 @@ import PageLinkContent from './page-link-content'
 import React from 'react'
 
 const LinkWrapper = styled(Link)<{ width: number | string }>`
-    width: ${({ width }) => (typeof width === 'number' ? `calc(125px * ${width} + ${(width - 1) * 10}px)` : width)};
+    /* width: ${({ width }) =>
+        typeof width === 'number' ? `calc(125px * ${width} + ${(width - 1) * 10}px)` : width}; */
 
     @media (max-width: 500px) {
-        max-width: ${({ width }) => (typeof width === 'number' ? `calc(32vw * ${width} - 16px)` : width)};
-        min-width: ${({ width }) => (typeof width === 'number' ? `calc(32vw * ${width} - 16px)` : width)};
-        width: ${({ width }) => (typeof width === 'number' ? `calc(32vw * ${width} - 16px)` : width)};
+        height: 110px;
+        width: ${({ width }) => (typeof width === 'number' ? `calc(33vw * ${width} - 14px)` : width)};
     }
 `
 

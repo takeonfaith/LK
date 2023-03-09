@@ -112,7 +112,7 @@ const List = (props: Props) => {
                 <div className="bottom-wrapper">
                     {leftArrow && (
                         <Button
-                            background={Colors.grey.transparent3}
+                            background="transparent"
                             minWidth="40px"
                             height="25px"
                             icon={<FiChevronLeft />}
@@ -129,7 +129,7 @@ const List = (props: Props) => {
                     {showPages && <DotPages direction="horizontal" current={currentPage} amount={amountOfPages} />}
                     {rightArrow && (
                         <Button
-                            background={Colors.grey.transparent3}
+                            background="transparent"
                             minWidth="40px"
                             height="25px"
                             icon={<FiChevronRight />}

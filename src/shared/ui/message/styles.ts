@@ -8,7 +8,7 @@ import styled from 'styled-components'
 //         : Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparent3']
 
 const getColor = (isLightTheme: boolean, type: MessageType) =>
-    isLightTheme ? Colors[messageType[type].color].dark2 : Colors[messageType[type].color].light2
+    isLightTheme ? Colors[messageType[type].color].dark2 : Colors[messageType[type].color].light3
 
 export const MessageWrapper = styled.div<{
     type: MessageType
@@ -26,7 +26,7 @@ export const MessageWrapper = styled.div<{
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     color: ${({ type, isLightTheme }) => getColor(isLightTheme, type)};
     background: ${({ type, solidBackground }) =>
-        Colors[messageType[type].color][solidBackground ? 'transparent1' : 'transparent2']};
+        Colors[messageType[type].color][solidBackground ? 'transparent1' : 'transparent3']};
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     font-size: ${({ fontSize }) => fontSize ?? '0.8em'};

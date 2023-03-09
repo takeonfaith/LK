@@ -44,6 +44,7 @@ export interface IColors {
     lightGreen: IColorPalette
     blue: IColorPalette
     lightBlue: IColorPalette
+    darkBlue: IColorPalette
     purple: IColorPalette
     pink: IColorPalette
     red: IColorPalette
@@ -114,6 +115,18 @@ export const Colors: IColors = {
         transparent1: '#e0e9ffba',
         transparent2: '#e0e9ff6b',
         transparent3: '#e0e9ff29',
+    },
+    darkBlue: {
+        dark3: '#211d69',
+        dark2: '#272279',
+        dark1: '#2e2891',
+        main: '#3831a5',
+        light1: '#4038b5',
+        light2: '#4e46c7',
+        light3: '#5c54d9',
+        transparent1: '#5c54d9e0',
+        transparent2: '#5c54d9b5',
+        transparent3: '#5c54d98c',
     },
     purple: {
         dark3: '#5b248d',
