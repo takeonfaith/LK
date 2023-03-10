@@ -19,7 +19,7 @@ export const FormStyled = styled.div`
     justify-content: space-between;
     gap: 10px;
     min-height: 100%;
-    min-width: 280px;
+    max-width: 280px;
     width: 100%;
 `
 

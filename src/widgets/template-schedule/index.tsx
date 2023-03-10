@@ -5,7 +5,7 @@ import retakeRoutes from '@features/schedule/config'
 import getSessionStats from '@features/schedule/lib/get-session-stats'
 import {
     ScheduleViewButtonsList,
-    TeacherScheduleIndicator,
+    FilterScheduleIndicator,
     WeekDayButtonsList,
     WeekSchedule,
 } from '@features/schedule/ui'
@@ -46,12 +46,13 @@ const SchedulePageContent = styled.div`
 
 interface Props {
     teacherName?: string
+    group?: string
     data: ISchedule
     loading: boolean
     error: string | null
 }
 
-const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
+const TemplateSchedule = ({ teacherName, group, data, loading, error }: Props) => {
     const { schedule, currentModule, view } = data
     const {
         data: { user },
@@ -60,6 +61,8 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
     const wrapperRef = useRef<HTMLDivElement>(null)
 
     const [groupSearch, setGroupSearch] = useState(user?.group ?? '')
+
+    const showGroupSearch = user?.user_status === 'stud' && !teacherName && !group
 
     const onHintClick = (hint: Hint | undefined) => {
         scheduleModel.effects.getScheduleFx({ user, group: hint?.value ?? '' })
@@ -127,7 +130,7 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                                 view={view}
                                 setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
                             />
-                            {!teacherName && (
+                            {showGroupSearch && (
                                 <SearchWithHints
                                     value={groupSearch}
                                     setValue={setGroupSearch}
@@ -141,7 +144,9 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                             )}
                         </div>
                     )}
-                    {teacherName && <TeacherScheduleIndicator fio={teacherName} />}
+                    {(teacherName || group) && (
+                        <FilterScheduleIndicator filter={teacherName ?? group ?? ''} isGroup={!!group} />
+                    )}
                     {currentModule !== '3' && <WeekDayButtonsList wrapperRef={wrapperRef} data={data} />}
                     {!!pages && pages[currentModule as keyof IModules]}
                 </SchedulePageContent>

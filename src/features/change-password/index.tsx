@@ -7,7 +7,7 @@ import { Message } from '@shared/ui/message'
 import ProgressBar from '@shared/ui/progress-bar'
 import Subtext from '@shared/ui/subtext'
 import React, { useState } from 'react'
-import { RULES } from './const'
+import { MANDATORY_RULES, OPTIONAL_RULES } from './const'
 import generatePassword from './lib/generate-password'
 import getPasswordStrength from './lib/get-password-strength'
 import { Buttons, ChangePasswordStyled, CheckStyled, FormStyled, InputsStyled, LeftSide, TopLeftSide } from './styles'
@@ -19,7 +19,7 @@ const ChangePassword = () => {
     const [error, setError] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
-    const { isActive, validationError } = useFormValidation(RULES, [first, second, old])
+    const { isActive, validationError } = useFormValidation(MANDATORY_RULES, [first, second, old])
     const strength = getPasswordStrength(first)
 
     const handleGeneratePassword = () => {
@@ -55,10 +55,26 @@ const ChangePassword = () => {
                         Смена пароля
                     </Title>
                     <Subtext width="100%" align="left" fontSize="0.9rem">
-                        Требования к новому паролю
+                        Обязательные требования
                     </Subtext>
                     <List gap={8} direction="vertical">
-                        {RULES.map((rule) => {
+                        {MANDATORY_RULES.map((rule) => {
+                            return (
+                                <Checkbox
+                                    fontSize="0.85rem"
+                                    key={rule.text}
+                                    setChecked={() => null}
+                                    text={rule.text}
+                                    checked={rule.test(first, second, old)}
+                                />
+                            )
+                        })}
+                    </List>
+                    <Subtext width="100%" align="left" fontSize="0.9rem">
+                        Необязательные требования
+                    </Subtext>
+                    <List gap={8} direction="vertical">
+                        {OPTIONAL_RULES.map((rule) => {
                             return (
                                 <Checkbox
                                     fontSize="0.85rem"
