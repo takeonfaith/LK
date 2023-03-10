@@ -5,20 +5,27 @@ import React, { useEffect, useState } from 'react'
 import { useRouteMatch } from 'react-router'
 import TemplateSchedule from 'widgets/template-schedule'
 
+const checkIfGroup = (filter: string | undefined) => (filter?.length === 7 || filter?.length === 8) && filter[3] === '-'
+
 const TeachersSchedule = () => {
-    const route: { params: { fio?: string } } = useRouteMatch()
+    const route: { params: { filter?: string } } = useRouteMatch()
     const { data } = scheduleModel.selectors.useSchedule()
+    const isGroup = checkIfGroup(route.params.filter)
 
     const [teacherSchedule, setTeacherSchedule] = useState<IModules | null>(null)
 
     useEffect(() => {
+        const scheduleRequest = isGroup
+            ? getSchedule('', route.params.filter)
+            : getSchedule(route?.params?.filter ?? '')
         setTeacherSchedule(null)
-        if (route.params.fio) getSchedule(route?.params?.fio ?? '').then((res) => setTeacherSchedule(res))
-    }, [route.params.fio])
+        if (route.params.filter) scheduleRequest.then((res) => setTeacherSchedule(res))
+    }, [route.params.filter])
 
     return (
         <TemplateSchedule
-            teacherName={route.params.fio}
+            teacherName={!isGroup ? route.params.filter : undefined}
+            group={isGroup ? route.params.filter : undefined}
             data={{ ...data, schedule: teacherSchedule }}
             loading={!teacherSchedule}
             error={null}

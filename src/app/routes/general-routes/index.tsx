@@ -65,6 +65,7 @@ export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-a
 export const PAYMENTS_ROUTE = '/payments'
 export const SCHEDULE_ROUTE = '/schedule'
 export const ALL_STUDENTS_ROUTE = '/all-students'
+export const FILTERED_ALL_STUDENTS_ROUTE = '/all-students/:filter'
 export const ALL_TEACHERS_ROUTE = '/all-teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const DECREIS_DIRECTIVES = '/decreis-directives'
@@ -87,7 +88,7 @@ export const ALERTS_ROUTE = '/alerts'
 export const USEFUL_INFO_ROUTE = '/helpful-information'
 
 // hidden
-export const TEACHER_SCHEDULE = SCHEDULE_ROUTE + '/:fio'
+export const FILTER_SCHEDULE = SCHEDULE_ROUTE + '/:filter'
 export const TEMPLATE_USEFUL_INFO_ROUTE = USEFUL_INFO_ROUTE + '/:infoType'
 
 export interface IRoutes {
@@ -345,8 +346,19 @@ export const generalHiddenRoutes: IRoutes = {
         id: 'teachers-schedule',
         title: 'Расписание преподавателя',
         icon: <BiIdCard />,
-        path: TEACHER_SCHEDULE,
+        path: FILTER_SCHEDULE,
         Component: TeachersSchedule,
+        color: 'blue',
+        isTemplate: false,
+        show: false,
+        group: 'OTHER',
+    },
+    'filtered-all-students': {
+        id: 'filtered-all-students',
+        title: 'Все студенты',
+        icon: <BiGroup />,
+        path: FILTERED_ALL_STUDENTS_ROUTE,
+        Component: AllStudentsPage,
         color: 'blue',
         isTemplate: false,
         show: false,
