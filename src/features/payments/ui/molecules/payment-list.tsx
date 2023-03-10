@@ -1,3 +1,4 @@
+import React from 'react'
 import { IPaymentItem } from '@api/model'
 import { PaymentItem } from '@features/payments'
 import { Title } from '@ui/atoms'
@@ -69,9 +70,11 @@ const PaymentList = ({ payments }: Props) => {
             <div className="all-payments">
                 <span>Поступившие платежи</span>
                 <span>
-                    {payments?.reduce((acc, curr) => {
-                        return acc + getCorrectNumberFormat(curr.value)
-                    }, 0)}{' '}
+                    {payments
+                        ?.reduce((acc, curr) => {
+                            return acc + getCorrectNumberFormat(curr.value)
+                        }, 0)
+                        .toFixed(1)}{' '}
                     руб.
                 </span>
             </div>

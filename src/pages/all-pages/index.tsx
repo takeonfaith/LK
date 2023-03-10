@@ -28,7 +28,6 @@ const AllPages = () => {
     const [foundPages, setFoundPages] = useState<IRoutes | null>(null)
     const [searchValue, setSearchValue] = useState<string>('')
     const groupedPages = useMemo(() => getGroupPages(visibleRoutes), [visibleRoutes])
-
     if (!visibleRoutes) return null
 
     return (
@@ -36,15 +35,15 @@ const AllPages = () => {
             <Title size={2} align="left" width="100%" bottomGap>
                 Все разделы
                 {/* <List direction="horizontal" verticalAlign="center" width="fit-content" height="40px">
-                    <Button icon={<FiGrid />} height="28px" width="45px" background={Colors.grey.transparentAF} />
-                    <Button icon={<FiList />} height="28px" width="45px" background={Colors.grey.transparentAF} />
+                    <Button icon={<FiGrid />} height="28px" width="45px" background={Colors.grey.transparent3} />
+                    <Button icon={<FiList />} height="28px" width="45px" background={Colors.grey.transparent3} />
                     <Divider margin="0px 10px" direction="horizontal" />
                     <Button
                         width="45px"
                         height="28px"
                         icon={<FiMoreVertical />}
                         onClick={(e) => contextMenuModel.events.open({ e, content: 'Test', height: 110 })}
-                        background={Colors.grey.transparentAF}
+                        background={Colors.grey.transparent3}
                     />
                 </List> */}
             </Title>
@@ -54,6 +53,7 @@ const AllPages = () => {
                 searchEngine={search}
                 setResult={setFoundPages}
                 setExternalValue={setSearchValue}
+                validationCheck
             />
             {searchValue.length === 0 &&
                 Object.keys(groupedPages)

@@ -2,7 +2,11 @@ import { Colors, IColors } from '@consts'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const LeftsideBarItemWrapper = styled(Link)<{
+const styledPropsArray = ['isCurrent', 'color']
+
+const LeftsideBarItemWrapper = styled(Link).withConfig({
+    shouldForwardProp: (prop) => !styledPropsArray.includes(prop),
+})<{
     isCurrent: boolean
     color: keyof IColors
 }>`
@@ -20,6 +24,14 @@ const LeftsideBarItemWrapper = styled(Link)<{
     text-decoration: none;
     border-radius: var(--brLight);
     color: ${({ color, isCurrent }) => (color && isCurrent ? Colors[color].main : 'var(--text)')};
+
+    & > button {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        right: -10px;
+        transform: translateY(-50%);
+    }
 
     .title {
         opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
@@ -45,6 +57,10 @@ const LeftsideBarItemWrapper = styled(Link)<{
         outline: none;
     }
 
+    &:hover > button {
+        opacity: 1;
+    }
+
     &::before {
         content: '';
         width: 8px;
@@ -61,6 +77,9 @@ const LeftsideBarItemWrapper = styled(Link)<{
     }
 
     @media (max-width: 1000px) {
+        & > button {
+            display: none;
+        }
         /* span {
             width: 100%;
             display: block;
@@ -75,8 +94,8 @@ const LeftsideBarItemWrapper = styled(Link)<{
         }
 
         &::before {
-            top: auto;
-            bottom: 0px;
+            display: none;
+            top: -2px;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -87,7 +106,13 @@ const LeftsideBarItemWrapper = styled(Link)<{
         }
 
         .title {
-            display: none;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%);
+            bottom: -5px;
+            font-size: 0.65em;
+            width: 100%;
+            text-align: center;
         }
     }
 `

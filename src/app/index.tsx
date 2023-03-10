@@ -1,8 +1,8 @@
+import useTheme from '@shared/lib/hooks/use-theme'
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'
-import SettingsProvider from '../shared/lib/contexts/settings-context'
 import Router from './routers/router'
 
 const Background = styled.div`
@@ -12,15 +12,15 @@ const Background = styled.div`
 `
 
 const App = () => {
+    useTheme()
+
     return (
         <ModalProvider>
-            <SettingsProvider>
-                <BrowserRouter basename="/">
-                    <Background>
-                        <Router />
-                    </Background>
-                </BrowserRouter>
-            </SettingsProvider>
+            <HashRouter basename="/">
+                <Background>
+                    <Router />
+                </Background>
+            </HashRouter>
         </ModalProvider>
     )
 }

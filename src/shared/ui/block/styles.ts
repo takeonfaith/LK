@@ -14,6 +14,7 @@ export interface StyledProps {
     alignItems?: string
     padding?: string
     shadow?: boolean
+    noAppearanceInMobile?: boolean
 }
 
 const BlockWrapper = styled.div<StyledProps>`
@@ -21,7 +22,7 @@ const BlockWrapper = styled.div<StyledProps>`
     align-items: ${({ alignItems }) => alignItems ?? 'center'};
     justify-content: ${({ justifyContent }) => justifyContent ?? 'space-between'};
     background: ${({ background }) => background ?? 'var(--schedule)'};
-    border-radius: var(--brSemi);
+    border-radius: var(--brLight);
     flex-direction: ${({ orientation }) => (orientation === 'vertical' ? 'column' : 'row')};
     box-shadow: ${({ shadow }) => (shadow ?? true) && 'var(--very-mild-shadow)'};
     padding: ${({ padding }) => padding ?? '20px'};
@@ -43,12 +44,12 @@ const BlockWrapper = styled.div<StyledProps>`
     }
 
     @media (max-width: 1400px) {
-        max-width: 800px;
+        max-width: ${({ maxWidth }) => maxWidth ?? '800px'};
         width: 100%;
     }
 
     @media (max-width: 1225px) {
-        height: auto;
+        height: 100%;
         max-width: ${({ maxWidth }) => maxWidth ?? '600px'};
     }
 
@@ -57,6 +58,10 @@ const BlockWrapper = styled.div<StyledProps>`
         /* max-height: 100%; */
         flex-direction: column;
         gap: 1rem;
+        box-shadow: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'none'};
+        border-radius: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'none'};
+        padding: ${({ noAppearanceInMobile }) => noAppearanceInMobile && '0'};
+        background: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'transparent'};
     }
 `
 export default BlockWrapper

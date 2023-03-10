@@ -19,13 +19,15 @@ import {
     QUESTION_SED,
     VISA_CERTIFICATE,
     WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY,
-    PARTTIME_EMPLOYMENT,
-    HOLIDAY_POSTPONED,
-    DISMISSAL,
-    WORK_TRANSFER,
-    EXTRA_HOLIDAY_COLL,
-    HOLIDAY_PLANNING,
-    HOLIDAY_WORK,
+    BUFFER_DISMISSAL,
+    BUFFER_PARTTIME_EMPLOYMENT,
+    BUFFER_HOLIDAY_POSTPONED,
+    BUFFER_WORK_TRANSFER,
+    BUFFER_EXTRA_HOLIDAY_COLL,
+    BUFFER_HOLIDAY_PLANNING,
+    BUFFER_HOLIDAY_WORK,
+    DATA_VERIFICATION_ROUTE,
+    CONTACT_INFO_ACTUALIZATION,
 } from '@app/routes/teacher-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
@@ -34,6 +36,8 @@ const getTeachersSectionLinks = () => {
         {
             title: 'Цифровые сервисы',
             links: [
+                { link: CONTACT_INFO_ACTUALIZATION, title: 'Актуализация контактных данных' },
+                { link: DATA_VERIFICATION_ROUTE, title: 'Анкета для сверки данных' },
                 { link: ISSUANCE_OF_LICENSES, title: 'Выдача лицензий и свидетельств о государственной аккредитации' },
                 { link: GETTING_COMPUTER_EQUIPMENT, title: 'Получение нового компьютерного оборудования' },
                 { link: CONNECTING_COMPUTER, title: 'Подключение компьютера, МФУ, телефона, WiFi' },
@@ -91,16 +95,26 @@ const getTeachersHRSectionLinks = () => {
         {
             title: '',
             links: [
-                { link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
-                { link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
-                { link: DISMISSAL, title: 'Заявление на увольнение' },
-                { link: HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
-                { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
-                { link: WORK_TRANSFER, title: 'Заявление на перевод' },
+                // { link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
+                // { link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
+                { link: BUFFER_PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
+                { link: BUFFER_HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
+                { link: BUFFER_DISMISSAL, title: 'Заявление на увольнение' },
+                { link: BUFFER_HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
+                { link: BUFFER_HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
+                { link: BUFFER_WORK_TRANSFER, title: 'Заявление на перевод' },
                 {
-                    link: EXTRA_HOLIDAY_COLL,
+                    link: BUFFER_EXTRA_HOLIDAY_COLL,
                     title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
                 },
+                //{ link: DISMISSAL, title: 'Заявление на увольнение' },
+                // { link: HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
+                // { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
+                // { link: WORK_TRANSFER, title: 'Заявление на перевод' },
+                // {
+                //     link: EXTRA_HOLIDAY_COLL,
+                //     title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
+                // },
             ],
         },
     ]

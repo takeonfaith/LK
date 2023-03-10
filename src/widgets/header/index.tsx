@@ -7,7 +7,7 @@ import { useHistory } from 'react-router'
 const Header = () => {
     const history = useHistory()
     return (
-        <List direction="horizontal" width="100%" padding="10px 40px">
+        <List direction="horizontal" width="100%" padding="5px 40px">
             <Button icon={<FaChevronLeft />} onClick={() => history.goBack()} background="transparent" />
             <Button icon={<FaChevronRight />} onClick={() => history.goForward()} background="transparent" />
         </List>

@@ -29,7 +29,7 @@ interface Props {
 const AdminLinksTemplate = ({ title, links }: Props) => {
     const [dates, setDates] = useState(['', ''])
     const [validDates, setValidDates] = useState(true)
-    const { data } = adminLinksModel.selectors.useAdminLinks()
+    const { data } = adminLinksModel.selectors.useData()
     return !!data ? (
         <AdminLinksTemplateWrapper>
             <Title size={3} align="left" bottomGap>

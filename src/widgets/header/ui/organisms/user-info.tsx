@@ -1,9 +1,8 @@
+import { contextMenuModel } from '@entities/context-menu'
 import { userModel } from '@entities/user'
 import createFullName from '@features/home/lib/create-full-name'
 import Avatar from '@features/home/ui/molecules/avatar'
-import { ContextMenu } from '@ui/atoms'
-import useOnClickOutside from '@utils/hooks/use-on-click-outside'
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 import styled from 'styled-components'
 import { SkeletonLoading, HeaderContextMenu } from '../molecules/'
@@ -34,13 +33,15 @@ const UserInfo = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const [isVisible, setIsVisible] = useState(false)
 
     const userInfoRef = useRef<HTMLDivElement>(null)
-    useOnClickOutside(userInfoRef, () => setIsVisible(false))
 
-    const handleVisible = () => {
-        setIsVisible((prev) => !prev)
+    const handleVisible = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        contextMenuModel.events.open({
+            e,
+            content: <HeaderContextMenu />,
+            height: 200,
+        })
     }
 
     return !!user ? (
@@ -55,9 +56,6 @@ const UserInfo = () => {
                 />
                 <FiChevronDown />
             </div>
-            <ContextMenu isVisible={isVisible}>
-                <HeaderContextMenu />
-            </ContextMenu>
         </UserInfoWrapper>
     ) : (
         <SkeletonLoading />

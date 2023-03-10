@@ -1,10 +1,7 @@
-import { VALID_FORMATS } from '@consts'
+import { FileFormats, VALID_FORMATS } from '@consts'
 
-const validateFile = (file: File) => {
-    if (VALID_FORMATS.indexOf(file.type) === -1) {
-        return false
-    }
-    return true
+const validateFile = (file: File, allowedTypes?: FileFormats) => {
+    return (allowedTypes ?? VALID_FORMATS).indexOf(file.type as typeof VALID_FORMATS[number]) !== -1
 }
 
 export default validateFile

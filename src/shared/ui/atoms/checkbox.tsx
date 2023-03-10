@@ -8,6 +8,8 @@ const CheckboxWrapper = styled.div<{
     invisibleOnFalse: boolean
     checked: boolean
     isActive: boolean
+    fontSize?: string
+    color?: string
 }>`
     transition: 0.1s;
     opacity: ${({ invisibleOnFalse, checked }) => (invisibleOnFalse ? (checked ? 1 : 0) : 1)};
@@ -15,13 +17,16 @@ const CheckboxWrapper = styled.div<{
     display: flex;
     align-items: center;
     opacity: ${({ isActive }) => !isActive && 0.7};
+
     .checkbox-text {
         user-select: none;
         white-space: pre-wrap;
+        font-size: ${({ fontSize }) => fontSize ?? '1rem'};
+        margin-left: 6px;
     }
 
     svg {
-        color: var(--reallyBlue);
+        color: ${({ color }) => color ?? 'var(--reallyBlue)'};
         background: var(--theme);
         border-radius: 100%;
         padding: 2px;
@@ -35,12 +40,14 @@ export interface CheckboxProps {
     text?: string
     isActive?: boolean
     visible?: boolean
+    fontSize?: string
 }
 
 const Checkbox = ({
     text,
     checked,
     setChecked,
+    fontSize,
     visible = true,
     isActive = true,
     invisibleOnFalse = false,
@@ -51,6 +58,7 @@ const Checkbox = ({
         <CheckboxWrapper
             checked={checked}
             invisibleOnFalse={invisibleOnFalse}
+            fontSize={fontSize}
             onClick={() => {
                 isActive && setChecked(!checked)
             }}

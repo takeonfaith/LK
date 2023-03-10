@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 const Subtext = styled.span<{ width?: string; maxWidth?: string; visible?: boolean; fontSize?: string; align?: Align }>`
     width: ${({ width }) => width ?? 'fit-content'};
+    min-width: ${({ width }) => width ?? 'fit-content'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'fit-content'};
     font-size: ${({ fontSize }) => fontSize ?? '0.8em'};
     font-weight: 500;

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import styled from 'styled-components'
-import SwitchToggle from '../molecules/switch-toggle'
+import ToggleItem from '../toggle-item'
 
 export interface ToggleItem {
     title: string
@@ -21,35 +21,12 @@ const Wrapper = styled.div`
     }
 `
 
-const ToggleItemBlock = styled.div`
-    padding: 7px 10px;
-    margin: 5px 0;
-    border-radius: var(--brLight);
-
-    & > label {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        user-select: none;
-        cursor: pointer;
-
-        h4 {
-            color: var(--grey);
-            font-weight: 600;
-        }
-    }
-
-    &:hover {
-        background: var(--mild-theme);
-    }
-`
-
 const ToggleArea = ({ title, toggles, setToggles }: Props) => {
     const handleChange = useCallback(
-        (id: number) => {
+        (id: number, action?: (state: boolean) => void) => {
             toggles[id].state = !toggles[id].state
             setToggles([...toggles])
+            action && action?.(toggles[id].state)
         },
         [toggles, setToggles],
     )
@@ -58,22 +35,7 @@ const ToggleArea = ({ title, toggles, setToggles }: Props) => {
         <Wrapper>
             {!!title.length && <h2>{title}</h2>}
             {toggles.map(({ title, state, action }, i) => {
-                return (
-                    <ToggleItemBlock key={title}>
-                        <label>
-                            <h4>{title}</h4>
-                            <SwitchToggle
-                                id={title}
-                                isToggled={state}
-                                setIsToggled={() => {
-                                    handleChange(i)
-                                    action && action(!state)
-                                }}
-                                key={title}
-                            />
-                        </label>
-                    </ToggleItemBlock>
-                )
+                return <ToggleItem key={title} title={title} state={state} action={() => handleChange(i, action)} />
             })}
         </Wrapper>
     )

@@ -1,12 +1,14 @@
+import Subtext from '@shared/ui/subtext'
 import { FileInputProps } from '@ui/file-input'
 import React, { useRef, useState } from 'react'
-import { FiUploadCloud } from 'react-icons/fi'
+import { FcFolder } from 'react-icons/fc'
+import getFormatName from './lib/get-format-name'
 import loadFiles from './lib/load-files'
 import DragAndDropAreaWrapper from './style'
 
 type Props = FileInputProps
 
-const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
+const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, formats }: Props) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
 
@@ -14,7 +16,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
         const loadedFiles = e.target.files as FileList
 
         if (loadedFiles?.length) {
-            setFiles(loadFiles(loadedFiles, files, maxFiles))
+            setFiles(loadFiles(loadedFiles, files, maxFiles, formats))
         }
     }
 
@@ -28,7 +30,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
         const loadedFiles = e.dataTransfer.files
 
         if (loadedFiles.length) {
-            setFiles(loadFiles(loadedFiles, files, maxFiles))
+            setFiles(loadFiles(loadedFiles, files, maxFiles, formats))
         }
     }
 
@@ -51,15 +53,18 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive }: Props) => {
             onDrop={(e) => isActive && handleDrop(e)}
             topPadding={!!maxFiles}
         >
-            <div className="info">
-                <span className="info-item">Макс. размер файла: 10 MB</span>
-                {maxFiles && <span className="info-item">Макс. файлов: {maxFiles}</span>}
-                <span className="info-item">Форматы: jpg, png, pdf</span>
-            </div>
             <input type="file" name="" id="" ref={fileInputRef} onChange={filesSelectedHandle} />
             <div className="message">
-                <FiUploadCloud />
+                <FcFolder className="front-icon" />
+                <div className="icons-behind">
+                    <FcFolder className="icon-1" />
+                    <FcFolder className="icon-2" />
+                </div>
                 <b>Нажмите сюда или перетащите файл</b>
+                <Subtext align="center">
+                    Форматы: {!formats ? 'jpg, png, pdf' : formats.map((t) => getFormatName(t)).join(', ')} • Макс.
+                    файлов: {maxFiles}
+                </Subtext>
             </div>
         </DragAndDropAreaWrapper>
     )

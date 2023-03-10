@@ -7,10 +7,9 @@ export const get = (): Promise<AxiosResponse<Feedback, any>> => {
     })
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const post = (body: FormFeedback): Promise<AxiosResponse<EmptyObject, any>> => {
     return new Promise((resolve) => {
-        // eslint-disable-next-line no-console
-        console.log(body)
         setTimeout(() => resolve({} as AxiosResponse<EmptyObject, any>), 1000)
     })
 }

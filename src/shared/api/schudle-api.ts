@@ -1,8 +1,8 @@
 import { $api } from '@api/config'
 import token from '@utils/token'
 
-export const get = () => {
-    return $api.get(`?getSchedule&token=${token()}`)
+export const get = (group: string) => {
+    return $api.get(`?getSchedule&group=${group}&token=${token()}`)
 }
 
 export const getTeachers = (fullName: string) => {

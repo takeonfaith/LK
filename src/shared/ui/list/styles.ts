@@ -17,12 +17,19 @@ export interface StyleProps {
     fontSize?: string
     scroll?: boolean
     wrap?: boolean
+    position?: string
     wrapOnMobile?: boolean
 }
 
-export const Wrapper = styled.div<{ padding?: string; width?: string; minWidth?: string; height?: string }>`
+export const Wrapper = styled.div<{
+    padding?: string
+    width?: string
+    minWidth?: string
+    height?: string
+    position?: string
+}>`
     padding: ${({ padding }) => padding ?? '0'};
-    position: relative;
+    position: ${({ position }) => position ?? 'relative'};
     width: ${({ width }) => width ?? '100%'};
     height: ${({ height }) => height ?? 'fit-content'};
     min-width: ${({ minWidth }) => minWidth};
@@ -36,7 +43,18 @@ export const Wrapper = styled.div<{ padding?: string; width?: string; minWidth?:
     }
 `
 
-export const ListWrapper = styled.div<StyleProps>`
+const styledPropsArray: Array<keyof StyleProps> = [
+    'wrap',
+    'horizontalAlign',
+    'verticalAlign',
+    'innerPadding',
+    'scroll',
+    'wrapOnMobile',
+]
+
+export const ListWrapper = styled.div.withConfig({
+    shouldForwardProp: (prop) => !styledPropsArray.includes(prop as keyof StyleProps),
+})<StyleProps>`
     display: flex;
     flex-direction: ${({ direction }) => (direction ?? 'vertical') === 'vertical' && 'column'};
     max-height: 100%;

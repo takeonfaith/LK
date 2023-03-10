@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { globalAppSendForm } from '@pages/applications/lib'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'

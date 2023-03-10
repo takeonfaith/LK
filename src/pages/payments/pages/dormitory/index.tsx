@@ -8,40 +8,35 @@ import {
     PaymentsInfo,
 } from '@features/payments'
 import getDormitoryPaygraphColumns from '@pages/payments/lib/get-dormitory-paygraph-columns'
-import { Divider, Message, Title } from '@ui/atoms'
-import { LinkButton } from '@ui/atoms'
+import { Divider, LinkButton, Message, Title } from '@ui/atoms'
 import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import { FiDownload, FiInfo } from 'react-icons/fi'
-import { userModel } from '@entities/user'
 
 const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
-    const { data: dataUser } = userModel.selectors.useUser()
 
     if (!data?.dormitory) return null
-
-    if (dataUser?.user && +dataUser.user.course === 1) {
-        return (
-            <Message type="failure" title="Внимание!" align={'center'} width={'400'}>
-                Отображение информации об оплатах для учащихся первых курсов временно недоступно.
-            </Message>
-        )
-    }
 
     return (
         <PageWrapper>
             {data.dormitory.map((dormitory, i) => {
                 return (
                     <React.Fragment key={dormitory.number}>
-                        <Message type="info" title="Информация" icon={<FiInfo />}>
-                            По возникновении технических проблем при подписании договоров и дополнительных соглашений в
-                            Личном кабинете просим обращаться на почту{' '}
-                            <a href="mailto:info@mospolytech.ru">info@mospolytech.ru</a>
+                        <Message type="info" title="Информация" icon={<FiInfo />} gap="12px" maxWidth="1190px">
+                            <p>
+                                По возникновении технических проблем при подписании договоров и дополнительных
+                                соглашений в Личном кабинете просим обращаться на почту{' '}
+                                <a href="mailto:info@mospolytech.ru">info@mospolytech.ru</a>
+                            </p>
+                            <p>
+                                Обращаем Ваше внимание на то, что произведенная оплата отображается в этом разделе не
+                                сразу, а обычно в течение 3-4 дней со дня платежа.
+                            </p>
                         </Message>
                         <div className="blocks-wrapper" key={i}>
-                            <Block orientation="vertical" maxWidth="800px">
+                            <Block orientation="vertical" maxWidth="800px" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap>
                                     Оплата за общежитие
                                 </Title>
@@ -49,7 +44,6 @@ const DormitoryPayments = () => {
                                     <PaymentList payments={dormitory?.payments ?? []} />
                                     <PaymentsInfo
                                         balanceCurrDate={getCorrectNumberFormat(dormitory?.balance_currdate ?? '0')}
-                                        monthly={650}
                                         bill={dormitory?.bill}
                                         startDate={dormitory?.startDate}
                                         endDate={dormitory?.endDatePlan}
@@ -64,7 +58,7 @@ const DormitoryPayments = () => {
                                     />
                                 </div>
                             </Block>
-                            <Block orientation="vertical" maxWidth="380px">
+                            <Block orientation="vertical" maxWidth="380px" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap width="100%">
                                     Реквизиты договора
                                     <LinkButton
@@ -78,7 +72,7 @@ const DormitoryPayments = () => {
                             </Block>
                         </div>
                         <div className="blocks-wrapper">
-                            <Block orientation="vertical" maxWidth="1190px" height="fit-content">
+                            <Block orientation="vertical" maxWidth="1190px" height="fit-content" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap>
                                     График платежей
                                 </Title>
@@ -90,7 +84,12 @@ const DormitoryPayments = () => {
                         </div>
                         {!!dormitory.agreements && !!dormitory.agreements.length && (
                             <div className="blocks-wrapper">
-                                <Block orientation="vertical" maxWidth="1190px" height="fit-content">
+                                <Block
+                                    orientation="vertical"
+                                    maxWidth="1190px"
+                                    height="fit-content"
+                                    noAppearanceInMobile
+                                >
                                     <Title size={2} align="left" bottomGap>
                                         Доп. соглашение
                                     </Title>

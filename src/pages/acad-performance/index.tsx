@@ -37,7 +37,7 @@ const AcadPerformanceWrapper = styled.div`
 `
 
 const AcadPerformance = () => {
-    const { data, loading, error } = acadPerformanceModel.selectors.useAcadPerformance()
+    const { data, loading, error } = acadPerformanceModel.selectors.useData()
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -51,7 +51,7 @@ const AcadPerformance = () => {
     // const [sortDesc, setSortDesc] = useState<boolean>(true)
 
     useEffect(() => {
-        acadPerformanceModel.effects.getAcadPerformanceFx({
+        acadPerformanceModel.effects.getFx({
             semestr: `${selected?.id !== -1 ? selected?.id : ''}`,
         })
     }, [selected])
@@ -60,7 +60,7 @@ const AcadPerformance = () => {
         <Wrapper
             loading={loading}
             load={() =>
-                acadPerformanceModel.effects.getAcadPerformanceFx({
+                acadPerformanceModel.effects.getFx({
                     semestr: `${selected?.id !== -1 ? selected?.id : ''}`,
                 })
             }

@@ -8,19 +8,24 @@ import useModal from 'widgets/modal'
 const PlateWrapper = styled.div<{ color?: keyof IColors }>`
     display: flex;
     align-items: center;
+    flex-direction: column;
     padding: 15px 20px;
-    width: 100%;
+    width: calc(50% - 5px);
+    gap: 10px;
+    text-align: center;
     color: ${({ color }) => (color ? Colors[color].main : 'var(--text)')};
-    border-radius: var(--brSemi);
-    background: ${({ color }) => (color ? Colors[color].transparentAF : 'var(--almostTransparent)')};
+    border-radius: var(--brLight);
 
     .title {
+        height: 40px;
         font-weight: 700;
+        color: var(--text);
     }
 
     a {
         text-decoration: none;
         color: var(--text);
+        width: 100%;
     }
 
     .icon {
@@ -32,8 +37,7 @@ const PlateWrapper = styled.div<{ color?: keyof IColors }>`
         align-items: center;
         justify-content: center;
         border-radius: 100%;
-        background: ${({ color }) => (color ? Colors[color].transparent : 'var(--almostTransparent)')};
-        margin-right: 10px;
+        background: var(--almostTransparent);
 
         svg {
             width: 20px;
@@ -58,7 +62,7 @@ const Plate = ({ icon, title, color, goTo, visible = true }: WhatsNewPlate) => {
             <span className="title">{title}</span>
             {!!goTo && (
                 <Link to={goTo}>
-                    <Button text="Перейти" onClick={close} background="var(--almostTransparent)" />
+                    <Button text="Перейти" onClick={close} background="var(--almostTransparent)" width="100%" />
                 </Link>
             )}
         </PlateWrapper>

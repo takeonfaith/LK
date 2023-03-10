@@ -1,59 +1,67 @@
-import Avatar from '@features/home/ui/molecules/avatar'
+import UserHeader from '@shared/ui/user-header'
 import React from 'react'
 import styled from 'styled-components'
+import { UserProps } from 'widgets/user/types'
 
-const TeacherModalWrapper = styled.div`
+const UserModalWrapper = styled.div`
     @media (min-width: 1001px) {
-        width: 280px;
-        height: 230px;
+        width: 330px;
+        height: fit-content;
+        min-height: 120px;
     }
 
     display: flex;
-    justify-content: center;
     align-items: center;
     height: inherit;
     min-height: inherit;
     flex-direction: column;
-
-    .teacher {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-
-        & > b {
-            margin-top: 10px;
-        }
-    }
 
     .buttons {
         margin-top: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
+        width: 100%;
+        gap: 4px;
 
-        & > * + * {
-            margin-left: 7px;
+        a {
+            width: 100%;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .user {
+            .info b {
+                width: 90%;
+                height: 35px;
+            }
+            &::before {
+                height: 110px;
+            }
         }
     }
 `
 
-interface Props {
-    avatar?: string
-    name: string
-    children: ChildrenType
-}
+type Props = Pick<
+    UserProps,
+    'finance' | 'educationForm' | 'degreeLevel' | 'course' | 'group' | 'type' | 'division' | 'isMe' | 'avatar' | 'name'
+>
 
-const UserModal = ({ avatar, name, children }: Props) => {
+const UserModal = (
+    props: Props & {
+        children: ChildrenType
+    },
+) => {
+    const { children } = props
     return (
-        <TeacherModalWrapper>
-            <div className="teacher">
-                <Avatar name={name} avatar={avatar} width="110px" height="110px" marginRight="0" />
-                <b>{name}</b>
-            </div>
+        <UserModalWrapper>
+            <UserHeader {...props} />
             <div className="buttons">{children}</div>
-        </TeacherModalWrapper>
+        </UserModalWrapper>
     )
 }
 

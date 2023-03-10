@@ -44,7 +44,7 @@ const CircleWrapper = styled.div<StyledProps & HiddenProps>`
             current ? `var(--reallyBlue)` : reached ? Colors.green.main : Colors.grey.main};
         outline: 6px solid
             ${({ reached, current }) =>
-                current ? Colors.blue.transparentAF : reached ? Colors.green.transparentAF : Colors.grey.transparentAF};
+                current ? Colors.blue.transparent3 : reached ? Colors.green.transparent3 : Colors.grey.transparent3};
         margin: 6px;
         border-radius: 100%;
         display: flex;

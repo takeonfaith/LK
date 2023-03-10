@@ -16,7 +16,7 @@ const HintModalWrapper = styled.div<{ open: boolean; left: number; top: number }
     align-items: flex-end;
     flex-direction: column;
     max-width: 300px;
-    box-shadow: 0 0 30px ${Colors.blue.transparent};
+    box-shadow: 0 0 30px ${Colors.blue.transparent3};
     transition: 0.2s;
     opacity: ${({ open }) => (open ? 1 : 0)};
     visibility: ${({ open }) => (open ? 'visible' : 'hidden')};

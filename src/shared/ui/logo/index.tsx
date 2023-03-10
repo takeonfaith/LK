@@ -5,11 +5,13 @@ import { LogoWrapper } from './styles'
 
 interface Props {
     short?: boolean
+    width?: string
+    className?: string
 }
 
-export function Logo({ short = false }: Props) {
+export function Logo({ width, className, short = false }: Props) {
     return (
-        <LogoWrapper>
+        <LogoWrapper width={width} className={className ?? 'logo'}>
             <img src={!short ? LogoPicture : LogoShort} alt="Logo" />
         </LogoWrapper>
     )

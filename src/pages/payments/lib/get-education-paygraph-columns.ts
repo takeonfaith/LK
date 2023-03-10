@@ -1,5 +1,7 @@
 import { ColumnProps } from '@ui/table/types'
 
+import renderPayStatus from './render-pay-status'
+
 const getEducationPaygraphColumns = (): ColumnProps[] => {
     return [
         {
@@ -10,39 +12,18 @@ const getEducationPaygraphColumns = (): ColumnProps[] => {
         {
             title: 'Семестр',
             field: 'semestr',
-            priority: 'five',
             width: '110px',
             sort: true,
         },
         {
-            title: 'Дата начала',
-            field: 'date_start',
-            type: 'date',
-            priority: 'five',
-        },
-        {
-            title: 'План. дата окончания',
+            title: 'Оплатить до',
             field: 'date_plan',
             type: 'date',
-            priority: 'six',
         },
         {
-            title: 'Дата окончания',
-            field: 'date_end',
-            type: 'date',
-            priority: 'five',
-        },
-        {
-            title: 'Cумма к оплате',
-            field: 'sum',
-            type: 'rub',
-            priority: 'three',
-        },
-        {
-            title: 'Оплачено',
+            title: 'Статус',
             field: 'sum_pay',
-            type: 'rub',
-            priority: 'two',
+            render: renderPayStatus,
         },
     ]
 }

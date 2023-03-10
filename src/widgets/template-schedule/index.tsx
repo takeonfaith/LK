@@ -1,18 +1,24 @@
 import { IModules, ISchedule, ViewType } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
+import retakeRoutes from '@features/schedule/config'
 import getSessionStats from '@features/schedule/lib/get-session-stats'
 import {
     ScheduleViewButtonsList,
-    TeacherScheduleIndicator,
+    FilterScheduleIndicator,
     WeekDayButtonsList,
     WeekSchedule,
 } from '@features/schedule/ui'
 import ExamStats from '@features/schedule/ui/atoms/exam-stats'
 import RetakeSchedule from '@features/schedule/ui/organisms/retake-schedule'
 import SessionSchedule from '@features/schedule/ui/organisms/session-schedule'
+import SearchWithHints from '@features/search-with-hints'
+import { getGroups } from '@shared/api/student-api'
+import Masks from '@shared/lib/masks'
+import { Hint } from '@shared/ui/search'
 import { Wrapper } from '@ui/atoms'
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
+import { FiUsers } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Slider } from 'widgets'
 
@@ -40,18 +46,31 @@ const SchedulePageContent = styled.div`
 
 interface Props {
     teacherName?: string
+    group?: string
     data: ISchedule
     loading: boolean
     error: string | null
 }
 
-const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
+const TemplateSchedule = ({ teacherName, group, data, loading, error }: Props) => {
     const { schedule, currentModule, view } = data
     const {
         data: { user },
     } = userModel.selectors.useUser()
 
     const wrapperRef = useRef<HTMLDivElement>(null)
+
+    const [groupSearch, setGroupSearch] = useState(user?.group ?? '')
+
+    const showGroupSearch = user?.user_status === 'stud' && !teacherName && !group
+
+    const onHintClick = (hint: Hint | undefined) => {
+        scheduleModel.effects.getScheduleFx({ user, group: hint?.value ?? '' })
+    }
+
+    const onValueEmpty = () => {
+        scheduleModel.effects.getScheduleFx({ user, group: '' })
+    }
 
     const pages = useMemo(() => {
         return (
@@ -62,14 +81,19 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                     <ExamStats {...getSessionStats(schedule['2'])} />
                     <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['2']} />
                 </React.Fragment>,
-                <RetakeSchedule key={3} />,
+                <RetakeSchedule links={retakeRoutes} key={3} />,
             ]
         )
     }, [schedule, view])
 
     return (
-        <Wrapper loading={loading} load={() => scheduleModel.effects.getScheduleFx(user)} error={error} data={schedule}>
-            {!!schedule ? (
+        <Wrapper
+            loading={loading}
+            load={() => scheduleModel.effects.getScheduleFx({ user, group: user?.group ?? '' })}
+            error={error}
+            data={schedule}
+        >
+            {
                 <SchedulePageContent>
                     <div className="slider-wrapper">
                         <Slider
@@ -77,15 +101,15 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                             pages={[
                                 {
                                     title: 'Текущая неделя',
-                                    condition: !!schedule['0'],
+                                    condition: !!schedule?.['0'],
                                 },
                                 {
                                     title: 'Весь семестр',
-                                    condition: !!schedule['1'],
+                                    condition: !!schedule?.['1'],
                                 },
                                 {
                                     title: 'Сессия',
-                                    condition: !!schedule['2'],
+                                    condition: !!schedule?.['2'],
                                 },
                                 {
                                     title: 'Пересдачи',
@@ -106,19 +130,27 @@ const TemplateSchedule = ({ teacherName, data, loading, error }: Props) => {
                                 view={view}
                                 setView={(view: ViewType) => scheduleModel.events.changeView({ view })}
                             />
-                            {/*<Input*/}
-                            {/*    value={value}*/}
-                            {/*    setValue={setValue}*/}
-                            {/*    placeholder="Номер группы"*/}
-                            {/*    leftIcon={!!value.length ? <FiUsers /> : <FiSearch />}*/}
-                            {/*/>*/}
+                            {showGroupSearch && (
+                                <SearchWithHints
+                                    value={groupSearch}
+                                    setValue={setGroupSearch}
+                                    onHintClick={onHintClick}
+                                    placeholder={'Группа'}
+                                    customMask={Masks.groupMask}
+                                    request={getGroups}
+                                    leftIcon={<FiUsers />}
+                                    onValueEmpty={user?.user_status === 'staff' ? onValueEmpty : undefined}
+                                />
+                            )}
                         </div>
                     )}
-                    {teacherName && <TeacherScheduleIndicator fio={teacherName} />}
+                    {(teacherName || group) && (
+                        <FilterScheduleIndicator filter={teacherName ?? group ?? ''} isGroup={!!group} />
+                    )}
                     {currentModule !== '3' && <WeekDayButtonsList wrapperRef={wrapperRef} data={data} />}
                     {!!pages && pages[currentModule as keyof IModules]}
                 </SchedulePageContent>
-            ) : null}
+            }
         </Wrapper>
     )
 }

@@ -9,7 +9,7 @@ const getDaysColor = (day: string) => {
     if (daysLeft < 0) return Colors.blue.main
     if (daysLeft < 1) return Colors.pink.main
     if (daysLeft < 2) return Colors.red.main
-    if (daysLeft < 5) return Colors.yellow.main
+    if (daysLeft < 5) return Colors.orange.main
     return Colors.green.main
 }
 

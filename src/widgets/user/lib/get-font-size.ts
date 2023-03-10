@@ -5,7 +5,7 @@ const getFontSize = (size: Size) => {
         case 'small':
             return '0.65em'
         case 'middle':
-            return '0.85em'
+            return '0.77em'
         default:
             return '1em'
     }

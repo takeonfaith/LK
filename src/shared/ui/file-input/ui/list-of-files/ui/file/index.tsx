@@ -28,27 +28,23 @@ const File = ({ file, files, setFiles }: Props) => {
             reader.readAsDataURL(file)
         }
     }
+
+    const handleRemove = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+        confirmModel.events.evokeConfirm({
+            message: 'Вы уверены, что хотите удалить файл?',
+            onConfirm: () => setFiles(removeFile(e, file.name, files)),
+        })
+
     return (
         <FileWrapper onClick={(e) => e.preventDefault()}>
             <div className="file-body" onClick={(e) => file.type.includes('image') && handleOpenPreview(e, file)}>
-                {file.type.includes('image') ? <FcLandscape /> : <FcFile />}
+                <div className="image-container">{file.type.includes('image') ? <FcLandscape /> : <FcFile />}</div>
                 <div className="name-and-size">
                     <b className="file-name">{file.name}</b>
                     <Subtext fontSize="0.7em">{getFileSize(file.size)}</Subtext>
                 </div>
             </div>
-            <Button
-                icon={<FiX />}
-                height="30px"
-                width="30px"
-                background="transparent"
-                onClick={(e) =>
-                    confirmModel.events.evokeConfirm({
-                        message: 'Вы уверены, что хотите удалить файл?',
-                        onConfirm: () => setFiles(removeFile(e, file.name, files)),
-                    })
-                }
-            />
+            <Button icon={<FiX />} height="30px" width="30px" background="transparent" onClick={handleRemove} />
         </FileWrapper>
     )
 }

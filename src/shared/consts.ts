@@ -6,7 +6,7 @@ import { HiOutlineLightBulb } from 'react-icons/hi'
 
 export type MenuType = string[]
 export type ShortCutLinksType = number[]
-export type ThemeType = string
+export type ThemeType = 'dark' | 'light'
 export type GeneralType = {
     [key: string]: boolean
 }
@@ -14,6 +14,9 @@ export type GeneralType = {
 export interface IDefaultSettings {
     [key: string]: MenuType | ThemeType | GeneralType | ShortCutLinksType
 }
+
+export const DEFAULT_API_LOAD_ERROR_MESSAGE =
+    'Не удалось загрузить информацию. Проверьте соединение и попробуйте ещё раз'
 
 export const SHORT_CUT_LINKS_LIMIT_SIZE = 4
 
@@ -40,173 +43,149 @@ export interface IColors {
     green: IColorPalette
     lightGreen: IColorPalette
     blue: IColorPalette
-    darkBlue: IColorPalette
+    lightBlue: IColorPalette
     purple: IColorPalette
     pink: IColorPalette
     red: IColorPalette
-    yellow: IColorPalette
     orange: IColorPalette
     grey: IColorPalette
     white: IColorPalette
 }
 
 export interface IColorPalette {
+    dark3: string
+    dark2: string
+    dark1: string
     main: string
-    transparent: string
-    lighter: string
-    darker: string
-    littleDarker: string
-    light: string
-    dark: string
-    darkTransparent: string
-    lightTransparent: string
-    reallyTransparent: string
-    transparentAF: string
+    light1: string
+    light2: string
+    light3: string
+    transparent1: string
+    transparent2: string
+    transparent3: string
 }
 
 export const Colors: IColors = {
     green: {
+        dark3: '#106c3f',
+        dark2: '#188851',
+        dark1: '#27b56e',
         main: '#3cd288',
-        transparent: 'rgba(64, 197, 197, .3)',
-        lighter: '#3cd2d2',
-        darker: '#258787',
-        littleDarker: '#27b56e',
-        light: '',
-        dark: '#2a4f2f',
-        reallyTransparent: '',
-        darkTransparent: '#166c217a',
-        transparentAF: '#3cd2881a',
-        lightTransparent: '#9fe4a982',
+        light1: '#59e5a0',
+        light2: '#84ebb7',
+        light3: '#a8ffd3',
+        transparent1: '#a7ffd38a',
+        transparent2: '#a7ffd324',
+        transparent3: '#a7ffd30f',
     },
     lightGreen: {
-        main: 'rgb(64, 197, 197)',
-        transparent: 'rgba(64, 197, 197, .3)',
-        lighter: '#3cd2d2',
-        darker: '#258787',
-        light: 'rgba(105, 205, 145, 0.5)',
-        dark: '#216666',
-        reallyTransparent: '',
-        darkTransparent: '',
-        transparentAF: '',
-        lightTransparent: '',
-        littleDarker: '',
+        dark3: '#166363',
+        dark2: '#207878',
+        dark1: '#2e9b9b',
+        main: '#40c5c5',
+        light1: '#66dfdf',
+        light2: '#8bf1f1',
+        light3: '#a3fbfb',
+        transparent1: '#a3fbfb99',
+        transparent2: '#a3fbfb59',
+        transparent3: '#a3fbfb29',
     },
     blue: {
-        main: 'rgb(95, 109, 236)',
-        transparent: 'rgba(95, 109, 236, .3)',
-        lighter: '#7884ec',
-        darker: '#414ca8',
-        light: '#4a93ff',
-        dark: '#3f457f',
-        reallyTransparent: '#6a8dff30',
-        darkTransparent: '',
-        transparentAF: '#6a8dff12',
-        lightTransparent: '#567dff47',
-        littleDarker: '#3737b3',
+        dark3: '#29349c',
+        dark2: '#3742b1',
+        dark1: '#4552c9',
+        main: '#5f6dec',
+        light1: '#7c88f5',
+        light2: '#99a3ff',
+        light3: '#bac0ff',
+        transparent1: '#bac0ffa3',
+        // aaaaaaaaaaaaaaaaaaaaaaaaaa i love maria))))for real what competetive adv
+        transparent2: '#bac0ff42',
+        transparent3: '#bac0ff17',
     },
-    darkBlue: {
+    lightBlue: {
+        dark3: '#5278cd',
+        dark2: '#668de4',
+        dark1: '#789ff6',
         main: '#9cbbff',
-        transparent: 'rgba(95, 109, 236, .3)',
-        lighter: '#7884ec',
-        darker: '#414ca8',
-        light: '',
-        dark: '#4c73ca',
-        reallyTransparent: '',
-        darkTransparent: '',
-        transparentAF: '',
-        lightTransparent: '',
-        littleDarker: '',
+        light1: '#b9cfff',
+        light2: '#ceddff',
+        light3: '#e0e9ff',
+        transparent1: '#e0e9ffba',
+        transparent2: '#e0e9ff6b',
+        transparent3: '#e0e9ff29',
     },
     purple: {
-        main: 'rgb(168, 95, 236)',
-        transparent: 'rgba(168, 95, 236, .3)',
-        lighter: '#d079ec',
-        darker: '#824eb2',
-        light: '#a87eee',
-        dark: '#7e3798',
-        reallyTransparent: '',
-        darkTransparent: '',
-        transparentAF: '#a85fec14',
-        lightTransparent: '',
-        littleDarker: '',
+        dark3: '#5b248d',
+        dark2: '#7434af',
+        dark1: '#8b4ac7',
+        main: '#a85fec',
+        light1: '#bd7cfa',
+        light2: '#ce99ff',
+        light3: '#dcb7ff',
+        transparent1: '#dcb7ff99',
+        transparent2: '#dcb7ff5c',
+        transparent3: '#dcb7ff2b',
     },
     pink: {
-        main: 'rgb(236, 95, 182)',
-        transparent: 'rgba(236, 95, 182, .3)',
-        lighter: '#e06cb4',
-        darker: '#b24788',
-        light: '',
-        dark: '#842b62',
-        reallyTransparent: '',
-        darkTransparent: '',
-        transparentAF: '#ec5fb617',
-        lightTransparent: '',
-        littleDarker: '',
+        dark3: '#932066',
+        dark2: '#a62b77',
+        dark1: '#c34191',
+        main: '#ec5fb6',
+        light1: '#fd84cf',
+        light2: '#ffa8de',
+        light3: '#ffbce5',
+        transparent1: '#ffbce59e',
+        transparent2: '#ffbce561',
+        transparent3: '#ffbce530',
     },
     red: {
-        main: 'rgb(236, 95, 107)',
-        transparent: 'rgba(236, 95, 107, .3)',
-        lighter: '#f67b86',
-        darker: '#b63c46',
-        light: '',
-        dark: '#632d32',
-        littleDarker: '#b33b3b',
-        reallyTransparent: '',
-        darkTransparent: '#511a1ea3',
-        transparentAF: '#ec5f6b14',
-        lightTransparent: '#e2799273',
-    },
-    yellow: {
-        main: '#ee9e44',
-        transparent: 'rgba(236, 95, 107, .3)',
-        lighter: '#f67b86',
-        darker: '#b63c46',
-        light: '',
-        dark: '#632d32',
-        reallyTransparent: '',
-        darkTransparent: '#511a1ea3',
-        transparentAF: '',
-        lightTransparent: '',
-        littleDarker: '',
+        dark3: '#a3252f',
+        dark2: '#bf3641',
+        dark1: '#cf4b56',
+        main: '#ec5f6b',
+        light1: '#ff7b86',
+        light2: '#ff98a1',
+        light3: '#ffbbc1',
+        transparent1: '#ffbbc194',
+        transparent2: '#ffbbc159',
+        transparent3: '#ffbbc133',
     },
     orange: {
+        dark3: '#985e1d',
+        dark2: '#a76821',
+        dark1: '#ca8231',
         main: '#ee9e44',
-        transparent: '#ff520014',
-        lighter: '#ee9e44',
-        darker: '#ae4a1b',
-        light: '#ffd19d',
-        dark: '#e97944',
-        reallyTransparent: '',
-        darkTransparent: '#511a1ea3',
-        transparentAF: '#ee9e440f',
-        lightTransparent: '#ffd7a67d',
-        littleDarker: '#c75e1d',
+        light1: '#fcb566',
+        light2: '#ffc686',
+        light3: '#ffd7ab',
+        transparent1: '#ffd7ab99',
+        transparent2: '#ffd7ab54',
+        transparent3: '#ffd7ab1f',
     },
     grey: {
-        main: '#949494',
-        transparent: '',
-        lighter: '',
-        darker: '',
-        light: '',
-        dark: '',
-        reallyTransparent: '',
-        darkTransparent: '',
-        transparentAF: '#9494940d',
-        lightTransparent: '#80808014',
-        littleDarker: '',
+        dark3: '#353535',
+        dark2: '#484848',
+        dark1: '#646464',
+        main: '#797979',
+        light1: '#979797',
+        light2: '#bdbdbd',
+        light3: '#d5d5d5',
+        transparent1: '#d5d5d5a3',
+        transparent2: '#d5d5d559',
+        transparent3: '#d5d5d521',
     },
     white: {
+        dark3: '',
+        dark2: '',
+        dark1: '',
         main: '#fff',
-        transparent: '',
-        lighter: '',
-        darker: '',
-        light: '',
-        dark: '',
-        reallyTransparent: '',
-        darkTransparent: '',
-        transparentAF: '#ffffff17',
-        lightTransparent: '#80808014',
-        littleDarker: '',
+        light1: '',
+        light2: '',
+        light3: '',
+        transparent1: '',
+        transparent2: '#80808014',
+        transparent3: '#ffffff17',
     },
 }
 
@@ -239,18 +218,18 @@ export const ColorsByGrade = {
     Зачтено: Colors.green.main,
     Отлично: Colors.green.main,
     Хорошо: Colors.blue.main,
-    Удовлетворительно: Colors.yellow.main,
+    Удовлетворительно: Colors.orange.main,
     Неудовлетворительно: Colors.red.main,
     default: Colors.red.main,
 }
 
 export const WidthByGrade = {
-    Зачтено: '100%',
-    Отлично: '100%',
-    Хорошо: '80%',
-    Удовлетворительно: '60%',
-    Неудовлетворительно: '40%',
-    default: '40%',
+    Зачтено: 100,
+    Отлично: 100,
+    Хорошо: 80,
+    Удовлетворительно: 60,
+    Неудовлетворительно: 40,
+    default: 40,
 }
 
 export const GradeByScore: IGrade = {
@@ -263,15 +242,17 @@ export const GradeByScore: IGrade = {
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
-export const LastUpdateWhatsNew = '2022-05-19T10:30:00'
+export const LastUpdateWhatsNew = '2022-12-22T10:00:00'
 
-export const messageType: {
+type MessageTypeObj = {
     [key in MessageType]: {
         icon: IconType
         color: keyof IColors
         title: string
     }
-} = {
+}
+
+export const messageType: MessageTypeObj = {
     info: {
         icon: FiInfo,
         color: 'blue',
@@ -309,36 +290,39 @@ interface LetterColorMatch {
 }
 
 export const letterColorMatch: LetterColorMatch = {
+    '-': 'red',
     А: 'lightGreen',
     Б: 'purple',
     В: 'green',
     Г: 'pink',
-    Д: 'purple',
+    Д: 'blue',
     Е: 'blue',
     Ё: 'red',
     Ж: 'blue',
     З: 'lightGreen',
     И: 'pink',
+    Й: 'lightBlue',
     К: 'lightGreen',
     Л: 'green',
     М: 'red',
     Н: 'green',
     О: 'purple',
     П: 'blue',
-    Р: 'darkBlue',
+    Р: 'lightBlue',
     С: 'orange',
     Т: 'blue',
     У: 'lightGreen',
     Ф: 'blue',
     Х: 'green',
     Ч: 'purple',
+    Ц: 'green',
     Ш: 'red',
     Щ: 'red',
     Ъ: 'purple',
     Ы: 'green',
     Ь: 'blue',
     Э: 'red',
-    Ю: 'yellow',
+    Ю: 'orange',
     Я: 'green',
     A: 'lightGreen',
     B: 'purple',
@@ -356,7 +340,7 @@ export const letterColorMatch: LetterColorMatch = {
     N: 'green',
     O: 'purple',
     P: 'blue',
-    Q: 'darkBlue',
+    Q: 'lightBlue',
     R: 'orange',
     S: 'blue',
     T: 'lightGreen',
@@ -368,9 +352,15 @@ export const letterColorMatch: LetterColorMatch = {
     Z: 'purple',
 }
 
-export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf']
+export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
+export type FileFormats = typeof VALID_FORMATS[number][]
 
 export const MAX_FILE_SIZE = 11000000
+
+export const SCREEN_IPHONE_SE = '376px'
+export const SCREEN_IPHONE_12 = '391px'
+export const SCREEN_IPHONE_XR = '415px'
+export const SCREEN_IPAD_AIR = '821px'
 
 /**
  * @constant
@@ -378,4 +368,4 @@ export const MAX_FILE_SIZE = 11000000
  * @example
  * Component: () => isProduction ? PageIsNotReady : SettingsPage
  **/
-export const isProduction = (import.meta.env.VITE_BUILD_MODE as string)?.trimEnd() === 'PRODUCTION'
+export const isProduction = import.meta.env.MODE !== 'development'

@@ -1,3 +1,4 @@
+import React from 'react'
 import { applicationsModel } from '@entities/applications'
 import createApplicationSearch from '@features/applications/lib/create-application-search'
 import { getTeachersHRSectionLinks } from '@features/applications/lib/get-teachers-section-links'

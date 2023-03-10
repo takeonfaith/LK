@@ -1,16 +1,20 @@
+import React from 'react'
+import {
+    ALERTS_ROUTE,
+    ALL_STUDENTS_ROUTE,
+    ALL_TEACHERS_ROUTE,
+    PROJECT_ACTIVITIES_ROUTE,
+} from '@app/routes/general-routes'
+import { Colors } from '@consts'
+import { userModel } from '@entities/user'
 import { Button, Title } from '@ui/atoms'
 import { DotPages } from '@ui/molecules'
 import limitNumber from '@utils/limit-number'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import { WhatsNewTemplate } from './ui'
-import { BiNotification, BiRuble } from 'react-icons/bi'
-import { Colors } from '@consts'
-import { userModel } from '@entities/user'
-import { CONTACT_INFO_ACTUALIZATION, PERSONAL_NOTIFICATIONS } from '@app/routes/teacher-routes'
-import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { FiCheckSquare } from 'react-icons/fi'
+import { menuModel } from '@entities/menu'
 
 const WhatsNewWrapper = styled.div`
     display: flex;
@@ -46,24 +50,38 @@ const WhatsNew = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const { visibleRoutes } = menuModel.selectors.useMenu()
     const pages = [
         <WhatsNewTemplate
             key={0}
             list={[
-                { icon: <BiRuble />, title: 'В оплаты добавлен график платежей', color: 'pink', goTo: PAYMENTS_ROUTE },
                 {
-                    icon: <BiNotification />,
-                    title: 'Добавлен раздел Кадровые Уведомления',
-                    color: 'blue',
-                    visible: user?.user_status === 'staff',
-                    goTo: PERSONAL_NOTIFICATIONS,
+                    icon: visibleRoutes?.['all-students'].icon ?? '',
+                    title: visibleRoutes?.['all-students'].title ?? '',
+                    color: visibleRoutes?.['all-students'].color ?? 'blue',
+                    visible: true,
+                    goTo: ALL_STUDENTS_ROUTE,
                 },
                 {
-                    icon: <FiCheckSquare />,
-                    title: 'Добавлен раздел Актуализация контактных данных',
-                    color: 'green',
-                    visible: user?.user_status === 'staff',
-                    goTo: CONTACT_INFO_ACTUALIZATION,
+                    icon: visibleRoutes?.['all-teachers'].icon ?? '',
+                    title: visibleRoutes?.['all-teachers'].title ?? '',
+                    color: visibleRoutes?.['all-teachers'].color ?? 'blue',
+                    visible: true,
+                    goTo: ALL_TEACHERS_ROUTE,
+                },
+                {
+                    icon: visibleRoutes?.['project-activity'].icon ?? '',
+                    title: visibleRoutes?.['project-activity'].title ?? '',
+                    color: visibleRoutes?.['project-activity'].color ?? 'blue',
+                    visible: user?.user_status !== 'staff',
+                    goTo: PROJECT_ACTIVITIES_ROUTE,
+                },
+                {
+                    icon: visibleRoutes?.['alerts'].icon ?? '',
+                    title: visibleRoutes?.['alerts'].title ?? '',
+                    color: visibleRoutes?.['alerts'].color ?? 'blue',
+                    visible: true,
+                    goTo: ALERTS_ROUTE,
                 },
             ]}
         />,
@@ -86,7 +104,7 @@ const WhatsNew = () => {
                         onClick={close}
                         text="Готово"
                         width="100%"
-                        background={Colors.blue.light}
+                        background={Colors.blue.light1}
                         textColor="#fff"
                     />
                 ) : (

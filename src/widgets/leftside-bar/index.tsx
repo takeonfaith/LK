@@ -1,3 +1,4 @@
+import { HOME_ROUTE } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
 import { Logo } from '@ui/logo'
@@ -5,6 +6,7 @@ import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import UserBig from 'widgets/user-big'
 import { CloseMenuButton, LeftsideBarList, LeftsideBarWrapper } from './ui'
 
@@ -39,7 +41,9 @@ const LeftsideBar = () => {
     return (
         <LeftsideBarWrapper isOpen={isOpen} height={height}>
             <div className="top-wrapper">
-                <Logo />
+                <Link to={HOME_ROUTE}>
+                    <Logo width="165px" />
+                </Link>
                 <UserBig
                     notifications={visibleRoutes?.profile.notifications}
                     avatar={user?.avatar}

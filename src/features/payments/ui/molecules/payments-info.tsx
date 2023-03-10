@@ -1,7 +1,9 @@
+import React from 'react'
 import { Colors } from '@consts'
 import { Button, LinkButton } from '@ui/atoms'
+import List from '@ui/list'
 import localizeDate from '@utils/localize-date'
-import React, { useCallback } from 'react'
+import { useCallback } from 'react'
 import styled from 'styled-components'
 import { SliderPage, useModal } from 'widgets'
 import { MoneyNeedToPay } from '../atoms'
@@ -23,7 +25,6 @@ const PaymentsInfoWrapper = styled.div<{ paymentDifference: number }>`
 `
 
 interface Props {
-    monthly: number
     endDate?: string
     startDate?: string
     sum: number
@@ -60,24 +61,26 @@ const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_cur
                 <br />
                 <MoneyNeedToPay sum={sum} allPayments={allPayments} endDate={endDate} />
                 <br />
-                <Button
-                    onClick={handleModal}
-                    text={'Оплатить через QR-код Сбербанк онлайн'}
-                    width={'100%'}
-                    background={Colors.green.main}
-                    textColor="#fff"
-                />
-                {bill && (
-                    <LinkButton
-                        text="Сформировать квитанцию на оплату"
-                        background="transparent"
-                        textColor="var(--grey)"
-                        align="center"
-                        width="100%"
-                        href={bill}
-                        onClick={() => null}
+                <List gap={8} scroll={false}>
+                    <Button
+                        onClick={handleModal}
+                        text={'Оплатить через QR-код Сбербанк онлайн'}
+                        width={'100%'}
+                        background={Colors.green.main}
+                        textColor="#fff"
                     />
-                )}
+                    {bill && (
+                        <LinkButton
+                            text="Сформировать квитанцию на оплату"
+                            background="transparent"
+                            textColor="var(--grey)"
+                            align="center"
+                            width="100%"
+                            href={bill}
+                            onClick={() => null}
+                        />
+                    )}
+                </List>
             </div>
         </PaymentsInfoWrapper>
     )

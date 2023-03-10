@@ -3,12 +3,13 @@ import Notification from '@ui/notification'
 import getLettersColors from '@utils/get-letters-colors'
 import getNameFirstLetters from '@utils/get-name-first-letters'
 import React, { useState } from 'react'
+import { useModal } from 'widgets'
 import { Container, Img } from '../atoms/avatar'
 
 export default Avatar
 
 interface Props {
-    avatar?: string
+    avatar: string | undefined
     name: string
     width?: string
     height?: string
@@ -17,11 +18,32 @@ interface Props {
     selected?: boolean
     checked?: boolean
     boxShadow?: string
+    border?: boolean
+    avatarModal?: boolean
 }
 
-function Avatar({ selected, name, avatar, width, height, marginRight, notifications, checked, boxShadow }: Props) {
+function Avatar({
+    selected,
+    name,
+    avatar,
+    width,
+    height,
+    marginRight,
+    notifications,
+    checked,
+    boxShadow,
+    border,
+    avatarModal,
+}: Props) {
     const [isLoaded, setIsLoaded] = useState<boolean>(true)
     const shortName = getNameFirstLetters(name)[0] + (getNameFirstLetters(name)[1] ?? '')
+    const { open } = useModal()
+
+    const handleClick = () => {
+        if (avatarModal) {
+            open(<Avatar name={name} width="400px" height="400px" marginRight="0" avatar={avatar} />)
+        }
+    }
 
     return (
         <Container
@@ -31,6 +53,8 @@ function Avatar({ selected, name, avatar, width, height, marginRight, notificati
             marginRight={marginRight}
             background={getLettersColors(name)}
             boxShadow={boxShadow}
+            border={border}
+            onClick={handleClick}
         >
             {avatar && isLoaded ? (
                 <Img round onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />

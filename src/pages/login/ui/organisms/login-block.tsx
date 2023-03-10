@@ -1,154 +1,144 @@
-import {
-    CANT_ACCESS_ROUTE,
-    FEEDBACK_ROUTE,
-    GET_YOUR_LOGIN_ROUTE,
-    MEMO_FRESHMEN_ROUTE,
-    MEMO_TEACHER_ROUTE,
-} from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
+import React from 'react'
 import { userModel } from '@entities/user'
-import { Button, LinkButton, Message, Title } from '@ui/atoms'
-import Checkbox from '@ui/atoms/checkbox'
-import Input from '@ui/atoms/input'
-import SubmitButton from '@ui/atoms/submit-button'
 import BlockWrapper from '@ui/block/styles'
-import List from '@ui/list'
-import useQueryParams from '@utils/hooks/use-query-params'
-import useTheme from '@utils/hooks/use-theme'
-import React, { useEffect, useState } from 'react'
-import { FiArrowLeftCircle } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import Information from '../molecules/information'
+import Inputs from '../molecules/inputs'
 
-const LoginBlock = () => {
-    const queryParams = useQueryParams()
-    const queryLogin = queryParams.get('login')
-    const queryPassword = queryParams.get('password')
+const LoginBlockStyled = styled(BlockWrapper)<{ isAuthenticated: boolean }>`
+    overflow: hidden;
+    box-shadow: ${({ isAuthenticated }) => (!isAuthenticated ? '0 0 1px var(--theme-mild-opposite)' : 'none')};
+    min-height: 480px;
+    transition: 0.2s box-shadow;
+    position: relative;
+    background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--theme)' : 'var(--schedule)')};
 
-    const [login, setLogin] = useState(queryLogin ?? '')
-    const [password, setPassword] = useState(queryPassword ?? '')
-    const [capsLock, setCapsLock] = useState(false)
-    const loginFunc = userModel.events.login
-    useTheme()
-    const { loading, error, data } = userModel.selectors.useUser()
+    .left,
+    .right {
+        height: 100%;
+        padding: 22px;
+    }
 
-    const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
-        setCapsLock(e.getModifierState('CapsLock'))
+    .right {
+        min-width: 350px;
+        width: 350px;
+        opacity: ${({ isAuthenticated }) => +!isAuthenticated};
+    }
 
-        if (e.key === 'Enter') {
-            loginFunc({ login, password })
+    .left {
+        min-width: 320px;
+        width: 320px;
+        transition: 0.2s background, 0.2s opacity;
+        background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--theme)' : 'var(--theme-mild-xxl)')};
+        padding-top: ${({ isAuthenticated }) => (isAuthenticated ? '60px' : '22px')};
+
+        & > * > * > *:not(.logo) {
+            opacity: ${({ isAuthenticated }) => +!isAuthenticated};
         }
     }
 
-    useEffect(() => {
-        queryLogin && queryPassword && loginFunc({ login: queryLogin, password: queryPassword })
-    }, [queryLogin, queryPassword])
+    .logo {
+        transform-origin: left;
+    }
 
+    .logo.first {
+        z-index: 100;
+        animation: ${({ isAuthenticated }) => isAuthenticated && 'logoMove 0.8s forwards ease-in-out'};
+
+        @keyframes logoMove {
+            0% {
+                position: absolute;
+                top: 22px;
+                left: 22px;
+                transform: scale(1) translateY(0%) translateX(0%);
+            }
+            100% {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: scale(2) translateY(-25%) translateX(-50%);
+            }
+        }
+    }
+
+    .logo.second {
+        display: none;
+    }
+
+    @media (max-width: 675px) {
+        max-width: 400px;
+        max-height: 90%;
+        flex-direction: column-reverse;
+        overflow-y: auto;
+        justify-content: flex-start;
+
+        .right {
+            opacity: 1;
+
+            & > * > * > *:not(.logo) {
+                opacity: ${({ isAuthenticated }) => +!isAuthenticated};
+            }
+        }
+
+        .left {
+            padding-top: 22px;
+        }
+
+        .logo.first {
+            display: none;
+        }
+
+        .logo.second {
+            display: block;
+            z-index: 100;
+            animation: ${({ isAuthenticated }) => isAuthenticated && 'logoMoveMobile 0.8s forwards ease-in-out'};
+
+            @keyframes logoMoveMobile {
+                0% {
+                    position: absolute;
+                    top: 22px;
+                    left: 50%;
+                    transform: scale(1) translateY(0%) translateX(-50%);
+                }
+                100% {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: scale(2) translateY(-25%) translateX(-50%);
+                }
+            }
+        }
+
+        .left,
+        .right {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 400px) {
+        box-shadow: none;
+        border-radius: 0px;
+        height: 100%;
+        max-height: 100%;
+    }
+`
+
+const LoginBlock = () => {
+    const {
+        data: { isAuthenticated },
+    } = userModel.selectors.useUser()
     return (
-        <BlockWrapper
+        <LoginBlockStyled
+            isAuthenticated={isAuthenticated ?? false}
             height="fit-content"
-            orientation="vertical"
-            gap="20px"
-            maxWidth="500px"
-            onKeyDown={handleKeyPress}
+            orientation="horizontal"
+            gap="4px"
+            maxWidth="fit-content"
+            padding="0"
         >
-            <Title size={2} align="left">
-                Вход в личный кабинет
-            </Title>
-            <LinkButton
-                text={'Перейти к старому дизайну'}
-                onClick={() => {
-                    localStorage.setItem('useOldVersion', 'true')
-                }}
-                background="transparent"
-                icon={<FiArrowLeftCircle />}
-                align="left"
-                width="100%"
-                href={`${OLD_LK_URL}/index.php`}
-            />
-            <Message type="failure" visible={!!error}>
-                {error}
-            </Message>
-            <Message type="success" visible={data?.isAuthenticated ?? false}>
-                Вы вошли в аккаунт
-            </Message>
-            <Input value={login} setValue={setLogin} title="Логин" placeholder="Введите логин" />
-            <Input
-                value={password}
-                setValue={setPassword}
-                title="Пароль"
-                placeholder="Введите пароль"
-                type="password"
-                alertMessage={capsLock ? 'Включен Capslock' : undefined}
-            />
-            <SubmitButton
-                text="Вход"
-                action={() => loginFunc({ login, password })}
-                isLoading={loading}
-                completed={false}
-                setCompleted={() => null}
-                isActive={!!password && !!login}
-            />
-            <List padding="4px" scroll={false} horizontalAlign="center">
-                <Checkbox
-                    text="Оставаться в системе"
-                    checked={data.savePassword}
-                    setChecked={(value) => {
-                        userModel.events.changeSavePassword({ savePassword: value })
-                    }}
-                />
-                <List scroll={false} direction="horizontal" padding="4px" horizontalAlign="center">
-                    {/*<Link to={FORGOT_PASSWORD_ROUTE} tabIndex={-1}>*/}
-                    {/*    <Button*/}
-                    {/*        text="Забыли пароль от ЕУЗ?"*/}
-                    {/*        height="25px"*/}
-                    {/*        background="transparent"*/}
-                    {/*        textColor="var(--reallyBlue)"*/}
-                    {/*    />*/}
-                    {/*</Link>*/}
-                    <Link to={FEEDBACK_ROUTE} tabIndex={-1}>
-                        <Button
-                            text="Обратная связь"
-                            height="25px"
-                            background="transparent"
-                            textColor="var(--reallyBlue)"
-                            width="144px"
-                        />
-                    </Link>
-                    <Link to={GET_YOUR_LOGIN_ROUTE} tabIndex={-1}>
-                        <Button
-                            text="Узнать свой логин ЕУЗ"
-                            height="25px"
-                            background="transparent"
-                            textColor="var(--reallyBlue)"
-                        />
-                    </Link>
-                </List>
-                <Link to={MEMO_FRESHMEN_ROUTE} tabIndex={-1}>
-                    <Button
-                        text="Вниманию студентов 1 курса!"
-                        height="25px"
-                        background="transparent"
-                        textColor="var(--reallyBlue)"
-                    />
-                </Link>
-                <Link to={MEMO_TEACHER_ROUTE} tabIndex={-1}>
-                    <Button
-                        text="Вниманию сотрудников!"
-                        height="25px"
-                        background="transparent"
-                        textColor="var(--reallyBlue)"
-                    />
-                </Link>
-                <Link to={CANT_ACCESS_ROUTE} tabIndex={-1}>
-                    <Button
-                        text="Если не получается войти в Личный кабинет"
-                        height="25px"
-                        background="transparent"
-                        textColor="var(--red)"
-                    />
-                </Link>
-            </List>
-        </BlockWrapper>
+            <Information />
+            <Inputs />
+        </LoginBlockStyled>
     )
 }
 

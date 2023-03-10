@@ -1,3 +1,4 @@
+import React from 'react'
 import { WeekDays } from '@consts'
 import { scheduleModel } from '@entities/schedule'
 import displayTopInfo from '@features/schedule/lib/display-top-info'

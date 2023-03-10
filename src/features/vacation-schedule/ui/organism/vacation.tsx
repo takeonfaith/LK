@@ -6,6 +6,7 @@ import Table from '@ui/table'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import getCorrectWordForm, { Rules } from '@utils/get-correct-word-form'
 import React from 'react'
+import localizeDate from '@shared/lib/localize-date'
 
 const RULES: Rules = {
     fiveToNine: 'дней',
@@ -98,17 +99,23 @@ function getVacations(fact: VacationType[], plan: VacationType[]) {
         const factVacation = fact[i]
         const planVacation = plan[i]
         const vacation = { actualVacationPeriods: '', plannedVacationPeriods: '' }
+        const factFrom = localizeDate(factVacation?.from, 'numeric')
+        const factTo = localizeDate(factVacation?.to, 'numeric')
+        const planFrom = localizeDate(planVacation?.from, 'numeric')
+        const planTo = localizeDate(planVacation?.to, 'numeric')
 
         if (factVacation) {
-            vacation.actualVacationPeriods = `${factVacation.from} - ${factVacation.to} (${
-                factVacation.numdays
-            } ${getCorrectWordForm(Number(factVacation.numdays) || 0, RULES)})`
+            vacation.actualVacationPeriods = `${factFrom} - ${factTo} (${factVacation.numdays} ${getCorrectWordForm(
+                Number(factVacation.numdays) || 0,
+                RULES,
+            )})`
         }
 
         if (planVacation) {
-            vacation.plannedVacationPeriods = `${planVacation.from} - ${planVacation.to} (${
-                planVacation.numdays
-            } ${getCorrectWordForm(Number(planVacation.numdays) || 0, RULES)})`
+            vacation.plannedVacationPeriods = `${planFrom} - ${planTo} (${planVacation.numdays} ${getCorrectWordForm(
+                Number(planVacation.numdays) || 0,
+                RULES,
+            )})`
         }
         vacations.push(vacation)
     }

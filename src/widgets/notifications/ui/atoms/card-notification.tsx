@@ -1,4 +1,5 @@
-import { baseNotification, businesstripNotification } from '@api/model/notification'
+import React from 'react'
+import { baseNotification, businesstripNotification, NameListNotification } from '@api/model/notification'
 import { Colors } from '@consts'
 import { personalNotificationModel } from '@entities/notification'
 import { userModel } from '@entities/user'
@@ -15,7 +16,7 @@ const CardNotificationWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    border-radius: var(--brSemi);
+    border-radius: var(--brLight);
     background: var(--form);
     box-shadow: var(--schedule-shadow);
     row-gap: 20px;
@@ -50,7 +51,7 @@ const DateCardNotification = styled.div`
 
 interface Props {
     data: baseNotification | businesstripNotification
-    type: 'businesstrip' | 'fire' | 'vacation'
+    type: NameListNotification
 }
 
 const CardNotification = ({ data }: Props) => {
@@ -80,7 +81,7 @@ const CardNotification = ({ data }: Props) => {
                         height="35px"
                         minHeight="30px"
                         textColor="white"
-                        background={Colors.blue.light}
+                        background={Colors.blue.light1}
                     />
                 )}
                 <SubmitButton

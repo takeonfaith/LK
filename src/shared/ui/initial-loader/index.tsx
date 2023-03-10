@@ -5,14 +5,28 @@ import { Error } from '@ui/error'
 import { Loading } from '@ui/loading'
 import { Logo } from '@ui/logo'
 import styled from 'styled-components'
+import { Button } from '@ui/button'
+import { AiOutlineReload } from 'react-icons/ai'
+import { UserToken } from '@api/model'
 
-const InitialLoaderWrapper = styled.div<{ loading: boolean }>`
+const styledPropsArray: Array<keyof Props> = ['loading']
+
+const InitialLoaderWrapper = styled.div.withConfig({
+    shouldForwardProp: (prop) => !styledPropsArray.includes(prop as keyof Props),
+})<{ loading: boolean }>`
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, var(--theme), var(--theme), var(--theme), ${Colors.blue.main}, var(--theme));
+    background: linear-gradient(
+        45deg,
+        var(--theme),
+        var(--theme),
+        var(--theme),
+        ${Colors.lightBlue.main},
+        var(--theme)
+    );
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -100,20 +114,20 @@ const InitialLoader = ({ loading }: Props) => {
         return (
             <InitialLoaderWrapper loading={true}>
                 <Error text="Нет подключения к интернету">
-                    {/*<Button*/}
-                    {/*    onClick={() =>*/}
-                    {/*        userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)*/}
-                    {/*    }*/}
-                    {/*    text="Попробовать снова"*/}
-                    {/*    icon={<AiOutlineReload />}*/}
-                    {/*/>*/}
+                    <Button
+                        onClick={() =>
+                            userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)
+                        }
+                        text="Попробовать снова"
+                        icon={<AiOutlineReload />}
+                    />
                 </Error>
             </InitialLoaderWrapper>
         )
 
     return (
         <InitialLoaderWrapper loading={loading}>
-            <Logo short />
+            <Logo short width="100px" />
             {loading && <Loading />}
         </InitialLoaderWrapper>
     )

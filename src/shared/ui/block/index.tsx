@@ -3,11 +3,12 @@ import React from 'react'
 import styled from 'styled-components'
 import BlockWrapper, { StyledProps } from './styles'
 
-interface Props extends StyledProps {
-    children: ChildrenType
-    loading?: boolean
-    skeleton?: ChildrenType
-}
+type Props = StyledProps &
+    React.HTMLAttributes<HTMLDivElement> & {
+        children: ChildrenType
+        loading?: boolean
+        skeleton?: ChildrenType
+    }
 
 const SkeletonWrapper = styled.div`
     width: 100%;
@@ -89,6 +90,7 @@ const Block = (props: Props) => {
     const { children, skeleton = <DefaultSkeleton />, loading = false, ...restProps } = props
     return (
         <BlockWrapper {...restProps} className="block">
+            {/* <div></div> */}
             {!loading ? children : skeleton}
         </BlockWrapper>
     )

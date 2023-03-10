@@ -1,15 +1,15 @@
 import React from 'react'
-import styled from 'styled-components'
-import { ItemNotification, NameListNotification } from '@api/model/notification'
-import { CardNotification } from './index'
+import {
+    baseNotification,
+    businesstripNotification,
+    docsNotification,
+    ItemNotification,
+    NameListNotification,
+} from '@api/model/notification'
+import { CardNotification, CardDocument } from './index'
 import { Error } from '@ui/error'
-
-const ListNotificationsWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 10px 1px;
-    row-gap: 20px;
-`
+import { personalNotificationModel } from '@entities/notification'
+import List from '@shared/ui/list'
 
 interface Props {
     listNotification: ItemNotification[]
@@ -17,16 +17,26 @@ interface Props {
 }
 
 const ListNotifications = ({ listNotification, typeList }: Props) => {
+    const type = personalNotificationModel.selectors.useType()
+
     return (
-        <ListNotificationsWrapper>
+        <List direction="vertical" gap={8} scroll={false}>
             {listNotification.length ? (
-                listNotification.map((notification) => (
-                    <CardNotification key={notification.id} data={notification} type={typeList} />
-                ))
+                listNotification.map((notification) =>
+                    type === 'notifications' ? (
+                        <CardNotification
+                            key={notification.id}
+                            data={notification as baseNotification | businesstripNotification}
+                            type={typeList}
+                        />
+                    ) : (
+                        <CardDocument key={notification.id} data={notification as docsNotification} type={typeList} />
+                    ),
+                )
             ) : (
                 <Error text={'По заданным параметрам документ не найден'} />
             )}
-        </ListNotificationsWrapper>
+        </List>
     )
 }
 

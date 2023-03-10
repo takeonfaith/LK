@@ -1,5 +1,5 @@
-import { Logo } from '@ui/atoms'
 import React from 'react'
+import { SCREEN_IPHONE_SE } from '@consts'
 import styled from 'styled-components'
 import LoginBlock from './ui/organisms/login-block'
 
@@ -12,20 +12,15 @@ const LoginWrapper = styled.div`
     background: var(--theme);
     flex-direction: column;
 
-    img {
-        width: 100%;
-        max-width: 250px;
-        position: absolute;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+    @media (max-width: ${SCREEN_IPHONE_SE}) {
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 `
 
 const LoginPage = () => {
     return (
         <LoginWrapper>
-            <Logo />
             <LoginBlock />
         </LoginWrapper>
     )

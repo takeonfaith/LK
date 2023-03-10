@@ -17,18 +17,21 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
         align-items: flex-end;
     }
 
-    .close-button {
+    .close-button,
+    .back-button {
         position: absolute;
-        top: 20px;
-        right: 20px;
-
-        padding: 0;
-        height: 20px;
-        width: 20px;
+        top: 12px;
 
         &:hover {
             filter: brightness(0.8);
+            background: var(--theme-mild-xxl);
         }
+    }
+
+    .close-button {
+        right: 20px;
+        z-index: 100;
+        padding: 8px;
     }
 `
 

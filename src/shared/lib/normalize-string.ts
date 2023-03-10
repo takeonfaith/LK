@@ -1,11 +1,15 @@
-const normalizeString = (str: string) => {
+const normalizeString = (str: string, removeComma?: boolean) => {
     if (!str.length) return ''
-    return str
+
+    const shouldRemoveComma = removeComma ?? true
+
+    const result = str
         .replace(/\s/g, '')
         .replace(/\$/g, 's')
-        .replace(/[,'._/]/g, '')
+
         .replace(/-/g, '')
         .toLowerCase()
+    return shouldRemoveComma ? result.replace(/[,'._/]/g, '') : result
 }
 
 export default normalizeString

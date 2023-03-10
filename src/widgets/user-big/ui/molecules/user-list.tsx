@@ -34,14 +34,16 @@ const UserList = () => {
         }
     }
 
-    const renderItem = (item: UserType, index?: number) => {
+    const renderItem = (item: UserType, isMe: boolean, index?: number) => {
         return (
             <User
                 checked={!!chosenUsers.find((el) => el === item.id)}
                 name={item.fullName}
-                type={item.user_status === 'stud' ? 'student' : 'teacher'}
+                avatar={item?.avatar}
+                type={item.user_status}
                 key={index}
                 onClick={() => handleCheck(item)}
+                isMe={isMe}
             />
         )
     }

@@ -4,10 +4,14 @@ import styled from 'styled-components'
 import { Button, Error, Loading } from '.'
 import Thinking from '../../images/thinking-emoji.gif'
 
-const WrapperBlock = styled.div<{ loading: boolean }>`
+const styledPropsArray: Array<keyof Props> = ['loading']
+
+const WrapperBlock = styled.div.withConfig({
+    shouldForwardProp: (prop) => !styledPropsArray.includes(prop as keyof Props),
+})<{ loading: boolean }>`
     width: 100%;
     padding: 10px;
-    height: auto;
+    height: 100%;
 
     .loading {
         width: 100%;
@@ -33,7 +37,7 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
         transition: 0.2s;
         opacity: ${({ loading }) => (loading ? 0 : 1)};
         visibility: ${({ loading }) => (loading ? 'hidden' : 'visible')};
-        transform: scale(${({ loading }) => (loading ? '0.98' : '1')});
+        /* transform: scale(${({ loading }) => (loading ? '0.98' : '1')}); */
         height: 100%;
     }
 
@@ -47,6 +51,10 @@ const WrapperBlock = styled.div<{ loading: boolean }>`
         & > * + * {
             margin-top: 10px;
         }
+    }
+
+    @media (max-width: 550px) {
+        padding: 15px;
     }
 `
 

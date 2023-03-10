@@ -9,10 +9,7 @@ const useList = (gap?: number) => {
     const pageOffset = listRef.current?.clientWidth ?? 1
     const amountOfPages = Math.ceil((listRef.current?.scrollWidth ?? 0) / (pageOffset + (gap ?? 0)))
 
-    // console.log(amountOfPages)
-
     useEffect(() => {
-        // console.log(listRef.current?.scrollLeft)
         if (listRef.current) {
             listRef.current.scrollLeft = scrollLeft
 

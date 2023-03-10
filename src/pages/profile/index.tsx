@@ -1,80 +1,24 @@
-import React from 'react'
-import { SETTINGS_APPEARANCE_ROUTE, SETTINGS_ROUTE } from '@app/routes/general-routes'
-import { Colors } from '@consts'
-import { confirmModel } from '@entities/confirm'
+import React, { useState } from 'react'
 import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
-import Avatar from '@features/home/ui/molecules/avatar'
 import { UserInfo } from '@features/profile'
-import { Button } from '@ui/button'
 import { Error } from '@ui/error'
-import List from '@ui/list'
-import { ListWrapper } from '@ui/list/styles'
-import Subtext from '@ui/subtext'
-import { Title } from '@ui/title'
-import { FiLogOut, FiSettings, FiSun } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import Top from './ui/top'
+import { CenterPage, Wrapper } from '@shared/ui/atoms'
+import AllInfo from '@features/home/ui/molecules/all-info'
+import Orders from '@features/home/ui/molecules/orders'
+import { AvailableAccounts } from 'widgets'
+import Block from '@shared/ui/block'
 import styled from 'styled-components'
+import { isProduction } from '@shared/consts'
 
-const ProfileWrapper = styled.div`
-    height: auto;
+const ContentList = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 80px 150px;
-    color: var(--text);
-    /* background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 65%),
-        radial-gradient(farthest-side at top center, ${Colors.purple.main}, transparent 65%),
-        radial-gradient(farthest-side at top right, ${Colors.orange.main}, transparent 65%),
-        radial-gradient(farthest-side at top right, ${Colors.purple.main}, transparent 65%),
-        radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 65%); */
-
-    @media (max-width: 1000px) {
-        padding: 40px;
-    }
-
-    /* @media (max-width: 600px) {
-        padding: 20px;
-        background-image: radial-gradient(600px 600px at top left, ${Colors.blue.main}, transparent 45%),
-            radial-gradient(600px 600px at top center, ${Colors.purple.main}, transparent 45%),
-            radial-gradient(600px 600px at top right, ${Colors.orange.main}, transparent 45%),
-            radial-gradient(600px 600px at top right, ${Colors.purple.main}, transparent 45%),
-            radial-gradient(600px 600px at top right, ${Colors.red.main}, transparent 45%);
-    } */
-`
-
-const ProfileTop = styled(ListWrapper)`
+    gap: 12px;
     width: 100%;
-    margin-bottom: 30px;
-
-    @media (max-width: 1000px) {
-        .title-wrapper {
-            justify-content: center;
-        }
-
-        span {
-            text-align: center;
-        }
-    }
-
-    @media (max-width: 600px) {
-        padding-top: 40px;
-        margin-bottom: 0px;
-    }
+    align-items: center;
 `
-
-// const GradientCircle = styled.div<{ current: boolean }>`
-//     width: 20px;
-//     height: 20px;
-//     border-radius: 100px;
-//     border: ${({ current }) => current && '2px solid var(--theme)'};
-//     outline: ${({ current }) => current && '2px solid var(--reallyBlue)'};
-//     background-image: radial-gradient(farthest-side at top left, ${Colors.blue.main}, transparent 100%),
-//         radial-gradient(farthest-side at top center, ${Colors.purple.main}, transparent 100%),
-//         radial-gradient(farthest-side at top right, ${Colors.orange.main}, transparent 100%),
-//         radial-gradient(farthest-side at top right, ${Colors.purple.main}, transparent 100%),
-//         radial-gradient(farthest-corner at top right, ${Colors.red.main}, transparent 100%);
-// `
 
 const ProfilePage = () => {
     const {
@@ -82,83 +26,56 @@ const ProfilePage = () => {
         error,
     } = userModel.selectors.useUser()
     const { allRoutes } = menuModel.selectors.useMenu()
+    const [currentPage, setCurrentPage] = useState(0)
 
     if (!user || !allRoutes) return null
 
     if (!!error) return <Error text={error} />
 
+    const studentPages = [
+        { title: 'Учетная карточка', content: <AllInfo user={user} /> },
+        { title: 'Приказы', content: <Orders orders={user.orders} /> },
+    ]
+
+    const teacherPages = [
+        { title: 'Учетная карточка', content: <AllInfo user={user} /> },
+        // {
+        //     title: 'Сведения о вакцинации',
+        //     content: (
+        //         <div style={{ justifyContent: 'start' }}>
+        //             <PageIsNotReady oldVersionUrl={VAX_ROUTE} />
+        //         </div>
+        //     ),
+        // },
+        // {
+        //     title: 'Дети и внуки',
+        //     content: (
+        //         <div style={{ justifyContent: 'start' }}>
+        //             <PageIsNotReady oldVersionUrl={CHILDREN_ROUTE} />
+        //         </div>
+        //     ),
+        // },
+    ]
+
+    const pages = user.user_status === 'stud' ? studentPages : teacherPages
+
     return (
-        <ProfileWrapper>
-            <ProfileTop
-                horizontalAlign="center"
-                wrapOnMobile
-                padding="100px"
-                direction="horizontal"
-                verticalAlign="center"
-                gap={30}
-            >
-                <Avatar
-                    name={user.fullName}
-                    avatar={user.avatar}
-                    width="120px"
-                    height="120px"
-                    marginRight="0"
-                    boxShadow="0 0 80px #00000044"
-                />
-                <List horizontalAlign="center">
-                    <Title size={3} align="left">
-                        {user.fullName}
-                    </Title>
-                    <Subtext visible={!!user.specialty} width="100%">
-                        Направление: {user.specialty}
-                    </Subtext>
-                    <Subtext visible={!!user.group} maxWidth="100%" width="100%" align="left">
-                        Группа: {user.group}
-                    </Subtext>
-                    <Subtext width="100%" maxWidth="100%">
-                        {user.user_status === 'stud' ? 'Студент' : 'Сотрудник'}{' '}
-                        {user.user_status === 'stud' && `${user.course} Курс`}
-                    </Subtext>
-                </List>
-                <List
-                    direction="horizontal"
-                    verticalAlign="top"
-                    horizontalAlign="center"
-                    height="100%"
-                    padding="15px 0"
-                >
-                    {/* <Button icon={<GradientCircle current />} height="27px" background="transparent" /> */}
-                    <Link to={SETTINGS_APPEARANCE_ROUTE}>
-                        <Button icon={<FiSun />} background={Colors.white.transparentAF} height="27px" width="40px" />
-                    </Link>
-                    <Link to={SETTINGS_ROUTE}>
-                        <Button
-                            icon={<FiSettings />}
-                            background={Colors.white.transparentAF}
-                            height="27px"
-                            width="40px"
-                        />
-                    </Link>
-                    <Button
-                        onClick={() =>
-                            confirmModel.events.evokeConfirm({
-                                message: 'Вы точно хотите выйти из аккаунта?',
-                                onConfirm: userModel.events.logout,
-                            })
-                        }
-                        icon={<FiLogOut />}
-                        background={Colors.white.transparentAF}
-                        height="27px"
-                        width="40px"
-                    />
-                </List>
-            </ProfileTop>
-            {/* <List direction="horizontal" innerPadding="20px 0" showPages>
+        <Wrapper load={function () {}} loading={false} data={[]} error={null}>
+            <ContentList>
+                <Top user={user} currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} />
+                {/* <List direction="horizontal" innerPadding="0px 0vw 10px 0vw" showPages>
                 <StoryCard title="Обучение" content={TutorialStory} />
             </List> */}
-            {/* <AvailableAccounts /> */}
-            <UserInfo />
-        </ProfileWrapper>
+                {!isProduction && (
+                    <CenterPage>
+                        <Block height="100%" maxWidth="750px">
+                            <AvailableAccounts />
+                        </Block>
+                    </CenterPage>
+                )}
+                <UserInfo currentPage={currentPage} pages={pages.map((p) => p.content)} />
+            </ContentList>
+        </Wrapper>
     )
 }
 

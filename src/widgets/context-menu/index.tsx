@@ -32,6 +32,7 @@ const ContextMenuWrapper = styled.div<{
             isVisible ? 'translateY(0) translateX(-50%)' : 'translateY(20px) translateX(-50%)'};
         bottom: 10px;
         top: auto;
+        padding: 16px;
     }
 `
 

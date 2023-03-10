@@ -9,11 +9,17 @@ declare global {
         results?: T[]
     }
 
-    type ServerListRequest<TFilter extends Record<string, unknown> | EmptyObject> = {
+    type ServerListRequest<TFilter extends Record<string, unknown> | unknown> = {
         filter?: TFilter
+        search?: string
         limit?: number
         page?: number
     }
+
+    /**
+     * Выбор типа. Если первый существует, финальный тип будет такой же. Если же нет - как второй
+     */
+    type TypeChoice<Prefered, Second> = Prefered extends void ? Second : Prefered
 }
 
 export {}

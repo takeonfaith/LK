@@ -63,6 +63,7 @@ const GlobalStyles = createGlobalStyle`
 		--mild-theme: #363636;
 		--leftside-bar: #3b3b3b;
 		--leftside-bar-shadow: 5px 5px 10px rgba(0,0,0,0.377);
+		--theme-mild-xxl:#0000001f;
 		--header: #373737;
 		--search2: #313131;
 		--search: #313131;
@@ -102,6 +103,7 @@ const GlobalStyles = createGlobalStyle`
 		--mild-theme: #f5f5f5;
 		--primary-background: rgb(243, 243, 243);
 		--leftside-bar-shadow: 5px 5px 10px hsla(0,0%,40.8%,0.24);
+		--theme-mild-xxl:#00000005;
 		--header: #e9e9e9;
 		--text: #272727;
 		--invert-text: #f0f0f0;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { FiSearch } from 'react-icons/fi'
-import Input from '../atoms/input'
+import useDebounce from '@shared/lib/hooks/use-debounce'
+import React from 'react'
+import Search, { Hint } from '../search'
 
 interface Props<T, R> {
     whereToSearch: T
@@ -9,6 +9,9 @@ interface Props<T, R> {
     placeholder?: string
     inputAppearance?: boolean
     setExternalValue?: (value: string) => void
+    validationCheck?: boolean
+    loadingOnType?: boolean
+    hints?: Hint[]
 }
 
 const LocalSearch = <T, R>({
@@ -17,30 +20,34 @@ const LocalSearch = <T, R>({
     setResult,
     inputAppearance,
     setExternalValue,
+    hints,
+    loadingOnType = false,
     placeholder = 'Поиск по меню',
+    validationCheck = false,
 }: Props<T, R>) => {
-    const [value, setValue] = useState('')
+    const onDebounce = (value: string) => {
+        setResult(searchEngine(value, whereToSearch))
+    }
+    const onClear = () => {
+        setResult(null)
+    }
 
-    useEffect(() => {
-        if (value.length) {
-            const delayedSearch = setTimeout(() => {
-                setResult(searchEngine(value, whereToSearch))
-            }, 300)
+    const [value, setValue, loading] = useDebounce({ onDebounce, onClear })
 
-            return () => clearTimeout(delayedSearch)
-        } else setResult(null)
-    }, [value])
+    const handleChangeValue = (v: string) => {
+        setValue(v)
+        setExternalValue && setExternalValue(v)
+    }
 
     return (
-        <Input
-            value={value}
-            placeholder={placeholder}
-            leftIcon={<FiSearch />}
+        <Search
+            value={value ?? ''}
+            setValue={handleChangeValue}
             inputAppearance={inputAppearance}
-            setValue={(value: string) => {
-                setValue(value)
-                setExternalValue && setExternalValue(value)
-            }}
+            placeholder={placeholder}
+            validationCheck={validationCheck}
+            loading={loadingOnType ? loading : false}
+            hints={hints}
         />
     )
 }

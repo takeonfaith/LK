@@ -1,68 +1,58 @@
 import PageIsNotReady from '@pages/page-is-not-ready'
 
 import {
-    TeachersApplicationsPage,
-    DownloadAdminFilesPage,
-    AllTeachersPage,
-    HelpfulInformation,
-    HrApplicationsPage,
-    PartTimeEmployment,
-    HolidayPostponed,
-    Dismissal,
-    ExtraHolidayColl,
-    HolidayWork,
-    HolidayPlanning,
-    WorkTransfer,
-    // DataVerificationPage,
-    // ContactInfoActualizationPage,
-    VacationSchedule,
-    PersonalNotificationsPage,
-    IssuanceOfLicensesPage,
-    GettingComputerEquipmentPage,
-    ConnectingComputerPage,
-    PrinterMaintenancePage,
-    QuestionSedPage,
-    QuestionPersonalAccountPage,
-    OtherItServicesPage,
-    CertificateFromPlaceOfWorkPage,
-    VisaCertificatePage,
-    CertificateOfWorkExperiencePage,
-    NumberOfUnusedVacationDaysPage,
-    CopyOfEmploymentRecordPage,
-    CopiesOfDocumentsFromPersonalFilePage,
-    WorkOnTermsOfExternalConcurrencyPage,
-    CertificateTimeParentalLeavePage,
     ArbitraryRequestPage,
+    CertificateFromPlaceOfWorkPage,
+    CertificateOfWorkExperiencePage,
+    CertificateTimeParentalLeavePage,
+    ConnectingComputerPage,
+    CopiesOfDocumentsFromPersonalFilePage,
+    CopyOfEmploymentRecordPage,
     CourierPage,
-    PersonaIncomeTaxReferencePage,
-    PaymentOfChildBirthAllowancePage,
+    Dismissal,
+    DownloadAdminFilesPage,
+    ExtraHolidayColl,
+    GettingComputerEquipmentPage,
+    HelpfulInformation,
+    HolidayPlanning,
+    HolidayPostponed,
+    HolidayWork,
+    HrApplicationsPage,
+    IssuanceOfLicensesPage,
+    NumberOfUnusedVacationDaysPage,
+    OtherItServicesPage,
+    PartTimeEmployment,
     PaymentForChildCarePage,
+    PaymentOfChildBirthAllowancePage,
+    PersonaIncomeTaxReferencePage,
+    PersonalNotificationsPage,
+    PrinterMaintenancePage,
+    QuestionPersonalAccountPage,
+    QuestionSedPage,
+    TeachersApplicationsPage,
+    DataVerificationPage,
+    ContactInfoActualizationPage,
+    VacationSchedule,
+    VisaCertificatePage,
+    WorkOnTermsOfExternalConcurrencyPage,
+    WorkTransfer,
 } from './pages'
 
+import { isProduction, OLD_LK_URL } from '@consts'
+import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
-import { FiArrowDownCircle, FiBell, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
+import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
-import {
-    ALL_STUDENTS_ROUTE,
-    ALL_TEACHERS_ROUTE,
-    generalHiddenRoutes,
-    generalRoutes,
-    IRoutes,
-    PROJECT_ACTIVITIES_ROUTE,
-} from '../general-routes'
-import useIsTestEnv from '@utils/hooks/use-is-test-env'
-import AllStudentsPage from '@pages/all-students'
+import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
 
-export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
 export const HR_APPLICATIONS_ROUTE = '/hr-applications'
 export const JOB_ROUTE = '/job'
 export const ORDERS_ROUTE = '/staff_orders'
 export const DOCUMENT_BLANKS_ROUTE = '/staff_blanks'
 export const STUDENTS_LOGINS_ROUTE = '/ad_logins'
-export const ALERTS_ROUTE = '/alerts'
 export const VAX_ROUTE = '/vaccination'
 export const DOCLIST_ROUTE = '/doclist'
 export const PPS_VOTE_ROUTE = '/pps_vote2020'
@@ -70,7 +60,7 @@ export const CHILDREN_ROUTE = '/children'
 export const PPS_CONTEST_ROUTE = '/pps_contest'
 export const ElECTRONIC_STATEMENTS = '/electronic-statements'
 export const VACATION_ROUTE = '/vacation'
-export const KPI_PPS_ROUTE = '/kpi_pss'
+export const KPI_PPS_ROUTE = '/kpi_pps'
 export const KPI_ADMIN_ROUTE = '/kpi_admin'
 export const SC_NEWS_ROUTE = '/sc_news'
 export const OOP_ROUTE = '/oop'
@@ -80,9 +70,10 @@ export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const DOWNLOAD_AGREEMENTS_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
-export const CONTACT_INFO_ACTUALIZATION = '/contact-info-actualization'
 
 //hidden routes
+export const CONTACT_INFO_ACTUALIZATION = APPLICATIONS_ROUTE + '/contact-info-actualization'
+export const DATA_VERIFICATION_ROUTE = APPLICATIONS_ROUTE + '/data-verification'
 export const ISSUANCE_OF_LICENSES = APPLICATIONS_ROUTE + '/issuance-of-licenses'
 export const GETTING_COMPUTER_EQUIPMENT = APPLICATIONS_ROUTE + '/getting-computer-equipment'
 export const CONNECTING_COMPUTER = APPLICATIONS_ROUTE + '/connecting-computer'
@@ -110,41 +101,38 @@ export const WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/work-transfer'
 export const EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/extra-holiday-coll'
 export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning'
 export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work'
+export const BUFFER_DISMISSAL = HR_APPLICATIONS_ROUTE + '/buffer-dismissal'
+export const BUFFER_WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/buffer-work-transfer'
+export const BUFFER_EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/buffer-extra-holiday-coll'
+export const BUFFER_HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/buffer-holiday-planning'
+export const BUFFER_HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/buffer-holiday-work'
+export const BUFFER_PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/buffer-part-time-deployment'
+export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday-postponed'
 
-const isProdEnv = !useIsTestEnv()
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const teachersPrivateRoutes: () => IRoutes = () => ({
-    ...generalRoutes,
-    doclist: {
-        id: 'doclist',
-        title: 'Ознакомление с документами',
-        icon: <FiFileText />,
-        path: DOCLIST_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: DOCLIST_ROUTE }),
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-    },
+    // On this position just to make necessary order
     applications: {
         id: 'applications',
         title: 'Цифровые сервисы',
         icon: <FiFileText />,
         path: APPLICATIONS_ROUTE,
-        Component: isProdEnv ? ApplicationRedirect : TeachersApplicationsPage,
+        Component: isProduction ? ApplicationRedirect : TeachersApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'OTHER',
     },
+    ...generalRoutes,
     'hr-applications': {
         id: 'hr-applications',
         title: 'Кадровые заявления',
         icon: <FiFileText />,
         path: HR_APPLICATIONS_ROUTE,
-        Component: HrApplicationsPage,
+        Component: isProduction ? ApplicationRedirect : HrApplicationsPage,
         color: 'green',
         isTemplate: false,
-        group: 'FINANCES_DOCS',
+        group: 'OTHER',
     },
     'download-agreements': {
         id: 'download-agreements',
@@ -158,45 +146,86 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
 
         isAdmin: true,
     },
-    alerts: {
-        id: 'alerts',
-        title: 'Оповещения',
-        icon: <FiBell />,
-        path: ALERTS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: ALERTS_ROUTE }),
+    'electronic-statements': {
+        id: 'electronic-statements',
+        title: 'Электронные ведомости',
+        icon: <BiIdCard />,
+        path: ElECTRONIC_STATEMENTS,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(' https://e.mospolytech.ru/old/stats.php?m=items&act=st_list')
+            }, [])
+
+            return null
+        },
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
-    calendar: {
-        id: 'calendar',
-        title: 'График отпусков',
-        icon: <FiCalendar />,
-        path: VACATION_ROUTE,
-        Component: VacationSchedule,
-        color: 'purple',
+    'project-activity': {
+        id: 'project-activity',
+        title: 'Проектная деятельность',
+        icon: <FaRegLightbulb />,
+        path: PROJECT_ACTIVITIES_ROUTE,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=proj_main`)
+            }, [])
+
+            return null
+        },
+        color: 'orange',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
+    },
+    'pps-contest': {
+        id: 'pps-contest',
+        title: 'Конкурс ППС',
+        icon: <BiIdCard />,
+        path: PPS_CONTEST_ROUTE,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace('https://mospolytech.ru/contest-pps/')
+            }, [])
+
+            return null
+        },
+        color: 'blue',
+        isTemplate: false,
+        group: 'LEARNING_ACTIVITIES',
     },
     'kpi-pps': {
         id: 'kpi-pps',
         title: 'Рейтинговая система ППС',
         icon: <FiStar />,
         path: KPI_PPS_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: KPI_PPS_ROUTE }),
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=${KPI_PPS_ROUTE?.slice(1, KPI_PPS_ROUTE.length)}`)
+            }, [])
+
+            return null
+        },
         color: 'pink',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
     'kpi-admin': {
         id: 'kpi-admin',
-        title: 'Экспертиза рейтинговой системы ППС',
+        // title: 'Экспертиза рейтинговой системы ППС',
+        title: 'Экспертиза рейтинго...',
         icon: <FiMonitor />,
         path: KPI_ADMIN_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: KPI_ADMIN_ROUTE }),
-        color: 'darkBlue',
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(`${OLD_LK_URL}/?p=${KPI_ADMIN_ROUTE?.slice(1, KPI_ADMIN_ROUTE.length)}`)
+            }, [])
+
+            return null
+        },
+        color: 'lightBlue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'LEARNING_ACTIVITIES',
     },
     'sc-news': {
         id: 'sc-news',
@@ -220,28 +249,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         group: 'OTHER',
         show: false,
     },
-    'all-students': {
-        id: 'all-students',
-        title: 'Студенты',
-        icon: <BiGroup />,
-        path: ALL_STUDENTS_ROUTE,
-        Component: AllStudentsPage,
-        color: 'darkBlue',
-        isTemplate: false,
-        group: 'OTHER',
-        show: false,
-    },
-    'all-teachers': {
-        id: 'all-teachers',
-        title: 'Сотрудники',
-        icon: <BiBookReader />,
-        path: ALL_TEACHERS_ROUTE,
-        Component: AllTeachersPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'OTHER',
-        show: false,
-    },
     'document-blanks': {
         id: 'document-blanks',
         title: 'Бланки документов',
@@ -260,6 +267,16 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         path: PERSONAL_NOTIFICATIONS,
         Component: PersonalNotificationsPage,
         color: 'blue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
+    calendar: {
+        id: 'calendar',
+        title: 'График отпусков',
+        icon: <FiCalendar />,
+        path: VACATION_ROUTE,
+        Component: VacationSchedule,
+        color: 'purple',
         isTemplate: false,
         group: 'FINANCES_DOCS',
     },
@@ -295,38 +312,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'GENERAL',
     },
-    'pps-contest': {
-        id: 'pps-contest',
-        title: 'Конкурс ППС',
-        icon: <BiIdCard />,
-        path: PPS_CONTEST_ROUTE,
-        Component: () => {
-            React.useEffect(() => {
-                window.location.replace('https://mospolytech.ru/contest-pps/')
-            }, [])
-
-            return null
-        },
-        color: 'blue',
-        isTemplate: false,
-        group: 'LEARNING_ACTIVITIES',
-    },
-    'electronic-statements': {
-        id: 'electronic-statements',
-        title: 'Электронные ведомости',
-        icon: <BiIdCard />,
-        path: ElECTRONIC_STATEMENTS,
-        Component: () => {
-            React.useEffect(() => {
-                window.location.replace(' https://e.mospolytech.ru/old/stats.php?m=items&act=st_list')
-            }, [])
-
-            return null
-        },
-        color: 'blue',
-        isTemplate: false,
-        group: 'LEARNING_ACTIVITIES',
-    },
     'pps-vote': {
         id: 'pps-vote',
         title: 'Опрос для проверки уровня цифровой грамотности',
@@ -338,16 +323,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         group: 'OTHER',
         show: false,
     },
-    'project-activity': {
-        id: 'project-activity',
-        title: 'Проектная деятельность',
-        icon: <FaRegLightbulb />,
-        path: PROJECT_ACTIVITIES_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: '/projects' }),
-        color: 'yellow',
-        isTemplate: false,
-        group: 'OTHER',
-    },
 })
 
 export const teachersHiddenRoutes: () => IRoutes = () => ({
@@ -358,77 +333,87 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: ISSUANCE_OF_LICENSES,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProdEnv ? ApplicationRedirect : IssuanceOfLicensesPage,
+        Component: isProduction ? ApplicationRedirect : IssuanceOfLicensesPage,
         isTemplate: false,
         group: 'OTHER',
     },
     'part-time-deployment': {
         id: 'part-time-deployment',
         title: 'Заявление на трудоустройство по совместительству',
-        path: PARTTIME_EMPLOYMENT,
+        path: BUFFER_PARTTIME_EMPLOYMENT,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProdEnv ? ApplicationRedirect : PartTimeEmployment,
+        Component: isProduction ? ApplicationRedirect : PartTimeEmployment,
         isTemplate: false,
         group: 'OTHER',
     },
     'holiday-postponed': {
         id: 'holiday-postponed',
         title: 'Заявление на перенос отпуска',
-        path: HOLIDAY_POSTPONED,
+        path: BUFFER_HOLIDAY_POSTPONED,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProdEnv ? ApplicationRedirect : HolidayPostponed,
+        Component: isProduction ? ApplicationRedirect : HolidayPostponed,
         isTemplate: false,
         group: 'OTHER',
     },
     dismissal: {
-        id: 'dismissal',
+        id: 'dismissal2',
         title: 'Заявление на увольнение',
-        path: DISMISSAL,
+        path: BUFFER_DISMISSAL,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProdEnv ? ApplicationRedirect : Dismissal,
+        Component: isProduction ? ApplicationRedirect : DismissalBufferPage,
         isTemplate: false,
         group: 'OTHER',
     },
     'holiday-work': {
         id: 'part-time-deployment',
         title: 'Заявление о привлечении к работе в выходной день',
-        path: HOLIDAY_WORK,
+        path: BUFFER_HOLIDAY_WORK,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProdEnv ? ApplicationRedirect : HolidayWork,
+        Component: isProduction ? ApplicationRedirect : HolidayWork,
         isTemplate: false,
         group: 'OTHER',
     },
     'holiday-planning': {
         id: 'holiday-postponed',
         title: 'Заявление о предоставлении отпуска',
-        path: HOLIDAY_PLANNING,
+        path: BUFFER_HOLIDAY_PLANNING,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProdEnv ? ApplicationRedirect : HolidayPlanning,
+        Component: isProduction ? ApplicationRedirect : HolidayPlanning,
         isTemplate: false,
         group: 'OTHER',
     },
     'extra-holiday-coll': {
         id: 'dismissal',
         title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
-        path: EXTRA_HOLIDAY_COLL,
+        path: BUFFER_EXTRA_HOLIDAY_COLL,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProdEnv ? ApplicationRedirect : ExtraHolidayColl,
+        Component: isProduction ? ApplicationRedirect : ExtraHolidayColl,
         isTemplate: false,
         group: 'OTHER',
     },
     'work-transfer': {
         id: 'dismissal',
         title: 'Заявление на перевод',
-        path: WORK_TRANSFER,
+        path: BUFFER_WORK_TRANSFER,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProdEnv ? ApplicationRedirect : WorkTransfer,
+        Component: isProduction ? ApplicationRedirect : WorkTransfer,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    dismissal_form: {
+        id: 'dismissal',
+        title: 'Заявление на увольнение',
+        path: DISMISSAL,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : Dismissal,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -438,7 +423,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: GETTING_COMPUTER_EQUIPMENT,
-        Component: isProdEnv ? ApplicationRedirect : GettingComputerEquipmentPage,
+        Component: isProduction ? ApplicationRedirect : GettingComputerEquipmentPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -448,7 +433,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: CONNECTING_COMPUTER,
-        Component: isProdEnv ? ApplicationRedirect : ConnectingComputerPage,
+        Component: isProduction ? ApplicationRedirect : ConnectingComputerPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -458,7 +443,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: PRINTER_MAINTENANCE,
-        Component: isProdEnv ? ApplicationRedirect : PrinterMaintenancePage,
+        Component: isProduction ? ApplicationRedirect : PrinterMaintenancePage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -468,7 +453,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: QUESTION_SED,
-        Component: isProdEnv ? ApplicationRedirect : QuestionSedPage,
+        Component: isProduction ? ApplicationRedirect : QuestionSedPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -478,7 +463,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: QUESTION_PERSONAL_ACCOUNT,
-        Component: isProdEnv ? ApplicationRedirect : QuestionPersonalAccountPage,
+        Component: isProduction ? ApplicationRedirect : QuestionPersonalAccountPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -488,7 +473,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: OTHER_IT_SERVICES,
-        Component: isProdEnv ? ApplicationRedirect : OtherItServicesPage,
+        Component: isProduction ? ApplicationRedirect : OtherItServicesPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -498,7 +483,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: CERTIFICATE_FROM_PLACE_OF_WORK,
-        Component: isProdEnv ? ApplicationRedirect : CertificateFromPlaceOfWorkPage,
+        Component: isProduction ? ApplicationRedirect : CertificateFromPlaceOfWorkPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -508,7 +493,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: VISA_CERTIFICATE,
-        Component: isProdEnv ? ApplicationRedirect : VisaCertificatePage,
+        Component: isProduction ? ApplicationRedirect : VisaCertificatePage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -518,7 +503,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: CERTIFICATE_OF_WORK_EXPERIENCE,
-        Component: isProdEnv ? ApplicationRedirect : CertificateOfWorkExperiencePage,
+        Component: isProduction ? ApplicationRedirect : CertificateOfWorkExperiencePage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -528,7 +513,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: NUMBER_OF_UNUSED_VACATION_DAYS,
-        Component: isProdEnv ? ApplicationRedirect : NumberOfUnusedVacationDaysPage,
+        Component: isProduction ? ApplicationRedirect : NumberOfUnusedVacationDaysPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -538,7 +523,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: COPY_OF_EMPLOYMENT_RECORD,
-        Component: isProdEnv ? ApplicationRedirect : CopyOfEmploymentRecordPage,
+        Component: isProduction ? ApplicationRedirect : CopyOfEmploymentRecordPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -548,7 +533,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: COPIES_OF_DOCUMENTS_FROM_PERSONAL_FILE,
-        Component: isProdEnv ? ApplicationRedirect : CopiesOfDocumentsFromPersonalFilePage,
+        Component: isProduction ? ApplicationRedirect : CopiesOfDocumentsFromPersonalFilePage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -558,7 +543,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY,
-        Component: isProdEnv ? ApplicationRedirect : WorkOnTermsOfExternalConcurrencyPage,
+        Component: isProduction ? ApplicationRedirect : WorkOnTermsOfExternalConcurrencyPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -568,7 +553,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: CERTIFICATE_TIME_PARENTAL_LEAVE,
-        Component: isProdEnv ? ApplicationRedirect : CertificateTimeParentalLeavePage,
+        Component: isProduction ? ApplicationRedirect : CertificateTimeParentalLeavePage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -578,7 +563,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: ARBITRARY_REQUEST,
-        Component: isProdEnv ? ApplicationRedirect : ArbitraryRequestPage,
+        Component: isProduction ? ApplicationRedirect : ArbitraryRequestPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -588,7 +573,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: COURIER,
-        Component: isProdEnv ? ApplicationRedirect : CourierPage,
+        Component: isProduction ? ApplicationRedirect : CourierPage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -598,7 +583,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: PERSONA_INCOME_TAX_REFERENCE,
-        Component: isProdEnv ? ApplicationRedirect : PersonaIncomeTaxReferencePage,
+        Component: isProduction ? ApplicationRedirect : PersonaIncomeTaxReferencePage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -608,7 +593,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: PAYMENT_OF_CHILD_BIRTH_ALLOWANCE,
-        Component: isProdEnv ? ApplicationRedirect : PaymentOfChildBirthAllowancePage,
+        Component: isProduction ? ApplicationRedirect : PaymentOfChildBirthAllowancePage,
         isTemplate: false,
         group: 'OTHER',
     },
@@ -618,7 +603,27 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         path: PAYMENT_FOR_CHILD_CARE,
-        Component: isProdEnv ? ApplicationRedirect : PaymentForChildCarePage,
+        Component: isProduction ? ApplicationRedirect : PaymentForChildCarePage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'contact-info-actualization': {
+        id: 'contact-info-actualization',
+        title: 'Актуализация контактных данных',
+        icon: <FiFileText />,
+        color: 'blue',
+        path: CONTACT_INFO_ACTUALIZATION,
+        Component: ContactInfoActualizationPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'data-verification': {
+        id: 'data-verification',
+        title: 'Анкета для сверки данных',
+        icon: <FiFileText />,
+        color: 'blue',
+        path: DATA_VERIFICATION_ROUTE,
+        Component: DataVerificationPage,
         isTemplate: false,
         group: 'OTHER',
     },

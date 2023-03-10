@@ -101,10 +101,10 @@ const Subject = (props: Props) => {
     return (
         <SubjectWrapper
             isCurrent={isCurrent}
-            color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].darker}
-            color2={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].lighter}
-            darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark}
-            transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent}
+            color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark1}
+            color2={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].light3}
+            darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark2}
+            transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent2}
             isFull={view === 'full'}
             onClick={() => open(<SubjectModal {...props} />)}
         >
@@ -119,7 +119,7 @@ const Subject = (props: Props) => {
                     <Rooms
                         rooms={rooms}
                         isCurrent={isCurrent}
-                        color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].darker}
+                        color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark1}
                     />
                 ) : (
                     <Place place={place} link={link} />
@@ -129,16 +129,21 @@ const Subject = (props: Props) => {
             <p className="teachers">
                 {teachers.map((teacher: string, index) => {
                     return (
-                        <>
+                        <React.Fragment key={teacher + index}>
                             {teacher}
                             {index !== teachers.length - 1 && ', '}
-                        </>
+                        </React.Fragment>
                     )
                 })}
             </p>
             <div className="interval-and-groups">
                 <p className="date-interval">{dateInterval}</p>
-                <Groups groups={groups} isCurrent={isCurrent} inModal={view === 'full'} />
+                <Groups
+                    groups={groups}
+                    isCurrent={isCurrent}
+                    inModal={view === 'full'}
+                    color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark1}
+                />
             </div>
         </SubjectWrapper>
     )

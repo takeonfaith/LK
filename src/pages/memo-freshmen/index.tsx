@@ -6,8 +6,8 @@ import { Ul } from '@features/feedback/ui/organisms/help-links'
 
 const MemoFreshmenPage = () => {
     return (
-        <CenterPage>
-            <Block height="fit-content" orientation="vertical" maxWidth="500px" gap="10px">
+        <CenterPage alignItems="center" padding="15px" height="100%">
+            <Block height="fit-content" orientation="vertical" maxWidth="500px" gap="10px" noAppearanceInMobile>
                 <GoBackButton />
                 <Title size={4} align="left">
                     Вниманию студентов 1 курса!

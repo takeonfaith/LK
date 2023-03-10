@@ -6,7 +6,7 @@ import useFilterList from './lib/hooks/use-filter-list'
 
 const Element = styled.div<{ color?: string; background?: string; remove?: boolean }>`
     padding: ${({ remove }) => (remove ? '0px' : '5px 10px')};
-    background: ${({ background }) => background ?? Colors.blue.transparentAF};
+    background: ${({ background }) => background ?? Colors.blue.transparent3};
     font-size: 0.7em;
     font-weight: 600;
     color: ${({ color }) => color ?? 'var(--reallyBlue)'};
@@ -85,7 +85,7 @@ const Element = styled.div<{ color?: string; background?: string; remove?: boole
     }
 `
 
-const AddedElementsListWrapper = styled.div<{ removeAll?: boolean; padding?: string }>`
+const AddedElementsListWrapper = styled.div<{ removeAll?: boolean; padding?: string; height?: string }>`
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -93,7 +93,7 @@ const AddedElementsListWrapper = styled.div<{ removeAll?: boolean; padding?: str
     transition: 0.2s;
     padding: ${({ padding }) => padding ?? '10px'};
     opacity: ${({ removeAll }) => (removeAll ? '0' : '1')};
-    height: ${({ removeAll }) => (removeAll ? '0px' : '46px')};
+    min-height: ${({ removeAll, height }) => (removeAll ? '0px' : height ? height : '46px')};
     visibility: ${({ removeAll }) => (removeAll ? 'hidden' : 'visible')};
     transform: scale(${({ removeAll }) => (removeAll ? '0.95' : '1')})
         translate(${({ removeAll }) => (removeAll ? '-30px, 20px' : '0, 0')});
@@ -116,17 +116,18 @@ interface Props {
     onRemoveOne: (id: string) => void
     onRemoveAll?: () => void
     padding?: string
+    height?: string
     setList: React.Dispatch<React.SetStateAction<FilterElementList>>
 }
 
-const AddedElementsList = ({ list, onAddElement, onRemoveAll, onRemoveOne, padding, setList }: Props) => {
+const AddedElementsList = ({ list, onAddElement, onRemoveAll, onRemoveOne, padding, height, setList }: Props) => {
     const listKeys = Object.keys(list ?? {})
     const { removeAll, removeOne, setRemoveAll, setRemoveOne } = useFilterList(listKeys, setList)
 
     if (!listKeys.length) return null
 
     return (
-        <AddedElementsListWrapper removeAll={removeAll || closed} padding={padding}>
+        <AddedElementsListWrapper removeAll={removeAll || closed} padding={padding} height={height}>
             {!!onAddElement && (
                 <Element onClick={onAddElement} background={'var(--reallyBlue)'} color="#fff">
                     <FiPlus />

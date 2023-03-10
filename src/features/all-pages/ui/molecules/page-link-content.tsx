@@ -1,24 +1,25 @@
+import React from 'react'
 import { Colors, IColors } from '@consts'
-import { contextMenuModel } from '@entities/context-menu'
 import { settingsModel } from '@entities/settings'
+import addPageToHome from '@features/all-pages/lib/add-page-to-home'
+import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
+import LinkMoreButton from '@features/link-more-button'
 import BlockWrapper from '@ui/block/styles'
 import { Button } from '@ui/button'
 import Notification from '@ui/notification'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import getShortStirng from '@utils/get-short-string'
-import { FiMoreVertical, FiPlus, FiX } from 'react-icons/fi'
+import { useMemo } from 'react'
+import { FiPlus, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
-import ContextContent from './context-content'
 import { PageLinkProps } from './page-link'
-import React, { useMemo } from 'react'
-import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
-import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 
 export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean; hasNotifications: boolean }>`
     position: relative;
     cursor: pointer;
     text-decoration: none;
+    border-radius: var(--brLight);
 
     .new {
         position: absolute;
@@ -28,12 +29,12 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             isVertical
                 ? 'var(--brLight) calc(var(--brLight) - 4px) calc(var(--brLight) - 4px) var(--brLight)'
                 : 'var(--brLight)'};
-        background: ${Colors.red.lighter};
+        background: ${Colors.red.light2};
         font-size: 0.7em;
         font-weight: bold;
         color: #fff;
         padding: 5px 10px;
-        /* box-shadow: 0 0 60px ${Colors.red.lighter}; */
+        /* box-shadow: 0 0 60px ${Colors.red.light2}; */
     }
 
     .more-button {
@@ -64,7 +65,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
         gap: 15px;
         display: flex;
         flex-direction: ${({ isVertical }) => (isVertical ? 'column' : 'row')};
-        border-radius: ${({ isVertical }) => (isVertical ? 'var(--brSemi)' : 'var(--brLight)')};
+        border-radius: var(--brLight);
         align-items: center;
         justify-content: ${({ isVertical }) => (isVertical ? 'center' : 'flex-start')};
         padding: 15px;
@@ -101,7 +102,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             display: flex;
             align-items: center;
             font-size: 0.8em;
-            text-align: center;
+            text-align: ${({ isVertical }) => (isVertical ? 'center' : 'left')};
             color: var(--text);
             transition: 0.2s;
             height: 30px;
@@ -126,9 +127,9 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
 
     const isVertical = orientation === 'vertical'
     const { settings } = settingsModel.selectors.useSettings()
-    const isAdded = (settings['settings-home-page'].property.pages as string[]).find((el) => el === id)
+    const isAdded = !!(settings['settings-home-page'].property.pages as string[])?.find((el) => el === id)
 
-    const maxFirstWordLength = 12
+    const maxFirstWordLength = 13
 
     const getHyphenatedTitle = useMemo(
         () => (title: string, maxLength: number) => {
@@ -166,7 +167,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
                 {notifications}
             </Notification>
             <div className="outside">
-                <Icon color={color.length ? color : 'blue'}>{icon}</Icon>
+                <Icon color={color.length ? color : 'blue'}>{icon ?? <FiPlus />}</Icon>
                 <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLength)}</b>
                 {notifications && (
                     <span className="notifications-title">
@@ -180,23 +181,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
                     </span>
                 )}
             </div>
-            {mode === 'use' && (
-                <Button
-                    icon={<FiMoreVertical />}
-                    textColor={Colors[(color.length ? color : 'blue') as keyof IColors].main}
-                    className="more-button"
-                    background="transparent"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        contextMenuModel.events.open({
-                            e,
-                            height: 105,
-                            content: <ContextContent {...props} />,
-                        })
-                    }}
-                />
-            )}
+            {mode === 'use' && <LinkMoreButton route={props} />}
             {mode === 'add' ? (
                 isAdded ? (
                     <Button

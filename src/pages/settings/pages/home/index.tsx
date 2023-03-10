@@ -2,7 +2,7 @@ import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
 import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
 import AddPagesList from '@features/all-pages/ui/organisms/add-pages-list'
-import AddedElementsList from '@ui/added-elements-list'
+import AddedElementsList, { FilterElementList } from '@ui/added-elements-list'
 import { Divider } from '@ui/divider'
 import { Title } from '@ui/title'
 import { useEffect, useState } from 'react'
@@ -18,6 +18,15 @@ const HomeSettings = () => {
     const { open } = useModal()
     const [toggles, setToggles] = useState<ToggleItem[]>([])
     const { settings } = settingsModel.selectors.useSettings()
+    const [list, setList] = useState(homeRoutes)
+
+    useEffect(() => {
+        if (homeRoutes && list) {
+            if (Object.keys(homeRoutes).length > Object.keys(list).length) {
+                setList(homeRoutes)
+            }
+        }
+    }, [homeRoutes])
 
     useEffect(() => {
         if (settings) {
@@ -53,11 +62,12 @@ const HomeSettings = () => {
                 Разделы
             </Title>
             <AddedElementsList
-                list={homeRoutes}
+                list={list}
                 onRemoveOne={(id) => deletePageFromHome(id, settings)}
                 onAddElement={() => open(<AddPagesList />)}
-                setList={() => null}
-                padding="0"
+                setList={setList as React.Dispatch<React.SetStateAction<FilterElementList>>}
+                padding="10px 0"
+                height="fit-content"
             />
             <Divider margin="30px 0" />
             <ToggleArea title={'Виджеты'} toggles={toggles} setToggles={setToggles} />

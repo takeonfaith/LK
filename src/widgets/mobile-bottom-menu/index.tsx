@@ -24,7 +24,7 @@ const MobileBottomMenu = () => {
 
     if (!allRoutes) {
         return (
-            <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly">
+            <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly" verticalAlign="center">
                 <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
                 <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
                 <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />

@@ -1,4 +1,3 @@
-import { Colors } from '@consts'
 import { Button } from '@ui/atoms'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useMemo, useRef } from 'react'
@@ -30,12 +29,21 @@ const Modal = () => {
                         icon={<FiChevronLeft />}
                         text="Назад"
                         background="transparent"
-                        textColor={Colors.blue.main}
-                        width="100%"
+                        textColor={'var(--theme-opposite)'}
+                        width="fit-content"
                         align="left"
+                        padding="8px"
+                        height="fit-content"
+                        className="back-button"
                     />
                 )}
-                <Button onClick={close} icon={<FiX />} className="close-button" background="transparent" />
+                <Button
+                    onClick={close}
+                    icon={<FiX />}
+                    className="close-button"
+                    background="transparent"
+                    height="32.5px"
+                />
 
                 <Content>{Component}</Content>
             </ModalContent>

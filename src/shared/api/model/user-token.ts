@@ -1,5 +1,6 @@
 export interface UserToken {
     token: string
+    jwt: string
     expires: number
 }
 
