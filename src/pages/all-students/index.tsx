@@ -33,9 +33,6 @@ const AllStudentsPage = () => {
 
     const filter = route.params.filter ?? user?.group ?? ''
 
-    // eslint-disable-next-line no-console
-    console.log(filter)
-
     const underSearchText = (filter: SelectPage | null) => {
         if (filter?.title === 'Все' || !filter?.id) return null
 
