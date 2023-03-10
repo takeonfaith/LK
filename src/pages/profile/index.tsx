@@ -10,7 +10,6 @@ import Orders from '@features/home/ui/molecules/orders'
 import { AvailableAccounts } from 'widgets'
 import Block from '@shared/ui/block'
 import styled from 'styled-components'
-import { isProduction } from '@shared/consts'
 
 const ContentList = styled.div`
     display: flex;
@@ -41,7 +40,7 @@ const ProfilePage = () => {
         { title: 'Учетная карточка', content: <AllInfo user={user} /> },
         // {
         //     title: 'Сведения о вакцинации',
-        //     content: (
+        //     content:  (
         //         <div style={{ justifyContent: 'start' }}>
         //             <PageIsNotReady oldVersionUrl={VAX_ROUTE} />
         //         </div>
@@ -66,13 +65,12 @@ const ProfilePage = () => {
                 {/* <List direction="horizontal" innerPadding="0px 0vw 10px 0vw" showPages>
                 <StoryCard title="Обучение" content={TutorialStory} />
             </List> */}
-                {!isProduction && (
-                    <CenterPage>
-                        <Block height="100%" maxWidth="750px">
-                            <AvailableAccounts />
-                        </Block>
-                    </CenterPage>
-                )}
+                <CenterPage>
+                    <Block height="100%" maxWidth="750px">
+                        <AvailableAccounts />
+                    </Block>
+                </CenterPage>
+
                 <UserInfo currentPage={currentPage} pages={pages.map((p) => p.content)} />
             </ContentList>
         </Wrapper>
