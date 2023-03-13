@@ -127,7 +127,7 @@ const TopMessage = ({
             <div className="top-info">
                 <span className="section-name">{section}</span>
                 <Title size={3} align="left" bottomGap="4px">
-                    {balance} руб.
+                    {Math.abs(balance)} руб.
                 </Title>
                 <Link to={PAYMENTS_ROUTE}>
                     <Button icon={<FiExternalLink />} background="transparent" />

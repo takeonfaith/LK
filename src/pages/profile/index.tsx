@@ -70,7 +70,6 @@ const ProfilePage = () => {
                         <AvailableAccounts />
                     </Block>
                 </CenterPage>
-
                 <UserInfo currentPage={currentPage} pages={pages.map((p) => p.content)} />
             </ContentList>
         </Wrapper>
