@@ -130,7 +130,7 @@ const GraphicInfo = () => {
                         />
                     ) : (
                         <>
-                            <svg style={{ filter: 'drop-shadow(0 0 25px ' + findColor(examPercentage) + ')' }}>
+                            <svg>
                                 <g>
                                     <circle cx="70" cy="70" r="70"></circle>
                                 </g>
@@ -207,7 +207,7 @@ const GraphicInfo = () => {
                         />
                     ) : (
                         <>
-                            <svg style={{ filter: 'drop-shadow(0 0 25px ' + findColor(easyExamPercentage) + ')' }}>
+                            <svg>
                                 <g>
                                     <circle cx="70" cy="70" r="70"></circle>
                                 </g>
