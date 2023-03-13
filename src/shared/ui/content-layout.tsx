@@ -4,7 +4,6 @@ import { popUpMessageModel } from '@entities/pop-up-message'
 import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
-import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import { Suspense, useEffect } from 'react'
 import styled from 'styled-components'
@@ -43,7 +42,6 @@ const ContentWrapper = styled.div`
 `
 
 const ContentLayout = () => {
-    const { height } = useResize()
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -96,7 +94,7 @@ const ContentLayout = () => {
     // }, [])
 
     return (
-        <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
+        <div style={{ height: '100vh', display: 'flex', background: 'var(--theme)' }}>
             <InitialLoader loading={!user} />
             {/* <GreetingsScreen /> */}
             <Story />

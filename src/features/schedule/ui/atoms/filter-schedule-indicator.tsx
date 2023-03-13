@@ -16,6 +16,7 @@ const FilterScheduleIndicatorWrapper = styled.div`
 interface Props {
     filter: string
     isGroup?: boolean
+    visible: boolean
 }
 
 const GroupLink = styled(Link)`
@@ -24,8 +25,11 @@ const GroupLink = styled(Link)`
     text-decoration: underline;
 `
 
-const FilterScheduleIndicator = ({ filter, isGroup }: Props) => {
+const FilterScheduleIndicator = ({ filter, isGroup, visible }: Props) => {
     const history = useHistory()
+
+    if (!visible) return null
+
     return (
         <FilterScheduleIndicatorWrapper>
             <div>

@@ -3,7 +3,7 @@ import { confirmModel } from '@entities/confirm'
 import { contextMenuModel } from '@entities/context-menu'
 import { userModel } from '@entities/user'
 import { OLD_LK_URL } from '@shared/consts'
-import { Divider, LinkButton, Message } from '@shared/ui/atoms'
+import { Divider, Message } from '@shared/ui/atoms'
 import { Button } from '@shared/ui/button'
 import React from 'react'
 import { FiArrowLeftCircle, FiLogOut, FiSettings } from 'react-icons/fi'
@@ -15,7 +15,7 @@ const UserContextMenu = () => {
 
     const handleClose = () => contextMenuModel.events.close()
 
-    const handleOldLK = () => localStorage.setItem('useOldVersion', 'true')
+    // const handleOldLK = () => localStorage.setItem('useOldVersion', 'true')
 
     const logout = () => {
         confirmModel.events.evokeConfirm({
@@ -44,15 +44,15 @@ const UserContextMenu = () => {
                     onClick={handleClose}
                 />
             </Link>
-            <LinkButton
-                text={'Cтарый дизайн'}
-                onClick={handleOldLK}
-                background="var(--schedule)"
-                icon={<FiArrowLeftCircle />}
-                width="100%"
-                align="left"
-                href={`${OLD_LK_URL}/index.php`}
-            />
+            <a href={`${OLD_LK_URL}/index.php`}>
+                <Button
+                    text="Старый дизайн"
+                    icon={<FiArrowLeftCircle />}
+                    width="100%"
+                    background="var(--schedule)"
+                    align="left"
+                />
+            </a>
             <Divider />
             <Button
                 align="left"
