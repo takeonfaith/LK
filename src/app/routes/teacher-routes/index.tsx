@@ -36,6 +36,7 @@ import {
     VisaCertificatePage,
     WorkOnTermsOfExternalConcurrencyPage,
     WorkTransfer,
+    TeacherPhysicalEducation,
 } from './pages'
 
 import { isProduction, OLD_LK_URL } from '@consts'
@@ -70,6 +71,7 @@ export const INFO_ROUTE = '/info'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const DOWNLOAD_AGREEMENTS_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
+export const PHYSICAL_EDUCATION = '/physical-education'
 
 //hidden routes
 export const CONTACT_INFO_ACTUALIZATION = APPLICATIONS_ROUTE + '/contact-info-actualization'
@@ -574,6 +576,16 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         color: 'blue',
         path: COURIER,
         Component: isProduction ? ApplicationRedirect : CourierPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'physical-education': {
+        id: 'physical-education',
+        title: 'Физическая культура',
+        icon: <FiFileText />,
+        color: 'lightGreen',
+        path: TeacherPhysicalEducation,
+        Component: CourierPage,
         isTemplate: false,
         group: 'OTHER',
     },
