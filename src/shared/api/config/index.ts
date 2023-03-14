@@ -1,5 +1,6 @@
 //import { getUserToken } from '@api/user-api'
 import { OLD_LK_URL } from '@consts'
+import { userModel } from '@entities/user'
 import { getJwtToken } from '@entities/user/lib/jwt-token'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import { refreshAccessToken } from '../user-api'
@@ -24,16 +25,21 @@ $hrApi.interceptors.response.use(
     },
     async function (error) {
         const originalRequest = error.config
-        if ((error.request.status === 403 || error.request.status === 401) && !originalRequest._retry) {
-            originalRequest._retry = true
-            const refreshToken = localStorage.getItem('jwt_refresh')
+        if (error.request.status === 403 || error.request.status === 401) {
+            if (!originalRequest._retry) {
+                originalRequest._retry = true
+                const refreshToken = localStorage.getItem('jwt_refresh')
 
-            const { accessToken, refreshToken: newRefreshToken } = await refreshAccessToken(refreshToken ?? '')
+                try {
+                    const { accessToken, refreshToken: newRefreshToken } = await refreshAccessToken(refreshToken ?? '')
+                    localStorage.setItem('jwt', accessToken)
+                    localStorage.setItem('jwt_refresh', newRefreshToken)
 
-            localStorage.setItem('jwt', accessToken)
-            localStorage.setItem('jwt_refresh', newRefreshToken)
-
-            return $hrApi(originalRequest)
+                    return $hrApi(originalRequest)
+                } catch (error) {
+                    userModel.events.logout()
+                }
+            }
         }
         return Promise.reject(error)
     },
