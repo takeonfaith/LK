@@ -13,6 +13,11 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 import { getAdditionally, globalAppSendForm } from '@pages/applications/lib'
 import { listConfigCert } from '@features/applications/lib/get-list-configs-certificate'
+import getBirthCertificate from '@pages/applications/pages/campus-management/family-room/lib/get-birth-certificate'
+import getConsentToProcessingPersonalData from '@pages/applications/pages/campus-management/family-room/lib/get-consent-to-processing-personal-data'
+import getMarriageRegistrationCertificate from '@pages/applications/pages/campus-management/family-room/lib/get-marriage-registration-certificate'
+import getRegistrationDoc from '@pages/applications/pages/campus-management/family-room/lib/get-registration-doc'
+import getRegistrationFamilyMembers from '@pages/applications/pages/campus-management/family-room/lib/get-registration-family-members'
 
 const FamilyRoomPage = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
@@ -23,6 +28,11 @@ const FamilyRoomPage = () => {
     const [loading, setLoading] = useState(false)
     const [family, setFamily] = useState<IInputArea | null>(null)
     const [additionally, setAdditionally] = useState<IInputArea | null>(null)
+    const [birthCertificate, setBirthCertificate] = useState<IInputArea | null>(null)
+    const [consentToProcessingPersonalData, setConsentToProcessingPersonalData] = useState<IInputArea | null>(null)
+    const [marriageRegistrationCertificate, setMarriageRegistrationCertificate] = useState<IInputArea | null>(null)
+    const [registrationDoc, setRegistrationDoc] = useState<IInputArea | null>(null)
+    const [registrationFamilyMembers, setRegistrationFamilyMembers] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
     const history = useHistory()
 
@@ -36,6 +46,11 @@ const FamilyRoomPage = () => {
             setForm(getForm(dataUserApplication))
             setFamily(getFamily())
             setAdditionally(getAdditionally())
+            setBirthCertificate(getBirthCertificate())
+            setConsentToProcessingPersonalData(getConsentToProcessingPersonalData())
+            setMarriageRegistrationCertificate(getMarriageRegistrationCertificate())
+            setRegistrationDoc(getRegistrationDoc())
+            setRegistrationFamilyMembers(getRegistrationFamilyMembers())
         }
     }, [dataUserApplication])
 
@@ -59,6 +74,33 @@ const FamilyRoomPage = () => {
                     {vichRwCert && setVichRwCert && <InputArea {...vichRwCert} setData={setVichRwCert} />}
                     {graftCert && setGraftCert && <InputArea {...graftCert} setData={setGraftCert} />}
                     {additionally && <InputArea {...additionally} collapsed={isDone} setData={setAdditionally} />}
+                    {birthCertificate && (
+                        <InputArea {...birthCertificate} collapsed={isDone} setData={setBirthCertificate} />
+                    )}
+                    {consentToProcessingPersonalData && (
+                        <InputArea
+                            {...consentToProcessingPersonalData}
+                            collapsed={isDone}
+                            setData={setConsentToProcessingPersonalData}
+                        />
+                    )}
+                    {marriageRegistrationCertificate && (
+                        <InputArea
+                            {...marriageRegistrationCertificate}
+                            collapsed={isDone}
+                            setData={setMarriageRegistrationCertificate}
+                        />
+                    )}
+                    {registrationDoc && (
+                        <InputArea {...registrationDoc} collapsed={isDone} setData={setRegistrationDoc} />
+                    )}
+                    {registrationFamilyMembers && (
+                        <InputArea
+                            {...registrationFamilyMembers}
+                            collapsed={isDone}
+                            setData={setRegistrationFamilyMembers}
+                        />
+                    )}
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>
@@ -72,6 +114,11 @@ const FamilyRoomPage = () => {
                                     fluorographyCert,
                                     vichRwCert,
                                     graftCert,
+                                    birthCertificate,
+                                    consentToProcessingPersonalData,
+                                    marriageRegistrationCertificate,
+                                    registrationDoc,
+                                    registrationFamilyMembers,
                                 ] as IInputArea[],
                                 setLoading,
                                 setCompleted,
@@ -84,17 +131,25 @@ const FamilyRoomPage = () => {
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
                         isActive={
-                            (additionally.optionalCheckbox?.value ?? true) &&
+                            (form.optionalCheckbox?.value ?? true) &&
                             !!family?.data.length &&
                             !!fluorographyCert &&
                             !!vichRwCert &&
                             !!graftCert &&
                             !!kvdCert &&
+                            !!consentToProcessingPersonalData &&
+                            !!marriageRegistrationCertificate &&
+                            !!registrationDoc &&
+                            !!registrationFamilyMembers &&
                             checkFormFields(form) &&
                             checkFormFields(fluorographyCert) &&
                             checkFormFields(vichRwCert) &&
                             checkFormFields(graftCert) &&
-                            checkFormFields(kvdCert)
+                            checkFormFields(kvdCert) &&
+                            checkFormFields(consentToProcessingPersonalData) &&
+                            checkFormFields(marriageRegistrationCertificate) &&
+                            checkFormFields(registrationDoc) &&
+                            checkFormFields(registrationFamilyMembers)
                         }
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
