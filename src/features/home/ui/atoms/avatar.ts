@@ -15,7 +15,7 @@ export const Container = styled.div<{
     justify-content: center;
     background: ${({ background }) => background ?? 'var(--almostTransparent)'};
     color: var(--text);
-    border: ${({ selected, border }) => (selected || border) && '5px solid var(--schedule)'};
+    border: ${({ selected, border }) => (selected || border) && '5px solid var(--theme)'};
     outline: ${({ selected }) => selected && '4px solid var(--reallyBlue)'};
     position: relative;
 

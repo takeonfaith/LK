@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { FilterElementList } from '@ui/added-elements-list'
 import { TableCatalogType, TableSearchType, TableSortType } from '@ui/table/types'
 import { IndexedProperties } from '@utility-types/indexed-properties'

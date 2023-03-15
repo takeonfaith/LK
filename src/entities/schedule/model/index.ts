@@ -19,9 +19,11 @@ const useSchedule = () => {
     return { data: useStore($schedule), loading: useStore(getScheduleFx.pending), error: useStore($schedule).error }
 }
 
-const getScheduleFx = createEffect(async (user: User | null): Promise<IModules> => {
+type GetScheduleProps = { user: User | null; group?: string }
+
+const getScheduleFx = createEffect(async ({ user, group }: GetScheduleProps): Promise<IModules> => {
     try {
-        return getSchedule(user)
+        return getSchedule(user, group)
     } catch (error) {
         throw new Error('Не удалось загрузить расписание')
     }
@@ -35,6 +37,7 @@ const clearStore = createEvent()
 const $schedule = createStore<ISchedule>(DEFAULT_STORE)
     .on(getScheduleFx, (oldData) => ({
         ...oldData,
+        schedule: null,
         error: null,
     }))
     .on(getScheduleFx.doneData, (oldData, newData) => ({

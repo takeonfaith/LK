@@ -65,17 +65,17 @@ const ConfirmMessage = () => {
                         text="Да"
                         onClick={handleConfirm}
                         width="90px"
-                        textColor="var(--red)"
+                        textColor={Colors.red.main}
                         background="transparent"
-                        hoverBackground={Colors.red.transparentAF}
+                        hoverBackground={Colors.red.transparent3}
                     />
                     <Button
                         text="Нет"
                         onClick={onReject ?? handleReject}
                         width="90px"
-                        textColor="var(--blue)"
+                        textColor={Colors.blue.main}
                         background="transparent"
-                        hoverBackground={Colors.blue.transparentAF}
+                        hoverBackground={Colors.blue.transparent3}
                     />
                 </List>
             </ConfirmWrapper>

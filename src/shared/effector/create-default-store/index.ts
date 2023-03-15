@@ -1,7 +1,7 @@
 import { DEFAULT_API_LOAD_ERROR_MESSAGE } from '@shared/consts'
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react/compat'
-import { Args, TemplateStore, TemplateStoreOutput, TypeChoice } from './types'
+import { Args, TemplateStore, TemplateStoreOutput } from './types'
 
 const DEFAULT_STORE = {
     data: null,

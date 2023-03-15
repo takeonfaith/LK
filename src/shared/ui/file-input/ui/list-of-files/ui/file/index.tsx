@@ -38,7 +38,7 @@ const File = ({ file, files, setFiles }: Props) => {
     return (
         <FileWrapper onClick={(e) => e.preventDefault()}>
             <div className="file-body" onClick={(e) => file.type.includes('image') && handleOpenPreview(e, file)}>
-                {file.type.includes('image') ? <FcLandscape /> : <FcFile />}
+                <div className="image-container">{file.type.includes('image') ? <FcLandscape /> : <FcFile />}</div>
                 <div className="name-and-size">
                     <b className="file-name">{file.name}</b>
                     <Subtext fontSize="0.7em">{getFileSize(file.size)}</Subtext>

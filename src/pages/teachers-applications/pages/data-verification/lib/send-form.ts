@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
 import { IInputArea } from '@ui/input-area/model'
@@ -67,7 +66,6 @@ const sendForm = (inputAreas: IInputArea[], setSubmitLoading: React.Dispatch<Rea
     })
 
     const result = Object.assign({}, ...form, ...files, ...checkboxes)
-    // console.log(result)
 
     try {
         teacherDateVerificationModel.events.postTeacherDataVerification(result)

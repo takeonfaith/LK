@@ -11,7 +11,7 @@ import styled from 'styled-components'
 const CustomBlock = styled.div`
     width: 100%;
     border-radius: var(--brLight);
-    background: ${Colors.grey.transparentAF};
+    background: ${Colors.grey.transparent3};
     padding: 16px;
     a {
         font-size: 0.95rem;

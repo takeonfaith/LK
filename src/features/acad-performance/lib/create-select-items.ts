@@ -8,7 +8,7 @@ const createSelectItems = (course: number) => {
     for (let i = 1; i <= count; i++) {
         result.push({ id: i, title: `${i} семестр` })
     }
-    // eslint-disable-next-line no-console
+
     result.push({ id: -1, title: 'Все семестры' })
 
     return result

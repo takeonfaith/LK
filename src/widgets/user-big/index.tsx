@@ -2,6 +2,7 @@ import { PROFILE_ROUTE } from '@app/routes/general-routes'
 import { contextMenuModel } from '@entities/context-menu'
 import { menuModel } from '@entities/menu'
 import Avatar from '@features/home/ui/molecules/avatar'
+import UserContextMenu from '@features/user-context-menu'
 import { Button } from '@ui/button'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { Title } from '@ui/title'
@@ -9,7 +10,6 @@ import React from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { UserBigModal } from './ui'
 
 const UserBigWrapper = styled(Link)`
     display: flex;
@@ -71,7 +71,7 @@ const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props
                     contextMenuModel.events.open({
                         e,
                         height: 143,
-                        content: <UserBigModal />,
+                        content: <UserContextMenu />,
                     })
                 }}
             />

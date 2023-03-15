@@ -5,7 +5,7 @@ type LastArgs<TFilter extends Record<string, unknown> | unknown> = ServerListReq
 
 export function createPaginationList<
     TEntity extends Record<string, unknown>,
-    TFilter extends Record<string, unknown> | unknown,
+    TFilter extends Record<string, unknown> | string | unknown,
 >(options: {
     getFx: Effect<ServerListRequest<TFilter>, ServerListResponse<TEntity>>
     limit: number

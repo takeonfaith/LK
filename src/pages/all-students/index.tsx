@@ -7,6 +7,9 @@ import { useStore } from 'effector-react'
 import ListOfPeople from 'widgets/list-of-people'
 import { userModel } from '@entities/user'
 import styled from 'styled-components'
+import { getGroups } from '@shared/api/student-api'
+import Masks from '@shared/lib/masks'
+import { useRouteMatch } from 'react-router'
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -22,14 +25,14 @@ const PageWrapper = styled.div`
 const AllStudentsPage = () => {
     const { $isPending, $items } = paginationList
     const isPending = useStore($isPending)
+    const route: { params: { filter?: string } } = useRouteMatch()
     const items = useStore($items)
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const filter: SelectPage[] = [
-        { id: user?.group ?? '', title: 'Моя группа' },
-        { id: '1', title: 'Все' },
-    ]
+
+    const filter = route.params.filter ?? user?.group ?? ''
+
     const underSearchText = (filter: SelectPage | null) => {
         if (filter?.title === 'Все' || !filter?.id) return null
 
@@ -52,7 +55,11 @@ const AllStudentsPage = () => {
                             title="Студенты"
                             searchPlaceholder="Поиск студентов"
                             paginationList={paginationList}
-                            filters={user?.user_status === 'stud' ? filter : undefined}
+                            filterRequest={getGroups}
+                            filterPlaceholder="Группа"
+                            defaultFilter={filter}
+                            filter={user?.user_status === 'stud' ? filter : undefined}
+                            customMask={Masks.groupMask}
                             underSearchText={underSearchText}
                         />
                     </Block>

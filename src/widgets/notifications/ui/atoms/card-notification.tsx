@@ -81,7 +81,7 @@ const CardNotification = ({ data }: Props) => {
                         height="35px"
                         minHeight="30px"
                         textColor="white"
-                        background={Colors.blue.light}
+                        background={Colors.blue.light1}
                     />
                 )}
                 <SubmitButton

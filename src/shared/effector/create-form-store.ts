@@ -15,7 +15,7 @@ export interface TemplateFormStoreOutput<DataType, PostDataType> {
         useForm: () => TemplateFormStore<DataType>
     }
     effects: {
-        getFormFx: Effect<void, DataType, Error>
+        getFormFx: Effect<void, DataType | null, Error>
         postFormFx: Effect<PostDataType, void, Error>
     }
     events: {
@@ -27,7 +27,7 @@ export interface TemplateFormStoreOutput<DataType, PostDataType> {
 }
 
 interface APIType<DataType, PostDataType> {
-    get: () => Promise<AxiosResponse<DataType>>
+    get?: () => Promise<AxiosResponse<DataType>>
     post: (postData: PostDataType, formId?: string) => Promise<AxiosResponse<any, any>>
     put?: () => void
 }
@@ -64,14 +64,18 @@ export const createFormStore = <DataType, PostDataType>({
         }
     })
 
-    const getFormFx = createEffect(async (): Promise<DataType> => {
-        try {
-            const response = await api.get()
+    const getFormFx = createEffect(async (): Promise<DataType | null> => {
+        if (api.get) {
+            try {
+                const response = await api.get()
 
-            return { ...response.data }
-        } catch (error) {
-            throw new Error(error as string)
+                return { ...response.data }
+            } catch (error) {
+                throw new Error(error as string)
+            }
         }
+
+        return DEFAULT_STORE.data
     })
 
     const clearStore = createEvent()

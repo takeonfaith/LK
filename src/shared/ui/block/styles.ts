@@ -49,7 +49,7 @@ const BlockWrapper = styled.div<StyledProps>`
     }
 
     @media (max-width: 1225px) {
-        height: auto;
+        height: 100%;
         max-width: ${({ maxWidth }) => maxWidth ?? '600px'};
     }
 
@@ -61,7 +61,7 @@ const BlockWrapper = styled.div<StyledProps>`
         box-shadow: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'none'};
         border-radius: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'none'};
         padding: ${({ noAppearanceInMobile }) => noAppearanceInMobile && '0'};
-        /* background: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'transparent'}; */
+        background: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'transparent'};
     }
 `
 export default BlockWrapper

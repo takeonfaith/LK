@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors, FileFormats } from '@consts'
 import { Button, Divider, FileLink, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import FileInput from '@ui/file-input'
@@ -136,7 +136,7 @@ const InputArea = ({
                             setFiles={(files: File[]) => handleLoadFiles(files)}
                             maxFileSizeInBytes={0}
                             maxFiles={documents.maxFiles}
-                            allowedTypes={documents.allowedTypes}
+                            formats={documents.allowedTypes as FileFormats}
                             isActive={
                                 documents.checkboxCondition
                                     ? documents.checkboxCondition === 'straight'

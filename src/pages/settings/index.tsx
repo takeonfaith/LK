@@ -1,58 +1,65 @@
-import { menuModel } from '@entities/menu'
-import { settingsModel } from '@entities/settings'
-import { ListOfSettings } from '@features/settings'
-import ContentWrapper from '@ui/content-wrapper'
-import { Route, Switch } from 'react-router'
-import styled from 'styled-components'
 import React from 'react'
+import { ListOfSettings } from '@features/settings'
+import { CenterPage } from '@shared/ui/atoms'
+import { useState } from 'react'
+import styled from 'styled-components'
+import useSettings from './hooks/use-settings'
+import SettingsContent from './settings-content'
+import BlockWrapper from '@shared/ui/block/styles'
 
 const Wrapper = styled.div`
-    height: 100%;
+    padding: 10px;
+    height: 100vh;
     width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-
-    .settings-page {
-        height: 90%;
-        width: 100%;
-        border-radius: 10px;
-        overflow-y: auto;
-        margin-top: 10px;
-    }
 
     @media (max-width: 800px) {
         width: 100%;
+        padding: 0;
+        height: calc(100vh - 60px);
+        gap: 0 !important;
         .settings-page {
             font-size: 0.8em;
         }
     }
 `
 
+const SettingsBlock = styled(BlockWrapper)`
+    @media (max-width: 768px) {
+        flex-direction: row;
+    }
+`
+
 const SettingsPage = () => {
-    const { allRoutes } = menuModel.selectors.useMenu()
-    const { settings } = settingsModel.selectors.useSettings()
+    const [searchValue, setSearchValue] = useState('')
+    const [searchResult, setSearchResult] = useState<string[][] | null>(null)
+    const fullSettings = useSettings()
+    if (fullSettings === null) return null
 
-    if (!allRoutes) return null
-
-    const renderList = (name: string) => {
-        const Wrapper = allRoutes[name].Component
-        return (
-            <Route path={allRoutes[name].path} key={name}>
-                <ContentWrapper>
-                    <Wrapper />
-                </ContentWrapper>
-            </Route>
-        )
-    }
-
-    if (settings === undefined) {
-        return null
-    }
     return (
         <Wrapper>
-            <ListOfSettings config={Object.keys(settings)} />
-            <Switch>{Object.keys(settings).map(renderList)}</Switch>
+            <CenterPage height="100%">
+                <SettingsBlock
+                    width="100%"
+                    maxWidth="1000px"
+                    noAppearanceInMobile
+                    height="700px"
+                    maxHeight="100vh"
+                    gap="0"
+                    padding="0"
+                    alignItems="flex-start"
+                >
+                    <ListOfSettings
+                        setSearchValue={setSearchValue}
+                        setSearchResult={setSearchResult}
+                        settingsConfig={fullSettings}
+                    />
+                    <SettingsContent
+                        searchValue={searchValue}
+                        searchResult={searchResult}
+                        settingsConfig={fullSettings}
+                    />
+                </SettingsBlock>
+            </CenterPage>
         </Wrapper>
     )
 }

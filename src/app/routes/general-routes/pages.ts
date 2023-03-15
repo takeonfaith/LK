@@ -24,5 +24,4 @@ export const DecreisDirectivesPage = lazy(() => import('@pages/decreis-directive
 export const GetYourLoginPage = lazy(() => import('@pages/get-your-login'))
 export const MemoFreshmenPage = lazy(() => import('@pages/memo-freshmen'))
 export const MemoTeacherPage = lazy(() => import('@pages/memo-teacher'))
-export const CustomizeMenu = lazy(() => import('@pages/settings/pages/customize-menu'))
 export const MedicalCertificate = lazy(() => import('@pages/medical-certificate'))

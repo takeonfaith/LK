@@ -29,12 +29,12 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             isVertical
                 ? 'var(--brLight) calc(var(--brLight) - 4px) calc(var(--brLight) - 4px) var(--brLight)'
                 : 'var(--brLight)'};
-        background: ${Colors.red.lighter};
+        background: ${Colors.red.light2};
         font-size: 0.7em;
         font-weight: bold;
         color: #fff;
         padding: 5px 10px;
-        /* box-shadow: 0 0 60px ${Colors.red.lighter}; */
+        /* box-shadow: 0 0 60px ${Colors.red.light2}; */
     }
 
     .more-button {

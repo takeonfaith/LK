@@ -33,7 +33,7 @@ const SwitchToggleWrapper = styled.div`
     .checkbox:checked + .toggle-body .toggle-circle {
         background: #fff;
         margin-left: calc(100% - 22px);
-        box-shadow: 0 0 30px #6290e4;
+        /* box-shadow: 0 0 30px #6290e4; */
     }
 
     .checkbox:checked + .toggle-body {

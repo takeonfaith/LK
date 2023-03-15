@@ -1,9 +1,10 @@
-export type UserType = 'student' | 'teacher'
+import { StudentAccount, UserStatus } from '@shared/api/model'
 import { Direction, Size } from '@ui/types'
 
-export interface UserProps {
-    type: UserType
+export type UserProps = StudentAccount & {
+    type: UserStatus
     orientation?: Direction
+    token?: string
     avatar?: string
     division?: string
     name: string
@@ -11,7 +12,6 @@ export interface UserProps {
     size?: Size
     isMe?: boolean
     checked?: boolean
-    group?: string
     indexNumber?: number
     setChecked?: (value: boolean) => void
     onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void

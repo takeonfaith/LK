@@ -11,6 +11,7 @@ const SubjectPlaceBlockWrapper = styled.div`
     display: flex;
     align-items: center;
     border-radius: var(--brSemi);
+    background: var(--orangeGradient);
 `
 
 interface Props {

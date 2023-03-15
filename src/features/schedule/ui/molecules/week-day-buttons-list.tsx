@@ -26,6 +26,7 @@ const WeekDayButtonsListWrapper = styled.div<{ isFull: boolean }>`
     scroll-behavior: smooth;
 
     @media (max-width: 1000px) {
+        padding: 0 16px;
         position: absolute;
         bottom: 10px;
         left: 0;

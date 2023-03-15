@@ -11,6 +11,7 @@ const ScheduleViewButtonsListWrapper = styled.div`
     border-radius: 10px;
     background: var(--mild-theme);
     border-radius: 10px;
+    min-width: 80px;
     overflow: hidden;
 
     button {

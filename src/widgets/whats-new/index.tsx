@@ -104,7 +104,7 @@ const WhatsNew = () => {
                         onClick={close}
                         text="Готово"
                         width="100%"
-                        background={Colors.blue.light}
+                        background={Colors.blue.light1}
                         textColor="#fff"
                     />
                 ) : (

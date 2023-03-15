@@ -1,5 +1,5 @@
 import React from 'react'
-import Select, { SelectPage } from '@features/select'
+import { SelectPage } from '@features/select'
 import { Title } from '@shared/ui/title'
 import PagintaionList from '@ui/pagination-list'
 import { Event, Store } from 'effector'
@@ -9,6 +9,9 @@ import styled from 'styled-components'
 import { User } from 'widgets'
 import GlobalSearch from '@shared/ui/global-search'
 import Subtext from '@shared/ui/subtext'
+import { Hint } from '@shared/ui/search'
+import SearchWithHints from '@features/search-with-hints'
+import { AxiosResponse } from 'axios'
 
 const ListWrapper = styled.div`
     width: 100%;
@@ -29,6 +32,7 @@ type TUser = {
     division?: string
     group?: string
     fio: string
+    avatar?: string
 }
 
 type Props<T extends TUser> = {
@@ -41,24 +45,31 @@ type Props<T extends TUser> = {
         next: Event<ServerListRequest<SelectPage | null>>
         load: Event<ServerListRequest<SelectPage | null>>
     }
-    filters?: SelectPage[]
+    filter?: string
     underSearchText?: (filter: SelectPage | null) => string | null
     noResultContent?: JSX.Element | null
+    defaultFilter: string
+    filterPlaceholder?: string
+    customMask?: (value: string, prevValue?: string) => string
+    filterRequest: (value: string) => Promise<AxiosResponse<{ items: string[] }, any>>
 }
 
 const ListOfPeople = <T extends TUser>({
     title,
     searchPlaceholder,
     paginationList,
+    defaultFilter,
     noResultContent,
-    filters,
+    filterPlaceholder,
+    filterRequest,
     underSearchText,
+    customMask,
 }: Props<T>) => {
     const { $items, $isPending, $hasNext, next, load } = paginationList
     const isPending = useStore($isPending)
     const hasNext = useStore($hasNext)
-
-    const [filter, setFilter] = useState<SelectPage | null>(filters?.[0] ?? null)
+    const [groupSearch, setGroupSearch] = useState(defaultFilter)
+    const [filter, setFilter] = useState<Hint | null>({ id: groupSearch, value: groupSearch, title: groupSearch })
     const under = underSearchText?.(filter)
 
     const handleNext = () => {
@@ -73,7 +84,13 @@ const ListOfPeople = <T extends TUser>({
         load({ filter, search: value })
     }
 
-    const handleSelected = (data: any) => setFilter(data)
+    const onHintClick = (hint: Hint | undefined) => {
+        setFilter(hint ?? null)
+    }
+
+    const onValueEmpty = () => {
+        setFilter(null)
+    }
 
     return (
         <ListWrapper>
@@ -82,12 +99,22 @@ const ListOfPeople = <T extends TUser>({
             </Title>
             <div className="search-and-filter">
                 <GlobalSearch
-                    triggerSearchOn={[filter?.id.toString() ?? '']}
+                    triggerSearchOn={[filter?.id ?? '']}
                     placeholder={searchPlaceholder ?? 'Поиск'}
                     searchApi={handleSearch}
                     validationCheck
                 />
-                {filters && <Select items={filters} setSelected={handleSelected} selected={filter} />}
+                {filterRequest && (
+                    <SearchWithHints
+                        value={groupSearch}
+                        setValue={setGroupSearch}
+                        onHintClick={onHintClick}
+                        onValueEmpty={onValueEmpty}
+                        customMask={customMask}
+                        placeholder={filterPlaceholder ?? 'Поиск'}
+                        request={filterRequest}
+                    />
+                )}
             </div>
             <Subtext visible={!!under}>{under}</Subtext>
             <PagintaionList
@@ -111,8 +138,9 @@ function renderItem<T extends TUser>(item: T, isMe: boolean, index?: number) {
     return (
         <User
             name={item.fio}
-            type={item.division ? 'teacher' : 'student'}
+            type={item.division ? 'staff' : 'stud'}
             key={index}
+            avatar={item.avatar}
             group={item.group}
             isMe={isMe}
             division={item.division}

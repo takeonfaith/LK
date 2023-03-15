@@ -15,7 +15,6 @@ const PlateWrapper = styled.div<{ color?: keyof IColors }>`
     text-align: center;
     color: ${({ color }) => (color ? Colors[color].main : 'var(--text)')};
     border-radius: var(--brLight);
-    /* background: ${({ color }) => (color ? Colors[color].transparentAF : 'var(--almostTransparent)')}; */
 
     .title {
         height: 40px;

@@ -1,5 +1,6 @@
 import { Colors } from '@consts'
 import Avatar from '@features/home/ui/molecules/avatar'
+import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import { Direction, Size } from '@ui/types'
 import React from 'react'
 import styled from 'styled-components'
@@ -32,7 +33,7 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     }
 
     &:hover {
-        background: ${Colors.grey.transparentAF};
+        background: ${Colors.grey.transparent3};
     }
 
     .name-and-status {
@@ -40,7 +41,7 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
         flex-direction: column;
         text-align: ${({ orientation }) => (orientation === 'vertical' ? 'center' : 'left')};
         margin-top: ${({ orientation }) => (orientation === 'vertical' ? '5px' : '0')};
-        width: calc(100% - 60px);
+        width: ${({ orientation }) => (orientation === 'vertical' ? '100%' : 'calc(100% - 60px)')};
 
         .name {
             font-size: ${({ size }) => getFontSize(size)};
@@ -61,21 +62,22 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     }
 `
 
-const User = ({
-    type,
-    avatar,
-    name,
-    checked,
-    onClick,
-    indexNumber,
-    division,
-    group,
-    isMe = false,
-    loading = false,
-    orientation = 'horizontal',
-    size = 'middle',
-}: UserProps) => {
+const User = (props: UserProps) => {
     const { open } = useModal()
+    const {
+        type,
+        avatar,
+        name,
+        checked,
+        onClick,
+        indexNumber,
+        division,
+        group,
+        isMe = false,
+        loading = false,
+        orientation = 'horizontal',
+        size = 'middle',
+    } = props
     const status = getStatus(isMe, type, division, group)
 
     if (loading) return <SkeletonLoading />
@@ -85,13 +87,7 @@ const User = ({
             onClick(e)
         } else {
             if (!isMe) {
-                open(
-                    type === 'teacher' ? (
-                        <TeacherModal name={name} avatar={avatar} isMe={isMe} division={division} />
-                    ) : (
-                        <StudentModal name={name} avatar={avatar} isMe={isMe} group={group} />
-                    ),
-                )
+                open(type === 'staff' ? <TeacherModal {...props} /> : <StudentModal {...props} />)
             }
         }
     }
@@ -109,7 +105,9 @@ const User = ({
             />
             <div className="name-and-status">
                 <span className="name">{name}</span>
-                <span className="status"> {status}</span>
+                <span className="status">
+                    <DotSeparatedWords words={status} />
+                </span>
             </div>
         </UserWrapper>
     )

@@ -174,7 +174,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
 
             return null
         },
-        color: 'yellow',
+        color: 'orange',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
     },
@@ -223,7 +223,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
 
             return null
         },
-        color: 'darkBlue',
+        color: 'lightBlue',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
     },

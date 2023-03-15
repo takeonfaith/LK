@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { userApi } from '@api'
 import { LoginData } from '@api/user-api'
 import { createEffect, createEvent, createStore, forward } from 'effector'
@@ -58,14 +57,13 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
             currentUser: {
                 ...user,
                 fullName: createFullName({ name, surname, patronymic }),
-                available_accounts: [],
             },
             isAuthenticated: !!data,
             error: null,
             savePassword: savePasswordInStorage(),
         }
     } catch (error) {
-        // logout()
+        // eslint-disable-next-line no-console
         console.log(error)
 
         throw new Error('Возникла какая-то ошибка')
@@ -77,6 +75,7 @@ const getLoginEuzFx = createEffect(async (data: ADName): Promise<string> => {
         const userResponse = await userApi.getADName(data)
         return userResponse.data
     } catch (error) {
+        // eslint-disable-next-line no-console
         console.log(error)
 
         throw new Error('Возникла какая-то ошибка')
@@ -113,6 +112,7 @@ const changeSavePasswordFunc = (savePassword?: boolean) => {
 const login = createEvent<LoginData>()
 const logout = createEvent()
 const clear = createEvent()
+const update = createEvent<{ key: keyof User; value: User[keyof User] }>()
 const changeSavePassword = createEvent<{ savePassword: boolean }>()
 
 forward({ from: login, to: getUserTokenFx })
@@ -171,6 +171,10 @@ const $userStore = createStore(DEFAULT_STORE)
         ...oldData,
         error: error.message,
     }))
+    .on(update, (oldData, { key, value }) => ({
+        ...oldData,
+        currentUser: oldData.currentUser ? { ...oldData.currentUser, [key]: value } : null,
+    }))
     .on(clear, (oldData) => ({
         ...oldData,
         currentUser: null,
@@ -185,6 +189,7 @@ export const events = {
     logout,
     changeSavePassword,
     clear,
+    update,
 }
 
 export const effects = {
