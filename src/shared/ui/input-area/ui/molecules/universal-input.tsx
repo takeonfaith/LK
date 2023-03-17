@@ -8,6 +8,7 @@ import { RadioButton } from '@ui/organisms/radio-button-list'
 import React, { useState } from 'react'
 import { specialFieldsNameT } from '@entities/applications/consts'
 import SimpleText from '@ui/molecules/simple-text'
+import HrCheckbox from '@shared/ui/atoms/hr-checkbox'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -40,6 +41,7 @@ const UniversalInput = (props: Props) => {
         specialFieldsName,
         minValueInput,
         maxValueInput,
+        maxValueLength,
         diff,
         visible,
     } = props
@@ -104,6 +106,13 @@ const UniversalInput = (props: Props) => {
                 checked={value as boolean}
                 setChecked={(value) => handleChangeValue(value, indexI, indexJ)}
             />
+        ) : type === 'hr-checkbox' ? (
+            <HrCheckbox
+                text={title}
+                isActive={isActive}
+                checked={value as boolean}
+                setChecked={(value) => handleChangeValue(value, indexI, indexJ)}
+            />
         ) : type === 'textarea' ? (
             <TextArea
                 value={value as string}
@@ -150,6 +159,7 @@ const UniversalInput = (props: Props) => {
                 title={title}
                 minValue={minValueInput}
                 maxValue={maxValueInput}
+                maxLength={maxValueLength}
                 setValue={(value) => handleChangeValue(value, indexI, indexJ)}
                 type={type}
                 isActive={isActive}

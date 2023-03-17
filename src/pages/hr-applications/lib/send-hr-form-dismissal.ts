@@ -1,16 +1,13 @@
-import { popUpMessageModel } from '@entities/pop-up-message'
-import { IInputArea } from '@ui/input-area/model'
 import { applicationsModel } from '@entities/hr-applications'
 import { getJwtToken, parseJwt } from '@entities/user/lib/jwt-token'
+import { IInputArea } from '@ui/input-area/model'
 
-const SendHrFormDismissal = async (
+const sendHrFormDismissal = async (
     employeeId: string,
     inputAreas: IInputArea[],
-    setLoading: (loading: boolean) => void,
     setCompleted: (loading: boolean) => void,
 ) => {
-    setLoading(true)
-
+    setCompleted(false)
     const form = inputAreas
         .map((itemForm) => {
             if (!Array.isArray(itemForm.data[0])) {
@@ -55,26 +52,19 @@ const SendHrFormDismissal = async (
         .flat()
 
     const result = Object.assign({}, ...form)
-    try {
-        const aaa = {
-            guid: parseJwt(JSON.parse(getJwtToken() || '{}'))['IndividualGuid'],
-            jobGuid: result.jobGuid,
-            dateOfDismissal: result.last_day,
-            isSendMail: result.get_tk == 'По почте',
-            isRetirement: result.reason == 'Выходом на пенсию',
-            address: result.get_tk_address,
-        }
-        await applicationsModel.effects.postApplicationFx(aaa)
-        setLoading(false)
-        setCompleted(true)
-    } catch (error) {
-        setLoading(false)
-        popUpMessageModel.events.evokePopUpMessage({
-            message: `Форма отправлена успешно`,
-            type: 'success',
-            time: 30000,
-        })
-    }
+
+    const response = await applicationsModel.effects.postApplicationFx({
+        guid: parseJwt(getJwtToken() || '{}')['IndividualGuid'],
+        jobGuid: result.jobGuid,
+        signingDate: new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString(),
+        dateOfDismissal: result.last_day,
+        isSendMail: result.get_tk === 'По почте',
+        isRetirement: !!result.isRetirement,
+        address: result.get_tk_address,
+        reason: result.reason.charAt(0).toLowerCase() + result.reason.slice(1),
+    })
+
+    !response?.data?.dismissalResponse?.isError && setCompleted(true)
 }
 
-export default SendHrFormDismissal
+export default sendHrFormDismissal

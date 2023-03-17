@@ -17,6 +17,11 @@ export const hrOrderConstants = {
     fixing: 'На доработке',
     empty: 'Не создан',
 }
+export const hrOrderRegisterConstants = {
+    registered: 'Зарегистрирован',
+    registering: 'На регистрации',
+    notRegistered: 'Не зарегистрирован',
+}
 
 export const NumberOfCopiesOptions = [
     { id: 1, title: '1' },
@@ -62,4 +67,5 @@ export type specialFieldsNameT =
     | 'collHoliday5'
     | 'Structure1'
     | 'Structure2'
+    | 'PartTime'
     | null

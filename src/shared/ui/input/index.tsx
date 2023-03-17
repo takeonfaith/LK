@@ -117,8 +117,8 @@ interface Props {
     maxValue?: number | string
     loading?: boolean
     customMask?: (value: string, prevValue?: string) => string
+    maxLength?: number | undefined
 }
-
 const Input = ({
     value,
     setValue,
@@ -139,6 +139,7 @@ const Input = ({
     autocomplete = true,
     minValue = undefined,
     maxValue = undefined,
+    maxLength = undefined,
 }: Props) => {
     const { inputType, buttonOnClick, danger, handleOnChange, phoneMaskKeyDown } = useInput(
         value,
@@ -168,6 +169,7 @@ const Input = ({
             <input
                 min={minValue}
                 max={maxValue}
+                maxLength={maxLength}
                 step={maxValue ? 0.1 : undefined}
                 type={inputType}
                 placeholder={placeholder}

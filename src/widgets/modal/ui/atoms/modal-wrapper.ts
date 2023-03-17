@@ -21,6 +21,11 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
     .back-button {
         position: absolute;
         top: 12px;
+        /*top: 12px;
+        right: 20px;
+        padding: 8px;
+        */
+        z-index: 100;
 
         &:hover {
             filter: brightness(0.8);

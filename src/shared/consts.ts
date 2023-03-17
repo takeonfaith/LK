@@ -283,6 +283,11 @@ export const messageType: MessageTypeObj = {
         color: 'white',
         title: 'Подсказка',
     },
+    hrFailure: {
+        icon: FiXCircle,
+        color: 'red',
+        title: 'Ошибка',
+    },
 }
 
 interface LetterColorMatch {

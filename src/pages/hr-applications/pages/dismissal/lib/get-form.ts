@@ -13,7 +13,6 @@ const getForm = (
     currentIndex: number,
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
-
     return {
         title: 'Заявление на увольнение',
         data: [
@@ -104,13 +103,23 @@ const getForm = (
                 //minValueInput: getDelayInDays(14),
             },
             {
-                title: 'Причина (В связи с...)',
+                title: 'Причина',
                 type: 'text',
-                value: null,
+                value: 'По собственному желанию',
                 fieldName: 'reason',
                 editable: true,
                 mask: true,
                 required: true,
+                maxValueLength: 50,
+            },
+            {
+                title: 'В связи с выходом на пенсию',
+                type: 'hr-checkbox',
+                value: '',
+                fieldName: 'isRetirement',
+                editable: true,
+                mask: true,
+                required: false,
             },
             {
                 title: 'Способ получения трудовой книжки',
@@ -137,7 +146,7 @@ const getForm = (
                 fieldName: 'get_tk_address',
                 editable: true,
                 mask: true,
-                required: false,
+                required: true,
                 specialType: 'Address',
             },
             {

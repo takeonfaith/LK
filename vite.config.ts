@@ -11,15 +11,16 @@ export default defineConfig((conf) => {
         server: {
             open: true,
         },
+        esbuild: {
+            // jsxInject: (str: string) => (!str.includes('import React') ? "import React from 'react'" : ''),
+            logOverride: { 'this-is-undefined-in-esm': 'silent' },
+        },
         preview: { port: 3000 },
         plugins: [
             react(),
             checker({ typescript: true, eslint: { lintCommand: 'eslint "./src/**/*.{ts,tsx}"' } }),
             tsconfigPaths(),
             svgr(),
-            // build time
-            // 23s - with
-            // 43 - without
             legacy({
                 targets: ['IE >= 11'],
             }),
@@ -28,9 +29,6 @@ export default defineConfig((conf) => {
         build: {
             outDir,
             manifest: true,
-        },
-        esbuild: {
-            logOverride: { 'this-is-undefined-in-esm': 'silent' },
         },
     }
 })

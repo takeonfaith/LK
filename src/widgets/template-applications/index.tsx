@@ -1,4 +1,3 @@
-import React from 'react'
 import { applicationsModel } from '@entities/applications'
 import getApplicationsColumns from '@features/applications/lib/get-applications-columns'
 import CreateApplicationList from '@features/applications/ui/molecules/create-application-list'
@@ -7,6 +6,7 @@ import Table from '@ui/table'
 import { FiInfo, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
+import React from 'react'
 
 const ApplicationPageWrapper = styled.div`
     display: flex;

@@ -1,35 +1,73 @@
 import { IInputArea } from '@ui/input-area/model'
-import { UserApplication } from '@api/model'
+import { UserApplication, WorkerApplication } from '@api/model'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 
-const getForm = (dataUserApplication: UserApplication): IInputArea => {
+const getForm = (
+    dataUserApplication: UserApplication,
+    dataWorkerApplication: WorkerApplication[],
+    currentIndex: number,
+): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
         title: 'Заявление о предоставлении отпуска',
         data: [
             {
                 title: 'ФИО',
+                type: 'simple-text',
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
-                mask: true,
-                editable: true,
-                required: true,
+                visible: true,
             },
             {
                 title: 'Должность',
-                value: null,
+                type: 'simple-text',
                 fieldName: 'post',
-                editable: true,
-                mask: true,
-                required: true,
+                value: dataWorkerApplication[currentIndex].jobTitle.toString(),
+                visible: true,
             },
             {
-                title: 'Наименование структурного подразделения',
-                value: null,
-                fieldName: 'structure',
+                title: 'Структурное подразделение',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].subDivision.toString(),
+                fieldName: 'subDivision',
+                visible: true,
+            },
+            // {
+            //     title: 'Период отпуска:',
+            //     type: 'date-interval',
+            //     value: ['', ''],
+            //     fieldName: 'holiday_dates',
+            //     editable: true,
+            //     mask: true,
+            //     required: true,
+            //     minValueInput: getDelayInDays(5),
+            // },
+            {
+                title: 'Начало отпуска:',
+                type: 'date',
+                value: '',
+                fieldName: 'holiday_start',
                 editable: true,
                 mask: true,
                 required: true,
+                minValueInput: getDelayInDays(5),
+            },
+            {
+                title: '',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].jobGuid.toString(),
+                fieldName: 'jobGuid',
+                visible: false,
+            },
+            {
+                title: 'Окончание отпуска:',
+                type: 'date',
+                value: '',
+                fieldName: 'holiday_end',
+                editable: true,
+                mask: true,
+                required: true,
+                minValueInput: getDelayInDays(5),
             },
             {
                 title: 'Вид отпуска',
@@ -62,30 +100,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                     },
                 ],
             },
-            {
-                title: 'Период отпуска:',
-                type: 'date-interval',
-                value: ['', ''],
-                fieldName: 'holiday_dates',
-                editable: true,
-                mask: true,
-                required: true,
-                minValueInput: getDelayInDays(5),
-            },
-            {
-                title: 'Комментарий к заявке',
-                type: 'textarea',
-                fieldName: 'commentary',
-                value: '',
-                editable: true,
-            },
         ],
-        documents: {
-            files: [],
-            required: true,
-            fieldName: 'holidayFiles',
-            maxFiles: 10,
-        },
     }
 }
 

@@ -26,6 +26,7 @@ type IInputAreaTypes =
     | 'checkbox-docs'
     | 'date-interval'
     | 'simple-text'
+    | 'hr-checkbox'
 
 export interface IInputAreaFiles {
     files: File[]
@@ -57,7 +58,7 @@ export interface IInputAreaLink {
 export interface IInputAreaData {
     fieldName: string
     title: string
-    value: string | SelectPage | boolean | SelectPage[] | null | RadioButton | string[]
+    value: string | SelectPage | boolean | SelectPage[] | null | RadioButton | string[] | IFormDropdownValue
     type?: IInputAreaTypes
     items?: SelectPage[] | CheckboxDocs[] | RadioButton[] | RadioChildrenForm[]
     width?: string
@@ -70,8 +71,14 @@ export interface IInputAreaData {
     specialType?: specialFieldsNameT
     minValueInput?: number | string
     maxValueInput?: number | string
+    maxValueLength?: number | undefined
     diff?: number
     visible?: boolean
+}
+
+export interface IFormDropdownValue {
+    id: number
+    title: string
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]

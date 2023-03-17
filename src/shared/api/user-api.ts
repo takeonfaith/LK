@@ -1,5 +1,6 @@
 import { $api } from '@api/config'
 import getToken from '@shared/lib/token'
+import axios from 'axios'
 import { ADName, User, UserToken } from './model'
 
 export type LoginData = { login: string; password: string }
@@ -69,4 +70,13 @@ export const changePhone = async (newPhone: string) => {
             'Content-Type': 'multipart/form-data',
         },
     })
+}
+
+export const refreshAccessToken = async (refreshToken: string) => {
+    const { data } = await axios.post<{ accessToken: string; refreshToken: string }>(
+        'https://api.mospolytech.ru/frontendtokenservice/Token/Refresh',
+        { refreshToken },
+    )
+
+    return data
 }

@@ -1,7 +1,11 @@
 import { IInputArea } from '@ui/input-area/model'
-import { UserApplication } from '@api/model'
+import { UserApplication, WorkerApplication } from '@api/model'
 
-const getForm = (dataUserApplication: UserApplication): IInputArea => {
+const getForm = (
+    dataUserApplication: UserApplication,
+    dataWorkerApplication: WorkerApplication[],
+    currentIndex: number,
+): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
         title: 'Заявление о привлечении к работе в выходной день',
@@ -16,19 +20,17 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Должность',
-                value: 'Лаборант',
+                type: 'simple-text',
                 fieldName: 'post',
-                editable: true,
-                mask: true,
-                required: true,
+                value: dataWorkerApplication[currentIndex].jobTitle.toString(),
+                visible: true,
             },
             {
-                title: 'Наименование структурного подразделения',
-                value: 'Кафедра информационных систем и технологий',
-                fieldName: 'structure',
-                editable: true,
-                mask: true,
-                required: true,
+                title: 'Структурное подразделение',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].subDivision.toString(),
+                fieldName: 'subDivision',
+                visible: true,
             },
             {
                 title: 'Дата привлечения к работе',
@@ -86,6 +88,13 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 mask: true,
                 required: false,
                 specialType: 'Compensation',
+            },
+            {
+                title: '',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].jobGuid.toString(),
+                fieldName: 'jobGuid',
+                visible: false,
             },
             {
                 title: 'Комментарий к заявке',
