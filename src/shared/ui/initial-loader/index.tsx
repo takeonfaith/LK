@@ -7,7 +7,6 @@ import { Logo } from '@ui/logo'
 import styled from 'styled-components'
 import { Button } from '@ui/button'
 import { AiOutlineReload } from 'react-icons/ai'
-import { UserToken } from '@api/model'
 
 const styledPropsArray: Array<keyof Props> = ['loading']
 
@@ -116,7 +115,10 @@ const InitialLoader = ({ loading }: Props) => {
                 <Error text="Нет подключения к интернету">
                     <Button
                         onClick={() =>
-                            userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)
+                            userModel.effects.getUserFx({
+                                token: localStorage.getItem('token') ?? '',
+                                jwt: localStorage.getItem('jwt') ?? '',
+                            })
                         }
                         text="Попробовать снова"
                         icon={<AiOutlineReload />}

@@ -1,5 +1,5 @@
+import { releaseClear } from '@entities/release/utils'
 import useTheme from '@shared/lib/hooks/use-theme'
-import React from 'react'
 import { HashRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'
@@ -10,6 +10,8 @@ const Background = styled.div`
     overflow-y: auto;
     height: 100vh;
 `
+
+releaseClear()
 
 const App = () => {
     useTheme()

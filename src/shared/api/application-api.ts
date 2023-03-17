@@ -21,7 +21,6 @@ export const getWorkerData = async (): Promise<AxiosResponse> => {
     )
 
     return response
-    //return $workerApi.get(`?employeeGuid=7b741f98-cd43-11e8-9419-b4b52f5f5348`)
 }
 export const postWorkerStatuses = (): Promise<AxiosResponse> => {
     //907afd9b-d9c5-11e7-940a-b4b52f5f5349

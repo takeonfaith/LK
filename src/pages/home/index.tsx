@@ -28,7 +28,7 @@ const Home = () => {
     useEffect(() => {
         scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
-    }, [])
+    }, [user])
 
     const handleUserClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.preventDefault()
