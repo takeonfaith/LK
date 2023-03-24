@@ -289,6 +289,16 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'FINANCES_DOCS',
     },
+    'physical-education': {
+        id: 'physical-education',
+        title: 'Физическая культура',
+        icon: <FiFileText />,
+        color: 'lightGreen',
+        path: PHYSICAL_EDUCATION,
+        Component: TeacherPhysicalEducation,
+        isTemplate: false,
+        group: 'OTHER',
+    },
     oop: {
         id: 'oop',
         title: 'Образовательные программы',
@@ -616,16 +626,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
     },
-    'physical-education': {
-        id: 'physical-education',
-        title: 'Физическая культура',
-        icon: <FiFileText />,
-        color: 'lightGreen',
-        path: PHYSICAL_EDUCATION,
-        Component: TeacherPhysicalEducation,
-        isTemplate: false,
-        group: 'OTHER',
-    },
+
     'personal-income-tax-reference': {
         id: 'personal-income-tax-reference',
         title: 'Справка по форме 2-НДФЛ',
