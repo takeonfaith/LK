@@ -37,6 +37,7 @@ import {
     PaymentOfChildBirthAllowancePage,
     PaymentForChildCarePage,
     HolidayTransfer,
+    MedicalExamination,
 } from './pages'
 
 import React from 'react'
@@ -58,6 +59,7 @@ import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import HolidayWorkBufferPage from '@pages/hr-applications/pages/buffer-holiday-work'
 import HolidayPlanningBufferPage from '@pages/hr-applications/pages/buffer-holiday-planning'
 import HolidayTransferBufferPage from '@pages/hr-applications/pages/buffer-holiday-transfer'
+import MedicalExaminationBufferPage from '@pages/hr-applications/pages/buffer-medical-examination'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
@@ -115,12 +117,14 @@ export const EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/extra-holiday-coll'
 export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning/:id'
 export const HOLIDAY_TRANSFER = HR_APPLICATIONS_ROUTE + '/holiday-transfer/:id'
 export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work/:id'
+export const MEDICAL_EXAMINATION = HR_APPLICATIONS_ROUTE + '/medical-examination/:id'
 export const BUFFER_DISMISSAL = HR_APPLICATIONS_ROUTE + '/buffer-dismissal'
 // export const BUFFER_WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/buffer-work-transfer'
 // export const BUFFER_EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/buffer-extra-holiday-coll'
 export const BUFFER_HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/buffer-holiday-planning'
 export const BUFFER_HOLIDAY_TRANSFER = HR_APPLICATIONS_ROUTE + '/buffer-holiday-transfer'
 export const BUFFER_HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/buffer-holiday-work'
+export const BUFFER_MEDICAL_EXAMINATION = HR_APPLICATIONS_ROUTE + '/buffer-medical-examination'
 // export const BUFFER_PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/buffer-part-time-deployment'
 // export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday-postponed'
 
@@ -411,6 +415,16 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
     },
+    'medical-examination': {
+        id: 'part-time-deployment',
+        title: 'Заявление о диспансеризации',
+        path: BUFFER_MEDICAL_EXAMINATION,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : MedicalExaminationBufferPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
     'holiday-planning': {
         id: 'holiday-postponed',
         title: 'Заявление о предоставлении отпуска',
@@ -438,6 +452,16 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : HolidayWork,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'medical-examination-form': {
+        id: 'part-time-deployment',
+        title: 'Заявление о диспансеризации',
+        path: MEDICAL_EXAMINATION,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : MedicalExamination,
         isTemplate: false,
         group: 'OTHER',
     },

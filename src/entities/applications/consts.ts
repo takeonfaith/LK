@@ -59,6 +59,7 @@ export type specialFieldsNameT =
     | 'postMethod'
     | 'personalNature'
     | 'Compensation'
+    | 'Compensation2'
     | 'Address'
     | 'collHoliday1'
     | 'collHoliday2'

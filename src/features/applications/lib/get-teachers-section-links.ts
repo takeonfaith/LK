@@ -32,6 +32,7 @@ import {
     //HOLIDAY_POSTPONED,
     WORK_TRANSFER,
     EXTRA_HOLIDAY_COLL,
+    BUFFER_MEDICAL_EXAMINATION,
 } from '@app/routes/teacher-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
@@ -105,6 +106,7 @@ const getTeachersHRSectionLinks = () => {
                 { link: BUFFER_HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
                 { link: BUFFER_HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
                 { link: BUFFER_HOLIDAY_TRANSFER, title: 'Заявление о переносе отпуска' },
+                { link: BUFFER_MEDICAL_EXAMINATION, title: 'Заявление о диспансеризации' },
                 // { link: BUFFER_WORK_TRANSFER, title: 'Заявление на перевод' },
                 // {
                 //     link: BUFFER_EXTRA_HOLIDAY_COLL,
@@ -114,10 +116,10 @@ const getTeachersHRSectionLinks = () => {
                 //{ link: HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },
                 // { link: HOLIDAY_PLANNING, title: 'Заявление о предоставлении отпуска' },
                 { link: WORK_TRANSFER, title: 'Заявление на перевод' },
-                {
-                    link: EXTRA_HOLIDAY_COLL,
-                    title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
-                },
+                // {
+                //     link: EXTRA_HOLIDAY_COLL,
+                //     title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
+                // },
             ],
         },
     ]

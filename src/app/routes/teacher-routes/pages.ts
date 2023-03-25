@@ -56,6 +56,7 @@ export const PartTimeEmployment = lazy(() => import('@pages/hr-applications/page
 export const Dismissal = lazy(() => import('@pages/hr-applications/pages/dismissal'))
 export const ExtraHolidayColl = lazy(() => import('@pages/hr-applications/pages/extra-holiday-coll'))
 export const HolidayWork = lazy(() => import('@pages/hr-applications/pages/holiday-work'))
+export const MedicalExamination = lazy(() => import('@pages/hr-applications/pages/medical-examination'))
 export const HolidayPlanning = lazy(() => import('@pages/hr-applications/pages/holiday-planning'))
 export const HolidayTransfer = lazy(() => import('@pages/hr-applications/pages/holiday-transfer'))
 export const WorkTransfer = lazy(() => import('@pages/hr-applications/pages/work-transfer'))
