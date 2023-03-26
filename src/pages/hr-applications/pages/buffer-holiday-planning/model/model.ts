@@ -11,8 +11,8 @@ const loadBufferHolidayPlanning = createEvent()
 const sendBufferHolidayPlanning = createEvent<BufferHolidayPlanningForm>()
 
 const loadBufferHolidayPlanningFx = createEffect(async () => {
-    const { data } = await $hrApi.get<BufferHolidayPlanning[]>(
-        `Vacation.GetAllHistory?employeeGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
+    const { data } = await $hrApi.get<BufferHolidayPlanning>(
+        `Vacation.GetAllHistory?personalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
     )
     return data
 })
@@ -27,10 +27,14 @@ const sendBufferHolidayPlanningFx = createEffect(async (data: BufferHolidayPlann
 
 sample({ clock: sendBufferHolidayPlanning, target: sendBufferHolidayPlanningFx })
 
-const $bufferHolidayPlanning = createStore<BufferHolidayPlanning[]>([])
+const $bufferHolidayPlanning = createStore<BufferHolidayPlanning['employeeVacations']>([])
 const $bufferHolidayPlanningLoading = sendBufferHolidayPlanningFx.pending
 
-sample({ clock: loadBufferHolidayPlanningFx.doneData, target: $bufferHolidayPlanning })
+sample({
+    clock: loadBufferHolidayPlanningFx.doneData,
+    fn: ({ employeeVacations }) => employeeVacations,
+    target: $bufferHolidayPlanning,
+})
 
 sample({
     clock: sendBufferHolidayPlanningFx.doneData,
@@ -51,8 +55,8 @@ sample({
 sample({
     clock: sendBufferHolidayPlanningFx.doneData,
     source: $bufferHolidayPlanning,
-    fn: (source, clock) => {
-        return [...source, clock]
+    fn: (source, { employeeVacations }) => {
+        return [...source, ...employeeVacations]
     },
     target: $bufferHolidayPlanning,
 })

@@ -2,6 +2,8 @@ export interface BufferHolidayPlanning {
     isError: boolean
     error: string
     employeeVacations: {
+        division: string
+        jobTitle: string
         employeeGuid: string
         schedule: [
             {
@@ -94,7 +96,7 @@ export interface BufferHolidayPlanning {
                 period: {
                     startDate: string
                     endDate: string
-                    totalDays: 0
+                    totalDays: number
                 }
                 status: {
                     creationDate: string
@@ -113,7 +115,7 @@ export interface BufferHolidayPlanning {
             }
             documentGuid: string
         }[]
-    }
+    }[]
 }
 
 export interface BufferHolidayPlanningForm {

@@ -12,7 +12,7 @@ const sendBufferHolidayTransfer = createEvent<BufferHolidayTransferForm>()
 
 const loadBufferHolidayTransferFx = createEffect(async () => {
     const { data } = await $hrApi.get<BufferHolidayTransfer[]>(
-        `Vacation.GetAllHistory?employeeGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
+        `Vacation.GetAllHistory?personalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
     )
     return data
 })

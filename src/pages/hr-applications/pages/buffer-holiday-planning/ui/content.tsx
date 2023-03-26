@@ -1,36 +1,26 @@
 import React from 'react'
-import { applicationsModel } from '@entities/applications'
-import { useState } from 'react'
-import History from './history'
-import JobTitle from './job-title'
 import styled from 'styled-components'
 import { bufferHolidayPlanningModel } from '../model'
+import JobTitle from './job-title'
 
 const Content = () => {
-    const {
-        data: { dataWorkerApplication },
-    } = applicationsModel.selectors.useApplications()
     const { data } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
-    const [historyIsEmpty, setHistoryIsEmpty] = useState<boolean>(true)
 
     if (!data) {
         return null
     }
-    if (!dataWorkerApplication) {
-        return null
-    }
+
     return (
         <Wrapper>
-            {dataWorkerApplication.map((jobTitleInfo, index) => {
+            {/* {data.map((jobTitleInfo, index) => {
                 if (jobTitleInfo.isDismissal) {
                     historyIsEmpty && setHistoryIsEmpty(false)
                     return null
                 } else return <JobTitle info={jobTitleInfo} index={index} />
-            })}
-            {/* {data.map((info, index) => {
-                return <JobTitle info={info} index={index} />
             })} */}
-            <History />
+            {data.map((info, index) => {
+                return <JobTitle key={index} info={info} index={index} />
+            })}
         </Wrapper>
     )
 }
