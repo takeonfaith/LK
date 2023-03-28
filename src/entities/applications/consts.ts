@@ -69,4 +69,5 @@ export type specialFieldsNameT =
     | 'Structure1'
     | 'Structure2'
     | 'PartTime'
+    | 'collDog'
     | null

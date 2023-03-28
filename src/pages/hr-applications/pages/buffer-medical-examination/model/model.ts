@@ -6,6 +6,7 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
 import { MdDoNotDisturb } from 'react-icons/md'
 import { setAgeMed } from '../../medical-examination/lib/age-med'
+import { setIsTutor } from '../../medical-examination/lib/is-tutor'
 import { BufferMedicalExamination, BufferMedicalExaminationForm, BufferMedicalExaminationOrder } from '../types'
 
 const loadBufferMedicalExamination = createEvent()
@@ -16,6 +17,8 @@ const loadBufferMedicalExaminationFx = createEffect(async () => {
         `MedicalExamination.GetAllHistory?PersonalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
     )
     setAgeMed(data.age)
+    setIsTutor(true)
+    //setIsTutor(data.employeeMedicalExaminations[0].tutor)
     return data.employeeMedicalExaminations
 })
 sample({ clock: loadBufferMedicalExamination, target: loadBufferMedicalExaminationFx })

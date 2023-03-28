@@ -1,13 +1,17 @@
-import { IInputArea } from '@ui/input-area/model'
+import { IComplexInputAreaData, IInputArea, IInputAreaData } from '@ui/input-area/model'
 import { UserApplication, WorkerApplication } from '@api/model'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
+import useCollDate from './HPcontainer'
 
 const getForm = (
     dataUserApplication: UserApplication,
     dataWorkerApplication: WorkerApplication[],
     currentIndex: number,
+    dataForm: IInputAreaData[],
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
+    // let date = ''
+    // if (dataForm) {date = dataForm[3].value as string}
     return {
         title: 'Заявление о предоставлении отпуска',
         data: [
@@ -67,8 +71,19 @@ const getForm = (
                 editable: true,
                 mask: true,
                 required: true,
-                minValueInput: getDelayInDays(5),
+                maxValueInput: getDelayInDays(5, useCollDate()),
             },
+            // {
+            //     title: 'Окончание отпуска:',
+            //     type: 'date-interval',
+            //     value: ['', ''],
+            //     fieldName: 'holiday_end',
+            //     editable: true,
+            //     mask: true,
+            //     required: true,
+            //     minValueInput: getDelayInDays(5),
+            //     maxValueInput: getDelayInDays(5),
+            // },
             {
                 title: 'Вид отпуска',
                 type: 'select',
@@ -93,6 +108,54 @@ const getForm = (
                     {
                         id: 3,
                         title: 'Отпуск по коллективному договору',
+                    },
+                ],
+            },
+            {
+                title: 'Категория для предоставления отпуска',
+                type: 'select',
+                fieldName: 'holiday_type_coll',
+                value: null,
+                editable: true,
+                required: true,
+                width: '100%',
+                specialType: 'collDog',
+                items: [
+                    {
+                        id: 0,
+                        title: '3 Работникам, имеющим двоих и более детей в возрасте до 14 лет',
+                    },
+                    {
+                        id: 1,
+                        title: '5 Работникам, имеющим ребенка-инвалида в возрасте до 18 лет',
+                    },
+                    {
+                        id: 2,
+                        title: '5 Работникам, имеющим ребенка-инвалида в возрасте до 18 лет',
+                    },
+                    {
+                        id: 3,
+                        title: '3 Работникам в случаях рождения ребенка, регистрации брака, смерти близких родственников',
+                    },
+                    {
+                        id: 4,
+                        title: '1 Работникам, сопровождающим детей младшего школьного возраста в школу в первый день учебного года',
+                    },
+                    {
+                        id: 5,
+                        title: '1 Работникам, имеющим общий стаж работы в Университете от 20 до 25 лет',
+                    },
+                    {
+                        id: 6,
+                        title: '2 Работникам, имеющим общий стаж работы в Университете от 25 до 30 лет',
+                    },
+                    {
+                        id: 7,
+                        title: '3 Работникам, имеющим общий стаж работы в Университете от 30 до 35 лет',
+                    },
+                    {
+                        id: 8,
+                        title: '4 Работникам, имеющим общий стаж работы в Университете свыше 35 лет',
                     },
                 ],
             },

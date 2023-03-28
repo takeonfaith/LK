@@ -1,5 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication, WorkerApplication } from '@api/model'
+import { useState } from 'react'
 
 const getForm = (
     dataUserApplication: UserApplication,
@@ -77,18 +78,6 @@ const getForm = (
                 editable: true,
                 mask: true,
                 required: false,
-                specialType: 'Compensation',
-                maxValueLength: 1,
-            },
-            {
-                title: 'Выберите день отдыха',
-                type: 'date',
-                value: '',
-                fieldName: 'extra_examination_date',
-                editable: true,
-                mask: true,
-                required: false,
-                specialType: 'Compensation2',
                 maxValueLength: 1,
             },
             {
@@ -96,7 +85,7 @@ const getForm = (
                 type: 'date',
                 value: '',
                 fieldName: 'extra_examination_date_2',
-                editable: true,
+                editable: false,
                 mask: true,
                 required: false,
                 specialType: 'Compensation2',

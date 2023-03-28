@@ -5,6 +5,8 @@ export interface BufferMedicalExamination {
     employeeMedicalExaminations: BufferMedicalExaminationOrder[]
 }
 export interface BufferMedicalExaminationOrder {
+    tutor: boolean
+    employeeGuid: string
     documentGuid: string
     creationDate: string
     registrationDate: string
