@@ -152,7 +152,6 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: FAMILY_ROOM,
                     title: 'Предоставление права проживания в семейной комнате',
-                    disabled: isProduction,
                     exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
                 },
                 {

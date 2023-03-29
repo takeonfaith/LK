@@ -273,7 +273,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания в семейной комнате',
         icon: BiIdCard,
         path: FAMILY_ROOM,
-        Component: isProduction ? ApplicationRedirect : FamilyRoomPage,
+        Component: FamilyRoomPage,
         color: 'blue',
         isTemplate: false,
     },
