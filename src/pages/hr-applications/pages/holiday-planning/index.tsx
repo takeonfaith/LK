@@ -15,8 +15,6 @@ import { bufferHolidayPlanningModel } from '../buffer-holiday-planning/model'
 import getCollDog from './lib/get-coll-dog'
 import getForm from './lib/get-form'
 
-type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
-
 const HolidayPlanning = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
@@ -29,16 +27,26 @@ const HolidayPlanning = () => {
     const history = useHistory()
     const { id } = useParams<{ id: string }>()
     const currentIndex = +id
+
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
             setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex, form?.data as IInputAreaData[]))
         }
     }, [dataUserApplication, currentIndex, loading])
+
     useEffect(() => {
         if (!!form && !!dataUserApplication) {
             setSpecialFieldsName(getCollDog(form.data as IInputAreaData[]))
         }
     }, [form])
+
+    const onInputUpdated = (state: IInputArea) => {
+        if (dataUserApplication && dataWorkerApplication) {
+            console.log({ state })
+            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex, state.data as IInputAreaData[]))
+        }
+    }
+
     return (
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && !!setForm && (
@@ -53,7 +61,7 @@ const HolidayPlanning = () => {
                     <InputArea
                         {...form}
                         collapsed={isDone}
-                        setData={setForm as LoadedState}
+                        setData={onInputUpdated as any}
                         specialFieldsName={specialFieldsName}
                     />
 

@@ -17,6 +17,7 @@ type Props = IInputAreaData & {
     indexI: number
     indexJ?: number
     specialFieldsName?: specialFieldsNameT
+    onChange?: (value: any) => void
 }
 
 const UniversalInput = (props: Props) => {
@@ -44,6 +45,7 @@ const UniversalInput = (props: Props) => {
         maxValueLength,
         diff,
         visible,
+        onChange,
     } = props
 
     const isActive = editable ?? (changeInputArea && !documents)
@@ -60,6 +62,8 @@ const UniversalInput = (props: Props) => {
                     ;(area.data[i] as IInputAreaData).value = value
                 }
             }
+            onChange?.({ ...area })
+
             return { ...area }
         })
     }
