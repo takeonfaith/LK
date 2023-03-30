@@ -12,15 +12,16 @@ import { globalAppSendForm, getRegistration, getDisability } from '@pages/applic
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 import { listConfigCert } from '@features/applications/lib/get-list-configs-certificate'
+import StepByStepForm from '@features/applications/ui/molecules/step-by-step-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const PreferentialAccommodationPage = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
-    const [kvdCert, setKvdCert] = useState<IInputArea | null>(listConfigCert.kvdCert)
-    const [fluorographyCert, setFluorographyCert] = useState<IInputArea | null>(listConfigCert.fluorographyCert)
-    const [vichRwCert, setVichRwCert] = useState<IInputArea | null>(listConfigCert.vichRwCert)
-    const [graftCert, setGraftCert] = useState<IInputArea | null>(listConfigCert.graftCert)
+    const [kvdCert, setKvdCert] = useState<IInputArea>(listConfigCert.kvdCert)
+    const [fluorographyCert, setFluorographyCert] = useState<IInputArea>(listConfigCert.fluorographyCert)
+    const [vichRwCert, setVichRwCert] = useState<IInputArea>(listConfigCert.vichRwCert)
+    const [graftCert, setGraftCert] = useState<IInputArea>(listConfigCert.graftCert)
     const history = useHistory()
     const {
         data: { dataUserApplication },
@@ -39,6 +40,14 @@ const PreferentialAccommodationPage = () => {
         }
     }, [dataUserApplication])
 
+    const sendForm = () =>
+        globalAppSendForm(
+            ApplicationFormCodes.USG_GETHOSTEL_BENEFIT,
+            [form, registration, disability, kvdCert, fluorographyCert, vichRwCert, graftCert] as IInputArea[],
+            setLoading,
+            setCompleted,
+        )
+
     return (
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && !!setForm && !!registration && !!disability && (
@@ -50,37 +59,18 @@ const PreferentialAccommodationPage = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
-                    {disability && (
+                    <StepByStepForm>
+                        <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                         <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
-                    )}
-                    {registration && (
                         <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
-                    )}
-                    {kvdCert && setKvdCert && <InputArea {...kvdCert} setData={setKvdCert} />}
-                    {fluorographyCert && setFluorographyCert && (
+                        <InputArea {...kvdCert} setData={setKvdCert} />
                         <InputArea {...fluorographyCert} setData={setFluorographyCert} />
-                    )}
-                    {vichRwCert && setVichRwCert && <InputArea {...vichRwCert} setData={setVichRwCert} />}
-                    {graftCert && setGraftCert && <InputArea {...graftCert} setData={setGraftCert} />}
+                        <InputArea {...vichRwCert} setData={setVichRwCert} />
+                        <InputArea {...graftCert} setData={setGraftCert} />
+                    </StepByStepForm>
                     <SubmitButton
                         text={'Отправить'}
-                        action={() =>
-                            globalAppSendForm(
-                                ApplicationFormCodes.USG_GETHOSTEL_BENEFIT,
-                                [
-                                    form,
-                                    registration,
-                                    disability,
-                                    kvdCert,
-                                    fluorographyCert,
-                                    vichRwCert,
-                                    graftCert,
-                                ] as IInputArea[],
-                                setLoading,
-                                setCompleted,
-                            )
-                        }
+                        action={() => sendForm()}
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}

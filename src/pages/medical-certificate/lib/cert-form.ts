@@ -22,6 +22,7 @@ export const getCertForm = ({ config }: Args): IInputArea => {
                 editable: true,
                 fieldName: config.issueDateFieldName,
                 required: true,
+
                 minValueInput: getDelayInDays(-30 * 11),
                 maxValueInput: getDelayInDays(0),
             },

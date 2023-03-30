@@ -19,12 +19,13 @@ const LineWrapper = styled.div<StyledProps & HiddenProps>`
     border-radius: 10px;
     height: ${({ direction, distance }) => (direction === 'vertical' ? (distance ?? 100) + 'px' : '5px')};
     overflow: hidden;
+    width: 100%;
 
     .inside-line {
         height: ${({ direction, filled }) => (direction === 'vertical' ? (filled ?? 100) + '%' : '5px')};
         border-radius: 10px;
         width: ${({ direction, filled }) => (direction === 'vertical' ? '100%' : (filled ?? 100) + '%')};
-        background: ${({ reached }) => (reached ? Colors.green.main : 'var(--reallyBlue)')};
+        background: ${({ reached }) => (reached ? Colors.green.main : 'none')};
     }
 `
 
