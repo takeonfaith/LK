@@ -67,6 +67,7 @@ const UserHeader = ({
         <UserHeaderStyled>
             <UserHeaderBackground
                 fullName={name}
+                avatar={avatar}
                 height="136px"
                 width="calc(100% + 16px)"
                 baseScale={1}

@@ -4,7 +4,6 @@ import { popUpMessageModel } from '@entities/pop-up-message'
 import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
-import useResize from '@utils/hooks/use-resize'
 import useTheme from '@utils/hooks/use-theme'
 import { Suspense, useEffect } from 'react'
 import styled from 'styled-components'
@@ -18,6 +17,7 @@ import React from 'react'
 // import useShowTutorial from '@utils/hooks/use-show-tutorial'
 import { Link } from 'react-router-dom'
 import { ALERTS_ROUTE } from '@app/routes/general-routes'
+import useResize from '@shared/lib/hooks/use-resize'
 
 const ContentWrapper = styled.div`
     width: 100%;
@@ -43,10 +43,10 @@ const ContentWrapper = styled.div`
 `
 
 const ContentLayout = () => {
-    const { height } = useResize()
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const { height } = useResize()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
     // const { seen } = useShowTutorial()
