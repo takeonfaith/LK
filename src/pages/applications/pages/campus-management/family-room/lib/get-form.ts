@@ -36,6 +36,24 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
         ],
+        links: [
+            {
+                title: 'Согласие на обработку моих персональных данных',
+                link: 'https://e.mospolytech.ru/old/storage/files/Form_17_PD_2022.DOC',
+                type: 'document',
+            },
+            {
+                title: 'Согласие на обработку персональных данных членов моей семьи',
+                link: 'https://e.mospolytech.ru/old/storage/files/PD_agreement_minor.docx',
+                type: 'document',
+            },
+        ],
+        optionalCheckbox: {
+            title: `Я подтверждаю, что никто из членов семьи не имеет прописки в пределах трассы А-107`,
+            value: false,
+            fieldName: 'isCorrectRegistration',
+            editable: true,
+        },
     }
 }
 
