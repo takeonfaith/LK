@@ -16,6 +16,8 @@ import { User } from 'widgets'
 import { paginationList } from '@entities/all-students'
 import { ALL_STUDENTS_ROUTE } from '@app/routes/general-routes'
 import { useHistory } from 'react-router'
+import Alerts from '@pages/alerts/ui/alerts'
+import { alertModel } from '@entities/alert'
 
 const HomePageStyled = styled.div`
     width: 100%;
@@ -32,6 +34,9 @@ const Home = () => {
         data: { user },
         error,
     } = userModel.selectors.useUser()
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { data, error: alertsError, loading } = alertModel.selectors.useData()
+
     const { $items } = paginationList
     const history = useHistory()
 
@@ -42,6 +47,7 @@ const Home = () => {
     useEffect(() => {
         scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
+        alertModel.effects.getFx()
     }, [])
 
     const handleWatchMore = () => {
@@ -66,6 +72,10 @@ const Home = () => {
                             ))}
                         </List>
                         <Divider />
+                        <Title size={3} align="left">
+                            Оповещения
+                        </Title>
+                        <Alerts alerts={data ?? {}} limit={3} listView />
                     </Block>
                 </CenterPage>
             </HomePageStyled>
