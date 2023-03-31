@@ -31,7 +31,7 @@ export const PopUpNotificationsItem = styled.div<{ open: boolean }>`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 0 50px #00000547;
+    box-shadow: 0 0 50px #00000521;
     transition: 0.2s;
 
     animation: ${({ open }) => (open ? 'open' : 'close')} ${OPEN_CLOSE_ANIMATION_DURATION / 1000}s forwards;

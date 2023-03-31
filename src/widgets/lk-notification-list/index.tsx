@@ -1,6 +1,5 @@
 import { ALERTS_ROUTE } from '@app/routes/general-routes'
 import { lkNotificationModel } from '@entities/lk-notifications'
-import { userModel } from '@entities/user'
 import { Thinking } from '@shared/images'
 import { CenterPage, Error } from '@shared/ui/atoms'
 import { Button } from '@shared/ui/button'
@@ -21,9 +20,6 @@ const LkNotificationListStyled = styled.div`
 `
 
 const LkNotificationList = () => {
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
     const { notifications } = lkNotificationModel.selectors.useLkNotifications()
 
     const addNotif = () => {
@@ -31,10 +27,9 @@ const LkNotificationList = () => {
         console.log('Test', notifications)
         lkNotificationModel.events.add({
             id: crypto.randomUUID(),
-            title: 'Шурыгин Владимир Николаевич',
-            text: 'Приглашаем обучающихся, имеющих публикации',
-            type: 'message',
-            image: user?.avatar,
+            title: 'Новые оповещения',
+            text: 'Приглашаем к трудоустройству в органы безопасности РФ',
+            type: 'alert',
             goTo: ALERTS_ROUTE,
             time: '12:42',
             date: '2022-12-1',
