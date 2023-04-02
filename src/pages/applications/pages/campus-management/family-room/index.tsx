@@ -1,5 +1,4 @@
 import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
-import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
@@ -15,6 +14,8 @@ import { getAdditionally, globalAppSendForm } from '@pages/applications/lib'
 import { listConfigCert } from '@features/applications/lib/get-list-configs-certificate'
 import StepByStepForm from '@features/applications/ui/molecules/step-by-step-form'
 
+type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
+
 const FamilyRoomPage = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const {
@@ -29,6 +30,9 @@ const FamilyRoomPage = () => {
     const history = useHistory()
 
     const [kvdCert, setKvdCert] = useState<IInputArea>(listConfigCert.kvdCert)
+    const [fluorographyCert, setFluorographyCert] = useState<IInputArea>(listConfigCert.fluorographyCert)
+    const [vichRwCert, setVichRwCert] = useState<IInputArea>(listConfigCert.vichRwCert)
+    const [graftCert, setGraftCert] = useState<IInputArea>(listConfigCert.graftCert)
 
     const isForm = !!form && !!family && !!additionally
 
@@ -57,11 +61,18 @@ const FamilyRoomPage = () => {
                 <Title size={4} align="left">
                     Предоставление права проживания в семейной комнате
                 </Title>
-                <StepByStepForm>
-                    <InputArea {...form} collapsed={isDone} setData={setForm} />
-                    <InputArea {...family} collapsed={isDone} setData={setFamily} />
-                    <InputArea {...kvdCert} setData={setKvdCert} />
-                </StepByStepForm>
+                <StepByStepForm
+                    stagesConfig={[
+                        [{ dataForm: form, setDataForm: setForm as LoadedState }],
+                        [{ dataForm: family, setDataForm: setFamily as LoadedState }],
+                        [
+                            { dataForm: kvdCert, setDataForm: setKvdCert as LoadedState },
+                            { dataForm: fluorographyCert, setDataForm: setFluorographyCert as LoadedState },
+                            { dataForm: vichRwCert, setDataForm: setVichRwCert as LoadedState },
+                            { dataForm: graftCert, setDataForm: setGraftCert as LoadedState },
+                        ],
+                    ]}
+                />
                 <SubmitButton
                     text={'Отправить'}
                     action={() =>
@@ -79,10 +90,13 @@ const FamilyRoomPage = () => {
                     buttonSuccessText="Отправлено"
                     isDone={isDone}
                     isActive={
-                        (additionally.optionalCheckbox?.value ?? true) &&
+                        (form.optionalCheckbox?.value ?? true) &&
                         checkFormFields(form) &&
                         checkFormFields(family) &&
-                        checkFormFields(kvdCert)
+                        checkFormFields(kvdCert) &&
+                        checkFormFields(fluorographyCert) &&
+                        checkFormFields(vichRwCert) &&
+                        checkFormFields(graftCert)
                     }
                     popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                     popUpSuccessMessage="Данные формы успешно отправлены"

@@ -59,15 +59,19 @@ const PreferentialAccommodationPage = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <StepByStepForm>
-                        <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
-                        <InputArea {...disability} collapsed={isDone} setData={setDisability as LoadedState} />
-                        <InputArea {...registration} collapsed={isDone} setData={setRegistration as LoadedState} />
-                        <InputArea {...kvdCert} setData={setKvdCert} />
-                        <InputArea {...fluorographyCert} setData={setFluorographyCert} />
-                        <InputArea {...vichRwCert} setData={setVichRwCert} />
-                        <InputArea {...graftCert} setData={setGraftCert} />
-                    </StepByStepForm>
+                    <StepByStepForm
+                        stagesConfig={[
+                            [{ dataForm: form, setDataForm: setForm as LoadedState }],
+                            [{ dataForm: disability, setDataForm: setDisability as LoadedState }],
+                            [{ dataForm: registration, setDataForm: setRegistration as LoadedState }],
+                            [
+                                { dataForm: kvdCert, setDataForm: setKvdCert },
+                                { dataForm: fluorographyCert, setDataForm: setFluorographyCert },
+                                { dataForm: vichRwCert, setDataForm: setVichRwCert },
+                                { dataForm: graftCert, setDataForm: setGraftCert },
+                            ],
+                        ]}
+                    />
                     <SubmitButton
                         text={'Отправить'}
                         action={() => sendForm()}
