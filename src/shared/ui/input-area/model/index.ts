@@ -73,6 +73,7 @@ export interface IInputAreaData {
     maxValueLength?: number | undefined
     diff?: number
     visible?: boolean
+    onChange?: (value: any) => void
 }
 
 export interface IFormDropdownValue {

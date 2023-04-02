@@ -1,16 +1,17 @@
 import { UserApplication, WorkerApplication } from '@api/model'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
-import { IInputArea, IInputAreaData } from '@ui/input-area/model'
+import { IInputArea } from '@ui/input-area/model'
 
 const getForm = (
     dataUserApplication: UserApplication,
     dataWorkerApplication: WorkerApplication[],
     currentIndex: number,
-    dataForm: IInputAreaData[],
+    startDate: string | null,
+    setStartDate: React.Dispatch<React.SetStateAction<string | null>>,
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
 
-    const startDate = !!dataForm?.at(3)?.value ? new Date(dataForm?.at(3)?.value as string) : new Date().toISOString()
+    const holidayStartDate = !!startDate ? startDate : new Date().toISOString()
 
     return {
         title: 'Заявление о предоставлении отпуска',
@@ -49,10 +50,13 @@ const getForm = (
             {
                 title: 'Начало отпуска:',
                 type: 'date',
-                value: dataForm?.[3].value,
+                value: null,
                 fieldName: 'holiday_start',
                 editable: true,
                 mask: true,
+                onChange: (value) => {
+                    setStartDate(value)
+                },
                 required: true,
                 minValueInput: getDelayInDays(5),
             },
@@ -66,15 +70,12 @@ const getForm = (
             {
                 title: 'Окончание отпуска:',
                 type: 'date',
-                value: dataForm?.[5].value,
+                value: null,
                 fieldName: 'holiday_end',
                 editable: true,
                 mask: true,
                 required: true,
-                maxValueInput: getDelayInDays(5, startDate),
-                onChange: (value) => {
-                    console.log('da')
-                },
+                maxValueInput: getDelayInDays(5, holidayStartDate),
             },
             // {
             //     title: 'Окончание отпуска:',
@@ -91,7 +92,7 @@ const getForm = (
                 title: 'Вид отпуска',
                 type: 'select',
                 fieldName: 'holiday_type',
-                value: dataForm?.[6].value,
+                value: null,
                 editable: true,
                 required: true,
                 width: '100%',
@@ -118,7 +119,7 @@ const getForm = (
                 title: 'Категория для предоставления отпуска',
                 type: 'select',
                 fieldName: 'holiday_type_coll',
-                value: dataForm?.[7].value,
+                value: null,
                 editable: true,
                 required: true,
                 width: '100%',

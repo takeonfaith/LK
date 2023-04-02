@@ -67,6 +67,7 @@ const InputArea = ({
                     {!Array.isArray(data[0])
                         ? (data as IInputAreaData[]).map((attr, index) => {
                               // TODO: Remove UniversalInput, inputs performing different tasks should be different components
+
                               return (
                                   <UniversalInput
                                       key={index}

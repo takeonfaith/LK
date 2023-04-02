@@ -17,6 +17,7 @@ import getForm from './lib/get-form'
 
 const HolidayPlanning = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
+    const [startDate, setStartDate] = useState<string | null>(null)
     const {
         data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
@@ -30,22 +31,15 @@ const HolidayPlanning = () => {
 
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
-            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex, form?.data as IInputAreaData[]))
+            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex, startDate, setStartDate))
         }
-    }, [dataUserApplication, currentIndex, loading])
+    }, [dataUserApplication, currentIndex, loading, startDate])
 
     useEffect(() => {
         if (!!form && !!dataUserApplication) {
             setSpecialFieldsName(getCollDog(form.data as IInputAreaData[]))
         }
     }, [form])
-
-    const onInputUpdated = (state: IInputArea) => {
-        if (dataUserApplication && dataWorkerApplication) {
-            console.log({ state })
-            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex, state.data as IInputAreaData[]))
-        }
-    }
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
@@ -61,7 +55,7 @@ const HolidayPlanning = () => {
                     <InputArea
                         {...form}
                         collapsed={isDone}
-                        setData={onInputUpdated as any}
+                        setData={setForm as any}
                         specialFieldsName={specialFieldsName}
                     />
 

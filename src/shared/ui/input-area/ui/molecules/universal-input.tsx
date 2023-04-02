@@ -52,6 +52,7 @@ const UniversalInput = (props: Props) => {
     const [validDates, setValidDates] = useState(true)
 
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
+        onChange?.(value)
         setData((area) => {
             if (Array.isArray(area.data[0])) {
                 ;(area.data as IComplexInputAreaData)[i][j ?? 0].value = value
@@ -62,19 +63,20 @@ const UniversalInput = (props: Props) => {
                     ;(area.data[i] as IInputAreaData).value = value
                 }
             }
-            onChange?.({ ...area })
 
             return { ...area }
         })
     }
 
     const handleChangeSelect = (page: SelectPage | SelectPage[], i: number, j?: number) => {
+        onChange?.(page)
         setData((area) => {
             if (Array.isArray(area.data[0])) {
                 ;(area.data as IComplexInputAreaData)[i][j ?? 0].value = page
             } else {
                 ;(area.data[i] as IInputAreaData).value = page
             }
+
             return { ...area }
         })
     }
@@ -82,6 +84,7 @@ const UniversalInput = (props: Props) => {
     const handleLoadFiles = (files: File[], i: number, j?: number) => {
         setData((area) => {
             ;((area.data[i] as IInputAreaData).items as CheckboxDocs[])[j ?? 0].files = files
+
             return { ...area }
         })
     }
@@ -89,13 +92,16 @@ const UniversalInput = (props: Props) => {
     const handleRadio = (button: RadioButton | null) => {
         setData((area) => {
             ;(area.data[indexI] as IInputAreaData).value = button
+
             return { ...area }
         })
     }
 
     const handleDates = (dates: string[]) => {
+        onChange?.(dates)
         setData((area) => {
             ;(area.data[indexI] as IInputAreaData).value = dates
+
             return { ...area }
         })
     }
