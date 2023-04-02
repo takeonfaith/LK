@@ -31,7 +31,7 @@ const getForm = (data: UserApplication): IInputArea => {
                 title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
                 type: 'radio',
                 fieldName: 'structural-subdivision',
-                value: null,
+                value: '',
                 editable: true,
                 items: getFormattedDivisions(data.divisions_crs),
                 isSpecificRadio: true,

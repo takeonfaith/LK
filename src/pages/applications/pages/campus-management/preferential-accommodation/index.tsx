@@ -1,5 +1,4 @@
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
-import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
