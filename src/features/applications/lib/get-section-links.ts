@@ -61,6 +61,56 @@ const getSectionLinks = (): Section[] => {
             ],
         },
         {
+            title: 'Управление студенческим городком',
+            links: [
+                {
+                    link: REGULAR_ACCOMMODATION,
+                    title: 'Предоставление права проживания (очная форма)',
+                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
+                },
+                {
+                    link: FULL_TIME_PART_TIME_FORM,
+                    title: 'Предоставление права проживания (очно-заочная форма)',
+                    exceptionalFormEducationList: ['Очная', 'Заочная'],
+                },
+                {
+                    link: ACCOMMODATION_CORRESPONDENCE_FORM,
+                    title: 'Предоставление права проживания (заочная форма)',
+                    exceptionalFormEducationList: ['Очная', 'Очно-заочная'],
+                },
+                {
+                    link: PREFERENTIAL_ACCOMMODATION,
+                    title: 'Предоставление права проживания льготной категории граждан',
+                },
+                {
+                    link: ACADEMIC_LEAVE_ACCOMMODATION,
+                    title: 'Предоставление права проживания в период академического отпуска',
+                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
+                },
+                {
+                    link: FAMILY_ROOM,
+                    title: 'Предоставление права проживания в семейной комнате',
+                    disabled: isProduction,
+                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
+                },
+                {
+                    link: RELOCATION_INSIDE_HOSTEL,
+                    title: 'Переселение внутри общежития',
+                    exceptionalFormEducationList: ['Заочная'],
+                },
+                {
+                    link: RELOCATION_TO_ANOTHER_HOSTEL,
+                    title: 'Переселение в другое общежитие',
+                    disabled: isProduction,
+                    exceptionalFormEducationList: ['Заочная'],
+                },
+                {
+                    link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
+                    title: 'Расторжение договора найма',
+                },
+            ],
+        },
+        {
             title: 'Профсоюзная организация' + additionalHeaderClosedService,
             disabled: isProduction,
             links: [
@@ -119,56 +169,6 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: ARBITRARY_REQUEST_ROUTE,
                     title: ' Произвольный запрос',
-                },
-            ],
-        },
-        {
-            title: 'Управление студенческим городком',
-            links: [
-                {
-                    link: REGULAR_ACCOMMODATION,
-                    title: 'Предоставление права проживания (очная форма)',
-                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
-                },
-                {
-                    link: FULL_TIME_PART_TIME_FORM,
-                    title: 'Предоставление права проживания (очно-заочная форма)',
-                    exceptionalFormEducationList: ['Очная', 'Заочная'],
-                },
-                {
-                    link: ACCOMMODATION_CORRESPONDENCE_FORM,
-                    title: 'Предоставление права проживания (заочная форма)',
-                    exceptionalFormEducationList: ['Очная', 'Очно-заочная'],
-                },
-                {
-                    link: PREFERENTIAL_ACCOMMODATION,
-                    title: 'Предоставление права проживания льготной категории граждан',
-                },
-                {
-                    link: ACADEMIC_LEAVE_ACCOMMODATION,
-                    title: 'Предоставление права проживания в период академического отпуска',
-                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
-                },
-                {
-                    link: FAMILY_ROOM,
-                    title: 'Предоставление права проживания в семейной комнате',
-                    disabled: isProduction,
-                    exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
-                },
-                {
-                    link: RELOCATION_INSIDE_HOSTEL,
-                    title: 'Переселение внутри общежития',
-                    exceptionalFormEducationList: ['Заочная'],
-                },
-                {
-                    link: RELOCATION_TO_ANOTHER_HOSTEL,
-                    title: 'Переселение в другое общежитие',
-                    disabled: isProduction,
-                    exceptionalFormEducationList: ['Заочная'],
-                },
-                {
-                    link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
-                    title: 'Расторжение договора найма',
                 },
             ],
         },

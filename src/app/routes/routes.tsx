@@ -47,8 +47,9 @@ import {
     StateAccreditation,
     StudentStatus,
     TerminationOfEmploymentContractPage,
+    ArbitraryRequestPage,
 } from './other-routes/pages'
-import { ArbitraryRequestPage, HelpfulInformation } from './teacher-routes/pages'
+import { HelpfulInformation } from './teacher-routes/pages'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
