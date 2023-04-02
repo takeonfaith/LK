@@ -41,7 +41,7 @@ const StudentStatus = () => {
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
-            {!!form && !!setForm && (
+            {!!form && (
                 <FormBlock>
                     <Button
                         text="Назад к заявлениям"

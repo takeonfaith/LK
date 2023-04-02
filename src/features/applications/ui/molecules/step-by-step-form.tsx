@@ -4,6 +4,7 @@ import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import { Colors } from '@consts'
 import { Line } from '@ui/timeline/ui'
+import InputArea from '@ui/input-area'
 
 type HiddenProps = {
     reached?: boolean
@@ -39,43 +40,57 @@ const ElementControlStepForm = styled.div<{ lastElement?: boolean }>`
     align-items: center;
 `
 
-type mmm = {
+type ReachedT = {
     [key: number]: boolean
 }
 
-const StepByStepForm = ({ children }: any) => {
+type DataForStepByStep = {
+    dataForm: IInputArea
+    setDataForm: React.Dispatch<React.SetStateAction<IInputArea>>
+}
+
+type Props = {
+    stagesConfig: DataForStepByStep[][]
+}
+
+const StepByStepForm = ({ stagesConfig }: Props) => {
     const [indexActiveForm, setIndexActiveForm] = useState<number>(0)
-    const [list, setList] = useState<mmm>({})
+    const [listReached, setListReached] = useState<ReachedT>({})
     useEffect(() => {
         changeStep(0)
     }, [])
 
     const changeStep = (indexAnotherStep: number) => {
-        setList((prevState) => ({
+        setListReached((prevState) => ({
             ...prevState,
-            [indexActiveForm]: checkFormFields(children[indexActiveForm].props),
+            // [indexActiveForm]: checkFormFields(children[indexActiveForm].props),
+            [indexActiveForm]: true,
         }))
         setIndexActiveForm(indexAnotherStep)
     }
     return (
         <>
             <ListStepForm>
-                {children.map((item: IInputArea & { setData: any; divider?: boolean }, key: number) => (
-                    <ElementControlStepForm lastElement={key === children.length - 1} key={key}>
+                {stagesConfig.map((item, key: number) => (
+                    <ElementControlStepForm lastElement={key === stagesConfig.length - 1} key={key}>
                         <StepCircle
                             current={key === indexActiveForm}
                             onClick={() => changeStep(key)}
-                            reached={list[key]}
+                            reached={listReached[key]}
                         >
                             {key + 1}
                         </StepCircle>
-                        {key !== children.length - 1 && (
-                            <Line direction={'horizontal'} reached={list[key]} filled={100} distance={40} />
+                        {key !== stagesConfig.length - 1 && (
+                            <Line direction={'horizontal'} reached={listReached[key]} filled={100} distance={40} />
                         )}
                     </ElementControlStepForm>
                 ))}
             </ListStepForm>
-            <>{children[indexActiveForm]}</>
+            <>
+                {stagesConfig[indexActiveForm].map((item, key) => (
+                    <InputArea {...item.dataForm} setData={item.setDataForm} key={key} />
+                ))}
+            </>
         </>
     )
 }
