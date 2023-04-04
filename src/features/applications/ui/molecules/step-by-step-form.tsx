@@ -49,8 +49,10 @@ type DataForStepByStep = {
     setDataForm: React.Dispatch<React.SetStateAction<IInputArea>>
 }
 
+export type StagesConfigsT = DataForStepByStep[][]
+
 type Props = {
-    stagesConfig: DataForStepByStep[][]
+    stagesConfig: StagesConfigsT
 }
 
 const StepByStepForm = ({ stagesConfig }: Props) => {
@@ -63,8 +65,7 @@ const StepByStepForm = ({ stagesConfig }: Props) => {
     const changeStep = (indexAnotherStep: number) => {
         setListReached((prevState) => ({
             ...prevState,
-            // [indexActiveForm]: checkFormFields(children[indexActiveForm].props),
-            [indexActiveForm]: true,
+            [indexActiveForm]: checkFormFields(stagesConfig[indexActiveForm][0].dataForm),
         }))
         setIndexActiveForm(indexAnotherStep)
     }
