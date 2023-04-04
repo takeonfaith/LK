@@ -1,4 +1,4 @@
-import { Button, FormBlock, SubmitButton } from '@ui/atoms'
+import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
@@ -58,6 +58,9 @@ const PreferentialAccommodationPage = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
+                    <Title size={4} align="left">
+                        Предоставление права проживания льготной категории граждан
+                    </Title>
                     <StepByStepForm
                         stagesConfig={[
                             [{ dataForm: form, setDataForm: setForm as LoadedState }],
