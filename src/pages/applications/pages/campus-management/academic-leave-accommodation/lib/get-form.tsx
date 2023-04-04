@@ -5,7 +5,7 @@ import React from 'react'
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Предоставление права проживания в период академического отпуска',
+        title: 'Контактная информация',
         data: [
             {
                 title: 'ФИО',

@@ -2,6 +2,7 @@ import { CheckboxDocs, IInputArea, IInputAreaData } from '@ui/input-area/model'
 
 const checkFormFields = (form: IInputArea) => {
     const isCheckDocument = !form.documents?.required || !!form.documents.files.length
+    const isCheckNewElementForm = !form.addNew || !!form.data.length
     return (
         !(form.data as IInputAreaData[]).find((el) => {
             if (el.type === 'date' && (el.maxValueInput || el.minValueInput)) {
@@ -21,7 +22,9 @@ const checkFormFields = (form: IInputArea) => {
             return el.type !== 'checkbox-docs'
                 ? !el.value && el.required
                 : el.required && !(el.items as CheckboxDocs[]).find((item) => !!item.files.length)
-        }) && isCheckDocument
+        }) &&
+        isCheckDocument &&
+        isCheckNewElementForm
     )
 }
 

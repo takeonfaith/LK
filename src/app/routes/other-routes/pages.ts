@@ -111,3 +111,5 @@ export const AccommodationCorrespondenceFormPage = lazy(
 )
 
 export const FamilyRoomPage = lazy(() => import('@pages/applications/pages/campus-management/family-room'))
+
+export const ArbitraryRequestPage = lazy(() => import('@pages/applications/pages/other/arbitrary-request'))
