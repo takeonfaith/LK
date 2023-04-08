@@ -94,11 +94,7 @@ const createResultElementForm = (elementForm: IInputAreaData) => {
 }
 
 const getValueElementForm = (elementForm: IInputAreaData) => {
-    // eslint-disable-next-line no-console
-    console.log(111, elementForm)
     const isSimpleField = !elementForm.value || typeof elementForm.value !== 'object'
-    // eslint-disable-next-line no-console
-    console.log(222, elementForm)
     return isSimpleField ? elementForm?.value : (elementForm.value as SelectPage).title
 }
 

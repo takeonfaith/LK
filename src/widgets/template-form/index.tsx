@@ -76,7 +76,9 @@ const TemplateForm = <T extends { last_update?: string }>({
                 buttonSuccessText="Отправлено"
                 repeatable={repeatable}
                 isDone={isDone && !repeatable}
-                isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
+                isActive={
+                    checkFormFields(form, Object.values(specialFieldsName)) && (form.optionalCheckbox?.value ?? true)
+                }
                 popUpFailureMessage={
                     isDone ? 'Форма отправлена' : 'Для отправки формы необходимо, чтобы все поля были заполнены'
                 }

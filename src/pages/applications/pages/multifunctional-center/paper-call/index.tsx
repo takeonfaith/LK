@@ -69,7 +69,7 @@ const ApplicationPaperCall = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form)}
+                        isActive={checkFormFields(form, Object.values(specialFieldsName))}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

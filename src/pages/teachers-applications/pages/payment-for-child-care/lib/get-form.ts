@@ -2,8 +2,8 @@ import { IInputArea } from '@ui/input-area/model'
 import getBasicFieldsApplicationTeacher from '@pages/teachers-applications/lib/get-basic-fields-application-teacher'
 import { UserApplication } from '@api/model'
 import { MethodObtainingOptions } from '@entities/applications/consts'
-import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
 import getAddressFields from '@features/applications/lib/get-address-fields'
+import getTeacherSubdivisions from '@pages/teachers-applications/lib/get-teacher-subdivisions'
 
 const getForm = (data: UserApplication): IInputArea => {
     return {
@@ -27,16 +27,7 @@ const getForm = (data: UserApplication): IInputArea => {
                 required: true,
                 items: MethodObtainingOptions,
             },
-            {
-                title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
-                type: 'radio',
-                fieldName: 'structural-subdivision',
-                value: '',
-                editable: true,
-                items: getFormattedDivisions(data.divisions_crs),
-                isSpecificRadio: true,
-                specialType: 'personalMethod',
-            },
+            ...getTeacherSubdivisions(),
             ...getAddressFields(),
             {
                 title: 'Комментарий к заявке',
