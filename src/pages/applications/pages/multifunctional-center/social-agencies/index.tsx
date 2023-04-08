@@ -11,7 +11,7 @@ import { globalAppSendForm } from '@pages/applications/lib'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { specialFieldsNameConfigT } from '@entities/applications/consts'
 import getMethodObtaining from '@features/applications/lib/get-method-obstaing'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
@@ -20,7 +20,7 @@ const ApplicationSocialAgencies = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameConfigT>({})
     const isDone = completed ?? false
     const {
         data: { dataUserApplication },

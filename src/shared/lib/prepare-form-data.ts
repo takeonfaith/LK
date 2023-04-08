@@ -15,7 +15,9 @@ const prepareFormData = <T>(form: IInputArea) => {
             }, {} as { [key: string]: any })
             acc = Object.assign({}, acc, files)
         } else if (item.type === 'select') {
-            acc[item.fieldName] = (item.value as SelectPage).title
+            acc[item.fieldName] = !!item.isSpecificSelect
+                ? (item.value as SelectPage).id
+                : (item.value as SelectPage).title
         } else {
             acc[item.fieldName] = item.value
         }

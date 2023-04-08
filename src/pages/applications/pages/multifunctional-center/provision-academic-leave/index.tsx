@@ -13,7 +13,7 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
 import getReasonAcademic from '@pages/applications/pages/multifunctional-center/provision-academic-leave/lib/get-reason-academic'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { specialFieldsNameConfigT } from '@entities/applications/consts'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -21,7 +21,7 @@ const ApplicationProvisionAcademicLeave = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameConfigT>({})
     const isDone = completed ?? false
     const {
         data: { dataUserApplication },
@@ -69,7 +69,7 @@ const ApplicationProvisionAcademicLeave = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form) && !!form?.documents?.files.length}
+                        isActive={checkFormFields(form, Object.values(specialFieldsName))}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

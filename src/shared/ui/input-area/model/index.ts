@@ -1,6 +1,6 @@
 import { SelectPage } from '@features/select'
 import { RadioButton } from '@ui/organisms/radio-button-list'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { specialFieldsNameConfigT, specialFieldsNameT } from '@entities/applications/consts'
 
 export interface IInputAreaCheckbox {
     fieldName: string
@@ -72,6 +72,7 @@ export interface IInputAreaData {
     maxValueInput?: number | string
     diff?: number
     visible?: boolean
+    isSpecificSelect?: boolean
 }
 
 export type IComplexInputAreaData = IInputAreaData[][]
@@ -89,5 +90,5 @@ export interface IInputArea {
     optionalCheckbox?: IInputAreaCheckbox
     collapsed?: boolean
     links?: IInputAreaLink[]
-    specialFieldsName?: specialFieldsNameT
+    specialFieldsName?: specialFieldsNameConfigT
 }

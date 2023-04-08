@@ -6,7 +6,7 @@ import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
 import React, { useState } from 'react'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { specialFieldsNameConfigT } from '@entities/applications/consts'
 import SimpleText from '@ui/molecules/simple-text'
 
 type Props = IInputAreaData & {
@@ -15,7 +15,7 @@ type Props = IInputAreaData & {
     setData: React.Dispatch<React.SetStateAction<IInputArea>>
     indexI: number
     indexJ?: number
-    specialFieldsName?: specialFieldsNameT
+    specialFieldsNameConfig?: specialFieldsNameConfigT
 }
 
 const UniversalInput = (props: Props) => {
@@ -37,7 +37,7 @@ const UniversalInput = (props: Props) => {
         autocomplete,
         isSpecificRadio,
         specialType,
-        specialFieldsName,
+        specialFieldsNameConfig,
         minValueInput,
         maxValueInput,
         diff,
@@ -93,7 +93,7 @@ const UniversalInput = (props: Props) => {
             return { ...area }
         })
     }
-    if (!!specialType && specialType !== specialFieldsName) {
+    if (!!specialFieldsNameConfig && !!specialType && !Object.values(specialFieldsNameConfig).includes(specialType)) {
         return null
     }
     return (type !== 'select' && type !== 'multiselect') || !items ? (
