@@ -1,7 +1,9 @@
-export const getIsTutor = () => {
-    return localStorage.getItem('isTutor')
+export const getIsTutor = (employeeFuid: string) => {
+    return localStorage.getItem(employeeFuid)
 }
 
-export const setIsTutor = (isTutor: boolean) => {
-    return localStorage.setItem('isTutor', isTutor.toString())
+export const setIsTutor = (empGuidIsTutor: any[]) => {
+    return empGuidIsTutor.map((el) => {
+        localStorage.setItem(el.employeeGuid, el.tutor.toString())
+    })
 }

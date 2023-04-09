@@ -8,11 +8,14 @@ const getForm = (
     currentIndex: number,
     startDate: string | null,
     setStartDate: React.Dispatch<React.SetStateAction<string | null>>,
+    collType: any,
+    setCollType: React.Dispatch<React.SetStateAction<string | null>>,
+    holidayType: any,
+    setHolidayType: React.Dispatch<React.SetStateAction<string | null>>,
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
-
     const holidayStartDate = !!startDate ? startDate : new Date().toISOString()
-
+    console.log(collType)
     return {
         title: 'Заявление о предоставлении отпуска',
         data: [
@@ -50,7 +53,7 @@ const getForm = (
             {
                 title: 'Начало отпуска:',
                 type: 'date',
-                value: null,
+                value: startDate,
                 fieldName: 'holiday_start',
                 editable: true,
                 mask: true,
@@ -70,31 +73,23 @@ const getForm = (
             {
                 title: 'Окончание отпуска:',
                 type: 'date',
-                value: null,
+                value: holidayStartDate,
                 fieldName: 'holiday_end',
                 editable: true,
                 mask: true,
                 required: true,
-                maxValueInput: getDelayInDays(5, holidayStartDate),
+                maxValueInput: getDelayInDays(collType ? +collType.data : 28, holidayStartDate),
             },
-            // {
-            //     title: 'Окончание отпуска:',
-            //     type: 'date-interval',
-            //     value: ['', ''],
-            //     fieldName: 'holiday_end',
-            //     editable: true,
-            //     mask: true,
-            //     required: true,
-            //     minValueInput: getDelayInDays(5),
-            //     maxValueInput: getDelayInDays(5),
-            // },
             {
                 title: 'Вид отпуска',
                 type: 'select',
                 fieldName: 'holiday_type',
-                value: null,
+                value: holidayType,
                 editable: true,
                 required: true,
+                onChange: (value) => {
+                    setHolidayType(value)
+                },
                 width: '100%',
                 items: [
                     {
@@ -119,47 +114,60 @@ const getForm = (
                 title: 'Категория для предоставления отпуска',
                 type: 'select',
                 fieldName: 'holiday_type_coll',
-                value: null,
+                value: collType,
                 editable: true,
                 required: true,
+                onChange: (value) => {
+                    console.log(value)
+                    setCollType(value)
+                },
                 width: '100%',
                 specialType: 'collDog',
                 items: [
                     {
                         id: 0,
-                        title: '3 Работникам, имеющим двоих и более детей в возрасте до 14 лет',
+                        title: 'Работникам, имеющим двоих и более детей в возрасте до 14 лет',
+                        data: 3,
                     },
                     {
                         id: 1,
-                        title: '5 Работникам, имеющим ребенка-инвалида в возрасте до 18 лет',
+                        title: 'Работникам, имеющим ребенка-инвалида в возрасте до 18 лет',
+                        data: 5,
                     },
                     {
                         id: 2,
-                        title: '5 Работникам, имеющим ребенка-инвалида в возрасте до 18 лет',
+                        title: 'Одиноким матерям (отцам)',
+                        data: 5,
                     },
                     {
                         id: 3,
-                        title: '3 Работникам в случаях рождения ребенка, регистрации брака, смерти близких родственников',
+                        title: 'Работникам в случаях рождения ребенка, регистрации брака, смерти близких родственников',
+                        data: 3,
                     },
                     {
                         id: 4,
-                        title: '1 Работникам, сопровождающим детей младшего школьного возраста в школу в первый день учебного года',
+                        title: 'Работникам, сопровождающим детей младшего школьного возраста в школу в первый день учебного года',
+                        data: 1,
                     },
                     {
                         id: 5,
-                        title: '1 Работникам, имеющим общий стаж работы в Университете от 20 до 25 лет',
+                        title: 'Работникам, имеющим общий стаж работы в Университете от 20 до 25 лет',
+                        data: 1,
                     },
                     {
                         id: 6,
-                        title: '2 Работникам, имеющим общий стаж работы в Университете от 25 до 30 лет',
+                        title: 'Работникам, имеющим общий стаж работы в Университете от 25 до 30 лет',
+                        data: 2,
                     },
                     {
                         id: 7,
-                        title: '3 Работникам, имеющим общий стаж работы в Университете от 30 до 35 лет',
+                        title: 'Работникам, имеющим общий стаж работы в Университете от 30 до 35 лет',
+                        data: 3,
                     },
                     {
                         id: 8,
-                        title: '4 Работникам, имеющим общий стаж работы в Университете свыше 35 лет',
+                        title: 'Работникам, имеющим общий стаж работы в Университете свыше 35 лет',
+                        data: 4,
                     },
                 ],
             },

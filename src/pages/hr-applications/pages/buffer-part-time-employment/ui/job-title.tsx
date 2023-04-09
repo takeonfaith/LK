@@ -1,24 +1,25 @@
+import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
-import Table from '@shared/ui/table'
+// import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { getBufferHolidayPlanningColumns } from '../lib/get-buffer-holiday-planning-columns'
-import { BufferHolidayPlanning } from '../types'
+// import getHrApplicationsColumns from '../lib/get-hr-applications-columns'
+// import { BufferHolidayWork } from '../types'
 
 interface Props {
-    info: BufferHolidayPlanning['employeeVacations'][0]
+    //info?: BufferHolidayPlanning
+    // jobTitleInfo: WorkerApplication
+    info: WorkerApplication
     index: number
 }
 
 const JobTitle: React.FC<Props> = ({ info, index }) => {
-    const { notTaken, jobTitle, division } = info
+    const { jobTitle, subDivision, rate } = info
 
     const [opened, setOpened] = useState<boolean>(false)
-
-    //console.log(notTaken)
 
     return (
         <Block
@@ -41,25 +42,29 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {division}
+                Структурное подразделение: {subDivision}
+                <br />
+                Ставка: {rate}
                 <br />
                 {/* Вид места работы: добавим */}
             </JobDescription>
             {opened && (
                 <ActionBlock>
-                    <Link to={`/hr-applications/holiday-planning/${index}`}>
-                        <Button
-                            text="Отпуск по этой должности"
-                            background="rgb(236,95,107)"
-                            textColor="#fff"
-                            width={'250px'}
-                            minWidth={'150px'}
-                            height="36px"
-                        />
-                    </Link>
-                    {!!notTaken.length && (
-                        <StyledTable columns={getBufferHolidayPlanningColumns()} data={notTaken} maxOnPage={10} />
+                    {true && (
+                        <Link to={`/hr-applications/part-time-employment/${index}`}>
+                            <Button
+                                text="Устроиться по совместительству"
+                                background="rgb(236,95,107)"
+                                textColor="#fff"
+                                width={'300px'}
+                                minWidth={'150px'}
+                                height="36px"
+                            />
+                        </Link>
                     )}
+                    {/* {!!dismissalApplications.length && (
+                        <StyledTable columns={getHrApplicationsColumns()} data={dismissalApplications} maxOnPage={10} />
+                    )} */}
                 </ActionBlock>
             )}
             <Button
@@ -69,6 +74,7 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                 }}
                 text={opened ? 'Скрыть' : 'Подробнее'}
                 background="transparent"
+                padding="0px"
             />
         </Block>
     )
@@ -90,9 +96,9 @@ const BlockHeader = styled.div`
     align-items: center;
 `
 
-const StyledTable = styled(Table)`
-    width: 100%;
-`
+// const StyledTable = styled(Table)`
+//     width: 100%;
+// `
 
 const ActionBlock = styled.div`
     display: flex;

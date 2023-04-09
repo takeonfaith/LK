@@ -1,13 +1,27 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication, WorkerApplication } from '@api/model'
-import { useState } from 'react'
+import { getIsTutor } from './is-tutor'
 
 const getForm = (
     dataUserApplication: UserApplication,
     dataWorkerApplication: WorkerApplication[],
     currentIndex: number,
+    startDate: string | null,
+    setStartDate: React.Dispatch<React.SetStateAction<string | null>>,
+    medicalExaminationDate: string | null,
+    setMedicalExaminationDate: React.Dispatch<React.SetStateAction<string | null>>,
+    isRetirement: string | null,
+    setIsRetirement: React.Dispatch<React.SetStateAction<string | null>>,
 ): IInputArea => {
-    const { surname, name, patronymic, birthday } = dataUserApplication
+    const { surname, name, patronymic } = dataUserApplication
+    const firstDayOff = !!startDate ? new Date(startDate) : new Date()
+    const secondDayOff = new Date(firstDayOff.getTime() + 24 * 60 * 60 * 1000)
+    const isTutor = getIsTutor(dataWorkerApplication[currentIndex].jobGuid.toString()) === 'true' ? true : false
+    if (isTutor && firstDayOff.getDay() === 5) {
+        secondDayOff.setDate(firstDayOff.getDate() + 1)
+    } else if (firstDayOff.getDay() === 5 || firstDayOff.getDay() === 6 || firstDayOff.getDay() === 0) {
+        secondDayOff.setDate(firstDayOff.getDate() + ((8 - firstDayOff.getDay()) % 7))
+    }
     return {
         title: 'Заявление о диспансеризации',
         data: [
@@ -36,54 +50,44 @@ const getForm = (
             {
                 title: 'Дата прохождения диспансеризации',
                 type: 'date',
-                value: null,
+                value: medicalExaminationDate,
                 fieldName: 'medical-examination-date',
                 editable: true,
                 mask: true,
                 required: true,
+                onChange: (value) => {
+                    setMedicalExaminationDate(value)
+                },
             },
             {
-                title: 'Я являюсь пенсионером',
+                title: 'Выберите день отдыха',
+                type: 'date',
+                value: startDate,
+                fieldName: 'extra_examination_date',
+                editable: true,
+                onChange: (value) => {
+                    setStartDate(value)
+                },
+                mask: true,
+                required: true,
+                maxValueLength: 1,
+            },
+            {
+                title: 'Я являюсь получателем пенсии по старости или пенсии за выслугу лет или мне осталось менее 5 лет до этого',
                 type: 'hr-checkbox',
-                value: '',
+                value: isRetirement,
                 fieldName: 'isRetirement',
                 editable: true,
                 mask: true,
                 required: false,
-            },
-            // {
-            //     title: 'Компенсация',
-            //     type: 'select',
-            //     fieldName: 'compensation',
-            //     value: null,
-            //     editable: true,
-            //     required: true,
-            //     width: '100%',
-            //     items: [
-            //         {
-            //             id: 0,
-            //             title: 'Оплатить работу в выходной день в двойном размере',
-            //         },
-            //         {
-            //             id: 1,
-            //             title: 'Оплатить работу в выходной день в одинарном размере с предоставлением другого дня отдыха',
-            //         },
-            //     ],
-            // },
-            {
-                title: 'Выберите день отдыха',
-                type: 'date',
-                value: '',
-                fieldName: 'extra_examination_date',
-                editable: true,
-                mask: true,
-                required: false,
-                maxValueLength: 1,
+                onChange: (value) => {
+                    setIsRetirement(value)
+                },
             },
             {
-                title: 'Выберите второй день отдыха',
+                title: 'Второй день отдыха',
                 type: 'date',
-                value: '',
+                value: secondDayOff.toISOString().substr(0, 10),
                 fieldName: 'extra_examination_date_2',
                 editable: false,
                 mask: true,
@@ -98,13 +102,6 @@ const getForm = (
                 fieldName: 'jobGuid',
                 visible: false,
             },
-            // {
-            //     title: '',
-            //     type: 'number',
-            //     value: getAgeMed(birthday).toString(),
-            //     fieldName: 'age-of-employee',
-            //     visible: false,
-            // },
         ],
     }
 }

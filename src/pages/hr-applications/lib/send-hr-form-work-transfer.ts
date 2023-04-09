@@ -1,12 +1,13 @@
 import { IInputArea } from '@ui/input-area/model'
-import { bufferHolidayTransferModel } from '../pages/buffer-holiday-transfer/model'
+import { bufferWorkTransferModel } from '../pages/buffer-holiday-work-transfer/model'
 
-const sendHrFormHolidayTransfer = async (
+const SendHrFormWorkTransfer = async (
     employeeId: string,
     inputAreas: IInputArea[],
     setCompleted: (loading: boolean) => void,
 ) => {
     setCompleted(false)
+
     const form = inputAreas
         .map((itemForm) => {
             if (!Array.isArray(itemForm.data[0])) {
@@ -42,33 +43,23 @@ const sendHrFormHolidayTransfer = async (
                     )
                 })
                 const obj = {} as any
-
                 obj[employeeId] = JSON.stringify(r)
-
                 return obj
             }
         })
         .flat()
 
     const result = Object.assign({}, ...form)
-    //console.log(result)
 
-    const response = await bufferHolidayTransferModel.effects.sendBufferHolidayTransferFx({
+    const response = await bufferWorkTransferModel.effects.sendBufferWorkTransferFx({
         employeeGuid: result.jobGuid,
-        reason: result.reason,
-        period: {
-            from: {
-                startDate: result.holiday_old_start,
-                endDate: result.holiday_old_end,
-            },
-            to: {
-                startDate: result.holiday_new_start,
-                endDate: result.holiday_new_end,
-            },
-        },
+        transferDate: result.transferDate,
+        divisionGuid: result.jobGuid,
+        desiredJob: result.newPost,
+        desiredRate: result.newRate,
     })
 
     !response.isError && setCompleted(true)
 }
 
-export default sendHrFormHolidayTransfer
+export default SendHrFormWorkTransfer

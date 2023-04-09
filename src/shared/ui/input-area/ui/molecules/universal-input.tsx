@@ -9,6 +9,7 @@ import React, { useState } from 'react'
 import { specialFieldsNameT } from '@entities/applications/consts'
 import SimpleText from '@ui/molecules/simple-text'
 import HrCheckbox from '@shared/ui/atoms/hr-checkbox'
+import TextHeader from '@shared/ui/molecules/text-header'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -90,6 +91,7 @@ const UniversalInput = (props: Props) => {
     }
 
     const handleRadio = (button: RadioButton | null) => {
+        onChange?.(button)
         setData((area) => {
             ;(area.data[indexI] as IInputAreaData).value = button
 
@@ -154,6 +156,8 @@ const UniversalInput = (props: Props) => {
             />
         ) : type === 'simple-text' ? (
             <SimpleText title={title} value={value as string} visible={visible} />
+        ) : type === 'text-header' ? (
+            <TextHeader title={title} visible={visible} />
         ) : type === 'radio' ? (
             <RadioButtonList
                 buttons={items as RadioButton[]}

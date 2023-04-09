@@ -15,29 +15,42 @@ import { bufferMedicalExaminationModel } from '../buffer-medical-examination/mod
 import getCompensation from './lib/get-compenstion'
 import getForm from './lib/get-form'
 
-type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
-
 const MedicalExamination = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
+    const [startDate, setStartDate] = useState<string | null>(null)
+    const [medicalExaminationDate, setMedicalExaminationDate] = useState<string | null>(null)
+    const [isRetirement, setIsRetirement] = useState<string | null>(null)
     const {
         data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
     const birthday = dataUserApplication
     const { loading: loading } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
-    const [completed, setCompleted] = useState(false)
     const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [completed, setCompleted] = useState(false)
     const isDone = completed ?? false
     const history = useHistory()
     const { id } = useParams<{ id: string }>()
     const currentIndex = +id
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
-            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
+            setForm(
+                getForm(
+                    dataUserApplication,
+                    dataWorkerApplication,
+                    currentIndex,
+                    startDate,
+                    setStartDate,
+                    medicalExaminationDate,
+                    setMedicalExaminationDate,
+                    isRetirement,
+                    setIsRetirement,
+                ),
+            )
         }
-    }, [dataUserApplication, currentIndex, loading])
+    }, [dataUserApplication, currentIndex, loading, startDate, medicalExaminationDate, isRetirement])
     useEffect(() => {
-        if (!!form && !!dataUserApplication && !!birthday) {
-            setSpecialFieldsName(getCompensation(form.data as IInputAreaData[], birthday as unknown as string))
+        if (!!form && !!dataUserApplication) {
+            setSpecialFieldsName(getCompensation(form.data as IInputAreaData[]))
         }
     }, [form])
 
@@ -55,7 +68,7 @@ const MedicalExamination = () => {
                     <InputArea
                         {...form}
                         collapsed={isDone}
-                        setData={setForm as LoadedState}
+                        setData={setForm as any}
                         specialFieldsName={specialFieldsName}
                     />
 

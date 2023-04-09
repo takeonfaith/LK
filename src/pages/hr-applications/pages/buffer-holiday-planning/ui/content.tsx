@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { bufferHolidayPlanningModel } from '../model'
+import History from './history'
 import JobTitle from './job-title'
 
 const Content = () => {
@@ -21,6 +22,7 @@ const Content = () => {
             {data.map((info, index) => {
                 return <JobTitle key={index} info={info} index={index} />
             })}
+            <History />
         </Wrapper>
     )
 }

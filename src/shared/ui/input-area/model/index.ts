@@ -27,6 +27,7 @@ type IInputAreaTypes =
     | 'date-interval'
     | 'simple-text'
     | 'hr-checkbox'
+    | 'text-header'
 
 export interface IInputAreaFiles {
     files: File[]

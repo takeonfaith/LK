@@ -1,17 +1,18 @@
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
 import Table from '@shared/ui/table'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
-import getMedicalExaminationHistoryColumns from '../lib/get-holiday-work-history-columns'
-import { bufferMedicalExaminationModel } from '../model'
+import getHolidayWorkHistoryColumns from '../../buffer-holiday-transfer/lib/get-holiday-work-history-columns'
+import { bufferHolidayPlanningModel } from '../model'
 
 const History = () => {
     const [openedHistory, setOpenedHistory] = useState<boolean>(false)
-    useEffect(bufferMedicalExaminationModel.events.loadBufferMedicalExamination, [])
-    const { data } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
+
+    const { data } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
     const historyIsEmpty = !!data.every((d) => !d)
+
     return (
         <Block
             orientation={'vertical'}
@@ -23,26 +24,19 @@ const History = () => {
             height="fit-content"
         >
             <BlockHeader>
-                История заявлений на выход в выходной день:
+                История заявлений на отпуск:
                 <Button
                     icon={openedHistory ? <HiChevronUp /> : <HiChevronDown />}
                     onClick={() => !historyIsEmpty && setOpenedHistory((prev) => !prev)}
                     background="transparent"
                 />
             </BlockHeader>
-            {openedHistory && (
-                // if (!object.dismissalApplications.length) return null
+            {openedHistory &&
+                data.map((object, index) => {
+                    // if (!object.dismissalApplications.length) return null
 
-                <StyledTable
-                    columns={getMedicalExaminationHistoryColumns()}
-                    data={data.map((object) => {
-                        return {
-                            ...object,
-                        }
-                    })}
-                    maxOnPage={5}
-                />
-            )}
+                    return <StyledTable key={index} columns={getHolidayWorkHistoryColumns()} data={[]} maxOnPage={10} />
+                })}
             <Button
                 onClick={() => {
                     !historyIsEmpty && setOpenedHistory((prev) => !prev)

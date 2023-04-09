@@ -1,24 +1,23 @@
+import { WorkerApplication } from '@shared/api/model'
 import { IInputArea } from '@ui/input-area/model'
 
-const getOldPost = (): IInputArea => {
+const getOldPost = (dataWorkerApplication: WorkerApplication[], currentIndex: number): IInputArea => {
     return {
-        title: 'Старое:',
+        title: 'Старое место работы:',
         data: [
             {
-                title: 'Подразделение',
-                value: null,
-                fieldName: 'exPlaceOfWork',
-                editable: true,
-                mask: true,
-                required: true,
+                title: 'Должность',
+                type: 'simple-text',
+                fieldName: 'post',
+                value: dataWorkerApplication[currentIndex].jobTitle.toString(),
+                visible: true,
             },
             {
-                title: 'Должность',
-                value: null,
-                fieldName: 'exPost',
-                editable: true,
-                mask: true,
-                required: true,
+                title: 'Структурное подразделение',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].subDivision.toString(),
+                fieldName: 'subDivision',
+                visible: true,
             },
             {
                 title: 'Ставка',

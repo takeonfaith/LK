@@ -1,7 +1,11 @@
 import { IInputArea } from '@ui/input-area/model'
-import { UserApplication } from '@api/model'
+import { UserApplication, WorkerApplication } from '@api/model'
 
-const getForm = (dataUserApplication: UserApplication): IInputArea => {
+const getForm = (
+    dataUserApplication: UserApplication,
+    dataWorkerApplication: WorkerApplication[],
+    currentIndex: number,
+): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
         title: 'Заявление на трудоустройство по совместительству',
@@ -15,31 +19,21 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Ученая степень',
-                value: null,
-                fieldName: 'degree',
-                editable: true,
-                mask: true,
-                required: false,
+                title: 'Должность',
+                type: 'simple-text',
+                fieldName: 'post',
+                value: dataWorkerApplication[currentIndex].jobTitle.toString(),
+                visible: true,
             },
             {
-                title: 'Ученое звание',
-                value: null,
-                fieldName: 'academicTitle',
-                editable: true,
-                mask: true,
-                required: false,
+                title: 'Структурное подразделение',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].subDivision.toString(),
+                fieldName: 'subDivision',
+                visible: true,
             },
             {
-                title: 'Наименование учебной группы (для студентов), кафедры (для аспирантов)',
-                value: null,
-                fieldName: 'placeOfStudy',
-                editable: true,
-                mask: true,
-                required: false,
-            },
-            {
-                title: 'Полное наименование структурного подразделения, куда производится трудорустройство',
+                title: 'Cтруктурноe подразделениe, куда производится трудорустройство',
                 value: null,
                 fieldName: 'placeOfWork',
                 editable: true,
@@ -76,6 +70,13 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 mask: true,
                 editable: true,
                 required: true,
+            },
+            {
+                title: '',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].jobGuid.toString(),
+                fieldName: 'jobGuid',
+                visible: false,
             },
             {
                 title: 'Комментарий к заявке',

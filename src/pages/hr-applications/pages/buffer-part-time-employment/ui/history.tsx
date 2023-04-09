@@ -4,13 +4,13 @@ import Table from '@shared/ui/table'
 import React, { useState, useEffect } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
-import getMedicalExaminationHistoryColumns from '../lib/get-holiday-work-history-columns'
-import { bufferMedicalExaminationModel } from '../model'
+import getPartTimeEmploymentHistoryColumns from '../../buffer-holiday-transfer/lib/get-holiday-work-history-columns'
+import { bufferPartTimeEmploymentModel } from '../model'
 
 const History = () => {
     const [openedHistory, setOpenedHistory] = useState<boolean>(false)
-    useEffect(bufferMedicalExaminationModel.events.loadBufferMedicalExamination, [])
-    const { data } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
+    useEffect(bufferPartTimeEmploymentModel.events.loadBufferPartTimeEmployment, [])
+    const { data } = bufferPartTimeEmploymentModel.selectors.useBufferPartTimeEmployment()
     const historyIsEmpty = !!data.every((d) => !d)
     return (
         <Block
@@ -23,7 +23,7 @@ const History = () => {
             height="fit-content"
         >
             <BlockHeader>
-                История заявлений на выход в выходной день:
+                История заявлений по трудоустройствоству по совместительству:
                 <Button
                     icon={openedHistory ? <HiChevronUp /> : <HiChevronDown />}
                     onClick={() => !historyIsEmpty && setOpenedHistory((prev) => !prev)}
@@ -34,7 +34,7 @@ const History = () => {
                 // if (!object.dismissalApplications.length) return null
 
                 <StyledTable
-                    columns={getMedicalExaminationHistoryColumns()}
+                    columns={getPartTimeEmploymentHistoryColumns()}
                     data={data.map((object) => {
                         return {
                             ...object,

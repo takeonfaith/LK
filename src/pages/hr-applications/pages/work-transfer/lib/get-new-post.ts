@@ -2,7 +2,7 @@ import { IInputArea } from '@ui/input-area/model'
 
 const geOldPost = (): IInputArea => {
     return {
-        title: 'Новое',
+        title: 'Новое место работы',
         data: [
             {
                 title: 'Подразделение',
@@ -40,6 +40,45 @@ const geOldPost = (): IInputArea => {
                     {
                         id: 2,
                         title: '1',
+                    },
+                ],
+            },
+            {
+                title: 'Тип занятости',
+                type: 'select',
+                fieldName: 'employment',
+                value: null,
+                editable: true,
+                required: true,
+                width: '100%',
+                items: [
+                    {
+                        id: 0,
+                        title: 'Основное',
+                    },
+                    {
+                        id: 1,
+                        title: 'По совместительству',
+                    },
+                ],
+            },
+            {
+                title: 'Тип совместительства',
+                type: 'select',
+                fieldName: 'parttime_type',
+                value: null,
+                editable: true,
+                required: true,
+                specialType: 'PartTime',
+                width: '100%',
+                items: [
+                    {
+                        id: 0,
+                        title: 'Внутреннее',
+                    },
+                    {
+                        id: 1,
+                        title: 'Внешнее',
                     },
                 ],
             },
