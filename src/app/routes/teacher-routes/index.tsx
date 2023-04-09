@@ -41,7 +41,7 @@ import {
 import { isProduction, OLD_LK_URL } from '@consts'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import React from 'react'
-import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'
+import { BiBookReader, BiGroup, BiHeadphone, BiIdCard } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
@@ -260,11 +260,12 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         show: false,
         group: 'OTHER',
     },
-    'personal-notifications': {
-        id: 'personal-notifications',
-        title: 'Кадровые уведомления',
-        icon: <BiNotification />,
-        path: PERSONAL_NOTIFICATIONS,
+    doclist: {
+        id: 'doclist',
+        // title: 'Ознакомление с документами',
+        title: 'Ознакомление с док...',
+        icon: <FiFileText />,
+        path: DOCLIST_ROUTE,
         Component: PersonalNotificationsPage,
         color: 'blue',
         isTemplate: false,
