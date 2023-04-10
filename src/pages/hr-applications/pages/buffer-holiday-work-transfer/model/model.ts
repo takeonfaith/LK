@@ -11,14 +11,14 @@ const sendBufferWorkTransfer = createEvent<BufferWorkTransferForm>()
 
 const loadBufferWorkTransferFx = createEffect(async () => {
     const { data } = await $hrApi.get<BufferWorkTransfer>(
-        `Weekend.GetAllHistory?PersonalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
+        `AnotherPlaceWork.GetAllHistory?PersonalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
     )
     return data.employeeHistories
 })
 sample({ clock: loadBufferWorkTransfer, target: loadBufferWorkTransferFx })
 
 const sendBufferWorkTransferFx = createEffect(async (data: BufferWorkTransferForm) => {
-    const result = await $hrApi.post<BufferWorkTransfer>('Weekend.AddWeekend', data)
+    const result = await $hrApi.post<BufferWorkTransfer>('AnotherPlaceWork.AddAnotherPlaceOfWork', data)
 
     return result.data
 })
