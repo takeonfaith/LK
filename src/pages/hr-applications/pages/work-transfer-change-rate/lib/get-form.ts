@@ -24,7 +24,7 @@ const getForm = (
                 value: dataWorkerApplication[currentIndex].jobGuid.toString(),
                 fieldName: 'jobGuid',
                 visible: false,
-            },           
+            },
             {
                 title: 'Должность',
                 type: 'simple-text',
@@ -69,7 +69,6 @@ const getForm = (
                     },
                 ],
             },
-           
         ],
     }
 }
