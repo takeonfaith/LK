@@ -219,7 +219,7 @@ export const generalRoutes: IRoutes = {
         title: 'Ознакомление с док...',
         icon: <FiFileText />,
         path: DOCLIST_ROUTE,
-        Component: DecreisDirectivesPage,
+        Component: () => <DecreisDirectivesPage />,
         color: 'blue',
         isTemplate: false,
         group: 'FINANCES_DOCS',
