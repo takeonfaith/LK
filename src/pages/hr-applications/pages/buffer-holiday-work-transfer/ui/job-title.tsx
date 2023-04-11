@@ -53,7 +53,7 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                     {true && (
                         <Link to={`/hr-applications/work-transfer/${index}`}>
                             <Button
-                                text="Перевестись"
+                                text="Перевестись с этой должности"
                                 background="rgb(236,95,107)"
                                 textColor="#fff"
                                 width={'250px'}
@@ -62,6 +62,16 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                             />
                         </Link>
                     )}
+                    <Link to={`/hr-applications/work-transfer-change-rate/${index}`}>
+                        <Button
+                            text="Изменить ставку"
+                            background="rgb(236,95,107)"
+                            textColor="#fff"
+                            width={'250px'}
+                            minWidth={'150px'}
+                            height="36px"
+                        />
+                    </Link>
                     {/* {!!dismissalApplications.length && (
                         <StyledTable columns={getHrApplicationsColumns()} data={dismissalApplications} maxOnPage={10} />
                     )} */}
@@ -102,8 +112,9 @@ const BlockHeader = styled.div`
 
 const ActionBlock = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
     align-items: center;
+    justify-content: center;
     width: 100%;
 `

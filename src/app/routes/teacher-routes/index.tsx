@@ -38,6 +38,7 @@ import {
     PaymentForChildCarePage,
     HolidayTransfer,
     MedicalExamination,
+    WorkTransferChangeRate,
 } from './pages'
 
 import React from 'react'
@@ -119,6 +120,7 @@ export const EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/extra-holiday-coll'
 export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning/:id'
 export const HOLIDAY_TRANSFER = HR_APPLICATIONS_ROUTE + '/holiday-transfer/:id'
 export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work/:id'
+export const WORK_TRANSFER_CHANGE_RATE = HR_APPLICATIONS_ROUTE + '/work-transfer-change-rate/:id'
 export const MEDICAL_EXAMINATION = HR_APPLICATIONS_ROUTE + '/medical-examination/:id'
 export const BUFFER_DISMISSAL = HR_APPLICATIONS_ROUTE + '/buffer-dismissal'
 // export const BUFFER_EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/buffer-extra-holiday-coll'
@@ -516,6 +518,16 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : WorkTransfer,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'work-transfer-change-rate-form': {
+        id: 'work-transfer-form',
+        title: 'Заявление на перевод',
+        path: WORK_TRANSFER_CHANGE_RATE,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : WorkTransferChangeRate,
         isTemplate: false,
         group: 'OTHER',
     },

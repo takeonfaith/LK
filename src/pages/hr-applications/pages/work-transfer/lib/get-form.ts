@@ -26,7 +26,7 @@ const getForm = (
                 visible: false,
             },
             {
-                title: 'Старое место работы',
+                title: 'Текущее место работы',
                 type: 'text-header',
                 fieldName: 'post',
                 value: '',
@@ -47,27 +47,11 @@ const getForm = (
                 visible: true,
             },
             {
-                title: 'Ставка',
-                type: 'select',
-                fieldName: 'exRate',
-                value: '',
-                editable: true,
-                required: true,
-                width: '100%',
-                items: [
-                    {
-                        id: 0,
-                        title: '0.25',
-                    },
-                    {
-                        id: 1,
-                        title: '0.5',
-                    },
-                    {
-                        id: 2,
-                        title: '1',
-                    },
-                ],
+                title: 'Cтавка',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].rate.toString(),
+                fieldName: 'currentRate',
+                visible: true,
             },
             {
                 title: 'Новое место работы',

@@ -60,4 +60,5 @@ export const MedicalExamination = lazy(() => import('@pages/hr-applications/page
 export const HolidayPlanning = lazy(() => import('@pages/hr-applications/pages/holiday-planning'))
 export const HolidayTransfer = lazy(() => import('@pages/hr-applications/pages/holiday-transfer'))
 export const WorkTransfer = lazy(() => import('@pages/hr-applications/pages/work-transfer'))
+export const WorkTransferChangeRate = lazy(() => import('@pages/hr-applications/pages/work-transfer-change-rate'))
 export const DismissalBufferPage = lazy(() => import('@pages/hr-applications/pages/buffer-dismissal'))
