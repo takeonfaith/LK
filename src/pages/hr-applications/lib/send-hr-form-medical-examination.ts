@@ -12,7 +12,6 @@ const SendHrFormMedicalExamination = async (
             if (!Array.isArray(itemForm.data[0])) {
                 return itemForm.data.map((l) => {
                     const obj = {}
-                    console.log(l)
                     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     if (!!l?.fieldName) obj[l?.fieldName ?? ''] = typeof l.value !== 'object' ? l?.value : l.value.title
@@ -54,7 +53,7 @@ const SendHrFormMedicalExamination = async (
     const response = await bufferMedicalExaminationModel.effects.sendBufferMedicalExaminationFx({
         employeeGuid: result.jobGuid,
         start: result.extra_examination_date,
-        end: result.isRetirement ? result.extra_examination_date_2 : null,
+        end: result.isRetirement ? result.extra_examination_date_2 : result.extra_examination_date,
     })
 
     !response.isError && setCompleted(true)

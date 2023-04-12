@@ -1,6 +1,7 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication, WorkerApplication } from '@api/model'
 import { getIsTutor } from './is-tutor'
+import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 
 const getForm = (
     dataUserApplication: UserApplication,
@@ -22,6 +23,7 @@ const getForm = (
     } else if (firstDayOff.getDay() === 5 || firstDayOff.getDay() === 6 || firstDayOff.getDay() === 0) {
         secondDayOff.setDate(firstDayOff.getDate() + ((8 - firstDayOff.getDay()) % 7))
     }
+
     return {
         title: 'Заявление о диспансеризации',
         data: [
@@ -47,20 +49,20 @@ const getForm = (
                 fieldName: 'subDivision',
                 visible: true,
             },
+            // {
+            //     title: 'Дата прохождения диспансеризации',
+            //     type: 'date',
+            //     value: medicalExaminationDate,
+            //     fieldName: 'medical-examination-date',
+            //     editable: true,
+            //     mask: true,
+            //     required: true,
+            //     onChange: (value) => {
+            //         setMedicalExaminationDate(value)
+            //     },
+            // },
             {
                 title: 'Дата прохождения диспансеризации',
-                type: 'date',
-                value: medicalExaminationDate,
-                fieldName: 'medical-examination-date',
-                editable: true,
-                mask: true,
-                required: true,
-                onChange: (value) => {
-                    setMedicalExaminationDate(value)
-                },
-            },
-            {
-                title: 'Выберите день отдыха',
                 type: 'date',
                 value: startDate,
                 fieldName: 'extra_examination_date',
@@ -71,11 +73,12 @@ const getForm = (
                 mask: true,
                 required: true,
                 maxValueLength: 1,
+                minValueInput: getDelayInDays(0),
             },
             {
                 title: 'Я являюсь получателем пенсии по старости или пенсии за выслугу лет или мне осталось менее 5 лет до этого',
                 type: 'hr-checkbox',
-                value: isRetirement,
+                value: !!isRetirement ? isRetirement : '',
                 fieldName: 'isRetirement',
                 editable: true,
                 mask: true,

@@ -1,5 +1,6 @@
 import { UserApplication, WorkerApplication } from '@api/model'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
+import localizeDate from '@shared/lib/localize-date'
 import { IInputArea } from '@ui/input-area/model'
 
 const getForm = (
@@ -8,6 +9,8 @@ const getForm = (
     currentIndex: number,
     startDate: string | null,
     setStartDate: React.Dispatch<React.SetStateAction<string | null>>,
+    endDate: string | null,
+    setEndDate: React.Dispatch<React.SetStateAction<string | null>>,
     collType: any,
     setCollType: React.Dispatch<React.SetStateAction<string | null>>,
     holidayType: any,
@@ -15,7 +18,8 @@ const getForm = (
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     const holidayStartDate = !!startDate ? startDate : new Date().toISOString()
-    console.log(collType)
+    const holidayEndDate = !!endDate ? endDate : new Date().toISOString()
+    const collTypeData = !!collType ? collType : ''
     return {
         title: 'Заявление о предоставлении отпуска',
         data: [
@@ -73,11 +77,15 @@ const getForm = (
             {
                 title: 'Окончание отпуска:',
                 type: 'date',
-                value: holidayStartDate,
+                value: holidayEndDate,
                 fieldName: 'holiday_end',
                 editable: true,
                 mask: true,
                 required: true,
+                onChange: (value) => {
+                    setEndDate(value)
+                },
+                minValueInput: holidayStartDate,
                 maxValueInput: getDelayInDays(collType ? +collType.data : 28, holidayStartDate),
             },
             {
@@ -114,12 +122,12 @@ const getForm = (
                 title: 'Категория для предоставления отпуска',
                 type: 'select',
                 fieldName: 'holiday_type_coll',
-                value: collType,
+                value: collTypeData,
                 editable: true,
                 required: true,
                 onChange: (value) => {
-                    console.log(value)
                     setCollType(value)
+                    setEndDate(getDelayInDays(value ? +value.data : 28, holidayStartDate))
                 },
                 width: '100%',
                 specialType: 'collDog',

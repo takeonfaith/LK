@@ -18,6 +18,7 @@ import getForm from './lib/get-form'
 const HolidayPlanning = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [startDate, setStartDate] = useState<string | null>(null)
+    const [endDate, setEndDate] = useState<string | null>(null)
     const [collType, setCollType] = useState<string | null>(null)
     const [holidayType, setHolidayType] = useState<string | null>(null)
     const {
@@ -40,6 +41,8 @@ const HolidayPlanning = () => {
                     currentIndex,
                     startDate,
                     setStartDate,
+                    endDate,
+                    setEndDate,
                     collType,
                     setCollType,
                     holidayType,
