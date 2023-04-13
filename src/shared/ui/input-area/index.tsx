@@ -86,7 +86,7 @@ const InputArea = ({
                                       changeInputArea={changeInputArea && !optionalCheckbox?.value}
                                       setData={setData as LoadedState}
                                       indexI={index}
-                                      specialFieldsName={specialFieldsName}
+                                      specialFieldsNameConfig={specialFieldsName}
                                       {...attr}
                                   />
                               )
@@ -103,7 +103,7 @@ const InputArea = ({
                                                   setData={setData as LoadedState}
                                                   indexI={i}
                                                   indexJ={j}
-                                                  specialFieldsName={specialFieldsName}
+                                                  specialFieldsNameConfig={specialFieldsName}
                                                   {...attr}
                                               />
                                           )

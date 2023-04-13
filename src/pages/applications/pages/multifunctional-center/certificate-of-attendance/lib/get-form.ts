@@ -1,30 +1,10 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
-import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
 import { MethodObtainingOptions } from '@entities/applications/consts'
-import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
 import getAddressFields from '@features/applications/lib/get-address-fields'
-// const expelled_uni = [
-//     {
-//         title: 'отчислением из',
-//         type: 'text',
-//         value: '',
-//         editable: true,
-//         fieldName: 'expelled_university',
-//         required: true,
-//     },
-//     {
-//         title: 'в',
-//         type: 'text',
-//         value: '',
-//         editable: true,
-//         fieldName: 'year',
-//         required: true,
-//     },
-//     {
-//         title: 'году',
-//     },
-// ]
+import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
+import getStudentSubdivisions from '@pages/applications/lib/get-student-subdivisions'
+
 const academic_form = [
     { id: 0, title: 'Очная' },
     { id: 1, title: 'Заочная' },
@@ -69,7 +49,6 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
                 value: dataUserApplication.phone,
             },
-
             {
                 title: 'Email',
                 type: 'email',
@@ -87,16 +66,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
                 items: MethodObtainingOptions,
             },
-            {
-                title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
-                type: 'radio',
-                fieldName: 'structural-subdivision',
-                value: null,
-                editable: true,
-                items: getFormattedDivisions(dataUserApplication.divisions_crs),
-                isSpecificRadio: true,
-                specialType: 'personalMethod',
-            },
+            ...getStudentSubdivisions(dataUserApplication),
             ...getAddressFields(),
             {
                 title: 'Прошу выдать мне справку об обучении в связи с:',
@@ -107,6 +77,24 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 items: reasons,
                 editable: true,
                 required: true,
+            },
+            {
+                title: 'Название вуза на момент отчисления',
+                type: 'text',
+                value: '',
+                editable: true,
+                fieldName: 'vuz_otch',
+                required: true,
+                specialType: 'dueToWithdrawal',
+            },
+            {
+                title: 'Год отчисления',
+                type: 'number',
+                value: '',
+                editable: true,
+                fieldName: 'vuz_otch_year',
+                required: true,
+                specialType: 'dueToWithdrawal',
             },
             {
                 title: 'Код направления подготовки',

@@ -7,6 +7,7 @@ const getAddressFields = (): IInputAreaData[] => {
             value: '',
             fieldName: 'post_street',
             editable: true,
+            required: true,
             specialType: 'postMethod',
         },
         {
@@ -14,6 +15,7 @@ const getAddressFields = (): IInputAreaData[] => {
             value: '',
             fieldName: 'post_city',
             editable: true,
+            required: true,
             specialType: 'postMethod',
         },
         {
@@ -28,6 +30,7 @@ const getAddressFields = (): IInputAreaData[] => {
             value: '',
             fieldName: 'post_region',
             editable: true,
+            required: true,
             specialType: 'postMethod',
         },
         {
@@ -35,6 +38,7 @@ const getAddressFields = (): IInputAreaData[] => {
             value: '',
             fieldName: 'post_country',
             editable: true,
+            required: true,
             specialType: 'postMethod',
         },
         {
@@ -42,6 +46,7 @@ const getAddressFields = (): IInputAreaData[] => {
             value: '',
             fieldName: 'post_index',
             editable: true,
+            required: true,
             specialType: 'postMethod',
         },
     ]

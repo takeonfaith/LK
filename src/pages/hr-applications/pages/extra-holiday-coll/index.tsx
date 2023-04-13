@@ -11,7 +11,7 @@ import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrap
 import checkFormFields from '@utils/check-form-fields'
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { specialFieldsNameConfigT } from '@entities/applications/consts'
 import getExtraHolidayLength from './lib/get-extra-holiday-length'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
@@ -23,7 +23,7 @@ const ExtraHolidayColl = () => {
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameConfigT>({})
     const isDone = completed ?? false
     const history = useHistory()
 

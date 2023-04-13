@@ -1,7 +1,7 @@
 import React from 'react'
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { specialFieldsNameConfigT } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { getCurrentIndex } from '@pages/hr-applications/lib/currentIndex'
 import SendHrFormDismissal from '@pages/hr-applications/lib/send-hr-form-dismissal'
@@ -25,7 +25,7 @@ const Dismissal = () => {
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameConfigT>({})
     const isDone = completed ?? false
     const history = useHistory()
     const currentIndex = getCurrentIndex()

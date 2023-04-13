@@ -1,6 +1,7 @@
 import { CheckboxDocs, IInputArea, IInputAreaData } from '@ui/input-area/model'
+import { specialFieldsNameT } from '@entities/applications/consts'
 
-const checkFormFields = (form: IInputArea) => {
+const checkFormFields = (form: IInputArea, listOptionalFields?: specialFieldsNameT[]) => {
     const isCheckDocument = !form.documents?.required || !!form.documents.files.length
     const isCheckNewElementForm = !form.addNew || !!form.data.length
     return (
@@ -17,6 +18,9 @@ const checkFormFields = (form: IInputArea) => {
 
                     if (parsedDate > parsedMaxDate) return true
                 }
+            }
+            if (!!listOptionalFields && !!el.specialType && !listOptionalFields.includes(el.specialType)) {
+                return false
             }
 
             return el.type !== 'checkbox-docs'
