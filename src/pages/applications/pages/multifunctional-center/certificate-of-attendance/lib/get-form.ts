@@ -1,9 +1,9 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
-import { MethodObtainingOptions } from '@entities/applications/consts'
 import getAddressFields from '@features/applications/lib/get-address-fields'
 import findCurrentInSelect from '@ui/input-area/lib/find-current-in-select'
 import getStudentSubdivisions from '@pages/applications/lib/get-student-subdivisions'
+import getMethodObtainingFields from '@features/applications/lib/get-method-obtaining-fields'
 
 const academic_form = [
     { id: 0, title: 'Очная' },
@@ -57,15 +57,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 required: true,
             },
-            {
-                title: 'Способ получения справки',
-                type: 'radio',
-                fieldName: 'method_obtaining',
-                value: null,
-                editable: true,
-                required: true,
-                items: MethodObtainingOptions,
-            },
+            ...getMethodObtainingFields(),
             ...getStudentSubdivisions(dataUserApplication),
             ...getAddressFields(),
             {

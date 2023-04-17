@@ -1,8 +1,9 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
-import { MethodObtainingOptions, NumberOfCopiesOptions } from '@entities/applications/consts'
+import { NumberOfCopiesOptions } from '@entities/applications/consts'
 import getAddressFields from '@features/applications/lib/get-address-fields'
 import getStudentSubdivisions from '@pages/applications/lib/get-student-subdivisions'
+import getMethodObtainingFields from '@features/applications/lib/get-method-obtaining-fields'
 
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     return {
@@ -26,15 +27,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
                 required: true,
             },
-            {
-                title: 'Способ получения справки',
-                type: 'radio',
-                fieldName: 'method_obtaining',
-                value: null,
-                editable: true,
-                required: true,
-                items: MethodObtainingOptions,
-            },
+            ...getMethodObtainingFields(),
             ...getStudentSubdivisions(dataUserApplication),
             ...getAddressFields(),
             {
