@@ -1,9 +1,9 @@
 import { IInputArea } from '@ui/input-area/model'
 import getBasicFieldsApplicationTeacher from '@pages/teachers-applications/lib/get-basic-fields-application-teacher'
 import { UserApplication } from '@api/model'
-import { MethodObtainingOptions } from '@entities/applications/consts'
 import getAddressFields from '@features/applications/lib/get-address-fields'
 import getTeacherSubdivisions from '@pages/teachers-applications/lib/get-teacher-subdivisions'
+import getMethodObtainingFields from '@features/applications/lib/get-method-obtaining-fields'
 
 const getForm = (data: UserApplication): IInputArea => {
     return {
@@ -84,15 +84,7 @@ const getForm = (data: UserApplication): IInputArea => {
                 editable: true,
                 required: true,
             },
-            {
-                title: 'Способ получения справки',
-                type: 'radio',
-                fieldName: 'method_obtaining',
-                value: null,
-                editable: true,
-                required: true,
-                items: MethodObtainingOptions,
-            },
+            ...getMethodObtainingFields(),
             ...getTeacherSubdivisions(),
             ...getAddressFields(),
             {
