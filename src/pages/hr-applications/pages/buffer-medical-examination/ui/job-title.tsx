@@ -1,11 +1,13 @@
 import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
-// import Table from '@shared/ui/table'
+import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import getMedicalExaminationColumns from '../lib/get-medical-examination-columns'
+import { bufferMedicalExaminationModel } from '../model'
 // import getHrApplicationsColumns from '../lib/get-hr-applications-columns'
 // import { BufferHolidayWork } from '../types'
 
@@ -18,8 +20,10 @@ interface Props {
 
 const JobTitle: React.FC<Props> = ({ info, index }) => {
     const { jobTitle, subDivision, rate } = info
-
+    const { data } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
     const [opened, setOpened] = useState<boolean>(false)
+    if (data.length == 0) return null
+    console.log(data[index].notTaken)
 
     return (
         <Block
@@ -62,9 +66,13 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                             />
                         </Link>
                     )}
-                    {/* {!!dismissalApplications.length && (
-                        <StyledTable columns={getHrApplicationsColumns()} data={dismissalApplications} maxOnPage={10} />
-                    )} */}
+                    {!!data[index].notTaken && (
+                        <StyledTable
+                            columns={getMedicalExaminationColumns()}
+                            data={data[index].notTaken}
+                            maxOnPage={10}
+                        />
+                    )}
                 </ActionBlock>
             )}
             <Button
@@ -96,9 +104,9 @@ const BlockHeader = styled.div`
     align-items: center;
 `
 
-// const StyledTable = styled(Table)`
-//     width: 100%;
-// `
+const StyledTable = styled(Table)`
+    width: 100%;
+`
 
 const ActionBlock = styled.div`
     display: flex;

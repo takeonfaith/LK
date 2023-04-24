@@ -23,7 +23,7 @@ const History = () => {
             height="fit-content"
         >
             <BlockHeader>
-                История заявлений на выход в выходной день:
+                История заявлений на диспансеризацю:
                 <Button
                     icon={openedHistory ? <HiChevronUp /> : <HiChevronDown />}
                     onClick={() => !historyIsEmpty && setOpenedHistory((prev) => !prev)}

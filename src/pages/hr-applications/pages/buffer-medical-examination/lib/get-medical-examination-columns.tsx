@@ -4,7 +4,7 @@ import localizeDate from '@shared/lib/localize-date'
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
 import React from 'react'
-const getHrApplicationsColumns = (): ColumnProps[] => {
+const getMedicalExaminationColumns = (): ColumnProps[] => {
     return [
         //{ title: 'Название', field: 'title', priority: 'one', search: true, },
 
@@ -17,46 +17,50 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
                 ...(Object.values(hrApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
             ],
             render: (value) => (
-                <Message
-                    type={
-                        value === 'Согласовано'
-                            ? 'success'
-                            : value === 'Не согласовано' || value === 'Не создано'
-                            ? 'failure'
-                            : 'alert'
-                    }
-                    title={value}
-                    align="center"
-                    width="100%"
-                    icon={null}
-                    maxWidth="150px"
-                />
+                value.orderStatus,
+                (
+                    <Message
+                        type={
+                            value === 'Согласовано'
+                                ? 'success'
+                                : value === 'Не согласовано' || value === 'Не создано'
+                                ? 'failure'
+                                : 'alert'
+                        }
+                        title={value}
+                        align="center"
+                        width="100%"
+                        icon={null}
+                        maxWidth="150px"
+                    />
+                )
             ),
         },
         {
             title: 'Дата заявления',
-            field: 'creationDate',
+            field: 'status',
             type: 'date',
             priority: 'one',
             align: 'center',
+            render: (value) => value.creationDate,
         },
         {
-            title: 'Номер приказа',
-            field: 'dismissalOrder',
+            title: 'Номер заявления',
+            field: 'status',
             priority: 'one',
             align: 'center',
             render: (value) => value.orderNumber,
         },
         {
-            title: 'Дата приказа',
-            field: 'dismissalOrder',
+            title: 'Дата диспансеризации',
+            field: 'medicalExamination',
             type: 'date',
             priority: 'one',
             align: 'center',
-            render: (value) => localizeDate(value.orderDate, 'numeric'),
+            render: (value) => value.period.startDate + ' - ' + value.period.endDate,
         },
         {
-            title: 'Статус приказа',
+            title: 'Статус заявления',
             field: 'dismissalOrder',
             priority: 'one',
             width: '200px',
@@ -112,4 +116,4 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
     ]
 }
 
-export default getHrApplicationsColumns
+export default getMedicalExaminationColumns

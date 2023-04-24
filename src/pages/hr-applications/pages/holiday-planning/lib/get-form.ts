@@ -20,6 +20,7 @@ const getForm = (
     const holidayStartDate = !!startDate ? startDate : new Date().toISOString()
     const holidayEndDate = !!endDate ? endDate : new Date().toISOString()
     const collTypeData = !!collType ? collType : ''
+    console.log(dataWorkerApplication)
     return {
         title: 'Заявление о предоставлении отпуска',
         data: [
@@ -43,50 +44,6 @@ const getForm = (
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
                 visible: true,
-            },
-            // {
-            //     title: 'Период отпуска:',
-            //     type: 'date-interval',
-            //     value: ['', ''],
-            //     fieldName: 'holiday_dates',
-            //     editable: true,
-            //     mask: true,
-            //     required: true,
-            //     minValueInput: getDelayInDays(5),
-            // },
-            {
-                title: 'Начало отпуска:',
-                type: 'date',
-                value: startDate,
-                fieldName: 'holiday_start',
-                editable: true,
-                mask: true,
-                onChange: (value) => {
-                    setStartDate(value)
-                },
-                required: true,
-                minValueInput: getDelayInDays(5),
-            },
-            {
-                title: '',
-                type: 'simple-text',
-                value: dataWorkerApplication[currentIndex].jobGuid.toString(),
-                fieldName: 'jobGuid',
-                visible: false,
-            },
-            {
-                title: 'Окончание отпуска:',
-                type: 'date',
-                value: holidayEndDate,
-                fieldName: 'holiday_end',
-                editable: true,
-                mask: true,
-                required: true,
-                onChange: (value) => {
-                    setEndDate(value)
-                },
-                minValueInput: holidayStartDate,
-                maxValueInput: getDelayInDays(collType ? +collType.data : 28, holidayStartDate),
             },
             {
                 title: 'Вид отпуска',
@@ -178,6 +135,40 @@ const getForm = (
                         data: 4,
                     },
                 ],
+            },
+            {
+                title: 'Начало отпуска:',
+                type: 'date',
+                value: startDate,
+                fieldName: 'holiday_start',
+                editable: true,
+                mask: true,
+                onChange: (value) => {
+                    setStartDate(value)
+                },
+                required: true,
+                minValueInput: getDelayInDays(5),
+            },
+            {
+                title: '',
+                type: 'simple-text',
+                value: dataWorkerApplication[currentIndex].jobGuid.toString(),
+                fieldName: 'jobGuid',
+                visible: false,
+            },
+            {
+                title: 'Окончание отпуска:',
+                type: 'date',
+                value: holidayEndDate,
+                fieldName: 'holiday_end',
+                editable: true,
+                mask: true,
+                required: true,
+                onChange: (value) => {
+                    setEndDate(value)
+                },
+                minValueInput: holidayStartDate,
+                maxValueInput: getDelayInDays(collType ? +collType.data : 28, holidayStartDate),
             },
         ],
     }
