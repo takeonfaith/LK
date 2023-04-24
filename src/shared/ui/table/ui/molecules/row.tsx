@@ -11,7 +11,7 @@ interface Props {
     onRowClick?: (obj: IndexedProperties) => void
 }
 
-const Row = ({ columns, el, index }: Props) => {
+const Row = ({ columns, el, index, onRowClick }: Props) => {
     return (
         <RowWrapper even={!!(index % 2)}>
             {columns.map((column) => {
@@ -22,6 +22,7 @@ const Row = ({ columns, el, index }: Props) => {
                         className={column.priority?.toString() ?? 'one'}
                         key={column.field}
                         align={column.align}
+                        onClick={() => onRowClick?.(el)}
                     >
                         {column.render
                             ? column.render(displayWithType(el[column.field], column.type), el)

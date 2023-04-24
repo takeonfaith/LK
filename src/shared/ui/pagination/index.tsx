@@ -10,7 +10,7 @@ interface Props {
     pages: number
     condition: boolean
     currentPage: number
-    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
+    setCurrentPage: (value: number) => void
 }
 
 const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'center' }: Props) => {

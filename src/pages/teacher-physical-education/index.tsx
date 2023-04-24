@@ -1,16 +1,13 @@
-import { pEStudentModel } from '@entities/pe-student/model'
-import Table from '@shared/ui/table'
-import { useUnit } from 'effector-react'
-import React, { useEffect } from 'react'
+import { SliderPage } from 'widgets'
+import { StudentsList } from './students-list'
+import { Wrapper } from './styled'
 
 const TeacherPhysicalEducation = () => {
-    const students = useUnit(pEStudentModel.stores.$pEStudents)
-
-    useEffect(() => {
-        pEStudentModel.events.load()
-    }, [])
-
-    return <Table data={students} columns={[{ field: 'fullName', title: 'fullName' }]} />
+    return (
+        <Wrapper>
+            <SliderPage pages={[{ title: 'Студенты', content: <StudentsList /> }]} />
+        </Wrapper>
+    )
 }
 
 export default TeacherPhysicalEducation
