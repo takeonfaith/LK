@@ -29,7 +29,7 @@ const Content = () => {
                 if (jobTitleInfo.isDismissal) {
                     historyIsEmpty && setHistoryIsEmpty(false)
                     return null
-                } else return <JobTitle info={jobTitleInfo} index={index} data={data}/>
+                } else return <JobTitle info={jobTitleInfo} index={index} data={data} />
             })}
             {/* {data.map((info, index) => {
                 return <JobTitle key={index} info={info} index={index} />

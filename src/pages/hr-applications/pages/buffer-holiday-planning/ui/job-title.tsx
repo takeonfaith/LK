@@ -73,18 +73,16 @@ const JobTitle: React.FC<Props> = ({ info, index, data }) => {
                             maxOnPage={10}
                         />
                     )} */}
-                    {
-                        data.map((workerInfo, index) => {
-                            if (workerInfo.employeeGuid == info.jobGuid)
-                                return (
-                                    <StyledTable
-                                        columns={getBufferHolidayPlanningColumns()}
-                                        data={data[index].notTaken}
-                                        maxOnPage={10}
-                                    />
-                                )
-                        })
-                    }
+                    {data.map((workerInfo, index) => {
+                        if (workerInfo.employeeGuid == info.jobGuid)
+                            return (
+                                <StyledTable
+                                    columns={getBufferHolidayPlanningColumns()}
+                                    data={data[index].notTaken}
+                                    maxOnPage={10}
+                                />
+                            )
+                    })}
                 </ActionBlock>
             )}
             <Button
