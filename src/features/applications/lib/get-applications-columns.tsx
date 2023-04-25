@@ -73,6 +73,8 @@ const transformStatusApplication = (status: string): string => {
     switch (status) {
         case 'На рассмотрении':
             return ApplicationsConstants.pending
+        case 'Принято в работу':
+            return ApplicationsConstants.pending
         case 'Получено':
             return ApplicationsConstants.ready
         default:

@@ -125,7 +125,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Предыдущий документ об образовании',
+                title: 'Год выдачи предудщего документа об образовании',
                 placeholder: 'Укажите год выдачи',
                 type: 'number',
                 fieldName: 'previous_doc_year',
@@ -135,7 +135,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Тип документа об образовании',
+                title: 'Предудущий документ об образовании',
                 type: 'select',
                 fieldName: 'previous_doc_year_type',
                 value: '',
@@ -154,7 +154,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
             },
             {
                 title: 'Год зачисления',
-                type: 'text',
+                type: 'number',
                 value: '',
                 editable: true,
                 fieldName: 'uni_year',
