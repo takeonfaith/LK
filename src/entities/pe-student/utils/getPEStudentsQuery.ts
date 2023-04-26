@@ -1,4 +1,4 @@
-export const STUDENT_PAGE_SIZE = 10
+import { STUDENT_PAGE_SIZE } from '../constants'
 
 export const getPEStudentsQuery = (page: number) => `{
     students (take:${STUDENT_PAGE_SIZE}, skip: ${STUDENT_PAGE_SIZE * page}){
@@ -9,17 +9,17 @@ export const getPEStudentsQuery = (page: number) => `{
             studentGuid
             visits
             additionalPoints
+            pointsForStandards
+            group {
+                visitValue
+            }
+            course
+            department
         }
         pageInfo {
             hasNextPage
             hasPreviousPage
         }
-        totalCount
-    }
-}`
-
-export const getPEStudentsTotalCountQuery = () => `{
-    students (){
         totalCount
     }
 }`

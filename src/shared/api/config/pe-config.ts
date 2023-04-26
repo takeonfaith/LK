@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { addAuthHeaderToRequests, authResponseInterceptor } from './utils'
 
 export const PE_URL = 'http://45.10.42.218:3333/graphql/'
 
@@ -10,6 +11,18 @@ const config = {
     },
 }
 
+$pEApi.interceptors.request.use(addAuthHeaderToRequests)
+
+$pEApi.interceptors.response.use((response) => {
+    return response
+}, authResponseInterceptor)
+
 export const pERequest = async <T>(query: string): Promise<T> => {
-    return (await $pEApi.post('', { query }, config)).data.data
+    const response = await $pEApi.post('', { query }, config)
+
+    if (response.data.errors) {
+        throw new Error('Request error')
+    }
+
+    return response.data.data
 }

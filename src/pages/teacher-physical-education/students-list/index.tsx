@@ -1,5 +1,7 @@
+import { STUDENT_PAGE_SIZE } from '@entities/pe-student/constants'
 import { pEStudentModel } from '@entities/pe-student/model'
-import { STUDENT_PAGE_SIZE } from '@entities/pe-student/utils'
+import { PEStudent } from '@entities/pe-student/types'
+import { PEStudentModal } from '@features/physical-education/pe-student-modal/ui/modal'
 import Pagination from '@shared/ui/pagination'
 import Table from '@shared/ui/table'
 import { useUnit } from 'effector-react'
@@ -28,7 +30,7 @@ export const StudentsList = () => {
                     data={students}
                     columns={columns}
                     onRowClick={(value) => {
-                        open(<div style={{ width: 300, height: 500 }}>{JSON.stringify(value)}</div>)
+                        open(<PEStudentModal student={value as PEStudent} />)
                     }}
                 />
                 <Pagination

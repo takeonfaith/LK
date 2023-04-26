@@ -1,4 +1,8 @@
-export const columns = [
+import { PEStudent } from '@entities/pe-student/types'
+import { calcSummaryPoints } from '@entities/pe-student/utils/calcSummaryPoints'
+import { ColumnProps } from '@shared/ui/table/types'
+
+export const columns: ColumnProps[] = [
     {
         title: 'ФИО',
         field: 'fullName',
@@ -18,5 +22,6 @@ export const columns = [
     {
         title: 'Баллы',
         field: 'pointsCount',
+        render: (_, value) => calcSummaryPoints(value as PEStudent),
     },
 ]

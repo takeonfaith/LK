@@ -3,6 +3,12 @@ export interface PEStudent {
     groupNumber: string
     healthGroup: string
     studentGuid: string
-    visits: string
-    additionalPoints: string
+    visits: number
+    additionalPoints: number
+    pointsForStandards: number
+    group: {
+        visitValue: number
+    }
+    course: number
+    department: string
 }
