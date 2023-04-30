@@ -1,15 +1,29 @@
+import { PHYSICAL_EDUCATION_STUDENT } from '@app/routes/teacher-routes'
 import { PEStudent } from '@entities/pe-student/types'
 import { calcSummaryPoints } from '@entities/pe-student/utils/calcSummaryPoints'
 import { AddPeStudentVisits } from '@features/physical-education/add-pe-student-visits/ui'
+import { buildRealLink } from '@shared/lib/buildRealLink'
 import KeyValue from '@shared/ui/atoms/key-value'
+import { Button } from '@shared/ui/button'
 import { Title } from '@shared/ui/title'
-import { UserData, Visits, Wrapper } from '../styled'
+import { useHistory } from 'react-router'
+import { useModal } from 'widgets'
+import { UserData, Visits, Wrapper } from './styled'
 
 interface Props {
     student: PEStudent
 }
 
 export const PEStudentModal = ({ student }: Props) => {
+    const history = useHistory()
+
+    const { close } = useModal()
+
+    const handleClick = () => {
+        history.push(buildRealLink(PHYSICAL_EDUCATION_STUDENT, { studentId: student.studentGuid }))
+        close()
+    }
+
     return (
         <Wrapper>
             <Title size={2}>{student.fullName}</Title>
@@ -26,6 +40,7 @@ export const PEStudentModal = ({ student }: Props) => {
                 <Title size={2}>Посещения</Title>
                 <AddPeStudentVisits studentGuid={student.studentGuid} />
             </Visits>
+            <Button onClick={handleClick} text={'Перейти к студенту'} />
         </Wrapper>
     )
 }

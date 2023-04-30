@@ -26,6 +26,7 @@ export const CopyOfEmploymentRecordPage = lazy(
 )
 export const CourierPage = lazy(() => import('@pages/teachers-applications/pages/courier'))
 export const TeacherPhysicalEducation = lazy(() => import('@pages/teacher-physical-education'))
+export const PhysicalEducationStudent = lazy(() => import('@pages/pe-student'))
 export const GettingComputerEquipmentPage = lazy(
     () => import('@pages/teachers-applications/pages/getting-computer-equipment'),
 )

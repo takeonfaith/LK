@@ -2,7 +2,7 @@ import { PEStudent } from '@entities/pe-student/types'
 import { calcSummaryPoints } from '@entities/pe-student/utils/calcSummaryPoints'
 import { ColumnProps } from '@shared/ui/table/types'
 
-export const columns: ColumnProps[] = [
+export const peStudentColumns: ColumnProps[] = [
     {
         title: 'ФИО',
         field: 'fullName',

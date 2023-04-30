@@ -23,6 +23,7 @@ const Row = ({ columns, el, index, onRowClick }: Props) => {
                         key={column.field}
                         align={column.align}
                         onClick={() => onRowClick?.(el)}
+                        clickable={!!onRowClick}
                     >
                         {column.render
                             ? column.render(displayWithType(el[column.field], column.type), el)

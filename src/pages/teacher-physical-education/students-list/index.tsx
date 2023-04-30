@@ -7,7 +7,7 @@ import Table from '@shared/ui/table'
 import { useUnit } from 'effector-react'
 import React, { useEffect } from 'react'
 import { useModal } from 'widgets'
-import { columns } from './constants'
+import { peStudentColumns } from './constants'
 import { TableWrapper, Wrapper } from './styled'
 
 export const StudentsList = () => {
@@ -28,9 +28,13 @@ export const StudentsList = () => {
             <TableWrapper>
                 <Table
                     data={students}
-                    columns={columns}
-                    onRowClick={(value) => {
-                        open(<PEStudentModal student={value as PEStudent} />)
+                    columns={peStudentColumns}
+                    onRowClick={({ studentGuid }) => {
+                        open(
+                            <PEStudentModal
+                                student={students.find((d) => d.studentGuid === studentGuid) as PEStudent}
+                            />,
+                        )
                     }}
                 />
                 <Pagination

@@ -39,6 +39,7 @@ import {
     HolidayTransfer,
     DataVerificationPage,
     TeacherPhysicalEducation,
+    PhysicalEducationStudent,
 } from './pages'
 
 import { isProduction, OLD_LK_URL } from '@consts'
@@ -79,6 +80,7 @@ export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
 export const PHYSICAL_EDUCATION = '/physical-education'
 
 //hidden routes
+export const PHYSICAL_EDUCATION_STUDENT = '/physical-education/student/:studentId'
 export const CONTACT_INFO_ACTUALIZATION = APPLICATIONS_ROUTE + '/contact-info-actualization'
 export const DATA_VERIFICATION_ROUTE = APPLICATIONS_ROUTE + '/data-verification'
 export const ISSUANCE_OF_LICENSES = APPLICATIONS_ROUTE + '/issuance-of-licenses'
@@ -298,6 +300,17 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: TeacherPhysicalEducation,
         isTemplate: false,
         group: 'OTHER',
+    },
+    'physical-education-student': {
+        id: 'physical-education-student',
+        title: 'Физическая культура',
+        icon: <FiFileText />,
+        color: 'pink',
+        path: PHYSICAL_EDUCATION_STUDENT,
+        Component: PhysicalEducationStudent,
+        isTemplate: false,
+        group: 'OTHER',
+        show: false,
     },
     oop: {
         id: 'oop',
