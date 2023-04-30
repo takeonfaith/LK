@@ -56,8 +56,7 @@ const sendHrFormHolidayPlanning = async (
     else if (result.holiday_type == 'Ежегодный дополнительный оплачиваемый отпуск (в т.ч. учебный)')
         result.holiday_type = 2
     else if (result.holiday_type == 'Отпуск без сохранения заработной платы') result.holiday_type = 3
-    else if (result.holiday_type == 'Отпуск по беременности и родам (декретный отпуск)') result.holiday_type = 4
-    else if (result.holiday_type == 'Отпуск по уходу за ребенком') result.holiday_type = 5
+    else if (result.holiday_type == 'Отпуск по коллективному договору') result.holiday_type = 4
 
     const response = await bufferHolidayPlanningModel.effects.sendBufferHolidayPlanningFx({
         employeeGuid: result.jobGuid,

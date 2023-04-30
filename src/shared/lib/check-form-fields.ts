@@ -1,6 +1,6 @@
 import { CheckboxDocs, IFormDropdownValue, IInputArea, IInputAreaData } from '@ui/input-area/model'
 
-const checkFormFields = (form: IInputArea) => {
+const checkFormFields = (form: IInputArea, formID?: any) => {
     if ((form.data as IInputAreaData[]).find((el) => (el.value as IFormDropdownValue)?.title == 'Очно')) {
         // Если значение поля типа "dropdown" равно "Очно", сразу возвращаем true, не проверяя другие поля.
         return true
@@ -22,6 +22,9 @@ const checkFormFields = (form: IInputArea) => {
                 }
             }
 
+            if (el.fieldName == 'holiday_type_coll' && formID == null) return false
+            if (el.fieldName == 'holiday_end' && el.value?.toString().substring(el.value.toString().length - 1) == 'Z')
+                return true
             return el.type !== 'checkbox-docs'
                 ? !el.value && el.required
                 : el.required && !(el.items as CheckboxDocs[]).find((item) => !!item.files.length)

@@ -11,8 +11,8 @@ const loadBufferHolidayTransfer = createEvent()
 const sendBufferHolidayTransfer = createEvent<BufferHolidayTransferForm>()
 
 const loadBufferHolidayTransferFx = createEffect(async () => {
-    const { data } = await $hrApi.get<BufferHolidayTransfer[]>(
-        `Vacation.GetAllHistory?employeeGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
+    const { data } = await $hrApi.get<BufferHolidayTransfer>(
+        `CarryForwardVacation.GetAllHistory?personalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
     )
     return data
 })
@@ -20,17 +20,21 @@ const loadBufferHolidayTransferFx = createEffect(async () => {
 sample({ clock: loadBufferHolidayTransfer, target: loadBufferHolidayTransferFx })
 
 const sendBufferHolidayTransferFx = createEffect(async (data: BufferHolidayTransferForm) => {
-    const result = await $hrApi.post<BufferHolidayTransfer>('Vacation.AddVacation', data)
+    const result = await $hrApi.post<BufferHolidayTransfer>('CarryForwardVacation.AddCarryForwardVacation', data)
 
     return result.data
 })
 
 sample({ clock: sendBufferHolidayTransfer, target: sendBufferHolidayTransferFx })
 
-const $bufferHolidayTransfer = createStore<BufferHolidayTransfer[]>([])
+const $bufferHolidayTransfer = createStore<BufferHolidayTransfer['employeeVacations']>([])
 const $bufferHolidayTransferLoading = sendBufferHolidayTransferFx.pending
 
-sample({ clock: loadBufferHolidayTransferFx.doneData, target: $bufferHolidayTransfer })
+sample({
+    clock: loadBufferHolidayTransferFx.doneData,
+    fn: ({ employeeVacations }) => employeeVacations,
+    target: $bufferHolidayTransfer,
+})
 
 sample({
     clock: sendBufferHolidayTransferFx.doneData,
@@ -51,8 +55,8 @@ sample({
 sample({
     clock: sendBufferHolidayTransferFx.doneData,
     source: $bufferHolidayTransfer,
-    fn: (source, clock) => {
-        return [...source, clock]
+    fn: (source, { employeeVacations }) => {
+        return [...source, ...employeeVacations]
     },
     target: $bufferHolidayTransfer,
 })

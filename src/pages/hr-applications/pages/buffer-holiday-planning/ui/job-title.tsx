@@ -1,22 +1,32 @@
 import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
+import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { getBufferHolidayPlanningColumns } from '../lib/get-buffer-holiday-planning-columns'
+import { bufferHolidayPlanningModel } from '../model'
+import { BufferHolidayPlanning } from '../types'
 
 interface Props {
-    //info?: BufferHolidayPlanning
-    // jobTitleInfo: WorkerApplication
+    //info: BufferHolidayPlanning['employeeVacations'][0]
     info: WorkerApplication
     index: number
+    data: BufferHolidayPlanning['employeeVacations']
 }
 
-const JobTitle: React.FC<Props> = ({ info, index }) => {
+const JobTitle: React.FC<Props> = ({ info, index, data }) => {
+    //const { notTaken} = info
+
     const { jobTitle, subDivision, rate } = info
 
     const [opened, setOpened] = useState<boolean>(false)
+    // console.log('info')
+    // console.log(info)
+    // console.log('data')
+    // console.log(data)
 
     return (
         <Block
@@ -42,26 +52,37 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                 Структурное подразделение: {subDivision}
                 <br />
                 Ставка: {rate}
-                <br />
                 {/* Вид места работы: добавим */}
             </JobDescription>
             {opened && (
                 <ActionBlock>
-                    {true && (
-                        <Link to={`/hr-applications/holiday-planning/${index}`}>
-                            <Button
-                                text="Отпуск по этой должности"
-                                background="rgb(236,95,107)"
-                                textColor="#fff"
-                                width={'250px'}
-                                minWidth={'150px'}
-                                height="36px"
-                            />
-                        </Link>
-                    )}
-                    {/* {!!dismissalApplications.length && (
-                        <StyledTable columns={getHrApplicationsColumns()} data={dismissalApplications} maxOnPage={10} />
+                    <Link to={`/hr-applications/holiday-planning/${index}`}>
+                        <Button
+                            text="Отпуск по этой должности"
+                            background="rgb(236,95,107)"
+                            textColor="#fff"
+                            width={'250px'}
+                            minWidth={'150px'}
+                            height="36px"
+                        />
+                    </Link>
+                    {/* {!!data[index].notTaken.length && (
+                        <StyledTable
+                            columns={getBufferHolidayPlanningColumns()}
+                            data={data[index].notTaken}
+                            maxOnPage={10}
+                        />
                     )} */}
+                    {data.map((workerInfo, index) => {
+                        if (workerInfo.employeeGuid == info.jobGuid)
+                            return (
+                                <StyledTable
+                                    columns={getBufferHolidayPlanningColumns()}
+                                    data={data[index].notTaken}
+                                    maxOnPage={10}
+                                />
+                            )
+                    })}
                 </ActionBlock>
             )}
             <Button
@@ -92,9 +113,9 @@ const BlockHeader = styled.div`
     align-items: center;
 `
 
-// const StyledTable = styled(Table)`
-//     width: 100%;
-// `
+const StyledTable = styled(Table)`
+    width: 100%;
+`
 
 const ActionBlock = styled.div`
     display: flex;

@@ -59,6 +59,7 @@ export type specialFieldsNameT =
     | 'postMethod'
     | 'personalNature'
     | 'Compensation'
+    | 'Compensation2'
     | 'Address'
     | 'collHoliday1'
     | 'collHoliday2'
@@ -68,4 +69,5 @@ export type specialFieldsNameT =
     | 'Structure1'
     | 'Structure2'
     | 'PartTime'
+    | 'collDog'
     | null

@@ -27,6 +27,7 @@ type IInputAreaTypes =
     | 'date-interval'
     | 'simple-text'
     | 'hr-checkbox'
+    | 'text-header'
 
 export interface IInputAreaFiles {
     files: File[]
@@ -74,6 +75,7 @@ export interface IInputAreaData {
     maxValueLength?: number | undefined
     diff?: number
     visible?: boolean
+    onChange?: (value: any) => void
 }
 
 export interface IFormDropdownValue {

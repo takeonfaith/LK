@@ -4,14 +4,14 @@ import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
-import getExHrApplicationsColumns from '../lib/get-ex-hr-applications-columns'
+import getHolidayWorkHistoryColumns from '../../buffer-holiday-transfer/lib/get-holiday-work-history-columns'
 import { bufferHolidayPlanningModel } from '../model'
 
 const History = () => {
     const [openedHistory, setOpenedHistory] = useState<boolean>(false)
 
     const { data } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
-    const historyIsEmpty = !!data.every((d) => !d.employeeVacations)
+    const historyIsEmpty = !!data.every((d) => !d)
 
     return (
         <Block
@@ -24,7 +24,7 @@ const History = () => {
             height="fit-content"
         >
             <BlockHeader>
-                История заявлений отпуск:
+                История заявлений на отпуск:
                 <Button
                     icon={openedHistory ? <HiChevronUp /> : <HiChevronDown />}
                     onClick={() => !historyIsEmpty && setOpenedHistory((prev) => !prev)}
@@ -35,7 +35,7 @@ const History = () => {
                 data.map((object, index) => {
                     // if (!object.dismissalApplications.length) return null
 
-                    return <StyledTable key={index} columns={getExHrApplicationsColumns()} data={[]} maxOnPage={10} />
+                    return <StyledTable key={index} columns={getHolidayWorkHistoryColumns()} data={[]} maxOnPage={10} />
                 })}
             <Button
                 onClick={() => {

@@ -91,18 +91,23 @@ const getForm = (
             },
             {
                 title: 'Причина',
-                value: 'Семейные обстоятельства',
+                type: 'select',
                 fieldName: 'reason',
-                editable: true,
-                mask: true,
-                required: true,
-            },
-            {
-                title: 'Комментарий к заявке',
-                type: 'textarea',
-                fieldName: 'commentary',
                 value: '',
                 editable: true,
+                required: true,
+                width: '100%',
+                items: [
+                    {
+                        id: 0,
+                        title: 'Семейные обстоятельства',
+                    },
+                    {
+                        id: 1,
+                        title: 'Рабочая необходимость',
+                        data: 5,
+                    },
+                ],
             },
             // {
             //     title: 'Окончание отпуска после переноса:',
@@ -114,12 +119,6 @@ const getForm = (
             //     //minValueInput: getDelayInDays(5),
             // },
         ],
-        documents: {
-            files: [],
-            required: false,
-            fieldName: 'holidayFiles',
-            maxFiles: 10,
-        },
     }
 }
 
