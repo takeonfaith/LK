@@ -1,4 +1,3 @@
-import Table from '@shared/ui/table'
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
@@ -16,14 +15,4 @@ export const UserData = styled.div`
     display: flex;
     gap: 5px;
     flex-direction: row;
-`
-
-export const Visits = styled.div`
-    display: flex;
-    gap: 5px;
-    flex-direction: column;
-`
-
-export const StyledTable = styled(Table)`
-    flex: 1;
 `

@@ -1,7 +1,5 @@
 import { IInputAreaData } from '@ui/input-area/model'
 
-type radioType = { id: number; title: string }
-
 type specialReasonFieldsNameT = 'Compensation' | 'Compensation2' | null
 
 const getCompensation = (data: IInputAreaData[]): specialReasonFieldsNameT => {

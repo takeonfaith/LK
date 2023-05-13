@@ -16,7 +16,6 @@ interface Props {
 const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
     const { jobTitle, subDivision, rate, canBeRepeated, dismissalApplications } = jobTitleInfo
     const [opened, setOpened] = useState<boolean>(false)
-    console.log(dismissalApplications)
     return (
         <Block
             orientation={'vertical'}

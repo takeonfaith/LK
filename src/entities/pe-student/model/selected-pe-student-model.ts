@@ -1,14 +1,16 @@
+import { peStudentAdditionalPointsModel } from '@entities/pe-student-additional-points/model'
+import { peStudentRegulationPointsModel } from '@entities/pe-student-regulation-points/model'
 import { pERequest } from '@shared/api/config/pe-config'
 import { combine, createEffect, createEvent, createStore, sample } from 'effector'
 import { pEStudentVisitModel } from '.'
 import { PEStudentProfile } from '../types'
-import { getPEStudentQuery } from '../utils/getPEStudentsQuery'
+import { getPEStudentQuery } from '../utils/get-pe-student-query'
 
 const setCurrentStudentId = createEvent<string>()
 const resetStudentId = createEvent()
 const reload = createEvent()
 
-export const loadCurrentStudent = createEffect(async (studentId: string) => {
+const loadCurrentStudent = createEffect(async (studentId: string) => {
     const { student } = await pERequest<{ student: PEStudentProfile }>(getPEStudentQuery(studentId))
 
     return student
@@ -20,7 +22,11 @@ const $selectedStudent = createStore<PEStudentProfile | null>(null).reset(resetS
 const $loading = combine(pEStudentVisitModel.effects.addVisitFx.pending, loadCurrentStudent.pending, Boolean)
 
 sample({
-    clock: pEStudentVisitModel.effects.addVisitFx.doneData,
+    clock: [
+        pEStudentVisitModel.effects.addVisitFx.doneData,
+        peStudentAdditionalPointsModel.effects.addAdditionPointsFx.doneData,
+        peStudentRegulationPointsModel.effects.addRegulationPointsFx.doneData,
+    ],
     target: reload,
 })
 

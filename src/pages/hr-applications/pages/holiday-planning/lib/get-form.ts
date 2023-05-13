@@ -1,6 +1,5 @@
 import { UserApplication, WorkerApplication } from '@api/model'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
-import localizeDate from '@shared/lib/localize-date'
 import { IInputArea } from '@ui/input-area/model'
 
 const getForm = (
@@ -20,7 +19,6 @@ const getForm = (
     const holidayStartDate = !!startDate ? startDate : new Date().toISOString()
     const holidayEndDate = !!endDate ? endDate : new Date().toISOString()
     const collTypeData = !!collType ? collType : ''
-    console.log(dataWorkerApplication)
     return {
         title: 'Заявление о предоставлении отпуска',
         data: [

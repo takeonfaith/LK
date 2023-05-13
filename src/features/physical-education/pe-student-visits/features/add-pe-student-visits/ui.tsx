@@ -17,9 +17,9 @@ export const AddPeStudentVisits = ({ studentGuid }: Props) => {
 
     return (
         <Wrapper>
-            <Input minValue={minDate} maxValue={maxDate} setValue={setDate} value={date} type="date" />
+            <Input type="date" minValue={minDate} maxValue={maxDate} setValue={setDate} value={date} />
             <Button
-                text={`Добавить посещение за ${localizeDate(date, 'numeric')}`}
+                text={`Добавить посещение ${localizeDate(date, 'numeric')}`}
                 onClick={() =>
                     pEStudentVisitModel.events.addVisit({ studentGuid, date: localizeDate(date, 'numeric') })
                 }

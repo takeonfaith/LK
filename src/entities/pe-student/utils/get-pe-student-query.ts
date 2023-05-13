@@ -1,14 +1,15 @@
+import { jsonStringifyGraphql } from '@shared/lib/json-stringify-graphql'
 import { STUDENT_PAGE_SIZE } from '../constants'
 
 export const getPEStudentsQuery = (page: number, filters: Record<string, unknown> | null = null) => {
-    const stringifyFilters = JSON.stringify(filters).replace(/"([^"]+)":/g, '$1:')
-
+    const stringifyFilters = jsonStringifyGraphql(filters)
     return `{
-    students (take:${STUDENT_PAGE_SIZE}, skip: ${STUDENT_PAGE_SIZE * page}, where: ${stringifyFilters}){
+      students (take:${STUDENT_PAGE_SIZE}, skip: ${
+        STUDENT_PAGE_SIZE * page
+    }, where: ${stringifyFilters}, order: [{fullName:ASC}]){
         items {
             fullName
             groupNumber
-            healthGroup
             studentGuid
             visits
             additionalPoints
@@ -20,31 +21,55 @@ export const getPEStudentsQuery = (page: number, filters: Record<string, unknown
             department
         }
         totalCount
-    }
-}`
+      }
+    }`
 }
 
 export const getPEStudentQuery = (studentId: string) => `{
     student(guid: "${studentId}") {
         fullName
         groupNumber
-        healthGroup
         studentGuid
         visits
         additionalPoints
         pointsForStandards
         course
         department
+        standardsHistory {
+          id
+          points
+          standardType
+          date
+          teacher {
+            fullName
+          }
+        }
         group {
           visitValue
         }
         visitsHistory {
           id
           date
-          sport
           teacher {
             fullName
           }
         }
+        pointsHistory{
+          id
+          workType
+          comment
+          date
+          points
+        }
       }
 }`
+
+export const getPEStudentsTotalCountQuery = (filters: Record<string, unknown> | null = null) => {
+    const stringifyFilters = jsonStringifyGraphql(filters)
+
+    return `{
+      students(where: ${stringifyFilters}) {
+        totalCount
+      }
+    }`
+}

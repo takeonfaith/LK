@@ -23,7 +23,6 @@ const MedicalExamination = () => {
     const {
         data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
-    const birthday = dataUserApplication
     const { loading: loading } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
     const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const [completed, setCompleted] = useState(false)

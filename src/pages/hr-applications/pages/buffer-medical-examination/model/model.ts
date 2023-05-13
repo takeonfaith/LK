@@ -4,8 +4,6 @@ import { $hrApi } from '@shared/api/config'
 import { MessageType } from '@shared/ui/types'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react'
-import { MdDoNotDisturb } from 'react-icons/md'
-import { isStyledComponent } from 'styled-components'
 import { setAgeMed } from '../../medical-examination/lib/age-med'
 import { setIsTutor } from '../../medical-examination/lib/is-tutor'
 import { BufferMedicalExamination, BufferMedicalExaminationForm, BufferMedicalExaminationOrder } from '../types'
@@ -17,7 +15,6 @@ const loadBufferMedicalExaminationFx = createEffect(async () => {
     const { data } = await $hrApi.get<BufferMedicalExamination>(
         `MedicalExamination.GetAllHistory?PersonalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
     )
-    console.log(data)
     setAgeMed(data.age)
     setIsTutor(data.employeeMedicalExaminations.map(({ employeeGuid, tutor }) => ({ employeeGuid, tutor })))
     // const empGuidIsTutor = data.employeeMedicalExaminations.map(({ employeeGuid, tutor }) => ({ employeeGuid, tutor }));

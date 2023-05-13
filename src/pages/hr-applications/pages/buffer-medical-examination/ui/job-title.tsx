@@ -23,7 +23,6 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
     const { data } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
     const [opened, setOpened] = useState<boolean>(false)
     if (data.length == 0) return null
-    console.log(data[index].notTaken)
 
     return (
         <Block

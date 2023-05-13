@@ -1,8 +1,9 @@
+import { WorkType } from '@entities/pe-student-additional-points/types'
+
 export interface PEStudent {
     studentGuid: string
     fullName: string
     groupNumber: string
-    healthGroup: string
     visits: number
     additionalPoints: number
     pointsForStandards: number
@@ -17,10 +18,23 @@ export type PEStudentProfile = PEStudent & {
     visitsHistory: {
         id: number
         date: string
-        // TODO: use other types
-        sport: 'ARM_WRESTLING'
         teacher: {
             fullName: string
         }
+    }[]
+    pointsHistory: {
+        id: string
+        workType: WorkType
+        comment: string
+        date: string
+        points: number
+    }[]
+    standardsHistory: {
+        id: string
+        standardType: string
+        teacher: {
+            fullName: string
+        }
+        points: number
     }[]
 }

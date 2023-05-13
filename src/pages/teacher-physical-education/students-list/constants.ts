@@ -12,10 +12,6 @@ export const peStudentColumns: ColumnProps[] = [
         field: 'groupNumber',
     },
     {
-        title: 'Группа здоровья',
-        field: 'healthGroup',
-    },
-    {
         title: 'Посещений',
         field: 'visits',
     },

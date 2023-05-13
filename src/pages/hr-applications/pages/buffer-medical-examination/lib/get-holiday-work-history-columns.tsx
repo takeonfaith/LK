@@ -1,8 +1,7 @@
-import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
+import { hrApplicationsConstants } from '@entities/applications/consts'
 import localizeDate from '@shared/lib/localize-date'
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
-import React from 'react'
 const getMedicalExaminationHistoryColumns = (): ColumnProps[] => {
     return [
         //{ title: 'Название', field: 'title', priority: 'one', search: true, },

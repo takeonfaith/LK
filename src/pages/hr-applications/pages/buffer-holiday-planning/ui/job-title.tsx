@@ -7,7 +7,6 @@ import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { getBufferHolidayPlanningColumns } from '../lib/get-buffer-holiday-planning-columns'
-import { bufferHolidayPlanningModel } from '../model'
 import { BufferHolidayPlanning } from '../types'
 
 interface Props {

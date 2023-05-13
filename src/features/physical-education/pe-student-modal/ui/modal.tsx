@@ -1,7 +1,7 @@
 import { PHYSICAL_EDUCATION_STUDENT } from '@app/routes/teacher-routes'
 import { PEStudent } from '@entities/pe-student/types'
 import { calcSummaryPoints } from '@entities/pe-student/utils/calcSummaryPoints'
-import { AddPeStudentVisits } from '@features/physical-education/add-pe-student-visits/ui'
+import { AddPeStudentVisits } from '@features/physical-education/pe-student-visits/features/add-pe-student-visits/ui'
 import { buildRealLink } from '@shared/lib/buildRealLink'
 import KeyValue from '@shared/ui/atoms/key-value'
 import { Button } from '@shared/ui/button'
@@ -32,7 +32,6 @@ export const PEStudentModal = ({ student }: Props) => {
                 <KeyValue keyStr="Группа" value={student.groupNumber} />
                 <KeyValue keyStr="Баллы" value={calcSummaryPoints(student)} />
                 <KeyValue keyStr="Курс" value={student.course} />
-                <KeyValue keyStr="Группа здоровья" value={student.healthGroup} />
                 <KeyValue keyStr="Факультет" value={student.department} />
             </UserData>
 

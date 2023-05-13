@@ -1,7 +1,8 @@
 import { pERequest } from '@shared/api/config/pe-config'
 import { createEffect, createEvent, sample } from 'effector'
+import { modalModel } from 'widgets/modal/model'
 import { AddStudentVisits } from '../types/add-student-visits'
-import { getAddVisitMutation } from '../utils/getAddVisitMutation'
+import { getAddVisitMutation } from '../utils/get-add-visits-mutation'
 
 const addVisit = createEvent<AddStudentVisits>()
 
@@ -12,6 +13,7 @@ const addVisitFx = createEffect(async (payload: AddStudentVisits) => {
 })
 
 sample({ clock: addVisit, target: addVisitFx })
+sample({ clock: addVisitFx.doneData, target: modalModel.events.close })
 
 export const events = {
     addVisit,
