@@ -1,15 +1,16 @@
 import { Title } from '@shared/ui/title'
 import styled from 'styled-components'
+import React from 'react'
 
 interface Props {
-    keyStr: string
+    label: string
     value: string
 }
 
-export const UserDataBlock = ({ keyStr, value }: Props) => {
+export const UserDataBlock = ({ label, value }: Props) => {
     return (
         <Wrapper>
-            <Title size={3}>{keyStr}</Title>
+            <Title size={3}>{label}</Title>
             <Value>{value}</Value>
         </Wrapper>
     )

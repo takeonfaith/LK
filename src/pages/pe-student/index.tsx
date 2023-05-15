@@ -8,6 +8,7 @@ import { useParams } from 'react-router'
 import { SliderPage } from 'widgets'
 import { UserData, Wrapper } from './styled'
 import { UserDataBlock } from './ui/user-date-block'
+import React from 'react'
 
 const PEStudent = () => {
     const { studentId } = useParams<{ studentId: string }>()
@@ -26,10 +27,10 @@ const PEStudent = () => {
             <Title size={1}>{student.fullName}</Title>
 
             <UserData>
-                <UserDataBlock keyStr="Группа" value={student.groupNumber} />
-                <UserDataBlock keyStr="Баллы" value={calcSummaryPoints(student).toString()} />
-                <UserDataBlock keyStr="Курс" value={student.course.toString()} />
-                <UserDataBlock keyStr="Факультет" value={student.department} />
+                <UserDataBlock label="Группа" value={student.groupNumber} />
+                <UserDataBlock label="Баллы" value={calcSummaryPoints(student).toString()} />
+                <UserDataBlock label="Курс" value={student.course.toString()} />
+                <UserDataBlock label="Факультет" value={student.department} />
             </UserData>
 
             <SliderPage pages={sliderData} />

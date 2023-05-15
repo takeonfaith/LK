@@ -1,6 +1,7 @@
 import { SliderPage } from 'widgets'
 import { StudentsList } from './students-list'
 import { Wrapper } from './styled'
+import React from 'react'
 
 const TeacherPhysicalEducation = () => {
     return (

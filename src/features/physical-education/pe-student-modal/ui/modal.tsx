@@ -9,6 +9,7 @@ import { Title } from '@shared/ui/title'
 import { useHistory } from 'react-router'
 import { useModal } from 'widgets'
 import { UserData, Visits, Wrapper } from './styled'
+import React from 'react'
 
 interface Props {
     student: PEStudent

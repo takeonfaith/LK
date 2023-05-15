@@ -2,6 +2,7 @@ import { ColumnProps } from '@shared/ui/table/types'
 import { PEStudentVisits } from '.'
 import { PEStudentAdditionalPoints } from '../pe-student-additional-points'
 import { PEStudentRegulationPoints } from '../pe-student-regulation-points'
+import React from 'react'
 
 export const peStudentVisitsColumns: ColumnProps[] = [
     {

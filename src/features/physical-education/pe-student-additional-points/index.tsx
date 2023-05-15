@@ -5,6 +5,7 @@ import { useModal } from 'widgets'
 import { additionalPointsColumns } from './constants'
 import { AddPEStudentAdditionalPoints } from './features/add-pe-student-additional-points'
 import { StyledTable, Wrapper } from './styled'
+import React from 'react'
 
 export const PEStudentAdditionalPoints = () => {
     const [student] = useUnit([selectedPEStudentModel.stores.$selectedStudent])

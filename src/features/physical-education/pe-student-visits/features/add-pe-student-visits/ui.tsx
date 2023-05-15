@@ -4,6 +4,7 @@ import { Button } from '@shared/ui/button'
 import Input from '@shared/ui/input'
 import { useState } from 'react'
 import { Wrapper } from './styled'
+import React from 'react'
 
 interface Props {
     studentGuid: string

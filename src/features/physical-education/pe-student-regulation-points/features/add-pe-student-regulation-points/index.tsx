@@ -9,6 +9,7 @@ import { useUnit } from 'effector-react'
 import { useState } from 'react'
 import { selectorData } from '../../constants'
 import { Wrapper } from './styled'
+import React from 'react'
 
 export const AddPEStudentRegulationPoints = () => {
     const student = useUnit(selectedPEStudentModel.stores.$selectedStudent)

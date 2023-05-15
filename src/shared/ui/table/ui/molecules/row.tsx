@@ -3,6 +3,7 @@ import { ColumnProps } from '@ui/table/types'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import { RowWrapper } from '../atoms'
 import Column from '../atoms/column'
+import React from 'react'
 
 interface Props {
     el: { [key: string]: any }

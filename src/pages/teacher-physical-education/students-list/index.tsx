@@ -11,6 +11,7 @@ import { useModal } from 'widgets'
 import { pEStudentSearchModel } from '../model'
 import { peStudentColumns } from './constants'
 import { TableWrapper, Wrapper } from './styled'
+import React from 'react'
 
 export const StudentsList = () => {
     const { open } = useModal()
