@@ -5,7 +5,7 @@ import { settingsModel } from '@entities/settings'
 import React, { Suspense, useEffect, useState } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'
-import ContentLayout from '../../shared/ui/content-layout'
+import ContentLayout from '../../widgets/content-layout'
 import { applicationsModel } from '@entities/applications'
 
 const Router = () => {
