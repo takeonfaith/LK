@@ -8,13 +8,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { USER_NOT_FOUND } from './config/ad-result-status'
 
-const ADNameElement = styled.span`
-    display: flex;
-    margin: 0 auto;
-    gap: 5px;
-    text-align: center;
-`
-
 const GetYourLoginPage = () => {
     const [fio, setFio] = useState('')
     const [passportNumber, setPassportNumber] = useState('')
@@ -51,7 +44,7 @@ const GetYourLoginPage = () => {
     }
 
     return (
-        <CenterPage height="100%" alignItems="center" padding="15px">
+        <StyledCenterPage>
             <Block
                 height="fit-content"
                 maxWidth="500px"
@@ -93,8 +86,21 @@ const GetYourLoginPage = () => {
                     <Message type="failure" title="Не удалось найти пользователя" />
                 )}
             </Block>
-        </CenterPage>
+        </StyledCenterPage>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    height: 100%;
+    align-items: center;
+    padding: 15px;
+`
+
+const ADNameElement = styled.span`
+    display: flex;
+    margin: 0 auto;
+    gap: 5px;
+    text-align: center;
+`
 
 export default GetYourLoginPage

@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import getStatus from 'widgets/user/lib/get-status'
 import { UserProps } from 'widgets/user/types'
-import KeyValue from '../atoms/key-value'
+import { KeyValue } from '../atoms/key-value'
 import DotSeparatedWords from '../dot-separated-words'
 import Subtext from '../subtext'
 import UserHeaderBackground from './user-header-background'
@@ -77,23 +77,13 @@ const UserHeader = ({
             {!noInfo && (
                 <div className="info">
                     <b>{name}</b>
-                    <Subtext fontSize="0.9rem">
+                    <Subtext>
                         <DotSeparatedWords words={status} />
                     </Subtext>
-                    <KeyValue fontSize="0.9rem" visible={!!finance} keyStr={'Уровень финансирование'} value={finance} />
-                    <KeyValue
-                        fontSize="0.9rem"
-                        visible={!!degreeLevel}
-                        keyStr={'Уровень образования'}
-                        value={degreeLevel}
-                    />
-                    <KeyValue fontSize="0.9rem" visible={!!course} keyStr={'Курс'} value={course} />
-                    <KeyValue
-                        fontSize="0.9rem"
-                        visible={!!educationForm}
-                        keyStr={'Форма образования'}
-                        value={educationForm}
-                    />
+                    {!!finance && <KeyValue keyStr={'Уровень финансирование'} value={finance} />}
+                    {!!degreeLevel && <KeyValue keyStr={'Уровень образования'} value={degreeLevel} />}
+                    {!!course && <KeyValue keyStr={'Курс'} value={course} />}
+                    {!!educationForm && <KeyValue keyStr={'Форма образования'} value={educationForm} />}
                 </div>
             )}
         </UserHeaderStyled>

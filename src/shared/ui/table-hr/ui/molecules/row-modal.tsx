@@ -1,4 +1,4 @@
-import KeyValue from '@ui/atoms/key-value'
+import { KeyValue } from '@ui/atoms/key-value'
 import displayWithType from '@ui/table/lib/display-with-type'
 import { ColumnProps } from '@ui/table/types'
 import { Title } from '@ui/title'

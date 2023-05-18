@@ -1,6 +1,6 @@
 import { Application } from '@api/model'
 import { Title } from '@ui/atoms'
-import KeyValue from '@ui/atoms/key-value'
+import { KeyValue } from '@ui/atoms/key-value'
 import React from 'react'
 import styled from 'styled-components'
 

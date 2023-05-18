@@ -3,10 +3,11 @@ import Block from '@ui/block'
 import GoBackButton from '@ui/go-back-button'
 import React from 'react'
 import { Ul } from '@features/feedback/ui/organisms/help-links'
+import styled from 'styled-components'
 
 const MemoFreshmenPage = () => {
     return (
-        <CenterPage alignItems="center" padding="15px" height="100%">
+        <StyledCenterPage>
             <Block height="fit-content" orientation="vertical" maxWidth="500px" gap="10px" noAppearanceInMobile>
                 <GoBackButton />
                 <Title size={4} align="left">
@@ -39,8 +40,14 @@ const MemoFreshmenPage = () => {
                     </p>
                 </Ul>
             </Block>
-        </CenterPage>
+        </StyledCenterPage>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    align-items: center;
+    padding: 15px;
+    height: 100%;
+`
 
 export default MemoFreshmenPage

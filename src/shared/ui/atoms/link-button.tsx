@@ -1,34 +1,55 @@
-import React, { memo } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import { Align } from '../types'
+
+interface Props {
+    icon?: JSX.Element
+    text?: React.ReactNode | string
+    onClick?: (event: any) => void
+    isChosen?: boolean
+    align?: Align
+    isActive?: boolean
+    href: string
+}
+
+export const LinkButton = ({ icon, text, onClick, align, href, isChosen = false, isActive = true }: Props) => {
+    return (
+        <LinkButtonWrapper
+            text={!!text}
+            onClick={(e) => isActive && onClick && onClick(e)}
+            isChosen={isChosen}
+            href={href}
+            align={align}
+            isActive={isActive}
+        >
+            {!!icon && icon}
+            <span>{text}</span>
+        </LinkButtonWrapper>
+    )
+}
 
 const LinkButtonWrapper = styled.a<{
     text: boolean
     isChosen: boolean
-    width?: string
-    background?: string
-    textColor?: string
-    align?: 'left' | 'center' | 'right'
+    align?: Align
     isActive: boolean
-    height?: string
-    minHeight?: string
-    padding?: string
 }>`
     display: flex;
     align-items: center;
     justify-content: ${({ align }) => align ?? 'center'};
     border: none;
-    color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
-    background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
-    padding: ${({ padding }) => padding ?? '10px'};
+    color: var(--text);
+    background: ${({ isChosen }) => (isChosen ? 'var(--blue)' : 'var(--search)')};
+    padding: 10px;
     border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
     transition: 0.2s transform;
-    width: ${({ width }) => (width ? width : 'fit-content')};
+    width: 'fit-content';
     text-decoration: none;
     font-size: 0.8em;
-    height: ${({ height = '40px' }) => height};
-    min-height: ${({ minHeight = '40px' }) => minHeight};
+    height: 40px;
+    min-height: 40px;
     opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
     pointer-events: ${({ isActive }) => !isActive && 'none'};
 
@@ -64,57 +85,3 @@ const LinkButtonWrapper = styled.a<{
         }
     }
 `
-
-interface Props {
-    icon?: JSX.Element
-    text?: React.ReactNode | string
-    onClick?: (event: any) => void
-    isChosen?: boolean
-    width?: string
-    background?: string
-    textColor?: string
-    align?: 'left' | 'center' | 'right'
-    isActive?: boolean
-    href: string
-    height?: string
-    minHeight?: string
-    padding?: string
-}
-
-const LinkButton = ({
-    icon,
-    text,
-    onClick,
-    width,
-    background,
-    textColor,
-    align,
-    href,
-    height,
-    minHeight,
-    padding,
-    isActive = true,
-    isChosen = false,
-}: Props) => {
-    return (
-        <LinkButtonWrapper
-            text={!!text}
-            onClick={(e) => isActive && onClick && onClick(e)}
-            isChosen={isChosen}
-            width={width}
-            background={background}
-            textColor={textColor}
-            href={href}
-            align={align}
-            isActive={isActive}
-            height={height}
-            padding={padding}
-            minHeight={minHeight}
-        >
-            {!!icon && icon}
-            <span>{text}</span>
-        </LinkButtonWrapper>
-    )
-}
-
-export default memo(LinkButton)

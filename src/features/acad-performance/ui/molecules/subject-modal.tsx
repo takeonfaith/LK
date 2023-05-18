@@ -1,6 +1,6 @@
 import { AcadPerformance } from '@api/model/acad-performance'
 import { Title } from '@ui/atoms'
-import KeyValue from '@ui/atoms/key-value'
+import { KeyValue } from '@ui/atoms/key-value'
 import findSemestr from '@utils/find-semestr'
 import localizeDate from '@utils/localize-date'
 import React from 'react'

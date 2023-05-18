@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const SwitchToggleWrapper = styled.div`
+export const SwitchToggleWrapper = styled.div`
     user-select: none;
     min-width: 56px;
     height: 30px;
@@ -44,5 +44,3 @@ const SwitchToggleWrapper = styled.div`
         transform: scale(0.9);
     }
 `
-
-export default SwitchToggleWrapper

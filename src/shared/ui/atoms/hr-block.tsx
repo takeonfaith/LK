@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const HrBlockWrapper = styled.div<{ maxWidth?: string }>`
+export const HrBlock = styled.div<{ maxWidth?: string }>`
     width: 100%;
     margin-bottom: 20px;
     height: fit-content;
@@ -19,5 +19,3 @@ const HrBlockWrapper = styled.div<{ maxWidth?: string }>`
         background: transparent;
     }
 `
-
-export default HrBlockWrapper

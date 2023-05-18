@@ -115,7 +115,7 @@ const SettingsContent = ({ searchValue, searchResult, settingsConfig }: Props) =
                         )
                     })}
                     <Route path={'/'}>
-                        <CenterPage height="100%">
+                        <StyledCenterPage>
                             <Error
                                 text="Ничего не выбрано"
                                 image={
@@ -124,12 +124,16 @@ const SettingsContent = ({ searchValue, searchResult, settingsConfig }: Props) =
                                     </Icon>
                                 }
                             />
-                        </CenterPage>
+                        </StyledCenterPage>
                     </Route>
                 </Switch>
             </SettingsContentStyled>
         </SettingsContentWrapper>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    height: 100%;
+`
 
 export default SettingsContent

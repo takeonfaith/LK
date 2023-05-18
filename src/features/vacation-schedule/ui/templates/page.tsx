@@ -7,6 +7,7 @@ import Card from '@ui/card'
 import List from '@ui/list'
 import Subtext from '@ui/subtext'
 import React, { useEffect, useMemo, useState } from 'react'
+import styled from 'styled-components'
 import { Vacation } from '../organism'
 
 const calendarUrls = {
@@ -38,7 +39,7 @@ const Page = () => {
 
     return (
         <Wrapper load={vacationScheduleModel.effects.getFx} error={error} data={data}>
-            <CenterPage alignItems="flex-start">
+            <StyledCenterPage>
                 <Block orientation="vertical" height="fit-content" gap="1rem" maxWidth="700px" noAppearanceInMobile>
                     <Title size={2} align="left">
                         График отпусков
@@ -58,9 +59,9 @@ const Page = () => {
                                 onClick={() => null}
                                 href={calendarUrls.fiveWorkDays}
                                 textColor="var(--reallyBlue)"
+                                padding="10px 0"
                                 text="Подробнее"
                                 background="transparent"
-                                padding="10px 0"
                             />
                         </Card>
                         <Card
@@ -89,9 +90,13 @@ const Page = () => {
                     )}
                     {selectedVacation && <Vacation {...selectedVacation} />}
                 </Block>
-            </CenterPage>
+            </StyledCenterPage>
         </Wrapper>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    align-items: flex-start;
+`
 
 export default Page

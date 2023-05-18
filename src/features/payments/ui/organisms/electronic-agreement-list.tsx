@@ -1,6 +1,6 @@
 import List from '@ui/list'
 import React from 'react'
-import ElectronicAgreementListItem from '../molecules/electronic-agreement-list-item'
+import { ElectronicAgreementListItem } from '../molecules/electronic-agreement-list-item'
 
 interface Props {
     electronicAgreements: any[]

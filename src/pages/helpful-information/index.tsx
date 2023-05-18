@@ -8,6 +8,7 @@ import getPages from './lib/get-pages'
 import { useHistory, useRouteMatch } from 'react-router'
 import { TEMPLATE_USEFUL_INFO_ROUTE, USEFUL_INFO_ROUTE } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
+import styled from 'styled-components'
 
 const HelpfulInformation = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
@@ -32,15 +33,20 @@ const HelpfulInformation = () => {
     )
 
     return (
-        <CenterPage alignItems="flex-start" padding="10px">
+        <StyledCenterPage>
             <Block orientation="vertical" gap="10px" maxWidth="750px" height="fit-content" noAppearanceInMobile>
                 <Title size={2} align="left">
                     Полезная информация
                 </Title>
                 <SliderPage pages={sliderPages} currentPage={sliderPageOnMount} onChangePage={onChangeSliderPage} />
             </Block>
-        </CenterPage>
+        </StyledCenterPage>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    align-items: flex-start;
+    padding: 10px;
+`
 
 export default HelpfulInformation

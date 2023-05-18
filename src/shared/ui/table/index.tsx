@@ -1,4 +1,4 @@
-import AddedElementsList from '@ui/added-elements-list'
+import { AddedElementsList } from '@ui/added-elements-list'
 import React from 'react'
 import styled from 'styled-components'
 import useFilter from './lib/hooks/use-filter'

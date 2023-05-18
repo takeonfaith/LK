@@ -10,6 +10,63 @@ import { useState } from 'react'
 import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 
+interface Props {
+    data: baseNotification | businesstripNotification
+    type: NameListNotification
+}
+
+const CardNotification = ({ data }: Props) => {
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
+    const [loading, setLoading] = useState(false)
+    const [completed, setCompleted] = useState(false)
+    return (
+        <CardNotificationWrapper>
+            <InfoNotification>
+                <TitleCardNotification>{data.event || data.post}</TitleCardNotification>
+                {data.startDate && (
+                    <DateCardNotification>
+                        Период: {localizeDate(data.startDate, 'numeric')} - {localizeDate(data.endDate, 'numeric')}
+                    </DateCardNotification>
+                )}
+            </InfoNotification>
+            <BlockButtons>
+                {data.file && (
+                    <StyledLinkButton href={data.file} onClick={() => null} text="Скачать" icon={<FiDownload />} />
+                )}
+                <SubmitButton
+                    text={data.viewed ? getRightGenderWord(user?.sex, 'Ознакомлен', 'Ознакомлена') : 'Ознакомиться'}
+                    action={() => {
+                        setLoading(true)
+                        personalNotificationModel.effects.viewPersonalNotificationsFx(data.id)
+                        setLoading(false)
+                        setCompleted(true)
+                    }}
+                    height="35px"
+                    width="150px"
+                    buttonSuccessText={getRightGenderWord(user?.sex, 'Ознакомлен', 'Ознакомлена')}
+                    isLoading={loading}
+                    completed={completed}
+                    setCompleted={setCompleted}
+                    isActive={true}
+                    isDone={data.viewed}
+                    repeatable={false}
+                    popUpFailureMessage="Вы уже ознакомились"
+                />
+            </BlockButtons>
+        </CardNotificationWrapper>
+    )
+}
+
+const StyledLinkButton = styled(LinkButton)`
+    width: 150px;
+    height: 35px;
+    min-height: 30px;
+    color: white;
+    background: ${Colors.blue.light1};
+`
+
 const CardNotificationWrapper = styled.div`
     display: flex;
     width: 100%;
@@ -48,64 +105,5 @@ const DateCardNotification = styled.div`
     font-size: 13px;
     line-height: 16px;
 `
-
-interface Props {
-    data: baseNotification | businesstripNotification
-    type: NameListNotification
-}
-
-const CardNotification = ({ data }: Props) => {
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
-    const [loading, setLoading] = useState(false)
-    const [completed, setCompleted] = useState(false)
-    return (
-        <CardNotificationWrapper>
-            <InfoNotification>
-                <TitleCardNotification>{data.event || data.post}</TitleCardNotification>
-                {data.startDate && (
-                    <DateCardNotification>
-                        Период: {localizeDate(data.startDate, 'numeric')} - {localizeDate(data.endDate, 'numeric')}
-                    </DateCardNotification>
-                )}
-            </InfoNotification>
-            <BlockButtons>
-                {data.file && (
-                    <LinkButton
-                        href={data.file}
-                        onClick={() => null}
-                        text="Скачать"
-                        width="150px"
-                        icon={<FiDownload />}
-                        height="35px"
-                        minHeight="30px"
-                        textColor="white"
-                        background={Colors.blue.light1}
-                    />
-                )}
-                <SubmitButton
-                    text={data.viewed ? getRightGenderWord(user?.sex, 'Ознакомлен', 'Ознакомлена') : 'Ознакомиться'}
-                    action={() => {
-                        setLoading(true)
-                        personalNotificationModel.effects.viewPersonalNotificationsFx(data.id)
-                        setLoading(false)
-                        setCompleted(true)
-                    }}
-                    height="35px"
-                    width="150px"
-                    buttonSuccessText={getRightGenderWord(user?.sex, 'Ознакомлен', 'Ознакомлена')}
-                    isLoading={loading}
-                    completed={completed}
-                    setCompleted={setCompleted}
-                    isActive={true}
-                    isDone={data.viewed}
-                    repeatable={false}
-                    popUpFailureMessage="Вы уже ознакомились"
-                />
-            </BlockButtons>
-        </CardNotificationWrapper>
-    )
-}
 
 export default CardNotification

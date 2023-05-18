@@ -4,12 +4,91 @@ import { FiPlus, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import useFilterList from './lib/hooks/use-filter-list'
 
+export interface FilterElement {
+    id: string
+    title: string
+}
+
+export type FilterElementList = {
+    [key: string]: FilterElement
+} | null
+
+interface Props {
+    list: FilterElementList
+    onAddElement?: () => void
+    onRemoveOne: (id: string) => void
+    onRemoveAll?: () => void
+    padding?: string
+    height?: string
+    setList: React.Dispatch<React.SetStateAction<FilterElementList>>
+}
+
+export const AddedElementsList = ({
+    list,
+    onAddElement,
+    onRemoveAll,
+    onRemoveOne,
+    padding,
+    height,
+    setList,
+}: Props) => {
+    const listKeys = Object.keys(list ?? {})
+    const { removeAll, removeOne, setRemoveAll, setRemoveOne } = useFilterList(listKeys, setList)
+
+    if (!listKeys.length) return null
+
+    return (
+        <AddedElementsListWrapper removeAll={removeAll || closed} padding={padding} height={height}>
+            {!!onAddElement && (
+                <Element onClick={onAddElement} background={'var(--reallyBlue)'} color="#fff">
+                    <FiPlus />
+                    Добавить
+                </Element>
+            )}
+            {Object.values(list ?? {}).map((el) => {
+                return (
+                    <Element key={el.id} remove={removeOne === el.id}>
+                        <div className="element-text">{el.title}</div>
+                        <div
+                            className="remove"
+                            onClick={() => {
+                                if (listKeys.length === 1) {
+                                    setRemoveAll(true)
+                                    onRemoveAll?.()
+                                } else {
+                                    setRemoveOne(el.id)
+
+                                    onRemoveOne(el.id)
+                                }
+                            }}
+                        >
+                            <FiX />
+                        </div>
+                    </Element>
+                )
+            })}
+            {listKeys.length && !!onRemoveAll && (
+                <Element
+                    background={'var(--reallyBlue)'}
+                    color="#fff"
+                    onClick={() => {
+                        onRemoveAll()
+                        setRemoveAll(true)
+                    }}
+                >
+                    <div className="element-text">Убрать все</div>
+                </Element>
+            )}
+        </AddedElementsListWrapper>
+    )
+}
+
 const Element = styled.div<{ color?: string; background?: string; remove?: boolean }>`
     padding: ${({ remove }) => (remove ? '0px' : '5px 10px')};
-    background: ${({ background }) => background ?? Colors.blue.transparent3};
+    background: ${Colors.blue.transparent3};
     font-size: 0.7em;
     font-weight: 600;
-    color: ${({ color }) => color ?? 'var(--reallyBlue)'};
+    color: var(--reallyBlue);
     border-radius: var(--brLight);
     display: flex;
     align-items: center;
@@ -98,78 +177,3 @@ const AddedElementsListWrapper = styled.div<{ removeAll?: boolean; padding?: str
     transform: scale(${({ removeAll }) => (removeAll ? '0.95' : '1')})
         translate(${({ removeAll }) => (removeAll ? '-30px, 20px' : '0, 0')});
 `
-
-export interface FilterElement {
-    id: string
-    title: string
-    color?: string
-    background?: string
-}
-
-export type FilterElementList = {
-    [key: string]: FilterElement
-} | null
-
-interface Props {
-    list: FilterElementList
-    onAddElement?: () => void
-    onRemoveOne: (id: string) => void
-    onRemoveAll?: () => void
-    padding?: string
-    height?: string
-    setList: React.Dispatch<React.SetStateAction<FilterElementList>>
-}
-
-const AddedElementsList = ({ list, onAddElement, onRemoveAll, onRemoveOne, padding, height, setList }: Props) => {
-    const listKeys = Object.keys(list ?? {})
-    const { removeAll, removeOne, setRemoveAll, setRemoveOne } = useFilterList(listKeys, setList)
-
-    if (!listKeys.length) return null
-
-    return (
-        <AddedElementsListWrapper removeAll={removeAll || closed} padding={padding} height={height}>
-            {!!onAddElement && (
-                <Element onClick={onAddElement} background={'var(--reallyBlue)'} color="#fff">
-                    <FiPlus />
-                    Добавить
-                </Element>
-            )}
-            {Object.values(list ?? {}).map((el) => {
-                return (
-                    <Element key={el.id} background={el.background} remove={removeOne === el.id}>
-                        <div className="element-text">{el.title}</div>
-                        <div
-                            className="remove"
-                            onClick={() => {
-                                if (listKeys.length === 1) {
-                                    setRemoveAll(true)
-                                    onRemoveAll?.()
-                                } else {
-                                    setRemoveOne(el.id)
-
-                                    onRemoveOne(el.id)
-                                }
-                            }}
-                        >
-                            <FiX />
-                        </div>
-                    </Element>
-                )
-            })}
-            {listKeys.length && !!onRemoveAll && (
-                <Element
-                    background={'var(--reallyBlue)'}
-                    color="#fff"
-                    onClick={() => {
-                        onRemoveAll()
-                        setRemoveAll(true)
-                    }}
-                >
-                    <div className="element-text">Убрать все</div>
-                </Element>
-            )}
-        </AddedElementsListWrapper>
-    )
-}
-
-export default AddedElementsList

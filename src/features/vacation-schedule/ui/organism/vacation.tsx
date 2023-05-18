@@ -1,6 +1,6 @@
 import { Vacation as VacationType, VacationSchedule } from '@api/model/vacation-schedule'
 import { ColumnProps } from '@ui/table/types'
-import KeyValue from '@ui/atoms/key-value'
+import { KeyValue } from '@ui/atoms/key-value'
 import List from '@ui/list'
 import Table from '@ui/table'
 import { IndexedProperties } from '@utility-types/indexed-properties'

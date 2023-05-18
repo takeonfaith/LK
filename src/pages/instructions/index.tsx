@@ -61,7 +61,7 @@ const InstructionsPage = () => {
     } = userModel.selectors.useUser()
     const data = user?.user_status === 'stud' ? instructionsStudentData : instructionsTeacherData
     return (
-        <CenterPage alignItems="flex-start" padding="10px">
+        <StyledCenterPage>
             <CustomBlock orientation="vertical" gap="10px" maxWidth="650px" height="fit-content">
                 <Title size={3} align="left">
                     Инструкции, положения, правила
@@ -133,8 +133,13 @@ const InstructionsPage = () => {
                     </p>
                 </Message>
             </CustomBlock>
-        </CenterPage>
+        </StyledCenterPage>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    align-items: flex-start;
+    padding: 10px;
+`
 
 export default InstructionsPage

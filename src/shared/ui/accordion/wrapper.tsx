@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const AccordionWrapper = styled.div<{
+export const AccordionWrapper = styled.div<{
     height: number
     open: boolean
 }>`
@@ -28,5 +28,3 @@ const AccordionWrapper = styled.div<{
         }
     }
 `
-
-export default AccordionWrapper

@@ -2,13 +2,14 @@ import { CenterPage, Input, Message, SubmitButton, Title } from '@ui/atoms'
 import Block from '@ui/block'
 import GoBackButton from '@ui/go-back-button'
 import React, { useState } from 'react'
+import styled from 'styled-components'
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('')
     const [loading] = useState(false)
     const [completed, setCompleted] = useState(false)
     return (
-        <CenterPage background="var(--theme)">
+        <StyledCenterPage>
             <Block
                 height="fit-content"
                 maxWidth="500px"
@@ -43,8 +44,12 @@ const ForgotPasswordPage = () => {
                     isActive={!!email.length}
                 />
             </Block>
-        </CenterPage>
+        </StyledCenterPage>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    background: var(--theme);
+`
 
 export default ForgotPasswordPage

@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 
-const CenterPage = styled.div<{ background?: string; alignItems?: string; padding?: string; height?: string }>`
+export const CenterPage = styled.div`
     display: flex;
-    align-items: ${({ alignItems }) => alignItems ?? 'center'};
+    align-items: 'center';
     justify-content: center;
-    height: ${({ height }) => height ?? 'auto'};
+    height: 'auto';
     color: var(--text);
-    background: ${({ background }) => background};
-    padding: ${({ padding }) => padding};
     width: 100%;
 `
-
-export default CenterPage

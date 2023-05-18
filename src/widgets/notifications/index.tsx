@@ -53,7 +53,7 @@ const NotificationsPage = ({ title, type }: Props) => {
             error={error}
             data={foundNotification}
         >
-            <CenterPage padding="0 0 10px 0">
+            <StyledCenterPage>
                 <Block maxWidth={'725px'} orientation="vertical" gap="10px" height="fit-content" noAppearanceInMobile>
                     <Title size={2} align="left">
                         {title}
@@ -104,9 +104,13 @@ const NotificationsPage = ({ title, type }: Props) => {
                         />
                     )}
                 </Block>
-            </CenterPage>
+            </StyledCenterPage>
         </Wrapper>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    padding: 0 0 10px 0;
+`
 
 export default NotificationsPage

@@ -9,32 +9,6 @@ import { useModal } from 'widgets'
 import { useElectronicAgreement } from '../hooks/use-electronic-agreement'
 import { MistakeModal } from './atoms'
 
-const CenterSection = styled(BlockWrapper)<{ showInfoText: boolean }>`
-    .info-text {
-        transition: 0.2s;
-        opacity: ${({ showInfoText }) => (showInfoText ? 1 : 0)};
-        visibility: ${({ showInfoText }) => (showInfoText ? 'visible' : 'hidden')};
-        height: ${({ showInfoText }) => (showInfoText ? '100%' : '0')};
-    }
-
-    p {
-        a {
-            color: var(--blue);
-        }
-
-        b {
-            opacity: 0.8;
-        }
-    }
-
-    @media (max-width: 1000px) {
-        width: 95%;
-        .center-section {
-            box-shadow: none;
-        }
-    }
-`
-
 interface Props {
     children: React.ReactChild
     submit: () => Promise<void> | void
@@ -61,13 +35,7 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
             height="fit-content"
             gap="10px"
         >
-            <LinkButton
-                href={data.file}
-                onClick={() => null}
-                text="Скачать согласие"
-                width="100%"
-                icon={<FiDownload />}
-            />
+            <StyledLinkButton href={data.file} onClick={() => null} text="Скачать согласие" icon={<FiDownload />} />
             <Message
                 type={'success'}
                 icon={<FiCheck />}
@@ -108,5 +76,35 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
         </CenterSection>
     )
 }
+
+const StyledLinkButton = styled(LinkButton)`
+    width: 100%;
+`
+
+const CenterSection = styled(BlockWrapper)<{ showInfoText: boolean }>`
+    .info-text {
+        transition: 0.2s;
+        opacity: ${({ showInfoText }) => (showInfoText ? 1 : 0)};
+        visibility: ${({ showInfoText }) => (showInfoText ? 'visible' : 'hidden')};
+        height: ${({ showInfoText }) => (showInfoText ? '100%' : '0')};
+    }
+
+    p {
+        a {
+            color: var(--blue);
+        }
+
+        b {
+            opacity: 0.8;
+        }
+    }
+
+    @media (max-width: 1000px) {
+        width: 95%;
+        .center-section {
+            box-shadow: none;
+        }
+    }
+`
 
 export default ElectornicAgreement

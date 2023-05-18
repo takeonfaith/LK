@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import { User } from '@api/model'
 import transformSex from '@utils/transform-sex'
-import KeyValue from '@ui/atoms/key-value'
+import { KeyValue } from '@ui/atoms/key-value'
 import { Divider } from '@ui/divider'
 
 export default memo(AllInfo)

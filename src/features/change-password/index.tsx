@@ -7,6 +7,7 @@ import { Message } from '@shared/ui/message'
 import ProgressBar from '@shared/ui/progress-bar'
 import Subtext from '@shared/ui/subtext'
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import { MANDATORY_RULES, OPTIONAL_RULES } from './const'
 import generatePassword from './lib/generate-password'
 import getPasswordStrength from './lib/get-password-strength'
@@ -60,8 +61,7 @@ const ChangePassword = () => {
                     <List gap={8} direction="vertical">
                         {MANDATORY_RULES.map((rule) => {
                             return (
-                                <Checkbox
-                                    fontSize="0.85rem"
+                                <StyledCheckBox
                                     key={rule.text}
                                     setChecked={() => null}
                                     text={rule.text}
@@ -76,8 +76,7 @@ const ChangePassword = () => {
                     <List gap={8} direction="vertical">
                         {OPTIONAL_RULES.map((rule) => {
                             return (
-                                <Checkbox
-                                    fontSize="0.85rem"
+                                <StyledCheckBox
                                     key={rule.text}
                                     setChecked={() => null}
                                     text={rule.text}
@@ -151,5 +150,9 @@ const ChangePassword = () => {
         </ChangePasswordStyled>
     )
 }
+
+export const StyledCheckBox = styled(Checkbox)`
+    font-size: 0.85rem;
+`
 
 export default ChangePassword

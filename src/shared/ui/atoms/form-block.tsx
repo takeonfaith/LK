@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const FormBlockWrapper = styled.div<{ maxWidth?: string }>`
+export const FormBlock = styled.div<{ maxWidth?: string }>`
     width: 100%;
     height: fit-content;
     max-width: ${({ maxWidth }) => maxWidth ?? '600px'};
@@ -18,5 +18,3 @@ const FormBlockWrapper = styled.div<{ maxWidth?: string }>`
         background: transparent;
     }
 `
-
-export default FormBlockWrapper

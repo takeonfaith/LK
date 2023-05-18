@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import AccordionTitle from './title'
-import AccordionWrapper from './wrapper'
+import { AccordionTitle } from './title'
+import { AccordionWrapper } from './wrapper'
 
 interface Props {
     children: React.ReactNode
@@ -10,7 +10,7 @@ interface Props {
     confirmed?: boolean
 }
 
-const Accordion = (props: Props) => {
+export const Accordion = (props: Props) => {
     const { children, title, height, confirmed = false, show = false } = props
 
     const [open, setOpen] = useState<boolean>(show)
@@ -22,5 +22,3 @@ const Accordion = (props: Props) => {
         </AccordionWrapper>
     )
 }
-
-export default Accordion

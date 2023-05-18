@@ -1,5 +1,5 @@
 import { FieldProps } from '@pages/settings/model'
-import AddedElementsList, { FilterElementList } from '@shared/ui/added-elements-list'
+import { FilterElementList, AddedElementsList } from '@shared/ui/added-elements-list'
 import React, { useState } from 'react'
 
 const ChoicesFiled = (props: FieldProps) => {

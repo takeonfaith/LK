@@ -124,15 +124,12 @@ const HeaderContextMenu = () => {
                 align="left"
                 background="var(--schedule)"
             />
-            <LinkButton
+            <StyledLinkButton
                 text={'Cтарый дизайн'}
                 onClick={() => {
                     localStorage.setItem('useOldVersion', 'true')
                 }}
-                background="var(--schedule)"
                 icon={<FiArrowLeftCircle />}
-                width="100%"
-                align="left"
                 href={`${OLD_LK_URL}/index.php`}
             />
             <Divider />
@@ -152,5 +149,10 @@ const HeaderContextMenu = () => {
         </HeaderContextMenuWrapper>
     ) : null
 }
+
+const StyledLinkButton = styled(LinkButton)`
+    background: var(--schedule);
+    width: 100%;
+`
 
 export default HeaderContextMenu

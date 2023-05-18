@@ -1,6 +1,6 @@
 import { paymentApi } from '@api'
 import { Agreement } from '@api/model'
-import Accordion from '@ui/accordion/accordion'
+import { Accordion } from '@ui/accordion'
 import { LinkButton, SubmitButton } from '@ui/atoms'
 import { Message } from '@ui/message'
 import localizeDate from '@utils/localize-date'
@@ -13,28 +13,7 @@ interface Props {
     data: Agreement
 }
 
-const Wrapper = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    row-gap: 10px;
-
-    .block {
-        width: 49%;
-        min-width: 320px;
-        display: flex;
-        flex-direction: column;
-        gap: 0.625rem;
-
-        .text {
-            text-align: center;
-        }
-    }
-`
-
-const ElectronicAgreementListItem = ({ data }: Props) => {
+export const ElectronicAgreementListItem = ({ data }: Props) => {
     const { id, signed_user: signedUser, name, can_sign: isActive, date } = data
 
     const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
@@ -44,17 +23,16 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
 
     const height = signedUser || done ? 200 : 100
 
-    // TODO: Этап рефакторинга №2
     return (
         <Accordion height={height} title={name} confirmed={signedUser}>
             {`${name} - ${localizeDate(date)}`}
             <Wrapper>
-                <div className="block">
+                <ActionsBlock>
                     {done && (
-                        <p className="text">
+                        <ActionsBlockDescription>
                             Дата подписания: {localizeDate(data.signed_user_date || new Date())},{' '}
                             {data.signed_user_time || `${new Date().getHours()}:${new Date().getMinutes()}`}
-                        </p>
+                        </ActionsBlockDescription>
                     )}
                     <LinkButton
                         href={data.file}
@@ -71,7 +49,7 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                         align="center"
                         visible={done}
                     />
-                </div>
+                </ActionsBlock>
                 {!done && (
                     <div className="block">
                         <SubmitButton
@@ -96,4 +74,23 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
     )
 }
 
-export default ElectronicAgreementListItem
+const Wrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+`
+
+const ActionsBlock = styled.div`
+    width: 49%;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+`
+
+const ActionsBlockDescription = styled.p`
+    text-align: center;
+`

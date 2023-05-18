@@ -1,14 +1,15 @@
 import { CenterPage, Message, Title } from '@ui/atoms'
-import KeyValue from '@ui/atoms/key-value'
+import { KeyValue } from '@ui/atoms/key-value'
 import Block from '@ui/block'
 import GoBackButton from '@ui/go-back-button'
 import List from '@ui/list'
 import React from 'react'
 import { FiInfo } from 'react-icons/fi'
+import styled from 'styled-components'
 
 const CantAccessPage = () => {
     return (
-        <CenterPage alignItems="center" height="100%">
+        <StyledCenterPage>
             <Block height="fit-content" orientation="vertical" maxWidth="500px" gap="10px">
                 <GoBackButton />
                 <Title size={4} align="left">
@@ -42,8 +43,13 @@ const CantAccessPage = () => {
                     title="Служба технической поддержки работает по рабочему графику с 9.30 до 20:00 в будние дни."
                 />
             </Block>
-        </CenterPage>
+        </StyledCenterPage>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    align-items: center;
+    height: 100%;
+`
 
 export default CantAccessPage

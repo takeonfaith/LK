@@ -37,7 +37,7 @@ const SettingsPage = () => {
 
     return (
         <Wrapper>
-            <CenterPage height="100%">
+            <StyledCenterPage>
                 <SettingsBlock
                     width="100%"
                     maxWidth="1000px"
@@ -59,9 +59,13 @@ const SettingsPage = () => {
                         settingsConfig={fullSettings}
                     />
                 </SettingsBlock>
-            </CenterPage>
+            </StyledCenterPage>
         </Wrapper>
     )
 }
+
+const StyledCenterPage = styled(CenterPage)`
+    height: 100%;
+`
 
 export default SettingsPage
