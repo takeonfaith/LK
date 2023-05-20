@@ -1,32 +1,37 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React from 'react'
 import { menuModel } from '@entities/menu'
 import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
-import LinksList from '@features/home/ui/organisms/links-list'
+import Links from '@features/home/ui/links'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
-import { CenterPage, Divider, Title, Wrapper } from '@ui/atoms'
-import { useEffect } from 'react'
-import React from 'react'
 import Block from '@shared/ui/block'
-import TopUser from './ui/top-user'
+import Flex from '@shared/ui/flex'
+import { LocalSearch } from '@shared/ui/molecules'
+import { CenterPage, Title, Wrapper } from '@ui/atoms'
+import { useEffect } from 'react'
 import styled from 'styled-components'
+import AcadPerformanceStatWidget from 'widgets/acad-performance-stat-widget'
 import DaytimeBackground from './ui/daytime-background'
-import List from '@shared/ui/list'
-import { User } from 'widgets'
-import { paginationList } from '@entities/all-students'
-import { ALL_STUDENTS_ROUTE } from '@app/routes/general-routes'
-import { useHistory } from 'react-router'
-import Alerts from '@pages/alerts/ui/alerts'
-import { alertModel } from '@entities/alert'
+import TopUser from './ui/top-user'
+import { FiSearch } from 'react-icons/fi'
+import Subtext from '@shared/ui/subtext'
+import { acadPerformanceModel } from '@entities/acad-performance'
+import findSemestr from '@shared/lib/find-semestr'
 
 const HomePageStyled = styled.div`
     width: 100%;
-    padding-top: 30px;
+    padding-top: 156px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
+
+    @media (max-width: 1000px) {
+        padding-top: 153px;
+    }
 `
 
 const Home = () => {
@@ -34,11 +39,8 @@ const Home = () => {
         data: { user },
         error,
     } = userModel.selectors.useUser()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { data, error: alertsError, loading } = alertModel.selectors.useData()
-
-    const { $items } = paginationList
-    const history = useHistory()
+    const { data } = acadPerformanceModel.selectors.useData()
+    const semestr = `${findSemestr(new Date().toString(), user?.course ?? 1)}`
 
     const { homeRoutes } = menuModel.selectors.useMenu()
 
@@ -47,35 +49,32 @@ const Home = () => {
     useEffect(() => {
         scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
-        alertModel.effects.getFx()
+        acadPerformanceModel.effects.getFx({ semestr })
     }, [])
-
-    const handleWatchMore = () => {
-        history.push(ALL_STUDENTS_ROUTE)
-    }
 
     return (
         <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <DaytimeBackground />
             <HomePageStyled>
-                <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
+                <Block maxWidth="750px" height="fit-content" padding="16px">
+                    <Subtext align="left" fontSize="0.9rem">
+                        <Flex gap="8px">
+                            <FiSearch />
+                            Поиск
+                        </Flex>
+                    </Subtext>
+                </Block>
+                <Links links={homeRoutes} />
                 <CenterPage>
-                    <Block maxHeight="100%" minHeight="100%" height="100%" orientation="vertical" gap="16px">
-                        <Title size={2} align="left" width="100%">
-                            Главная
+                    <Block maxWidth="750px" minHeight="100%" height="100%" orientation="vertical" gap="16px">
+                        <Flex>
+                            <Title size={2} align="left" width="100%">
+                                Главная
+                            </Title>
                             <TopUser />
-                        </Title>
+                        </Flex>
                         <ScheduleAndNotification />
-                        <List showPages title="Одногруппники" direction="horizontal" onWatchMore={handleWatchMore}>
-                            {$items.getState()?.map((user) => (
-                                <User key={user?.fio} type={'stud'} name={user.fio} orientation="vertical" />
-                            ))}
-                        </List>
-                        <Divider />
-                        <Title size={3} align="left">
-                            Оповещения
-                        </Title>
-                        <Alerts alerts={data ?? {}} limit={3} listView />
+                        {user.user_status === 'stud' && <AcadPerformanceStatWidget />}
                     </Block>
                 </CenterPage>
             </HomePageStyled>

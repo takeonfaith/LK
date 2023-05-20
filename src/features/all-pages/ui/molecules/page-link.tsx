@@ -7,8 +7,7 @@ import PageLinkContent from './page-link-content'
 import React from 'react'
 
 const LinkWrapper = styled(Link)<{ width: number | string }>`
-    /* width: ${({ width }) =>
-        typeof width === 'number' ? `calc(125px * ${width} + ${(width - 1) * 10}px)` : width}; */
+    width: ${({ width }) => (typeof width === 'number' ? `calc(125px * ${width} + ${(width - 1) * 10}px)` : width)};
 
     @media (max-width: 500px) {
         height: 110px;

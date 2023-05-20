@@ -35,14 +35,16 @@ const Alerts = ({ alerts, limit, listView }: Props) => {
 
     return (
         <AlertsStyled>
-            <LocalSearch
-                placeholder="Поиск оповещений"
-                whereToSearch={alerts}
-                searchEngine={search}
-                setResult={setFoundAlerts}
-                loadingOnType
-                validationCheck
-            />
+            {!listView && (
+                <LocalSearch
+                    placeholder="Поиск оповещений"
+                    whereToSearch={alerts}
+                    searchEngine={search}
+                    setResult={setFoundAlerts}
+                    loadingOnType
+                    validationCheck
+                />
+            )}
             {!listView &&
                 Object.keys(finalAlerts)
                     .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))

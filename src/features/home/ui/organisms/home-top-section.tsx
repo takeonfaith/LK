@@ -9,7 +9,7 @@ import LkNotificationList from 'widgets/lk-notification-list'
 
 const HomeTopSectionStyled = styled.div`
     position: relative;
-    width: 40px;
+    min-width: 40px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -53,7 +53,7 @@ const HomeTopSection = () => {
                 visible={!user?.hasAlerts}
                 pulsing
                 className="notification-circle"
-            ></Notification>
+            />
             <MdOutlineNotifications />
         </HomeTopSectionStyled>
     )

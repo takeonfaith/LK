@@ -117,7 +117,7 @@ const GlobalStyles = createGlobalStyle`
 		--theme: #fff;
 		--theme-mild-opposite: #565656;
 		--search2: #eee;
-		--search: #e7e7e7;
+		--search: #f5f5f5;
 		--settings: #dadada;
 		--green: #62c087;
 		--red: #e27992;

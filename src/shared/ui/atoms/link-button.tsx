@@ -112,7 +112,7 @@ const LinkButton = ({
             minHeight={minHeight}
         >
             {!!icon && icon}
-            <span>{text}</span>
+            {text && <span>{text}</span>}
         </LinkButtonWrapper>
     )
 }

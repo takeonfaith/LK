@@ -227,8 +227,9 @@ export const WeekDays: IWeekDays = {
     // sunday: { full: 'Воскресенье', short: 'Вс' },
 }
 
-export const ColorsByGrade = {
+export const ColorsByGrade: Record<keyof IGrade | 'default', string> = {
     Зачтено: Colors.green.main,
+    'Не зачтено': Colors.red.main,
     Отлично: Colors.green.main,
     Хорошо: Colors.blue.main,
     Удовлетворительно: Colors.orange.main,
@@ -236,8 +237,9 @@ export const ColorsByGrade = {
     default: Colors.red.main,
 }
 
-export const WidthByGrade = {
+export const WidthByGrade: IGrade & { default: number } = {
     Зачтено: 100,
+    'Не зачтено': 40,
     Отлично: 100,
     Хорошо: 80,
     Удовлетворительно: 60,
@@ -247,6 +249,7 @@ export const WidthByGrade = {
 
 export const GradeByScore: IGrade = {
     Зачтено: 5,
+    'Не зачтено': 2,
     Отлично: 5,
     Хорошо: 4,
     Удовлетворительно: 3,

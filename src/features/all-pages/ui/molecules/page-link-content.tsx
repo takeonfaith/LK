@@ -20,16 +20,6 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
     cursor: pointer;
     text-decoration: none;
     border-radius: var(--brLight);
-    height: 120px;
-    width: 120px;
-    background: var(--theme);
-    backdrop-filter: blur(15px);
-    border: 2px solid linear-gradient(45deg, #fff, transparent);
-
-    @media (max-width: 500px) {
-        height: 110px;
-        width: calc(33vw - 14px);
-    }
 
     .new {
         position: absolute;
@@ -76,6 +66,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
         display: flex;
         flex-direction: ${({ isVertical }) => (isVertical ? 'column' : 'row')};
         border-radius: var(--brLight);
+        align-items: center;
         justify-content: ${({ isVertical }) => (isVertical ? 'center' : 'flex-start')};
         padding: 15px;
 
@@ -111,6 +102,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             display: flex;
             align-items: center;
             font-size: 0.8em;
+            text-align: ${({ isVertical }) => (isVertical ? 'center' : 'left')};
             color: var(--text);
             transition: 0.2s;
             height: 30px;

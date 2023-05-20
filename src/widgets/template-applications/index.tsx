@@ -38,6 +38,9 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
     } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
 
+    // eslint-disable-next-line no-console
+    console.log(listApplication)
+
     return (
         <Wrapper
             load={() => applicationsModel.effects.getApplicationsFx()}
@@ -46,7 +49,7 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
             data={listApplication}
         >
             <ApplicationPageWrapper>
-                <FormBlock maxWidth="1500px">
+                <FormBlock maxWidth="1450px">
                     <Title size={2} align="left">
                         Цифровые сервисы
                     </Title>

@@ -12,6 +12,7 @@ const Router = () => {
     const {
         data: { isAuthenticated, user },
     } = userModel.selectors.useUser()
+
     const { data } = adminLinksModel.selectors.useData()
     const { settings } = settingsModel.selectors.useSettings()
     const [delayedAuth, setDelayedAuth] = useState(isAuthenticated)

@@ -11,6 +11,7 @@ import getStatus from './lib/get-status'
 import getWidth from './lib/get-width'
 import { UserProps } from './types'
 import { SkeletonLoading, StudentModal, TeacherModal } from './ui'
+import { contextMenuModel } from '@entities/context-menu'
 
 const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     display: flex;
@@ -87,6 +88,7 @@ const User = (props: UserProps) => {
             onClick(e)
         } else {
             if (!isMe) {
+                contextMenuModel.events.close()
                 open(type === 'staff' ? <TeacherModal {...props} /> : <StudentModal {...props} />)
             }
         }

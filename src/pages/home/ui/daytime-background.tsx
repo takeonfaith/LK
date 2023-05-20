@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { userModel } from '@entities/user'
 import { Colors } from '@shared/consts'
+import UserHeaderBackground from '@shared/ui/user-header/user-header-background'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -34,9 +36,13 @@ const DaytimeBackground = () => {
         data: { user },
     } = userModel.selectors.useUser()
     return (
-        <HomePageHeaderBackground color1={Colors.blue.main} color2={Colors.blue.light1}>
-            {/* <Moon className="moon" color={Colors.blue.main} /> */}
-        </HomePageHeaderBackground>
+        <UserHeaderBackground
+            fullName={user?.fullName ?? ''}
+            width="calc(100% + 16px)"
+            height="215px"
+            baseScale={1.4}
+            baseScaleDelta={1}
+        />
     )
 }
 

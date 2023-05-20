@@ -7,21 +7,22 @@ import LinksList from '@features/home/ui/organisms/links-list'
 import { LocalSearch } from '@ui/molecules'
 import { Title } from '@ui/title'
 import { useMemo, useState } from 'react'
-import styled from 'styled-components'
 import React from 'react'
+import Block from '@shared/ui/block'
+import { CenterPage } from '@shared/ui/atoms'
 
-const AllPagesWrapper = styled.div`
-    padding: calc(var(--desktop-page-padding) + 10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    color: var(--text);
-    @media (max-width: 600px) {
-        padding: 10px;
-    }
-`
+// const AllPagesWrapper = styled.div`
+//     padding: calc(var(--desktop-page-padding) + 10px);
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     gap: 10px;
+//     flex-wrap: wrap;
+//     color: var(--text);
+//     @media (max-width: 600px) {
+//         padding: 10px;
+//     }
+// `
 
 const AllPages = () => {
     const { visibleRoutes, allRoutes } = menuModel.selectors.useMenu()
@@ -31,10 +32,11 @@ const AllPages = () => {
     if (!visibleRoutes) return null
 
     return (
-        <AllPagesWrapper>
-            <Title size={2} align="left" width="100%" bottomGap>
-                Все разделы
-                {/* <List direction="horizontal" verticalAlign="center" width="fit-content" height="40px">
+        <CenterPage padding="10px">
+            <Block orientation="vertical" maxWidth="750px" height="fit-content" gap="8px">
+                <Title size={2} align="left" width="100%" bottomGap>
+                    Все разделы
+                    {/* <List direction="horizontal" verticalAlign="center" width="fit-content" height="40px">
                     <Button icon={<FiGrid />} height="28px" width="45px" background={Colors.grey.transparent3} />
                     <Button icon={<FiList />} height="28px" width="45px" background={Colors.grey.transparent3} />
                     <Divider margin="0px 10px" direction="horizontal" />
@@ -46,26 +48,27 @@ const AllPages = () => {
                         background={Colors.grey.transparent3}
                     />
                 </List> */}
-            </Title>
-            <LocalSearch
-                placeholder="Поиск разделов"
-                whereToSearch={allRoutes ?? {}}
-                searchEngine={search}
-                setResult={setFoundPages}
-                setExternalValue={setSearchValue}
-                validationCheck
-            />
-            {searchValue.length === 0 &&
-                Object.keys(groupedPages)
-                    .sort((a, b) => {
-                        return routesOrder[a as Groups] - routesOrder[b as Groups]
-                    })
-                    .map((group) => {
-                        const links = groupedPages[group as Groups]
-                        return <LinksList title={group} key={group} doNotShow="all" align="left" links={links} />
-                    })}
-            <FoundPages pages={foundPages} />
-        </AllPagesWrapper>
+                </Title>
+                <LocalSearch
+                    placeholder="Поиск разделов"
+                    whereToSearch={allRoutes ?? {}}
+                    searchEngine={search}
+                    setResult={setFoundPages}
+                    setExternalValue={setSearchValue}
+                    validationCheck
+                />
+                {searchValue.length === 0 &&
+                    Object.keys(groupedPages)
+                        .sort((a, b) => {
+                            return routesOrder[a as Groups] - routesOrder[b as Groups]
+                        })
+                        .map((group) => {
+                            const links = groupedPages[group as Groups]
+                            return <LinksList title={group} key={group} doNotShow="all" align="left" links={links} />
+                        })}
+                <FoundPages pages={foundPages} />
+            </Block>
+        </CenterPage>
     )
 }
 

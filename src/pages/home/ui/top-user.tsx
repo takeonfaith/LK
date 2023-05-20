@@ -38,6 +38,7 @@ const TopUser = () => {
     return (
         <TopUserStyled>
             <HomeTopSection />
+
             <div onClick={handleUserClick}>
                 <Avatar width="30px" height="30px" avatar={user.avatar} name={user.name} marginRight="0" />
             </div>
