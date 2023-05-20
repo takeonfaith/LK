@@ -1,72 +1,30 @@
 import PrivateRouter from '@app/routers/private-router'
+import { ALERTS_ROUTE } from '@app/routes/general-routes'
 import { OLD_LK_URL } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import useTheme from '@utils/hooks/use-theme'
-import { Suspense, useEffect } from 'react'
-import styled, { css } from 'styled-components'
-import { Confirm, Header, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
+import useCurrentExactPage from '@utils/hooks/use-current-exact-page'
+import React, { Suspense, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
-import WhatsNew from '../../widgets/whats-new'
-import InitialLoader from './initial-loader'
-import Story from './story'
-import React from 'react'
-// import useShowTutorial from '@utils/hooks/use-show-tutorial'
-import { Link } from 'react-router-dom'
-import { ALERTS_ROUTE } from '@app/routes/general-routes'
-import useResize from '@shared/lib/hooks/use-resize'
-import useCurrentExactPage from '@utils/hooks/use-current-exact-page'
-
-const ContentWrapper = styled.div<{ withHeader: boolean }>`
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 3;
-    background: var(--theme);
-    overflow: hidden;
-
-    .page-content {
-        position: relative;
-        overflow-x: hidden;
-        overflow-y: auto;
-        width: 100%;
-
-        ${({ withHeader }) =>
-            withHeader
-                ? css`
-                      height: calc(100% - var(--header-height));
-                      margin-top: var(--header-height);
-                  `
-                : css`
-                      height: 100%;
-                  `}
-    }
-
-    @media (max-width: 1000px) {
-        font-size: 0.9em;
-        .page-content {
-            margin-bottom: var(--mobile-bottom-menu-height);
-
-            height: ${({ withHeader }) =>
-                withHeader
-                    ? 'calc(100% - var(--mobile-bottom-menu-height) - var(--header-height))'
-                    : 'calc(100% - var(--mobile-bottom-menu-height))'};
-        }
-    }
-`
+import InitialLoader from '../../shared/ui/initial-loader'
+import Story from '../../shared/ui/story'
+import WhatsNew from '../whats-new'
+import { ContentWrapper, PageContent, Wrapper } from './styled'
+import Header from 'widgets/header'
 
 const ContentLayout = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { height } = useResize()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
     const { currentPage, exactCurrentPage } = useCurrentExactPage()
-    // const { seen } = useShowTutorial()
 
     useEffect(() => {
         if (user) settingsModel.effects.getLocalSettingsFx(user.id)
@@ -96,7 +54,6 @@ const ContentLayout = () => {
                     }),
                 5000,
             )
-        // InstallApp()
     }, [user])
 
     useEffect(() => {
@@ -105,26 +62,19 @@ const ContentLayout = () => {
         }
     }, [isShowNotification])
 
-    // useEffect(() => {
-    //     if (!seen) {
-    //         storyModel.events.open({ pages: TutorialStory })
-    //         setSeen(true)
-    //     }
-    // }, [])
-
     return (
-        <div style={{ height, display: 'flex', background: 'var(--theme)' }}>
+        <Wrapper>
             <InitialLoader loading={!user} />
             {/* <GreetingsScreen /> */}
             <Story />
             <LeftsideBar />
-            <ContentWrapper withHeader={!(exactCurrentPage ?? currentPage)?.withoutHeader}>
+            <ContentWrapper>
                 <Header currentPagePair={{ currentPage, exactCurrentPage }} />
-                <div className="page-content">
+                <PageContent withHeader={!(exactCurrentPage ?? currentPage)?.withoutHeader}>
                     <Suspense fallback={null}>
                         <PrivateRouter />
                     </Suspense>
-                </div>
+                </PageContent>
                 <MobileBottomMenu />
             </ContentWrapper>
             <Modal />
@@ -132,7 +82,7 @@ const ContentLayout = () => {
             <Confirm />
             <ContextMenu />
             <HintModal />
-        </div>
+        </Wrapper>
     )
 }
 
