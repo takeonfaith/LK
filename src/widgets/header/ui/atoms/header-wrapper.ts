@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 
 const HeaderWrapper = styled.header<{ hidden?: boolean }>`
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
     height: var(--header-height);
     background: var(--theme);

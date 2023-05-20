@@ -11,6 +11,7 @@ import React from 'react'
 
 const AllPagesWrapper = styled.div`
     padding: calc(var(--desktop-page-padding) + 10px);
+    padding-top: calc(var(--desktop-page-padding) - 10px);
     display: flex;
     align-items: center;
     justify-content: center;
