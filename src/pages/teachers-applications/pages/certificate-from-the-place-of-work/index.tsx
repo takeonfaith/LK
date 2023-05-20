@@ -9,7 +9,6 @@ const CertificateFromPlaceOfWorkPage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             isSpecialField={true}
             formId={ApplicationTeachersFormCodes.CERTIFICATE_FROM_PLACE_OF_WORK}
         />

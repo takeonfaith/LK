@@ -1,12 +1,9 @@
-import { Button, Error, FormBlock, SubmitButton, Title } from '@ui/atoms'
+import { Error, FormBlock, SubmitButton, Title } from '@ui/atoms'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import getForm from './lib/get-form'
-import { useHistory } from 'react-router'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { FiChevronLeft } from 'react-icons/fi'
-import { APPLICATIONS_ROUTE } from '@routes'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 import { userModel } from '@entities/user'
@@ -34,7 +31,6 @@ const AccommodationCorrespondenceFormPage = () => {
     const [additionally, setAdditionally] = useState<IInputArea | null>(null)
     const [registration, setRegistration] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
-    const history = useHistory()
 
     const isForm = !!form && !!registration && !!disability && !!additionally
 
@@ -68,13 +64,6 @@ const AccommodationCorrespondenceFormPage = () => {
     return (
         <BaseApplicationWrapper isDone={isDone}>
             <FormBlock>
-                <Button
-                    text="Назад к цифровым сервисам"
-                    icon={<FiChevronLeft />}
-                    onClick={() => history.push(APPLICATIONS_ROUTE)}
-                    background="transparent"
-                    textColor="var(--blue)"
-                />
                 <Title size={4} align="left">
                     Предоставление права проживания (заочная форма)
                 </Title>

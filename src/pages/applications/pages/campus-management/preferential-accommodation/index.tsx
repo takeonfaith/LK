@@ -1,17 +1,14 @@
-import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
-import { IInputArea } from '@ui/input-area/model'
-import checkFormFields from '@utils/check-form-fields'
-import React, { useEffect, useState } from 'react'
-import getForm from './lib/get-form'
-import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { FiChevronLeft } from 'react-icons/fi'
-import { APPLICATIONS_ROUTE } from '@routes'
-import { useHistory } from 'react-router'
-import { globalAppSendForm, getRegistration, getDisability } from '@pages/applications/lib'
-import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 import { listConfigCert } from '@features/applications/lib/get-list-configs-certificate'
 import StepByStepForm from '@features/applications/ui/molecules/step-by-step-form'
+import { getDisability, getRegistration, globalAppSendForm } from '@pages/applications/lib'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import { FormBlock, SubmitButton, Title } from '@ui/atoms'
+import { IInputArea } from '@ui/input-area/model'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import checkFormFields from '@utils/check-form-fields'
+import React, { useEffect, useState } from 'react'
+import getForm from './lib/get-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -21,7 +18,6 @@ const PreferentialAccommodationPage = () => {
     const [fluorographyCert, setFluorographyCert] = useState<IInputArea>(listConfigCert.fluorographyCert)
     const [vichRwCert, setVichRwCert] = useState<IInputArea>(listConfigCert.vichRwCert)
     const [graftCert, setGraftCert] = useState<IInputArea>(listConfigCert.graftCert)
-    const history = useHistory()
     const {
         data: { dataUserApplication },
     } = applicationsModel.selectors.useApplications()
@@ -51,13 +47,6 @@ const PreferentialAccommodationPage = () => {
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && !!setForm && !!registration && !!disability && (
                 <FormBlock>
-                    <Button
-                        text="Назад к цифровым сервисам"
-                        icon={<FiChevronLeft />}
-                        onClick={() => history.push(APPLICATIONS_ROUTE)}
-                        background="transparent"
-                        textColor="var(--blue)"
-                    />
                     <Title size={4} align="left">
                         Предоставление права проживания льготной категории граждан
                     </Title>

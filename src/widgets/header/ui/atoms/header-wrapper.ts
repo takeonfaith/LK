@@ -1,15 +1,19 @@
 import styled from 'styled-components'
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper = styled.header<{ hidden?: boolean }>`
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
-    height: 45px;
+    height: var(--header-height);
     background: var(--theme);
     box-shadow: var(--header-box-shadow);
     z-index: 12;
-    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 40px;
+    padding: 0 50px;
+
+    display: ${({ hidden = false }) => (hidden ? 'none' : 'flex')};
 
     & > .buttons {
         display: flex;
@@ -23,13 +27,22 @@ const HeaderWrapper = styled.header`
     .header-button-and-title {
         display: flex;
         align-items: center;
+        min-width: 200px;
 
         button {
             margin-right: 8px;
+            flex-shrink: 0;
         }
 
-        h3 {
-            color: var(--text);
+        .title-container {
+            min-width: 200px;
+
+            h3 {
+                color: var(--text);
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
         }
     }
 

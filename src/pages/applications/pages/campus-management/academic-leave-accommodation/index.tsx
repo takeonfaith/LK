@@ -1,17 +1,14 @@
-import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
-import { IInputArea } from '@ui/input-area/model'
-import checkFormFields from '@utils/check-form-fields'
-import React, { useEffect, useState } from 'react'
-import getForm from './lib/get-form'
-import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { useHistory } from 'react-router'
-import { FiChevronLeft } from 'react-icons/fi'
-import { APPLICATIONS_ROUTE } from '@routes'
-import { globalAppSendForm } from '@pages/applications/lib'
-import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
 import { listConfigCert } from '@features/applications/lib/get-list-configs-certificate'
 import StepByStepForm, { StagesConfigsT } from '@features/applications/ui/molecules/step-by-step-form'
+import { globalAppSendForm } from '@pages/applications/lib'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import { FormBlock, SubmitButton, Title } from '@ui/atoms'
+import { IInputArea } from '@ui/input-area/model'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import checkFormFields from '@utils/check-form-fields'
+import React, { useEffect, useState } from 'react'
+import getForm from './lib/get-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -27,8 +24,6 @@ const AcademicLeaveAccommodationPage = () => {
     const {
         data: { dataUserApplication },
     } = applicationsModel.selectors.useApplications()
-
-    const history = useHistory()
 
     const isForm = !!form
 
@@ -53,13 +48,6 @@ const AcademicLeaveAccommodationPage = () => {
     return (
         <BaseApplicationWrapper isDone={isDone}>
             <FormBlock>
-                <Button
-                    text="Назад к цифровым сервисам"
-                    icon={<FiChevronLeft />}
-                    onClick={() => history.push(APPLICATIONS_ROUTE)}
-                    background="transparent"
-                    textColor="var(--blue)"
-                />
                 <Title size={4} align="left">
                     Предоставление права проживания в период академического отпуска
                 </Title>

@@ -6,8 +6,8 @@ import { userModel } from '@entities/user'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import useTheme from '@utils/hooks/use-theme'
 import { Suspense, useEffect } from 'react'
-import styled from 'styled-components'
-import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
+import styled, { css } from 'styled-components'
+import { Confirm, Header, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import WhatsNew from '../../widgets/whats-new'
@@ -18,8 +18,10 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ALERTS_ROUTE } from '@app/routes/general-routes'
 import useResize from '@shared/lib/hooks/use-resize'
+import useCurrentExactPage from '@utils/hooks/use-current-exact-page'
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ withHeader: boolean }>`
+    position: relative;
     width: 100%;
     height: 100%;
     z-index: 3;
@@ -31,13 +33,27 @@ const ContentWrapper = styled.div`
         overflow-x: hidden;
         overflow-y: auto;
         width: 100%;
-        height: 100%;
+
+        ${({ withHeader }) =>
+            withHeader
+                ? css`
+                      height: calc(100% - var(--header-height));
+                      margin-top: var(--header-height);
+                  `
+                : css`
+                      height: 100%;
+                  `}
     }
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
         .page-content {
-            height: calc(100% - 60px);
+            margin-bottom: var(--mobile-bottom-menu-height);
+
+            height: ${({ withHeader }) =>
+                withHeader
+                    ? 'calc(100% - var(--mobile-bottom-menu-height) - var(--header-height))'
+                    : 'calc(100% - var(--mobile-bottom-menu-height))'};
         }
     }
 `
@@ -49,6 +65,7 @@ const ContentLayout = () => {
     const { height } = useResize()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
+    const { currentPage, exactCurrentPage } = useCurrentExactPage()
     // const { seen } = useShowTutorial()
 
     useEffect(() => {
@@ -101,8 +118,8 @@ const ContentLayout = () => {
             {/* <GreetingsScreen /> */}
             <Story />
             <LeftsideBar />
-            <ContentWrapper>
-                {/* <Header /> */}
+            <ContentWrapper withHeader={!(exactCurrentPage ?? currentPage)?.withoutHeader}>
+                <Header currentPagePair={{ currentPage, exactCurrentPage }} />
                 <div className="page-content">
                     <Suspense fallback={null}>
                         <PrivateRouter />

@@ -9,7 +9,6 @@ const CopiesOfDocumentsFromPersonalFilePage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             isSpecialField={true}
             formId={ApplicationTeachersFormCodes.COPIES_OF_DOCUMENTS_FROM_PERSONAL_FILE}
         />

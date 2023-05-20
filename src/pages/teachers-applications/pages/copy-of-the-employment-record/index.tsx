@@ -9,7 +9,6 @@ const CopyOfEmploymentRecordPage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             isSpecialField={true}
             formId={ApplicationTeachersFormCodes.COPY_OF_EMPLOYMENT_RECORD}
         />

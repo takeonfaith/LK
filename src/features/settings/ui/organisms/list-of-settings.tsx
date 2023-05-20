@@ -5,7 +5,6 @@ import search from '@pages/settings/lib/search'
 import { TFullSettingsModel } from '@pages/settings/model'
 import { LocalSearch } from '@shared/ui/molecules'
 import { ListWrapper } from '@ui/list/styles'
-import { Title } from '@ui/title'
 import React from 'react'
 import { useRouteMatch } from 'react-router'
 
@@ -45,9 +44,9 @@ const ListOfSettings = ({ setSearchValue, setSearchResult, settingsConfig }: Pro
 
     return (
         <ListOfSettingsWrapper width="290px" open={!params?.id}>
-            <Title size={2} align="left" bottomGap>
+            {/* <Title size={2} align="left" bottomGap>
                 Настройки
-            </Title>
+            </Title> */}
             <LocalSearch
                 whereToSearch={settingsConfig}
                 placeholder="Поиск настроек"

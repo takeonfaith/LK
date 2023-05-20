@@ -52,7 +52,6 @@ const AllStudentsPage = () => {
                         noAppearanceInMobile
                     >
                         <ListOfPeople
-                            title="Студенты"
                             searchPlaceholder="Поиск студентов"
                             paginationList={paginationList}
                             filterRequest={getGroups}
