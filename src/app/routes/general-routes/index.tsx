@@ -240,7 +240,6 @@ export const generalRoutes: IRoutes = {
         Component: AlertsPage,
         color: 'blue',
         isTemplate: false,
-        isNew: true,
         group: 'COMMUNICATION',
     },
     home: {
@@ -294,7 +293,6 @@ export const generalRoutes: IRoutes = {
         Component: AllStudentsPage,
         color: 'lightBlue',
         isTemplate: false,
-        isNew: true,
         group: 'COMMUNICATION',
     },
     'all-teachers': {
@@ -306,7 +304,6 @@ export const generalRoutes: IRoutes = {
         color: 'orange',
         isTemplate: false,
         group: 'COMMUNICATION',
-        isNew: true,
     },
     // portfolio: {
     //     id: 'portfolio',

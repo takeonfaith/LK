@@ -70,7 +70,7 @@ const HeaderContextMenu = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { open } = useModal()
+    const { open, close } = useModal()
 
     const { theme, switchTheme } = useTheme()
     const [toggles, setToggles] = useState<ToggleItem[]>([
@@ -120,7 +120,10 @@ const HeaderContextMenu = () => {
             <Button
                 text="Что нового"
                 icon={<FiGrid />}
-                onClick={() => open(<WhatsNew />)}
+                onClick={() => {
+                    close()
+                    open(<WhatsNew />)
+                }}
                 width="100%"
                 align="left"
                 background="var(--schedule)"

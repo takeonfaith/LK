@@ -262,8 +262,8 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
     },
     doclist: {
         id: 'doclist',
-        // title: 'Ознакомление с документами',
-        title: 'Ознакомление с док...',
+        title: 'Ознакомление с документами',
+        shortTitle: 'Ознакомление с док...',
         icon: <FiFileText />,
         path: DOCLIST_ROUTE,
         Component: PersonalNotificationsPage,
