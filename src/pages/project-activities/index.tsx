@@ -69,10 +69,6 @@ const ProjectActivitiesPage = () => {
         >
             <Container>
                 <Block maxWidth="700px" orientation="vertical" gap="16px" height="100%" noAppearanceInMobile>
-                    <Title size={2} align="left">
-                        Проектная деятельность
-                    </Title>
-
                     <Message type="info" title="Вниманию студентов 2-4 курсов!">
                         Актуальная информация на 1 сентября 2022 г.:
                         <br />

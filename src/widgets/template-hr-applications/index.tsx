@@ -119,9 +119,6 @@ const TeachersHrApplicationsPage = ({}: Props) => {
         >
             <ApplicationPageWrapper>
                 <FormBlock maxWidth="750px">
-                    <Title size={2} align="left">
-                        Кадровые заявления
-                    </Title>
                     <Message type="info" title="Информация" icon={<FiInfo />}>
                         Данный сервис создан для упрощения оборота кадровых документов внутри Университета.
                     </Message>
@@ -148,6 +145,7 @@ const TeachersHrApplicationsPage = ({}: Props) => {
                                                     {section.links.map((link) =>
                                                         link.isExternalLink ? (
                                                             <a
+                                                                key={link.title}
                                                                 href={link.link}
                                                                 target={link.isOpenInNewWindow ? '_blank' : '_self'}
                                                                 rel="noreferrer"

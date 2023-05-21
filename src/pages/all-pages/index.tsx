@@ -5,13 +5,13 @@ import getGroupPages, { routesOrder } from '@features/all-pages/lib/get-group-pa
 import search from '@features/all-pages/lib/search'
 import LinksList from '@features/home/ui/organisms/links-list'
 import { LocalSearch } from '@ui/molecules'
-import { Title } from '@ui/title'
 import { useMemo, useState } from 'react'
 import styled from 'styled-components'
 import React from 'react'
 
 const AllPagesWrapper = styled.div`
     padding: calc(var(--desktop-page-padding) + 10px);
+    padding-top: calc(var(--desktop-page-padding) - 10px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,11 +32,11 @@ const AllPages = () => {
 
     return (
         <AllPagesWrapper>
-            <Title size={2} align="left" width="100%" bottomGap>
-                Все разделы
-                {/* <List direction="horizontal" verticalAlign="center" width="fit-content" height="40px">
-                    <Button icon={<FiGrid />} height="28px" width="45px" background={Colors.grey.transparent3} />
-                    <Button icon={<FiList />} height="28px" width="45px" background={Colors.grey.transparent3} />
+            {/*<Title size={2} align="left" width="100%" bottomGap>*/}
+            {/*Все разделы*/}
+            {/* <List direction="horizontal" verticalAlign="center" width="fit-content" height="40px">
+                    <Button icon={<FiGrid />} height="28px" width="45px" background={Colors.grey.transparentAF} />
+                    <Button icon={<FiList />} height="28px" width="45px" background={Colors.grey.transparentAF} />
                     <Divider margin="0px 10px" direction="horizontal" />
                     <Button
                         width="45px"
@@ -46,7 +46,7 @@ const AllPages = () => {
                         background={Colors.grey.transparent3}
                     />
                 </List> */}
-            </Title>
+            {/*</Title>*/}
             <LocalSearch
                 placeholder="Поиск разделов"
                 whereToSearch={allRoutes ?? {}}

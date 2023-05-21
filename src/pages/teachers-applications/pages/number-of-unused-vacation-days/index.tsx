@@ -9,7 +9,6 @@ const NumberOfUnusedVacationDaysPage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             isSpecialField={true}
             formId={ApplicationTeachersFormCodes.NUMBER_OF_UNUSED_VACATION_DAYS}
         />

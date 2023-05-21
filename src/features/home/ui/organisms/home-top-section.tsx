@@ -50,7 +50,7 @@ const HomeTopSection = () => {
                     right="4px"
                     visible={user?.hasAlerts}
                     className="notification-circle"
-                ></Notification>
+                />
                 <MdOutlineNotifications />
             </Link>
         </HomeTopSectionStyled>

@@ -9,7 +9,6 @@ const CourierPage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             formId={ApplicationTeachersFormCodes.COURIER}
         />
     )

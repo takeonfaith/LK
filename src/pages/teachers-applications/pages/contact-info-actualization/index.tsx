@@ -4,9 +4,7 @@ import getForm from './lib/get-form'
 import React from 'react'
 
 const ContactInfoActualizationPage = () => {
-    return (
-        <TemplateFormPage model={contactInfoActualizationModel} getForm={getForm} goBack="Назад к цифровым сервисам" />
-    )
+    return <TemplateFormPage model={contactInfoActualizationModel} getForm={getForm} />
 }
 
 export default ContactInfoActualizationPage

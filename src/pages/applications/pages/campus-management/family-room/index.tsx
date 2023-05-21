@@ -1,12 +1,9 @@
-import { Button, FormBlock, SubmitButton, Title } from '@ui/atoms'
+import { FormBlock, SubmitButton, Title } from '@ui/atoms'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import getForm from './lib/get-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { useHistory } from 'react-router'
-import { FiChevronLeft } from 'react-icons/fi'
-import { APPLICATIONS_ROUTE } from '@routes'
 import getFamily from './lib/get-family'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
@@ -31,8 +28,6 @@ const FamilyRoomPage = () => {
     const [family, setFamily] = useState<IInputArea | null>(null)
     const [additionally, setAdditionally] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
-
-    const history = useHistory()
 
     const [kvdCert, setKvdCert] = useState<IInputArea>(listConfigCert.kvdCert)
     const [fluorographyCert, setFluorographyCert] = useState<IInputArea>(listConfigCert.fluorographyCert)
@@ -95,13 +90,6 @@ const FamilyRoomPage = () => {
     return (
         <BaseApplicationWrapper isDone={isDone}>
             <FormBlock>
-                <Button
-                    text="Назад к цифровым сервисам"
-                    icon={<FiChevronLeft />}
-                    onClick={() => history.push(APPLICATIONS_ROUTE)}
-                    background="transparent"
-                    textColor="var(--blue)"
-                />
                 <Title size={4} align="left">
                     Предоставление права проживания в семейной комнате
                 </Title>
