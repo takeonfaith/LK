@@ -148,6 +148,7 @@ const TeachersHrApplicationsPage = ({}: Props) => {
                                                     {section.links.map((link) =>
                                                         link.isExternalLink ? (
                                                             <a
+                                                                key={link.title}
                                                                 href={link.link}
                                                                 target={link.isOpenInNewWindow ? '_blank' : '_self'}
                                                                 rel="noreferrer"
