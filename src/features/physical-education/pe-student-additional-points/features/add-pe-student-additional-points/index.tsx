@@ -11,6 +11,7 @@ import { useUnit } from 'effector-react'
 import { useState } from 'react'
 import { selectorData } from '../../constants'
 import { Wrapper } from './styled'
+import React from 'react'
 
 export const AddPEStudentAdditionalPoints = () => {
     const student = useUnit(selectedPEStudentModel.stores.$selectedStudent)
@@ -32,9 +33,10 @@ export const AddPEStudentAdditionalPoints = () => {
     return (
         <Wrapper>
             <Title size={3}>Дополнительные баллы</Title>
-            <Input title={'Дата'} setValue={setDate} value={date} type="date" />
 
             <Select title={'Тип работ'} items={selectorData} selected={type} setSelected={setType} />
+
+            <Input title={'Дата'} setValue={setDate} value={date} type="date" />
 
             <Input
                 title={'Количество баллов'}

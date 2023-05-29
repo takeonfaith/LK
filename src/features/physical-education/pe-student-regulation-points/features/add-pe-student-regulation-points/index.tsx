@@ -28,9 +28,9 @@ export const AddPEStudentRegulationPoints = () => {
 
     return (
         <Wrapper>
-            <Input title={'Дата'} setValue={setDate} value={date} type="date" />
-
             <Select title={'Тип работ'} items={selectorData} selected={type} setSelected={setType} />
+
+            <Input title={'Дата'} setValue={setDate} value={date} type="date" />
 
             <Input
                 title={'Количество баллов'}

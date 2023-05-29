@@ -37,7 +37,7 @@ const Select = (props: SelectProps) => {
             isActive={isActive ?? true}
             width={width}
         >
-            <Title size={5} align="left" bottomGap="5px" visible={!!title} required={required}>
+            <Title size={4} align="left" bottomGap="5px" visible={!!title} required={required}>
                 {title}
             </Title>
             <SelectHeaderWrapper multiple={multiple} appearance={appearance}>

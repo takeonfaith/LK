@@ -22,6 +22,7 @@ const PEStudent = () => {
     }, [studentId])
 
     if (!student) return null
+
     return (
         <Wrapper>
             <Title size={1}>{student.fullName}</Title>

@@ -2,6 +2,7 @@ import { hrApplicationsConstants } from '@entities/applications/consts'
 import localizeDate from '@shared/lib/localize-date'
 import { Message } from '@ui/message'
 import { ColumnProps } from '@ui/table/types'
+import React from 'react'
 
 const getHolidayWorkHistoryColumns = (): ColumnProps[] => {
     return [
