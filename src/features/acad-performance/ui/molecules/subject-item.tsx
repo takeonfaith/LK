@@ -7,7 +7,7 @@ import { useModal } from 'widgets'
 import { SubjectModal } from '.'
 import { SubjectCheker } from '../atoms'
 import ProgressBar from '@shared/ui/progress-bar'
-import { GradeByScore, WidthByGrade } from '@shared/consts'
+import { GradeByScore, WidthByGrade } from '@shared/constants/consts'
 import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 
 interface Props {

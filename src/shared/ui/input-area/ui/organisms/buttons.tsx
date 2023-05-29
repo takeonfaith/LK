@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import { Button } from '@ui/button'
 import useInputArea from '@ui/input-area/lib/use-input-area'
 import { IInputArea } from '@ui/input-area/model'

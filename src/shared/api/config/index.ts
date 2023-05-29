@@ -1,5 +1,5 @@
 //import { getUserToken } from '@api/user-api'
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants/consts'
 import { getJwtToken } from '@entities/user/lib/jwt-token'
 import axios, { AxiosError } from 'axios'
 

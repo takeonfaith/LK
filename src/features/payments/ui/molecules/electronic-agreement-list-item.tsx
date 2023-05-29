@@ -34,13 +34,11 @@ export const ElectronicAgreementListItem = ({ data }: Props) => {
                             {data.signed_user_time || `${new Date().getHours()}:${new Date().getMinutes()}`}
                         </ActionsBlockDescription>
                     )}
-                    <LinkButton
+                    <StyledLinkButton
                         href={data.file}
                         onClick={() => null}
                         text="Скачать документ"
-                        width="100%"
                         icon={<FiDownload />}
-                        // background="transparent"
                     />
                     <Message
                         type={'success'}
@@ -93,4 +91,8 @@ const ActionsBlock = styled.div`
 
 const ActionsBlockDescription = styled.p`
     text-align: center;
+`
+
+const StyledLinkButton = styled(LinkButton)`
+    width: 100%;
 `

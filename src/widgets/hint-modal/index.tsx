@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import { hintModel } from '@entities/hint'
 import { Message } from '@ui/message'
 import React from 'react'

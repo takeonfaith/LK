@@ -13,6 +13,7 @@ import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import { FiDownload, FiInfo } from 'react-icons/fi'
+import styled from 'styled-components'
 
 const DormitoryPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
@@ -61,11 +62,10 @@ const DormitoryPayments = () => {
                             <Block orientation="vertical" maxWidth="380px" noAppearanceInMobile>
                                 <Title size={2} align="left" bottomGap width="100%">
                                     Реквизиты договора
-                                    <LinkButton
+                                    <StyledLinkButton
                                         onClick={() => null}
                                         href={dormitory.file ?? ''}
                                         icon={<FiDownload />}
-                                        width="40px"
                                     />
                                 </Title>
                                 <Contract contract={dormitory} />
@@ -108,5 +108,9 @@ const DormitoryPayments = () => {
         </PageWrapper>
     )
 }
+
+const StyledLinkButton = styled(LinkButton)`
+    width: 40px;
+`
 
 export default DormitoryPayments

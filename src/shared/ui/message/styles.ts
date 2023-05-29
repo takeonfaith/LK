@@ -1,4 +1,4 @@
-import { Colors, messageType } from '@consts'
+import { Colors, messageType } from '@shared/constants/consts'
 import { Align, MessageType } from '@ui/types'
 import styled from 'styled-components'
 

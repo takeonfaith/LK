@@ -1,6 +1,6 @@
 import { Payments } from '@api/model'
 import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants/consts'
 import { paymentsModel } from '@entities/payments'
 import QrCode from '@features/payments/ui/atoms/qr-code'
 import { Button } from '@ui/button'

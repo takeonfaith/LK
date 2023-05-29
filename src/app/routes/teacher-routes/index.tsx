@@ -38,7 +38,7 @@ import {
     WorkTransfer,
 } from './pages'
 
-import { isProduction, OLD_LK_URL } from '@consts'
+import { isProduction, OLD_LK_URL } from '@shared/constants/consts'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiNotification } from 'react-icons/bi'

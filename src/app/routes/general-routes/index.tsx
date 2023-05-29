@@ -1,5 +1,5 @@
 import React from 'react'
-import { IColors } from '@consts'
+import { IColors } from '@shared/constants/consts'
 import { LazyExoticComponent } from 'react'
 
 import LoginPage from '@pages/login'

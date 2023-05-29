@@ -6,7 +6,7 @@ import {
     MEMO_FRESHMEN_ROUTE,
     MEMO_TEACHER_ROUTE,
 } from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants/consts'
 import { LinkButton } from '@ui/atoms'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
@@ -16,6 +16,7 @@ import { BiHeadphone } from 'react-icons/bi'
 import { BsAsterisk } from 'react-icons/bs'
 import { FiAlertCircle, FiArrowLeftCircle, FiMeh } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 const Information = () => {
     return (
@@ -78,22 +79,25 @@ const Information = () => {
                     </Link>
                 </List>
 
-                <LinkButton
+                <StyledLinkButton
                     text={'Перейти к старому дизайну'}
                     onClick={() => {
                         localStorage.setItem('useOldVersion', 'true')
                     }}
-                    background="transparent"
-                    textColor="var(--reallyBlue)"
                     icon={<FiArrowLeftCircle />}
                     align="left"
-                    padding="0"
-                    width="100%"
                     href={`${OLD_LK_URL}/index.php`}
                 />
             </List>
         </div>
     )
 }
+
+const StyledLinkButton = styled(LinkButton)`
+    background-color: transparent;
+    color: var(--reallyBlue);
+    padding: 0;
+    width: 100%;
+`
 
 export default Information

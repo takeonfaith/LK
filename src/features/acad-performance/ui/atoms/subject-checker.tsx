@@ -1,5 +1,5 @@
 import { IGrade } from '@api/model/acad-performance'
-import { GradeByScore } from '@consts'
+import { GradeByScore } from '@shared/constants/consts'
 import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 import React from 'react'
 import { FiCheck, FiX } from 'react-icons/fi'

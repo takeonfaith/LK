@@ -1,4 +1,4 @@
-import { GradeByScore } from '@consts'
+import { GradeByScore } from '@shared/constants/consts'
 import { AcadPerformance } from '@api/model/acad-performance'
 
 function findPercentage(data: AcadPerformance[], circleMode = 0): number {

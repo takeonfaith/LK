@@ -1,5 +1,5 @@
 import React from 'react'
-import { isProduction } from '@consts'
+import { isProduction } from '@shared/constants/consts'
 import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
 import PageIsNotReady from '@pages/page-is-not-ready'
 import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'

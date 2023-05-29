@@ -1,5 +1,5 @@
 import React from 'react'
-import { WeekDays } from '@consts'
+import { WeekDays } from '@shared/constants/consts'
 import { scheduleModel } from '@entities/schedule'
 import displayTopInfo from '@features/schedule/lib/display-top-info'
 import getTomorrow from '@features/schedule/lib/get-tomorrow'

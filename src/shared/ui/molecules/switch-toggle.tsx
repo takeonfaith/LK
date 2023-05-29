@@ -1,5 +1,5 @@
 import React from 'react'
-import SwitchToggleWrapper from '../atoms/switch-toggle-wrapper'
+import { SwitchToggleWrapper } from '../atoms'
 
 interface ISwitchToggle {
     id: string

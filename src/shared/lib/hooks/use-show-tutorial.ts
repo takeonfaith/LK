@@ -1,8 +1,10 @@
+import { LocalStorageKey } from '@shared/constants/local-storage'
+
 const useShowTutorial = () => {
-    const seen = JSON.parse(localStorage.getItem('tutorial') ?? 'false') as boolean
+    const seen = JSON.parse(localStorage.getItem(LocalStorageKey.Tutorial) ?? 'false') as boolean
 
     const setSeen = (value: boolean) => {
-        localStorage.setItem('tutorial', value.toString())
+        localStorage.setItem(LocalStorageKey.Tutorial, value.toString())
     }
 
     return { seen, setSeen }

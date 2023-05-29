@@ -1,5 +1,5 @@
 import React from 'react'
-import { SCREEN_IPHONE_SE } from '@consts'
+import { SCREEN_IPHONE_SE } from '@shared/constants/consts'
 import styled from 'styled-components'
 import LoginBlock from './ui/organisms/login-block'
 

@@ -4,7 +4,7 @@ import { ColumnProps } from '@ui/table/types'
 import React from 'react'
 import { ApplicationFileOutput } from '@api/model'
 import { Button } from '@ui/button'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 
 const getApplicationsColumns = (): ColumnProps[] => {
     return [

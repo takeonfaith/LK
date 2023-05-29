@@ -55,13 +55,10 @@ const Page = () => {
                             background="5"
                             padding="20px 40px 20px 20px"
                         >
-                            <LinkButton
+                            <MoreFiveDaysLinkButton
                                 onClick={() => null}
                                 href={calendarUrls.fiveWorkDays}
-                                textColor="var(--reallyBlue)"
-                                padding="10px 0"
                                 text="Подробнее"
-                                background="transparent"
                             />
                         </Card>
                         <Card
@@ -71,13 +68,10 @@ const Page = () => {
                             background="6"
                             padding="20px 40px 20px 20px"
                         >
-                            <LinkButton
+                            <MoreSixDaysLinkButton
                                 onClick={() => null}
                                 href={calendarUrls.sixWorkDays}
-                                textColor="var(--reallyBlue)"
                                 text="Подробнее"
-                                background="transparent"
-                                padding="10px 0"
                             />
                         </Card>
                     </List>
@@ -97,6 +91,16 @@ const Page = () => {
 
 const StyledCenterPage = styled(CenterPage)`
     align-items: flex-start;
+`
+
+const MoreFiveDaysLinkButton = styled(LinkButton)`
+    color: var(--reallyBlue);
+    padding: 10px 0;
+    background: transparent;
+`
+
+const MoreSixDaysLinkButton = styled(LinkButton)`
+    background: transparent;
 `
 
 export default Page

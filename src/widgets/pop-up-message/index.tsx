@@ -1,4 +1,4 @@
-import { messageType } from '@consts'
+import { messageType } from '@shared/constants/consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { Message } from '@ui/atoms'
 import React, { useCallback, useEffect } from 'react'

@@ -1,6 +1,6 @@
 import PrivateRouter from '@app/routers/private-router'
 import { ALERTS_ROUTE } from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants/consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'

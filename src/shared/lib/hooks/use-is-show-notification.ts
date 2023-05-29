@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { userModel } from '@entities/user'
-import { LastUpdateWhatsNew } from '@consts'
+import { LastUpdateWhatsNew } from '@shared/constants/consts'
+import { LocalStorageKey } from '@shared/constants/local-storage'
 
 const useIsShowNotification = () => {
     const {
@@ -9,11 +10,11 @@ const useIsShowNotification = () => {
     const [isShowNotification, setIsShowNotification] = useState<boolean>(false)
 
     const checkingShowNotification = (lastAccess: string) => {
-        const lastLocalAccess = localStorage.getItem('lastLocalAccess') || lastAccess
+        const lastLocalAccess = localStorage.getItem(LocalStorageKey.LastLocalAccess) || lastAccess
         const UpdateWhatsNewDate = new Date(LastUpdateWhatsNew)
 
         if (new Date(lastAccess) < UpdateWhatsNewDate && new Date(lastLocalAccess) < UpdateWhatsNewDate) {
-            localStorage.setItem('lastLocalAccess', new Date().toISOString())
+            localStorage.setItem(LocalStorageKey.LastLocalAccess, new Date().toISOString())
             setIsShowNotification(true)
         }
     }

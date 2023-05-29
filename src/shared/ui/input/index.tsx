@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import React, { HTMLInputTypeAttribute } from 'react'
 import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import { Button, LinkButton } from '@ui/atoms'
 import List from '@ui/list'
 import localizeDate from '@utils/localize-date'
@@ -70,12 +70,9 @@ const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_cur
                         textColor="#fff"
                     />
                     {bill && (
-                        <LinkButton
+                        <StyledLinkButton
                             text="Сформировать квитанцию на оплату"
-                            background="transparent"
-                            textColor="var(--grey)"
                             align="center"
-                            width="100%"
                             href={bill}
                             onClick={() => null}
                         />
@@ -85,5 +82,11 @@ const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_cur
         </PaymentsInfoWrapper>
     )
 }
+
+const StyledLinkButton = styled(LinkButton)`
+    background-color: transparent;
+    color: var(--grey);
+    width: 100%;
+`
 
 export default PaymentsInfo

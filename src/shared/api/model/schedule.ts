@@ -1,4 +1,4 @@
-import { Colors, IColorPalette } from '../../consts'
+import { Colors, IColorPalette } from '../../constants/consts'
 
 export type TimeIntervals =
     | '9:00 - 10:30'

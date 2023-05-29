@@ -5,7 +5,7 @@ import {
     ALL_TEACHERS_ROUTE,
     PROJECT_ACTIVITIES_ROUTE,
 } from '@app/routes/general-routes'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import { userModel } from '@entities/user'
 import { Button, Title } from '@ui/atoms'
 import { DotPages } from '@ui/molecules'

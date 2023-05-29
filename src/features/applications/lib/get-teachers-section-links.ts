@@ -29,7 +29,7 @@ import {
     DATA_VERIFICATION_ROUTE,
     CONTACT_INFO_ACTUALIZATION,
 } from '@app/routes/teacher-routes'
-import { UNION_ORGANIZATION } from '@consts'
+import { UNION_ORGANIZATION } from '@shared/constants/consts'
 
 const getTeachersSectionLinks = () => {
     return [

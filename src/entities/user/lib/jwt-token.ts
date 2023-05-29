@@ -1,9 +1,11 @@
+import { LocalStorageKey } from '@shared/constants/local-storage'
+
 export const getJwtToken = () => {
-    return localStorage.getItem('jwt')
+    return localStorage.getItem(LocalStorageKey.JWT)
 }
 
 export const setJwtToken = (token: string) => {
-    return localStorage.setItem('jwt', token)
+    return localStorage.setItem(LocalStorageKey.JWT, token)
 }
 
 export const parseJwt = (token: string) => {

@@ -1,4 +1,4 @@
-import { messageType } from '@consts'
+import { messageType } from '@shared/constants/consts'
 import useTheme from '@shared/lib/hooks/use-theme'
 import { Button } from '@ui/button'
 import SkeletonList from '@ui/skeleton-list'

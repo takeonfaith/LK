@@ -1,5 +1,5 @@
 import React from 'react'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import { userModel } from '@entities/user'
 import { Error } from '@ui/error'
 import { Loading } from '@ui/loading'
@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { Button } from '@ui/button'
 import { AiOutlineReload } from 'react-icons/ai'
 import { UserToken } from '@api/model'
+import { LocalStorageKey } from '@shared/constants/local-storage'
 
 const styledPropsArray: Array<keyof Props> = ['loading']
 
@@ -116,7 +117,9 @@ const InitialLoader = ({ loading }: Props) => {
                 <Error text="Нет подключения к интернету">
                     <Button
                         onClick={() =>
-                            userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)
+                            userModel.effects.getUserFx(
+                                JSON.parse(localStorage.getItem(LocalStorageKey.Token) ?? '') as UserToken,
+                            )
                         }
                         text="Попробовать снова"
                         icon={<AiOutlineReload />}

@@ -1,6 +1,6 @@
 import { IRoute } from '@app/routes/general-routes'
 import { contextMenuModel } from '@entities/context-menu'
-import { Colors, IColors } from '@shared/consts'
+import { Colors, IColors } from '@shared/constants/consts'
 import { Button } from '@shared/ui/button'
 import React from 'react'
 import { FiMoreVertical } from 'react-icons/fi'

@@ -1,4 +1,4 @@
-import { DEFAULT_API_LOAD_ERROR_MESSAGE } from '@shared/consts'
+import { DEFAULT_API_LOAD_ERROR_MESSAGE } from '@shared/constants/consts'
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { Args, TemplateStore, TemplateStoreOutput } from './types'

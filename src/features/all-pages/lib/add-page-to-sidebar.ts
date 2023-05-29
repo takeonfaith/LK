@@ -1,4 +1,4 @@
-import { ADDITIONAL_MENU_ITEMS_LIMIT_SIZE, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { ADDITIONAL_MENU_ITEMS_LIMIT_SIZE, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@shared/constants/consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { settingsModel } from '@entities/settings'
 

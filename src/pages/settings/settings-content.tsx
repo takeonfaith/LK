@@ -1,7 +1,7 @@
 import { SETTINGS_ROUTE, TEMPLATE_SETTINGS_ROUTE } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { Icon } from '@features/all-pages'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants/consts'
 import { Button, CenterPage, Error, Title } from '@shared/ui/atoms'
 import List from '@shared/ui/list'
 import React from 'react'

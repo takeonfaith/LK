@@ -1,8 +1,9 @@
 import { useStore } from 'effector-react/compat'
 import { createEvent, createStore } from 'effector'
 import { createEffect } from 'effector'
-import { ThemeType } from '@consts'
+import { ThemeType } from '@shared/constants/consts'
 import getDefaultSettings from '../lib/get-default-settings'
+import { LocalStorageKey } from '@shared/constants/local-storage'
 
 export enum NameSettings {
     'settings-home-page' = 'settings-home-page',
@@ -51,7 +52,7 @@ const getLocalSettingsFx = createEffect((userId: string): Param => {
     currentUser = userId
     // TODO: change logic so that it supports an update of settings config.
     // Now doesn't update local storage if u add something to object of default settings
-    const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser] as Param
+    const localSettings = JSON.parse(localStorage.getItem(LocalStorageKey.NewSettings) ?? '{}')[currentUser] as Param
     return localSettings ?? getDefaultSettings(userId)[userId]
 })
 
@@ -97,9 +98,9 @@ const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
 
 $settingsStore.watch((state) => {
     if (state !== DEFAULT_STORE && !!currentUser) {
-        const allSettings = JSON.parse(localStorage.getItem('new-settings') ?? JSON.stringify({}))
+        const allSettings = JSON.parse(localStorage.getItem(LocalStorageKey.NewSettings) ?? JSON.stringify({}))
         allSettings[currentUser] = state.settings[currentUser]
-        localStorage.setItem('new-settings', JSON.stringify(allSettings))
+        localStorage.setItem(LocalStorageKey.NewSettings, JSON.stringify(allSettings))
     }
 })
 

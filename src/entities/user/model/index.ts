@@ -6,6 +6,7 @@ import { ADName, User, UserToken } from '@api/model'
 import axios from 'axios'
 import clearAllStores from '../lib/clear-all-stores'
 import createFullName from '@features/home/lib/create-full-name'
+import { LocalStorageKey } from '@shared/constants/local-storage'
 
 interface UserStore {
     currentUser: User | null
@@ -17,8 +18,8 @@ interface UserStore {
 
 //  In effector chat core-team describe something like this code (Perhaps a better solution can be found)
 // TODO: ask about token expires (Looks like it won't expire)
-const tokenInStorage = JSON.parse(localStorage.getItem('token') ?? 'null')
-const savePasswordInStorage = () => JSON.parse(localStorage.getItem('savePassword') ?? 'true')
+const tokenInStorage = JSON.parse(localStorage.getItem(LocalStorageKey.Token) ?? 'null')
+const savePasswordInStorage = () => JSON.parse(localStorage.getItem(LocalStorageKey.SavePassword) ?? 'true')
 
 const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginData) => {
     try {
@@ -35,11 +36,11 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
         } catch {}
 
         if (savePasswordInStorage()) {
-            localStorage.setItem('token', JSON.stringify(tokenResponse.data))
-            localStorage.setItem('jwt', JSON.stringify(tokenResponse.data.jwt))
+            localStorage.setItem(LocalStorageKey.Token, JSON.stringify(tokenResponse.data))
+            localStorage.setItem(LocalStorageKey.JWT, JSON.stringify(tokenResponse.data.jwt))
         } else {
-            sessionStorage.setItem('token', JSON.stringify(tokenResponse.data))
-            sessionStorage.setItem('jwt', JSON.stringify(tokenResponse.data.jwt))
+            sessionStorage.setItem(LocalStorageKey.Token, JSON.stringify(tokenResponse.data))
+            sessionStorage.setItem(LocalStorageKey.JWT, JSON.stringify(tokenResponse.data.jwt))
         }
         return tokenResponse.data
     } catch (e) {
@@ -93,18 +94,18 @@ const useUser = () => {
 
 const logoutFx = createEffect(() => {
     if (savePasswordInStorage()) {
-        localStorage.removeItem('token')
+        localStorage.removeItem(LocalStorageKey.Token)
     } else {
-        sessionStorage.removeItem('token')
+        sessionStorage.removeItem(LocalStorageKey.Token)
     }
 
     clearAllStores()
 })
 
 const changeSavePasswordFunc = (savePassword?: boolean) => {
-    const localStorageValue = localStorage.getItem('savePassword')
+    const localStorageValue = localStorage.getItem(LocalStorageKey.SavePassword)
     const value = savePassword ?? JSON.parse(localStorageValue ?? 'true')
-    localStorage.setItem('savePassword', value.toString())
+    localStorage.setItem(LocalStorageKey.SavePassword, value.toString())
 
     return value
 }

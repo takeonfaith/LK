@@ -13,6 +13,7 @@ import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
 import { FiDownload, FiInfo } from 'react-icons/fi'
+import styled from 'styled-components'
 
 const EducationPayments = () => {
     const { data } = paymentsModel.selectors.usePayments()
@@ -61,11 +62,10 @@ const EducationPayments = () => {
                             <Block orientation="vertical" maxWidth="380px">
                                 <Title size={2} align="left" bottomGap width="100%">
                                     Реквизиты договора
-                                    <LinkButton
+                                    <StyledLinkButton
                                         onClick={() => null}
                                         href={education.file ?? ''}
                                         icon={<FiDownload />}
-                                        width="40px"
                                     />
                                 </Title>
                                 <Contract contract={education} />
@@ -107,5 +107,9 @@ const EducationPayments = () => {
         </PageWrapper>
     )
 }
+
+const StyledLinkButton = styled(LinkButton)`
+    width: 40px;
+`
 
 export default EducationPayments

@@ -1,5 +1,5 @@
 import React from 'react'
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants/consts'
 import { confirmModel } from '@entities/confirm'
 import { userModel } from '@entities/user'
 import createFullName from '@features/home/lib/create-full-name'

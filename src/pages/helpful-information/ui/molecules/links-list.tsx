@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import search from '@pages/helpful-information/lib/search'
 import { HelpfulPage } from '@pages/helpful-information/types/helpful-pages'
 import { Error } from '@ui/error'

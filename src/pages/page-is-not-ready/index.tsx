@@ -1,6 +1,7 @@
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants/consts'
 import { Error, LinkButton } from '@ui/atoms'
 import React, { useEffect } from 'react'
+import styled from 'styled-components'
 
 interface Props {
     oldVersionUrl?: string
@@ -20,17 +21,20 @@ const PageIsNotReady = ({
     }, [])
     return (
         <Error text={errorText}>
-            <LinkButton
+            <StyledLinkButton
                 text={buttonText}
                 onClick={() => {
                     localStorage.setItem('useOldVersion', 'true')
                 }}
-                background="var(--purple)"
-                width="300px"
                 href={`${OLD_LK_URL}/?p=${oldVersionUrl?.slice(1, oldVersionUrl.length)}`}
             />
         </Error>
     )
 }
+
+const StyledLinkButton = styled(LinkButton)`
+    background-color: var(--purple);
+    width: 300px;
+`
 
 export default PageIsNotReady

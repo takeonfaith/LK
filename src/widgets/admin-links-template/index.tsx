@@ -1,5 +1,5 @@
 import { AdminLink } from '@api/model'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import { adminLinksModel } from '@entities/admin-links'
 import { Divider, LinkButton, Message, Title } from '@ui/atoms'
 import { DateInterval } from '@ui/molecules'
@@ -30,7 +30,10 @@ const AdminLinksTemplate = ({ title, links }: Props) => {
     const [dates, setDates] = useState(['', ''])
     const [validDates, setValidDates] = useState(true)
     const { data } = adminLinksModel.selectors.useData()
-    return !!data ? (
+
+    if (!data) return null
+
+    return (
         <AdminLinksTemplateWrapper>
             <Title size={3} align="left" bottomGap>
                 {title}
@@ -46,14 +49,11 @@ const AdminLinksTemplate = ({ title, links }: Props) => {
                                 <Title size={4} align="left">
                                     {link.title}
                                 </Title>
-                                <LinkButton
+                                <StyledLinkButton
                                     onClick={() => null}
                                     href={href}
                                     text="Загрузить"
                                     icon={<FiDownload />}
-                                    width="170px"
-                                    background={Colors.blue.main}
-                                    textColor="#fff"
                                     isActive={validDates}
                                 />
                             </section>
@@ -63,7 +63,13 @@ const AdminLinksTemplate = ({ title, links }: Props) => {
                 })}
             </div>
         </AdminLinksTemplateWrapper>
-    ) : null
+    )
 }
+
+const StyledLinkButton = styled(LinkButton)`
+    width: 170px;
+    background-color: ${Colors.blue.main};
+    color: var(--text);
+`
 
 export default AdminLinksTemplate

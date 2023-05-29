@@ -2,11 +2,12 @@ import { AdminLinks, User } from '@api/model'
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 import { hiddenRoutes, privateRoutes } from '@app/routes/routes'
 import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teacher-routes'
-import { MenuType, REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { MenuType, REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@shared/constants/consts'
 import { SettingsType } from '@entities/settings/model'
 import { useStore } from 'effector-react/compat'
 import { createEvent, createStore } from 'effector'
 import findRoutesByConfig from '../lib/find-routes-by-config'
+import { LocalStorageKey } from '@shared/constants/local-storage'
 
 export interface Menu {
     allRoutes: IRoutes | null
@@ -25,7 +26,7 @@ export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profil
 const getLeftsideBarConfig = (user: User | null, _adminLinks?: boolean): MenuType => {
     if (!user) return []
 
-    const localSettings = JSON.parse(localStorage.getItem('new-settings') || '{}') as SettingsType
+    const localSettings = JSON.parse(localStorage.getItem(LocalStorageKey.NewSettings) || '{}') as SettingsType
     const settingsMenuData =
         (localSettings[user.id]['settings-customize-menu']?.property.pages as unknown as string[]) ??
         REQUIRED_LEFTSIDE_BAR_CONFIG
@@ -111,7 +112,9 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
         ),
         homeRoutes: findRoutesByConfig(
             homeRoutes ??
-                (JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[]),
+                (JSON.parse(
+                    localStorage.getItem(LocalStorageKey.HomeRoutes) ?? JSON.stringify(DEFAULT_HOME_CONFIG),
+                ) as string[]),
             user?.user_status === 'staff'
                 ? { ...filterTeachersPrivateRoutes(adminLinks), ...teachersHiddenRoutes() }
                 : { ...privateRoutes(), ...hiddenRoutes() },

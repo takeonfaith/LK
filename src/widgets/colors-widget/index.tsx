@@ -1,4 +1,4 @@
-import { Colors, IColorPalette } from '@shared/consts'
+import { Colors, IColorPalette } from '@shared/constants/consts'
 import React from 'react'
 import Block from '@shared/ui/block'
 import { Title } from '@shared/ui/title'

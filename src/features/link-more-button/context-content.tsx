@@ -12,7 +12,7 @@ import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 import addPageToSidebar from '@features/all-pages/lib/add-page-to-sidebar'
 import { menuModel } from '@entities/menu'
 import deletePageFromSidebar from '@features/all-pages/lib/delete-page-from-sidebar'
-import { REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@shared/constants/consts'
 import { userModel } from '@entities/user'
 
 const ContextContentWrapper = styled.div`

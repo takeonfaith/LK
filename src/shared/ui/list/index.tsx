@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import { Button } from '@ui/button'
 import { DotPages } from '@ui/molecules'
 import { Title } from '@ui/title'

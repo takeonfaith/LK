@@ -1,4 +1,4 @@
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants/consts'
 import useOnClickOutside from '@shared/lib/hooks/use-on-click-outside'
 import limitNumber from '@shared/lib/limit-number'
 import React, { useCallback, useRef, useState } from 'react'

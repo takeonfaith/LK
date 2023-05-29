@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import { storyModel } from '@entities/story'
 import { Button } from '@ui/button'
 import { StoryProps } from '@ui/story/ui/story-page'

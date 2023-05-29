@@ -2,7 +2,7 @@ import List from '@ui/list'
 import DragAndDropArea from './ui/drag-and-drop-area'
 import ListOfFiles from './ui/list-of-files'
 import React from 'react'
-import { FileFormats } from '@shared/consts'
+import { FileFormats } from '@shared/constants/consts'
 
 export interface FileInputProps {
     title?: string

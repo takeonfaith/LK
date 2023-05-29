@@ -1,4 +1,4 @@
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants/consts'
 import { HiOutlineDocumentText } from 'react-icons/hi'
 import { InstructionsType } from './student-data'
 

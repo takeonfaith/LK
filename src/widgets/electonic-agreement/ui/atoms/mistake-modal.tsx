@@ -26,11 +26,10 @@ const MistakeModal = () => {
                 <>
                     Для изменения данных Вам необходимо обратиться в отделение центра по работе со студентами
                     (многофункциональный центр)
-                    <LinkButton
+                    <StyledLinkButton
                         onClick={() => null}
                         href={'https://mospolytech.ru/obuchauschimsya/mnogofunkcionalnyy-centr/'}
                         text="Контакты центра по работе со студентами"
-                        width="100%"
                     />
                 </>
             ) : (
@@ -46,5 +45,9 @@ const MistakeModal = () => {
         </MistakeModalWrapper>
     )
 }
+
+export const StyledLinkButton = styled(LinkButton)`
+    width: 100%;
+`
 
 export default MistakeModal

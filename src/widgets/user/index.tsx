@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants/consts'
 import Avatar from '@features/home/ui/molecules/avatar'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import { Direction, Size } from '@ui/types'
