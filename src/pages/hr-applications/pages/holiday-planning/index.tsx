@@ -18,6 +18,9 @@ import getForm from './lib/get-form'
 const HolidayPlanning = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [startDate, setStartDate] = useState<string | null>(null)
+    const [endDate, setEndDate] = useState<string | null>(null)
+    const [collType, setCollType] = useState<string | null>(null)
+    const [holidayType, setHolidayType] = useState<string | null>(null)
     const {
         data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
@@ -31,9 +34,23 @@ const HolidayPlanning = () => {
 
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
-            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex, startDate, setStartDate))
+            setForm(
+                getForm(
+                    dataUserApplication,
+                    dataWorkerApplication,
+                    currentIndex,
+                    startDate,
+                    setStartDate,
+                    endDate,
+                    setEndDate,
+                    collType,
+                    setCollType,
+                    holidayType,
+                    setHolidayType,
+                ),
+            )
         }
-    }, [dataUserApplication, currentIndex, loading, startDate])
+    }, [dataUserApplication, currentIndex, loading, startDate, collType, holidayType])
 
     useEffect(() => {
         if (!!form && !!dataUserApplication) {
@@ -61,14 +78,16 @@ const HolidayPlanning = () => {
 
                     <SubmitButton
                         text={'Отправить'}
-                        action={() => sendHrFormHolidayPlanning(ApplicationFormCodes.DISMISSAL, [form], setCompleted)}
+                        action={() =>
+                            sendHrFormHolidayPlanning(ApplicationFormCodes.HOLIDAY_PLANNING, [form], setCompleted)
+                        }
                         isLoading={loading}
                         completed={completed}
                         setCompleted={setCompleted}
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form) && (form.optionalCheckbox?.value ?? true)}
+                        isActive={checkFormFields(form, specialFieldsName) && (form.optionalCheckbox?.value ?? true)}
                         alerts={false}
                     />
                 </FormBlock>

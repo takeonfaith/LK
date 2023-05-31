@@ -9,7 +9,7 @@ const getForm = (
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
-        title: 'Заявление о предоставлении отпуска',
+        title: 'Заявление о переносе отпуска',
         data: [
             {
                 title: 'ФИО',
@@ -32,16 +32,6 @@ const getForm = (
                 fieldName: 'subDivision',
                 visible: true,
             },
-            // {
-            //     title: 'Период отпуска:',
-            //     type: 'date-interval',
-            //     value: ['', ''],
-            //     fieldName: 'holiday_dates',
-            //     editable: true,
-            //     mask: true,
-            //     required: true,
-            //     minValueInput: getDelayInDays(5),
-            // },
             {
                 title: 'Начало отпуска до переноса:',
                 type: 'date',
@@ -91,18 +81,23 @@ const getForm = (
             },
             {
                 title: 'Причина',
-                value: 'Семейные обстоятельства',
+                type: 'select',
                 fieldName: 'reason',
-                editable: true,
-                mask: true,
-                required: true,
-            },
-            {
-                title: 'Комментарий к заявке',
-                type: 'textarea',
-                fieldName: 'commentary',
                 value: '',
                 editable: true,
+                required: true,
+                width: '100%',
+                items: [
+                    {
+                        id: 0,
+                        title: 'Семейные обстоятельства',
+                    },
+                    {
+                        id: 1,
+                        title: 'Рабочая необходимость',
+                        data: 5,
+                    },
+                ],
             },
             // {
             //     title: 'Окончание отпуска после переноса:',
@@ -114,12 +109,6 @@ const getForm = (
             //     //minValueInput: getDelayInDays(5),
             // },
         ],
-        documents: {
-            files: [],
-            required: false,
-            fieldName: 'holidayFiles',
-            maxFiles: 10,
-        },
     }
 }
 

@@ -9,7 +9,7 @@ const downloadFile = async (guid: string) => {
     const response = await axios({
         url: url,
         method: 'GET',
-        responseType: 'blob', // important
+        responseType: 'blob',
         headers: headers,
     })
     const downloadUrl = window.URL.createObjectURL(new Blob([response.data]))

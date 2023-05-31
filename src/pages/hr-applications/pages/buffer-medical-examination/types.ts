@@ -6,6 +6,7 @@ export interface BufferMedicalExamination {
 }
 export interface BufferMedicalExaminationOrder {
     tutor: boolean
+    notTaken: BufferMedicalExaminationNotTaken[]
     employeeGuid: string
     documentGuid: string
     creationDate: string
@@ -17,19 +18,31 @@ export interface BufferMedicalExaminationOrder {
     status: string
     orderRegistrationStatus: string
     orderNumber: string
-    weekends: BufferMedicalExaminationWeekend[]
 }
 
-export interface BufferMedicalExaminationWeekend {
-    employeeGuid: string
-    type: number
-    dates: [
-        {
-            date: string
-            hours: number
-        },
-    ]
+export interface BufferMedicalExaminationNotTaken {
+    medicalExamination: {
+        period: {
+            startDate: string
+            endDate: string
+        }
+        status: {
+            creationDate: string
+            signedDate: string
+            hasApplication: true
+            hasOrder: true
+            orderNumber: string
+            displayApplication: true
+            displayOrder: true
+            orderStatus: string
+            applicationApporvalStatus: string
+            orderApprovalStatus: string
+            downloadApplication: true
+            downloadOrder: true
+        }
+    }
 }
+
 export interface BufferMedicalExaminationForm {
     employeeGuid: string
     start: string

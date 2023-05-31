@@ -31,8 +31,6 @@ const History = () => {
                 />
             </BlockHeader>
             {openedHistory && (
-                // if (!object.dismissalApplications.length) return null
-
                 <StyledTable
                     columns={getHolidayWorkHistoryColumns()}
                     data={data.map((object) => {

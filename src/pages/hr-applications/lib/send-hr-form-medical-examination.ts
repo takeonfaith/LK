@@ -7,7 +7,6 @@ const SendHrFormMedicalExamination = async (
     setCompleted: (loading: boolean) => void,
 ) => {
     setCompleted(false)
-
     const form = inputAreas
         .map((itemForm) => {
             if (!Array.isArray(itemForm.data[0])) {
@@ -53,8 +52,8 @@ const SendHrFormMedicalExamination = async (
 
     const response = await bufferMedicalExaminationModel.effects.sendBufferMedicalExaminationFx({
         employeeGuid: result.jobGuid,
-        start: result.holiday_work_date,
-        end: result.extra_holiday_date,
+        start: result.extra_examination_date,
+        end: result.isRetirement ? result.extra_examination_date_2 : result.extra_examination_date,
     })
 
     !response.isError && setCompleted(true)

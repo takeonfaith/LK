@@ -11,7 +11,7 @@ const History = () => {
     const [openedHistory, setOpenedHistory] = useState<boolean>(false)
 
     const { data } = bufferHolidayTransferModel.selectors.useBufferHolidayTransfer()
-    const historyIsEmpty = !!data.every((d) => !d.employeeVacations)
+    const historyIsEmpty = !!data.every((d) => !d)
 
     return (
         <Block

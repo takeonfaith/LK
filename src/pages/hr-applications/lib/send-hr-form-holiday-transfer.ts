@@ -53,18 +53,19 @@ const sendHrFormHolidayTransfer = async (
     const result = Object.assign({}, ...form)
     //console.log(result)
 
-    if (result.holiday_type == 'Ежегодный (основной) оплачиваемый отпуск') result.holiday_type = 1
-    else if (result.holiday_type == 'Ежегодный дополнительный оплачиваемый отпуск (в т.ч. учебный)')
-        result.holiday_type = 2
-    else if (result.holiday_type == 'Отпуск без сохранения заработной платы') result.holiday_type = 3
-    else if (result.holiday_type == 'Отпуск по беременности и родам (декретный отпуск)') result.holiday_type = 4
-    else if (result.holiday_type == 'Отпуск по уходу за ребенком') result.holiday_type = 5
-
     const response = await bufferHolidayTransferModel.effects.sendBufferHolidayTransferFx({
         employeeGuid: result.jobGuid,
-        type: result.holiday_type,
-        start: result.holiday_start,
-        end: result.holiday_end,
+        reason: result.reason,
+        period: {
+            from: {
+                startDate: result.holiday_old_start,
+                endDate: result.holiday_old_end,
+            },
+            to: {
+                startDate: result.holiday_new_start,
+                endDate: result.holiday_new_end,
+            },
+        },
     })
 
     !response.isError && setCompleted(true)

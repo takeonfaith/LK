@@ -4,6 +4,7 @@ import { useState } from 'react'
 import History from './history'
 import JobTitle from './job-title'
 import styled from 'styled-components'
+import { bufferMedicalExaminationModel } from '../model'
 //import HWAssesment from './holiday-work-affirmation'
 
 const Content = () => {
@@ -11,7 +12,7 @@ const Content = () => {
         data: { dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
     const [historyIsEmpty, setHistoryIsEmpty] = useState<boolean>(true)
-
+    const { data } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
     if (!dataWorkerApplication) {
         return null
     }
@@ -22,7 +23,7 @@ const Content = () => {
                 if (jobTitleInfo.isDismissal) {
                     historyIsEmpty && setHistoryIsEmpty(false)
                     return null
-                } else return <JobTitle info={jobTitleInfo} index={index} />
+                } else return <JobTitle info={jobTitleInfo} index={index} data={data} />
             })}
             {/* {data.map((info, index) => {
                 return <JobTitle info={info} index={index} />

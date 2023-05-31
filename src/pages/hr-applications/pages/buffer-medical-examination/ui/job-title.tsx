@@ -1,11 +1,14 @@
 import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
-// import Table from '@shared/ui/table'
+import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { getMedicalExaminationHistoryColumns } from '../lib/get-medical-examination-columns'
+import { bufferMedicalExaminationModel } from '../model'
+import { BufferMedicalExaminationOrder } from '../types'
 // import getHrApplicationsColumns from '../lib/get-hr-applications-columns'
 // import { BufferHolidayWork } from '../types'
 
@@ -14,12 +17,15 @@ interface Props {
     // jobTitleInfo: WorkerApplication
     info: WorkerApplication
     index: number
+    data: BufferMedicalExaminationOrder[]
 }
 
 const JobTitle: React.FC<Props> = ({ info, index }) => {
     const { jobTitle, subDivision, rate } = info
-
+    const { data } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
     const [opened, setOpened] = useState<boolean>(false)
+    //if (data.length == 0) return null
+    console.log(data)
 
     return (
         <Block
@@ -62,9 +68,24 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                             />
                         </Link>
                     )}
-                    {/* {!!dismissalApplications.length && (
-                        <StyledTable columns={getHrApplicationsColumns()} data={dismissalApplications} maxOnPage={10} />
-                    )} */}
+                    {data.map((workerInfo, index) => {
+                        if (workerInfo.employeeGuid == info.jobGuid) {
+                            const filteredData = data[index].notTaken.filter((item) => {
+                                if (
+                                    item.medicalExamination.status.orderStatus != 'false' &&
+                                    item.medicalExamination.status.orderStatus != ''
+                                )
+                                    return item.medicalExamination.status.orderStatus
+                            })
+                            return (
+                                <StyledTable
+                                    columns={getMedicalExaminationHistoryColumns()}
+                                    data={filteredData}
+                                    maxOnPage={10}
+                                />
+                            )
+                        }
+                    })}
                 </ActionBlock>
             )}
             <Button
@@ -96,9 +117,9 @@ const BlockHeader = styled.div`
     align-items: center;
 `
 
-// const StyledTable = styled(Table)`
-//     width: 100%;
-// `
+const StyledTable = styled(Table)`
+    width: 100%;
+`
 
 const ActionBlock = styled.div`
     display: flex;

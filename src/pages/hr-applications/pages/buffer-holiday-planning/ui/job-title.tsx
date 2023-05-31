@@ -1,3 +1,4 @@
+import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
 import Table from '@shared/ui/table'
@@ -6,19 +7,26 @@ import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { getBufferHolidayPlanningColumns } from '../lib/get-buffer-holiday-planning-columns'
+import { bufferHolidayPlanningModel } from '../model'
 import { BufferHolidayPlanning } from '../types'
 
 interface Props {
-    info: BufferHolidayPlanning['employeeVacations'][0]
+    //info: BufferHolidayPlanning['employeeVacations'][0]
+    info: WorkerApplication
     index: number
+    data: BufferHolidayPlanning['employeeVacations']
 }
 
-const JobTitle: React.FC<Props> = ({ info, index }) => {
-    const { notTaken, jobTitle, division } = info
+const JobTitle: React.FC<Props> = ({ info, index, data }) => {
+    //const { notTaken} = info
+
+    const { jobTitle, subDivision, rate } = info
 
     const [opened, setOpened] = useState<boolean>(false)
-
-    console.log(notTaken)
+    // console.log('info')
+    // console.log(info)
+    console.log(data)
+    // console.log(data)
 
     return (
         <Block
@@ -41,8 +49,9 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {division}
+                Структурное подразделение: {subDivision}
                 <br />
+                Ставка: {rate}
                 {/* Вид места работы: добавим */}
             </JobDescription>
             {opened && (
@@ -57,9 +66,31 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                             height="36px"
                         />
                     </Link>
-                    {!!notTaken.length && (
-                        <StyledTable columns={getBufferHolidayPlanningColumns()} data={notTaken} maxOnPage={10} />
-                    )}
+                    {/* {!!data[index].notTaken.length && (
+                        <StyledTable
+                            columns={getBufferHolidayPlanningColumns()}
+                            data={data[index].notTaken}
+                            maxOnPage={10}
+                        />
+                    )} */}
+                    {data.map((workerInfo, index) => {
+                        if (workerInfo.employeeGuid == info.jobGuid) {
+                            const filteredData = data[index].notTaken.filter((item) => {
+                                if (
+                                    item.vacation.status.orderStatus != 'false' &&
+                                    item.vacation.status.orderStatus != ''
+                                )
+                                    return item.vacation.status.orderStatus
+                            })
+                            return (
+                                <StyledTable
+                                    columns={getBufferHolidayPlanningColumns()}
+                                    data={filteredData}
+                                    maxOnPage={10}
+                                />
+                            )
+                        }
+                    })}
                 </ActionBlock>
             )}
             <Button
