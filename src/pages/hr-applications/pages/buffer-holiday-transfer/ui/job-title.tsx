@@ -1,21 +1,25 @@
 import { WorkerApplication } from '@shared/api/model'
 import Block from '@shared/ui/block'
 import { Button } from '@shared/ui/button'
+import Table from '@shared/ui/table'
 import React, { useState } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { getBufferHolidayPlanningColumns } from '../../buffer-holiday-planning/lib/get-buffer-holiday-planning-columns'
+import { BufferHolidayTransfer } from '../types'
 
 interface Props {
     //info?: BufferHolidayPlanning
     // jobTitleInfo: WorkerApplication
     info: WorkerApplication
     index: number
+    data: BufferHolidayTransfer['employeeVacations']
 }
 
-const JobTitle: React.FC<Props> = ({ info, index }) => {
+const JobTitle: React.FC<Props> = ({ info, index, data }) => {
     const { jobTitle, subDivision, rate } = info
-
+    //console.log(data)
     const [opened, setOpened] = useState<boolean>(false)
 
     return (
@@ -59,6 +63,24 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                             />
                         </Link>
                     )}
+                    {data.map((workerInfo, index) => {
+                        if (workerInfo.employeeGuid == info.jobGuid) {
+                            const filteredData = data[index].notTaken.filter((item) => {
+                                if (
+                                    item.vacation.status.orderStatus != 'false' &&
+                                    item.vacation.status.orderStatus != ''
+                                )
+                                    return item.vacation.status.orderStatus
+                            })
+                            return (
+                                <StyledTable
+                                    columns={getBufferHolidayPlanningColumns()}
+                                    data={filteredData}
+                                    maxOnPage={10}
+                                />
+                            )
+                        }
+                    })}
                     {/* {!!dismissalApplications.length && (
                         <StyledTable columns={getHrApplicationsColumns()} data={dismissalApplications} maxOnPage={10} />
                     )} */}
@@ -91,10 +113,9 @@ const BlockHeader = styled.div`
     gap: 10px;
     align-items: center;
 `
-
-// const StyledTable = styled(Table)`
-//     width: 100%;
-// `
+const StyledTable = styled(Table)`
+    width: 100%;
+`
 
 const ActionBlock = styled.div`
     display: flex;

@@ -168,7 +168,7 @@ const getForm = (
                     setEndDate(value)
                 },
                 minValueInput: holidayStartDate,
-                maxValueInput: getDelayInDays(collType ? +collType.data : 28, holidayStartDate),
+                maxValueInput: getDelayInDays(collType ? +collType.data : 365, holidayStartDate),
             },
         ],
     }

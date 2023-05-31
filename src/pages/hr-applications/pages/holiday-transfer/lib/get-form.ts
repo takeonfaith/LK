@@ -9,7 +9,7 @@ const getForm = (
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
-        title: 'Заявление о предоставлении отпуска',
+        title: 'Заявление о переносе отпуска',
         data: [
             {
                 title: 'ФИО',
@@ -32,16 +32,6 @@ const getForm = (
                 fieldName: 'subDivision',
                 visible: true,
             },
-            // {
-            //     title: 'Период отпуска:',
-            //     type: 'date-interval',
-            //     value: ['', ''],
-            //     fieldName: 'holiday_dates',
-            //     editable: true,
-            //     mask: true,
-            //     required: true,
-            //     minValueInput: getDelayInDays(5),
-            // },
             {
                 title: 'Начало отпуска до переноса:',
                 type: 'date',

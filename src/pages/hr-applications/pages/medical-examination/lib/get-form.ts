@@ -9,8 +9,6 @@ const getForm = (
     currentIndex: number,
     startDate: string | null,
     setStartDate: React.Dispatch<React.SetStateAction<string | null>>,
-    medicalExaminationDate: string | null,
-    setMedicalExaminationDate: React.Dispatch<React.SetStateAction<string | null>>,
     isRetirement: string | null,
     setIsRetirement: React.Dispatch<React.SetStateAction<string | null>>,
 ): IInputArea => {
@@ -49,18 +47,6 @@ const getForm = (
                 fieldName: 'subDivision',
                 visible: true,
             },
-            // {
-            //     title: 'Дата прохождения диспансеризации',
-            //     type: 'date',
-            //     value: medicalExaminationDate,
-            //     fieldName: 'medical-examination-date',
-            //     editable: true,
-            //     mask: true,
-            //     required: true,
-            //     onChange: (value) => {
-            //         setMedicalExaminationDate(value)
-            //     },
-            // },
             {
                 title: 'Дата прохождения диспансеризации',
                 type: 'date',

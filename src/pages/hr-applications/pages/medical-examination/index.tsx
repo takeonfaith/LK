@@ -40,8 +40,6 @@ const MedicalExamination = () => {
                     currentIndex,
                     startDate,
                     setStartDate,
-                    medicalExaminationDate,
-                    setMedicalExaminationDate,
                     isRetirement,
                     setIsRetirement,
                 ),

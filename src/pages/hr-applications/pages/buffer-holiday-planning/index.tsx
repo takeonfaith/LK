@@ -4,6 +4,7 @@ import { FiInfo } from 'react-icons/fi'
 import styled from 'styled-components'
 import Content from './ui/content'
 import { bufferHolidayPlanningModel } from './model'
+import { Link } from 'react-router-dom'
 
 const HolidayPlanningBufferPage = () => {
     const { data, loading } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
@@ -31,6 +32,13 @@ const HolidayPlanningBufferPage = () => {
                             В колонке «Структурное подразделение, адрес» указывается название подразделения и адрес,
                             куда необходимо приехать за готовым документом.
                         </Message>
+                        <p>
+                            График отпусков вы можете посмотреть по{' '}
+                            <a target="_blank" href="#/vacation" rel="noreferrer">
+                                ссылке
+                            </a>
+                            .{' '}
+                        </p>
                     </HrHeader>
                     <Content />
                 </HrBlock>
