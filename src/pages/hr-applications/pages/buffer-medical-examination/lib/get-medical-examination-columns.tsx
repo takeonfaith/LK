@@ -1,7 +1,6 @@
-import { hrApplicationsConstants } from '@entities/applications/consts'
 import localizeDate from '@shared/lib/localize-date'
 import { Message } from '@shared/ui/message'
-
+import React from 'react'
 import { ColumnProps } from '@ui/table/types'
 
 export const getMedicalExaminationHistoryColumns = (): ColumnProps[] => {
