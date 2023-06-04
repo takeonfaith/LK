@@ -1,11 +1,8 @@
-import { APPLICATIONS_ROUTE } from '@app/routes/routes'
-import { Button, FormBlock, SubmitButton } from '@ui/atoms'
+import { FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea, IInputAreaData } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
-import { FiChevronLeft } from 'react-icons/fi'
-import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { globalAppSendForm } from '@pages/applications/lib'
@@ -26,8 +23,6 @@ const StudentStatus = () => {
         data: { dataUserApplication },
     } = applicationsModel.selectors.useApplications()
 
-    const history = useHistory()
-
     useEffect(() => {
         if (!!dataUserApplication) {
             setForm(getForm(dataUserApplication))
@@ -43,13 +38,6 @@ const StudentStatus = () => {
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && (
                 <FormBlock>
-                    <Button
-                        text="Назад к заявлениям"
-                        icon={<FiChevronLeft />}
-                        onClick={() => history.push(APPLICATIONS_ROUTE)}
-                        background="transparent"
-                        textColor="var(--blue)"
-                    />
                     <InputArea
                         {...form}
                         collapsed={isDone}

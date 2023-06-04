@@ -6,6 +6,7 @@ import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import useTheme from '@utils/hooks/use-theme'
+import useCurrentExactPage from '@utils/hooks/use-current-exact-page'
 import React, { Suspense, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
@@ -15,6 +16,7 @@ import InitialLoader from '../../shared/ui/initial-loader'
 import Story from '../../shared/ui/story'
 import WhatsNew from '../whats-new'
 import { ContentWrapper, PageContent, Wrapper } from './styled'
+import Header from 'widgets/header'
 
 const ContentLayout = () => {
     const {
@@ -22,7 +24,7 @@ const ContentLayout = () => {
     } = userModel.selectors.useUser()
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
-    // const { seen } = useShowTutorial()
+    const { currentPage, exactCurrentPage } = useCurrentExactPage()
 
     useEffect(() => {
         if (user) settingsModel.effects.getLocalSettingsFx(user.id)
@@ -52,7 +54,6 @@ const ContentLayout = () => {
                     }),
                 5000,
             )
-        // InstallApp()
     }, [user])
 
     useEffect(() => {
@@ -61,13 +62,6 @@ const ContentLayout = () => {
         }
     }, [isShowNotification])
 
-    // useEffect(() => {
-    //     if (!seen) {
-    //         storyModel.events.open({ pages: TutorialStory })
-    //         setSeen(true)
-    //     }
-    // }, [])
-
     return (
         <Wrapper>
             <InitialLoader loading={!user} />
@@ -75,8 +69,8 @@ const ContentLayout = () => {
             <Story />
             <LeftsideBar />
             <ContentWrapper>
-                {/* <Header /> */}
-                <PageContent>
+                <Header currentPagePair={{ currentPage, exactCurrentPage }} />
+                <PageContent withHeader={!(exactCurrentPage ?? currentPage)?.withoutHeader}>
                     <Suspense fallback={null}>
                         <PrivateRouter />
                     </Suspense>

@@ -84,5 +84,6 @@ export const ListWrapper = styled.div.withConfig({
 
     @media (max-width: 1000px) {
         flex-wrap: ${({ wrapOnMobile }) => (wrapOnMobile ? 'wrap' : 'nowrap')};
+        overflow-x: auto;
     }
 `

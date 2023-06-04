@@ -9,7 +9,6 @@ const IssuanceOfLicensesPage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             isSpecialField={true}
             formId={ApplicationTeachersFormCodes.ISSUANCE_OF_LICENSES}
         />

@@ -1,18 +1,15 @@
+import { applicationsModel } from '@entities/applications'
 import { userModel } from '@entities/user'
-import { Button, Error, FormBlock, SubmitButton, Title } from '@ui/atoms'
+import { listConfigCert } from '@features/applications/lib/get-list-configs-certificate'
+import StepByStepForm, { StagesConfigsT } from '@features/applications/ui/molecules/step-by-step-form'
+import { getAdditionally, getDisability, getRegistration, globalAppSendForm } from '@pages/applications/lib'
+import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
+import { Error, FormBlock, SubmitButton, Title } from '@ui/atoms'
 import { IInputArea } from '@ui/input-area/model'
+import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import getForm from './lib/get-form'
-import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { FiChevronLeft } from 'react-icons/fi'
-import { APPLICATIONS_ROUTE } from '@routes'
-import { useHistory } from 'react-router'
-import { getAdditionally, getRegistration, getDisability, globalAppSendForm } from '@pages/applications/lib'
-import { ApplicationFormCodes } from '@utility-types/application-form-codes'
-import { applicationsModel } from '@entities/applications'
-import { listConfigCert } from '@features/applications/lib/get-list-configs-certificate'
-import StepByStepForm, { StagesConfigsT } from '@features/applications/ui/molecules/step-by-step-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -35,7 +32,6 @@ const RegularAccommodationPage = () => {
     const [registration, setRegistration] = useState<IInputArea | null>(null)
     const [additionally, setAdditionally] = useState<IInputArea | null>(null)
     const isDone = completed ?? false
-    const history = useHistory()
 
     const isForm = !!form && !!registration && !!disability && !!additionally
 
@@ -69,13 +65,6 @@ const RegularAccommodationPage = () => {
     return (
         <BaseApplicationWrapper isDone={isDone}>
             <FormBlock>
-                <Button
-                    text="Назад к цифровым сервисам"
-                    icon={<FiChevronLeft />}
-                    onClick={() => history.push(APPLICATIONS_ROUTE)}
-                    background="transparent"
-                    textColor="var(--blue)"
-                />
                 <Title size={4} align="left">
                     Предоставление права проживания (очная форма)
                 </Title>

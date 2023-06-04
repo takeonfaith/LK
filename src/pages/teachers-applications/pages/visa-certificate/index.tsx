@@ -9,7 +9,6 @@ const VisaCertificatePage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             isSpecialField={true}
             formId={ApplicationTeachersFormCodes.VISA_CERTIFICATE}
         />

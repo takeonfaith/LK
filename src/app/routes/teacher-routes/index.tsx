@@ -66,7 +66,7 @@ export const SC_NEWS_ROUTE = '/sc_news'
 export const OOP_ROUTE = '/oop'
 export const CENTERS_ROUTE = '/centers'
 export const PORTFOLIO_ROUTE = '/portfolio'
-export const INFO_ROUTE = '/info'
+export const INFO_ROUTE = '/helpful-information'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const DOWNLOAD_AGREEMENTS_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
@@ -262,8 +262,8 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
     },
     doclist: {
         id: 'doclist',
-        // title: 'Ознакомление с документами',
-        title: 'Ознакомление с док...',
+        title: 'Ознакомление с документами',
+        shortTitle: 'Ознакомление с док...',
         icon: <FiFileText />,
         path: DOCLIST_ROUTE,
         Component: PersonalNotificationsPage,
@@ -337,6 +337,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : IssuanceOfLicensesPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'part-time-deployment': {
         id: 'part-time-deployment',
@@ -347,6 +351,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : PartTimeEmployment,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к кадровым заявлениям',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     'holiday-postponed': {
         id: 'holiday-postponed',
@@ -357,6 +365,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : HolidayPostponed,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к кадровым заявлениям',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     dismissal: {
         id: 'dismissal2',
@@ -367,6 +379,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : DismissalBufferPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к кадровым заявлениям',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     'holiday-work': {
         id: 'part-time-deployment',
@@ -377,6 +393,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : HolidayWork,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к кадровым заявлениям',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     'holiday-planning': {
         id: 'holiday-postponed',
@@ -387,6 +407,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : HolidayPlanning,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к кадровым заявлениям',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     'extra-holiday-coll': {
         id: 'dismissal',
@@ -397,6 +421,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : ExtraHolidayColl,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к кадровым заявлениям',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     'work-transfer': {
         id: 'dismissal',
@@ -407,6 +435,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : WorkTransfer,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к кадровым заявлениям',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     dismissal_form: {
         id: 'dismissal',
@@ -417,6 +449,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : Dismissal,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к кадровым заявлениям',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     'getting-computer-equipment': {
         id: 'getting-computer-equipment',
@@ -427,6 +463,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : GettingComputerEquipmentPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'connecting-computer': {
         id: 'connecting-computer',
@@ -437,6 +477,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : ConnectingComputerPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'printer-maintenance': {
         id: 'printer-maintenance',
@@ -447,6 +491,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : PrinterMaintenancePage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'question-sed': {
         id: 'question-sed',
@@ -457,6 +505,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : QuestionSedPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'question-personal-account': {
         id: 'question-personal-account',
@@ -467,6 +519,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : QuestionPersonalAccountPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'other-it-services': {
         id: 'other-it-services',
@@ -477,6 +533,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : OtherItServicesPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'certificate-form-place-of-work': {
         id: 'certificate-form-place-of-work',
@@ -487,6 +547,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : CertificateFromPlaceOfWorkPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'visa-certificate': {
         id: 'visa-certificate',
@@ -497,6 +561,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : VisaCertificatePage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'certificate-of-work-experience': {
         id: 'certificate-of-work-experience',
@@ -507,6 +575,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : CertificateOfWorkExperiencePage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'number-of-unused-vacation-days': {
         id: 'number-of-unused-vacation-days',
@@ -517,6 +589,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : NumberOfUnusedVacationDaysPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'copy-of-employment-record': {
         id: 'copy-of-employment-record',
@@ -527,6 +603,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : CopyOfEmploymentRecordPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'copies-of-documents-from-personal-file': {
         id: 'copies-of-documents-from-personal-file',
@@ -537,6 +617,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : CopiesOfDocumentsFromPersonalFilePage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'work-on-terms-of-external-concurrency': {
         id: 'work-on-terms-of-external-concurrency',
@@ -547,6 +631,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : WorkOnTermsOfExternalConcurrencyPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'certificate-time-parental-leave': {
         id: 'certificate-time-parental-leave',
@@ -557,6 +645,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : CertificateTimeParentalLeavePage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'arbitrary-request': {
         id: 'arbitrary-request',
@@ -567,6 +659,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : ArbitraryRequestPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     courier: {
         id: 'courier',
@@ -577,6 +673,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : CourierPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'personal-income-tax-reference': {
         id: 'personal-income-tax-reference',
@@ -587,6 +687,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : PersonaIncomeTaxReferencePage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'payment-of-child-birth-allowance': {
         id: 'payment-of-child-birth-allowance',
@@ -597,6 +701,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : PaymentOfChildBirthAllowancePage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'payment-for-child-care': {
         id: 'payment-for-child-care',
@@ -607,6 +715,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : PaymentForChildCarePage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'contact-info-actualization': {
         id: 'contact-info-actualization',
@@ -617,6 +729,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: ContactInfoActualizationPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'data-verification': {
         id: 'data-verification',
@@ -627,5 +743,9 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         Component: DataVerificationPage,
         isTemplate: false,
         group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
 })
