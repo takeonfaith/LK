@@ -54,7 +54,7 @@ const WrapperBlock = styled.div.withConfig({
     }
 
     @media (max-width: 550px) {
-        padding: 15px;
+        padding: 10px;
     }
 `
 

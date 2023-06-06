@@ -1,5 +1,6 @@
 import { userModel } from '@entities/user'
 import useLogin from '@pages/login/hooks/use-login'
+import Flex from '@shared/ui/flex'
 import { Input, Logo, SubmitButton } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import List from '@ui/list'
@@ -21,6 +22,11 @@ const Inputs = () => {
         login,
         setLogin,
     } = useLogin()
+    // const languages = [
+    //     { id: 'ru', title: 'RU', icon: <GrLanguage /> },
+    //     { id: 'en', title: 'EN', icon: <GrLanguage /> },
+    // ]
+    // const [selectedLang, setSelectedLang] = useState(languages[0])
     return (
         <div className="right" onKeyDown={handleKeyPress}>
             <List
@@ -32,11 +38,19 @@ const Inputs = () => {
                 scroll={false}
             >
                 <Logo width="50px" short className="logo second" />
+                <Flex jc="space-between">
+                    <Title size={3} align="left">
+                        Личный кабинет
+                    </Title>
+                    {/* <Select
+                        width="80px"
+                        items={languages}
+                        selected={selectedLang}
+                        setSelected={(value: any) => setSelectedLang(value)}
+                    /> */}
+                </Flex>
 
-                <Title size={3} align="left">
-                    Личный кабинет
-                </Title>
-                <List gap={16} horizontalAlign="center" scroll={false}>
+                <List gap={16} scroll={false}>
                     <Title size={4} align="left">
                         Вход
                     </Title>

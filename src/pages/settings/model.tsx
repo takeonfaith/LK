@@ -1,11 +1,12 @@
-import React from 'react'
-import { NameSettings } from '@entities/settings/model'
-import { MdOutlinePassword } from 'react-icons/md'
-import { FiLogOut, FiMail, FiPhone } from 'react-icons/fi'
 import { confirmModel } from '@entities/confirm'
+import { NameSettings } from '@entities/settings/model'
 import { userModel } from '@entities/user'
 import { FilterElementList } from '@shared/ui/added-elements-list'
 import { MessageType } from '@shared/ui/types'
+import React from 'react'
+import { FiBell, FiClock, FiFilePlus, FiFileText, FiLogOut, FiMail, FiPhone } from 'react-icons/fi'
+import { HiOutlineViewGridAdd } from 'react-icons/hi'
+import { MdOutlinePassword } from 'react-icons/md'
 
 export type TSettingsFieldType =
     | 'link'
@@ -135,6 +136,48 @@ const getSettingsModel: TSettingsModel = ({ theme, email, avatar, homepage, phon
         },
     ],
     'settings-personal': [
+        {
+            title: 'Уведомления',
+            fields: [
+                {
+                    type: 'toggle',
+                    title: 'Получать уведомления',
+                    value: true,
+                    subfields: [
+                        {
+                            title: 'Новая версия',
+                            type: 'toggle',
+                            value: true,
+                            icon: <HiOutlineViewGridAdd />,
+                        },
+                        {
+                            title: 'Сессия',
+                            type: 'toggle',
+                            value: true,
+                            icon: <FiClock />,
+                        },
+                        {
+                            title: 'Новые оповещения',
+                            type: 'toggle',
+                            value: true,
+                            icon: <FiBell />,
+                        },
+                        {
+                            title: 'Цифровые сервисы',
+                            type: 'toggle',
+                            value: true,
+                            icon: <FiFileText />,
+                        },
+                        {
+                            title: 'Документы для ознакомления',
+                            type: 'toggle',
+                            value: true,
+                            icon: <FiFilePlus />,
+                        },
+                    ],
+                },
+            ],
+        },
         {
             title: 'Данные',
             fields: [

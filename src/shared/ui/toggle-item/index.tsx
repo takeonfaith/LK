@@ -10,6 +10,21 @@ const ToggleItemBlock = styled.div`
     align-items: center;
     border-radius: var(--brLight);
 
+    .icon {
+        width: 22px;
+        height: 22px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            width: 22px;
+            height: 22px;
+            opacity: 0.4;
+        }
+    }
+
     & > label {
         display: flex;
         align-items: center;
@@ -35,15 +50,17 @@ type Props = {
     title: string
     state: boolean
     action: (state: boolean) => void
+    icon?: React.ReactNode
 }
 
-const ToggleItem = ({ title, state, action }: Props) => {
+const ToggleItem = ({ title, state, action, icon }: Props) => {
     const handleToggle = () => {
         action(!state)
     }
 
     return (
         <ToggleItemBlock key={title}>
+            {icon && <div className="icon">{icon}</div>}
             <label>
                 <b>{title}</b>
                 <SwitchToggle id={Math.random().toString()} isToggled={state} setIsToggled={handleToggle} key={title} />

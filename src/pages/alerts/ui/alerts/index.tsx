@@ -28,7 +28,7 @@ const Alerts = ({ alerts, limit, listView }: Props) => {
     const [foundAlerts, setFoundAlerts] = useState<PreparedAlerts | null>(null)
 
     const handleAlertClick = (alert: Alert) => {
-        open(<AlertModal alert={alert} />)
+        open(<AlertModal alert={alert} />, alert.title)
     }
 
     const finalAlerts = foundAlerts ?? alerts

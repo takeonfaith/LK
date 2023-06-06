@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { DEFAULT_STATE_DURATION, OPEN_CLOSE_ANIMATION_DURATION } from '../consts'
 
 const usePopUpNotifications = () => {
-    const { notifications } = lkNotificationModel.selectors.useLkNotifications()
+    const { visibleNotifications } = lkNotificationModel.selectors.useLkNotifications()
     const [closing, setClosing] = useState<string | null>(null)
     const timerRef = useRef<number | undefined>()
 
@@ -14,19 +14,19 @@ const usePopUpNotifications = () => {
         return () => {
             setClosing(id)
             setTimeout(() => {
-                lkNotificationModel.events.clearById(id)
+                lkNotificationModel.events.clearVisibleById(id)
             }, OPEN_CLOSE_ANIMATION_DURATION)
         }
     }
 
     useEffect(() => {
-        if (notifications.length && timerRef.current === undefined) {
+        if (visibleNotifications.length && timerRef.current === undefined) {
             timerRef.current = setTimeout(
-                handleClose(notifications[0]?.id),
-                notifications[0]?.duration ?? DEFAULT_STATE_DURATION,
+                handleClose(visibleNotifications[0]?.id),
+                visibleNotifications[0]?.duration ?? DEFAULT_STATE_DURATION,
             )
         }
-    }, [notifications])
+    }, [visibleNotifications])
 
     return {
         handleClose,

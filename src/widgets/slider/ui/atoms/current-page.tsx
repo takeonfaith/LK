@@ -16,7 +16,7 @@ const CurrentPageWrapper = styled.span<{
     position: absolute;
     transition: 0.3s left, 0.2s transform;
     z-index: 0;
-    border-radius: 14px;
+    border-radius: calc(var(--brLight) - 2px);
     scroll-snap-align: center;
     left: ${({ currentPage, moreThanNeeded, pages, size }) =>
         `calc(${(currentPage * 100) / (!moreThanNeeded ? pages.length : size)}%)`};

@@ -1,14 +1,12 @@
+import PerhapsYouMeant from '@features/perhaps-you-meant'
 import { Colors } from '@shared/consts'
 import useOnClickOutside from '@shared/lib/hooks/use-on-click-outside'
 import limitNumber from '@shared/lib/limit-number'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Input } from '../atoms'
 import BlockWrapper from '../block/styles'
-import Subtext from '../subtext'
-import englishToRussianKeyboard from './lib/english-to-russian-keyboard'
-import isValidEnglishText from './lib/is-valid-english-text'
 
 const SearchStyled = styled.div<{ width?: string }>`
     display: flex;
@@ -72,6 +70,7 @@ type SearchProps = {
     loading?: boolean
     hints?: Hint[]
     leftIcon?: ChildrenType
+    focusOn?: any
     onHintClick?: (hint: Hint | undefined) => void
     customMask?: (value: string, prevValue?: string) => string
 }
@@ -79,25 +78,29 @@ type SearchProps = {
 const Search = ({
     value,
     width,
-    setValue,
     placeholder,
     inputAppearance,
-    validationCheck,
     loading,
     hints,
     leftIcon,
+    focusOn,
+    setValue,
     customMask,
     onHintClick,
+    validationCheck = false,
 }: SearchProps) => {
-    const handleSuggestions = useCallback(() => {
-        setValue(englishToRussianKeyboard(value))
-    }, [value, setValue])
-
     const [currentSelectedHint, setCurrentSelectedHint] = useState<number | null>(0)
     const [openHints, setOpenHints] = useState(false)
     const hintsRef = useRef<HTMLDivElement>(null)
     const selectedRef = useRef<HTMLDivElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
     useOnClickOutside(hintsRef, () => setOpenHints(false))
+
+    useEffect(() => {
+        if (focusOn) {
+            setTimeout(() => inputRef.current?.focus(), 50)
+        }
+    }, [focusOn])
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
         if ((hints?.length ?? 0) > 0 || loading) setOpenHints(true)
@@ -142,15 +145,9 @@ const Search = ({
                 width={width}
                 mask
                 customMask={customMask}
+                ref={inputRef}
             />
-            {value.length > 0 && validationCheck && isValidEnglishText(value) && (
-                <Subtext width="100%" maxWidth="100%" onClick={handleSuggestions}>
-                    Возможно, вы имели в виду{' '}
-                    <a href="#" onClick={(e) => e.preventDefault()}>
-                        {englishToRussianKeyboard(value)}
-                    </a>
-                </Subtext>
-            )}
+            <PerhapsYouMeant setValue={setValue} value={value} visible={validationCheck} />
             {openHints && (
                 <Hints
                     height="fit-content"

@@ -6,9 +6,11 @@ import {
     CertificateOfWorkExperiencePage,
     CertificateTimeParentalLeavePage,
     ConnectingComputerPage,
+    ContactInfoActualizationPage,
     CopiesOfDocumentsFromPersonalFilePage,
     CopyOfEmploymentRecordPage,
     CourierPage,
+    DataVerificationPage,
     Dismissal,
     DownloadAdminFilesPage,
     ExtraHolidayColl,
@@ -30,8 +32,6 @@ import {
     QuestionPersonalAccountPage,
     QuestionSedPage,
     TeachersApplicationsPage,
-    DataVerificationPage,
-    ContactInfoActualizationPage,
     VacationSchedule,
     VisaCertificatePage,
     WorkOnTermsOfExternalConcurrencyPage,
@@ -108,6 +108,7 @@ export const BUFFER_HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/buffer-holiday-
 export const BUFFER_HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/buffer-holiday-work'
 export const BUFFER_PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/buffer-part-time-deployment'
 export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday-postponed'
+// export const GENERATE_SCHEDULE = '/generate-schedule'
 
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
@@ -122,6 +123,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'OTHER',
+        keywords: ['заявления', 'справки', 'заявление', 'справка'],
     },
     ...generalRoutes,
     'hr-applications': {
@@ -323,6 +325,17 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         group: 'OTHER',
         show: false,
     },
+    // 'generate-schedule': {
+    //     id: 'generate-schedule',
+    //     title: 'Генерация пересдач',
+    //     icon: <HiOutlineSparkles />,
+    //     path: GENERATE_SCHEDULE,
+    //     Component: GenerateSchedule,
+    //     color: 'pink',
+    //     isTemplate: false,
+    //     group: 'OTHER',
+    //     isAdmin: true,
+    // },
 })
 
 export const teachersHiddenRoutes: () => IRoutes = () => ({

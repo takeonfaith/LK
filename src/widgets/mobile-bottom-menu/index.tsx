@@ -10,7 +10,7 @@ const MobileBottomMenuWrapper = styled(ListWrapper)`
     width: 100%;
     height: 60px;
     background: var(--schedule);
-    box-shadow: 0 0 1px;
+    border-top: 1px solid var(--scheduleBg);
     padding: 0px 10px;
     display: none;
 

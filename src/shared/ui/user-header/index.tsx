@@ -43,6 +43,7 @@ interface Props
         | 'isMe'
         | 'avatar'
         | 'name'
+        | 'faculty'
     > {
     noInfo?: boolean
 }
@@ -55,6 +56,7 @@ const UserHeader = ({
     group,
     finance,
     educationForm,
+    faculty,
     degreeLevel,
     course,
     isMe = false,
@@ -67,7 +69,6 @@ const UserHeader = ({
         <UserHeaderStyled>
             <UserHeaderBackground
                 fullName={name}
-                avatar={avatar}
                 height="136px"
                 width="calc(100% + 16px)"
                 baseScale={1}
@@ -81,6 +82,7 @@ const UserHeader = ({
                         <DotSeparatedWords words={status} />
                     </Subtext>
                     <KeyValue fontSize="0.9rem" visible={!!finance} keyStr={'Уровень финансирование'} value={finance} />
+                    <KeyValue fontSize="0.9rem" visible={!!faculty} keyStr={'Факультет'} value={faculty} />
                     <KeyValue
                         fontSize="0.9rem"
                         visible={!!degreeLevel}

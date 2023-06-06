@@ -10,6 +10,7 @@ import { useMemo, useState } from 'react'
 import React from 'react'
 import Block from '@shared/ui/block'
 import { CenterPage } from '@shared/ui/atoms'
+import Flex from '@shared/ui/flex'
 
 // const AllPagesWrapper = styled.div`
 //     padding: calc(var(--desktop-page-padding) + 10px);
@@ -56,16 +57,21 @@ const AllPages = () => {
                     setResult={setFoundPages}
                     setExternalValue={setSearchValue}
                     validationCheck
+                    loadingOnType
                 />
-                {searchValue.length === 0 &&
-                    Object.keys(groupedPages)
-                        .sort((a, b) => {
-                            return routesOrder[a as Groups] - routesOrder[b as Groups]
-                        })
-                        .map((group) => {
-                            const links = groupedPages[group as Groups]
-                            return <LinksList title={group} key={group} doNotShow="all" align="left" links={links} />
-                        })}
+                <Flex d="column" gap="24px">
+                    {searchValue.length === 0 &&
+                        Object.keys(groupedPages)
+                            .sort((a, b) => {
+                                return routesOrder[a as Groups] - routesOrder[b as Groups]
+                            })
+                            .map((group) => {
+                                const links = groupedPages[group as Groups]
+                                return (
+                                    <LinksList title={group} key={group} doNotShow="all" align="left" links={links} />
+                                )
+                            })}
+                </Flex>
                 <FoundPages pages={foundPages} />
             </Block>
         </CenterPage>

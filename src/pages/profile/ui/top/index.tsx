@@ -59,13 +59,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
 
     return (
         <TopStyled>
-            <UserHeaderBackground
-                avatar={avatar}
-                fullName={fullName}
-                width="calc(100% + 32px)"
-                height="210px"
-                baseScale={1.5}
-            />
+            <UserHeaderBackground fullName={fullName} width="calc(100% + 32px)" height="210px" baseScale={1.5} />
             <BlocksList>
                 <TopInfoBlock maxWidth="530px" height="180px" orientation="vertical">
                     <AvatarWrapper>

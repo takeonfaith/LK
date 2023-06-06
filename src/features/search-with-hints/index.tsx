@@ -7,6 +7,8 @@ type Props = {
     value: string
     leftIcon?: ChildrenType
     hintIcon?: ChildrenType
+    loading?: boolean
+    focusOn?: any
     setValue: React.Dispatch<React.SetStateAction<string>>
     onHintClick: (hint: Hint | undefined) => void
     onValueEmpty?: () => void
@@ -14,16 +16,18 @@ type Props = {
     customMask?: (value: string, prevValue?: string) => string
 }
 
-const SeachDivisions = ({
+const SeachWithHints = ({
     value,
     setValue,
     placeholder,
     onValueEmpty,
     request,
+    loading,
     onHintClick,
     hintIcon,
     customMask,
     leftIcon,
+    focusOn,
 }: Props) => {
     const [hints, setHints] = useState<Hint[]>([])
     const [loadingHints, setLoadingHints] = useState(false)
@@ -54,12 +58,13 @@ const SeachDivisions = ({
             placeholder={placeholder}
             hints={hints}
             width="180px"
+            focusOn={focusOn}
             leftIcon={leftIcon}
-            loading={loadingHints}
+            loading={loadingHints && loading}
             onHintClick={onHintClick}
             customMask={customMask}
         />
     )
 }
 
-export default SeachDivisions
+export default SeachWithHints

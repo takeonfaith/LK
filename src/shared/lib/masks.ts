@@ -1,5 +1,5 @@
 const groupMask = (value: string, prevValue?: string) => {
-    if (value.length > 7) return value.substring(0, 7)
+    if (value.length > 8) return value.substring(0, 8)
     if (value.length === 3 && prevValue?.length === 2) return value + '-'
     if (value.length === 3 && prevValue?.length === 4) return value.substring(0, 2)
     return value

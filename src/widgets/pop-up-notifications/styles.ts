@@ -30,7 +30,7 @@ export const PopUpNotificationsItem = styled.div<{ open: boolean }>`
     color: var(--text);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     box-shadow: 0 0 50px #00000521;
     transition: 0.2s;
 
@@ -46,7 +46,7 @@ export const PopUpNotificationsItem = styled.div<{ open: boolean }>`
         }
         100% {
             padding: 8px;
-            height: 71px;
+            height: 65px;
             margin-top: 8px;
             opacity: 1;
             transform: scale(1);
@@ -55,7 +55,7 @@ export const PopUpNotificationsItem = styled.div<{ open: boolean }>`
 
     @keyframes close {
         0% {
-            height: 71px;
+            height: 65px;
             padding: 8px;
             opacity: 1;
             margin-top: 8px;

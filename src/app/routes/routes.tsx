@@ -101,6 +101,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'OTHER',
+        keywords: ['справки', 'справка', 'заявления', 'заявление'],
     },
     ...generalRoutes,
     dormitory: {
@@ -124,6 +125,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'green',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
+        keywords: ['оценки', 'экзамены', 'зачеты'],
     },
     'project-activity': {
         id: 'project-activity',
@@ -135,6 +137,7 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
         isNew: true,
+        keywords: ['пд'],
     },
 
     'helpful-information': {

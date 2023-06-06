@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Size } from '../types'
-import { Colors } from '@shared/consts'
+import { Colors, IColors } from '@shared/consts'
 import { SkeletonShape } from '../skeleton-shape'
 import { Title } from '../title'
 
@@ -54,9 +54,10 @@ type Props = {
     size?: Size
     loading?: boolean
     children?: ChildrenType
+    color?: keyof IColors
 }
 
-const PieChart = ({ percent, children, label, size = 'middle', loading = false }: Props) => {
+const PieChart = ({ percent, children, label, color = 'blue', size = 'middle', loading = false }: Props) => {
     const width = ({ small: 80, middle: 160, big: 240 } as const)[size]
     const strokeDashoffset = (1 - percent) * width * FACTOR + 'px'
     const s = width / 2 - 10
@@ -76,7 +77,7 @@ const PieChart = ({ percent, children, label, size = 'middle', loading = false }
                                 r={s - 2}
                                 style={{
                                     strokeDashoffset,
-                                    stroke: Colors.blue.main,
+                                    stroke: Colors[color].main,
                                 }}
                                 strokeDasharray={width * FACTOR}
                                 strokeLinecap="round"

@@ -40,7 +40,7 @@ const TopUser = () => {
             <HomeTopSection />
 
             <div onClick={handleUserClick}>
-                <Avatar width="30px" height="30px" avatar={user.avatar} name={user.name} marginRight="0" />
+                <Avatar width="30px" height="30px" avatar={user.avatar} name={user.fullName} marginRight="0" />
             </div>
         </TopUserStyled>
     )

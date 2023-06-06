@@ -1,8 +1,10 @@
 import { acadPerformanceModel } from '@entities/acad-performance'
-import findColor from '@features/acad-performance/lib/find-color'
 import findPercentage from '@features/acad-performance/lib/find-percentage'
+import { IColors } from '@shared/consts'
+import { Button } from '@shared/ui/button'
+import Flex from '@shared/ui/flex'
+import { DotPages } from '@shared/ui/molecules'
 import PieChart from '@shared/ui/pie-chart'
-import Subtext from '@shared/ui/subtext'
 import React, { useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import styled from 'styled-components'
@@ -28,86 +30,67 @@ const Circle = styled.div`
     }
 `
 
-const Page = styled.div`
+const Buttons = styled.div`
     position: absolute;
-    width: 40px;
-    height: 10px;
-    top: 120px;
+    left: 50%;
+    top: 120%;
+    transform: translate(-50%, 0%);
     display: flex;
-    justify-content: space-around;
-
-    & span {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: var(--almostTransparentOpposite);
-        transform: scale(0.8);
-    }
-`
-
-const Arrows = styled.div`
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
-
-    &:hover {
-        filter: brightness(0.8);
-    }
-
-    & .arrow {
-        width: 30px;
-    }
+    align-items: center;
 `
 
 const GraphicInfo = () => {
     const { data, loading } = acadPerformanceModel.selectors.useData()
 
     const [circleMode, setCircleMode] = useState(0)
-    const examPercentage = data?.exam.length ? findPercentage(data.exam, circleMode) : 0
-    const easyExamPercentage = data?.test.length ? findPercentage(data.test) : 0
+    const examPercentage = data?.exam.length ? findPercentage(data.exam, circleMode) : '0'
+    const easyExamPercentage = data?.test.length ? findPercentage(data.test) : '0'
+    const examsText = ['Сдано', 'На 5', 'На 4']
+    const examColors: (keyof IColors)[] = ['lightBlue', 'green', 'blue']
+
+    const nextMode = () => setCircleMode((prev) => Math.min(2, prev + 1))
+    const prevMode = () => setCircleMode((prev) => Math.max(0, prev - 1))
 
     return (
         <Wrap>
             <Circle>
-                <PieChart percent={examPercentage} loading={loading} label="Экзамены">
-                    <Arrows>
-                        <FiChevronLeft
-                            className="arrow"
-                            style={circleMode === 0 ? { opacity: '.3' } : {}}
-                            onClick={() => {
-                                if (circleMode - 1 > -1) setCircleMode(circleMode - 1)
-                            }}
-                        ></FiChevronLeft>
-                        <FiChevronRight
-                            className="arrow"
-                            style={circleMode === 2 ? { opacity: '.3' } : {}}
-                            onClick={() => {
-                                if (circleMode + 1 < 3) setCircleMode(circleMode + 1)
-                            }}
-                        ></FiChevronRight>
-                        <Subtext>{circleMode === 0 ? 'Сдано' : circleMode === 1 ? 'На 5' : 'На 4'}</Subtext>
-                    </Arrows>
-                    <Page>
-                        <span
-                            style={
-                                circleMode === 0 ? { background: findColor(examPercentage), transform: 'scale(1)' } : {}
-                            }
-                        ></span>
-                        <span
-                            style={
-                                circleMode === 1 ? { background: findColor(examPercentage), transform: 'scale(1)' } : {}
-                            }
-                        ></span>
-                        <span
-                            style={
-                                circleMode === 2 ? { background: findColor(examPercentage), transform: 'scale(1)' } : {}
-                            }
-                        ></span>
-                    </Page>
+                <PieChart
+                    color={examColors[circleMode]}
+                    percent={+examPercentage / 100}
+                    loading={loading}
+                    label={`${examPercentage}%`}
+                >
+                    <Flex ai="center" jc="center">
+                        <Buttons>
+                            <Button
+                                icon={<FiChevronLeft />}
+                                width="20px"
+                                height="20px"
+                                background="var(--theme)"
+                                onClick={prevMode}
+                            />
+                            <DotPages color={examColors[circleMode]} amount={3} current={circleMode} />
+                            <Button
+                                icon={<FiChevronRight />}
+                                width="20px"
+                                height="20px"
+                                background="var(--theme)"
+                                onClick={nextMode}
+                            />
+                        </Buttons>
+                        {examsText[circleMode]}
+                    </Flex>
                 </PieChart>
             </Circle>
             <Circle>
-                <PieChart percent={easyExamPercentage} loading={loading} label="Зачеты" />
+                <PieChart
+                    color="lightBlue"
+                    percent={+easyExamPercentage / 100}
+                    loading={loading}
+                    label={`${easyExamPercentage}%`}
+                >
+                    Зачет
+                </PieChart>
             </Circle>
         </Wrap>
     )

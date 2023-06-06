@@ -1,5 +1,5 @@
 import useResize from '@utils/hooks/use-resize'
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { CurrentPage, SliderItem } from './ui/atoms'
 
@@ -20,7 +20,7 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string; appearanc
     align-items: center;
     justify-content: flex-start;
     background: ${({ appearance }) => appearance && 'var(--search2)'};
-    border-radius: ${({ appearance }) => appearance && '17px'};
+    border-radius: ${({ appearance }) => appearance && 'var(--brLight)'};
     overflow-y: hidden;
     overflow-x: auto;
     scroll-snap-type: x proximity;
@@ -55,18 +55,20 @@ const SliderWrapper = styled.div<{ size: number; sliderWidth?: string; appearanc
 
 const Slider = ({ pages, currentPage, setCurrentPage, sliderWidth, appearance = true }: ISlider) => {
     const [size, setSize] = useState(5)
+    const sliderRef = useRef<HTMLDivElement>(null)
 
     const { width } = useResize()
 
     useEffect(() => {
-        if (width > 1200) setSize(6)
-        else if (width > 1000 && width <= 1200) setSize(5)
-        else if (width > 600 && width <= 1000) setSize(4)
-        else if (width <= 600) setSize(3)
-    }, [width])
+        const innerWidth = sliderRef?.current?.offsetWidth ?? width
+        if (innerWidth > 800) setSize(5)
+        else if (innerWidth > 600 && innerWidth <= 800) setSize(4)
+        else if (innerWidth > 400 && innerWidth <= 600) setSize(4)
+        else if (innerWidth <= 400) setSize(3)
+    }, [width, sliderRef.current])
 
     return (
-        <SliderWrapper size={size} sliderWidth={sliderWidth} appearance={appearance}>
+        <SliderWrapper ref={sliderRef} size={size} sliderWidth={sliderWidth} appearance={appearance}>
             <div className="slider-body">
                 <CurrentPage appearance={appearance} pages={pages} currentPage={currentPage} size={size} />
                 {pages.map((page, index: number) => {

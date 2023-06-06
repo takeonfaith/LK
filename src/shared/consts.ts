@@ -329,7 +329,7 @@ export const letterColorMatch: LetterColorMatch = {
     П: 'blue',
     Р: 'lightBlue',
     С: 'orange',
-    Т: 'blue',
+    Т: 'pink',
     У: 'lightGreen',
     Ф: 'blue',
     Х: 'green',
@@ -372,7 +372,7 @@ export const letterColorMatch: LetterColorMatch = {
 }
 
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
-export type FileFormats = (typeof VALID_FORMATS)[number][]
+export type FileFormats = typeof VALID_FORMATS[number][]
 
 export const MAX_FILE_SIZE = 11000000
 

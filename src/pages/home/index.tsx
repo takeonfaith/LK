@@ -1,28 +1,24 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react'
+import { acadPerformanceModel } from '@entities/acad-performance'
 import { menuModel } from '@entities/menu'
 import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
+import GlobalAppSearch from '@features/global-app-search'
 import Links from '@features/home/ui/links'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
+import findSemestr from '@shared/lib/find-semestr'
 import Block from '@shared/ui/block'
 import Flex from '@shared/ui/flex'
-import { LocalSearch } from '@shared/ui/molecules'
 import { CenterPage, Title, Wrapper } from '@ui/atoms'
-import { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import AcadPerformanceStatWidget from 'widgets/acad-performance-stat-widget'
-import DaytimeBackground from './ui/daytime-background'
+import ProfileTopPlate from './ui/profile-top-plate'
 import TopUser from './ui/top-user'
-import { FiSearch } from 'react-icons/fi'
-import Subtext from '@shared/ui/subtext'
-import { acadPerformanceModel } from '@entities/acad-performance'
-import findSemestr from '@shared/lib/find-semestr'
 
 const HomePageStyled = styled.div`
     width: 100%;
-    padding-top: 156px;
+    padding-top: 160px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,31 +35,27 @@ const Home = () => {
         data: { user },
         error,
     } = userModel.selectors.useUser()
-    const { data } = acadPerformanceModel.selectors.useData()
+
+    const { data: acad } = acadPerformanceModel.selectors.useData()
+    const { data: payments } = paymentsModel.selectors.usePayments()
+    const { data: schedule } = scheduleModel.selectors.useSchedule()
     const semestr = `${findSemestr(new Date().toString(), user?.course ?? 1)}`
 
     const { homeRoutes } = menuModel.selectors.useMenu()
 
     if (!user || !homeRoutes) return null
 
-    useEffect(() => {
+    const load = () => {
         scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
         acadPerformanceModel.effects.getFx({ semestr })
-    }, [])
+    }
 
     return (
-        <Wrapper loading={!user} load={() => null} error={error} data={user}>
-            <DaytimeBackground />
+        <Wrapper loading={!user} load={load} error={error} data={acad && payments && schedule}>
+            <ProfileTopPlate />
             <HomePageStyled>
-                <Block maxWidth="750px" height="fit-content" padding="16px">
-                    <Subtext align="left" fontSize="0.9rem">
-                        <Flex gap="8px">
-                            <FiSearch />
-                            Поиск
-                        </Flex>
-                    </Subtext>
-                </Block>
+                <GlobalAppSearch />
                 <Links links={homeRoutes} />
                 <CenterPage>
                     <Block maxWidth="750px" minHeight="100%" height="100%" orientation="vertical" gap="16px">
@@ -73,6 +65,7 @@ const Home = () => {
                             </Title>
                             <TopUser />
                         </Flex>
+
                         <ScheduleAndNotification />
                         {user.user_status === 'stud' && <AcadPerformanceStatWidget />}
                     </Block>
