@@ -54,7 +54,7 @@ const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_cur
             <div>
                 <p>
                     {balanceCurrDate < 0 ? 'Переплата' : 'Долг'} на {localizeDate(new Date().toString())}{' '}
-                    <span className="debt-or-overpay">{balanceCurrDate} руб.</span>
+                    <span className="debt-or-overpay">{Math.abs(balanceCurrDate)} руб.</span>
                     {/* Следующий платеж -{' '}
                     <span className="monthly">{monthly} руб.</span> */}
                 </p>

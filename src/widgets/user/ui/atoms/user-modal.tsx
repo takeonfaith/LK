@@ -22,12 +22,13 @@ const UserModalWrapper = styled.div`
         align-items: center;
         justify-content: center;
         width: 100%;
-
-        & > * + * {
-            margin-left: 7px;
-        }
+        gap: 4px;
 
         a {
+            width: 100%;
+        }
+
+        button {
             width: 100%;
         }
     }

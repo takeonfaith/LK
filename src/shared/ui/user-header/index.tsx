@@ -67,12 +67,13 @@ const UserHeader = ({
         <UserHeaderStyled>
             <UserHeaderBackground
                 fullName={name}
+                avatar={avatar}
                 height="136px"
                 width="calc(100% + 16px)"
                 baseScale={1}
                 baseScaleDelta={0.5}
             />
-            <Avatar border name={name} avatar={avatar} width={size} height={size} marginRight="0" />
+            <Avatar avatarModal border name={name} avatar={avatar} width={size} height={size} marginRight="0" />
             {!noInfo && (
                 <div className="info">
                     <b>{name}</b>

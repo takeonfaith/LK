@@ -4,6 +4,7 @@ export interface IGrade {
     Отлично: number
     Хорошо: number
     Удовлетворительно: number
+    'Не явился': number
     Неудовлетворительно: number
 }
 

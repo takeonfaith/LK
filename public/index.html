@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="theme-color" content="#000000"/>
-    <meta name="description" content="Личный кабинет студента Московского Политеха"/>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="description" content="Личный кабинет студента Московского Политеха" />
 
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link
+        <link rel="manifest" href="manifest.json" />
+        <!-- <link rel="apple-touch-icon" href="icon.png" /> -->
+        <link rel="icon" href="icon-black.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap"
             rel="stylesheet"
-    />
-    <title>Личный кабинет</title>
-</head>
-<body>
-<noscript>Чтобы это приложение работало, вам необходимо включить JavaScript</noscript>
-<div id="root"></div>
-<script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function () {
-            navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
-                console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, function (err) {
-                console.log('ServiceWorker registration failed: ', err);
-            }).catch(function (err) {
-                console.log(err)
-            });
-        });
-    } else {
-        console.log('service worker is not supported');
-    }
-</script>
-</body>
+        />
+        <title>Личный кабинет</title>
+    </head>
+    <body>
+        <noscript>Чтобы это приложение работало, вам необходимо включить JavaScript</noscript>
+        <div id="root"></div>
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function () {
+                    navigator.serviceWorker
+                        .register('./service-worker.js')
+                        .then(
+                            function (registration) {
+                                console.log('ServiceWorker registration successful with scope: ', registration.scope)
+                            },
+                            function (err) {
+                                console.log('ServiceWorker registration failed: ', err)
+                            },
+                        )
+                        .catch(function (err) {
+                            console.log(err)
+                        })
+                })
+            } else {
+                console.log('service worker is not supported')
+            }
+        </script>
+    </body>
 </html>

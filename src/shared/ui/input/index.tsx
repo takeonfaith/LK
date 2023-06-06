@@ -136,7 +136,7 @@ const Input = ({
     isActive = true,
     inputAppearance = true,
     mask = false,
-    autocomplete = true,
+    autocomplete = false,
     minValue = undefined,
     maxValue = undefined,
 }: Props) => {
@@ -166,6 +166,7 @@ const Input = ({
             <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
             {leftIcon && <span className="left-icon">{leftIcon}</span>}
             <input
+                id={placeholder}
                 min={minValue}
                 max={maxValue}
                 step={maxValue ? 0.1 : undefined}

@@ -234,6 +234,7 @@ export const ColorsByGrade: Record<keyof IGrade | 'default', string> = {
     Хорошо: Colors.blue.main,
     Удовлетворительно: Colors.orange.main,
     Неудовлетворительно: Colors.red.main,
+    'Не явился': Colors.red.main,
     default: Colors.red.main,
 }
 
@@ -243,7 +244,8 @@ export const WidthByGrade: IGrade & { default: number } = {
     Отлично: 100,
     Хорошо: 80,
     Удовлетворительно: 60,
-    Неудовлетворительно: 40,
+    Неудовлетворительно: 20,
+    'Не явился': 20,
     default: 40,
 }
 
@@ -253,6 +255,7 @@ export const GradeByScore: IGrade = {
     Отлично: 5,
     Хорошо: 4,
     Удовлетворительно: 3,
+    'Не явился': 2,
     Неудовлетворительно: 2,
 }
 
@@ -369,7 +372,7 @@ export const letterColorMatch: LetterColorMatch = {
 }
 
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
-export type FileFormats = typeof VALID_FORMATS[number][]
+export type FileFormats = (typeof VALID_FORMATS)[number][]
 
 export const MAX_FILE_SIZE = 11000000
 

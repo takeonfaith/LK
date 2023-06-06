@@ -59,7 +59,13 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
 
     return (
         <TopStyled>
-            <UserHeaderBackground fullName={fullName} width="calc(100% + 32px)" height="210px" baseScale={1.5} />
+            <UserHeaderBackground
+                avatar={avatar}
+                fullName={fullName}
+                width="calc(100% + 32px)"
+                height="210px"
+                baseScale={1.5}
+            />
             <BlocksList>
                 <TopInfoBlock maxWidth="530px" height="180px" orientation="vertical">
                     <AvatarWrapper>
@@ -89,7 +95,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                         />
                     </InfoWrapper>
                 </TopInfoBlock>
-                <TopInfoBlock maxWidth="250px" height="180px">
+                <TopInfoBlock maxWidth="250px" height="fit-content">
                     <Buttons>
                         <Link to={SETTINGS_ROUTE}>
                             <Button
@@ -100,7 +106,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                                     </IconWrapper>
                                 }
                                 width="100%"
-                                height="72px"
+                                height="73px"
                                 text="Настройки"
                                 direction="vertical"
                                 shrinkTextInMobile
@@ -117,7 +123,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                             onClick={changeTheme}
                             text={`Тема: ${themeWord}`}
                             width="calc(50% - 5px)"
-                            height="72px"
+                            height="73px"
                             direction="vertical"
                             shrinkTextInMobile
                         />
@@ -131,7 +137,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                                 }
                                 text="Изменить"
                                 width="100%"
-                                height="72px"
+                                height="73px"
                                 direction="vertical"
                                 shrinkTextInMobile
                             />
@@ -144,7 +150,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                                 </IconWrapper>
                             }
                             text="Выйти"
-                            height="72px"
+                            height="73px"
                             onClick={logout}
                             width="calc(50% - 5px)"
                             direction="vertical"

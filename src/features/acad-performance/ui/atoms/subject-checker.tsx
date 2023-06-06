@@ -16,7 +16,6 @@ const Container = styled.div<Props>`
     color: #fff;
 
     background-color: ${({ grade }) => findProgressBarColor(grade)};
-    filter: drop-shadow(${({ grade }) => findProgressBarColor(grade)} 0px 0px 10px);
 
     width: 20px;
     height: 20px;
