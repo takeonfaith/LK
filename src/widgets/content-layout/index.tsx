@@ -1,7 +1,7 @@
 import PrivateRouter from '@app/routers/private-router'
 import { userModel } from '@entities/user'
 import React, { Suspense, useRef, useState } from 'react'
-import { Confirm, Header, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage } from 'widgets'
+import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import PopUpNotifications from 'widgets/pop-up-notifications'
@@ -9,6 +9,7 @@ import InitialLoader from '../../shared/ui/initial-loader'
 import Story from '../../shared/ui/story'
 import useContentLayout from './hooks/use-content-layout'
 import { ContentWrapper, PageContent, Wrapper } from './styled'
+import Header from 'widgets/header'
 
 const ContentLayout = () => {
     const {
