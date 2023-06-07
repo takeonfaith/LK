@@ -359,7 +359,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение в другое общежитие',
         icon: BiIdCard,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
-        Component: isProduction ? ApplicationRedirect : RelocationToAnotherHostelPage,
+        Component: RelocationToAnotherHostelPage,
         color: 'blue',
         isTemplate: false,
         isSubPage: true,
