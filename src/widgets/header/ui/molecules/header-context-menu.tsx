@@ -13,6 +13,7 @@ import { FiArrowLeftCircle, FiGrid, FiLogOut } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal, WhatsNew } from 'widgets'
 import SettingsButton from './settings-button'
+import { contextMenuModel } from '@entities/context-menu'
 
 const HeaderContextMenuWrapper = styled.div`
     .user-info-plate {
@@ -70,7 +71,7 @@ const HeaderContextMenu = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { open, close } = useModal()
+    const { open } = useModal()
 
     const { theme, switchTheme } = useTheme()
     const [toggles, setToggles] = useState<ToggleItem[]>([
@@ -80,6 +81,8 @@ const HeaderContextMenu = () => {
             action: (state: boolean) => switchTheme(state),
         },
     ])
+
+    const handleClose = () => contextMenuModel.events.close()
 
     useEffect(() => {
         setToggles([
@@ -121,7 +124,7 @@ const HeaderContextMenu = () => {
                 text="Что нового"
                 icon={<FiGrid />}
                 onClick={() => {
-                    close()
+                    handleClose()
                     open(<WhatsNew />)
                 }}
                 width="100%"
@@ -143,12 +146,13 @@ const HeaderContextMenu = () => {
             <Button
                 align="left"
                 icon={<FiLogOut />}
-                onClick={() =>
+                onClick={() => {
+                    handleClose()
                     confirmModel.events.evokeConfirm({
                         message: 'Вы точно хотите выйти из аккаунта?',
                         onConfirm: logout,
                     })
-                }
+                }}
                 text="Выйти"
                 width="100%"
                 background="var(--schedule)"

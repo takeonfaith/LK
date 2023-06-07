@@ -12,6 +12,7 @@ import { Divider, LinkButton, Message, Title } from '@ui/atoms'
 import Block from '@ui/block'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
+import { AiFillWarning } from 'react-icons/ai'
 import { FiDownload, FiInfo } from 'react-icons/fi'
 
 const DormitoryPayments = () => {
@@ -24,6 +25,10 @@ const DormitoryPayments = () => {
             {data.dormitory.map((dormitory, i) => {
                 return (
                     <React.Fragment key={dormitory.number}>
+                        <Message type="alert" title="Внимание" icon={<AiFillWarning />} maxWidth="1190px">
+                            В связи с техническими работами отображение данных по произведенным оплатам может быть не
+                            полным
+                        </Message>
                         <Message type="info" title="Информация" icon={<FiInfo />} gap="12px" maxWidth="1190px">
                             <p>
                                 По возникновении технических проблем при подписании договоров и дополнительных
