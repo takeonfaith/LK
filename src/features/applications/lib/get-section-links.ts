@@ -36,8 +36,7 @@ const getSectionLinks = (): Section[] => {
     const additionalHeaderClosedService = isProduction ? ' (Сервис временно недоступен)' : ''
     return [
         {
-            title: 'Многофункциональный центр' + additionalHeaderClosedService,
-            disabled: isProduction,
+            title: 'Многофункциональный центр',
             links: [
                 {
                     link: CERTIFICATE_OF_ATTENDANCE,
@@ -90,7 +89,6 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: FAMILY_ROOM,
                     title: 'Предоставление права проживания в семейной комнате',
-                    disabled: isProduction,
                     exceptionalFormEducationList: ['Очно-заочная', 'Заочная'],
                 },
                 {
@@ -101,7 +99,6 @@ const getSectionLinks = (): Section[] => {
                 {
                     link: RELOCATION_TO_ANOTHER_HOSTEL,
                     title: 'Переселение в другое общежитие',
-                    disabled: isProduction,
                     exceptionalFormEducationList: ['Заочная'],
                 },
                 {
@@ -111,8 +108,7 @@ const getSectionLinks = (): Section[] => {
             ],
         },
         {
-            title: 'Профсоюзная организация' + additionalHeaderClosedService,
-            disabled: isProduction,
+            title: 'Профсоюзная организация',
             links: [
                 {
                     link: UNION_ORGANIZATION,
@@ -152,19 +148,17 @@ const getSectionLinks = (): Section[] => {
             ],
         },
         {
-            title: 'Приемная комиссия' + additionalHeaderClosedService,
-            disabled: isProduction,
+            title: 'Приемная комиссия',
             links: [
                 {
                     link: RECEPTION_COMMISSION,
                     isExternalLink: true,
-                    title: ' Изменение условий обучения (направление подготовки (специальность), форма), в том числе перевод с платного обучения на бесплатное',
+                    title: 'Изменение условий обучения (направление подготовки (специальность), форма), в том числе перевод с платного обучения на бесплатное',
                 },
             ],
         },
         {
-            title: 'Прочее' + additionalHeaderClosedService,
-            disabled: isProduction,
+            title: 'Прочее',
             links: [
                 {
                     link: ARBITRARY_REQUEST_ROUTE,
