@@ -17,6 +17,7 @@ import Story from '../../shared/ui/story'
 import WhatsNew from '../whats-new'
 import { ContentWrapper, PageContent, Wrapper } from './styled'
 import Header from 'widgets/header'
+import useResize from '@shared/lib/hooks/use-resize'
 
 const ContentLayout = () => {
     const {
@@ -25,6 +26,8 @@ const ContentLayout = () => {
     const { open } = useModal()
     const isShowNotification = useIsShowNotification()
     const { currentPage, exactCurrentPage } = useCurrentExactPage()
+
+    const { height } = useResize()
 
     useEffect(() => {
         if (user) settingsModel.effects.getLocalSettingsFx(user.id)
@@ -63,7 +66,7 @@ const ContentLayout = () => {
     }, [isShowNotification])
 
     return (
-        <Wrapper>
+        <Wrapper style={{ height }}>
             <InitialLoader loading={!user} />
             {/* <GreetingsScreen /> */}
             <Story />
