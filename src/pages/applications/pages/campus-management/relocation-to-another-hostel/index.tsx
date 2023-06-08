@@ -39,7 +39,7 @@ const RelocationToAnotherHostelPage = () => {
                                 [form],
                                 setLoading,
                                 setCompleted,
-                                true,
+                                false,
                             )
                         }
                         isLoading={loading}
