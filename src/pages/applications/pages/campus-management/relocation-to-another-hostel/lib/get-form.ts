@@ -43,7 +43,7 @@ const extracurricularActivities: CheckboxDocs[] = [
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Переселение в другое общежитие',
+        title: 'Переселение в другое общежитие (Подача заявок доступна с 08.06.2023 по 15.06.2023)',
         data: [
             {
                 title: 'ФИО',
