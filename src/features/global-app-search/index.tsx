@@ -42,18 +42,24 @@ const getShortCut = () => {
     const os = getUsersOS()
 
     const shortcuts = {
-        Windows: [{ key: 'Ctrl' }, { key: 'k' }],
-        Linux: [{ key: 'Ctrl' }, { key: 'k' }],
-        UNIX: [{ key: 'Ctrl' }, { key: 'k' }],
-        MacOS: [{ key: 'Meta', icon: <FiCommand /> }, { key: 'k' }],
-    } as Record<typeof os, { key: string; icon?: React.ReactNode }[]>
+        Windows: [{ title: 'CTRL', key: 'Control' }, { key: 'k' }],
+        Linux: [{ title: 'CTRL', key: 'Control' }, { key: 'k' }],
+        UNIX: [{ title: 'CTRL', key: 'Control' }, { key: 'k' }],
+        MacOS: [{ title: 'CMD', key: 'Meta', icon: <FiCommand /> }, { key: 'k' }],
+    } as Record<typeof os, { title?: string; key: string; icon?: React.ReactNode }[]>
 
     return shortcuts[os]
 }
 
-const GlobalAppSearch = () => {
+type Props = {
+    size?: 'small' | 'large'
+}
+
+const GlobalAppSearch = ({ size = 'large' }: Props) => {
     const shortCut = getShortCut()
     const { open } = useModal()
+    const padding = size === 'large' ? '16px' : '8px'
+    const width = size === 'large' ? '100%' : '92%'
 
     const handleOpenModal = () => open(<GlobalAppSearchModal />, 'Глобальный поиск')
 
@@ -65,8 +71,9 @@ const GlobalAppSearch = () => {
     return (
         <GlobalAppSearchStyled
             maxWidth="750px"
+            width={width}
             height="fit-content"
-            padding="16px"
+            padding={padding}
             justifyContent="space-between"
             onClick={handleOpenModal}
         >
@@ -78,7 +85,7 @@ const GlobalAppSearch = () => {
             </Subtext>
             <Shortcuts w="fit-content" gap="4px">
                 {shortCut.map((k) => (
-                    <Key key={k.key}>{k?.icon ?? k.key.toUpperCase()}</Key>
+                    <Key key={k.key}>{k?.icon ?? (k.title ?? k.key).toUpperCase()}</Key>
                 ))}
             </Shortcuts>
         </GlobalAppSearchStyled>

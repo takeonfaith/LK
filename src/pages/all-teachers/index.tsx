@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import { SelectPage } from '@features/select'
 import { getDivisions } from '@shared/api/teacher-api'
 import { userModel } from '@entities/user'
+import { useRouteMatch } from 'react-router'
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -25,8 +26,11 @@ const AllTeachersPage = () => {
         data: { user },
     } = userModel.selectors.useUser()
     const { $isPending, $items } = paginationList
+    const route: { params: { filter?: string } } = useRouteMatch()
+
     const isPending = useStore($isPending)
     const items = useStore($items)
+    const filter = route.params.filter ?? user?.subdivisions?.[0].subdivision ?? ''
 
     const underSearchText = (filter: SelectPage | null) => {
         if (!filter?.title) return null
@@ -51,7 +55,7 @@ const AllTeachersPage = () => {
                             searchPlaceholder="Поиск сотрудников"
                             paginationList={paginationList}
                             filterRequest={getDivisions}
-                            defaultFilter={user?.subdivisions?.[0].subdivision ?? ''}
+                            defaultFilter={filter}
                             filterPlaceholder="Подразделения"
                             underSearchText={underSearchText}
                         />

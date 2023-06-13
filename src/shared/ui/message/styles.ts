@@ -11,7 +11,7 @@ const getColor = (isLightTheme: boolean, type: MessageType, solidBackground: boo
     solidBackground
         ? '#fff'
         : isLightTheme
-        ? Colors[messageType[type].color].dark1
+        ? Colors[messageType[type].color].dark3
         : Colors[messageType[type].color].light3
 
 export const MessageWrapper = styled.div<{

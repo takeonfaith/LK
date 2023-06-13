@@ -67,6 +67,7 @@ export const PAYMENTS_ROUTE = '/payments'
 export const SCHEDULE_ROUTE = '/schedule'
 export const ALL_STUDENTS_ROUTE = '/all-students'
 export const FILTERED_ALL_STUDENTS_ROUTE = '/all-students/:filter'
+export const FILTERED_ALL_TEACHERS_ROUTE = '/all-teachers/:filter'
 export const ALL_TEACHERS_ROUTE = '/all-teachers'
 export const PORTFOLIO_ROUTE = '/portfolio'
 export const DECREIS_DIRECTIVES = '/decreis-directives'
@@ -212,7 +213,7 @@ export const generalRoutes: IRoutes = {
         icon: <BiRuble />,
         path: PAYMENTS_ROUTE,
         Component: PaymentsPage,
-        color: 'lightGreen',
+        color: 'green',
         isTemplate: false,
         group: 'FINANCES_DOCS',
         keywords: ['оплата'],
@@ -249,6 +250,7 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
+        keywords: ['домой'],
     },
     profile: {
         id: 'profile',
@@ -269,6 +271,7 @@ export const generalRoutes: IRoutes = {
         color: 'orange',
         isTemplate: false,
         group: 'GENERAL',
+        keywords: ['Оповещения'],
     },
     chat: {
         //ChatPage
@@ -378,6 +381,17 @@ export const generalHiddenRoutes: IRoutes = {
         icon: <BiGroup />,
         path: FILTERED_ALL_STUDENTS_ROUTE,
         Component: AllStudentsPage,
+        color: 'blue',
+        isTemplate: false,
+        show: false,
+        group: 'OTHER',
+    },
+    'filtered-all-teachers': {
+        id: 'filtered-all-teachers',
+        title: 'Все сотрудники',
+        icon: <BiGroup />,
+        path: FILTERED_ALL_TEACHERS_ROUTE,
+        Component: AllTeachersPage,
         color: 'blue',
         isTemplate: false,
         show: false,

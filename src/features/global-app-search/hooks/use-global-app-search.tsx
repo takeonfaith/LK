@@ -3,6 +3,8 @@ import { useMemo, useState } from 'react'
 import useSearchConfig from './use-search-config'
 import getSearchHistory from '../lib/get-search-history'
 import getDataLength from '../lib/get-data-length'
+import isValidEnglishText from '@shared/ui/search/lib/is-valid-english-text'
+import englishToRussianKeyboard from '@shared/ui/search/lib/english-to-russian-keyboard'
 
 const useGlobalAppSearch = () => {
     const config = useSearchConfig()
@@ -15,9 +17,11 @@ const useGlobalAppSearch = () => {
 
     const onSearch = async (value: string) => {
         config[currentPage].clear()
-        await config[currentPage].search(value)
-        if (value.length > 0 && !searchHistory.includes(value)) {
-            searchHistory.unshift(value)
+        const normalizedValue = isValidEnglishText(value) ? englishToRussianKeyboard(value) : value
+
+        await config[currentPage].search(normalizedValue)
+        if (normalizedValue.length > 0 && !searchHistory.includes(normalizedValue)) {
+            searchHistory.unshift(normalizedValue)
             if (searchHistory.length > 8) {
                 searchHistory.pop()
             }
@@ -28,7 +32,7 @@ const useGlobalAppSearch = () => {
 
     const [searchValue, setSearchValue, loading] = useDebounce({
         onDebounce: onSearch,
-        delay: 500,
+        delay: 400,
         defaultValue: '',
         deps: [currentPage.toString()],
         triggerDelay: 200,

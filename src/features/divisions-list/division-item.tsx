@@ -1,12 +1,12 @@
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
-import { FiChevronRight, FiUsers } from 'react-icons/fi'
+import { FiBriefcase, FiChevronRight } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import GroupModal from './group-modal'
+import DivisionModal from './division-modal'
 
-const GroupItemStyled = styled.div`
+const DivisionItemStyled = styled.div`
     width: 100%;
     color: var(--text);
     padding: 0px 16px;
@@ -24,27 +24,26 @@ const GroupItemStyled = styled.div`
 `
 
 type Props = {
-    group: string
+    division: string
 }
 
-const GroupItem = ({ group }: Props) => {
+const DivisionItem = ({ division }: Props) => {
     const { open } = useModal()
 
     const handleOpenModal = () => {
-        open(<GroupModal group={group} />, `Группа`)
+        open(<DivisionModal division={division} />, `Подразделение`)
     }
-
     return (
-        <GroupItemStyled onClick={handleOpenModal}>
+        <DivisionItemStyled onClick={handleOpenModal}>
             <Flex gap="8px" h="50px" jc="space-between" w="100%">
-                <Flex gap="8px" h="50px">
-                    <FiUsers />
-                    <Subtext fontSize="1rem">{group}</Subtext>
+                <Flex gap="8px">
+                    <FiBriefcase />
+                    <Subtext fontSize="1rem">{division}</Subtext>
                 </Flex>
                 <FiChevronRight />
             </Flex>
-        </GroupItemStyled>
+        </DivisionItemStyled>
     )
 }
 
-export default GroupItem
+export default DivisionItem

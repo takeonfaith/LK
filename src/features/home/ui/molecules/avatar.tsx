@@ -59,7 +59,13 @@ function Avatar({
             onClick={handleClick}
         >
             {avatar && isLoaded ? (
-                <Img round onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />
+                <Img
+                    loading="lazy"
+                    round
+                    onLoadedData={() => setIsLoaded(true)}
+                    onError={() => setIsLoaded(false)}
+                    src={avatar}
+                />
             ) : (
                 <div className="name">{shortName}</div>
             )}

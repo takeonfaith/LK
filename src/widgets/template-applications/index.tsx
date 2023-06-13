@@ -38,9 +38,6 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
     } = applicationsModel.selectors.useApplications()
     const { open } = useModal()
 
-    // eslint-disable-next-line no-console
-    console.log(listApplication)
-
     return (
         <Wrapper
             load={() => applicationsModel.effects.getApplicationsFx()}

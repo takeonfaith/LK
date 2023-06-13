@@ -4,13 +4,14 @@ export type NotificationType =
     | 'alert'
     | 'payment-dorm'
     | 'payment-ed'
-    | 'pps-contest'
+    | 'kpi-pps'
     | 'hr-applications'
     | 'doc-for-review'
     | 'digital-services'
     | 'schedule'
     | 'schedule-session'
     | 'version-update'
+    | 'electronic-interaction'
 
 export type TNotification = {
     id: string
@@ -26,4 +27,5 @@ export type TNotification = {
     onClick?: () => void
     onClose?: () => void
     canClose?: boolean
+    pageId?: string
 }

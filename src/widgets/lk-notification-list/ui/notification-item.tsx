@@ -1,5 +1,4 @@
-import { lkNotificationModel } from '@entities/lk-notifications'
-import { NotificationType, TNotification } from '@entities/lk-notifications'
+import { NotificationType, TNotification, lkNotificationModel } from '@entities/lk-notifications'
 import { Icon } from '@features/all-pages'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { IColors } from '@shared/consts'
@@ -12,8 +11,9 @@ import Subtext from '@shared/ui/subtext'
 import { Title } from '@shared/ui/title'
 import { HeaderSize, Size } from '@shared/ui/types'
 import React from 'react'
-import { BiBell, BiRuble } from 'react-icons/bi'
+import { BiNews, BiRuble } from 'react-icons/bi'
 import { FiClock, FiFileText, FiInfo, FiMessageCircle, FiStar, FiX } from 'react-icons/fi'
+import { HiOutlineClipboardCheck } from 'react-icons/hi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets/modal/lib'
@@ -81,8 +81,8 @@ const iconObject = (name: string, avatar: string | undefined): Record<Notificati
     ),
     message: <ChatIcon name={name} avatar={avatar} />,
     alert: (
-        <IconWrapper color="blue">
-            <BiBell />
+        <IconWrapper color="purple">
+            <BiNews />
         </IconWrapper>
     ),
     'payment-dorm': (
@@ -110,7 +110,7 @@ const iconObject = (name: string, avatar: string | undefined): Record<Notificati
             <FiFileText />
         </IconWrapper>
     ),
-    'pps-contest': (
+    'kpi-pps': (
         <IconWrapper color="pink">
             <FiStar />
         </IconWrapper>
@@ -126,6 +126,11 @@ const iconObject = (name: string, avatar: string | undefined): Record<Notificati
         </IconWrapper>
     ),
     'version-update': <NewVersionMessage />,
+    'electronic-interaction': (
+        <IconWrapper color="blue">
+            <HiOutlineClipboardCheck />
+        </IconWrapper>
+    ),
 })
 
 const NotificationItem = ({
@@ -138,6 +143,7 @@ const NotificationItem = ({
     onClick,
     type,
     image,
+    pageId,
     goTo,
     maxLetters = 200,
     size = 'middle',
@@ -153,7 +159,7 @@ const NotificationItem = ({
 
     const handleClick = () => {
         onClick?.()
-        lkNotificationModel.events.clearById(id)
+        lkNotificationModel.events.clearById({ id, pageId })
         close()
     }
 

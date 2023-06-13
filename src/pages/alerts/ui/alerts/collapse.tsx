@@ -32,10 +32,10 @@ const CollapseStyled = styled.div<{ collapsed: boolean; noChildren: boolean }>`
     .children {
         transition: 0.2s;
 
-        img {
+        /* img {
             max-width: 100%;
             height: unset;
-        }
+        } */
     }
 
     .children.close {

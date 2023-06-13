@@ -30,6 +30,7 @@ const AllPages = () => {
     const [foundPages, setFoundPages] = useState<IRoutes | null>(null)
     const [searchValue, setSearchValue] = useState<string>('')
     const groupedPages = useMemo(() => getGroupPages(visibleRoutes), [visibleRoutes])
+
     if (!visibleRoutes) return null
 
     return (

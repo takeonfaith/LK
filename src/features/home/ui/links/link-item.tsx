@@ -2,6 +2,7 @@ import { IRoute } from '@app/routes/general-routes'
 import { Icon } from '@features/all-pages'
 import { Colors } from '@shared/consts'
 import getShortStirng from '@shared/lib/get-short-string'
+import Notification from '@shared/ui/notification'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -16,7 +17,7 @@ const LinkItemStyled = styled(Link)<{ amount: number; color: string }>`
     justify-content: center;
     position: relative;
 
-    & span {
+    .subtext {
         white-space: nowrap;
         opacity: 0;
         transform: translateY(10px) translateX(-50%);
@@ -33,7 +34,7 @@ const LinkItemStyled = styled(Link)<{ amount: number; color: string }>`
             background-color: ${({ color }) => color};
         }
 
-        &:hover span {
+        &:hover .subtext {
             opacity: 1;
             transform: translateY(0px) translateX(-50%);
         }
@@ -47,9 +48,13 @@ const LinkItemStyled = styled(Link)<{ amount: number; color: string }>`
         transform: scale(0.7);
     }
 
-    &:active span {
+    &:active .subtext {
         transform: scale(0.9) translateY(0px) translateX(-50%);
         transform-origin: left top;
+    }
+
+    &:hover .notification-circle {
+        opacity: 0;
     }
 
     @media (max-width: 1000px) {
@@ -69,11 +74,23 @@ type Props = {
 }
 
 const LinkItem = ({ item, amount }: Props) => {
-    const { icon, color, path, title } = item
+    const { icon, color, path, title, notifications } = item
     return (
         <LinkItemStyled amount={amount} to={path} color={Colors[color].transparent3}>
+            <Notification
+                outline="4px solid var(--schedule)"
+                color="red"
+                top={'60px'}
+                right={'25px'}
+                visible={!!notifications}
+                className="notification-circle"
+            >
+                {notifications}
+            </Notification>
             <Icon color={color}>{icon}</Icon>
-            <Subtext align="center">{getShortStirng(title, 10)}</Subtext>
+            <Subtext className="subtext" align="center">
+                {getShortStirng(title, 10)}
+            </Subtext>
         </LinkItemStyled>
     )
 }

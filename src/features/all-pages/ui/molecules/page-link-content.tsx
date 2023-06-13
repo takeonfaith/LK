@@ -161,7 +161,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
                 top={isVertical ? '60px' : '75%'}
                 left={orientation !== 'vertical' ? '50px' : 'auto'}
                 right={isVertical ? '32px' : 'auto'}
-                visible={!!notifications}
+                visible={(notifications ?? 0) > 0}
                 className="notification-circle"
             >
                 {notifications}

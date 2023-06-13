@@ -10,7 +10,7 @@ const AlertsPage = () => {
     const { data, error, loading } = alertModel.selectors.useData()
 
     useEffect(() => {
-        lkNotificationModel.events.clearById('alert')
+        lkNotificationModel.events.clearById({ id: 'alert', pageId: 'alerts' })
     }, [])
 
     return (

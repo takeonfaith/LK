@@ -10,15 +10,17 @@ type Props = {
 const NotificationList = ({ notifications }: Props) => {
     if (!notifications) return null
 
-    const handleClose = (id: string, close?: () => void) => {
+    const handleClose = (id: string, pageId?: string, close?: () => void) => {
         return () => {
-            lkNotificationModel.events.clearById(id)
+            lkNotificationModel.events.clearById({ id, pageId })
             close?.()
         }
     }
 
     const onClose = (notification: TNotification) =>
-        notification.canClose !== false ? handleClose(notification.id, notification.onClose) : undefined
+        notification.canClose !== false
+            ? handleClose(notification.id, notification.pageId, notification.onClose)
+            : undefined
 
     return (
         <List gap={12} visible={notifications.length > 0}>

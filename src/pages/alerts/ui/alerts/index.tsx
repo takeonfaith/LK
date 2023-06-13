@@ -1,14 +1,11 @@
 import { PreparedAlerts } from '@entities/alert/lib/prepare-data'
-import { Alert } from '@shared/api/model/alert'
 import List from '@shared/ui/list'
 import { LocalSearch } from '@shared/ui/molecules'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useModal } from 'widgets'
-import AlertItem from '../alert-item'
-import AlertModal from '../alert-modal'
-import Collapse from './collapse'
+import AlertItem from 'widgets/alerts-widget/alert-item'
 import search from '../../lib/search'
+import Collapse from './collapse'
 
 const AlertsStyled = styled.div`
     width: 100%;
@@ -19,17 +16,11 @@ const AlertsStyled = styled.div`
 
 type Props = {
     alerts: PreparedAlerts
-    limit?: number
     listView?: boolean
 }
 
-const Alerts = ({ alerts, limit, listView }: Props) => {
-    const { open } = useModal()
+const Alerts = ({ alerts, listView }: Props) => {
     const [foundAlerts, setFoundAlerts] = useState<PreparedAlerts | null>(null)
-
-    const handleAlertClick = (alert: Alert) => {
-        open(<AlertModal alert={alert} />, alert.title)
-    }
 
     const finalAlerts = foundAlerts ?? alerts
 
@@ -37,7 +28,7 @@ const Alerts = ({ alerts, limit, listView }: Props) => {
         <AlertsStyled>
             {!listView && (
                 <LocalSearch
-                    placeholder="Поиск оповещений"
+                    placeholder="Поиск новостей"
                     whereToSearch={alerts}
                     searchEngine={search}
                     setResult={setFoundAlerts}
@@ -45,51 +36,27 @@ const Alerts = ({ alerts, limit, listView }: Props) => {
                     validationCheck
                 />
             )}
-            {!listView &&
-                Object.keys(finalAlerts)
-                    .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
-                    .map((year) => {
-                        const collapsed = foundAlerts === null ? year !== new Date().getFullYear().toString() : false
-                        const sideText = `Оповещений: ${finalAlerts[year].length}`
-                        return (
-                            <Collapse
-                                sideText={sideText}
-                                title={year}
-                                key={year}
-                                isCollapsed={collapsed}
-                                initiallyCollapsed={collapsed}
-                            >
-                                {!!finalAlerts[year].length ? (
-                                    <List scroll={false} gap={12}>
-                                        {finalAlerts[year]
-                                            .slice(0, limit ?? Object.keys(finalAlerts).length)
-                                            .map((alert) => {
-                                                return (
-                                                    <AlertItem
-                                                        key={alert.id}
-                                                        alert={alert}
-                                                        onClick={handleAlertClick}
-                                                    />
-                                                )
-                                            })}
-                                    </List>
-                                ) : null}
-                            </Collapse>
-                        )
-                    })}
-
-            {listView && (
-                <List scroll={false} gap={12}>
-                    {Object.values(finalAlerts)
-                        .reverse()
-                        .slice(0, 1)
-                        .map((alerts) => {
-                            return alerts.map((alert) => {
-                                return <AlertItem key={alert.id} alert={alert} onClick={handleAlertClick} />
-                            })
-                        })}
-                </List>
-            )}
+            {Object.keys(finalAlerts)
+                .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
+                .map((year) => {
+                    const collapsed = foundAlerts === null ? year !== new Date().getFullYear().toString() : false
+                    const sideText = `Новостей: ${finalAlerts[year].length}`
+                    return (
+                        <Collapse
+                            sideText={sideText}
+                            title={year}
+                            key={year}
+                            isCollapsed={collapsed}
+                            initiallyCollapsed={collapsed}
+                        >
+                            <List scroll={false} gap={12}>
+                                {finalAlerts[year].map((alert) => {
+                                    return <AlertItem key={alert.id} news={alert} orientation="horizontal" />
+                                })}
+                            </List>
+                        </Collapse>
+                    )
+                })}
         </AlertsStyled>
     )
 }

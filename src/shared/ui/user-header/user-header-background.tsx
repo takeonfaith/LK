@@ -16,6 +16,7 @@ export const BackgroundPlate = styled.div<{
     background: ${({ color }) => color};
     z-index: -1;
     overflow: hidden;
+    filter: brightness(1.1);
     top: -16px;
     left: -16px;
 

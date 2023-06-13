@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import UserBig from 'widgets/user-big'
 import { CloseMenuButton, LeftsideBarList, LeftsideBarWrapper } from './ui'
+import GlobalAppSearch from '@features/global-app-search'
 
 const LeftsideBar = () => {
     const { isOpen } = menuModel.selectors.useMenu()
@@ -51,6 +52,7 @@ const LeftsideBar = () => {
                     loading={!user}
                     selected={currentPage?.id === 'profile'}
                 />
+                <GlobalAppSearch size="small" />
                 <LeftsideBarList />
             </div>
             <ToggleArea title={''} toggles={toggles} setToggles={setToggles} />

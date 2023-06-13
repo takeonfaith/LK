@@ -9,6 +9,7 @@ import { useModal } from 'widgets'
 
 const LinkWrapper = styled(Link)<{ width: number | string }>`
     width: ${({ width }) => (typeof width === 'number' ? `calc(125px * ${width} + ${(width - 1) * 10}px)` : width)};
+    border-radius: var(--brLight);
 
     @media (max-width: 500px) {
         height: 110px;

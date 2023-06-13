@@ -12,9 +12,10 @@ import Flex from '@shared/ui/flex'
 import { CenterPage, Title, Wrapper } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
-import AcadPerformanceStatWidget from 'widgets/acad-performance-stat-widget'
 import ProfileTopPlate from './ui/profile-top-plate'
 import TopUser from './ui/top-user'
+import AlertsWidget from 'widgets/alerts-widget'
+import { electronicInteractionModel } from '@entities/electronic-interaction'
 
 const HomePageStyled = styled.div`
     width: 100%;
@@ -49,6 +50,7 @@ const Home = () => {
         scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
         acadPerformanceModel.effects.getFx({ semestr })
+        electronicInteractionModel.effects.getElectronicInteractionFx()
     }
 
     return (
@@ -58,16 +60,16 @@ const Home = () => {
                 <GlobalAppSearch />
                 <Links links={homeRoutes} />
                 <CenterPage>
-                    <Block maxWidth="750px" minHeight="100%" height="100%" orientation="vertical" gap="16px">
+                    <Block maxWidth="750px" minHeight="100%" height="100%" orientation="vertical" gap="20px">
                         <Flex>
                             <Title size={2} align="left" width="100%">
                                 Главная
                             </Title>
                             <TopUser />
                         </Flex>
-
                         <ScheduleAndNotification />
-                        {user.user_status === 'stud' && <AcadPerformanceStatWidget />}
+                        {/* {user.user_status === 'stud' && <AcadPerformanceStatWidget />} */}
+                        <AlertsWidget />
                     </Block>
                 </CenterPage>
             </HomePageStyled>

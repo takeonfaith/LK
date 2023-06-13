@@ -1,25 +1,26 @@
 import { IRoutes } from '@app/routes/general-routes'
 import { TNotification, lkNotificationModel } from '@entities/lk-notifications'
 import { menuModel } from '@entities/menu'
-import { HelpfulPage } from '@pages/helpful-information/types/helpful-pages'
-import { TStudent, TTeacher } from '@shared/api/model'
-import React, { useMemo, useState } from 'react'
-import getDataLength from '../lib/get-data-length'
-import { Title } from '@shared/ui/title'
-import { Divider } from '@shared/ui/divider'
-import search from '@pages/helpful-information/lib/search'
-import pages from '@pages/helpful-information/config/pages-config'
-import searchFunc from '@features/all-pages/lib/search'
 import { userModel } from '@entities/user'
-import BlocksList from '@pages/helpful-information/ui/molecules/blocks-list'
-import NotificationList from 'widgets/lk-notification-list/ui/list'
-import normalizeString from '@shared/lib/normalize-string'
-import { getGroups } from '@shared/api/student-api'
-import GroupsList from '@features/groups-list'
-import { studentApi, teacherApi } from '@shared/api'
-import Flex from '@shared/ui/flex'
-import { User } from 'widgets'
 import { FoundPages } from '@features/all-pages'
+import searchFunc from '@features/all-pages/lib/search'
+import DivisionsList from '@features/divisions-list'
+import GroupsList from '@features/groups-list'
+import pages from '@pages/helpful-information/config/pages-config'
+import search from '@pages/helpful-information/lib/search'
+import { HelpfulPage } from '@pages/helpful-information/types/helpful-pages'
+import BlocksList from '@pages/helpful-information/ui/molecules/blocks-list'
+import { studentApi, teacherApi } from '@shared/api'
+import { TStudent, TTeacher } from '@shared/api/model'
+import { getGroups } from '@shared/api/student-api'
+import normalizeString from '@shared/lib/normalize-string'
+import { Divider } from '@shared/ui/divider'
+import Flex from '@shared/ui/flex'
+import { Title } from '@shared/ui/title'
+import React, { useMemo, useState } from 'react'
+import { User } from 'widgets'
+import NotificationList from 'widgets/lk-notification-list/ui/list'
+import getDataLength from '../lib/get-data-length'
 
 type SearchConfig = {
     title: string
@@ -59,6 +60,7 @@ const useSearchConfig = () => {
         [isStaff],
     )
     const [groups, setGroups] = useState<string[] | null>(null)
+    const [divisions, setDivisions] = useState<string[] | null>(null)
     const [staff, setStaff] = useState<TTeacher[] | null>(null)
     const [students, setStudents] = useState<TStudent[] | null>(null)
     const [foundPages, setFoundPages] = useState<IRoutes | null>(null)
@@ -117,6 +119,18 @@ const useSearchConfig = () => {
             },
         },
         {
+            title: 'Подразделения',
+            content: <DivisionsList divisions={divisions} />,
+            data: divisions,
+            clear: () => {
+                setDivisions(null)
+            },
+            search: async (value) => {
+                const { data } = await teacherApi.getDivisions(value)
+                setDivisions(data.items)
+            },
+        },
+        {
             title: 'Уведомления',
             content: <NotificationList notifications={foundNotifications} />,
             clear: () => {
@@ -135,9 +149,6 @@ const useSearchConfig = () => {
                 setFoundHelpfullPages(null)
             },
             search: (value) => {
-                // eslint-disable-next-line no-console
-                console.log(mergedPages)
-
                 const found = search(value, mergedPages)
                 setFoundHelpfullPages(found)
             },
@@ -175,16 +186,14 @@ const useSearchConfig = () => {
                 if (value.length <= 8 && /\d|[-]/g.test(value)) {
                     await preconfig[3].search(value)
                 } else {
-                    // Pages Search
-                    if (value.length <= 2) {
-                        preconfig[0].search(value)
-                    } else {
+                    preconfig[0].search(value)
+                    preconfig[5].search(value)
+                    preconfig[6].search(value)
+                    if (getDataLength(preconfig[0].data) === 0) {
                         // Other Search
-                        preconfig[0].search(value)
                         await preconfig[1].search(value)
                         await preconfig[2].search(value)
-                        preconfig[4].search(value)
-                        preconfig[5].search(value)
+                        await preconfig[4].search(value)
                     }
                 }
             },
