@@ -58,7 +58,7 @@ const Alerts = ({ alerts, listView }: Props) => {
                                 {finalAlerts[year].map((alert, index) => {
                                     return (
                                         <AlertItem
-                                            isNew={year === currentYear && index === 0 && !user?.hasAlerts}
+                                            isNew={year === currentYear && index === 0 && user?.hasAlerts}
                                             key={alert.id}
                                             news={alert}
                                             orientation="horizontal"

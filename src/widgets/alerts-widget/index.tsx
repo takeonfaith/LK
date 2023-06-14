@@ -38,7 +38,7 @@ const AlertsWidget = () => {
             )}
             {currentNews?.map((news, index) => (
                 <AlertItem
-                    isNew={index === 0 && !user?.hasAlerts}
+                    isNew={index === 0 && user?.hasAlerts}
                     news={news}
                     key={news.id}
                     orientation={isMobile ? 'horizontal' : 'vertical'}
