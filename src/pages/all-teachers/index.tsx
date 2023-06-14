@@ -1,13 +1,14 @@
 import React from 'react'
 import { paginationList } from '@entities/all-teachers'
 import Block from '@shared/ui/block'
-import { CenterPage, Wrapper } from '@ui/atoms'
+import { CenterPage, Title, Wrapper } from '@ui/atoms'
 import { useStore } from 'effector-react'
 import ListOfPeople from 'widgets/list-of-people'
 import styled from 'styled-components'
 import { SelectPage } from '@features/select'
 import { getDivisions } from '@shared/api/teacher-api'
 import { userModel } from '@entities/user'
+import { useRouteMatch } from 'react-router'
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -25,8 +26,11 @@ const AllTeachersPage = () => {
         data: { user },
     } = userModel.selectors.useUser()
     const { $isPending, $items } = paginationList
+    const route: { params: { filter?: string } } = useRouteMatch()
+
     const isPending = useStore($isPending)
     const items = useStore($items)
+    const filter = route.params.filter ?? user?.subdivisions?.[0].subdivision ?? ''
 
     const underSearchText = (filter: SelectPage | null) => {
         if (!filter?.title) return null
@@ -46,11 +50,14 @@ const AllTeachersPage = () => {
                         justifyContent="none"
                         noAppearanceInMobile
                     >
+                        <Title size={2} align="left" bottomGap>
+                            Сотрудники
+                        </Title>
                         <ListOfPeople
                             searchPlaceholder="Поиск сотрудников"
                             paginationList={paginationList}
                             filterRequest={getDivisions}
-                            defaultFilter={user?.subdivisions?.[0].subdivision ?? ''}
+                            defaultFilter={filter}
                             filterPlaceholder="Подразделения"
                             underSearchText={underSearchText}
                         />

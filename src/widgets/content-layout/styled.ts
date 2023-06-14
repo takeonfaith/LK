@@ -18,7 +18,7 @@ export const ContentWrapper = styled.div`
     }
 `
 
-export const PageContent = styled.div<{ withHeader: boolean }>`
+export const PageContent = styled.div<{ withHeader?: boolean }>`
     position: relative;
     overflow-x: hidden;
     overflow-y: auto;
@@ -33,7 +33,6 @@ export const PageContent = styled.div<{ withHeader: boolean }>`
             : css`
                   height: 100%;
               `}
-    }
 
     @media (max-width: 1000px) {
         margin-bottom: var(--mobile-bottom-menu-height);

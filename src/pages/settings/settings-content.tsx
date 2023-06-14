@@ -32,6 +32,7 @@ const SettingsContentStyled = styled.div`
     height: 100%;
     height: calc(100% - 60px);
     padding: 20px;
+    overflow-y: auto;
 `
 
 const SettingsHeader = styled.header`

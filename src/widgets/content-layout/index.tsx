@@ -1,76 +1,29 @@
 import PrivateRouter from '@app/routers/private-router'
-import { ALERTS_ROUTE } from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
-import { popUpMessageModel } from '@entities/pop-up-message'
-import { settingsModel } from '@entities/settings'
-import { userModel } from '@entities/user'
-import useIsShowNotification from '@utils/hooks/use-is-show-notification'
-import useTheme from '@utils/hooks/use-theme'
-import useCurrentExactPage from '@utils/hooks/use-current-exact-page'
-import React, { Suspense, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
+import React, { Suspense } from 'react'
+import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
 import { Modal } from 'widgets/modal'
 import InitialLoader from '../../shared/ui/initial-loader'
 import Story from '../../shared/ui/story'
-import WhatsNew from '../whats-new'
+import useContentLayout from './hooks/use-content-layout'
 import { ContentWrapper, PageContent, Wrapper } from './styled'
-import Header from 'widgets/header'
+import { userModel } from '@entities/user'
+import PopUpNotifications from 'widgets/pop-up-notifications'
 
 const ContentLayout = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { open } = useModal()
-    const isShowNotification = useIsShowNotification()
-    const { currentPage, exactCurrentPage } = useCurrentExactPage()
-
-    useEffect(() => {
-        if (user) settingsModel.effects.getLocalSettingsFx(user.id)
-    }, [user])
-
-    useTheme()
-    useEffect(() => {
-        popUpMessageModel.events.evokePopUpMessage({
-            message: (
-                <>
-                    Если вы хотите перейти <br /> в старый личный кабинет,{' '}
-                    <a href={`${OLD_LK_URL}/index.php`}>нажмите сюда</a>
-                </>
-            ),
-            type: 'info',
-            time: 5000,
-        })
-
-        // TODO: popUpMessageModel add stack of alerts
-        user?.hasAlerts &&
-            setTimeout(
-                () =>
-                    popUpMessageModel.events.evokePopUpMessage({
-                        message: <Link to={ALERTS_ROUTE}>У вас есть новые оповещения</Link>,
-                        type: 'tip',
-                        time: 5000,
-                    }),
-                5000,
-            )
-    }, [user])
-
-    useEffect(() => {
-        if (isShowNotification) {
-            isShowNotification && open(<WhatsNew />)
-        }
-    }, [isShowNotification])
+    useContentLayout()
 
     return (
         <Wrapper>
             <InitialLoader loading={!user} />
-            {/* <GreetingsScreen /> */}
             <Story />
             <LeftsideBar />
             <ContentWrapper>
-                <Header currentPagePair={{ currentPage, exactCurrentPage }} />
-                <PageContent withHeader={!(exactCurrentPage ?? currentPage)?.withoutHeader}>
+                {/* <Header currentPagePair={{ currentPage, exactCurrentPage }} /> */}
+                <PageContent>
                     <Suspense fallback={null}>
                         <PrivateRouter />
                     </Suspense>
@@ -82,6 +35,7 @@ const ContentLayout = () => {
             <Confirm />
             <ContextMenu />
             <HintModal />
+            <PopUpNotifications />
         </Wrapper>
     )
 }

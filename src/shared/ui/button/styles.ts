@@ -26,7 +26,7 @@ export const ButtonWrapper = styled.button<{
     padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
     min-width: ${({ minWidth }) => minWidth && minWidth};
@@ -50,6 +50,7 @@ export const ButtonWrapper = styled.button<{
     &:hover {
         background: ${({ hoverBackground, isChosen, background }) =>
             hoverBackground ?? (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
+        filter: brightness(0.97);
     }
 
     .icon {
@@ -81,13 +82,18 @@ export const ButtonWrapper = styled.button<{
         padding: 0;
 
         .icon {
-            width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
-            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
+            width: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};
+            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};
             margin-bottom: ${({ direction, shrinkTextInMobile }) =>
                 direction === 'vertical' && !shrinkTextInMobile ? '4px' : '0px'};
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};
-            height: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
+            height: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};
+
+            svg {
+                max-width: 23px;
+                /* max-height: 23px; */
+            }
         }
 
         span {

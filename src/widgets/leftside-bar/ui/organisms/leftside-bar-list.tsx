@@ -4,6 +4,7 @@ import { SkeletonShape } from '@ui/skeleton-shape'
 import React, { useMemo } from 'react'
 import LeftsideBarListWrapper from '../atoms/leftside-bar-list-wrapper'
 import LeftsideBarItem from '../molecules/leftside-bar-item'
+import Flex from '@shared/ui/flex'
 
 const LeftsideBarList = () => {
     const { leftsideBarRoutes, currentPage } = menuModel.selectors.useMenu()
@@ -21,13 +22,72 @@ const LeftsideBarList = () => {
 
     if (!leftsideBarRoutes)
         return (
-            <SkeletonShape
-                shape={'rect'}
-                size={{
-                    width: '100%',
-                    height: '300px',
-                }}
-            />
+            <Flex d="column">
+                <Flex gap="8px">
+                    <SkeletonShape
+                        shape={'rect'}
+                        size={{
+                            width: '30px',
+                            height: '30px',
+                        }}
+                    />
+                    <SkeletonShape
+                        shape={'rect'}
+                        size={{
+                            width: '160px',
+                            height: '18px',
+                        }}
+                    />
+                </Flex>
+                <Flex gap="8px">
+                    <SkeletonShape
+                        shape={'rect'}
+                        size={{
+                            width: '30px',
+                            height: '30px',
+                        }}
+                    />
+                    <SkeletonShape
+                        shape={'rect'}
+                        size={{
+                            width: '160px',
+                            height: '18px',
+                        }}
+                    />
+                </Flex>
+                <Flex gap="8px">
+                    <SkeletonShape
+                        shape={'rect'}
+                        size={{
+                            width: '30px',
+                            height: '30px',
+                        }}
+                    />
+                    <SkeletonShape
+                        shape={'rect'}
+                        size={{
+                            width: '160px',
+                            height: '18px',
+                        }}
+                    />
+                </Flex>
+                <Flex gap="8px">
+                    <SkeletonShape
+                        shape={'rect'}
+                        size={{
+                            width: '30px',
+                            height: '30px',
+                        }}
+                    />
+                    <SkeletonShape
+                        shape={'rect'}
+                        size={{
+                            width: '160px',
+                            height: '18px',
+                        }}
+                    />
+                </Flex>
+            </Flex>
         )
 
     return (

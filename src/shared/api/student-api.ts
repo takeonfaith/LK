@@ -16,6 +16,6 @@ export const get = (search: string, group: string, page: number | undefined, lim
     )
 }
 
-export const getGroups = (value: string) => {
-    return $api.get(`?getGroups=${value}&perpage=${30}&page=${1}&token=${token()}`)
+export const getGroups = async (value: string) => {
+    return await $api.get<{ items: string[] }>(`?getGroups=${value}&perpage=${30}&page=${1}&token=${token()}`)
 }

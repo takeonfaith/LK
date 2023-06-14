@@ -14,7 +14,7 @@ export const Ul = styled.div`
 export function HelpLinks() {
     return (
         <>
-            <Message type="alert" title="Внимание!">
+            <Message type="alert" title="Внимание!" fontSize="0.85rem">
                 Прежде, чем написать сообщение, убедитесь в том, что указанные ниже случаи не относятся к вашей
                 проблеме:
             </Message>

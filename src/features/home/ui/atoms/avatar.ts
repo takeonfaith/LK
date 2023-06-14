@@ -26,6 +26,26 @@ export const Container = styled.div<{
     margin-right: ${({ marginRight }) => marginRight ?? '32px'};
     box-shadow: ${({ boxShadow }) => boxShadow ?? '0'};
 
+    .icon {
+        position: absolute;
+        bottom: -2px;
+        right: -5px;
+        background: var(--theme);
+        color: var(--text);
+        padding: 2px;
+        border-radius: 100%;
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+    }
+
     .checkbox {
         position: absolute;
         bottom: -9px;

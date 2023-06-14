@@ -1,4 +1,4 @@
-import { Button } from '@ui/atoms'
+import { Button, Title } from '@ui/atoms'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useMemo, useRef } from 'react'
 import styled from 'styled-components'
@@ -12,7 +12,7 @@ const Content = styled.div`
 `
 
 const Modal = () => {
-    const { isOpen, component: Component, canBack, back, close } = useCoreModal()
+    const { isOpen, component: Component, canBack, back, close, title } = useCoreModal()
     const ref = useRef(null)
     const isValid = useMemo(() => isOpen && !!Component, [isOpen, Component])
 
@@ -22,12 +22,12 @@ const Modal = () => {
 
     return (
         <ModalWrapper isOpen={isValid}>
-            <ModalContent isOpen={isValid} ref={ref}>
+            <ModalContent isOpen={isValid} ref={ref} hasBack={canBack} hasTitle={!!title}>
                 {canBack && (
                     <Button
                         onClick={back}
                         icon={<FiChevronLeft />}
-                        text="Назад"
+                        text={!!title ? '' : 'Назад'}
                         background="transparent"
                         textColor={'var(--theme-opposite)'}
                         width="fit-content"
@@ -37,12 +37,19 @@ const Modal = () => {
                         className="back-button"
                     />
                 )}
+                {title && (
+                    <Title size={3} align="left">
+                        {title}
+                    </Title>
+                )}
                 <Button
                     onClick={close}
                     icon={<FiX />}
                     className="close-button"
-                    background="transparent"
-                    height="32.5px"
+                    height="35px"
+                    minWidth="35px"
+                    width="35px"
+                    background="var(--search)"
                 />
 
                 <Content>{Component}</Content>

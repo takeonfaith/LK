@@ -5,7 +5,7 @@ const FormBlockWrapper = styled.div<{ maxWidth?: string }>`
     height: fit-content;
     max-width: ${({ maxWidth }) => maxWidth ?? '600px'};
     padding: 20px;
-    border-radius: var(--brSemi);
+    border-radius: var(--brLight);
     background: var(--schedule);
     box-shadow: var(--schedule-shadow);
     display: flex;

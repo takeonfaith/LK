@@ -7,8 +7,12 @@ import styled from 'styled-components'
 //         ? Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparent3']
 //         : Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparent3']
 
-const getColor = (isLightTheme: boolean, type: MessageType) =>
-    isLightTheme ? Colors[messageType[type].color].dark2 : Colors[messageType[type].color].light2
+const getColor = (isLightTheme: boolean, type: MessageType, solidBackground: boolean) =>
+    solidBackground
+        ? '#fff'
+        : isLightTheme
+        ? Colors[messageType[type].color].dark3
+        : Colors[messageType[type].color].light3
 
 export const MessageWrapper = styled.div<{
     type: MessageType
@@ -24,9 +28,9 @@ export const MessageWrapper = styled.div<{
 }>`
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
-    color: ${({ type, isLightTheme }) => getColor(isLightTheme, type)};
+    color: ${({ type, isLightTheme, solidBackground }) => getColor(isLightTheme, type, solidBackground)};
     background: ${({ type, solidBackground }) =>
-        Colors[messageType[type].color][solidBackground ? 'transparent1' : 'transparent2']};
+        Colors[messageType[type].color][solidBackground ? 'main' : 'transparent3']};
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     font-size: ${({ fontSize }) => fontSize ?? '0.8em'};

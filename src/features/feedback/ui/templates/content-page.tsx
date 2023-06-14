@@ -11,7 +11,14 @@ export function ContentPage() {
     } = userModel.selectors.useUser()
     return (
         <CenterPage alignItems="flex-start">
-            <Block orientation="vertical" height="fit-content" maxWidth="700px" gap="10px" noAppearanceInMobile>
+            <Block
+                orientation="vertical"
+                height="fit-content"
+                lineHeight="25px"
+                maxWidth="700px"
+                gap="10px"
+                noAppearanceInMobile
+            >
                 {!user && <GoBackButton />}
                 <HelpLinks />
                 <OtherContacts />

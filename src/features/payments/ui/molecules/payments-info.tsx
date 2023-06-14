@@ -1,13 +1,10 @@
-import React from 'react'
-import { Colors } from '@consts'
-import { Button, LinkButton } from '@ui/atoms'
+import PaymentButton from '@features/payment-button'
+import { LinkButton } from '@ui/atoms'
 import List from '@ui/list'
 import localizeDate from '@utils/localize-date'
-import { useCallback } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { SliderPage, useModal } from 'widgets'
 import { MoneyNeedToPay } from '../atoms'
-import QrCode from '../atoms/qr-code'
 
 const PaymentsInfoWrapper = styled.div<{ paymentDifference: number }>`
     display: flex;
@@ -36,19 +33,6 @@ interface Props {
 }
 
 const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_current, qr_total }: Props) => {
-    const { open } = useModal()
-
-    const handleModal = useCallback(() => {
-        open(
-            <SliderPage
-                pages={[
-                    { title: 'Текущая задолженность', content: <QrCode qrCode={qr_current} /> },
-                    { title: 'Общая задолженность', content: <QrCode qrCode={qr_total} /> },
-                ]}
-            />,
-        )
-    }, [open])
-
     return (
         <PaymentsInfoWrapper paymentDifference={balanceCurrDate}>
             <div>
@@ -62,13 +46,7 @@ const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_cur
                 <MoneyNeedToPay sum={sum} allPayments={allPayments} endDate={endDate} />
                 <br />
                 <List gap={8} scroll={false}>
-                    <Button
-                        onClick={handleModal}
-                        text={'Оплатить через QR-код Сбербанк онлайн'}
-                        width={'100%'}
-                        background={Colors.green.main}
-                        textColor="#fff"
-                    />
+                    <PaymentButton qr_current={qr_current} qr_total={qr_total} />
                     {bill && (
                         <LinkButton
                             text="Сформировать квитанцию на оплату"

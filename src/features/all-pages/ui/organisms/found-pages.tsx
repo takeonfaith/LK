@@ -13,12 +13,13 @@ const FoundPagesWrapper = styled.div`
 
 interface Props {
     pages: IRoutes | null
+    showNotFound?: boolean
 }
 
-const FoundPages = ({ pages }: Props) => {
-    if (!pages) return null
+const FoundPages = ({ pages, showNotFound = true }: Props) => {
+    if (!pages || (!showNotFound && Object.keys(pages).length === 0)) return null
 
-    if (!Object.keys(pages).length) return <Error text="Ничего не было найдено" />
+    if (!Object.keys(pages).length && showNotFound) return <Error text="Ничего не было найдено" />
 
     return (
         <FoundPagesWrapper>

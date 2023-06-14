@@ -2,7 +2,7 @@ import React from 'react'
 import { paginationList } from '@entities/all-students'
 import { SelectPage } from '@features/select'
 import Block from '@shared/ui/block'
-import { CenterPage, Wrapper } from '@ui/atoms'
+import { CenterPage, Title, Wrapper } from '@ui/atoms'
 import { useStore } from 'effector-react'
 import ListOfPeople from 'widgets/list-of-people'
 import { userModel } from '@entities/user'
@@ -51,6 +51,9 @@ const AllStudentsPage = () => {
                         justifyContent="none"
                         noAppearanceInMobile
                     >
+                        <Title size={2} align="left" bottomGap>
+                            Студенты
+                        </Title>
                         <ListOfPeople
                             searchPlaceholder="Поиск студентов"
                             paginationList={paginationList}

@@ -1,19 +1,35 @@
+import { acadPerformanceModel } from '@entities/acad-performance'
 import { menuModel } from '@entities/menu'
 import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
-import LinksList from '@features/home/ui/organisms/links-list'
+import GlobalAppSearch from '@features/global-app-search'
+import Links from '@features/home/ui/links'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
-import { Title, Wrapper } from '@ui/atoms'
-import { useEffect } from 'react'
-import { Content } from './ui/atoms/content'
+import findSemestr from '@shared/lib/find-semestr'
+import Block from '@shared/ui/block'
+import Flex from '@shared/ui/flex'
+import { CenterPage, Title, Wrapper } from '@ui/atoms'
 import React from 'react'
-import MobileAppLink from '@features/all-pages/ui/organisms/mobile-app-link'
-import { isProduction } from '@shared/consts'
-import HomeTopSection from '@features/home/ui/organisms/home-top-section'
-import Avatar from '@features/home/ui/molecules/avatar'
-import UserContextMenu from '@features/user-context-menu'
-import { contextMenuModel } from '@entities/context-menu'
+import styled from 'styled-components'
+import HomeTopPlate from './ui/home-top-plate'
+import TopUser from './ui/top-user'
+import AlertsWidget from 'widgets/alerts-widget'
+import { electronicInteractionModel } from '@entities/electronic-interaction'
+
+const HomePageStyled = styled.div`
+    width: 100%;
+    padding-top: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+
+    @media (max-width: 1000px) {
+        padding-top: 153px;
+    }
+`
 
 const Home = () => {
     const {
@@ -21,48 +37,42 @@ const Home = () => {
         error,
     } = userModel.selectors.useUser()
 
+    const { data: acad } = acadPerformanceModel.selectors.useData()
+    const { data: payments } = paymentsModel.selectors.usePayments()
+    const { data: schedule } = scheduleModel.selectors.useSchedule()
+    const semestr = `${findSemestr(new Date().toString(), user?.course ?? 1)}`
+
     const { homeRoutes } = menuModel.selectors.useMenu()
 
     if (!user || !homeRoutes) return null
 
-    useEffect(() => {
+    const load = () => {
         scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
-    }, [])
-
-    const handleUserClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        e.preventDefault()
-        e.stopPropagation()
-        contextMenuModel.events.open({
-            e,
-            height: 143,
-            content: <UserContextMenu />,
-        })
+        acadPerformanceModel.effects.getFx({ semestr })
+        electronicInteractionModel.effects.getElectronicInteractionFx()
     }
 
     return (
-        <Wrapper loading={!user} load={() => null} error={error} data={user}>
-            <Content>
-                <div className="top">
-                    <div className="user" onClick={handleUserClick}>
-                        <Avatar
-                            marginRight="5px"
-                            name={user.fullName ?? ''}
-                            avatar={user.avatar}
-                            width="40px"
-                            height="40px"
-                            border
-                        />
-                        <Title size={3} align="left">
-                            {user.name}
-                        </Title>
-                    </div>
-                    <HomeTopSection />
-                </div>
-                <LinksList wrapOnMobile={false} align="left" restricted title={'Разделы'} links={homeRoutes} />
-                <ScheduleAndNotification />
-                {!isProduction && <MobileAppLink />}
-            </Content>
+        <Wrapper loading={!user} load={load} error={error} data={acad && payments && schedule}>
+            <HomeTopPlate />
+            <HomePageStyled>
+                <GlobalAppSearch />
+                <Links links={homeRoutes} />
+                <CenterPage>
+                    <Block maxWidth="750px" minHeight="100%" height="100%" orientation="vertical" gap="20px">
+                        <Flex>
+                            <Title size={2} align="left" width="100%">
+                                Главная
+                            </Title>
+                            <TopUser />
+                        </Flex>
+                        <ScheduleAndNotification />
+                        {/* {user.user_status === 'stud' && <AcadPerformanceStatWidget />} */}
+                        <AlertsWidget />
+                    </Block>
+                </CenterPage>
+            </HomePageStyled>
         </Wrapper>
     )
 }

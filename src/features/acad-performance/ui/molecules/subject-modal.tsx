@@ -1,5 +1,4 @@
 import { AcadPerformance } from '@api/model/acad-performance'
-import { Title } from '@ui/atoms'
 import KeyValue from '@ui/atoms/key-value'
 import findSemestr from '@utils/find-semestr'
 import localizeDate from '@utils/localize-date'
@@ -8,11 +7,10 @@ import styled from 'styled-components'
 import { User } from 'widgets'
 
 const Container = styled.div`
-    width: 600px;
+    width: 400px;
 
     @media (max-width: 800px) {
         width: 100%;
-        padding: 10px;
     }
 `
 
@@ -23,9 +21,6 @@ interface Props {
 const SubjectModal = ({ item }: Props) => {
     return (
         <Container>
-            <Title size={2} align="left">
-                {item.name}
-            </Title>
             <KeyValue keyStr="Курс" value={item.course} />
             <KeyValue keyStr="Форма аттестации" value={item.exam_type} />
             <KeyValue keyStr="Дата проведения" value={localizeDate(item.exam_date)} />

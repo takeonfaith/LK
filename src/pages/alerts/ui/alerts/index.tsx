@@ -1,48 +1,51 @@
 import { PreparedAlerts } from '@entities/alert/lib/prepare-data'
-import { Alert } from '@shared/api/model/alert'
 import List from '@shared/ui/list'
 import { LocalSearch } from '@shared/ui/molecules'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useModal } from 'widgets'
-import AlertItem from '../alert-item'
-import AlertModal from '../alert-modal'
-import Collapse from './collapse'
+import AlertItem from 'widgets/alerts-widget/alert-item'
 import search from '../../lib/search'
+import Collapse from './collapse'
+import { userModel } from '@entities/user'
 
 const AlertsStyled = styled.div`
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 `
 
 type Props = {
     alerts: PreparedAlerts
+    listView?: boolean
 }
 
-const Alerts = ({ alerts }: Props) => {
-    const { open } = useModal()
+const Alerts = ({ alerts, listView }: Props) => {
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const [foundAlerts, setFoundAlerts] = useState<PreparedAlerts | null>(null)
-
-    const handleAlertClick = (alert: Alert) => {
-        open(<AlertModal alert={alert} />)
-    }
 
     const finalAlerts = foundAlerts ?? alerts
 
     return (
         <AlertsStyled>
-            <LocalSearch
-                placeholder="Поиск оповещений"
-                whereToSearch={alerts}
-                searchEngine={search}
-                setResult={setFoundAlerts}
-                loadingOnType
-                validationCheck
-            />
+            {!listView && (
+                <LocalSearch
+                    placeholder="Поиск новостей"
+                    whereToSearch={alerts}
+                    searchEngine={search}
+                    setResult={setFoundAlerts}
+                    loadingOnType
+                    validationCheck
+                />
+            )}
             {Object.keys(finalAlerts)
                 .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
                 .map((year) => {
-                    const collapsed = foundAlerts === null ? year !== new Date().getFullYear().toString() : false
-                    const sideText = `Оповещений: ${finalAlerts[year].length}`
+                    const currentYear = new Date().getFullYear().toString()
+                    const collapsed = foundAlerts === null ? year !== currentYear : false
+                    const sideText = `Новостей: ${finalAlerts[year].length}`
                     return (
                         <Collapse
                             sideText={sideText}
@@ -51,13 +54,18 @@ const Alerts = ({ alerts }: Props) => {
                             isCollapsed={collapsed}
                             initiallyCollapsed={collapsed}
                         >
-                            {!!finalAlerts[year].length ? (
-                                <List scroll={false}>
-                                    {finalAlerts[year].map((alert) => {
-                                        return <AlertItem key={alert.id} alert={alert} onClick={handleAlertClick} />
-                                    })}
-                                </List>
-                            ) : null}
+                            <List scroll={false} gap={12}>
+                                {finalAlerts[year].map((alert, index) => {
+                                    return (
+                                        <AlertItem
+                                            isNew={year === currentYear && index === 0 && !user?.hasAlerts}
+                                            key={alert.id}
+                                            news={alert}
+                                            orientation="horizontal"
+                                        />
+                                    )
+                                })}
+                            </List>
                         </Collapse>
                     )
                 })}

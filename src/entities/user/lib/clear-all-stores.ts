@@ -1,5 +1,6 @@
 import { acadPerformanceModel } from '@entities/acad-performance'
 import { adminLinksModel } from '@entities/admin-links'
+import { alertModel } from '@entities/alert'
 import { applicationsModel } from '@entities/applications'
 import { confirmModel } from '@entities/confirm'
 import { contactInfoActualizationModel } from '@entities/contact-info-actualization'
@@ -28,6 +29,7 @@ const stores = [
     superiorRoomModel,
     teacherDateVerificationModel,
     contactInfoActualizationModel,
+    alertModel,
 ]
 
 const clearAllStores = () => {

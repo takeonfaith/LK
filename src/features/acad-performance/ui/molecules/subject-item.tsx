@@ -129,8 +129,11 @@ export const GradeScore = styled.div<{ grade: keyof IGrade }>`
 
 const SubjectItem = ({ item, number, type }: Props) => {
     const { open } = useModal()
+
+    const handleOpen = () => item.grade && open(<SubjectModal item={item} />, item.name)
+
     return (
-        <Wrap onClick={() => item.grade && open(<SubjectModal item={item} />)} isGraded={!!item.grade}>
+        <Wrap onClick={handleOpen} isGraded={!!item.grade}>
             <Name>
                 <span>{number}</span>
                 <div>{item.name}</div>

@@ -4,16 +4,16 @@ import { userModel } from '@entities/user'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { User } from '@shared/api/model'
 import { Colors } from '@shared/consts'
-import useTheme from '@shared/lib/hooks/use-theme'
 import { Button } from '@shared/ui/button'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Subtext from '@shared/ui/subtext'
 import UserHeaderBackground from '@shared/ui/user-header/user-header-background'
-import React, { useEffect, useState } from 'react'
-import { FiEdit2, FiLogOut, FiMoon, FiSettings, FiSun } from 'react-icons/fi'
+import React from 'react'
+import { FiEdit2, FiLogOut, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import Slider from 'widgets/slider'
 
+import ThemeToggle from '@features/theme-toggle'
 import { AvatarWrapper, BlocksList, Buttons, IconWrapper, Info, InfoWrapper, TopInfoBlock, TopStyled } from './styles'
 
 type Props = {
@@ -42,30 +42,9 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
         })
     }
 
-    const { theme, switchTheme } = useTheme()
-
-    const [isLight, setIsLight] = useState(theme === 'light')
-
-    useEffect(() => {
-        setIsLight(theme === 'light')
-    }, [theme])
-
-    const themeWord = isLight ? 'Светлая' : 'Темная'
-
-    const changeTheme = () => {
-        switchTheme(isLight)
-        setIsLight((prev) => !prev)
-    }
-
     return (
         <TopStyled>
-            <UserHeaderBackground
-                avatar={avatar}
-                fullName={fullName}
-                width="calc(100% + 32px)"
-                height="210px"
-                baseScale={1.5}
-            />
+            <UserHeaderBackground fullName={fullName} width="calc(100% + 32px)" height="210px" baseScale={1.5} />
             <BlocksList>
                 <TopInfoBlock maxWidth="530px" height="180px" orientation="vertical">
                     <AvatarWrapper>
@@ -112,21 +91,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                                 shrinkTextInMobile
                             />
                         </Link>
-                        <Button
-                            padding="0"
-                            background={Colors.white.transparent2}
-                            icon={
-                                <IconWrapper background={Colors.green.main}>
-                                    {isLight ? <FiSun /> : <FiMoon />}
-                                </IconWrapper>
-                            }
-                            onClick={changeTheme}
-                            text={`Тема: ${themeWord}`}
-                            width="calc(50% - 5px)"
-                            height="73px"
-                            direction="vertical"
-                            shrinkTextInMobile
-                        />
+                        <ThemeToggle type="v-button" />
                         <Link to={SETTINGS_PERSONAl_ROUTE}>
                             <Button
                                 background={Colors.white.transparent2}

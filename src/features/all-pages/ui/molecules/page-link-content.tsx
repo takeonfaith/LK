@@ -117,7 +117,6 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
         notifications,
         maxWordLength,
         title,
-        shortTitle,
         isNew,
         icon,
         mode,
@@ -162,15 +161,15 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
                 top={isVertical ? '60px' : '75%'}
                 left={orientation !== 'vertical' ? '50px' : 'auto'}
                 right={isVertical ? '32px' : 'auto'}
-                visible={!!notifications}
+                visible={(notifications ?? 0) > 0}
                 className="notification-circle"
             >
                 {notifications}
             </Notification>
             <div className="outside">
                 <Icon color={color.length ? color : 'blue'}>{icon ?? <FiPlus />}</Icon>
-                <b>{getShortStirng(getHyphenatedTitle(shortTitle ?? title, maxFirstWordLength), maxWordLength)}</b>
-                {notifications && (
+                <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLength)}</b>
+                {!!notifications && (
                     <span className="notifications-title">
                         {notifications}{' '}
                         {getCorrectWordForm(notifications, {

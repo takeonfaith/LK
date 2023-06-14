@@ -16,7 +16,7 @@ interface Props {
 
 const Row = ({ columns, el, index, onRowClick }: Props) => {
     const { open } = useModal()
-    const defaultOnClick = () => open(<RowModal title={'Информация'} obj={el} columns={columns} />)
+    const defaultOnClick = () => open(<RowModal obj={el} columns={columns} />, 'Информация')
     return (
         <RowWrapper even={index % 2 === 0} onClick={() => (onRowClick ? onRowClick(el) : defaultOnClick())}>
             {columns.map((column) => {
