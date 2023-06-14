@@ -94,7 +94,8 @@ const createResultElementForm = (elementForm: IInputAreaData) => {
 }
 
 const getValueElementForm = (elementForm: IInputAreaData) => {
-    return typeof elementForm.value !== 'object' ? elementForm?.value : (elementForm.value as SelectPage).title
+    const isSimpleField = !elementForm.value || typeof elementForm.value !== 'object'
+    return isSimpleField ? elementForm?.value : (elementForm.value as SelectPage).title
 }
 
 export default globalAppSendForm

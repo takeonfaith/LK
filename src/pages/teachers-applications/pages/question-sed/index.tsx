@@ -9,7 +9,6 @@ const QuestionSedPage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             formId={ApplicationTeachersFormCodes.QUESTION_SED}
         />
     )

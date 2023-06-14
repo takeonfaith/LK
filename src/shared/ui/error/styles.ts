@@ -11,7 +11,7 @@ export const ErrorContainer = styled.div<{ size?: string }>`
     color: var(--text);
 
     span {
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .image {

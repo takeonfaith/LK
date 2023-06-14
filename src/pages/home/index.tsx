@@ -12,7 +12,7 @@ import Flex from '@shared/ui/flex'
 import { CenterPage, Title, Wrapper } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
-import ProfileTopPlate from './ui/profile-top-plate'
+import HomeTopPlate from './ui/home-top-plate'
 import TopUser from './ui/top-user'
 import AlertsWidget from 'widgets/alerts-widget'
 import { electronicInteractionModel } from '@entities/electronic-interaction'
@@ -55,7 +55,7 @@ const Home = () => {
 
     return (
         <Wrapper loading={!user} load={load} error={error} data={acad && payments && schedule}>
-            <ProfileTopPlate />
+            <HomeTopPlate />
             <HomePageStyled>
                 <GlobalAppSearch />
                 <Links links={homeRoutes} />

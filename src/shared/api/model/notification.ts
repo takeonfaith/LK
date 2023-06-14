@@ -18,6 +18,7 @@ export interface businesstripNotification {
     file: string
     viewed: boolean
     post?: string
+    notificationType: 'businesstrip'
 }
 
 export interface baseNotification {
@@ -31,6 +32,7 @@ export interface baseNotification {
     file: string
     viewed: boolean
     event?: string
+    notificationType?: 'fire' | 'vacation'
 }
 
 export interface docsNotification {
@@ -42,6 +44,7 @@ export interface docsNotification {
     link: string
     viewed: boolean
     document: boolean
+    notificationType: 'docs'
 }
 
 export type ItemNotification = baseNotification | businesstripNotification | docsNotification

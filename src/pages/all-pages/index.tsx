@@ -5,11 +5,10 @@ import getGroupPages, { routesOrder } from '@features/all-pages/lib/get-group-pa
 import search from '@features/all-pages/lib/search'
 import LinksList from '@features/home/ui/organisms/links-list'
 import { LocalSearch } from '@ui/molecules'
-import { Title } from '@ui/title'
 import { useMemo, useState } from 'react'
 import React from 'react'
 import Block from '@shared/ui/block'
-import { CenterPage } from '@shared/ui/atoms'
+import { CenterPage, Title } from '@shared/ui/atoms'
 import Flex from '@shared/ui/flex'
 
 // const AllPagesWrapper = styled.div`

@@ -1,19 +1,18 @@
 import { IInputAreaData } from '@ui/input-area/model'
+import { specialFieldsNameConfigT, specialFieldsNameT } from '@entities/applications/consts'
 
 type radioType = { id: number; title: string }
 
-type specialReasonFieldsNameT = 'Address' | 'Structure1' | 'Structure2' | null
-
-const getAddress = (data: IInputAreaData[]): specialReasonFieldsNameT => {
+const getAddress = (data: IInputAreaData[]): specialFieldsNameConfigT => {
     const reasonField = data.find((item: IInputAreaData) => item.fieldName === 'get_tk')
-
+    let resultNameField: specialFieldsNameT = null
     if (!!reasonField?.value) {
         const valueReason = reasonField?.value as radioType
         if (valueReason.title === 'По почте') {
-            return 'Address'
+            resultNameField = 'Address'
         }
     }
-    return null
+    return { get_tk: resultNameField }
 }
 
 export default getAddress

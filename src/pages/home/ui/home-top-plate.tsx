@@ -6,13 +6,12 @@ import shuffleArray from '@shared/lib/shuffle-array'
 import React from 'react'
 import styled from 'styled-components'
 
-const ProfileTopPlateStyled = styled.div<{ dark: string; main: string; light: string }>`
+const HomeTopPlateStyled = styled.div<{ dark: string; main: string; light: string }>`
     width: 100%;
     height: 200px;
     position: absolute;
     top: 0;
     left: 0;
-    filter: brightness(1.1);
     background: ${({ main, dark }) => `linear-gradient(119deg, ${main}, ${dark})`};
 
     @keyframes fadeIn {
@@ -77,7 +76,7 @@ const ProfileTopPlateStyled = styled.div<{ dark: string; main: string; light: st
     }
 `
 
-const ProfileTopPlate = () => {
+const HomeTopPlate = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -86,7 +85,7 @@ const ProfileTopPlate = () => {
     const light = getLettersColors(user?.fullName ?? '', 'light1') ?? Colors.blue.light2
 
     return (
-        <ProfileTopPlateStyled light={light} main={main} dark={dark}>
+        <HomeTopPlateStyled light={light} main={main} dark={dark}>
             <svg width="620" height="570" viewBox="0 0 620 570" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                     fillRule="evenodd"
@@ -123,8 +122,8 @@ const ProfileTopPlate = () => {
             <div className="circle c3"></div>
             <div className="circle c4"></div>
             <div className="circle c5"></div>
-        </ProfileTopPlateStyled>
+        </HomeTopPlateStyled>
     )
 }
 
-export default React.memo(ProfileTopPlate)
+export default React.memo(HomeTopPlate)

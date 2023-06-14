@@ -22,6 +22,7 @@ const ContentLayout = () => {
             <Story />
             <LeftsideBar />
             <ContentWrapper>
+                {/* <Header currentPagePair={{ currentPage, exactCurrentPage }} /> */}
                 <PageContent>
                     <Suspense fallback={null}>
                         <PrivateRouter />

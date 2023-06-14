@@ -1,7 +1,7 @@
 import React from 'react'
 import { paginationList } from '@entities/all-teachers'
 import Block from '@shared/ui/block'
-import { CenterPage, Wrapper } from '@ui/atoms'
+import { CenterPage, Title, Wrapper } from '@ui/atoms'
 import { useStore } from 'effector-react'
 import ListOfPeople from 'widgets/list-of-people'
 import styled from 'styled-components'
@@ -50,8 +50,10 @@ const AllTeachersPage = () => {
                         justifyContent="none"
                         noAppearanceInMobile
                     >
+                        <Title size={2} align="left" bottomGap>
+                            Сотрудники
+                        </Title>
                         <ListOfPeople
-                            title="Сотрудники"
                             searchPlaceholder="Поиск сотрудников"
                             paginationList={paginationList}
                             filterRequest={getDivisions}

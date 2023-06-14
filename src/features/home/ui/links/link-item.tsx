@@ -2,6 +2,7 @@ import { IRoute } from '@app/routes/general-routes'
 import { Icon } from '@features/all-pages'
 import { Colors } from '@shared/consts'
 import getShortStirng from '@shared/lib/get-short-string'
+import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import Notification from '@shared/ui/notification'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
@@ -75,13 +76,14 @@ type Props = {
 
 const LinkItem = ({ item, amount }: Props) => {
     const { icon, color, path, title, notifications } = item
+    const { isMobile } = useCurrentDevice()
     return (
         <LinkItemStyled amount={amount} to={path} color={Colors[color].transparent3}>
             <Notification
                 outline="4px solid var(--schedule)"
                 color="red"
-                top={'60px'}
-                right={'25px'}
+                top={isMobile ? '80%' : '66%'}
+                left={isMobile ? '70%' : '66%'}
                 visible={!!notifications}
                 className="notification-circle"
             >

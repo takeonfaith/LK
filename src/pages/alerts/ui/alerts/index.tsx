@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import AlertItem from 'widgets/alerts-widget/alert-item'
 import search from '../../lib/search'
 import Collapse from './collapse'
+import { userModel } from '@entities/user'
 
 const AlertsStyled = styled.div`
     width: 100%;
@@ -20,6 +21,9 @@ type Props = {
 }
 
 const Alerts = ({ alerts, listView }: Props) => {
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const [foundAlerts, setFoundAlerts] = useState<PreparedAlerts | null>(null)
 
     const finalAlerts = foundAlerts ?? alerts
@@ -39,7 +43,8 @@ const Alerts = ({ alerts, listView }: Props) => {
             {Object.keys(finalAlerts)
                 .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
                 .map((year) => {
-                    const collapsed = foundAlerts === null ? year !== new Date().getFullYear().toString() : false
+                    const currentYear = new Date().getFullYear().toString()
+                    const collapsed = foundAlerts === null ? year !== currentYear : false
                     const sideText = `Новостей: ${finalAlerts[year].length}`
                     return (
                         <Collapse
@@ -50,8 +55,15 @@ const Alerts = ({ alerts, listView }: Props) => {
                             initiallyCollapsed={collapsed}
                         >
                             <List scroll={false} gap={12}>
-                                {finalAlerts[year].map((alert) => {
-                                    return <AlertItem key={alert.id} news={alert} orientation="horizontal" />
+                                {finalAlerts[year].map((alert, index) => {
+                                    return (
+                                        <AlertItem
+                                            isNew={year === currentYear && index === 0 && !user?.hasAlerts}
+                                            key={alert.id}
+                                            news={alert}
+                                            orientation="horizontal"
+                                        />
+                                    )
                                 })}
                             </List>
                         </Collapse>

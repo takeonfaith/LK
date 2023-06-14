@@ -113,12 +113,19 @@ export interface IRoute {
     Component: (() => JSX.Element | null) | LazyExoticComponent<() => JSX.Element | null>
     color: keyof IColors
     isTemplate: boolean
+    shortTitle?: string
     isAdmin?: boolean
     isNew?: boolean
     show?: boolean
     notifications?: number
     group?: keyof typeof Groups
     keywords?: string[]
+    withoutHeader?: boolean
+    withoutBackButton?: boolean
+    isSubPage?: boolean
+    backButtonText?: string
+    subPageHeaderTitle?: string
+    fallbackPrevPage?: string
 }
 
 export const publicRoutes = [
@@ -184,6 +191,7 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         show: false,
         group: 'GENERAL',
+        withoutBackButton: true,
     },
     settings: {
         id: 'settings',
@@ -198,8 +206,8 @@ export const generalRoutes: IRoutes = {
     },
     'electronic-interaction-agreement': {
         id: 'electronic-interaction-agreement',
-        title: 'Соглашение об электр...',
-        // title: 'Соглашение об электронном взаимодействии',
+        title: 'Соглашение об электронном взаимодействии',
+        shortTitle: 'Соглашение об электр...',
         icon: <HiOutlineClipboardCheck />,
         path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
         Component: ElectronicInteractionAgreementPage,
@@ -220,11 +228,11 @@ export const generalRoutes: IRoutes = {
     },
     doclist: {
         id: 'doclist',
-        // title: 'Ознакомление с документами',
-        title: 'Ознакомление с док...',
+        title: 'Ознакомление с документами',
+        shortTitle: 'Ознакомление с док...',
         icon: <FiFileText />,
         path: DOCLIST_ROUTE,
-        Component: DecreisDirectivesPage,
+        Component: () => <DecreisDirectivesPage />,
         color: 'blue',
         isTemplate: false,
         group: 'FINANCES_DOCS',
@@ -237,7 +245,6 @@ export const generalRoutes: IRoutes = {
         Component: AlertsPage,
         color: 'purple',
         isTemplate: false,
-        isNew: true,
         group: 'COMMUNICATION',
         keywords: ['Оповещения'],
     },
@@ -251,6 +258,7 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'GENERAL',
         keywords: ['домой'],
+        withoutHeader: true,
     },
     profile: {
         id: 'profile',
@@ -261,6 +269,7 @@ export const generalRoutes: IRoutes = {
         color: 'purple',
         isTemplate: false,
         group: 'GENERAL',
+        withoutHeader: true,
     },
     'lk-notifications': {
         id: 'lk-notifications',
@@ -304,7 +313,6 @@ export const generalRoutes: IRoutes = {
         Component: AllStudentsPage,
         color: 'lightBlue',
         isTemplate: false,
-        isNew: true,
         group: 'COMMUNICATION',
         keywords: ['одногруппники', 'ученики'],
     },
@@ -342,7 +350,7 @@ export const generalRoutes: IRoutes = {
     },
     instructions: {
         id: 'instructions',
-        title: 'Инструкции, положения, правила',
+        title: 'Полезная информация',
         icon: <FiClipboard />,
         path: INSTRUCTIONS_ROUTE,
         Component: InstructionsPage,

@@ -55,6 +55,8 @@ const GlobalStyles = createGlobalStyle`
 		--very-mild-shadow: 0 0 32px rgb(0 0 0 / 8%);
 		--desktop-page-padding: 40px;
 		--mobile-page-padding: 5px;
+        --header-height: 45px;
+        --mobile-bottom-menu-height: 60px;
 	}
 
 	html[data-theme=dark] {

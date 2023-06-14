@@ -1,5 +1,5 @@
 import React from 'react'
-import { baseNotification, businesstripNotification, NameListNotification } from '@api/model/notification'
+import { baseNotification, businesstripNotification } from '@api/model/notification'
 import { Colors } from '@consts'
 import { personalNotificationModel } from '@entities/notification'
 import { userModel } from '@entities/user'
@@ -51,7 +51,6 @@ const DateCardNotification = styled.div`
 
 interface Props {
     data: baseNotification | businesstripNotification
-    type: NameListNotification
 }
 
 const CardNotification = ({ data }: Props) => {

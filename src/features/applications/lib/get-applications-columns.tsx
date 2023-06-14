@@ -8,7 +8,7 @@ import { Colors } from '@consts'
 
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
-        { title: 'Запрос', field: 'subject', priority: 'one', search: true },
+        { title: 'Запрос', field: 'subject', priority: 'one', search: true, showFull: true },
         {
             title: 'Дата',
             field: 'created',
@@ -16,31 +16,36 @@ const getApplicationsColumns = (): ColumnProps[] => {
             sort: true,
             type: 'date',
             align: 'center',
+            width: '120px',
         },
         {
             title: 'Рег. номер',
             field: 'num',
             priority: 'three',
             align: 'center',
+            width: '170px',
         },
         {
             title: 'Статус',
             field: 'status',
             priority: 'one',
-            width: '160px',
+            width: '130px',
             catalogs: [
                 ...(Object.values(ApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
             ],
-            render: (value) => (
-                <Message
-                    type={value === 'Готово' ? 'success' : value === 'Отклонено' ? 'failure' : 'alert'}
-                    title={value}
-                    align="center"
-                    width="100%"
-                    icon={null}
-                    maxWidth="150px"
-                />
-            ),
+            render: (value) => {
+                const newValue = transformStatusApplication(value)
+                return (
+                    <Message
+                        type={newValue === 'Готово' ? 'success' : newValue === 'Отклонено' ? 'failure' : 'alert'}
+                        title={newValue}
+                        align="center"
+                        width="100%"
+                        icon={null}
+                        maxWidth="150px"
+                    />
+                )
+            },
         },
         { title: 'Структурное подразделение, адрес', priority: 'five', field: 'response_div', width: '360px' },
         { title: 'Примечание', field: 'comment', priority: 'five' },
@@ -49,6 +54,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
             align: 'center',
             field: 'files_output',
             priority: 'five',
+            width: '150px',
             render: (value) =>
                 !!value.length && (
                     <Button
@@ -61,6 +67,19 @@ const getApplicationsColumns = (): ColumnProps[] => {
                 ),
         },
     ]
+}
+
+const transformStatusApplication = (status: string): string => {
+    switch (status) {
+        case 'На рассмотрении':
+            return ApplicationsConstants.pending
+        case 'Принято в работу':
+            return ApplicationsConstants.pending
+        case 'Получено':
+            return ApplicationsConstants.ready
+        default:
+            return status
+    }
 }
 
 const downloadFiles = (links: ApplicationFileOutput[]) => {

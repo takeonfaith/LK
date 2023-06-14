@@ -20,6 +20,7 @@ const SliderItemWrapper = styled.div<{ size: number; condition: boolean }>`
     & > b {
         word-break: normal;
         text-overflow: ellipsis;
+        font-weight: 600;
     }
 
     &:hover {

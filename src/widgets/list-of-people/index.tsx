@@ -33,7 +33,7 @@ type TUser = {
 }
 
 type Props<T extends TUser> = {
-    title: string
+    title?: string
     searchPlaceholder?: string
     paginationList: {
         $items: Store<T[] | null>
@@ -83,9 +83,12 @@ const ListOfPeople = <T extends TUser>({
 
     return (
         <ListWrapper>
-            <Title size={2} align="left" bottomGap>
-                {title}
-            </Title>
+            {title && (
+                <Title size={2} align="left" bottomGap>
+                    {title}
+                </Title>
+            )}
+
             <div className="search-and-filter">
                 {search && (
                     <GlobalSearch

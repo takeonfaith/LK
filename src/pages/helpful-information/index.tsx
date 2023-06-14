@@ -1,5 +1,5 @@
 import { userModel } from '@entities/user'
-import { CenterPage, Title } from '@ui/atoms'
+import { CenterPage } from '@ui/atoms'
 import Block from '@ui/block'
 import React, { useCallback, useMemo } from 'react'
 import { SliderPage } from 'widgets'
@@ -34,9 +34,6 @@ const HelpfulInformation = () => {
     return (
         <CenterPage alignItems="flex-start" padding="10px">
             <Block orientation="vertical" gap="10px" maxWidth="750px" height="fit-content" noAppearanceInMobile>
-                <Title size={2} align="left">
-                    Полезная информация
-                </Title>
                 <SliderPage pages={sliderPages} currentPage={sliderPageOnMount} onChangePage={onChangeSliderPage} />
             </Block>
         </CenterPage>

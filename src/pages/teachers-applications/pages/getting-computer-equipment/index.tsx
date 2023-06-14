@@ -9,7 +9,6 @@ const GettingComputerEquipmentPage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             formId={ApplicationTeachersFormCodes.GETTING_COMPUTER_EQUIPMENT}
         />
     )

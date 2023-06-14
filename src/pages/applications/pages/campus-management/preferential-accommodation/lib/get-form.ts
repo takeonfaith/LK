@@ -25,7 +25,7 @@ const itemsCategory = [
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Предоставление права проживания льготной категории граждан',
+        title: 'Контактная информация',
         hint: 'Необходимо прикрепить документ, подтверждающий соответствие льготной категории',
         data: [
             {

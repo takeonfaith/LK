@@ -9,7 +9,6 @@ const PaymentOfChildBirthAllowancePage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             isSpecialField={true}
             formId={ApplicationTeachersFormCodes.PAYMENT_OF_CHILD_BIRTH_ALLOWANCE}
         />

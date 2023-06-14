@@ -4,6 +4,7 @@ import { contextMenuModel } from '@entities/context-menu'
 import { lkNotificationModel } from '@entities/lk-notifications'
 import { userModel } from '@entities/user'
 import { NotificationsModal } from '@features/home/ui/organisms/home-top-section'
+import ThemeToggle from '@features/theme-toggle'
 import { OLD_LK_URL } from '@shared/consts'
 import { Divider } from '@shared/ui/atoms'
 import { Button } from '@shared/ui/button'
@@ -48,6 +49,8 @@ const UserContextMenu = () => {
     return (
         <>
             <AvailableAccounts padding="8px" size="small" />
+            <Divider />
+            <ThemeToggle type="h-button" />
             <Divider />
             <NotificationButtonWrapper>
                 <Button

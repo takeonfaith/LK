@@ -71,10 +71,10 @@ const List = (props: Props) => {
                 )}
                 {onWatchMore && (
                     <Button
-                        width="fit-content"
+                        width="50px"
                         height="15px"
-                        background={Colors.grey.transparent3}
-                        textColor="var(--reallyBlue)"
+                        background={Colors.blue.transparent2}
+                        textColor={Colors.blue.light1}
                         onClick={onWatchMore}
                         text="Ещё"
                     />

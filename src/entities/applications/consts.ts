@@ -62,4 +62,7 @@ export type specialFieldsNameT =
     | 'collHoliday5'
     | 'Structure1'
     | 'Structure2'
+    | 'dueToWithdrawal'
     | null
+
+export type specialFieldsNameConfigT = { [key: string]: specialFieldsNameT }

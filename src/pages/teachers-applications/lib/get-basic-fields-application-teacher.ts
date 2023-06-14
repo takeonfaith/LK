@@ -1,6 +1,7 @@
 import { UserApplication } from '@api/model'
 import { IInputAreaData } from '@ui/input-area/model'
 import { getFormattedSubDivisions } from '@features/applications/lib/get-subdivisions'
+import { getDefaultSubdivision } from '@pages/teachers-applications/lib/get-default-subdivision'
 
 const getBasicFieldsApplicationTeacher = (dataForm: UserApplication): IInputAreaData[] => {
     const { surname, name, patronymic, email, phone, subdivisions } = dataForm
@@ -15,13 +16,14 @@ const getBasicFieldsApplicationTeacher = (dataForm: UserApplication): IInputArea
         },
         {
             title: 'Подразделение/должность',
-            value: null,
-            fieldName: 'guid_worker',
+            value: getDefaultSubdivision(subdivisions),
+            fieldName: 'guid_staff',
             editable: true,
             width: '100',
-            required: !!subdivisions?.length,
+            required: true,
             type: 'select',
             items: getFormattedSubDivisions(subdivisions),
+            isSpecificSelect: true,
         },
         {
             title: 'E-mail',

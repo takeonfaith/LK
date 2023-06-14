@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { alertModel } from '@entities/alert'
-import { CenterPage, Error, Wrapper } from '@shared/ui/atoms'
+import { CenterPage, Error, Title, Wrapper } from '@shared/ui/atoms'
 import Block from '@shared/ui/block'
-import { Title } from '@shared/ui/title'
 import Alerts from './ui/alerts'
 import { lkNotificationModel } from '@entities/lk-notifications'
 

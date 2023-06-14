@@ -1,5 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
+import React from 'react'
 
 const ReasonProvidingOptions = [
     { id: 0, title: 'медицинские показания' },
@@ -81,7 +82,13 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 editable: true,
             },
         ],
-        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: true },
+        hint: (
+            <>
+                В случае предоставления академического отпуска по медицинским показаниям необходимо загрузить
+                подтверждающие медицинские документы.
+            </>
+        ),
+        documents: { files: [], fieldName: 'docs', maxFiles: 6, required: false },
     }
 }
 
