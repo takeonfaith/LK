@@ -8,7 +8,7 @@ import DragAndDropAreaWrapper from './style'
 
 type Props = FileInputProps
 
-const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, formats }: Props) => {
+const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, formats, maxFileSizeInMegaBytes }: Props) => {
     const fileInputRef = useRef(null)
     const [showPulse, setShowPulse] = useState(false)
 
@@ -16,7 +16,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, formats }: Props
         const loadedFiles = e.target.files as FileList
 
         if (loadedFiles?.length) {
-            setFiles(loadFiles(loadedFiles, files, maxFiles, formats))
+            setFiles(loadFiles(loadedFiles, files, maxFiles, formats, maxFileSizeInMegaBytes))
         }
     }
 
@@ -30,7 +30,7 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, formats }: Props
         const loadedFiles = e.dataTransfer.files
 
         if (loadedFiles.length) {
-            setFiles(loadFiles(loadedFiles, files, maxFiles, formats))
+            setFiles(loadFiles(loadedFiles, files, maxFiles, formats, maxFileSizeInMegaBytes))
         }
     }
 
