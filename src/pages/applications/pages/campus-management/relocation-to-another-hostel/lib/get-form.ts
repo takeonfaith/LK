@@ -138,7 +138,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: false,
             },
             {
-                title: 'Участие во внеучебной деятельности',
+                title: 'Участие во внеучебной деятельности (Общий объем файлов - 1мб.)',
                 value: null,
                 fieldName: 'extracurricular',
                 type: 'checkbox-docs',
