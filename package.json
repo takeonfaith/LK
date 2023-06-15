@@ -10,7 +10,8 @@
         "start": "vite",
         "build": "vite build",
         "build-test": "vite build --mode development",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm cache clean -f && npm i"
     },
     "dependencies": {
         "axios": "^0.24.0",
