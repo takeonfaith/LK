@@ -1,9 +1,9 @@
 {
-  "_customize-leftside-bar-item-4c711261.js": {
-    "file": "assets/customize-leftside-bar-item-4c711261.js",
+  "_customize-leftside-bar-item-3d5de4b7.js": {
+    "file": "assets/customize-leftside-bar-item-3d5de4b7.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_page-link-content-10aa0ec7.js",
+      "_page-link-content-cfcb1d65.js",
       "_index.esm-a48c2a55.js",
       "index.html"
     ]
@@ -11,25 +11,25 @@
   "_find-current-in-select-ba4611d5.js": {
     "file": "assets/find-current-in-select-ba4611d5.js"
   },
-  "_found-pages-df4c83c4.js": {
-    "file": "assets/found-pages-df4c83c4.js",
+  "_found-pages-412a5d4f.js": {
+    "file": "assets/found-pages-412a5d4f.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_page-link-1120fecf.js"
+      "_page-link-9dbd17eb.js"
     ]
   },
-  "_get-basic-fields-application-teacher-5fa35ac1.js": {
-    "file": "assets/get-basic-fields-application-teacher-5fa35ac1.js",
+  "_get-basic-fields-application-teacher-49a7e2a6.js": {
+    "file": "assets/get-basic-fields-application-teacher-49a7e2a6.js",
     "imports": [
-      "_get-default-subdivision-7a83d065.js"
+      "_get-default-subdivision-09d1f0f6.js"
     ]
   },
   "_get-correct-word-form-c0a854e8.js": {
     "file": "assets/get-correct-word-form-c0a854e8.js"
   },
-  "_get-default-subdivision-7a83d065.js": {
-    "file": "assets/get-default-subdivision-7a83d065.js",
+  "_get-default-subdivision-09d1f0f6.js": {
+    "file": "assets/get-default-subdivision-09d1f0f6.js",
     "imports": [
       "index.html"
     ]
@@ -40,8 +40,8 @@
   "_get-method-obstaing-c0726de9.js": {
     "file": "assets/get-method-obstaing-c0726de9.js"
   },
-  "_get-method-obtaining-fields-087d310a.js": {
-    "file": "assets/get-method-obtaining-fields-087d310a.js",
+  "_get-method-obtaining-fields-ac2d61bf.js": {
+    "file": "assets/get-method-obtaining-fields-ac2d61bf.js",
     "imports": [
       "index.html"
     ]
@@ -58,91 +58,91 @@
   "_get-teacher-subdivisions-500dfe3f.js": {
     "file": "assets/get-teacher-subdivisions-500dfe3f.js"
   },
-  "_help-links-7d531a5e.js": {
-    "file": "assets/help-links-7d531a5e.js",
+  "_help-links-29175817.js": {
+    "file": "assets/help-links-29175817.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
     ]
   },
-  "_index-06cfa6e7.js": {
-    "file": "assets/index-06cfa6e7.js",
+  "_index-00672e45.js": {
+    "file": "assets/index-00672e45.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
     ]
   },
-  "_index-167f2659.js": {
-    "file": "assets/index-167f2659.js",
-    "imports": [
-      "_vendor-1714f5a3.js",
-      "index.html"
-    ]
-  },
-  "_index-4b35992c.js": {
-    "file": "assets/index-4b35992c.js",
+  "_index-0a12301c.js": {
+    "file": "assets/index-0a12301c.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-167f2659.js"
+      "_week-schedule-7d8bf19c.js",
+      "_index-968ec3eb.js",
+      "_student-api-a5e3cd03.js",
+      "_get-correct-word-form-c0a854e8.js",
+      "_page-link-content-cfcb1d65.js",
+      "_page-link-9dbd17eb.js",
+      "_found-pages-412a5d4f.js"
     ]
   },
-  "_index-7ee38fb1.js": {
-    "file": "assets/index-7ee38fb1.js",
+  "_index-38c759c7.js": {
+    "file": "assets/index-38c759c7.js",
+    "imports": [
+      "_vendor-1714f5a3.js",
+      "index.html"
+    ]
+  },
+  "_index-62fc8c28.js": {
+    "file": "assets/index-62fc8c28.js",
+    "imports": [
+      "_vendor-1714f5a3.js",
+      "index.html",
+      "_index-968ec3eb.js"
+    ]
+  },
+  "_index-7537c7b0.js": {
+    "file": "assets/index-7537c7b0.js",
+    "imports": [
+      "_vendor-1714f5a3.js",
+      "index.html"
+    ]
+  },
+  "_index-753e6b6d.js": {
+    "file": "assets/index-753e6b6d.js",
     "imports": [
       "index.html",
       "_vendor-1714f5a3.js"
     ]
   },
-  "_index-82e0eef8.js": {
-    "file": "assets/index-82e0eef8.js",
+  "_index-968ec3eb.js": {
+    "file": "assets/index-968ec3eb.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
     ]
   },
-  "_index-8aa3d1de.js": {
-    "file": "assets/index-8aa3d1de.js",
-    "imports": [
-      "_vendor-1714f5a3.js",
-      "index.html"
-    ]
-  },
-  "_index-90c830e7.js": {
-    "file": "assets/index-90c830e7.js",
+  "_index-b443cbe0.js": {
+    "file": "assets/index-b443cbe0.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ]
   },
-  "_index-bb162ee8.js": {
-    "file": "assets/index-bb162ee8.js",
-    "imports": [
-      "_vendor-1714f5a3.js",
-      "index.html",
-      "_week-schedule-5e2734c9.js",
-      "_index-167f2659.js",
-      "_student-api-f38ccc74.js",
-      "_get-correct-word-form-c0a854e8.js",
-      "_page-link-content-10aa0ec7.js",
-      "_page-link-1120fecf.js",
-      "_found-pages-df4c83c4.js"
-    ]
-  },
-  "_index-c5368c58.js": {
-    "file": "assets/index-c5368c58.js",
-    "imports": [
-      "_vendor-1714f5a3.js",
-      "index.html",
-      "_index-06cfa6e7.js"
-    ]
-  },
-  "_index-f940e1e2.js": {
-    "file": "assets/index-f940e1e2.js",
+  "_index-b46bf8e4.js": {
+    "file": "assets/index-b46bf8e4.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
+    ]
+  },
+  "_index-d0b40f10.js": {
+    "file": "assets/index-d0b40f10.js",
+    "imports": [
+      "_vendor-1714f5a3.js",
+      "index.html",
+      "_index-38c759c7.js"
     ]
   },
   "_index.esm-a48c2a55.js": {
@@ -151,24 +151,24 @@
       "_vendor-1714f5a3.js"
     ]
   },
-  "_links-list-0d0ebb1b.js": {
-    "file": "assets/links-list-0d0ebb1b.js",
+  "_links-list-6257e9e8.js": {
+    "file": "assets/links-list-6257e9e8.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_page-link-1120fecf.js",
+      "_page-link-9dbd17eb.js",
       "index.html"
     ]
   },
-  "_page-link-1120fecf.js": {
-    "file": "assets/page-link-1120fecf.js",
+  "_page-link-9dbd17eb.js": {
+    "file": "assets/page-link-9dbd17eb.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_page-link-content-10aa0ec7.js"
+      "_page-link-content-cfcb1d65.js"
     ]
   },
-  "_page-link-content-10aa0ec7.js": {
-    "file": "assets/page-link-content-10aa0ec7.js",
+  "_page-link-content-cfcb1d65.js": {
+    "file": "assets/page-link-content-cfcb1d65.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
@@ -176,27 +176,27 @@
       "_get-short-string-60b0c4d4.js"
     ]
   },
-  "_qr-code-15664bc4.js": {
-    "file": "assets/qr-code-15664bc4.js",
+  "_qr-code-d97e5e6e.js": {
+    "file": "assets/qr-code-d97e5e6e.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
     ]
   },
-  "_search-42ee957d.js": {
-    "file": "assets/search-42ee957d.js",
+  "_search-350a8790.js": {
+    "file": "assets/search-350a8790.js",
     "imports": [
       "index.html"
     ]
   },
-  "_student-api-f38ccc74.js": {
-    "file": "assets/student-api-f38ccc74.js",
+  "_student-api-a5e3cd03.js": {
+    "file": "assets/student-api-a5e3cd03.js",
     "imports": [
       "index.html"
     ]
   },
-  "_teacher-data-5c533569.js": {
-    "file": "assets/teacher-data-5c533569.js",
+  "_teacher-data-1c9901f6.js": {
+    "file": "assets/teacher-data-1c9901f6.js",
     "imports": [
       "index.html",
       "_vendor-1714f5a3.js"
@@ -205,17 +205,17 @@
   "_vendor-1714f5a3.js": {
     "file": "assets/vendor-1714f5a3.js"
   },
-  "_week-schedule-5e2734c9.js": {
+  "_week-schedule-7d8bf19c.js": {
     "assets": [
       "assets/sleep-54d590c1.gif"
     ],
-    "file": "assets/week-schedule-5e2734c9.js",
+    "file": "assets/week-schedule-7d8bf19c.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
       "_get-correct-word-form-c0a854e8.js",
       "_get-short-string-60b0c4d4.js",
-      "_index-8aa3d1de.js"
+      "_index-7537c7b0.js"
     ]
   },
   "index.html": {
@@ -323,7 +323,7 @@
       "src/pages/memo-teacher/index.tsx",
       "src/pages/medical-certificate/index.tsx"
     ],
-    "file": "assets/index-a5eecfde.js",
+    "file": "assets/index-272cdddb.js",
     "imports": [
       "_vendor-1714f5a3.js"
     ],
@@ -331,36 +331,36 @@
     "src": "index.html"
   },
   "src/pages/acad-performance/index.tsx": {
-    "file": "assets/index-0789b7b5.js",
+    "file": "assets/index-c7109b10.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-f940e1e2.js"
+      "_index-00672e45.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/acad-performance/index.tsx"
   },
   "src/pages/alerts/index.tsx": {
-    "file": "assets/index-de899157.js",
+    "file": "assets/index-7fc05a05.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js",
+      "_index-38c759c7.js",
       "_get-short-string-60b0c4d4.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/alerts/index.tsx"
   },
   "src/pages/all-pages/index.tsx": {
-    "file": "assets/index-6e95a377.js",
+    "file": "assets/index-3dbe961a.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_page-link-1120fecf.js",
-      "_found-pages-df4c83c4.js",
-      "_search-42ee957d.js",
-      "_links-list-0d0ebb1b.js",
-      "_page-link-content-10aa0ec7.js",
+      "_page-link-9dbd17eb.js",
+      "_found-pages-412a5d4f.js",
+      "_search-350a8790.js",
+      "_links-list-6257e9e8.js",
+      "_page-link-content-cfcb1d65.js",
       "_get-correct-word-form-c0a854e8.js",
       "_get-short-string-60b0c4d4.js"
     ],
@@ -368,32 +368,32 @@
     "src": "src/pages/all-pages/index.tsx"
   },
   "src/pages/all-students/index.tsx": {
-    "file": "assets/index-14193ce7.js",
+    "file": "assets/index-99cc7732.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_student-api-f38ccc74.js",
-      "_index-4b35992c.js",
-      "_index-06cfa6e7.js",
-      "_index-167f2659.js"
+      "_student-api-a5e3cd03.js",
+      "_index-62fc8c28.js",
+      "_index-38c759c7.js",
+      "_index-968ec3eb.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/all-students/index.tsx"
   },
   "src/pages/all-teachers/index.tsx": {
-    "file": "assets/index-279b587a.js",
+    "file": "assets/index-359c6243.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-4b35992c.js",
-      "_index-06cfa6e7.js",
-      "_index-167f2659.js"
+      "_index-62fc8c28.js",
+      "_index-38c759c7.js",
+      "_index-968ec3eb.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/all-teachers/index.tsx"
   },
   "src/pages/application-for-superior-room/index.tsx": {
-    "file": "assets/index-906a8ef1.js",
+    "file": "assets/index-89b46b26.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -402,7 +402,7 @@
     "src": "src/pages/application-for-superior-room/index.tsx"
   },
   "src/pages/applications/index.tsx": {
-    "file": "assets/index-ffb4c3e8.js",
+    "file": "assets/index-2ac1e0a0.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -411,7 +411,7 @@
     "src": "src/pages/applications/index.tsx"
   },
   "src/pages/applications/pages/campus-management/academic-leave-accommodation/index.tsx": {
-    "file": "assets/index-93c76ce0.js",
+    "file": "assets/index-4b3d240f.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -420,7 +420,7 @@
     "src": "src/pages/applications/pages/campus-management/academic-leave-accommodation/index.tsx"
   },
   "src/pages/applications/pages/campus-management/accommodation-correspondence-form/index.tsx": {
-    "file": "assets/index-fa6e6d14.js",
+    "file": "assets/index-589e429d.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -429,7 +429,7 @@
     "src": "src/pages/applications/pages/campus-management/accommodation-correspondence-form/index.tsx"
   },
   "src/pages/applications/pages/campus-management/family-room/index.tsx": {
-    "file": "assets/index-79d64a4c.js",
+    "file": "assets/index-747dffe9.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -438,7 +438,7 @@
     "src": "src/pages/applications/pages/campus-management/family-room/index.tsx"
   },
   "src/pages/applications/pages/campus-management/preferential-accommodation/index.tsx": {
-    "file": "assets/index-92ac9e89.js",
+    "file": "assets/index-8a0bf710.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -447,7 +447,7 @@
     "src": "src/pages/applications/pages/campus-management/preferential-accommodation/index.tsx"
   },
   "src/pages/applications/pages/campus-management/regular-accommodation/index.tsx": {
-    "file": "assets/index-804643f5.js",
+    "file": "assets/index-275e1c02.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -456,7 +456,7 @@
     "src": "src/pages/applications/pages/campus-management/regular-accommodation/index.tsx"
   },
   "src/pages/applications/pages/campus-management/relocation-inside-hostel/index.tsx": {
-    "file": "assets/index-caa7982e.js",
+    "file": "assets/index-1fe49443.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -465,7 +465,7 @@
     "src": "src/pages/applications/pages/campus-management/relocation-inside-hostel/index.tsx"
   },
   "src/pages/applications/pages/campus-management/relocation-to-another-hostel/index.tsx": {
-    "file": "assets/index-a5a91d84.js",
+    "file": "assets/index-e0eea45f.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -474,7 +474,7 @@
     "src": "src/pages/applications/pages/campus-management/relocation-to-another-hostel/index.tsx"
   },
   "src/pages/applications/pages/campus-management/termination-of-employment-contract/index.tsx": {
-    "file": "assets/index-7bcf6773.js",
+    "file": "assets/index-31623493.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -483,7 +483,7 @@
     "src": "src/pages/applications/pages/campus-management/termination-of-employment-contract/index.tsx"
   },
   "src/pages/applications/pages/department-of-paid-services/paymnet-recipient/index.tsx": {
-    "file": "assets/index-e5ab0634.js",
+    "file": "assets/index-ed18a0db.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -492,7 +492,7 @@
     "src": "src/pages/applications/pages/department-of-paid-services/paymnet-recipient/index.tsx"
   },
   "src/pages/applications/pages/mobilization-department/military-registration-card/index.tsx": {
-    "file": "assets/index-067cf144.js",
+    "file": "assets/index-2fbbaaa0.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -501,7 +501,7 @@
     "src": "src/pages/applications/pages/mobilization-department/military-registration-card/index.tsx"
   },
   "src/pages/applications/pages/mobilization-department/military-registration-documents/index.tsx": {
-    "file": "assets/index-19f2729e.js",
+    "file": "assets/index-d3047784.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -510,11 +510,11 @@
     "src": "src/pages/applications/pages/mobilization-department/military-registration-documents/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/certificate-of-attendance/index.tsx": {
-    "file": "assets/index-82262490.js",
+    "file": "assets/index-2f825c47.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_find-current-in-select-ba4611d5.js",
       "_get-student-subdivisions-5a2f2c8d.js",
       "_get-method-obstaing-c0726de9.js",
@@ -524,7 +524,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/certificate-of-attendance/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/changing-personal-data/index.tsx": {
-    "file": "assets/index-2f32d160.js",
+    "file": "assets/index-09a72f68.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -533,7 +533,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/changing-personal-data/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/clarification-of-passport-data/index.tsx": {
-    "file": "assets/index-470a5147.js",
+    "file": "assets/index-7adf4c50.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -542,7 +542,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/clarification-of-passport-data/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/extension-attestation/index.tsx": {
-    "file": "assets/index-472ec3e6.js",
+    "file": "assets/index-70364c7f.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -551,7 +551,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/extension-attestation/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/holidays-after-training/index.tsx": {
-    "file": "assets/index-9f4845c1.js",
+    "file": "assets/index-7f243fbf.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -560,7 +560,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/holidays-after-training/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/independently-deducted/index.tsx": {
-    "file": "assets/index-9ac29f49.js",
+    "file": "assets/index-efdc818e.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -569,11 +569,11 @@
     "src": "src/pages/applications/pages/multifunctional-center/independently-deducted/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/paper-call/index.tsx": {
-    "file": "assets/index-26ed339b.js",
+    "file": "assets/index-5fe48529.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-student-subdivisions-5a2f2c8d.js",
       "_get-method-obstaing-c0726de9.js",
       "_get-divisions-96cfa1b1.js"
@@ -582,7 +582,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/paper-call/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/provision-academic-leave/index.tsx": {
-    "file": "assets/index-ab7adc6c.js",
+    "file": "assets/index-94d00043.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -591,7 +591,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/provision-academic-leave/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/restoring-the-magnetic-pass/index.tsx": {
-    "file": "assets/index-17932a90.js",
+    "file": "assets/index-fe3f30ab.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -600,7 +600,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/restoring-the-magnetic-pass/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/retake-for-diploma/index.tsx": {
-    "file": "assets/index-f8ba50e8.js",
+    "file": "assets/index-a85a317f.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -609,11 +609,11 @@
     "src": "src/pages/applications/pages/multifunctional-center/retake-for-diploma/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/social-agencies/index.tsx": {
-    "file": "assets/index-f7ddffe5.js",
+    "file": "assets/index-764e4e69.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-student-subdivisions-5a2f2c8d.js",
       "_get-method-obstaing-c0726de9.js",
       "_get-divisions-96cfa1b1.js"
@@ -622,11 +622,11 @@
     "src": "src/pages/applications/pages/multifunctional-center/social-agencies/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/state-accreditation/index.tsx": {
-    "file": "assets/index-a488169e.js",
+    "file": "assets/index-a527a076.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-student-subdivisions-5a2f2c8d.js",
       "_get-method-obstaing-c0726de9.js",
       "_get-divisions-96cfa1b1.js"
@@ -635,11 +635,11 @@
     "src": "src/pages/applications/pages/multifunctional-center/state-accreditation/index.tsx"
   },
   "src/pages/applications/pages/multifunctional-center/student-status/index.tsx": {
-    "file": "assets/index-cd04a9fc.js",
+    "file": "assets/index-00298d54.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-student-subdivisions-5a2f2c8d.js",
       "_get-method-obstaing-c0726de9.js",
       "_get-divisions-96cfa1b1.js"
@@ -648,7 +648,7 @@
     "src": "src/pages/applications/pages/multifunctional-center/student-status/index.tsx"
   },
   "src/pages/applications/pages/other/arbitrary-request/index.tsx": {
-    "file": "assets/index-fa5a73a0.js",
+    "file": "assets/index-0ae85093.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
@@ -658,7 +658,7 @@
     "src": "src/pages/applications/pages/other/arbitrary-request/index.tsx"
   },
   "src/pages/applications/pages/trade-union-organization/financial-assistance/index.tsx": {
-    "file": "assets/index-f31613f1.js",
+    "file": "assets/index-690a81ea.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -667,7 +667,7 @@
     "src": "src/pages/applications/pages/trade-union-organization/financial-assistance/index.tsx"
   },
   "src/pages/applications/pages/trade-union-organization/financial-support/index.tsx": {
-    "file": "assets/index-992f2472.js",
+    "file": "assets/index-66e46167.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -676,7 +676,7 @@
     "src": "src/pages/applications/pages/trade-union-organization/financial-support/index.tsx"
   },
   "src/pages/applications/pages/trade-union-organization/increased-state-academic-scholarship/index.tsx": {
-    "file": "assets/index-002baeb4.js",
+    "file": "assets/index-ead83b88.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -685,7 +685,7 @@
     "src": "src/pages/applications/pages/trade-union-organization/increased-state-academic-scholarship/index.tsx"
   },
   "src/pages/applications/pages/trade-union-organization/social-scollarship/index.tsx": {
-    "file": "assets/index-1d9b1d5f.js",
+    "file": "assets/index-05d9382f.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -694,17 +694,17 @@
     "src": "src/pages/applications/pages/trade-union-organization/social-scollarship/index.tsx"
   },
   "src/pages/cant-access/index.tsx": {
-    "file": "assets/index-6650ea99.js",
+    "file": "assets/index-c2399312.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js"
+      "_index-38c759c7.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/cant-access/index.tsx"
   },
   "src/pages/chat/index.tsx": {
-    "file": "assets/index-fe22a080.js",
+    "file": "assets/index-6b6ecaad.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
@@ -714,28 +714,28 @@
     "src": "src/pages/chat/index.tsx"
   },
   "src/pages/decreis-directives/index.tsx": {
-    "file": "assets/index-5d7fa73e.js",
+    "file": "assets/index-278edd24.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-c5368c58.js",
+      "_index-d0b40f10.js",
       "index.html",
-      "_index-06cfa6e7.js"
+      "_index-38c759c7.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/decreis-directives/index.tsx"
   },
   "src/pages/dormitory/index.tsx": {
-    "file": "assets/index-16e00793.js",
+    "file": "assets/index-45941b44.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js"
+      "_index-38c759c7.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/dormitory/index.tsx"
   },
   "src/pages/download-admin-files/index.tsx": {
-    "file": "assets/index-1bece607.js",
+    "file": "assets/index-a74ae009.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -744,77 +744,77 @@
     "src": "src/pages/download-admin-files/index.tsx"
   },
   "src/pages/electronic-interaction-agreement/index.tsx": {
-    "file": "assets/index-8cce672b.js",
+    "file": "assets/index-90dd9b79.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-82e0eef8.js"
+      "_index-b46bf8e4.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/electronic-interaction-agreement/index.tsx"
   },
   "src/pages/feedback/index.tsx": {
-    "file": "assets/index-9c3704d3.js",
+    "file": "assets/index-b5a819c8.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js",
-      "_help-links-7d531a5e.js"
+      "_index-38c759c7.js",
+      "_help-links-29175817.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/feedback/index.tsx"
   },
   "src/pages/forgot-password/index.tsx": {
-    "file": "assets/index-196f643b.js",
+    "file": "assets/index-e80aebcd.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js"
+      "_index-38c759c7.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/forgot-password/index.tsx"
   },
   "src/pages/get-your-login/index.tsx": {
-    "file": "assets/index-af8b3f6d.js",
+    "file": "assets/index-21a481ce.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js"
+      "_index-38c759c7.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/get-your-login/index.tsx"
   },
   "src/pages/helpful-information/index.tsx": {
-    "file": "assets/index-4f993ca6.js",
+    "file": "assets/index-2a38194d.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js",
-      "_teacher-data-5c533569.js"
+      "_index-38c759c7.js",
+      "_teacher-data-1c9901f6.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/helpful-information/index.tsx"
   },
   "src/pages/home/index.tsx": {
-    "file": "assets/index-1a8a25af.js",
+    "file": "assets/index-4c0480ed.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_links-list-0d0ebb1b.js",
-      "_week-schedule-5e2734c9.js",
-      "_qr-code-15664bc4.js",
-      "_index-06cfa6e7.js",
-      "_page-link-1120fecf.js",
-      "_page-link-content-10aa0ec7.js",
+      "_links-list-6257e9e8.js",
+      "_week-schedule-7d8bf19c.js",
+      "_qr-code-d97e5e6e.js",
+      "_index-38c759c7.js",
+      "_page-link-9dbd17eb.js",
+      "_page-link-content-cfcb1d65.js",
       "_get-correct-word-form-c0a854e8.js",
       "_get-short-string-60b0c4d4.js",
-      "_index-8aa3d1de.js"
+      "_index-7537c7b0.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/home/index.tsx"
   },
   "src/pages/hr-applications/index.tsx": {
-    "file": "assets/index-c60ab0fd.js",
+    "file": "assets/index-a93382bb.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -823,17 +823,17 @@
     "src": "src/pages/hr-applications/index.tsx"
   },
   "src/pages/hr-applications/pages/dismissal/index.tsx": {
-    "file": "assets/index-9b0c9331.js",
+    "file": "assets/index-282a2dc2.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-7ee38fb1.js"
+      "_index-753e6b6d.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/hr-applications/pages/dismissal/index.tsx"
   },
   "src/pages/hr-applications/pages/extra-holiday-coll/index.tsx": {
-    "file": "assets/index-9014b4bc.js",
+    "file": "assets/index-f0a4768d.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -842,7 +842,7 @@
     "src": "src/pages/hr-applications/pages/extra-holiday-coll/index.tsx"
   },
   "src/pages/hr-applications/pages/holiday-planning/index.tsx": {
-    "file": "assets/index-d5e1d096.js",
+    "file": "assets/index-8d1e8aa4.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -851,7 +851,7 @@
     "src": "src/pages/hr-applications/pages/holiday-planning/index.tsx"
   },
   "src/pages/hr-applications/pages/holiday-postponed/index.tsx": {
-    "file": "assets/index-d033fb52.js",
+    "file": "assets/index-aac19ce9.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -860,17 +860,17 @@
     "src": "src/pages/hr-applications/pages/holiday-postponed/index.tsx"
   },
   "src/pages/hr-applications/pages/holiday-work/index.tsx": {
-    "file": "assets/index-ec347420.js",
+    "file": "assets/index-734676ca.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-7ee38fb1.js"
+      "_index-753e6b6d.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/hr-applications/pages/holiday-work/index.tsx"
   },
   "src/pages/hr-applications/pages/part-time-deployment/index.tsx": {
-    "file": "assets/index-cb02f13c.js",
+    "file": "assets/index-a4106ada.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -879,7 +879,7 @@
     "src": "src/pages/hr-applications/pages/part-time-deployment/index.tsx"
   },
   "src/pages/hr-applications/pages/work-transfer/index.tsx": {
-    "file": "assets/index-89430928.js",
+    "file": "assets/index-22de449b.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -888,17 +888,17 @@
     "src": "src/pages/hr-applications/pages/work-transfer/index.tsx"
   },
   "src/pages/instructions/index.tsx": {
-    "file": "assets/index-fb474389.js",
+    "file": "assets/index-4e6cf44b.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_teacher-data-5c533569.js"
+      "_teacher-data-1c9901f6.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/instructions/index.tsx"
   },
   "src/pages/medical-certificate/index.tsx": {
-    "file": "assets/index-ef640f48.js",
+    "file": "assets/index-4bae1aba.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -907,102 +907,102 @@
     "src": "src/pages/medical-certificate/index.tsx"
   },
   "src/pages/memo-freshmen/index.tsx": {
-    "file": "assets/index-5da98bf6.js",
+    "file": "assets/index-1bf20976.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js",
-      "_help-links-7d531a5e.js"
+      "_index-38c759c7.js",
+      "_help-links-29175817.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/memo-freshmen/index.tsx"
   },
   "src/pages/memo-teacher/index.tsx": {
-    "file": "assets/index-ee2da485.js",
+    "file": "assets/index-bc845f89.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js",
-      "_help-links-7d531a5e.js"
+      "_index-38c759c7.js",
+      "_help-links-29175817.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/memo-teacher/index.tsx"
   },
   "src/pages/payments/index.tsx": {
-    "file": "assets/index-90bb30a8.js",
+    "file": "assets/index-605eac71.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_qr-code-15664bc4.js",
-      "_index-82e0eef8.js",
-      "_index-06cfa6e7.js"
+      "_qr-code-d97e5e6e.js",
+      "_index-b46bf8e4.js",
+      "_index-38c759c7.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/payments/index.tsx"
   },
   "src/pages/personal-notifications/index.tsx": {
-    "file": "assets/index-a958d065.js",
+    "file": "assets/index-1f735e03.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-c5368c58.js",
+      "_index-d0b40f10.js",
       "index.html",
-      "_index-06cfa6e7.js"
+      "_index-38c759c7.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/personal-notifications/index.tsx"
   },
   "src/pages/profile/index.tsx": {
-    "file": "assets/index-80f01912.js",
+    "file": "assets/index-0325cfa9.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js"
+      "_index-38c759c7.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/profile/index.tsx"
   },
   "src/pages/project-activities/index.tsx": {
-    "file": "assets/index-810f7076.js",
+    "file": "assets/index-729139d8.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js",
+      "_index-38c759c7.js",
       "_get-short-string-60b0c4d4.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/project-activities/index.tsx"
   },
   "src/pages/schedule/index.tsx": {
-    "file": "assets/index-4c6a5771.js",
+    "file": "assets/index-1504e93a.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-bb162ee8.js",
-      "_week-schedule-5e2734c9.js",
+      "_index-0a12301c.js",
+      "_week-schedule-7d8bf19c.js",
       "_get-correct-word-form-c0a854e8.js",
       "_get-short-string-60b0c4d4.js",
-      "_index-8aa3d1de.js",
-      "_index-167f2659.js",
-      "_student-api-f38ccc74.js",
-      "_page-link-content-10aa0ec7.js",
-      "_page-link-1120fecf.js",
-      "_found-pages-df4c83c4.js"
+      "_index-7537c7b0.js",
+      "_index-968ec3eb.js",
+      "_student-api-a5e3cd03.js",
+      "_page-link-content-cfcb1d65.js",
+      "_page-link-9dbd17eb.js",
+      "_found-pages-412a5d4f.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/schedule/index.tsx"
   },
   "src/pages/settings/index.tsx": {
-    "file": "assets/index-be7c3426.js",
+    "file": "assets/index-6c60767e.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_page-link-1120fecf.js",
-      "_found-pages-df4c83c4.js",
-      "_customize-leftside-bar-item-4c711261.js",
-      "_search-42ee957d.js",
-      "_index-8aa3d1de.js",
-      "_index-f940e1e2.js",
-      "_page-link-content-10aa0ec7.js",
+      "_page-link-9dbd17eb.js",
+      "_found-pages-412a5d4f.js",
+      "_customize-leftside-bar-item-3d5de4b7.js",
+      "_search-350a8790.js",
+      "_index-7537c7b0.js",
+      "_index-00672e45.js",
+      "_page-link-content-cfcb1d65.js",
       "_get-correct-word-form-c0a854e8.js",
       "_get-short-string-60b0c4d4.js",
       "_index.esm-a48c2a55.js"
@@ -1011,7 +1011,7 @@
     "src": "src/pages/settings/index.tsx"
   },
   "src/pages/settings/pages/account/index.tsx": {
-    "file": "assets/index-0cafdfdf.js",
+    "file": "assets/index-8a3140ea.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -1020,7 +1020,7 @@
     "src": "src/pages/settings/pages/account/index.tsx"
   },
   "src/pages/settings/pages/appearance/index.tsx": {
-    "file": "assets/index-1a83b821.js",
+    "file": "assets/index-bafa2749.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -1029,12 +1029,12 @@
     "src": "src/pages/settings/pages/appearance/index.tsx"
   },
   "src/pages/settings/pages/home/index.tsx": {
-    "file": "assets/index-778d0163.js",
+    "file": "assets/index-a046e7a4.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_customize-leftside-bar-item-4c711261.js",
-      "_page-link-content-10aa0ec7.js",
+      "_customize-leftside-bar-item-3d5de4b7.js",
+      "_page-link-content-cfcb1d65.js",
       "_get-correct-word-form-c0a854e8.js",
       "_get-short-string-60b0c4d4.js",
       "_index.esm-a48c2a55.js"
@@ -1051,7 +1051,7 @@
     "src": "src/pages/settings/pages/security/index.tsx"
   },
   "src/pages/teachers-applications/index.tsx": {
-    "file": "assets/index-0fd30744.js",
+    "file": "assets/index-bcbbab03.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html"
@@ -1060,12 +1060,12 @@
     "src": "src/pages/teachers-applications/index.tsx"
   },
   "src/pages/teachers-applications/pages/arbitrary-request/index.tsx": {
-    "file": "assets/index-8bc379f7.js",
+    "file": "assets/index-2a62f34d.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_get-default-subdivision-7a83d065.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
+      "_get-default-subdivision-09d1f0f6.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1073,11 +1073,11 @@
     "src": "src/pages/teachers-applications/pages/arbitrary-request/index.tsx"
   },
   "src/pages/teachers-applications/pages/certificate-from-the-place-of-work/index.tsx": {
-    "file": "assets/index-5ba497f1.js",
+    "file": "assets/index-8bb1797a.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_get-default-subdivision-7a83d065.js",
-      "_index-90c830e7.js",
+      "_get-default-subdivision-09d1f0f6.js",
+      "_index-b443cbe0.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1085,13 +1085,13 @@
     "src": "src/pages/teachers-applications/pages/certificate-from-the-place-of-work/index.tsx"
   },
   "src/pages/teachers-applications/pages/certificate-of-work-experience/index.tsx": {
-    "file": "assets/index-05122512.js",
+    "file": "assets/index-3e444230.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_get-default-subdivision-7a83d065.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_get-default-subdivision-09d1f0f6.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
@@ -1100,14 +1100,14 @@
     "src": "src/pages/teachers-applications/pages/certificate-of-work-experience/index.tsx"
   },
   "src/pages/teachers-applications/pages/certificate-time-parental-leave/index.tsx": {
-    "file": "assets/index-66ee2ad0.js",
+    "file": "assets/index-35144519.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1115,12 +1115,12 @@
     "src": "src/pages/teachers-applications/pages/certificate-time-parental-leave/index.tsx"
   },
   "src/pages/teachers-applications/pages/connecting-computer/index.tsx": {
-    "file": "assets/index-c0f35258.js",
+    "file": "assets/index-c094c228.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1128,25 +1128,25 @@
     "src": "src/pages/teachers-applications/pages/connecting-computer/index.tsx"
   },
   "src/pages/teachers-applications/pages/contact-info-actualization/index.tsx": {
-    "file": "assets/index-3ab040e3.js",
+    "file": "assets/index-a4f51b28.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-90c830e7.js",
+      "_index-b443cbe0.js",
       "_get-method-obstaing-c0726de9.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/teachers-applications/pages/contact-info-actualization/index.tsx"
   },
   "src/pages/teachers-applications/pages/copies-of-documents-from-the-personal-file/index.tsx": {
-    "file": "assets/index-79a675fc.js",
+    "file": "assets/index-86cb3c10.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1154,14 +1154,14 @@
     "src": "src/pages/teachers-applications/pages/copies-of-documents-from-the-personal-file/index.tsx"
   },
   "src/pages/teachers-applications/pages/copy-of-the-employment-record/index.tsx": {
-    "file": "assets/index-5c78bd50.js",
+    "file": "assets/index-ef6f472f.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1169,12 +1169,12 @@
     "src": "src/pages/teachers-applications/pages/copy-of-the-employment-record/index.tsx"
   },
   "src/pages/teachers-applications/pages/courier/index.tsx": {
-    "file": "assets/index-b616ce9d.js",
+    "file": "assets/index-111a9fbe.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1182,7 +1182,7 @@
     "src": "src/pages/teachers-applications/pages/courier/index.tsx"
   },
   "src/pages/teachers-applications/pages/data-verification/index.tsx": {
-    "file": "assets/index-584ecd83.js",
+    "file": "assets/index-26163b31.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
@@ -1192,12 +1192,12 @@
     "src": "src/pages/teachers-applications/pages/data-verification/index.tsx"
   },
   "src/pages/teachers-applications/pages/getting-computer-equipment/index.tsx": {
-    "file": "assets/index-31437d08.js",
+    "file": "assets/index-13eebef5.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1205,14 +1205,14 @@
     "src": "src/pages/teachers-applications/pages/getting-computer-equipment/index.tsx"
   },
   "src/pages/teachers-applications/pages/issuance-of-licenses/index.tsx": {
-    "file": "assets/index-07fdeee5.js",
+    "file": "assets/index-5d650677.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1220,11 +1220,11 @@
     "src": "src/pages/teachers-applications/pages/issuance-of-licenses/index.tsx"
   },
   "src/pages/teachers-applications/pages/number-of-unused-vacation-days/index.tsx": {
-    "file": "assets/index-68b10277.js",
+    "file": "assets/index-ebe582d3.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_index-b443cbe0.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1232,12 +1232,12 @@
     "src": "src/pages/teachers-applications/pages/number-of-unused-vacation-days/index.tsx"
   },
   "src/pages/teachers-applications/pages/other-it-services/index.tsx": {
-    "file": "assets/index-0c9d6e4d.js",
+    "file": "assets/index-6fc2dec6.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1245,14 +1245,14 @@
     "src": "src/pages/teachers-applications/pages/other-it-services/index.tsx"
   },
   "src/pages/teachers-applications/pages/payment-for-child-care/index.tsx": {
-    "file": "assets/index-534a69c9.js",
+    "file": "assets/index-eea46a81.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1260,14 +1260,14 @@
     "src": "src/pages/teachers-applications/pages/payment-for-child-care/index.tsx"
   },
   "src/pages/teachers-applications/pages/payment-of-child-birth-allowance/index.tsx": {
-    "file": "assets/index-3ef28a70.js",
+    "file": "assets/index-84ce666f.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1275,14 +1275,14 @@
     "src": "src/pages/teachers-applications/pages/payment-of-child-birth-allowance/index.tsx"
   },
   "src/pages/teachers-applications/pages/persona-income-tax-reference/index.tsx": {
-    "file": "assets/index-5b6919b5.js",
+    "file": "assets/index-551579c6.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1290,12 +1290,12 @@
     "src": "src/pages/teachers-applications/pages/persona-income-tax-reference/index.tsx"
   },
   "src/pages/teachers-applications/pages/printer-maintenance/index.tsx": {
-    "file": "assets/index-fdc7805d.js",
+    "file": "assets/index-f80b3ba5.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_get-default-subdivision-7a83d065.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
+      "_get-default-subdivision-09d1f0f6.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1303,12 +1303,12 @@
     "src": "src/pages/teachers-applications/pages/printer-maintenance/index.tsx"
   },
   "src/pages/teachers-applications/pages/question-personal-account/index.tsx": {
-    "file": "assets/index-89398451.js",
+    "file": "assets/index-9ecf0d47.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1316,12 +1316,12 @@
     "src": "src/pages/teachers-applications/pages/question-personal-account/index.tsx"
   },
   "src/pages/teachers-applications/pages/question-sed/index.tsx": {
-    "file": "assets/index-311a29b3.js",
+    "file": "assets/index-b13400af.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1329,11 +1329,11 @@
     "src": "src/pages/teachers-applications/pages/question-sed/index.tsx"
   },
   "src/pages/teachers-applications/pages/visa-certificate/index.tsx": {
-    "file": "assets/index-99c3b44c.js",
+    "file": "assets/index-e8b3ebdb.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_index-b443cbe0.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1341,14 +1341,14 @@
     "src": "src/pages/teachers-applications/pages/visa-certificate/index.tsx"
   },
   "src/pages/teachers-applications/pages/work-on-the-terms-of-external-concurrency/index.tsx": {
-    "file": "assets/index-28480470.js",
+    "file": "assets/index-b3c482f5.js",
     "imports": [
       "_vendor-1714f5a3.js",
-      "_index-90c830e7.js",
-      "_get-basic-fields-application-teacher-5fa35ac1.js",
-      "_get-method-obtaining-fields-087d310a.js",
+      "_index-b443cbe0.js",
+      "_get-basic-fields-application-teacher-49a7e2a6.js",
+      "_get-method-obtaining-fields-ac2d61bf.js",
       "_get-teacher-subdivisions-500dfe3f.js",
-      "_get-default-subdivision-7a83d065.js",
+      "_get-default-subdivision-09d1f0f6.js",
       "index.html",
       "_get-method-obstaing-c0726de9.js"
     ],
@@ -1356,30 +1356,30 @@
     "src": "src/pages/teachers-applications/pages/work-on-the-terms-of-external-concurrency/index.tsx"
   },
   "src/pages/teachers-schedule/index.tsx": {
-    "file": "assets/index-1f5f8ad1.js",
+    "file": "assets/index-389941c8.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-bb162ee8.js",
-      "_week-schedule-5e2734c9.js",
+      "_index-0a12301c.js",
+      "_week-schedule-7d8bf19c.js",
       "_get-correct-word-form-c0a854e8.js",
       "_get-short-string-60b0c4d4.js",
-      "_index-8aa3d1de.js",
-      "_index-167f2659.js",
-      "_student-api-f38ccc74.js",
-      "_page-link-content-10aa0ec7.js",
-      "_page-link-1120fecf.js",
-      "_found-pages-df4c83c4.js"
+      "_index-7537c7b0.js",
+      "_index-968ec3eb.js",
+      "_student-api-a5e3cd03.js",
+      "_page-link-content-cfcb1d65.js",
+      "_page-link-9dbd17eb.js",
+      "_found-pages-412a5d4f.js"
     ],
     "isDynamicEntry": true,
     "src": "src/pages/teachers-schedule/index.tsx"
   },
   "src/pages/vacation-schedule/index.tsx": {
-    "file": "assets/index-1645ee1c.js",
+    "file": "assets/index-6c2df2be.js",
     "imports": [
       "_vendor-1714f5a3.js",
       "index.html",
-      "_index-06cfa6e7.js",
+      "_index-38c759c7.js",
       "_get-short-string-60b0c4d4.js",
       "_get-correct-word-form-c0a854e8.js"
     ],
