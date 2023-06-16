@@ -355,7 +355,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение в другое общежитие (Подача заявок доступна с 08.06.2023 по 15.06.2023)',
         icon: BiIdCard,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
-        Component: RelocationToAnotherHostelPage,
+        Component: isProduction ? ApplicationRedirect : RelocationToAnotherHostelPage,
         color: 'blue',
         isTemplate: false,
         isSubPage: true,
