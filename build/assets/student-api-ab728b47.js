@@ -1,0 +1,1 @@
+import{$ as t,m as g}from"./index-1840b39c.js";const $=(e,r,p,a)=>t.get(`?getStudents&search=${e}&group=${r}&page=${p}&perpage=${a}&token=${g()}`),s=e=>t.get(`?getGroups=${e}&perpage=30&page=1&token=${g()}`);export{s as a,$ as g};
