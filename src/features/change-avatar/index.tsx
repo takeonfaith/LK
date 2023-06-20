@@ -105,14 +105,7 @@ const ChangeAvatar = (props: FieldProps) => {
             <Message type="failure" visible={!!error || !!errorDelete}>
                 {error || errorDelete}
             </Message>
-            <FileInput
-                maxFileSizeInBytes={0}
-                files={files}
-                maxFiles={1}
-                formats={['image/jpeg']}
-                setFiles={setFiles}
-                isActive
-            />
+            <FileInput files={files} maxFiles={1} formats={['image/jpeg']} setFiles={setFiles} isActive />
             <List direction="horizontal">
                 {user?.avatar && (
                     <SubmitButton

@@ -32,7 +32,6 @@ const GenerateSchedule = () => {
 
                     <Subtext fontSize="1rem">Список комиссий</Subtext>
                     <FileInput
-                        maxFileSizeInBytes={0}
                         files={[]}
                         setFiles={function (args: any): void {
                             throw new Error('Function not implemented.')
@@ -41,7 +40,6 @@ const GenerateSchedule = () => {
                     />
                     <Subtext fontSize="1rem">Список групп</Subtext>
                     <FileInput
-                        maxFileSizeInBytes={0}
                         files={[]}
                         setFiles={function (args: any): void {
                             throw new Error('Function not implemented.')
