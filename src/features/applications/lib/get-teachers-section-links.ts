@@ -28,6 +28,7 @@ import {
     BUFFER_HOLIDAY_WORK,
     DATA_VERIFICATION_ROUTE,
     CONTACT_INFO_ACTUALIZATION,
+    PRINT_ORDER_ROUTE,
 } from '@app/routes/teacher-routes'
 import { UNION_ORGANIZATION } from '@consts'
 
@@ -87,6 +88,15 @@ const getTeachersSectionLinks = () => {
         {
             title: 'Экспедиция отдела контроля и делопроизводства',
             links: [{ link: COURIER, title: 'Курьер' }],
+        },
+        {
+            title: 'Отдел оперативной полиграфии',
+            links: [
+                {
+                    link: PRINT_ORDER_ROUTE,
+                    title: 'Заказ в отдел оперативной полиграфии',
+                },
+            ],
         },
     ]
 }

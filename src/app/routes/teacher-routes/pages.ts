@@ -49,6 +49,7 @@ export const VisaCertificatePage = lazy(() => import('@pages/teachers-applicatio
 export const WorkOnTermsOfExternalConcurrencyPage = lazy(
     () => import('@pages/teachers-applications/pages/work-on-the-terms-of-external-concurrency'),
 )
+export const PrintOrderPage = lazy(() => import('@pages/teachers-applications/pages/print-order'))
 export const VacationSchedule = lazy(() => import('@pages/vacation-schedule'))
 
 export const AllTeachersPage = lazy(() => import('@pages/all-teachers'))

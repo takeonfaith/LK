@@ -36,6 +36,7 @@ import {
     VisaCertificatePage,
     WorkOnTermsOfExternalConcurrencyPage,
     WorkTransfer,
+    PrintOrderPage,
 } from './pages'
 
 import { isProduction, OLD_LK_URL } from '@consts'
@@ -94,6 +95,7 @@ export const COURIER = APPLICATIONS_ROUTE + '/courier'
 export const PERSONA_INCOME_TAX_REFERENCE = APPLICATIONS_ROUTE + '/persona-income-tax-reference'
 export const PAYMENT_OF_CHILD_BIRTH_ALLOWANCE = APPLICATIONS_ROUTE + '/payment-of-child-birth-allowance'
 export const PAYMENT_FOR_CHILD_CARE = APPLICATIONS_ROUTE + '/payment-for-child-care'
+export const PRINT_ORDER_ROUTE = APPLICATIONS_ROUTE + '/print-order'
 export const PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/part-time-deployment'
 export const HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/holiday-postponed'
 export const DISMISSAL = HR_APPLICATIONS_ROUTE + '/dismissal'
@@ -761,5 +763,15 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'print-order': {
+        id: 'print-order',
+        title: 'Заказ в отдел оперативной полиграфии',
+        icon: <FiFileText />,
+        color: 'blue',
+        path: PRINT_ORDER_ROUTE,
+        Component: isProduction ? ApplicationRedirect : PrintOrderPage,
+        isTemplate: false,
+        group: 'OTHER',
     },
 })
