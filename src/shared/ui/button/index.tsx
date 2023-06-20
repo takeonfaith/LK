@@ -1,6 +1,7 @@
 import { Align, Direction } from '@ui/types'
 import React, { HtmlHTMLAttributes } from 'react'
 import { ButtonWrapper } from './styles'
+import { popUpMessageModel } from '@entities/pop-up-message'
 
 type BaseProps = HtmlHTMLAttributes<HTMLButtonElement>
 
@@ -21,6 +22,7 @@ export type ButtonProps = BaseProps & {
     isActive?: boolean
     fixedInMobile?: boolean
     height?: string
+    notActiveClickMessage?: string
 }
 
 export function Button(props: ButtonProps) {
@@ -41,13 +43,20 @@ export function Button(props: ButtonProps) {
         direction = 'horizontal',
         isActive = true,
         height,
+        notActiveClickMessage,
         ...restProps
     } = props
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        if (isActive) onClick?.(event)
+        else if (notActiveClickMessage)
+            popUpMessageModel.events.evokePopUpMessage({ type: 'failure', message: notActiveClickMessage, time: 10000 })
+    }
 
     return (
         <ButtonWrapper
             text={!!text}
-            onClick={(e) => isActive && onClick?.(e)}
+            onClick={handleClick}
             isChosen={isChosen}
             width={width}
             minWidth={minWidth}
@@ -64,7 +73,7 @@ export function Button(props: ButtonProps) {
             {...restProps}
         >
             {!!icon && <div className="icon">{icon}</div>}
-            <span>{text}</span>
+            <span className="text">{text}</span>
         </ButtonWrapper>
     )
 }

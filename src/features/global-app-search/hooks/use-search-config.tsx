@@ -44,7 +44,7 @@ const FoundPeople = ({ people, type }: { people: (TTeacher | TStudent)[] | null;
 
 const useSearchConfig = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
-    const { notifications } = lkNotificationModel.selectors.useLkNotifications()
+    const { notifications, removeNotificationLoading } = lkNotificationModel.selectors.useLkNotifications()
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -132,7 +132,7 @@ const useSearchConfig = () => {
         },
         {
             title: 'Уведомления',
-            content: <NotificationList notifications={foundNotifications} />,
+            content: <NotificationList notifications={foundNotifications} loadingRemove={removeNotificationLoading} />,
             clear: () => {
                 setFoundNotifications(null)
             },

@@ -1,13 +1,12 @@
+import { TEMPLATE_USEFUL_INFO_ROUTE, USEFUL_INFO_ROUTE } from '@app/routes/general-routes'
+import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
-import { CenterPage } from '@ui/atoms'
-import Block from '@ui/block'
+import PageBlock from '@shared/ui/page-block'
 import React, { useCallback, useMemo } from 'react'
+import { useHistory, useRouteMatch } from 'react-router'
 import { SliderPage } from 'widgets'
 import pages from './config/pages-config'
 import getPages from './lib/get-pages'
-import { useHistory, useRouteMatch } from 'react-router'
-import { TEMPLATE_USEFUL_INFO_ROUTE, USEFUL_INFO_ROUTE } from '@app/routes/general-routes'
-import { menuModel } from '@entities/menu'
 
 const HelpfulInformation = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
@@ -32,11 +31,14 @@ const HelpfulInformation = () => {
     )
 
     return (
-        <CenterPage alignItems="flex-start" padding="10px">
-            <Block orientation="vertical" gap="10px" maxWidth="750px" height="fit-content" noAppearanceInMobile>
-                <SliderPage pages={sliderPages} currentPage={sliderPageOnMount} onChangePage={onChangeSliderPage} />
-            </Block>
-        </CenterPage>
+        <PageBlock>
+            <SliderPage
+                pages={sliderPages}
+                currentPage={sliderPageOnMount}
+                onChangePage={onChangeSliderPage}
+                appearance={false}
+            />
+        </PageBlock>
     )
 }
 

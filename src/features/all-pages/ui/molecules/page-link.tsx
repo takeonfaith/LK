@@ -12,8 +12,7 @@ const LinkWrapper = styled(Link)<{ width: number | string }>`
     border-radius: var(--brLight);
 
     @media (max-width: 500px) {
-        height: 110px;
-        width: ${({ width }) => (typeof width === 'number' ? `calc(33vw * ${width} - 14px)` : width)};
+        width: ${({ width }) => (typeof width === 'number' ? `calc(33vw * ${width} - 16.1px)` : width)};
     }
 `
 

@@ -24,6 +24,7 @@ export const MessageWrapper = styled.div<{
     fontSize?: string
     padding?: string
     gap?: string
+    lineHeight?: string
     isLightTheme: boolean
 }>`
     width: ${({ width }) => width ?? '100%'};
@@ -42,12 +43,16 @@ export const MessageWrapper = styled.div<{
     gap: 10px;
     font-weight: 500;
     justify-content: flex-end;
+    line-height: ${({ lineHeight }) => lineHeight};
     align-items: ${({ align }) => (align === 'left' ? 'flex-start' : align === 'center' ? 'center' : 'flex-end')};
 
     .close-button {
         position: absolute;
-        top: 0px;
-        right: 0px;
+        top: 5px;
+        right: 5px;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
     }
 
     .info-text {
@@ -58,6 +63,6 @@ export const MessageWrapper = styled.div<{
 
     a {
         text-decoration: underline;
-        color: ${({ type, isLightTheme }) => Colors[messageType[type].color][isLightTheme ? 'dark3' : 'light3']};
+        color: ${({ type, isLightTheme }) => Colors[messageType[type].color][isLightTheme ? 'main' : 'light2']};
     }
 `

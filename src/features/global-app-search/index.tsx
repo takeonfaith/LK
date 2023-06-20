@@ -2,6 +2,7 @@
 import getUsersOS from '@shared/lib/get-users-os'
 import useShortCutKeys from '@shared/lib/hooks/use-short-cut-keys'
 import BlockWrapper from '@shared/ui/block/styles'
+import { Button } from '@shared/ui/button'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
@@ -52,7 +53,7 @@ const getShortCut = () => {
 }
 
 type Props = {
-    size?: 'small' | 'large'
+    size?: 'icon' | 'small' | 'large'
 }
 
 const GlobalAppSearch = ({ size = 'large' }: Props) => {
@@ -67,6 +68,19 @@ const GlobalAppSearch = ({ size = 'large' }: Props) => {
         shortCut.map(({ key }) => key),
         handleOpenModal,
     )
+
+    if (size === 'icon') {
+        return (
+            <Button
+                direction="vertical"
+                icon={<FiSearch />}
+                width="40px"
+                minWidth="40px"
+                background="transparent"
+                onClick={handleOpenModal}
+            />
+        )
+    }
 
     return (
         <GlobalAppSearchStyled

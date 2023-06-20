@@ -83,6 +83,7 @@ export const SETTINGS_PERSONAl_ROUTE = SETTINGS_ROUTE + '/personal'
 export const SETTINGS_SECURITY_ROUTE = SETTINGS_ROUTE + '/security'
 export const SETTINGS_HOME_PAGE_ROUTE = SETTINGS_ROUTE + '/home-page'
 export const SETTINGS_CUSTOMIZE_MENU_PAGE_ROUTE = SETTINGS_ROUTE + '/customize-menu'
+export const SETTINGS_NOTIFICATIONS = SETTINGS_ROUTE + '/notifications'
 export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activity'
 export const ALERTS_ROUTE = '/alerts'
@@ -126,6 +127,7 @@ export interface IRoute {
     backButtonText?: string
     subPageHeaderTitle?: string
     fallbackPrevPage?: string
+    planeHeader?: boolean
 }
 
 export const publicRoutes = [
@@ -288,11 +290,12 @@ export const generalRoutes: IRoutes = {
         title: 'Сообщения',
         icon: <BiMessageRounded />,
         path: CHAT_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
+        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE, forceForward: true }),
         color: 'red',
         isTemplate: true,
         group: 'OTHER',
         keywords: ['чат'],
+        planeHeader: true,
     },
     schedule: {
         id: 'schedule',
@@ -304,6 +307,7 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
         keywords: ['экзамены', 'зачеты', 'сессия', 'пересдача'],
+        planeHeader: true,
     },
     'all-students': {
         id: 'all-students',
@@ -382,6 +386,7 @@ export const generalHiddenRoutes: IRoutes = {
         isTemplate: false,
         show: false,
         group: 'OTHER',
+        planeHeader: true,
     },
     'filtered-all-students': {
         id: 'filtered-all-students',
@@ -415,6 +420,10 @@ export const generalHiddenRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'OTHER',
+        isSubPage: true,
+        subPageHeaderTitle: 'Внешний вид',
+        fallbackPrevPage: SETTINGS_ROUTE,
+        backButtonText: 'Настройки',
     },
     'settings-personal': {
         id: 'settings-personal',
@@ -426,6 +435,10 @@ export const generalHiddenRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'OTHER',
+        isSubPage: true,
+        subPageHeaderTitle: 'Внешний вид',
+        fallbackPrevPage: SETTINGS_ROUTE,
+        backButtonText: 'Настройки',
     },
     'settings-security': {
         id: 'settings-security',
@@ -437,10 +450,14 @@ export const generalHiddenRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'OTHER',
+        isSubPage: true,
+        subPageHeaderTitle: 'Безопасность',
+        fallbackPrevPage: SETTINGS_ROUTE,
+        backButtonText: 'Настройки',
     },
     'settings-home-page': {
         id: 'settings-home-page',
-        title: 'Настройки. Домашний экран',
+        title: 'Настройки. Главная',
         icon: <FiHome />,
         path: SETTINGS_HOME_PAGE_ROUTE,
         Component: HomeSettings,
@@ -448,6 +465,10 @@ export const generalHiddenRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'OTHER',
+        isSubPage: true,
+        subPageHeaderTitle: 'Главная',
+        fallbackPrevPage: SETTINGS_ROUTE,
+        backButtonText: 'Настройки',
     },
     'settings-customize-menu': {
         id: 'settings-customize-menu',
@@ -458,6 +479,24 @@ export const generalHiddenRoutes: IRoutes = {
         color: 'red',
         isTemplate: true,
         show: true,
+        isSubPage: true,
+        subPageHeaderTitle: 'Меню',
+        fallbackPrevPage: SETTINGS_ROUTE,
+        backButtonText: 'Настройки',
+    },
+    'settings-notifications': {
+        id: 'settings-notifications',
+        title: 'Настройки. Уведомления',
+        icon: <FiBell />,
+        path: SETTINGS_NOTIFICATIONS,
+        Component: () => <></>,
+        color: 'orange',
+        isTemplate: true,
+        show: true,
+        isSubPage: true,
+        subPageHeaderTitle: 'Уведомления',
+        fallbackPrevPage: SETTINGS_ROUTE,
+        backButtonText: 'Настройки',
     },
     'useful-info-template': {
         id: `useful-info-template`,

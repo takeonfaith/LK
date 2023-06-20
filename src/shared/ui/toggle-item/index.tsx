@@ -2,13 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { SwitchToggle } from '../molecules'
 
-const ToggleItemBlock = styled.div`
+const ToggleItemBlock = styled.div<{ disabled?: boolean }>`
     padding: 0px 12px;
     height: 45px;
     width: 100%;
     display: flex;
     align-items: center;
     border-radius: var(--brLight);
+    opacity: ${({ disabled }) => (disabled ? '0.5' : '1')};
+    pointer-events: ${({ disabled }) => (disabled ? 'none' : 'all')};
 
     .icon {
         width: 22px;
@@ -51,15 +53,16 @@ type Props = {
     state: boolean
     action: (state: boolean) => void
     icon?: React.ReactNode
+    disabled?: boolean
 }
 
-const ToggleItem = ({ title, state, action, icon }: Props) => {
+const ToggleItem = ({ title, state, action, icon, disabled }: Props) => {
     const handleToggle = () => {
         action(!state)
     }
 
     return (
-        <ToggleItemBlock key={title}>
+        <ToggleItemBlock key={title} disabled={disabled}>
             {icon && <div className="icon">{icon}</div>}
             <label>
                 <b>{title}</b>

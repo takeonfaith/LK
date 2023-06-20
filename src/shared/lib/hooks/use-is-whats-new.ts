@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { userModel } from '@entities/user'
 import { LastUpdateWhatsNew } from '@consts'
 
-const useIsShowNotification = () => {
+const useIsShowWhatsNew = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -27,4 +27,4 @@ const useIsShowNotification = () => {
     return isShowNotification
 }
 
-export default useIsShowNotification
+export default useIsShowWhatsNew

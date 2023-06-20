@@ -11,10 +11,9 @@ const AreaTitleWrapper = styled.div`
     cursor: pointer;
     position: sticky;
     top: -2px;
-    background: var(--form);
+    background: var(--schedule);
     z-index: 3;
     width: 100%;
-    padding: 0 10px;
     /* border-radius: var(--brLight) var(--brLight) 0 0; */
 
     .title-and-icon {
@@ -27,10 +26,12 @@ const AreaTitleWrapper = styled.div`
             width: 100%;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-weight: 500;
         }
 
         svg {
-            min-width: 16px;
+            min-width: 19px;
+            height: 19px;
             margin-right: 7px;
         }
         /* white-space: nowrap; */

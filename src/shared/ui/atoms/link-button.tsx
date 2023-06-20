@@ -22,7 +22,7 @@ const LinkButtonWrapper = styled.a<{
     padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
     text-decoration: none;

@@ -1,3 +1,4 @@
+import { settingsModel } from '@entities/settings'
 import { IconWrapper } from '@pages/profile/ui/top/styles'
 import { Colors } from '@shared/consts'
 import useTheme from '@shared/lib/hooks/use-theme'
@@ -13,6 +14,8 @@ type Props = {
 
 const ThemeToggle = ({ type, onClick }: Props) => {
     const { theme, switchTheme } = useTheme()
+    const { settings } = settingsModel.selectors.useSettings()
+    const apparanceSettings = settings?.['settings-appearance'].property
     const [isLight, setIsLight] = useState(theme === 'light')
     const icon = isLight ? <FiSun /> : <FiMoon />
     const themeWord = isLight ? 'Светлая' : 'Темная'
@@ -46,11 +49,21 @@ const ThemeToggle = ({ type, onClick }: Props) => {
         onClick?.()
     }
 
-    if (type === 'toggle') return <ToggleArea title={''} toggles={toggles} setToggles={setToggles} />
+    if (type === 'toggle')
+        return (
+            <ToggleArea
+                disabled={!!apparanceSettings?.scheduledLightTheme}
+                title={''}
+                toggles={toggles}
+                setToggles={setToggles}
+            />
+        )
 
     if (type === 'h-button') {
         return (
             <Button
+                notActiveClickMessage="У вас включена тема по расписанию. Если хотите управлять темой вручную, перейдите в настройки -> внешний вид"
+                isActive={!apparanceSettings.scheduledLightTheme}
                 text={text}
                 background="var(--schedule)"
                 icon={icon}
@@ -63,9 +76,15 @@ const ThemeToggle = ({ type, onClick }: Props) => {
 
     return (
         <Button
+            notActiveClickMessage="У вас включена тема по расписанию. Если хотите управлять темой вручную, перейдите в настройки -> внешний вид"
+            isActive={!apparanceSettings.scheduledLightTheme}
             padding="0"
             background={Colors.white.transparent2}
-            icon={<IconWrapper background={Colors.green.main}>{icon}</IconWrapper>}
+            icon={
+                <IconWrapper width="30px" background={Colors.green.main}>
+                    {icon}
+                </IconWrapper>
+            }
             onClick={changeTheme}
             text={text}
             width="calc(50% - 5px)"

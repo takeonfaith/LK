@@ -31,9 +31,9 @@ const Notification = styled.span<{
     font-weight: bold;
     height: 16px;
     display: ${({ visible }) => !visible && 'none'};
-    animation: ${({ pulsing }) => pulsing && '2s pulsing infinite'};
+    animation: ${({ pulsing }) => pulsing && '2s notif-pulsing infinite'};
 
-    @keyframes pulsing {
+    @keyframes notif-pulsing {
         0% {
             outline: 0px solid ${({ color }) => Colors[color ?? 'red'].main};
         }

@@ -9,9 +9,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import LkNotificationList from 'widgets/lk-notification-list'
-// import UserBig from 'widgets/user-big'
 
-const HomeTopSectionStyled = styled.div`
+const NotificationBellStyled = styled.div`
     position: relative;
     min-width: 40px;
     height: 40px;
@@ -36,7 +35,7 @@ export const NotificationsModal = () => {
     const { notifications } = lkNotificationModel.selectors.useLkNotifications()
 
     return (
-        <Flex d="column" gap="48px" w="100%">
+        <Flex d="column" gap="48px" w="100%" mw="500px">
             <LkNotificationList />
             {notifications.length > 0 && (
                 <Link to={LK_NOTIFICATIONS_ROUTE} style={{ width: '100%' }}>
@@ -47,7 +46,7 @@ export const NotificationsModal = () => {
     )
 }
 
-const HomeTopSection = () => {
+const NotificationBellSection = () => {
     const { notifications } = lkNotificationModel.selectors.useLkNotifications()
     const { open } = useModal()
 
@@ -56,7 +55,7 @@ const HomeTopSection = () => {
     }
 
     return (
-        <HomeTopSectionStyled onClick={handleClick}>
+        <NotificationBellStyled onClick={handleClick}>
             <Notification
                 outline="none"
                 box-shadow="0px 0px 0px 3px var(--schedule)"
@@ -71,8 +70,8 @@ const HomeTopSection = () => {
                 {notifications.length}
             </Notification>
             <MdOutlineNotifications />
-        </HomeTopSectionStyled>
+        </NotificationBellStyled>
     )
 }
 
-export default HomeTopSection
+export default NotificationBellSection

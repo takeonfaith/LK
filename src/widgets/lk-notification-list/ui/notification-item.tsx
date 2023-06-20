@@ -1,22 +1,18 @@
-import { NotificationType, TNotification, lkNotificationModel } from '@entities/lk-notifications'
-import { Icon } from '@features/all-pages'
-import Avatar from '@features/home/ui/molecules/avatar'
-import { IColors } from '@shared/consts'
+import { TNotification, lkNotificationModel } from '@entities/lk-notifications'
 import getShortString from '@shared/lib/get-short-string'
 import localizeDate from '@shared/lib/localize-date'
 import { Button } from '@shared/ui/button'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
-import NewVersionMessage from '@shared/ui/new-version-message'
+import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
-import { Title } from '@shared/ui/title'
-import { HeaderSize, Size } from '@shared/ui/types'
-import React from 'react'
-import { BiNews, BiRuble } from 'react-icons/bi'
-import { FiClock, FiFileText, FiInfo, FiMessageCircle, FiStar, FiX } from 'react-icons/fi'
-import { HiOutlineClipboardCheck } from 'react-icons/hi'
+import { Size } from '@shared/ui/types'
+import React, { useState } from 'react'
+import { FiX } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets/modal/lib'
+import { iconObject } from './notification-icon'
+import { Loading } from '@shared/ui/loading'
 
 const NotificationItemStyled = styled(Link)`
     width: 100%;
@@ -50,88 +46,30 @@ const NotificationItemStyled = styled(Link)`
     }
 `
 
-type SizeObject = Record<Size, string | number>
+const NotificationTitle = styled.div<{ fontSize: string }>`
+    font-size: ${({ fontSize }) => fontSize};
+    font-weight: 500;
+`
+
+type SizeObject = Record<Size, string>
 
 const titleSize: SizeObject = {
-    small: 5,
-    middle: 5,
-    big: 3,
+    small: '0.8rem',
+    middle: '0.83rem',
+    big: '0.86rem',
 }
 
 const textSize: SizeObject = {
     small: '0.75rem',
-    middle: '0.8rem',
-    big: '0.9rem',
+    middle: '0.78rem',
+    big: '0.80rem',
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const ChatIcon = ({ name, avatar }: { name: string; avatar: string | undefined }) => {
-    return <Avatar avatar={avatar} width="38px" height="38px" name={name} marginRight="0" icon={<FiMessageCircle />} />
+const gapSize: SizeObject = {
+    small: '0px',
+    middle: '1px',
+    big: '3px',
 }
-
-const IconWrapper = ({ color, children }: { color: keyof IColors; children: JSX.Element }) => {
-    return <Icon color={color}>{children}</Icon>
-}
-
-const iconObject = (name: string, avatar: string | undefined): Record<NotificationType, ChildrenType> => ({
-    info: (
-        <IconWrapper color="grey">
-            <FiInfo />
-        </IconWrapper>
-    ),
-    message: <ChatIcon name={name} avatar={avatar} />,
-    alert: (
-        <IconWrapper color="purple">
-            <BiNews />
-        </IconWrapper>
-    ),
-    'payment-dorm': (
-        <IconWrapper color="green">
-            <BiRuble />
-        </IconWrapper>
-    ),
-    'payment-ed': (
-        <IconWrapper color="green">
-            <BiRuble />
-        </IconWrapper>
-    ),
-    'digital-services': (
-        <IconWrapper color="red">
-            <FiFileText />
-        </IconWrapper>
-    ),
-    'doc-for-review': (
-        <IconWrapper color="blue">
-            <FiFileText />
-        </IconWrapper>
-    ),
-    'hr-applications': (
-        <IconWrapper color="green">
-            <FiFileText />
-        </IconWrapper>
-    ),
-    'kpi-pps': (
-        <IconWrapper color="pink">
-            <FiStar />
-        </IconWrapper>
-    ),
-    schedule: (
-        <IconWrapper color="pink">
-            <FiClock />
-        </IconWrapper>
-    ),
-    'schedule-session': (
-        <IconWrapper color="pink">
-            <FiClock />
-        </IconWrapper>
-    ),
-    'version-update': <NewVersionMessage />,
-    'electronic-interaction': (
-        <IconWrapper color="blue">
-            <HiOutlineClipboardCheck />
-        </IconWrapper>
-    ),
-})
 
 const NotificationItem = ({
     id,
@@ -139,46 +77,59 @@ const NotificationItem = ({
     text,
     time,
     date,
-    onClose,
     onClick,
     type,
-    image,
     pageId,
     goTo,
+    onClose,
+    loadingRemove = false,
+    canClose = true,
+    fullText = true,
     maxLetters = 200,
     size = 'middle',
 }: TNotification & { size?: Size; maxLetters?: number }) => {
     const normalizedDate = localizeDate(date, 'short')
     const { close } = useModal()
 
+    const [removeButtonClicked, setRemoveButtonClicked] = useState(false)
+
     const handleClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation()
         e.preventDefault()
+        setRemoveButtonClicked(true)
         onClose?.()
     }
 
     const handleClick = () => {
         onClick?.()
-        lkNotificationModel.events.clearById({ id, pageId })
+        if (canClose) lkNotificationModel.events.clearById({ id, pageId })
         close()
     }
 
     return (
         <NotificationItemStyled to={goTo ?? ''} onClick={handleClick}>
-            <span className="left-icon">{iconObject(title, image)[type]}</span>
+            <span className="left-icon">{iconObject()[type]}</span>
             <div className="content">
                 <Subtext fontSize="0.7rem">
                     <DotSeparatedWords words={[normalizedDate ?? '', time ?? '']} />
                 </Subtext>
-
-                <div className="top-content">
-                    <Title size={titleSize[size] as HeaderSize} align="left" width="fit-content">
-                        {getShortString(title, maxLetters)}
-                    </Title>
-                </div>
-                <Subtext fontSize={textSize[size] as string}>{getShortString(text, maxLetters)}</Subtext>
+                <Flex d="column" gap={gapSize[size]} ai="flex-start">
+                    <NotificationTitle fontSize={titleSize[size]}>
+                        {fullText ? title : getShortString(title, maxLetters)}
+                    </NotificationTitle>
+                    <Subtext fontSize={textSize[size] as string}>
+                        {fullText ? text : getShortString(text, maxLetters)}
+                    </Subtext>
+                </Flex>
             </div>
-            {onClose && <Button icon={<FiX />} background="transparent" onClick={handleClose} />}
+            {onClose && (
+                <Button
+                    isActive={!(loadingRemove && removeButtonClicked)}
+                    icon={loadingRemove && removeButtonClicked ? <Loading width="20px" height="20px" /> : <FiX />}
+                    background="transparent"
+                    onClick={handleClose}
+                />
+            )}
         </NotificationItemStyled>
     )
 }

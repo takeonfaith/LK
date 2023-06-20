@@ -2,7 +2,7 @@ import React from 'react'
 import NotificationsPage from '../../widgets/notifications'
 
 const PersonalNotificationsPage = () => {
-    return <NotificationsPage title="Ознакомление с документами" />
+    return <NotificationsPage />
 }
 
 export default PersonalNotificationsPage

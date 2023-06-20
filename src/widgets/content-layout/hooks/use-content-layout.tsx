@@ -1,7 +1,8 @@
 import useLkNotifications from '@entities/lk-notifications/hooks/use-lk-notifications'
 import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
-import useIsShowNotification from '@shared/lib/hooks/use-is-show-notification'
+import useCurrentExactPage from '@shared/lib/hooks/use-current-exact-page'
+import useIsShowWhatsNew from '@shared/lib/hooks/use-is-whats-new'
 import useTheme from '@shared/lib/hooks/use-theme'
 import React, { useEffect } from 'react'
 import { WhatsNew } from 'widgets'
@@ -11,9 +12,10 @@ const useContentLayout = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const { currentPage, exactCurrentPage } = useCurrentExactPage()
 
     const { open } = useModal()
-    const isShowNotification = useIsShowNotification()
+    const isShowWhatsNew = useIsShowWhatsNew()
     // const { seen } = useShowTutorial()
 
     useEffect(() => {
@@ -25,10 +27,12 @@ const useContentLayout = () => {
     useTheme()
 
     useEffect(() => {
-        if (isShowNotification) {
-            isShowNotification && open(<WhatsNew />)
+        if (isShowWhatsNew) {
+            isShowWhatsNew && open(<WhatsNew />)
         }
-    }, [isShowNotification])
+    }, [isShowWhatsNew])
+
+    return { currentPage, exactCurrentPage }
 }
 
 export default useContentLayout

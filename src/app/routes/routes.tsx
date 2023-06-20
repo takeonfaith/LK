@@ -103,11 +103,12 @@ export const privateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
         keywords: ['справки', 'справка', 'заявления', 'заявление'],
+        planeHeader: true,
     },
     ...generalRoutes,
     dormitory: {
         id: 'dormitory',
-        title: 'Общежитие',
+        title: 'Список ожидания на заселение в общежитие',
         icon: <MdOutlineBedroomChild />,
         path: DORMITORY,
         Component: DormitoryPage,

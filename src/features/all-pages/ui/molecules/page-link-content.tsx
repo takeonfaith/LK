@@ -20,6 +20,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
     cursor: pointer;
     text-decoration: none;
     border-radius: var(--brLight);
+    background: var(--form);
 
     .new {
         position: absolute;
@@ -105,6 +106,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             text-align: ${({ isVertical }) => (isVertical ? 'center' : 'left')};
             color: var(--text);
             transition: 0.2s;
+            font-weight: 600;
             height: 30px;
         }
     }

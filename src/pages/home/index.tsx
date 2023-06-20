@@ -1,4 +1,4 @@
-import { acadPerformanceModel } from '@entities/acad-performance'
+import { electronicInteractionModel } from '@entities/electronic-interaction'
 import { menuModel } from '@entities/menu'
 import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
@@ -6,16 +6,14 @@ import { userModel } from '@entities/user'
 import GlobalAppSearch from '@features/global-app-search'
 import Links from '@features/home/ui/links'
 import ScheduleAndNotification from '@features/home/ui/organisms/schedule-and-notification'
-import findSemestr from '@shared/lib/find-semestr'
+import UserInfo from '@features/user-info'
 import Block from '@shared/ui/block'
 import Flex from '@shared/ui/flex'
 import { CenterPage, Title, Wrapper } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
-import HomeTopPlate from './ui/home-top-plate'
-import TopUser from './ui/top-user'
 import AlertsWidget from 'widgets/alerts-widget'
-import { electronicInteractionModel } from '@entities/electronic-interaction'
+import HomeTopPlate from './ui/home-top-plate'
 
 const HomePageStyled = styled.div`
     width: 100%;
@@ -37,10 +35,8 @@ const Home = () => {
         error,
     } = userModel.selectors.useUser()
 
-    const { data: acad } = acadPerformanceModel.selectors.useData()
     const { data: payments } = paymentsModel.selectors.usePayments()
     const { data: schedule } = scheduleModel.selectors.useSchedule()
-    const semestr = `${findSemestr(new Date().toString(), user?.course ?? 1)}`
 
     const { homeRoutes } = menuModel.selectors.useMenu()
 
@@ -49,12 +45,11 @@ const Home = () => {
     const load = () => {
         scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
-        acadPerformanceModel.effects.getFx({ semestr })
         electronicInteractionModel.effects.getElectronicInteractionFx()
     }
 
     return (
-        <Wrapper loading={!user} load={load} error={error} data={acad && payments && schedule}>
+        <Wrapper loading={!user} load={load} error={error} data={payments && schedule}>
             <HomeTopPlate />
             <HomePageStyled>
                 <GlobalAppSearch />
@@ -65,10 +60,9 @@ const Home = () => {
                             <Title size={2} align="left" width="100%">
                                 Главная
                             </Title>
-                            <TopUser />
+                            <UserInfo />
                         </Flex>
                         <ScheduleAndNotification />
-                        {/* {user.user_status === 'stud' && <AcadPerformanceStatWidget />} */}
                         <AlertsWidget />
                     </Block>
                 </CenterPage>

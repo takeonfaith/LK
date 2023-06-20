@@ -20,7 +20,6 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
     padding: ${({ orientation }) => (orientation === 'vertical' ? '10px' : '8px')};
     border-radius: var(--brLight);
     color: var(--text);
-    font-weight: 600;
     cursor: pointer;
     width: ${({ orientation, size }) => (orientation === 'vertical' ? getWidth(size) : '100%')};
 
@@ -50,6 +49,7 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
             white-space: ${({ orientation }) => orientation === 'vertical' && 'nowrap'};
             overflow: ${({ orientation }) => orientation === 'vertical' && 'hidden'};
             text-overflow: ${({ orientation }) => orientation === 'vertical' && 'ellipsis'};
+            font-weight: 500;
         }
 
         .status {
@@ -59,6 +59,7 @@ const UserWrapper = styled.div<{ orientation: Direction; size: Size }>`
             white-space: nowrap;
             overflow: hidden;
             width: 90%;
+            font-weight: 500;
         }
     }
 `

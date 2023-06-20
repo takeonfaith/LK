@@ -55,7 +55,6 @@ const PaymentsInfo = ({ endDate, sum, allPayments, bill, balanceCurrDate, qr_cur
                             align="center"
                             width="100%"
                             href={bill}
-                            onClick={() => null}
                         />
                     )}
                 </List>

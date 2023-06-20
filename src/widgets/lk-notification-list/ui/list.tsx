@@ -5,9 +5,10 @@ import { TNotification, lkNotificationModel } from '@entities/lk-notifications'
 
 type Props = {
     notifications: TNotification[] | null
+    loadingRemove: boolean
 }
 
-const NotificationList = ({ notifications }: Props) => {
+const NotificationList = ({ notifications, loadingRemove }: Props) => {
     if (!notifications) return null
 
     const handleClose = (id: string, pageId?: string, close?: () => void) => {
@@ -26,9 +27,10 @@ const NotificationList = ({ notifications }: Props) => {
         <List gap={12} visible={notifications.length > 0}>
             {notifications.map((notification) => (
                 <NotificationItem
-                    size="small"
+                    size="big"
+                    loadingRemove={loadingRemove}
                     {...notification}
-                    key={notification.title}
+                    key={notification.id}
                     onClose={onClose(notification)}
                 />
             ))}

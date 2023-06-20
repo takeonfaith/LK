@@ -1,38 +1,28 @@
 import { AcadPerformance } from '@api/model/acad-performance'
+import Flex from '@shared/ui/flex'
+import Subtext from '@shared/ui/subtext'
+import { Title } from '@shared/ui/title'
 import React, { memo } from 'react'
-import styled from 'styled-components'
 import SubjectItems from '../molecules/subject-items'
 
-interface Props {
+type Props = {
     header: string
     loading?: boolean
     items?: AcadPerformance[]
     type?: 'exam' | 'test'
 }
-const Wrap = styled.div`
-    width: 100%;
 
-    @media (max-width: 1000px) {
-        border-radius: var(--brSemi);
-        border: 1px solid var(--almostTransparentOpposite);
-        padding: 10px 20px;
-    }
-`
-
-const Heading = styled.h2`
-    margin-bottom: 10px;
-    @media (max-width: 1000px) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-`
 const SubjectList = ({ header, items, loading, type = 'exam' }: Props) => {
     return (
-        <Wrap>
-            {!!items?.length && <Heading>{header}</Heading>}
+        <Flex d="column">
+            {!!items?.length && (
+                <Title size={3} align="left" width="fit-content">
+                    {header}
+                    <Subtext>{items.length}</Subtext>
+                </Title>
+            )}
             <SubjectItems items={items || []} type={type} loading={loading} />
-        </Wrap>
+        </Flex>
     )
 }
 

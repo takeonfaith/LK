@@ -10,9 +10,9 @@ const AccordionWrapper = styled.div<{
     width: 100%;
     border-radius: var(--brLight);
     overflow: hidden;
-    background: var(--form);
+
     .inputs {
-        padding: ${({ open }) => (open ? '15px' : '0')};
+        padding: ${({ open }) => (open ? '15px 0' : '0')};
         display: flex;
         flex-direction: column;
         row-gap: 15px;

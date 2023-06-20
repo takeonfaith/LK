@@ -53,12 +53,15 @@ export const ButtonWrapper = styled.button<{
         filter: brightness(0.97);
     }
 
+    .text {
+        margin-top: ${({ direction, text }) => direction === 'vertical' && text && '6px'};
+    }
+
     .icon {
         margin-right: ${({ text, direction }) => (text && direction === 'horizontal' ? '7px' : '0')};
         width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
         min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
         height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
-        margin-bottom: ${({ direction, text }) => direction === 'vertical' && text && '4px'};
         display: flex;
         align-items: center;
         justify-content: center;
@@ -81,11 +84,15 @@ export const ButtonWrapper = styled.button<{
         right: 10px;
         padding: 0;
 
+        .text {
+            margin-top: ${({ direction, shrinkTextInMobile }) =>
+                direction === 'vertical' && !shrinkTextInMobile ? '4px' : '0px'};
+        }
+
         .icon {
             width: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};
             min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};
-            margin-bottom: ${({ direction, shrinkTextInMobile }) =>
-                direction === 'vertical' && !shrinkTextInMobile ? '4px' : '0px'};
+
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};
             height: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};

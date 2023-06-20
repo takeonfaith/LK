@@ -67,6 +67,14 @@ const ModalContent = styled.div<{ isOpen: boolean; hasBack: boolean; hasTitle: b
         border-radius: 20px 20px 0 0;
         transform: ${({ isOpen }) => (isOpen ? `scale(1) translateY(0px)` : `scale(1) translateY(150px)`)};
         border-radius: var(--brLight);
+
+        .close-button {
+            right: 15px;
+        }
+
+        h3 {
+            margin-top: 7px;
+        }
     }
 `
 

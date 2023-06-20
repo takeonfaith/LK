@@ -1,12 +1,13 @@
 import { contextMenuModel } from '@entities/context-menu'
 import { userModel } from '@entities/user'
+import GlobalAppSearch from '@features/global-app-search'
 import Avatar from '@features/home/ui/molecules/avatar'
-import HomeTopSection from '@features/home/ui/organisms/home-top-section'
 import UserContextMenu from '@features/user-context-menu'
 import React from 'react'
 import styled from 'styled-components'
+import NotificationBell from './notification-bell'
 
-const TopUserStyled = styled.div`
+const UserInfoStyled = styled.div`
     padding: 4px;
     border-radius: var(--brLight);
     display: flex;
@@ -18,7 +19,11 @@ const TopUserStyled = styled.div`
     }
 `
 
-const TopUser = () => {
+type Props = {
+    showSearch?: boolean
+}
+
+const UserInfo = ({ showSearch = false }: Props) => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -34,16 +39,20 @@ const TopUser = () => {
             content: <UserContextMenu />,
         })
     }
-
     return (
-        <TopUserStyled>
-            <HomeTopSection />
-
-            <div onClick={handleUserClick}>
-                <Avatar width="30px" height="30px" avatar={user.avatar} name={user.fullName} marginRight="0" />
-            </div>
-        </TopUserStyled>
+        <UserInfoStyled>
+            {showSearch && <GlobalAppSearch size="icon" />}
+            <NotificationBell />
+            <Avatar
+                onClick={handleUserClick}
+                width="30px"
+                height="30px"
+                avatar={user.avatar}
+                name={user.fullName}
+                marginRight="0"
+            />
+        </UserInfoStyled>
     )
 }
 
-export default TopUser
+export default UserInfo

@@ -8,7 +8,7 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
         {
             title: 'Год',
             field: 'year',
-            width: '15%',
+            width: '25%',
             render: (_, row) => {
                 const dateStart = row?.date_start
                 if (!dateStart) {
@@ -23,7 +23,8 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
         {
             title: 'Месяц',
             field: 'month',
-            width: '20%',
+            width: '25%',
+
             render: (_, row) => {
                 const dateStart = row?.date_start
                 if (!dateStart) {
@@ -47,6 +48,7 @@ const getDormitoryPaygraphColumns = (): ColumnProps[] => {
         {
             title: 'Статус',
             field: 'sum_pay',
+            width: '25%',
             render: renderPayStatus,
         },
     ]
