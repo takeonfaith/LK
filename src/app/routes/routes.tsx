@@ -137,7 +137,6 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'orange',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
-        isNew: true,
         keywords: ['пд'],
     },
 

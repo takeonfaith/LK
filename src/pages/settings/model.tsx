@@ -6,7 +6,7 @@ import { FilterElementList } from '@shared/ui/added-elements-list'
 import { MessageType } from '@shared/ui/types'
 import React from 'react'
 import { BiNews } from 'react-icons/bi'
-import { FiClock, FiFilePlus, FiFileText, FiLogOut, FiMail, FiMessageCircle, FiPhone } from 'react-icons/fi'
+import { FiBell, FiClock, FiFilePlus, FiFileText, FiLogOut, FiMail, FiMessageCircle, FiPhone } from 'react-icons/fi'
 import { HiOutlineViewGridAdd } from 'react-icons/hi'
 import { MdOutlinePassword } from 'react-icons/md'
 
@@ -239,6 +239,7 @@ const getSettingsModel: TSettingsModel = ({
                     id: 'all',
                     type: 'toggle',
                     title: 'Все',
+                    icon: <FiBell />,
                     value: settings.all,
                     subfields: [
                         {

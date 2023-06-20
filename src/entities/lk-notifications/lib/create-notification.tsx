@@ -84,6 +84,7 @@ const createNotification = (type: NotificationType, id: string, title?: string, 
             type: 'doc-for-review',
             goTo: DOCLIST_ROUTE,
             pageId: 'doclist',
+            canClose: false,
         },
         'digital-services': {
             id,

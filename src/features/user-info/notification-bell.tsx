@@ -1,8 +1,10 @@
 import { LK_NOTIFICATIONS_ROUTE } from '@app/routes/general-routes'
 import { lkNotificationModel } from '@entities/lk-notifications'
+import getCorrectWordForm from '@shared/lib/get-correct-word-form'
 import { Button } from '@shared/ui/button'
 import Flex from '@shared/ui/flex'
 import Notification from '@shared/ui/notification'
+import Subtext from '@shared/ui/subtext'
 import React from 'react'
 import { MdOutlineNotifications } from 'react-icons/md'
 import { Link } from 'react-router-dom'
@@ -33,13 +35,26 @@ const NotificationBellStyled = styled.div`
 export const NotificationsModal = () => {
     const { close } = useModal()
     const { notifications } = lkNotificationModel.selectors.useLkNotifications()
+    const MAX_QUANTITY = 3
 
     return (
-        <Flex d="column" gap="48px" w="100%" mw="500px">
-            <LkNotificationList />
+        <Flex d="column" gap="30px" w="100%" mw="400px">
+            <Flex d="column" gap="16px">
+                <LkNotificationList maxNotificationsVisible={MAX_QUANTITY} />
+                <Subtext width="100%" visible={notifications.length > MAX_QUANTITY}>
+                    Еще {notifications.length - MAX_QUANTITY}{' '}
+                    {getCorrectWordForm(notifications.length - MAX_QUANTITY, {
+                        one: 'уведомление',
+                        twoToFour: 'уведомления',
+                        fiveToNine: 'уведомлений',
+                        zero: 'уведомлений',
+                    })}
+                    ...
+                </Subtext>
+            </Flex>
             {notifications.length > 0 && (
                 <Link to={LK_NOTIFICATIONS_ROUTE} style={{ width: '100%' }}>
-                    <Button width="100%" text="Показать больше" onClick={close} />
+                    <Button width="100%" text="Показать все" onClick={close} />
                 </Link>
             )}
         </Flex>
@@ -61,7 +76,7 @@ const NotificationBellSection = () => {
                 box-shadow="0px 0px 0px 3px var(--schedule)"
                 color="red"
                 top="14px"
-                right="-4px"
+                left="30px"
                 visible={notifications.length > 0}
                 pulsing
                 className="notification-circle"

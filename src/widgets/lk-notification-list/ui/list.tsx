@@ -1,7 +1,7 @@
+import { TNotification, lkNotificationModel } from '@entities/lk-notifications'
 import List from '@shared/ui/list'
 import React from 'react'
 import NotificationItem from './notification-item'
-import { TNotification, lkNotificationModel } from '@entities/lk-notifications'
 
 type Props = {
     notifications: TNotification[] | null

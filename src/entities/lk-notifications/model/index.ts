@@ -75,8 +75,9 @@ const clearVisibleById = createEvent<string>()
 const clearById = createEvent<{ id: string; pageId?: string }>()
 const clearAll = createEvent()
 const clearAllVisible = createEvent()
+const clearStore = createEvent()
 
-const $lkNotificationsStore = createStore<TStore>(DEFAULT_STORE)
+const $lkNotificationsStore = createStore<TStore>(DEFAULT_STORE).reset(clearStore)
 
 forward({
     from: initialize,
@@ -128,6 +129,9 @@ sample({
     source: $lkNotificationsStore,
     fn: ({ notifications, visibleNotifications, ...store }, { id, pageId }) => {
         removeNotificationFromPageFx(pageId)
+        // eslint-disable-next-line no-console
+        console.log(id, notifications)
+
         return {
             ...store,
             notifications: notifications.filter((n) => n.id !== id),
@@ -180,5 +184,5 @@ const useLkNotifications = () => {
     return useStore($lkNotificationsStore)
 }
 
-export const events = { initialize, add, clearById, clearVisibleById, clearAll, clearAllVisible }
+export const events = { initialize, add, clearById, clearVisibleById, clearAll, clearAllVisible, clearStore }
 export const selectors = { useLkNotifications }

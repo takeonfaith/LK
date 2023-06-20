@@ -283,6 +283,7 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'GENERAL',
         keywords: ['Оповещения'],
+        isNew: true,
     },
     chat: {
         //ChatPage
@@ -329,7 +330,6 @@ export const generalRoutes: IRoutes = {
         color: 'orange',
         isTemplate: false,
         group: 'COMMUNICATION',
-        isNew: true,
         keywords: ['преподаватели', 'преподы'],
     },
     // portfolio: {

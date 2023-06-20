@@ -8,11 +8,10 @@ import { SubjectList } from '@features/acad-performance/ui/organisms'
 import Select, { SelectPage } from '@features/select'
 import Flex from '@shared/ui/flex'
 import PageBlock from '@shared/ui/page-block'
-import { Button, Error, Wrapper } from '@ui/atoms'
+import { Error, Wrapper } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
 import findSemestr from '@utils/find-semestr'
 import React, { useMemo, useState } from 'react'
-import { FiPieChart } from 'react-icons/fi'
 import { HiOutlineEmojiSad } from 'react-icons/hi'
 import PerformanceMessage from './ui/performance-message'
 
@@ -44,7 +43,7 @@ const AcadPerformance = () => {
             <PageBlock
                 topRightCornerElement={
                     !!user?.id && (
-                        <Flex w="188px" gap="8px">
+                        <Flex w="150px" gap="8px">
                             <Select
                                 onClick={loadFunc}
                                 width="150px"
@@ -52,7 +51,7 @@ const AcadPerformance = () => {
                                 selected={selected}
                                 setSelected={setSelected}
                             />
-                            <Button minWidth="38px" height="38px" icon={<FiPieChart />} />
+                            {/* <Button minWidth="38px" height="38px" icon={<FiPieChart />} /> */}
                         </Flex>
                     )
                 }

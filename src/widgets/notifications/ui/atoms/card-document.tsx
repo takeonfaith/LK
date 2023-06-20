@@ -11,6 +11,7 @@ import { FiLink } from 'react-icons/fi'
 import styled from 'styled-components'
 import Subtext from '@shared/ui/subtext'
 import { popUpMessageModel } from '@entities/pop-up-message'
+import { lkNotificationModel } from '@entities/lk-notifications'
 
 const CardDocumentWrapper = styled.div`
     width: 100%;
@@ -65,6 +66,7 @@ const CardDocument = ({ data }: Props) => {
         try {
             setLoading(true)
             personalNotificationModel.effects.viewPersonalNotificationsFx(data.id)
+            lkNotificationModel.events.clearById({ id: `studdoc-${data.id}`, pageId: 'doclist' })
             setLoading(false)
             setCompleted(true)
         } catch (_) {
