@@ -1,1 +1,0 @@
-import{g as i}from"./get-divisions-96cfa1b1.js";const r=({divisions_crs:e})=>[{title:"Выберите отделение МФЦ, где желаете получить готовый документ:",required:!0,type:"radio",fieldName:"structural-subdivision",value:null,editable:!0,items:i(e),isSpecificRadio:!0,specialType:"personalMethod"}];export{r as g};

@@ -1,1 +1,0 @@
-const s=o=>{const e=o.find(t=>t.fieldName==="method_obtaining");let l=null;if(e!=null&&e.value){const t=e==null?void 0:e.value;t.title==="На электронную почту"?l=null:t.title==="Лично"?l="personalMethod":t.title==="На почтовый адрес"&&(l="postMethod")}return{method_obtaining:l}};export{s as g};
