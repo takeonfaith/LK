@@ -8,12 +8,13 @@ import React from 'react'
 import { useModal } from 'widgets'
 
 const LinkWrapper = styled(Link)<{ width: number | string }>`
-    width: ${({ width }) => (typeof width === 'number' ? `calc(125px * ${width} + ${(width - 1) * 10}px)` : width)};
+    width: ${({ width }) =>
+        typeof width === 'number' ? `calc((700px / 5) * ${width} - ${width === 2 ? 22 : 15}px)` : width};
     border-radius: var(--brLight);
 
     @media (max-width: 500px) {
-        height: 110px;
-        width: ${({ width }) => (typeof width === 'number' ? `calc(33vw * ${width} - 14px)` : width)};
+        width: ${({ width }) =>
+            typeof width === 'number' ? `calc(33vw * ${width} - ${width === 2 ? 22 : 15}px)` : width};
     }
 `
 

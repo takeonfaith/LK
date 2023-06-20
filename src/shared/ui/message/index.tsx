@@ -23,6 +23,7 @@ export type MessageProps = {
     gap?: string
     solidBackground?: boolean
     loading?: boolean
+    lineHeight?: string
 }
 
 const Loading = () => {
@@ -62,6 +63,7 @@ export function Message({
     padding,
     fontSize,
     gap,
+    lineHeight,
     solidBackground = false,
     align = 'left',
     visible = true,
@@ -82,12 +84,13 @@ export function Message({
             padding={padding}
             fontSize={fontSize}
             gap={gap}
+            lineHeight={lineHeight}
             solidBackground={solidBackground}
         >
             <Title size={4} align={align} icon={icon === null ? null : icon ?? messageType[type].icon({})}>
                 {title ?? messageType[type].title}
             </Title>
-            {onClose && <Button onClick={onClose} icon={<FiX />} className="close-button" background="transparent" />}
+            {onClose && <Button onClick={onClose} icon={<FiX />} className="close-button" />}
             {children && <div className="info-text">{children}</div>}
             {loading && <Loading />}
             {/* {type === 'hint' && <Button background="#ffffff10" text="Понятно!" textColor="#fff" />} */}

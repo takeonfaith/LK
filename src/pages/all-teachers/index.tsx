@@ -1,20 +1,20 @@
-import React from 'react'
 import { paginationList } from '@entities/all-teachers'
-import Block from '@shared/ui/block'
-import { CenterPage, Title, Wrapper } from '@ui/atoms'
-import { useStore } from 'effector-react'
-import ListOfPeople from 'widgets/list-of-people'
-import styled from 'styled-components'
+import { userModel } from '@entities/user'
 import { SelectPage } from '@features/select'
 import { getDivisions } from '@shared/api/teacher-api'
-import { userModel } from '@entities/user'
+import PageBlock from '@shared/ui/page-block'
+import { Wrapper } from '@ui/atoms'
+import { useStore } from 'effector-react'
+import React from 'react'
 import { useRouteMatch } from 'react-router'
+import styled from 'styled-components'
+import ListOfPeople from 'widgets/list-of-people'
 
 const PageWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    height: calc(100vh - 20px);
+    height: calc(100vh - var(--header-height) - 20px);
 
     @media (max-width: 1000px) {
         height: calc(100vh - 80px);
@@ -40,30 +40,18 @@ const AllTeachersPage = () => {
 
     return (
         <Wrapper load={function () {}} loading={isPending} error={null} data={items}>
-            <CenterPage>
-                <PageWrapper>
-                    <Block
-                        maxWidth="700px"
-                        orientation="vertical"
-                        height="100%"
-                        maxHeight="100%"
-                        justifyContent="none"
-                        noAppearanceInMobile
-                    >
-                        <Title size={2} align="left" bottomGap>
-                            Сотрудники
-                        </Title>
-                        <ListOfPeople
-                            searchPlaceholder="Поиск сотрудников"
-                            paginationList={paginationList}
-                            filterRequest={getDivisions}
-                            defaultFilter={filter}
-                            filterPlaceholder="Подразделения"
-                            underSearchText={underSearchText}
-                        />
-                    </Block>
-                </PageWrapper>
-            </CenterPage>
+            <PageWrapper>
+                <PageBlock>
+                    <ListOfPeople
+                        searchPlaceholder="Поиск сотрудников"
+                        paginationList={paginationList}
+                        filterRequest={getDivisions}
+                        defaultFilter={filter}
+                        filterPlaceholder="Подразделения"
+                        underSearchText={underSearchText}
+                    />
+                </PageBlock>
+            </PageWrapper>
         </Wrapper>
     )
 }

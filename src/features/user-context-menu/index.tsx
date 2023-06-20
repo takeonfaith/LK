@@ -3,7 +3,7 @@ import { confirmModel } from '@entities/confirm'
 import { contextMenuModel } from '@entities/context-menu'
 import { lkNotificationModel } from '@entities/lk-notifications'
 import { userModel } from '@entities/user'
-import { NotificationsModal } from '@features/home/ui/organisms/home-top-section'
+import { NotificationsModal } from '@features/user-info/notification-bell'
 import ThemeToggle from '@features/theme-toggle'
 import { OLD_LK_URL } from '@shared/consts'
 import { Divider } from '@shared/ui/atoms'
@@ -25,8 +25,6 @@ const UserContextMenu = () => {
     const { notifications } = lkNotificationModel.selectors.useLkNotifications()
 
     const handleClose = () => contextMenuModel.events.close()
-
-    // const handleOldLK = () => localStorage.setItem('useOldVersion', 'true')
 
     const logout = () => {
         confirmModel.events.evokeConfirm({

@@ -5,6 +5,7 @@ import { applicationsModel } from '@entities/applications'
 import { confirmModel } from '@entities/confirm'
 import { contactInfoActualizationModel } from '@entities/contact-info-actualization'
 import { electronicInteractionModel } from '@entities/electronic-interaction'
+import { lkNotificationModel } from '@entities/lk-notifications'
 import { messagesModel } from '@entities/messages'
 import { personalNotificationModel } from '@entities/notification'
 import { paymentsModel } from '@entities/payments'
@@ -30,6 +31,7 @@ const stores = [
     teacherDateVerificationModel,
     contactInfoActualizationModel,
     alertModel,
+    lkNotificationModel,
 ]
 
 const clearAllStores = () => {

@@ -9,7 +9,6 @@ export type NotificationType =
     | 'doc-for-review'
     | 'digital-services'
     | 'schedule'
-    | 'schedule-session'
     | 'version-update'
     | 'electronic-interaction'
 
@@ -28,4 +27,6 @@ export type TNotification = {
     onClose?: () => void
     canClose?: boolean
     pageId?: string
+    fullText?: boolean
+    loadingRemove?: boolean
 }

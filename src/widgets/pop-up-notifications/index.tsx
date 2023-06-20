@@ -16,7 +16,12 @@ const PopUpNotifications = () => {
                         key={notification.id}
                         open={closing !== notification.id}
                     >
-                        <NotificationItem {...notification} maxLetters={19} onClose={handleClose(notification.id)} />
+                        <NotificationItem
+                            {...notification}
+                            fullText={false}
+                            maxLetters={19}
+                            onClose={handleClose(notification.id)}
+                        />
                     </PopUpNotificationsItem>
                 )
             })}

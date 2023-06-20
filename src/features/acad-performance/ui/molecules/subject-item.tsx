@@ -1,14 +1,50 @@
-import { AcadPerformance, IGrade } from '@api/model/acad-performance'
-import localizeDate from '@utils/localize-date'
+import { AcadPerformance } from '@api/model/acad-performance'
+import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
+import { Icon } from '@features/all-pages'
+import { GradeByScore } from '@shared/consts'
+import normalizeString from '@shared/lib/normalize-string'
+import DotSeparatedWords from '@shared/ui/dot-separated-words'
+import Flex from '@shared/ui/flex'
+import Subtext from '@shared/ui/subtext'
 import getShortName from '@utils/get-short-name'
+import localizeDate from '@utils/localize-date'
 import React from 'react'
+import { BiRuble } from 'react-icons/bi'
+import {
+    FiCircle,
+    FiCommand,
+    FiCpu,
+    FiDribbble,
+    FiGitBranch,
+    FiHash,
+    FiLayers,
+    FiLifeBuoy,
+    FiPrinter,
+} from 'react-icons/fi'
+import {
+    HiOutlineAcademicCap,
+    HiOutlineBookOpen,
+    HiOutlineBriefcase,
+    HiOutlineCode,
+    HiOutlineDatabase,
+    HiOutlineDeviceMobile,
+    HiOutlineEye,
+    HiOutlineLibrary,
+    HiOutlineLightBulb,
+    HiOutlineLockClosed,
+    HiOutlineOfficeBuilding,
+    HiOutlinePlay,
+    HiOutlinePresentationChartBar,
+    HiOutlineSparkles,
+    HiOutlineSpeakerphone,
+    HiOutlineTranslate,
+    HiOutlineUserGroup,
+    HiOutlineVariable,
+} from 'react-icons/hi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import { SubjectModal } from '.'
 import { SubjectCheker } from '../atoms'
-import ProgressBar from '@shared/ui/progress-bar'
-import { GradeByScore, WidthByGrade } from '@shared/consts'
-import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 
 interface Props {
     item: AcadPerformance
@@ -22,123 +58,185 @@ const Wrap = styled.div<{ isGraded: boolean }>`
     min-height: 60px;
     align-items: center;
     justify-content: space-between;
-    background: var(--theme);
     padding: 15px 0;
     box-sizing: border-box;
     cursor: pointer;
     opacity: ${({ isGraded }) => (isGraded ? 1 : 0.4)};
-
-    &:not(:last-child) {
-        border-bottom: 1px solid var(--almostTransparentOpposite);
-    }
-
-    &:hover {
-        filter: brightness(0.95);
-    }
 `
 
 const Name = styled.div`
-    width: 340px;
-    min-width: 240px;
-    height: 100%;
     display: flex;
     margin-right: 10px;
-
-    div {
-        font-weight: 600;
-        width: 100%;
-        height: 100%;
-
-        display: flex;
-        align-items: center;
-
-        margin-left: 5px;
-    }
+    font-weight: 500;
 
     @media (max-width: 1000px) {
         min-width: 0px;
     }
 `
 
-const Bar = styled.div`
+// export const GradeScore = styled.div<{ grade: keyof IGrade }>`
+//     display: none;
+
+//     @media (max-width: 1000px) {
+//         display: block;
+//         font-weight: 600;
+//         color: ${({ grade }) => findProgressBarColor(grade)};
+//     }
+// `
+
+const Grade = styled.strong<{ color: string }>`
+    color: ${({ color }) => color};
+    font-weight: 600;
+    width: 100px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 5px;
-    min-width: 330px;
-
-    @media (max-width: 1400px) {
-        min-width: 200px;
-    }
-
-    @media (max-width: 1200px) {
-        display: none;
-    }
-
-    @media (max-width: 1000px) {
-        min-width: 0px;
-        display: flex;
-        justify-content: flex-end;
-        margin-right: 5px;
-    }
+    justify-content: flex-end;
 `
 
-const Grade = styled.div`
-    min-width: 166px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: center;
+const getSubjectIcon = (name: string) => {
+    const normalizedName = normalizeString(name)
+    const matchingKeys = [
+        {
+            keys: ['распознаван'],
+            icon: <HiOutlineEye />,
+        },
+        {
+            keys: ['принт'],
+            icon: <FiPrinter />,
+        },
+        {
+            keys: ['жизнед'],
+            icon: <FiLifeBuoy />,
+        },
+        {
+            keys: ['истор'],
+            icon: <HiOutlineLibrary />,
+        },
+        {
+            keys: ['информат'],
+            icon: <FiHash />,
+        },
+        {
+            keys: ['мобильн'],
+            icon: <HiOutlineDeviceMobile />,
+        },
+        {
+            keys: ['безопасн'],
+            icon: <HiOutlineLockClosed />,
+        },
+        {
+            keys: ['автоматиз'],
+            icon: <HiOutlinePlay />,
+        },
+        {
+            keys: ['обработ'],
+            icon: <FiLayers />,
+        },
+        {
+            keys: ['операционн'],
+            icon: <FiCommand />,
+        },
+        {
+            keys: ['эконом'],
+            icon: <BiRuble />,
+        },
+        {
+            keys: ['информацион', 'программир'],
+            icon: <HiOutlineCode />,
+        },
+        {
+            keys: ['анализ'],
+            icon: <HiOutlinePresentationChartBar />,
+        },
+        {
+            keys: ['компьют', 'алгоритм'],
+            icon: <FiCpu />,
+        },
+        {
+            keys: ['сети', 'сетей'],
+            icon: <FiGitBranch />,
+        },
+        {
+            keys: ['матем'],
+            icon: <HiOutlineVariable />,
+        },
+        {
+            keys: ['философ'],
+            icon: <FiCircle />,
+        },
+        {
+            keys: ['данны'],
+            icon: <HiOutlineDatabase />,
+        },
+        {
+            keys: ['язык'],
+            icon: <HiOutlineTranslate />,
+        },
+        {
+            keys: ['спорт'],
+            icon: <FiDribbble />,
+        },
+        {
+            keys: ['проектная'],
+            icon: <HiOutlineLightBulb />,
+        },
+        {
+            keys: ['интеллект'],
+            icon: <HiOutlineSparkles />,
+        },
+        {
+            keys: ['практика'],
+            icon: <HiOutlineOfficeBuilding />,
+        },
+        {
+            keys: ['предприним'],
+            icon: <HiOutlineBriefcase />,
+        },
+        {
+            keys: ['коммуникац'],
+            icon: <HiOutlineSpeakerphone />,
+        },
+        {
+            keys: ['управлени'],
+            icon: <HiOutlineUserGroup />,
+        },
+        {
+            keys: ['научн'],
+            icon: <HiOutlineAcademicCap />,
+        },
+    ]
 
-    @media (max-width: 1000px) {
-        display: none;
+    const matched = matchingKeys.find((k) => k.keys.find((e) => normalizedName.includes(e)))
+
+    if (matched) {
+        return matched.icon
     }
-`
 
-const ExamDate = styled.div`
-    min-width: 150px;
-    width: 150px;
+    return <HiOutlineBookOpen />
+}
 
-    @media (max-width: 1000px) {
-        display: none;
-    }
-`
-
-const Teacher = styled.div`
-    min-width: 150px;
-    width: 150px;
-
-    @media (max-width: 1200px) {
-        display: none;
-    }
-
-    @media (max-width: 1000px) {
-        display: none;
-    }
-`
-
-export const GradeScore = styled.div<{ grade: keyof IGrade }>`
-    display: none;
-
-    @media (max-width: 1000px) {
-        display: block;
-        font-weight: 600;
-        color: ${({ grade }) => findProgressBarColor(grade)};
-    }
-`
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SubjectItem = ({ item, number, type }: Props) => {
     const { open } = useModal()
+    const { name, grade } = item
+
+    // const grade = 'Удовлетворительно'
 
     const handleOpen = () => item.grade && open(<SubjectModal item={item} />, item.name)
 
     return (
         <Wrap onClick={handleOpen} isGraded={!!item.grade}>
-            <Name>
-                <span>{number}</span>
-                <div>{item.name}</div>
-            </Name>
-            <Bar>
+            <Flex gap="16px">
+                <Icon color={findProgressBarColor(grade)} borderRadius="9px">
+                    {getSubjectIcon(name)}
+                </Icon>
+                <Flex d="column" ai="flex-start" gap="4px">
+                    <Name>{name}</Name>
+                    <Subtext>
+                        <DotSeparatedWords words={[getShortName(item.teacher), localizeDate(item.exam_date)]} />
+                    </Subtext>
+                </Flex>
+            </Flex>
+            {/* <Bar>
                 {type === 'exam' ? (
                     <>
                         <ProgressBar value={WidthByGrade[item.grade]} coloring />
@@ -147,10 +245,10 @@ const SubjectItem = ({ item, number, type }: Props) => {
                 ) : (
                     <SubjectCheker grade={item.grade} />
                 )}
-            </Bar>
-            <Grade>{item.grade}</Grade>
-            <ExamDate>{localizeDate(item.exam_date)}</ExamDate>
-            <Teacher>{getShortName(item.teacher)}</Teacher>
+            </Bar> */}
+            <Grade color={findProgressBarColor(grade)}>
+                {type === 'exam' ? GradeByScore[grade] : <SubjectCheker grade={grade} />}
+            </Grade>
         </Wrap>
     )
 }

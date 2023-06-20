@@ -12,6 +12,8 @@ interface Props {
     title: string
     toggles: ToggleItem[]
     setToggles: (toggles: ToggleItem[]) => void
+    disabled?: boolean
+    disabledClickMessage?: string
 }
 
 const Wrapper = styled.div`
@@ -21,7 +23,7 @@ const Wrapper = styled.div`
     }
 `
 
-const ToggleArea = ({ title, toggles, setToggles }: Props) => {
+const ToggleArea = ({ title, toggles, setToggles, disabled }: Props) => {
     const handleChange = useCallback(
         (id: number, action?: (state: boolean) => void) => {
             toggles[id].state = !toggles[id].state
@@ -35,7 +37,15 @@ const ToggleArea = ({ title, toggles, setToggles }: Props) => {
         <Wrapper>
             {!!title.length && <h2>{title}</h2>}
             {toggles.map(({ title, state, action }, i) => {
-                return <ToggleItem key={title} title={title} state={state} action={() => handleChange(i, action)} />
+                return (
+                    <ToggleItem
+                        disabled={disabled}
+                        key={title}
+                        title={title}
+                        state={state}
+                        action={() => handleChange(i, action)}
+                    />
+                )
             })}
         </Wrapper>
     )

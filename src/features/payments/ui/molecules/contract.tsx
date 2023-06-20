@@ -1,16 +1,22 @@
 import { PaymentsContract } from '@api/model'
-import { SubmitButton } from '@ui/atoms'
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import localizeDate from '@utils/localize-date'
 import { paymentsModel } from '@entities/payments'
+import { Colors } from '@shared/consts'
+import KeyValue from '@shared/ui/atoms/key-value'
+import Flex from '@shared/ui/flex'
+import { Button, LinkButton, SubmitButton } from '@ui/atoms'
+import localizeDate from '@utils/localize-date'
+import React, { useState } from 'react'
+import { FiDownload } from 'react-icons/fi'
+import styled from 'styled-components'
+import { useModal } from 'widgets'
+import TechicalErrorMessage from './technical-error-message'
 
 const ContractWrapper = styled.div`
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    height: 100%;
+    height: 300px;
     justify-content: space-between;
 
     .contract-info {
@@ -28,6 +34,9 @@ interface Props {
 }
 
 const Contract = ({ contract }: Props) => {
+    if (!contract) return null
+    const { number, startDate, endDatePlan, contragent, sum, can_sign, file, student } = contract
+    const { open } = useModal()
     const [copied, setCopied] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
@@ -35,28 +44,28 @@ const Contract = ({ contract }: Props) => {
 
     const contractInfo = [
         {
-            text: 'Номер договора: ',
-            info: contract?.number ?? '',
+            text: 'Номер договора',
+            info: number ?? '',
         },
         {
-            text: 'Начало действия: ',
-            info: localizeDate(contract?.startDate),
+            text: 'Начало действия',
+            info: localizeDate(startDate),
         },
         {
-            text: 'Действует до: ',
-            info: localizeDate(contract?.endDatePlan),
+            text: 'Действует до',
+            info: localizeDate(endDatePlan),
         },
         {
-            text: 'Заказчик: ',
-            info: contract?.contragent || 'Московский политех',
+            text: 'Заказчик',
+            info: contragent || 'Московский политех',
         },
         {
-            text: 'Обучающийся: ',
-            info: contract?.student ?? '',
+            text: 'Обучающийся',
+            info: student ?? '',
         },
         {
-            text: 'Сумма к оплате: ',
-            info: contract?.sum ?? '',
+            text: 'Сумма к оплате',
+            info: sum ?? '',
         },
         // {
         //     text: 'Ежемесячная плата: ',
@@ -78,44 +87,54 @@ const Contract = ({ contract }: Props) => {
         }
     }
 
+    const handleOpenCantSign = () => {
+        open(<TechicalErrorMessage />, 'Не получается подписать')
+    }
+
     return (
         <ContractWrapper>
             <div className="contract-info">
-                {contractInfo.map((info, i) => {
-                    return (
-                        <p key={i}>
-                            <b>{info.text}</b>
-                            <span> {info.info}</span>
-                        </p>
-                    )
+                {contractInfo.map(({ info, text }) => {
+                    return <KeyValue keyStr={text} value={info} key={info} />
                 })}
             </div>
-            {contract?.can_sign && (
-                <SubmitButton
-                    text="Подписать"
-                    buttonSuccessText="Подписан"
-                    action={handleSign}
-                    isLoading={loading}
-                    completed={completed}
-                    repeatable={false}
-                    popUpFailureMessage={error ?? 'Не удалось подписать договор'}
-                    setCompleted={setCompleted}
-                    popUpSuccessMessage="Договор подписан"
-                    isActive
-                    pulsing
-                />
+            {can_sign && (
+                <Flex d="column" gap="8px">
+                    <SubmitButton
+                        text="Подписать договор"
+                        buttonSuccessText="Подписан"
+                        action={handleSign}
+                        isLoading={loading}
+                        completed={completed}
+                        repeatable={false}
+                        popUpFailureMessage={error ?? 'Не удалось подписать договор'}
+                        setCompleted={setCompleted}
+                        popUpSuccessMessage="Договор подписан"
+                        isActive
+                        pulsing
+                    />
+                    <Button
+                        onClick={handleOpenCantSign}
+                        text="Не получается подписать?"
+                        background="transparent"
+                        textColor={Colors.grey.main}
+                    />
+                </Flex>
             )}
 
-            {!contract?.can_sign && (
-                <SubmitButton
-                    text="Скопировать номер договора"
-                    action={handleCopy}
-                    isLoading={false}
-                    completed={copied}
-                    setCompleted={setCopied}
-                    popUpSuccessMessage="Номер договора скопирован в буфер"
-                    isActive
-                />
+            {!can_sign && (
+                <Flex gap="8px">
+                    <SubmitButton
+                        text="Скопировать номер договора"
+                        action={handleCopy}
+                        isLoading={false}
+                        completed={copied}
+                        setCompleted={setCopied}
+                        popUpSuccessMessage="Номер договора скопирован в буфер"
+                        isActive
+                    />
+                    <LinkButton onClick={() => null} href={file ?? ''} icon={<FiDownload />} width="45px" />
+                </Flex>
             )}
         </ContractWrapper>
     )

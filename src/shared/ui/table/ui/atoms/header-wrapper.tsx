@@ -4,7 +4,7 @@ const HeaderWrapper = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.9em;
     z-index: 10;
 

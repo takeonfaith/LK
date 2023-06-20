@@ -8,8 +8,9 @@ export const Container = styled.div<{
     background?: string
     boxShadow?: string
     border?: boolean
+    borderRadius?: number
 }>`
-    border-radius: 50%;
+    border-radius: ${({ borderRadius }) => (borderRadius ? `${borderRadius}px` : '50%')};
     display: flex;
     align-items: center;
     justify-content: center;

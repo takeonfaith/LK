@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const getPercent = (value: number, max: number) => {
@@ -90,9 +90,10 @@ type Props = {
     valueTransform?: (value: number) => string
     initialValues: [number, number]
     onSave: (values: [number, number]) => void
+    onChange?: (values: [number, number]) => void
 }
 
-const DoubleSlider = ({ range, step, initialValues, onSave, valueTransform }: Props) => {
+const DoubleSlider = ({ range, step, initialValues, onSave, onChange, valueTransform }: Props) => {
     const [f, s] = initialValues
     const [min, max] = range
     const [first, setFirst] = useState(f)
@@ -118,6 +119,10 @@ const DoubleSlider = ({ range, step, initialValues, onSave, valueTransform }: Pr
                 e.target.value = value.toString()
             }
     }
+
+    useEffect(() => {
+        onChange?.([first, second])
+    }, [first, second])
 
     return (
         <DoubleSliderStyled left={getPercent(first, max - min)} width={getPercent(second - first, max - min)}>

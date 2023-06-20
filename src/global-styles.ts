@@ -9,6 +9,10 @@ const GlobalStyles = createGlobalStyle`
 		-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 	}
 
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: 600;
+	}
+
 	#root {
 		height: 100vh;
 	}
@@ -23,7 +27,7 @@ const GlobalStyles = createGlobalStyle`
 		}
 	
 		::-webkit-scrollbar-track {
-			background-color: var(--mild-theme);
+			background-color: transparent;
 		}
 	
 		::-webkit-scrollbar-thumb {
@@ -55,7 +59,7 @@ const GlobalStyles = createGlobalStyle`
 		--very-mild-shadow: 0 0 32px rgb(0 0 0 / 8%);
 		--desktop-page-padding: 40px;
 		--mobile-page-padding: 5px;
-        --header-height: 45px;
+        --header-height: 55px;
         --mobile-bottom-menu-height: 60px;
 	}
 

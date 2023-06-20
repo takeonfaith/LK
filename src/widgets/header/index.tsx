@@ -1,74 +1,34 @@
-import React from 'react'
-import { useHistory } from 'react-router'
-import { FaChevronLeft } from 'react-icons/fa'
-import useHistoryStack from '@utils/hooks/use-history-stack'
-import { Button } from '@ui/button'
-import { menuModel } from '@entities/menu'
-import useResize from '@utils/hooks/use-resize'
-import { HeaderWrapper, UserInfo } from './ui'
-import { ALL_ROUTE } from '@app/routes/general-routes'
-import GoBackButton from '@ui/go-back-button'
+import UserInfo from '@features/user-info'
+import useCurrentDevice from '@shared/lib/hooks/use-current-device'
+import Flex from '@shared/ui/flex'
 import { CurrentPagePairType } from '@utils/hooks/use-current-exact-page'
+import React from 'react'
+import { HeaderWrapper } from './ui'
+import { HeaderTitle } from './ui/atoms/header-wrapper'
+import useHeader from './use-header'
 
 type Props = {
     currentPagePair: CurrentPagePairType
+    headerVisible?: boolean
 }
 
-const Header: React.FC<Props> = ({ currentPagePair: { currentPage, exactCurrentPage } }) => {
-    const history = useHistory()
-    const historyStack = useHistoryStack()
-    const { width } = useResize()
+const Header: React.FC<Props> = ({ currentPagePair: { currentPage, exactCurrentPage }, headerVisible = false }) => {
+    const { isMobile } = useCurrentDevice()
+    const isHeaderVisible = headerVisible || !!exactCurrentPage?.planeHeader
+    const { headerTitle, backButton } = useHeader({ currentPage, exactCurrentPage, isHeaderVisible })
 
-    const onClickBackButton =
-        (route = ALL_ROUTE) =>
-        () => {
-            menuModel.events.changeOpen({
-                isOpen: false,
-                currentPage: route.slice(1, route.length),
-            })
-            history.push(route)
-        }
-
-    const headerTitle = React.useMemo(
-        () =>
-            exactCurrentPage
-                ? exactCurrentPage.isSubPage
-                    ? exactCurrentPage.subPageHeaderTitle
-                    : exactCurrentPage.title
-                : currentPage?.title,
-        [currentPage, exactCurrentPage],
-    )
-
-    const backButton = React.useMemo(
-        () =>
-            exactCurrentPage?.withoutBackButton ? null : exactCurrentPage?.isSubPage ? (
-                historyStack.length > 1 ? (
-                    <GoBackButton text={exactCurrentPage?.backButtonText} fullWidth={false} />
-                ) : exactCurrentPage.fallbackPrevPage ? (
-                    <Button
-                        icon={<FaChevronLeft />}
-                        onClick={onClickBackButton(exactCurrentPage.fallbackPrevPage)}
-                        background="transparent"
-                    />
-                ) : (
-                    <Button icon={<FaChevronLeft />} onClick={onClickBackButton()} background="transparent" />
-                )
-            ) : (
-                <Button icon={<FaChevronLeft />} onClick={onClickBackButton()} background="transparent" />
-            ),
-        [exactCurrentPage, historyStack, onClickBackButton],
-    )
+    if ((exactCurrentPage ?? currentPage)?.withoutHeader) return null
 
     return (
-        <HeaderWrapper hidden={(exactCurrentPage ?? currentPage)?.withoutHeader}>
-            <div className="header-button-and-title">
-                {backButton}
+        <HeaderWrapper headerVisible={isHeaderVisible} hidden={(exactCurrentPage ?? currentPage)?.withoutHeader}>
+            <HeaderTitle noButton={exactCurrentPage?.withoutBackButton} headerVisible={isHeaderVisible}>
+                {headerTitle}
+            </HeaderTitle>
+            <Flex jc="space-between" mw="700px">
+                {backButton ?? <div />}
 
-                <div className="title-container">
-                    <h3>{headerTitle}</h3>
-                </div>
-            </div>
-            {width <= 1000 && <UserInfo />}
+                {isMobile && <UserInfo showSearch />}
+            </Flex>
         </HeaderWrapper>
     )
 }

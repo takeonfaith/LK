@@ -80,7 +80,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                             <Button
                                 background={Colors.white.transparent2}
                                 icon={
-                                    <IconWrapper background={Colors.grey.main}>
+                                    <IconWrapper width="30px" background={Colors.grey.main}>
                                         <FiSettings />
                                     </IconWrapper>
                                 }
@@ -96,7 +96,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                             <Button
                                 background={Colors.white.transparent2}
                                 icon={
-                                    <IconWrapper background={Colors.purple.main}>
+                                    <IconWrapper width="30px" background={Colors.purple.main}>
                                         <FiEdit2 />
                                     </IconWrapper>
                                 }
@@ -110,7 +110,7 @@ const Top = ({ pages, user, currentPage, setCurrentPage }: Props) => {
                         <Button
                             background={Colors.white.transparent2}
                             icon={
-                                <IconWrapper background={Colors.red.main}>
+                                <IconWrapper width="30px" background={Colors.red.main}>
                                     <FiLogOut />
                                 </IconWrapper>
                             }

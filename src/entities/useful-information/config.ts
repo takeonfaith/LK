@@ -8,7 +8,7 @@ export enum HelpfulInfoEnum {
 }
 
 export const helpfulInfoName: Record<HelpfulInfoEnum, string> = {
-    [HelpfulInfoEnum.information]: 'Полезная информация',
+    [HelpfulInfoEnum.information]: 'Общая',
     [HelpfulInfoEnum.instructions]: 'Инструкции',
     [HelpfulInfoEnum.courses]: 'Курсы',
     [HelpfulInfoEnum.security]: 'Безопасность',

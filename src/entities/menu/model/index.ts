@@ -63,7 +63,8 @@ const changeNotifications = createEvent<{ page: string; notifications: ((prev: n
 
 const getNewNotifications = (page: string, notifications: number, routes: IRoutes | null) => {
     const newRoutes = { ...routes }
-    newRoutes[page].notifications = notifications
+    if (!!newRoutes[page]) newRoutes[page].notifications = notifications
+    else return null
 
     return newRoutes
 }

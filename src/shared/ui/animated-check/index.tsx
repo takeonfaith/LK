@@ -1,13 +1,15 @@
 import React from 'react'
 import { AnimatedCheckWrapper } from './styles'
+import { Colors, IColors } from '@shared/consts'
 
 export type AnimatedCheckProps = {
     size: string
+    color?: keyof IColors
 }
 
-export function AnimatedCheck({ size }: AnimatedCheckProps) {
+export function AnimatedCheck({ size, color }: AnimatedCheckProps) {
     return (
-        <AnimatedCheckWrapper size={size}>
+        <AnimatedCheckWrapper size={size} color={color ? Colors[color].main : undefined}>
             <div className="wrapper">
                 <div className="circle-blue">
                     <div className="circle-white"></div>

@@ -1,9 +1,9 @@
-import React from 'react'
 import { applicationsModel } from '@entities/applications'
 import getApplicationsColumns from '@features/applications/lib/get-applications-columns'
 import CreateApplicationList from '@features/applications/ui/molecules/create-application-list'
-import { Button, FormBlock, Message, Title, Wrapper } from '@ui/atoms'
+import { Button, FormBlock, Message, Wrapper } from '@ui/atoms'
 import Table from '@ui/table'
+import React from 'react'
 import { FiInfo, FiPlus } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
@@ -47,9 +47,6 @@ const TeachersHrApplicationsPage = ({ isTeachers }: Props) => {
         >
             <ApplicationPageWrapper>
                 <FormBlock maxWidth="1450px">
-                    <Title size={2} align="left">
-                        Цифровые сервисы
-                    </Title>
                     <Message type="info" title="Информация" icon={<FiInfo />}>
                         Данный сервис позволяет заказать необходимую справку, подать заявление, запрос. Статус
                         (информация о степени готовности) заказанных справок меняется согласно действиям оператора. В

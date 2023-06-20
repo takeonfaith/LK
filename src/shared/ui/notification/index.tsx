@@ -21,19 +21,20 @@ const Notification = styled.span<{
     right: ${({ right }) => right ?? '50%'};
     outline: ${({ outline }) => outline};
     font-size: 0.6em;
-    border-radius: 100%;
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     transform: translate(-50%, -50%);
-    width: 16px;
+    width: fit-content;
+    padding: 0 5px;
     min-width: 16px;
     font-weight: bold;
     height: 16px;
     display: ${({ visible }) => !visible && 'none'};
-    animation: ${({ pulsing }) => pulsing && '2s pulsing infinite'};
+    animation: ${({ pulsing }) => pulsing && '2s notif-pulsing infinite'};
 
-    @keyframes pulsing {
+    @keyframes notif-pulsing {
         0% {
             outline: 0px solid ${({ color }) => Colors[color ?? 'red'].main};
         }

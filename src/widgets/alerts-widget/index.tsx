@@ -1,13 +1,15 @@
-import { ALERTS_ROUTE } from '@app/routes/general-routes'
 import { alertModel } from '@entities/alert'
+import { userModel } from '@entities/user'
+import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import Flex from '@shared/ui/flex'
-import List from '@shared/ui/list'
 import PlaneSkeleton from '@shared/ui/plane-skeleton'
 import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import AlertItem from './alert-item'
-import useCurrentDevice from '@shared/lib/hooks/use-current-device'
-import { userModel } from '@entities/user'
+import { Title } from '@shared/ui/title'
+import { Button } from '@shared/ui/button'
+import { Colors } from '@shared/consts'
+import { Link } from 'react-router-dom'
+import { ALERTS_ROUTE } from '@app/routes/general-routes'
 
 const AlertsWidget = () => {
     const { data, loading } = alertModel.selectors.useData()
@@ -16,35 +18,42 @@ const AlertsWidget = () => {
     } = userModel.selectors.useUser()
     const currentNews = data?.[new Date().getFullYear()]?.slice(0, 3)
     const { isMobile } = useCurrentDevice()
-    const history = useHistory()
     useEffect(() => {
         if (!data) alertModel.effects.getFx()
     }, [])
 
     return (
-        <List
-            title=" Последние новости"
-            gap={8}
-            scroll={false}
-            direction={isMobile ? 'vertical' : 'horizontal'}
-            onWatchMore={() => history.push(ALERTS_ROUTE)}
-        >
-            {loading && (
-                <Flex d="column" gap="8px">
-                    <PlaneSkeleton />
-                    <PlaneSkeleton />
-                    <PlaneSkeleton />
-                </Flex>
-            )}
-            {currentNews?.map((news, index) => (
-                <AlertItem
-                    isNew={index === 0 && !user?.hasAlerts}
-                    news={news}
-                    key={news.id}
-                    orientation={isMobile ? 'horizontal' : 'vertical'}
-                />
-            ))}
-        </List>
+        <Flex d="column">
+            <Title size={4} bottomGap align="left">
+                Последние новости
+                <Link to={ALERTS_ROUTE}>
+                    <Button
+                        width="50px"
+                        height="15px"
+                        background={Colors.blue.transparent2}
+                        textColor={Colors.blue.light1}
+                        text="Ещё"
+                    />
+                </Link>
+            </Title>
+            <Flex gap="12px" d={isMobile ? 'column' : 'row'}>
+                {loading && (
+                    <Flex d="column" gap="8px">
+                        <PlaneSkeleton />
+                        <PlaneSkeleton />
+                        <PlaneSkeleton />
+                    </Flex>
+                )}
+                {currentNews?.map((news, index) => (
+                    <AlertItem
+                        isNew={index === 0 && user?.hasAlerts}
+                        news={news}
+                        key={news.id}
+                        orientation={isMobile ? 'horizontal' : 'vertical'}
+                    />
+                ))}
+            </Flex>
+        </Flex>
     )
 }
 

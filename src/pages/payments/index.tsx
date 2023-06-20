@@ -1,41 +1,58 @@
-import React from 'react'
 import { paymentsModel } from '@entities/payments'
-import { Wrapper } from '@ui/atoms'
+import { popUpMessageModel } from '@entities/pop-up-message'
+import PageBlock from '@shared/ui/page-block'
+import { Error, Wrapper } from '@ui/atoms'
+import React, { useEffect } from 'react'
 import { SliderPage } from 'widgets'
-import { DormitoryPayments, EducationPayments } from './pages'
+import PaymentsTemplate from './payments-template'
 
 const PaymentsPage = () => {
     const { data, loading, error } = paymentsModel.selectors.usePayments()
+    const paymentType =
+        !!data?.dormitory.length && !!data?.education.length
+            ? 'both'
+            : !!data?.dormitory.length
+            ? 'dormitory'
+            : !!data?.education.length
+            ? 'education'
+            : 'none'
+
+    useEffect(() => {
+        popUpMessageModel.events.evokePopUpMessage({
+            type: 'alert',
+            time: 10000,
+            message: 'В связи с техническими работами отображение данных по произведенным оплатам может быть не полным',
+        })
+    }, [])
 
     return (
         <Wrapper
             loading={loading}
             load={paymentsModel.effects.getPaymentsFx}
             error={error}
-            data={data && (!!data?.dormitory.length || !!data?.education.length)}
+            data={data}
             noDataCheck={!data?.dormitory.length}
         >
-            {!!data?.dormitory.length || !!data?.education.length ? (
-                <SliderPage
-                    pages={[
-                        {
-                            title: 'Общежитие',
-                            condition: !!data?.dormitory?.length,
-                            content: <DormitoryPayments />,
-                        },
-                        {
-                            title: 'Обучение',
-                            condition: !!data?.education.length,
-                            content: <EducationPayments />,
-                        },
-                    ]}
-                    sliderWidth={'600px'}
-                    appearance={false}
-                    currentPage={!!data?.dormitory.length ? 0 : !!data?.education.length ? 1 : 0}
-                />
-            ) : (
-                <></>
-            )}
+            <PageBlock>
+                {paymentType === 'none' && <Error text="Нет данных" />}
+                {paymentType === 'both' && (
+                    <SliderPage
+                        pages={[
+                            {
+                                title: 'Общежитие',
+                                content: <PaymentsTemplate contracts={data?.dormitory} />,
+                            },
+                            {
+                                title: 'Обучение',
+                                content: <PaymentsTemplate contracts={data?.education} />,
+                            },
+                        ]}
+                        appearance={false}
+                    />
+                )}
+                {paymentType === 'dormitory' && <PaymentsTemplate contracts={data?.dormitory} />}
+                {paymentType === 'education' && <PaymentsTemplate contracts={data?.education} />}
+            </PageBlock>
         </Wrapper>
     )
 }
