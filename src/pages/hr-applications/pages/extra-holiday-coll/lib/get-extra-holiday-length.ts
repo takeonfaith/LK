@@ -1,18 +1,11 @@
 import { IInputAreaData } from '@ui/input-area/model'
+import { specialFieldsNameConfigT, specialFieldsNameT } from '@entities/applications/consts'
 
 type radioType = { id: number; title: string }
 
-type specialReasonFieldsNameT =
-    | 'collHoliday1'
-    | 'collHoliday2'
-    | 'collHoliday3'
-    | 'collHoliday4'
-    | 'collHoliday5'
-    | null
-
-const getExtraHolidayLength = (data: IInputAreaData[]): specialReasonFieldsNameT => {
+const getExtraHolidayLength = (data: IInputAreaData[]): specialFieldsNameConfigT => {
     const reasonField = data.find((item: IInputAreaData) => item.fieldName === 'reason')
-
+    let resultNameField: specialFieldsNameT = null
     if (!!reasonField?.value) {
         const valueReason = reasonField?.value as radioType
         if (
@@ -20,22 +13,22 @@ const getExtraHolidayLength = (data: IInputAreaData[]): specialReasonFieldsNameT
                 'Сопровождение детей младшего школьного возраста в школу в первый день учебного года' ||
             valueReason.title === 'Стаж работы в Университете от 20 до 25 лет'
         )
-            return 'collHoliday1'
-        else if (valueReason.title === 'Стаж работы в Университете от 25 до 30 лет') return 'collHoliday2'
+            resultNameField = 'collHoliday1'
+        else if (valueReason.title === 'Стаж работы в Университете от 25 до 30 лет') resultNameField = 'collHoliday2'
         else if (
             valueReason.title === 'Двое и более детей в возрасте до 14 лет' ||
             valueReason.title === 'В случаях рождения ребенка, регистрации брака, смерти близких родственников' ||
             valueReason.title === 'Стаж работы в Университете от 30 до 35 лет'
         )
-            return 'collHoliday3'
-        else if (valueReason.title === 'Стаж работы в Университете свыше 35 лет') return 'collHoliday4'
+            resultNameField = 'collHoliday3'
+        else if (valueReason.title === 'Стаж работы в Университете свыше 35 лет') resultNameField = 'collHoliday4'
         else if (
             valueReason.title === 'Одиноким матерям/отцам' ||
             valueReason.title === 'Ребенок-инвалид в возрасте до 18 лет'
         )
-            return 'collHoliday5'
+            resultNameField = 'collHoliday5'
     }
-    return null
+    return { reasonExtraHoliday: resultNameField }
 }
 
 export default getExtraHolidayLength

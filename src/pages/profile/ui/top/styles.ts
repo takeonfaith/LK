@@ -67,9 +67,9 @@ export const Buttons = styled.div`
     }
 `
 
-export const IconWrapper = styled.div<{ background: string }>`
-    min-width: 35px;
-    height: 35px;
+export const IconWrapper = styled.div<{ background: string; width?: string }>`
+    min-width: ${({ width }) => width ?? '35px'};
+    height: ${({ width }) => width ?? '35px'};
     display: flex;
     align-items: center;
     justify-content: center;

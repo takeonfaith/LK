@@ -16,14 +16,26 @@ const pages: HelpfulPages = [
                         visible: 'student',
                         href: 'https://e.mospolytech.ru/old/storage/files/Vremennoe_polozhenie_o_provedenii_tekuschego_kontrolya_uspevaemosti_i_promezhutochnoj_attestatsii_obuchajuschihsya_v_usloviyah_obespecheniya_rezhima_izolyatsii_v_tselyah_predotvrascheniya_rasprostraneniya_koronavirusnoj_infektsii.pdf',
                     },
-                    { title: 'Оплата обучения', visible: 'student', href: 'https://mospolytech.ru/?id=2042' },
+                    {
+                        title: 'Оплата обучения',
+                        visible: 'student',
+                        href: 'https://mospolytech.ru/obuchauschimsya/oplata-obucheniya/?sphrase_id=311027',
+                    },
                     {
                         title: 'Программы дополнительного профессионального образования',
                         visible: 'all',
                         href: 'https://study.mospolytech.ru/dpo',
                     },
-                    { title: 'Международные программы', visible: 'student', href: 'https://mospolytech.ru/?id=8' },
-                    { title: 'Дополнительное образование', visible: 'student', href: 'https://mospolytech.ru/?id=92' },
+                    {
+                        title: 'Международные программы',
+                        visible: 'student',
+                        href: 'https://mospolytech.ru/mejdunarodnaya-deyatelnost/mezhdunarodnye-stazhirovki/',
+                    },
+                    {
+                        title: 'Дополнительное образование',
+                        visible: 'student',
+                        href: 'https://mospolytech.ru/dop-obrazovanie/povyshenie-kvalifikacii-i-professionalnaya-perepodgotovka/',
+                    },
 
                     {
                         title: 'Электронная библиотека Московского Политеха',
@@ -48,6 +60,16 @@ const pages: HelpfulPages = [
                 ],
             },
             {
+                title: 'Общежития',
+                links: [
+                    {
+                        title: 'Правила внутреннего распорядка в студенческом городке',
+                        visible: 'all',
+                        href: 'https://mospolytech.ru/upload/medialibrary/c01/Pravila-vnutrennego-rasporyadka-v-studencheskom-gorodke-Moskovskogo-Polytecha-(23092022).pdf',
+                    },
+                ],
+            },
+            {
                 title: 'Наука',
                 links: [
                     {
@@ -55,13 +77,21 @@ const pages: HelpfulPages = [
                         visible: 'all',
                         href: 'https://mospolytech.ru/nauchnaya-deyatelnost/obyavleniya/',
                     },
-                    { title: 'Как получить патент', visible: 'all', href: '#' },
+                    {
+                        title: 'Как получить патент',
+                        visible: 'all',
+                        href: 'https://e.mospolytech.ru/old/storage/files/Uvedomlenie_o_sozdanii_RID_(standartnoe).docx',
+                    },
                     {
                         title: 'Рекомендации по использованию Scopus для подготовки отчетности о результатах публикационной активности организации',
                         visible: 'all',
                         href: 'https://www.elsevier.com',
                     },
-                    { title: 'Список низкорейтинговых журналов', visible: 'all', href: '#' },
+                    {
+                        title: 'Список низкорейтинговых журналов',
+                        visible: 'all',
+                        href: 'https://e.mospolytech.ru/old/storage/files/Discontinued-sources-from-Scopus.xlsx',
+                    },
                     {
                         title: 'SciVal онлайн-платформа для мониторинга и анализа международных научных исследований',
                         visible: 'all',
@@ -80,14 +110,18 @@ const pages: HelpfulPages = [
                     {
                         title: 'Спортивная деятельность',
                         visible: 'student',
-                        href: 'https://e.mospolytech.ru/old/storage/files/Sportivnye_Sektsii_Mospoliteha.pdf',
+                        href: 'https://mospolytech.ru/studencheskaya-zhizn/sportivnaya-deyatelnost/',
                     },
                     {
                         title: 'Расписание спортивных секций',
                         visible: 'student',
-                        href: 'https://mospolytech.ru/?id=1482',
+                        href: 'https://e.mospolytech.ru/old/storage/files/Sportivnye_Sektsii_Mospoliteha.pdf',
                     },
-                    { title: 'Студенческая жизнь', visible: 'student', href: 'https://mospolytech.ru/?id=669' },
+                    {
+                        title: 'Студенческая жизнь',
+                        visible: 'student',
+                        href: 'https://mospolytech.ru/studencheskaya-zhizn/o-studencheskoy-jizni/?sphrase_id=311039',
+                    },
                     { title: 'Профорганизация', visible: 'all', href: 'https://profkommospolytech.ru' },
                     {
                         title: 'Студенческое научно-техническое общество',

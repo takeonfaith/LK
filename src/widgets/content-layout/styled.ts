@@ -12,23 +12,23 @@ export const ContentWrapper = styled.div`
     z-index: 3;
     background: var(--theme);
     overflow: hidden;
+    position: relative;
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
-        .page-content {
-            height: calc(100% - 60px);
-        }
     }
 `
 
-export const PageContent = styled.div`
+export const PageContent = styled.div<{ withHeader?: boolean }>`
     position: relative;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: scroll;
+    padding-top: ${({ withHeader }) => (withHeader ? 'var(--header-height)' : '0')};
     width: 100%;
     height: 100%;
 
     @media (max-width: 1000px) {
-        height: calc(100% - 60px);
+        margin-bottom: var(--mobile-bottom-menu-height);
+        height: calc(100% - var(--mobile-bottom-menu-height));
     }
 `

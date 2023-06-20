@@ -44,6 +44,7 @@ export interface IColors {
     lightGreen: IColorPalette
     blue: IColorPalette
     lightBlue: IColorPalette
+    darkBlue: IColorPalette
     purple: IColorPalette
     pink: IColorPalette
     red: IColorPalette
@@ -71,12 +72,12 @@ export const Colors: IColors = {
         dark2: '#188851',
         dark1: '#27b56e',
         main: '#3cd288',
-        light1: '#59e5a0',
-        light2: '#84ebb7',
-        light3: '#a8ffd3',
+        light1: '#49e698',
+        light2: '#58f3a6',
+        light3: '#6bfeb5',
         transparent1: '#a7ffd38a',
         transparent2: '#a7ffd324',
-        transparent3: '#a7ffd30f',
+        transparent3: '#4ad18e1f',
     },
     lightGreen: {
         dark3: '#166363',
@@ -114,6 +115,18 @@ export const Colors: IColors = {
         transparent1: '#e0e9ffba',
         transparent2: '#e0e9ff6b',
         transparent3: '#e0e9ff29',
+    },
+    darkBlue: {
+        dark3: '#211d69',
+        dark2: '#272279',
+        dark1: '#2e2891',
+        main: '#3831a5',
+        light1: '#443cc5',
+        light2: '#5850d4',
+        light3: '#675fe5',
+        transparent1: '#5c54d9e0',
+        transparent2: '#5c54d9b5',
+        transparent3: '#5c54d98c',
     },
     purple: {
         dark3: '#5b248d',
@@ -214,8 +227,9 @@ export const WeekDays: IWeekDays = {
     // sunday: { full: 'Воскресенье', short: 'Вс' },
 }
 
-export const ColorsByGrade = {
+export const ColorsByGrade: Record<keyof IGrade | 'default', string> = {
     Зачтено: Colors.green.main,
+    'Не зачтено': Colors.red.main,
     Отлично: Colors.green.main,
     Хорошо: Colors.blue.main,
     Удовлетворительно: Colors.orange.main,
@@ -224,8 +238,9 @@ export const ColorsByGrade = {
     default: Colors.red.main,
 }
 
-export const WidthByGrade = {
+export const WidthByGrade: IGrade & { default: number } = {
     Зачтено: 100,
+    'Не зачтено': 40,
     Отлично: 100,
     Хорошо: 80,
     Удовлетворительно: 60,
@@ -236,6 +251,7 @@ export const WidthByGrade = {
 
 export const GradeByScore: IGrade = {
     Зачтено: 5,
+    'Не зачтено': 2,
     Отлично: 5,
     Хорошо: 4,
     Удовлетворительно: 3,
@@ -313,7 +329,7 @@ export const letterColorMatch: LetterColorMatch = {
     П: 'blue',
     Р: 'lightBlue',
     С: 'orange',
-    Т: 'blue',
+    Т: 'pink',
     У: 'lightGreen',
     Ф: 'blue',
     Х: 'green',
@@ -356,7 +372,7 @@ export const letterColorMatch: LetterColorMatch = {
 }
 
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
-export type FileFormats = (typeof VALID_FORMATS)[number][]
+export type FileFormats = typeof VALID_FORMATS[number][]
 
 export const MAX_FILE_SIZE = 11000000
 

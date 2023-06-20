@@ -1,5 +1,6 @@
 export interface IGrade {
     Зачтено: number
+    'Не зачтено': number
     Отлично: number
     Хорошо: number
     Удовлетворительно: number

@@ -15,7 +15,7 @@ const reasonItems = [
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Предоставление права проживания (очная форма)',
+        title: 'Контактная информация',
         data: [
             {
                 title: 'ФИО',

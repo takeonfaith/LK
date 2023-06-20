@@ -6,7 +6,6 @@ import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
 import LinkMoreButton from '@features/link-more-button'
 import BlockWrapper from '@ui/block/styles'
 import { Button } from '@ui/button'
-import Notification from '@ui/notification'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import getShortStirng from '@utils/get-short-string'
 import { useMemo } from 'react'
@@ -20,6 +19,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
     cursor: pointer;
     text-decoration: none;
     border-radius: var(--brLight);
+    background: var(--form);
 
     .new {
         position: absolute;
@@ -78,7 +78,8 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             transition: 0.2s;
             bottom: 25px;
             font-weight: bold;
-            color: #fff;
+            color: var(--text);
+            right: ${({ isVertical }) => !isVertical && '50px'};
         }
 
         &:hover {
@@ -88,7 +89,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             }
 
             b {
-                opacity: ${({ hasNotifications }) => hasNotifications && 0};
+                opacity: ${({ hasNotifications, isVertical }) => isVertical && hasNotifications && 0};
                 transform: ${({ isVertical }) => isVertical && 'scale(0.95) translateY(40%)'};
             }
 
@@ -105,6 +106,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             text-align: ${({ isVertical }) => (isVertical ? 'center' : 'left')};
             color: var(--text);
             transition: 0.2s;
+            font-weight: 600;
             height: 30px;
         }
     }
@@ -155,21 +157,12 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
             hasNotifications={!!notifications}
             background={background}
         >
-            <Notification
-                outline="4px solid var(--schedule)"
-                color="red"
-                top={isVertical ? '60px' : '75%'}
-                left={orientation !== 'vertical' ? '50px' : 'auto'}
-                right={isVertical ? '32px' : 'auto'}
-                visible={!!notifications}
-                className="notification-circle"
-            >
-                {notifications}
-            </Notification>
             <div className="outside">
-                <Icon color={color.length ? color : 'blue'}>{icon ?? <FiPlus />}</Icon>
+                <Icon badge={notifications?.toString()} color={color.length ? color : 'blue'}>
+                    {icon ?? <FiPlus />}
+                </Icon>
                 <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLength)}</b>
-                {notifications && (
+                {!!notifications && (
                     <span className="notifications-title">
                         {notifications}{' '}
                         {getCorrectWordForm(notifications, {

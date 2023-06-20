@@ -1,3 +1,4 @@
+import { Divider } from '@shared/ui/divider'
 import Subtext from '@shared/ui/subtext'
 import { Title } from '@shared/ui/title'
 import React, { useEffect, useState } from 'react'
@@ -31,10 +32,10 @@ const CollapseStyled = styled.div<{ collapsed: boolean; noChildren: boolean }>`
     .children {
         transition: 0.2s;
 
-        img {
+        /* img {
             max-width: 100%;
             height: unset;
-        }
+        } */
     }
 
     .children.close {
@@ -82,6 +83,7 @@ const Collapse = ({ title, children, initiallyCollapsed, sideText, isCollapsed }
                     </Title>
                     <FiChevronDown />
                 </div>
+                <Divider margin="0 20px" />
                 <Subtext>{sideText}</Subtext>
             </div>
 

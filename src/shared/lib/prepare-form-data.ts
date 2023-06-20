@@ -3,6 +3,7 @@ import { CheckboxDocs, IInputArea, IInputAreaData } from '@ui/input-area/model'
 
 const prepareFormData = <T>(form: IInputArea) => {
     return (form.data as IInputAreaData[]).reduce((acc, item) => {
+        if (!item.value) return acc
         if (item.type === 'checkbox-docs') {
             const files = (item.items as CheckboxDocs[])?.reduce((obj, element) => {
                 for (let fileIndex = 0; fileIndex < element.files.length; fileIndex++) {
@@ -15,9 +16,12 @@ const prepareFormData = <T>(form: IInputArea) => {
             }, {} as { [key: string]: any })
             acc = Object.assign({}, acc, files)
         } else if (item.type === 'select') {
-            acc[item.fieldName] = (item.value as SelectPage).title
+            acc[item.fieldName] = !!item.isSpecificSelect
+                ? (item.value as SelectPage).id
+                : (item.value as SelectPage).title || null
         } else {
-            acc[item.fieldName] = item.value
+            const isSimpleField = !item.value || typeof item.value !== 'object'
+            acc[item.fieldName] = isSimpleField ? item?.value : (item.value as SelectPage).title
         }
         return acc
     }, {} as { [key: string]: any }) as T

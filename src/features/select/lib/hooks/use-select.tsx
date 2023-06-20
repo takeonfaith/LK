@@ -13,6 +13,7 @@ export interface SelectProps {
     isActive?: boolean
     title?: string
     width?: string
+    onClick?: (page: SelectPage) => void
     multiple?: boolean
     required?: boolean
     placeholder?: string
@@ -20,7 +21,7 @@ export interface SelectProps {
 }
 
 const useSelect = (props: SelectProps) => {
-    const { items, setSelected, selected, appearance = true, multiple = false } = props
+    const { items, setSelected, onClick, selected, appearance = true, multiple = false } = props
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const refElement = useRef<HTMLDivElement | null>(null)
     const refItems = useRef<HTMLUListElement | null>(null)
@@ -64,6 +65,7 @@ const useSelect = (props: SelectProps) => {
 
                 setRoute([...route])
             }
+            onClick?.(page)
         },
         [setSelected, route],
     )

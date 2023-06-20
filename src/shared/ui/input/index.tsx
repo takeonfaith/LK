@@ -1,9 +1,9 @@
 import { Colors } from '@consts'
-import React, { HTMLInputTypeAttribute } from 'react'
+import { Button } from '@ui/button'
+import { Title } from '@ui/title'
+import React, { ForwardedRef, HTMLInputTypeAttribute, forwardRef } from 'react'
 import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
-import { Title } from '@ui/title'
-import { Button } from '@ui/button'
 import { Loading, Message } from '../atoms'
 import useInput from './hooks/use-input'
 
@@ -119,27 +119,28 @@ interface Props {
     customMask?: (value: string, prevValue?: string) => string
 }
 
-const Input = ({
-    value,
-    setValue,
-    leftIcon,
-    title,
-    required,
-    width,
-    minWidth,
-    customMask,
-    placeholder = 'Введите сюда',
-    type = 'text',
-    danger: initDanger,
-    alertMessage,
-    loading = false,
-    isActive = true,
-    inputAppearance = true,
-    mask = false,
-    autocomplete = false,
-    minValue = undefined,
-    maxValue = undefined,
-}: Props) => {
+const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInputElement>) {
+    const {
+        value,
+        setValue,
+        leftIcon,
+        title,
+        required,
+        width,
+        minWidth,
+        customMask,
+        placeholder = 'Введите сюда',
+        type = 'text',
+        danger: initDanger,
+        alertMessage,
+        loading = false,
+        isActive = true,
+        inputAppearance = true,
+        mask = false,
+        autocomplete = false,
+        minValue = undefined,
+        maxValue = undefined,
+    } = props
     const { inputType, buttonOnClick, danger, handleOnChange, phoneMaskKeyDown } = useInput(
         value,
         setValue,
@@ -178,6 +179,7 @@ const Input = ({
                 onChange={handleOnChange}
                 required={required}
                 readOnly={!isActive}
+                ref={ref}
             />
             {type !== 'password' ? (
                 !!value?.length &&
@@ -192,6 +194,6 @@ const Input = ({
             )}
         </InputWrapper>
     )
-}
+})
 
 export default Input

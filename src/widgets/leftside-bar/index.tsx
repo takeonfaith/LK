@@ -1,11 +1,11 @@
 import { HOME_ROUTE } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
+import GlobalAppSearch from '@features/global-app-search'
+import ThemeToggle from '@features/theme-toggle'
 import { Logo } from '@ui/logo'
-import ToggleArea, { ToggleItem } from '@ui/organisms/toggle-area'
 import useResize from '@utils/hooks/use-resize'
-import useTheme from '@utils/hooks/use-theme'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import UserBig from 'widgets/user-big'
 import { CloseMenuButton, LeftsideBarList, LeftsideBarWrapper } from './ui'
@@ -18,25 +18,6 @@ const LeftsideBar = () => {
     } = userModel.selectors.useUser()
 
     const { visibleRoutes, currentPage } = menuModel.selectors.useMenu()
-
-    const { theme, switchTheme } = useTheme()
-    const [toggles, setToggles] = useState<ToggleItem[]>([
-        {
-            title: 'Темная тема',
-            state: theme !== 'light',
-            action: (state: boolean) => switchTheme(state),
-        },
-    ])
-
-    useEffect(() => {
-        setToggles([
-            {
-                title: 'Темная тема',
-                state: theme !== 'light',
-                action: (state: boolean) => switchTheme(state),
-            },
-        ])
-    }, [theme])
 
     return (
         <LeftsideBarWrapper isOpen={isOpen} height={height}>
@@ -51,9 +32,10 @@ const LeftsideBar = () => {
                     loading={!user}
                     selected={currentPage?.id === 'profile'}
                 />
+                <GlobalAppSearch size="small" />
                 <LeftsideBarList />
             </div>
-            <ToggleArea title={''} toggles={toggles} setToggles={setToggles} />
+            <ThemeToggle type="toggle" />
             {width < 1000 && <CloseMenuButton />}
         </LeftsideBarWrapper>
     )

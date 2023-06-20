@@ -26,7 +26,7 @@ export const ButtonWrapper = styled.button<{
     padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600;
     transition: 0.2s transform;
     width: ${({ width }) => (width ? width : 'fit-content')};
     min-width: ${({ minWidth }) => minWidth && minWidth};
@@ -50,6 +50,11 @@ export const ButtonWrapper = styled.button<{
     &:hover {
         background: ${({ hoverBackground, isChosen, background }) =>
             hoverBackground ?? (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
+        filter: brightness(0.97);
+    }
+
+    .text {
+        margin-top: ${({ direction, text }) => direction === 'vertical' && text && '6px'};
     }
 
     .icon {
@@ -57,7 +62,6 @@ export const ButtonWrapper = styled.button<{
         width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
         min-width: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : 'fit-content')};
         height: ${({ direction, text }) => (direction === 'vertical' || !text ? '20px' : '15px')};
-        margin-bottom: ${({ direction, text }) => direction === 'vertical' && text && '4px'};
         display: flex;
         align-items: center;
         justify-content: center;
@@ -80,14 +84,23 @@ export const ButtonWrapper = styled.button<{
         right: 10px;
         padding: 0;
 
-        .icon {
-            width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
-            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
-            margin-bottom: ${({ direction, shrinkTextInMobile }) =>
+        .text {
+            margin-top: ${({ direction, shrinkTextInMobile }) =>
                 direction === 'vertical' && !shrinkTextInMobile ? '4px' : '0px'};
+        }
+
+        .icon {
+            width: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};
+            min-width: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};
+
             margin-right: ${({ shrinkTextInMobile, text, direction }) =>
                 shrinkTextInMobile || direction === 'vertical' || !text ? '0px' : '7px'};
-            height: ${({ direction }) => (direction === 'vertical' ? '30px' : 'fit-content')};
+            height: ${({ direction }) => (direction === 'vertical' ? '30px' : '15px')};
+
+            svg {
+                max-width: 23px;
+                /* max-height: 23px; */
+            }
         }
 
         span {

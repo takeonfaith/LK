@@ -1,11 +1,8 @@
-import React from 'react'
 import { Image } from '@ui/atoms'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const QrCodeWrapper = styled.div`
-    width: 100%;
-    min-width: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,7 +27,7 @@ const QrCode = ({ qrCode }: Props) => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-        }, 1200)
+        }, 500)
     }, [])
 
     return (

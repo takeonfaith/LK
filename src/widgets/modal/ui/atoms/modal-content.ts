@@ -1,14 +1,38 @@
 import styled from 'styled-components'
 
-const ModalContent = styled.div<{ isOpen: boolean }>`
+const ModalContent = styled.div<{ isOpen: boolean; hasBack: boolean; hasTitle: boolean }>`
     background: var(--theme);
     color: var(--text);
     padding: 20px;
     min-height: 150px;
     max-height: 90vh;
-    border-radius: var(--brSemi);
+    border-radius: var(--brLight);
     transition: 0.2s opacity, 0.2s transform;
     overflow: auto;
+
+    h3 {
+        margin-left: ${({ hasBack }) => (hasBack ? '15px' : '0px')};
+        padding-right: 50px;
+        white-space: break-spaces;
+        max-width: 600px;
+    }
+
+    .close-button,
+    .back-button {
+        position: absolute;
+        top: 14px;
+    }
+
+    .back-button {
+        left: ${({ hasTitle }) => (hasTitle ? '4px' : '12px')};
+    }
+
+    .close-button {
+        right: 20px;
+        z-index: 100;
+        padding: 8px;
+        border-radius: 100%;
+    }
 
     @media (max-width: 1000px) {
         font-size: 0.9em;
@@ -35,16 +59,22 @@ const ModalContent = styled.div<{ isOpen: boolean }>`
     }
 
     @media (max-width: 800px) {
-        padding: 10px;
-        padding-top: 15px;
-
+        padding: 15px;
         width: 100%;
         max-height: 80%;
         height: fit-content;
         bottom: 0;
         border-radius: 20px 20px 0 0;
         transform: ${({ isOpen }) => (isOpen ? `scale(1) translateY(0px)` : `scale(1) translateY(150px)`)};
-        border-radius: var(--brLight) var(--brLight) 0 0;
+        border-radius: var(--brLight);
+
+        .close-button {
+            right: 15px;
+        }
+
+        h3 {
+            margin-top: 7px;
+        }
     }
 `
 

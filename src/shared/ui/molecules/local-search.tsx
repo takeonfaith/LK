@@ -12,6 +12,7 @@ interface Props<T, R> {
     validationCheck?: boolean
     loadingOnType?: boolean
     hints?: Hint[]
+    width?: string
 }
 
 const LocalSearch = <T, R>({
@@ -21,6 +22,7 @@ const LocalSearch = <T, R>({
     inputAppearance,
     setExternalValue,
     hints,
+    width,
     loadingOnType = false,
     placeholder = 'Поиск по меню',
     validationCheck = false,
@@ -48,6 +50,7 @@ const LocalSearch = <T, R>({
             validationCheck={validationCheck}
             loading={loadingOnType ? loading : false}
             hints={hints}
+            width={width}
         />
     )
 }

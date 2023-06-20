@@ -22,7 +22,7 @@ const SubmitButtonWrapper = styled.button<StyledProps>`
     box-sizing: border-box;
     opacity: ${(props) => (props.isLoading || !props.isActive ? 0.5 : 1)};
     color: #fff;
-    font-weight: bold;
+    font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;

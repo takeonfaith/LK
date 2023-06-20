@@ -1,16 +1,20 @@
+import React from 'react'
+import styled from 'styled-components'
 import { menuModel } from '@entities/menu'
 import { DEFAULT_MOBILE_CONFIG } from '@entities/menu/model'
 import { ListWrapper } from '@ui/list/styles'
 import { SkeletonShape } from '@ui/skeleton-shape'
-import React from 'react'
-import styled from 'styled-components'
 import { LeftsideBarItem } from 'widgets/leftside-bar/ui'
 
 const MobileBottomMenuWrapper = styled(ListWrapper)`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
     width: 100%;
-    height: 60px;
+    height: var(--mobile-bottom-menu-height);
     background: var(--schedule);
-    box-shadow: 0 0 1px;
+    border-top: 1px solid var(--scheduleBg);
     padding: 0px 10px;
     display: none;
 

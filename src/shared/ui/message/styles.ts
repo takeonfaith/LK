@@ -7,8 +7,12 @@ import styled from 'styled-components'
 //         ? Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparent3']
 //         : Colors[messageType[type].color][solidBackground ? 'transparent' : 'transparent3']
 
-const getColor = (isLightTheme: boolean, type: MessageType) =>
-    isLightTheme ? Colors[messageType[type].color].dark2 : Colors[messageType[type].color].light2
+const getColor = (isLightTheme: boolean, type: MessageType, solidBackground: boolean) =>
+    solidBackground
+        ? '#fff'
+        : isLightTheme
+        ? Colors[messageType[type].color].dark3
+        : Colors[messageType[type].color].light3
 
 export const MessageWrapper = styled.div<{
     type: MessageType
@@ -20,13 +24,14 @@ export const MessageWrapper = styled.div<{
     fontSize?: string
     padding?: string
     gap?: string
+    lineHeight?: string
     isLightTheme: boolean
 }>`
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
-    color: ${({ type, isLightTheme }) => getColor(isLightTheme, type)};
+    color: ${({ type, isLightTheme, solidBackground }) => getColor(isLightTheme, type, solidBackground)};
     background: ${({ type, solidBackground }) =>
-        Colors[messageType[type].color][solidBackground ? 'transparent1' : 'transparent2']};
+        Colors[messageType[type].color][solidBackground ? 'main' : 'transparent3']};
     width: ${({ width }) => width ?? '100%'};
     max-width: ${({ maxWidth }) => maxWidth ?? 'none'};
     font-size: ${({ fontSize }) => fontSize ?? '0.8em'};
@@ -38,12 +43,16 @@ export const MessageWrapper = styled.div<{
     gap: 10px;
     font-weight: 500;
     justify-content: flex-end;
+    line-height: ${({ lineHeight }) => lineHeight};
     align-items: ${({ align }) => (align === 'left' ? 'flex-start' : align === 'center' ? 'center' : 'flex-end')};
 
     .close-button {
         position: absolute;
-        top: 0px;
-        right: 0px;
+        top: 5px;
+        right: 5px;
+        border-radius: 100%;
+        width: 30px;
+        height: 30px;
     }
 
     .info-text {
@@ -54,6 +63,6 @@ export const MessageWrapper = styled.div<{
 
     a {
         text-decoration: underline;
-        color: ${({ type, isLightTheme }) => Colors[messageType[type].color][isLightTheme ? 'dark3' : 'light3']};
+        color: ${({ type, isLightTheme }) => Colors[messageType[type].color][isLightTheme ? 'main' : 'light2']};
     }
 `

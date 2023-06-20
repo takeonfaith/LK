@@ -1,42 +1,34 @@
-import React from 'react'
-import {
-    baseNotification,
-    businesstripNotification,
-    docsNotification,
-    ItemNotification,
-    NameListNotification,
-} from '@api/model/notification'
-import { CardNotification, CardDocument } from './index'
-import { Error } from '@ui/error'
+import { baseNotification, businesstripNotification, docsNotification, ItemNotification } from '@api/model/notification'
 import { personalNotificationModel } from '@entities/notification'
-import List from '@shared/ui/list'
+import Flex from '@shared/ui/flex'
+import { Error } from '@ui/error'
+import React from 'react'
+import { CardDocument, CardNotification } from './index'
 
 interface Props {
     listNotification: ItemNotification[]
-    typeList: NameListNotification
 }
 
-const ListNotifications = ({ listNotification, typeList }: Props) => {
+const ListNotifications = ({ listNotification }: Props) => {
     const type = personalNotificationModel.selectors.useType()
 
     return (
-        <List direction="vertical" gap={8} scroll={false}>
+        <Flex d="column" gap="8px">
             {listNotification.length ? (
                 listNotification.map((notification) =>
                     type === 'notifications' ? (
                         <CardNotification
                             key={notification.id}
                             data={notification as baseNotification | businesstripNotification}
-                            type={typeList}
                         />
                     ) : (
-                        <CardDocument key={notification.id} data={notification as docsNotification} type={typeList} />
+                        <CardDocument key={notification.id} data={notification as docsNotification} />
                     ),
                 )
             ) : (
                 <Error text={'По заданным параметрам документ не найден'} />
             )}
-        </List>
+        </Flex>
     )
 }
 

@@ -6,6 +6,7 @@ const SettingsSection = styled.section`
     border-radius: var(--brLight);
     padding: 0px;
     overflow: hidden;
+    margin-bottom: 16px;
 
     h4 {
         opacity: 0.9;

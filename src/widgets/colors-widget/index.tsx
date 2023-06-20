@@ -6,13 +6,12 @@ import ColorPlate from './color-plate'
 
 const ColorsWidget = () => {
     return (
-        <Block maxWidth="750px" orientation="vertical" height="fit-content">
+        <Block maxWidth="1200px" orientation="horizontal" height="fit-content">
             {Object.keys(Colors).map((color) => {
                 const typedColor = color as keyof typeof Colors
                 return (
-                    // eslint-disable-next-line react/jsx-key
-                    <div style={{ margin: '50px 0' }}>
-                        <Title>{typedColor}</Title>
+                    <div key={color}>
+                        <Title size={4}>{typedColor}</Title>
                         {Object.keys(Colors[typedColor]).map((shade) => {
                             return (
                                 <ColorPlate color={Colors[typedColor][shade as keyof IColorPalette]} key={shade}>

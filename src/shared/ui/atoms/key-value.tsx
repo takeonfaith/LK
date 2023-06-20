@@ -18,6 +18,10 @@ const Line = styled.div<{ direction: Direction; fontSize?: string }>`
     span {
         width: ${({ direction }) => (direction === 'vertical' ? '100%' : 'fit-content')};
     }
+
+    strong {
+        font-weight: 600;
+    }
 `
 
 interface Props {

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const AnimatedCheckWrapper = styled.div<{ size: string }>`
+export const AnimatedCheckWrapper = styled.div<{ size: string; color?: string }>`
     .wrapper {
         position: relative;
         width: ${({ size }) => size};
@@ -11,7 +11,7 @@ export const AnimatedCheckWrapper = styled.div<{ size: string }>`
         width: ${({ size }) => size};
         height: ${({ size }) => size};
         border-radius: 50%;
-        background: var(--blue);
+        background: ${({ color }) => color ?? 'var(--blue)'};
         animation: expand 0.4s cubic-bezier(0.77, 0, 0.175, 1) forwards;
     }
 
@@ -62,7 +62,7 @@ export const AnimatedCheckWrapper = styled.div<{ size: string }>`
         fill: transparent;
         stroke-width: 3;
         stroke-dasharray: 36px 36px;
-        stroke: var(--blue);
+        stroke: ${({ color }) => color ?? 'var(--blue)'};
         animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0.4s 1 both drawCheck;
     }
 

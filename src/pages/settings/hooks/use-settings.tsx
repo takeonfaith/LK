@@ -13,6 +13,7 @@ import getSettingsModel, { TFullSettingsModel } from '../model'
 import CustomizeMenu from '../../../features/customize-menu'
 import addPageToSidebar from '@features/all-pages/lib/add-page-to-sidebar'
 import addPageToHome from '@features/all-pages/lib/add-page-to-home'
+import { NotificationsSettingsType } from '@entities/settings/lib/get-default-settings'
 
 const getValue = (value: string | undefined) => (!value || value.length === 0 ? 'Не указан' : value)
 
@@ -25,13 +26,18 @@ const useSettings = () => {
     const { leftsideBarRoutes, homeRoutes } = menuModel.selectors.useMenu()
     const { settings } = settingsModel.selectors.useSettings()
     const [fullSettings, setFullSettings] = useState<TFullSettingsModel | null>(null)
-
+    const { property: settingsProperty } = settings['settings-notifications']
+    const { property: appearanceProperty } = settings['settings-appearance']
     const { widgetPayment, widgetSchedule } = settings['settings-home-page'].property
     const requiredLeftsideBarItems =
         user?.user_status === 'staff' ? REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG : REQUIRED_LEFTSIDE_BAR_CONFIG
     useEffect(() => {
         setFullSettings({
             ...getSettingsModel({
+                scheduledLightTheme: appearanceProperty.scheduledLightTheme as boolean,
+                lightThemeRange: appearanceProperty.lightThemeRange as [string, string],
+                settings: settingsProperty as NotificationsSettingsType,
+                isStudent: user?.user_status === 'stud',
                 menu: {
                     value: leftsideBarRoutes,
                     additionalActions: {
@@ -48,7 +54,7 @@ const useSettings = () => {
                         onRemoveOne: (id) => deletePageFromSidebar(id as string, settings, requiredLeftsideBarItems),
                     },
                 },
-                theme: { value: theme === 'dark', action: (value) => switchTheme(!(value as boolean)) },
+                theme: { value: theme === 'dark', action: (value) => switchTheme(value as boolean) },
                 phone: {
                     value: user?.phone ?? '',
                     description: user?.phone,

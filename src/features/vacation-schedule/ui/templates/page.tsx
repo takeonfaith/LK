@@ -40,9 +40,6 @@ const Page = () => {
         <Wrapper load={vacationScheduleModel.effects.getFx} error={error} data={data}>
             <CenterPage alignItems="flex-start">
                 <Block orientation="vertical" height="fit-content" gap="1rem" maxWidth="700px" noAppearanceInMobile>
-                    <Title size={2} align="left">
-                        График отпусков
-                    </Title>
                     <Subtext width="100%" maxWidth="100%">
                         Производственный календарь на 2023 год
                     </Subtext>
