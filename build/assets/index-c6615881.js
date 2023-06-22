@@ -1,0 +1,1 @@
+import{j as t}from"./vendor-0c76c893.js";import{N as o}from"./index-6677385a.js";import"./index-8d41848f.js";import"./index-dc78f9a9.js";const e=()=>t.jsx(o,{title:"Ознакомление с документами"});export{e as default};

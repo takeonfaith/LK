@@ -1,23 +1,20 @@
 import PrivateRouter from '@app/routers/private-router'
-import { ALERTS_ROUTE } from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
+import useResize from '@shared/lib/hooks/use-resize'
+import useCurrentExactPage from '@utils/hooks/use-current-exact-page'
 import useIsShowNotification from '@utils/hooks/use-is-show-notification'
 import useTheme from '@utils/hooks/use-theme'
-import useCurrentExactPage from '@utils/hooks/use-current-exact-page'
 import React, { Suspense, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { Confirm, HintModal, LeftsideBar, MobileBottomMenu, PopUpMessage, useModal } from 'widgets'
 import ContextMenu from 'widgets/context-menu'
+import Header from 'widgets/header'
 import { Modal } from 'widgets/modal'
 import InitialLoader from '../../shared/ui/initial-loader'
 import Story from '../../shared/ui/story'
 import WhatsNew from '../whats-new'
 import { ContentWrapper, PageContent, Wrapper } from './styled'
-import Header from 'widgets/header'
-import useResize from '@shared/lib/hooks/use-resize'
 
 const ContentLayout = () => {
     const {
@@ -36,27 +33,37 @@ const ContentLayout = () => {
     useTheme()
     useEffect(() => {
         popUpMessageModel.events.evokePopUpMessage({
-            message: (
-                <>
-                    Если вы хотите перейти <br /> в старый личный кабинет,{' '}
-                    <a href={`${OLD_LK_URL}/index.php`}>нажмите сюда</a>
-                </>
-            ),
-            type: 'info',
-            time: 5000,
+            message: <>Ведутся технические работы. Возможны проблемы со входом.</>,
+            type: 'failure',
+            time: 9999999999999,
         })
 
+        // setTimeout(
+        //     () =>
+        //         popUpMessageModel.events.evokePopUpMessage({
+        //             message: (
+        //                 <>
+        //                     Если вы хотите перейти <br /> в старый личный кабинет,{' '}
+        //                     <a href={`${OLD_LK_URL}/index.php`}>нажмите сюда</a>
+        //                 </>
+        //             ),
+        //             type: 'info',
+        //             time: 5000,
+        //         }),
+        //     15000,
+        // )
+
         // TODO: popUpMessageModel add stack of alerts
-        user?.hasAlerts &&
-            setTimeout(
-                () =>
-                    popUpMessageModel.events.evokePopUpMessage({
-                        message: <Link to={ALERTS_ROUTE}>У вас есть новые оповещения</Link>,
-                        type: 'tip',
-                        time: 5000,
-                    }),
-                5000,
-            )
+        // user?.hasAlerts &&
+        //     setTimeout(
+        //         () =>
+        //             popUpMessageModel.events.evokePopUpMessage({
+        //                 message: <Link to={ALERTS_ROUTE}>У вас есть новые оповещения</Link>,
+        //                 type: 'tip',
+        //                 time: 5000,
+        //             }),
+        //         5000,
+        //     )
     }, [user])
 
     useEffect(() => {

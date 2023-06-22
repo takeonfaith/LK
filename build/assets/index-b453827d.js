@@ -1,0 +1,1 @@
+import{j as t}from"./vendor-0c76c893.js";import{N as e}from"./index-6677385a.js";import"./index-8d41848f.js";import"./index-dc78f9a9.js";const a=()=>t.jsx(e,{docsType:!0,title:"Приказы и распоряжения"});export{a as default};
