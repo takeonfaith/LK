@@ -1,8 +1,8 @@
 import { userModel } from '@entities/user'
 import { vacationScheduleModel } from '@entities/vacation-schedule'
 import Select, { SelectPage } from '@features/select'
+import PageBlock from '@shared/ui/page-block'
 import { CenterPage, Divider, LinkButton, Title, Wrapper } from '@ui/atoms'
-import Block from '@ui/block'
 import Card from '@ui/card'
 import List from '@ui/list'
 import Subtext from '@ui/subtext'
@@ -39,7 +39,7 @@ const Page = () => {
     return (
         <Wrapper load={vacationScheduleModel.effects.getFx} error={error} data={data}>
             <CenterPage alignItems="flex-start">
-                <Block orientation="vertical" height="fit-content" gap="1rem" maxWidth="700px" noAppearanceInMobile>
+                <PageBlock>
                     <Subtext width="100%" maxWidth="100%">
                         Производственный календарь на 2023 год
                     </Subtext>
@@ -85,7 +85,7 @@ const Page = () => {
                         <Select width="fit-content" items={items} selected={selected} setSelected={setSelected} />
                     )}
                     {selectedVacation && <Vacation {...selectedVacation} />}
-                </Block>
+                </PageBlock>
             </CenterPage>
         </Wrapper>
     )

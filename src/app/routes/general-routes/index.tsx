@@ -308,7 +308,6 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
         keywords: ['экзамены', 'зачеты', 'сессия', 'пересдача'],
-        planeHeader: true,
     },
     'all-students': {
         id: 'all-students',
@@ -386,7 +385,6 @@ export const generalHiddenRoutes: IRoutes = {
         isTemplate: false,
         show: false,
         group: 'OTHER',
-        planeHeader: true,
     },
     'filtered-all-students': {
         id: 'filtered-all-students',
