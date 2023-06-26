@@ -9,7 +9,7 @@ const useLkNotifications = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { notifications, loading } = lkNotificationModel.selectors.useLkNotifications()
+    const { notifications, loading, loaded } = lkNotificationModel.selectors.useLkNotifications()
     const { settings } = settingsModel.selectors.useSettings()
     const notificationSettings = useMemo(
         () => settings?.['settings-notifications'].property as NotificationsSettingsType,
@@ -18,13 +18,13 @@ const useLkNotifications = () => {
 
     useEffect(() => {
         if (!!user && !!notificationSettings) {
-            if (notificationSettings.all !== false && notifications.length === 0 && !loading) {
+            if (notificationSettings.all !== false && !loaded && !loading) {
                 lkNotificationModel.events.initialize({
                     settings: notificationSettings,
                 })
             }
         }
-    }, [user, notificationSettings, loading])
+    }, [user, notificationSettings, loading, loaded])
 
     useEffect(() => {
         menuModel.events.changeNotifications({ page: 'lk-notifications', notifications: notifications.length })
