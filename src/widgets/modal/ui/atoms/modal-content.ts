@@ -10,7 +10,7 @@ const ModalContent = styled.div<{ isOpen: boolean; hasBack: boolean; hasTitle: b
     transition: 0.2s opacity, 0.2s transform;
     overflow: auto;
 
-    h3 {
+    & > .title-wrapper {
         margin-left: ${({ hasBack }) => (hasBack ? '15px' : '0px')};
         padding-right: 50px;
         white-space: break-spaces;

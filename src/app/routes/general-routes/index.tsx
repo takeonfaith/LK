@@ -216,6 +216,7 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'FINANCES_DOCS',
+        planeHeader: true,
     },
     payments: {
         id: 'payments',

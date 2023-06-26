@@ -1,6 +1,7 @@
 import { TNotification, lkNotificationModel } from '@entities/lk-notifications'
 import getShortString from '@shared/lib/get-short-string'
 import localizeDate from '@shared/lib/localize-date'
+import AutoAccordion from '@shared/ui/auto-accordion'
 import { Button } from '@shared/ui/button'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'
@@ -12,9 +13,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets/modal/lib'
 import { iconObject } from './notification-icon'
-import { Loading } from '@shared/ui/loading'
 
-const NotificationItemStyled = styled(Link)`
+const NotificationItemStyled = styled(Link)<{ closed: boolean }>`
     width: 100%;
     display: flex;
     align-items: center;
@@ -82,12 +82,14 @@ const NotificationItem = ({
     pageId,
     goTo,
     onClose,
+    bottomMargin,
+    closeAnimation = true,
     loadingRemove = false,
     canClose = true,
     fullText = true,
     maxLetters = 200,
     size = 'middle',
-}: TNotification & { size?: Size; maxLetters?: number }) => {
+}: TNotification & { size?: Size; maxLetters?: number; closeAnimation?: boolean; bottomMargin?: boolean }) => {
     const normalizedDate = localizeDate(date, 'short')
     const { close } = useModal()
 
@@ -96,8 +98,15 @@ const NotificationItem = ({
     const handleClose = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation()
         e.preventDefault()
-        setRemoveButtonClicked(true)
-        onClose?.()
+        if (closeAnimation) {
+            setRemoveButtonClicked(true)
+
+            setTimeout(() => {
+                onClose?.()
+            }, 300)
+        } else {
+            onClose?.()
+        }
     }
 
     const handleClick = () => {
@@ -107,30 +116,32 @@ const NotificationItem = ({
     }
 
     return (
-        <NotificationItemStyled to={goTo ?? ''} onClick={handleClick}>
-            <span className="left-icon">{iconObject()[type]}</span>
-            <div className="content">
-                <Subtext fontSize="0.7rem">
-                    <DotSeparatedWords words={[normalizedDate ?? '', time ?? '']} />
-                </Subtext>
-                <Flex d="column" gap={gapSize[size]} ai="flex-start">
-                    <NotificationTitle fontSize={titleSize[size]}>
-                        {fullText ? title : getShortString(title, maxLetters)}
-                    </NotificationTitle>
-                    <Subtext fontSize={textSize[size] as string}>
-                        {fullText ? text : getShortString(text, maxLetters)}
+        <AutoAccordion forceState={!removeButtonClicked} bottomMargin={bottomMargin}>
+            <NotificationItemStyled to={goTo ?? ''} onClick={handleClick} closed={removeButtonClicked}>
+                <span className="left-icon">{iconObject()[type]}</span>
+                <div className="content">
+                    <Subtext fontSize="0.7rem">
+                        <DotSeparatedWords words={[normalizedDate ?? '', time ?? '']} />
                     </Subtext>
-                </Flex>
-            </div>
-            {onClose && (
-                <Button
-                    isActive={!(loadingRemove && removeButtonClicked)}
-                    icon={loadingRemove && removeButtonClicked ? <Loading width="20px" height="20px" /> : <FiX />}
-                    background="transparent"
-                    onClick={handleClose}
-                />
-            )}
-        </NotificationItemStyled>
+                    <Flex d="column" gap={gapSize[size]} ai="flex-start">
+                        <NotificationTitle fontSize={titleSize[size]}>
+                            {fullText ? title : getShortString(title, maxLetters)}
+                        </NotificationTitle>
+                        <Subtext fontSize={textSize[size] as string}>
+                            {fullText ? text : getShortString(text, maxLetters)}
+                        </Subtext>
+                    </Flex>
+                </div>
+                {onClose && (
+                    <Button
+                        isActive={!(loadingRemove && removeButtonClicked)}
+                        icon={<FiX />}
+                        background="transparent"
+                        onClick={handleClose}
+                    />
+                )}
+            </NotificationItemStyled>
+        </AutoAccordion>
     )
 }
 

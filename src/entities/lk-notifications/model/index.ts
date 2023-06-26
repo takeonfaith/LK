@@ -129,8 +129,6 @@ sample({
     source: $lkNotificationsStore,
     fn: ({ notifications, visibleNotifications, ...store }, { id, pageId }) => {
         removeNotificationFromPageFx(pageId)
-        // eslint-disable-next-line no-console
-        console.log(id, notifications)
 
         return {
             ...store,

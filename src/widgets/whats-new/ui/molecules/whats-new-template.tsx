@@ -1,9 +1,10 @@
+import useCurrentDevice from '@shared/lib/hooks/use-current-device'
+import Subtext from '@shared/ui/subtext'
 import { Title } from '@ui/atoms'
-import useResize from '@utils/hooks/use-resize'
 import React from 'react'
 import styled from 'styled-components'
-import { WhatsNewPlate } from '../atoms/plate'
 import { Plate } from '../atoms'
+import { WhatsNewPlate } from '../atoms/plate'
 
 const WhatsNewTemplateWrapper = styled.div`
     width: 100%;
@@ -13,10 +14,19 @@ const WhatsNewTemplateWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    img {
+    .image {
+        height: fit-content;
         width: 100%;
-        object-fit: cover;
-        object-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
     }
 
     @media (max-width: 1000px) {
@@ -34,28 +44,41 @@ const PlateWrapper = styled.div`
     gap: 5px;
 `
 
+const TemplateText = styled(Subtext)`
+    margin-bottom: 20px;
+`
+
 interface Props {
     image?: {
-        text: string
+        title: string
         mobile?: string
         desktop?: string
+        component?: ChildrenType
     }
+    text?: string
     list?: WhatsNewPlate[]
 }
 
-const WhatsNewTemplate = ({ image, list }: Props) => {
-    const { width } = useResize()
+const WhatsNewTemplate = ({ image, list, text }: Props) => {
+    const { isMobile } = useCurrentDevice()
 
     return (
         <WhatsNewTemplateWrapper>
             {!!image && (
                 <>
-                    <Title size={4} bottomGap>
-                        {image.text}
+                    <Title size={3} align="center" bottomGap>
+                        {image.title}
                     </Title>
-                    <img src={width < 1000 && !!image.mobile ? image.mobile : image.desktop} alt="" />
+                    <div className="image">
+                        {image.component ?? (
+                            <img src={isMobile && !!image.mobile ? image.mobile : image.desktop} alt="" />
+                        )}
+                    </div>
                 </>
             )}
+            <TemplateText lineHeight="1.6rem" width="100%" align="center" fontSize="1rem" visible={!!text}>
+                {text}
+            </TemplateText>
             {!!list && (
                 <PlateWrapper>
                     {list?.map((el) => {

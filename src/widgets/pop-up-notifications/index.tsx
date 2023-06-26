@@ -20,6 +20,7 @@ const PopUpNotifications = () => {
                             {...notification}
                             fullText={false}
                             maxLetters={19}
+                            closeAnimation={false}
                             onClose={handleClose(notification.id)}
                         />
                     </PopUpNotificationsItem>
