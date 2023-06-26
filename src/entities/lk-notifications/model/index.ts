@@ -13,6 +13,8 @@ type TStore = {
     error: string | null
     removeNotificationError: string | null
     removeNotificationLoading: boolean
+    clearAllLoading: boolean
+    clearAllError: string | null
 }
 
 const DEFAULT_STORE: TStore = {
@@ -22,6 +24,8 @@ const DEFAULT_STORE: TStore = {
     error: null,
     removeNotificationError: null,
     removeNotificationLoading: false,
+    clearAllLoading: false,
+    clearAllError: null,
 }
 
 const fetchNotifications = createEffect(async ({ settings }: { settings: NotificationsSettingsType }) => {
@@ -62,6 +66,14 @@ const clearNotificationByIdFx = createEffect(async ({ id, pageId }: { id: string
         return { id, pageId }
     } catch (error) {
         throw new Error('Не удалось скрыть уведомление')
+    }
+})
+
+const clearAllNotificationsFx = createEffect(async () => {
+    try {
+        await lkNotificationApi.clearAllNotifications()
+    } catch (error) {
+        throw new Error('Не удалось скрыть все уведомления')
     }
 })
 
@@ -153,8 +165,27 @@ sample({
     target: $lkNotificationsStore,
 })
 
+forward({
+    from: clearAll,
+    to: clearAllNotificationsFx,
+})
+
 sample({
-    clock: clearAll,
+    clock: clearAllNotificationsFx.pending,
+    source: $lkNotificationsStore,
+    fn: (store, clk) => ({ ...store, clearAllLoading: clk, clearAllError: null }),
+    target: $lkNotificationsStore,
+})
+
+sample({
+    clock: clearAllNotificationsFx.failData,
+    source: $lkNotificationsStore,
+    fn: (store, clk) => ({ ...store, clearAllError: clk.message }),
+    target: $lkNotificationsStore,
+})
+
+sample({
+    clock: clearAllNotificationsFx.doneData,
     source: $lkNotificationsStore,
     fn: (store) => ({ ...store, notifications: [], visibleNotifications: [] }),
     target: $lkNotificationsStore,
