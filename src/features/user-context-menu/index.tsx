@@ -36,7 +36,7 @@ const UserContextMenu = () => {
 
     const handleWhatsNew = () => {
         contextMenuModel.events.close()
-        open(<WhatsNew />)
+        open(<WhatsNew />, 'Что нового')
     }
 
     const handleOpenNotificationModal = () => {
