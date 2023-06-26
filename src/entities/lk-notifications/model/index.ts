@@ -15,6 +15,7 @@ type TStore = {
     removeNotificationLoading: boolean
     clearAllLoading: boolean
     clearAllError: string | null
+    loaded: boolean
 }
 
 const DEFAULT_STORE: TStore = {
@@ -26,6 +27,7 @@ const DEFAULT_STORE: TStore = {
     removeNotificationLoading: false,
     clearAllLoading: false,
     clearAllError: null,
+    loaded: false,
 }
 
 const fetchNotifications = createEffect(async ({ settings }: { settings: NotificationsSettingsType }) => {
@@ -114,9 +116,11 @@ sample({
     clock: fetchNotifications.doneData,
     source: $lkNotificationsStore,
     fn: (store, clk) => ({
+        ...store,
         notifications: [...clk, ...store.notifications],
         visibleNotifications: [...store.visibleNotifications, ...clk].slice(0, 2),
         error: null,
+        loaded: true,
     }),
     target: [$lkNotificationsStore, addNotificationsToPagesFx],
 })
