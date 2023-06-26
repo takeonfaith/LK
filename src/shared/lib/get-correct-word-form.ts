@@ -6,6 +6,8 @@ export interface Rules {
 }
 
 const getCorrectWordForm = (amount: number, rules: Rules) => {
+    if (amount >= 10 && amount <= 19) return rules.fiveToNine
+
     const normalized = amount % 10
     if (normalized === 0) return rules.zero
     if (normalized === 1) return rules.one
