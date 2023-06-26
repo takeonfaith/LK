@@ -60,7 +60,7 @@ const SettingsContent = ({ searchValue, searchResult, settingsConfig }: Props) =
             <SettingsContentStyled>
                 <Switch>
                     {searchValue && <SearchResultField list={searchResult} />}
-                    {Object.keys(settingsConfig).map((name) => {
+                    {Object.keys(settingsConfig ?? {})?.map((name) => {
                         const sections = settingsConfig[name as keyof typeof settingsConfig]
                         const { path } = allRoutes[name]
                         return (
