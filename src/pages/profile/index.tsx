@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
 import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
-import { UserInfo } from '@features/profile'
-import { Error } from '@ui/error'
-import Top from './ui/top'
-import { CenterPage, Wrapper } from '@shared/ui/atoms'
 import AllInfo from '@features/home/ui/molecules/all-info'
 import Orders from '@features/home/ui/molecules/orders'
-import { AvailableAccounts } from 'widgets'
+import { UserInfo } from '@features/profile'
+import { CenterPage, Wrapper } from '@shared/ui/atoms'
 import Block from '@shared/ui/block'
+import { Error } from '@ui/error'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { AvailableAccounts } from 'widgets'
+import Top from './ui/top'
 
 const ContentList = styled.div`
     display: flex;
@@ -62,9 +62,7 @@ const ProfilePage = () => {
         <Wrapper load={function () {}} loading={false} data={[]} error={null}>
             <ContentList>
                 <Top user={user} currentPage={currentPage} setCurrentPage={setCurrentPage} pages={pages} />
-                {/* <List direction="horizontal" innerPadding="0px 0vw 10px 0vw" showPages>
-                <StoryCard title="Обучение" content={TutorialStory} />
-            </List> */}
+
                 <CenterPage>
                     <Block height="100%" maxWidth="750px">
                         <AvailableAccounts />

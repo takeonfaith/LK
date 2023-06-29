@@ -13,6 +13,7 @@ export type UserProps = StudentAccount & {
     isMe?: boolean
     checked?: boolean
     indexNumber?: number
+    faculty?: string
     setChecked?: (value: boolean) => void
     onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }

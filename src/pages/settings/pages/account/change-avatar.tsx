@@ -23,7 +23,6 @@ const ChangeAvatar = () => {
     return (
         <ChangeAvatarStyled>
             <FileInput
-                maxFileSizeInBytes={0}
                 files={data}
                 setFiles={settingsAccountModel.events.avatar.changeAvatar}
                 isActive={true}

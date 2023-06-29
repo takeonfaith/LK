@@ -20,10 +20,10 @@ export const TutorialStory: StoryProps[] = [
             horizontal: 'left',
             vertical: 'bottom',
         },
-        color: '#fff',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%);',
+        color: 'var(--text)',
+        background: 'var(--theme)',
         image: LogoWhite,
-        imageSize: { width: '100px', height: 'auto' },
+        imageSize: { width: '40%', height: 'auto' },
         children: (
             <Button
                 background={Colors.white.transparent3}
@@ -33,24 +33,24 @@ export const TutorialStory: StoryProps[] = [
             />
         ),
     },
-    // {
-    //     title: 'Навигация по обучению',
-    //     text: 'Если хотите вернуться на предыдущую карточку, нажмите в левую часть плитки. Для перехода на следующую - в правую',
-    //     align: {
-    //         horizontal: 'left',
-    //         vertical: 'bottom',
-    //     },
-    //     background: 'var(--theme)',
-    // },
-    // {
-    //     title: 'Таймер',
-    //     text: 'Плитка автоматически переключится через 10 секунд. Если хотите, чтобы она оставалась дольше, нажмите в центре плитки. Итак, начнем',
-    //     align: {
-    //         horizontal: 'left',
-    //         vertical: 'bottom',
-    //     },
-    //     background: 'var(--theme)',
-    // },
+    {
+        title: 'Навигация по обучению',
+        text: 'Если хотите вернуться на предыдущую карточку, нажмите в левую часть плитки. Для перехода на следующую - в правую',
+        align: {
+            horizontal: 'left',
+            vertical: 'bottom',
+        },
+        background: 'var(--theme)',
+    },
+    {
+        title: 'Таймер',
+        text: 'Плитка автоматически переключится через 10 секунд. Если хотите, чтобы она оставалась дольше, нажмите в центре плитки. Итак, начнем',
+        align: {
+            horizontal: 'left',
+            vertical: 'bottom',
+        },
+        background: 'var(--theme)',
+    },
     {
         title: 'Обновлены главная страница и профиль.',
         // text: 'Обновлены главная страница и профиль.',

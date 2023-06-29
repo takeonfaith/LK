@@ -1,7 +1,6 @@
 import KeyValue from '@ui/atoms/key-value'
 import displayWithType from '@ui/table/lib/display-with-type'
 import { ColumnProps } from '@ui/table/types'
-import { Title } from '@ui/title'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import React from 'react'
 import styled from 'styled-components'
@@ -13,17 +12,13 @@ const RowModalWrapper = styled.div`
 `
 
 interface Props {
-    title: string
     obj: IndexedProperties
     columns: ColumnProps[]
 }
 
-const RowModal = ({ title, obj, columns }: Props) => {
+const RowModal = ({ obj, columns }: Props) => {
     return (
         <RowModalWrapper>
-            <Title size={3} align="left" bottomGap>
-                {title}
-            </Title>
             {columns.map((column) => {
                 return (
                     <KeyValue

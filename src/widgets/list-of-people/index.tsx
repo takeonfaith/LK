@@ -1,17 +1,14 @@
-import React from 'react'
-import { SelectPage } from '@features/select'
-import { Title } from '@shared/ui/title'
-import PagintaionList from '@ui/pagination-list'
-import { Event, Store } from 'effector'
-import { useStore } from 'effector-react'
-import { useState } from 'react'
-import styled from 'styled-components'
-import { User } from 'widgets'
-import GlobalSearch from '@shared/ui/global-search'
-import Subtext from '@shared/ui/subtext'
-import { Hint } from '@shared/ui/search'
 import SearchWithHints from '@features/search-with-hints'
+import { SelectPage } from '@features/select'
+import GlobalSearch from '@shared/ui/global-search'
+import { Hint } from '@shared/ui/search'
+import Subtext from '@shared/ui/subtext'
+import { Title } from '@shared/ui/title'
 import { AxiosResponse } from 'axios'
+import { Event, Store } from 'effector'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import PeoplePaginationList from './people-pagination-list'
 
 const ListWrapper = styled.div`
     width: 100%;
@@ -51,7 +48,8 @@ type Props<T extends TUser> = {
     defaultFilter: string
     filterPlaceholder?: string
     customMask?: (value: string, prevValue?: string) => string
-    filterRequest: (value: string) => Promise<AxiosResponse<{ items: string[] }, any>>
+    filterRequest?: (value: string) => Promise<AxiosResponse<{ items: string[] }, any>>
+    search?: boolean
 }
 
 const ListOfPeople = <T extends TUser>({
@@ -64,24 +62,15 @@ const ListOfPeople = <T extends TUser>({
     filterRequest,
     underSearchText,
     customMask,
+    search = true,
 }: Props<T>) => {
-    const { $items, $isPending, $hasNext, next, load } = paginationList
-    const isPending = useStore($isPending)
-    const hasNext = useStore($hasNext)
+    const { load } = paginationList
     const [groupSearch, setGroupSearch] = useState(defaultFilter)
     const [filter, setFilter] = useState<Hint | null>({ id: groupSearch, value: groupSearch, title: groupSearch })
     const under = underSearchText?.(filter)
 
-    const handleNext = () => {
-        next({ filter })
-    }
-
-    const handleReload = () => {
-        load({ filter })
-    }
-
-    const handleSearch = (value: string) => {
-        load({ filter, search: value })
+    const handleSearch = async (value: string) => {
+        await load({ filter, search: value })
     }
 
     const onHintClick = (hint: Hint | undefined) => {
@@ -101,12 +90,14 @@ const ListOfPeople = <T extends TUser>({
             )}
 
             <div className="search-and-filter">
-                <GlobalSearch
-                    triggerSearchOn={[filter?.id ?? '']}
-                    placeholder={searchPlaceholder ?? 'Поиск'}
-                    searchApi={handleSearch}
-                    validationCheck
-                />
+                {search && (
+                    <GlobalSearch
+                        triggerSearchOn={[filter?.id ?? '']}
+                        placeholder={searchPlaceholder ?? 'Поиск'}
+                        searchApi={handleSearch}
+                        validationCheck
+                    />
+                )}
                 {filterRequest && (
                     <SearchWithHints
                         value={groupSearch}
@@ -120,34 +111,9 @@ const ListOfPeople = <T extends TUser>({
                 )}
             </div>
             <Subtext visible={!!under}>{under}</Subtext>
-            <PagintaionList
-                items={$items.getState()}
-                renderItem={renderItem}
-                handleNext={handleNext}
-                isPending={isPending}
-                hasNext={hasNext}
-                filter={filter}
-                handleReload={handleReload}
-                showAlphabetLetters
-                noResultContent={noResultContent}
-            />
+            <PeoplePaginationList paginationList={paginationList} noResultContent={noResultContent} filter={filter} />
         </ListWrapper>
     )
 }
 
 export default ListOfPeople
-
-function renderItem<T extends TUser>(item: T, isMe: boolean, index?: number) {
-    return (
-        <User
-            name={item.fio}
-            type={item.division ? 'staff' : 'stud'}
-            key={index}
-            avatar={item.avatar}
-            group={item.group}
-            isMe={isMe}
-            division={item.division}
-            indexNumber={(index ?? 0) + 1}
-        />
-    )
-}

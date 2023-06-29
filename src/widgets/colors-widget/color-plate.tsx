@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const ColorPlate = styled.div<{ color: string }>`
-    width: 50vw;
+    width: 7vw;
     max-width: 300px;
     background: ${({ color }) => color};
     height: 70px;
@@ -9,9 +9,10 @@ const ColorPlate = styled.div<{ color: string }>`
     align-items: center;
     justify-content: flex-start;
     font-weight: bold;
-    padding: 15px;
+    padding: 8px;
     color: #fff;
-    text-shadow: 0 0 30px #000000;
+    font-size: 0.7rem;
+    text-shadow: 0 0 30px #00000045;
 `
 
 export default ColorPlate

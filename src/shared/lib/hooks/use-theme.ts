@@ -2,12 +2,21 @@ import { settingsModel } from '@entities/settings'
 import { useCallback, useEffect, useState } from 'react'
 const useTheme = () => {
     const { settings } = settingsModel.selectors.useSettings()
+    const appearanceSettings = settings?.['settings-appearance']
 
     const [theme, setTheme] = useState<string>('light')
 
     useEffect(() => {
         if (settings) {
-            const currentTheme = settings['settings-appearance'].property['theme'] as string
+            const currentTime = new Date().getHours() * 60 + new Date().getMinutes()
+            const timeRange = (appearanceSettings.property.lightThemeRange as [string, string]) ?? 0
+            const isTimeInInterval = currentTime > +timeRange[0] && currentTime < +timeRange[1]
+
+            const currentTheme = appearanceSettings.property.scheduledLightTheme
+                ? isTimeInInterval
+                    ? 'light'
+                    : 'dark'
+                : (appearanceSettings.property['theme'] as string)
             if (!document.documentElement.getAttribute('data-theme')) {
                 document.documentElement.setAttribute('data-theme', currentTheme)
                 setTheme(currentTheme)

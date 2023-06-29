@@ -7,7 +7,7 @@ import styled from 'styled-components'
 const PopUpMessageWrapper = styled.div<{ isOpen: boolean; isClickable: boolean }>`
     width: 300px;
     position: absolute;
-    bottom: 20px;
+    top: calc(var(--header-height) + 10px);
     right: 20px;
     background: var(--theme);
     border-radius: var(--brLight);
@@ -18,26 +18,6 @@ const PopUpMessageWrapper = styled.div<{ isOpen: boolean; isClickable: boolean }
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
     font-weight: 600;
     cursor: ${({ isClickable }) => (isClickable ? 'pointer' : 'normal')};
-
-    /* a {
-        color: #fff;
-    } */
-
-    button {
-        position: absolute;
-        top: 4px;
-        right: 4px;
-        background: transparent;
-        width: 28px;
-        height: 28px;
-        border-radius: 6px;
-        padding: 5px;
-        color: #fff;
-
-        &:hover {
-            background: #ffffff5c;
-        }
-    }
 
     @media (max-width: 1000px) {
         top: 20px;
@@ -76,6 +56,7 @@ const PopUpMessage = () => {
             <Message
                 type={type}
                 fontSize="1em"
+                lineHeight="1.4rem"
                 onClose={() => popUpMessageModel.events.openPopUpMessage({ isOpen: false })}
             >
                 {message}

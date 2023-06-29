@@ -1,25 +1,19 @@
-import React from 'react'
 import { projectActivitesModel } from '@entities/project-activites'
+import { Colors } from '@shared/consts'
+import { Message } from '@shared/ui/message'
+import PageBlock from '@shared/ui/page-block'
 import Subtext from '@shared/ui/subtext'
 import { Button, Divider, Title, Wrapper } from '@ui/atoms'
-import styled from 'styled-components'
-import { Message } from '@shared/ui/message'
-import Block from '@shared/ui/block'
-import { Colors } from '@shared/consts'
+import React from 'react'
 import { FiInfo } from 'react-icons/fi'
+import styled from 'styled-components'
 import { useModal } from 'widgets'
-import InfoModal from './ui/project-info/info-modal'
 import CurrentSemestr from './ui/current-semestr'
 import LastSemestr from './ui/last-semestr'
+import InfoModal from './ui/project-info/info-modal'
 import Result from './ui/result'
 
 const Container = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding-bottom: 10px;
-    height: auto;
-
     h3 {
         background: ${Colors.blue.main};
         background: linear-gradient(to right, ${Colors.blue.main} 0%, ${Colors.pink.main} 100%);
@@ -37,27 +31,11 @@ const ProjectStyled = styled.div`
 `
 
 const ProjectActivitiesPage = () => {
-    // const {
-    //     data: { user },
-    // } = userModel.selectors.useUser()
     const { data, loading, error } = projectActivitesModel.selectors.useData()
     const { open } = useModal()
 
-    // const [selected, setSelected] = useState<SelectPage | null>({
-    //     id: findSemestr(new Date().toString(), user?.course ?? 1),
-    //     title: findSemestr(new Date().toString(), user?.course ?? 1).toString() + ' семестр',
-    // })
-
-    // const items = useMemo(() => createSelectItems(user?.course ?? 0), [user])
-
-    // useEffect(() => {
-    //     if (selected) {
-    //         projectActivitesModel.effects.getProjectActivitesFx(selected.id.toString())
-    //     }
-    // }, [selected?.id])
-
     const handleOpenModal = () => {
-        open(<InfoModal data={data} />)
+        open(<InfoModal data={data} />, 'Информация')
     }
 
     return (
@@ -68,8 +46,8 @@ const ProjectActivitiesPage = () => {
             data={data}
         >
             <Container>
-                <Block maxWidth="700px" orientation="vertical" gap="16px" height="100%" noAppearanceInMobile>
-                    <Message type="info" title="Вниманию студентов 2-4 курсов!">
+                <PageBlock>
+                    <Message lineHeight="1.5rem" fontSize="0.86rem" type="info" title="Вниманию студентов 2-4 курсов!">
                         Актуальная информация на 1 сентября 2022 г.:
                         <br />
                         1. Дата первой встречи по проектам:
@@ -125,7 +103,7 @@ const ProjectActivitiesPage = () => {
                     ) : (
                         <Error text={'Данных за этот семестр нет, попробуйте другой!'} />
                     )} */}
-                </Block>
+                </PageBlock>
             </Container>
         </Wrapper>
     )

@@ -1,6 +1,6 @@
 import { Button } from '@ui/button'
 import React from 'react'
-import { FiArrowLeft } from 'react-icons/fi'
+import { HiOutlineChevronLeft } from 'react-icons/hi'
 import { useHistory } from 'react-router-dom'
 
 interface Props {
@@ -17,7 +17,7 @@ const GoBackButton = ({ visible = true, text = 'Назад', fullWidth = true }:
         <Button
             text={text}
             onClick={() => history.goBack()}
-            icon={<FiArrowLeft />}
+            icon={<HiOutlineChevronLeft />}
             textColor="var(--reallyBlue)"
             background="transparent"
             width={fullWidth ? '100%' : undefined}

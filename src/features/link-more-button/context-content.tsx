@@ -21,17 +21,17 @@ const ContextContentWrapper = styled.div`
         align-items: center;
         gap: 6px;
         padding: 7px;
-
-        span {
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: 100%;
-            font-size: 0.8em;
-            font-weight: 500;
-        }
     }
+`
+
+const PageName = styled.span`
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    font-size: 0.8em;
+    font-weight: 500;
 `
 
 const ContextContent = (props: IRoute) => {
@@ -60,7 +60,7 @@ const ContextContent = (props: IRoute) => {
                 <Icon color={color} size={22}>
                     {icon}
                 </Icon>
-                <span>{title}</span>
+                <PageName>{title}</PageName>
             </div>
             <Divider />
             {isAddedToHome ? (

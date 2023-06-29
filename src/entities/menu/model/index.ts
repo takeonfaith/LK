@@ -63,7 +63,9 @@ const changeNotifications = createEvent<{ page: string; notifications: ((prev: n
 
 const getNewNotifications = (page: string, notifications: number, routes: IRoutes | null) => {
     const newRoutes = { ...routes }
-    newRoutes[page].notifications = notifications
+    if (!!newRoutes[page]) newRoutes[page].notifications = notifications
+    else return null
+
     return newRoutes
 }
 
@@ -119,12 +121,12 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
     }))
     .on(changeNotifications, (oldData, { page, notifications }) => ({
         ...oldData,
-        allRoutes: getNewNotifications(
+        visibleRoutes: getNewNotifications(
             page,
             typeof notifications === 'number'
                 ? notifications
-                : notifications(oldData.allRoutes?.[page].notifications ?? 0),
-            oldData.allRoutes,
+                : notifications(oldData.visibleRoutes?.[page].notifications ?? 0),
+            oldData.visibleRoutes,
         ),
     }))
 

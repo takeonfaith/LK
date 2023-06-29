@@ -1,11 +1,15 @@
-import React from 'react'
-import { NameSettings } from '@entities/settings/model'
-import { MdOutlinePassword } from 'react-icons/md'
-import { FiLogOut, FiMail, FiPhone } from 'react-icons/fi'
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { confirmModel } from '@entities/confirm'
+import { NameSettings } from '@entities/settings/model'
 import { userModel } from '@entities/user'
+import getTimeFromMinutes from '@shared/lib/get-time-from-minutes'
 import { FilterElementList } from '@shared/ui/added-elements-list'
 import { MessageType } from '@shared/ui/types'
+import React from 'react'
+import { BiNews } from 'react-icons/bi'
+import { FiBell, FiClock, FiFilePlus, FiFileText, FiLogOut, FiMail, FiMessageCircle, FiPhone } from 'react-icons/fi'
+import { HiOutlineViewGridAdd } from 'react-icons/hi'
+import { MdOutlinePassword } from 'react-icons/md'
 
 export type TSettingsFieldType =
     | 'link'
@@ -17,11 +21,13 @@ export type TSettingsFieldType =
     | 'interval'
     | 'password'
     | 'tel'
-type TValueFieldType = FilterElementList | string[] | number[] | string | boolean
+export type TValueFieldType = FilterElementList | string[] | number[] | string | boolean
 export type TSettingsFields = {
+    id?: string
     title: string
     type: TSettingsFieldType
     action?: (value?: TValueFieldType) => void
+    disabled?: boolean
     value?: TValueFieldType
     additionalActions?:
         | {
@@ -36,6 +42,7 @@ export type TSettingsFields = {
     visible?: boolean
     subfields?: TSettingsFields[]
     searchable?: boolean
+    settingsName?: NameSettings
 }
 
 type TSettingsSection = {
@@ -46,12 +53,24 @@ type TSettingsSection = {
 type Prop<T> = { value: T } & Pick<TSettingsFields, 'icon' | 'description' | 'action' | 'additionalActions'>
 
 type SettingsFullProps = {
+    isStudent?: boolean
     theme: Prop<boolean>
+    scheduledLightTheme: boolean
+    lightThemeRange: [string, string]
     email: Prop<string>
     phone: Prop<string>
     avatar: Prop<string | undefined>
     menu: Prop<FilterElementList>
     homepage: { widgets: { schedule: Prop<boolean>; payments: Prop<boolean> }; sections: Prop<FilterElementList> }
+    settings: {
+        all: boolean
+        messages: boolean
+        newVersion: boolean
+        schedule: boolean
+        news: boolean
+        applications: boolean
+        doclist: boolean
+    }
 }
 
 export type TFullSettingsModel = {
@@ -62,7 +81,19 @@ export type FieldProps = TSettingsFields
 
 export type TSettingsModel = (props: SettingsFullProps) => TFullSettingsModel
 
-const getSettingsModel: TSettingsModel = ({ theme, email, avatar, homepage, phone, menu }) => ({
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const getSettingsModel: TSettingsModel = ({
+    // isStudent,
+    theme,
+    scheduledLightTheme,
+    lightThemeRange,
+    email,
+    avatar,
+    homepage,
+    phone,
+    menu,
+    settings,
+}) => ({
     'settings-appearance': [
         {
             title: 'Тема',
@@ -71,19 +102,23 @@ const getSettingsModel: TSettingsModel = ({ theme, email, avatar, homepage, phon
                     title: 'Темная тема',
                     type: 'toggle',
                     value: theme.value,
+                    disabled: scheduledLightTheme,
                     action: theme.action,
                 },
                 // {
+                //     id: 'scheduledLightTheme',
                 //     title: 'По расписанию',
                 //     type: 'toggle',
-                //     value: false,
-                //     action: () => null,
+                //     value: scheduledLightTheme,
                 //     subfields: [
                 //         {
+                //             id: 'lightThemeRange',
                 //             title: 'Время',
                 //             type: 'interval',
-                //             value: [300, 1140],
-                //             description: 'с 05:00 до 19:00 будет белая тема',
+                //             value: lightThemeRange.map((el) => +el),
+                //             description: `с ${getTimeFromMinutes(+lightThemeRange[0])} до ${getTimeFromMinutes(
+                //                 +lightThemeRange[1],
+                //             )} будет светлая тема`,
                 //         },
                 //     ],
                 // },
@@ -193,6 +228,64 @@ const getSettingsModel: TSettingsModel = ({ theme, email, avatar, homepage, phon
                             message: 'Вы точно хотите выйти из аккаунта?',
                             onConfirm: userModel.events.logout,
                         }),
+                },
+            ],
+        },
+    ],
+    'settings-notifications': [
+        {
+            title: 'Получать уведомления',
+            fields: [
+                {
+                    id: 'all',
+                    type: 'toggle',
+                    title: 'Все',
+                    icon: <FiBell />,
+                    value: settings.all,
+                    subfields: [
+                        {
+                            id: 'messages',
+                            title: 'Сообщения',
+                            type: 'toggle',
+                            value: settings.messages,
+                            icon: <FiMessageCircle />,
+                        },
+                        {
+                            id: 'newVersion',
+                            title: 'Новая версия',
+                            type: 'toggle',
+                            value: settings.newVersion,
+                            icon: <HiOutlineViewGridAdd />,
+                        },
+                        {
+                            id: 'schedule',
+                            title: 'Расписание',
+                            type: 'toggle',
+                            value: settings.schedule,
+                            icon: <FiClock />,
+                        },
+                        {
+                            id: 'news',
+                            title: 'Новости',
+                            type: 'toggle',
+                            value: settings.news,
+                            icon: <BiNews />,
+                        },
+                        {
+                            id: 'applications',
+                            title: 'Цифровые сервисы',
+                            type: 'toggle',
+                            value: settings.applications,
+                            icon: <FiFileText />,
+                        },
+                        {
+                            id: 'doclist',
+                            title: 'Документы для ознакомления',
+                            type: 'toggle',
+                            value: settings.doclist,
+                            icon: <FiFilePlus />,
+                        },
+                    ],
                 },
             ],
         },

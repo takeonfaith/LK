@@ -6,16 +6,18 @@ const extracurricularActivities: CheckboxDocs[] = [
         value: false,
         title: 'Общественная',
         files: [],
-        maxFiles: 10,
+        maxFiles: 1,
         required: false,
         fieldName: 'society',
         checkboxCondition: 'straight',
+        maxFileSizeInMegaBytes: 3,
     },
     {
         value: false,
         title: 'Научная',
         files: [],
-        maxFiles: 10,
+        maxFileSizeInMegaBytes: 3,
+        maxFiles: 1,
         required: false,
         fieldName: 'science',
         checkboxCondition: 'straight',
@@ -24,17 +26,19 @@ const extracurricularActivities: CheckboxDocs[] = [
         value: false,
         title: 'Спортивная',
         files: [],
-        maxFiles: 10,
+        maxFiles: 1,
         required: false,
         fieldName: 'sport',
+        maxFileSizeInMegaBytes: 3,
         checkboxCondition: 'straight',
     },
     {
         value: false,
         title: 'Творческая',
         files: [],
-        maxFiles: 10,
+        maxFiles: 1,
         required: false,
+        maxFileSizeInMegaBytes: 3,
         fieldName: 'creativity',
         checkboxCondition: 'straight',
     },
@@ -43,7 +47,7 @@ const extracurricularActivities: CheckboxDocs[] = [
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Переселение в другое общежитие',
+        title: 'Переселение в другое общежитие (Подача заявок доступна с 08.06.2023 по 15.06.2023)',
         data: [
             {
                 title: 'ФИО',
@@ -121,7 +125,7 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                     },
                     {
                         id: 9,
-                        title: '10 общежитие',
+                        title: '1 общежитие',
                     },
                 ],
             },
@@ -134,12 +138,12 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: false,
             },
             {
-                title: 'Участие во внеучебной деятельности',
+                title: 'Участие во внеучебной деятельности (Общий объем файлов - 1мб.)',
                 value: null,
                 fieldName: 'extracurricular',
                 type: 'checkbox-docs',
                 items: extracurricularActivities,
-                width: '100%',
+                width: '10%',
                 editable: true,
             },
             {

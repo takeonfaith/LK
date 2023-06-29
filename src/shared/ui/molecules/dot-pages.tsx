@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors, IColors } from '@consts'
 import List from '@ui/list'
 import { Direction } from '@ui/types'
 import React from 'react'
@@ -19,7 +19,7 @@ const CurrentPage = styled(Dot)<{ current: number }>`
     transition: 0.2s;
     left: 0;
     position: absolute;
-    background: ${Colors.blue.main};
+    background: ${({ color }) => Colors[(color as keyof IColors) ?? 'blue'].main};
     transform: ${({ current }) => `translateX(${current * 16}px)`};
 `
 
@@ -27,9 +27,10 @@ interface Props {
     direction?: Direction
     amount: number
     current: number
+    color?: keyof IColors
 }
 
-const DotPages = ({ amount, current, direction = 'horizontal' }: Props) => {
+const DotPages = ({ amount, current, color, direction = 'horizontal' }: Props) => {
     if (amount <= 1) return null
 
     return (
@@ -46,7 +47,7 @@ const DotPages = ({ amount, current, direction = 'horizontal' }: Props) => {
                 .map((_, index) => {
                     return <DotPage key={index} />
                 })}
-            <CurrentPage current={current} />
+            <CurrentPage color={color} current={current} />
         </List>
     )
 }

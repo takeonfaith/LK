@@ -11,6 +11,7 @@ import { FiLink } from 'react-icons/fi'
 import styled from 'styled-components'
 import Subtext from '@shared/ui/subtext'
 import { popUpMessageModel } from '@entities/pop-up-message'
+import { lkNotificationModel } from '@entities/lk-notifications'
 
 const CardDocumentWrapper = styled.div`
     width: 100%;
@@ -36,9 +37,9 @@ const BlockButtons = styled.div`
     display: flex;
     gap: 8px;
     margin-top: 5px;
-    max-width: 400px;
+    width: 300px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
         max-width: 100%;
         width: 100%;
     }
@@ -65,6 +66,7 @@ const CardDocument = ({ data }: Props) => {
         try {
             setLoading(true)
             personalNotificationModel.effects.viewPersonalNotificationsFx(data.id)
+            lkNotificationModel.events.clearById({ id: `studdoc-${data.id}`, pageId: 'doclist' })
             setLoading(false)
             setCompleted(true)
         } catch (_) {
@@ -87,8 +89,7 @@ const CardDocument = ({ data }: Props) => {
                         icon={<FiLink />}
                         height="35px"
                         minHeight="30px"
-                        textColor="white"
-                        background={Colors.blue.light1}
+                        background={Colors.grey.transparent2}
                     />
                 )}
                 <SubmitButton

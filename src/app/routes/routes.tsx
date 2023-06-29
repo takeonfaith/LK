@@ -102,11 +102,13 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'OTHER',
+        keywords: ['справки', 'справка', 'заявления', 'заявление'],
+        planeHeader: true,
     },
     ...generalRoutes,
     dormitory: {
         id: 'dormitory',
-        title: 'Общежитие',
+        title: 'Список ожидания на заселение в общежитие',
         icon: <MdOutlineBedroomChild />,
         path: DORMITORY,
         Component: DormitoryPage,
@@ -124,6 +126,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'green',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
+        keywords: ['оценки', 'экзамены', 'зачеты'],
     },
     'project-activity': {
         id: 'project-activity',
@@ -134,6 +137,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'orange',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
+        keywords: ['пд'],
     },
 
     'helpful-information': {
@@ -352,7 +356,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     },
     'relocation-to-another-hostel': {
         id: 'relocation-to-another-hostel',
-        title: 'Переселение в другое общежитие',
+        title: 'Переселение в другое общежитие (Подача заявок доступна с 08.06.2023 по 15.06.2023)',
         icon: BiIdCard,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
         Component: isProduction ? ApplicationRedirect : RelocationToAnotherHostelPage,

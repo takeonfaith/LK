@@ -1,9 +1,11 @@
 import { acadPerformanceModel } from '@entities/acad-performance'
 import { adminLinksModel } from '@entities/admin-links'
+import { alertModel } from '@entities/alert'
 import { applicationsModel } from '@entities/applications'
 import { confirmModel } from '@entities/confirm'
 import { contactInfoActualizationModel } from '@entities/contact-info-actualization'
 import { electronicInteractionModel } from '@entities/electronic-interaction'
+import { lkNotificationModel } from '@entities/lk-notifications'
 import { messagesModel } from '@entities/messages'
 import { personalNotificationModel } from '@entities/notification'
 import { paymentsModel } from '@entities/payments'
@@ -28,6 +30,8 @@ const stores = [
     superiorRoomModel,
     teacherDateVerificationModel,
     contactInfoActualizationModel,
+    alertModel,
+    lkNotificationModel,
 ]
 
 const clearAllStores = () => {

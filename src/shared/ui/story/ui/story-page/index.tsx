@@ -5,7 +5,7 @@ import Subtext from '@ui/subtext'
 import { Title } from '@ui/title'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import StoryPageWrapper, { StyledProps } from './style'
+import StoryPageWrapper, { StyledProps, TextContent } from './style'
 
 export type StoryProps = StyledProps & {
     title: string
@@ -45,7 +45,13 @@ const StoryPage = ({
             color={color}
         >
             {image && <Image src={image} loading={false} width={imageSize.width} height={imageSize.height} />}
-            <div className="text-content">
+            <TextContent
+                imageAlign={imageAlign}
+                onClick={() => setPlaying((prev) => !prev)}
+                background={background}
+                align={align}
+                color={color}
+            >
                 <Title size={2} align={textAlign}>
                     {title}
                 </Title>
@@ -62,7 +68,7 @@ const StoryPage = ({
                     />
                 )}
                 {children && <div className="content-children">{children}</div>}
-            </div>
+            </TextContent>
         </StoryPageWrapper>
     )
 }

@@ -15,6 +15,7 @@ export interface StyledProps {
     padding?: string
     shadow?: boolean
     noAppearanceInMobile?: boolean
+    lineHeight?: string
 }
 
 const BlockWrapper = styled.div<StyledProps>`
@@ -22,12 +23,13 @@ const BlockWrapper = styled.div<StyledProps>`
     align-items: ${({ alignItems }) => alignItems ?? 'center'};
     justify-content: ${({ justifyContent }) => justifyContent ?? 'space-between'};
     background: ${({ background }) => background ?? 'var(--schedule)'};
+    line-height: ${({ lineHeight }) => lineHeight};
     border-radius: var(--brLight);
     flex-direction: ${({ orientation }) => (orientation === 'vertical' ? 'column' : 'row')};
     box-shadow: ${({ shadow }) => (shadow ?? true) && 'var(--very-mild-shadow)'};
     padding: ${({ padding }) => padding ?? '20px'};
     height: ${({ height }) => height ?? '330px'};
-    max-width: ${({ maxWidth }) => maxWidth ?? '750px'};
+    max-width: ${({ maxWidth }) => maxWidth ?? '800px'};
     width: ${({ width }) => width ?? '100%'};
     color: var(--text);
     gap: ${({ gap }) => gap ?? '0'};
@@ -45,7 +47,7 @@ const BlockWrapper = styled.div<StyledProps>`
 
     @media (max-width: 1400px) {
         max-width: ${({ maxWidth }) => maxWidth ?? '800px'};
-        width: 100%;
+        /* width: 100%; */
     }
 
     @media (max-width: 1225px) {
@@ -56,10 +58,10 @@ const BlockWrapper = styled.div<StyledProps>`
         /* height: auto; */
         /* max-height: 100%; */
         flex-direction: column;
-        gap: 1rem;
+        /* gap: 1rem; */
         box-shadow: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'none'};
         border-radius: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'none'};
-        padding: ${({ noAppearanceInMobile }) => noAppearanceInMobile && '0'};
+        padding: ${({ noAppearanceInMobile }) => noAppearanceInMobile && '6px'};
         background: ${({ noAppearanceInMobile }) => noAppearanceInMobile && 'transparent'};
     }
 `

@@ -8,8 +8,8 @@ export type DividerProps = {
 }
 
 export const Divider = styled.div<DividerProps>`
-    width: ${({ direction, width }) => (direction !== 'horizontal' ? width ?? '90%' : '0.5px')};
-    height: ${({ direction }) => (direction !== 'horizontal' ? '0.5px' : '90%')};
+    width: ${({ direction = 'horizontal', width }) => (direction === 'horizontal' ? width ?? '90%' : '0.5px')};
+    height: ${({ direction = 'horizontal', width }) => (direction === 'horizontal' ? '0.5px' : width ?? '90%')};
     background: var(--almostTransparentOpposite);
     margin: ${({ margin }) => margin ?? '5px auto'};
 `

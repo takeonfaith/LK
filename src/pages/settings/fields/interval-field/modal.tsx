@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FieldProps } from '@pages/settings/model'
 import get2DigitDumber from '@shared/lib/get-2-digit-number'
-import { Button, Input, SubmitButton } from '@shared/ui/atoms'
+import { Button, SubmitButton } from '@shared/ui/atoms'
 import DoubleSlider from '@shared/ui/double-slider'
 import List from '@shared/ui/list'
 import React, { useState } from 'react'
@@ -18,13 +17,21 @@ const IntervalFieldModal = (props: FieldProps) => {
     const { value, action } = props
     const { close } = useModal()
     const [fV, sV] = value as number[]
+    const [first, setFirst] = useState(fV)
+    const [second, setSecond] = useState(sV)
     const [completed, setCompleted] = useState(false)
     const handleAction = () => {
-        action?.()
+        action?.([first, second])
+        close()
     }
 
     const handleTransform = (value: number) => {
         return get2DigitDumber(Math.floor(value / 60)) + ':' + get2DigitDumber(value % 60)
+    }
+
+    const handleChange = (values: [number, number]) => {
+        setFirst(values[0])
+        setSecond(values[1])
     }
 
     return (
@@ -35,6 +42,7 @@ const IntervalFieldModal = (props: FieldProps) => {
                 valueTransform={handleTransform}
                 initialValues={[fV, sV]}
                 onSave={() => null}
+                onChange={handleChange}
             />
             <List gap={8} direction="horizontal" horizontalAlign="right">
                 <Button text="Отменить" width="120px" onClick={close} />

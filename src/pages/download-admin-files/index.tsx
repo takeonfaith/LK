@@ -1,29 +1,21 @@
 import { STUDENTS_LOGINS_ROUTE } from '@app/routes/teacher-routes'
 import { adminLinksModel } from '@entities/admin-links'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import { FormBlock } from '@ui/atoms'
+import PageBlock from '@shared/ui/page-block'
 import React from 'react'
-import styled from 'styled-components'
 import { SliderPage } from 'widgets'
 import DownloadAccepts from './pages/accepts'
 import AdditionalAgreements from './pages/additional-agreements'
 import DownloadCheckdata from './pages/checkdata'
-
-const DownloadAdminFilesPageWrapper = styled.div`
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    color: var(--text);
-`
+import { CenterPage } from '@shared/ui/atoms'
 
 const DownloadAdminFilesPage = () => {
     const { data } = adminLinksModel.selectors.useData()
     return (
-        <DownloadAdminFilesPageWrapper>
-            <FormBlock>
+        <CenterPage padding="10px">
+            <PageBlock>
                 <SliderPage
+                    appearance={false}
                     pages={[
                         { title: 'Анкета', content: <DownloadCheckdata />, condition: !!data?.checkdata.length },
                         { title: 'Акцепт', content: <DownloadAccepts />, condition: !!data?.accepts.length },
@@ -39,8 +31,8 @@ const DownloadAdminFilesPage = () => {
                         },
                     ]}
                 />
-            </FormBlock>
-        </DownloadAdminFilesPageWrapper>
+            </PageBlock>
+        </CenterPage>
     )
 }
 

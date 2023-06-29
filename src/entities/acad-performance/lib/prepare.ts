@@ -1,15 +1,13 @@
 import { AcadPerformance } from '@api/model/acad-performance'
 
-export interface PreparedData {
-    [key: string]: AcadPerformance[]
-}
-
-interface Matches {
-    [key: string]: string
-}
-
 const EXAM = 'exam'
 const TEST = 'test'
+
+export type PreparedData = Record<typeof EXAM | typeof TEST, AcadPerformance[]>
+
+interface Matches {
+    [key: string]: typeof EXAM | typeof TEST
+}
 
 const MATCHES: Matches = {
     'Курсовой проект': EXAM,

@@ -9,12 +9,17 @@ export const Ul = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    line-height: 1.6rem;
+
+    strong {
+        font-weight: 600;
+    }
 `
 
 export function HelpLinks() {
     return (
         <>
-            <Message type="alert" title="Внимание!">
+            <Message lineHeight="1.4rem" type="alert" title="Внимание!" fontSize="0.85rem">
                 Прежде, чем написать сообщение, убедитесь в том, что указанные ниже случаи не относятся к вашей
                 проблеме:
             </Message>
