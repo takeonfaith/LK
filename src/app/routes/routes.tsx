@@ -42,6 +42,7 @@ import {
     RegularAccommodationPage,
     RelocationInsideHostelPage,
     RelocationToAnotherHostelPage,
+    AccommodationForGraduatesPage,
     RestoringTheMagneticPass,
     RetakeForDiploma,
     StateAccreditation,
@@ -73,6 +74,7 @@ export const FAMILY_ROOM = APPLICATIONS_ROUTE + '/family-room'
 export const TERMINATION_OF_EMPLOYMENT_CONTRACT = APPLICATIONS_ROUTE + '/termination-of-employment-contract'
 export const RELOCATION_INSIDE_HOSTEL = APPLICATIONS_ROUTE + '/relocation-inside-hostel'
 export const RELOCATION_TO_ANOTHER_HOSTEL = APPLICATIONS_ROUTE + '/relocation-to-another-hostel'
+export const ACCOMMODATION_FOR_GRADUATES = APPLICATIONS_ROUTE + '/accommodation-for-graduates'
 export const PAYMENT_RECIPIENT = APPLICATIONS_ROUTE + '/payment-recipient'
 export const RESTORING_THE_MAGNETIC_PASS = APPLICATIONS_ROUTE + '/restoring-the-magnetic-pass'
 export const RETAKE_FOR_DIPLOMA = APPLICATIONS_ROUTE + '/retake-for-diploma'
@@ -360,6 +362,19 @@ export const hiddenRoutes: () => IRoutes = () => ({
         icon: BiIdCard,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
         Component: isProduction ? ApplicationRedirect : RelocationToAnotherHostelPage,
+        color: 'blue',
+        isTemplate: false,
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'accommodation-for-graduates': {
+        id: 'accommodation-for-graduates',
+        title: 'Предоставление права проживания в период каникул (для выпускников университета, проживающих в общежитии)',
+        icon: BiIdCard,
+        path: ACCOMMODATION_FOR_GRADUATES,
+        Component: AccommodationForGraduatesPage,
         color: 'blue',
         isTemplate: false,
         isSubPage: true,

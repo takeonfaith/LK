@@ -2,21 +2,25 @@ import { IInputArea } from '@ui/input-area/model'
 import { UserApplication } from '@api/model'
 import listHostelsOptions from '@features/applications/lib/get-list-hostels'
 
-const reasonItems = [
+const statusesStudentForHostelOptions = [
     {
         id: 0,
-        title: 'имею постоянную регистрацию за пределами А-107 или не имею постоянную регистрацию',
+        title: 'Поступающий в бакалавриат, специалитет, магистратуру',
     },
     {
         id: 1,
-        title: 'имею постоянную регистрацию в пределах А-107',
+        title: 'Поступающий в аспирантуру',
+    },
+    {
+        id: 2,
+        title: 'Не поступающий, на период каникул',
     },
 ]
 
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Контактная информация',
+        title: 'Предоставление права проживания в период каникул (для выпускников университета, проживающих в общежитии)',
         data: [
             {
                 title: 'ФИО',
@@ -48,27 +52,36 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                 required: true,
             },
             {
-                title: 'Причина предоставления (в связи с)',
-                type: 'select',
-                width: '100%',
+                title: 'Общежитие',
+                fieldName: 'hostel',
                 value: null,
-                fieldName: 'reason',
-                placeholder: 'укажите причину',
-                editable: true,
-                required: true,
-                items: reasonItems,
-            },
-            {
-                title: 'Приоритетное общежитие',
-                fieldName: 'priority_hostel',
-                value: '',
                 type: 'select',
                 width: '100%',
                 editable: true,
                 required: true,
                 items: listHostelsOptions,
             },
+            {
+                title: 'Комната',
+                placeholder: 'Укажите номер комнаты, в которую хотите переселиться',
+                fieldName: 'room',
+                value: '',
+                editable: true,
+                required: true,
+            },
+            {
+                title: 'Статус',
+                fieldName: 'status-for-hostel',
+                value: null,
+                type: 'select',
+                width: '100%',
+                editable: true,
+                required: true,
+                items: statusesStudentForHostelOptions,
+            },
         ],
+        hint: 'Прикрепите справку из приемной комиссии о подаче документов для поступления и/или выписку из приказа о предоставлении каникул',
+        documents: { files: [], fieldName: 'docs', required: false, maxFiles: 3, allowedTypes: ['application/pdf'] },
     }
 }
 
