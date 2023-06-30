@@ -15,23 +15,17 @@ const HeaderWrapper = styled.div`
         transform: translateY(-50%);
     }
 
-    & > * + * {
-        border-left: 1px solid var(--mild-theme);
+    .five {
+        display: none;
     }
 
-    @media (max-width: 1200px) {
-        .five {
+    @media (max-width: 500px) {
+        .four {
             display: none;
         }
     }
 
-    @media (max-width: 1000px) {
-        .four {
-            display: flex;
-        }
-    }
-
-    @media (max-width: 700px) {
+    @media (max-width: 400px) {
         font-size: 0.8em;
         .three {
             display: none;

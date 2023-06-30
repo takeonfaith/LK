@@ -32,8 +32,9 @@ const HeaderWrapper = styled.header<{ hidden?: boolean; headerVisible: boolean }
 export const HeaderTitle = styled.div<{
     headerVisible: boolean
     noButton: boolean | undefined
+    maxWidth: string
 }>`
-    max-width: 700px;
+    max-width: ${({ maxWidth }) => maxWidth};
     width: 100%;
     font-size: ${({ headerVisible }) => (headerVisible ? '1.1rem' : '1.4rem')};
     font-weight: 600;

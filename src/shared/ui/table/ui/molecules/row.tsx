@@ -21,17 +21,19 @@ const Row = ({ columns, el, index, onRowClick }: Props) => {
         <RowWrapper even={index % 2 === 0} onClick={() => (onRowClick ? onRowClick(el) : defaultOnClick())}>
             {columns.map((column) => {
                 return (
-                    <Column
-                        showFull={column.showFull}
-                        width={column.width}
-                        className={column.priority?.toString() ?? 'one'}
-                        key={column.field}
-                        align={column.align}
-                    >
-                        {column.render
-                            ? column.render(displayWithType(el[column.field], column.type), el)
-                            : displayWithType(el[column.field], column.type)}
-                    </Column>
+                    <>
+                        <Column
+                            showFull={column.showFull}
+                            width={column.width}
+                            className={column.priority?.toString() ?? 'one'}
+                            key={column.field}
+                            align={column.align}
+                        >
+                            {column.render
+                                ? column.render(displayWithType(el[column.field], column.type), el)
+                                : displayWithType(el[column.field], column.type)}
+                        </Column>
+                    </>
                 )
             })}
         </RowWrapper>

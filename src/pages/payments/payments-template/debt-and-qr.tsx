@@ -1,5 +1,6 @@
 import PaymentButton from '@features/payment-button'
 import { Contract } from '@features/payments'
+import Debt from '@features/payments/debt'
 import { PaymentsContract } from '@shared/api/model'
 import { Colors } from '@shared/consts'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
@@ -11,8 +12,7 @@ import Notification from '@shared/ui/notification'
 import Subtext from '@shared/ui/subtext'
 import { Title } from '@shared/ui/title'
 import React, { useState } from 'react'
-import { BiRuble, BiWallet } from 'react-icons/bi'
-import {} from 'react-icons/hi'
+import { BiWallet } from 'react-icons/bi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import Slider from 'widgets/slider'
@@ -58,14 +58,6 @@ const ButtonsList = styled.div`
     }
 `
 
-const Debt = styled.div<{ color: string }>`
-    color: ${({ color }) => color};
-    font-size: 1.5rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-`
-
 const ContractButtonWrapper = styled.div`
     position: relative;
 `
@@ -75,7 +67,6 @@ type Props = {
     isDormitory: boolean
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DebtAndQr = (props: Props) => {
     const { data, isDormitory } = props
     const { balance_currdate, balance, endDatePlan, can_sign, bill, qr_current, qr_total } = data
@@ -84,7 +75,6 @@ const DebtAndQr = (props: Props) => {
     const [currentPage, setCurrentPage] = useState(0)
     const chosenDebt = currentPage === 0 ? +balance_currdate : +balance
     const hasDebt = chosenDebt > 0
-    const debtColor = chosenDebt > 0 ? Colors.red.main : Colors.green.main
     const paymentPlace = isDormitory ? 'общежитию' : 'обучению'
     const text = hasDebt
         ? `Долг по ${paymentPlace}`
@@ -115,10 +105,8 @@ const DebtAndQr = (props: Props) => {
                 />
                 <DebtAndQrContentStyled>
                     <Flex d="column" gap="12px" ai="flex-start">
-                        <Debt color={debtColor}>
-                            {chosenDebt >= 0 ? chosenDebt : `+${-chosenDebt}`}
-                            <BiRuble />
-                        </Debt>
+                        <Debt debt={chosenDebt} />
+
                         <Flex d="column" gap="4px" ai="flex-start">
                             <Title size={3} align="left">
                                 {text}

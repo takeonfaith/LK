@@ -52,6 +52,7 @@ import { BsFileMedical } from 'react-icons/bs'
 import { FiBell, FiClipboard, FiFileText, FiHome, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 import { DOCLIST_ROUTE } from '../teacher-routes'
+import { Size } from '@shared/ui/types'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -128,6 +129,7 @@ export interface IRoute {
     subPageHeaderTitle?: string
     fallbackPrevPage?: string
     planeHeader?: boolean
+    pageSize?: Size
 }
 
 export const publicRoutes = [
@@ -216,7 +218,7 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'FINANCES_DOCS',
-        planeHeader: true,
+        pageSize: 'small',
     },
     payments: {
         id: 'payments',
@@ -424,6 +426,7 @@ export const generalHiddenRoutes: IRoutes = {
         isSubPage: true,
         subPageHeaderTitle: 'Внешний вид',
         fallbackPrevPage: SETTINGS_ROUTE,
+
         backButtonText: 'Настройки',
     },
     'settings-personal': {
@@ -439,6 +442,7 @@ export const generalHiddenRoutes: IRoutes = {
         isSubPage: true,
         subPageHeaderTitle: 'Внешний вид',
         fallbackPrevPage: SETTINGS_ROUTE,
+
         backButtonText: 'Настройки',
     },
     'settings-security': {
@@ -469,6 +473,7 @@ export const generalHiddenRoutes: IRoutes = {
         isSubPage: true,
         subPageHeaderTitle: 'Главная',
         fallbackPrevPage: SETTINGS_ROUTE,
+
         backButtonText: 'Настройки',
     },
     'settings-customize-menu': {
@@ -483,6 +488,7 @@ export const generalHiddenRoutes: IRoutes = {
         isSubPage: true,
         subPageHeaderTitle: 'Меню',
         fallbackPrevPage: SETTINGS_ROUTE,
+
         backButtonText: 'Настройки',
     },
     'settings-notifications': {
@@ -497,6 +503,7 @@ export const generalHiddenRoutes: IRoutes = {
         isSubPage: true,
         subPageHeaderTitle: 'Уведомления',
         fallbackPrevPage: SETTINGS_ROUTE,
+
         backButtonText: 'Настройки',
     },
     'useful-info-template': {
@@ -507,6 +514,6 @@ export const generalHiddenRoutes: IRoutes = {
         Component: HelpfulInformation,
         color: 'grey',
         isTemplate: true,
-        show: true,
+        show: false,
     },
 }

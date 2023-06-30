@@ -9,13 +9,13 @@ const QUERIES = [
 const getValues = (
     mediaQueryList: {
         mql: MediaQueryList
-        title: (typeof QUERIES)[number]['title']
+        title: typeof QUERIES[number]['title']
     }[],
 ) => {
     return mediaQueryList.reduce((acc, value) => {
         acc[value.title] = value.mql.matches
         return acc
-    }, {} as Record<(typeof QUERIES)[number]['title'], boolean>)
+    }, {} as Record<typeof QUERIES[number]['title'], boolean>)
 }
 
 const useCurrentDevice = () => {

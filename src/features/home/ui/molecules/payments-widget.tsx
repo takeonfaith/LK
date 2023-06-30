@@ -1,13 +1,14 @@
 import { Payments } from '@api/model'
 import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { Colors, IColors } from '@consts'
+import { IColors } from '@consts'
 import { paymentsModel } from '@entities/payments'
 import PaymentButton from '@features/payment-button'
+import Debt from '@features/payments/debt'
+import Subtext from '@shared/ui/subtext'
 import { Button } from '@ui/button'
 import { Error } from '@ui/error'
 import { Message } from '@ui/message'
 import { SkeletonShape } from '@ui/skeleton-shape'
-import { Title } from '@ui/title'
 import React from 'react'
 import { FiCheck, FiInfo } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
@@ -36,19 +37,6 @@ const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
         position: relative;
 
         .top-info {
-            h3 {
-                color: ${({ background }) => (background ? Colors[background].main : '')};
-            }
-
-            .section-name {
-                font-size: 0.8em;
-                opacity: 0.6;
-            }
-
-            p {
-                font-size: 0.9em;
-            }
-
             a {
                 position: absolute;
                 top: 6px;
@@ -123,10 +111,8 @@ const TopMessage = ({
     return (
         <div className="payment-info">
             <div className="top-info">
-                <span className="section-name">{section}</span>
-                <Title size={3} align="left" bottomGap="4px">
-                    {Math.abs(balance)} руб.
-                </Title>
+                <Subtext>{section}</Subtext>
+                <Debt size="middle" debt={balance} />
                 <Link to={PAYMENTS_ROUTE}>
                     <Button icon={<FiInfo />} background="transparent" />
                 </Link>

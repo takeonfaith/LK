@@ -1,11 +1,11 @@
 import { IPaymentItem } from '@api/model'
 import { PaymentItem } from '@features/payments'
 import Flex from '@shared/ui/flex'
+import RubleNumber from '@shared/ui/ruble-number'
 import Subtext from '@shared/ui/subtext'
 import { Error, Title } from '@ui/atoms'
 import getCorrectNumberFormat from '@utils/get-correct-number-format'
 import React from 'react'
-import { BiRuble } from 'react-icons/bi'
 import { FiArrowDownCircle, FiBox } from 'react-icons/fi'
 import styled from 'styled-components'
 
@@ -48,7 +48,7 @@ const PaymentList = ({ payments }: Props) => {
                     Поступившие платежи
                 </Title>
                 <Subtext fontSize="1rem" width="fit-content">
-                    {sum} <BiRuble />
+                    <RubleNumber size="small">{sum}</RubleNumber>
                 </Subtext>
             </Flex>
             <div className="payment-list">

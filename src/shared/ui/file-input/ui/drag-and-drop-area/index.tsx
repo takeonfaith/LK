@@ -5,6 +5,7 @@ import { FcFolder } from 'react-icons/fc'
 import getFormatName from './lib/get-format-name'
 import loadFiles from './lib/load-files'
 import DragAndDropAreaWrapper from './style'
+import DotSeparatedWords from '@shared/ui/dot-separated-words'
 
 type Props = FileInputProps
 
@@ -62,8 +63,12 @@ const DragAndDropArea = ({ files, maxFiles, setFiles, isActive, formats, maxFile
                 </div>
                 <b>Нажмите сюда или перетащите файл</b>
                 <Subtext align="center">
-                    Форматы: {!formats ? 'jpg, png, pdf' : formats.map((t) => getFormatName(t)).join(', ')} • Макс.
-                    файлов: {maxFiles}
+                    <DotSeparatedWords
+                        words={[
+                            `Форматы: ${!formats ? 'jpg, png, pdf' : formats.map((t) => getFormatName(t)).join(', ')}`,
+                            `Макс. файлов: ${maxFiles}`,
+                        ]}
+                    />
                 </Subtext>
             </div>
         </DragAndDropAreaWrapper>

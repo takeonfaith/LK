@@ -31,6 +31,9 @@ const loadFiles = (
                 return [...files, loadedFiles[i]]
             }
         } else {
+            // eslint-disable-next-line no-console
+            console.log(loadedFiles[i])
+
             popUpMessageModel.events.evokePopUpMessage({
                 message: `Неверный формат файла. Доступные форматы: ${allowedFormats?.map((format) =>
                     getFormatName(format),

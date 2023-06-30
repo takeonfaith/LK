@@ -34,8 +34,8 @@ export type PageLinkProps = IRoute & {
 
 const PageLink = (props: PageLinkProps) => {
     const { close } = useModal()
-    const { path, orientation = 'vertical', restricted = false, mode = 'use' } = props
-    const maxWordLength = restricted ? 14 : 17
+    const { path, orientation = 'vertical', mode = 'use' } = props
+    const maxWordLength = orientation === 'vertical' ? 17 : 50
     const linkWidth = 1
 
     if (mode === 'add') {
