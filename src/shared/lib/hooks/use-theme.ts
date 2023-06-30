@@ -1,12 +1,14 @@
 import { settingsModel } from '@entities/settings'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 const useTheme = () => {
     const { settings } = settingsModel.selectors.useSettings()
     const appearanceSettings = settings?.['settings-appearance']
 
-    const [theme, setTheme] = useState<string>('light')
+    const [theme, setTheme] = useState<string>(
+        (settings?.['settings-appearance']?.property?.theme as string) ?? 'light',
+    )
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (settings) {
             const currentTime = new Date().getHours() * 60 + new Date().getMinutes()
             const timeRange = (appearanceSettings.property.lightThemeRange as [string, string]) ?? 0
@@ -18,11 +20,11 @@ const useTheme = () => {
                     : 'dark'
                 : (appearanceSettings.property['theme'] as string)
             if (!document.documentElement.getAttribute('data-theme')) {
-                document.documentElement.setAttribute('data-theme', currentTheme)
                 setTheme(currentTheme)
+                document.documentElement.setAttribute('data-theme', currentTheme)
             } else {
-                document.documentElement.setAttribute('data-theme', currentTheme)
                 setTheme(currentTheme)
+                document.documentElement.setAttribute('data-theme', currentTheme)
             }
         } else {
             document.documentElement.setAttribute('data-theme', 'light')

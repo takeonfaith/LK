@@ -13,6 +13,7 @@ const Column = styled.div<{
     width: ${({ width }) => width ?? '100%'};
     min-width: ${({ width }) => width ?? 'auto'};
     padding: ${({ padding }) => padding ?? '20px'};
+    height: 100%;
     text-align: ${({ align }) => align && align};
     cursor: ${({ clickable }) => clickable && 'pointer'};
     overflow: ${({ overflow }) => overflow ?? 'hidden'};

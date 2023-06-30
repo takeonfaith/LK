@@ -1,37 +1,24 @@
-import { Button, LinkButton, SubmitButton } from '@ui/atoms'
-import BlockWrapper from '@ui/block/styles'
+import { Button, Divider, LinkButton, SubmitButton } from '@ui/atoms'
 import { Message } from '@ui/message'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
 import { FiCheck, FiDownload } from 'react-icons/fi'
-import styled from 'styled-components'
 import { useModal } from 'widgets'
 import { useElectronicAgreement } from '../hooks/use-electronic-agreement'
 import { MistakeModal } from './atoms'
+import Flex from '@shared/ui/flex'
+import styled from 'styled-components'
+import Subtext from '@shared/ui/subtext'
+import { Colors } from '@shared/consts'
 
-const CenterSection = styled(BlockWrapper)<{ showInfoText: boolean }>`
+const ElectornicAgreementStyled = styled.div`
     .info-text {
-        transition: 0.2s;
-        opacity: ${({ showInfoText }) => (showInfoText ? 1 : 0)};
-        visibility: ${({ showInfoText }) => (showInfoText ? 'visible' : 'hidden')};
-        height: ${({ showInfoText }) => (showInfoText ? '100%' : '0')};
+        margin: 16px 0;
+        line-height: 1.7rem;
     }
 
-    p {
-        a {
-            color: var(--blue);
-        }
-
-        b {
-            opacity: 0.8;
-        }
-    }
-
-    @media (max-width: 1000px) {
-        width: 95%;
-        .center-section {
-            box-shadow: none;
-        }
+    b {
+        font-weight: 600;
     }
 `
 
@@ -54,27 +41,25 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
     if (!data) return null
 
     return (
-        <CenterSection
-            showInfoText={!data.status && !done}
-            maxWidth="500px"
-            orientation="vertical"
-            height="fit-content"
-            gap="10px"
-        >
-            <LinkButton
-                href={data.file}
-                onClick={() => null}
-                text="Скачать согласие"
-                width="100%"
-                icon={<FiDownload />}
-            />
-            <Message
-                type={'success'}
-                icon={<FiCheck />}
-                title={'Успешно подписано'}
-                visible={data.status || done}
-                align="center"
-            />
+        <ElectornicAgreementStyled>
+            <Flex gap="8px">
+                <LinkButton
+                    href={data.file}
+                    onClick={() => null}
+                    text="Скачать согласие"
+                    width="100%"
+                    minHeight="38px"
+                    height="38px"
+                    icon={<FiDownload />}
+                />
+                <Message
+                    type={'success'}
+                    icon={<FiCheck />}
+                    title={'Успешно подписано'}
+                    visible={data.status || done}
+                    align="center"
+                />
+            </Flex>
             <div className="info-text">{children}</div>
             {!data.status && !done && (
                 <SubmitButton
@@ -90,22 +75,27 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
                 />
             )}
             {(data.status || done) && (
-                <p>
-                    Дата подписания: {localizeDate(data.date || new Date())},{' '}
-                    {data.time || `${new Date().getHours()}:${new Date().getMinutes()}`}
-                    <br />
-                    {data.fio}
-                </p>
+                <>
+                    <Divider margin="16px 0" width="100%" />
+                    <Subtext fontSize="0.9rem" lineHeight="1.4rem">
+                        Дата подписания: {localizeDate(data.date || new Date())},{' '}
+                        {data.time || `${new Date().getHours()}:${new Date().getMinutes()}`}
+                        <br />
+                        {data.fio}
+                    </Subtext>
+                </>
             )}
             {!data.status && !done && (
-                <Button
-                    onClick={() => open(<MistakeModal />)}
-                    text="Заметили ошибку в личных данных?"
-                    background="transparent"
-                    textColor="#b1b1b1"
-                />
+                <Flex jc="center">
+                    <Button
+                        onClick={() => open(<MistakeModal />)}
+                        text="Заметили ошибку в личных данных?"
+                        background="transparent"
+                        textColor={Colors.grey.main}
+                    />
+                </Flex>
             )}
-        </CenterSection>
+        </ElectornicAgreementStyled>
     )
 }
 

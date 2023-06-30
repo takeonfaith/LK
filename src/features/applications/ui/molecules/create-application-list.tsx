@@ -102,9 +102,6 @@ const CreateApplicationList = ({ isTeachers = false, currentFormEducation }: Pro
 
     return (
         <CreateApplicationListWrapper>
-            <Title size={3} align="left" bottomGap>
-                Создать заявку
-            </Title>
             <LocalSearch
                 whereToSearch={sections}
                 searchEngine={createApplicationSearch}

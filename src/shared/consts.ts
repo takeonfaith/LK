@@ -261,7 +261,7 @@ export const GradeByScore: IGrade = {
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
-export const LastUpdateWhatsNew = '2023-06-25T00:43:43'
+export const LastUpdateWhatsNew = '2023-06-30T00:43:43'
 
 type MessageTypeObj = {
     [key in MessageType]: {
@@ -372,7 +372,7 @@ export const letterColorMatch: LetterColorMatch = {
 }
 
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
-export type FileFormats = (typeof VALID_FORMATS)[number][]
+export type FileFormats = typeof VALID_FORMATS[number][]
 
 export const MAX_FILE_SIZE = 10
 

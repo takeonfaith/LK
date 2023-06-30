@@ -102,8 +102,8 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'red',
         isTemplate: false,
         group: 'OTHER',
+        pageSize: 'big',
         keywords: ['справки', 'справка', 'заявления', 'заявление'],
-        planeHeader: true,
     },
     ...generalRoutes,
     dormitory: {
@@ -253,7 +253,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'regular-accommodation': {
         id: 'regular-accommodation',
         title: 'Предоставление права проживания (очная форма)',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: REGULAR_ACCOMMODATION,
         Component: RegularAccommodationPage,
         color: 'blue',
@@ -266,7 +266,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'full-time-part-time-form': {
         id: 'full-time-part-time-form',
         title: 'Предоставление права проживания (очно-заочная форма)',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: FULL_TIME_PART_TIME_FORM,
         Component: FullTimePartTimeFormPage,
         color: 'blue',
@@ -279,7 +279,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'accommodation-correspondence-form': {
         id: 'accommodation-correspondence-form',
         title: 'Предоставление права проживания (заочная форма)',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: ACCOMMODATION_CORRESPONDENCE_FORM,
         Component: AccommodationCorrespondenceFormPage,
         color: 'blue',
@@ -292,7 +292,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'academic-leave-accommodation': {
         id: 'academic-leave-accommodation',
         title: 'Предоставление права проживания в период академического отпуска',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: ACADEMIC_LEAVE_ACCOMMODATION,
         Component: AcademicLeaveAccommodationPage,
         color: 'blue',
@@ -305,7 +305,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'preferential-accommodation': {
         id: 'preferential-accommodation',
         title: 'Предоставление права проживания льготной категории граждан',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: PREFERENTIAL_ACCOMMODATION,
         Component: PreferentialAccommodationPage,
         color: 'blue',
@@ -318,7 +318,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'family-room': {
         id: 'family-room',
         title: 'Предоставление права проживания в семейной комнате',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: FAMILY_ROOM,
         Component: FamilyRoomPage,
         color: 'blue',
@@ -331,7 +331,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'termination-of-employment-contract': {
         id: 'termination-of-employment-contract',
         title: 'Расторжение договора найма',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: TERMINATION_OF_EMPLOYMENT_CONTRACT,
         Component: TerminationOfEmploymentContractPage,
         color: 'blue',
@@ -344,7 +344,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'relocation-inside-hostel': {
         id: 'relocation-inside-hostel',
         title: 'Переселение внутри общежития',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: RELOCATION_INSIDE_HOSTEL,
         Component: RelocationInsideHostelPage,
         color: 'blue',
@@ -357,7 +357,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'relocation-to-another-hostel': {
         id: 'relocation-to-another-hostel',
         title: 'Переселение в другое общежитие (Подача заявок доступна с 08.06.2023 по 15.06.2023)',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
         Component: isProduction ? ApplicationRedirect : RelocationToAnotherHostelPage,
         color: 'blue',
@@ -370,7 +370,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'payment-recipient': {
         id: 'payment-recipient',
         title: 'Отправка квитанции об оплате',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: PAYMENT_RECIPIENT,
         Component: PaymentRecipient,
         color: 'blue',
@@ -383,7 +383,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'restoring-the-magnetic-pass': {
         id: 'restoring-the-magnetic-pass',
         title: 'Запрос на восстановление магнитного пропуска',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: RESTORING_THE_MAGNETIC_PASS,
         Component: RestoringTheMagneticPass,
         color: 'blue',
@@ -396,7 +396,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'military-registration-documents': {
         id: 'military-registration-documents',
         title: 'Отправить документы воинского учета',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: MILITARY_REGISTRATION_DOCUMENTS,
         Component: isProduction ? ApplicationRedirect : MilitaryRegistrationDocuments,
         color: 'blue',
@@ -409,7 +409,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'retake-for-diploma': {
         id: 'retake-for-diploma',
         title: 'Заявление на пересдачу для получения диплома с отличием',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: RETAKE_FOR_DIPLOMA,
         Component: RetakeForDiploma,
         color: 'blue',
@@ -422,7 +422,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'increased-state-academic-scholarship': {
         id: 'increased-state-academic-scholarship',
         title: 'Получение повышенной государственной академической стипендии',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: INCREASED_STATE_ACADEMIC_SCHOLARSHIP,
         Component: isProduction ? ApplicationRedirect : IncreasedStateAcademicScholarship,
         color: 'blue',
@@ -435,7 +435,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'financial-support': {
         id: 'financial-support',
         title: 'Оформить материальную поддержку остронуждающимся студентам (Дотацию)',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: FINANCIAL_SUPPORT,
         Component: isProduction ? ApplicationRedirect : FinancialSupport,
         color: 'blue',
@@ -448,7 +448,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'financial-assistance': {
         id: 'financial-assistance',
         title: 'Финансовая поддержка',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: FINANCIAL_ASSISTANCE,
         Component: isProduction ? ApplicationRedirect : ApplicationForFinancialAssistance,
         color: 'blue',
@@ -461,7 +461,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'changing-personal-data': {
         id: 'changing-personal-data',
         title: 'Запрос на изменение персональных данных',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: CHANGING_PERSONAL_DATA,
         Component: ChangingPersonalData,
         color: 'blue',
@@ -474,7 +474,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'student-status': {
         id: 'student-status',
         title: 'Справка о прохождении обучения в университете (о статусе обучающегося) по месту требования',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: STUDENT_STATUS,
         Component: StudentStatus,
         color: 'blue',
@@ -487,7 +487,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'state-accreditation': {
         id: 'state-accreditation',
         title: 'Выдача лицензий и свидетельств о государственной аккредитации',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: STATE_ACCREDITATION,
         Component: StateAccreditation,
         color: 'blue',
@@ -556,7 +556,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
     'military-registration-card': {
         id: 'military-registration-card',
         title: 'Заполнить личную карточку обучающегося по воинскому учету для получения отсрочки от призыва на военную службу',
-        icon: BiIdCard,
+        icon: <BiIdCard />,
         path: MILITARY_REGISTRATION_CARD,
         Component: isProduction ? ApplicationRedirect : MilitaryRegistrationCard,
         color: 'blue',

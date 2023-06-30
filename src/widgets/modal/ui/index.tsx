@@ -6,6 +6,7 @@ import { FiChevronLeft, FiX } from 'react-icons/fi'
 import useCoreModal from '../lib/hooks/use-core-modal'
 import ModalContent from './atoms/modal-content'
 import ModalWrapper from './atoms/modal-wrapper'
+import useShortCutKeys from '@shared/lib/hooks/use-short-cut-keys'
 
 const Content = styled.div`
     padding-top: 30px;
@@ -15,6 +16,7 @@ const Modal = () => {
     const { isOpen, component: Component, canBack, back, close, title } = useCoreModal()
     const ref = useRef(null)
     const isValid = useMemo(() => isOpen && !!Component, [isOpen, Component])
+    useShortCutKeys(['Escape'], close)
 
     useOnClickOutside(ref, () => {
         close()

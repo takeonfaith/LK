@@ -13,6 +13,7 @@ import { FiPlus, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
 import { PageLinkProps } from './page-link'
+import { HiOutlineFolder } from 'react-icons/hi'
 
 export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean; hasNotifications: boolean }>`
     position: relative;
@@ -82,20 +83,23 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             right: ${({ isVertical }) => !isVertical && '50px'};
         }
 
-        &:hover {
-            .icon {
-                box-shadow: 0 20px 110px 60px ${({ color }) => Colors[color as keyof IColors].main};
-                transform: ${({ isVertical }) => isVertical && 'scale(1.1) translateY(20px)'};
-            }
+        @media (min-width: 1001px) {
+            &:hover {
+                .icon {
+                    box-shadow: 0 20px 110px 60px ${({ color }) => Colors[color as keyof IColors].main};
+                    transform: ${({ isVertical }) => isVertical && 'scale(1.1) translateY(20px)'};
+                }
 
-            b {
-                opacity: ${({ hasNotifications, isVertical }) => isVertical && hasNotifications && 0};
-                transform: ${({ isVertical }) => isVertical && 'scale(0.95) translateY(40%)'};
-            }
+                b {
+                    opacity: ${({ hasNotifications, isVertical }) => isVertical && hasNotifications && 0};
+                    transform: ${({ isVertical }) => isVertical && 'scale(0.95) translateY(40%)'};
+                    color: ${({ isVertical }) => (isVertical ? '#fff' : 'var(--text)')};
+                }
 
-            .notifications-title {
-                opacity: 1;
-                transform: translateY(0px);
+                .notifications-title {
+                    opacity: 1;
+                    transform: translateY(0px);
+                }
             }
         }
 
@@ -159,7 +163,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
         >
             <div className="outside">
                 <Icon badge={notifications?.toString()} color={color.length ? color : 'blue'}>
-                    {icon ?? <FiPlus />}
+                    {icon ?? <HiOutlineFolder />}
                 </Icon>
                 <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLength)}</b>
                 {!!notifications && (

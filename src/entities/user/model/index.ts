@@ -15,8 +15,6 @@ interface UserStore {
     loginEuz?: string
 }
 
-//  In effector chat core-team describe something like this code (Perhaps a better solution can be found)
-// TODO: ask about token expires (Looks like it won't expire)
 const tokenInStorage = JSON.parse(localStorage.getItem('token') ?? 'null')
 const savePasswordInStorage = () => JSON.parse(localStorage.getItem('savePassword') ?? 'true')
 

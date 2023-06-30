@@ -1,23 +1,12 @@
 import { electronicInteractionModel } from '@entities/electronic-interaction'
+import PageBlock from '@shared/ui/page-block'
 import { Wrapper } from '@ui/atoms'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
-import styled from 'styled-components'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
-
-const ElectronicInteractionAgreementPageWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-    color: var(--text);
-    gap: 10px;
-`
 
 const ElectronicInteractionAgreementPage = () => {
     const { data, error } = electronicInteractionModel.selectors.useElectronicInteraction()
-
     const handleSubmit = async () => {
         electronicInteractionModel.effects.postElectronicInteractionFx()
     }
@@ -29,7 +18,7 @@ const ElectronicInteractionAgreementPage = () => {
             error={error}
             data={data}
         >
-            <ElectronicInteractionAgreementPageWrapper>
+            <PageBlock>
                 {data && (
                     <ElectornicAgreement data={data} submit={handleSubmit}>
                         <p className="info-text">
@@ -39,7 +28,7 @@ const ElectronicInteractionAgreementPage = () => {
                                 {data.passSer} {data.passNum}, выдан {localizeDate(data.passDate)} {data.passDiv}
                                 <br />
                                 <b>Дата рождения: </b>
-                                {localizeDate(data.bdate)}
+                                {data.bdate}
                                 <br />
                                 <b>Номер мобильного телефона: </b>
                                 {data.phone}
@@ -63,7 +52,7 @@ const ElectronicInteractionAgreementPage = () => {
                         </p>
                     </ElectornicAgreement>
                 )}
-            </ElectronicInteractionAgreementPageWrapper>
+            </PageBlock>
         </Wrapper>
     )
 }
