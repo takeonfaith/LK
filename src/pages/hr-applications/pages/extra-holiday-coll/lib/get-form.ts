@@ -157,13 +157,6 @@ const getForm = (dataUserApplication: UserApplication): IInputArea => {
                     },
                 ],
             },
-            {
-                title: 'Комментарий к заявке',
-                type: 'textarea',
-                fieldName: 'commentary',
-                value: '',
-                editable: true,
-            },
         ],
         documents: {
             files: [],

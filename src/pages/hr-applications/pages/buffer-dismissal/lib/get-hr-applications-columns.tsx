@@ -98,6 +98,7 @@ const getHrApplicationsColumns = (): ColumnProps[] => {
                             text="Скачать файл"
                             background="rgb(60,210,136)"
                             textColor="#fff"
+                            id="downloadButton"
                             width={'150px'}
                             align="center"
                             minWidth={'150px'}

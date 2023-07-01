@@ -25,7 +25,7 @@ const JobTitle: React.FC<Props> = ({ info, index, data }) => {
     const [opened, setOpened] = useState<boolean>(false)
     // console.log('info')
     // console.log(info)
-    console.log(data)
+    //console.log(data)
     // console.log(data)
 
     return (
@@ -49,7 +49,7 @@ const JobTitle: React.FC<Props> = ({ info, index, data }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {subDivision}
+                Подразделение: {subDivision}
                 <br />
                 Ставка: {rate}
                 {/* Вид места работы: добавим */}

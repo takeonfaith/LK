@@ -8,7 +8,7 @@ const getExHrApplicationsColumns = (): ColumnProps[] => {
         //{ title: 'Название', field: 'title', priority: 'one', search: true, },
 
         {
-            title: 'Должность, Структурное подразделение',
+            title: 'Должность, Подразделение',
             field: 'jobDivision',
             priority: 'one',
             width: '200px',

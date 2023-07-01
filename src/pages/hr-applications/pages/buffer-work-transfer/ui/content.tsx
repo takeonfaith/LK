@@ -4,6 +4,7 @@ import { useState } from 'react'
 import History from './history'
 import JobTitle from './job-title'
 import styled from 'styled-components'
+import { getDivisions } from '@shared/api/application-api'
 //import HWAssesment from './holiday-work-affirmation'
 
 const Content = () => {
@@ -15,6 +16,17 @@ const Content = () => {
     if (!dataWorkerApplication) {
         return null
     }
+    // async function fetchData() {
+    //     const data = await getDivisions()
+    //     //console.log(data.data) // { hello: 'world' }
+    // }
+    // fetchData()
+    // getDivisions().then((data) => {
+    //     let items
+    //     data.data.divisions.map((item: any, index: number) => {
+    //         items[index] = { id: index, title: item.divisionName }
+    //     })
+    // })
 
     return (
         <Wrapper>

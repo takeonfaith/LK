@@ -42,7 +42,7 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {subDivision}
+                Подразделение: {subDivision}
                 <br />
                 Ставка: {rate}
                 <br />
@@ -51,7 +51,7 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
             {opened && (
                 <ActionBlock>
                     {true && (
-                        <Link to={`/hr-applications/part-time-employment/${index}`}>
+                        <Link to={`/hr-applications/part-time-employment/`}>
                             <Button
                                 text="Устроиться по совместительству"
                                 background="rgb(236,95,107)"

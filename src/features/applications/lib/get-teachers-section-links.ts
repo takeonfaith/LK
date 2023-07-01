@@ -100,7 +100,7 @@ const getTeachersHRSectionLinks = () => {
             links: [
                 //{ link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
                 //{ link: HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
-                { link: BUFFER_PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
+                { link: PARTTIME_EMPLOYMENT, title: 'Заявление на трудоустройство по совместительству' },
                 // { link: BUFFER_HOLIDAY_POSTPONED, title: 'Заявление на перенос отпуска' },
                 { link: BUFFER_DISMISSAL, title: 'Заявление на увольнение' },
                 { link: BUFFER_HOLIDAY_WORK, title: 'Заявление о привлечении к работе в выходной день' },

@@ -1,5 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication, WorkerApplication } from '@api/model'
+import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 
 const getForm = (
     dataUserApplication: UserApplication,
@@ -12,11 +13,10 @@ const getForm = (
         data: [
             {
                 title: 'ФИО',
+                type: 'simple-text',
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
-                mask: true,
-                editable: true,
-                required: true,
+                visible: true,
             },
             {
                 title: 'Должность',
@@ -26,7 +26,7 @@ const getForm = (
                 visible: true,
             },
             {
-                title: 'Структурное подразделение',
+                title: 'Подразделение',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
@@ -40,17 +40,62 @@ const getForm = (
                 editable: true,
                 mask: true,
                 required: true,
+                minValueInput: getDelayInDays(0),
             },
+            // {
+            //     title: 'Количество часов',
+            //     type: 'number',
+            //     value: null,
+            //     fieldName: 'holiday_work_hours',
+            //     editable: true,
+            //     mask: true,
+            //     required: true,
+            //     minValueInput: 1,
+            //     maxValueInput: 8,
+            //     step: 1,
+            // },
             {
                 title: 'Количество часов',
-                type: 'number',
-                value: null,
+                type: 'select',
                 fieldName: 'holiday_work_hours',
+                value: null,
                 editable: true,
-                mask: true,
                 required: true,
-                minValueInput: 1,
-                maxValueInput: 8,
+                width: '100%',
+                items: [
+                    {
+                        id: 0,
+                        title: '1',
+                    },
+                    {
+                        id: 1,
+                        title: '2',
+                    },
+                    {
+                        id: 2,
+                        title: '3',
+                    },
+                    {
+                        id: 3,
+                        title: '4',
+                    },
+                    {
+                        id: 4,
+                        title: '5',
+                    },
+                    {
+                        id: 5,
+                        title: '6',
+                    },
+                    {
+                        id: 6,
+                        title: '7',
+                    },
+                    {
+                        id: 7,
+                        title: '8',
+                    },
+                ],
             },
             {
                 title: 'Причина',
@@ -61,7 +106,7 @@ const getForm = (
                 required: true,
             },
             {
-                title: 'Компенсация',
+                title: 'Вид компенсации',
                 type: 'select',
                 fieldName: 'compensation',
                 value: null,
@@ -95,13 +140,6 @@ const getForm = (
                 value: dataWorkerApplication[currentIndex].jobGuid.toString(),
                 fieldName: 'jobGuid',
                 visible: false,
-            },
-            {
-                title: 'Комментарий к заявке',
-                type: 'textarea',
-                fieldName: 'commentary',
-                value: '',
-                editable: true,
             },
         ],
     }

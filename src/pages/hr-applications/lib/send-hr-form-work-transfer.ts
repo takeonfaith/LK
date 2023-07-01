@@ -1,5 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
-import { bufferWorkTransferModel } from '../pages/buffer-holiday-work-transfer/model'
+import { bufferWorkTransferModel } from '../pages/buffer-work-transfer/model'
+import { getDivisionGuid } from './divisions'
 
 const SendHrFormWorkTransfer = async (
     employeeId: string,
@@ -50,11 +51,10 @@ const SendHrFormWorkTransfer = async (
         .flat()
 
     const result = Object.assign({}, ...form)
-
     const response = await bufferWorkTransferModel.effects.sendBufferWorkTransferFx({
         employeeGuid: result.jobGuid,
         transferDate: result.transferDate,
-        divisionGuid: result.jobGuid,
+        divisionGuid: getDivisionGuid(result.newPlaceOfWork),
         desiredJob: result.newPost,
         desiredRate: result.newRate,
     })

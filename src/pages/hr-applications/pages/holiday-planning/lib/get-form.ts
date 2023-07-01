@@ -1,5 +1,6 @@
 import { UserApplication, WorkerApplication } from '@api/model'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
+import { getDivisions } from '@shared/api/application-api'
 import localizeDate from '@shared/lib/localize-date'
 import { IInputArea } from '@ui/input-area/model'
 
@@ -20,7 +21,8 @@ const getForm = (
     const holidayStartDate = !!startDate ? startDate : new Date().toISOString()
     const holidayEndDate = !!endDate ? endDate : new Date().toISOString()
     const collTypeData = !!collType ? collType : ''
-    console.log(dataWorkerApplication)
+    //console.log(endDate)
+
     return {
         title: 'Заявление о предоставлении отпуска',
         data: [
@@ -39,7 +41,7 @@ const getForm = (
                 visible: true,
             },
             {
-                title: 'Структурное подразделение',
+                title: 'Подразделение',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
@@ -84,7 +86,7 @@ const getForm = (
                 required: true,
                 onChange: (value) => {
                     setCollType(value)
-                    setEndDate(getDelayInDays(value ? +value.data : 28, holidayStartDate))
+                    setEndDate(getDelayInDays(value ? +value.data : 0, holidayStartDate + 5))
                 },
                 width: '100%',
                 specialType: 'collDog',
@@ -145,6 +147,7 @@ const getForm = (
                 mask: true,
                 onChange: (value) => {
                     setStartDate(value)
+                    setEndDate(value)
                 },
                 required: true,
                 minValueInput: getDelayInDays(5),
@@ -167,7 +170,7 @@ const getForm = (
                 onChange: (value) => {
                     setEndDate(value)
                 },
-                minValueInput: holidayStartDate,
+                minValueInput: !!endDate ? endDate : getDelayInDays(0),
                 maxValueInput: getDelayInDays(collType ? +collType.data : 365, holidayStartDate),
             },
         ],

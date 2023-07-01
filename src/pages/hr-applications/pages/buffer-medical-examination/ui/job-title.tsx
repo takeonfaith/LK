@@ -25,7 +25,7 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
     const { data } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
     const [opened, setOpened] = useState<boolean>(false)
     //if (data.length == 0) return null
-    console.log(data)
+    //console.log(data)
 
     return (
         <Block
@@ -48,7 +48,7 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {subDivision}
+                Подразделение: {subDivision}
                 <br />
                 Ставка: {rate}
                 <br />

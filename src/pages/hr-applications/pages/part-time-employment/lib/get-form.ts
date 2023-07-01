@@ -1,12 +1,11 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication, WorkerApplication } from '@api/model'
+import { getDivisions } from '@shared/api/application-api'
+import { getSuggestions } from '@pages/hr-applications/lib/divisions'
 
-const getForm = (
-    dataUserApplication: UserApplication,
-    dataWorkerApplication: WorkerApplication[],
-    currentIndex: number,
-): IInputArea => {
+const getForm = (dataUserApplication: UserApplication, dataWorkerApplication: WorkerApplication[]): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
+
     return {
         title: 'Заявление на трудоустройство по совместительству',
         data: [
@@ -14,30 +13,27 @@ const getForm = (
                 title: 'ФИО',
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
-                mask: true,
-                editable: true,
+                type: 'simple-text',
+                visible: true,
+            },
+            {
+                title: 'Подразделениe, куда производится трудорустройство',
+                type: 'auto-complete-input',
+                fieldName: 'newPlaceOfWork',
+                value: '',
+                width: '100%',
+                suggestions: getSuggestions(),
                 required: true,
+                mask: true,
+                visible: true,
+                placeholder: 'Начните вводить название подразделения',
             },
             {
                 title: 'Должность',
-                type: 'simple-text',
-                fieldName: 'post',
-                value: dataWorkerApplication[currentIndex].jobTitle.toString(),
-                visible: true,
-            },
-            {
-                title: 'Структурное подразделение',
-                type: 'simple-text',
-                value: dataWorkerApplication[currentIndex].subDivision.toString(),
-                fieldName: 'subDivision',
-                visible: true,
-            },
-            {
-                title: 'Cтруктурноe подразделениe, куда производится трудорустройство',
                 value: null,
-                fieldName: 'placeOfWork',
-                editable: true,
+                fieldName: 'post',
                 mask: true,
+                editable: true,
                 required: true,
             },
             {
@@ -51,7 +47,7 @@ const getForm = (
                 items: [
                     {
                         id: 0,
-                        title: '0.25',
+                        title: '1',
                     },
                     {
                         id: 1,
@@ -59,31 +55,9 @@ const getForm = (
                     },
                     {
                         id: 2,
-                        title: '1',
+                        title: '0.25',
                     },
                 ],
-            },
-            {
-                title: 'Должность',
-                value: null,
-                fieldName: 'post',
-                mask: true,
-                editable: true,
-                required: true,
-            },
-            {
-                title: '',
-                type: 'simple-text',
-                value: dataWorkerApplication[currentIndex].jobGuid.toString(),
-                fieldName: 'jobGuid',
-                visible: false,
-            },
-            {
-                title: 'Комментарий к заявке',
-                type: 'textarea',
-                fieldName: 'commentary',
-                value: '',
-                editable: true,
             },
         ],
     }
