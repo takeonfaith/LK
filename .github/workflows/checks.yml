@@ -1,4 +1,4 @@
-name: Main Workflow
+name: Linter and Typescript check
 
 permissions:
     contents: read
