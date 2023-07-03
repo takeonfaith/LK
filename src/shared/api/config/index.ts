@@ -2,7 +2,9 @@
 import { OLD_LK_URL } from '@consts'
 import { userModel } from '@entities/user'
 import { getJwtToken } from '@entities/user/lib/jwt-token'
+import { setDivisions } from '@pages/hr-applications/lib/divisions'
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
+import { getDivisions } from '../application-api'
 import { refreshAccessToken } from '../user-api'
 
 export const API_BASE_URL = `${OLD_LK_URL}/lk_api.php`
@@ -16,7 +18,7 @@ const addAuthHeaderToRequests = (config: AxiosRequestConfig) => {
     config.headers.Authorization = `Bearer ${getJwtToken()}`
     return config
 }
-
+getDivisions().then(setDivisions)
 $hrApi.interceptors.request.use(addAuthHeaderToRequests)
 
 $hrApi.interceptors.response.use(

@@ -105,6 +105,8 @@ interface Props {
     minValue?: number | string
     maxValue?: number | string
     maxLength?: number | undefined
+    step?: number
+    visible?: boolean
 }
 const Input = ({
     value,
@@ -114,6 +116,7 @@ const Input = ({
     required,
     width,
     minWidth,
+    step,
     placeholder = 'Введите сюда',
     type = 'text',
     danger,
@@ -125,6 +128,7 @@ const Input = ({
     minValue = undefined,
     maxValue = undefined,
     maxLength = undefined,
+    visible = true,
 }: Props) => {
     const [inputType, setInputType] = useState(type)
 
@@ -190,55 +194,56 @@ const Input = ({
             setValue('')
         }
     }
-
-    return (
-        <InputWrapper
-            leftIcon={!!leftIcon}
-            isActive={isActive}
-            inputAppearance={inputAppearance}
-            width={width}
-            danger={danger}
-            minWidth={minWidth}
-        >
-            <Title size={5} align="left" visible={!!title} bottomGap="5px" required={required}>
-                {title}
-            </Title>
-            <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
-            {leftIcon && <span className="left-icon">{leftIcon}</span>}
-            <input
-                min={minValue}
-                max={maxValue}
-                maxLength={maxLength}
-                step={maxValue ? 0.1 : undefined}
-                type={inputType}
-                placeholder={placeholder}
-                value={value}
-                autoComplete={autocomplete ? 'on' : 'off'}
-                onKeyDown={(e) => type === 'tel' && phoneMaskKeyDown(e)}
-                onChange={(e) => {
-                    if (mask) {
-                        if (type === 'tel') {
-                            setValue(phoneMask(e))
-                        } else if (type === 'email') {
-                            setValue(emailMask(e.target.value))
+    if (visible) {
+        return (
+            <InputWrapper
+                leftIcon={!!leftIcon}
+                isActive={isActive}
+                inputAppearance={inputAppearance}
+                width={width}
+                danger={danger}
+                minWidth={minWidth}
+            >
+                <Title size={5} align="left" visible={!!title} bottomGap="5px" required={required}>
+                    {title}
+                </Title>
+                <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
+                {leftIcon && <span className="left-icon">{leftIcon}</span>}
+                <input
+                    min={minValue}
+                    max={maxValue}
+                    maxLength={maxLength}
+                    step={step}
+                    type={inputType}
+                    placeholder={placeholder}
+                    value={value}
+                    autoComplete={autocomplete ? 'on' : 'off'}
+                    onKeyDown={(e) => type === 'tel' && phoneMaskKeyDown(e)}
+                    onChange={(e) => {
+                        if (mask) {
+                            if (type === 'tel') {
+                                setValue(phoneMask(e))
+                            } else if (type === 'email') {
+                                setValue(emailMask(e.target.value))
+                            } else setValue(e.target.value)
                         } else setValue(e.target.value)
-                    } else setValue(e.target.value)
-                }}
-                required={required}
-                readOnly={!isActive}
-            />
-            {type !== 'password' ? (
-                !!value?.length &&
-                inputAppearance && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
-            ) : (
-                <Button
-                    icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}
-                    tabIndex={-1}
-                    onClick={() => setInputType((prev) => (prev === 'password' ? 'text' : 'password'))}
+                    }}
+                    required={required}
+                    readOnly={!isActive}
                 />
-            )}
-        </InputWrapper>
-    )
+                {type !== 'password' ? (
+                    !!value?.length &&
+                    inputAppearance && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
+                ) : (
+                    <Button
+                        icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}
+                        tabIndex={-1}
+                        onClick={() => setInputType((prev) => (prev === 'password' ? 'text' : 'password'))}
+                    />
+                )}
+            </InputWrapper>
+        )
+    } else return null
 }
 
 export default Input

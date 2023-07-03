@@ -26,7 +26,7 @@ const getForm = (
                 visible: true,
             },
             {
-                title: 'Структурное подразделение',
+                title: 'Подразделение',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
@@ -40,7 +40,7 @@ const getForm = (
                 editable: true,
                 mask: true,
                 required: true,
-                //minValueInput: getDelayInDays(5),
+                minValueInput: getDelayInDays(0),
             },
             {
                 title: '',
@@ -57,7 +57,7 @@ const getForm = (
                 editable: true,
                 mask: true,
                 required: true,
-                //minValueInput: getDelayInDays(5),
+                minValueInput: getDelayInDays(0),
             },
             {
                 title: 'Начало отпуска после переноса:',
@@ -95,7 +95,6 @@ const getForm = (
                     {
                         id: 1,
                         title: 'Рабочая необходимость',
-                        data: 5,
                     },
                 ],
             },

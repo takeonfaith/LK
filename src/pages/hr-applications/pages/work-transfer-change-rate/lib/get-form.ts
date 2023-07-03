@@ -14,9 +14,8 @@ const getForm = (
                 title: 'ФИО',
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
-                mask: true,
-                editable: true,
-                required: true,
+                type: 'simple-text',
+                visible: true,
             },
             {
                 title: '',
@@ -33,7 +32,7 @@ const getForm = (
                 visible: true,
             },
             {
-                title: 'Структурное подразделение',
+                title: 'Подразделение',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',

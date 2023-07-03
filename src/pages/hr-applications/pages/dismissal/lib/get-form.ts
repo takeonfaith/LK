@@ -1,5 +1,6 @@
 import { IInputArea } from '@ui/input-area/model'
 import { UserApplication, WorkerApplication } from '@api/model'
+import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 //import { SelectPage } from '@features/select'
 //import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 // const parseJobs = (dataWorkerApplication: WorkerApplication[]): SelectPage[] => {
@@ -11,6 +12,16 @@ const getForm = (
     dataUserApplication: UserApplication,
     dataWorkerApplication: WorkerApplication[],
     currentIndex: number,
+    isRetirement: boolean,
+    setIsRetirement: React.Dispatch<React.SetStateAction<boolean>>,
+    getTkAddress: string | null,
+    setGetTkAddress: React.Dispatch<React.SetStateAction<string | null>>,
+    getTk: any,
+    setGetTk: React.Dispatch<React.SetStateAction<any>>,
+    reason: string | null,
+    setReason: React.Dispatch<React.SetStateAction<string | null>>,
+    lastDay: string | null,
+    setLastDay: React.Dispatch<React.SetStateAction<string | null>>,
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
@@ -20,9 +31,8 @@ const getForm = (
                 title: 'ФИО',
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
-                mask: true,
-                editable: false,
-                required: true,
+                type: 'simple-text',
+                visible: true,
             },
             {
                 title: 'Должность',
@@ -32,7 +42,7 @@ const getForm = (
                 visible: true,
             },
             {
-                title: 'Структурное подразделение',
+                title: 'Подразделение',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
@@ -63,37 +73,46 @@ const getForm = (
             {
                 title: 'Дата увольнения (последний рабочий день)',
                 type: 'date',
-                value: '',
+                value: lastDay,
                 fieldName: 'last_day',
                 editable: true,
                 mask: true,
                 required: true,
-                //minValueInput: getDelayInDays(14),
+                minValueInput: getDelayInDays(0),
+                onChange: (value) => {
+                    setLastDay(value)
+                },
             },
             {
                 title: 'Причина',
                 type: 'text',
-                value: 'По собственному желанию',
+                value: reason,
                 fieldName: 'reason',
                 editable: true,
                 mask: true,
                 required: true,
                 maxValueLength: 50,
+                onChange: (value) => {
+                    setReason(value)
+                },
             },
             {
                 title: 'В связи с выходом на пенсию',
                 type: 'hr-checkbox',
-                value: '',
+                value: isRetirement,
                 fieldName: 'isRetirement',
                 editable: true,
                 mask: true,
                 required: false,
+                onChange: (value) => {
+                    setIsRetirement(value)
+                },
             },
             {
                 title: 'Способ получения трудовой книжки',
                 type: 'select',
                 fieldName: 'get_tk',
-                value: null,
+                value: getTk,
                 editable: true,
                 required: true,
                 width: '100%',
@@ -107,22 +126,22 @@ const getForm = (
                         title: 'По почте',
                     },
                 ],
+                onChange: (value) => {
+                    setGetTk(value)
+                },
             },
             {
                 title: 'Адрес для отправки трудовой книжки',
-                value: '',
+                value: getTkAddress,
                 fieldName: 'get_tk_address',
                 editable: true,
                 mask: true,
-                required: true,
-                specialType: 'Address',
-            },
-            {
-                title: 'Комментарий к заявке',
-                type: 'textarea',
-                fieldName: 'commentary',
-                value: '',
-                editable: true,
+                required: getTk?.title == 'По почте' ? true : false,
+                visible: getTk?.title == 'По почте' ? true : false,
+                //specialType: 'Address',
+                onChange: (value) => {
+                    setGetTkAddress(value)
+                },
             },
         ],
     }

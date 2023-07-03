@@ -61,8 +61,8 @@ import HolidayWorkBufferPage from '@pages/hr-applications/pages/buffer-holiday-w
 import HolidayPlanningBufferPage from '@pages/hr-applications/pages/buffer-holiday-planning'
 import HolidayTransferBufferPage from '@pages/hr-applications/pages/buffer-holiday-transfer'
 import MedicalExaminationBufferPage from '@pages/hr-applications/pages/buffer-medical-examination'
-import PartTimeEmploymentBufferPage from '@pages/hr-applications/pages/buffer-part-time-employment'
-import WorkTransferBufferPage from '@pages/hr-applications/pages/buffer-holiday-work-transfer'
+//import PartTimeEmploymentBufferPage from '@pages/hr-applications/pages/buffer-part-time-employment'
+import WorkTransferBufferPage from '@pages/hr-applications/pages/buffer-work-transfer'
 
 export const DATA_VERIFICATION_ROUTE = '/data-verification'
 export const APPLICATIONS_ROUTE = '/applications'
@@ -112,7 +112,7 @@ export const COURIER = APPLICATIONS_ROUTE + '/courier'
 export const PERSONA_INCOME_TAX_REFERENCE = APPLICATIONS_ROUTE + '/persona-income-tax-reference'
 export const PAYMENT_OF_CHILD_BIRTH_ALLOWANCE = APPLICATIONS_ROUTE + '/payment-of-child-birth-allowance'
 export const PAYMENT_FOR_CHILD_CARE = APPLICATIONS_ROUTE + '/payment-for-child-care'
-export const PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/part-time-employment/:id'
+export const PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/part-time-employment/'
 export const HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/holiday-postponed'
 export const DISMISSAL = HR_APPLICATIONS_ROUTE + '/dismissal/:id'
 export const WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/work-transfer/:id'
@@ -454,10 +454,10 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
     'part-time-employment': {
         id: 'part-time-employment',
         title: 'Заявление на трудоустройство по совместительству',
-        path: BUFFER_PARTTIME_EMPLOYMENT,
+        path: PARTTIME_EMPLOYMENT,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProduction ? ApplicationRedirect : PartTimeEmploymentBufferPage,
+        Component: isProduction ? ApplicationRedirect : PartTimeEmployment,
         isTemplate: false,
         group: 'OTHER',
     },

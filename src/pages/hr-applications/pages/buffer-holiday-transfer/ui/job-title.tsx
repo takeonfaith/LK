@@ -43,7 +43,7 @@ const JobTitle: React.FC<Props> = ({ info, index, data }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {subDivision}
+                Подразделение: {subDivision}
                 <br />
                 Ставка: {rate}
                 <br />
