@@ -1,8 +1,9 @@
 import { SelectPage } from '@features/select'
 import { CheckboxDocs, IInputArea, IInputAreaData } from '@ui/input-area/model'
+import { IndexedProperties } from '@shared/models/indexed-properties'
 
 const prepareFormData = <T>(form: IInputArea) => {
-    return (form.data as IInputAreaData[]).reduce((acc, item) => {
+    const inputs = (form.data as IInputAreaData[]).reduce((acc, item) => {
         if (!item.value) return acc
         if (item.type === 'checkbox-docs') {
             const files = (item.items as CheckboxDocs[])?.reduce((obj, element) => {
@@ -25,6 +26,19 @@ const prepareFormData = <T>(form: IInputArea) => {
         }
         return acc
     }, {} as { [key: string]: any }) as T
+
+    const files = () => {
+        const obj: IndexedProperties = {}
+        if (form.documents?.fieldName) {
+            for (let fileIndex = 0; fileIndex < form.documents.files.length; fileIndex++) {
+                obj[form.documents?.fieldName + `[${fileIndex}]`] = form.documents.files[fileIndex]
+            }
+        }
+
+        return obj
+    }
+
+    return { ...inputs, ...files() }
 }
 
 export default prepareFormData
