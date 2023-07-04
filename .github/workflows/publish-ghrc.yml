@@ -5,7 +5,7 @@ on:
         branches: [master, add-ci-cd]
 
     workflow_run:
-        workflows: ['checks.yml']
+        workflows: ['Linter and Typescript check']
         types:
             - completed
 
