@@ -1,0 +1,46 @@
+name: run
+
+on:
+    push:
+        branches: [master, add-ci-cd]
+    workflow_run:
+        workflows: ['publish-ghrc.yml']
+        types:
+            - completed
+jobs:
+    build_and_publish:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Install OpenVPN
+              run: |
+                  sudo apt-get update
+                  sudo apt-get --assume-yes --no-install-recommends install openvpn
+
+            - name: Setup VPN config
+              run: |
+                  echo "${{ secrets.CA_CRT }}" > ca.crt
+                  echo "${{ secrets.SECRET_USERNAME_PASSWORD }}" > secret.txt
+                  echo "${{ secrets.TLS_KEY }}" > tls.key          
+                  echo "${{ secrets.CONFIG }}" > config.ovpn
+
+            - name: Connect VPN
+              run: sudo openvpn --config "config.ovpn" --log "vpn.log" --daemon
+
+            - name: Wait for a VPN connection
+              timeout-minutes: 1
+              run: until ping -c1 ${{ secrets.TEST_HOST_IP }}; do sleep 2; done
+
+            # - name: 'Run deploy on server'
+            #   uses: appleboy/ssh-action@master
+            #   with:
+            #       host: ${{ secrets.SERVER_HOST }}
+            #       username: ${{ secrets.SERVER_USERNAME }}
+            #       key: ${{ secrets.SERVER_KEY }}
+            #       port: ${{ secrets.SERVER_PORT }}
+            #       script: |
+            #           sudo docker-compose -f docker-compose.prod-ci.yml -p prod pull
+            #           sudo docker-compose -f docker-compose.prod-ci.yml -p prod up -d

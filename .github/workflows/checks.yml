@@ -7,7 +7,7 @@ permissions:
 
 on:
   push:
-      branches: [master]
+      branches: [master, add-ci-cd]
   pull_request:
       types: [opened, reopened]
 
