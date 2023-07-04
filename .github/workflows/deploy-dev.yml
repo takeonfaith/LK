@@ -40,3 +40,15 @@ jobs:
             #       script: |
             #           sudo docker-compose -f docker-compose.prod-ci.yml -p prod pull
             #           sudo docker-compose -f docker-compose.prod-ci.yml -p prod up -d
+            - name: Kill VPN connection
+              if: always()
+              run: |
+                  sudo chmod 777 vpn.log
+                  sudo killall openvpn      
+          
+            - name: Upload VPN logs
+              uses: actions/upload-artifact@v2
+              if: always()
+              with:
+                  name: VPN logs
+                  path: vpn.log
