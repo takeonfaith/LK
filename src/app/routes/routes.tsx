@@ -348,7 +348,14 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение внутри общежития',
         icon: <BiIdCard />,
         path: RELOCATION_INSIDE_HOSTEL,
-        Component: RelocationInsideHostelPage,
+        Component: isProduction
+            ? () => (
+                  <PageIsNotReady
+                      isRedirectButtonVisible={false}
+                      errorText="Прием заявок на переселение внутри общежития будет осуществляться с 01.10.2023"
+                  />
+              )
+            : RelocationInsideHostelPage,
         color: 'blue',
         isTemplate: false,
         isSubPage: true,
@@ -358,10 +365,17 @@ export const hiddenRoutes: () => IRoutes = () => ({
     },
     'relocation-to-another-hostel': {
         id: 'relocation-to-another-hostel',
-        title: 'Переселение в другое общежитие (Подача заявок доступна с 08.06.2023 по 15.06.2023)',
+        title: 'Переселение в другое общежитие',
         icon: <BiIdCard />,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
-        Component: isProduction ? ApplicationRedirect : RelocationToAnotherHostelPage,
+        Component: isProduction
+            ? () => (
+                  <PageIsNotReady
+                      isRedirectButtonVisible={false}
+                      errorText="Прием заявок на переселение в другое общежитие завершен 15.06.2023"
+                  />
+              )
+            : RelocationToAnotherHostelPage,
         color: 'blue',
         isTemplate: false,
         isSubPage: true,
