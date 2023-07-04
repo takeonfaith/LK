@@ -40,11 +40,11 @@ const Buttons = styled.div`
 `
 
 const GraphicInfo = () => {
-    const { data, loading } = acadPerformanceModel.selectors.useData()
+    const { preparedData, loading } = acadPerformanceModel.selectors.useData()
 
     const [circleMode, setCircleMode] = useState(0)
-    const examPercentage = data?.exam.length ? findPercentage(data.exam, circleMode) : '0'
-    const easyExamPercentage = data?.test.length ? findPercentage(data.test) : '0'
+    const examPercentage = '0'
+    const easyExamPercentage = preparedData?.test.length ? findPercentage(preparedData.test) : '0'
     const examsText = ['Сдано', 'На 5', 'На 4']
     const examColors: (keyof IColors)[] = ['lightBlue', 'green', 'blue']
 
@@ -59,6 +59,7 @@ const GraphicInfo = () => {
                     percent={+examPercentage / 100}
                     loading={loading}
                     label={`${examPercentage}%`}
+                    size="small"
                 >
                     <Flex ai="center" jc="center">
                         <Buttons>
@@ -88,6 +89,7 @@ const GraphicInfo = () => {
                     percent={+easyExamPercentage / 100}
                     loading={loading}
                     label={`${easyExamPercentage}%`}
+                    size="small"
                 >
                     Зачет
                 </PieChart>

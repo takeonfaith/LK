@@ -1,4 +1,4 @@
-import { PreparedData } from '@entities/acad-performance/lib/prepare'
+import { AcadPerformance } from '@shared/api/model/acad-performance'
 import Flex from '@shared/ui/flex'
 import { Image } from '@shared/ui/image'
 import Subtext from '@shared/ui/subtext'
@@ -14,13 +14,18 @@ const AStudentBackground = styled.div`
     justify-content: space-between;
     width: 100%;
     padding: 16px;
-    background: linear-gradient(270deg, #5d2466, #28549d, #1e7096);
+    background: linear-gradient(270deg, #246655, #46b99b, #46a4b9);
     background-size: 600% 600%;
-    -webkit-animation: AnimationName 4s ease infinite;
-    -moz-animation: AnimationName 4s ease infinite;
-    animation: AnimationName 4s ease infinite;
 
-    @-webkit-keyframes AnimationName {
+    -webkit-animation: AStudentBackground 10s ease infinite;
+    -moz-animation: AStudentBackground 10s ease infinite;
+    animation: AStudentBackground 10s ease infinite;
+
+    img {
+        filter: drop-shadow(2px 4px 25px black);
+    }
+
+    @-webkit-keyframes AStudentBackground {
         0% {
             background-position: 0% 50%;
         }
@@ -31,7 +36,7 @@ const AStudentBackground = styled.div`
             background-position: 0% 50%;
         }
     }
-    @-moz-keyframes AnimationName {
+    @-moz-keyframes AStudentBackground {
         0% {
             background-position: 0% 50%;
         }
@@ -42,7 +47,7 @@ const AStudentBackground = styled.div`
             background-position: 0% 50%;
         }
     }
-    @keyframes AnimationName {
+    @keyframes AStudentBackground {
         0% {
             background-position: 0% 50%;
         }
@@ -62,12 +67,12 @@ const AlmostBackground = styled.div`
     justify-content: space-between;
     width: 100%;
     padding: 16px;
-    background: linear-gradient(270deg, #580808, #5f0458, #2b0749);
-    background-size: 600% 600%;
+    background: linear-gradient(270deg, #243766, #4657b9, #46a4b9, #5d46b9);
+    background-size: 800% 800%;
 
-    -webkit-animation: AnimationName 6s ease infinite;
-    -moz-animation: AnimationName 6s ease infinite;
-    animation: AnimationName 6s ease infinite;
+    -webkit-animation: AnimationName 10s ease infinite;
+    -moz-animation: AnimationName 10s ease infinite;
+    animation: AnimationName 10s ease infinite;
 
     @-webkit-keyframes AnimationName {
         0% {
@@ -105,16 +110,15 @@ const AlmostBackground = styled.div`
 `
 
 type Props = {
-    data: PreparedData | null
+    data: AcadPerformance[] | null
 }
 
-const analyzeGrades = (data: PreparedData | null): 'empty' | 'a-student' | 'almost' => {
+const analyzeGrades = (data: AcadPerformance[] | null): 'empty' | 'a-student' | 'almost' => {
     if (!data) return 'empty'
-    const mergedData = [...data.exam, ...data.test]
     let amountOfNonFives = 0
 
-    for (let index = 0; index < mergedData.length; index++) {
-        const { grade } = mergedData[index]
+    for (let index = 0; index < data.length; index++) {
+        const { grade } = data[index]
         if (!grade) return 'empty'
 
         if (grade !== 'Зачтено' && grade !== 'Отлично') {

@@ -2,7 +2,7 @@ import { lkNotificationModel } from '@entities/lk-notifications'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { CenterPage, Error, Message } from '@shared/ui/atoms'
 import Flex from '@shared/ui/flex'
-import PlaneSkeleton from '@shared/ui/plane-skeleton'
+import PlaneSkeletonList from '@shared/ui/plane-skeleton-list'
 import React, { useEffect } from 'react'
 import { FiBellOff, FiXCircle } from 'react-icons/fi'
 import styled from 'styled-components'
@@ -65,15 +65,7 @@ const LkNotificationList = ({ maxNotificationsVisible }: Props) => {
                     loadingRemove={removeNotificationLoading}
                 />
             </Flex>
-            {loading && (
-                <Flex d="column" gap="12px">
-                    {Array(5)
-                        .fill(0)
-                        .map((_, i) => (
-                            <PlaneSkeleton key={i} />
-                        ))}
-                </Flex>
-            )}
+            {loading && <PlaneSkeletonList quantity={10} />}
         </LkNotificationListStyled>
     )
 }

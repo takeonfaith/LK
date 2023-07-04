@@ -82,7 +82,7 @@ const NotificationBellSection = () => {
                 className="notification-circle"
                 shadow
             >
-                {notifications.length}
+                {notifications.length > 10 ? '10+' : notifications.length}
             </Notification>
             <MdOutlineNotifications />
         </NotificationBellStyled>
