@@ -17,13 +17,29 @@ const useList = (gap?: number) => {
 
             if (listRef.current.clientWidth < listRef.current.scrollWidth) {
                 setLeftArrow(true)
-
                 setRightArrow(true)
+            } else {
+                setRightArrow(false)
+                setLeftArrow(false)
             }
         }
-    }, [scrollLeft, listRef.current?.scrollLeft, width])
+    }, [scrollLeft, listRef.current?.clientWidth, width])
 
-    return { listRef, leftArrow, rightArrow, setScrollLeft, pageOffset, amountOfPages, currentPage, setCurrentPage }
+    const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        setCurrentPage(Math.ceil(e.currentTarget.scrollLeft / (pageOffset + (gap ?? 0))))
+    }
+
+    return {
+        listRef,
+        leftArrow,
+        rightArrow,
+        setScrollLeft,
+        pageOffset,
+        amountOfPages,
+        currentPage,
+        setCurrentPage,
+        handleScroll,
+    }
 }
 
 export default useList

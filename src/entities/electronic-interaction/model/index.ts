@@ -41,7 +41,7 @@ const getElectronicInteractionFx = createEffect(async (): Promise<ElectronicInte
     try {
         const response = await pepApi.get()
 
-        return response.data[0]
+        return response[0]
     } catch (error) {
         throw new Error(error as string)
     }

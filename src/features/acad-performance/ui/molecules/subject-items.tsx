@@ -1,34 +1,15 @@
 import { AcadPerformance } from '@api/model/acad-performance'
-import { Divider, SkeletonShape } from '@ui/atoms'
+import { Divider } from '@ui/atoms'
 import React, { memo } from 'react'
 import { SubjectItem } from '.'
 
 interface Props {
     loading?: boolean
     items: AcadPerformance[]
-    type: 'exam' | 'test'
+    type: string
 }
 
-const SubjectItems = ({ items, type, loading }: Props) => {
-    if (loading)
-        return (
-            <>
-                {Array(5)
-                    .fill(0)
-                    .map((_, i) => (
-                        <SkeletonShape
-                            key={i}
-                            shape="rect"
-                            size={{
-                                width: '100%',
-                                height: '30px',
-                            }}
-                            margin="10px 0"
-                        />
-                    ))}
-            </>
-        )
-
+const SubjectItems = ({ items, type }: Props) => {
     return (
         <>
             {items.map((item, i) => (
