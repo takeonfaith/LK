@@ -9,7 +9,6 @@ type Props = IRoute & { isCurrent: boolean }
 
 const LeftsideBarItem = (props: Props) => {
     const { path, icon, title, isCurrent, isAdmin, color, notifications } = props
-    // const { isOpen } = menuModel.selectors.useMenu()
 
     return (
         <LeftsideBarItemWrapper

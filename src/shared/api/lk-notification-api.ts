@@ -18,5 +18,5 @@ export const clearNotificationById = (id: string) => {
 }
 
 export const clearAllNotifications = () => {
-    return $api.get('?clearAllNotifications&token=${getToken()}')
+    return $api.get(`?clearAllNotifications&token=${getToken()}`)
 }

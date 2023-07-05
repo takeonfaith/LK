@@ -2,6 +2,8 @@ import React from 'react'
 import BlockWrapper from '../block/styles'
 import styled from 'styled-components'
 import { CenterPage } from '../atoms'
+import useCurrentExactPage from '@shared/lib/hooks/use-current-exact-page'
+import { getPageWidth } from './lib/get-page-width'
 
 const PageBlockStyled = styled(BlockWrapper)`
     position: relative;
@@ -36,13 +38,16 @@ type Props = {
 }
 
 const PageBlock = ({ children, topRightCornerElement, padding }: Props) => {
+    const { exactCurrentPage } = useCurrentExactPage()
+    const maxWidth = getPageWidth(exactCurrentPage)
+
     return (
         <CenterPage padding="0 0 10px 0">
             <PageBlockStyled
                 justifyContent="flex-start"
                 height="100%"
                 orientation="vertical"
-                maxWidth="700px"
+                maxWidth={maxWidth}
                 gap="24px"
                 alignItems="flex-start"
                 noAppearanceInMobile

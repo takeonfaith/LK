@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react'
 type TRule = {
     text: string
     test: (...values: string[]) => boolean

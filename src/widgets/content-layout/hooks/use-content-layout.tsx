@@ -28,7 +28,7 @@ const useContentLayout = () => {
 
     useEffect(() => {
         if (isShowWhatsNew) {
-            isShowWhatsNew && open(<WhatsNew />)
+            isShowWhatsNew && open(<WhatsNew />, 'Что нового')
         }
     }, [isShowWhatsNew])
 

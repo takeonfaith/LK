@@ -17,7 +17,7 @@ import { SubjectCheker } from '../atoms'
 interface Props {
     item: AcadPerformance
     number: number
-    type: 'exam' | 'test'
+    type: string
 }
 
 const Wrap = styled.div<{ isGraded: boolean }>`
@@ -36,6 +36,7 @@ const Name = styled.div`
     display: flex;
     margin-right: 10px;
     font-weight: 500;
+    hyphens: auto;
 
     @media (max-width: 1000px) {
         min-width: 0px;
@@ -55,12 +56,13 @@ const Name = styled.div`
 const Grade = styled.strong<{ color: string }>`
     color: ${({ color }) => color};
     font-weight: 600;
-    width: 100px;
+    width: 30px;
     display: flex;
     justify-content: flex-end;
 `
 
-const SubjectItem = ({ item, type }: Props) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const SubjectItem = ({ item, number, type }: Props) => {
     const { open } = useModal()
     const { name, grade } = item
 
@@ -81,18 +83,8 @@ const SubjectItem = ({ item, type }: Props) => {
                     </Subtext>
                 </Flex>
             </Flex>
-            {/* <Bar>
-                {type === 'exam' ? (
-                    <>
-                        <ProgressBar value={WidthByGrade[item.grade]} coloring />
-                        <GradeScore grade={item.grade}>{GradeByScore[item.grade]}</GradeScore>
-                    </>
-                ) : (
-                    <SubjectCheker grade={item.grade} />
-                )}
-            </Bar> */}
             <Grade color={findProgressBarColor(grade)}>
-                {type === 'exam' ? GradeByScore[grade] : <SubjectCheker grade={grade} />}
+                {type === 'Зачет' ? <SubjectCheker grade={grade} /> : grade && GradeByScore[grade]}
             </Grade>
         </Wrap>
     )

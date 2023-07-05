@@ -8,7 +8,7 @@ import { Colors } from '@consts'
 
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
-        { title: 'Запрос', field: 'subject', priority: 'one', search: true, showFull: true },
+        { title: 'Запрос', field: 'subject', priority: 'one', search: true, showFull: true, width: '320px' },
         {
             title: 'Дата',
             field: 'created',
@@ -21,7 +21,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
         {
             title: 'Рег. номер',
             field: 'num',
-            priority: 'three',
+            priority: 'five',
             align: 'center',
             width: '170px',
         },
@@ -47,8 +47,13 @@ const getApplicationsColumns = (): ColumnProps[] => {
                 )
             },
         },
-        { title: 'Структурное подразделение, адрес', priority: 'five', field: 'response_div', width: '360px' },
-        { title: 'Примечание', field: 'comment', priority: 'five' },
+        {
+            title: 'Структурное подразделение, адрес',
+            priority: 'four',
+            field: 'response_div',
+            showFull: false,
+        },
+        { title: 'Примечание', field: 'comment', priority: 'five', width: '150px' },
         {
             title: 'Файлы',
             align: 'center',

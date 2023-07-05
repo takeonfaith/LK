@@ -6,7 +6,7 @@ import { FileFormats } from '@shared/consts'
 
 export interface FileInputProps {
     title?: string
-    maxFileSizeInBytes: number
+    maxFileSizeInMegaBytes?: number
     files: File[]
     setFiles: (args: any) => void
     isActive: boolean

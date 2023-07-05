@@ -28,7 +28,7 @@ export function useElectronicAgreement({ isDone, submit, setData }: Props) {
 
     useEffect(() => {
         if (setData) {
-            pepApi.get().then((res) => setData(res.data[0]))
+            pepApi.get().then((res) => setData(res[0]))
         }
     }, [])
 

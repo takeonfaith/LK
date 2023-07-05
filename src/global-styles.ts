@@ -61,6 +61,7 @@ const GlobalStyles = createGlobalStyle`
 		--mobile-page-padding: 5px;
         --header-height: 55px;
         --mobile-bottom-menu-height: 60px;
+		--theme: #fff;
 	}
 
 	html[data-theme=dark] {

@@ -1,27 +1,30 @@
 import { menuModel } from '@entities/menu'
-import { userModel } from '@entities/user'
-import { useEffect } from 'react'
-import { lkNotificationModel } from '..'
 import { settingsModel } from '@entities/settings'
 import { NotificationsSettingsType } from '@entities/settings/lib/get-default-settings'
+import { userModel } from '@entities/user'
+import { useEffect, useMemo } from 'react'
+import { lkNotificationModel } from '..'
 
 const useLkNotifications = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { notifications } = lkNotificationModel.selectors.useLkNotifications()
+    const { notifications, loading, loaded } = lkNotificationModel.selectors.useLkNotifications()
     const { settings } = settingsModel.selectors.useSettings()
-    const notificationSettings = settings?.['settings-notifications'].property as NotificationsSettingsType
+    const notificationSettings = useMemo(
+        () => settings?.['settings-notifications'].property as NotificationsSettingsType,
+        [settings?.['settings-notifications']],
+    )
 
     useEffect(() => {
         if (!!user && !!notificationSettings) {
-            if (notificationSettings.all !== false && notifications.length === 0) {
+            if (notificationSettings.all !== false && !loaded && !loading) {
                 lkNotificationModel.events.initialize({
                     settings: notificationSettings,
                 })
             }
         }
-    }, [user, notificationSettings])
+    }, [user, notificationSettings, loading, loaded])
 
     useEffect(() => {
         menuModel.events.changeNotifications({ page: 'lk-notifications', notifications: notifications.length })

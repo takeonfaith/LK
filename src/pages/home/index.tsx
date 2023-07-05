@@ -1,4 +1,3 @@
-import { electronicInteractionModel } from '@entities/electronic-interaction'
 import { menuModel } from '@entities/menu'
 import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
@@ -45,7 +44,6 @@ const Home = () => {
     const load = () => {
         scheduleModel.effects.getScheduleFx({ user })
         paymentsModel.effects.getPaymentsFx()
-        electronicInteractionModel.effects.getElectronicInteractionFx()
     }
 
     return (

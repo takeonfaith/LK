@@ -30,19 +30,27 @@ const AllPages = () => {
                     validationCheck
                     loadingOnType
                 />
-                <Flex d="column" gap="24px">
-                    {searchValue.length === 0 &&
-                        Object.keys(groupedPages)
-                            .sort((a, b) => {
-                                return routesOrder[a as Groups] - routesOrder[b as Groups]
-                            })
-                            .map((group) => {
-                                const links = groupedPages[group as Groups]
-                                return (
-                                    <LinksList title={group} key={group} doNotShow="all" align="left" links={links} />
-                                )
-                            })}
-                </Flex>
+                {!foundPages && (
+                    <Flex d="column" gap="24px">
+                        {searchValue.length === 0 &&
+                            Object.keys(groupedPages)
+                                .sort((a, b) => {
+                                    return routesOrder[a as Groups] - routesOrder[b as Groups]
+                                })
+                                .map((group) => {
+                                    const links = groupedPages[group as Groups]
+                                    return (
+                                        <LinksList
+                                            title={group}
+                                            key={group}
+                                            doNotShow="all"
+                                            align="left"
+                                            links={links}
+                                        />
+                                    )
+                                })}
+                    </Flex>
+                )}
                 <FoundPages pages={foundPages} />
             </PageBlock>
         </CenterPage>

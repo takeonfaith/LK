@@ -6,15 +6,17 @@ import React, { useEffect } from 'react'
 import Alerts from './ui/alerts'
 
 const AlertsPage = () => {
-    const { data, error, loading } = alertModel.selectors.useData()
+    const { preparedData, error, loading } = alertModel.selectors.useData()
 
     useEffect(() => {
         lkNotificationModel.events.clearById({ id: 'alert', pageId: 'alerts' })
     }, [])
 
     return (
-        <Wrapper load={alertModel.effects.getFx} error={error} loading={loading} data={data}>
-            <PageBlock>{data ? <Alerts alerts={data} /> : <Error text="У вас нет оповещений" />}</PageBlock>
+        <Wrapper load={alertModel.effects.getFx} error={error} loading={loading} data={preparedData}>
+            <PageBlock>
+                {preparedData ? <Alerts alerts={preparedData} /> : <Error text="У вас нет оповещений" />}
+            </PageBlock>
         </Wrapper>
     )
 }

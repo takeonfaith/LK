@@ -21,8 +21,7 @@ const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payment
 
 export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getLeftsideBarConfig = (user: User | null, _adminLinks?: boolean): MenuType => {
+const getLeftsideBarConfig = (user: User | null): MenuType => {
     if (!user) return []
 
     const localSettings = JSON.parse(localStorage.getItem('new-settings') || '{}') as SettingsType
@@ -34,7 +33,6 @@ const getLeftsideBarConfig = (user: User | null, _adminLinks?: boolean): MenuTyp
         (item) => !settingsMenuData.includes(item),
     )
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const settingsDataToBeSet =
         user?.user_status === 'staff' && settingsMenuData.some((item) => !uniqueRequiredTeacherMenuItems.includes(item))
             ? [...settingsMenuData, ...uniqueRequiredTeacherMenuItems]
@@ -108,7 +106,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
                 : { ...privateRoutes(), ...hiddenRoutes() },
         visibleRoutes: user?.user_status === 'staff' ? filterTeachersPrivateRoutes(adminLinks) : privateRoutes(),
         leftsideBarRoutes: findRoutesByConfig(
-            getLeftsideBarConfig(user, false),
+            getLeftsideBarConfig(user),
             user?.user_status === 'staff' ? filterTeachersPrivateRoutes(adminLinks) : privateRoutes(),
         ),
         homeRoutes: findRoutesByConfig(

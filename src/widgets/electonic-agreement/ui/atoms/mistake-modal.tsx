@@ -9,10 +9,13 @@ const MistakeModalWrapper = styled.div`
     align-items: center;
     justify-content: center;
     row-gap: 10px;
-    text-align: center;
+
+    & > span {
+        line-height: 1.7rem;
+    }
 
     @media (min-width: 1001px) {
-        max-width: 300px;
+        max-width: 400px;
     }
 `
 
@@ -24,13 +27,16 @@ const MistakeModal = () => {
         <MistakeModalWrapper>
             {user?.user_status === 'stud' ? (
                 <>
-                    Для изменения данных Вам необходимо обратиться в отделение центра по работе со студентами
-                    (многофункциональный центр)
+                    <span>
+                        Для изменения данных Вам необходимо обратиться в отделение центра по работе со студентами
+                        (многофункциональный центр)
+                    </span>
                     <LinkButton
                         onClick={() => null}
                         href={'https://mospolytech.ru/obuchauschimsya/mnogofunkcionalnyy-centr/'}
                         text="Контакты центра по работе со студентами"
                         width="100%"
+                        align="center"
                     />
                 </>
             ) : (

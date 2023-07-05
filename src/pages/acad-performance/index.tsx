@@ -1,22 +1,23 @@
 import { AcadPerformance as IAcadPerformance } from '@api/model/acad-performance'
 import { acadPerformanceModel } from '@entities/acad-performance'
-import { PreparedData } from '@entities/acad-performance/lib/prepare'
+import { PreparedAcadPerformanceData } from '@entities/acad-performance/lib/prepare'
 import { userModel } from '@entities/user'
 import createSelectItems from '@features/acad-performance/lib/create-select-items'
 import search from '@features/acad-performance/lib/search'
 import { SubjectList } from '@features/acad-performance/ui/organisms'
 import Select, { SelectPage } from '@features/select'
-import Flex from '@shared/ui/flex'
 import PageBlock from '@shared/ui/page-block'
 import { Error, Wrapper } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
 import findSemestr from '@utils/find-semestr'
 import React, { useMemo, useState } from 'react'
 import { HiOutlineEmojiSad } from 'react-icons/hi'
+import GradeGraph from './ui/grade-graph'
 import PerformanceMessage from './ui/performance-message'
+import Flex from '@shared/ui/flex'
 
 const AcadPerformance = () => {
-    const { data, loading, error } = acadPerformanceModel.selectors.useData()
+    const { data, preparedData, loading, error } = acadPerformanceModel.selectors.useData()
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -26,9 +27,9 @@ const AcadPerformance = () => {
         id: findSemestr(new Date().toString(), user?.course ?? 1),
         title: findSemestr(new Date().toString(), user?.course ?? 1).toString() + ' семестр',
     })
-    const [foundSubjects, setFoundSubjects] = useState<PreparedData | null>(null)
-    const noDataError = data?.exam?.length === 0 && data?.test.length === 0 && !loading
-    const notFoundError = foundSubjects?.exam.length === 0 && foundSubjects?.test.length === 0 && !loading
+    const [foundSubjects, setFoundSubjects] = useState<PreparedAcadPerformanceData | null>(null)
+    const noDataError = data?.length === 0 && !loading
+    const notFoundError = foundSubjects && !Object.keys(foundSubjects ?? {}).find((el) => el?.length !== 0) && !loading
 
     const loadSemestrFilter = `${selected?.id !== -1 ? selected?.id : ''}`
 
@@ -43,27 +44,24 @@ const AcadPerformance = () => {
             <PageBlock
                 topRightCornerElement={
                     !!user?.id && (
-                        <Flex w="150px" gap="8px">
-                            <Select
-                                onClick={loadFunc}
-                                width="150px"
-                                items={items}
-                                selected={selected}
-                                setSelected={setSelected}
-                            />
-                            {/* <Button minWidth="38px" height="38px" icon={<FiPieChart />} /> */}
-                        </Flex>
+                        <Select
+                            onClick={loadFunc}
+                            width="150px"
+                            items={items}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
                     )
                 }
             >
-                {noDataError ? (
+                {noDataError || !data ? (
                     <Error text={'Данных за этот семестр нет, попробуйте другой!'} />
                 ) : (
                     <>
-                        {/* <GraphicInfo /> */}
                         {!foundSubjects && !loading && <PerformanceMessage data={data} />}
-                        <LocalSearch<IAcadPerformance[], PreparedData>
-                            whereToSearch={[...(data?.exam ?? []), ...(data?.test ?? [])]}
+                        {/* <PerformanceGraph data={preparedData} /> */}
+                        <LocalSearch<IAcadPerformance[], PreparedAcadPerformanceData>
+                            whereToSearch={data}
                             searchEngine={search}
                             setResult={setFoundSubjects}
                             placeholder={'Поиск предметов'}
@@ -72,13 +70,12 @@ const AcadPerformance = () => {
                         {notFoundError && (
                             <Error text={'По данному запросу ничего не найдено'} image={<HiOutlineEmojiSad />} />
                         )}
-                        <SubjectList header={'Экзамены'} items={foundSubjects?.exam ?? data?.exam} loading={loading} />
-                        <SubjectList
-                            header={'Зачеты'}
-                            items={foundSubjects?.test ?? data?.test}
-                            type={'test'}
-                            loading={loading}
-                        />
+                        {!notFoundError && (
+                            <Flex d="column" gap="40px">
+                                <GradeGraph data={data} loading={loading} />
+                                <SubjectList items={foundSubjects ?? preparedData} loading={loading} />
+                            </Flex>
+                        )}
                     </>
                 )}
             </PageBlock>
