@@ -1,0 +1,22 @@
+name: PR Linter and Typescript check
+
+on:
+    pull_request:
+        types: [opened, reopened]
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Run Eslint Checks
+              uses: 'skaele/LK/.github/actions/eslint.yml@add-ci-cd'
+
+    typescript:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Run TS Checks
+              uses: 'skaele/LK/.github/actions/typescript.yml@add-ci-cd'
