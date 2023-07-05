@@ -51,6 +51,7 @@ import {
     ArbitraryRequestPage,
 } from './other-routes/pages'
 import { HelpfulInformation } from './teacher-routes/pages'
+import { User } from '@shared/api/model'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -165,7 +166,7 @@ export const privateRoutes: () => IRoutes = () => ({
     },
 })
 
-export const hiddenRoutes: () => IRoutes = () => ({
+export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
     ...generalHiddenRoutes,
     'clarification-of-passport-data': {
         id: 'clarification-of-passport-data',
@@ -388,7 +389,17 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Предоставление права проживания в период каникул (для выпускников университета, проживающих в общежитии)',
         icon: BiIdCard,
         path: ACCOMMODATION_FOR_GRADUATES,
-        Component: AccommodationForGraduatesPage,
+        Component:
+            ['4', '5', '6'].includes(user?.course ?? '') ||
+            user?.status?.toLocaleLowerCase()?.includes('окончил') ||
+            (user?.degreeLevel?.toLocaleLowerCase() === 'магистратура' && user?.course === '2')
+                ? AccommodationForGraduatesPage
+                : () => (
+                      <PageIsNotReady
+                          isRedirectButtonVisible={false}
+                          errorText={'Сервис доступен только выпускникам университета, проживающих в общежитии'}
+                      />
+                  ),
         color: 'blue',
         isTemplate: false,
         isSubPage: true,

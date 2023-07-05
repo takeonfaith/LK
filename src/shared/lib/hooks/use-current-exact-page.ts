@@ -12,7 +12,7 @@ const useCurrentExactPage = (): CurrentPagePairType => {
     const { data } = userModel.selectors.useUser()
 
     const currentRoute: IRoutes = !data.user?.subdivisions
-        ? { ...privateRoutes(), ...hiddenRoutes() }
+        ? { ...privateRoutes(), ...hiddenRoutes(data.user) }
         : { ...teachersPrivateRoutes(), ...teachersHiddenRoutes() }
 
     const [{ exactCurrentPage, currentPage }, setCurrentPage] = useState<CurrentPagePairType>({

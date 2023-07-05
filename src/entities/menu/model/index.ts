@@ -103,7 +103,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
         allRoutes:
             user?.user_status === 'staff'
                 ? { ...filterTeachersPrivateRoutes(adminLinks), ...teachersHiddenRoutes() }
-                : { ...privateRoutes(), ...hiddenRoutes() },
+                : { ...privateRoutes(), ...hiddenRoutes(user) },
         visibleRoutes: user?.user_status === 'staff' ? filterTeachersPrivateRoutes(adminLinks) : privateRoutes(),
         leftsideBarRoutes: findRoutesByConfig(
             getLeftsideBarConfig(user),
@@ -114,7 +114,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
                 (JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[]),
             user?.user_status === 'staff'
                 ? { ...filterTeachersPrivateRoutes(adminLinks), ...teachersHiddenRoutes() }
-                : { ...privateRoutes(), ...hiddenRoutes() },
+                : { ...privateRoutes(), ...hiddenRoutes(user) },
         ),
     }))
     .on(changeNotifications, (oldData, { page, notifications }) => ({

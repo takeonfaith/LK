@@ -19,7 +19,7 @@ type GeneralAccountFields = {
 export type StudentAccount = {
     status?: string
     group?: string
-    course?: number
+    course?: string
     educationForm?: EducationFormT
     finance?: string
     degreeLevel?: string
