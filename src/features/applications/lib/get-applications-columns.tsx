@@ -8,7 +8,7 @@ import { Colors } from '@consts'
 
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
-        { title: 'Запрос', field: 'subject', priority: 'one', search: true, showFull: true, width: '320px' },
+        { title: 'Запрос', field: 'subject', priority: 'one', search: true, showFull: true },
         {
             title: 'Дата',
             field: 'created',
