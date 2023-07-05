@@ -386,7 +386,7 @@ export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
     },
     'accommodation-for-graduates': {
         id: 'accommodation-for-graduates',
-        title: 'Предоставление права проживания в период каникул (для выпускников университета, проживающих в общежитии)',
+        title: 'Предоставление права проживания в каникулярный период',
         icon: BiIdCard,
         path: ACCOMMODATION_FOR_GRADUATES,
         Component:

@@ -20,7 +20,7 @@ const statusesStudentForHostelOptions = [
 const getForm = (dataUserApplication: UserApplication): IInputArea => {
     const { surname, name, patronymic, group, email, phone } = dataUserApplication
     return {
-        title: 'Предоставление права проживания в период каникул (для выпускников университета, проживающих в общежитии)',
+        title: 'Предоставление права проживания в каникулярный период (для выпускников университета, проживающих в общежитиях)',
         data: [
             {
                 title: 'ФИО',
