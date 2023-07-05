@@ -38,14 +38,14 @@ jobs:
                   password: ${{ secrets.TEST_SERVER_PASSWORD }}
                   script: |
                       cd client-app/LK
-                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker compose -p web pull
-                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker compose -p web up -d
+                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo -S docker compose -p web pull
+                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo -S docker compose -p web up -d
             - name: Kill VPN connection
               if: always()
               run: |
                   sudo chmod 777 vpn.log
-                  sudo killall openvpn      
-          
+                  sudo killall openvpn
+
             - name: Upload VPN logs
               uses: actions/upload-artifact@v2
               if: always()
