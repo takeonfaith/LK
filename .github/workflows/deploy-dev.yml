@@ -34,8 +34,8 @@ jobs:
               uses: appleboy/ssh-action@master
               with:
                   host: ${{ secrets.TEST_HOST_IP }}
-                  username: ${{ secrets.SERVER_USERNAME }}
-                  key: ${{ secrets.SERVER_KEY }}
+                  username: ${{ secrets.TEST_SERVER_USERNAME }}
+                  password: ${{ secrets.TEST_SERVER_PASSWORD }}
                   script: |
                       ls
                       # sudo docker-compose -f docker-compose.yml -p prod pull
