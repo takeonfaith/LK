@@ -37,7 +37,7 @@ jobs:
                   username: ${{ secrets.TEST_SERVER_USERNAME }}
                   password: ${{ secrets.TEST_SERVER_PASSWORD }}
                   script: |
-                      cd client/app
+                      cd client-app/LK
                       echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker compose -p web pull
                       echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker compose -p web up -d
             - name: Kill VPN connection
