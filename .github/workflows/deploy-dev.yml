@@ -38,8 +38,8 @@ jobs:
                   password: ${{ secrets.TEST_SERVER_PASSWORD }}
                   script: |
                       cd client/app
-                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker-compose -p web pull
-                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker-compose -p web up -d
+                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker compose -p web pull
+                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker compose -p web up -d
             - name: Kill VPN connection
               if: always()
               run: |
