@@ -37,9 +37,9 @@ jobs:
                   username: ${{ secrets.TEST_SERVER_USERNAME }}
                   password: ${{ secrets.TEST_SERVER_PASSWORD }}
                   script: |
-                      ls
-                      # sudo docker-compose -f docker-compose.yml -p prod pull
-                      # sudo docker-compose -f docker-compose.prod-ci.yml -p prod up -d
+                      cd client/app
+                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker-compose -p web pull
+                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo docker-compose -p web up -d
             - name: Kill VPN connection
               if: always()
               run: |
