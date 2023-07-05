@@ -13,7 +13,7 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
     position: relative;
     display: flex;
     align-items: center;
-    font-weight: ${({ isCurrent }) => (isCurrent ? 600 : 500)};
+    font-weight: 600;
     width: 100%;
     justify-content: flex-start;
     padding: 10px 0;
@@ -77,6 +77,9 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
     }
 
     @media (max-width: 1000px) {
+        margin: 0;
+        font-weight: ${({ isCurrent }) => (isCurrent ? 800 : 600)};
+
         & > button {
             display: none;
         }

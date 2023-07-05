@@ -5,7 +5,7 @@
     "scope": "/",
     "start_url": ".",
     "name": "Личный Кабинет Московского Политеха",
-    "short_name": "Политех",
+    "short_name": "ЛК",
     "icons": [
         {
             "src": "icon.ico",

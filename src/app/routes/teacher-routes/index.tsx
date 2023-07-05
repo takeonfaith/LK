@@ -124,7 +124,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
         keywords: ['заявления', 'справки', 'заявление', 'справка'],
-        planeHeader: true,
     },
     ...generalRoutes,
     'hr-applications': {
