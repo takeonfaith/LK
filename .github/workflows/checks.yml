@@ -1,15 +1,10 @@
 name: Linter and Typescript check
 
-permissions:
-    contents: read
-    pages: write
-    id-token: write
-
 on:
-  push:
-      branches: [master, add-ci-cd]
-  pull_request:
-      types: [opened, reopened]
+    push:
+        branches: [master, add-ci-cd]
+    # pull_request:
+    #     types: [opened, reopened]
 
 jobs:
     lint:
