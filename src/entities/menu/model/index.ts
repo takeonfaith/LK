@@ -19,7 +19,8 @@ export interface Menu {
 
 const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students']
 
-export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
+export const DEFAULT_STUDENT_MOBILE_CONFIG = ['home', 'schedule', 'acad-performance', 'all', 'profile']
+export const DEFAULT_STAFF_MOBILE_CONFIG = ['home', 'schedule', 'hr-applications', 'all', 'profile']
 
 const getLeftsideBarConfig = (user: User | null): MenuType => {
     if (!user) return []
