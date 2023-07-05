@@ -310,6 +310,7 @@ export const generalRoutes: IRoutes = {
         color: 'pink',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
+        pageSize: 'big',
         keywords: ['экзамены', 'зачеты', 'сессия', 'пересдача'],
     },
     'all-students': {

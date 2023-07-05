@@ -14,18 +14,29 @@ import {
 } from 'react-icons/fi'
 import {
     HiOutlineAcademicCap,
+    HiOutlineBadgeCheck,
+    HiOutlineBeaker,
     HiOutlineBookOpen,
     HiOutlineBriefcase,
+    HiOutlineCalculator,
     HiOutlineCode,
+    HiOutlineCog,
+    HiOutlineCube,
     HiOutlineDatabase,
     HiOutlineDeviceMobile,
     HiOutlineEye,
+    HiOutlineFlag,
+    HiOutlineGlobe,
     HiOutlineLibrary,
     HiOutlineLightBulb,
+    HiOutlineLightningBolt,
     HiOutlineLockClosed,
     HiOutlineOfficeBuilding,
     HiOutlinePlay,
+    HiOutlinePlusCircle,
     HiOutlinePresentationChartBar,
+    HiOutlineRefresh,
+    HiOutlineShieldCheck,
     HiOutlineSparkles,
     HiOutlineSpeakerphone,
     HiOutlineTranslate,
@@ -89,7 +100,7 @@ export const getSubjectIcon = (name: string) => {
             icon: <HiOutlinePresentationChartBar />,
         },
         {
-            keys: ['компьют', 'алгоритм'],
+            keys: ['компьют', 'алгоритм', 'электрон'],
             icon: <FiCpu />,
         },
         {
@@ -143,6 +154,50 @@ export const getSubjectIcon = (name: string) => {
         {
             keys: ['научн'],
             icon: <HiOutlineAcademicCap />,
+        },
+        {
+            keys: ['вкр', 'итоговая', 'аттестация'],
+            icon: <HiOutlineFlag />,
+        },
+        {
+            keys: ['переработ'],
+            icon: <HiOutlineRefresh />,
+        },
+        {
+            keys: ['машин', 'инжен'],
+            icon: <HiOutlineCog />,
+        },
+        {
+            keys: ['проектир', 'расчет'],
+            icon: <HiOutlineCalculator />,
+        },
+        {
+            keys: ['производ'],
+            icon: <HiOutlinePlusCircle />,
+        },
+        {
+            keys: ['эколог'],
+            icon: <HiOutlineGlobe />,
+        },
+        {
+            keys: ['защит'],
+            icon: <HiOutlineShieldCheck />,
+        },
+        {
+            keys: ['хими'],
+            icon: <HiOutlineBeaker />,
+        },
+        {
+            keys: ['патент'],
+            icon: <HiOutlineBadgeCheck />,
+        },
+        {
+            keys: ['материал'],
+            icon: <HiOutlineCube />,
+        },
+        {
+            keys: ['физик'],
+            icon: <HiOutlineLightningBolt />,
         },
     ]
 

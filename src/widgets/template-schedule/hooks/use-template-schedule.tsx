@@ -39,12 +39,17 @@ const useTemplateSchedule = (data: ISchedule, teacherName: string | undefined, g
     const pages = schedule
         ? [
               {
-                  title: 'Текущая неделя',
+                  title: 'Сегодня',
                   condition: !!schedule?.['0'],
                   content: <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['0']} key={0} />,
               },
               {
-                  title: 'Весь семестр',
+                  title: 'Неделя',
+                  condition: !!schedule?.['0'],
+                  content: <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['0']} key={0} />,
+              },
+              {
+                  title: 'Семестр',
                   condition: !!schedule?.['1'],
                   content: <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['1']} key={1} />,
               },
