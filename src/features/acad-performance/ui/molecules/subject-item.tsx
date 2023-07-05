@@ -23,18 +23,29 @@ import {
 } from 'react-icons/fi'
 import {
     HiOutlineAcademicCap,
+    HiOutlineBadgeCheck,
+    HiOutlineBeaker,
     HiOutlineBookOpen,
     HiOutlineBriefcase,
+    HiOutlineCalculator,
     HiOutlineCode,
+    HiOutlineCog,
+    HiOutlineCube,
     HiOutlineDatabase,
     HiOutlineDeviceMobile,
     HiOutlineEye,
+    HiOutlineFlag,
+    HiOutlineGlobe,
     HiOutlineLibrary,
     HiOutlineLightBulb,
+    HiOutlineLightningBolt,
     HiOutlineLockClosed,
     HiOutlineOfficeBuilding,
     HiOutlinePlay,
+    HiOutlinePlusCircle,
     HiOutlinePresentationChartBar,
+    HiOutlineRefresh,
+    HiOutlineShieldCheck,
     HiOutlineSparkles,
     HiOutlineSpeakerphone,
     HiOutlineTranslate,
@@ -49,7 +60,7 @@ import { SubjectCheker } from '../atoms'
 interface Props {
     item: AcadPerformance
     number: number
-    type: 'exam' | 'test'
+    type: string
 }
 
 const Wrap = styled.div<{ isGraded: boolean }>`
@@ -68,6 +79,7 @@ const Name = styled.div`
     display: flex;
     margin-right: 10px;
     font-weight: 500;
+    hyphens: auto;
 
     @media (max-width: 1000px) {
         min-width: 0px;
@@ -87,12 +99,12 @@ const Name = styled.div`
 const Grade = styled.strong<{ color: string }>`
     color: ${({ color }) => color};
     font-weight: 600;
-    width: 100px;
+    width: 30px;
     display: flex;
     justify-content: flex-end;
 `
 
-const getSubjectIcon = (name: string) => {
+export const getSubjectIcon = (name: string) => {
     const normalizedName = normalizeString(name)
     const matchingKeys = [
         {
@@ -148,7 +160,7 @@ const getSubjectIcon = (name: string) => {
             icon: <HiOutlinePresentationChartBar />,
         },
         {
-            keys: ['компьют', 'алгоритм'],
+            keys: ['компьют', 'алгоритм', 'электрон'],
             icon: <FiCpu />,
         },
         {
@@ -203,6 +215,50 @@ const getSubjectIcon = (name: string) => {
             keys: ['научн'],
             icon: <HiOutlineAcademicCap />,
         },
+        {
+            keys: ['вкр', 'итоговая', 'аттестация'],
+            icon: <HiOutlineFlag />,
+        },
+        {
+            keys: ['переработ'],
+            icon: <HiOutlineRefresh />,
+        },
+        {
+            keys: ['машин', 'инжен'],
+            icon: <HiOutlineCog />,
+        },
+        {
+            keys: ['проектир', 'расчет'],
+            icon: <HiOutlineCalculator />,
+        },
+        {
+            keys: ['производ'],
+            icon: <HiOutlinePlusCircle />,
+        },
+        {
+            keys: ['эколог'],
+            icon: <HiOutlineGlobe />,
+        },
+        {
+            keys: ['защит'],
+            icon: <HiOutlineShieldCheck />,
+        },
+        {
+            keys: ['хими'],
+            icon: <HiOutlineBeaker />,
+        },
+        {
+            keys: ['патент'],
+            icon: <HiOutlineBadgeCheck />,
+        },
+        {
+            keys: ['материал'],
+            icon: <HiOutlineCube />,
+        },
+        {
+            keys: ['физик'],
+            icon: <HiOutlineLightningBolt />,
+        },
     ]
 
     const matched = matchingKeys.find((k) => k.keys.find((e) => normalizedName.includes(e)))
@@ -236,18 +292,8 @@ const SubjectItem = ({ item, number, type }: Props) => {
                     </Subtext>
                 </Flex>
             </Flex>
-            {/* <Bar>
-                {type === 'exam' ? (
-                    <>
-                        <ProgressBar value={WidthByGrade[item.grade]} coloring />
-                        <GradeScore grade={item.grade}>{GradeByScore[item.grade]}</GradeScore>
-                    </>
-                ) : (
-                    <SubjectCheker grade={item.grade} />
-                )}
-            </Bar> */}
             <Grade color={findProgressBarColor(grade)}>
-                {type === 'exam' ? GradeByScore[grade] : <SubjectCheker grade={grade} />}
+                {type === 'Зачет' ? <SubjectCheker grade={grade} /> : grade && GradeByScore[grade]}
             </Grade>
         </Wrap>
     )

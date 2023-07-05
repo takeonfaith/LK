@@ -14,7 +14,8 @@ const ModalContent = styled.div<{ isOpen: boolean; hasBack: boolean; hasTitle: b
         margin-left: ${({ hasBack }) => (hasBack ? '15px' : '0px')};
         padding-right: 50px;
         white-space: break-spaces;
-        max-width: 600px;
+        max-width: 400px;
+        hyphens: auto;
     }
 
     .close-button,

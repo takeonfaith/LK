@@ -1,30 +1,27 @@
 import { GradeByScore } from '@consts'
 import { AcadPerformance } from '@api/model/acad-performance'
 
-function findPercentage(data: AcadPerformance[], circleMode = 0): string {
-    let counter = 0
-    const totalLength = data.filter((el) => !!el.grade).length
+type Percentage = {
+    5: number
+    4: number
+    3: number
+    2: number
+}
 
-    if (circleMode) {
-        switch (circleMode) {
-            case 0:
-                data.forEach(({ grade }) => GradeByScore[grade] > 2 && counter++)
-                break
-            case 1:
-                data.forEach(({ grade }) => GradeByScore[grade] === 5 && counter++)
-                break
-            case 2:
-                data.forEach(({ grade }) => GradeByScore[grade] === 4 && counter++)
-                break
-            default:
-                break
-        }
-    } else {
-        data.forEach(({ grade }) => GradeByScore[grade] > 2 && counter++)
-    }
-    const perc = (+(counter / totalLength) * 100).toFixed(1)
+function findPercentage(data: AcadPerformance[]): Percentage {
+    const result: Percentage = { 5: 0, 4: 0, 3: 0, 2: 0 }
+    const totalLength = data.filter((el) => !!el.grade && el.exam_type !== 'Зачет').length
 
-    return isNaN(+perc) ? '0' : perc
+    data.forEach(({ grade, exam_type }) => {
+        if (exam_type !== 'Зачет' && grade !== undefined) result[GradeByScore[grade] as keyof Percentage]++
+    })
+
+    if (totalLength === 0) return result
+
+    return Object.keys(result).reduce((acc, key) => {
+        acc[+key as keyof Percentage] = result[+key as keyof Percentage] / totalLength
+        return acc
+    }, {} as Percentage)
 }
 
 export default findPercentage

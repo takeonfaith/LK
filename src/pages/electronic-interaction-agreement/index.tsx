@@ -6,35 +6,33 @@ import React from 'react'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
 
 const ElectronicInteractionAgreementPage = () => {
-    const { data, error } = electronicInteractionModel.selectors.useElectronicInteraction()
+    const { data, preparedData, error, loading } = electronicInteractionModel.selectors.useData()
     const handleSubmit = async () => {
-        electronicInteractionModel.effects.postElectronicInteractionFx()
+        electronicInteractionModel.effects.postFx()
     }
 
+    const load = () => electronicInteractionModel.effects.getFx()
+
     return (
-        <Wrapper
-            load={() => electronicInteractionModel.effects.getElectronicInteractionFx()}
-            loading={!data}
-            error={error}
-            data={data}
-        >
+        <Wrapper load={load} loading={loading} error={error} data={data} loadEveryVisit>
             <PageBlock>
-                {data && (
-                    <ElectornicAgreement data={data} submit={handleSubmit}>
+                {preparedData && (
+                    <ElectornicAgreement data={preparedData} submit={handleSubmit}>
                         <p className="info-text">
-                            Я, <b>{data.fio}</b>,
+                            Я, <b>{preparedData.fio}</b>,
                             <p>
                                 <b>Паспорт: </b>
-                                {data.passSer} {data.passNum}, выдан {localizeDate(data.passDate)} {data.passDiv}
+                                {preparedData.passSer} {preparedData.passNum}, выдан{' '}
+                                {localizeDate(preparedData.passDate)} {preparedData.passDiv}
                                 <br />
                                 <b>Дата рождения: </b>
-                                {data.bdate}
+                                {preparedData.bdate}
                                 <br />
                                 <b>Номер мобильного телефона: </b>
-                                {data.phone}
+                                {preparedData.phone}
                                 <br />
                                 <b>Адрес электронной почты: </b>
-                                {data.email}
+                                {preparedData.email}
                             </p>
                             <p>
                                 настоящим безоговорочно без каких-либо изъятий или ограничений на условиях присоединения

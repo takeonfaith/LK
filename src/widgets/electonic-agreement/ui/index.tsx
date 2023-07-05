@@ -88,7 +88,7 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
             {!data.status && !done && (
                 <Flex jc="center">
                     <Button
-                        onClick={() => open(<MistakeModal />)}
+                        onClick={() => open(<MistakeModal />, 'Ошибка в данных')}
                         text="Заметили ошибку в личных данных?"
                         background="transparent"
                         textColor={Colors.grey.main}

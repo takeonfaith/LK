@@ -52,7 +52,7 @@ const List = (props: Props) => {
 
     if (!visible) return null
 
-    const { listRef, leftArrow, rightArrow, setScrollLeft, pageOffset, amountOfPages, currentPage, setCurrentPage } =
+    const { listRef, leftArrow, rightArrow, handleScroll, setScrollLeft, pageOffset, amountOfPages, currentPage } =
         useList(gap)
 
     return (
@@ -104,6 +104,7 @@ const List = (props: Props) => {
                 innerPadding={innerPadding}
                 scroll={scroll}
                 wrapOnMobile={wrapOnMobile}
+                onScroll={handleScroll}
                 {...restProps}
             >
                 {children}
@@ -119,7 +120,6 @@ const List = (props: Props) => {
                             className="left-button"
                             textColor={Colors.grey.main}
                             onClick={() => {
-                                setCurrentPage((prev) => limitNumber(prev - 1, amountOfPages - 1))
                                 setScrollLeft((prev) =>
                                     limitNumber(prev - pageOffset - (gap ?? 0), listRef.current?.scrollWidth ?? 0),
                                 )
@@ -136,7 +136,6 @@ const List = (props: Props) => {
                             className="right-button"
                             textColor={Colors.grey.main}
                             onClick={() => {
-                                setCurrentPage((prev) => limitNumber(prev + 1, amountOfPages - 1))
                                 setScrollLeft((prev) =>
                                     limitNumber(prev + pageOffset + (gap ?? 0), listRef.current?.scrollWidth ?? 0),
                                 )

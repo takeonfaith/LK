@@ -2,7 +2,7 @@ import { alertModel } from '@entities/alert'
 import { userModel } from '@entities/user'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import Flex from '@shared/ui/flex'
-import PlaneSkeleton from '@shared/ui/plane-skeleton'
+import PlaneSkeletonList from '@shared/ui/plane-skeleton-list'
 import React, { useEffect } from 'react'
 import AlertItem from './alert-item'
 import { Title } from '@shared/ui/title'
@@ -12,14 +12,14 @@ import { Link } from 'react-router-dom'
 import { ALERTS_ROUTE } from '@app/routes/general-routes'
 
 const AlertsWidget = () => {
-    const { data, loading } = alertModel.selectors.useData()
+    const { preparedData, loading } = alertModel.selectors.useData()
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const currentNews = data?.[new Date().getFullYear()]?.slice(0, 3)
+    const currentNews = preparedData?.[new Date().getFullYear()]?.slice(0, 3)
     const { isMobile } = useCurrentDevice()
     useEffect(() => {
-        if (!data) alertModel.effects.getFx()
+        if (!preparedData) alertModel.effects.getFx()
     }, [])
 
     return (
@@ -39,9 +39,9 @@ const AlertsWidget = () => {
             <Flex gap="12px" d={isMobile ? 'column' : 'row'}>
                 {loading && (
                     <Flex d="column" gap="8px">
-                        <PlaneSkeleton />
-                        <PlaneSkeleton />
-                        <PlaneSkeleton />
+                        <PlaneSkeletonList />
+                        <PlaneSkeletonList />
+                        <PlaneSkeletonList />
                     </Flex>
                 )}
                 {currentNews?.map((news, index) => (

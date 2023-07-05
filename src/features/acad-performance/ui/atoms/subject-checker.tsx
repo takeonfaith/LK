@@ -6,7 +6,7 @@ import { HiOutlineCheck, HiOutlineX } from 'react-icons/hi'
 import styled from 'styled-components'
 
 interface Props {
-    grade: keyof IGrade
+    grade: keyof IGrade | undefined
 }
 
 const Container = styled.div<Props>`
@@ -31,7 +31,9 @@ const Container = styled.div<Props>`
 `
 
 const SubjectChecker = ({ grade }: Props) => {
-    return <Container grade={grade}>{GradeByScore[grade] > 2 ? <HiOutlineCheck /> : <HiOutlineX />}</Container>
+    return (
+        <Container grade={grade}>{grade && (GradeByScore[grade] > 2 ? <HiOutlineCheck /> : <HiOutlineX />)}</Container>
+    )
 }
 
 export default SubjectChecker
