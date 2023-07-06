@@ -371,7 +371,14 @@ export const letterColorMatch: LetterColorMatch = {
     Z: 'purple',
 }
 
-export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
+export const VALID_FORMATS = [
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'application/pdf',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.ms-excel',
+] as const
 export type FileFormats = (typeof VALID_FORMATS)[number][]
 
 export const MAX_FILE_SIZE = 10

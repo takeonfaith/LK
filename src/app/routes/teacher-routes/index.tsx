@@ -327,17 +327,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         group: 'OTHER',
         show: false,
     },
-    // 'generate-schedule': {
-    //     id: 'generate-schedule',
-    //     title: 'Генерация пересдач',
-    //     icon: <HiOutlineSparkles />,
-    //     path: GENERATE_SCHEDULE,
-    //     Component: GenerateSchedule,
-    //     color: 'pink',
-    //     isTemplate: false,
-    //     group: 'OTHER',
-    //     isAdmin: true,
-    // },
 })
 
 export const teachersHiddenRoutes: () => IRoutes = () => ({
