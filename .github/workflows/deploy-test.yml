@@ -10,8 +10,8 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@v3
-            - name: Run Eslunt Checks
-              uses: 'skaele/LK/.github/actions/eslint.yml@add-ci-cd'
+            - name: Run Eslint Checks
+              uses: './.github/actions/eslint'
 
     typescript:
         runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
             - name: Run TS Checks
-              uses: 'skaele/LK/.github/actions/typescript.yml@add-ci-cd'
+              uses: './.github/actions/typescript'
 
     build_and_publish:
         runs-on: ubuntu-latest

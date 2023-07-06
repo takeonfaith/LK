@@ -1,5 +1,5 @@
-name: Typescript
-description: Run Typescript check
+name: Lint
+description: Run ESLint check
 
 runs:
     using: 'composite'
@@ -11,5 +11,7 @@ runs:
               cache: 'npm'
         - name: Install dependencies
           run: npm ci
-        - name: Typescript check
-          run: npx tsc
+          shell: bash
+        - name: ESLint check
+          run: npx eslint "./src/**/*.{ts,tsx}" --config .eslintrc.js
+          shell: bash
