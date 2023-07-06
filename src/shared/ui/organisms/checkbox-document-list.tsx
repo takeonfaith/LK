@@ -19,14 +19,14 @@ const CheckboxDocumentList = ({ title, items, setChecked, setFiles }: Props) => 
             <Title size={5} align="left" bottomGap>
                 {title}
             </Title>
-            {items.map(({ value, title, files, maxFiles, checkboxCondition }, j) => {
+            {items.map(({ value, title, files, maxFiles, checkboxCondition, maxFileSizeInMegaBytes }, j) => {
                 return (
                     <CheckboxDocument
                         checkbox={{ checked: value, setChecked: () => setChecked(value, j), text: title }}
                         loadfile={{
                             files,
                             maxFiles,
-                            maxFileSizeInBytes: 0,
+                            maxFileSizeInMegaBytes: maxFileSizeInMegaBytes,
                             isActive: true,
                             setFiles: (files) => setFiles(files, j),
                         }}

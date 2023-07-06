@@ -134,7 +134,7 @@ const InputArea = ({
                         <FileInput
                             files={documents.files}
                             setFiles={(files: File[]) => handleLoadFiles(files)}
-                            maxFileSizeInBytes={0}
+                            maxFileSizeInMegaBytes={documents.maxFileSizeInMegaBytes}
                             maxFiles={documents.maxFiles}
                             formats={documents.allowedTypes as FileFormats}
                             isActive={

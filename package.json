@@ -10,10 +10,12 @@
         "start": "vite",
         "build": "vite build",
         "build-test": "vite build --mode development",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm cache clean -f && npm i"
     },
     "dependencies": {
         "axios": "^0.24.0",
+        "downloadjs": "^1.4.7",
         "effector": "^22.4.0",
         "effector-react": "^22.3.4",
         "react": "^17.0.2",
@@ -26,6 +28,7 @@
         "styled-components": "^5.3.3"
     },
     "devDependencies": {
+        "@types/downloadjs": "^1.4.3",
         "@types/react": "^17.0.38",
         "@types/react-collapse": "^5.0.1",
         "@types/react-dom": "^17.0.11",
@@ -48,5 +51,6 @@
         "vite-plugin-checker": "^0.6.0",
         "vite-plugin-svgr": "^3.2.0",
         "vite-tsconfig-paths": "^4.2.0"
-    }
+    },
+    "repository": "https://github.com/takeonfaith/LK.git"
 }

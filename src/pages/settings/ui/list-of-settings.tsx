@@ -60,7 +60,7 @@ const ListOfSettings = ({ settingsConfig, setSearchResult, setSearchValue }: Pro
                 validationCheck
                 loadingOnType
             />
-            {Object.keys(settingsConfig).map((name) => {
+            {Object.keys(settingsConfig ?? {})?.map((name) => {
                 if ((isMobile && name !== 'settings-customize-menu') || !isMobile) {
                     return (
                         <PageLink

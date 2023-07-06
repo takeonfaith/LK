@@ -5,6 +5,7 @@ export const SkeletonShapeWrapper = styled.div<{
     shape: Shape
     size: { width: string; height: string }
     margin: string
+    pulse: boolean
 }>`
     width: ${({ size }) => (size ? size.width : '100px')};
     min-width: ${({ size }) => (size ? size.width : '100px')};
@@ -12,7 +13,7 @@ export const SkeletonShapeWrapper = styled.div<{
     border-radius: ${({ shape }) => (shape === 'circle' ? '100%' : '10px')};
     background: var(--almostTransparent);
     margin: ${({ margin }) => margin};
-    animation: skeleton 1s infinite;
+    animation: ${({ pulse }) => pulse && 'skeleton 1s infinite'};
 
     @keyframes skeleton {
         0% {

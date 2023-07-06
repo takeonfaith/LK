@@ -1,9 +1,16 @@
 import { FileFormats, MAX_FILE_SIZE } from '@consts'
 import { popUpMessageModel } from '@entities/pop-up-message'
+import { getFileSize } from './get-file-size'
 import getFormatName from './get-format-name'
 import validateFile from './validate-file'
 
-const loadFiles = (loadedFiles: FileList, files: File[], maxFiles?: number, allowedFormats?: FileFormats) => {
+const loadFiles = (
+    loadedFiles: FileList,
+    files: File[],
+    maxFiles?: number,
+    allowedFormats?: FileFormats,
+    maxFileMB: number = MAX_FILE_SIZE,
+) => {
     if (!!maxFiles && files.length + loadedFiles.length > maxFiles) {
         popUpMessageModel.events.evokePopUpMessage({
             message: `Нельзя загрузить больше ${maxFiles} файлов`,
@@ -13,9 +20,9 @@ const loadFiles = (loadedFiles: FileList, files: File[], maxFiles?: number, allo
     }
     for (let i = 0; i < loadedFiles.length; i++) {
         if (validateFile(loadedFiles[i], allowedFormats)) {
-            if (loadedFiles[i].size > MAX_FILE_SIZE) {
+            if (loadedFiles[i].size > getFileSize(maxFileMB)) {
                 popUpMessageModel.events.evokePopUpMessage({
-                    message: 'Размер файла слишком большой. Максимальный размер файла: 10 MB',
+                    message: `Размер файла слишком большой. Максимальный размер файла: ${maxFileMB} MB`,
                     type: 'failure',
                     time: 10000,
                 })

@@ -50,8 +50,9 @@ import {
 import LkNotificationsPage from '@pages/lk-notifications'
 import { BsFileMedical } from 'react-icons/bs'
 import { FiBell, FiClipboard, FiFileText, FiHome, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
-import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
+import { HiOutlineClipboardCheck, HiOutlineSparkles, HiOutlineViewGrid } from 'react-icons/hi'
 import { DOCLIST_ROUTE } from '../teacher-routes'
+import GenerateSchedule from '@pages/generate-schedule'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -88,7 +89,7 @@ export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activity'
 export const ALERTS_ROUTE = '/alerts'
 export const LK_NOTIFICATIONS_ROUTE = '/lk-notifications'
-
+export const GENERATE_SCHEDULE = '/generate-schedule'
 export const USEFUL_INFO_ROUTE = '/helpful-information'
 
 // hidden
@@ -216,6 +217,7 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'FINANCES_DOCS',
+        planeHeader: true,
     },
     payments: {
         id: 'payments',
@@ -291,7 +293,7 @@ export const generalRoutes: IRoutes = {
         title: 'Сообщения',
         icon: <BiMessageRounded />,
         path: CHAT_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE, forceForward: true }),
+        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
         color: 'red',
         isTemplate: true,
         group: 'OTHER',
@@ -372,6 +374,17 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
+    },
+    'generate-schedule': {
+        id: 'generate-schedule',
+        title: 'Генерация пересдач',
+        icon: <HiOutlineSparkles />,
+        path: GENERATE_SCHEDULE,
+        Component: GenerateSchedule,
+        color: 'pink',
+        isTemplate: false,
+        group: 'OTHER',
+        isAdmin: true,
     },
 }
 

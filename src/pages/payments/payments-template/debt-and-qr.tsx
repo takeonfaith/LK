@@ -6,7 +6,6 @@ import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import localizeDate from '@shared/lib/localize-date'
 import { AnimatedCheck } from '@shared/ui/animated-check'
 import { Button, LinkButton } from '@shared/ui/atoms'
-import { Divider } from '@shared/ui/divider'
 import Flex from '@shared/ui/flex'
 import Notification from '@shared/ui/notification'
 import Subtext from '@shared/ui/subtext'
@@ -94,9 +93,9 @@ const DebtAndQr = (props: Props) => {
         : 'У вас нет долга'
     const dateText = currentPage === 0 ? `На ${localizeDate(new Date())}` : `До ${localizeDate(endDatePlan)}`
 
-    const handleQrTutorial = () => {
-        open(<></>, 'Как оплатить с помощью QR')
-    }
+    // const handleQrTutorial = () => {
+    //     open(<></>, 'Как оплатить с помощью QR')
+    // }
 
     const handleOpenContract = () => {
         open(<Contract contract={data} />, 'Реквизиты договора')
@@ -164,8 +163,8 @@ const DebtAndQr = (props: Props) => {
                             1
                         </Notification>
                     </ContractButtonWrapper>
-                    {!isMobile && <Divider direction="vertical" />}
-                    <Button
+                    {/* {!isMobile && <Divider direction="vertical" />} */}
+                    {/* <Button
                         onClick={handleQrTutorial}
                         text="Как оплатить с помощью QR?"
                         background="transparent"
@@ -173,7 +172,7 @@ const DebtAndQr = (props: Props) => {
                         width="fit-content"
                         padding="0"
                         align="left"
-                    />
+                    /> */}
                 </ButtonsList>
             </DebtAndQrStyled>
         </DebtAndQrWrapper>

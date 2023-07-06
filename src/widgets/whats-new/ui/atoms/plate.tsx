@@ -52,6 +52,7 @@ export interface WhatsNewPlate {
     color?: keyof IColors
     visible?: boolean
     goTo?: string
+    text?: string
 }
 
 const Plate = ({ icon, title, color, goTo, visible = true }: WhatsNewPlate) => {

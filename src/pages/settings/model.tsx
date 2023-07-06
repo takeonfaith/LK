@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { confirmModel } from '@entities/confirm'
 import { NameSettings } from '@entities/settings/model'
 import { userModel } from '@entities/user'
@@ -104,23 +105,23 @@ const getSettingsModel: TSettingsModel = ({
                     disabled: scheduledLightTheme,
                     action: theme.action,
                 },
-                {
-                    id: 'scheduledLightTheme',
-                    title: 'По расписанию',
-                    type: 'toggle',
-                    value: scheduledLightTheme,
-                    subfields: [
-                        {
-                            id: 'lightThemeRange',
-                            title: 'Время',
-                            type: 'interval',
-                            value: lightThemeRange.map((el) => +el),
-                            description: `с ${getTimeFromMinutes(+lightThemeRange[0])} до ${getTimeFromMinutes(
-                                +lightThemeRange[1],
-                            )} будет светлая тема`,
-                        },
-                    ],
-                },
+                // {
+                //     id: 'scheduledLightTheme',
+                //     title: 'По расписанию',
+                //     type: 'toggle',
+                //     value: scheduledLightTheme,
+                //     subfields: [
+                //         {
+                //             id: 'lightThemeRange',
+                //             title: 'Время',
+                //             type: 'interval',
+                //             value: lightThemeRange.map((el) => +el),
+                //             description: `с ${getTimeFromMinutes(+lightThemeRange[0])} до ${getTimeFromMinutes(
+                //                 +lightThemeRange[1],
+                //             )} будет светлая тема`,
+                //         },
+                //     ],
+                // },
             ],
         },
     ],
