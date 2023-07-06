@@ -387,4 +387,4 @@ export const SCREEN_IPAD_AIR = '821px'
  * @example
  * Component: () => isProduction ? PageIsNotReady : SettingsPage
  **/
-export const isProduction = import.meta.env.MODE !== 'development'
+export const isProduction = !window.location.port || window.location.port === '80'
