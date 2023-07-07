@@ -390,4 +390,4 @@ export const SCREEN_IPAD_AIR = '821px'
 export const isProduction = !window.location.port || window.location.port === '80'
 
 // eslint-disable-next-line no-console
-console.log('Is production', isProduction)
+console.log('Running on production', isProduction)
