@@ -9,8 +9,6 @@ const getForm = (
     currentIndex: number,
     startDate: string | null,
     setStartDate: React.Dispatch<React.SetStateAction<string | null>>,
-    medicalExaminationDate: string | null,
-    setMedicalExaminationDate: React.Dispatch<React.SetStateAction<string | null>>,
     isRetirement: string | null,
     setIsRetirement: React.Dispatch<React.SetStateAction<string | null>>,
 ): IInputArea => {
@@ -31,9 +29,8 @@ const getForm = (
                 title: 'ФИО',
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
-                mask: true,
-                editable: true,
-                required: true,
+                type: 'simple-text',
+                visible: true,
             },
             {
                 title: 'Должность',
@@ -43,24 +40,12 @@ const getForm = (
                 visible: true,
             },
             {
-                title: 'Структурное подразделение',
+                title: 'Подразделение',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
                 visible: true,
             },
-            // {
-            //     title: 'Дата прохождения диспансеризации',
-            //     type: 'date',
-            //     value: medicalExaminationDate,
-            //     fieldName: 'medical-examination-date',
-            //     editable: true,
-            //     mask: true,
-            //     required: true,
-            //     onChange: (value) => {
-            //         setMedicalExaminationDate(value)
-            //     },
-            // },
             {
                 title: 'Дата прохождения диспансеризации',
                 type: 'date',
@@ -103,7 +88,6 @@ const getForm = (
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].jobGuid.toString(),
                 fieldName: 'jobGuid',
-                visible: false,
             },
         ],
     }

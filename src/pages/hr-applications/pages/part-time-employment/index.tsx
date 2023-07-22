@@ -24,14 +24,12 @@ const PartTimeEmployment = () => {
     const [completed, setCompleted] = useState(false)
     const isDone = completed ?? false
     const history = useHistory()
-    const { id } = useParams<{ id: string }>()
-    const currentIndex = +id
 
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
-            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
+            setForm(getForm(dataUserApplication, dataWorkerApplication))
         }
-    }, [dataUserApplication, currentIndex, loading])
+    }, [dataUserApplication, loading])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>

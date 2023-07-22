@@ -10,6 +10,8 @@ import { specialFieldsNameT } from '@entities/applications/consts'
 import SimpleText from '@ui/molecules/simple-text'
 import HrCheckbox from '@shared/ui/atoms/hr-checkbox'
 import TextHeader from '@shared/ui/molecules/text-header'
+import AutocompleteInput from '@shared/ui/atoms/auto-complete-input'
+import TextWarning from '@shared/ui/molecules/text-warning'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -19,6 +21,11 @@ type Props = IInputAreaData & {
     indexJ?: number
     specialFieldsName?: specialFieldsNameT
     onChange?: (value: any) => void
+    onKeyPress?: (value: any) => void
+    onBlur?: (value: any) => void
+    onKeyDown?: (value: any) => void
+    onKeyUp?: (value: any) => void
+    onFocus?: (value: any) => void
 }
 
 const UniversalInput = (props: Props) => {
@@ -29,6 +36,7 @@ const UniversalInput = (props: Props) => {
         indexI,
         indexJ,
         type,
+        suggestions,
         items,
         title,
         documents,
@@ -47,6 +55,11 @@ const UniversalInput = (props: Props) => {
         diff,
         visible,
         onChange,
+        onKeyPress,
+        onBlur,
+        onKeyDown,
+        onKeyUp,
+        onFocus,
     } = props
 
     const isActive = editable ?? (changeInputArea && !documents)
@@ -101,6 +114,11 @@ const UniversalInput = (props: Props) => {
 
     const handleDates = (dates: string[]) => {
         onChange?.(dates)
+        onKeyPress?.(dates)
+        onBlur?.(dates)
+        onKeyDown?.(dates)
+        onKeyUp?.(dates)
+        onFocus?.(dates)
         setData((area) => {
             ;(area.data[indexI] as IInputAreaData).value = dates
 
@@ -124,6 +142,15 @@ const UniversalInput = (props: Props) => {
                 isActive={isActive}
                 checked={value as boolean}
                 setChecked={(value) => handleChangeValue(value, indexI, indexJ)}
+            />
+        ) : type === 'auto-complete-input' ? (
+            <AutocompleteInput
+                title={title}
+                suggestions={suggestions ?? []}
+                required={required}
+                value={value as string}
+                placeholder={placeholder ?? title}
+                setValue={(value) => handleChangeValue(value, indexI, indexJ)}
             />
         ) : type === 'textarea' ? (
             <TextArea
@@ -156,6 +183,8 @@ const UniversalInput = (props: Props) => {
             />
         ) : type === 'simple-text' ? (
             <SimpleText title={title} value={value as string} visible={visible} />
+        ) : type === 'text-warning' ? (
+            <TextWarning title={title} visible={visible} />
         ) : type === 'text-header' ? (
             <TextHeader title={title} visible={visible} />
         ) : type === 'radio' ? (

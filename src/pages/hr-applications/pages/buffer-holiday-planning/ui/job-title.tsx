@@ -24,7 +24,7 @@ const JobTitle: React.FC<Props> = ({ info, index, data }) => {
     const [opened, setOpened] = useState<boolean>(false)
     // console.log('info')
     // console.log(info)
-    // console.log('data')
+    //console.log(data)
     // console.log(data)
 
     return (
@@ -48,7 +48,7 @@ const JobTitle: React.FC<Props> = ({ info, index, data }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {subDivision}
+                Подразделение: {subDivision}
                 <br />
                 Ставка: {rate}
                 {/* Вид места работы: добавим */}
@@ -73,14 +73,22 @@ const JobTitle: React.FC<Props> = ({ info, index, data }) => {
                         />
                     )} */}
                     {data.map((workerInfo, index) => {
-                        if (workerInfo.employeeGuid == info.jobGuid)
+                        if (workerInfo.employeeGuid == info.jobGuid) {
+                            const filteredData = data[index].notTaken.filter((item) => {
+                                if (
+                                    item.vacation.status.orderStatus != 'false' &&
+                                    item.vacation.status.orderStatus != ''
+                                )
+                                    return item.vacation.status.orderStatus
+                            })
                             return (
                                 <StyledTable
                                     columns={getBufferHolidayPlanningColumns()}
-                                    data={data[index].notTaken}
+                                    data={filteredData}
                                     maxOnPage={10}
                                 />
                             )
+                        }
                     })}
                 </ActionBlock>
             )}

@@ -4,7 +4,7 @@ import Table from '@shared/ui/table'
 import React, { useState, useEffect } from 'react'
 import { HiChevronDown, HiChevronUp } from 'react-icons/hi'
 import styled from 'styled-components'
-import getMedicalExaminationHistoryColumns from '../lib/get-holiday-work-history-columns'
+import { getMedicalExaminationHistoryColumns } from '../lib/get-medical-examination-columns'
 import { bufferMedicalExaminationModel } from '../model'
 
 const History = () => {
@@ -23,7 +23,7 @@ const History = () => {
             height="fit-content"
         >
             <BlockHeader>
-                История заявлений на диспансеризацю:
+                История заявлений на диспансеризацию:
                 <Button
                     icon={openedHistory ? <HiChevronUp /> : <HiChevronDown />}
                     onClick={() => !historyIsEmpty && setOpenedHistory((prev) => !prev)}

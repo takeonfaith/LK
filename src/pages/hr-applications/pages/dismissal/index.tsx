@@ -12,7 +12,6 @@ import checkFormFields from '@utils/check-form-fields'
 import { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory, useParams } from 'react-router'
-import getAddress from './lib/get-address'
 import getForm from './lib/get-form'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
@@ -24,23 +23,36 @@ const Dismissal = () => {
         workerLoading: loading,
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
-
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [getTk, setGetTk] = useState<any | null>(null)
+    const [isRetirement, setIsRetirement] = useState<boolean>(false)
+    const [getTkAddress, setGetTkAddress] = useState<string | null>(null)
+    const [reason, setReason] = useState<string | null>('По собственному желанию')
+    const [lastDay, setLastDay] = useState<string | null>(null)
     const isDone = completed ?? false
     const history = useHistory()
     const { id } = useParams<{ id: string }>()
     const currentIndex = +id
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
-            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
+            setForm(
+                getForm(
+                    dataUserApplication,
+                    dataWorkerApplication,
+                    currentIndex,
+                    getTk,
+                    setGetTk,
+                    getTkAddress,
+                    setGetTkAddress,
+                    isRetirement,
+                    setIsRetirement,
+                    reason,
+                    setReason,
+                    lastDay,
+                    setLastDay,
+                ),
+            )
         }
-    }, [dataUserApplication, currentIndex, loading])
-
-    useEffect(() => {
-        if (!!form && !!dataUserApplication) {
-            setSpecialFieldsName(getAddress(form.data as IInputAreaData[]))
-        }
-    }, [form])
+    }, [dataUserApplication, currentIndex, loading, getTk, getTkAddress, isRetirement, reason, lastDay])
 
     return (
         <BaseApplicationWrapper isDone={isDone}>
@@ -53,12 +65,7 @@ const Dismissal = () => {
                         background="transparent"
                         textColor="var(--blue)"
                     />
-                    <InputArea
-                        {...form}
-                        collapsed={isDone}
-                        setData={setForm as LoadedState}
-                        specialFieldsName={specialFieldsName}
-                    />
+                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
 
                     <SubmitButton
                         text={'Отправить'}

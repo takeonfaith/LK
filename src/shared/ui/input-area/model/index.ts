@@ -28,6 +28,8 @@ type IInputAreaTypes =
     | 'simple-text'
     | 'hr-checkbox'
     | 'text-header'
+    | 'auto-complete-input'
+    | 'text-warning'
 
 export interface IInputAreaFiles {
     files: File[]
@@ -62,6 +64,7 @@ export interface IInputAreaData {
     value: string | SelectPage | boolean | SelectPage[] | null | RadioButton | string[] | IFormDropdownValue
     type?: IInputAreaTypes
     items?: SelectPage[] | CheckboxDocs[] | RadioButton[] | RadioChildrenForm[]
+    suggestions?: string[]
     width?: string
     required?: boolean
     mask?: boolean
@@ -76,6 +79,11 @@ export interface IInputAreaData {
     diff?: number
     visible?: boolean
     onChange?: (value: any) => void
+    onKeyPress?: (value: any) => void
+    onBlur?: (value: any) => void
+    onKeyDown?: (value: any) => void
+    onKeyUp?: (value: any) => void
+    onFocus?: (value: any) => void
 }
 
 export interface IFormDropdownValue {
@@ -89,8 +97,8 @@ export interface IInputArea {
     title: string
     hint?: React.ReactNode
     alert?: React.ReactNode
-    data: IInputAreaData[] | IComplexInputAreaData
-    default?: IInputAreaData[] | IComplexInputAreaData
+    data: (IInputAreaData | false)[] | IComplexInputAreaData
+    default?: (IInputAreaData | false)[] | IComplexInputAreaData
     confirmed?: boolean
     optional?: boolean
     documents?: IInputAreaFiles

@@ -46,7 +46,7 @@ const InputArea = ({
     } = useInputArea({
         documents,
         optionalCheckbox,
-        data,
+        data: (data as IInputAreaData[]).filter(Boolean),
         setData: setData as React.Dispatch<React.SetStateAction<IInputArea>>,
         optional,
         collapsed,

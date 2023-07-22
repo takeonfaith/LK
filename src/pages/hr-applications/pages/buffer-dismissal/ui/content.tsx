@@ -14,6 +14,7 @@ const Content = () => {
     if (!dataWorkerApplication) {
         return null
     }
+
     return (
         <Wrapper>
             {dataWorkerApplication.map((jobTitleInfo, index) => {

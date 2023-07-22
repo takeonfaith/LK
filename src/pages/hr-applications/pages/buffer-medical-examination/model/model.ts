@@ -15,6 +15,7 @@ const loadBufferMedicalExaminationFx = createEffect(async () => {
     const { data } = await $hrApi.get<BufferMedicalExamination>(
         `MedicalExamination.GetAllHistory?PersonalGuid=${parseJwt(getJwtToken() ?? '').IndividualGuid}`,
     )
+
     setAgeMed(data.age)
     setIsTutor(data.employeeMedicalExaminations.map(({ employeeGuid, tutor }) => ({ employeeGuid, tutor })))
     // const empGuidIsTutor = data.employeeMedicalExaminations.map(({ employeeGuid, tutor }) => ({ employeeGuid, tutor }));

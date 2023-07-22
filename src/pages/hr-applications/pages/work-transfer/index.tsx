@@ -3,6 +3,8 @@ import { applicationsModel } from '@entities/applications'
 import { specialFieldsNameT } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import SendHrFormWorkTransfer from '@pages/hr-applications/lib/send-hr-form-work-transfer'
+import { getDivisions } from '@shared/api/application-api'
+import { $hrApi } from '@shared/api/config'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea, IInputAreaData } from '@ui/input-area/model'
@@ -11,7 +13,7 @@ import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory, useParams } from 'react-router'
-import { bufferWorkTransferModel } from '../buffer-holiday-work-transfer/model'
+import { bufferWorkTransferModel } from '../buffer-work-transfer/model'
 import getForm from './lib/get-form'
 import getPostAfterTransfer from './lib/get-post-after-transfer'
 
@@ -24,6 +26,12 @@ const WorkTransfer = () => {
     } = applicationsModel.selectors.useApplications()
     const { loading: loading } = bufferWorkTransferModel.selectors.useBufferWorkTransfer()
     const [completed, setCompleted] = useState(false)
+    const [partTimeType, setPartTimeType] = useState<any | null>(null)
+    const [employment, setEmployment] = useState<any | null>(null)
+    const [newPost, setNewPost] = useState<string | null>(null)
+    const [newPlaceOfWork, setNewPlaceOfWork] = useState<string | null>(null)
+    const [newRate, setNewRate] = useState<any>(null)
+    const [transferDate, setTransferDate] = useState<string | null>(null)
     const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
     const isDone = completed ?? false
     const history = useHistory()
@@ -37,10 +45,37 @@ const WorkTransfer = () => {
 
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
-            setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
+            setForm(
+                getForm(
+                    dataUserApplication,
+                    dataWorkerApplication,
+                    currentIndex,
+                    employment,
+                    setEmployment,
+                    newPost,
+                    setNewPost,
+                    newPlaceOfWork,
+                    setNewPlaceOfWork,
+                    newRate,
+                    setNewRate,
+                    transferDate,
+                    setTransferDate,
+                    partTimeType,
+                    setPartTimeType,
+                ),
+            )
         }
-    }, [dataUserApplication, currentIndex, loading])
-
+    }, [
+        dataUserApplication,
+        currentIndex,
+        loading,
+        employment,
+        newPost,
+        newPlaceOfWork,
+        newRate,
+        transferDate,
+        partTimeType,
+    ])
     return (
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && !!setForm && (

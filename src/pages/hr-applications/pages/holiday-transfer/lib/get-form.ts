@@ -9,7 +9,7 @@ const getForm = (
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
-        title: 'Заявление о предоставлении отпуска',
+        title: 'Заявление о переносе отпуска',
         data: [
             {
                 title: 'ФИО',
@@ -26,22 +26,12 @@ const getForm = (
                 visible: true,
             },
             {
-                title: 'Структурное подразделение',
+                title: 'Подразделение',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
                 visible: true,
             },
-            // {
-            //     title: 'Период отпуска:',
-            //     type: 'date-interval',
-            //     value: ['', ''],
-            //     fieldName: 'holiday_dates',
-            //     editable: true,
-            //     mask: true,
-            //     required: true,
-            //     minValueInput: getDelayInDays(5),
-            // },
             {
                 title: 'Начало отпуска до переноса:',
                 type: 'date',
@@ -50,14 +40,13 @@ const getForm = (
                 editable: true,
                 mask: true,
                 required: true,
-                //minValueInput: getDelayInDays(5),
+                minValueInput: getDelayInDays(0),
             },
             {
                 title: '',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].jobGuid.toString(),
                 fieldName: 'jobGuid',
-                visible: false,
             },
             {
                 title: 'Окончание отпуска до переноса:',
@@ -67,7 +56,7 @@ const getForm = (
                 editable: true,
                 mask: true,
                 required: true,
-                //minValueInput: getDelayInDays(5),
+                minValueInput: getDelayInDays(0),
             },
             {
                 title: 'Начало отпуска после переноса:',
@@ -105,7 +94,6 @@ const getForm = (
                     {
                         id: 1,
                         title: 'Рабочая необходимость',
-                        data: 5,
                     },
                 ],
             },

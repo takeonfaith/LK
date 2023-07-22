@@ -11,7 +11,7 @@ import checkFormFields from '@utils/check-form-fields'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft } from 'react-icons/fi'
 import { useHistory, useParams } from 'react-router'
-import { bufferWorkTransferModel } from '../buffer-holiday-work-transfer/model'
+import { bufferWorkTransferModel } from '../buffer-work-transfer/model'
 import getForm from './lib/get-form'
 import getPostAfterTransfer from './lib/get-post-after-transfer'
 

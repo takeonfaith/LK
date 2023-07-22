@@ -16,6 +16,7 @@ interface Props {
 const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
     const { jobTitle, subDivision, rate, canBeRepeated, dismissalApplications } = jobTitleInfo
     const [opened, setOpened] = useState<boolean>(false)
+
     return (
         <Block
             orientation={'vertical'}
@@ -37,7 +38,7 @@ const JobTitle: React.FC<Props> = ({ jobTitleInfo, index }) => {
                 />
             </BlockHeader>
             <JobDescription>
-                Структурное подразделение: {subDivision}
+                Подразделение: {subDivision}
                 <br />
                 Ставка: {rate}
                 <br />

@@ -1,82 +1,36 @@
-import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
-
-import { Message } from '@ui/message'
-import { ColumnProps } from '@ui/table/types'
+import localizeDate from '@shared/lib/localize-date'
+import { Message } from '@shared/ui/message'
 import React from 'react'
-const getMedicalExaminationColumns = (): ColumnProps[] => {
-    return [
-        //{ title: 'Название', field: 'title', priority: 'one', search: true, },
+import { ColumnProps } from '@ui/table/types'
 
+export const getMedicalExaminationHistoryColumns = (): ColumnProps[] => {
+    return [
+        // {
+        //     title: 'Статус заявления',
+        //     field: 'vacation',
+        //     width: '200px',
+        //     render: (value) => {
+        //         return value.status.orderStatus
+        //     },
+        // },
         {
             title: 'Статус заявления',
-            field: 'status',
-            priority: 'one',
-            width: '200px',
-            catalogs: [
-                ...(Object.values(hrApplicationsConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
-            ],
-            render: (value) => (
-                value.orderStatus,
-                (
-                    <Message
-                        type={
-                            value === 'Согласовано'
-                                ? 'success'
-                                : value === 'Не согласовано' || value === 'Не создано'
-                                ? 'failure'
-                                : 'alert'
-                        }
-                        title={value}
-                        align="center"
-                        width="100%"
-                        icon={null}
-                        maxWidth="150px"
-                    />
-                )
-            ),
-        },
-        {
-            title: 'Дата заявления',
-            field: 'status',
-            type: 'date',
-            priority: 'one',
-            align: 'center',
-            render: (value) => value.creationDate,
-        },
-        {
-            title: 'Номер заявления',
-            field: 'status',
-            priority: 'one',
-            align: 'center',
-            render: (value) => value.orderNumber,
-        },
-        {
-            title: 'Дата диспансеризации',
             field: 'medicalExamination',
-            type: 'date',
-            priority: 'one',
-            align: 'center',
-            render: (value) => value.period.startDate + ' - ' + value.period.endDate,
-        },
-        {
-            title: 'Статус заявления',
-            field: 'dismissalOrder',
-            priority: 'one',
             width: '200px',
-            catalogs: [...(Object.values(hrOrderConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? [])],
-            render: (value, data) => {
-                if (!value.orderStatus) return null
-                const title = value.orderStatus + data.dismissalOrder.registrationStatus
+            render: (value) => {
                 return (
                     <Message
                         type={
-                            value.orderStatus === 'Подписан'
+                            value.status.orderStatus === 'Согласовано'
                                 ? 'success'
-                                : value.orderStatus === 'Не создан'
+                                : value.status.orderStatus === 'На регистрации'
+                                ? 'info'
+                                : value.status.orderStatus === 'Не утвержден' ||
+                                  value.status.orderStatus === 'Не создано'
                                 ? 'failure'
                                 : 'alert'
                         }
-                        title={title}
+                        title={value.status.orderStatus}
                         align="center"
                         width="100%"
                         icon={null}
@@ -85,34 +39,32 @@ const getMedicalExaminationColumns = (): ColumnProps[] => {
                 )
             },
         },
-        { title: 'Файл заявления', priority: 'one', field: 'file', type: 'file' },
+        {
+            title: 'Период',
+            field: 'medicalExamination',
+            align: 'center',
+            render: (value) => {
+                return `${localizeDate(value?.period?.startDate, 'numeric')} - ${localizeDate(
+                    value?.period?.endDate,
+                    'numeric',
+                )}`
+            },
+        },
         // {
-        //     title: 'Статус регистрации приказа',
+        //     title: 'Номер приказа',
         //     field: 'dismissalOrder',
         //     priority: 'one',
-
-        //     catalogs: [
-        //         ...(Object.values(hrOrderRegisterConstants).map((val, i) => ({ id: i.toString(), title: val })) ?? []),
-        //     ],
-        //     render: (value, elements) =>
-        //         elements.dismissalOrder.orderStatus == 'Подписан' && (
-        //             <Message
-        //                 type={
-        //                     value.registrationStatus === 'Зарегистрирован'
-        //                         ? 'success'
-        //                         : value.registrationStatus === 'Не зарегистрирован'
-        //                         ? 'failure'
-        //                         : 'alert'
-        //                 }
-        //                 title={value.registrationStatus}
-        //                 align="center"
-        //                 width="100%"
-        //                 icon={null}
-        //                 maxWidth="150px"
-        //             />
-        //         ),
+        //     align: 'center',
+        //     render: (value) => value.orderNumber,
         // },
+        // {
+        //     title: 'Дата приказа',
+        //     field: 'vacation',
+        //     type: 'date',
+        //     priority: 'one',
+        //     align: 'center',
+        //     render: (value) => localizeDate(value.status.orderDate, 'numeric'),
+        // },
+        // { title: 'Файл заявления', priority: 'one', field: 'file', type: 'file' },
     ]
 }
-
-export default getMedicalExaminationColumns

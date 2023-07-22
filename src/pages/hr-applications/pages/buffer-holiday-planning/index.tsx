@@ -4,6 +4,7 @@ import { FiInfo } from 'react-icons/fi'
 import styled from 'styled-components'
 import Content from './ui/content'
 import { bufferHolidayPlanningModel } from './model'
+import { Link } from 'react-router-dom'
 
 const HolidayPlanningBufferPage = () => {
     const { data, loading } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
@@ -28,9 +29,16 @@ const HolidayPlanningBufferPage = () => {
                         <Message type="info" title="Информация" icon={<FiInfo />}>
                             Данный сервис позволяет заказать необходимую справку, подать заявление, запрос. Статус
                             (информация о степени готовности) заказанных справок меняется согласно действиям оператора.
-                            В колонке «Структурное подразделение, адрес» указывается название подразделения и адрес,
-                            куда необходимо приехать за готовым документом.
+                            В колонке «Подразделение, адрес» указывается название подразделения и адрес, куда необходимо
+                            приехать за готовым документом.
                         </Message>
+                        <p>
+                            График отпусков вы можете посмотреть по{' '}
+                            <a target="_blank" href="#/vacation" rel="noreferrer">
+                                ссылке
+                            </a>
+                            .{' '}
+                        </p>
                     </HrHeader>
                     <Content />
                 </HrBlock>

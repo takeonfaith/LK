@@ -30,6 +30,7 @@ const MedicalExamination = () => {
     const history = useHistory()
     const { id } = useParams<{ id: string }>()
     const currentIndex = +id
+
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
             setForm(
@@ -39,8 +40,6 @@ const MedicalExamination = () => {
                     currentIndex,
                     startDate,
                     setStartDate,
-                    medicalExaminationDate,
-                    setMedicalExaminationDate,
                     isRetirement,
                     setIsRetirement,
                 ),
@@ -92,7 +91,3 @@ const MedicalExamination = () => {
 }
 
 export default MedicalExamination
-
-/*<TemplateFormPage model={teacherStatementModel} 
-            getForm={getForm(dataUserApplication)} 
-            goBack="Назад к цифровым сервисам" />*/

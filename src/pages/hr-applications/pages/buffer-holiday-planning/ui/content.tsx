@@ -19,9 +19,11 @@ const Content = () => {
         data: { dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
     const [historyIsEmpty, setHistoryIsEmpty] = useState<boolean>(true)
+
     if (!dataWorkerApplication) {
         return null
     }
+
     return (
         <Wrapper>
             {dataWorkerApplication.map((jobTitleInfo, index) => {

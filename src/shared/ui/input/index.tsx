@@ -1,9 +1,9 @@
 import { Colors } from '@consts'
-import React, { HTMLInputTypeAttribute } from 'react'
+import { Button } from '@ui/button'
+import { Title } from '@ui/title'
+import React, { ForwardedRef, HTMLInputTypeAttribute, forwardRef } from 'react'
 import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
-import { Title } from '@ui/title'
-import { Button } from '@ui/button'
 import { Loading, Message } from '../atoms'
 import useInput from './hooks/use-input'
 
@@ -113,34 +113,37 @@ interface Props {
     autocomplete?: boolean
     danger?: boolean
     alertMessage?: string
+    maxLength?: number
     minValue?: number | string
     maxValue?: number | string
     loading?: boolean
     customMask?: (value: string, prevValue?: string) => string
-    maxLength?: number | undefined
 }
-const Input = ({
-    value,
-    setValue,
-    leftIcon,
-    title,
-    required,
-    width,
-    minWidth,
-    customMask,
-    placeholder = 'Введите сюда',
-    type = 'text',
-    danger: initDanger,
-    alertMessage,
-    loading = false,
-    isActive = true,
-    inputAppearance = true,
-    mask = false,
-    autocomplete = true,
-    minValue = undefined,
-    maxValue = undefined,
-    maxLength = undefined,
-}: Props) => {
+
+const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInputElement>) {
+    const {
+        value,
+        setValue,
+        leftIcon,
+        title,
+        required,
+        width,
+        minWidth,
+        customMask,
+        placeholder = 'Введите сюда',
+        type = 'text',
+        danger: initDanger,
+        alertMessage,
+        loading = false,
+        isActive = true,
+        inputAppearance = true,
+        mask = false,
+        autocomplete = false,
+        minValue = undefined,
+        maxValue = undefined,
+        maxLength = undefined,
+    } = props
+
     const { inputType, buttonOnClick, danger, handleOnChange, phoneMaskKeyDown } = useInput(
         value,
         setValue,
@@ -167,6 +170,7 @@ const Input = ({
             <Message type="alert" visible={!!alertMessage} icon={<FiAlertTriangle />} title={alertMessage ?? ''} />
             {leftIcon && <span className="left-icon">{leftIcon}</span>}
             <input
+                id={placeholder}
                 min={minValue}
                 max={maxValue}
                 maxLength={maxLength}
@@ -179,6 +183,7 @@ const Input = ({
                 onChange={handleOnChange}
                 required={required}
                 readOnly={!isActive}
+                ref={ref}
             />
             {type !== 'password' ? (
                 !!value?.length &&
@@ -193,6 +198,6 @@ const Input = ({
             )}
         </InputWrapper>
     )
-}
+})
 
 export default Input
