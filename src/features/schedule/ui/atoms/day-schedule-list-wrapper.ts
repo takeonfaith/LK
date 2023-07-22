@@ -18,7 +18,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number; isT
     }
 
     @media (max-width: 1000px) {
-        max-height: ${({ height, isTeacherSchedule }) => `calc(${height}px - ${isTeacherSchedule ? 340 : 240}px)`};
+        max-height: ${({ height, isTeacherSchedule }) => `calc(${height}px - ${isTeacherSchedule ? 340 : 280}px)`};
     }
 `
 

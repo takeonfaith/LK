@@ -28,7 +28,7 @@ const InputArea = ({
     divider,
     collapsed,
     links,
-    specialFieldsName,
+    specialFieldsNameConfig,
 }: IInputArea & { setData: SetData; divider?: boolean }) => {
     //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
@@ -87,7 +87,7 @@ const InputArea = ({
                                       changeInputArea={changeInputArea && !optionalCheckbox?.value}
                                       setData={setData as LoadedState}
                                       indexI={index}
-                                      specialFieldsName={specialFieldsName}
+                                      specialFieldsNameConfig={specialFieldsNameConfig}
                                       {...attr}
                                   />
                               )
@@ -104,7 +104,7 @@ const InputArea = ({
                                                   setData={setData as LoadedState}
                                                   indexI={i}
                                                   indexJ={j}
-                                                  specialFieldsName={specialFieldsName}
+                                                  specialFieldsNameConfig={specialFieldsNameConfig}
                                                   {...attr}
                                               />
                                           )
@@ -135,7 +135,7 @@ const InputArea = ({
                         <FileInput
                             files={documents.files}
                             setFiles={(files: File[]) => handleLoadFiles(files)}
-                            maxFileSizeInBytes={0}
+                            maxFileSizeInMegaBytes={documents.maxFileSizeInMegaBytes}
                             maxFiles={documents.maxFiles}
                             formats={documents.allowedTypes as FileFormats}
                             isActive={

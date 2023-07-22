@@ -1,0 +1,84 @@
+name: Deploy Test Server
+
+on:
+    push:
+        branches: [master]
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Run Eslint Checks
+              uses: './.github/actions/eslint'
+
+    typescript:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Run TS Checks
+              uses: './.github/actions/typescript'
+
+    build-and-publish-image:
+        runs-on: ubuntu-latest
+        needs: [typescript, lint]
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Build and publish
+              run: |
+                  docker login --username skaele --password ${{ secrets.GH_PAT }} ghcr.io
+                  docker build . --tag ghcr.io/skaele/mospolytech-lk-ghcr:latest
+                  docker push ghcr.io/skaele/mospolytech-lk-ghcr:latest
+
+    update-server-containers:
+        runs-on: ubuntu-latest
+        needs: build-and-publish-image
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Install OpenVPN
+              run: |
+                  sudo apt-get update
+                  sudo apt-get --assume-yes --no-install-recommends install openvpn
+
+            - name: Setup VPN config
+              run: |
+                  echo "${{ secrets.CA_CRT }}" > ca.crt
+                  echo "${{ secrets.SECRET_USERNAME_PASSWORD }}" > secret.txt
+                  echo "${{ secrets.TLS_KEY }}" > tls.key          
+                  echo "${{ secrets.CONFIG }}" > config.ovpn
+
+            - name: Connect VPN
+              run: sudo openvpn --config "config.ovpn" --log "vpn.log" --daemon
+
+            - name: Wait for a VPN connection
+              timeout-minutes: 1
+              run: until ping -c1 ${{ secrets.TEST_HOST_IP }}; do sleep 2; done
+
+            - name: 'Run deploy on server'
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.TEST_HOST_IP }}
+                  username: ${{ secrets.TEST_SERVER_USERNAME }}
+                  password: ${{ secrets.TEST_SERVER_PASSWORD }}
+                  script: |
+                      cd client-app/LK
+                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo -S docker compose -p web pull
+                      echo ${{ secrets.TEST_SERVER_PASSWORD }} | sudo -S docker compose -p web up -d
+            - name: Kill VPN connection
+              if: always()
+              run: |
+                  sudo chmod 777 vpn.log
+                  sudo killall openvpn
+
+            - name: Upload VPN logs
+              uses: actions/upload-artifact@v2
+              if: always()
+              with:
+                  name: VPN logs
+                  path: vpn.log

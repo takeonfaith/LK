@@ -9,7 +9,6 @@ const PrinterMaintenancePage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             formId={ApplicationTeachersFormCodes.PRINTER_MAINTENANCE}
         />
     )

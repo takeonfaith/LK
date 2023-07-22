@@ -1,51 +1,38 @@
 import { electronicInteractionModel } from '@entities/electronic-interaction'
+import PageBlock from '@shared/ui/page-block'
 import { Wrapper } from '@ui/atoms'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
-import styled from 'styled-components'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
 
-const ElectronicInteractionAgreementPageWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-    color: var(--text);
-    gap: 10px;
-`
-
 const ElectronicInteractionAgreementPage = () => {
-    const { data, error } = electronicInteractionModel.selectors.useElectronicInteraction()
-
+    const { data, preparedData, error, loading } = electronicInteractionModel.selectors.useData()
     const handleSubmit = async () => {
-        electronicInteractionModel.effects.postElectronicInteractionFx()
+        electronicInteractionModel.effects.postFx()
     }
 
+    const load = () => electronicInteractionModel.effects.getFx()
+
     return (
-        <Wrapper
-            load={() => electronicInteractionModel.effects.getElectronicInteractionFx()}
-            loading={!data}
-            error={error}
-            data={data}
-        >
-            <ElectronicInteractionAgreementPageWrapper>
-                {data && (
-                    <ElectornicAgreement data={data} submit={handleSubmit}>
+        <Wrapper load={load} loading={loading} error={error} data={data} loadEveryVisit>
+            <PageBlock>
+                {preparedData && (
+                    <ElectornicAgreement data={preparedData} submit={handleSubmit}>
                         <p className="info-text">
-                            Я, <b>{data.fio}</b>,
+                            Я, <b>{preparedData.fio}</b>,
                             <p>
                                 <b>Паспорт: </b>
-                                {data.passSer} {data.passNum}, выдан {localizeDate(data.passDate)} {data.passDiv}
+                                {preparedData.passSer} {preparedData.passNum}, выдан{' '}
+                                {localizeDate(preparedData.passDate)} {preparedData.passDiv}
                                 <br />
                                 <b>Дата рождения: </b>
-                                {localizeDate(data.bdate)}
+                                {preparedData.bdate}
                                 <br />
                                 <b>Номер мобильного телефона: </b>
-                                {data.phone}
+                                {preparedData.phone}
                                 <br />
                                 <b>Адрес электронной почты: </b>
-                                {data.email}
+                                {preparedData.email}
                             </p>
                             <p>
                                 настоящим безоговорочно без каких-либо изъятий или ограничений на условиях присоединения
@@ -63,7 +50,7 @@ const ElectronicInteractionAgreementPage = () => {
                         </p>
                     </ElectornicAgreement>
                 )}
-            </ElectronicInteractionAgreementPageWrapper>
+            </PageBlock>
         </Wrapper>
     )
 }

@@ -1,3 +1,4 @@
+import { confirmModel } from '@entities/confirm'
 import { userModel } from '@entities/user'
 import { FieldProps } from '@pages/settings/model'
 import { changeAvatar } from '@shared/api/user-api'
@@ -36,12 +37,14 @@ const ChangeAvatar = (props: FieldProps) => {
         error: [errorDelete, setErrorDelete],
         isActive: isActiveDelete,
     } = useSubmitButton(!!user?.avatar)
+
     const {
         completed: [completed, setCompleted],
         loading: [loading, setLoading],
         error: [error, setError],
         isActive,
     } = useSubmitButton(files.length === 1)
+
     useEffect(() => {
         const reader = new FileReader()
 
@@ -83,6 +86,12 @@ const ChangeAvatar = (props: FieldProps) => {
         }
     }
 
+    const deleteConfirm = () =>
+        confirmModel.events.evokeConfirm({
+            message: 'Вы уверены, что хотите удалить фото профиля?',
+            onConfirm: handleDelete,
+        })
+
     return (
         <ChangeAvatarStyled>
             <UserHeader
@@ -96,14 +105,7 @@ const ChangeAvatar = (props: FieldProps) => {
             <Message type="failure" visible={!!error || !!errorDelete}>
                 {error || errorDelete}
             </Message>
-            <FileInput
-                maxFileSizeInBytes={0}
-                files={files}
-                maxFiles={1}
-                formats={['image/jpeg']}
-                setFiles={setFiles}
-                isActive
-            />
+            <FileInput files={files} maxFiles={1} formats={['image/jpeg']} setFiles={setFiles} isActive />
             <List direction="horizontal">
                 {user?.avatar && (
                     <SubmitButton
@@ -112,7 +114,7 @@ const ChangeAvatar = (props: FieldProps) => {
                         completed={completedDelete}
                         isActive={isActiveDelete}
                         text={'Удалить фото профиля'}
-                        action={handleDelete}
+                        action={deleteConfirm}
                         setCompleted={setCompletedDelete}
                     />
                 )}

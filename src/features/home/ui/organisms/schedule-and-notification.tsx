@@ -21,7 +21,7 @@ const ScheduleAndNotification = () => {
             {widgetSchedule && (
                 <DaySchedule
                     lessons={!schedule && currentDayString === 'sunday' ? [] : lessons}
-                    width={400}
+                    width={350}
                     height={156}
                     isCurrent
                     topInfo=""

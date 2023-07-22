@@ -20,6 +20,10 @@ interface Props {
     boxShadow?: string
     border?: boolean
     avatarModal?: boolean
+    icon?: ChildrenType
+    background?: string
+    borderRadius?: number
+    onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
 function Avatar({
@@ -33,15 +37,21 @@ function Avatar({
     checked,
     boxShadow,
     border,
+    icon,
     avatarModal,
+    onClick,
+    borderRadius,
+    background,
 }: Props) {
     const [isLoaded, setIsLoaded] = useState<boolean>(true)
     const shortName = getNameFirstLetters(name)[0] + (getNameFirstLetters(name)[1] ?? '')
     const { open } = useModal()
 
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (avatarModal) {
             open(<Avatar name={name} width="400px" height="400px" marginRight="0" avatar={avatar} />)
+        } else {
+            onClick?.(e)
         }
     }
 
@@ -51,16 +61,24 @@ function Avatar({
             width={width}
             height={height}
             marginRight={marginRight}
-            background={getLettersColors(name)}
+            background={background ?? getLettersColors(name)}
             boxShadow={boxShadow}
             border={border}
             onClick={handleClick}
+            borderRadius={borderRadius}
         >
             {avatar && isLoaded ? (
-                <Img round onLoadedData={() => setIsLoaded(true)} onError={() => setIsLoaded(false)} src={avatar} />
+                <Img
+                    loading="lazy"
+                    round
+                    onLoadedData={() => setIsLoaded(true)}
+                    onError={() => setIsLoaded(false)}
+                    src={avatar}
+                />
             ) : (
                 <div className="name">{shortName}</div>
             )}
+            {icon && <span className="icon">{icon}</span>}
             <Checkbox
                 invisibleOnFalse
                 checked={checked ?? false}

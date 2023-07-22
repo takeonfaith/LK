@@ -1,6 +1,6 @@
 import { SelectPage } from '@features/select'
 import { RadioButton } from '@ui/organisms/radio-button-list'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig, SpecialFieldsName } from '@entities/applications/consts'
 
 export interface IInputAreaCheckbox {
     fieldName: string
@@ -38,6 +38,7 @@ export interface IInputAreaFiles {
     fieldName: string
     maxFiles?: number
     allowedTypes?: string[]
+    maxFileSizeInMegaBytes?: number
 }
 
 export type CheckboxDocs = IInputAreaFiles & {
@@ -72,11 +73,12 @@ export interface IInputAreaData {
     placeholder?: string
     autocomplete?: boolean
     isSpecificRadio?: boolean
-    specialType?: specialFieldsNameT
+    specialType?: SpecialFieldsName
     minValueInput?: number | string
     maxValueInput?: number | string
     maxValueLength?: number | undefined
     diff?: number
+    isSpecificSelect?: boolean
     visible?: boolean
     onChange?: (value: any) => void
     onKeyPress?: (value: any) => void
@@ -106,5 +108,5 @@ export interface IInputArea {
     optionalCheckbox?: IInputAreaCheckbox
     collapsed?: boolean
     links?: IInputAreaLink[]
-    specialFieldsName?: specialFieldsNameT
+    specialFieldsNameConfig?: SpecialFieldsNameConfig
 }

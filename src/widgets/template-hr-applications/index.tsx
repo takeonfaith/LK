@@ -1,28 +1,16 @@
-import React from 'react'
 import { applicationsModel } from '@entities/applications'
 import createApplicationSearch from '@features/applications/lib/create-application-search'
 import { getTeachersHRSectionLinks } from '@features/applications/lib/get-teachers-section-links'
-import { FormBlock, Message, Title, Wrapper } from '@ui/atoms'
+import PageBlock from '@shared/ui/page-block'
+import { Message, Title, Wrapper } from '@ui/atoms'
 import { Error } from '@ui/error'
 import { LocalSearch } from '@ui/molecules'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { FiInfo } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 
-const ApplicationPageWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    color: var(--text);
-    justify-content: center;
-
-    @media (max-width: 1000px) {
-        align-items: flex-start;
-        overflow-y: auto;
-        height: 100%;
-    }
-`
 const CreateApplicationListWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -30,9 +18,7 @@ const CreateApplicationListWrapper = styled.div`
     width: 100%;
 
     .list {
-        padding: 5px 5px 5px 0px;
         margin-top: 10px;
-        overflow-y: auto;
         height: 100%;
 
         .links-wrapper {
@@ -90,6 +76,19 @@ const CreateApplicationListWrapper = styled.div`
         }
     }
 `
+
+const LinksList = styled.div`
+    padding: 12px;
+    box-shadow: var(--schedule-shadow);
+    border-radius: 8px;
+    margin: 10px 0;
+
+    .links {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+`
 export interface Section {
     title: string
     disabled?: boolean
@@ -117,62 +116,56 @@ const TeachersHrApplicationsPage = ({}: Props) => {
             error={error}
             data={listApplication}
         >
-            <ApplicationPageWrapper>
-                <FormBlock maxWidth="750px">
-                    <Title size={2} align="left">
-                        Кадровые заявления
+            <PageBlock>
+                <Message type="info" title="Информация" icon={<FiInfo />}>
+                    Данный сервис создан для упрощения оборота кадровых документов внутри Университета.
+                </Message>
+
+                <CreateApplicationListWrapper>
+                    <Title size={3} align="left" bottomGap>
+                        Создать заявление
                     </Title>
-                    <Message type="info" title="Информация" icon={<FiInfo />}>
-                        Данный сервис создан для упрощения оборота кадровых документов внутри Университета.
-                    </Message>
 
-                    <CreateApplicationListWrapper>
-                        <Title size={3} align="left" bottomGap>
-                            Создать заявление
-                        </Title>
-
-                        <LocalSearch
-                            whereToSearch={sections}
-                            searchEngine={createApplicationSearch}
-                            setResult={setFoundSections}
-                            placeholder="Поиск заявления"
-                            setExternalValue={setSearch}
-                        />
-                        <div className="list">
-                            <div className="links-wrapper">
-                                {(foundSections ?? sections).map((section) => {
-                                    return (
-                                        <div className="link-list" key={section.title}>
-                                            {!section.disabled && (
-                                                <div className="links">
-                                                    {section.links.map((link) =>
-                                                        link.isExternalLink ? (
-                                                            <a
-                                                                href={link.link}
-                                                                target={link.isOpenInNewWindow ? '_blank' : '_self'}
-                                                                rel="noreferrer"
-                                                            >
-                                                                {link.title}
-                                                            </a>
-                                                        ) : (
-                                                            <Link to={link.link} key={link.link} onClick={close}>
-                                                                {link.title}
-                                                            </Link>
-                                                        ),
-                                                    )}
-                                                </div>
+                    <LocalSearch
+                        whereToSearch={sections}
+                        searchEngine={createApplicationSearch}
+                        setResult={setFoundSections}
+                        placeholder="Поиск заявления"
+                        setExternalValue={setSearch}
+                    />
+                    <LinksList>
+                        {(foundSections ?? sections).map((section) => {
+                            return (
+                                <div className="link-list" key={section.title}>
+                                    {!section.disabled && (
+                                        <div className="links">
+                                            {section.links.map((link) =>
+                                                link.isExternalLink ? (
+                                                    <a
+                                                        key={link.title}
+                                                        href={link.link}
+                                                        target={link.isOpenInNewWindow ? '_blank' : '_self'}
+                                                        rel="noreferrer"
+                                                    >
+                                                        {link.title}
+                                                    </a>
+                                                ) : (
+                                                    <Link to={link.link} key={link.link} onClick={close}>
+                                                        {link.title}
+                                                    </Link>
+                                                ),
                                             )}
                                         </div>
-                                    )
-                                })}
-                                {!foundSections?.length && !!search.length && (
-                                    <Error text={`По запросу ${search} ничего не найдено`} />
-                                )}
-                            </div>
-                        </div>
-                    </CreateApplicationListWrapper>
-                </FormBlock>
-            </ApplicationPageWrapper>
+                                    )}
+                                </div>
+                            )
+                        })}
+                        {!foundSections?.length && !!search.length && (
+                            <Error text={`По запросу ${search} ничего не найдено`} />
+                        )}
+                    </LinksList>
+                </CreateApplicationListWrapper>
+            </PageBlock>
         </Wrapper>
     )
 }

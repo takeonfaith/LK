@@ -8,6 +8,7 @@ export enum ApplicationFormCodes {
     USG_CONTR_TERMINATION = 'usg_contr_termination', // Расторжение договора найма
     USG_RELOCATION_INNER = 'usg_relocation_inner', // Переселение внутри общежития
     USG_RELOCATION = 'usg_relocation', // Переселение в другое общежитие
+    ACCOMMODATION_FOR_GRADUATES = 'accommodation_for_graduates', // Предоставление права проживания в период каникул
     OBUCH = 'obuch',
     STATUS_SOBES = 'status_sobes',
     SPRVIZOV = 'sprvizov',

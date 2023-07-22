@@ -6,7 +6,6 @@ import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
 import LinkMoreButton from '@features/link-more-button'
 import BlockWrapper from '@ui/block/styles'
 import { Button } from '@ui/button'
-import Notification from '@ui/notification'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 import getShortStirng from '@utils/get-short-string'
 import { useMemo } from 'react'
@@ -14,12 +13,14 @@ import { FiPlus, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
 import Icon from '../atoms/icon'
 import { PageLinkProps } from './page-link'
+import { HiOutlineFolder } from 'react-icons/hi'
 
 export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical: boolean; hasNotifications: boolean }>`
     position: relative;
     cursor: pointer;
     text-decoration: none;
     border-radius: var(--brLight);
+    background: var(--form);
 
     .new {
         position: absolute;
@@ -48,16 +49,6 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
         transition: 0.2s;
     }
 
-    &:hover {
-        .more-button {
-            opacity: 1;
-            visibility: visible;
-        }
-        .notification-circle {
-            opacity: 0;
-        }
-    }
-
     .outside {
         width: 100%;
         height: 100%;
@@ -78,23 +69,35 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             transition: 0.2s;
             bottom: 25px;
             font-weight: bold;
-            color: #fff;
+            color: var(--text);
+            right: ${({ isVertical }) => !isVertical && '50px'};
         }
 
-        &:hover {
-            .icon {
-                box-shadow: 0 20px 110px 60px ${({ color }) => Colors[color as keyof IColors].main};
-                transform: ${({ isVertical }) => isVertical && 'scale(1.1) translateY(20px)'};
-            }
+        @media (min-width: 1001px) {
+            &:hover {
+                .more-button {
+                    opacity: 1;
+                    visibility: visible;
+                }
+                .notification-circle {
+                    opacity: 0;
+                }
 
-            b {
-                opacity: ${({ hasNotifications }) => hasNotifications && 0};
-                transform: ${({ isVertical }) => isVertical && 'scale(0.95) translateY(40%)'};
-            }
+                .icon {
+                    box-shadow: 0 20px 110px 60px ${({ color }) => Colors[color as keyof IColors].main};
+                    transform: ${({ isVertical }) => isVertical && 'scale(1.1) translateY(20px)'};
+                }
 
-            .notifications-title {
-                opacity: 1;
-                transform: translateY(0px);
+                b {
+                    opacity: ${({ hasNotifications, isVertical }) => isVertical && hasNotifications && 0};
+                    transform: ${({ isVertical }) => isVertical && 'scale(0.95) translateY(40%)'};
+                    color: ${({ isVertical }) => (isVertical ? '#fff' : 'var(--text)')};
+                }
+
+                .notifications-title {
+                    opacity: 1;
+                    transform: translateY(0px);
+                }
             }
         }
 
@@ -105,6 +108,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
             text-align: ${({ isVertical }) => (isVertical ? 'center' : 'left')};
             color: var(--text);
             transition: 0.2s;
+            font-weight: 600;
             height: 30px;
         }
     }
@@ -129,7 +133,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
     const { settings } = settingsModel.selectors.useSettings()
     const isAdded = !!(settings['settings-home-page'].property.pages as string[])?.find((el) => el === id)
 
-    const maxFirstWordLength = 13
+    const maxFirstWordLength = 11
 
     const getHyphenatedTitle = useMemo(
         () => (title: string, maxLength: number) => {
@@ -155,21 +159,12 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
             hasNotifications={!!notifications}
             background={background}
         >
-            <Notification
-                outline="4px solid var(--schedule)"
-                color="red"
-                top={isVertical ? '60px' : '75%'}
-                left={orientation !== 'vertical' ? '50px' : 'auto'}
-                right={isVertical ? '32px' : 'auto'}
-                visible={!!notifications}
-                className="notification-circle"
-            >
-                {notifications}
-            </Notification>
             <div className="outside">
-                <Icon color={color.length ? color : 'blue'}>{icon ?? <FiPlus />}</Icon>
+                <Icon badge={notifications?.toString()} color={color.length ? color : 'blue'}>
+                    {icon ?? <HiOutlineFolder />}
+                </Icon>
                 <b>{getShortStirng(getHyphenatedTitle(title, maxFirstWordLength), maxWordLength)}</b>
-                {notifications && (
+                {!!notifications && (
                     <span className="notifications-title">
                         {notifications}{' '}
                         {getCorrectWordForm(notifications, {

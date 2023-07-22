@@ -19,10 +19,10 @@ export interface Menu {
 
 const DEFAULT_HOME_CONFIG = ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students']
 
-export const DEFAULT_MOBILE_CONFIG = ['home', 'schedule', 'chat', 'all', 'profile']
+export const DEFAULT_STUDENT_MOBILE_CONFIG = ['home', 'schedule', 'acad-performance', 'all', 'profile']
+export const DEFAULT_STAFF_MOBILE_CONFIG = ['home', 'schedule', 'hr-applications', 'all', 'profile']
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getLeftsideBarConfig = (user: User | null, _adminLinks?: boolean): MenuType => {
+const getLeftsideBarConfig = (user: User | null): MenuType => {
     if (!user) return []
 
     const localSettings = JSON.parse(localStorage.getItem('new-settings') || '{}') as SettingsType
@@ -34,7 +34,6 @@ const getLeftsideBarConfig = (user: User | null, _adminLinks?: boolean): MenuTyp
         (item) => !settingsMenuData.includes(item),
     )
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const settingsDataToBeSet =
         user?.user_status === 'staff' && settingsMenuData.some((item) => !uniqueRequiredTeacherMenuItems.includes(item))
             ? [...settingsMenuData, ...uniqueRequiredTeacherMenuItems]
@@ -63,7 +62,9 @@ const changeNotifications = createEvent<{ page: string; notifications: ((prev: n
 
 const getNewNotifications = (page: string, notifications: number, routes: IRoutes | null) => {
     const newRoutes = { ...routes }
-    newRoutes[page].notifications = notifications
+    if (!!newRoutes[page]) newRoutes[page].notifications = notifications
+    else return null
+
     return newRoutes
 }
 
@@ -103,10 +104,10 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
         allRoutes:
             user?.user_status === 'staff'
                 ? { ...filterTeachersPrivateRoutes(adminLinks), ...teachersHiddenRoutes() }
-                : { ...privateRoutes(), ...hiddenRoutes() },
+                : { ...privateRoutes(), ...hiddenRoutes(user) },
         visibleRoutes: user?.user_status === 'staff' ? filterTeachersPrivateRoutes(adminLinks) : privateRoutes(),
         leftsideBarRoutes: findRoutesByConfig(
-            getLeftsideBarConfig(user, false),
+            getLeftsideBarConfig(user),
             user?.user_status === 'staff' ? filterTeachersPrivateRoutes(adminLinks) : privateRoutes(),
         ),
         homeRoutes: findRoutesByConfig(
@@ -114,17 +115,17 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
                 (JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[]),
             user?.user_status === 'staff'
                 ? { ...filterTeachersPrivateRoutes(adminLinks), ...teachersHiddenRoutes() }
-                : { ...privateRoutes(), ...hiddenRoutes() },
+                : { ...privateRoutes(), ...hiddenRoutes(user) },
         ),
     }))
     .on(changeNotifications, (oldData, { page, notifications }) => ({
         ...oldData,
-        allRoutes: getNewNotifications(
+        visibleRoutes: getNewNotifications(
             page,
             typeof notifications === 'number'
                 ? notifications
-                : notifications(oldData.allRoutes?.[page].notifications ?? 0),
-            oldData.allRoutes,
+                : notifications(oldData.visibleRoutes?.[page].notifications ?? 0),
+            oldData.visibleRoutes,
         ),
     }))
 

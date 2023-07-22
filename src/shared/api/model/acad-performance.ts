@@ -1,8 +1,10 @@
 export interface IGrade {
     Зачтено: number
+    'Не зачтено': number
     Отлично: number
     Хорошо: number
     Удовлетворительно: number
+    'Не явился': number
     Неудовлетворительно: number
 }
 
@@ -15,7 +17,7 @@ export interface AcadPerformance {
     exam_date: string
     exam_time: string
     exam_type: string
-    grade: keyof IGrade
+    grade: keyof IGrade | undefined
     id: string
     name: string
     teacher: string

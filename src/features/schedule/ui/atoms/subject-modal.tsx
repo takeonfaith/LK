@@ -1,12 +1,15 @@
 import { ISubject } from '@api/model'
-import { Divider, Title } from '@ui/atoms'
+import { SCHEDULE_ROUTE } from '@app/routes/general-routes'
+import { Button, Divider, Title } from '@ui/atoms'
 import calcTimeLeft from '@utils/calc-time-left'
 import React from 'react'
+import { useHistory } from 'react-router'
 import styled from 'styled-components'
-import { User } from 'widgets'
+import { useModal, User } from 'widgets'
 import { Rooms, SubjectPlaceBlock } from '..'
 import { NextSubject, Time } from '../atoms'
 import Groups from './groups'
+import ListOfGroups from './list-of-groups'
 
 const SubjectModalWrapper = styled.div`
     @media (min-width: 1001px) {
@@ -46,6 +49,17 @@ type Props = ISubject & { isCurrent: boolean; isNext?: boolean }
 
 const SubjectModal = (props: Props) => {
     const { timeInterval, name, place, teachers, dateInterval, link, rooms, groups, isNext = false } = props
+    const { open, close } = useModal()
+    const groupsArray = groups?.split(', ') ?? []
+    const history = useHistory()
+    const handleCheckGroups = () => {
+        if (groupsArray.length === 1) {
+            history.push(`${SCHEDULE_ROUTE}/${groupsArray[0]}`)
+            close()
+        } else {
+            open(<ListOfGroups groups={groupsArray} />)
+        }
+    }
 
     return (
         <SubjectModalWrapper>
@@ -73,6 +87,17 @@ const SubjectModal = (props: Props) => {
                             return <User type="staff" name={teacher} key={teacher} />
                         })}
                     </div>
+                </>
+            )}
+
+            {groups && (
+                <>
+                    <Divider margin="20px auto" />
+                    <Button
+                        width="100%"
+                        text={`Посмотреть расписание ${groupsArray.length === 1 ? groupsArray[0] : 'групп'}`}
+                        onClick={handleCheckGroups}
+                    />
                 </>
             )}
         </SubjectModalWrapper>

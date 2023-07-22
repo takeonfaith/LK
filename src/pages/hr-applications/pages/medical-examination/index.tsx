@@ -1,6 +1,6 @@
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import SendHrFormMedicalExamination from '@pages/hr-applications/lib/send-hr-form-medical-examination'
 import { ApplicationFormCodes } from '@shared/models/application-form-codes'
@@ -24,7 +24,7 @@ const MedicalExamination = () => {
         data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
     const { loading: loading } = bufferMedicalExaminationModel.selectors.useBufferMedicalExamination()
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
     const [completed, setCompleted] = useState(false)
     const isDone = completed ?? false
     const history = useHistory()
@@ -67,7 +67,7 @@ const MedicalExamination = () => {
                         {...form}
                         collapsed={isDone}
                         setData={setForm as any}
-                        specialFieldsName={specialFieldsName}
+                        specialFieldsNameConfig={specialFieldsName}
                     />
 
                     <SubmitButton

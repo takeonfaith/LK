@@ -1,5 +1,5 @@
 import { popUpMessageModel } from '@entities/pop-up-message'
-import { IComplexInputAreaData, IInputArea, IInputAreaData } from '@ui/input-area/model'
+import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData } from '@ui/input-area/model'
 import prepareFormData from '@utils/prepare-form-data'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import { applicationsModel } from '@entities/applications'
@@ -90,11 +90,21 @@ const createResultElementForm = (elementForm: IInputAreaData) => {
         )
     }
 
+    if (elementForm.type === 'checkbox-docs') {
+        return (elementForm.items as CheckboxDocs[])?.reduce((obj, element) => {
+            for (let fileIndex = 0; fileIndex < element.files.length; fileIndex++) {
+                obj[element?.fieldName + `[${fileIndex}]`] = element.files[fileIndex]
+            }
+            return obj
+        }, {} as { [key: string]: any })
+    }
+
     return obj
 }
 
 const getValueElementForm = (elementForm: IInputAreaData) => {
-    return typeof elementForm.value !== 'object' ? elementForm?.value : (elementForm.value as SelectPage).title
+    const isSimpleField = !elementForm.value || typeof elementForm.value !== 'object'
+    return isSimpleField ? elementForm?.value : (elementForm.value as SelectPage).title
 }
 
 export default globalAppSendForm

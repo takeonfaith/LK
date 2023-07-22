@@ -1,7 +1,9 @@
 import { paymentApi } from '@api'
 import { Agreement } from '@api/model'
+import Flex from '@shared/ui/flex'
+import Subtext from '@shared/ui/subtext'
 import Accordion from '@ui/accordion/accordion'
-import { LinkButton, SubmitButton } from '@ui/atoms'
+import { Divider, LinkButton, SubmitButton, Title } from '@ui/atoms'
 import { Message } from '@ui/message'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
@@ -13,24 +15,13 @@ interface Props {
     data: Agreement
 }
 
-const Wrapper = styled.div`
-    width: 100%;
+const SignBlock = styled.div`
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
-    row-gap: 10px;
 
-    .block {
-        width: 49%;
-        min-width: 320px;
-        display: flex;
+    @media (max-width: 768px) {
         flex-direction: column;
-        gap: 0.625rem;
-
-        .text {
-            text-align: center;
-        }
+        gap: 16px;
     }
 `
 
@@ -42,44 +33,33 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
         submit: () => paymentApi.agreementSubmit(id),
     })
 
-    const height = signedUser || done ? 200 : 100
+    const height = signedUser || done ? 140 : 100
 
-    // TODO: Этап рефакторинга №2
     return (
-        <Accordion height={height} title={name} confirmed={signedUser}>
-            {`${name} - ${localizeDate(date)}`}
-            <Wrapper>
-                <div className="block">
-                    {done && (
-                        <p className="text">
-                            Дата подписания: {localizeDate(data.signed_user_date || new Date())},{' '}
-                            {data.signed_user_time || `${new Date().getHours()}:${new Date().getMinutes()}`}
-                        </p>
-                    )}
+        <Accordion height={height} title={name} confirmed={signedUser || done}>
+            <SignBlock>
+                <Flex d="column" ai="flex-start" gap="4px">
+                    <Title size={5} align="left">
+                        {name}
+                    </Title>
+                    <Subtext>{localizeDate(date)}</Subtext>
+                </Flex>
+                <Flex gap="8px" w="100%" jc="flex-end">
                     <LinkButton
                         href={data.file}
                         onClick={() => null}
-                        text="Скачать документ"
-                        width="100%"
+                        width="40px"
                         icon={<FiDownload />}
                         // background="transparent"
                     />
-                    <Message
-                        type={'success'}
-                        title={'Успешно отправлено'}
-                        icon={<FiCheck />}
-                        align="center"
-                        visible={done}
-                    />
-                </div>
-                {!done && (
-                    <div className="block">
+                    {!done && (
                         <SubmitButton
                             text={!done ? 'Подписать' : 'Подписано'}
                             action={handleSubmit}
                             isLoading={loading}
                             completed={completed}
                             isDone={done}
+                            width="160px"
                             setCompleted={setCompleted}
                             isActive={!done && isActive}
                             popUpFailureMessage={
@@ -89,9 +69,24 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                             }
                             popUpSuccessMessage="Согласие успешно подписано"
                         />
-                    </div>
-                )}
-            </Wrapper>
+                    )}
+                    <Message
+                        type={'success'}
+                        title={'Подписано'}
+                        icon={<FiCheck />}
+                        align="center"
+                        width="130px"
+                        visible={done}
+                    />
+                </Flex>
+            </SignBlock>
+            {(done || signedUser) && <Divider width="100%" />}
+            {(done || signedUser) && (
+                <Subtext>
+                    Дата подписания: {localizeDate(data.signed_user_date || new Date())},{' '}
+                    {data.signed_user_time || `${new Date().getHours()}:${new Date().getMinutes()}`}
+                </Subtext>
+            )}
         </Accordion>
     )
 }

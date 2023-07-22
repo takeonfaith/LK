@@ -1,6 +1,6 @@
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { SpecialFieldsName, SpecialFieldsNameConfig } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import SendHrFormHolidayWork from '@pages/hr-applications/lib/send-hr-form-holiday-work'
 import { ApplicationFormCodes } from '@shared/models/application-form-codes'
@@ -22,13 +22,15 @@ const HolidayWork = () => {
     const {
         data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
-    const { loading: loading } = bufferHolidayWorkModel.selectors.useBufferHolidayWork()
+    const { loading } = bufferHolidayWorkModel.selectors.useBufferHolidayWork()
+
     const [completed, setCompleted] = useState(false)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
     const isDone = completed ?? false
     const history = useHistory()
     const { id } = useParams<{ id: string }>()
     const currentIndex = +id
+
     useEffect(() => {
         if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
             setForm(getForm(dataUserApplication, dataWorkerApplication, currentIndex))
@@ -55,7 +57,7 @@ const HolidayWork = () => {
                         {...form}
                         collapsed={isDone}
                         setData={setForm as LoadedState}
-                        specialFieldsName={specialFieldsName}
+                        specialFieldsNameConfig={specialFieldsName}
                     />
 
                     <SubmitButton

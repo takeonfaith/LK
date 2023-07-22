@@ -8,8 +8,8 @@ export enum NameSettings {
     'settings-home-page' = 'settings-home-page',
     'settings-personal' = 'settings-personal',
     'settings-appearance' = 'settings-appearance',
-    // 'settings-security' = 'settings-security',
     'settings-customize-menu' = 'settings-customize-menu',
+    'settings-notifications' = 'settings-notifications',
 }
 
 export type Param = {
@@ -47,12 +47,23 @@ const useSettings = () => {
     }
 }
 
+const actualizeSettings = (settings: Param | undefined, defaultSettings: Param) => {
+    if (!settings) return defaultSettings
+    const result = { ...settings }
+
+    for (const key in defaultSettings) {
+        if (result[key as NameSettings] === undefined) {
+            result[key as NameSettings] = defaultSettings[key as NameSettings]
+        }
+    }
+
+    return result
+}
+
 const getLocalSettingsFx = createEffect((userId: string): Param => {
     currentUser = userId
-    // TODO: change logic so that it supports an update of settings config.
-    // Now doesn't update local storage if u add something to object of default settings
     const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser] as Param
-    return localSettings ?? getDefaultSettings(userId)[userId]
+    return actualizeSettings(localSettings, getDefaultSettings(userId)[userId])
 })
 
 const updateSetting = createEvent<{

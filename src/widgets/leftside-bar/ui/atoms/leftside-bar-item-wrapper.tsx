@@ -13,11 +13,11 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
     position: relative;
     display: flex;
     align-items: center;
-    font-weight: ${({ isCurrent }) => (isCurrent ? 800 : 600)};
+    font-weight: 600;
     width: 100%;
     justify-content: flex-start;
     padding: 10px 0;
-    margin: 5px 0;
+    margin: 3px 0;
     cursor: pointer;
     position: relative;
     user-select: none;
@@ -46,7 +46,7 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
         opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
         width: 22px;
         height: 22px;
-        margin-right: 7px;
+        margin-right: 12px;
     }
 
     &:focus {
@@ -77,6 +77,9 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
     }
 
     @media (max-width: 1000px) {
+        margin: 0;
+        font-weight: ${({ isCurrent }) => (isCurrent ? 800 : 600)};
+
         & > button {
             display: none;
         }

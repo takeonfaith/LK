@@ -1,18 +1,18 @@
 import { Payments } from '@api/model'
 import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { Colors, IColors } from '@consts'
+import { IColors } from '@consts'
 import { paymentsModel } from '@entities/payments'
-import QrCode from '@features/payments/ui/atoms/qr-code'
+import PaymentButton from '@features/payment-button'
+import Debt from '@features/payments/debt'
+import Subtext from '@shared/ui/subtext'
 import { Button } from '@ui/button'
 import { Error } from '@ui/error'
 import { Message } from '@ui/message'
 import { SkeletonShape } from '@ui/skeleton-shape'
-import { Title } from '@ui/title'
 import React from 'react'
-import { FiCheck, FiExternalLink } from 'react-icons/fi'
+import { FiCheck, FiInfo } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { SliderPage, useModal } from 'widgets'
 
 const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     max-width: 400px;
@@ -37,19 +37,6 @@ const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
         position: relative;
 
         .top-info {
-            h3 {
-                color: ${({ background }) => (background ? Colors[background].main : '')};
-            }
-
-            .section-name {
-                font-size: 0.8em;
-                opacity: 0.6;
-            }
-
-            p {
-                font-size: 0.9em;
-            }
-
             a {
                 position: absolute;
                 top: 6px;
@@ -117,40 +104,20 @@ const TopMessage = ({
     balance: number
     section: 'Обучение' | 'Общежитие'
 }) => {
-    const { open } = useModal()
     if (!data.length) return null
 
-    const info = data[0]
+    const { qr_current, qr_total } = data[0]
 
     return (
         <div className="payment-info">
             <div className="top-info">
-                <span className="section-name">{section}</span>
-                <Title size={3} align="left" bottomGap="4px">
-                    {balance} руб.
-                </Title>
+                <Subtext>{section}</Subtext>
+                <Debt size="middle" debt={balance} />
                 <Link to={PAYMENTS_ROUTE}>
-                    <Button icon={<FiExternalLink />} background="transparent" />
+                    <Button icon={<FiInfo />} background="transparent" />
                 </Link>
             </div>
-            {balance > 0 && (
-                <Button
-                    text="Оплатить"
-                    onClick={() =>
-                        open(
-                            <SliderPage
-                                pages={[
-                                    { title: 'Текущая залолженность', content: <QrCode qrCode={info.qr_current} /> },
-                                    { title: 'Общая залолженность', content: <QrCode qrCode={info.qr_total} /> },
-                                ]}
-                            />,
-                        )
-                    }
-                    width="100%"
-                    textColor="#fff"
-                    background={Colors.green.main}
-                />
-            )}
+            {balance > 0 && <PaymentButton qr_current={qr_current} qr_total={qr_total} />}
             {balance <= 0 && (
                 <Message type="success" title={'Оплачено'} width="100%" align="center" icon={<FiCheck />} />
             )}

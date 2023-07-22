@@ -1,6 +1,5 @@
-import { SelectItems } from '@features/select/ui/atoms'
 import { Colors } from '@shared/consts'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Title } from '../title'
 

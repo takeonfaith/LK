@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 
 type Props = {
     defaultValue?: string
-    onDebounce: (value: string) => void
+    onDebounce: (value: string) => Promise<void> | void
     onClear?: (value: string) => void
     deps?: string[]
     delay?: number
+    triggerDelay?: number
+    triggerOn?: (value: string) => boolean
 }
 
 const DEFAULT_DELAY = 300
@@ -14,31 +16,42 @@ const useDebounce = ({
     defaultValue,
     onDebounce,
     onClear,
+    triggerOn,
+    triggerDelay,
     deps = [],
     delay = DEFAULT_DELAY,
-}: Props): [string | null, React.Dispatch<React.SetStateAction<string | null>>, boolean] => {
-    const [value, setValue] = useState<string | null>(defaultValue ?? null)
+}: Props): [string, React.Dispatch<React.SetStateAction<string>>, boolean] => {
+    const [value, setValue] = useState<string>(defaultValue ?? '')
+    const [prevValue, setPrevValue] = useState('')
     const [loading, setLoading] = useState<boolean>(false)
 
     useEffect(() => {
         if (value !== null) {
             if (value.length) {
                 setLoading(true)
-                const delayedSearch = setTimeout(() => {
-                    onDebounce(value)
+
+                const delayedSearch = setTimeout(async () => {
+                    await onDebounce(value)
+                    setPrevValue(value)
                     setLoading(false)
                 }, delay)
 
                 return () => clearTimeout(delayedSearch)
-            } else onClear?.(value)
+            } else if (prevValue.length !== 0) {
+                onClear?.(value)
+                setValue('')
+                setLoading(false)
+            }
         }
     }, [value])
 
     useEffect(() => {
-        if (deps.length) {
-            const delayedSearch = setTimeout(() => {
-                onDebounce(value ?? '')
-            }, delay)
+        if (deps.length && (triggerOn?.(value) ?? true)) {
+            setLoading(true)
+            const delayedSearch = setTimeout(async () => {
+                await onDebounce(value)
+                setLoading(false)
+            }, triggerDelay ?? delay)
 
             return () => clearTimeout(delayedSearch)
         }

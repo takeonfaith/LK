@@ -14,6 +14,14 @@ const Line = styled.div<{ direction: Direction; fontSize?: string }>`
     margin-top: 10px;
     font-size: ${({ fontSize }) => fontSize};
     color: var(--text);
+
+    span {
+        width: ${({ direction }) => (direction === 'vertical' ? '100%' : 'fit-content')};
+    }
+
+    strong {
+        font-weight: 600;
+    }
 `
 
 interface Props {

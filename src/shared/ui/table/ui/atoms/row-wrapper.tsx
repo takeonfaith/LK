@@ -6,22 +6,26 @@ const RowWrapper = styled.div<{ even?: boolean }>`
     align-items: center;
     width: 100%;
     font-size: 0.9em;
-    background: ${({ even }) => (!even ? 'transparent' : `${Colors.blue.transparent3}`)};
+    cursor: pointer;
+    background: ${({ even }) => (!even ? 'var(--theme)' : `${Colors.blue.transparent3}`)};
 
-    @media (max-width: 1200px) {
-        .five {
+    &:hover {
+        filter: brightness(0.98);
+    }
+
+    .five {
+        display: none;
+    }
+
+    @media (max-width: 650px) {
+        font-size: 0.9em;
+
+        .four {
             display: none;
         }
     }
 
-    @media (max-width: 1000px) {
-        .four {
-            display: flex;
-        }
-    }
-
-    @media (max-width: 700px) {
-        font-size: 0.8em;
+    @media (max-width: 550px) {
         .three {
             display: none;
         }

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Title } from '../title'
 import Sad from '../../images/sad-emoji.gif'
+import Subtext from '../subtext'
 import { ErrorContainer } from './styles'
 
 export type ErrorProps = {
@@ -16,9 +16,9 @@ export function Error({ text, image, size, children }: ErrorProps) {
             <div className="image">
                 {typeof image === 'string' || !image ? <img src={image || Sad} alt="груфтим(" /> : image}
             </div>
-            <Title size={3} bottomGap="20px">
+            <Subtext fontSize="1rem" align="center" maxWidth="500px" width="auto">
                 {text}
-            </Title>
+            </Subtext>
             {children && <div className="error-content">{children}</div>}
         </ErrorContainer>
     )

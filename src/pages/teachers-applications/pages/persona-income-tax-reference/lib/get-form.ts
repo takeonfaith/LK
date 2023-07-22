@@ -1,9 +1,10 @@
 import { IInputArea } from '@ui/input-area/model'
 import getBasicFieldsApplicationTeacher from '@pages/teachers-applications/lib/get-basic-fields-application-teacher'
 import { UserApplication } from '@api/model'
-import { MethodObtainingOptions } from '@entities/applications/consts'
-import { getFormattedDivisions } from '@features/applications/lib/get-divisions'
 import getAddressFields from '@features/applications/lib/get-address-fields'
+import getTeacherSubdivisions from '@pages/teachers-applications/lib/get-teacher-subdivisions'
+import getMethodObtainingFields from '@features/applications/lib/get-method-obtaining-fields'
+import { getLastYearForPeriod } from '@pages/teachers-applications/lib/get-last-year-for-period'
 
 const getForm = (data: UserApplication): IInputArea => {
     return {
@@ -12,11 +13,13 @@ const getForm = (data: UserApplication): IInputArea => {
             ...getBasicFieldsApplicationTeacher(data),
             {
                 title: 'Период',
-                type: 'date-interval',
-                value: ['', ''],
-                editable: true,
+                type: 'select',
+                value: null,
                 fieldName: 'period',
+                editable: true,
+                width: '100',
                 required: true,
+                items: getLastYearForPeriod(),
             },
             {
                 title: 'Количество копий',
@@ -26,25 +29,8 @@ const getForm = (data: UserApplication): IInputArea => {
                 editable: true,
                 required: true,
             },
-            {
-                title: 'Способ получения справки',
-                type: 'radio',
-                fieldName: 'method_obtaining',
-                value: null,
-                editable: true,
-                required: true,
-                items: MethodObtainingOptions,
-            },
-            {
-                title: 'Выберите отделение МФЦ, где желаете получить готовый документ:',
-                type: 'radio',
-                fieldName: 'structural-subdivision',
-                value: null,
-                editable: true,
-                items: getFormattedDivisions(data.divisions_crs),
-                isSpecificRadio: true,
-                specialType: 'personalMethod',
-            },
+            ...getMethodObtainingFields(),
+            ...getTeacherSubdivisions(),
             ...getAddressFields(),
             {
                 title: 'Комментарий к заявке',

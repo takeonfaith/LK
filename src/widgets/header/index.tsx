@@ -1,16 +1,41 @@
-import { Button } from '@ui/button'
-import List from '@ui/list'
+import UserInfo from '@features/user-info'
+import useCurrentDevice from '@shared/lib/hooks/use-current-device'
+import Flex from '@shared/ui/flex'
+import { CurrentPagePairType } from '@utils/hooks/use-current-exact-page'
 import React from 'react'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { useHistory } from 'react-router'
+import { HeaderWrapper } from './ui'
+import { HeaderTitle } from './ui/atoms/header-wrapper'
+import useHeader from './use-header'
+import { getPageWidth } from '@shared/ui/page-block/lib/get-page-width'
 
-const Header = () => {
-    const history = useHistory()
+type Props = {
+    currentPagePair: CurrentPagePairType
+    headerVisible?: boolean
+}
+
+const Header: React.FC<Props> = ({ currentPagePair: { currentPage, exactCurrentPage }, headerVisible = false }) => {
+    const { isMobile } = useCurrentDevice()
+    const isHeaderVisible = headerVisible || !!exactCurrentPage?.planeHeader
+    const { headerTitle, backButton } = useHeader({ currentPage, exactCurrentPage, isHeaderVisible })
+    const maxWidth = getPageWidth(exactCurrentPage)
+
+    if ((exactCurrentPage ?? currentPage)?.withoutHeader) return null
+
     return (
-        <List direction="horizontal" width="100%" padding="5px 40px">
-            <Button icon={<FaChevronLeft />} onClick={() => history.goBack()} background="transparent" />
-            <Button icon={<FaChevronRight />} onClick={() => history.goForward()} background="transparent" />
-        </List>
+        <HeaderWrapper headerVisible={isHeaderVisible} hidden={(exactCurrentPage ?? currentPage)?.withoutHeader}>
+            <HeaderTitle
+                maxWidth={maxWidth}
+                noButton={exactCurrentPage?.withoutBackButton}
+                headerVisible={isHeaderVisible}
+            >
+                {headerTitle}
+            </HeaderTitle>
+            <Flex jc="space-between" mw={maxWidth}>
+                {backButton ?? <div />}
+
+                {isMobile && <UserInfo showSearch />}
+            </Flex>
+        </HeaderWrapper>
     )
 }
 

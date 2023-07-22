@@ -9,6 +9,7 @@ export const get = () => {
 export const post = (args: { [key: string]: any }) => {
     const formData = new FormData()
     formData.set('token', token())
+    formData.set('saveAppData', args.formId)
 
     for (const [key, value] of Object.entries(args)) {
         formData.set(key, value)

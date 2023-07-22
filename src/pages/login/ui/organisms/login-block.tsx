@@ -75,8 +75,12 @@ const LoginBlockStyled = styled(BlockWrapper)<{ isAuthenticated: boolean }>`
         .right {
             opacity: 1;
 
-            & > * > * > *:not(.logo) {
+            & > * > * > *:not(.logo):not(button) {
                 opacity: ${({ isAuthenticated }) => +!isAuthenticated};
+            }
+
+            button {
+                opacity: ${({ isAuthenticated }) => isAuthenticated && '0'};
             }
         }
 

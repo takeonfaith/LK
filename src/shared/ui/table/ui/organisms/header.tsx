@@ -23,6 +23,22 @@ const FilterWrapper = styled.div`
 `
 
 const Header = ({ columns, search, setSearch, filter, setFilter, sort, setSort }: Props) => {
+    const columnClick = (column: ColumnProps) => {
+        return () => {
+            if (column.search) {
+                setSearch({ value: '', column })
+            }
+
+            if (column.sort) {
+                setSort((prev) => {
+                    const result = !prev?.value ? 'desc' : prev.value === 'desc' ? 'asc' : null
+                    sortPopUp(result)
+                    return !result ? null : { column, value: result }
+                })
+            }
+        }
+    }
+
     return (
         <HeaderWrapper>
             {columns.map((column) => {
@@ -36,19 +52,7 @@ const Header = ({ columns, search, setSearch, filter, setFilter, sort, setSort }
                         key={column.title}
                         showFull={column.showFull}
                         className={column.priority?.toString() ?? 'one'}
-                        onClick={() => {
-                            if (column.search) {
-                                setSearch({ value: '', column })
-                            }
-
-                            if (column.sort) {
-                                setSort((prev) => {
-                                    const result = !prev?.value ? 'desc' : prev.value === 'desc' ? 'asc' : null
-                                    sortPopUp(result)
-                                    return !result ? null : { column, value: result }
-                                })
-                            }
-                        }}
+                        onClick={columnClick(column)}
                     >
                         {!column.catalogs && column.title}
                         {!column.catalogs && !column.sort && column.search && (

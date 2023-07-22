@@ -21,6 +21,8 @@ export interface Subdivision {
     wage: string
     categoty: string
     status: string
+    guid_person: string
+    guid_staff: string
 }
 
 export interface Order {

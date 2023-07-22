@@ -1,10 +1,8 @@
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { SpecialFieldsName, SpecialFieldsNameConfig } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import SendHrFormWorkTransfer from '@pages/hr-applications/lib/send-hr-form-work-transfer'
-import { getDivisions } from '@shared/api/application-api'
-import { $hrApi } from '@shared/api/config'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
 import { IInputArea, IInputAreaData } from '@ui/input-area/model'
@@ -32,7 +30,7 @@ const WorkTransfer = () => {
     const [newPlaceOfWork, setNewPlaceOfWork] = useState<string | null>(null)
     const [newRate, setNewRate] = useState<any>(null)
     const [transferDate, setTransferDate] = useState<string | null>(null)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
     const isDone = completed ?? false
     const history = useHistory()
     const { id } = useParams<{ id: string }>()
@@ -91,7 +89,7 @@ const WorkTransfer = () => {
                         {...form}
                         collapsed={isDone}
                         setData={setForm as LoadedState}
-                        specialFieldsName={specialFieldsName}
+                        specialFieldsNameConfig={specialFieldsName}
                     />
 
                     <SubmitButton

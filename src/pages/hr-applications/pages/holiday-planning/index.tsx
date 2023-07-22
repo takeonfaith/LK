@@ -1,6 +1,6 @@
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import sendHrFormHolidayPlanning from '@pages/hr-applications/lib/send-hr-form-holiday-planning'
 import { Button, FormBlock, SubmitButton } from '@ui/atoms'
@@ -25,7 +25,7 @@ const HolidayPlanning = () => {
         data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
     const { loading: loading } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
     const [completed, setCompleted] = useState(false)
     const isDone = completed ?? false
     const history = useHistory()
@@ -73,7 +73,7 @@ const HolidayPlanning = () => {
                         {...form}
                         collapsed={isDone}
                         setData={setForm as any}
-                        specialFieldsName={specialFieldsName}
+                        specialFieldsNameConfig={specialFieldsName}
                     />
 
                     <SubmitButton

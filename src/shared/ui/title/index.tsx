@@ -31,7 +31,7 @@ export function Title(props: TitleProps) {
     if (!visible) return null
 
     return (
-        <TitleWrapper className="title-wrapper" align={align} bottomGap={bottomGap} iconColor={iconColor}>
+        <TitleWrapper size={size} className="title-wrapper" align={align} bottomGap={bottomGap} iconColor={iconColor}>
             {icon}
             <CreateHeader size={size} width={width}>
                 {required && <RedStar>*</RedStar>}

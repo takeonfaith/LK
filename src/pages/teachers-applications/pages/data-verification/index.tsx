@@ -1,5 +1,4 @@
 import { teacherDateVerificationModel } from '@entities/teacher-data-verification'
-import GoBackButton from '@shared/ui/go-back-button'
 import { FormBlock, Message, SubmitButton, Title, Wrapper } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import InputArea from '@ui/input-area'
@@ -133,7 +132,6 @@ const DataVerificationPage = () => {
             !!army ? (
                 <DataVerificationPageWrapper>
                     <FormBlock>
-                        <GoBackButton text="Назад к цифровым сервисам" />
                         {!isDone && (
                             <Title size={3} align="left" bottomGap>
                                 Подтвердите актуальность данных, указанных в каждом разделе анкеты, либо внесите

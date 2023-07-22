@@ -47,11 +47,11 @@ const RETAKE_LINKS: Record<string, RetakeLink> = {
                 href: 'https://e.mospolytech.ru/old/storage/files/arrears/FIT_2022-2023-zima__kafedra_PI.pdf',
             },
             {
-                title: 'ФИТ 2021-2022-лето, кафедра ИиИТ',
+                title: 'ФИТ 2022-2023-лето, кафедра ИиИТ',
                 href: 'https://e.mospolytech.ru/old/storage/files/arrears/FIT_2022-2023-zima__kafedra_IiIT.pdf',
             },
             {
-                title: 'ФИТ 2021-2022-лето, кафедра ИиИТ, ВНЕШНИЕ',
+                title: 'ФИТ 2022-2023-лето, кафедра ИиИТ, ВНЕШНИЕ',
                 href: 'https://e.mospolytech.ru/old/storage/files/arrears/FIT_2022-2023-zima__kafedra_IiIT_VNEShNIE.pdf',
             },
         ],

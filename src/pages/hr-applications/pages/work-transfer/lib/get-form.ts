@@ -1,8 +1,8 @@
-import { IInputArea } from '@ui/input-area/model'
 import { UserApplication, WorkerApplication } from '@api/model'
 import { getSuggestions } from '@pages/hr-applications/lib/divisions'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
-import React, { useEffect, useState } from 'react'
+import { IInputArea } from '@ui/input-area/model'
+import React from 'react'
 
 const getForm = (
     dataUserApplication: UserApplication,
@@ -30,24 +30,28 @@ const getForm = (
                 value: surname + ' ' + name + ' ' + patronymic,
                 fieldName: 'fio',
                 type: 'simple-text',
+                visible: true,
             },
             {
                 title: '',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].jobGuid.toString(),
                 fieldName: 'jobGuid',
+                visible: false,
             },
             {
                 title: 'Текущее место работы',
                 type: 'text-header',
                 fieldName: 'post',
                 value: '',
+                visible: true,
             },
             {
                 title: 'Должность',
                 type: 'simple-text',
                 fieldName: 'post',
                 value: dataWorkerApplication[currentIndex].jobTitle.toString(),
+                visible: true,
             },
 
             {
@@ -55,18 +59,21 @@ const getForm = (
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].subDivision.toString(),
                 fieldName: 'subDivision',
+                visible: true,
             },
             {
                 title: 'Cтавка',
                 type: 'simple-text',
                 value: dataWorkerApplication[currentIndex].rate.toString(),
                 fieldName: 'currentRate',
+                visible: true,
             },
             {
                 title: 'Новое место работы',
                 type: 'text-header',
                 fieldName: 'post',
                 value: '',
+                visible: true,
             },
             {
                 title: 'Подразделение',
@@ -77,6 +84,7 @@ const getForm = (
                 suggestions: getSuggestions(),
                 required: true,
                 mask: true,
+                visible: true,
                 placeholder: 'Начните вводить название подразделения',
                 onChange: (value) => {
                     setNewPlaceOfWork(value)
@@ -155,11 +163,12 @@ const getForm = (
                     setNewRate(value)
                 },
             },
-            employment?.title === 'По совместительству' && {
+            {
                 title: 'При устройстве по совместительству ставка не может превышать 0.5',
                 type: 'text-warning',
                 fieldName: 'PartTime',
                 value: null,
+                visible: employment?.title == 'По совместительству' ? true : false,
                 required: false,
                 width: '100%',
             },

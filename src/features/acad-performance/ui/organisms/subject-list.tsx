@@ -1,38 +1,45 @@
-import { AcadPerformance } from '@api/model/acad-performance'
+import { PreparedAcadPerformanceData } from '@entities/acad-performance/lib/prepare'
+import Flex from '@shared/ui/flex'
+import Subtext from '@shared/ui/subtext'
+import { Title } from '@shared/ui/title'
 import React, { memo } from 'react'
-import styled from 'styled-components'
 import SubjectItems from '../molecules/subject-items'
+import PlaneSkeletonList from '@shared/ui/plane-skeleton-list'
+import { SkeletonShape } from '@shared/ui/skeleton-shape'
 
-interface Props {
-    header: string
+type Props = {
     loading?: boolean
-    items?: AcadPerformance[]
-    type?: 'exam' | 'test'
+    items: PreparedAcadPerformanceData | null
 }
-const Wrap = styled.div`
-    width: 100%;
 
-    @media (max-width: 1000px) {
-        border-radius: var(--brSemi);
-        border: 1px solid var(--almostTransparentOpposite);
-        padding: 10px 20px;
-    }
-`
+const SubjectList = ({ items, loading }: Props) => {
+    if (!items) return null
 
-const Heading = styled.h2`
-    margin-bottom: 10px;
-    @media (max-width: 1000px) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-`
-const SubjectList = ({ header, items, loading, type = 'exam' }: Props) => {
+    if (loading)
+        return (
+            <Flex d="column" ai="flex-start" gap="12px">
+                <SkeletonShape shape="rect" size={{ width: '100px', height: '30px' }} />
+                <PlaneSkeletonList quantity={5} avatarShape="rect" />
+                <SkeletonShape shape="rect" size={{ width: '100px', height: '30px' }} />
+                <PlaneSkeletonList quantity={10} avatarShape="rect" />
+            </Flex>
+        )
+
     return (
-        <Wrap>
-            {!!items?.length && <Heading>{header}</Heading>}
-            <SubjectItems items={items || []} type={type} loading={loading} />
-        </Wrap>
+        <Flex d="column" gap="20px">
+            {Object.keys(items)?.map((key) => {
+                return (
+                    <Flex d="column" key={key}>
+                        <Title size={3} align="left" width="fit-content">
+                            {key}
+                            <Subtext>{items[key].length}</Subtext>
+                        </Title>
+
+                        <SubjectItems items={items[key] || []} type={key} loading={loading} />
+                    </Flex>
+                )
+            })}
+        </Flex>
     )
 }
 

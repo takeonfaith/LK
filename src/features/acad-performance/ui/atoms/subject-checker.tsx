@@ -2,11 +2,11 @@ import { IGrade } from '@api/model/acad-performance'
 import { GradeByScore } from '@consts'
 import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 import React from 'react'
-import { FiCheck, FiX } from 'react-icons/fi'
+import { HiOutlineCheck, HiOutlineX } from 'react-icons/hi'
 import styled from 'styled-components'
 
 interface Props {
-    grade: keyof IGrade
+    grade: keyof IGrade | undefined
 }
 
 const Container = styled.div<Props>`
@@ -15,19 +15,25 @@ const Container = styled.div<Props>`
     justify-content: center;
     color: #fff;
 
-    background-color: ${({ grade }) => findProgressBarColor(grade)};
-    filter: drop-shadow(${({ grade }) => findProgressBarColor(grade)} 0px 0px 10px);
+    color: ${({ grade }) => findProgressBarColor(grade)};
 
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
 
-    min-width: 20px;
-    min-height: 20px;
+    min-width: 22px;
+    min-height: 22px;
     border-radius: 50%;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
 `
 
 const SubjectChecker = ({ grade }: Props) => {
-    return <Container grade={grade}>{GradeByScore[grade] > 2 ? <FiCheck /> : <FiX />}</Container>
+    return (
+        <Container grade={grade}>{grade && (GradeByScore[grade] > 2 ? <HiOutlineCheck /> : <HiOutlineX />)}</Container>
+    )
 }
 
 export default SubjectChecker

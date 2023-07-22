@@ -52,7 +52,7 @@ const List = (props: Props) => {
 
     if (!visible) return null
 
-    const { listRef, leftArrow, rightArrow, setScrollLeft, pageOffset, amountOfPages, currentPage, setCurrentPage } =
+    const { listRef, leftArrow, rightArrow, handleScroll, setScrollLeft, pageOffset, amountOfPages, currentPage } =
         useList(gap)
 
     return (
@@ -71,10 +71,10 @@ const List = (props: Props) => {
                 )}
                 {onWatchMore && (
                     <Button
-                        width="fit-content"
+                        width="50px"
                         height="15px"
-                        background={Colors.grey.transparent3}
-                        textColor="var(--reallyBlue)"
+                        background={Colors.blue.transparent2}
+                        textColor={Colors.blue.light1}
                         onClick={onWatchMore}
                         text="Ещё"
                     />
@@ -104,6 +104,7 @@ const List = (props: Props) => {
                 innerPadding={innerPadding}
                 scroll={scroll}
                 wrapOnMobile={wrapOnMobile}
+                onScroll={handleScroll}
                 {...restProps}
             >
                 {children}
@@ -112,14 +113,13 @@ const List = (props: Props) => {
                 <div className="bottom-wrapper">
                     {leftArrow && (
                         <Button
-                            background={Colors.grey.transparent3}
+                            background="transparent"
                             minWidth="40px"
                             height="25px"
                             icon={<FiChevronLeft />}
                             className="left-button"
                             textColor={Colors.grey.main}
                             onClick={() => {
-                                setCurrentPage((prev) => limitNumber(prev - 1, amountOfPages - 1))
                                 setScrollLeft((prev) =>
                                     limitNumber(prev - pageOffset - (gap ?? 0), listRef.current?.scrollWidth ?? 0),
                                 )
@@ -129,14 +129,13 @@ const List = (props: Props) => {
                     {showPages && <DotPages direction="horizontal" current={currentPage} amount={amountOfPages} />}
                     {rightArrow && (
                         <Button
-                            background={Colors.grey.transparent3}
+                            background="transparent"
                             minWidth="40px"
                             height="25px"
                             icon={<FiChevronRight />}
                             className="right-button"
                             textColor={Colors.grey.main}
                             onClick={() => {
-                                setCurrentPage((prev) => limitNumber(prev + 1, amountOfPages - 1))
                                 setScrollLeft((prev) =>
                                     limitNumber(prev + pageOffset + (gap ?? 0), listRef.current?.scrollWidth ?? 0),
                                 )

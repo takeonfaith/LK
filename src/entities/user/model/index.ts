@@ -17,7 +17,7 @@ interface UserStore {
 }
 
 //  In effector chat core-team describe something like this code (Perhaps a better solution can be found)
-// TODO: ask about token expires (Looks like it won't expire)
+// TODO: move localstorage keys to enum
 const tokenInStorage = localStorage.getItem('token') ?? 'null'
 const savePasswordInStorage = () => JSON.parse(localStorage.getItem('savePassword') ?? 'true')
 

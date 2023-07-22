@@ -9,7 +9,6 @@ const WorkOnTermsOfExternalConcurrencyPage = () => {
         <TemplateFormPage
             model={teacherStatementModel}
             getForm={getForm}
-            goBack="Назад к цифровым сервисам"
             isSpecialField={true}
             formId={ApplicationTeachersFormCodes.WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY}
         />

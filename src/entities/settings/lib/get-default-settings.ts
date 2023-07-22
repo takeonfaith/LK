@@ -1,6 +1,18 @@
 import { ThemeType, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@consts'
 import { NameSettings, Param, SettingsType } from '../model'
 
+const NOTIFICATIONS_DEFAULT_VALUE = {
+    all: true,
+    messages: true,
+    newVersion: true,
+    schedule: true,
+    news: true,
+    applications: true,
+    doclist: true,
+}
+
+export type NotificationsSettingsType = typeof NOTIFICATIONS_DEFAULT_VALUE
+
 const generateDefaultSettings = () => {
     return (Object.keys(NameSettings) as (keyof typeof NameSettings)[]).reduce((acc, el) => {
         acc[el] = {
@@ -35,6 +47,10 @@ const getDefaultSettings = (userId = ''): SettingsType => ({
             property: {
                 pages: REQUIRED_LEFTSIDE_BAR_CONFIG,
             },
+        },
+        [NameSettings['settings-notifications']]: {
+            id: NameSettings['settings-notifications'],
+            property: NOTIFICATIONS_DEFAULT_VALUE,
         },
     },
 })

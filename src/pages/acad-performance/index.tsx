@@ -1,43 +1,23 @@
 import { AcadPerformance as IAcadPerformance } from '@api/model/acad-performance'
 import { acadPerformanceModel } from '@entities/acad-performance'
-import { PreparedData } from '@entities/acad-performance/lib/prepare'
+import { PreparedAcadPerformanceData } from '@entities/acad-performance/lib/prepare'
 import { userModel } from '@entities/user'
 import createSelectItems from '@features/acad-performance/lib/create-select-items'
 import search from '@features/acad-performance/lib/search'
-import { GraphicInfo, SubjectList } from '@features/acad-performance/ui/organisms'
+import { SubjectList } from '@features/acad-performance/ui/organisms'
 import Select, { SelectPage } from '@features/select'
+import PageBlock from '@shared/ui/page-block'
 import { Error, Wrapper } from '@ui/atoms'
 import { LocalSearch } from '@ui/molecules'
 import findSemestr from '@utils/find-semestr'
-import React, { useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
-
-const AcadPerformanceWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    height: 100%;
-    width: 100%;
-    color: var(--text);
-
-    .search-and-filter {
-        display: flex;
-        align-items: center;
-        column-gap: 10px;
-        width: 100%;
-    }
-
-    & > * + * {
-        margin-top: 20px;
-    }
-    @media (max-width: 1000px) {
-        padding: 0px;
-    }
-`
+import React, { useMemo, useState } from 'react'
+import { HiOutlineEmojiSad } from 'react-icons/hi'
+import GradeGraph from './ui/grade-graph'
+import PerformanceMessage from './ui/performance-message'
+import Flex from '@shared/ui/flex'
 
 const AcadPerformance = () => {
-    const { data, loading, error } = acadPerformanceModel.selectors.useData()
+    const { data, preparedData, loading, error } = acadPerformanceModel.selectors.useData()
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -47,62 +27,58 @@ const AcadPerformance = () => {
         id: findSemestr(new Date().toString(), user?.course ?? 1),
         title: findSemestr(new Date().toString(), user?.course ?? 1).toString() + ' семестр',
     })
-    const [foundSubjects, setFoundSubjects] = useState<PreparedData | null>(null)
-    // const [sortDesc, setSortDesc] = useState<boolean>(true)
+    const [foundSubjects, setFoundSubjects] = useState<PreparedAcadPerformanceData | null>(null)
+    const noDataError = data?.length === 0 && !loading
+    const notFoundError = foundSubjects && !Object.keys(foundSubjects ?? {}).find((el) => el?.length !== 0) && !loading
 
-    useEffect(() => {
+    const loadSemestrFilter = `${selected?.id !== -1 ? selected?.id : ''}`
+
+    const loadFunc = (page?: SelectPage) => {
         acadPerformanceModel.effects.getFx({
-            semestr: `${selected?.id !== -1 ? selected?.id : ''}`,
+            semestr: page ? `${page?.id !== -1 ? page?.id : ''}` : loadSemestrFilter,
         })
-    }, [selected])
+    }
 
     return (
-        <Wrapper
-            loading={loading}
-            load={() =>
-                acadPerformanceModel.effects.getFx({
-                    semestr: `${selected?.id !== -1 ? selected?.id : ''}`,
-                })
-            }
-            error={error}
-            data={data}
-        >
-            <AcadPerformanceWrapper>
-                {!!user?.id && <Select items={items} selected={selected} setSelected={setSelected} />}
-                {data?.exam?.length === 0 && data?.test.length === 0 && !loading ? (
+        <Wrapper loading={loading} load={loadFunc} error={error} data={data}>
+            <PageBlock
+                topRightCornerElement={
+                    !!user?.id && (
+                        <Select
+                            onClick={loadFunc}
+                            width="150px"
+                            items={items}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                    )
+                }
+            >
+                {noDataError || !data ? (
                     <Error text={'Данных за этот семестр нет, попробуйте другой!'} />
                 ) : (
                     <>
-                        <GraphicInfo />
-                        <div className="search-and-filter">
-                            <LocalSearch<IAcadPerformance[], PreparedData>
-                                whereToSearch={[...(data?.exam ?? []), ...(data?.test ?? [])]}
-                                searchEngine={search}
-                                setResult={setFoundSubjects}
-                                placeholder={'Поиск предметов'}
-                            />
-                            {/* <Button
-                                onClick={() => {
-                                    setSortDesc((prev) => !prev)
-                                    popUpMessageModel.events.evokePopUpMessage({
-                                        type: 'success',
-                                        message: `Предметы отсортированны по ${sortDesc ? 'убыванию' : 'возрастанию'}`,
-                                    })
-                                }}
-                                isChosen={sortDesc}
-                                icon={sortDesc ? <HiSortAscending /> : <HiSortDescending />}
-                            /> */}
-                        </div>
-                        <SubjectList header={'Экзамены'} items={foundSubjects?.exam ?? data?.exam} loading={loading} />
-                        <SubjectList
-                            header={'Зачеты'}
-                            items={foundSubjects?.test ?? data?.test}
-                            type={'test'}
-                            loading={loading}
+                        {!foundSubjects && !loading && <PerformanceMessage data={data} />}
+                        {/* <PerformanceGraph data={preparedData} /> */}
+                        <LocalSearch<IAcadPerformance[], PreparedAcadPerformanceData>
+                            whereToSearch={data}
+                            searchEngine={search}
+                            setResult={setFoundSubjects}
+                            placeholder={'Поиск предметов'}
+                            loadingOnType
                         />
+                        {notFoundError && (
+                            <Error text={'По данному запросу ничего не найдено'} image={<HiOutlineEmojiSad />} />
+                        )}
+                        {!notFoundError && (
+                            <Flex d="column" gap="40px">
+                                <GradeGraph data={data} loading={loading} />
+                                <SubjectList items={foundSubjects ?? preparedData} loading={loading} />
+                            </Flex>
+                        )}
                     </>
                 )}
-            </AcadPerformanceWrapper>
+            </PageBlock>
         </Wrapper>
     )
 }

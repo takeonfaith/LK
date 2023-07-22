@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import InputArea from '@ui/input-area'
-import { Button, FormBlock, SubmitButton } from '@ui/atoms'
+import { FormBlock, SubmitButton } from '@ui/atoms'
 import { IInputArea, IInputAreaData } from '@ui/input-area/model'
-import { useHistory } from 'react-router'
 import getForm from './lib/get-form'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import { applicationsModel } from '@entities/applications'
-import { FiChevronLeft } from 'react-icons/fi'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import checkFormFields from '@utils/check-form-fields'
-import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
-import { specialFieldsNameT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 import getExtraHolidayLength from './lib/get-extra-holiday-length'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
@@ -23,9 +20,8 @@ const ExtraHolidayColl = () => {
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameT>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
     const isDone = completed ?? false
-    const history = useHistory()
 
     useEffect(() => {
         if (!!dataUserApplication) setForm(getForm(dataUserApplication))
@@ -40,18 +36,11 @@ const ExtraHolidayColl = () => {
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && !!setForm && (
                 <FormBlock>
-                    <Button
-                        text="Назад к кадровым заявлениям"
-                        icon={<FiChevronLeft />}
-                        onClick={() => history.push(HR_APPLICATIONS_ROUTE)}
-                        background="transparent"
-                        textColor="var(--blue)"
-                    />
                     <InputArea
                         {...form}
                         collapsed={isDone}
                         setData={setForm as LoadedState}
-                        specialFieldsName={specialFieldsName}
+                        specialFieldsNameConfig={specialFieldsName}
                     />
 
                     <SubmitButton
@@ -77,6 +66,6 @@ const ExtraHolidayColl = () => {
 
 export default ExtraHolidayColl
 
-/*<TemplateFormPage model={teacherStatementModel} 
-            getForm={getForm(dataUserApplication)} 
+/*<TemplateFormPage model={teacherStatementModel}
+            getForm={getForm(dataUserApplication)}
             goBack="Назад к цифровым сервисам" />*/
