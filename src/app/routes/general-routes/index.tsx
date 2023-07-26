@@ -440,7 +440,7 @@ export const generalHiddenRoutes: IRoutes = {
         show: true,
         group: 'OTHER',
         isSubPage: true,
-        subPageHeaderTitle: 'Внешний вид',
+        subPageHeaderTitle: 'Аккаунт',
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
