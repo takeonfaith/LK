@@ -25,7 +25,7 @@ const InitialLoader = ({ loading }: Props) => {
 
     if (!!error)
         return (
-            <InitialLoaderWrapper loading={true} color={color}>
+            <InitialLoaderWrapper $loading={true} color={color}>
                 <Error text="Нет подключения к интернету">
                     <Button onClick={loadUser} text="Попробовать снова" icon={<AiOutlineReload />} />
                 </Error>
@@ -33,7 +33,7 @@ const InitialLoader = ({ loading }: Props) => {
         )
 
     return (
-        <InitialLoaderWrapper color={color} loading={loading}>
+        <InitialLoaderWrapper color={color} $loading={loading}>
             <Logo short width="100px" />
             {loading && <Loading />}
         </InitialLoaderWrapper>
