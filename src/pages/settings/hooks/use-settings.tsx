@@ -112,7 +112,7 @@ const useSettings = () => {
                                 settingsModel.events.updateSetting({
                                     nameSettings: 'settings-home-page',
                                     nameParam: 'widgetSchedule',
-                                    value: !(state as boolean | undefined) ?? false,
+                                    value: !!state,
                                 }),
                         },
                         payments: {
@@ -121,7 +121,7 @@ const useSettings = () => {
                                 settingsModel.events.updateSetting({
                                     nameSettings: 'settings-home-page',
                                     nameParam: 'widgetPayment',
-                                    value: !(state as boolean | undefined) ?? false,
+                                    value: !!state,
                                 }),
                         },
                     },
