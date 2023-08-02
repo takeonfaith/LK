@@ -162,7 +162,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
-        show: false,
+        show: true,
     },
 })
 
