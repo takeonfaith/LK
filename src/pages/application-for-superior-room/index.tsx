@@ -41,10 +41,11 @@ const ApplicationForSuperiorRoom = () => {
         return <Error text={'Данный раздел недоступен для вашей формы обучения'} />
     }
 
-    const statusForm = getStatusFormSuperiorRoom(user)
-    if (!!statusForm) {
-        return <Error text={statusForm} />
-    }
+    // Временная разблокировка страницы КПК для Dev
+    // const statusForm = getStatusFormSuperiorRoom(user)
+    // if (!!statusForm) {
+    //     return <Error text={statusForm} />
+    // }
 
     useEffect(() => {
         //fetch
