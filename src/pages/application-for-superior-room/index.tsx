@@ -32,7 +32,11 @@ const ApplicationForSuperiorRoom = () => {
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const isDone = (completed || !data?.is_avaliable) ?? false
+
+    // Временная разблокировка страницы КПК для Dev
+    // const isDone = (completed || !data?.is_avaliable) ?? false
+    const isDone = false
+
     const {
         data: { user },
     } = userModel.selectors.useUser()
