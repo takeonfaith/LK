@@ -1,7 +1,6 @@
 import { $api, $hrApi } from '@api/config'
 import { ApplicationCreating } from '@entities/applications/model'
 import { getJwtToken, parseJwt } from '@entities/user/lib/jwt-token'
-import { setDivisions } from '@pages/hr-applications/lib/divisions'
 import token from '@utils/token'
 import { AxiosResponse } from 'axios'
 import { Application, UserApplication } from './model'
@@ -28,12 +27,9 @@ export const postWorkerStatuses = (): Promise<AxiosResponse> => {
     return $hrApi.post('Dismissal.AllHistory')
 }
 export const getDivisions = async () => {
-    try {
-        const response = await $hrApi.get(`/AnotherPlaceWork.GetDivisions`)
-        return response.data.divisions
-    } catch (error) {
-        console.error('Error:', error)
-    }
+    const { data } = await $hrApi.get(`/AnotherPlaceWork.GetDivisions`)
+
+    return data.divisions
 }
 
 export const post = async (data: ApplicationCreating) => {

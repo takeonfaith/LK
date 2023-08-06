@@ -16,7 +16,7 @@ interface Props {
     index: number
 }
 
-const JobTitle: React.FC<Props> = ({ info, index }) => {
+const JobTitle: React.FC<Props> = ({ info }) => {
     const { jobTitle, subDivision, rate } = info
 
     const [opened, setOpened] = useState<boolean>(false)

@@ -1,5 +1,4 @@
 import { UserApplication, WorkerApplication } from '@api/model'
-import { getSuggestions } from '@pages/hr-applications/lib/divisions'
 import getDelayInDays from '@pages/hr-applications/lib/get-delay-in-days'
 import { IInputArea } from '@ui/input-area/model'
 import React from 'react'
@@ -20,6 +19,7 @@ const getForm = (
     setTransferDate: React.Dispatch<React.SetStateAction<string | null>>,
     partTimeType: string | null,
     setPartTimeType: React.Dispatch<React.SetStateAction<string | null>>,
+    suggestions: any,
 ): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
     return {
@@ -81,7 +81,7 @@ const getForm = (
                 fieldName: 'newPlaceOfWork',
                 value: newPlaceOfWork,
                 width: '100%',
-                suggestions: getSuggestions(),
+                suggestions,
                 required: true,
                 mask: true,
                 visible: true,

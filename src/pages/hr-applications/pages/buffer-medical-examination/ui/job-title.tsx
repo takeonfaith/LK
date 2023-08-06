@@ -78,6 +78,7 @@ const JobTitle: React.FC<Props> = ({ info, index }) => {
                             })
                             return (
                                 <StyledTable
+                                    key={workerInfo.orderNumber}
                                     columns={getMedicalExaminationHistoryColumns()}
                                     data={filteredData}
                                     maxOnPage={10}

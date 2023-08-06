@@ -1,9 +1,7 @@
 import { IInputArea } from '@ui/input-area/model'
-import { UserApplication, WorkerApplication } from '@api/model'
-import { getDivisions } from '@shared/api/application-api'
-import { getSuggestions } from '@pages/hr-applications/lib/divisions'
+import { UserApplication } from '@api/model'
 
-const getForm = (dataUserApplication: UserApplication, dataWorkerApplication: WorkerApplication[]): IInputArea => {
+const getForm = (dataUserApplication: UserApplication, suggestions: any): IInputArea => {
     const { surname, name, patronymic } = dataUserApplication
 
     return {
@@ -22,7 +20,7 @@ const getForm = (dataUserApplication: UserApplication, dataWorkerApplication: Wo
                 fieldName: 'newPlaceOfWork',
                 value: '',
                 width: '100%',
-                suggestions: getSuggestions(),
+                suggestions,
                 required: true,
                 mask: true,
                 visible: true,

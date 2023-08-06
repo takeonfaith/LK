@@ -1,6 +1,6 @@
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import { SpecialFieldsName, SpecialFieldsNameConfig } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import SendHrFormHolidayWork from '@pages/hr-applications/lib/send-hr-form-holiday-work'
 import { ApplicationFormCodes } from '@shared/models/application-form-codes'

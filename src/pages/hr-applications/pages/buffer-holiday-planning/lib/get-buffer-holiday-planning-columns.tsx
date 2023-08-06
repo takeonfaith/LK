@@ -1,9 +1,7 @@
-import { hrApplicationsConstants } from '@entities/applications/consts'
 import localizeDate from '@shared/lib/localize-date'
 import { Message } from '@shared/ui/message'
-import React from 'react'
-import ReactDOM from 'react-dom'
 import { ColumnProps } from '@ui/table/types'
+import React from 'react'
 
 export const getBufferHolidayPlanningColumns = (): ColumnProps[] => {
     return [

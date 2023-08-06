@@ -4,8 +4,6 @@ import { useState } from 'react'
 import History from './history'
 import JobTitle from './job-title'
 import styled from 'styled-components'
-import { getDivisions } from '@shared/api/application-api'
-//import HWAssesment from './holiday-work-affirmation'
 
 const Content = () => {
     const {

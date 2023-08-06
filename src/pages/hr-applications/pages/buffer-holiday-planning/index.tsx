@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react'
 import { HrBlock, Message, Title, Wrapper } from '@ui/atoms'
+import React, { useEffect } from 'react'
 import { FiInfo } from 'react-icons/fi'
 import styled from 'styled-components'
-import Content from './ui/content'
 import { bufferHolidayPlanningModel } from './model'
-import { Link } from 'react-router-dom'
+import Content from './ui/content'
 
 const HolidayPlanningBufferPage = () => {
     const { data, loading } = bufferHolidayPlanningModel.selectors.useBufferHolidayPlanning()

@@ -7,6 +7,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import { userModel } from '../../entities/user'
 import { applicationsModel } from '@entities/applications'
 import ContentLayout from 'widgets/content-layout'
+import { loadDivisions } from '@pages/hr-applications/model/divisions'
 
 const Router = () => {
     const {
@@ -19,12 +20,14 @@ const Router = () => {
 
     useEffect(() => {
         if (isAuthenticated) {
+            // TODO: add custom event for all effects/events
             setTimeout(() => {
                 setDelayedAuth(true)
             }, 1000)
             adminLinksModel.effects.getFx()
             applicationsModel.effects.getUserDataApplicationsFx()
             applicationsModel.effects.getWorkerPosts()
+            loadDivisions()
         } else {
             setDelayedAuth(false)
         }

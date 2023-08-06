@@ -18,7 +18,7 @@ import getForm from './lib/get-form'
 const MedicalExamination = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [startDate, setStartDate] = useState<string | null>(null)
-    const [medicalExaminationDate, setMedicalExaminationDate] = useState<string | null>(null)
+    const [medicalExaminationDate] = useState<string | null>(null)
     const [isRetirement, setIsRetirement] = useState<string | null>(null)
     const {
         data: { dataUserApplication, dataWorkerApplication },

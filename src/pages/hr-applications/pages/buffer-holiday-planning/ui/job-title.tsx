@@ -83,6 +83,7 @@ const JobTitle: React.FC<Props> = ({ info, index, data }) => {
                             })
                             return (
                                 <StyledTable
+                                    key={workerInfo.jobTitle}
                                     columns={getBufferHolidayPlanningColumns()}
                                     data={filteredData}
                                     maxOnPage={10}

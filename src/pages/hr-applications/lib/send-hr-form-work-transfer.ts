@@ -1,11 +1,11 @@
 import { IInputArea } from '@ui/input-area/model'
 import { bufferWorkTransferModel } from '../pages/buffer-work-transfer/model'
-import { getDivisionGuid } from './divisions'
 
-const SendHrFormWorkTransfer = async (
+const sendHrFormWorkTransfer = async (
     employeeId: string,
     inputAreas: IInputArea[],
     setCompleted: (loading: boolean) => void,
+    divisions: any,
 ) => {
     setCompleted(false)
 
@@ -54,7 +54,7 @@ const SendHrFormWorkTransfer = async (
     const response = await bufferWorkTransferModel.effects.sendBufferWorkTransferFx({
         employeeGuid: result.jobGuid,
         transferDate: result.transferDate,
-        divisionGuid: getDivisionGuid(result.newPlaceOfWork),
+        divisionGuid: divisions.find((item: any) => item.divisionName === result.newPlaceOfWork)?.divisionGuid ?? '',
         desiredJob: result.newPost,
         desiredRate: result.newRate,
     })
@@ -62,4 +62,4 @@ const SendHrFormWorkTransfer = async (
     !response.isError && setCompleted(true)
 }
 
-export default SendHrFormWorkTransfer
+export default sendHrFormWorkTransfer
