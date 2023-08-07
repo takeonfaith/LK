@@ -32,7 +32,11 @@ const ApplicationForSuperiorRoom = () => {
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const isDone = (completed || !data?.is_avaliable) ?? false
+
+    // Временная разблокировка страницы КПК для Dev
+    // const isDone = (completed || !data?.is_avaliable) ?? false
+    const isDone = false
+
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -41,10 +45,11 @@ const ApplicationForSuperiorRoom = () => {
         return <Error text={'Данный раздел недоступен для вашей формы обучения'} />
     }
 
-    const statusForm = getStatusFormSuperiorRoom(user)
-    if (!!statusForm) {
-        return <Error text={statusForm} />
-    }
+    // Временная разблокировка страницы КПК для Dev
+    // const statusForm = getStatusFormSuperiorRoom(user)
+    // if (!!statusForm) {
+    //     return <Error text={statusForm} />
+    // }
 
     useEffect(() => {
         //fetch
