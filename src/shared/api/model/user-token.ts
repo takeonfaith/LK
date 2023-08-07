@@ -1,8 +1,7 @@
 export interface UserToken {
     token: string
-    jwt: string
-    expires: number
-    jwt_refresh: string
+    jwt: string | null
+    jwt_refresh: string | null
 }
 
 export interface ADName {

@@ -1,4 +1,4 @@
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import styled from 'styled-components'
 import { OPEN_CLOSE_ANIMATION_DURATION } from './consts'
 

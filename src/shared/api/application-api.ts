@@ -12,6 +12,7 @@ export const get = (): Promise<AxiosResponse<Application[]>> => {
 export const getAppData = (): Promise<AxiosResponse<UserApplication>> => {
     return $api.get(`?getAppData&token=${token()}`)
 }
+
 export const getWorkerData = async (): Promise<AxiosResponse> => {
     //907afd9b-d9c5-11e7-940a-b4b52f5f5349
 
@@ -22,10 +23,12 @@ export const getWorkerData = async (): Promise<AxiosResponse> => {
 
     return response
 }
+
 export const postWorkerStatuses = (): Promise<AxiosResponse> => {
     //907afd9b-d9c5-11e7-940a-b4b52f5f5349
     return $hrApi.post('Dismissal.AllHistory')
 }
+
 export const getDivisions = async () => {
     const { data } = await $hrApi.get(`/AnotherPlaceWork.GetDivisions`)
 

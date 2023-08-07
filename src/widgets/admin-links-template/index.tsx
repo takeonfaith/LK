@@ -1,5 +1,5 @@
 import { AdminLink } from '@api/model'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { adminLinksModel } from '@entities/admin-links'
 import { Divider, LinkButton, Message, Title } from '@ui/atoms'
 import { DateInterval } from '@ui/molecules'

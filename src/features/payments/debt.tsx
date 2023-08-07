@@ -1,4 +1,4 @@
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import RubleNumber from '@shared/ui/ruble-number'
 import { Size } from '@shared/ui/types'
 import React from 'react'

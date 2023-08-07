@@ -1,4 +1,4 @@
-import { Colors, FileFormats } from '@consts'
+import { Colors, FileFormats } from '@shared/constants'
 import { Button, Divider, FileLink, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import FileInput from '@ui/file-input'

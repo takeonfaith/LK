@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { Direction } from '@ui/types'
 import React from 'react'
 import styled from 'styled-components'

@@ -1,6 +1,6 @@
 import { PaymentsContract } from '@api/model'
 import { paymentsModel } from '@entities/payments'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import KeyValue from '@shared/ui/atoms/key-value'
 import Flex from '@shared/ui/flex'
 import { Button, LinkButton, SubmitButton } from '@ui/atoms'

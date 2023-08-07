@@ -2,6 +2,7 @@ import { userApi } from '@api'
 import { ADName, User, UserToken } from '@api/model'
 import { LoginData } from '@api/user-api'
 import createFullName from '@features/home/lib/create-full-name'
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 import axios from 'axios'
 import { createEffect, createEvent, createStore, forward, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
@@ -18,12 +19,12 @@ interface UserStore {
 
 //  In effector chat core-team describe something like this code (Perhaps a better solution can be found)
 // TODO: move localstorage keys to enum
-const tokenInStorage = localStorage.getItem('token') ?? 'null'
-const savePasswordInStorage = () => JSON.parse(localStorage.getItem('savePassword') ?? 'true')
+const tokenInStorage = localStorage.getItem(BrowserStorageKey.Token) ?? ''
+const savePasswordInStorage = () => JSON.parse(localStorage.getItem(BrowserStorageKey.SavePassword) ?? 'true')
 
 const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginData) => {
     try {
-        const tokenResponse = await userApi.getUserToken(params)
+        const { data } = await userApi.getUserToken(params)
 
         const form = new FormData()
         form.set('ulogin', params.login)
@@ -36,14 +37,14 @@ const getUserTokenFx = createEffect<LoginData, UserToken>(async (params: LoginDa
         } catch {}
 
         if (savePasswordInStorage()) {
-            localStorage.setItem('token', tokenResponse.data.token)
-            localStorage.setItem('jwt', tokenResponse.data.jwt)
-            localStorage.setItem('jwt_refresh', tokenResponse.data.jwt_refresh)
+            localStorage.setItem(BrowserStorageKey.Token, data.token)
+            localStorage.setItem(BrowserStorageKey.JWT, data?.jwt ?? '')
+            localStorage.setItem(BrowserStorageKey.JWTRefresh, data.jwt_refresh ?? '')
         } else {
-            sessionStorage.setItem('token', tokenResponse.data.token)
-            sessionStorage.setItem('jwt', tokenResponse.data.jwt)
+            sessionStorage.setItem(BrowserStorageKey.Token, data.token)
+            sessionStorage.setItem(BrowserStorageKey.JWT, data?.jwt ?? '')
         }
-        return tokenResponse.data
+        return data
     } catch (e) {
         throw new Error(navigator.onLine ? 'Неверный логин или пароль' : 'Потеряно соединение с интернетом')
     }
@@ -58,7 +59,7 @@ const getUserFx = createEffect<Pick<UserToken, 'jwt' | 'token'>, UserStore>(asyn
         return {
             currentUser: {
                 ...user,
-                guid: parseJwt(token.jwt).IndividualGuid,
+                guid: token.jwt ? parseJwt(token.jwt).IndividualGuid : '',
                 fullName: createFullName({ name, surname, patronymic }),
             },
             isAuthenticated: !!token,
@@ -87,22 +88,22 @@ const getLoginEuzFx = createEffect(async (data: ADName): Promise<string> => {
 
 const logoutFx = createEffect(() => {
     if (savePasswordInStorage()) {
-        localStorage.removeItem('token')
-        localStorage.removeItem('jwt')
-        localStorage.removeItem('jwt_refresh')
+        localStorage.removeItem(BrowserStorageKey.Token)
+        localStorage.removeItem(BrowserStorageKey.JWT)
+        localStorage.removeItem(BrowserStorageKey.JWTRefresh)
     } else {
-        sessionStorage.removeItem('token')
-        sessionStorage.removeItem('jwt')
-        sessionStorage.removeItem('jwt_refresh')
+        sessionStorage.removeItem(BrowserStorageKey.Token)
+        sessionStorage.removeItem(BrowserStorageKey.JWT)
+        sessionStorage.removeItem(BrowserStorageKey.JWTRefresh)
     }
 
     clearAllStores()
 })
 
 const changeSavePasswordFunc = (savePassword?: boolean) => {
-    const localStorageValue = localStorage.getItem('savePassword')
+    const localStorageValue = localStorage.getItem(BrowserStorageKey.SavePassword)
     const value = savePassword ?? JSON.parse(localStorageValue ?? 'true')
-    localStorage.setItem('savePassword', value.toString())
+    localStorage.setItem(BrowserStorageKey.SavePassword, value.toString())
 
     return value
 }
@@ -118,7 +119,7 @@ sample({ clock: getUserTokenFx.doneData, target: getUserFx })
 forward({ from: logout, to: logoutFx })
 
 !!tokenInStorage && savePasswordInStorage()
-    ? getUserFx({ token: tokenInStorage, jwt: localStorage.getItem('jwt')! })
+    ? getUserFx({ token: tokenInStorage, jwt: localStorage.getItem(BrowserStorageKey.JWT)! })
     : logoutFx()
 
 const DEFAULT_STORE: UserStore = {

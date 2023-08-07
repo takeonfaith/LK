@@ -1,4 +1,4 @@
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Title } from '../title'

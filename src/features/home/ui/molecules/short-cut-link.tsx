@@ -1,4 +1,4 @@
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants'
 import React from 'react'
 import { IconType } from 'react-icons'
 import { ShortCutLinkContainer } from '../atoms/short-cut'

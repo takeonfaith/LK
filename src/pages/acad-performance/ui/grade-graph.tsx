@@ -1,6 +1,6 @@
 import findPercentage from '@features/acad-performance/lib/find-percentage'
 import { AcadPerformance } from '@shared/api/model/acad-performance'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import Flex from '@shared/ui/flex'
 import { SkeletonShape } from '@shared/ui/skeleton-shape'
 import Subtext from '@shared/ui/subtext'

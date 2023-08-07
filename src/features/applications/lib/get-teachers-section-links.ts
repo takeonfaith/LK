@@ -31,7 +31,7 @@ import {
     VISA_CERTIFICATE,
     WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY,
 } from '@app/routes/teacher-routes'
-import { UNION_ORGANIZATION } from '@consts'
+import { UNION_ORGANIZATION } from '@shared/constants'
 
 const getTeachersSectionLinks = () => {
     return [

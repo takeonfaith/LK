@@ -41,7 +41,7 @@ import {
     WorkTransfer,
 } from './pages'
 
-import { isProduction, OLD_LK_URL } from '@consts'
+import { isProduction, OLD_LK_URL } from '@shared/constants'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
@@ -307,6 +307,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'lightGreen',
         path: PHYSICAL_EDUCATION,
+        show: !isProduction,
         Component: TeacherPhysicalEducation,
         isTemplate: false,
         group: 'OTHER',

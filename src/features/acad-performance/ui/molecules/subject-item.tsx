@@ -1,7 +1,7 @@
 import { AcadPerformance } from '@api/model/acad-performance'
 import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 import { Icon } from '@features/all-pages'
-import { GradeByScore } from '@shared/consts'
+import { GradeByScore } from '@shared/constants'
 import normalizeString from '@shared/lib/normalize-string'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'

@@ -1,4 +1,4 @@
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants'
 import axios, { AxiosError } from 'axios'
 import { addAuthHeaderToRequests, authResponseInterceptor } from './utils'
 

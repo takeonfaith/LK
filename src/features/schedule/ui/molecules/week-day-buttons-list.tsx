@@ -1,5 +1,5 @@
 import { ISchedule } from '@api/model'
-import { IWeekDays, WeekDays } from '@consts'
+import { IWeekDays, WeekDays } from '@shared/constants'
 import { scheduleModel } from '@entities/schedule'
 import useResize from '@utils/hooks/use-resize'
 import localizeDate from '@utils/localize-date'

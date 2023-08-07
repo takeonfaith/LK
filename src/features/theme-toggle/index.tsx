@@ -1,6 +1,6 @@
 import { settingsModel } from '@entities/settings'
 import { IconWrapper } from '@pages/profile/ui/top/styles'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import useTheme from '@shared/lib/hooks/use-theme'
 import { Button } from '@shared/ui/button'
 import ToggleArea, { ToggleItem } from '@shared/ui/organisms/toggle-area'

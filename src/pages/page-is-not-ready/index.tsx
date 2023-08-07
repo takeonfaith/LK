@@ -1,4 +1,4 @@
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants'
 import { Error, LinkButton } from '@ui/atoms'
 import React, { useEffect } from 'react'
 

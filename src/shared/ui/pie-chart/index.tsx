@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Size } from '../types'
-import { Colors, IColors } from '@shared/consts'
+import { Colors, IColors } from '@shared/constants'
 import { SkeletonShape } from '../skeleton-shape'
 import { Title } from '../title'
 

@@ -1,4 +1,4 @@
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import { Button } from '@shared/ui/button'
 import React from 'react'
 import { useModal } from 'widgets'

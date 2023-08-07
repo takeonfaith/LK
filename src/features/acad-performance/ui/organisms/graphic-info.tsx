@@ -1,6 +1,6 @@
 import { acadPerformanceModel } from '@entities/acad-performance'
 import findPercentage from '@features/acad-performance/lib/find-percentage'
-import { IColors } from '@shared/consts'
+import { IColors } from '@shared/constants'
 import { Button } from '@shared/ui/button'
 import Flex from '@shared/ui/flex'
 import { DotPages } from '@shared/ui/molecules'

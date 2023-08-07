@@ -1,4 +1,4 @@
-import { ThemeType, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { ThemeType, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@shared/constants'
 import { NameSettings, Param, SettingsType } from '../model'
 
 const NOTIFICATIONS_DEFAULT_VALUE = {

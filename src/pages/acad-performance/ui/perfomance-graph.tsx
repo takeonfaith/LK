@@ -2,7 +2,7 @@
 import { PreparedAcadPerformanceData } from '@entities/acad-performance/lib/prepare'
 import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 import { getSubjectIcon } from '@features/acad-performance/ui/molecules/subject-item'
-import { GradeByScore } from '@shared/consts'
+import { GradeByScore } from '@shared/constants'
 import { Divider } from '@shared/ui/divider'
 import Flex from '@shared/ui/flex'
 import List from '@shared/ui/list'

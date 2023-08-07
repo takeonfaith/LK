@@ -1,5 +1,5 @@
 import { baseNotification, businesstripNotification } from '@api/model/notification'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { personalNotificationModel } from '@entities/notification'
 import { userModel } from '@entities/user'
 import Subtext from '@shared/ui/subtext'

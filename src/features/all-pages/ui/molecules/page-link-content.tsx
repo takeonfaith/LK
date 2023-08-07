@@ -1,5 +1,5 @@
 import React from 'react'
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants'
 import { settingsModel } from '@entities/settings'
 import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'

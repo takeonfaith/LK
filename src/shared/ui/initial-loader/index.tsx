@@ -8,7 +8,8 @@ import { AiOutlineReload } from 'react-icons/ai'
 import { UserToken } from '@api/model'
 import { InitialLoaderWrapper } from './styles'
 import getLettersColors from '@shared/lib/get-letters-colors'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 
 interface Props {
     loading: boolean
@@ -21,7 +22,8 @@ const InitialLoader = ({ loading }: Props) => {
     } = userModel.selectors.useUser()
     const color = user ? getLettersColors(user?.fullName) : Colors.blue.main
 
-    const loadUser = () => userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)
+    const loadUser = () =>
+        userModel.effects.getUserFx(JSON.parse(localStorage.getItem(BrowserStorageKey.Token) ?? '') as UserToken)
 
     if (!!error)
         return (

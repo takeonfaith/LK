@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { confirmModel } from '@entities/confirm'
 import { Button, Title } from '@ui/atoms'
 import List from '@ui/list'

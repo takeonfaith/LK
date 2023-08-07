@@ -1,4 +1,4 @@
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import Badge from '@shared/ui/badge'
 import { Direction } from '@shared/ui/types'
 import styled from 'styled-components'

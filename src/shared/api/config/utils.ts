@@ -1,5 +1,6 @@
 import { userModel } from '@entities/user'
 import { getJwtToken } from '@entities/user/lib/jwt-token'
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 import { AxiosRequestConfig } from 'axios'
 import { $hrApi } from '.'
 import { refreshAccessToken } from '../user-api'
@@ -9,12 +10,12 @@ export const authResponseInterceptor = async (error: any) => {
     if (error.request.status === 403 || error.request.status === 401) {
         if (!originalRequest._retry) {
             originalRequest._retry = true
-            const refreshToken = localStorage.getItem('jwt_refresh')
+            const refreshToken = localStorage.getItem(BrowserStorageKey.JWTRefresh)
 
             try {
                 const { accessToken, refreshToken: newRefreshToken } = await refreshAccessToken(refreshToken ?? '')
-                localStorage.setItem('jwt', accessToken)
-                localStorage.setItem('jwt_refresh', newRefreshToken)
+                localStorage.setItem(BrowserStorageKey.JWT, accessToken)
+                localStorage.setItem(BrowserStorageKey.JWTRefresh, newRefreshToken)
 
                 return $hrApi(originalRequest)
             } catch (error) {

@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { Button } from '@ui/button'
 import { Title } from '@ui/title'
 import React, { ForwardedRef, HTMLInputTypeAttribute, forwardRef } from 'react'

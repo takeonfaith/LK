@@ -1,9 +1,11 @@
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
+
 export const getJwtToken = () => {
-    return localStorage.getItem('jwt')
+    return localStorage.getItem(BrowserStorageKey.JWT)
 }
 
 export const setJwtToken = (token: string) => {
-    return localStorage.setItem('jwt', token)
+    return localStorage.setItem(BrowserStorageKey.JWT, token)
 }
 
 export const parseJwt = (token: string) => {

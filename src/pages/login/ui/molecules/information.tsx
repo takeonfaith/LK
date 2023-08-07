@@ -5,7 +5,7 @@ import {
     MEMO_FRESHMEN_ROUTE,
     MEMO_TEACHER_ROUTE,
 } from '@app/routes/general-routes'
-import { OLD_LK_URL } from '@consts'
+import { OLD_LK_URL } from '@shared/constants'
 import { LinkButton } from '@ui/atoms'
 import { Button } from '@ui/button'
 import { Divider } from '@ui/divider'
