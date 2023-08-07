@@ -6,8 +6,12 @@ import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'
 import { RadioButton } from '@ui/organisms/radio-button-list'
 import React, { useState } from 'react'
-import { specialFieldsNameConfigT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 import SimpleText from '@ui/molecules/simple-text'
+import HrCheckbox from '@shared/ui/atoms/hr-checkbox'
+import TextHeader from '@shared/ui/molecules/text-header'
+import AutocompleteInput from '@shared/ui/atoms/auto-complete-input'
+import TextWarning from '@shared/ui/molecules/text-warning'
 
 type Props = IInputAreaData & {
     documents?: IInputAreaFiles
@@ -15,7 +19,13 @@ type Props = IInputAreaData & {
     setData: React.Dispatch<React.SetStateAction<IInputArea>>
     indexI: number
     indexJ?: number
-    specialFieldsNameConfig?: specialFieldsNameConfigT
+    onChange?: (value: any) => void
+    onKeyPress?: (value: any) => void
+    onBlur?: (value: any) => void
+    onKeyDown?: (value: any) => void
+    onKeyUp?: (value: any) => void
+    onFocus?: (value: any) => void
+    specialFieldsNameConfig?: SpecialFieldsNameConfig
 }
 
 const UniversalInput = (props: Props) => {
@@ -26,6 +36,7 @@ const UniversalInput = (props: Props) => {
         indexI,
         indexJ,
         type,
+        suggestions,
         items,
         title,
         documents,
@@ -40,14 +51,22 @@ const UniversalInput = (props: Props) => {
         specialFieldsNameConfig,
         minValueInput,
         maxValueInput,
+        maxValueLength,
         diff,
         visible,
+        onChange,
+        onKeyPress,
+        onBlur,
+        onKeyDown,
+        onKeyUp,
+        onFocus,
     } = props
 
     const isActive = editable ?? (changeInputArea && !documents)
     const [validDates, setValidDates] = useState(true)
 
     const handleChangeValue = (value: string | boolean, i: number, j?: number) => {
+        onChange?.(value)
         setData((area) => {
             if (Array.isArray(area.data[0])) {
                 ;(area.data as IComplexInputAreaData)[i][j ?? 0].value = value
@@ -58,17 +77,20 @@ const UniversalInput = (props: Props) => {
                     ;(area.data[i] as IInputAreaData).value = value
                 }
             }
+
             return { ...area }
         })
     }
 
     const handleChangeSelect = (page: SelectPage | SelectPage[], i: number, j?: number) => {
+        onChange?.(page)
         setData((area) => {
             if (Array.isArray(area.data[0])) {
                 ;(area.data as IComplexInputAreaData)[i][j ?? 0].value = page
             } else {
                 ;(area.data[i] as IInputAreaData).value = page
             }
+
             return { ...area }
         })
     }
@@ -76,26 +98,38 @@ const UniversalInput = (props: Props) => {
     const handleLoadFiles = (files: File[], i: number, j?: number) => {
         setData((area) => {
             ;((area.data[i] as IInputAreaData).items as CheckboxDocs[])[j ?? 0].files = files
+
             return { ...area }
         })
     }
 
     const handleRadio = (button: RadioButton | null) => {
+        onChange?.(button)
         setData((area) => {
             ;(area.data[indexI] as IInputAreaData).value = button
+
             return { ...area }
         })
     }
 
     const handleDates = (dates: string[]) => {
+        onChange?.(dates)
+        onKeyPress?.(dates)
+        onBlur?.(dates)
+        onKeyDown?.(dates)
+        onKeyUp?.(dates)
+        onFocus?.(dates)
         setData((area) => {
             ;(area.data[indexI] as IInputAreaData).value = dates
+
             return { ...area }
         })
     }
+
     if (!!specialFieldsNameConfig && !!specialType && !Object.values(specialFieldsNameConfig).includes(specialType)) {
         return null
     }
+
     return (type !== 'select' && type !== 'multiselect') || !items ? (
         type === 'checkbox' ? (
             <Checkbox
@@ -103,6 +137,22 @@ const UniversalInput = (props: Props) => {
                 isActive={isActive}
                 checked={value as boolean}
                 setChecked={(value) => handleChangeValue(value, indexI, indexJ)}
+            />
+        ) : type === 'hr-checkbox' ? (
+            <HrCheckbox
+                text={title}
+                isActive={isActive}
+                checked={value as boolean}
+                setChecked={(value) => handleChangeValue(value, indexI, indexJ)}
+            />
+        ) : type === 'auto-complete-input' ? (
+            <AutocompleteInput
+                title={title}
+                suggestions={suggestions ?? []}
+                required={required}
+                value={value as string}
+                placeholder={placeholder ?? title}
+                setValue={(value) => handleChangeValue(value, indexI, indexJ)}
             />
         ) : type === 'textarea' ? (
             <TextArea
@@ -135,6 +185,10 @@ const UniversalInput = (props: Props) => {
             />
         ) : type === 'simple-text' ? (
             <SimpleText title={title} value={value as string} visible={visible} />
+        ) : type === 'text-warning' ? (
+            <TextWarning title={title} visible={visible} />
+        ) : type === 'text-header' ? (
+            <TextHeader title={title} visible={visible} />
         ) : type === 'radio' ? (
             <RadioButtonList
                 buttons={items as RadioButton[]}
@@ -150,6 +204,7 @@ const UniversalInput = (props: Props) => {
                 title={title}
                 minValue={minValueInput}
                 maxValue={maxValueInput}
+                maxLength={maxValueLength}
                 setValue={(value) => handleChangeValue(value, indexI, indexJ)}
                 type={type}
                 isActive={isActive}

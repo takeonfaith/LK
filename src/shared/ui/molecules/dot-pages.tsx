@@ -1,4 +1,4 @@
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants'
 import List from '@ui/list'
 import { Direction } from '@ui/types'
 import React from 'react'

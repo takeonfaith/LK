@@ -8,7 +8,11 @@ export default defineConfig((conf) => {
     return {
         server: {
             open: true,
-            port: 80,
+            port: 3000,
+        },
+        esbuild: {
+            // jsxInject: (str: string) => (!str.includes('import React') ? "import React from 'react'" : ''),
+            logOverride: { 'this-is-undefined-in-esm': 'silent' },
         },
         preview: { port: 3000 },
         plugins: [
@@ -21,9 +25,6 @@ export default defineConfig((conf) => {
         build: {
             outDir: 'build',
             manifest: true,
-        },
-        esbuild: {
-            logOverride: { 'this-is-undefined-in-esm': 'silent' },
         },
     }
 })

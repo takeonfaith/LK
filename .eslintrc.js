@@ -35,5 +35,6 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         'react/jsx-key': 1,
+        "react/react-in-jsx-scope": 2,          
     },
 }

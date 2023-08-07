@@ -1,4 +1,4 @@
-import { IColors } from '@consts'
+import { IColors } from '@shared/constants'
 import React, { LazyExoticComponent } from 'react'
 
 import LoginPage from '@pages/login'

@@ -1,32 +1,35 @@
 import PageIsNotReady from '@pages/page-is-not-ready'
 
 import {
-    ArbitraryRequestPage,
+    HelpfulInformation,
+    HrApplicationsPage,
+    PartTimeEmployment,
+    Dismissal,
+    ExtraHolidayColl,
+    HolidayWork,
+    HolidayPlanning,
+    IssuanceOfLicensesPage,
+    GettingComputerEquipmentPage,
+    ConnectingComputerPage,
+    OtherItServicesPage,
     CertificateFromPlaceOfWorkPage,
     CertificateOfWorkExperiencePage,
-    CertificateTimeParentalLeavePage,
-    ConnectingComputerPage,
-    ContactInfoActualizationPage,
-    CopiesOfDocumentsFromPersonalFilePage,
-    CopyOfEmploymentRecordPage,
-    CourierPage,
-    DataVerificationPage,
-    Dismissal,
-    DownloadAdminFilesPage,
-    ExtraHolidayColl,
-    GettingComputerEquipmentPage,
-    HelpfulInformation,
-    HolidayPlanning,
-    HolidayPostponed,
-    HolidayWork,
-    HrApplicationsPage,
-    IssuanceOfLicensesPage,
     NumberOfUnusedVacationDaysPage,
-    OtherItServicesPage,
-    PartTimeEmployment,
+    CopyOfEmploymentRecordPage,
+    CopiesOfDocumentsFromPersonalFilePage,
+    CertificateTimeParentalLeavePage,
+    ArbitraryRequestPage,
+    CourierPage,
     PaymentForChildCarePage,
     PaymentOfChildBirthAllowancePage,
     PersonaIncomeTaxReferencePage,
+    ContactInfoActualizationPage,
+    HolidayTransfer,
+    DataVerificationPage,
+    TeacherPhysicalEducation,
+    PhysicalEducationStudent,
+    MedicalExamination,
+    WorkTransferChangeRate,
     PersonalNotificationsPage,
     PrinterMaintenancePage,
     QuestionPersonalAccountPage,
@@ -38,14 +41,21 @@ import {
     WorkTransfer,
 } from './pages'
 
-import { isProduction, OLD_LK_URL } from '@consts'
-import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
+import { isProduction, OLD_LK_URL } from '@shared/constants'
 import React from 'react'
 import { BiBookReader, BiGroup, BiHeadphone, BiIdCard } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
 import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
+import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
+import HolidayWorkBufferPage from '@pages/hr-applications/pages/buffer-holiday-work'
+import HolidayPlanningBufferPage from '@pages/hr-applications/pages/buffer-holiday-planning'
+import HolidayTransferBufferPage from '@pages/hr-applications/pages/buffer-holiday-transfer'
+import MedicalExaminationBufferPage from '@pages/hr-applications/pages/buffer-medical-examination'
+//import PartTimeEmploymentBufferPage from '@pages/hr-applications/pages/buffer-part-time-employment'
+import WorkTransferBufferPage from '@pages/hr-applications/pages/buffer-work-transfer'
+import DownloadAdminFilesPage from '@pages/download-admin-files'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const HR_APPLICATIONS_ROUTE = '/hr-applications'
@@ -70,8 +80,10 @@ export const INFO_ROUTE = '/helpful-information'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const DOWNLOAD_AGREEMENTS_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
+export const PHYSICAL_EDUCATION = '/physical-education'
 
 //hidden routes
+export const PHYSICAL_EDUCATION_STUDENT = '/physical-education/student/:studentId'
 export const CONTACT_INFO_ACTUALIZATION = APPLICATIONS_ROUTE + '/contact-info-actualization'
 export const DATA_VERIFICATION_ROUTE = APPLICATIONS_ROUTE + '/data-verification'
 export const ISSUANCE_OF_LICENSES = APPLICATIONS_ROUTE + '/issuance-of-licenses'
@@ -94,18 +106,24 @@ export const COURIER = APPLICATIONS_ROUTE + '/courier'
 export const PERSONA_INCOME_TAX_REFERENCE = APPLICATIONS_ROUTE + '/persona-income-tax-reference'
 export const PAYMENT_OF_CHILD_BIRTH_ALLOWANCE = APPLICATIONS_ROUTE + '/payment-of-child-birth-allowance'
 export const PAYMENT_FOR_CHILD_CARE = APPLICATIONS_ROUTE + '/payment-for-child-care'
-export const PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/part-time-deployment'
+export const PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/part-time-employment/'
 export const HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/holiday-postponed'
-export const DISMISSAL = HR_APPLICATIONS_ROUTE + '/dismissal'
-export const WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/work-transfer'
+export const DISMISSAL = HR_APPLICATIONS_ROUTE + '/dismissal/:id'
+export const WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/work-transfer/:id'
 export const EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/extra-holiday-coll'
-export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning'
-export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work'
+export const HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/holiday-planning/:id'
+export const HOLIDAY_TRANSFER = HR_APPLICATIONS_ROUTE + '/holiday-transfer/:id'
+export const HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/holiday-work/:id'
+export const WORK_TRANSFER_CHANGE_RATE = HR_APPLICATIONS_ROUTE + '/work-transfer-change-rate/:id'
+export const MEDICAL_EXAMINATION = HR_APPLICATIONS_ROUTE + '/medical-examination/:id'
 export const BUFFER_DISMISSAL = HR_APPLICATIONS_ROUTE + '/buffer-dismissal'
-export const BUFFER_WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/buffer-work-transfer'
-export const BUFFER_EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/buffer-extra-holiday-coll'
+// export const BUFFER_EXTRA_HOLIDAY_COLL = HR_APPLICATIONS_ROUTE + '/buffer-extra-holiday-coll'
 export const BUFFER_HOLIDAY_PLANNING = HR_APPLICATIONS_ROUTE + '/buffer-holiday-planning'
+export const BUFFER_HOLIDAY_TRANSFER = HR_APPLICATIONS_ROUTE + '/buffer-holiday-transfer'
 export const BUFFER_HOLIDAY_WORK = HR_APPLICATIONS_ROUTE + '/buffer-holiday-work'
+export const BUFFER_MEDICAL_EXAMINATION = HR_APPLICATIONS_ROUTE + '/buffer-medical-examination'
+export const BUFFER_WORK_TRANSFER = HR_APPLICATIONS_ROUTE + '/buffer-work-transfer'
+// export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday-postponed'
 export const BUFFER_PARTTIME_EMPLOYMENT = HR_APPLICATIONS_ROUTE + '/buffer-part-time-deployment'
 export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday-postponed'
 // export const GENERATE_SCHEDULE = '/generate-schedule'
@@ -283,6 +301,28 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'FINANCES_DOCS',
     },
+    'physical-education': {
+        id: 'physical-education',
+        title: 'Физическая культура',
+        icon: <FiFileText />,
+        color: 'lightGreen',
+        path: PHYSICAL_EDUCATION,
+        show: !isProduction,
+        Component: TeacherPhysicalEducation,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'physical-education-student': {
+        id: 'physical-education-student',
+        title: 'Физическая культура',
+        icon: <FiFileText />,
+        color: 'pink',
+        path: PHYSICAL_EDUCATION_STUDENT,
+        Component: PhysicalEducationStudent,
+        isTemplate: false,
+        group: 'OTHER',
+        show: false,
+    },
     oop: {
         id: 'oop',
         title: 'Образовательные программы',
@@ -355,34 +395,6 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
     },
-    'part-time-deployment': {
-        id: 'part-time-deployment',
-        title: 'Заявление на трудоустройство по совместительству',
-        path: BUFFER_PARTTIME_EMPLOYMENT,
-        icon: <FiFileText />,
-        color: 'blue',
-        Component: isProduction ? ApplicationRedirect : PartTimeEmployment,
-        isTemplate: false,
-        group: 'OTHER',
-        isSubPage: true,
-        backButtonText: 'Назад к кадровым заявлениям',
-        subPageHeaderTitle: '',
-        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
-    },
-    'holiday-postponed': {
-        id: 'holiday-postponed',
-        title: 'Заявление на перенос отпуска',
-        path: BUFFER_HOLIDAY_POSTPONED,
-        icon: <FiFileText />,
-        color: 'blue',
-        Component: isProduction ? ApplicationRedirect : HolidayPostponed,
-        isTemplate: false,
-        group: 'OTHER',
-        isSubPage: true,
-        backButtonText: 'Назад к кадровым заявлениям',
-        subPageHeaderTitle: '',
-        fallbackPrevPage: HR_APPLICATIONS_ROUTE,
-    },
     dismissal: {
         id: 'dismissal2',
         title: 'Заявление на увольнение',
@@ -398,12 +410,22 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
     'holiday-work': {
-        id: 'part-time-deployment',
+        id: 'part-time-employment',
         title: 'Заявление о привлечении к работе в выходной день',
         path: BUFFER_HOLIDAY_WORK,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProduction ? ApplicationRedirect : HolidayWork,
+        Component: isProduction ? ApplicationRedirect : HolidayWorkBufferPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'medical-examination': {
+        id: 'part-time-employment',
+        title: 'Заявление о диспансеризации',
+        path: BUFFER_MEDICAL_EXAMINATION,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : MedicalExaminationBufferPage,
         isTemplate: false,
         group: 'OTHER',
         isSubPage: true,
@@ -417,7 +439,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: BUFFER_HOLIDAY_PLANNING,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProduction ? ApplicationRedirect : HolidayPlanning,
+        Component: isProduction ? ApplicationRedirect : HolidayPlanningBufferPage,
         isTemplate: false,
         group: 'OTHER',
         isSubPage: true,
@@ -425,13 +447,13 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         subPageHeaderTitle: '',
         fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
-    'extra-holiday-coll': {
-        id: 'dismissal',
-        title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
-        path: BUFFER_EXTRA_HOLIDAY_COLL,
+    'holiday-transfer': {
+        id: 'holiday-transfer',
+        title: 'Заявление о переносе отпуска',
+        path: BUFFER_HOLIDAY_TRANSFER,
         icon: <FiFileText />,
         color: 'blue',
-        Component: isProduction ? ApplicationRedirect : ExtraHolidayColl,
+        Component: isProduction ? ApplicationRedirect : HolidayTransferBufferPage,
         isTemplate: false,
         group: 'OTHER',
         isSubPage: true,
@@ -439,10 +461,72 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         subPageHeaderTitle: '',
         fallbackPrevPage: HR_APPLICATIONS_ROUTE,
     },
+
     'work-transfer': {
         id: 'dismissal',
         title: 'Заявление на перевод',
         path: BUFFER_WORK_TRANSFER,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : WorkTransferBufferPage,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+
+    'part-time-employment': {
+        id: 'part-time-employment',
+        title: 'Заявление на трудоустройство по совместительству',
+        path: PARTTIME_EMPLOYMENT,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : PartTimeEmployment,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'holiday-work-form': {
+        id: 'part-time-employment',
+        title: 'Заявление о привлечении к работе в выходной день',
+        path: HOLIDAY_WORK,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : HolidayWork,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'medical-examination-form': {
+        id: 'part-time-employment',
+        title: 'Заявление о диспансеризации',
+        path: MEDICAL_EXAMINATION,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : MedicalExamination,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'holiday-planning-form': {
+        id: 'holiday-postponed',
+        title: 'Заявление о предоставлении отпуска',
+        path: HOLIDAY_PLANNING,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : HolidayPlanning,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'holiday-transfer-form': {
+        id: 'holiday-transfer',
+        title: 'Заявление о переносе отпуска',
+        path: HOLIDAY_TRANSFER,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : HolidayTransfer,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'work-transfer-form': {
+        id: 'work-transfer-form',
+        title: 'Заявление на перевод',
+        path: WORK_TRANSFER,
         icon: <FiFileText />,
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : WorkTransfer,
@@ -452,6 +536,26 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         backButtonText: 'Назад к кадровым заявлениям',
         subPageHeaderTitle: '',
         fallbackPrevPage: HR_APPLICATIONS_ROUTE,
+    },
+    'work-transfer-change-rate-form': {
+        id: 'work-transfer-form',
+        title: 'Заявление на перевод',
+        path: WORK_TRANSFER_CHANGE_RATE,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : WorkTransferChangeRate,
+        isTemplate: false,
+        group: 'OTHER',
+    },
+    'extra-holiday-coll': {
+        id: 'dismissal',
+        title: 'Заявление о предоставлении дополнительного отпуска по коллективному договору',
+        path: EXTRA_HOLIDAY_COLL,
+        icon: <FiFileText />,
+        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : ExtraHolidayColl,
+        isTemplate: false,
+        group: 'OTHER',
     },
     dismissal_form: {
         id: 'dismissal',
@@ -691,6 +795,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
     },
+
     'personal-income-tax-reference': {
         id: 'personal-income-tax-reference',
         title: 'Справка по форме 2-НДФЛ',

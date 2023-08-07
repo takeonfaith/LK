@@ -30,7 +30,7 @@ import {
     FULL_TIME_PART_TIME_FORM,
     ACCOMMODATION_FOR_GRADUATES,
 } from '@app/routes/routes'
-import { isProduction, RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
+import { isProduction, RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@shared/constants'
 import { Section } from '@features/applications/ui/molecules/create-application-list'
 
 const getSectionLinks = (): Section[] => {

@@ -1,12 +1,13 @@
 import { LOGIN_ROUTE, publicRoutes } from '@app/routes/general-routes'
 import { adminLinksModel } from '@entities/admin-links'
+import { applicationsModel } from '@entities/applications'
 import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
-import React, { Suspense, useEffect, useState } from 'react'
+import { loadDivisions } from '@pages/hr-applications/model/divisions'
+import React, { Suspense, useEffect } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
+import ContentLayout from 'widgets/content-layout'
 import { userModel } from '../../entities/user'
-import ContentLayout from '../../widgets/content-layout'
-import { applicationsModel } from '@entities/applications'
 
 const Router = () => {
     const {
@@ -15,23 +16,21 @@ const Router = () => {
 
     const { data } = adminLinksModel.selectors.useData()
     const { settings } = settingsModel.selectors.useSettings()
-    const [delayedAuth, setDelayedAuth] = useState(isAuthenticated)
 
     useEffect(() => {
         if (isAuthenticated) {
-            setTimeout(() => {
-                setDelayedAuth(true)
-            }, 1000)
-            adminLinksModel.effects.getFx()
-            applicationsModel.effects.getUserDataApplicationsFx()
-            applicationsModel.effects.getWorkerPosts()
-        } else {
-            setDelayedAuth(false)
+            // TODO: add custom event for all effects/events
+            // setTimeout(() => {
+            //     setDelayedAuth(true)
+            // }, 1000)
+            if (user?.user_status === 'staff') {
+                adminLinksModel.effects.getFx()
+                applicationsModel.effects.getUserDataApplicationsFx()
+                applicationsModel.effects.getWorkerPosts()
+                loadDivisions()
+            }
         }
-        return () => {
-            setDelayedAuth(false)
-        }
-    }, [isAuthenticated])
+    }, [isAuthenticated, user])
 
     useEffect(() => {
         if (user && settings) {
@@ -43,7 +42,7 @@ const Router = () => {
         }
     }, [user, data, settings])
 
-    return isAuthenticated && delayedAuth ? (
+    return isAuthenticated ? (
         <ContentLayout />
     ) : (
         <Suspense fallback={null}>

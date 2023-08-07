@@ -1,6 +1,6 @@
 import { Payments } from '@api/model'
 import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { IColors } from '@consts'
+import { IColors } from '@shared/constants'
 import { paymentsModel } from '@entities/payments'
 import PaymentButton from '@features/payment-button'
 import Debt from '@features/payments/debt'

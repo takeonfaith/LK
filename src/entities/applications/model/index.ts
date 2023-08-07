@@ -1,9 +1,9 @@
 import { applicationApi } from '@api'
 import { Application, UserApplication, WorkerApplication } from '@api/model'
-import { createEvent, forward } from 'effector'
-import { useStore } from 'effector-react/compat'
-import { createEffect, createStore } from 'effector'
+import { applicationsModel } from '@entities/hr-applications'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
+import { combine, createEffect, createEvent, createStore, forward } from 'effector'
+import { useStore } from 'effector-react/compat'
 
 interface ApplicationsStore {
     listApplication: Application[] | null
@@ -19,14 +19,15 @@ export interface ApplicationCreating {
 
 const DEFAULT_STORE = { listApplication: null, error: null, dataUserApplication: null, dataWorkerApplication: null }
 
-const useApplications = () => {
-    const { listApplication, dataUserApplication, dataWorkerApplication, error } = useStore($applicationsStore)
-    return {
-        data: { listApplication, dataUserApplication, dataWorkerApplication },
-        loading: useStore(getUserDataApplicationsFx.pending),
-        error: error,
+const getWorkerPostsFx = createEffect(async (): Promise<any[]> => {
+    const response = await applicationApi.getWorkerData()
+    try {
+        return response.data
+    } catch (_) {
+        throw new Error('Не удалось загрузить информацию о пользователе')
     }
-}
+})
+
 const getApplicationsFx = createEffect(async (): Promise<Application[]> => {
     const response = await applicationApi.get()
     try {
@@ -35,7 +36,6 @@ const getApplicationsFx = createEffect(async (): Promise<Application[]> => {
         throw new Error('Не удалось загрузить заявления')
     }
 })
-
 const getUserDataApplicationsFx = createEffect(async (): Promise<UserApplication> => {
     const response = await applicationApi.getAppData()
 
@@ -55,14 +55,22 @@ const postApplicationFx = createEffect(async (data: ApplicationCreating): Promis
         throw new Error(resultAddApplication)
     }
 })
-const getWorkerPosts = createEffect(async (): Promise<any[]> => {
-    const response = await applicationApi.getWorkerData()
-    try {
-        return response.data
-    } catch (_) {
-        throw new Error('Не удалось загрузить информацию о пользователе')
+
+const useApplications = () => {
+    const { listApplication, dataUserApplication, dataWorkerApplication, error } = useStore($applicationsStore)
+    return {
+        data: { listApplication, dataUserApplication, dataWorkerApplication },
+        loading: useStore(getUserDataApplicationsFx.pending),
+        workerLoading: useStore(
+            combine(
+                getWorkerPostsFx.pending,
+                applicationsModel.effects.postApplicationFx.pending,
+                (first, second) => first || second,
+            ),
+        ),
+        error: error,
     }
-})
+}
 
 const clearStore = createEvent()
 
@@ -93,15 +101,15 @@ const $applicationsStore = createStore<ApplicationsStore>(DEFAULT_STORE)
         ...oldData,
         error: newData.message,
     }))
-    .on(getWorkerPosts, (oldData) => ({
+    .on(getWorkerPostsFx, (oldData) => ({
         ...oldData,
         error: null,
     }))
-    .on(getWorkerPosts.doneData, (oldData, newData) => ({
+    .on(getWorkerPostsFx.doneData, (oldData, newData) => ({
         ...oldData,
         dataWorkerApplication: newData,
     }))
-    .on(getWorkerPosts.failData, (oldData, newData) => ({
+    .on(getWorkerPostsFx.failData, (oldData, newData) => ({
         ...oldData,
         error: newData.message,
     }))
@@ -117,7 +125,7 @@ export const effects = {
     getApplicationsFx,
     getUserDataApplicationsFx,
     postApplicationFx,
-    getWorkerPosts,
+    getWorkerPosts: getWorkerPostsFx,
 }
 
 export const events = {

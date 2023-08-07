@@ -10,7 +10,7 @@ import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { applicationsModel } from '@entities/applications'
 import getReasonAcademic from '@pages/applications/pages/multifunctional-center/provision-academic-leave/lib/get-reason-academic'
-import { specialFieldsNameConfigT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
@@ -18,7 +18,7 @@ const ApplicationProvisionAcademicLeave = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameConfigT>({})
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
     const isDone = completed ?? false
     const {
         data: { dataUserApplication },
@@ -44,7 +44,7 @@ const ApplicationProvisionAcademicLeave = () => {
                         {...form}
                         collapsed={isDone}
                         setData={setForm as LoadedState}
-                        specialFieldsName={specialFieldsName}
+                        specialFieldsNameConfig={specialFieldsName}
                     />
                     <SubmitButton
                         text={!isDone ? 'Отправить' : 'Отправлено'}
@@ -57,7 +57,7 @@ const ApplicationProvisionAcademicLeave = () => {
                         repeatable={false}
                         buttonSuccessText="Отправлено"
                         isDone={isDone}
-                        isActive={checkFormFields(form, Object.values(specialFieldsName))}
+                        isActive={checkFormFields(form, specialFieldsName)}
                         popUpFailureMessage={'Для отправки формы необходимо, чтобы все поля были заполнены'}
                         popUpSuccessMessage="Данные формы успешно отправлены"
                     />

@@ -1787,7 +1787,7 @@ effector-react@^22.3.4:
   dependencies:
     use-sync-external-store "^1.0.0"
 
-effector@^22.0.2, effector@^22.4.0:
+effector@^22.0.2, effector@^22.1.2, effector@^22.4.0:
   version "22.8.6"
   resolved "https://registry.npmjs.org/effector/-/effector-22.8.6.tgz"
   integrity sha512-Bkg/rlPs7J4dmOFGPLLcL7X0SZeA8WdRnyC2X4tGVo7i6M8oxYwtNOkEUact/zIT/MgqTGm9A8T40dPnr8oXmA==
@@ -2873,6 +2873,11 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/path-type/-/path-type-4.0.0.tgz"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+
+patronum@^1.17.0:
+  version "1.17.0"
+  resolved "https://registry.npmjs.org/patronum/-/patronum-1.17.0.tgz"
+  integrity sha512-FCcbjJ52ELV5ikaqURjniCEV4IfrtBP6BSOBpmP7iCvC9seo83YjymSfxaaRBG5vkn/HRKf/5SDpHangJylBKw==
 
 picocolors@^1.0.0:
   version "1.0.0"

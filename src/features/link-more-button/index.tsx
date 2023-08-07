@@ -1,6 +1,6 @@
 import { IRoute } from '@app/routes/general-routes'
 import { contextMenuModel } from '@entities/context-menu'
-import { Colors, IColors } from '@shared/consts'
+import { Colors, IColors } from '@shared/constants'
 import { Button } from '@shared/ui/button'
 import React from 'react'
 import { FiMoreVertical } from 'react-icons/fi'
@@ -11,7 +11,7 @@ type Props = {
 }
 
 const LinkMoreButton = ({ route }: Props) => {
-    const textColor = Colors[(route.color.length ? route.color : 'blue') as keyof IColors].main
+    const textColor = Colors[(route?.color?.length ? route.color : 'blue') as keyof IColors].main
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault()

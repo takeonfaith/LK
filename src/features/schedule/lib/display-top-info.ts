@@ -1,5 +1,5 @@
 import { IWeekSchedule } from '@api/model'
-import { IWeekDays } from '@consts'
+import { IWeekDays } from '@shared/constants'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 
 const displayTopInfo = (weekSchedule: Nullable<IWeekSchedule>, day: keyof IWeekDays) => {

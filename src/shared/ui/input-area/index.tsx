@@ -1,4 +1,4 @@
-import { Colors, FileFormats } from '@consts'
+import { Colors, FileFormats } from '@shared/constants'
 import { Button, Divider, FileLink, Message } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import FileInput from '@ui/file-input'
@@ -28,7 +28,7 @@ const InputArea = ({
     divider,
     collapsed,
     links,
-    specialFieldsName,
+    specialFieldsNameConfig,
 }: IInputArea & { setData: SetData; divider?: boolean }) => {
     //TODO: rewrite, this hook binds the inputs and their wrapper too much, so I can't quickly rewrite
     const {
@@ -46,7 +46,7 @@ const InputArea = ({
     } = useInputArea({
         documents,
         optionalCheckbox,
-        data,
+        data: (data as IInputAreaData[]).filter(Boolean),
         setData: setData as React.Dispatch<React.SetStateAction<IInputArea>>,
         optional,
         collapsed,
@@ -79,6 +79,7 @@ const InputArea = ({
                     {!Array.isArray(data[0])
                         ? (data as IInputAreaData[]).map((attr, index) => {
                               // TODO: Remove UniversalInput, inputs performing different tasks should be different components
+
                               return (
                                   <UniversalInput
                                       key={index}
@@ -86,7 +87,7 @@ const InputArea = ({
                                       changeInputArea={changeInputArea && !optionalCheckbox?.value}
                                       setData={setData as LoadedState}
                                       indexI={index}
-                                      specialFieldsNameConfig={specialFieldsName}
+                                      specialFieldsNameConfig={specialFieldsNameConfig}
                                       {...attr}
                                   />
                               )
@@ -103,7 +104,7 @@ const InputArea = ({
                                                   setData={setData as LoadedState}
                                                   indexI={i}
                                                   indexJ={j}
-                                                  specialFieldsNameConfig={specialFieldsName}
+                                                  specialFieldsNameConfig={specialFieldsNameConfig}
                                                   {...attr}
                                               />
                                           )

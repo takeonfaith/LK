@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { TSettingsFields } from '../../model'
 
 const TextFieldStyled = styled.div`
+    cursor: pointer;
     width: 100%;
     display: flex;
     align-items: center;

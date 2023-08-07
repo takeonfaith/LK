@@ -6,7 +6,7 @@ import { BiRuble } from 'react-icons/bi'
 import { Icon } from '@features/all-pages'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 
 const PaymentItemWrapper = styled.div`
     width: 100%;

@@ -1,6 +1,6 @@
 import { NotificationType } from '@entities/lk-notifications'
 import { Icon } from '@features/all-pages'
-import { IColors } from '@shared/consts'
+import { IColors } from '@shared/constants'
 import NewVersionMessage from '@shared/ui/new-version-message'
 import React from 'react'
 import { BiNews, BiRuble } from 'react-icons/bi'

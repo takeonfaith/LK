@@ -9,6 +9,7 @@ const Column = styled.div<{
     width?: string
     overflow?: string
     showFull?: boolean
+    onRowClick?: () => void
 }>`
     width: ${({ width }) => width ?? '100%'};
     min-width: ${({ width }) => width ?? 'auto'};

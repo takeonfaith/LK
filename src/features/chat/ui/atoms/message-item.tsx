@@ -1,5 +1,5 @@
 import { Message } from '@api/model'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { contextMenuModel } from '@entities/context-menu'
 import localizeDate from '@utils/localize-date'
 import React from 'react'

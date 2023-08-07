@@ -10,6 +10,8 @@ export const TitleWrapper = styled.div<{ align: Align; bottomGap: boolean | stri
     justify-content: ${({ align }) =>
         align ? (align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : align) : 'center'};
 
+    color: var(--text);
+
     svg {
         min-width: ${({ size }) => `${58 - size * 10}px`};
         height: ${({ size }) => `${58 - size * 10}px`};

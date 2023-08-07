@@ -1,4 +1,4 @@
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import englishToRussianKeyboard from '@shared/ui/search/lib/english-to-russian-keyboard'
 import isValidEnglishText from '@shared/ui/search/lib/is-valid-english-text'
 import Subtext from '@shared/ui/subtext'

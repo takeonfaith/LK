@@ -1,5 +1,5 @@
 import { projectActivitesModel } from '@entities/project-activites'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import { Message } from '@shared/ui/message'
 import PageBlock from '@shared/ui/page-block'
 import Subtext from '@shared/ui/subtext'

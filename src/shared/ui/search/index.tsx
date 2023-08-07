@@ -1,5 +1,5 @@
 import PerhapsYouMeant from '@features/perhaps-you-meant'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import useOnClickOutside from '@shared/lib/hooks/use-on-click-outside'
 import limitNumber from '@shared/lib/limit-number'
 import React, { useEffect, useRef, useState } from 'react'

@@ -1,5 +1,5 @@
 import { IWeekSchedule } from '@api/model'
-import { IWeekDays, WeekDays } from '@consts'
+import { IWeekDays, WeekDays } from '@shared/constants'
 import { scheduleModel } from '@entities/schedule'
 import displayTopInfo from '@features/schedule/lib/display-top-info'
 import useResize from '@utils/hooks/use-resize'

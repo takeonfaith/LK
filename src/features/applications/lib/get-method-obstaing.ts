@@ -1,11 +1,11 @@
 import { IInputAreaData } from '@ui/input-area/model'
-import { specialFieldsNameConfigT, specialFieldsNameT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig, SpecialFieldsName } from '@entities/applications/consts'
 
 type radioType = { id: number; title: string }
 
-const getMethodObtaining = (data: IInputAreaData[]): specialFieldsNameConfigT => {
+const getMethodObtaining = (data: IInputAreaData[]): SpecialFieldsNameConfig => {
     const methodObtainingField = data.find((item: IInputAreaData) => item.fieldName === 'method_obtaining')
-    let resultNameField: specialFieldsNameT = null
+    let resultNameField: SpecialFieldsName = null
     if (!!methodObtainingField?.value) {
         const valueMethod = methodObtainingField?.value as radioType
         if (valueMethod.title === 'На электронную почту') {
