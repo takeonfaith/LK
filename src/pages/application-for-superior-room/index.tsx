@@ -63,7 +63,7 @@ const ApplicationForSuperiorRoom = () => {
                         <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                         <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
                             Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
-                            направлены Вам в срок до 2 сентября 2023 года на указанную в заявке почту:{' '}
+                            направлены Вам в срок до 18 августа 2023 года на указанную в заявке почту:{' '}
                             {(form.data?.[2] as IInputAreaData).value}
                         </Message>
                         <SubmitButton
