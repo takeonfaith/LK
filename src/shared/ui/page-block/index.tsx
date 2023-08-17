@@ -11,10 +11,6 @@ const PageBlockStyled = styled(BlockWrapper)`
     @media (min-width: 1001px) {
         padding-top: 70px;
     }
-
-    @media (max-width: 1000px) {
-        padding-top: 50px;
-    }
 `
 
 const TopRightCornerElement = styled.div`
