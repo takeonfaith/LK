@@ -33,9 +33,7 @@ const ApplicationForSuperiorRoom = () => {
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    // Временная разблокировка страницы КПК для Dev
-    // const isDone = (completed || !data?.is_avaliable) ?? false
-    const isDone = false
+    const isDone = (completed || !data?.is_avaliable) ?? false
 
     const {
         data: { user },
@@ -45,11 +43,10 @@ const ApplicationForSuperiorRoom = () => {
         return <Error text={'Данный раздел недоступен для вашей формы обучения'} />
     }
 
-    // Временная разблокировка страницы КПК для Dev
-    // const statusForm = getStatusFormSuperiorRoom(user)
-    // if (!!statusForm) {
-    //     return <Error text={statusForm} />
-    // }
+    const statusForm = getStatusFormSuperiorRoom(user)
+    if (!!statusForm) {
+        return <Error text={statusForm} />
+    }
 
     useEffect(() => {
         //fetch
@@ -66,7 +63,7 @@ const ApplicationForSuperiorRoom = () => {
                         <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                         <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
                             Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
-                            направлены Вам в срок до 2 сентября 2022 года на указанную в заявке почту:{' '}
+                            направлены Вам в срок до 21 августа 2023 года на указанную в заявке почту:{' '}
                             {(form.data?.[2] as IInputAreaData).value}
                         </Message>
                         <SubmitButton
