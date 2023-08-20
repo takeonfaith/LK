@@ -28,7 +28,7 @@ const useSettings = () => {
     const [fullSettings, setFullSettings] = useState<TFullSettingsModel | null>(null)
     const { property: settingsProperty } = settings['settings-notifications']
     const { property: appearanceProperty } = settings['settings-appearance']
-    const { widgetPayment, widgetSchedule } = settings['settings-home-page'].property
+    const { widgetPayment, widgetSchedule, news } = settings['settings-home-page'].property
     const requiredLeftsideBarItems =
         user?.user_status === 'staff' ? REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG : REQUIRED_LEFTSIDE_BAR_CONFIG
     useEffect(() => {
@@ -124,6 +124,15 @@ const useSettings = () => {
                                     value: !!state,
                                 }),
                         },
+                    },
+                    news: {
+                        value: news as boolean,
+                        action: (state) =>
+                            settingsModel.events.updateSetting({
+                                nameSettings: 'settings-home-page',
+                                nameParam: 'news',
+                                value: !!state,
+                            }),
                     },
                 },
             }),

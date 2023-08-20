@@ -40,6 +40,7 @@ const getDefaultSettings = (userId = ''): SettingsType => ({
                 pages: ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students'],
                 widgetSchedule: true,
                 widgetPayment: true,
+                news: true,
             },
         },
         [NameSettings['settings-customize-menu']]: {
