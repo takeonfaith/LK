@@ -40,6 +40,8 @@ const signContractFx = createEffect(async (contractId: string) => {
     }
 })
 
+signContractFx.done.watch(() => getPaymentsFx())
+
 const clearStore = createEvent()
 
 const $paymentsStore = createStore<PaymentsStore>(DEFAULT_STORE)
