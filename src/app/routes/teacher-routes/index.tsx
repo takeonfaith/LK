@@ -69,6 +69,8 @@ export const PPS_VOTE_ROUTE = '/pps_vote2020'
 export const CHILDREN_ROUTE = '/children'
 export const PPS_CONTEST_ROUTE = '/pps_contest'
 export const ElECTRONIC_STATEMENTS = '/electronic-statements'
+export const ADDRESSES_AND_CONTACTS = '/addresses-and-contacts'
+export const STRUCTURE_OF_THE_UNIVERSITY = '/structure-of-the-university'
 export const VACATION_ROUTE = '/vacation'
 export const KPI_PPS_ROUTE = '/kpi_pps'
 export const KPI_ADMIN_ROUTE = '/kpi_admin'
@@ -212,7 +214,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         },
         color: 'blue',
         isTemplate: false,
-        group: 'LEARNING_ACTIVITIES',
+        group: 'FINANCES_DOCS',
     },
     'kpi-pps': {
         id: 'kpi-pps',
@@ -365,6 +367,40 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
         show: false,
+    },
+    'addresses-and-contacts': {
+        id: 'addresses-and-contacts',
+        title: 'Адреса и контакты',
+        icon: <BiIdCard />,
+        path: ADDRESSES_AND_CONTACTS,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace('https://mospolytech.ru/ob-universitete/adresa-i-kontakty/')
+            }, [])
+
+            return null
+        },
+        color: 'blue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
+    'structure-of-the-university': {
+        id: 'structure-of-the-university',
+        title: 'Структура университета',
+        icon: <BiIdCard />,
+        path: STRUCTURE_OF_THE_UNIVERSITY,
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(
+                    'https://mospolytech.ru/ob-universitete/rukovodstvo-i-struktura/strukturnye-podrazdeleniya/',
+                )
+            }, [])
+
+            return null
+        },
+        color: 'blue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
     },
     // 'generate-schedule': {
     //     id: 'generate-schedule',

@@ -102,7 +102,7 @@ export interface IRoutes {
 
 export enum Groups {
     GENERAL = 'Основное',
-    FINANCES_DOCS = 'Финансы и документы',
+    FINANCES_DOCS = 'Кадровая среда',
     LEARNING_ACTIVITIES = 'Учебная деятельность',
     OTHER = 'Находится в разработке',
     COMMUNICATION = 'Коммуникация',
