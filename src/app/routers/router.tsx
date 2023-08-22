@@ -23,9 +23,9 @@ const Router = () => {
             // setTimeout(() => {
             //     setDelayedAuth(true)
             // }, 1000)
+            applicationsModel.effects.getUserDataApplicationsFx()
             if (user?.user_status === 'staff') {
                 adminLinksModel.effects.getFx()
-                applicationsModel.effects.getUserDataApplicationsFx()
                 applicationsModel.effects.getWorkerPosts()
                 loadDivisions()
             }
