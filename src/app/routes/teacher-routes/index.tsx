@@ -56,6 +56,7 @@ import MedicalExaminationBufferPage from '@pages/hr-applications/pages/buffer-me
 //import PartTimeEmploymentBufferPage from '@pages/hr-applications/pages/buffer-part-time-employment'
 import WorkTransferBufferPage from '@pages/hr-applications/pages/buffer-work-transfer'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
+import { Onboarding } from '../general-routes/pages'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const HR_APPLICATIONS_ROUTE = '/hr-applications'
@@ -71,6 +72,7 @@ export const PPS_CONTEST_ROUTE = '/pps_contest'
 export const ElECTRONIC_STATEMENTS = '/electronic-statements'
 export const ADDRESSES_AND_CONTACTS = '/addresses-and-contacts'
 export const STRUCTURE_OF_THE_UNIVERSITY = '/structure-of-the-university'
+export const ONBOARDING = '/onboarding'
 export const VACATION_ROUTE = '/vacation'
 export const KPI_PPS_ROUTE = '/kpi_pps'
 export const KPI_ADMIN_ROUTE = '/kpi_admin'
@@ -398,6 +400,16 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
 
             return null
         },
+        color: 'blue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
+    onboarding: {
+        id: 'onboarding',
+        title: 'Новому работнику',
+        icon: <BiIdCard />,
+        path: ONBOARDING,
+        Component: Onboarding,
         color: 'blue',
         isTemplate: false,
         group: 'FINANCES_DOCS',
