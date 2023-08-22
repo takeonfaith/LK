@@ -43,7 +43,7 @@ import {
 
 import { isProduction, OLD_LK_URL } from '@shared/constants'
 import React from 'react'
-import { BiBookReader, BiGroup, BiHeadphone, BiIdCard } from 'react-icons/bi'
+import { BiBookOpen, BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiPlusMedical, BiWifi } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
@@ -57,6 +57,7 @@ import MedicalExaminationBufferPage from '@pages/hr-applications/pages/buffer-me
 import WorkTransferBufferPage from '@pages/hr-applications/pages/buffer-work-transfer'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import { Onboarding } from '../general-routes/pages'
+import { MdPsychology } from 'react-icons/md'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const HR_APPLICATIONS_ROUTE = '/hr-applications'
@@ -913,5 +914,78 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'social-environment': {
+        id: 'Социальная среда',
+        title: 'Социальная среда',
+        color: 'pink',
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace('https://profkommospolytech.ru/')
+            }, [])
+
+            return null
+        },
+        icon: <BiGroup />,
+        isTemplate: false,
+        path: '/social-environment',
+    },
+    'psychological-help': {
+        id: 'Психологическая помощь',
+        title: 'Психологическая помощь',
+        color: 'green',
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace(
+                    'https://mospolytech.ru/studencheskaya-zhizn/medical-help/slujba-psihologicheskoy-pomoschi/',
+                )
+            }, [])
+
+            return null
+        },
+        icon: <MdPsychology />,
+        isTemplate: false,
+        path: '/psychological-help',
+    },
+    'health-care': {
+        id: 'Медицинская помощь',
+        title: 'Медицинская помощь',
+        color: 'red',
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace('https://mospolytech.ru/studencheskaya-zhizn/medical-help/medicinskaya-slujba/')
+            }, [])
+
+            return null
+        },
+        icon: <BiPlusMedical />,
+        isTemplate: false,
+        path: '/health-care',
+    },
+    'wifi-at-the-university': {
+        id: 'WI-FI  в университете',
+        title: 'WI-FI  в университете',
+        color: 'purple',
+        Component: () => {
+            return null
+        },
+        icon: <BiWifi />,
+        isTemplate: false,
+        path: '/wifi-at-the-university',
+    },
+    brandbook: {
+        id: 'Брендбук',
+        title: 'Брендбук',
+        color: 'orange',
+        Component: () => {
+            React.useEffect(() => {
+                window.location.replace('https://mospolytech.ru/ob-universitete/brandbook/')
+            }, [])
+
+            return null
+        },
+        icon: <BiBookOpen />,
+        isTemplate: false,
+        path: '/brandbook',
     },
 })
