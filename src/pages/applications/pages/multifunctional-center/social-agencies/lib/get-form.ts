@@ -6,7 +6,7 @@ import getStudentSubdivisions from '@pages/applications/lib/get-student-subdivis
 import getMethodObtainingFields from '@features/applications/lib/get-method-obtaining-fields'
 
 const SocialPlaceOfReferenceOptions = [
-    { id: 0, title: 'в Пенсионный фонд Российской Федерации (ПФР)' },
+    { id: 0, title: 'в Фонд пенсионного и социального страхования Российской Федерации (СФР)' },
     { id: 1, title: 'в Управление социальной защиты населения (УСЗН)' },
     { id: 2, title: 'в военный комиссариат' },
     { id: 3, title: 'в Многофункциональный центр (МФЦ)' },
