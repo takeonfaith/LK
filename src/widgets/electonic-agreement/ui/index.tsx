@@ -10,6 +10,7 @@ import Flex from '@shared/ui/flex'
 import styled from 'styled-components'
 import Subtext from '@shared/ui/subtext'
 import { Colors } from '@shared/constants'
+import { Effect } from 'effector'
 
 const ElectornicAgreementStyled = styled.div`
     .info-text {
@@ -24,18 +25,17 @@ const ElectornicAgreementStyled = styled.div`
 
 interface Props {
     children: React.ReactChild
-    submit: () => Promise<void> | void
+    submit: Effect<void, any, Error>
     data: any
     setData?: React.Dispatch<any>
     isDone?: boolean
 }
 
-const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }: Props) => {
+const ElectornicAgreement = ({ children, data, submit, isDone = false }: Props) => {
     const { open } = useModal()
     const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
         isDone,
         submit,
-        setData,
     })
 
     if (!data) return null

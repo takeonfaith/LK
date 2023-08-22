@@ -7,9 +7,7 @@ import { ElectornicAgreement } from 'widgets/electonic-agreement'
 
 const ElectronicInteractionAgreementPage = () => {
     const { data, preparedData, error, loading } = electronicInteractionModel.selectors.useData()
-    const handleSubmit = async () => {
-        electronicInteractionModel.effects.postFx()
-    }
+    const handleSubmit = electronicInteractionModel.effects.postFx
 
     const load = () => electronicInteractionModel.effects.getFx()
 
@@ -18,7 +16,7 @@ const ElectronicInteractionAgreementPage = () => {
             <PageBlock>
                 {preparedData && (
                     <ElectornicAgreement data={preparedData} submit={handleSubmit}>
-                        <p className="info-text">
+                        <div className="info-text">
                             Я, <b>{preparedData.fio}</b>,
                             <p>
                                 <b>Паспорт: </b>
@@ -47,7 +45,7 @@ const ElectronicInteractionAgreementPage = () => {
                                 об электронном взаимодействии, опубликованного на официальном сайте Университета, и
                                 выражаю согласие на подписание электронных документов в личном кабинете.
                             </p>
-                        </p>
+                        </div>
                     </ElectornicAgreement>
                 )}
             </PageBlock>

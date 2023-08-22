@@ -4,6 +4,7 @@ import { createEvent } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector'
 import changeCanSign from '../lib/change-can-sign'
+import { agreementSubmit } from '@shared/api/payment-api'
 
 interface PaymentsStore {
     payments: Payments | null
@@ -37,6 +38,17 @@ const signContractFx = createEffect(async (contractId: string) => {
         return contractId
     } catch (error) {
         throw new Error('Не удалось подписать конкракт. Причина: ' + error)
+    }
+})
+
+const signAgreementFx = createEffect(async (id: string) => {
+    const response = await agreementSubmit(id)
+    if (!response.data.contracts.education && !response.data.contracts.dormitory)
+        throw new Error('У вас нет данных по оплате')
+    try {
+        return response.data.contracts
+    } catch (_) {
+        throw new Error('Не удалось загрузить оплату')
     }
 })
 
@@ -74,6 +86,7 @@ export const selectors = {
 export const effects = {
     getPaymentsFx,
     signContractFx,
+    signAgreementFx,
 }
 
 export const events = {

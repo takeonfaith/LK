@@ -1,5 +1,5 @@
-import { paymentApi } from '@api'
 import { Agreement } from '@api/model'
+import { paymentsModel } from '@entities/payments'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import Accordion from '@ui/accordion/accordion'
@@ -30,7 +30,8 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
 
     const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
         isDone: signedUser,
-        submit: () => paymentApi.agreementSubmit(id),
+        submit: paymentsModel.effects.signAgreementFx,
+        id,
     })
 
     const height = signedUser || done ? 140 : 100

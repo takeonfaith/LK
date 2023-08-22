@@ -50,7 +50,12 @@ export const createDefaultStore = <APIDataType, OutputDataType = void, APIGetArg
 
     const postFx = createEffect(async (args: APIPostArgs): Promise<any> => {
         try {
-            await api.post?.(args)
+            const response = await api.post?.(args)
+
+            return {
+                data: response,
+                preparedData: (prepareData ? prepareData(response) : response) as PreparedDataType,
+            }
         } catch (error) {
             throw new Error(errorMessage(error as Error))
         }
