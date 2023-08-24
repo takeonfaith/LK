@@ -207,6 +207,7 @@ export const generalRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'GENERAL',
+        pageSize: 'small',
     },
     'electronic-interaction-agreement': {
         id: 'electronic-interaction-agreement',
@@ -287,6 +288,7 @@ export const generalRoutes: IRoutes = {
         group: 'GENERAL',
         keywords: ['Оповещения'],
         isNew: true,
+        pageSize: 'small',
     },
     chat: {
         //ChatPage
@@ -375,6 +377,7 @@ export const generalRoutes: IRoutes = {
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
+        pageSize: 'small',
     },
 }
 
@@ -428,6 +431,7 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
+        pageSize: 'small',
     },
     'settings-personal': {
         id: 'settings-personal',
@@ -444,6 +448,7 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
+        pageSize: 'small',
     },
     'settings-security': {
         id: 'settings-security',
@@ -459,6 +464,7 @@ export const generalHiddenRoutes: IRoutes = {
         subPageHeaderTitle: 'Безопасность',
         fallbackPrevPage: SETTINGS_ROUTE,
         backButtonText: 'Настройки',
+        pageSize: 'small',
     },
     'settings-home-page': {
         id: 'settings-home-page',
@@ -475,6 +481,7 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
+        pageSize: 'small',
     },
     'settings-customize-menu': {
         id: 'settings-customize-menu',
@@ -490,6 +497,7 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
+        pageSize: 'small',
     },
     'settings-notifications': {
         id: 'settings-notifications',
@@ -505,6 +513,7 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
+        pageSize: 'small',
     },
     'useful-info-template': {
         id: `useful-info-template`,
