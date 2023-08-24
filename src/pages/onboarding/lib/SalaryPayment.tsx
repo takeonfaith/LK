@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScheduleTable } from '../ui/ScheduleTable'
+import { ScheduleTable } from '../ui/molecules/ScheduleTable'
 
 export const SalaryPayment = (
     <>

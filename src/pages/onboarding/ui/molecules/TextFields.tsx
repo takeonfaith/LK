@@ -1,5 +1,5 @@
 import React from 'react'
-import { topics } from '../config/paragraph-config'
+import { topics } from '../../config/paragraph-config'
 import TextWrapper from './TextWrapper'
 
 export const TextFields = () => {

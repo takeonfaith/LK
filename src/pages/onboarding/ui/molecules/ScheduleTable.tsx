@@ -1,5 +1,5 @@
 import React from 'react'
-import { ColumnDivider } from './atoms/ColumnDivider'
+import { ColumnDivider } from '../atoms/ColumnDivider'
 import Flex from '@shared/ui/flex'
 
 type Props = {
