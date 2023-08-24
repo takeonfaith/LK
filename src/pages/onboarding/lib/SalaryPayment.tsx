@@ -1,7 +1,8 @@
 import React from 'react'
 import { ScheduleTable } from '../ui/molecules/ScheduleTable'
+import { Contacts } from '../ui/atoms/Contacts'
 
-export const SalaryPayment = (
+export const SalaryPayment = () => (
     <>
         <p>
             Выплата заработной платы за первую половину месяца производится{' '}
@@ -19,11 +20,11 @@ export const SalaryPayment = (
                 'Суббота, Воскресенье': 'Выходной',
             }}
         />
-        <p style={{ fontStyle: 'italic' }}>
+        <Contacts>
             г. Москва, ул. Большая Семеновская, д. 38, каб. А-311
             <br />
             <a href="tel:+74952230523p1410">Тел. : +7 (495) 223-05-23 доб. 1410</a>,{' '}
             <a href="tel:+74952230523p1322">1322</a>, <a href="tel:+74952230523p1236">1236</a>
-        </p>
+        </Contacts>
     </>
 )

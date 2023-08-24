@@ -1,6 +1,7 @@
 import React from 'react'
+import { Contacts } from '../ui/atoms/Contacts'
 
-export const WorkplaceOrganization = (
+export const WorkplaceOrganization = () => (
     <>
         <p>
             Для получения доступа к внутренним системам Московского Политеха направьте письмо на электронный адрес{' '}
@@ -15,10 +16,10 @@ export const WorkplaceOrganization = (
             При осуществлении внутренней и внешней переписки посредством электронной почты, связанной с деятельностью
             университета, все работники обязаны использовать корпоративную электронную почту.
         </p>
-        <p style={{ fontStyle: 'italic' }}>
+        <Contacts>
             По всем дополнительным вопросам, связанным с обеспечением технической поддержки на рабочем месте, обращаться
             по телефону <a href="tel:+74952230523p1111">+7 (495) 223-05-23 доб. 1111</a> или на адрес электронной почты{' '}
             <a href="mailto:help@mospolytech.ru">help@mospolytech.ru</a>.
-        </p>
+        </Contacts>
     </>
 )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Documents = (
+export const Documents = () => (
     <>
         <a href="https://disk.yandex.ru/i/40qk8-JKl4rMqg" target="_blank" rel="noreferrer">
             Коллективный договор на 2020-2023 гг.

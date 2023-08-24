@@ -3,7 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ScheduleTable } from '../ui/molecules/ScheduleTable'
 
-export const HRDocumentFlow = (
+export const HRDocumentFlow = () => (
     <>
         <p>
             Для оформления кадровых заявлений перейдите в раздел{' '}
