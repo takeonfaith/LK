@@ -7,7 +7,7 @@ export const TextFields = () => {
         <>
             {topics.map((topic, index) => (
                 <TextWrapper key={topic.title} title={topic.title} collapsed={index !== 0}>
-                    {topic.content}
+                    {topic.content()}
                 </TextWrapper>
             ))}
         </>

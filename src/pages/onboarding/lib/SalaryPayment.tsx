@@ -1,13 +1,14 @@
 import React from 'react'
 import { ScheduleTable } from '../ui/molecules/ScheduleTable'
 import { Contacts } from '../ui/atoms/Contacts'
+import { ColofrulText } from '@shared/ui/atoms/ColofrulText'
 
 export const SalaryPayment = () => (
     <>
         <p>
             Выплата заработной платы за первую половину месяца производится{' '}
-            <span style={{ color: '#94F0B9' }}>до 20 числа</span> текущего месяца, за вторую половину –{' '}
-            <span style={{ color: '#94F0B9' }}>до 5 числа</span> следующего месяца. Перечисление заработной платы
+            <ColofrulText color="green">до 20 числа</ColofrulText> текущего месяца, за вторую половину –{' '}
+            <ColofrulText color="green">до 5 числа</ColofrulText> следующего месяца. Перечисление заработной платы
             в университете производится на банковскую карту платежной системы «МИР». В случае отсутствия действующей
             карты платежной системы «МИР», оформите ее, обратившись в Расчетный отдел университета.
         </p>

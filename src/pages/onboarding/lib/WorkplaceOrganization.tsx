@@ -1,5 +1,6 @@
 import React from 'react'
 import { Contacts } from '../ui/atoms/Contacts'
+import { BoldText } from '@shared/ui/atoms/BoldText'
 
 export const WorkplaceOrganization = () => (
     <>
@@ -7,9 +8,9 @@ export const WorkplaceOrganization = () => (
             Для получения доступа к внутренним системам Московского Политеха направьте письмо на электронный адрес{' '}
             <a href="mailto:help@mospolytech.ru">help@mospolytech.ru</a> c указанием следующей информации:
             <br />
-            <span style={{ fontWeight: 'bold' }}>Тема письма:</span> Доступ к внутренним системам университета
+            <BoldText>Тема письма:</BoldText> Доступ к внутренним системам университета
             <br />
-            <span style={{ fontWeight: 'bold' }}>Содержание:</span> Указать необходимые системы, ФИО, должность,
+            <BoldText style={{ fontWeight: 'bold' }}>Содержание:</BoldText> Указать необходимые системы, ФИО, должность,
             подразделение
         </p>
         <p>
