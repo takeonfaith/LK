@@ -52,12 +52,19 @@ import {
     BiHeadphone,
     BiIdCard,
     BiPlusMedical,
+    BiRuble,
     BiWifi,
 } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
+import {
+    generalHiddenRoutes,
+    generalRoutes,
+    IRoutes,
+    PAYMENTS_ROUTE,
+    PROJECT_ACTIVITIES_ROUTE,
+} from '../general-routes'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import HolidayWorkBufferPage from '@pages/hr-applications/pages/buffer-holiday-work'
 import HolidayPlanningBufferPage from '@pages/hr-applications/pages/buffer-holiday-planning'
@@ -67,8 +74,8 @@ import MedicalExaminationBufferPage from '@pages/hr-applications/pages/buffer-me
 import WorkTransferBufferPage from '@pages/hr-applications/pages/buffer-work-transfer'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import { Onboarding } from '../general-routes/pages'
-import { MdPsychology } from 'react-icons/md'
 import { MdGroups, MdPsychology } from 'react-icons/md'
+import PaymentsPage from '@pages/payments'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const HR_APPLICATIONS_ROUTE = '/hr-applications'
@@ -82,8 +89,6 @@ export const PPS_VOTE_ROUTE = '/pps_vote2020'
 export const CHILDREN_ROUTE = '/children'
 export const PPS_CONTEST_ROUTE = '/pps_contest'
 export const ElECTRONIC_STATEMENTS = '/electronic-statements'
-export const ADDRESSES_AND_CONTACTS = '/addresses-and-contacts'
-export const STRUCTURE_OF_THE_UNIVERSITY = '/structure-of-the-university'
 export const ONBOARDING = '/onboarding'
 export const STRUCTURE_OF_THE_UNIVERSITY = '/structure-of-the-university'
 export const ADDRESSES_AND_CONTACTS = '/addresses-and-contacts'
@@ -220,6 +225,17 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'orange',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
+    },
+    payments: {
+        id: 'payments',
+        title: 'Оплата общежития',
+        icon: <BiRuble />,
+        path: PAYMENTS_ROUTE,
+        Component: PaymentsPage,
+        color: 'green',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        keywords: ['оплата'],
     },
     'pps-contest': {
         id: 'pps-contest',

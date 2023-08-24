@@ -11,7 +11,6 @@ import {
     BiMessageRounded,
     BiNews,
     BiPalette,
-    BiRuble,
     BiTimeFive,
     BiUserCircle,
 } from 'react-icons/bi'
@@ -38,7 +37,6 @@ import {
     MedicalCertificate,
     MemoFreshmenPage,
     MemoTeacherPage,
-    PaymentsPage,
     ProfilePage,
     // ChatPage,
     SchedulePage,
@@ -220,17 +218,6 @@ export const generalRoutes: IRoutes = {
         isTemplate: false,
         group: 'FINANCES_DOCS',
         pageSize: 'small',
-    },
-    payments: {
-        id: 'payments',
-        title: 'Договоры и оплаты',
-        icon: <BiRuble />,
-        path: PAYMENTS_ROUTE,
-        Component: PaymentsPage,
-        color: 'green',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
-        keywords: ['оплата'],
     },
     doclist: {
         id: 'doclist',
