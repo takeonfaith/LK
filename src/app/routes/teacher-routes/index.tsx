@@ -43,7 +43,17 @@ import {
 
 import { isProduction, OLD_LK_URL } from '@shared/constants'
 import React from 'react'
-import { BiBookOpen, BiBookReader, BiGroup, BiHeadphone, BiIdCard, BiPlusMedical, BiWifi } from 'react-icons/bi'
+import { Redirect } from 'react-router-dom'
+import {
+    BiBookOpen,
+    BiBookReader,
+    BiBuildings,
+    BiGroup,
+    BiHeadphone,
+    BiIdCard,
+    BiPlusMedical,
+    BiWifi,
+} from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
@@ -58,6 +68,7 @@ import WorkTransferBufferPage from '@pages/hr-applications/pages/buffer-work-tra
 import DownloadAdminFilesPage from '@pages/download-admin-files'
 import { Onboarding } from '../general-routes/pages'
 import { MdPsychology } from 'react-icons/md'
+import { MdGroups, MdPsychology } from 'react-icons/md'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const HR_APPLICATIONS_ROUTE = '/hr-applications'
@@ -74,6 +85,13 @@ export const ElECTRONIC_STATEMENTS = '/electronic-statements'
 export const ADDRESSES_AND_CONTACTS = '/addresses-and-contacts'
 export const STRUCTURE_OF_THE_UNIVERSITY = '/structure-of-the-university'
 export const ONBOARDING = '/onboarding'
+export const STRUCTURE_OF_THE_UNIVERSITY = '/structure-of-the-university'
+export const ADDRESSES_AND_CONTACTS = '/addresses-and-contacts'
+export const BRANDBOOK = '/brandbook'
+export const WIFI_AT_THE_UNIVERSITY = '/wifi-at-the-university'
+export const HEALTH_CARE = '/health-care'
+export const PSYCHOLOGICAL_HELP = '/psychological-help'
+export const SOICAL_ENVIROMENT = '/social-environment'
 export const VACATION_ROUTE = '/vacation'
 export const KPI_PPS_ROUTE = '/kpi_pps'
 export const KPI_ADMIN_ROUTE = '/kpi_admin'
@@ -370,40 +388,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
         show: false,
-    },
-    'addresses-and-contacts': {
-        id: 'addresses-and-contacts',
-        title: 'Адреса и контакты',
-        icon: <BiIdCard />,
-        path: ADDRESSES_AND_CONTACTS,
-        Component: () => {
-            React.useEffect(() => {
-                window.location.replace('https://mospolytech.ru/ob-universitete/adresa-i-kontakty/')
-            }, [])
-
-            return null
-        },
-        color: 'blue',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
-    },
-    'structure-of-the-university': {
-        id: 'structure-of-the-university',
-        title: 'Структура университета',
-        icon: <BiIdCard />,
-        path: STRUCTURE_OF_THE_UNIVERSITY,
-        Component: () => {
-            React.useEffect(() => {
-                window.location.replace(
-                    'https://mospolytech.ru/ob-universitete/rukovodstvo-i-struktura/strukturnye-podrazdeleniya/',
-                )
-            }, [])
-
-            return null
-        },
-        color: 'blue',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
     },
     onboarding: {
         id: 'onboarding',
@@ -920,72 +904,116 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         title: 'Социальная среда',
         color: 'pink',
         Component: () => {
-            React.useEffect(() => {
-                window.location.replace('https://profkommospolytech.ru/')
-            }, [])
+            window.location.href = 'https://profkommospolytech.ru/'
 
-            return null
+            return <Redirect to={ONBOARDING} />
         },
         icon: <BiGroup />,
         isTemplate: false,
-        path: '/social-environment',
+        path: SOICAL_ENVIROMENT,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
     },
     'psychological-help': {
         id: 'Психологическая помощь',
         title: 'Психологическая помощь',
         color: 'green',
         Component: () => {
-            React.useEffect(() => {
-                window.location.replace(
-                    'https://mospolytech.ru/studencheskaya-zhizn/medical-help/slujba-psihologicheskoy-pomoschi/',
-                )
-            }, [])
+            window.location.href =
+                'https://mospolytech.ru/studencheskaya-zhizn/medical-help/slujba-psihologicheskoy-pomoschi/'
 
-            return null
+            return <Redirect to={ONBOARDING} />
         },
         icon: <MdPsychology />,
         isTemplate: false,
-        path: '/psychological-help',
+        path: PSYCHOLOGICAL_HELP,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
     },
     'health-care': {
         id: 'Медицинская помощь',
         title: 'Медицинская помощь',
         color: 'red',
         Component: () => {
-            React.useEffect(() => {
-                window.location.replace('https://mospolytech.ru/studencheskaya-zhizn/medical-help/medicinskaya-slujba/')
-            }, [])
+            window.location.href = 'https://mospolytech.ru/studencheskaya-zhizn/medical-help/medicinskaya-slujba/'
 
-            return null
+            return <Redirect to={ONBOARDING} />
         },
         icon: <BiPlusMedical />,
         isTemplate: false,
-        path: '/health-care',
+        path: HEALTH_CARE,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
     },
     'wifi-at-the-university': {
         id: 'WI-FI  в университете',
         title: 'WI-FI  в университете',
         color: 'purple',
         Component: () => {
-            return null
+            window.location.href =
+                'https://e.mospolytech.ru/old/storage/files/Instruktsiya_dostupa_k_internetu_v_auditoriyah.pdf'
+
+            return <Redirect to={ONBOARDING} />
         },
         icon: <BiWifi />,
         isTemplate: false,
-        path: '/wifi-at-the-university',
+        path: WIFI_AT_THE_UNIVERSITY,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
     },
     brandbook: {
         id: 'Брендбук',
         title: 'Брендбук',
         color: 'orange',
         Component: () => {
-            React.useEffect(() => {
-                window.location.replace('https://mospolytech.ru/ob-universitete/brandbook/')
-            }, [])
+            window.location.href = 'https://mospolytech.ru/ob-universitete/brandbook/'
 
-            return null
+            return <Redirect to={ONBOARDING} />
         },
         icon: <BiBookOpen />,
         isTemplate: false,
-        path: '/brandbook',
+        path: BRANDBOOK,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
+    },
+    'addresses-and-contacts': {
+        id: 'addresses-and-contacts',
+        title: 'Адреса и контакты',
+        icon: <BiBuildings />,
+        path: ADDRESSES_AND_CONTACTS,
+        Component: () => {
+            window.location.href = 'https://mospolytech.ru/ob-universitete/adresa-i-kontakty/'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        color: 'darkBlue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
+    },
+    'structure-of-the-university': {
+        id: 'structure-of-the-university',
+        title: 'Структура университета',
+        icon: <MdGroups />,
+        path: STRUCTURE_OF_THE_UNIVERSITY,
+        Component: () => {
+            window.location.href =
+                'https://mospolytech.ru/ob-universitete/rukovodstvo-i-struktura/strukturnye-podrazdeleniya/'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        color: 'lightGreen',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
     },
 })
