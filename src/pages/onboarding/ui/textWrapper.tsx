@@ -16,6 +16,7 @@ const TextWrapper = ({ title, collapsed, children }: ITextWrapper) => {
                 setOpenArea={setOpenArea}
                 setIncluded={setIncluded}
                 collapsed={false}
+                openArea={openArea}
             />
             <div className="inputs">{children}</div>
         </InputAreaWrapper>
