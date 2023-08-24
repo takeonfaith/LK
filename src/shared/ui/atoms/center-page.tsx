@@ -16,6 +16,14 @@ const CenterPage = styled.div<{
     background: ${({ background }) => background};
     padding: ${({ padding }) => padding};
     width: 100%;
+
+    /* @media (min-width: 550px) and (max-width: 1000px) {
+        margin-top: 25px;
+    } */
+
+    @media (max-width: 1000px) {
+        margin-top: 25px;
+    }
 `
 
 export default CenterPage

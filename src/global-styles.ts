@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
 		padding: 0;
 		box-sizing: border-box;
 		font-family: "Montserrat", sans-serif;
+		line-height: 130%;
 		-webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 	}
 

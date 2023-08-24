@@ -23,6 +23,7 @@ export type ButtonProps = BaseProps & {
     fixedInMobile?: boolean
     height?: string
     notActiveClickMessage?: string
+    flipped?: boolean
 }
 
 export function Button(props: ButtonProps) {
@@ -44,6 +45,7 @@ export function Button(props: ButtonProps) {
         isActive = true,
         height,
         notActiveClickMessage,
+        flipped,
         ...restProps
     } = props
 
@@ -70,6 +72,7 @@ export function Button(props: ButtonProps) {
             isActive={isActive}
             fixedInMobile={fixedInMobile}
             height={height}
+            flipped={flipped}
             {...restProps}
         >
             {!!icon && <div className="icon">{icon}</div>}
