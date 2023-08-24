@@ -1,13 +1,12 @@
-import { IModules, ISchedule, User, ViewType } from '@api/model'
-import calcNextExamTime from '@features/schedule/lib/calc-next-exam.time'
-import { useStore } from 'effector-react/compat'
+import { IFullSchedule, ISchedule, User, ViewType } from '@api/model'
 import { createEffect, createEvent, createStore } from 'effector'
+import { useStore } from 'effector-react/compat'
 import getCurrentDayString from '../lib/get-current-day-string'
 import getSchedule from '../lib/get-schedule'
 
 const DEFAULT_STORE: ISchedule = {
     schedule: null,
-    currentModule: '0',
+    currentModule: 'today',
     currentDay: new Date().getDay(),
     currentDayString: '',
     currentChosenDay: new Date().getDay(),
@@ -21,7 +20,7 @@ const useSchedule = () => {
 
 type GetScheduleProps = { user: User | null; group?: string }
 
-const getScheduleFx = createEffect(async ({ user, group }: GetScheduleProps): Promise<IModules> => {
+const getScheduleFx = createEffect(async ({ user, group }: GetScheduleProps): Promise<IFullSchedule> => {
     try {
         return getSchedule(user, group)
     } catch (error) {
@@ -29,7 +28,7 @@ const getScheduleFx = createEffect(async ({ user, group }: GetScheduleProps): Pr
     }
 })
 
-const changeCurrentModule = createEvent<{ currentModule: number }>()
+const changeCurrentModule = createEvent<{ currentModule: keyof IFullSchedule }>()
 const changeView = createEvent<{ view: ViewType }>()
 const changeCurrentChosenDay = createEvent<{ day: number }>()
 const clearStore = createEvent()
@@ -43,10 +42,19 @@ const $schedule = createStore<ISchedule>(DEFAULT_STORE)
     .on(getScheduleFx.doneData, (oldData, newData) => ({
         ...oldData,
         schedule: newData,
-        currentModule: !!newData['0'] ? '0' : !!newData['1'] ? '1' : newData['2'] ? '2' : newData['3'] ? '3' : '0',
+        currentModule: !!newData.today
+            ? 'today'
+            : !!newData.week
+            ? 'week'
+            : !!newData.semestr
+            ? 'semestr'
+            : !!newData.session
+            ? 'session'
+            : 'today',
         currentDayString: getCurrentDayString(newData, oldData.currentDay),
-        currentChosenDay: calcNextExamTime(newData['2']),
-        currentDay: !!newData['0'] ? new Date().getDay() : calcNextExamTime(newData['2']),
+        currentChosenDay: 0,
+        //calcNextExamTime(newData.semestr)
+        currentDay: !!newData.week ? new Date().getDay() : 0,
     }))
     .on(getScheduleFx.failData, (oldData) => ({
         ...oldData,
@@ -54,7 +62,7 @@ const $schedule = createStore<ISchedule>(DEFAULT_STORE)
     }))
     .on(changeCurrentModule, (oldState, newState) => ({
         ...oldState,
-        currentModule: newState.currentModule.toString() as keyof IModules,
+        currentModule: newState.currentModule.toString() as keyof IFullSchedule,
     }))
     .on(changeView, (oldState, newState) => ({
         ...oldState,

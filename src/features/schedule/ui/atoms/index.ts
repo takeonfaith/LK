@@ -1,6 +1,5 @@
-export { default as Subject } from './subject'
-export { default as WeekDayButton } from './week-day-button'
-export { default as SubjectModal } from './subject-modal'
+export { default as Subject } from '../subject'
+export { default as SubjectModal } from '../subject/modal'
 export { default as Time } from './time'
 export { default as Place } from './place'
 export { default as SubjectPlaceBlock } from './subject-place-block'

@@ -8,11 +8,11 @@ import { getPageWidth } from './lib/get-page-width'
 const PageBlockStyled = styled(BlockWrapper)`
     position: relative;
 
-    @media (min-width: 1001px) {
+    @media (min-width: 551px) {
         padding-top: 70px;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 550px) {
         padding-top: 50px;
     }
 `
@@ -25,7 +25,7 @@ const TopRightCornerElement = styled.div`
     display: flex;
     justify-content: flex-end;
 
-    @media (max-width: 1000px) {
+    @media (max-width: 550px) {
         top: -7px;
         right: 7px;
     }
@@ -38,8 +38,8 @@ type Props = {
 }
 
 const PageBlock = ({ children, topRightCornerElement, padding }: Props) => {
-    const { exactCurrentPage } = useCurrentExactPage()
-    const maxWidth = getPageWidth(exactCurrentPage)
+    const currentPage = useCurrentExactPage()
+    const maxWidth = getPageWidth(currentPage)
 
     return (
         <CenterPage padding="0 0 10px 0">

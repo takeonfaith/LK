@@ -7,3 +7,4 @@ export type Direction = 'horizontal' | 'vertical'
 export type MessageType = 'success' | 'failure' | 'info' | 'alert' | 'tip' | 'hint'
 export type Coordinates = { x: number; y: number }
 export type Size = 'small' | 'middle' | 'big'
+export type ExtSize = Size | 'large'

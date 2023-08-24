@@ -2,6 +2,7 @@ import normalizeString from '@shared/lib/normalize-string'
 import React from 'react'
 import { BiRuble } from 'react-icons/bi'
 import {
+    FiChrome,
     FiCircle,
     FiCommand,
     FiCpu,
@@ -14,11 +15,13 @@ import {
 } from 'react-icons/fi'
 import {
     HiOutlineAcademicCap,
+    HiOutlineArrowNarrowRight,
     HiOutlineBadgeCheck,
     HiOutlineBeaker,
     HiOutlineBookOpen,
     HiOutlineBriefcase,
     HiOutlineCalculator,
+    HiOutlineClock,
     HiOutlineCode,
     HiOutlineCog,
     HiOutlineCube,
@@ -35,6 +38,7 @@ import {
     HiOutlinePlay,
     HiOutlinePlusCircle,
     HiOutlinePresentationChartBar,
+    HiOutlinePresentationChartLine,
     HiOutlineRefresh,
     HiOutlineShieldCheck,
     HiOutlineSparkles,
@@ -60,6 +64,10 @@ export const getSubjectIcon = (name: string) => {
             icon: <FiLifeBuoy />,
         },
         {
+            keys: ['web'],
+            icon: <FiChrome />,
+        },
+        {
             keys: ['истор'],
             icon: <HiOutlineLibrary />,
         },
@@ -80,8 +88,16 @@ export const getSubjectIcon = (name: string) => {
             icon: <HiOutlinePlay />,
         },
         {
+            keys: ['линейн'],
+            icon: <HiOutlineArrowNarrowRight />,
+        },
+        {
             keys: ['обработ'],
             icon: <FiLayers />,
+        },
+        {
+            keys: ['презентац'],
+            icon: <HiOutlinePresentationChartLine />,
         },
         {
             keys: ['операционн'],
@@ -92,7 +108,7 @@ export const getSubjectIcon = (name: string) => {
             icon: <BiRuble />,
         },
         {
-            keys: ['информацион', 'программир'],
+            keys: ['информацион', 'программир', 'сайт'],
             icon: <HiOutlineCode />,
         },
         {
@@ -124,7 +140,7 @@ export const getSubjectIcon = (name: string) => {
             icon: <HiOutlineTranslate />,
         },
         {
-            keys: ['спорт'],
+            keys: ['спорт', 'физичес'],
             icon: <FiDribbble />,
         },
         {
@@ -198,6 +214,10 @@ export const getSubjectIcon = (name: string) => {
         {
             keys: ['физик'],
             icon: <HiOutlineLightningBolt />,
+        },
+        {
+            keys: ['тайм'],
+            icon: <HiOutlineClock />,
         },
     ]
 

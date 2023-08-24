@@ -15,8 +15,9 @@ const Line = styled.div<{ direction: Direction; fontSize?: string }>`
     font-size: ${({ fontSize }) => fontSize};
     color: var(--text);
 
-    span {
+    .value {
         width: ${({ direction }) => (direction === 'vertical' ? '100%' : 'fit-content')};
+        line-height: 1.4rem;
     }
 
     strong {
@@ -38,7 +39,7 @@ const KeyValue = ({ keyStr, value, fontSize, visible = true, direction = 'horizo
     return (
         <Line direction={direction} fontSize={fontSize}>
             <strong>{keyStr}:</strong>
-            <span>{value}</span>
+            <span className="value">{value}</span>
         </Line>
     )
 }

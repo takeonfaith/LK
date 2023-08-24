@@ -74,7 +74,7 @@ export const Colors: IColors = {
         main: '#3cd288',
         light1: '#49e698',
         light2: '#58f3a6',
-        light3: '#6bfeb5',
+        light3: '#74f5b5',
         transparent1: '#a7ffd38a',
         transparent2: '#a7ffd324',
         transparent3: '#4ad18e1f',
@@ -92,7 +92,7 @@ export const Colors: IColors = {
         transparent3: '#a3fbfb29',
     },
     blue: {
-        dark3: '#29349c',
+        dark3: '#3d4695',
         dark2: '#3742b1',
         dark1: '#4552c9',
         main: '#5f6dec',
@@ -129,7 +129,7 @@ export const Colors: IColors = {
         transparent3: '#5c54d98c',
     },
     purple: {
-        dark3: '#5b248d',
+        dark3: '#5c3381',
         dark2: '#7434af',
         dark1: '#8b4ac7',
         main: '#a85fec',
@@ -141,7 +141,7 @@ export const Colors: IColors = {
         transparent3: '#dcb7ff2b',
     },
     pink: {
-        dark3: '#932066',
+        dark3: '#8d4370',
         dark2: '#a62b77',
         dark1: '#c34191',
         main: '#ec5fb6',
@@ -153,7 +153,7 @@ export const Colors: IColors = {
         transparent3: '#ffbce530',
     },
     red: {
-        dark3: '#a3252f',
+        dark3: '#91353d',
         dark2: '#bf3641',
         dark1: '#cf4b56',
         main: '#ec5f6b',
@@ -165,7 +165,7 @@ export const Colors: IColors = {
         transparent3: '#ffbbc133',
     },
     orange: {
-        dark3: '#985e1d',
+        dark3: '#815b32',
         dark2: '#a76821',
         dark1: '#ca8231',
         main: '#ee9e44',

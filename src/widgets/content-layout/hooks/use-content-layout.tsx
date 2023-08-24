@@ -12,7 +12,7 @@ const useContentLayout = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { currentPage, exactCurrentPage } = useCurrentExactPage()
+    const currentPage = useCurrentExactPage()
 
     const { open } = useModal()
     const isShowWhatsNew = useIsShowWhatsNew()
@@ -32,7 +32,7 @@ const useContentLayout = () => {
         }
     }, [isShowWhatsNew])
 
-    return { currentPage, exactCurrentPage }
+    return { currentPage }
 }
 
 export default useContentLayout

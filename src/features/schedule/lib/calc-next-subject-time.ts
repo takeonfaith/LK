@@ -1,9 +1,11 @@
-import { ISubject } from '@api/model'
+import { type DayCalendarEvent } from '@shared/ui/calendar'
 import calcTimeLeft from '@utils/calc-time-left'
 
-const calcNextSubjectTime = (lessons: ISubject[]) => {
+const calcNextSubjectTime = (lessons: DayCalendarEvent[] | null | undefined) => {
+    if (!lessons) return Infinity
+
     const timeToEverySubject = lessons.reduce((acc, lesson) => {
-        const timeLeft = calcTimeLeft(lesson.timeInterval)
+        const timeLeft = calcTimeLeft(lesson.startTime)
         if (timeLeft > 0) acc.push(timeLeft)
         return acc
     }, [] as number[])

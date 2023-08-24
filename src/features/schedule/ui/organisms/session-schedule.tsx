@@ -37,7 +37,7 @@ const SessionSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
     const {
         data: { schedule, currentDay },
     } = scheduleModel.selectors.useSchedule()
-    const realCurrentDay = !!schedule && !!schedule['0'] ? -1 : currentDay
+    const realCurrentDay = !!schedule && !!schedule.week ? -1 : currentDay
     const { width } = useResize()
 
     useEffect(() => {

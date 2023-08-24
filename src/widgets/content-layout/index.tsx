@@ -10,12 +10,14 @@ import Story from '../../shared/ui/story'
 import useContentLayout from './hooks/use-content-layout'
 import { ContentWrapper, PageContent, Wrapper } from './styled'
 import Header from 'widgets/header'
+import { menuModel } from '@entities/menu'
 
 const ContentLayout = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { currentPage, exactCurrentPage } = useContentLayout()
+    const { allRoutes } = menuModel.selectors.useMenu()
+    const { currentPage } = useContentLayout()
     const [headerVisible, setHeaderVisible] = useState<boolean>(false)
     const contentRef = useRef<HTMLDivElement>(null)
 
@@ -25,16 +27,12 @@ const ContentLayout = () => {
 
     return (
         <Wrapper>
-            <InitialLoader loading={!user} />
+            <InitialLoader loading={!user || !allRoutes} />
             <Story />
             <LeftsideBar />
             <ContentWrapper>
-                <Header headerVisible={headerVisible} currentPagePair={{ currentPage, exactCurrentPage }} />
-                <PageContent
-                    ref={contentRef}
-                    onScroll={handleContentScroll}
-                    withHeader={!(exactCurrentPage ?? currentPage)?.withoutHeader}
-                >
+                <Header headerVisible={headerVisible} currentPage={currentPage} />
+                <PageContent ref={contentRef} onScroll={handleContentScroll} withHeader={!currentPage?.withoutHeader}>
                     <Suspense fallback={null}>
                         <PrivateRouter />
                     </Suspense>

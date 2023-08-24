@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@api/model'
 import calcTimeLeft from '@utils/calc-time-left'
 import getShortString from '@utils/get-short-string'
 import React from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { Place, SubjectModal, Time, NextSubject, Rooms, Groups } from '.'
+import { Place, SubjectModal, Time, NextSubject, Rooms, Groups } from '../atoms'
+import { Colors } from '@shared/consts'
 
 const SubjectWrapper = styled.div<{
     isCurrent: boolean
@@ -106,7 +108,7 @@ const Subject = (props: Props) => {
             darkColor={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark2}
             transparent={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].transparent2}
             isFull={view === 'full'}
-            onClick={() => open(<SubjectModal {...props} />)}
+            onClick={() => open(<SubjectModal {...props} color={Colors.blue} />)}
         >
             <div className="time-and-place">
                 <Time
@@ -121,9 +123,7 @@ const Subject = (props: Props) => {
                         isCurrent={isCurrent}
                         color={TimeIntervalColor[timeInterval as keyof ITimeIntervalColor].dark1}
                     />
-                ) : (
-                    <Place place={place} link={link} />
-                )}
+                ) : null}
             </div>
             <h3>{getShortString(name, 70)}</h3>
             <p className="teachers">

@@ -4,11 +4,19 @@ import { NotificationsSettingsType } from '@entities/settings/lib/get-default-se
 import { userModel } from '@entities/user'
 import { useEffect, useMemo } from 'react'
 import { lkNotificationModel } from '..'
+import { filterNotificationsViaSettings } from '../lib/filter-notifications-via-settings'
+import { NotificationsResponse } from '@shared/api/lk-notification-api'
+import createNotification from '../lib/create-notification'
+import calcNextSubjectTime from '@features/schedule/lib/calc-next-subject-time'
+import { scheduleModel } from '@entities/schedule'
 
 const useLkNotifications = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const {
+        data: { schedule },
+    } = scheduleModel.selectors.useSchedule()
     const { notifications, loading, loaded } = lkNotificationModel.selectors.useLkNotifications()
     const { settings } = settingsModel.selectors.useSettings()
     const notificationSettings = useMemo(
@@ -19,6 +27,23 @@ const useLkNotifications = () => {
     useEffect(() => {
         if (!!user && !!notificationSettings) {
             if (notificationSettings.all !== false && !loaded && !loading) {
+                const scheduleNotification: NotificationsResponse = [
+                    { id: 'schedule', type: 'schedule', title: 'Скоро пара!', text: 'Осталось меньше 15 мин.' },
+                ]
+
+                if (filterNotificationsViaSettings(notificationSettings, scheduleNotification).length) {
+                    if (calcNextSubjectTime(schedule?.today) <= 15) {
+                        lkNotificationModel.events.add(
+                            createNotification(
+                                scheduleNotification[0].type,
+                                scheduleNotification[0].id,
+                                scheduleNotification[0].title,
+                                scheduleNotification[0].text,
+                            ),
+                        )
+                    }
+                }
+
                 lkNotificationModel.events.initialize({
                     settings: notificationSettings,
                 })

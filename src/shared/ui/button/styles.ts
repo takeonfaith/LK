@@ -22,7 +22,7 @@ export const ButtonWrapper = styled.button<{
     justify-content: ${({ align = 'center' }) => align};
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
-    background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
+    background: ${({ isChosen, background }) => (isChosen ? 'var(--reallyBlue)' : background ?? 'var(--search)')};
     padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;

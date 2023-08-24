@@ -19,7 +19,7 @@ const HeaderWrapper = styled.header<{ hidden?: boolean; headerVisible: boolean }
         transform: translateX(${({ headerVisible }) => (headerVisible ? '-35px' : '0')});
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 550px) {
         padding: 0 15px;
         width: 100%;
         justify-content: flex-start;
@@ -50,6 +50,10 @@ export const HeaderTitle = styled.div<{
     }
 
     @media (max-width: 1000px) {
+        transform: ${({ headerVisible }) => `translate(${headerVisible ? '0, 0' : '26px, 75px'})`};
+    }
+
+    @media (max-width: 550px) {
         transform: ${({ headerVisible, noButton }) =>
             `translate(${headerVisible ? (noButton ? '0, 0' : '25px, 0') : '0px, 50px'})`};
         width: ${({ headerVisible }) => (headerVisible ? '180px' : 'calc(100% - 30px)')};

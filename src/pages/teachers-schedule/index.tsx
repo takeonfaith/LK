@@ -1,4 +1,4 @@
-import { IModules } from '@api/model'
+import { IFullSchedule } from '@api/model'
 import { scheduleModel } from '@entities/schedule'
 import getSchedule from '@entities/schedule/lib/get-schedule'
 import React, { useEffect, useState } from 'react'
@@ -12,7 +12,7 @@ const TeachersSchedule = () => {
     const { data } = scheduleModel.selectors.useSchedule()
     const isGroup = checkIfGroup(route.params.filter)
 
-    const [teacherSchedule, setTeacherSchedule] = useState<IModules | null>(null)
+    const [teacherSchedule, setTeacherSchedule] = useState<IFullSchedule | null>(null)
 
     useEffect(() => {
         const scheduleRequest = isGroup

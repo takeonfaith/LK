@@ -2,7 +2,7 @@ import { ISubject } from '@api/model'
 import { Months } from '@utility-types/months'
 import getDateWithoutTime from '@utils/get-date-without-time'
 
-const currentDate = new Date()
+const currentDate = new Date('April 1, 2023')
 
 const startDay = 1 //0=sunday, 1=monday etc.
 const d = currentDate.getDay()

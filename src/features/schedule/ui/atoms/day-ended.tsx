@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
 import { WeekDays } from '@consts'
 import { scheduleModel } from '@entities/schedule'
@@ -27,14 +28,14 @@ const DayEnded = () => {
         <DayEndedWrapper>
             <AnimatedCheck size={'38px'} />
             <Title size={4}>Учебный день завершился</Title>
-            {!!data.schedule?.[0] && (
+            {/* {!!data.schedule?.week && (
                 <Button
                     text="Посмотреть следующий"
                     onClick={() =>
                         open(
                             <DaySchedule
-                                lessons={data.schedule?.[0]?.[getTomorrow()].lessons ?? []}
-                                topInfo={displayTopInfo(data.schedule?.[0], getTomorrow())}
+                                lessons={data.schedule?.week?.[getTomorrow()].lessons ?? []}
+                                topInfo={displayTopInfo(data.schedule?.week, getTomorrow())}
                                 weekDay={WeekDays[getTomorrow()].full}
                             />,
                         )
@@ -42,7 +43,7 @@ const DayEnded = () => {
                     textColor="var(--blue)"
                     background="transparent"
                 />
-            )}
+            )} */}
         </DayEndedWrapper>
     )
 }

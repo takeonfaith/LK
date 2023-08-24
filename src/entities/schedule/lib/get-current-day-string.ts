@@ -1,9 +1,9 @@
-import { IModules } from '@api/model'
+import { IFullSchedule } from '@api/model'
 
-const getCurrentDayString = (schedule: IModules | null, currentDay: number) => {
-    return !!schedule && !!schedule['0']
-        ? Object.keys(schedule['0']).find((_, index) => index + 1 === currentDay) || 'sunday'
-        : !!schedule && !!schedule['2']
+const getCurrentDayString = (schedule: IFullSchedule | null, currentDay: number) => {
+    return !!schedule && !!schedule.week
+        ? Object.keys(schedule.week).find((_, index) => index + 1 === currentDay) || 'sunday'
+        : !!schedule && !!schedule.semestr
         ? ''
         : 'sunday'
 }

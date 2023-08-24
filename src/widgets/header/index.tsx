@@ -1,33 +1,30 @@
 import UserInfo from '@features/user-info'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import Flex from '@shared/ui/flex'
-import { CurrentPagePairType } from '@utils/hooks/use-current-exact-page'
 import React from 'react'
 import { HeaderWrapper } from './ui'
 import { HeaderTitle } from './ui/atoms/header-wrapper'
 import useHeader from './use-header'
-import { getPageWidth } from '@shared/ui/page-block/lib/get-page-width'
+import { IRoute } from '@app/routes/general-routes'
 
 type Props = {
-    currentPagePair: CurrentPagePairType
+    currentPage: IRoute | null
     headerVisible?: boolean
 }
 
-const Header: React.FC<Props> = ({ currentPagePair: { currentPage, exactCurrentPage }, headerVisible = false }) => {
+const Header: React.FC<Props> = ({ currentPage, headerVisible = false }) => {
     const { isMobile } = useCurrentDevice()
-    const isHeaderVisible = headerVisible || !!exactCurrentPage?.planeHeader
-    const { headerTitle, backButton } = useHeader({ currentPage, exactCurrentPage, isHeaderVisible })
-    const maxWidth = getPageWidth(exactCurrentPage)
 
-    if ((exactCurrentPage ?? currentPage)?.withoutHeader) return null
+    const { headerTitle, backButton, isHeaderVisible, maxWidth } = useHeader({
+        currentPage,
+        headerVisible,
+    })
+
+    if (currentPage?.withoutHeader) return null
 
     return (
-        <HeaderWrapper headerVisible={isHeaderVisible} hidden={(exactCurrentPage ?? currentPage)?.withoutHeader}>
-            <HeaderTitle
-                maxWidth={maxWidth}
-                noButton={exactCurrentPage?.withoutBackButton}
-                headerVisible={isHeaderVisible}
-            >
+        <HeaderWrapper headerVisible={isHeaderVisible} hidden={(currentPage ?? currentPage)?.withoutHeader}>
+            <HeaderTitle maxWidth={maxWidth} noButton={currentPage?.withoutBackButton} headerVisible={isHeaderVisible}>
                 {headerTitle}
             </HeaderTitle>
             <Flex jc="space-between" mw={maxWidth}>

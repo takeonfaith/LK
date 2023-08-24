@@ -48,11 +48,11 @@ import {
 } from './pages'
 
 import LkNotificationsPage from '@pages/lk-notifications'
+import { ExtSize } from '@shared/ui/types'
 import { BsFileMedical } from 'react-icons/bs'
 import { FiBell, FiClipboard, FiFileText, FiHome, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
 import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
 import { DOCLIST_ROUTE } from '../teacher-routes'
-import { Size } from '@shared/ui/types'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -129,7 +129,7 @@ export interface IRoute {
     subPageHeaderTitle?: string
     fallbackPrevPage?: string
     planeHeader?: boolean
-    pageSize?: Size
+    pageSize?: ExtSize
 }
 
 export const publicRoutes = [
@@ -310,7 +310,7 @@ export const generalRoutes: IRoutes = {
         color: 'pink',
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
-        pageSize: 'big',
+        pageSize: 'large',
         keywords: ['экзамены', 'зачеты', 'сессия', 'пересдача'],
     },
     'all-students': {
@@ -389,6 +389,7 @@ export const generalHiddenRoutes: IRoutes = {
         isTemplate: false,
         show: false,
         group: 'OTHER',
+        pageSize: 'large',
     },
     'filtered-all-students': {
         id: 'filtered-all-students',

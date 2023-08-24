@@ -2,19 +2,23 @@ import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import retakeRoutes from '@features/schedule/config'
 import getSessionStats from '@features/schedule/lib/get-session-stats'
-import { WeekSchedule } from '@features/schedule/ui'
 import ExamStats from '@features/schedule/ui/atoms/exam-stats'
 import RetakeSchedule from '@features/schedule/ui/organisms/retake-schedule'
 import SessionSchedule from '@features/schedule/ui/organisms/session-schedule'
-import { ISchedule } from '@shared/api/model'
+import { IFullSchedule, ISchedule } from '@shared/api/model'
+import { DayCalendar } from '@shared/ui/calendar'
+import WeekCalendar from '@shared/ui/calendar/week'
 import { Hint } from '@shared/ui/search'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
 const useTemplateSchedule = (data: ISchedule, teacherName: string | undefined, group: string | undefined) => {
     const { schedule, view } = data
+
     const {
         data: { user },
     } = userModel.selectors.useUser()
+
+    const [isListView, setIsListView] = useState<boolean>(false)
 
     const wrapperRef = useRef<HTMLDivElement>(null)
 
@@ -30,55 +34,68 @@ const useTemplateSchedule = (data: ISchedule, teacherName: string | undefined, g
         scheduleModel.effects.getScheduleFx({ user, group: '' })
     }
 
-    const setCurrentPage = (currentPage: number) => {
-        scheduleModel.events.changeCurrentModule({
-            currentModule: currentPage,
-        })
+    const handleListView = () => {
+        setIsListView((prev) => !prev)
     }
 
     const pages = schedule
         ? [
               {
-                  title: 'Сегодня',
-                  condition: !!schedule?.['0'],
-                  content: <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['0']} key={0} />,
+                  title: 'День',
+                  condition: !!schedule?.today,
+                  content: <DayCalendar interval={[9, 22]} events={schedule?.today} key={0} listView={isListView} />,
               },
               {
                   title: 'Неделя',
-                  condition: !!schedule?.['0'],
-                  content: <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['0']} key={0} />,
+                  condition: !!schedule?.week,
+                  content: <WeekCalendar interval={[9, 22]} events={schedule?.week} key={1} showDates />,
               },
               {
                   title: 'Семестр',
-                  condition: !!schedule?.['1'],
-                  content: <WeekSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['1']} key={1} />,
+                  condition: !!schedule?.semestr,
+                  content: <WeekCalendar interval={[9, 22]} events={schedule?.semestr} key={2} showDates={false} />,
               },
               {
                   title: 'Сессия',
-                  condition: !!schedule?.['2'],
+                  condition: !!schedule?.session,
                   content: (
-                      <React.Fragment key={2}>
-                          <ExamStats {...getSessionStats(schedule['2'])} />
-                          <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule['2']} />
+                      <React.Fragment key={3}>
+                          <ExamStats {...getSessionStats(schedule?.session)} />
+                          <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule?.session} />
                       </React.Fragment>
                   ),
               },
-              {
-                  title: 'Пересдачи',
-                  condition: true,
-                  content: <RetakeSchedule links={retakeRoutes} key={3} />,
-              },
           ]
         : []
+
+    if (!teacherName) {
+        pages.push({
+            title: 'Пересдачи',
+            condition: true,
+            content: <RetakeSchedule links={retakeRoutes} key={3} />,
+        })
+    }
+
+    const handleCurrentPage = (currentModuleIndex: number) => {
+        if (schedule) {
+            const currentModule = Object.keys(schedule)[currentModuleIndex] as keyof IFullSchedule
+
+            scheduleModel.events.changeCurrentModule({
+                currentModule,
+            })
+        }
+    }
 
     return {
         pages,
         showGroupSearch,
         wrapperRef,
-        setCurrentPage,
+        isListView,
         onValueEmpty,
         handleLoad,
+        handleCurrentPage,
         onHintClick,
+        handleListView,
     }
 }
 

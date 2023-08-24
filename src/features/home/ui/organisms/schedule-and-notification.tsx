@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { scheduleModel } from '@entities/schedule'
-import getLessons from '@features/home/lib/get-lessons'
+import { settingsModel } from '@entities/settings'
 import List from '@ui/list'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { DaySchedule } from '../../../schedule/ui'
 import PaymentsWidget from '../molecules/payments-widget'
-import { settingsModel } from '@entities/settings'
 
 const ScheduleAndNotification = () => {
     const {
@@ -14,11 +14,11 @@ const ScheduleAndNotification = () => {
     const { widgetSchedule, widgetPayment } =
         settingsModel.selectors.useSettings().settings['settings-home-page'].property
 
-    const lessons = useMemo(() => getLessons(schedule, currentDayString), [schedule, currentDayString])
+    const lessons = schedule?.today
 
     return (
         <List direction="horizontal" title="Виджеты" showPages gap={10} visible={!!widgetSchedule || !!widgetPayment}>
-            {widgetSchedule && (
+            {/* {widgetSchedule && (
                 <DaySchedule
                     lessons={!schedule && currentDayString === 'sunday' ? [] : lessons}
                     width={350}
@@ -27,7 +27,7 @@ const ScheduleAndNotification = () => {
                     topInfo=""
                     error={error}
                 />
-            )}
+            )} */}
             {widgetPayment && <PaymentsWidget />}
         </List>
     )
