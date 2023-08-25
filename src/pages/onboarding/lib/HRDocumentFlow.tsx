@@ -1,4 +1,4 @@
-import { APPLICATIONS_ROUTE, HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
+import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ScheduleTable } from '../ui/molecules/ScheduleTable'
@@ -23,8 +23,11 @@ export const HRDocumentFlow = () => (
         />
         <p>
             Для подачи заявления на выдачу документов, связанных с работой, а также справок, связанных с выплатой
-            заработной платы, перейдите в раздел <Link to={APPLICATIONS_ROUTE}>«Цифровые сервисы»</Link> или обратитесь
-            в одно из отделений{' '}
+            заработной платы, перейдите в раздел{' '}
+            <a href="https://e.mospolytech.ru/old/?p=sprav" target="_blank" rel="noreferrer">
+                «Цифровые сервисы»
+            </a>{' '}
+            или обратитесь в одно из отделений{' '}
             <a href="https://mospolytech.ru/obuchauschimsya/mnogofunkcionalnyy-centr/" target="_blank" rel="noreferrer">
                 Многофункционального центра университета (МФЦ)
             </a>
