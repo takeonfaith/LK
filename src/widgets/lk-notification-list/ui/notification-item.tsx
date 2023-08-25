@@ -14,7 +14,7 @@ import styled from 'styled-components'
 import { useModal } from 'widgets/modal/lib'
 import { iconObject } from './notification-icon'
 
-const NotificationItemStyled = styled(Link)<{ closed: boolean }>`
+const NotificationItemStyled = styled(Link)`
     width: 100%;
     display: flex;
     align-items: center;
@@ -117,7 +117,7 @@ const NotificationItem = ({
 
     return (
         <AutoAccordion forceState={!removeButtonClicked} bottomMargin={bottomMargin}>
-            <NotificationItemStyled to={goTo ?? ''} onClick={handleClick} closed={removeButtonClicked}>
+            <NotificationItemStyled to={goTo ?? ''} onClick={handleClick}>
                 <span className="left-icon">{iconObject()[type]}</span>
                 <div className="content">
                     <Subtext fontSize="0.7rem">

@@ -33,15 +33,15 @@ type Props = {
 }
 
 const Fields = (field: TSettingsFields): Record<TSettingsFieldType, ChildrenType> => ({
-    toggle: <ToggleField {...field} />,
-    photo: <PhotoField {...field} />,
-    choices: <ChoicesField {...field} />,
-    text: <TextField {...field} />,
-    display: <DisplayField {...field} />,
-    interval: <IntervalField {...field} />,
-    tel: <TextField {...field} />,
-    password: <PasswordField {...field} />,
-    link: <LinkField {...field} />,
+    toggle: <ToggleField key={field.title} {...field} />,
+    photo: <PhotoField key={field.title} {...field} />,
+    choices: <ChoicesField key={field.title} {...field} />,
+    text: <TextField key={field.title} {...field} />,
+    display: <DisplayField key={field.title} {...field} />,
+    interval: <IntervalField key={field.title} {...field} />,
+    tel: <TextField key={field.title} {...field} />,
+    password: <PasswordField key={field.title} {...field} />,
+    link: <LinkField key={field.title} {...field} />,
 })
 
 const SettingsFields = ({ fields, settingsName, asChild = false }: Props) => {
@@ -63,7 +63,6 @@ const SettingsFields = ({ fields, settingsName, asChild = false }: Props) => {
         <SettingsFieldsList asChild={asChild}>
             {fields.map((field) => {
                 const action = field.action ?? defaultSettingsAction(field.id)
-
                 const { type, visible = true } = field
                 if (visible) {
                     return Fields({ ...field, action, settingsName })[type]
