@@ -15,7 +15,7 @@ export const LinkList = () => {
         teachersHiddenRoutes()['addresses-and-contacts'],
     ]
     return (
-        <Flex gap="8px" wrap>
+        <Flex gap="8px" $wrap>
             {links.map((el) => {
                 return <PageLink key={el.id} {...el} />
             })}
