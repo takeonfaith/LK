@@ -1,6 +1,5 @@
 import { selectedPEStudentModel } from '@entities/pe-student/model'
 import { calcSummaryPoints } from '@entities/pe-student/utils/calcSummaryPoints'
-import { sliderData } from '@features/physical-education/pe-student-visits/constants'
 import { Title } from '@shared/ui/title'
 import { useUnit } from 'effector-react'
 import { useEffect } from 'react'
@@ -9,6 +8,7 @@ import { SliderPage } from 'widgets'
 import { UserData, Wrapper } from './styled'
 import { UserDataBlock } from './ui/user-date-block'
 import React from 'react'
+import { sliderData } from '@features/physical-education/student/pe-student-visits/constants'
 
 const PEStudent = () => {
     const { studentId } = useParams<{ studentId: string }>()
