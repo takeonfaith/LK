@@ -159,29 +159,7 @@ export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const teachersPrivateRoutes: () => IRoutes = () => ({
-    // On this position just to make necessary order
-    applications: {
-        id: 'applications',
-        title: 'Цифровые сервисы',
-        icon: <FiFileText />,
-        path: APPLICATIONS_ROUTE,
-        Component: isProduction ? ApplicationRedirect : TeachersApplicationsPage,
-        color: 'red',
-        isTemplate: false,
-        group: 'OTHER',
-        keywords: ['заявления', 'справки', 'заявление', 'справка'],
-    },
     ...generalRoutes,
-    'hr-applications': {
-        id: 'hr-applications',
-        title: 'Кадровые заявления',
-        icon: <FiFileText />,
-        path: HR_APPLICATIONS_ROUTE,
-        Component: isProduction ? ApplicationRedirect : HrApplicationsPage,
-        color: 'green',
-        isTemplate: false,
-        group: 'OTHER',
-    },
     'download-agreements': {
         id: 'download-agreements',
         title: 'Административная панель',
@@ -411,7 +389,32 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <BiIdCard />,
         path: ONBOARDING,
         Component: Onboarding,
-        color: 'blue',
+        color: 'orange',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
+    // Move when ready
+    applications: {
+        id: 'applications',
+        title: 'Цифровые сервисы',
+        icon: <FiFileText />,
+        path: APPLICATIONS_ROUTE,
+        Component: isProduction ? ApplicationRedirect : TeachersApplicationsPage,
+        color: 'red',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        keywords: ['заявления', 'справки', 'заявление', 'справка'],
+    },
+    'hr-applications': {
+        id: 'hr-applications',
+        title: 'Кадровые заявления',
+        icon: <FiFileText />,
+        path: HR_APPLICATIONS_ROUTE,
+        Component: isProduction
+            ? () =>
+                  PageIsNotReady({ errorText: 'Страница еще находится в разработке.', isRedirectButtonVisible: false })
+            : HrApplicationsPage,
+        color: 'green',
         isTemplate: false,
         group: 'FINANCES_DOCS',
     },
