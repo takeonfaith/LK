@@ -18,7 +18,7 @@ const DEFAULT_STORE = {
     done: false,
 }
 
-const postElectronicInteraction = createEvent<ElectronicInteraction>()
+const postElectronicInteraction = createEvent()
 const changeDone = createEvent<boolean>()
 const changeCompleted = createEvent<boolean>()
 

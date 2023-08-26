@@ -28,10 +28,14 @@ interface Props {
 
 const ElectornicAgreement = ({ children }: Props) => {
     const { open } = useModal()
-    const { data: store, workerLoading } = electronicInteractionModel.selectors.useData()
-    const { electronicInteraction: data, done, completed } = store
+    const {
+        data: { electronicInteraction: data, done, completed },
+        workerLoading,
+    } = electronicInteractionModel.selectors.useData()
 
-    const handleSubmit = electronicInteractionModel.events.postElectronicInteraction
+    const handleSubmit = () => {
+        electronicInteractionModel.events.postElectronicInteraction()
+    }
     const setCompleted = electronicInteractionModel.events.changeCompleted
 
     if (!data) return null
