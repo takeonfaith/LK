@@ -1,7 +1,7 @@
 import React from 'react'
-import { ScheduleTable } from '../ui/molecules/ScheduleTable'
-import { Contacts } from '../ui/atoms/Contacts'
 import { ColofrulText } from '@shared/ui/atoms/ColofrulText'
+import { ScheduleTable } from './schedule-table'
+import { Contacts } from './contacts'
 
 export const SalaryPayment = () => (
     <>

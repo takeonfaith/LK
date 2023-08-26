@@ -21,8 +21,9 @@ const AreaTitleWrapper = styled.div`
         align-items: center;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 550px) {
         background: transparent;
+        position: relative;
     }
 `
 
@@ -42,7 +43,7 @@ const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setInclu
         <AreaTitleWrapper onClick={() => !collapsed && (included || !optional) && setOpenArea((prev) => !prev)}>
             <div className="title-and-icon">
                 <Title
-                    size={4}
+                    size={3}
                     align="left"
                     icon={
                         confirmed !== undefined ? (

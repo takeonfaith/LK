@@ -1,6 +1,6 @@
 import React from 'react'
-import { Contacts } from '../ui/atoms/Contacts'
 import { BoldText } from '@shared/ui/atoms/BoldText'
+import { Contacts } from './contacts'
 
 export const WorkplaceOrganization = () => (
     <>
