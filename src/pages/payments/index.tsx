@@ -7,13 +7,17 @@ import { SliderPage } from 'widgets'
 import PaymentsTemplate from './payments-template'
 
 const PaymentsPage = () => {
-    const { data, loading, error } = paymentsModel.selectors.usePayments()
+    const {
+        data: { payments },
+        loading,
+        error,
+    } = paymentsModel.selectors.useData()
     const paymentType =
-        !!data?.dormitory.length && !!data?.education.length
+        !!payments?.dormitory.length && !!payments?.education.length
             ? 'both'
-            : !!data?.dormitory.length
+            : !!payments?.dormitory.length
             ? 'dormitory'
-            : !!data?.education.length
+            : !!payments?.education.length
             ? 'education'
             : 'none'
 
@@ -30,8 +34,8 @@ const PaymentsPage = () => {
             loading={loading}
             load={paymentsModel.effects.getPaymentsFx}
             error={error}
-            data={data}
-            noDataCheck={!data?.dormitory.length}
+            data={payments}
+            noDataCheck={!payments?.dormitory.length}
         >
             <PageBlock>
                 {paymentType === 'none' && <Error text="Нет данных" />}
@@ -40,18 +44,18 @@ const PaymentsPage = () => {
                         pages={[
                             {
                                 title: 'Общежитие',
-                                content: <PaymentsTemplate contracts={data?.dormitory} />,
+                                content: <PaymentsTemplate contracts={payments?.dormitory} />,
                             },
                             {
                                 title: 'Обучение',
-                                content: <PaymentsTemplate contracts={data?.education} />,
+                                content: <PaymentsTemplate contracts={payments?.education} />,
                             },
                         ]}
                         appearance={false}
                     />
                 )}
-                {paymentType === 'dormitory' && <PaymentsTemplate contracts={data?.dormitory} />}
-                {paymentType === 'education' && <PaymentsTemplate contracts={data?.education} />}
+                {paymentType === 'dormitory' && <PaymentsTemplate contracts={payments?.dormitory} />}
+                {paymentType === 'education' && <PaymentsTemplate contracts={payments?.education} />}
             </PageBlock>
         </Wrapper>
     )

@@ -40,7 +40,7 @@ const Contract = ({ contract }: Props) => {
     const [copied, setCopied] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
-    const { error } = paymentsModel.selectors.usePayments()
+    const { error } = paymentsModel.selectors.useData()
 
     const contractInfo = [
         {

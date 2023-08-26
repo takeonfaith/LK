@@ -1,6 +1,6 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
-import { createEvent } from 'effector'
+import { createEvent, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector'
 import changeCanSign from '../lib/change-can-sign'
@@ -9,17 +9,15 @@ import { agreementSubmit } from '@shared/api/payment-api'
 interface PaymentsStore {
     payments: Payments | null
     error: string | null
+    completed: boolean
+    done: boolean
 }
 
-const DEFAULT_STORE: PaymentsStore = { payments: null, error: null }
+const DEFAULT_STORE: PaymentsStore = { payments: null, completed: false, done: false, error: null }
 
-const usePayments = () => {
-    return {
-        data: useStore($paymentsStore).payments,
-        loading: useStore(getPaymentsFx.pending),
-        error: useStore($paymentsStore).error,
-    }
-}
+const signAgreement = createEvent<string>()
+const setDone = createEvent<boolean>()
+const setCompleted = createEvent<boolean>()
 
 const getPaymentsFx = createEffect(async (): Promise<Payments> => {
     const response = await paymentApi.get()
@@ -46,11 +44,24 @@ const signAgreementFx = createEffect(async (id: string) => {
     if (!response.data.contracts.education && !response.data.contracts.dormitory)
         throw new Error('У вас нет данных по оплате')
     try {
+        setDone(true)
         return response.data.contracts
     } catch (_) {
         throw new Error('Не удалось загрузить оплату')
     }
 })
+
+sample({ clock: signAgreement, target: signAgreementFx })
+
+const useData = () => {
+    const { completed, done, payments, error } = useStore($paymentsStore)
+    return {
+        data: { completed, done, payments },
+        loading: useStore(getPaymentsFx.pending),
+        workerLoading: useStore(signAgreementFx.pending),
+        error: error,
+    }
+}
 
 const clearStore = createEvent()
 
@@ -78,17 +89,26 @@ const $paymentsStore = createStore<PaymentsStore>(DEFAULT_STORE)
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
+    .on(setCompleted, (oldData, completed) => ({
+        ...oldData,
+        completed,
+    }))
+    .on(setDone, (oldData, done) => ({
+        ...oldData,
+        done,
+    }))
 
 export const selectors = {
-    usePayments,
+    useData,
 }
 
 export const effects = {
     getPaymentsFx,
     signContractFx,
-    signAgreementFx,
 }
 
 export const events = {
+    signAgreement,
+    setCompleted,
     clearStore,
 }

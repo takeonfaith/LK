@@ -9,7 +9,6 @@ import localizeDate from '@utils/localize-date'
 import React from 'react'
 import { FiCheck, FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
-import { useElectronicAgreement } from 'widgets/electonic-agreement'
 
 interface Props {
     data: Agreement
@@ -27,14 +26,14 @@ const SignBlock = styled.div`
 
 const ElectronicAgreementListItem = ({ data }: Props) => {
     const { id, signed_user: signedUser, name, can_sign: isActive, date } = data
-
-    const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
-        isDone: signedUser,
-        submit: paymentsModel.effects.signAgreementFx,
-        id,
-    })
+    const {
+        data: { done, completed },
+        loading,
+    } = paymentsModel.selectors.useData()
 
     const height = signedUser || done ? 140 : 100
+    const handleSubmit = () => paymentsModel.events.signAgreement(id)
+    const setCompleted = paymentsModel.events.setCompleted
 
     return (
         <Accordion height={height} title={name} confirmed={signedUser || done}>

@@ -126,23 +126,26 @@ const TopMessage = ({
 }
 
 const PaymentsWidget = () => {
-    const { data, error } = paymentsModel.selectors.usePayments()
+    const {
+        data: { payments },
+        error,
+    } = paymentsModel.selectors.useData()
 
     if (error) return <ErrorMessage />
 
-    if (!data) return <SkeletonLoading />
+    if (!payments) return <SkeletonLoading />
 
-    if (!!data && !data.dormitory.length && !data.education.length) return null
+    if (!!payments && !payments.dormitory.length && !payments.education.length) return null
 
-    const dormPayment = +data?.dormitory[0]?.balance_currdate
-    const eduPayment = +data?.education[0]?.balance_currdate
+    const dormPayment = +payments?.dormitory[0]?.balance_currdate
+    const eduPayment = +payments?.education[0]?.balance_currdate
 
     const hasToPay = dormPayment > 0 || eduPayment > 0
 
     return (
         <PaymentsWidgetWrapper background={hasToPay ? 'red' : 'green'}>
-            <TopMessage data={data.dormitory} balance={dormPayment} section={'Общежитие'} />
-            <TopMessage data={data.education} balance={eduPayment} section={'Обучение'} />
+            <TopMessage data={payments.dormitory} balance={dormPayment} section={'Общежитие'} />
+            <TopMessage data={payments.education} balance={eduPayment} section={'Обучение'} />
         </PaymentsWidgetWrapper>
     )
 }

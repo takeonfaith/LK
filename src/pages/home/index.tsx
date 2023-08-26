@@ -34,7 +34,9 @@ const Home = () => {
         error,
     } = userModel.selectors.useUser()
 
-    const { data: payments } = paymentsModel.selectors.usePayments()
+    const {
+        data: { payments },
+    } = paymentsModel.selectors.useData()
     const { data: schedule } = scheduleModel.selectors.useSchedule()
 
     const { homeRoutes } = menuModel.selectors.useMenu()
