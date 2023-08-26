@@ -11,10 +11,6 @@ const PageBlockStyled = styled(BlockWrapper)`
     @media (min-width: 1001px) {
         padding-top: 70px;
     }
-
-    @media (max-width: 1000px) {
-        padding-top: 50px;
-    }
 `
 
 const TopRightCornerElement = styled.div`
@@ -26,7 +22,7 @@ const TopRightCornerElement = styled.div`
     justify-content: flex-end;
 
     @media (max-width: 1000px) {
-        top: -7px;
+        top: 7px;
         right: 7px;
     }
 `
