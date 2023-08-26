@@ -159,6 +159,16 @@ export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const teachersPrivateRoutes: () => IRoutes = () => ({
+    onboarding: {
+        id: 'onboarding',
+        title: 'Новому работнику',
+        icon: <BiIdCard />,
+        path: ONBOARDING,
+        Component: Onboarding,
+        color: 'orange',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
     ...generalRoutes,
     'download-agreements': {
         id: 'download-agreements',
@@ -382,16 +392,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
         show: false,
-    },
-    onboarding: {
-        id: 'onboarding',
-        title: 'Новому работнику',
-        icon: <BiIdCard />,
-        path: ONBOARDING,
-        Component: Onboarding,
-        color: 'orange',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
     },
     // Move when ready
     applications: {
