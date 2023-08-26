@@ -1,39 +1,43 @@
 import { pepApi } from '@api'
 import { ElectronicInteraction } from '@api/model'
 import { useStore } from 'effector-react/compat'
-import { createEffect, createEvent, createStore } from 'effector'
+import { createEffect, createEvent, createStore, sample } from 'effector'
+import { popUpMessageModel } from '@entities/pop-up-message'
 
 interface ElectronicInteractionStore {
     electronicInteraction: ElectronicInteraction | null
     error: string | null
     completed: boolean
+    done: boolean
 }
 
 const DEFAULT_STORE = {
     electronicInteraction: null,
     error: null,
     completed: false,
-}
-
-const useElectronicInteraction = () => {
-    return {
-        data: useStore($electronicInteractionStore).electronicInteraction,
-        loading: useStore(getElectronicInteractionFx.pending),
-        error: useStore($electronicInteractionStore).error,
-        completed: useStore($electronicInteractionStore).completed,
-    }
+    done: false,
 }
 
 const postElectronicInteraction = createEvent<ElectronicInteraction>()
-const changeCompleted = createEvent<{ completed: boolean }>()
+const changeDone = createEvent<boolean>()
+const changeCompleted = createEvent<boolean>()
 
 const postElectronicInteractionFx = createEffect(async (): Promise<void> => {
     try {
         const response = await pepApi.set()
+        const preparedData = response[0]
 
-        return response.data
+        if (preparedData?.result !== 'ok')
+            popUpMessageModel.events.evokePopUpMessage({ message: 'Не удалось подписать', type: 'failure' })
+        else {
+            changeDone(true)
+            popUpMessageModel.events.evokePopUpMessage({
+                message: 'Согласие успешно подписано',
+                type: 'success',
+            })
+        }
     } catch (error) {
-        throw new Error('Не удалось загрузить раздел')
+        throw new Error('Возникла ошибка. Попробуйте позже')
     }
 })
 
@@ -46,6 +50,18 @@ const getElectronicInteractionFx = createEffect(async (): Promise<ElectronicInte
         throw new Error(error as string)
     }
 })
+
+sample({ clock: postElectronicInteraction, target: postElectronicInteractionFx })
+
+const useData = () => {
+    const { completed, done, electronicInteraction, error } = useStore($electronicInteractionStore)
+    return {
+        data: { completed, done, electronicInteraction },
+        loading: useStore(getElectronicInteractionFx.pending),
+        workerLoading: useStore(postElectronicInteractionFx.pending),
+        error: error,
+    }
+}
 
 const clearStore = createEvent()
 
@@ -62,22 +78,26 @@ const $electronicInteractionStore = createStore<ElectronicInteractionStore>(DEFA
         ...oldData,
         error: newData.message,
     }))
-    .on(changeCompleted, (oldData, newData) => ({
+    .on(changeCompleted, (oldData, completed) => ({
         ...oldData,
-        completed: newData.completed,
+        completed,
+    }))
+    .on(changeDone, (oldData, done) => ({
+        ...oldData,
+        done,
     }))
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
 
 export const selectors = {
-    useElectronicInteraction,
+    useData,
 }
 
 export const effects = {
     getElectronicInteractionFx,
-    postElectronicInteractionFx,
 }
+
 export const events = {
     postElectronicInteraction,
     changeCompleted,

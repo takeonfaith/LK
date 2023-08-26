@@ -75,7 +75,9 @@ interface Props {
 
 const Wrapper = ({ children, load, error, data, deps = [], noDataCheck = false, loadEveryVisit = false }: Props) => {
     useEffect(() => {
-        if (!data || loadEveryVisit) load()
+        if (!data || loadEveryVisit) {
+            load()
+        }
     }, deps)
 
     return (

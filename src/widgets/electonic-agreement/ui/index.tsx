@@ -4,13 +4,12 @@ import localizeDate from '@utils/localize-date'
 import React from 'react'
 import { FiCheck, FiDownload } from 'react-icons/fi'
 import { useModal } from 'widgets'
-import { useElectronicAgreement } from '../hooks/use-electronic-agreement'
 import { MistakeModal } from './atoms'
 import Flex from '@shared/ui/flex'
 import styled from 'styled-components'
 import Subtext from '@shared/ui/subtext'
 import { Colors } from '@shared/constants'
-import { Effect } from 'effector'
+import { electronicInteractionModel } from '@entities/electronic-interaction'
 
 const ElectornicAgreementStyled = styled.div`
     .info-text {
@@ -25,18 +24,15 @@ const ElectornicAgreementStyled = styled.div`
 
 interface Props {
     children: React.ReactChild
-    submit: Effect<void, any, Error>
-    data: any
-    setData?: React.Dispatch<any>
-    isDone?: boolean
 }
 
-const ElectornicAgreement = ({ children, data, submit, isDone = false }: Props) => {
+const ElectornicAgreement = ({ children }: Props) => {
     const { open } = useModal()
-    const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
-        isDone,
-        submit,
-    })
+    const { data: store, workerLoading } = electronicInteractionModel.selectors.useData()
+    const { electronicInteraction: data, done, completed } = store
+
+    const handleSubmit = electronicInteractionModel.events.postElectronicInteraction
+    const setCompleted = electronicInteractionModel.events.changeCompleted
 
     if (!data) return null
 
@@ -61,15 +57,15 @@ const ElectornicAgreement = ({ children, data, submit, isDone = false }: Props) 
                 />
             </Flex>
             <div className="info-text">{children}</div>
-            {!data.status && !done && (
+            {true && (
                 <SubmitButton
                     text={!data.status && !done ? 'Подписать' : 'Подписано'}
                     action={handleSubmit}
-                    isLoading={loading}
+                    isLoading={workerLoading}
                     completed={completed}
-                    isDone={done || data.status}
+                    isDone={done || !data.status}
                     setCompleted={setCompleted}
-                    isActive={!data.status && !done}
+                    isActive={true}
                     popUpFailureMessage="Согласие уже подписано"
                     popUpSuccessMessage="Согласие успешно подписано"
                 />

@@ -6,16 +6,16 @@ import React from 'react'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
 
 const ElectronicInteractionAgreementPage = () => {
-    const { data, preparedData, error, loading } = electronicInteractionModel.selectors.useData()
-    const handleSubmit = electronicInteractionModel.effects.postFx
+    const { data, error, loading } = electronicInteractionModel.selectors.useData()
+    const preparedData = data.electronicInteraction
 
-    const load = () => electronicInteractionModel.effects.getFx()
+    const load = () => electronicInteractionModel.effects.getElectronicInteractionFx()
 
     return (
-        <Wrapper load={load} loading={loading} error={error} data={data} loadEveryVisit>
+        <Wrapper load={load} loading={loading} error={error} data={preparedData} loadEveryVisit>
             <PageBlock>
                 {preparedData && (
-                    <ElectornicAgreement data={preparedData} submit={handleSubmit}>
+                    <ElectornicAgreement>
                         <div className="info-text">
                             Я, <b>{preparedData.fio}</b>,
                             <p>
