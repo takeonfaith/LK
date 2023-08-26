@@ -2,7 +2,7 @@ import React from 'react'
 import { isProduction } from '@shared/constants'
 import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import { BiCheckCircle, BiIdCard, BiInfoCircle, BiRuble } from 'react-icons/bi'
+import { BiCheckCircle, BiIdCard, BiInfoCircle, BiRuble, BiStar } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import { MdOutlineBedroomChild } from 'react-icons/md'
@@ -10,6 +10,7 @@ import {
     generalHiddenRoutes,
     generalRoutes,
     IRoutes,
+    MILITARY_REGISTRATION_ROUTE,
     PAYMENTS_ROUTE,
     PROJECT_ACTIVITIES_ROUTE,
     USEFUL_INFO_ROUTE,
@@ -54,6 +55,7 @@ import {
 import { HelpfulInformation } from './teacher-routes/pages'
 import { User } from '@shared/api/model'
 import PaymentsPage from '@pages/payments'
+import MilitaryRegistration from '@pages/applications/pages/other/military-registration'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -202,6 +204,20 @@ export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
         path: ARBITRARY_REQUEST_ROUTE,
         Component: ArbitraryRequestPage,
         color: 'blue',
+        isTemplate: false,
+        group: 'OTHER',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'military-registration': {
+        id: 'military-registration',
+        title: 'Воинский учёт',
+        icon: <BiStar />,
+        path: MILITARY_REGISTRATION_ROUTE,
+        Component: MilitaryRegistration,
+        color: 'red',
         isTemplate: false,
         group: 'OTHER',
         isSubPage: true,
