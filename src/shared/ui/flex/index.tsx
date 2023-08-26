@@ -12,7 +12,7 @@ const Flex = styled.div<{
     gap?: string
     d?: Direction
     mw?: string
-    wrap?: boolean
+    $wrap?: boolean
 }>`
     width: ${({ w }) => w ?? '100%'};
     max-width: ${({ mw }) => mw};
@@ -22,7 +22,7 @@ const Flex = styled.div<{
     align-items: ${({ ai }) => ai ?? 'center'};
     justify-content: ${({ jc }) => jc ?? 'flex-start'};
     flex-direction: ${({ d }) => d ?? 'row'};
-    flex-wrap: ${({ wrap }) => wrap && 'wrap'};
+    flex-wrap: ${({ $wrap }) => $wrap && 'wrap'};
 `
 
 export default Flex
