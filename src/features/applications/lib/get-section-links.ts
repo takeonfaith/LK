@@ -138,6 +138,7 @@ const getSectionLinks = (): Section[] => {
             disabled: isProduction,
             links: [
                 { link: MILITARY_REGISTRATION_DOCUMENTS, title: 'Отправить документы воинского учета' },
+                { link: MILITARY_REGISTRATION_DOCUMENTS, title: 'Отправить документы воинского учета' },
                 {
                     link: '',
                     title: 'Заполнить личную карточку обучающегося по воинскому учету для получения отсрочки от призывана военную службу',

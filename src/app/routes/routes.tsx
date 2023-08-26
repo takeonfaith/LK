@@ -10,7 +10,6 @@ import {
     generalHiddenRoutes,
     generalRoutes,
     IRoutes,
-    MILITARY_REGISTRATION_ROUTE,
     PAYMENTS_ROUTE,
     PROJECT_ACTIVITIES_ROUTE,
     USEFUL_INFO_ROUTE,
@@ -37,7 +36,6 @@ import {
     FinancialSupport,
     IncreasedStateAcademicScholarship,
     MilitaryRegistrationCard,
-    MilitaryRegistrationDocuments,
     PaymentRecipient,
     PreferentialAccommodationPage,
     ProjectActivitiesPage,
@@ -55,7 +53,7 @@ import {
 import { HelpfulInformation } from './teacher-routes/pages'
 import { User } from '@shared/api/model'
 import PaymentsPage from '@pages/payments'
-import MilitaryRegistration from '@pages/applications/pages/other/military-registration'
+import MilitaryRegistration from '@pages/applications/pages/mobilization-department/military-registration'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -211,21 +209,6 @@ export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
     },
-    'military-registration': {
-        id: 'military-registration',
-        title: 'Воинский учёт',
-        icon: <BiStar />,
-        path: MILITARY_REGISTRATION_ROUTE,
-        Component: MilitaryRegistration,
-        color: 'red',
-        isTemplate: false,
-        group: 'OTHER',
-        isSubPage: true,
-        backButtonText: 'Назад к цифровым сервисам',
-        subPageHeaderTitle: '',
-        fallbackPrevPage: APPLICATIONS_ROUTE,
-    },
-
     'social-scollarship': {
         id: 'social-scollarship',
         title: 'Социальная стипендия',
@@ -465,15 +448,16 @@ export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
     'military-registration-documents': {
         id: 'military-registration-documents',
         title: 'Отправить документы воинского учета',
-        icon: <BiIdCard />,
+        icon: <BiStar />,
         path: MILITARY_REGISTRATION_DOCUMENTS,
-        Component: isProduction ? ApplicationRedirect : MilitaryRegistrationDocuments,
-        color: 'blue',
+        Component: isProduction ? ApplicationRedirect : MilitaryRegistration,
+        color: 'red',
         isTemplate: false,
         isSubPage: true,
         backButtonText: 'Назад к заявлениям',
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
+        pageSize: 'small',
     },
     'retake-for-diploma': {
         id: 'retake-for-diploma',

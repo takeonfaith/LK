@@ -1,3 +1,4 @@
+import { SelectPage } from '@features/select'
 import { UserApplication } from '@shared/api/model'
 import { IInputArea, IInputAreaData } from '@shared/ui/input-area/model'
 
@@ -396,8 +397,8 @@ export interface DriversLicenseData {
     dateOfIssue: string
 }
 
-export const getDriversLicenseData = (driversLicenseData: IInputArea | null): IInputArea => {
-    const documentSelected = (driversLicenseData?.data[0] as IInputAreaData)?.value !== null
+export const getDriversLicenseData = (driversLicenseData: IInputAreaData[] | null): IInputArea => {
+    const documentSelected = (driversLicenseData && (driversLicenseData[0]?.value as SelectPage)?.id !== 0) || false
 
     return {
         title: 'Данные водительского удостоверения',
@@ -405,9 +406,12 @@ export const getDriversLicenseData = (driversLicenseData: IInputArea | null): II
             {
                 fieldName: 'documentType',
                 title: 'Вид документа',
-                value: null,
+                value: (driversLicenseData && driversLicenseData[0]?.value) ?? { id: 0, title: 'Не выбрано' },
                 type: 'select',
-                items: [{ id: 0, title: 'Водительское удостоверение' }],
+                items: [
+                    { id: 0, title: 'Не выбрано' },
+                    { id: 1, title: 'Водительское удостоверение' },
+                ],
                 width: '100%',
                 required: false,
                 editable: true,
@@ -415,7 +419,7 @@ export const getDriversLicenseData = (driversLicenseData: IInputArea | null): II
             {
                 fieldName: 'series',
                 title: 'Серия',
-                value: '',
+                value: (driversLicenseData && driversLicenseData[1]?.value) ?? '',
                 required: documentSelected,
                 visible: documentSelected,
                 editable: true,
@@ -424,7 +428,7 @@ export const getDriversLicenseData = (driversLicenseData: IInputArea | null): II
             {
                 fieldName: 'number',
                 title: 'Номер',
-                value: '',
+                value: (driversLicenseData && driversLicenseData[2]?.value) ?? '',
                 required: documentSelected,
                 visible: documentSelected,
                 editable: true,
@@ -433,7 +437,7 @@ export const getDriversLicenseData = (driversLicenseData: IInputArea | null): II
             {
                 fieldName: 'vehicleCategory',
                 title: 'Категория ТС',
-                value: null,
+                value: (driversLicenseData && driversLicenseData[3]?.value) ?? null,
                 type: 'select',
                 items: vehicleCategory,
                 width: '100%',
@@ -444,7 +448,7 @@ export const getDriversLicenseData = (driversLicenseData: IInputArea | null): II
             {
                 fieldName: 'dateOfIssue',
                 title: 'Дата выдачи',
-                value: '',
+                value: (driversLicenseData && driversLicenseData[4]?.value) ?? '',
                 type: 'date',
                 required: documentSelected,
                 visible: documentSelected,

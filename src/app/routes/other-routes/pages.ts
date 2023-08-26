@@ -68,8 +68,8 @@ export const RetakeForDiploma = lazy(
     () => import('@pages/applications/pages/multifunctional-center/retake-for-diploma'),
 )
 
-export const MilitaryRegistrationDocuments = lazy(
-    () => import('@pages/applications/pages/mobilization-department/military-registration-documents'),
+export const MilitaryRegistration = lazy(
+    () => import('@pages/applications/pages/mobilization-department/military-registration'),
 )
 
 export const FinancialSupport = lazy(

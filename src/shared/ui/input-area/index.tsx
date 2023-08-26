@@ -130,7 +130,7 @@ const InputArea = ({
                             isActive={!optionalCheckbox?.value}
                         />
                     )}
-                    {!!documents && changeInputArea && (
+                    {!!documents && changeInputArea && documents.visible !== false && (
                         <FileInput
                             files={documents.files}
                             setFiles={(files: File[]) => handleLoadFiles(files)}
