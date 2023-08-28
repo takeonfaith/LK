@@ -3,8 +3,8 @@ import { WorkplaceOrganization } from '../ui/workplace-organization'
 import { SalaryPayment } from '../ui/salary-payment'
 import { HRDocumentFlow } from '../ui/hr-document-flow'
 import { Documents } from '../ui/documents'
-import { OnboardingTopic } from '../types/onboarding'
 import { Nutrition } from '../ui/nutrition'
+import { OnboardingTopic } from '../types/onboarding'
 
 export const topics: OnboardingTopic = [
     {
