@@ -1,6 +1,6 @@
 import React from 'react'
-import { ScheduleTable } from '../ui/molecules/ScheduleTable'
-import { Contacts } from '../ui/atoms/Contacts'
+import { ScheduleTable } from './schedule-table'
+import { Contacts } from './contacts'
 
 export const PassRegistration = () => (
     <>
@@ -19,7 +19,7 @@ export const PassRegistration = () => (
         <Contacts>
             г. Москва, ул. Большая Семеновская, д. 38, каб. Н-514
             <br />
-            <a href="tel:+74952230523p1520">Тел. : +7 (495) 223-05-23 доб. 1520</a>
+            <a href="tel:+74952230523,1520">Тел. : +7 (495) 223-05-23 доб. 1520</a>
         </Contacts>
     </>
 )

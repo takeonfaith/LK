@@ -1,6 +1,6 @@
 import React from 'react'
-import { ColumnDivider } from '../atoms/ColumnDivider'
 import Flex from '@shared/ui/flex'
+import { ColumnDivider } from './column-divider'
 
 type Props = {
     title: string

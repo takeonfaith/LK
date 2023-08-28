@@ -16,5 +16,12 @@ export const Documents = () => (
         >
             Локальные нормативные акты, регулирующие социально-трудовые отношения
         </a>
+        <a
+            href="https://e.mospolytech.ru/old/storage/files/Polozhenie_o_kadrovom_elektronnom_dokumentooborote_Moskovskogo_Politeha.pdf"
+            target="_blank"
+            rel="noreferrer"
+        >
+            Положение о кадровом электронном документообороте Московского Политеха
+        </a>
     </>
 )
