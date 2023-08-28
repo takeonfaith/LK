@@ -207,25 +207,16 @@ export interface IWeekDayName {
     short: string
 }
 
-export interface IWeekDays {
-    monday: IWeekDayName
-    tuesday: IWeekDayName
-    wednesday: IWeekDayName
-    thursday: IWeekDayName
-    friday: IWeekDayName
-    saturday: IWeekDayName
-    // sunday: IWeekDayName
-}
-
-export const WeekDays: IWeekDays = {
+export const WEEK_DAYS = {
     monday: { full: 'Понедельник', short: 'Пн' },
     tuesday: { full: 'Вторник', short: 'Вт' },
     wednesday: { full: 'Среда', short: 'Ср' },
     thursday: { full: 'Четверг', short: 'Чт' },
     friday: { full: 'Пятница', short: 'Пт' },
     saturday: { full: 'Суббота', short: 'Сб' },
-    // sunday: { full: 'Воскресенье', short: 'Вс' },
-}
+} as const
+
+export type IWeekDays = typeof WEEK_DAYS
 
 export const ColorsByGrade: Record<keyof IGrade | 'default', string> = {
     Зачтено: Colors.green.main,
@@ -380,6 +371,10 @@ export const SCREEN_IPHONE_SE = '376px'
 export const SCREEN_IPHONE_12 = '391px'
 export const SCREEN_IPHONE_XR = '415px'
 export const SCREEN_IPAD_AIR = '821px'
+
+export const TIME_IN_MS = {
+    minute: 60000,
+}
 
 /**
  * @constant

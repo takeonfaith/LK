@@ -1,10 +1,14 @@
 import { getSubjectIcon } from '@features/acad-performance/lib/get-subject-icon'
 import { ISubject, ITimeIntervalColor, TimeIntervalColor } from '@shared/api/model'
+import { IWeekDays } from '@shared/consts'
 import { type DayCalendarEvent } from '@shared/ui/calendar'
 import React from 'react'
 import { HiBookOpen } from 'react-icons/hi'
 
-export const getCalendarSchedule = (lessons: ISubject[] | undefined | null): DayCalendarEvent[] => {
+export const getCalendarSchedule = (
+    lessons: ISubject[] | undefined | null,
+    weekday: IWeekDays[keyof IWeekDays]['short'],
+): DayCalendarEvent[] => {
     if (!lessons) return []
     const result: DayCalendarEvent[] = lessons?.map(
         ({ place, name, teachers, timeInterval, link, dateInterval, rooms, groups }) => {
@@ -19,6 +23,7 @@ export const getCalendarSchedule = (lessons: ISubject[] | undefined | null): Day
                 place,
                 link,
                 groups,
+                weekday,
                 rooms,
                 icon: getSubjectIcon(name),
             }

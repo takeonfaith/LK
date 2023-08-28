@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from 'react'
-import { WeekDays } from '@consts'
+import { WEEK_DAYS } from '@consts'
 import { scheduleModel } from '@entities/schedule'
 import displayTopInfo from '@features/schedule/lib/display-top-info'
 import getTomorrow from '@features/schedule/lib/get-tomorrow'

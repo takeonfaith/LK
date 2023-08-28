@@ -9,7 +9,7 @@ const TimeWrapper = styled(Flex)<{ scale: number; timesLen: number }>`
     position: absolute;
     left: 0;
     z-index: 0;
-    height: ${({ scale, timesLen }) => `${timesLen * scale * 60}px`};
+    height: ${({ scale, timesLen }) => `${timesLen * scale * 60 + 20}px`};
 `
 
 const TimeBlockWrapper = styled.div`
@@ -49,7 +49,7 @@ const Times = ({ interval, scale }: Props) => {
 
     return (
         <TimeWrapper
-            timesLen={times.length}
+            timesLen={times.length - 1}
             scale={scale}
             d="column"
             w="100%"

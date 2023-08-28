@@ -1,5 +1,5 @@
 import { IWeekSchedule } from '@api/model'
-import { IWeekDays, WeekDays } from '@consts'
+import { IWeekDays, WEEK_DAYS } from '@consts'
 import { scheduleModel } from '@entities/schedule'
 import displayTopInfo from '@features/schedule/lib/display-top-info'
 import useResize from '@utils/hooks/use-resize'
@@ -65,7 +65,7 @@ const WeekSchedule = ({ weekSchedule, view, wrapperRef }: Props) => {
                 <DaySchedule
                     key={index}
                     isCurrent={currentDay === index + 1}
-                    weekDay={WeekDays[day as keyof IWeekDays].full}
+                    weekDay={WEEK_DAYS[day as keyof IWeekDays].full}
                     lessons={weekSchedule[day as keyof IWeekDays].lessons}
                     view={view}
                     topInfo={displayTopInfo(weekSchedule, day as keyof IWeekDays)}

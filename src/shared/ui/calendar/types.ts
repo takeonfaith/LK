@@ -12,6 +12,7 @@ export type DayCalendarEvent = {
     dateInterval: string
     link?: string | null
     groups?: string
+    weekday: string
 }
 
 export type WeekEvents = {

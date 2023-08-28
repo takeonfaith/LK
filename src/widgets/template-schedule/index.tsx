@@ -58,6 +58,7 @@ const TemplateSchedule = ({ teacherName, group, data, loading, error }: Props) =
         isListView,
         handleListView,
     } = useTemplateSchedule(data, teacherName, group)
+
     const currentPage = Object.keys(schedule ?? {}).findIndex((el) => el === currentModule)
 
     return (

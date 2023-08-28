@@ -345,7 +345,11 @@ export const getTeachers = (fullName: string) => {
 }
 
 export const getSession = () => {
-    return emulateRequest({ data: [] })
+    return emulateRequest({
+        data: {
+            '2023/01/01': [MOCK.Friday],
+        },
+    })
 }
 
 export const getTeachersSession = (fullName: string) => {

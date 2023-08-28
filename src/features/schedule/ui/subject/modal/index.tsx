@@ -13,7 +13,7 @@ import Groups from '../../atoms/groups'
 import ListOfGroups from '../../atoms/list-of-groups'
 import EventBackground from '@shared/ui/calendar/day/ui/event-background'
 import { getSubjectIcon } from '@features/acad-performance/lib/get-subject-icon'
-import { Colors, IColorPalette } from '@shared/consts'
+import { Colors, IColorPalette, WEEK_DAYS } from '@shared/consts'
 import { Icon } from '@features/all-pages'
 import { ContentWrapper } from 'widgets/content-layout/styled'
 import Flex from '@shared/ui/flex'
@@ -96,7 +96,7 @@ const ModalContentWrapper = styled(Flex)`
 const TimeSquare = styled.div`
     min-width: 10px;
     height: 10px;
-    border-radius: 2px;
+    border-radius: 10px;
     background: ${({ color }) => color};
 `
 
@@ -113,6 +113,7 @@ const SubjectModal = (props: Props) => {
         rooms,
         groups,
         color,
+        weekday,
         isNext = false,
         noPadding = false,
     } = props
@@ -153,7 +154,10 @@ const SubjectModal = (props: Props) => {
                     </Title>
                 </Flex>
                 <Divider margin="0" width="100%" />
-                <IconText icon={<HiOutlineCalendar />} text={dateInterval} />
+                <IconText
+                    icon={<HiOutlineCalendar />}
+                    text={<DotSeparatedWords words={[weekday ?? '', dateInterval]} />}
+                />
                 {link?.length && (
                     <a href={link} target="_blank" rel="noreferrer">
                         <IconText icon={<HiOutlineExternalLink />} text={place} />

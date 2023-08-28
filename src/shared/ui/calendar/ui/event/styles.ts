@@ -2,15 +2,20 @@ import styled from 'styled-components'
 import { StyledProps } from './types'
 import { SCREEN_IPHONE_XR } from '@shared/consts'
 
+const getTop = ({ startTimeShift, startDayShift, scale }: StyledProps) => {
+    const top = (startTimeShift - startDayShift) * scale
+
+    return `${top}px`
+}
+
 export const EventItemStyled = styled.div<StyledProps>`
     width: ${({ width, listView }) => (listView ? '100%' : `calc(${width}% - 1px)`)};
-    height: ${({ duration, scale, listView }) => (listView ? '120px' : `${(duration + 3) * scale}px`)};
+    height: ${({ duration, scale, listView }) => (listView ? '120px' : `${duration * scale}px`)};
     border-radius: 5px;
     padding: ${({ shortInfo }) => (!shortInfo ? '12px' : '8px')};
     display: flex;
     position: relative;
     overflow: hidden;
-    background: var(--schedule);
     color: ${({ color, listView }) => (listView ? 'var(--text)' : color)};
     filter: ${({ otherIsCurrent }) => otherIsCurrent && 'grayscale(0.8)'};
     cursor: pointer;
@@ -18,8 +23,7 @@ export const EventItemStyled = styled.div<StyledProps>`
     margin: ${({ listView }) => (listView ? '4px' : '0')};
     transform: translateX(${({ leftShift }) => `calc(${leftShift}% + ${1 * (leftShift / 100)}px)`});
     left: 0;
-    top: ${({ startTimeShift, startDayShift, scale }) =>
-        `${startTimeShift - startDayShift + ((startTimeShift - startDayShift) / (60 * scale)) * 3}px`};
+    top: ${getTop};
 
     &:hover {
         filter: brightness(0.95);

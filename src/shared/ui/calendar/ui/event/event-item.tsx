@@ -10,7 +10,8 @@ import IconText from '../../day/ui/icon-text'
 import { EventItemStyled, EventTitle, IconSection, MobileIcon } from './styles'
 import { UIProps } from './types'
 
-const getStartTimeShift = (startTime: string) => {
+const getStartTimeShiftInMinutes = (startTime: string) => {
+    // E.g 12:20 -> 740
     const [hour, minute] = startTime.split(':')
     return +hour * 60 + +minute
 }
@@ -39,7 +40,7 @@ const EventItem = (props: Props) => {
         shortInfo = false,
     } = props
     const { theme } = useTheme()
-    const startTimeShift = getStartTimeShift(startTime)
+    const startTimeShift = getStartTimeShiftInMinutes(startTime)
     const textColor = theme === 'light' ? color.dark3 : color.light3
     const background = theme === 'light' ? color.transparent1 : color.transparent2
     const handleClick = () => onClick(props)

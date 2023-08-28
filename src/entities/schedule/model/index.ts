@@ -56,9 +56,9 @@ const $schedule = createStore<ISchedule>(DEFAULT_STORE)
         //calcNextExamTime(newData.semestr)
         currentDay: !!newData.week ? new Date().getDay() : 0,
     }))
-    .on(getScheduleFx.failData, (oldData) => ({
+    .on(getScheduleFx.failData, (oldData, error) => ({
         ...oldData,
-        error: 'Не удалось загрузить расписание',
+        error: `${error.cause}, ${error.message}, ${error.stack}, ${error.name}`,
     }))
     .on(changeCurrentModule, (oldState, newState) => ({
         ...oldState,

@@ -1,4 +1,5 @@
-import { Colors } from '@shared/consts'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Colors, TIME_IN_MS } from '@shared/consts'
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
@@ -7,6 +8,7 @@ const CurrentTimeLineStyled = styled.div<{ currentTime: number }>`
     display: flex;
     align-items: center;
     width: 100%;
+    height: 2px;
     z-index: -2;
     top: ${({ currentTime }) => `${currentTime}px`};
 
@@ -30,18 +32,23 @@ const CurrentTimeLineStyled = styled.div<{ currentTime: number }>`
 
 type Props = {
     shift: number
+    scale: number
 }
 
-export const CurrentTimeLine = ({ shift }: Props) => {
-    const [currentTime, setCurrentTime] = useState(new Date().getHours() * 60 + new Date().getMinutes())
+export const CurrentTimeLine = ({ shift, scale }: Props) => {
+    const getCurrentTime = () => {
+        return new Date().getHours() * 60 + new Date().getMinutes()
+    }
+    const [currentTime, setCurrentTime] = useState(getCurrentTime())
     const intervalRef = useRef<any>(null)
+
     useEffect(() => {
         intervalRef.current = setInterval(() => {
-            setCurrentTime(new Date().getHours() * 60 + new Date().getMinutes())
-        }, 60000)
+            setCurrentTime(getCurrentTime())
+        }, TIME_IN_MS.minute)
 
         return () => clearInterval(intervalRef.current)
     }, [])
 
-    return <CurrentTimeLineStyled currentTime={currentTime - shift + 20} />
+    return <CurrentTimeLineStyled currentTime={(currentTime - shift) * scale} />
 }

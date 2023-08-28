@@ -1,8 +1,6 @@
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import retakeRoutes from '@features/schedule/config'
-import getSessionStats from '@features/schedule/lib/get-session-stats'
-import ExamStats from '@features/schedule/ui/atoms/exam-stats'
 import RetakeSchedule from '@features/schedule/ui/organisms/retake-schedule'
 import SessionSchedule from '@features/schedule/ui/organisms/session-schedule'
 import { IFullSchedule, ISchedule } from '@shared/api/model'
@@ -10,6 +8,15 @@ import { DayCalendar } from '@shared/ui/calendar'
 import WeekCalendar from '@shared/ui/calendar/week'
 import { Hint } from '@shared/ui/search'
 import React, { useRef, useState } from 'react'
+
+/*
+    TODO: 
+    1. Зум календаря
+    2. Придумать, как быть с расписанием сессии
+    3. Добавить время в event-item
+    4. Неделя и семестр вид для мобилок
+    5. Список преподов?
+*/
 
 const useTemplateSchedule = (data: ISchedule, teacherName: string | undefined, group: string | undefined) => {
     const { schedule, view } = data
@@ -43,7 +50,7 @@ const useTemplateSchedule = (data: ISchedule, teacherName: string | undefined, g
               {
                   title: 'День',
                   condition: !!schedule?.today,
-                  content: <DayCalendar interval={[9, 22]} events={schedule?.today} key={0} listView={isListView} />,
+                  content: <DayCalendar interval={[9, 22]} events={schedule?.week} key={0} listView={isListView} />,
               },
               {
                   title: 'Неделя',
@@ -60,21 +67,22 @@ const useTemplateSchedule = (data: ISchedule, teacherName: string | undefined, g
                   condition: !!schedule?.session,
                   content: (
                       <React.Fragment key={3}>
-                          <ExamStats {...getSessionStats(schedule?.session)} />
+                          {/* <ExamStats {...getSessionStats(schedule?.session)} /> */}
                           <SessionSchedule view={view} wrapperRef={wrapperRef} weekSchedule={schedule?.session} />
                       </React.Fragment>
                   ),
               },
+              {
+                  title: 'Пересдачи',
+                  condition: !!schedule?.session,
+                  content: <RetakeSchedule links={retakeRoutes} key={4} />,
+              },
           ]
         : []
 
-    if (!teacherName) {
-        pages.push({
-            title: 'Пересдачи',
-            condition: true,
-            content: <RetakeSchedule links={retakeRoutes} key={3} />,
-        })
-    }
+    // if (!teacherName) {
+    //     pages.push()
+    // }
 
     const handleCurrentPage = (currentModuleIndex: number) => {
         if (schedule) {

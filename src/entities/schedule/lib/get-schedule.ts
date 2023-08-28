@@ -1,38 +1,46 @@
 import { scheduleApi } from '@api'
-import { IFullSchedule, IWeekSchedule, User } from '@api/model'
+import { IFullSchedule, IWeekEventSchedule, IWeekSchedule, User } from '@api/model'
 import createFullName from '@features/home/lib/create-full-name'
 import { getCalendarSchedule } from './get-calendar-schedule'
 import getCurrentDaySubjects from './get-current-day-schedule'
+import { IWeekDays, WEEK_DAYS } from '@shared/consts'
+import { getCurrentDay } from '@shared/ui/calendar/day/lib/get-current-day'
 
-const NO_RESULT = {
-    today: null,
-    week: null,
-    semestr: null,
-    session: null,
+const EMPTY_WEEK = Object.keys(WEEK_DAYS).reduce((acc, el) => {
+    acc[el as keyof IWeekDays] = []
+    return acc
+}, {} as IWeekEventSchedule)
+
+const NO_RESULT: IFullSchedule = {
+    today: [],
+    week: EMPTY_WEEK,
+    semestr: EMPTY_WEEK,
+    session: {},
 }
 
 const getSchedule = async (user: User | string | null, group?: string): Promise<IFullSchedule> => {
-    const isName = typeof user === 'string'
-    const shouldLoadStudentSchedule = (!isName && !user?.subdivisions) || !!group?.length
+    const isUserAsString = typeof user === 'string'
+    const shouldLoadStudentSchedule = (!isUserAsString && !user?.subdivisions) || !!group?.length
+    const teacherName = !isUserAsString
+        ? createFullName({
+              name: user?.name ?? '',
+              surname: user?.surname ?? '',
+              patronymic: user?.patronymic ?? '',
+          })
+        : ''
+
     const response = shouldLoadStudentSchedule
         ? await scheduleApi.get(group ?? (user as User).group ?? '')
-        : isName
+        : isUserAsString
         ? await scheduleApi.getTeachers(user)
-        : await scheduleApi.getTeachers(
-              createFullName({ name: user.name, surname: user.surname, patronymic: user.patronymic }),
-          )
+        : await scheduleApi.getTeachers(teacherName)
 
     const sessionResponse = shouldLoadStudentSchedule
         ? await scheduleApi.getSession()
-        : isName
+        : isUserAsString
         ? await scheduleApi.getTeachersSession(user)
-        : await scheduleApi.getTeachersSession(
-              createFullName({
-                  name: user?.name ?? '',
-                  surname: user?.surname ?? '',
-                  patronymic: user?.patronymic ?? '',
-              }),
-          )
+        : await scheduleApi.getTeachersSession(teacherName)
+
     const sessionSchedule: { [key: string]: any } | null = {}
     const semestrSchedule: { [key: string]: any } = {}
     const currentWeekSchedule: IWeekSchedule = {
@@ -56,7 +64,7 @@ const getSchedule = async (user: User | string | null, group?: string): Promise<
         }
 
         for (const [key, value] of Object.entries(semestrSchedule)) {
-            currentWeekSchedule[key as keyof IWeekSchedule].lessons = getCurrentDaySubjects(value.lessons)
+            currentWeekSchedule[key as keyof IWeekSchedule].lessons = getCurrentDaySubjects(value?.lessons)
         }
     }
 
@@ -74,7 +82,7 @@ const getSchedule = async (user: User | string | null, group?: string): Promise<
 
     const hasError = !(Object.keys(response.data).length && response.data.status !== 'error')
 
-    const currentDay = Object.keys(currentWeekSchedule)[new Date().getDay() - 1] as keyof IWeekSchedule
+    const currentDay = Object.keys(currentWeekSchedule)[getCurrentDay()] as keyof IWeekSchedule
     const currentDaySchedule = currentWeekSchedule[currentDay]
 
     if (hasError) {
@@ -82,24 +90,24 @@ const getSchedule = async (user: User | string | null, group?: string): Promise<
     }
 
     return {
-        today: getCalendarSchedule(currentDaySchedule.lessons),
+        today: getCalendarSchedule(currentDaySchedule.lessons, WEEK_DAYS.friday.short),
         week: {
-            monday: getCalendarSchedule(currentWeekSchedule.monday.lessons),
-            tuesday: getCalendarSchedule(currentWeekSchedule.tuesday.lessons),
-            wednesday: getCalendarSchedule(currentWeekSchedule.wednesday.lessons),
-            thursday: getCalendarSchedule(currentWeekSchedule.thursday.lessons),
-            friday: getCalendarSchedule(currentWeekSchedule.friday.lessons),
-            saturday: getCalendarSchedule(currentWeekSchedule.saturday.lessons),
+            monday: getCalendarSchedule(currentWeekSchedule.monday.lessons, WEEK_DAYS.monday.short),
+            tuesday: getCalendarSchedule(currentWeekSchedule.tuesday.lessons, WEEK_DAYS.tuesday.short),
+            wednesday: getCalendarSchedule(currentWeekSchedule.wednesday.lessons, WEEK_DAYS.wednesday.short),
+            thursday: getCalendarSchedule(currentWeekSchedule.thursday.lessons, WEEK_DAYS.thursday.short),
+            friday: getCalendarSchedule(currentWeekSchedule.friday.lessons, WEEK_DAYS.friday.short),
+            saturday: getCalendarSchedule(currentWeekSchedule.saturday.lessons, WEEK_DAYS.saturday.short),
         },
         semestr: {
-            monday: getCalendarSchedule(semestrSchedule.monday.lessons),
-            tuesday: getCalendarSchedule(semestrSchedule.tuesday.lessons),
-            wednesday: getCalendarSchedule(semestrSchedule.wednesday.lessons),
-            thursday: getCalendarSchedule(semestrSchedule.thursday.lessons),
-            friday: getCalendarSchedule(semestrSchedule.friday.lessons),
-            saturday: getCalendarSchedule(semestrSchedule.saturday.lessons),
+            monday: getCalendarSchedule(semestrSchedule.monday.lessons, WEEK_DAYS.monday.short),
+            tuesday: getCalendarSchedule(semestrSchedule.tuesday.lessons, WEEK_DAYS.tuesday.short),
+            wednesday: getCalendarSchedule(semestrSchedule.wednesday.lessons, WEEK_DAYS.wednesday.short),
+            thursday: getCalendarSchedule(semestrSchedule.thursday.lessons, WEEK_DAYS.thursday.short),
+            friday: getCalendarSchedule(semestrSchedule.friday.lessons, WEEK_DAYS.friday.short),
+            saturday: getCalendarSchedule(semestrSchedule.saturday.lessons, WEEK_DAYS.saturday.short),
         },
-        session: null,
+        session: sessionSchedule,
     }
 }
 

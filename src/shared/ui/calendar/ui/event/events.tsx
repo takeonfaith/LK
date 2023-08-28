@@ -11,7 +11,7 @@ const EventsWrapper = styled(Flex)`
     height: 100%;
     z-index: 1;
     position: relative;
-    margin-top: 20px;
+    margin-top: 21px;
     margin-left: 0px;
     margin-right: 0px;
 `
@@ -51,10 +51,9 @@ const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDa
     const isCurrentDay = new Date().getDay() === weekDay
 
     return (
-        <EventsStyled d="row" gap="2px" h="100%">
+        <EventsStyled d="row" gap="2px" h="100%" className="events">
             <EventsWrapper h="100%" d="column">
-                {isCurrentDay && !listView && <CurrentTimeLine shift={shift} />}
-
+                {isCurrentDay && <CurrentTimeLine scale={scale} shift={shift} />}
                 {Object.keys(eventsPrepared).map((key, i) => {
                     return eventsPrepared[key].map((event, index) => {
                         const isCurrent =

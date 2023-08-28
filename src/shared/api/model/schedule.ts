@@ -22,6 +22,7 @@ export interface ISubject {
     link: string | null | undefined
     teachers: string[]
     dateInterval: string
+    weekday?: string
     groups?: string
     rooms: string[]
 }
@@ -49,7 +50,7 @@ export interface IFullSchedule {
     today: DayCalendarEvent[] | null
     week: IWeekEventSchedule | null
     semestr: IWeekEventSchedule | null
-    session: any | null
+    session: ISessionSchedule | null
 }
 
 export type ViewType = 'full' | 'big'

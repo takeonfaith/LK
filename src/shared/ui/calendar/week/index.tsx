@@ -3,19 +3,12 @@ import { TimeIntervals } from '@shared/api/model'
 import React from 'react'
 import { useModal } from 'widgets'
 import { getEndTime } from '../day/lib/get-end-time'
+import { DayCalendarEvent, WeekEvents } from '../types'
 import { CalendarWrapper } from '../ui/calendar-wrapper'
 import Events from '../ui/event/events'
 import Times from '../ui/times'
-import { DateWrapper, DayWrapper, WeekCalendarWrapper, WeekDay, WeekDaysWrapper } from './styles'
-import { DayCalendarEvent, WeekEvents } from '../types'
-
-// const EventsWrapper = styled(Flex)`
-//     overflow-x: auto;
-//     overflow-y: hidden;
-//     height: 100%;
-
-//     scroll-snap-type: x mandatory;
-// `
+import { WeekDays } from '../ui/week-days'
+import { WeekCalendarWrapper } from './styles'
 
 type Props = {
     events: WeekEvents
@@ -24,28 +17,9 @@ type Props = {
     listView?: boolean
 }
 
-function getMonday(d: Date) {
-    d = new Date(d)
-    const day = d.getDay(),
-        diff = d.getDate() - day + (day == 0 ? -6 : 1) // adjust when day is sunday
-    return new Date(d.setDate(diff))
-}
-
-const getWeekNames = () => {
-    const day = getMonday(new Date())
-    const result = { Пн: '', Вт: '', Ср: '', Чт: '', Пт: '', Сб: '' }
-    for (let i = 0; i < 6; i++) {
-        const dayName = day.toLocaleDateString('ru-RU', { day: '2-digit' })
-        day.setDate(day.getDate() + 1)
-        result[Object.keys(result)[i] as keyof typeof result] = dayName
-    }
-
-    return result
-}
-
 const WeekCalendar = ({ interval, events, showDates, listView = false }: Props) => {
     const shift = interval[0] * 60
-    const scale = 1
+    const scale = 1.1
     const { open } = useModal()
 
     const handleOpenModal = (event: DayCalendarEvent) => {
@@ -68,21 +42,9 @@ const WeekCalendar = ({ interval, events, showDates, listView = false }: Props) 
         )
     }
 
-    const weekNames = getWeekNames()
-
     return (
         <WeekCalendarWrapper d="column">
-            <WeekDaysWrapper jc="space-between">
-                {Object.keys(weekNames).map((day) => {
-                    const date = weekNames[day as keyof typeof weekNames]
-                    return (
-                        <WeekDay key={day}>
-                            <DayWrapper>{day}</DayWrapper>
-                            {showDates && <DateWrapper isCurrent={+date === new Date().getDate()}>{date}</DateWrapper>}
-                        </WeekDay>
-                    )
-                })}
-            </WeekDaysWrapper>
+            <WeekDays showDates={showDates} showColumns={true} events={events} />
             <CalendarWrapper listView={listView}>
                 <Times interval={interval} scale={scale} />
                 <Events
