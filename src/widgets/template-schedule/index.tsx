@@ -6,11 +6,13 @@ import { getGroups } from '@shared/api/student-api'
 import Masks from '@shared/lib/masks'
 import Flex from '@shared/ui/flex'
 import PageBlock from '@shared/ui/page-block'
-import { Divider, Wrapper } from '@ui/atoms'
+import { Button, Divider, Wrapper } from '@ui/atoms'
 import React, { useState } from 'react'
-import { FiUsers } from 'react-icons/fi'
+import { FiSidebar, FiUsers } from 'react-icons/fi'
 import { Slider } from 'widgets'
 import useTemplateSchedule from './hooks/use-template-schedule'
+import { useDisableTrackpadZoom } from '@shared/lib/hooks/use-disable-trackpad-zoom'
+import { SideMenu } from './ui/side-menu'
 
 // const SchedulePageContent = styled.div`
 //     display: flex;
@@ -43,7 +45,7 @@ interface Props {
 }
 
 const TemplateSchedule = ({ teacherName, group, data, loading, error }: Props) => {
-    const { schedule, currentModule } = data
+    const { schedule, currentModule, teachers } = data
     const {
         data: { user },
     } = userModel.selectors.useUser()
@@ -58,6 +60,8 @@ const TemplateSchedule = ({ teacherName, group, data, loading, error }: Props) =
         isListView,
         handleListView,
     } = useTemplateSchedule(data, teacherName, group)
+    // eslint-disable-next-line no-console
+    console.log(teachers)
 
     const currentPage = Object.keys(schedule ?? {}).findIndex((el) => el === currentModule)
 
@@ -75,22 +79,32 @@ const TemplateSchedule = ({ teacherName, group, data, loading, error }: Props) =
                             width="38px"
                         /> */}
                         {showGroupSearch && (
-                            <SearchWithHints
-                                value={groupSearch}
-                                setValue={setGroupSearch}
-                                onHintClick={onHintClick}
-                                placeholder={'Группа'}
-                                customMask={Masks.groupMask}
-                                request={getGroups}
-                                leftIcon={<FiUsers />}
-                                onValueEmpty={user?.user_status === 'staff' ? onValueEmpty : undefined}
-                            />
+                            <Flex gap="8px">
+                                {/* <Button icon={<FiSidebar />} width="36px" height="36px" /> */}
+                                <SearchWithHints
+                                    value={groupSearch}
+                                    setValue={setGroupSearch}
+                                    onHintClick={onHintClick}
+                                    placeholder={'Группа'}
+                                    customMask={Masks.groupMask}
+                                    request={getGroups}
+                                    leftIcon={<FiUsers />}
+                                    onValueEmpty={user?.user_status === 'staff' ? onValueEmpty : undefined}
+                                />
+                            </Flex>
                         )}
                     </Flex>
                 }
             >
-                <Slider appearance={false} pages={pages} currentPage={currentPage} setCurrentPage={handleCurrentPage} />
-                {pages[currentPage ?? 0]?.content}
+                <Flex d="column" gap="8px">
+                    <Slider
+                        appearance={false}
+                        pages={pages}
+                        currentPage={currentPage}
+                        setCurrentPage={handleCurrentPage}
+                    />
+                    {pages[currentPage ?? 0]?.content}
+                </Flex>
             </PageBlock>
         </Wrapper>
     )

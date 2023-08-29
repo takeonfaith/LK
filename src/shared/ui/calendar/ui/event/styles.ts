@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { StyledProps } from './types'
 import { SCREEN_IPHONE_XR } from '@shared/consts'
+import Flex from '@shared/ui/flex'
 
 const getTop = ({ startTimeShift, startDayShift, scale }: StyledProps) => {
     const top = (startTimeShift - startDayShift) * scale
@@ -9,18 +10,17 @@ const getTop = ({ startTimeShift, startDayShift, scale }: StyledProps) => {
 }
 
 export const EventItemStyled = styled.div<StyledProps>`
-    width: ${({ width, listView }) => (listView ? '100%' : `calc(${width}% - 1px)`)};
-    height: ${({ duration, scale, listView }) => (listView ? '120px' : `${duration * scale}px`)};
+    width: ${({ width }) => `calc(${width}% - 1px)`};
+    height: ${({ duration, scale }) => `${duration * scale}px`};
     border-radius: 5px;
-    padding: ${({ shortInfo }) => (!shortInfo ? '12px' : '8px')};
+    padding: ${({ shortInfo, scale }) => (!shortInfo ? `${scale * 11}px` : '8px')};
     display: flex;
     position: relative;
     overflow: hidden;
-    color: ${({ color, listView }) => (listView ? 'var(--text)' : color)};
+    color: ${({ color }) => color};
     filter: ${({ otherIsCurrent }) => otherIsCurrent && 'grayscale(0.8)'};
     cursor: pointer;
-    position: ${({ listView }) => (listView ? 'static' : 'absolute')};
-    margin: ${({ listView }) => (listView ? '4px' : '0')};
+    position: absolute;
     transform: translateX(${({ leftShift }) => `calc(${leftShift}% + ${1 * (leftShift / 100)}px)`});
     left: 0;
     top: ${getTop};
@@ -30,11 +30,11 @@ export const EventItemStyled = styled.div<StyledProps>`
     }
 
     @media (max-width: ${SCREEN_IPHONE_XR}) {
-        padding: ${({ shortInfo }) => (!shortInfo ? '12px' : '4px')};
+        padding: ${({ shortInfo, scale }) => (!shortInfo ? `${scale * 10}px` : '4px')};
     }
 `
 
-export const IconSection = styled.div`
+export const IconSection = styled.div<{ scale: number }>`
     min-width: 35px;
     height: 100%;
 
@@ -53,18 +53,26 @@ export const IconSection = styled.div`
     }
 `
 
-export const EventTitle = styled.span<{ shortInfo: boolean }>`
+export const EventFront = styled(Flex)<{ shortInfo: boolean; scale: number }>`
+    gap: ${({ shortInfo, scale }) => (!shortInfo ? `${8 * scale}px` : '4px')};
+
+    @media (max-width: ${SCREEN_IPHONE_XR}) {
+        gap: ${({ shortInfo, scale }) => (!shortInfo ? `${4 * scale}px` : '4px')};
+    }
+`
+
+export const EventTitle = styled.span<{ shortInfo: boolean; scale: number }>`
     font-weight: 500;
-    font-size: ${({ shortInfo }) => (!shortInfo ? '0.95rem' : '0.85rem')};
+    font-size: ${({ shortInfo, scale }) => (!shortInfo ? `${0.85 * scale}rem` : '0.85rem')};
     padding-top: 2px;
     white-space: ${({ shortInfo }) => !shortInfo && 'nowrap'};
     text-overflow: ${({ shortInfo }) => !shortInfo && 'ellipsis'};
     overflow: ${({ shortInfo }) => !shortInfo && 'hidden'};
     hyphens: auto;
-    width: ${({ shortInfo }) => (!shortInfo ? 'calc(100% - 40px)' : '100%')};
+    width: ${({ shortInfo }) => (!shortInfo ? 'fit-content' : '100%')};
 
     @media (max-width: ${SCREEN_IPHONE_XR}) {
-        font-size: ${({ shortInfo }) => (shortInfo ? '0.7rem' : '0.9rem')};
+        font-size: ${({ shortInfo, scale }) => (!shortInfo ? `${0.95 * scale}rem` : '0.7rem')};
     }
 `
 

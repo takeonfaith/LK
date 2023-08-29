@@ -5,9 +5,9 @@ import { HiOutlineExternalLink, HiOutlineLogin, HiOutlineUserCircle } from 'reac
 import DotSeparatedWords from '../../../dot-separated-words'
 import Flex from '../../../flex'
 import { DayCalendarEvent } from '../../types'
-import EventBackground from '../../day/ui/event-background'
-import IconText from '../../day/ui/icon-text'
-import { EventItemStyled, EventTitle, IconSection, MobileIcon } from './styles'
+import EventBackground from '../day/ui/event-background'
+import IconText from '../day/ui/icon-text'
+import { EventFront, EventItemStyled, EventTitle, IconSection, MobileIcon } from './styles'
 import { UIProps } from './types'
 
 const getStartTimeShiftInMinutes = (startTime: string) => {
@@ -36,7 +36,6 @@ const EventItem = (props: Props) => {
         rooms,
         leftShift,
         width,
-        listView,
         shortInfo = false,
     } = props
     const { theme } = useTheme()
@@ -53,7 +52,6 @@ const EventItem = (props: Props) => {
 
     return (
         <EventItemStyled
-            listView={listView}
             leftShift={100 * leftShift}
             width={100 / width}
             duration={duration}
@@ -67,27 +65,42 @@ const EventItem = (props: Props) => {
             shortInfo={shortInfo}
         >
             <MobileIcon>{icon}</MobileIcon>
-            {!listView && <EventBackground icon={icon} background={background} />}
+            <EventBackground icon={icon} background={background} />
             <Flex className="event-body" gap="0px" ai="flex-start">
-                {!shortInfo && <IconSection>{icon}</IconSection>}
-                <Flex d="column" ai="flex-start" gap={!shortInfo ? '8px' : '4px'}>
-                    <EventTitle shortInfo={shortInfo}>{getShortString(title, shortInfo ? 27 : 100)}</EventTitle>
+                {!shortInfo && <IconSection scale={scale}>{icon}</IconSection>}
+                <EventFront scale={scale} d="column" ai="flex-start" shortInfo={shortInfo}>
+                    <EventTitle scale={scale} shortInfo={shortInfo}>
+                        {getShortString(title, shortInfo ? 27 : 100)}
+                    </EventTitle>
+
                     {!!link && (
                         <Flex gap="5px" d="column" ai="flex-start">
-                            <IconText icon={<HiOutlineExternalLink />} text={place} />
+                            <IconText
+                                shortInfo={shortInfo}
+                                scale={scale}
+                                icon={<HiOutlineExternalLink />}
+                                text={place}
+                            />
                         </Flex>
                     )}
                     {!!rooms?.length && (
-                        <IconText icon={<HiOutlineLogin />} text={<DotSeparatedWords words={rooms} />} />
+                        <IconText
+                            shortInfo={shortInfo}
+                            scale={scale}
+                            icon={<HiOutlineLogin />}
+                            text={<DotSeparatedWords words={rooms} />}
+                        />
                     )}
 
                     {!!people.length && (
                         <IconText
+                            shortInfo={shortInfo}
+                            scale={scale}
                             text={<DotSeparatedWords words={shortInfo ? [shortNames[0]] : shortNames} />}
                             icon={<HiOutlineUserCircle />}
                         />
                     )}
-                </Flex>
+                </EventFront>
             </Flex>
         </EventItemStyled>
     )

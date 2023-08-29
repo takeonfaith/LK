@@ -6,6 +6,7 @@ import getSchedule from '../lib/get-schedule'
 
 const DEFAULT_STORE: ISchedule = {
     schedule: null,
+    teachers: [],
     currentModule: 'today',
     currentDay: new Date().getDay(),
     currentDayString: '',
@@ -20,13 +21,16 @@ const useSchedule = () => {
 
 type GetScheduleProps = { user: User | null; group?: string }
 
-const getScheduleFx = createEffect(async ({ user, group }: GetScheduleProps): Promise<IFullSchedule> => {
-    try {
-        return getSchedule(user, group)
-    } catch (error) {
-        throw new Error('Не удалось загрузить расписание')
-    }
-})
+const getScheduleFx = createEffect(
+    async ({ user, group }: GetScheduleProps): Promise<{ schedule: IFullSchedule; teachers: string[] }> => {
+        try {
+            const { schedule, teachers } = await getSchedule(user, group)
+            return { schedule, teachers }
+        } catch (error) {
+            throw new Error('Не удалось загрузить расписание')
+        }
+    },
+)
 
 const changeCurrentModule = createEvent<{ currentModule: keyof IFullSchedule }>()
 const changeView = createEvent<{ view: ViewType }>()
@@ -41,20 +45,21 @@ const $schedule = createStore<ISchedule>(DEFAULT_STORE)
     }))
     .on(getScheduleFx.doneData, (oldData, newData) => ({
         ...oldData,
-        schedule: newData,
-        currentModule: !!newData.today
+        schedule: newData.schedule,
+        currentModule: !!newData.schedule.today
             ? 'today'
-            : !!newData.week
+            : !!newData.schedule.week
             ? 'week'
-            : !!newData.semestr
+            : !!newData.schedule.semestr
             ? 'semestr'
-            : !!newData.session
+            : !!newData.schedule.session
             ? 'session'
             : 'today',
-        currentDayString: getCurrentDayString(newData, oldData.currentDay),
+        currentDayString: getCurrentDayString(newData.schedule, oldData.currentDay),
         currentChosenDay: 0,
+        teachers: newData.teachers,
         //calcNextExamTime(newData.semestr)
-        currentDay: !!newData.week ? new Date().getDay() : 0,
+        currentDay: !!newData.schedule.week ? new Date().getDay() : 0,
     }))
     .on(getScheduleFx.failData, (oldData, error) => ({
         ...oldData,

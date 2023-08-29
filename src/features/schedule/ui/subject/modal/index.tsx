@@ -11,7 +11,7 @@ import { Rooms, SubjectPlaceBlock } from '../..'
 import { NextSubject, Time } from '../../atoms'
 import Groups from '../../atoms/groups'
 import ListOfGroups from '../../atoms/list-of-groups'
-import EventBackground from '@shared/ui/calendar/day/ui/event-background'
+import EventBackground from '@shared/ui/calendar/ui/day/ui/event-background'
 import { getSubjectIcon } from '@features/acad-performance/lib/get-subject-icon'
 import { Colors, IColorPalette, WEEK_DAYS } from '@shared/consts'
 import { Icon } from '@features/all-pages'
@@ -19,7 +19,7 @@ import { ContentWrapper } from 'widgets/content-layout/styled'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import useTheme from '@shared/lib/hooks/use-theme'
-import IconText from '@shared/ui/calendar/day/ui/icon-text'
+import IconText from '@shared/ui/calendar/ui/day/ui/icon-text'
 import { FiCalendar } from 'react-icons/fi'
 import {
     HiOutlineCalendar,
@@ -29,6 +29,7 @@ import {
     HiOutlineUserGroup,
 } from 'react-icons/hi'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
+import { TimeIndicator } from '../time-indicator'
 
 const SubjectModalWrapper = styled.div`
     position: relative;
@@ -145,10 +146,7 @@ const SubjectModal = (props: Props) => {
             </BackgroundWrapper>
             <ModalContentWrapper d="column" gap="20px" ai="flex-start">
                 <Flex jc="space-between" ai="flex-start" d="column" gap="6px">
-                    <Flex w="fit-content" gap="6px">
-                        <TimeSquare color={color.main} />
-                        <Subtext>{timeInterval}</Subtext>
-                    </Flex>
+                    <TimeIndicator color={color} timeInterval={timeInterval} />
                     <Title size={3} align="left" width="fit-content">
                         {name}
                     </Title>

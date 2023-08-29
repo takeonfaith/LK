@@ -1,26 +1,32 @@
 import { scheduleApi } from '@api'
-import { IFullSchedule, IWeekEventSchedule, IWeekSchedule, User } from '@api/model'
+import { IFullSchedule, ISubject, IWeekEventSchedule, IWeekSchedule, User } from '@api/model'
 import createFullName from '@features/home/lib/create-full-name'
+import { IWeekDays, WEEK_DAYS } from '@shared/consts'
+import { getCurrentDay } from '@shared/ui/calendar/ui/day/lib/get-current-day'
 import { getCalendarSchedule } from './get-calendar-schedule'
 import getCurrentDaySubjects from './get-current-day-schedule'
-import { IWeekDays, WEEK_DAYS } from '@shared/consts'
-import { getCurrentDay } from '@shared/ui/calendar/day/lib/get-current-day'
 
 const EMPTY_WEEK = Object.keys(WEEK_DAYS).reduce((acc, el) => {
     acc[el as keyof IWeekDays] = []
     return acc
 }, {} as IWeekEventSchedule)
 
-const NO_RESULT: IFullSchedule = {
-    today: [],
-    week: EMPTY_WEEK,
-    semestr: EMPTY_WEEK,
-    session: {},
+type GetScheduleResult = { schedule: IFullSchedule; teachers: string[] }
+
+const NO_RESULT: GetScheduleResult = {
+    schedule: {
+        today: [],
+        week: EMPTY_WEEK,
+        semestr: EMPTY_WEEK,
+        session: {},
+    },
+    teachers: [],
 }
 
-const getSchedule = async (user: User | string | null, group?: string): Promise<IFullSchedule> => {
+const getSchedule = async (user: User | string | null, group?: string): Promise<GetScheduleResult> => {
     const isUserAsString = typeof user === 'string'
     const shouldLoadStudentSchedule = (!isUserAsString && !user?.subdivisions) || !!group?.length
+    const teachers = new Set<string>()
     const teacherName = !isUserAsString
         ? createFullName({
               name: user?.name ?? '',
@@ -64,6 +70,11 @@ const getSchedule = async (user: User | string | null, group?: string): Promise<
         }
 
         for (const [key, value] of Object.entries(semestrSchedule)) {
+            value?.lessons.forEach((lesson: ISubject) => {
+                lesson.teachers.forEach((t) => {
+                    if (t.length !== 0) teachers.add(t)
+                })
+            })
             currentWeekSchedule[key as keyof IWeekSchedule].lessons = getCurrentDaySubjects(value?.lessons)
         }
     }
@@ -90,24 +101,27 @@ const getSchedule = async (user: User | string | null, group?: string): Promise<
     }
 
     return {
-        today: getCalendarSchedule(currentDaySchedule.lessons, WEEK_DAYS.friday.short),
-        week: {
-            monday: getCalendarSchedule(currentWeekSchedule.monday.lessons, WEEK_DAYS.monday.short),
-            tuesday: getCalendarSchedule(currentWeekSchedule.tuesday.lessons, WEEK_DAYS.tuesday.short),
-            wednesday: getCalendarSchedule(currentWeekSchedule.wednesday.lessons, WEEK_DAYS.wednesday.short),
-            thursday: getCalendarSchedule(currentWeekSchedule.thursday.lessons, WEEK_DAYS.thursday.short),
-            friday: getCalendarSchedule(currentWeekSchedule.friday.lessons, WEEK_DAYS.friday.short),
-            saturday: getCalendarSchedule(currentWeekSchedule.saturday.lessons, WEEK_DAYS.saturday.short),
+        schedule: {
+            today: getCalendarSchedule(currentDaySchedule.lessons, WEEK_DAYS.friday.short),
+            week: {
+                monday: getCalendarSchedule(currentWeekSchedule.monday.lessons, WEEK_DAYS.monday.short),
+                tuesday: getCalendarSchedule(currentWeekSchedule.tuesday.lessons, WEEK_DAYS.tuesday.short),
+                wednesday: getCalendarSchedule(currentWeekSchedule.wednesday.lessons, WEEK_DAYS.wednesday.short),
+                thursday: getCalendarSchedule(currentWeekSchedule.thursday.lessons, WEEK_DAYS.thursday.short),
+                friday: getCalendarSchedule(currentWeekSchedule.friday.lessons, WEEK_DAYS.friday.short),
+                saturday: getCalendarSchedule(currentWeekSchedule.saturday.lessons, WEEK_DAYS.saturday.short),
+            },
+            semestr: {
+                monday: getCalendarSchedule(semestrSchedule.monday.lessons, WEEK_DAYS.monday.short),
+                tuesday: getCalendarSchedule(semestrSchedule.tuesday.lessons, WEEK_DAYS.tuesday.short),
+                wednesday: getCalendarSchedule(semestrSchedule.wednesday.lessons, WEEK_DAYS.wednesday.short),
+                thursday: getCalendarSchedule(semestrSchedule.thursday.lessons, WEEK_DAYS.thursday.short),
+                friday: getCalendarSchedule(semestrSchedule.friday.lessons, WEEK_DAYS.friday.short),
+                saturday: getCalendarSchedule(semestrSchedule.saturday.lessons, WEEK_DAYS.saturday.short),
+            },
+            session: sessionSchedule,
         },
-        semestr: {
-            monday: getCalendarSchedule(semestrSchedule.monday.lessons, WEEK_DAYS.monday.short),
-            tuesday: getCalendarSchedule(semestrSchedule.tuesday.lessons, WEEK_DAYS.tuesday.short),
-            wednesday: getCalendarSchedule(semestrSchedule.wednesday.lessons, WEEK_DAYS.wednesday.short),
-            thursday: getCalendarSchedule(semestrSchedule.thursday.lessons, WEEK_DAYS.thursday.short),
-            friday: getCalendarSchedule(semestrSchedule.friday.lessons, WEEK_DAYS.friday.short),
-            saturday: getCalendarSchedule(semestrSchedule.saturday.lessons, WEEK_DAYS.saturday.short),
-        },
-        session: sessionSchedule,
+        teachers: Array.from(teachers),
     }
 }
 

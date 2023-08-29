@@ -9,7 +9,8 @@ export default defineConfig((conf) => {
     return {
         server: {
             open: true,
-            port: 3000
+            port: 3000,
+            host: true,
         },
         preview: { port: 3000 },
         plugins: [

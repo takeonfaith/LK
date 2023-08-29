@@ -4,7 +4,7 @@ import Subtext from '@shared/ui/subtext'
 import React from 'react'
 import styled from 'styled-components'
 
-const SmallIcon = styled.div`
+const SmallIcon = styled.div<{ scale: number }>`
     opacity: 0.7;
     width: 18px;
     height: 18px;
@@ -13,14 +13,14 @@ const SmallIcon = styled.div`
     justify-content: center;
 
     svg {
-        width: 22px;
-        height: 22px;
+        width: ${({ scale }) => `${scale * 22}px`};
+        height: ${({ scale }) => `${scale * 22}px`};
     }
 
     @media (max-width: ${SCREEN_IPHONE_XR}) {
         svg {
-            width: 18px;
-            height: 18px;
+            width: ${({ scale }) => `${scale * 18}px`};
+            height: ${({ scale }) => `${scale * 18}px`};
         }
     }
 `
@@ -34,13 +34,16 @@ const SubtextStyled = styled(Subtext)`
 type Props = {
     icon: ChildrenType
     text: ChildrenType
+    scale?: number
+    shortInfo?: boolean
 }
 
-const IconText = ({ icon, text }: Props) => {
+const IconText = ({ icon, text, shortInfo = false, scale = 1 }: Props) => {
+    const fontSize = `${(!shortInfo ? 0.85 : 0.7) * scale}rem`
     return (
         <Flex gap="8px" w="fit-content">
-            <SmallIcon>{icon}</SmallIcon>
-            <SubtextStyled className="text" fontSize="0.85rem">
+            <SmallIcon scale={scale}>{icon}</SmallIcon>
+            <SubtextStyled className="text" fontSize={fontSize}>
                 {text}
             </SubtextStyled>
         </Flex>

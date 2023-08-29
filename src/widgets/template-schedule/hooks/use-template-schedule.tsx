@@ -5,7 +5,7 @@ import RetakeSchedule from '@features/schedule/ui/organisms/retake-schedule'
 import SessionSchedule from '@features/schedule/ui/organisms/session-schedule'
 import { IFullSchedule, ISchedule } from '@shared/api/model'
 import { DayCalendar } from '@shared/ui/calendar'
-import WeekCalendar from '@shared/ui/calendar/week'
+import WeekCalendar from '@shared/ui/calendar/ui/week'
 import { Hint } from '@shared/ui/search'
 import React, { useRef, useState } from 'react'
 
@@ -50,7 +50,7 @@ const useTemplateSchedule = (data: ISchedule, teacherName: string | undefined, g
               {
                   title: 'День',
                   condition: !!schedule?.today,
-                  content: <DayCalendar interval={[9, 22]} events={schedule?.week} key={0} listView={isListView} />,
+                  content: <DayCalendar interval={[9, 22]} events={schedule?.week} key={0} />,
               },
               {
                   title: 'Неделя',

@@ -57,6 +57,7 @@ export type ViewType = 'full' | 'big'
 
 export interface ISchedule {
     schedule: IFullSchedule | null
+    teachers: string[]
     currentModule: keyof IFullSchedule
     currentDay: number
     currentDayString: string

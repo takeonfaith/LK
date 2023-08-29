@@ -1,21 +1,23 @@
 import { useState, useLayoutEffect } from 'react'
 
 const QUERIES = [
-    { query: '(max-width: 766px)', title: 'isMobile' },
-    { query: '(min-width: 767px) and (max-width: 1199px)', title: 'isTablet' },
-    { query: '(min-width: 1200px)', title: 'isDesktop' },
+    { query: '(max-width: 766px)', title: 'isMobile', value: 'mobile' },
+    { query: '(min-width: 767px) and (max-width: 1199px)', title: 'isTablet', value: 'tablet' },
+    { query: '(min-width: 1200px)', title: 'isDesktop', value: 'desktop' },
 ] as const
+
+type QueryType = typeof QUERIES
 
 const getValues = (
     mediaQueryList: {
         mql: MediaQueryList
-        title: typeof QUERIES[number]['title']
+        title: QueryType[number]['title']
     }[],
 ) => {
     return mediaQueryList.reduce((acc, value) => {
         acc[value.title] = value.mql.matches
         return acc
-    }, {} as Record<typeof QUERIES[number]['title'], boolean>)
+    }, {} as Record<QueryType[number]['title'], boolean>)
 }
 
 const useCurrentDevice = () => {
@@ -37,7 +39,10 @@ const useCurrentDevice = () => {
             )
     }, [])
 
-    return values
+    return {
+        ...values,
+        currentDevice: Object.keys(values).find((el: string) => values[el as keyof typeof values] === true),
+    }
 }
 
 export default useCurrentDevice

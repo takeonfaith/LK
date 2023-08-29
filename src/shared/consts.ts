@@ -217,6 +217,7 @@ export const WEEK_DAYS = {
 } as const
 
 export type IWeekDays = typeof WEEK_DAYS
+export type IWeekDayNames = keyof IWeekDays
 
 export const ColorsByGrade: Record<keyof IGrade | 'default', string> = {
     Зачтено: Colors.green.main,
@@ -363,7 +364,8 @@ export const letterColorMatch: LetterColorMatch = {
 }
 
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
-export type FileFormats = typeof VALID_FORMATS[number][]
+type ValidFormats = typeof VALID_FORMATS
+export type FileFormats = ValidFormats[number][]
 
 export const MAX_FILE_SIZE = 10
 

@@ -19,7 +19,7 @@ const TeachersSchedule = () => {
             ? getSchedule('', route.params.filter)
             : getSchedule(route?.params?.filter ?? '')
         setTeacherSchedule(null)
-        if (route.params.filter) scheduleRequest.then((res) => setTeacherSchedule(res))
+        if (route.params.filter) scheduleRequest.then((res) => setTeacherSchedule(res.schedule))
     }, [route.params.filter])
 
     return (

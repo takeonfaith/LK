@@ -2,7 +2,7 @@ import Flex from '@shared/ui/flex'
 import React from 'react'
 import styled from 'styled-components'
 import { DayCalendarEvent } from '../../types'
-import { CurrentTimeLine } from '../../day/ui/current-time-line'
+import { CurrentTimeLine } from '../day/ui/current-time-line'
 import EventItem from './event-item'
 
 const EventsStyled = styled(Flex)``
@@ -11,7 +11,7 @@ const EventsWrapper = styled(Flex)`
     height: 100%;
     z-index: 1;
     position: relative;
-    margin-top: 21px;
+    margin-top: 19px;
     margin-left: 0px;
     margin-right: 0px;
 `
@@ -24,7 +24,7 @@ type Props = {
     onClick: (event: DayCalendarEvent) => void
     shortInfo?: boolean
     weekDay: number
-    listView: boolean
+    interval: [number, number]
 }
 
 const prepareEvents = (events: DayCalendarEvent[] | null | undefined): Record<string, DayCalendarEvent[]> => {
@@ -45,7 +45,7 @@ const prepareEvents = (events: DayCalendarEvent[] | null | undefined): Record<st
     return result
 }
 
-const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDay, listView }: Props) => {
+const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDay, interval }: Props) => {
     const eventsPrepared = prepareEvents(events)
 
     const isCurrentDay = new Date().getDay() === weekDay
@@ -53,7 +53,7 @@ const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDa
     return (
         <EventsStyled d="row" gap="2px" h="100%" className="events">
             <EventsWrapper h="100%" d="column">
-                {isCurrentDay && <CurrentTimeLine scale={scale} shift={shift} />}
+                {isCurrentDay && <CurrentTimeLine scale={scale} shift={shift} interval={interval} />}
                 {Object.keys(eventsPrepared).map((key, i) => {
                     return eventsPrepared[key].map((event, index) => {
                         const isCurrent =
@@ -61,7 +61,6 @@ const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDa
 
                         return (
                             <EventItem
-                                listView={listView}
                                 leftShift={index}
                                 width={eventsPrepared[key].length}
                                 isCurrent={isCurrent}

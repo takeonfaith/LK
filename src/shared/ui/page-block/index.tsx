@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ForwardedRef, forwardRef } from 'react'
 import BlockWrapper from '../block/styles'
 import styled from 'styled-components'
 import { CenterPage } from '../atoms'
@@ -26,7 +26,7 @@ const TopRightCornerElement = styled.div`
     justify-content: flex-end;
 
     @media (max-width: 550px) {
-        top: -7px;
+        top: -4px;
         right: 7px;
     }
 `
@@ -37,27 +37,32 @@ type Props = {
     padding?: string
 }
 
-const PageBlock = ({ children, topRightCornerElement, padding }: Props) => {
-    const currentPage = useCurrentExactPage()
-    const maxWidth = getPageWidth(currentPage)
+const PageBlock = forwardRef(
+    ({ children, topRightCornerElement, padding }: Props, ref: ForwardedRef<HTMLDivElement>) => {
+        const currentPage = useCurrentExactPage()
+        const maxWidth = getPageWidth(currentPage)
 
-    return (
-        <CenterPage padding="0 0 10px 0">
-            <PageBlockStyled
-                justifyContent="flex-start"
-                height="100%"
-                orientation="vertical"
-                maxWidth={maxWidth}
-                gap="24px"
-                alignItems="flex-start"
-                noAppearanceInMobile
-                padding={padding}
-            >
-                {topRightCornerElement && <TopRightCornerElement>{topRightCornerElement}</TopRightCornerElement>}
-                {children}
-            </PageBlockStyled>
-        </CenterPage>
-    )
-}
+        return (
+            <CenterPage padding="0 0 10px 0">
+                <PageBlockStyled
+                    justifyContent="flex-start"
+                    height="100%"
+                    orientation="vertical"
+                    maxWidth={maxWidth}
+                    gap="24px"
+                    ref={ref}
+                    alignItems="flex-start"
+                    noAppearanceInMobile
+                    padding={padding}
+                >
+                    {topRightCornerElement && <TopRightCornerElement>{topRightCornerElement}</TopRightCornerElement>}
+                    {children}
+                </PageBlockStyled>
+            </CenterPage>
+        )
+    },
+)
+
+PageBlock.displayName = 'PageBlock'
 
 export default PageBlock

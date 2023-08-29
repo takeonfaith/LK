@@ -2,6 +2,7 @@
 import { Colors, TIME_IN_MS } from '@shared/consts'
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { getCurrentTime } from '../lib/get-time-in-minutes'
 
 const CurrentTimeLineStyled = styled.div<{ currentTime: number }>`
     position: absolute;
@@ -33,22 +34,23 @@ const CurrentTimeLineStyled = styled.div<{ currentTime: number }>`
 type Props = {
     shift: number
     scale: number
+    interval: [number, number]
 }
 
-export const CurrentTimeLine = ({ shift, scale }: Props) => {
-    const getCurrentTime = () => {
-        return new Date().getHours() * 60 + new Date().getMinutes()
-    }
-    const [currentTime, setCurrentTime] = useState(getCurrentTime())
+export const CurrentTimeLine = ({ shift, scale, interval }: Props) => {
+    const [currentTime, setCurrentTime] = useState(getCurrentTime(new Date(), interval[0] * 60, interval[1] * 60))
     const intervalRef = useRef<any>(null)
+    const timelineRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+        timelineRef.current?.scrollIntoView({ block: 'nearest' })
+
         intervalRef.current = setInterval(() => {
-            setCurrentTime(getCurrentTime())
+            setCurrentTime(getCurrentTime(new Date(), interval[0] * 60, interval[1] * 60))
         }, TIME_IN_MS.minute)
 
         return () => clearInterval(intervalRef.current)
     }, [])
 
-    return <CurrentTimeLineStyled currentTime={(currentTime - shift) * scale} />
+    return <CurrentTimeLineStyled currentTime={(currentTime - shift) * scale} ref={timelineRef} />
 }

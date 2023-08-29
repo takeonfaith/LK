@@ -64,7 +64,7 @@ const getUserFx = createEffect<UserToken, UserStore>(async (data: UserToken): Pr
         // eslint-disable-next-line no-console
         console.log(error)
 
-        throw new Error('Возникла какая-то ошибка')
+        throw new Error(`Возникла какая-то ошибка: ${(error as Error).message}`)
     }
 })
 

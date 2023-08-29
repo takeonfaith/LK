@@ -9,7 +9,6 @@ export type UIProps = {
     shortInfo?: boolean
     leftShift: number
     width: number
-    listView: boolean
 }
 
 export type StyledProps = Omit<UIProps, 'onClick' | 'shift'> & {

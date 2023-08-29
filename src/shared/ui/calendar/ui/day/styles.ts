@@ -1,12 +1,12 @@
 import { SCREEN_IPAD_AIR } from '@shared/consts'
 import styled from 'styled-components'
-import { Wrapper } from '../ui/wrapper'
+import { Wrapper } from '../wrapper'
 
 export const DayCalendarWrapper = styled(Wrapper)`
-    height: calc(100vh - var(--header-height) - 185px);
+    height: calc(100vh - var(--header-height) - 175px);
 
     @media (max-width: 768px) {
-        height: calc(100vh - var(--header-height) - 200px);
+        height: calc(100dvh - var(--header-height) - 185px);
     }
 `
 
