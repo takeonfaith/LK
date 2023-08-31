@@ -9,6 +9,7 @@ import React, { useEffect, useMemo, useRef } from 'react'
 import { useRouteMatch } from 'react-router'
 import inTimeInterval from '../../lib/in-time-interval'
 import { DayEnded, DayScheduleListWrapper, DayScheduleWrapper, HolidayPlate, SkeletonLoading, Subject } from '../atoms'
+import { userModel } from '@entities/user'
 
 type Props = ILessons & {
     weekDay?: string
@@ -21,6 +22,14 @@ type Props = ILessons & {
 }
 
 const DaySchedule = ({ lessons, weekDay, isCurrent, view, width, height, topInfo, error }: Props) => {
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
+
+    const isTeacher = user?.subdivisions?.some((subdivision) => subdivision.categoty === 'pps')
+
+    if (user?.user_status !== 'stud' && !isTeacher) return null
+
     const route: { params: { fio?: string } } = useRouteMatch()
     const dayRef = useRef<null | HTMLDivElement>(null)
     const isOnScreen = useOnScreen(dayRef)
