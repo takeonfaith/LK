@@ -21,7 +21,7 @@ const PaymentsPage = () => {
         popUpMessageModel.events.evokePopUpMessage({
             type: 'alert',
             time: 10000,
-            message: 'Ведутся доработки по информации о долге по оплате и суммам оплат',
+            message: 'В связи с техническими работами отображение данных по произведенным оплатам может быть не полным',
         })
     }, [])
 
