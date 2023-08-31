@@ -77,7 +77,9 @@ const DebtAndQr = (props: Props) => {
     const hasDebt = chosenDebt > 0
     const paymentPlace = isDormitory ? 'общежитию' : 'обучению'
     const text = hasDebt
-        ? `Долг по ${paymentPlace}`
+        ? currentPage === 0
+            ? `Долг по ${paymentPlace}`
+            : `Остаток по ${paymentPlace}`
         : chosenDebt < 0
         ? `Переплата по ${paymentPlace}`
         : 'У вас нет долга'
