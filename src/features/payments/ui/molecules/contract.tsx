@@ -10,6 +10,7 @@ import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import TechicalErrorMessage from './technical-error-message'
+import { formatNumber } from '@shared/lib/get-number-with-spaces-format'
 
 const ContractWrapper = styled.div`
     display: flex;
@@ -35,7 +36,7 @@ interface Props {
 
 const Contract = ({ contract }: Props) => {
     if (!contract) return null
-    const { number, startDate, endDatePlan, contragent, sum, can_sign, file, student } = contract
+    const { number, startDate, endDatePlan, contragent, sum, can_sign, file, student, signed_user } = contract
     const { open } = useModal()
     const [copied, setCopied] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
@@ -65,7 +66,11 @@ const Contract = ({ contract }: Props) => {
         },
         {
             text: 'Сумма к оплате',
-            info: sum ?? '',
+            info: formatNumber(sum) ?? '',
+        },
+        {
+            text: 'Статус',
+            info: signed_user ? 'Подписан' : 'Не подписан',
         },
         // {
         //     text: 'Ежемесячная плата: ',
