@@ -50,7 +50,7 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                         onClick={() => null}
                         width="40px"
                         icon={<FiDownload />}
-                        isActive={data.file !== ''}
+                        isActive={!!data.file}
                         // background="transparent"
                     />
                     {!done && (
