@@ -79,6 +79,7 @@ const GlobalStyles = createGlobalStyle`
 		--text: #f0f0f0;
 		--invert-text: #272727;
 		--select: #292929;
+		--toggle: #474747;
 		--content: #474747;
 		--invert: 0;
 		--double-invert: 1;
@@ -121,6 +122,7 @@ const GlobalStyles = createGlobalStyle`
 		--text: #272727;
 		--invert-text: #f0f0f0;
 		--select: #f3f3f3;
+		--toggle: #ffffff;
 		--content: #f1f1f1;
 		--invert: 1;
 		--double-invert: 0;
