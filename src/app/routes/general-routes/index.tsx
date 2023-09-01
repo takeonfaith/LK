@@ -363,7 +363,7 @@ export const generalRoutes: IRoutes = {
         Component: MedicalCertificate,
         color: 'blue',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'FINANCES_DOCS',
         pageSize: 'small',
     },
 }
