@@ -175,7 +175,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
-        show: new Date() > new Date('Sep 03 2023 12:00:00 GMT+0300') ? false : true,
+        show: new Date() > new Date('Aug 19 2023 12:00:00 GMT+0300') ? false : true,
     },
 })
 
