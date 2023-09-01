@@ -96,14 +96,25 @@ const FamilyRoomPage = () => {
                 <StepByStepForm stagesConfig={stagesConfigs} />
                 <SubmitButton
                     text={'Отправить'}
-                    action={() =>
-                        globalAppSendForm(
+                    action={() => {
+                        return globalAppSendForm(
                             ApplicationFormCodes.USG_GETHOSTEL_FAMILY,
-                            [form, family, kvdCert] as IInputArea[],
+                            [
+                                form,
+                                family,
+                                kvdCert,
+                                fluorographyCert,
+                                vichRwCert,
+                                graftCert,
+                                birthCertificate,
+                                consentToProcessingPersonalData,
+                                marriageRegistrationCertificate,
+                                registrationDoc,
+                            ] as IInputArea[],
                             setLoading,
                             setCompleted,
                         )
-                    }
+                    }}
                     isLoading={loading}
                     completed={completed}
                     setCompleted={setCompleted}
