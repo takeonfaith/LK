@@ -7,6 +7,7 @@ import { useHistory, useRouteMatch } from 'react-router'
 import { SliderPage } from 'widgets'
 import pages from './config/pages-config'
 import getPages from './lib/get-pages'
+import { CenterPage } from '@shared/ui/atoms'
 
 const HelpfulInformation = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
@@ -31,14 +32,16 @@ const HelpfulInformation = () => {
     )
 
     return (
-        <PageBlock>
-            <SliderPage
-                pages={sliderPages}
-                currentPage={sliderPageOnMount}
-                onChangePage={onChangeSliderPage}
-                appearance={false}
-            />
-        </PageBlock>
+        <CenterPage padding="10px">
+            <PageBlock>
+                <SliderPage
+                    pages={sliderPages}
+                    currentPage={sliderPageOnMount}
+                    onChangePage={onChangeSliderPage}
+                    appearance={false}
+                />
+            </PageBlock>
+        </CenterPage>
     )
 }
 

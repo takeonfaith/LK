@@ -1,6 +1,6 @@
 import { OLD_LK_URL } from '@shared/constants'
 import axios, { AxiosError } from 'axios'
-import { addAuthHeaderToRequests, authResponseInterceptor } from './utils'
+import { addAuthHeaderToRequests } from './utils'
 
 export const API_BASE_URL = `${OLD_LK_URL}/lk_api.php`
 export const API_HR_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders`
@@ -9,9 +9,10 @@ export const $api = axios.create({ baseURL: API_BASE_URL, withCredentials: true 
 export const $hrApi = axios.create({ baseURL: API_HR_URL })
 $hrApi.interceptors.request.use(addAuthHeaderToRequests)
 
-$hrApi.interceptors.response.use((response) => {
-    return response
-}, authResponseInterceptor)
+// Uncomment when ready
+// $hrApi.interceptors.response.use((response) => {
+//     return response
+// }, authResponseInterceptor)
 
 export function isAxiosError(error: Error): error is AxiosError {
     return (error as AxiosError).isAxiosError

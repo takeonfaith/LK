@@ -43,11 +43,28 @@ import {
 
 import { isProduction, OLD_LK_URL } from '@shared/constants'
 import React from 'react'
-import { BiBookReader, BiGroup, BiHeadphone, BiIdCard } from 'react-icons/bi'
+import { Redirect } from 'react-router-dom'
+import {
+    BiBookOpen,
+    BiBookReader,
+    BiBuildings,
+    BiGroup,
+    BiHeadphone,
+    BiIdCard,
+    BiPlusMedical,
+    BiRuble,
+    BiWifi,
+} from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiArrowDownCircle, FiCalendar, FiFileText, FiMonitor, FiStar } from 'react-icons/fi'
 import { RiNotificationBadgeLine } from 'react-icons/ri'
-import { generalHiddenRoutes, generalRoutes, IRoutes, PROJECT_ACTIVITIES_ROUTE } from '../general-routes'
+import {
+    generalHiddenRoutes,
+    generalRoutes,
+    IRoutes,
+    PAYMENTS_ROUTE,
+    PROJECT_ACTIVITIES_ROUTE,
+} from '../general-routes'
 import DismissalBufferPage from '@pages/hr-applications/pages/buffer-dismissal'
 import HolidayWorkBufferPage from '@pages/hr-applications/pages/buffer-holiday-work'
 import HolidayPlanningBufferPage from '@pages/hr-applications/pages/buffer-holiday-planning'
@@ -56,6 +73,9 @@ import MedicalExaminationBufferPage from '@pages/hr-applications/pages/buffer-me
 //import PartTimeEmploymentBufferPage from '@pages/hr-applications/pages/buffer-part-time-employment'
 import WorkTransferBufferPage from '@pages/hr-applications/pages/buffer-work-transfer'
 import DownloadAdminFilesPage from '@pages/download-admin-files'
+import { Onboarding } from '../general-routes/pages'
+import { MdGroups, MdPsychology } from 'react-icons/md'
+import PaymentsPage from '@pages/payments'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const HR_APPLICATIONS_ROUTE = '/hr-applications'
@@ -69,6 +89,14 @@ export const PPS_VOTE_ROUTE = '/pps_vote2020'
 export const CHILDREN_ROUTE = '/children'
 export const PPS_CONTEST_ROUTE = '/pps_contest'
 export const ElECTRONIC_STATEMENTS = '/electronic-statements'
+export const ONBOARDING = '/onboarding'
+export const STRUCTURE_OF_THE_UNIVERSITY = '/structure-of-the-university'
+export const ADDRESSES_AND_CONTACTS = '/addresses-and-contacts'
+export const BRANDBOOK = '/brandbook'
+export const WIFI_AT_THE_UNIVERSITY = '/wifi-at-the-university'
+export const HEALTH_CARE = '/health-care'
+export const PSYCHOLOGICAL_HELP = '/psychological-help'
+export const SOICAL_ENVIROMENT = '/social-environment'
 export const VACATION_ROUTE = '/vacation'
 export const KPI_PPS_ROUTE = '/kpi_pps'
 export const KPI_ADMIN_ROUTE = '/kpi_admin'
@@ -131,29 +159,18 @@ export const BUFFER_HOLIDAY_POSTPONED = HR_APPLICATIONS_ROUTE + '/buffer-holiday
 const ApplicationRedirect = () => PageIsNotReady({ oldVersionUrl: '/sprav' })
 
 export const teachersPrivateRoutes: () => IRoutes = () => ({
-    // On this position just to make necessary order
-    applications: {
-        id: 'applications',
-        title: 'Цифровые сервисы',
-        icon: <FiFileText />,
-        path: APPLICATIONS_ROUTE,
-        Component: isProduction ? ApplicationRedirect : TeachersApplicationsPage,
-        color: 'red',
+    onboarding: {
+        id: 'onboarding',
+        title: 'Новому работнику',
+        icon: <BiIdCard />,
+        path: ONBOARDING,
+        Component: Onboarding,
+        color: 'orange',
         isTemplate: false,
-        group: 'OTHER',
-        keywords: ['заявления', 'справки', 'заявление', 'справка'],
+        group: 'FINANCES_DOCS',
+        pageSize: 'big',
     },
     ...generalRoutes,
-    'hr-applications': {
-        id: 'hr-applications',
-        title: 'Кадровые заявления',
-        icon: <FiFileText />,
-        path: HR_APPLICATIONS_ROUTE,
-        Component: isProduction ? ApplicationRedirect : HrApplicationsPage,
-        color: 'green',
-        isTemplate: false,
-        group: 'OTHER',
-    },
     'download-agreements': {
         id: 'download-agreements',
         title: 'Административная панель',
@@ -198,6 +215,17 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'LEARNING_ACTIVITIES',
     },
+    payments: {
+        id: 'payments',
+        title: 'Оплата общежития',
+        icon: <BiRuble />,
+        path: PAYMENTS_ROUTE,
+        Component: PaymentsPage,
+        color: 'green',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        keywords: ['оплата'],
+    },
     'pps-contest': {
         id: 'pps-contest',
         title: 'Конкурс ППС',
@@ -212,7 +240,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         },
         color: 'blue',
         isTemplate: false,
-        group: 'LEARNING_ACTIVITIES',
+        group: 'FINANCES_DOCS',
     },
     'kpi-pps': {
         id: 'kpi-pps',
@@ -367,6 +395,32 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         group: 'OTHER',
         show: false,
     },
+    // Move when ready
+    applications: {
+        id: 'applications',
+        title: 'Цифровые сервисы',
+        icon: <FiFileText />,
+        path: APPLICATIONS_ROUTE,
+        Component: isProduction ? ApplicationRedirect : TeachersApplicationsPage,
+        color: 'red',
+        isTemplate: false,
+        pageSize: 'big',
+        group: 'FINANCES_DOCS',
+        keywords: ['заявления', 'справки', 'заявление', 'справка'],
+    },
+    'hr-applications': {
+        id: 'hr-applications',
+        title: 'Кадровые заявления',
+        icon: <FiFileText />,
+        path: HR_APPLICATIONS_ROUTE,
+        Component: isProduction
+            ? () =>
+                  PageIsNotReady({ errorText: 'Страница еще находится в разработке.', isRedirectButtonVisible: false })
+            : HrApplicationsPage,
+        color: 'green',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+    },
     // 'generate-schedule': {
     //     id: 'generate-schedule',
     //     title: 'Генерация пересдач',
@@ -390,7 +444,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         color: 'blue',
         Component: isProduction ? ApplicationRedirect : IssuanceOfLicensesPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -580,7 +634,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: GETTING_COMPUTER_EQUIPMENT,
         Component: isProduction ? ApplicationRedirect : GettingComputerEquipmentPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -594,7 +648,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: CONNECTING_COMPUTER,
         Component: isProduction ? ApplicationRedirect : ConnectingComputerPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -608,7 +662,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: PRINTER_MAINTENANCE,
         Component: isProduction ? ApplicationRedirect : PrinterMaintenancePage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -622,7 +676,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: QUESTION_SED,
         Component: isProduction ? ApplicationRedirect : QuestionSedPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -636,7 +690,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: QUESTION_PERSONAL_ACCOUNT,
         Component: isProduction ? ApplicationRedirect : QuestionPersonalAccountPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -650,7 +704,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: OTHER_IT_SERVICES,
         Component: isProduction ? ApplicationRedirect : OtherItServicesPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -664,7 +718,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: CERTIFICATE_FROM_PLACE_OF_WORK,
         Component: isProduction ? ApplicationRedirect : CertificateFromPlaceOfWorkPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -678,7 +732,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: VISA_CERTIFICATE,
         Component: isProduction ? ApplicationRedirect : VisaCertificatePage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -692,7 +746,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: CERTIFICATE_OF_WORK_EXPERIENCE,
         Component: isProduction ? ApplicationRedirect : CertificateOfWorkExperiencePage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -706,7 +760,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: NUMBER_OF_UNUSED_VACATION_DAYS,
         Component: isProduction ? ApplicationRedirect : NumberOfUnusedVacationDaysPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -720,7 +774,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: COPY_OF_EMPLOYMENT_RECORD,
         Component: isProduction ? ApplicationRedirect : CopyOfEmploymentRecordPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -734,7 +788,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: COPIES_OF_DOCUMENTS_FROM_PERSONAL_FILE,
         Component: isProduction ? ApplicationRedirect : CopiesOfDocumentsFromPersonalFilePage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -748,7 +802,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: WORK_ON_TERMS_OF_EXTERNAL_CONCURRENCY,
         Component: isProduction ? ApplicationRedirect : WorkOnTermsOfExternalConcurrencyPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -762,7 +816,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: CERTIFICATE_TIME_PARENTAL_LEAVE,
         Component: isProduction ? ApplicationRedirect : CertificateTimeParentalLeavePage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -776,7 +830,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: ARBITRARY_REQUEST,
         Component: isProduction ? ApplicationRedirect : ArbitraryRequestPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -790,7 +844,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: COURIER,
         Component: isProduction ? ApplicationRedirect : CourierPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -805,7 +859,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: PERSONA_INCOME_TAX_REFERENCE,
         Component: isProduction ? ApplicationRedirect : PersonaIncomeTaxReferencePage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -819,7 +873,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: PAYMENT_OF_CHILD_BIRTH_ALLOWANCE,
         Component: isProduction ? ApplicationRedirect : PaymentOfChildBirthAllowancePage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -833,7 +887,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: PAYMENT_FOR_CHILD_CARE,
         Component: isProduction ? ApplicationRedirect : PaymentForChildCarePage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -847,7 +901,7 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: CONTACT_INFO_ACTUALIZATION,
         Component: ContactInfoActualizationPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -861,10 +915,127 @@ export const teachersHiddenRoutes: () => IRoutes = () => ({
         path: DATA_VERIFICATION_ROUTE,
         Component: DataVerificationPage,
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'social-environment': {
+        id: 'Социальная среда',
+        title: 'Социальная среда',
+        color: 'pink',
+        Component: () => {
+            window.location.href = 'https://profkommospolytech.ru/'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        icon: <BiGroup />,
+        isTemplate: false,
+        path: SOICAL_ENVIROMENT,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
+    },
+    'psychological-help': {
+        id: 'Психологическая помощь',
+        title: 'Психологическая помощь',
+        color: 'green',
+        Component: () => {
+            window.location.href =
+                'https://mospolytech.ru/studencheskaya-zhizn/medical-help/slujba-psihologicheskoy-pomoschi/'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        icon: <MdPsychology />,
+        isTemplate: false,
+        path: PSYCHOLOGICAL_HELP,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
+    },
+    'health-care': {
+        id: 'Медицинская помощь',
+        title: 'Медицинская помощь',
+        color: 'red',
+        Component: () => {
+            window.location.href = 'https://mospolytech.ru/studencheskaya-zhizn/medical-help/medicinskaya-slujba/'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        icon: <BiPlusMedical />,
+        isTemplate: false,
+        path: HEALTH_CARE,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
+    },
+    'wifi-at-the-university': {
+        id: 'WI-FI  в университете',
+        title: 'WI-FI  в университете',
+        color: 'purple',
+        Component: () => {
+            window.location.href =
+                'https://e.mospolytech.ru/old/storage/files/Instruktsiya_dostupa_k_internetu_v_auditoriyah.pdf'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        icon: <BiWifi />,
+        isTemplate: false,
+        path: WIFI_AT_THE_UNIVERSITY,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
+    },
+    brandbook: {
+        id: 'Брендбук',
+        title: 'Брендбук',
+        color: 'orange',
+        Component: () => {
+            window.location.href = 'https://mospolytech.ru/ob-universitete/brandbook/'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        icon: <BiBookOpen />,
+        isTemplate: false,
+        path: BRANDBOOK,
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
+    },
+    'addresses-and-contacts': {
+        id: 'addresses-and-contacts',
+        title: 'Адреса и контакты',
+        icon: <BiBuildings />,
+        path: ADDRESSES_AND_CONTACTS,
+        Component: () => {
+            window.location.href = 'https://mospolytech.ru/ob-universitete/adresa-i-kontakty/'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        color: 'darkBlue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
+    },
+    'structure-of-the-university': {
+        id: 'structure-of-the-university',
+        title: 'Структура университета',
+        icon: <MdGroups />,
+        path: STRUCTURE_OF_THE_UNIVERSITY,
+        Component: () => {
+            window.location.href =
+                'https://mospolytech.ru/ob-universitete/rukovodstvo-i-struktura/strukturnye-podrazdeleniya/'
+
+            return <Redirect to={ONBOARDING} />
+        },
+        color: 'lightGreen',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        backButtonText: 'Новому работнику',
+        isSubPage: true,
+        fallbackPrevPage: ONBOARDING,
     },
 })

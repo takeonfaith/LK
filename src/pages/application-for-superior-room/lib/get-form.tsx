@@ -1,16 +1,21 @@
 import React from 'react'
 import { SuperiorRoom } from '@api/model'
-import { IInputArea } from '@ui/input-area/model'
+import { IInputArea, IInputAreaData } from '@ui/input-area/model'
+import { SelectPage } from '@features/select'
 
-const allocationTypes = [
+const mAllocationTypes = [
     { id: 0, title: 'Один в комнате' },
     { id: 1, title: 'Двое в комнате' },
-    // { id: 2, title: 'Один в блоке' },
+]
+
+const bgAllocationTypes = [
+    { id: 1, title: 'Двое в комнате' },
+    { id: 2, title: 'Трое в комнате' },
 ]
 
 const dormLocations = [
     { id: 0, title: 'ул. Михалковская, д. 7, корп. 3' },
-    { id: 1, title: 'ул. Малая Семеновская, д. 12' },
+    { id: 1, title: 'ул. Бориса Галушкина, д. 9' },
 ]
 
 // const extracurricularActivities: CheckboxDocs[] = [
@@ -52,9 +57,9 @@ const dormLocations = [
 //     },
 // ]
 
-const getForm = (data: SuperiorRoom): IInputArea => {
+const getForm = (data: SuperiorRoom, form: IInputArea | null): IInputArea => {
     const { fio, phone, email } = data
-
+    const dormId = ((form?.data[3] as IInputAreaData)?.value as SelectPage)?.id
     return {
         title: 'Заявка на комнату повышенной комфортности',
         data: [
@@ -67,7 +72,7 @@ const getForm = (data: SuperiorRoom): IInputArea => {
             },
             {
                 title: 'Телефон',
-                value: phone,
+                value: (form?.data[1] as IInputAreaData)?.value ?? phone,
                 fieldName: 'phone',
                 type: 'tel',
                 width: '100%',
@@ -77,9 +82,19 @@ const getForm = (data: SuperiorRoom): IInputArea => {
             },
             {
                 title: 'Email',
-                value: email,
+                value: (form?.data[2] as IInputAreaData)?.value ?? email,
                 fieldName: 'email',
                 type: 'email',
+                width: '100%',
+                editable: true,
+                required: true,
+            },
+            {
+                title: 'Адрес общежития',
+                value: (form?.data[3] as IInputAreaData)?.value ?? null,
+                fieldName: 'address',
+                type: 'select',
+                items: dormLocations,
                 width: '100%',
                 editable: true,
                 required: true,
@@ -89,7 +104,7 @@ const getForm = (data: SuperiorRoom): IInputArea => {
                 value: null,
                 fieldName: 'allocation',
                 type: 'select',
-                items: allocationTypes,
+                items: dormId === 1 ? bgAllocationTypes : mAllocationTypes,
                 width: '100%',
                 editable: true,
                 required: true,
@@ -99,17 +114,7 @@ const getForm = (data: SuperiorRoom): IInputArea => {
                 value: null,
                 fieldName: 'alternative-allocation',
                 type: 'select',
-                items: allocationTypes,
-                width: '100%',
-                editable: true,
-                required: true,
-            },
-            {
-                title: 'Адрес общежития',
-                value: null,
-                fieldName: 'address',
-                type: 'select',
-                items: dormLocations,
+                items: dormId === 1 ? bgAllocationTypes : mAllocationTypes,
                 width: '100%',
                 editable: true,
                 required: true,
@@ -132,14 +137,14 @@ const getForm = (data: SuperiorRoom): IInputArea => {
             // },
             {
                 title: 'Дополнительная информация',
-                value: '',
+                value: (form?.data[6] as IInputAreaData)?.value ?? '',
                 fieldName: 'info',
                 type: 'textarea',
                 editable: true,
                 placeholder: 'Желание проживать с другом и т.д.',
             },
         ],
-        alert: <>Подача заявок открыта с 12:00 17 августа до 12:00 19 августа!</>,
+        alert: <>Подача заявок открыта с 12:00 6 сентября до 12:00 7 сентября!</>,
         hint: 'Перед отправкой заявки обязательно проверьте указанную в форме контактную информацию (мобильный телефон и адрес электронной почты) и при необходимости внесите изменения.',
         optionalCheckbox: {
             title: `С приказами об изменении размеров платы за дополнительные услуги № 0597-ОД от 08.06.2021 и № 0032-АХД от 09.03.2022 ознакомлен(а)`,

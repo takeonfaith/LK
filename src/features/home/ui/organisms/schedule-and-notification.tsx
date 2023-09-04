@@ -18,7 +18,7 @@ const ScheduleAndNotification = () => {
 
     return (
         <List direction="horizontal" title="Виджеты" showPages gap={10} visible={!!widgetSchedule || !!widgetPayment}>
-            {widgetSchedule && (
+            {widgetSchedule && schedule?.[0] && (
                 <DaySchedule
                     lessons={!schedule && currentDayString === 'sunday' ? [] : lessons}
                     width={350}

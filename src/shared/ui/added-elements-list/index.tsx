@@ -135,26 +135,27 @@ const AddedElementsList = ({ list, onAddElement, onRemoveAll, onRemoveOne, paddi
                 </Element>
             )}
             {Object.values(list ?? {}).map((el) => {
-                return (
-                    <Element key={el.id} background={el.background} remove={removeOne === el.id}>
-                        <div className="element-text">{el.title}</div>
-                        <div
-                            className="remove"
-                            onClick={() => {
-                                if (listKeys.length === 1) {
-                                    setRemoveAll(true)
-                                    onRemoveAll?.()
-                                } else {
-                                    setRemoveOne(el.id)
+                if (el?.id)
+                    return (
+                        <Element key={el.id} background={el.background} remove={removeOne === el.id}>
+                            <div className="element-text">{el.title}</div>
+                            <div
+                                className="remove"
+                                onClick={() => {
+                                    if (listKeys.length === 1) {
+                                        setRemoveAll(true)
+                                        onRemoveAll?.()
+                                    } else {
+                                        setRemoveOne(el.id)
 
-                                    onRemoveOne(el.id)
-                                }
-                            }}
-                        >
-                            <FiX />
-                        </div>
-                    </Element>
-                )
+                                        onRemoveOne(el.id)
+                                    }
+                                }}
+                            >
+                                <FiX />
+                            </div>
+                        </Element>
+                    )
             })}
             {listKeys.length && !!onRemoveAll && (
                 <Element

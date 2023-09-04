@@ -66,7 +66,7 @@ const ToggleItem = ({ title, state, action, icon, disabled }: Props) => {
             {icon && <div className="icon">{icon}</div>}
             <label>
                 <b>{title}</b>
-                <SwitchToggle id={Math.random().toString()} isToggled={state} setIsToggled={handleToggle} key={title} />
+                <SwitchToggle id={title} isToggled={state} setIsToggled={handleToggle} key={title} />
             </label>
         </ToggleItemBlock>
     )
