@@ -22,7 +22,7 @@ const TopRightCornerElement = styled.div`
     justify-content: flex-end;
 
     @media (max-width: 1000px) {
-        top: 7px;
+        top: -55px;
         right: 7px;
     }
 `
