@@ -168,6 +168,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'orange',
         isTemplate: false,
         group: 'FINANCES_DOCS',
+        pageSize: 'big',
     },
     ...generalRoutes,
     'download-agreements': {
@@ -402,6 +403,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : TeachersApplicationsPage,
         color: 'red',
         isTemplate: false,
+        pageSize: 'big',
         group: 'FINANCES_DOCS',
         keywords: ['заявления', 'справки', 'заявление', 'справка'],
     },

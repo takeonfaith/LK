@@ -30,7 +30,6 @@ import {
     ForgotPasswordPage,
     GetYourLoginPage,
     Home,
-    HomeSettings,
     // AllStudentsPage,
     // AllTeachersPage,
     InstructionsPage,
@@ -194,6 +193,7 @@ export const generalRoutes: IRoutes = {
         show: false,
         group: 'GENERAL',
         withoutBackButton: true,
+        pageSize: 'big',
     },
     settings: {
         id: 'settings',
@@ -205,7 +205,6 @@ export const generalRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'GENERAL',
-        pageSize: 'small',
     },
     doclist: {
         id: 'doclist',
@@ -263,7 +262,6 @@ export const generalRoutes: IRoutes = {
         group: 'GENERAL',
         keywords: ['Оповещения'],
         isNew: true,
-        pageSize: 'small',
     },
     'electronic-interaction-agreement': {
         id: 'electronic-interaction-agreement',
@@ -418,7 +416,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-personal': {
         id: 'settings-personal',
@@ -435,7 +432,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-security': {
         id: 'settings-security',
@@ -451,14 +447,13 @@ export const generalHiddenRoutes: IRoutes = {
         subPageHeaderTitle: 'Безопасность',
         fallbackPrevPage: SETTINGS_ROUTE,
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-home-page': {
         id: 'settings-home-page',
         title: 'Настройки. Главная',
         icon: <FiHome />,
         path: SETTINGS_HOME_PAGE_ROUTE,
-        Component: HomeSettings,
+        Component: () => <></>,
         color: 'blue',
         isTemplate: true,
         show: true,
@@ -468,7 +463,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-customize-menu': {
         id: 'settings-customize-menu',
@@ -484,7 +478,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-notifications': {
         id: 'settings-notifications',
@@ -500,7 +493,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'useful-info-template': {
         id: `useful-info-template`,
