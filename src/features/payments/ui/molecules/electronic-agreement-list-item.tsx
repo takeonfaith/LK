@@ -13,6 +13,7 @@ import { useElectronicAgreement } from 'widgets/electonic-agreement'
 
 interface Props {
     data: Agreement
+    isContractSigned: boolean
 }
 
 const SignBlock = styled.div`
@@ -25,7 +26,7 @@ const SignBlock = styled.div`
     }
 `
 
-const ElectronicAgreementListItem = ({ data }: Props) => {
+const ElectronicAgreementListItem = ({ data, isContractSigned }: Props) => {
     const { id, signed_user: signedUser, name, can_sign: isActive, date } = data
 
     const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
@@ -65,7 +66,9 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                             isActive={!done && isActive}
                             popUpFailureMessage={
                                 !isActive
-                                    ? 'Необходимо сначала подписать соглашение об электронном взаимодейтсвии'
+                                    ? isContractSigned
+                                        ? 'Необходимо сначала подписать соглашение об электронном взаимодейтсвии'
+                                        : 'Необходимо сначала подписать договор'
                                     : 'Согласие уже подписано'
                             }
                             popUpSuccessMessage="Согласие успешно подписано"
