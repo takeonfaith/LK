@@ -9,8 +9,8 @@ import { FiInfo } from 'react-icons/fi'
 import styled from 'styled-components'
 import getForm from './lib/get-form'
 import sendForm from './lib/send-form'
-import getStatusFormSuperiorRoom from '@pages/application-for-superior-room/lib/get-status'
 import { SelectPage } from '@features/select'
+import { getStatusFormSuperiorRoom } from './lib/get-status'
 
 const ApplicationForSuperiorRoomWrapper = styled.div<{ isDone: boolean }>`
     display: flex;
