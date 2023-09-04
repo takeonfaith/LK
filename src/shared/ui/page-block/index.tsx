@@ -23,7 +23,7 @@ const TopRightCornerElement = styled.div`
 
     @media (max-width: 1000px) {
         top: -55px;
-        right: 7px;
+        right: 0px;
     }
 `
 
