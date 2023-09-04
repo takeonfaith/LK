@@ -193,7 +193,7 @@ export const generalRoutes: IRoutes = {
         show: false,
         group: 'GENERAL',
         withoutBackButton: true,
-        pageSize: 'big',
+        pageSize: 'large',
     },
     settings: {
         id: 'settings',
@@ -361,7 +361,8 @@ export const generalRoutes: IRoutes = {
         Component: MedicalCertificate,
         color: 'blue',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'FINANCES_DOCS',
+        pageSize: 'small',
     },
 }
 

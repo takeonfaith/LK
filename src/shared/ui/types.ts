@@ -6,4 +6,4 @@ export type VerticalAlign = 'top' | 'center' | 'bottom' | 'space-between'
 export type Direction = 'horizontal' | 'vertical'
 export type MessageType = 'success' | 'failure' | 'info' | 'alert' | 'tip' | 'hint' | 'hrFailure'
 export type Coordinates = { x: number; y: number }
-export type Size = 'small' | 'middle' | 'big'
+export type Size = 'small' | 'middle' | 'large' | 'big'
