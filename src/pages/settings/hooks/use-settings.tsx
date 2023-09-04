@@ -142,6 +142,7 @@ const useSettings = () => {
         homeRoutes,
         widgetSchedule,
         widgetPayment,
+        news,
         Object.keys(leftsideBarRoutes ?? {}).length,
         Object.keys(homeRoutes ?? {}).length,
     ])
