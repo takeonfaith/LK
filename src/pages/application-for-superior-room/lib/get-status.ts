@@ -1,18 +1,18 @@
 import { User } from '@api/model'
 
+export const StartDateSuperiorRoom = 'Sep 06 2023 12:00:00 GMT+0300'
+export const EndDateSuperiorRoom = 'Sep 07 2023 12:00:00 GMT+0300'
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getStatusFormSuperiorRoom = (user: User) => {
-    const StartDateSuperiorRoom = 'Aug 17 2023 12:00:00 GMT+0300'
-    const EndDateSuperiorRoom = 'Aug 19 2023 12:00:00 GMT+0300'
+export const getStatusFormSuperiorRoom = (user: User) => {
     const currentTime = new Date()
 
     // if (user.enterYear !== '2023/2024') return 'Форма доступна только для студентов 1 курса'
 
-    if (currentTime < new Date(StartDateSuperiorRoom)) return 'Подача заявок открыта с 1 сентября до 3 сентября!'
+    if (currentTime < new Date(StartDateSuperiorRoom))
+        return 'Подача заявок открыта с 12:00 6 сентября до 12:00 7 сентября!'
 
     if (currentTime > new Date(EndDateSuperiorRoom)) return 'Подача заявок закрыта'
 
     return ''
 }
-
-export default getStatusFormSuperiorRoom

@@ -54,6 +54,7 @@ import {
 import { HelpfulInformation } from './teacher-routes/pages'
 import { User } from '@shared/api/model'
 import PaymentsPage from '@pages/payments'
+import { EndDateSuperiorRoom } from '@pages/application-for-superior-room/lib/get-status'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -175,7 +176,7 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
-        show: new Date() > new Date('Aug 19 2023 12:00:00 GMT+0300') ? false : true,
+        show: new Date() > new Date(EndDateSuperiorRoom) ? false : true,
     },
 })
 
