@@ -56,18 +56,21 @@ type SizeObject = Record<Size, string>
 const titleSize: SizeObject = {
     small: '0.8rem',
     middle: '0.83rem',
+    large: '0.85rem',
     big: '0.86rem',
 }
 
 const textSize: SizeObject = {
     small: '0.75rem',
     middle: '0.78rem',
+    large: '0.79rem',
     big: '0.80rem',
 }
 
 const gapSize: SizeObject = {
     small: '0px',
     middle: '1px',
+    large: '2px',
     big: '3px',
 }
 

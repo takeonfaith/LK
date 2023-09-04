@@ -15,6 +15,7 @@ const getColorFromValue = (value: number): keyof IColors => {
 const SIZES: Record<Size, number> = {
     small: 4,
     middle: 9,
+    large: 12,
     big: 14,
 }
 
