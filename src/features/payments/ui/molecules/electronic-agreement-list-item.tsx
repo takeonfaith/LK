@@ -3,7 +3,7 @@ import { Agreement } from '@api/model'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import Accordion from '@ui/accordion/accordion'
-import { Divider, LinkButton, SubmitButton, Title } from '@ui/atoms'
+import { LinkButton, SubmitButton, Title } from '@ui/atoms'
 import { Message } from '@ui/message'
 import localizeDate from '@utils/localize-date'
 import React from 'react'
@@ -81,7 +81,6 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                     />
                 </Flex>
             </SignBlock>
-            {(done || signedUser) && <Divider width="100%" />}
             {(done || signedUser) && (
                 <Subtext>
                     Дата подписания: {localizeDate(data.signed_user_date || new Date())},{' '}

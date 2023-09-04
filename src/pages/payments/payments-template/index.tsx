@@ -40,7 +40,7 @@ const PaymentsTemplate = ({ contracts }: Props) => {
                                 </Subtext>
                             </Flex>
                         )}
-                        <DebtAndQr data={contract} isDormitory={isDormitory} />
+                        <DebtAndQr data={contract} />
                         <PaymentList payments={payments ?? []} />
                         <PaygraphTable paygraph={paygraph} />
                         <ElectronicAgreementList
