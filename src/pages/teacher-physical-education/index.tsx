@@ -1,7 +1,7 @@
-import { StudentsList } from './students-list'
 import React from 'react'
-import { AdminPanel } from './admin-panel'
 import { SliderPage } from 'widgets'
+import { AdminPanel } from './admin-panel'
+import { StudentsList } from './students-list'
 
 const TeacherPhysicalEducation = () => {
     return (

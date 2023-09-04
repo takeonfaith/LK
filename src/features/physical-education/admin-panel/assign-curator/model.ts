@@ -4,7 +4,7 @@ import { modalModel } from 'widgets/modal/model'
 import { AssignCurator } from './types'
 import { getAssignCuratorToGroup } from './utils'
 import { combineEvents } from 'patronum'
-import { assignVisitValueFx } from '../assign-visit-value/model'
+import { assignVisitValue, assignVisitValueFx } from '../assign-visit-value/model'
 export const assignCurator = createEvent<AssignCurator>()
 
 const assignCuratorFx = createEffect(async ({ groupName, teacherGuid }: AssignCurator) => {
@@ -12,6 +12,8 @@ const assignCuratorFx = createEffect(async ({ groupName, teacherGuid }: AssignCu
 })
 
 sample({ clock: assignCurator, target: assignCuratorFx })
+sample({ clock: assignCurator, target: assignVisitValue })
+
 sample({
     clock: combineEvents({ events: [assignCuratorFx.doneData, assignVisitValueFx.doneData] }),
     target: modalModel.events.close,

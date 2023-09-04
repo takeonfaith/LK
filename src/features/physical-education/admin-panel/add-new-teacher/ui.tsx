@@ -1,3 +1,4 @@
+import { TeacherSelect } from '@features/teacher-select/ui'
 import { Button } from '@shared/ui/button'
 import Input from '@shared/ui/input'
 import React, { useState } from 'react'
@@ -15,7 +16,7 @@ export const AddNewTeacher = () => {
     return (
         <Wrapper>
             <Input title={'Имя'} setValue={setFullName} value={fullName} />
-            <Input title={'Айди'} setValue={setUserId} value={userId} />
+            <TeacherSelect onChange={setUserId} />
 
             <Button text="Добавить" onClick={handleClick} />
         </Wrapper>
