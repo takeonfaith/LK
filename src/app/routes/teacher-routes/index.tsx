@@ -336,10 +336,11 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'lightGreen',
         withoutHeader: true,
         path: PHYSICAL_EDUCATION,
-        show: !isProduction,
+        show: true,
         Component: TeacherPhysicalEducation,
         isTemplate: false,
         group: 'OTHER',
+        pageSize: 'big',
     },
     'physical-education-student': {
         id: 'physical-education-student',
@@ -351,6 +352,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
         show: false,
+        pageSize: 'big',
     },
     oop: {
         id: 'oop',
