@@ -7,7 +7,6 @@ import { Button } from '@shared/ui/button'
 import { useUnit } from 'effector-react'
 import React from 'react'
 import { useModal } from 'widgets'
-import { Wrapper } from './styled'
 
 export const AdminPanel = () => {
     const [handleUpdateStudentsList] = useUnit([updateStudentsList])
