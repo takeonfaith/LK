@@ -5,6 +5,8 @@ import { DEFAULT_MOBILE_CONFIG } from '@entities/menu/model'
 import { ListWrapper } from '@ui/list/styles'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { LeftsideBarItem } from 'widgets/leftside-bar/ui'
+import Flex from '@shared/ui/flex'
+import { MEDIA_QUERIES } from '@shared/consts'
 
 const MobileBottomMenuWrapper = styled(ListWrapper)`
     position: absolute;
@@ -18,10 +20,19 @@ const MobileBottomMenuWrapper = styled(ListWrapper)`
     padding: 0px 10px;
     display: none;
 
-    @media (max-width: 1000px) {
+    ${MEDIA_QUERIES.isTablet} {
         display: flex;
     }
 `
+
+const LinkSkeleton = () => {
+    return (
+        <Flex d="column" gap="8px">
+            <SkeletonShape shape="circle" size={{ width: '20px', height: '20px' }} margin="0" />
+            <SkeletonShape shape="rect" size={{ width: '35px', height: '10px' }} margin="0" />
+        </Flex>
+    )
+}
 
 const MobileBottomMenu = () => {
     const { allRoutes, currentPage } = menuModel.selectors.useMenu()
@@ -29,11 +40,11 @@ const MobileBottomMenu = () => {
     if (!allRoutes) {
         return (
             <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly" verticalAlign="center">
-                <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
-                <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
-                <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
-                <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
-                <SkeletonShape shape="rect" size={{ width: '55px', height: '40px' }} margin="0" />
+                <LinkSkeleton />
+                <LinkSkeleton />
+                <LinkSkeleton />
+                <LinkSkeleton />
+                <LinkSkeleton />
             </MobileBottomMenuWrapper>
         )
     }

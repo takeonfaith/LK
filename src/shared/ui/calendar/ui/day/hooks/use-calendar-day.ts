@@ -9,7 +9,7 @@ import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 
 type Props = DayCalendarProps
 
-export const useCalendarDay = ({ interval = [0, 23], events: allEvents }: Props) => {
+export const useCalendarDay = ({ interval = [0, 23], events: allEvents, showDates = true }: Props) => {
     const { isMobile } = useCurrentDevice()
     const { scale, shift, events, handleOpenModal } = useCalendarGeneral({ interval, events: allEvents })
     const [chosenEvent, setChosenEvent] = useState<DayCalendarEvent | null>(null)
@@ -51,6 +51,7 @@ export const useCalendarDay = ({ interval = [0, 23], events: allEvents }: Props)
         scale,
         shift,
         onEventClick,
+        showDates,
         chosenEvent,
         timeInterval,
     }

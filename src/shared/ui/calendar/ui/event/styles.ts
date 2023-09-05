@@ -1,7 +1,7 @@
+import { MEDIA_QUERIES } from '@shared/consts'
+import Flex from '@shared/ui/flex'
 import styled from 'styled-components'
 import { StyledProps } from './types'
-import { SCREEN_IPHONE_XR } from '@shared/consts'
-import Flex from '@shared/ui/flex'
 
 const getTop = ({ startTimeShift, startDayShift, scale }: StyledProps) => {
     const top = (startTimeShift - startDayShift) * scale
@@ -29,7 +29,7 @@ export const EventItemStyled = styled.div<StyledProps>`
         filter: brightness(0.95);
     }
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         padding: ${({ shortInfo, scale }) => (!shortInfo ? `${scale * 10}px` : '4px')};
     }
 `
@@ -43,7 +43,7 @@ export const IconSection = styled.div<{ scale: number }>`
         height: 22px;
     }
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         min-width: 28px;
 
         svg {
@@ -56,7 +56,7 @@ export const IconSection = styled.div<{ scale: number }>`
 export const EventFront = styled(Flex)<{ shortInfo: boolean; scale: number }>`
     gap: ${({ shortInfo, scale }) => (!shortInfo ? `${8 * scale}px` : '4px')};
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         gap: ${({ shortInfo, scale }) => (!shortInfo ? `${4 * scale}px` : '4px')};
     }
 `
@@ -71,7 +71,7 @@ export const EventTitle = styled.span<{ shortInfo: boolean; scale: number }>`
     hyphens: auto;
     width: ${({ shortInfo }) => (!shortInfo ? 'fit-content' : '100%')};
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         font-size: ${({ shortInfo, scale }) => (!shortInfo ? `${0.95 * scale}rem` : '0.7rem')};
     }
 `
@@ -91,7 +91,7 @@ export const MobileIcon = styled.div`
         height: auto;
     }
 
-    /* @media (max-width: ${SCREEN_IPHONE_XR}) {
+    /* ${MEDIA_QUERIES.isMobile} {
         display: flex;
     } */
 `

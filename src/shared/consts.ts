@@ -374,6 +374,12 @@ export const SCREEN_IPHONE_12 = '391px'
 export const SCREEN_IPHONE_XR = '415px'
 export const SCREEN_IPAD_AIR = '821px'
 
+export const MEDIA_QUERIES = {
+    isMobile: '@media (max-width: 766px)',
+    isTablet: '@media (max-width: 1000px)',
+    isTesktop: '@media (min-width: 1001px)',
+} as const
+
 export const TIME_IN_MS = {
     minute: 60000,
 }

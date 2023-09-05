@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from '@shared/consts'
 import UserHeader from '@shared/ui/user-header'
 import React from 'react'
 import styled from 'styled-components'
@@ -32,7 +33,7 @@ const UserModalWrapper = styled.div`
         }
     }
 
-    @media (max-width: 600px) {
+    ${MEDIA_QUERIES.isMobile} {
         .user {
             .info b {
                 width: 90%;

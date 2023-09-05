@@ -1,4 +1,4 @@
-import { SCREEN_IPHONE_XR } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/consts'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
@@ -17,7 +17,7 @@ const SmallIcon = styled.div<{ scale: number }>`
         height: ${({ scale }) => `${scale * 22}px`};
     }
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         svg {
             width: ${({ scale }) => `${scale * 18}px`};
             height: ${({ scale }) => `${scale * 18}px`};

@@ -1,4 +1,4 @@
-import { SCREEN_IPHONE_XR } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/consts'
 import get2DigitDumber from '@shared/lib/get-2-digit-number'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
@@ -30,7 +30,7 @@ const TimeLine = styled.div`
 const SubtextStyled = styled(Subtext)`
     font-size: 0.9rem;
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         font-size: 0.65rem;
     }
 `

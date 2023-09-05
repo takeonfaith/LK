@@ -29,6 +29,7 @@ export const DayCalendar = (props: DayCalendarProps) => {
         shift,
         onEventClick,
         chosenEvent,
+        showDates,
         timeInterval,
     } = useCalendarDay(props)
 
@@ -37,7 +38,7 @@ export const DayCalendar = (props: DayCalendarProps) => {
             <WeekDays
                 onDayClick={handleDayClick}
                 currentChosenDay={currentDay}
-                showDates
+                showDates={showDates}
                 showColumns={false}
                 events={events}
             />

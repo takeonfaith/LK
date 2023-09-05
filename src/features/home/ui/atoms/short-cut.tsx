@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from '@shared/consts'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -53,7 +54,7 @@ export const ShortCutLinkContainer = styled(Link)`
         margin-bottom: 5px;
     }
 
-    @media (max-width: 600px) {
+    ${MEDIA_QUERIES.isMobile} {
         border-radius: var(--brLight);
         flex-direction: row;
         height: fit-content;

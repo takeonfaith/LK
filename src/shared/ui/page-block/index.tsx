@@ -31,14 +31,29 @@ const TopRightCornerElement = styled.div`
     }
 `
 
+const TopCenterElement = styled.div`
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: flex-end;
+
+    @media (max-width: 550px) {
+        top: -4px;
+        right: 7px;
+    }
+`
+
 type Props = {
     children: ChildrenType
     topRightCornerElement?: ChildrenType
+    topCenterElement?: ChildrenType
     padding?: string
 }
 
 const PageBlock = forwardRef(
-    ({ children, topRightCornerElement, padding }: Props, ref: ForwardedRef<HTMLDivElement>) => {
+    ({ children, topRightCornerElement, topCenterElement, padding }: Props, ref: ForwardedRef<HTMLDivElement>) => {
         const currentPage = useCurrentExactPage()
         const maxWidth = getPageWidth(currentPage)
 
@@ -56,6 +71,7 @@ const PageBlock = forwardRef(
                     padding={padding}
                 >
                     {topRightCornerElement && <TopRightCornerElement>{topRightCornerElement}</TopRightCornerElement>}
+                    {topCenterElement && <TopCenterElement>{topCenterElement}</TopCenterElement>}
                     {children}
                 </PageBlockStyled>
             </CenterPage>

@@ -1,12 +1,13 @@
-import { SCREEN_IPAD_AIR } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/consts'
 import styled from 'styled-components'
+import { CALENDAR_HEIGHT_DESKTOP, CALENDAR_HEIGHT_MOBILE } from '@pages/schedule/consts'
 import { Wrapper } from '../wrapper'
 
 export const DayCalendarWrapper = styled(Wrapper)`
-    height: calc(100vh - var(--header-height) - 175px);
+    height: ${CALENDAR_HEIGHT_DESKTOP};
 
-    @media (max-width: 768px) {
-        height: calc(100dvh - var(--header-height) - 185px);
+    ${MEDIA_QUERIES.isMobile} {
+        height: ${CALENDAR_HEIGHT_MOBILE};
     }
 `
 
@@ -21,7 +22,7 @@ export const EventInfo = styled.div`
     overflow: hidden;
     box-shadow: var(--schedule-shadow);
 
-    @media (max-width: ${SCREEN_IPAD_AIR}) {
+    ${MEDIA_QUERIES.isTablet} {
         display: none;
     }
 `

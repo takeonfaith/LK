@@ -1,5 +1,6 @@
 import { type DayCalendarEvent } from '@shared/ui/calendar'
 import { Colors, IColorPalette } from '../../consts'
+import { View } from '@entities/schedule/consts'
 
 export interface ITimeIntervalColor {
     '9:00 - 10:30': IColorPalette
@@ -47,22 +48,19 @@ export interface ISessionSchedule {
 }
 
 export interface IFullSchedule {
-    today: DayCalendarEvent[] | null
-    week: IWeekEventSchedule | null
-    semestr: IWeekEventSchedule | null
-    session: ISessionSchedule | null
+    today: DayCalendarEvent[]
+    week: IWeekEventSchedule
+    semestr: IWeekEventSchedule
+    session: ISessionSchedule
 }
 
 export type ViewType = 'full' | 'big'
 
 export interface ISchedule {
     schedule: IFullSchedule | null
+    externalSchedule: IFullSchedule | null
     teachers: string[]
-    currentModule: keyof IFullSchedule
-    currentDay: number
-    currentDayString: string
-    currentChosenDay: number
-    view: ViewType
+    view: View
     error: string | null
 }
 

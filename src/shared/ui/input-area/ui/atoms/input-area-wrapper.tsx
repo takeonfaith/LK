@@ -26,17 +26,6 @@ const InputAreaWrapper = styled.div<Args>`
             column-gap: 5px;
         }
     }
-
-    /* @media (max-width: 600px) {
-		 .inputs {
-			  .data-line {
-					display: flex;
-					row-gap: 5px;
-					column-gap: 5px;
-					flex-direction: column;
-			  }
-		 }
-	} */
 `
 
 export default InputAreaWrapper

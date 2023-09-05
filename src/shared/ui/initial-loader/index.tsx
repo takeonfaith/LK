@@ -31,13 +31,13 @@ const InitialLoader = ({ loading }: Props) => {
             <InitialLoaderWrapper loading={true} color={color}>
                 <Error text={error}>
                     <Flex d="column" gap="8px">
-                        <Button onClick={loadUser} text="Попробовать снова" icon={<AiOutlineReload />} width="170px" />
+                        <Button onClick={loadUser} text="Попробовать снова" icon={<AiOutlineReload />} width="200px" />
                         <Button
                             onClick={handleLogout}
                             textColor="var(--theme-mild-opposite)"
                             text="Выйти"
-                            width="fit-content"
-                            background="transparent"
+                            width="200px"
+                            background="var(--theme)"
                         />
                     </Flex>
                 </Error>

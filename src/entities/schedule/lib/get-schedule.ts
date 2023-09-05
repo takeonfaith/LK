@@ -6,14 +6,14 @@ import { getCurrentDay } from '@shared/ui/calendar/ui/day/lib/get-current-day'
 import { getCalendarSchedule } from './get-calendar-schedule'
 import getCurrentDaySubjects from './get-current-day-schedule'
 
-const EMPTY_WEEK = Object.keys(WEEK_DAYS).reduce((acc, el) => {
+export const EMPTY_WEEK = Object.keys(WEEK_DAYS).reduce((acc, el) => {
     acc[el as keyof IWeekDays] = []
     return acc
 }, {} as IWeekEventSchedule)
 
 type GetScheduleResult = { schedule: IFullSchedule; teachers: string[] }
 
-const NO_RESULT: GetScheduleResult = {
+export const SCHEDULE_NO_RESULT: GetScheduleResult = {
     schedule: {
         today: [],
         week: EMPTY_WEEK,
@@ -97,7 +97,7 @@ const getSchedule = async (user: User | string | null, group?: string): Promise<
     const currentDaySchedule = currentWeekSchedule[currentDay]
 
     if (hasError) {
-        return NO_RESULT
+        return SCHEDULE_NO_RESULT
     }
 
     return {

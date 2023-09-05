@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from '@shared/consts'
 import styled from 'styled-components'
 
 const ContentWrapper = styled.div<{ padding?: string; mobilePadding?: string }>`
@@ -8,7 +9,7 @@ const ContentWrapper = styled.div<{ padding?: string; mobilePadding?: string }>`
     height: 100%;
     color: var(--text);
 
-    @media (max-width: 600px) {
+    ${MEDIA_QUERIES.isMobile} {
         padding: ${({ mobilePadding }) => mobilePadding ?? '10px'};
     }
 `

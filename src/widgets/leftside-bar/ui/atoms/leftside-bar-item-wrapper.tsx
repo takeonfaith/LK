@@ -35,7 +35,7 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
 
     .title {
         opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
-        width: 130px;
+        width: 100%;
         display: block;
         overflow: hidden;
         white-space: nowrap;
@@ -44,6 +44,7 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
 
     svg {
         opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0.8)};
+        min-width: 22px;
         width: 22px;
         height: 22px;
         margin-right: 12px;

@@ -8,7 +8,7 @@ import PaymentsWidget from '../molecules/payments-widget'
 
 const ScheduleAndNotification = () => {
     const {
-        data: { schedule, currentDayString, error },
+        data: { schedule, error },
     } = scheduleModel.selectors.useSchedule()
 
     const { widgetSchedule, widgetPayment } =

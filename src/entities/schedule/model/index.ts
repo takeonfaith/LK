@@ -1,17 +1,14 @@
-import { IFullSchedule, ISchedule, User, ViewType } from '@api/model'
+import { IFullSchedule, ISchedule, User } from '@api/model'
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react/compat'
-import getCurrentDayString from '../lib/get-current-day-string'
+import { View } from '../consts'
 import getSchedule from '../lib/get-schedule'
 
 const DEFAULT_STORE: ISchedule = {
     schedule: null,
+    externalSchedule: null,
     teachers: [],
-    currentModule: 'today',
-    currentDay: new Date().getDay(),
-    currentDayString: '',
-    currentChosenDay: new Date().getDay(),
-    view: 'full',
+    view: View.day,
     error: null,
 }
 
@@ -33,7 +30,7 @@ const getScheduleFx = createEffect(
 )
 
 const changeCurrentModule = createEvent<{ currentModule: keyof IFullSchedule }>()
-const changeView = createEvent<{ view: ViewType }>()
+const changeView = createEvent<View>()
 const changeCurrentChosenDay = createEvent<{ day: number }>()
 const clearStore = createEvent()
 
@@ -46,32 +43,16 @@ const $schedule = createStore<ISchedule>(DEFAULT_STORE)
     .on(getScheduleFx.doneData, (oldData, newData) => ({
         ...oldData,
         schedule: newData.schedule,
-        currentModule: !!newData.schedule.today
-            ? 'today'
-            : !!newData.schedule.week
-            ? 'week'
-            : !!newData.schedule.semestr
-            ? 'semestr'
-            : !!newData.schedule.session
-            ? 'session'
-            : 'today',
-        currentDayString: getCurrentDayString(newData.schedule, oldData.currentDay),
-        currentChosenDay: 0,
         teachers: newData.teachers,
         //calcNextExamTime(newData.semestr)
-        currentDay: !!newData.schedule.week ? new Date().getDay() : 0,
     }))
     .on(getScheduleFx.failData, (oldData, error) => ({
         ...oldData,
         error: `${error.cause}, ${error.message}, ${error.stack}, ${error.name}`,
     }))
-    .on(changeCurrentModule, (oldState, newState) => ({
+    .on(changeView, (oldState, view) => ({
         ...oldState,
-        currentModule: newState.currentModule.toString() as keyof IFullSchedule,
-    }))
-    .on(changeView, (oldState, newState) => ({
-        ...oldState,
-        view: newState.view,
+        view,
     }))
     .on(changeCurrentChosenDay, (oldState, newState) => ({
         ...oldState,

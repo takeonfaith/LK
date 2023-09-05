@@ -1,6 +1,6 @@
 import { Payments } from '@api/model'
 import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { IColors } from '@consts'
+import { IColors, MEDIA_QUERIES } from '@consts'
 import { paymentsModel } from '@entities/payments'
 import PaymentButton from '@features/payment-button'
 import Debt from '@features/payments/debt'
@@ -45,7 +45,7 @@ const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
         }
     }
 
-    @media (max-width: 600px) {
+    ${MEDIA_QUERIES.isMobile} {
         width: 100%;
         min-width: 100%;
         max-width: 100%;

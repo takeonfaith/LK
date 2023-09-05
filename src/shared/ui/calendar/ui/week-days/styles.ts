@@ -1,4 +1,4 @@
-import { SCREEN_IPHONE_XR } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/consts'
 import Flex from '@shared/ui/flex'
 import styled from 'styled-components'
 
@@ -33,7 +33,7 @@ export const WeekDay = styled.div<{ showColumns: boolean }>`
         right: 0;
     }
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         font-size: 0.8rem;
         height: 70px;
 
@@ -48,7 +48,7 @@ export const WeekDay = styled.div<{ showColumns: boolean }>`
 export const WeekDayTop = styled(Flex)`
     margin: 2px 0;
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         flex-direction: column;
         margin: 6px 0;
     }
@@ -59,7 +59,7 @@ export const DayWrapper = styled.span<{ showDates?: boolean }>`
     margin-left: auto;
     margin-right: ${({ showDates }) => (!showDates ? 'auto' : '0')};
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         margin-right: auto;
     }
 `
@@ -95,7 +95,7 @@ export const DateWrapper = styled.span<DateWrapperProps>`
     color: ${getColor};
     font-weight: ${({ isCurrent, isCurrentChosenDay }) => isCurrent && isCurrentChosenDay && '600'};
 
-    @media (max-width: ${SCREEN_IPHONE_XR}) {
+    ${MEDIA_QUERIES.isMobile} {
         margin-left: auto;
         margin-top: 4px;
         font-size: ${({ isCurrent }) => isCurrent && '0.8rem'};
