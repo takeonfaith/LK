@@ -1,7 +1,7 @@
 import { User } from '@api/model'
 
-export const StartDateSuperiorRoom = 'Sep 06 2023 12:00:00 GMT+0300'
-export const EndDateSuperiorRoom = 'Sep 07 2023 12:00:00 GMT+0300'
+export const StartDateSuperiorRoom = 'Sep 04 2023 12:00:00 GMT+0300'
+export const EndDateSuperiorRoom = 'Sep 05 2023 12:00:00 GMT+0300'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getStatusFormSuperiorRoom = (user: User) => {
