@@ -16,23 +16,39 @@ import { NewPageLink } from './new-page-link'
 import { SideMenuStyled } from './styles'
 import { useLocation } from 'react-router'
 import { scheduleRoutes } from '@app/routes/general-routes'
+import { Button } from '@shared/ui/button'
+import { HiOutlineChevronLeft } from 'react-icons/hi'
 
 export const SideMenu = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const [groupSearch, setGroupSearch] = useState('')
+    const [groupSearch, setGroupSearch] = useState(user?.group ?? '')
 
     const location = useLocation()
 
+    const handleReturnToMySchedule = () => {
+        setGroupSearch(user?.group ?? '')
+        scheduleModel.events.resetExternalSchedule()
+    }
+
     const onHintClick = (hint: Hint | undefined) => {
-        scheduleModel.effects.getScheduleFx({ user, group: hint?.value ?? '' })
+        if (hint?.id === user?.group) {
+            scheduleModel.events.resetExternalSchedule()
+            return
+        }
+
+        scheduleModel.effects.getGroupScheduleFx({ group: hint?.value ?? '' })
     }
 
     const onValueEmpty = () => {
-        scheduleModel.effects.getScheduleFx({ user, group: '' })
+        scheduleModel.effects.getScheduleFx({ group: '' })
     }
+
+    const {
+        data: { schedule, externalSchedule },
+    } = scheduleModel.selectors.useSchedule()
 
     return (
         <SideMenuStyled>
@@ -46,6 +62,15 @@ export const SideMenu = () => {
                 leftIcon={<FiUsers />}
                 onValueEmpty={user?.user_status === 'staff' ? onValueEmpty : undefined}
             />
+            {user?.group !== groupSearch && (
+                <Button
+                    text="Мое расписание"
+                    onClick={handleReturnToMySchedule}
+                    icon={<HiOutlineChevronLeft />}
+                    background="var(--schedule)"
+                    textColor="var(--blue)"
+                />
+            )}
             <Divider margin="16px 0" />
             <Flex d="column" gap="2px" ai="flex-start">
                 {Object.keys(scheduleRoutes ?? {}).map((key) => {

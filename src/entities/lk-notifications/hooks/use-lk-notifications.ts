@@ -2,27 +2,33 @@ import { menuModel } from '@entities/menu'
 import { settingsModel } from '@entities/settings'
 import { NotificationsSettingsType } from '@entities/settings/lib/get-default-settings'
 import { userModel } from '@entities/user'
+import { NotificationsResponse } from '@shared/api/lk-notification-api'
 import { useEffect, useMemo } from 'react'
 import { lkNotificationModel } from '..'
 import { filterNotificationsViaSettings } from '../lib/filter-notifications-via-settings'
-import { NotificationsResponse } from '@shared/api/lk-notification-api'
+import { electronicInteractionModel } from '@entities/electronic-interaction'
 import createNotification from '../lib/create-notification'
-import calcNextSubjectTime from '@features/schedule/lib/calc-next-subject-time'
-import { scheduleModel } from '@entities/schedule'
 
 const useLkNotifications = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const {
-        data: { schedule },
-    } = scheduleModel.selectors.useSchedule()
+    // const {
+    //     data: { schedule },
+    // } = scheduleModel.selectors.useSchedule()
     const { notifications, loading, loaded } = lkNotificationModel.selectors.useLkNotifications()
     const { settings } = settingsModel.selectors.useSettings()
+    const { preparedData } = electronicInteractionModel.selectors.useData()
     const notificationSettings = useMemo(
         () => settings?.['settings-notifications'].property as NotificationsSettingsType,
         [settings?.['settings-notifications']],
     )
+
+    useEffect(() => {
+        if (preparedData && !preparedData.status) {
+            lkNotificationModel.events.add(createNotification('electronic-interaction', 'electronic-interaction'))
+        }
+    }, [preparedData?.status])
 
     useEffect(() => {
         if (!!user && !!notificationSettings) {
@@ -32,16 +38,16 @@ const useLkNotifications = () => {
                 ]
 
                 if (filterNotificationsViaSettings(notificationSettings, scheduleNotification).length) {
-                    if (calcNextSubjectTime(schedule?.today) <= 15) {
-                        lkNotificationModel.events.add(
-                            createNotification(
-                                scheduleNotification[0].type,
-                                scheduleNotification[0].id,
-                                scheduleNotification[0].title,
-                                scheduleNotification[0].text,
-                            ),
-                        )
-                    }
+                    // if (calcNextSubjectTime(schedule?.today) <= 15) {
+                    //     lkNotificationModel.events.add(
+                    //         createNotification(
+                    //             scheduleNotification[0].type,
+                    //             scheduleNotification[0].id,
+                    //             scheduleNotification[0].title,
+                    //             scheduleNotification[0].text,
+                    //         ),
+                    //     )
+                    // }
                 }
 
                 lkNotificationModel.events.initialize({

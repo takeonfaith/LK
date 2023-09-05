@@ -42,7 +42,7 @@ const Home = () => {
     if (!user || !homeRoutes) return null
 
     const load = () => {
-        scheduleModel.effects.getScheduleFx({ user })
+        scheduleModel.effects.getScheduleFx({ group: user.group })
         paymentsModel.effects.getPaymentsFx()
     }
 

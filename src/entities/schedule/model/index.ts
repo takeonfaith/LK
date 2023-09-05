@@ -1,50 +1,62 @@
-import { IFullSchedule, ISchedule, User } from '@api/model'
-import { createEffect, createEvent, createStore } from 'effector'
+import { IFullSchedule, ISchedule } from '@api/model'
+import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { View } from '../consts'
-import getSchedule from '../lib/get-schedule'
+import { getGroupSchedule } from '../lib/get-group-schedule'
+import { getTeacherSchedule } from '../lib/get-teacher-schedule'
 
 const DEFAULT_STORE: ISchedule = {
-    schedule: null,
-    externalSchedule: null,
-    teachers: [],
-    view: View.day,
+    data: {
+        schedule: null,
+        externalSchedule: null,
+        teachers: [],
+        view: View.day,
+    },
+    loading: false,
     error: null,
 }
 
 const useSchedule = () => {
-    return { data: useStore($schedule), loading: useStore(getScheduleFx.pending), error: useStore($schedule).error }
+    return useStore($schedule)
 }
 
-type GetScheduleProps = { user: User | null; group?: string }
+const getScheduleFx = createEffect(async ({ group }: { group: string | undefined }) => {
+    try {
+        return await getGroupSchedule(group)
+    } catch (error) {
+        throw new Error((error as Error).message)
+    }
+})
 
-const getScheduleFx = createEffect(
-    async ({ user, group }: GetScheduleProps): Promise<{ schedule: IFullSchedule; teachers: string[] }> => {
-        try {
-            const { schedule, teachers } = await getSchedule(user, group)
-            return { schedule, teachers }
-        } catch (error) {
-            throw new Error('Не удалось загрузить расписание')
-        }
-    },
-)
+const getGroupScheduleFx = createEffect(async ({ group }: { group: string }) => {
+    try {
+        return await getGroupSchedule(group)
+    } catch (error) {
+        throw new Error((error as Error).message)
+    }
+})
+
+const getTeacherScheduleFx = createEffect(async ({ fullName }: { fullName: string }) => {
+    try {
+        return await getTeacherSchedule(fullName)
+    } catch (error) {
+        throw new Error((error as Error).message)
+    }
+})
 
 const changeCurrentModule = createEvent<{ currentModule: keyof IFullSchedule }>()
 const changeView = createEvent<View>()
 const changeCurrentChosenDay = createEvent<{ day: number }>()
 const clearStore = createEvent()
+const resetExternalSchedule = createEvent()
+// const getSchedule = createEvent<{ group: string }>()
+// const getExternalGroupSchedule = createEvent<{ group: string }>()
 
-const $schedule = createStore<ISchedule>(DEFAULT_STORE)
+const $schedule = createStore(DEFAULT_STORE)
     .on(getScheduleFx, (oldData) => ({
         ...oldData,
-        schedule: null,
+        data: { ...oldData.data, schedule: null },
         error: null,
-    }))
-    .on(getScheduleFx.doneData, (oldData, newData) => ({
-        ...oldData,
-        schedule: newData.schedule,
-        teachers: newData.teachers,
-        //calcNextExamTime(newData.semestr)
     }))
     .on(getScheduleFx.failData, (oldData, error) => ({
         ...oldData,
@@ -52,7 +64,7 @@ const $schedule = createStore<ISchedule>(DEFAULT_STORE)
     }))
     .on(changeView, (oldState, view) => ({
         ...oldState,
-        view,
+        data: { ...oldState.data, view },
     }))
     .on(changeCurrentChosenDay, (oldState, newState) => ({
         ...oldState,
@@ -61,6 +73,55 @@ const $schedule = createStore<ISchedule>(DEFAULT_STORE)
     .on(clearStore, () => ({
         ...DEFAULT_STORE,
     }))
+
+sample({
+    clock: getScheduleFx.doneData,
+    source: $schedule,
+    fn: (store, schedule) => ({ ...store, data: { ...store.data, schedule } }),
+    target: $schedule,
+})
+
+sample({
+    clock: getTeacherScheduleFx.doneData,
+    source: $schedule,
+    fn: (store, externalSchedule) => ({ ...store, data: { ...store.data, externalSchedule } }),
+    target: $schedule,
+})
+
+sample({
+    clock: getGroupScheduleFx.doneData,
+    source: $schedule,
+    fn: (store, externalSchedule) => ({ ...store, data: { ...store.data, externalSchedule } }),
+    target: $schedule,
+})
+
+sample({
+    clock: [getGroupScheduleFx, getTeacherScheduleFx, getScheduleFx],
+    source: $schedule,
+    fn: (store) => ({ ...store, loading: true }),
+    target: $schedule,
+})
+
+sample({
+    clock: getGroupScheduleFx,
+    source: $schedule,
+    fn: (store) => ({ ...store, data: { ...store.data, externalSchedule: null } }),
+    target: $schedule,
+})
+
+sample({
+    clock: [getGroupScheduleFx.doneData, getTeacherScheduleFx.doneData, getScheduleFx.doneData],
+    source: $schedule,
+    fn: (store) => ({ error: null, loading: false, data: { ...store.data } }),
+    target: $schedule,
+})
+
+sample({
+    clock: resetExternalSchedule,
+    source: $schedule,
+    fn: (store) => ({ ...store, data: { ...store.data, externalSchedule: null } }),
+    target: $schedule,
+})
 
 export const selectors = {
     useSchedule,
@@ -71,8 +132,11 @@ export const events = {
     changeView,
     changeCurrentChosenDay,
     clearStore,
+    resetExternalSchedule,
 }
 
 export const effects = {
     getScheduleFx,
+    getGroupScheduleFx,
+    getTeacherScheduleFx,
 }

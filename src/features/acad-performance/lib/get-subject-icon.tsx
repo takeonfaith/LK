@@ -152,8 +152,8 @@ export const getSubjectIcon = (name: string) => {
             icon: <HiOutlineSparkles />,
         },
         {
-            keys: ['практика'],
-            icon: <HiOutlineOfficeBuilding />,
+            keys: ['научн'],
+            icon: <HiOutlineAcademicCap />,
         },
         {
             keys: ['предприним'],
@@ -167,10 +167,7 @@ export const getSubjectIcon = (name: string) => {
             keys: ['управлени'],
             icon: <HiOutlineUserGroup />,
         },
-        {
-            keys: ['научн'],
-            icon: <HiOutlineAcademicCap />,
-        },
+
         {
             keys: ['вкр', 'итоговая', 'аттестация'],
             icon: <HiOutlineFlag />,
@@ -218,6 +215,10 @@ export const getSubjectIcon = (name: string) => {
         {
             keys: ['тайм'],
             icon: <HiOutlineClock />,
+        },
+        {
+            keys: ['практика'],
+            icon: <HiOutlineOfficeBuilding />,
         },
     ]
 

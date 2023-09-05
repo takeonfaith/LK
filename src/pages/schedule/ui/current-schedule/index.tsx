@@ -1,5 +1,5 @@
 import { scheduleModel } from '@entities/schedule'
-import { SCHEDULE_NO_RESULT } from '@entities/schedule/lib/get-schedule'
+import { SCHEDULE_NO_RESULT } from '@entities/schedule/consts'
 import { Template } from '../template'
 import React from 'react'
 

@@ -5,11 +5,11 @@ import { CenterPage } from '../atoms'
 import useCurrentExactPage from '@shared/lib/hooks/use-current-exact-page'
 import { getPageWidth } from './lib/get-page-width'
 
-const PageBlockStyled = styled(BlockWrapper)`
+const PageBlockStyled = styled(BlockWrapper)<{ titleLen: number }>`
     position: relative;
 
     @media (min-width: 551px) {
-        padding-top: 70px;
+        padding-top: ${({ titleLen }) => (titleLen === 0 ? '20px' : titleLen < 60 ? '70px' : '140px')};
     }
 
     @media (max-width: 550px) {
@@ -60,6 +60,7 @@ const PageBlock = forwardRef(
         return (
             <CenterPage padding="0 0 10px 0">
                 <PageBlockStyled
+                    titleLen={currentPage?.subPageHeaderTitle?.length ?? currentPage?.title.length ?? 0}
                     justifyContent="flex-start"
                     height="100%"
                     orientation="vertical"

@@ -1,7 +1,7 @@
 import { scheduleModel } from '@entities/schedule'
 import { Template } from '../template'
 import React from 'react'
-import { SCHEDULE_NO_RESULT } from '@entities/schedule/lib/get-schedule'
+import { SCHEDULE_NO_RESULT } from '@entities/schedule/consts'
 
 const SemestrSchedule = () => {
     const {

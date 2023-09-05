@@ -1,6 +1,7 @@
 import { $api } from '@api/config'
 import emulateRequest from '@shared/lib/emulate-request'
 import token from '@utils/token'
+import { RawScheduleResponse, RawTeacherScheduleResponse } from './model'
 
 const MOCK = {
     Monday: {
@@ -337,11 +338,12 @@ const MOCK = {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const get = (group: string) => {
-    return emulateRequest({ data: MOCK })
+    return $api.get<RawScheduleResponse>(`?getSchedule&group=${group}&token=${token()}`)
+    // return emulateRequest({ data: MOCK }) as Promise<{ data: RawScheduleResponse }>
 }
 
 export const getTeachers = (fullName: string) => {
-    return $api.get(`?getScheduleTeacher&fio=${fullName}&token=${token()}`)
+    return $api.get<RawTeacherScheduleResponse>(`?getScheduleTeacher&fio=${fullName}&token=${token()}`)
 }
 
 export const getSession = () => {

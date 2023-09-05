@@ -24,7 +24,9 @@ export const WeekDays = ({ showDates, showColumns, currentChosenDay, onDayClick,
                 return (
                     <WeekDay key={day} showColumns={showColumns} onClick={onDayClick && (() => onDayClick?.(i))}>
                         <WeekDayTop>
-                            <DayWrapper showDates={showDates}>{day}</DayWrapper>
+                            <DayWrapper isCurrentChosenDay={!showDates && isCurrentChosenDay} showDates={showDates}>
+                                {day}
+                            </DayWrapper>
                             {showDates && (
                                 <DateWrapper
                                     isCurrentChosenDay={isCurrentChosenDay}

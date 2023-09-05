@@ -5,27 +5,25 @@ import { VIEWS } from '@entities/schedule/consts'
 import Flex from '@shared/ui/flex'
 import PageBlock from '@shared/ui/page-block'
 import { Button, Wrapper } from '@ui/atoms'
-import React, { useState } from 'react'
+import React from 'react'
 import { FiSidebar } from 'react-icons/fi'
 import { Redirect, Route, Switch, useLocation } from 'react-router'
 import { Slider } from 'widgets'
-import useTemplateSchedule from './hooks/use-template-schedule'
+import useSchedule from './hooks/use-schedule'
 import { SideMenu } from './ui/side-menu'
 
-const TemplateSchedule = () => {
+const Schedule = () => {
     const {
-        data: { view, schedule },
+        data: { view, schedule, externalSchedule },
         loading,
         error,
     } = scheduleModel.selectors.useSchedule()
     const { allRoutes } = menuModel.selectors.useMenu()
-    const { handleLoad } = useTemplateSchedule()
+    const { isSideMenuOpen, handleLoad, handleOpenSideMenu } = useSchedule()
     const location = useLocation()
 
-    const [isSideMenuOpen, setIsSideMenuOpen] = useState(true)
-
     return (
-        <Wrapper loading={loading} load={handleLoad} error={error} data={schedule}>
+        <Wrapper loading={loading} load={handleLoad} error={error} data={loading ? externalSchedule : schedule}>
             <PageBlock
                 topCenterElement={
                     location.pathname !== SCHEDULE_RETAKE_ROUTE && (
@@ -40,12 +38,7 @@ const TemplateSchedule = () => {
                 }
                 topRightCornerElement={
                     <Flex w="fit-content" gap="8px">
-                        <Button
-                            icon={<FiSidebar />}
-                            width="36px"
-                            height="36px"
-                            onClick={() => setIsSideMenuOpen((prev) => !prev)}
-                        />
+                        <Button icon={<FiSidebar />} width="36px" height="36px" onClick={handleOpenSideMenu} />
                     </Flex>
                 }
             >
@@ -70,4 +63,4 @@ const TemplateSchedule = () => {
     )
 }
 
-export default TemplateSchedule
+export default Schedule

@@ -1,5 +1,6 @@
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
+import { useEffect, useState } from 'react'
 
 /*
     TODO: 
@@ -10,18 +11,29 @@ import { userModel } from '@entities/user'
     5. Список преподов?
 */
 
-const useTemplateSchedule = () => {
+const useSchedule = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const [isSideMenuOpen, setIsSideMenuOpen] = useState(true)
+
+    useEffect(() => {
+        return () => {
+            scheduleModel.events.resetExternalSchedule()
+        }
+    }, [])
 
     const handleLoad = () => {
-        scheduleModel.effects.getScheduleFx({ user, group: user?.group ?? '' })
+        scheduleModel.effects.getScheduleFx({ group: user?.group })
     }
 
+    const handleOpenSideMenu = () => setIsSideMenuOpen((prev) => !prev)
+
     return {
+        isSideMenuOpen,
         handleLoad,
+        handleOpenSideMenu,
     }
 }
 
-export default useTemplateSchedule
+export default useSchedule

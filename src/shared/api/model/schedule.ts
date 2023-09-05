@@ -1,5 +1,5 @@
 import { type DayCalendarEvent } from '@shared/ui/calendar'
-import { Colors, IColorPalette } from '../../consts'
+import { Colors, IColorPalette, IWeekDayNames } from '../../consts'
 import { View } from '@entities/schedule/consts'
 
 export interface ITimeIntervalColor {
@@ -32,6 +32,19 @@ export interface ILessons {
     lessons?: ISubject[] | null
 }
 
+type ErrorResponse = {
+    status: string
+    error: string
+}
+
+export type CapitalLettersWeekNames = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
+
+export type RawTeacherScheduleResponse = Record<CapitalLettersWeekNames, ISubject[] | null>
+export type FullRawTeacherScheduleResponse = RawTeacherScheduleResponse | ErrorResponse
+
+export type RawScheduleResponse = Record<CapitalLettersWeekNames, Record<'lessons', ISubject[] | null>>
+export type FullRawScheduleResponse = RawScheduleResponse | ErrorResponse
+
 export interface IWeekSchedule {
     monday: ILessons
     tuesday: ILessons
@@ -41,14 +54,14 @@ export interface IWeekSchedule {
     saturday: ILessons
 }
 
-export type IWeekEventSchedule = Record<keyof IWeekSchedule, DayCalendarEvent[]>
+export type IWeekEventSchedule = Record<IWeekDayNames, DayCalendarEvent[]>
 
 export interface ISessionSchedule {
     [key: string]: ILessons
 }
 
 export interface IFullSchedule {
-    today: DayCalendarEvent[]
+    // today: DayCalendarEvent[]
     week: IWeekEventSchedule
     semestr: IWeekEventSchedule
     session: ISessionSchedule
@@ -57,10 +70,13 @@ export interface IFullSchedule {
 export type ViewType = 'full' | 'big'
 
 export interface ISchedule {
-    schedule: IFullSchedule | null
-    externalSchedule: IFullSchedule | null
-    teachers: string[]
-    view: View
+    data: {
+        schedule: IFullSchedule | null
+        externalSchedule: IFullSchedule | null
+        teachers: string[]
+        view: View
+    }
+    loading: boolean
     error: string | null
 }
 

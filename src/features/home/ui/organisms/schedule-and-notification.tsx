@@ -8,13 +8,14 @@ import PaymentsWidget from '../molecules/payments-widget'
 
 const ScheduleAndNotification = () => {
     const {
-        data: { schedule, error },
+        data: { schedule },
+        error,
     } = scheduleModel.selectors.useSchedule()
 
     const { widgetSchedule, widgetPayment } =
         settingsModel.selectors.useSettings().settings['settings-home-page'].property
 
-    const lessons = schedule?.today
+    // const lessons = schedule?.today
 
     return (
         <List direction="horizontal" title="Виджеты" showPages gap={10} visible={!!widgetSchedule || !!widgetPayment}>
