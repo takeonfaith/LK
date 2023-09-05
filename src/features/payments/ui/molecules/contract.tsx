@@ -36,7 +36,7 @@ interface Props {
 
 const Contract = ({ contract }: Props) => {
     if (!contract) return null
-    const { number, startDate, endDatePlan, contragent, sum, can_sign, file, student, signed_user } = contract
+    const { number, startDate, endDatePlan, contragent, sum, can_sign, file, student } = contract
     const { open } = useModal()
     const [copied, setCopied] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
@@ -70,7 +70,7 @@ const Contract = ({ contract }: Props) => {
         },
         {
             text: 'Статус',
-            info: signed_user ? 'Подписан' : 'Не подписан',
+            info: '',
         },
         // {
         //     text: 'Ежемесячная плата: ',

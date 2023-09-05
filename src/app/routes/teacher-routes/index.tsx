@@ -336,7 +336,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'lightGreen',
         withoutHeader: true,
         path: PHYSICAL_EDUCATION,
-        show: true,
+        show: !isProduction,
         Component: TeacherPhysicalEducation,
         isTemplate: false,
         group: 'OTHER',
