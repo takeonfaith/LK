@@ -334,6 +334,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Физическая культура',
         icon: <FiFileText />,
         color: 'lightGreen',
+        withoutHeader: true,
         path: PHYSICAL_EDUCATION,
         show: !isProduction,
         Component: TeacherPhysicalEducation,

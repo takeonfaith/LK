@@ -1,7 +1,6 @@
 import { PHYSICAL_EDUCATION_STUDENT } from '@app/routes/teacher-routes'
 import { PEStudent } from '@entities/pe-student/types'
 import { calcSummaryPoints } from '@entities/pe-student/utils/calcSummaryPoints'
-import { AddPeStudentVisits } from '@features/physical-education/pe-student-visits/features/add-pe-student-visits/ui'
 import { buildRealLink } from '@shared/lib/buildRealLink'
 import KeyValue from '@shared/ui/atoms/key-value'
 import { Button } from '@shared/ui/button'
@@ -10,6 +9,7 @@ import { useHistory } from 'react-router'
 import { useModal } from 'widgets'
 import { UserData, Visits, Wrapper } from './styled'
 import React from 'react'
+import { AddPeStudentVisits } from '../../pe-student-visits/features/add-pe-student-visits/ui'
 
 interface Props {
     student: PEStudent
