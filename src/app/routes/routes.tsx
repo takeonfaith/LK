@@ -2,7 +2,7 @@ import React from 'react'
 import { isProduction } from '@shared/constants'
 import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import { BiCheckCircle, BiIdCard, BiInfoCircle, BiRuble } from 'react-icons/bi'
+import { BiCheckCircle, BiIdCard, BiInfoCircle, BiRuble, BiStar } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import { MdOutlineBedroomChild } from 'react-icons/md'
@@ -36,7 +36,6 @@ import {
     FinancialSupport,
     IncreasedStateAcademicScholarship,
     MilitaryRegistrationCard,
-    MilitaryRegistrationDocuments,
     PaymentRecipient,
     PreferentialAccommodationPage,
     ProjectActivitiesPage,
@@ -50,11 +49,13 @@ import {
     StudentStatus,
     TerminationOfEmploymentContractPage,
     ArbitraryRequestPage,
+    MilitaryRegistrationDocuments,
 } from './other-routes/pages'
 import { HelpfulInformation } from './teacher-routes/pages'
 import { User } from '@shared/api/model'
 import PaymentsPage from '@pages/payments'
 import { EndDateSuperiorRoom } from '@pages/application-for-superior-room/lib/get-status'
+import MilitaryRegistration from '@pages/applications/pages/mobilization-department/military-registration'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -83,6 +84,7 @@ export const PAYMENT_RECIPIENT = APPLICATIONS_ROUTE + '/payment-recipient'
 export const RESTORING_THE_MAGNETIC_PASS = APPLICATIONS_ROUTE + '/restoring-the-magnetic-pass'
 export const RETAKE_FOR_DIPLOMA = APPLICATIONS_ROUTE + '/retake-for-diploma'
 export const MILITARY_REGISTRATION_DOCUMENTS = APPLICATIONS_ROUTE + '/military-registration-documents'
+export const MILITARY_REGISTRATION = APPLICATIONS_ROUTE + '/military-registration'
 export const FINANCIAL_SUPPORT = APPLICATIONS_ROUTE + '/financial-support'
 export const FINANCIAL_ASSISTANCE = APPLICATIONS_ROUTE + '/financial-assistance'
 export const INCREASED_STATE_ACADEMIC_SCHOLARSHIP = APPLICATIONS_ROUTE + '/increased-state-academic-scholarship'
@@ -210,7 +212,6 @@ export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
     },
-
     'social-scollarship': {
         id: 'social-scollarship',
         title: 'Социальная стипендия',
@@ -458,6 +459,19 @@ export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
         isSubPage: true,
         backButtonText: 'Назад к заявлениям',
         subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'military-registration': {
+        id: 'military-registration',
+        title: 'Воинский учет',
+        icon: <BiStar />,
+        path: MILITARY_REGISTRATION,
+        Component: isProduction ? ApplicationRedirect : MilitaryRegistration,
+        color: 'red',
+        isTemplate: false,
+        isSubPage: true,
+        backButtonText: 'Назад к заявлениям',
+        subPageHeaderTitle: 'Воинский учет',
         fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'retake-for-diploma': {

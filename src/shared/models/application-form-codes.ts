@@ -19,6 +19,7 @@ export enum ApplicationFormCodes {
     STATUS_REGULAR = 'status_regular',
     OKID_LICAKKRED = 'okid_licakkred',
     MILDOCS = 'mildocs',
+    MIL_REG = 'mil_reg',
     VOEN_UCH = 'voen_uch',
     PR_DONATE = 'pr_donate',
     PR_MATPOM = 'pr_matpom',

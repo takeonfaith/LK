@@ -39,6 +39,7 @@ export interface IInputAreaFiles {
     maxFiles?: number
     allowedTypes?: string[]
     maxFileSizeInMegaBytes?: number
+    visible?: boolean
 }
 
 export type CheckboxDocs = IInputAreaFiles & {

@@ -47,7 +47,7 @@ const ApplicationSocialAgencies = () => {
                     />
 
                     <SubmitButton
-                        text={isDone ? 'Отправить' : 'Отправлено'}
+                        text={!isDone ? 'Отправить' : 'Отправлено'}
                         action={() =>
                             globalAppSendForm(ApplicationFormCodes.STATUS_SOBES, [form], setLoading, setCompleted)
                         }
