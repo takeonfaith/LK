@@ -26,7 +26,7 @@ const ListNotifications = ({ listNotification }: Props) => {
                     ),
                 )
             ) : (
-                <Error text={'По заданным параметрам документ не найден'} />
+                <Error text={'У вас нет приказов, с которыми вы еще не ознакомились'} />
             )}
         </Flex>
     )

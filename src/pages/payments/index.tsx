@@ -1,7 +1,7 @@
 import { paymentsModel } from '@entities/payments'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import PageBlock from '@shared/ui/page-block'
-import { Error, Wrapper } from '@ui/atoms'
+import { Error, Message, Wrapper } from '@ui/atoms'
 import React, { useEffect } from 'react'
 import { SliderPage } from 'widgets'
 import PaymentsTemplate from './payments-template'
@@ -34,6 +34,9 @@ const PaymentsPage = () => {
             noDataCheck={!data?.dormitory.length}
         >
             <PageBlock>
+                <Message type={'alert'} title="Внимание!">
+                    Ведутся доработки по информации о долге по оплате и суммам оплат
+                </Message>
                 {paymentType === 'none' && <Error text="Нет данных" />}
                 {paymentType === 'both' && (
                     <SliderPage

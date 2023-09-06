@@ -79,6 +79,7 @@ const GlobalStyles = createGlobalStyle`
 		--text: #f0f0f0;
 		--invert-text: #272727;
 		--select: #292929;
+		--toggle: #474747;
 		--content: #474747;
 		--invert: 0;
 		--double-invert: 1;
@@ -87,7 +88,9 @@ const GlobalStyles = createGlobalStyle`
 		--theme-mild-opposite: #d2d2d2;
 		--settings: #292929;
 		--blue: #90b3e7;
+		--blueTransparent: #90b3e7b0;
 		--green: #94f0b9;
+		--greenTransparent: #94f0b9b0;
 		--red: #e27992;
 		--purple: #6f72d4;
 		--mildPurple: #8d91f8;
@@ -108,6 +111,7 @@ const GlobalStyles = createGlobalStyle`
 
 	html[data-theme=light] {
 		--blue: #6d86e3;
+		--blueTransparent: #6d86e3b0;
 		--leftside-bar: #f1f1f1;
 		--mild-theme: #f5f5f5;
 		--primary-background: rgb(243, 243, 243);
@@ -118,6 +122,7 @@ const GlobalStyles = createGlobalStyle`
 		--text: #272727;
 		--invert-text: #f0f0f0;
 		--select: #f3f3f3;
+		--toggle: #ffffff;
 		--content: #f1f1f1;
 		--invert: 1;
 		--double-invert: 0;
@@ -128,6 +133,7 @@ const GlobalStyles = createGlobalStyle`
 		--search: #f5f5f5;
 		--settings: #dadada;
 		--green: #62c087;
+		--greenTransparent: #62c087b0;
 		--red: #e27992;
 		--orange: rgb(203 104 46);
 		--purple: #9094fe;
