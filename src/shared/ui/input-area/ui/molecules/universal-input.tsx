@@ -53,7 +53,7 @@ const UniversalInput = (props: Props) => {
         maxValueInput,
         maxValueLength,
         diff,
-        visible,
+        visible = true,
         onChange,
         onKeyPress,
         onBlur,
@@ -173,16 +173,18 @@ const UniversalInput = (props: Props) => {
                 setFiles={(files, j?: number) => handleLoadFiles(files, indexI, j)}
             />
         ) : type === 'date-interval' ? (
-            <DateInterval
-                title={title}
-                required={required}
-                dates={value as string[]}
-                setDates={(dates: string[]) => handleDates(dates)}
-                valid={validDates}
-                setValid={setValidDates}
-                minValue={minValueInput}
-                diff={diff}
-            />
+            visible ? (
+                <DateInterval
+                    title={title}
+                    required={required}
+                    dates={value as string[]}
+                    setDates={(dates: string[]) => handleDates(dates)}
+                    valid={validDates}
+                    setValid={setValidDates}
+                    minValue={minValueInput}
+                    diff={diff}
+                />
+            ) : null
         ) : type === 'simple-text' ? (
             <SimpleText title={title} value={value as string} visible={visible} />
         ) : type === 'text-warning' ? (
@@ -198,7 +200,7 @@ const UniversalInput = (props: Props) => {
                 setCurrent={handleRadio}
                 isSpecificRadio={isSpecificRadio}
             />
-        ) : (
+        ) : visible ? (
             <Input
                 value={value as string}
                 title={title}
@@ -215,8 +217,8 @@ const UniversalInput = (props: Props) => {
                 width={width}
                 autocomplete={autocomplete}
             />
-        )
-    ) : (
+        ) : null
+    ) : visible ? (
         <Select
             items={items as SelectPage[]}
             setSelected={(value: any) => handleChangeSelect(value as SelectPage | SelectPage[], indexI, indexJ)}
@@ -227,7 +229,7 @@ const UniversalInput = (props: Props) => {
             multiple={type === 'multiselect'}
             required={required}
         />
-    )
+    ) : null
 }
 
 export default UniversalInput
