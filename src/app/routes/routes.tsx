@@ -49,6 +49,7 @@ import {
     StudentStatus,
     TerminationOfEmploymentContractPage,
     ArbitraryRequestPage,
+    MilitaryRegistrationDocuments,
 } from './other-routes/pages'
 import { HelpfulInformation } from './teacher-routes/pages'
 import { User } from '@shared/api/model'
@@ -83,6 +84,7 @@ export const PAYMENT_RECIPIENT = APPLICATIONS_ROUTE + '/payment-recipient'
 export const RESTORING_THE_MAGNETIC_PASS = APPLICATIONS_ROUTE + '/restoring-the-magnetic-pass'
 export const RETAKE_FOR_DIPLOMA = APPLICATIONS_ROUTE + '/retake-for-diploma'
 export const MILITARY_REGISTRATION_DOCUMENTS = APPLICATIONS_ROUTE + '/military-registration-documents'
+export const MILITARY_REGISTRATION = APPLICATIONS_ROUTE + '/military-registration'
 export const FINANCIAL_SUPPORT = APPLICATIONS_ROUTE + '/financial-support'
 export const FINANCIAL_ASSISTANCE = APPLICATIONS_ROUTE + '/financial-assistance'
 export const INCREASED_STATE_ACADEMIC_SCHOLARSHIP = APPLICATIONS_ROUTE + '/increased-state-academic-scholarship'
@@ -449,16 +451,28 @@ export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
     'military-registration-documents': {
         id: 'military-registration-documents',
         title: 'Отправить документы воинского учета',
-        icon: <BiStar />,
+        icon: <BiIdCard />,
         path: MILITARY_REGISTRATION_DOCUMENTS,
-        Component: isProduction ? ApplicationRedirect : MilitaryRegistration,
-        color: 'red',
+        Component: isProduction ? ApplicationRedirect : MilitaryRegistrationDocuments,
+        color: 'blue',
         isTemplate: false,
         isSubPage: true,
         backButtonText: 'Назад к заявлениям',
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
-        pageSize: 'small',
+    },
+    'military-registration': {
+        id: 'military-registration',
+        title: 'Воинский учет',
+        icon: <BiStar />,
+        path: MILITARY_REGISTRATION,
+        Component: isProduction ? ApplicationRedirect : MilitaryRegistration,
+        color: 'red',
+        isTemplate: false,
+        isSubPage: true,
+        backButtonText: 'Назад к заявлениям',
+        subPageHeaderTitle: 'Воинский учет',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'retake-for-diploma': {
         id: 'retake-for-diploma',

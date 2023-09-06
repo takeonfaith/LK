@@ -15,7 +15,6 @@ const familyMembers = [
     { id: 2, title: 'Жена' },
     { id: 3, title: 'Муж' },
     { id: 2, title: 'Ребенок' },
-    { id: 3, title: 'Билзкие родственники отсутствуют' },
 ]
 
 const militaryObligationCategory = [
@@ -95,7 +94,7 @@ const militaryServiceFitness = [
     { id: 4, title: 'Д - не годен к военной службе' },
 ]
 
-const militaryEnlistmentOffice = [{ id: 0, title: 'В разработке..' }]
+// const militaryEnlistmentOffice = [{ id: 0, title: 'В разработке..' }]
 
 const documentType = [
     { id: 0, title: 'Военный билет офицера запаса' },
@@ -188,33 +187,7 @@ export const getMaritalStatusForm = (): IInputArea => {
 export const getFamilyCompositionForm = (): IInputArea => {
     return {
         title: 'Состав семьи',
-        data: [
-            [
-                {
-                    fieldName: 'relation',
-                    title: 'Степень родства',
-                    value: null,
-                    type: 'select',
-                    items: familyMembers,
-                    width: '100%',
-                },
-                {
-                    fieldName: 'fio',
-                    title: 'ФИО',
-                    value: '',
-                    required: true,
-                    width: '40%',
-                },
-                {
-                    fieldName: 'bdate',
-                    title: 'Дата рождения',
-                    value: '',
-                    type: 'date',
-                    required: true,
-                    width: '30%',
-                },
-            ],
-        ],
+        data: [],
         default: [
             [
                 {
@@ -293,7 +266,7 @@ export const getMilitaryRegistrationDataForm = (): IInputArea => {
                 required: true,
             },
             {
-                fieldName: 'specialization',
+                fieldName: 'reserveCategory',
                 title: 'Категория запаса',
                 value: null,
                 type: 'select',
@@ -320,10 +293,8 @@ export const getMilitaryRegistrationDataForm = (): IInputArea => {
             {
                 fieldName: 'militaryEnlistmentOffice',
                 title: 'Военкомат',
-                value: null,
-                type: 'select',
-                items: militaryEnlistmentOffice,
-                width: '100%',
+                value: '',
+                width: '40%',
                 required: true,
             },
         ],
@@ -363,9 +334,7 @@ export const getMilitaryRegistrationDocument = (): IInputArea => {
             {
                 fieldName: 'issuedBy',
                 title: 'Кем выдан',
-                value: null,
-                type: 'select',
-                items: militaryEnlistmentOffice,
+                value: '',
                 width: '100%',
                 required: true,
                 editable: true,
@@ -404,7 +373,7 @@ export const getDriversLicenseData = (driversLicenseData: IInputAreaData[] | nul
         title: 'Данные водительского удостоверения',
         data: [
             {
-                fieldName: 'documentType',
+                fieldName: 'driversDocumentType',
                 title: 'Вид документа',
                 value: (driversLicenseData && driversLicenseData[0]?.value) ?? { id: 0, title: 'Не выбрано' },
                 type: 'select',
@@ -417,7 +386,7 @@ export const getDriversLicenseData = (driversLicenseData: IInputAreaData[] | nul
                 editable: true,
             },
             {
-                fieldName: 'series',
+                fieldName: 'driversSeries',
                 title: 'Серия',
                 value: (driversLicenseData && driversLicenseData[1]?.value) ?? '',
                 required: documentSelected,
@@ -426,7 +395,7 @@ export const getDriversLicenseData = (driversLicenseData: IInputAreaData[] | nul
                 width: '40%',
             },
             {
-                fieldName: 'number',
+                fieldName: 'driversSumber',
                 title: 'Номер',
                 value: (driversLicenseData && driversLicenseData[2]?.value) ?? '',
                 required: documentSelected,
@@ -446,7 +415,7 @@ export const getDriversLicenseData = (driversLicenseData: IInputAreaData[] | nul
                 editable: true,
             },
             {
-                fieldName: 'dateOfIssue',
+                fieldName: 'driversDateOfIssue',
                 title: 'Дата выдачи',
                 value: (driversLicenseData && driversLicenseData[4]?.value) ?? '',
                 type: 'date',

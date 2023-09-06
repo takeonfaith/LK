@@ -1,7 +1,6 @@
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { Divider, FormBlock, SubmitButton } from '@shared/ui/atoms'
+import { FormBlock, SubmitButton, Title } from '@shared/ui/atoms'
 import Checkbox from '@shared/ui/atoms/checkbox'
-import InputArea from '@shared/ui/input-area'
 import { IInputArea, IInputAreaData } from '@shared/ui/input-area/model'
 import React, { useEffect, useMemo, useState } from 'react'
 import {
@@ -17,14 +16,20 @@ import { SelectPage } from '@features/select'
 import { globalAppSendForm } from '@pages/applications/lib'
 import { ApplicationFormCodes } from '@shared/models/application-form-codes'
 import checkFormFields from '@shared/lib/check-form-fields'
+import StepByStepForm, { StagesConfigsT } from '@features/applications/ui/molecules/step-by-step-form'
+import { LoadedState } from 'widgets/template-form'
 
 const MilitaryRegistration = () => {
     const [generalData, setGeneralData] = useState<IInputArea | null>(null)
-    const [maritalStatus, setMaritalStatus] = useState<IInputArea | null>(null)
-    const [familyComposition, setFamilyComposition] = useState<IInputArea | null>(null)
-    const [militaryRegistrationData, setMilitaryRegistrationData] = useState<IInputArea | null>(null)
-    const [militaryRegistrationDocument, setMilitaryRegistrationDocument] = useState<IInputArea | null>(null)
-    const [driversLicenseData, setDriversLicenseData] = useState<IInputArea | null>(null)
+    const [maritalStatus, setMaritalStatus] = useState<IInputArea>(getMaritalStatusForm())
+    const [familyComposition, setFamilyComposition] = useState<IInputArea>(getFamilyCompositionForm())
+    const [militaryRegistrationData, setMilitaryRegistrationData] = useState<IInputArea>(
+        getMilitaryRegistrationDataForm(),
+    )
+    const [militaryRegistrationDocument, setMilitaryRegistrationDocument] = useState<IInputArea>(
+        getMilitaryRegistrationDocument(),
+    )
+    const [driversLicenseData, setDriversLicenseData] = useState<IInputArea>(getDriversLicenseData(null))
 
     const [confirmed, setConfirmed] = useState<boolean>(false)
     const [completed, setCompleted] = useState<boolean>(false)
@@ -40,14 +45,6 @@ const MilitaryRegistration = () => {
         }
     }, [dataUserApplication])
 
-    useEffect(() => {
-        setMaritalStatus(getMaritalStatusForm())
-        setFamilyComposition(getFamilyCompositionForm())
-        setMilitaryRegistrationData(getMilitaryRegistrationDataForm())
-        setMilitaryRegistrationDocument(getMilitaryRegistrationDocument())
-        setDriversLicenseData(getDriversLicenseData(null))
-    }, [])
-
     const driversLicenseEmpty = useMemo(() => {
         return ((driversLicenseData?.data[0] as IInputAreaData)?.value as SelectPage)?.id !== 0
     }, [(driversLicenseData?.data[0] as IInputAreaData)?.value])
@@ -56,29 +53,25 @@ const MilitaryRegistration = () => {
         if (driversLicenseData)
             setDriversLicenseData(getDriversLicenseData(driversLicenseData.data as IInputAreaData[]))
     }, [driversLicenseEmpty])
+
+    if (!generalData) return null
+
+    const stagesConfigs: StagesConfigsT = [
+        [{ dataForm: generalData, setDataForm: setGeneralData as LoadedState }],
+        [{ dataForm: maritalStatus, setDataForm: setMaritalStatus as LoadedState }],
+        [{ dataForm: familyComposition, setDataForm: setFamilyComposition as LoadedState }],
+        [{ dataForm: militaryRegistrationData, setDataForm: setMilitaryRegistrationData as LoadedState }],
+        [{ dataForm: militaryRegistrationDocument, setDataForm: setMilitaryRegistrationDocument as LoadedState }],
+        [{ dataForm: driversLicenseData, setDataForm: setDriversLicenseData as LoadedState }],
+    ]
+
     return (
         <BaseApplicationWrapper isDone={false}>
             <FormBlock>
-                {!!generalData && !!setGeneralData && <InputArea {...generalData} setData={setGeneralData} />}
-                <Divider />
-                {!!maritalStatus && !!setMaritalStatus && <InputArea {...maritalStatus} setData={setMaritalStatus} />}
-                <Divider />
-                {!!familyComposition && !!setFamilyComposition && (
-                    <InputArea {...familyComposition} setData={setFamilyComposition} />
-                )}
-                <Divider />
-                {!!militaryRegistrationData && !!setMilitaryRegistrationData && (
-                    <InputArea {...militaryRegistrationData} setData={setMilitaryRegistrationData} />
-                )}
-                <Divider />
-                {!!militaryRegistrationDocument && !!setMilitaryRegistrationDocument && (
-                    <InputArea {...militaryRegistrationDocument} setData={setMilitaryRegistrationDocument} />
-                )}
-                <Divider />
-                {!!driversLicenseData && !!setDriversLicenseData && (
-                    <InputArea {...driversLicenseData} setData={setDriversLicenseData} />
-                )}
-                <Divider />
+                <Title size={3} align="left">
+                    Воинский учет
+                </Title>
+                <StepByStepForm stagesConfig={stagesConfigs} />
                 <Checkbox
                     checked={confirmed}
                     setChecked={setConfirmed}
@@ -87,8 +80,8 @@ const MilitaryRegistration = () => {
                 <SubmitButton
                     text={!completed ? 'Отправить' : 'Отправлено'}
                     action={() => {
-                        globalAppSendForm(
-                            ApplicationFormCodes.MILITARY_REG,
+                        return globalAppSendForm(
+                            ApplicationFormCodes.MIL_REG,
                             [
                                 generalData,
                                 maritalStatus,
