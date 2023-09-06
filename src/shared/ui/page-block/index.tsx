@@ -4,16 +4,17 @@ import styled from 'styled-components'
 import { CenterPage } from '../atoms'
 import useCurrentExactPage from '@shared/lib/hooks/use-current-exact-page'
 import { getPageWidth } from './lib/get-page-width'
+import { MEDIA_QUERIES } from '@shared/consts'
 
-const PageBlockStyled = styled(BlockWrapper)<{ titleLen: number }>`
+const PageBlockStyled = styled(BlockWrapper)<{ titleLen: number; hasCenterEl: boolean }>`
     position: relative;
 
-    @media (min-width: 551px) {
+    ${MEDIA_QUERIES.isNotMobile} {
         padding-top: ${({ titleLen }) => (titleLen === 0 ? '20px' : titleLen < 60 ? '70px' : '140px')};
     }
 
-    @media (max-width: 550px) {
-        padding-top: 50px;
+    ${MEDIA_QUERIES.isMobile} {
+        padding-top: ${({ hasCenterEl }) => (hasCenterEl ? '90px' : '50px')};
     }
 `
 
@@ -39,9 +40,8 @@ const TopCenterElement = styled.div`
     display: flex;
     justify-content: flex-end;
 
-    @media (max-width: 550px) {
-        top: -4px;
-        right: 7px;
+    ${MEDIA_QUERIES.isMobile} {
+        top: 40px;
     }
 `
 
@@ -60,6 +60,7 @@ const PageBlock = forwardRef(
         return (
             <CenterPage padding="0 0 10px 0">
                 <PageBlockStyled
+                    hasCenterEl={!!topCenterElement}
                     titleLen={currentPage?.subPageHeaderTitle?.length ?? currentPage?.title.length ?? 0}
                     justifyContent="flex-start"
                     height="100%"

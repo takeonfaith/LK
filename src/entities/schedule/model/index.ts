@@ -20,7 +20,18 @@ const useSchedule = () => {
     return useStore($schedule)
 }
 
-const getScheduleFx = createEffect(async ({ group }: { group: string | undefined }) => {
+const getScheduleFx = createEffect(async ({ group, fullName }: { fullName?: string; group?: string | undefined }) => {
+    try {
+        if (fullName) return await getTeacherSchedule(fullName)
+        if (group) return await getGroupSchedule(group)
+
+        throw new Error('Невозможно получить расписание, так как не указан ни один из параметров')
+    } catch (error) {
+        throw new Error((error as Error).message)
+    }
+})
+
+const getGroupScheduleFx = createEffect(async ({ group }: { group: string | undefined }) => {
     try {
         return await getGroupSchedule(group)
     } catch (error) {
@@ -28,19 +39,11 @@ const getScheduleFx = createEffect(async ({ group }: { group: string | undefined
     }
 })
 
-const getGroupScheduleFx = createEffect(async ({ group }: { group: string }) => {
-    try {
-        return await getGroupSchedule(group)
-    } catch (error) {
-        throw new Error((error as Error).message)
-    }
-})
-
-const getTeacherScheduleFx = createEffect(async ({ fullName }: { fullName: string }) => {
+const getTeacherScheduleFx = createEffect(async ({ fullName }: { fullName: string | undefined }) => {
     try {
         return await getTeacherSchedule(fullName)
     } catch (error) {
-        throw new Error((error as Error).message)
+        throw new Error((error as Error).message + 'ЭВФЫВФ')
     }
 })
 
@@ -103,7 +106,7 @@ sample({
 })
 
 sample({
-    clock: getGroupScheduleFx,
+    clock: [getGroupScheduleFx, getTeacherScheduleFx],
     source: $schedule,
     fn: (store) => ({ ...store, data: { ...store.data, externalSchedule: null } }),
     target: $schedule,
@@ -113,6 +116,13 @@ sample({
     clock: [getGroupScheduleFx.doneData, getTeacherScheduleFx.doneData, getScheduleFx.doneData],
     source: $schedule,
     fn: (store) => ({ error: null, loading: false, data: { ...store.data } }),
+    target: $schedule,
+})
+
+sample({
+    clock: [getGroupScheduleFx.failData, getTeacherScheduleFx.failData, getScheduleFx.failData],
+    source: $schedule,
+    fn: (store, error) => ({ ...store, error: error.message, loading: false }),
     target: $schedule,
 })
 

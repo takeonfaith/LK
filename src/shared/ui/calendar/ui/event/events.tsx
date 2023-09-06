@@ -1,20 +1,10 @@
 import Flex from '@shared/ui/flex'
 import React from 'react'
-import styled from 'styled-components'
 import { DayCalendarEvent } from '../../types'
 import { CurrentTimeLine } from '../day/ui/current-time-line'
 import EventItem from './event-item'
-
-const EventsStyled = styled(Flex)``
-
-const EventsWrapper = styled(Flex)`
-    height: 100%;
-    z-index: 1;
-    position: relative;
-    margin-top: 19px;
-    margin-left: 0px;
-    margin-right: 0px;
-`
+import { prepareEvents } from './lib/prepare-events'
+import { EventsWrapper } from './styles'
 
 type Props = {
     events: DayCalendarEvent[] | null | undefined
@@ -25,35 +15,20 @@ type Props = {
     shortInfo?: boolean
     weekDay: number
     interval: [number, number]
+    showTime?: boolean
 }
 
-const prepareEvents = (events: DayCalendarEvent[] | null | undefined): Record<string, DayCalendarEvent[]> => {
-    const result: Record<string, DayCalendarEvent[]> = {}
-
-    if (!events) return result
-
-    for (let index = 0; index < events.length; index++) {
-        const event = events[index]
-
-        if (!result[event.startTime]) {
-            result[event.startTime] = []
-        }
-
-        result[event.startTime].push(event)
-    }
-
-    return result
-}
-
-const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDay, interval }: Props) => {
+const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDay, interval, showTime }: Props) => {
     const eventsPrepared = prepareEvents(events)
 
     const isCurrentDay = new Date().getDay() === weekDay
 
     return (
-        <EventsStyled d="row" gap="2px" h="100%" className="events">
+        <Flex d="row" gap="2px" h="100%" className="events">
             <EventsWrapper h="100%" d="column">
-                {isCurrentDay && <CurrentTimeLine scale={scale} shift={shift} interval={interval} />}
+                {isCurrentDay && (
+                    <CurrentTimeLine showTime={showTime} scale={scale} shift={shift} interval={interval} />
+                )}
                 {Object.keys(eventsPrepared).map((key, i) => {
                     return eventsPrepared[key].map((event, index) => {
                         const isCurrent =
@@ -62,7 +37,7 @@ const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDa
                         return (
                             <EventItem
                                 leftShift={index}
-                                width={eventsPrepared[key].length}
+                                quantity={eventsPrepared[key].length}
                                 isCurrent={isCurrent}
                                 otherIsCurrent={!isCurrent && currentEvent !== null}
                                 scale={scale}
@@ -76,7 +51,7 @@ const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDa
                     })
                 })}
             </EventsWrapper>
-        </EventsStyled>
+        </Flex>
     )
 }
 

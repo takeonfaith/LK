@@ -1,6 +1,6 @@
 import normalizeString from '@shared/lib/normalize-string'
 import React from 'react'
-import { BiRuble } from 'react-icons/bi'
+import { BiDice6, BiRuble } from 'react-icons/bi'
 import {
     FiChrome,
     FiCircle,
@@ -126,6 +126,10 @@ export const getSubjectIcon = (name: string) => {
         {
             keys: ['матем'],
             icon: <HiOutlineVariable />,
+        },
+        {
+            keys: ['вероятн'],
+            icon: <BiDice6 />,
         },
         {
             keys: ['философ'],

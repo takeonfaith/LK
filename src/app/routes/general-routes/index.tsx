@@ -109,6 +109,7 @@ export const LK_NOTIFICATIONS_ROUTE = '/lk-notifications'
 export const USEFUL_INFO_ROUTE = '/helpful-information'
 
 // hidden
+export const SCHEDULE_FILTER_ROUTE = SCHEDULE_ROUTE + '/:page/:filter'
 export const SCHEDULE_CURRENT_ROUTE = SCHEDULE_ROUTE + '/current'
 export const SCHEDULE_SEMESTR_ROUTE = SCHEDULE_ROUTE + '/semestr'
 export const SCHEDULE_SESSION_ROUTE = SCHEDULE_ROUTE + '/session'
@@ -464,6 +465,18 @@ export const generalHiddenRoutes: IRoutes = {
     //     group: 'OTHER',
     //     pageSize: 'large',
     // },
+    'schedule-filter': {
+        id: 'schedule-filter',
+        title: 'Расписание',
+        icon: <FiClock />,
+        path: SCHEDULE_FILTER_ROUTE,
+        Component: SchedulePage,
+        color: 'pink',
+        isTemplate: false,
+        show: false,
+        group: 'OTHER',
+        pageSize: 'large',
+    },
     ...scheduleRoutes,
     'filtered-all-students': {
         id: 'filtered-all-students',

@@ -10,10 +10,10 @@ const getTop = ({ startTimeShift, startDayShift, scale }: StyledProps) => {
 }
 
 export const EventItemStyled = styled.div<StyledProps>`
-    width: ${({ width }) => `calc(${width}% - 1px)`};
+    width: ${({ quantity }) => `calc(${quantity}% - 1px)`};
     height: ${({ duration, scale }) => `${duration * scale}px`};
     border-radius: 5px;
-    padding: ${({ shortInfo, scale }) => (!shortInfo ? `${scale * 11}px` : '8px')};
+    padding: ${({ shortInfo, scale }) => (!shortInfo ? `${scale * 8}px` : '8px')};
     display: flex;
     position: relative;
     overflow: hidden;
@@ -54,25 +54,26 @@ export const IconSection = styled.div<{ scale: number }>`
 `
 
 export const EventFront = styled(Flex)<{ shortInfo: boolean; scale: number }>`
-    gap: ${({ shortInfo, scale }) => (!shortInfo ? `${8 * scale}px` : '4px')};
+    gap: ${({ shortInfo }) => (!shortInfo ? '10px' : '6px')};
 
     ${MEDIA_QUERIES.isMobile} {
-        gap: ${({ shortInfo, scale }) => (!shortInfo ? `${4 * scale}px` : '4px')};
+        gap: ${({ shortInfo }) => (!shortInfo ? '8px' : '6px')};
     }
 `
 
 export const EventTitle = styled.span<{ shortInfo: boolean; scale: number }>`
     font-weight: 500;
-    font-size: ${({ shortInfo, scale }) => (!shortInfo ? `${0.85 * scale}rem` : '0.85rem')};
+    font-size: ${({ shortInfo }) => (!shortInfo ? `0.9rem` : '0.85rem')};
     padding-top: 2px;
     white-space: ${({ shortInfo }) => !shortInfo && 'nowrap'};
     text-overflow: ${({ shortInfo }) => !shortInfo && 'ellipsis'};
     overflow: ${({ shortInfo }) => !shortInfo && 'hidden'};
     hyphens: auto;
-    width: ${({ shortInfo }) => (!shortInfo ? 'fit-content' : '100%')};
+    width: 100%;
+    margin-bottom: 2px;
 
     ${MEDIA_QUERIES.isMobile} {
-        font-size: ${({ shortInfo, scale }) => (!shortInfo ? `${0.95 * scale}rem` : '0.7rem')};
+        font-size: ${({ shortInfo }) => (!shortInfo ? `0.8rem` : '0.7rem')};
     }
 `
 
@@ -94,4 +95,13 @@ export const MobileIcon = styled.div`
     /* ${MEDIA_QUERIES.isMobile} {
         display: flex;
     } */
+`
+
+export const EventsWrapper = styled(Flex)`
+    height: 100%;
+    z-index: 1;
+    position: relative;
+    margin-top: 19px;
+    margin-left: 0px;
+    margin-right: 0px;
 `

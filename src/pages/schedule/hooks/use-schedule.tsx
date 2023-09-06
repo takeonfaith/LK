@@ -1,21 +1,51 @@
+import { SCHEDULE_RETAKE_ROUTE } from '@app/routes/general-routes'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
+import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router'
+import { useModal } from 'widgets'
+import { SideMenuContent } from '../ui/side-menu/side-menu-content'
+import React from 'react'
 
 /*
     TODO: 
-    1. Зум календаря
-    2. Придумать, как быть с расписанием сессии
-    3. Добавить время в event-item
-    4. Неделя и семестр вид для мобилок
-    5. Список преподов?
 */
 
 const useSchedule = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const { isTablet, isMobile } = useCurrentDevice()
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(true)
+    const location = useLocation()
+    const shouldShowSlider = location.pathname !== SCHEDULE_RETAKE_ROUTE
+    const splitted = location.pathname.split('/')
+    const filter = splitted.length === 4 ? splitted[splitted.length - 1] : null
+    const isGroup = filter ? /\d/.test(filter) : false
+    const baseSearchValue = user?.user_status === 'staff' ? user?.fullName ?? '' : user?.group ?? ''
+    const [search, setSearch] = useState(baseSearchValue)
+    const { open } = useModal()
+
+    useEffect(() => {
+        if (isMobile || isTablet) {
+            setIsSideMenuOpen(false)
+        } else {
+            setIsSideMenuOpen(true)
+        }
+    }, [isTablet, isMobile])
+
+    useEffect(() => {
+        if (filter) {
+            if (isGroup) {
+                scheduleModel.effects.getGroupScheduleFx({ group: filter })
+            } else {
+                scheduleModel.effects.getTeacherScheduleFx({ fullName: filter })
+            }
+        } else {
+            scheduleModel.events.resetExternalSchedule()
+        }
+    }, [filter])
 
     useEffect(() => {
         return () => {
@@ -24,13 +54,38 @@ const useSchedule = () => {
     }, [])
 
     const handleLoad = () => {
-        scheduleModel.effects.getScheduleFx({ group: user?.group })
+        if (user?.user_status === 'staff') {
+            scheduleModel.effects.getScheduleFx({ fullName: user.fullName })
+        } else {
+            scheduleModel.effects.getScheduleFx({ group: user?.group })
+        }
     }
 
-    const handleOpenSideMenu = () => setIsSideMenuOpen((prev) => !prev)
+    const handleOpenSideMenu = () => {
+        if (isMobile) {
+            open(
+                <SideMenuContent
+                    filter={filter}
+                    isGroup={isGroup}
+                    search={search}
+                    baseSearchValue={baseSearchValue}
+                    setSearch={setSearch}
+                />,
+            )
+        } else {
+            setIsSideMenuOpen((prev) => !prev)
+        }
+    }
 
     return {
         isSideMenuOpen,
+        shouldShowSlider,
+        filter,
+        isGroup,
+        isMobile,
+        search,
+        baseSearchValue,
+        setSearch,
         handleLoad,
         handleOpenSideMenu,
     }

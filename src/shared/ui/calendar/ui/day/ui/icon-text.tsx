@@ -4,23 +4,31 @@ import Subtext from '@shared/ui/subtext'
 import React from 'react'
 import styled from 'styled-components'
 
-const SmallIcon = styled.div<{ scale: number }>`
+const IconTextStyled = styled(Flex)<{ shortInfo: boolean }>`
+    font-size: ${({ shortInfo }) => `${!shortInfo ? 1 : 0.92}rem`};
+
+    ${MEDIA_QUERIES.isMobile} {
+        font-size: ${({ shortInfo }) => `${!shortInfo ? 0.95 : 0.6}rem`};
+    }
+`
+
+const SmallIcon = styled.div<{ shortInfo: boolean }>`
     opacity: 0.7;
-    width: 18px;
-    height: 18px;
+    width: fit-content;
+    height: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
 
     svg {
-        width: ${({ scale }) => `${scale * 22}px`};
-        height: ${({ scale }) => `${scale * 22}px`};
+        width: ${({ shortInfo }) => (!shortInfo ? 18 : 16)}px;
+        height: ${({ shortInfo }) => (!shortInfo ? 18 : 16)}px;
     }
 
     ${MEDIA_QUERIES.isMobile} {
         svg {
-            width: ${({ scale }) => `${scale * 18}px`};
-            height: ${({ scale }) => `${scale * 18}px`};
+            width: 16px;
+            height: 16px;
         }
     }
 `
@@ -34,19 +42,15 @@ const SubtextStyled = styled(Subtext)`
 type Props = {
     icon: ChildrenType
     text: ChildrenType
-    scale?: number
     shortInfo?: boolean
 }
 
-const IconText = ({ icon, text, shortInfo = false, scale = 1 }: Props) => {
-    const fontSize = `${(!shortInfo ? 0.85 : 0.7) * scale}rem`
+const IconText = ({ icon, text, shortInfo = false }: Props) => {
     return (
-        <Flex gap="8px" w="fit-content">
-            <SmallIcon scale={scale}>{icon}</SmallIcon>
-            <SubtextStyled className="text" fontSize={fontSize}>
-                {text}
-            </SubtextStyled>
-        </Flex>
+        <IconTextStyled shortInfo={shortInfo} gap="7px" w="fit-content">
+            <SmallIcon shortInfo={shortInfo}>{icon}</SmallIcon>
+            <SubtextStyled className="text">{text}</SubtextStyled>
+        </IconTextStyled>
     )
 }
 

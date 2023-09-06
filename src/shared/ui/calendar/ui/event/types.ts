@@ -8,7 +8,7 @@ export type UIProps = {
     otherIsCurrent: boolean
     shortInfo?: boolean
     leftShift: number
-    width: number
+    quantity: number
 }
 
 export type StyledProps = Omit<UIProps, 'onClick' | 'shift'> & {

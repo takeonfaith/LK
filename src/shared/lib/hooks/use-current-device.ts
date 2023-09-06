@@ -1,12 +1,7 @@
-import { useState, useLayoutEffect } from 'react'
+import { JS_QUERIES } from '@shared/consts'
+import { useLayoutEffect, useState } from 'react'
 
-const QUERIES = [
-    { query: '(max-width: 766px)', title: 'isMobile', value: 'mobile' },
-    { query: '(min-width: 767px) and (max-width: 1199px)', title: 'isTablet', value: 'tablet' },
-    { query: '(min-width: 1200px)', title: 'isDesktop', value: 'desktop' },
-] as const
-
-type QueryType = typeof QUERIES
+type QueryType = typeof JS_QUERIES
 
 const getValues = (
     mediaQueryList: {
@@ -21,7 +16,7 @@ const getValues = (
 }
 
 const useCurrentDevice = () => {
-    const mediaQueryList = QUERIES.map(({ query, title }) => ({ mql: matchMedia(query), title }))
+    const mediaQueryList = JS_QUERIES.map(({ query, title }) => ({ mql: matchMedia(query), title }))
     const [values, setValues] = useState(getValues(mediaQueryList))
 
     useLayoutEffect(() => {

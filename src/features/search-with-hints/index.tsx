@@ -2,33 +2,37 @@ import Search, { Hint } from '@shared/ui/search'
 import { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
 
-type Props = {
+type Props<T> = {
     placeholder: string
     value: string
     leftIcon?: ChildrenType
     hintIcon?: ChildrenType
     loading?: boolean
     focusOn?: any
+    width?: string
+    transformRequest?: (el: T) => string
     setValue: React.Dispatch<React.SetStateAction<string>>
     onHintClick: (hint: Hint | undefined) => void
     onValueEmpty?: () => void
-    request: (value: string) => Promise<AxiosResponse<{ items: string[] }, any>>
+    request: (value: string) => Promise<AxiosResponse<{ items: T[] }, any>>
     customMask?: (value: string, prevValue?: string) => string
 }
 
-const SeachWithHints = ({
+const SeachWithHints = <T,>({
     value,
-    setValue,
     placeholder,
-    onValueEmpty,
-    request,
     loading,
-    onHintClick,
     hintIcon,
-    customMask,
     leftIcon,
     focusOn,
-}: Props) => {
+    width,
+    transformRequest,
+    setValue,
+    request,
+    onValueEmpty,
+    customMask,
+    onHintClick,
+}: Props<T>) => {
     const [hints, setHints] = useState<Hint[]>([])
     const [loadingHints, setLoadingHints] = useState(false)
 
@@ -37,7 +41,12 @@ const SeachWithHints = ({
             setLoadingHints(true)
             request(value)
                 .then((groups) => {
-                    setHints(groups.data.items.map((hint) => ({ id: hint, title: hint, value: hint, icon: hintIcon })))
+                    setHints(
+                        groups.data.items.map((hint) => {
+                            const hintString = transformRequest ? transformRequest(hint) : (hint as string)
+                            return { id: hintString, title: hintString, value: hintString, icon: hintIcon }
+                        }),
+                    )
                     setLoadingHints(false)
                 })
                 .catch(() => {
@@ -57,7 +66,7 @@ const SeachWithHints = ({
             setValue={setValue}
             placeholder={placeholder}
             hints={hints}
-            width="180px"
+            width={width ?? '180px'}
             focusOn={focusOn}
             leftIcon={leftIcon}
             loading={loadingHints && loading}

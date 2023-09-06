@@ -15,8 +15,7 @@ import getCurrentDaySubjects from './get-current-day-schedule'
 export const normalizeSchedule = (
     rawSchedule: FullRawScheduleResponse | FullRawTeacherScheduleResponse,
 ): IFullSchedule => {
-    if ('status' in rawSchedule && rawSchedule.status === 'error') {
-        //   throw new Error('Не удалось преобразовать расписание')
+    if (typeof rawSchedule === 'object' && 'status' in rawSchedule) {
         return SCHEDULE_NO_RESULT.schedule
     }
 

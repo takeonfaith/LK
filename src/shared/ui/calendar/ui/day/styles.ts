@@ -22,7 +22,7 @@ export const EventInfo = styled.div`
     overflow: hidden;
     box-shadow: var(--schedule-shadow);
 
-    ${MEDIA_QUERIES.isTablet} {
+    ${MEDIA_QUERIES.isSmallTesktop} {
         display: none;
     }
 `

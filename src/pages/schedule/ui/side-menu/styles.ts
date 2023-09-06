@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from '@shared/consts'
 import styled from 'styled-components'
 
 export const SideMenuStyled = styled.div`
@@ -8,5 +9,8 @@ export const SideMenuStyled = styled.div`
     z-index: 10;
     gap: 8px;
     flex-direction: column;
-    /* position: absolute; */
+
+    ${MEDIA_QUERIES.isMobile} {
+        display: none;
+    }
 `

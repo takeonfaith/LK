@@ -19,6 +19,7 @@ const WeekCalendar = (props: CalendarWeekProps) => {
                 {Object.keys(WEEK_DAYS).map((day, i) => {
                     return (
                         <Events
+                            showTime={false}
                             key={day}
                             weekDay={i + 1}
                             shortInfo

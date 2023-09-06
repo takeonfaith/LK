@@ -76,12 +76,13 @@ export const DayWrapper = styled.span<{ showDates?: boolean; isCurrentChosenDay:
     margin-left: auto;
     margin-right: ${({ showDates }) => (!showDates ? 'auto' : '0')};
     background: ${getBackground};
-    color: ${getColor};
+    color: ${({ isCurrentChosenDay }) => (isCurrentChosenDay ? '#fff' : 'var(--grey)')};
     padding: 5px;
     border-radius: 25px;
 
     ${MEDIA_QUERIES.isMobile} {
         margin-right: auto;
+        padding: 4px;
     }
 `
 

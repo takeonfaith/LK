@@ -1,6 +1,4 @@
-import { IColorPalette } from '@shared/consts'
-import Flex from '@shared/ui/flex'
-import Subtext from '@shared/ui/subtext'
+import { IColorPalette, MEDIA_QUERIES } from '@shared/consts'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -11,6 +9,22 @@ const TimeSquare = styled.div`
     background: ${({ color }) => color};
 `
 
+const TimeIndicatorStyled = styled.div`
+    display: flex;
+    align-items: center;
+    min-width: fit-content;
+    gap: 6px;
+`
+
+const TimeIntervalStyled = styled.span`
+    font-weight: 500;
+    font-size: 0.8rem;
+
+    ${MEDIA_QUERIES.isMobile} {
+        font-size: 0.7rem;
+    }
+`
+
 type Props = {
     timeInterval: string
     color: IColorPalette
@@ -18,9 +32,9 @@ type Props = {
 
 export const TimeIndicator = ({ timeInterval, color }: Props) => {
     return (
-        <Flex w="fit-content" gap="6px">
-            <TimeSquare color={color.main} />
-            <Subtext>{timeInterval}</Subtext>
-        </Flex>
+        <TimeIndicatorStyled>
+            <TimeSquare color={color.light1} />
+            <TimeIntervalStyled>{timeInterval}</TimeIntervalStyled>
+        </TimeIndicatorStyled>
     )
 }

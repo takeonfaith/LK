@@ -1,5 +1,6 @@
 export const SCALE_VALUES = {
-    isDesktop: 1.1,
+    isMiddleDesktop: 1.32,
+    isSmallDesktop: 1.32,
     isTablet: 1,
-    isMobile: 0.8,
+    isMobile: 1.2,
 }
