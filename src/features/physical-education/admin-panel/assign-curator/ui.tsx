@@ -2,6 +2,7 @@ import Select, { SelectPage } from '@features/select'
 import { Button } from '@shared/ui/button'
 import Input from '@shared/ui/input'
 import React, { useState } from 'react'
+import { PETeacherSelect } from '../pe-teacher-select/ui'
 import { assignCurator } from './model'
 import { Wrapper } from './styled'
 
@@ -17,16 +18,14 @@ export const AssignCurator = () => {
     const [group, setGroup] = useState<string>('')
 
     const handleClick = () => {
-        assignCurator({ cost: cost?.id.toString() ?? '', groupName: group, teacherGuid })
+        assignCurator({ newVisitValue: cost?.id.toString() ?? '', groupName: group, teacherGuid })
     }
 
     return (
         <Wrapper>
             <Input title={'Группа'} setValue={setGroup} value={group} />
-            <Input title={'Айди преподавателя'} setValue={setTeacherGuid} value={teacherGuid} />
-
-            <Select title={'Стоимость'} items={COSTS} selected={cost} setSelected={setCost} />
-
+            <PETeacherSelect onChange={setTeacherGuid} />
+            <Select title={'Стоимость посещения'} items={COSTS} selected={cost} setSelected={setCost} />
             <Button text="Добавить" onClick={handleClick} />
         </Wrapper>
     )

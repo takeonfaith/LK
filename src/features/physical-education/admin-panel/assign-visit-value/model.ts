@@ -6,8 +6,8 @@ import { getAssignVisitValueMutation } from './utils'
 
 export const assignVisitValue = createEvent<AssignVisitValue>()
 
-export const assignVisitValueFx = createEffect(async (payload: AssignVisitValue) => {
-    return await pERequest(getAssignVisitValueMutation(payload))
+export const assignVisitValueFx = createEffect(async ({ groupName, newVisitValue }: AssignVisitValue) => {
+    return await pERequest(getAssignVisitValueMutation({ groupName, newVisitValue }))
 })
 
 sample({ clock: assignVisitValue, target: assignVisitValueFx })

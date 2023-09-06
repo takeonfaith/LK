@@ -108,7 +108,7 @@ export const INFO_ROUTE = '/helpful-information'
 export const HELP_SERVICE_ROUTE = '/help_service'
 export const DOWNLOAD_AGREEMENTS_FILES_ROUTE = '/download-agreements'
 export const PERSONAL_NOTIFICATIONS = '/personal-notifications'
-export const PHYSICAL_EDUCATION = '/physical-education'
+export const PHYSICAL_EDUCATION = '/physical-education/main'
 
 //hidden routes
 export const PHYSICAL_EDUCATION_STUDENT = '/physical-education/student/:studentId'
@@ -334,13 +334,12 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Физическая культура',
         icon: <FiFileText />,
         color: 'lightGreen',
-        withoutHeader: true,
         path: PHYSICAL_EDUCATION,
         show: !isProduction,
+        pageSize: 'big',
         Component: TeacherPhysicalEducation,
         isTemplate: false,
         group: 'OTHER',
-        pageSize: 'big',
     },
     'physical-education-student': {
         id: 'physical-education-student',
@@ -350,9 +349,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         path: PHYSICAL_EDUCATION_STUDENT,
         Component: PhysicalEducationStudent,
         isTemplate: false,
-        group: 'OTHER',
-        show: false,
-        pageSize: 'big',
+        fallbackPrevPage: PHYSICAL_EDUCATION,
     },
     oop: {
         id: 'oop',

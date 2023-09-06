@@ -3,7 +3,7 @@ import { AssignVisitValue } from './types'
 
 export const getAssignVisitValueMutation = (model: AssignVisitValue) => {
     return `mutation assignVisitValue {
-      assignVisitValue(input: ${jsonStringifyGraphql(model)} {
+      assignVisitValue(input: ${jsonStringifyGraphql(model, ['newVisitValue'])}) {
         success
       }
     }`
