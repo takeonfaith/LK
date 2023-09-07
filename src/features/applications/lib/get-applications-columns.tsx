@@ -55,7 +55,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
         },
         { title: 'Примечание', field: 'comment', priority: 'five', width: '150px' },
         {
-            title: 'Файлы',
+            title: 'Файлы для скачивания',
             align: 'center',
             field: 'files_output',
             priority: 'five',

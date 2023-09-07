@@ -1,9 +1,10 @@
-import { Documents } from '../lib/Documents'
-import { HRDocumentFlow } from '../lib/HRDocumentFlow'
-import { PassRegistration } from '../lib/PassRegistration'
-import { SalaryPayment } from '../lib/SalaryPayment'
-import { WorkplaceOrganization } from '../lib/WorkplaceOrganization'
-import { OnboardingTopic } from '../types/Onboarding'
+import { PassRegistration } from '../ui/pass-registration'
+import { WorkplaceOrganization } from '../ui/workplace-organization'
+import { SalaryPayment } from '../ui/salary-payment'
+import { HRDocumentFlow } from '../ui/hr-document-flow'
+import { Documents } from '../ui/documents'
+import { Nutrition } from '../ui/nutrition'
+import { OnboardingTopic } from '../types/onboarding'
 
 export const topics: OnboardingTopic = [
     {
@@ -13,6 +14,10 @@ export const topics: OnboardingTopic = [
     {
         title: 'Организация рабочего места',
         content: WorkplaceOrganization,
+    },
+    {
+        title: 'Питание',
+        content: Nutrition,
     },
     {
         title: 'Выплата заработной платы',

@@ -1,6 +1,6 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
-import { createEvent } from 'effector'
+import { createEvent, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector'
 import changeCanSign from '../lib/change-can-sign'
@@ -39,6 +39,8 @@ const signContractFx = createEffect(async (contractId: string) => {
         throw new Error('Не удалось подписать конкракт. Причина: ' + error)
     }
 })
+
+sample({ clock: signContractFx.doneData, target: getPaymentsFx })
 
 const clearStore = createEvent()
 

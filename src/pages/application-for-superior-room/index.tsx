@@ -9,7 +9,8 @@ import { FiInfo } from 'react-icons/fi'
 import styled from 'styled-components'
 import getForm from './lib/get-form'
 import sendForm from './lib/send-form'
-import getStatusFormSuperiorRoom from '@pages/application-for-superior-room/lib/get-status'
+import { SelectPage } from '@features/select'
+import { getStatusFormSuperiorRoom } from './lib/get-status'
 
 const ApplicationForSuperiorRoomWrapper = styled.div<{ isDone: boolean }>`
     display: flex;
@@ -30,6 +31,7 @@ type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 const ApplicationForSuperiorRoom = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const { data, error } = superiorRoomModel.selectors.useSuperiorRoom()
+    const [dormId, setDormId] = useState<number>(0)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -49,11 +51,16 @@ const ApplicationForSuperiorRoom = () => {
     }
 
     useEffect(() => {
-        //fetch
         if (!!data) {
-            setForm(getForm(data))
+            setForm(getForm(data, form))
         }
-    }, [data])
+    }, [data, dormId])
+
+    useEffect(() => {
+        if (!!form) {
+            setDormId(((form?.data[3] as IInputAreaData)?.value as SelectPage)?.id as number)
+        }
+    }, [(form?.data[3] as IInputAreaData)?.value])
 
     return (
         <Wrapper load={() => superiorRoomModel.effects.getSuperiorRoomFx()} loading={!data} error={error} data={data}>
@@ -63,7 +70,7 @@ const ApplicationForSuperiorRoom = () => {
                         <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
                         <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone}>
                             Ваша заявка направлена на рассмотрение жилищной комиссии. Итоги рассмотрения будут
-                            направлены Вам в срок до 21 августа 2023 года на указанную в заявке почту:{' '}
+                            направлены Вам 11 сентября 2023 года на указанную в заявке почту:{' '}
                             {(form.data?.[2] as IInputAreaData).value}
                         </Message>
                         <SubmitButton

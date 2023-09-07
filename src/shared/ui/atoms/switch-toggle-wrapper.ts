@@ -14,7 +14,7 @@ const SwitchToggleWrapper = styled.div`
         height: 100%;
         display: block;
         position: relative;
-        background: var(--search);
+        background: var(--select);
         cursor: pointer;
         border-radius: 50px;
         padding: 4px;
@@ -23,7 +23,7 @@ const SwitchToggleWrapper = styled.div`
 
     .toggle-circle {
         height: 100%;
-        background: var(--theme);
+        background: var(--toggle);
         width: 22px;
         display: block;
         border-radius: 100%;

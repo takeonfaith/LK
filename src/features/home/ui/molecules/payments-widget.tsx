@@ -16,6 +16,7 @@ import styled from 'styled-components'
 
 const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     max-width: 400px;
+    min-width: calc(100% / 3);
     width: 100%;
     height: 156px;
     background: var(--scheduleBg);

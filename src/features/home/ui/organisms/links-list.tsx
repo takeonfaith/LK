@@ -21,7 +21,7 @@ const LinksList = ({ title, links, doNotShow, restricted, orientation, backgroun
             <Title size={4} align="left" bottomGap>
                 {title}
             </Title>
-            <Flex gap="8px" wrap>
+            <Flex gap="8px" $wrap>
                 {Object.values(links).map((el) => {
                     if (el?.show !== false && doNotShow !== el?.id)
                         return (

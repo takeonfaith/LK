@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const InitialLoaderWrapper = styled.div<{ loading: boolean; color: string }>`
+export const InitialLoaderWrapper = styled.div<{ $loading: boolean; color: string }>`
     position: absolute;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@ export const InitialLoaderWrapper = styled.div<{ loading: boolean; color: string
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: ${({ loading }) => !loading && 'load_finished 1.2s forwards ease-in-out reverse'};
+    animation: ${({ $loading }) => !$loading && 'load_finished 1.2s forwards ease-in-out reverse'};
     animation-delay: 0.8s;
     background-size: 100% 10000%;
     flex-direction: column;
@@ -61,8 +61,8 @@ export const InitialLoaderWrapper = styled.div<{ loading: boolean; color: string
     }
 
     img {
-        animation: ${({ loading }) => !loading && 'logo 0.7s forwards ease-in-out'};
-        animation-delay: ${({ loading }) => (loading ? '0s' : '1s')};
+        animation: ${({ $loading }) => !$loading && 'logo 0.7s forwards ease-in-out'};
+        animation-delay: ${({ $loading }) => ($loading ? '0s' : '1s')};
         width: 100px;
     }
 `
