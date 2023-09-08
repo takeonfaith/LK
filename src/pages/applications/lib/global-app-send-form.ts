@@ -1,4 +1,3 @@
-import { popUpMessageModel } from '@entities/pop-up-message'
 import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData } from '@ui/input-area/model'
 import prepareFormData from '@utils/prepare-form-data'
 import { IndexedProperties } from '@utility-types/indexed-properties'
@@ -71,11 +70,6 @@ const globalAppSendForm = async (
         setCompleted(true)
     } catch (error) {
         setLoading(false)
-        popUpMessageModel.events.evokePopUpMessage({
-            message: `Не удалось отправить форму. Ошибка: ${error as string}`,
-            type: 'failure',
-            time: 30000,
-        })
     }
 }
 

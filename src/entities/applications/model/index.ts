@@ -1,8 +1,10 @@
 import { applicationApi } from '@api'
 import { Application, UserApplication, WorkerApplication } from '@api/model'
 import { applicationsModel } from '@entities/hr-applications'
+import { popUpMessageModel } from '@entities/pop-up-message'
+import { MessageType } from '@shared/ui/types'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
-import { combine, createEffect, createEvent, createStore, forward } from 'effector'
+import { combine, createEffect, createEvent, createStore, forward, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
 
 interface ApplicationsStore {
@@ -49,10 +51,10 @@ const getUserDataApplicationsFx = createEffect(async (): Promise<UserApplication
 const postApplicationFx = createEffect(async (data: ApplicationCreating): Promise<string> => {
     const resultAddApplication = await applicationApi.post(data)
 
-    if (resultAddApplication === 'ok') {
+    if (resultAddApplication.result === 'ok') {
         return 'ok'
     } else {
-        throw new Error(resultAddApplication)
+        throw new Error(resultAddApplication.error_text)
     }
 })
 
@@ -75,6 +77,23 @@ const useApplications = () => {
 const clearStore = createEvent()
 
 forward({ from: postApplicationFx.doneData, to: getApplicationsFx })
+
+sample({
+    clock: postApplicationFx.failData,
+    fn: (error) => {
+        return {
+            message: `Не удалось отправить форму. Ошибка: ${error.message}`,
+            type: 'failure',
+            time: 30000,
+        } satisfies {
+            message: ChildrenType
+            type: MessageType
+            time?: number
+            onClick?: () => void
+        }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
+})
 
 const $applicationsStore = createStore<ApplicationsStore>(DEFAULT_STORE)
     .on(getUserDataApplicationsFx, (oldData) => ({
