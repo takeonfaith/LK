@@ -5,4 +5,5 @@ export type CalendarWeekProps = {
     showDates?: boolean
     interval: [number, number]
     listView?: boolean
+    onDayClick?: (dayIndex: number) => void
 }

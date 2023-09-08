@@ -1,36 +1,30 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SubjectModal } from '@features/schedule/ui'
-import { TimeIntervals } from '@shared/api/model'
-import capitalizeFirstLetter from '@shared/lib/capitalize-first-letter'
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { FiInbox } from 'react-icons/fi'
 import { Error } from '../../../error'
 import Flex from '../../../flex'
-import { DayCalendarEvent, WeekEvents } from '../../types'
-import { CalendarWrapper } from '../calendar-wrapper'
-import Events from '../event/events'
-import Times from '../times'
-import { WeekDays } from '../week-days'
-import { getEndTime } from './lib/get-end-time'
-import { DayCalendarWrapper, EventInfo, EventsCarousel } from './styles'
-import { getCurrentDay } from './lib/get-current-day'
-import { DayCalendarProps } from './types'
+import { CalendarWrapper } from '../../ui/calendar-wrapper'
+import Events from '../../ui/event/events'
+import Times from '../../ui/times'
+import { WeekDays } from '../../ui/week-days'
 import { useCalendarDay } from './hooks/use-calendar-day'
+import { DayCalendarWrapper, EventInfo, EventsCarousel } from './styles'
+import { DayCalendarProps } from './types'
 
 export const DayCalendar = (props: DayCalendarProps) => {
     const {
-        handleDayClick,
         currentDay,
         events,
-        handleCarouselScroll,
         carouselRef,
         interval,
         scale,
         shift,
-        onEventClick,
         chosenEvent,
         showDates,
         timeInterval,
+        handleDayClick,
+        handleCarouselScroll,
+        onEventClick,
     } = useCalendarDay(props)
 
     return (
@@ -49,6 +43,7 @@ export const DayCalendar = (props: DayCalendarProps) => {
                             <CalendarWrapper className="calendar-wrapper" key={i}>
                                 <Times interval={interval} scale={scale} />
                                 <Events
+                                    currentDay={currentDay}
                                     weekDay={i + 1}
                                     events={events?.[day as keyof typeof events] ?? []}
                                     shift={shift}

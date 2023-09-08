@@ -11,7 +11,7 @@ type Props<T> = {
     focusOn?: any
     width?: string
     transformRequest?: (el: T) => string
-    setValue: React.Dispatch<React.SetStateAction<string>>
+    setValue: (value: string) => void
     onHintClick: (hint: Hint | undefined) => void
     onValueEmpty?: () => void
     request: (value: string) => Promise<AxiosResponse<{ items: T[] }, any>>

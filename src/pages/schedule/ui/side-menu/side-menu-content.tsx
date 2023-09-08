@@ -1,59 +1,32 @@
+import { scheduleRoutes } from '@app/routes/general-routes'
 import { scheduleModel } from '@entities/schedule'
-import { userModel } from '@entities/user'
-import { Hint } from '@shared/ui/search'
-import React, { useEffect } from 'react'
-import { SideMenuProps } from './types'
-import { useHistory, useLocation } from 'react-router'
-import { getEnrichedTemplatePath } from '@entities/menu/lib/get-enriched-template-path'
-import { SCHEDULE_FILTER_ROUTE, scheduleRoutes } from '@app/routes/general-routes'
 import { TeacherGroupSearch } from '@features/teacher-group-search'
 import { Button } from '@shared/ui/button'
-import { HiOutlineChevronLeft } from 'react-icons/hi'
-import Flex from '@shared/ui/flex'
 import { Divider } from '@shared/ui/divider'
+import Flex from '@shared/ui/flex'
+import Subtext from '@shared/ui/subtext'
+import React from 'react'
+import { HiOutlineChevronLeft } from 'react-icons/hi'
 import { NewPageLink } from './new-page-link'
+import { SideMenuProps } from './types'
+import { useLocation } from 'react-router'
 
-export const SideMenuContent = ({ search, setSearch, filter, baseSearchValue }: SideMenuProps) => {
-    const history = useHistory()
+export const SideMenuContent = ({
+    handleReturnToMySchedule,
+    baseSearchValue,
+    handleValue,
+    onHintClick,
+}: SideMenuProps) => {
+    const {
+        data: { searchValue, filter },
+    } = scheduleModel.selectors.useSchedule()
     const location = useLocation()
 
-    const handleReturnToMySchedule = () => {
-        if (filter) {
-            history.push(getEnrichedTemplatePath(SCHEDULE_FILTER_ROUTE, { page: location.pathname.split('/')[2] }))
-        }
-
-        setSearch(baseSearchValue)
-
-        scheduleModel.events.resetExternalSchedule()
-    }
-
-    useEffect(() => {
-        if (filter) {
-            setSearch(filter)
-        }
-    }, [filter])
-
-    const {
-        data: { user },
-    } = userModel.selectors.useUser()
-
-    const onHintClick = (isSearchingGroup: boolean) => {
-        return (hint: Hint | undefined) => {
-            if (hint?.id === user?.group) {
-                scheduleModel.events.resetExternalSchedule()
-                return
-            }
-            if (isSearchingGroup) {
-                scheduleModel.effects.getGroupScheduleFx({ group: hint?.value })
-            } else {
-                scheduleModel.effects.getTeacherScheduleFx({ fullName: hint?.value })
-            }
-        }
-    }
     return (
         <>
-            <TeacherGroupSearch value={search} setValue={setSearch} onHintClick={onHintClick} />
-            {baseSearchValue !== search && (
+            <Subtext>Группа или преподаватель</Subtext>
+            <TeacherGroupSearch value={searchValue} setValue={handleValue} onHintClick={onHintClick} />
+            {baseSearchValue !== searchValue && (
                 <Button
                     text="Мое расписание"
                     onClick={handleReturnToMySchedule}
@@ -62,7 +35,7 @@ export const SideMenuContent = ({ search, setSearch, filter, baseSearchValue }: 
                     textColor="var(--blue)"
                 />
             )}
-            <Divider margin="16px 0" />
+            <Divider margin="16px 0" width="100%" />
             <Flex d="column" gap="2px" ai="flex-start">
                 {Object.keys(scheduleRoutes ?? {}).map((key) => {
                     const route = scheduleRoutes[key]
@@ -72,7 +45,7 @@ export const SideMenuContent = ({ search, setSearch, filter, baseSearchValue }: 
                     return (
                         <NewPageLink
                             key={id}
-                            disabled={id === 'schedule-retake' && !!filter}
+                            disabled={(id === 'schedule-retake' && !!filter) || id === 'schedule-session'}
                             isCurrent={location.pathname === normalizedPath}
                             route={{ ...route, path: normalizedPath }}
                         />

@@ -1,19 +1,24 @@
 import { TimeIntervals } from '@shared/api/model'
+import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import { DayCalendarEvent } from '@shared/ui/calendar'
 import { useCalendarGeneral } from '@shared/ui/calendar/hooks/use-calendar-general'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { getCurrentDay } from '../lib/get-current-day'
 import { getEndTime } from '../lib/get-end-time'
 import { DayCalendarProps } from '../types'
-import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 
 type Props = DayCalendarProps
 
-export const useCalendarDay = ({ interval = [0, 23], events: allEvents, showDates = true }: Props) => {
+export const useCalendarDay = ({
+    events: allEvents,
+    currentChosenDay,
+    showDates = true,
+    interval = [0, 23],
+}: Props) => {
     const { isSmallDesktop } = useCurrentDevice()
     const { scale, shift, events, handleOpenModal } = useCalendarGeneral({ interval, events: allEvents })
     const [chosenEvent, setChosenEvent] = useState<DayCalendarEvent | null>(null)
-    const [currentDay, setCurrentDay] = useState(getCurrentDay())
+    const [currentDay, setCurrentDay] = useState(getCurrentDay(currentChosenDay))
     const carouselRef = useRef<HTMLDivElement>(null)
     const timeInterval = chosenEvent
         ? (`${chosenEvent.startTime} - ${getEndTime(chosenEvent.startTime, chosenEvent.duration)}` as TimeIntervals)
@@ -29,30 +34,29 @@ export const useCalendarDay = ({ interval = [0, 23], events: allEvents, showDate
         setCurrentDay(pageIndex)
     }
 
-    useEffect(() => {
-        if (carouselRef.current) {
-            carouselRef.current.scrollLeft = carouselRef.current.clientWidth * getCurrentDay()
-        }
-    }, [carouselRef])
-
     const handleDayClick = (day: number) => {
         if (carouselRef.current) {
             carouselRef.current.scrollLeft = carouselRef.current.clientWidth * day
         }
     }
 
+    useLayoutEffect(() => {
+        handleDayClick(getCurrentDay(currentChosenDay))
+    }, [carouselRef, currentChosenDay])
+
     return {
-        handleDayClick,
         currentDay,
         events,
-        handleCarouselScroll,
         carouselRef,
         interval,
         scale,
         shift,
-        onEventClick,
         showDates,
         chosenEvent,
         timeInterval,
+        currentChosenDay,
+        handleDayClick,
+        handleCarouselScroll,
+        onEventClick,
     }
 }

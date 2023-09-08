@@ -1,7 +1,7 @@
 import { SCHEDULE_CURRENT_ROUTE, scheduleRoutes } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
 import { scheduleModel } from '@entities/schedule'
-import { VIEWS } from '@entities/schedule/consts'
+import { SESSION_VIEWS, VIEWS } from '@entities/schedule/consts'
 import Flex from '@shared/ui/flex'
 import PageBlock from '@shared/ui/page-block'
 import { Button, Wrapper } from '@ui/atoms'
@@ -21,12 +21,12 @@ const Schedule = () => {
     const { allRoutes } = menuModel.selectors.useMenu()
     const {
         isSideMenuOpen,
-        filter,
-        isGroup,
+        onHintClick,
+        handleValue,
+        handleReturnToMySchedule,
         shouldShowSlider,
+        isSessionPage,
         baseSearchValue,
-        search,
-        setSearch,
         handleLoad,
         handleOpenSideMenu,
         isMobile,
@@ -40,7 +40,7 @@ const Schedule = () => {
                         <Slider
                             size="small"
                             sliderWidth="240px"
-                            pages={VIEWS}
+                            pages={isSessionPage ? SESSION_VIEWS : VIEWS}
                             currentPage={view}
                             appearance={!isMobile}
                             setCurrentPage={scheduleModel.events.changeView}
@@ -53,15 +53,15 @@ const Schedule = () => {
                     </Flex>
                 }
             >
+                {/* <ColorsWidget /> */}
                 {allRoutes && (
                     <Flex gap="16px" ai="flex-start">
                         {isSideMenuOpen && !isMobile && (
                             <SideMenu
-                                search={search}
-                                setSearch={setSearch}
                                 baseSearchValue={baseSearchValue}
-                                isGroup={isGroup}
-                                filter={filter}
+                                handleReturnToMySchedule={handleReturnToMySchedule}
+                                onHintClick={onHintClick}
+                                handleValue={handleValue}
                             />
                         )}
                         <Switch>

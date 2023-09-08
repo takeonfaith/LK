@@ -1,4 +1,4 @@
-export * from './ui/day'
-export * from './ui/week'
+export * from './calendars/day'
+export * from './calendars/week'
 
 export * from './types'

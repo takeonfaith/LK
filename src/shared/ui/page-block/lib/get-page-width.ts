@@ -5,7 +5,7 @@ const sizes: Record<ExtSize, string> = {
     small: '600px',
     middle: '700px',
     big: '1000px',
-    large: '1450px',
+    large: '100%',
 }
 
 export const getPageWidth = (exactCurrentPage: IRoute | null) => sizes[exactCurrentPage?.pageSize ?? 'middle']

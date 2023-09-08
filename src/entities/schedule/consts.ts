@@ -4,6 +4,7 @@ import { IWeekDays, WEEK_DAYS } from '@shared/consts'
 export enum View {
     day,
     week,
+    month,
 }
 
 export const VIEWS = [
@@ -17,6 +18,14 @@ export const VIEWS = [
     },
 ]
 
+export const SESSION_VIEWS = [
+    ...VIEWS,
+    {
+        title: 'Месяц',
+        condition: true,
+    },
+]
+
 export const EMPTY_WEEK = Object.keys(WEEK_DAYS).reduce((acc, el) => {
     acc[el as keyof IWeekDays] = []
     return acc
@@ -26,7 +35,7 @@ type GetScheduleResult = { schedule: IFullSchedule; teachers: string[] }
 
 export const SCHEDULE_NO_RESULT: GetScheduleResult = {
     schedule: {
-        // today: [],
+        today: [],
         week: EMPTY_WEEK,
         semestr: EMPTY_WEEK,
         session: {},

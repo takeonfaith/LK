@@ -61,7 +61,7 @@ export interface ISessionSchedule {
 }
 
 export interface IFullSchedule {
-    // today: DayCalendarEvent[]
+    today: DayCalendarEvent[]
     week: IWeekEventSchedule
     semestr: IWeekEventSchedule
     session: ISessionSchedule
@@ -75,6 +75,8 @@ export interface ISchedule {
         externalSchedule: IFullSchedule | null
         teachers: string[]
         view: View
+        filter: string
+        searchValue: string
     }
     loading: boolean
     error: string | null

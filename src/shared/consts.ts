@@ -87,7 +87,7 @@ export const Colors: IColors = {
         light1: '#66dfdf',
         light2: '#8bf1f1',
         light3: '#a3fbfb',
-        transparent1: '#a3fbfb99',
+        transparent1: '#98e8e899',
         transparent2: '#a3fbfb59',
         transparent3: '#a3fbfb29',
     },
@@ -372,8 +372,8 @@ export const MAX_FILE_SIZE = 10
 export const MOBILE_SCREEN = '(max-width: 766px)'
 export const NOT_MOBILE_SCREEN = '(min-width: 767px)'
 export const TABLET_SCREEN = '(max-width: 1000px)'
-export const SMALL_DESKTOP = '(max-width: 1300px)'
-export const MIDDLE_DESKTOP = '(min-width: 1301px)'
+export const SMALL_DESKTOP = '(max-width: 1380px)'
+export const MIDDLE_DESKTOP = '(min-width: 1381px)'
 
 export const MEDIA_QUERIES = {
     isMobile: `@media ${MOBILE_SCREEN}`,

@@ -6,9 +6,12 @@ import React from 'react'
 const CurrentSchedule = () => {
     const {
         data: { schedule, externalSchedule, view },
+        loading,
     } = scheduleModel.selectors.useSchedule()
 
-    const resultSchedule = externalSchedule ?? schedule ?? SCHEDULE_NO_RESULT.schedule
+    const resultSchedule = loading
+        ? SCHEDULE_NO_RESULT.schedule
+        : externalSchedule ?? schedule ?? SCHEDULE_NO_RESULT.schedule
 
     return <Template showDates events={resultSchedule.week} view={view} />
 }

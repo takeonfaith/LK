@@ -1,12 +1,13 @@
 import Flex from '@shared/ui/flex'
 import React from 'react'
 import { DayCalendarEvent } from '../../types'
-import { CurrentTimeLine } from '../day/ui/current-time-line'
+import { CurrentTimeLine } from '../../calendars/day/ui/current-time-line'
 import EventItem from './event-item'
 import { prepareEvents } from './lib/prepare-events'
 import { EventsWrapper } from './styles'
 
 type Props = {
+    currentDay?: number
     events: DayCalendarEvent[] | null | undefined
     shift: number
     currentEvent: DayCalendarEvent | null
@@ -18,16 +19,34 @@ type Props = {
     showTime?: boolean
 }
 
-const Events = ({ events, currentEvent, shift, scale, onClick, shortInfo, weekDay, interval, showTime }: Props) => {
+const Events = ({
+    events,
+    currentEvent,
+    shift,
+    scale,
+    shortInfo,
+    weekDay,
+    interval,
+    showTime,
+    onClick,
+    currentDay,
+}: Props) => {
     const eventsPrepared = prepareEvents(events)
 
     const isCurrentDay = new Date().getDay() === weekDay
+    const isTimelineVisible = currentDay !== undefined ? currentDay + 1 === weekDay : undefined
 
     return (
         <Flex d="row" gap="2px" h="100%" className="events">
             <EventsWrapper h="100%" d="column">
                 {isCurrentDay && (
-                    <CurrentTimeLine showTime={showTime} scale={scale} shift={shift} interval={interval} />
+                    <CurrentTimeLine
+                        isVisible={isTimelineVisible}
+                        showTime={showTime}
+                        scale={scale}
+                        shift={shift}
+                        interval={interval}
+                    />
                 )}
                 {Object.keys(eventsPrepared).map((key, i) => {
                     return eventsPrepared[key].map((event, index) => {

@@ -6,7 +6,7 @@ import Flex from '@shared/ui/flex'
 import Notification from '@shared/ui/notification'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
-import { MdOutlineNotifications } from 'react-icons/md'
+import { FiBell } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
@@ -84,7 +84,7 @@ const NotificationBellSection = () => {
             >
                 {notifications.length > 10 ? '10+' : notifications.length}
             </Notification>
-            <MdOutlineNotifications />
+            <FiBell />
         </NotificationBellStyled>
     )
 }

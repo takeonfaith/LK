@@ -1,10 +1,14 @@
 import { MEDIA_QUERIES } from '@shared/consts'
 import styled from 'styled-components'
-import { CALENDAR_HEIGHT_DESKTOP, CALENDAR_HEIGHT_MOBILE } from '@pages/schedule/consts'
-import { Wrapper } from '../wrapper'
+import { CALENDAR_HEIGHT_DESKTOP, CALENDAR_HEIGHT_MOBILE, CALENDAR_HEIGHT_TABLET } from '@pages/schedule/consts'
+import { Wrapper } from '../../ui/wrapper'
 
 export const DayCalendarWrapper = styled(Wrapper)`
     height: ${CALENDAR_HEIGHT_DESKTOP};
+
+    ${MEDIA_QUERIES.isTablet} {
+        height: ${CALENDAR_HEIGHT_TABLET};
+    }
 
     ${MEDIA_QUERIES.isMobile} {
         height: ${CALENDAR_HEIGHT_MOBILE};
@@ -12,8 +16,8 @@ export const DayCalendarWrapper = styled(Wrapper)`
 `
 
 export const EventInfo = styled.div`
-    min-width: 380px;
-    max-width: 380px;
+    min-width: 340px;
+    max-width: 340px;
     height: 100%;
     z-index: 10;
     background: var(--form);

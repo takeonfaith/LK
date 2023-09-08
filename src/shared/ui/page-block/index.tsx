@@ -14,7 +14,7 @@ const PageBlockStyled = styled(BlockWrapper)<{ titleLen: number; hasCenterEl: bo
     }
 
     ${MEDIA_QUERIES.isMobile} {
-        padding-top: ${({ hasCenterEl }) => (hasCenterEl ? '90px' : '50px')};
+        padding-top: ${({ hasCenterEl }) => (hasCenterEl ? '90px' : '45px')};
     }
 `
 
@@ -26,7 +26,7 @@ const TopRightCornerElement = styled.div`
     display: flex;
     justify-content: flex-end;
 
-    @media (max-width: 550px) {
+    ${MEDIA_QUERIES.isMobile} {
         top: -4px;
         right: 7px;
     }

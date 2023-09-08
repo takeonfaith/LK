@@ -4,11 +4,11 @@ import { DayCalendarEvent } from '@shared/ui/calendar/types'
 import React from 'react'
 import { useModal } from 'widgets'
 import { getTimeInterval } from '../lib/get-time-interval'
-import { CalendarWeekProps } from '../ui/week/types'
+import { CalendarWeekProps } from '../calendars/week/types'
 
 type Props = CalendarWeekProps
 
-export const useCalendarGeneral = ({ interval, showDates, events }: Props) => {
+export const useCalendarGeneral = ({ interval, showDates, events, onDayClick }: Props) => {
     const shift = interval[0] * 60
     const { open } = useModal()
     const scale = useCalendarScale()
@@ -31,5 +31,5 @@ export const useCalendarGeneral = ({ interval, showDates, events }: Props) => {
         )
     }
 
-    return { handleOpenModal, shift, showDates, interval, events, scale }
+    return { handleOpenModal, onDayClick, shift, showDates, interval, events, scale }
 }

@@ -25,6 +25,11 @@ export const EventItemStyled = styled.div<StyledProps>`
     left: 0;
     top: ${getTop};
 
+    a {
+        color: ${({ color }) => color};
+        text-decoration: underline;
+    }
+
     &:hover {
         filter: brightness(0.95);
     }
@@ -55,6 +60,7 @@ export const IconSection = styled.div<{ scale: number }>`
 
 export const EventFront = styled(Flex)<{ shortInfo: boolean; scale: number }>`
     gap: ${({ shortInfo }) => (!shortInfo ? '10px' : '6px')};
+    height: 100%;
 
     ${MEDIA_QUERIES.isMobile} {
         gap: ${({ shortInfo }) => (!shortInfo ? '8px' : '6px')};
@@ -73,6 +79,7 @@ export const EventTitle = styled.span<{ shortInfo: boolean; scale: number }>`
     margin-bottom: 2px;
 
     ${MEDIA_QUERIES.isMobile} {
+        word-break: break-all;
         font-size: ${({ shortInfo }) => (!shortInfo ? `0.8rem` : '0.7rem')};
     }
 `

@@ -76,6 +76,7 @@ const GlobalAppSearch = ({ size = 'large' }: Props) => {
                 icon={<FiSearch />}
                 width="40px"
                 minWidth="40px"
+                shrinkTextInMobile
                 background="transparent"
                 onClick={handleOpenModal}
             />

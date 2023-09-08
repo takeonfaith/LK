@@ -1,8 +1,10 @@
 import React from 'react'
 import { WeekEvents } from '../../types'
 import { DateWrapper, DayWrapper, WeekDay, WeekDayTop, WeekDaysWrapper } from './styles'
-import { SubjectsIndicator } from '../subjects-indicator'
+import { IndicatorItem, SubjectsIndicator } from '../subjects-indicator'
 import { getWeekNames } from './lib/get-week-names'
+import { Colors } from '@shared/consts'
+import Flex from '@shared/ui/flex'
 
 type Props = {
     showDates?: boolean
@@ -24,7 +26,11 @@ export const WeekDays = ({ showDates, showColumns, currentChosenDay, onDayClick,
                 return (
                     <WeekDay key={day} showColumns={showColumns} onClick={onDayClick && (() => onDayClick?.(i))}>
                         <WeekDayTop>
-                            <DayWrapper isCurrentChosenDay={!showDates && isCurrentChosenDay} showDates={showDates}>
+                            <DayWrapper
+                                isCurrent={+date === new Date().getDate()}
+                                isCurrentChosenDay={!showDates && isCurrentChosenDay}
+                                showDates={showDates}
+                            >
                                 {day}
                             </DayWrapper>
                             {showDates && (
@@ -38,6 +44,11 @@ export const WeekDays = ({ showDates, showColumns, currentChosenDay, onDayClick,
                         </WeekDayTop>
                         {events && showDates && (
                             <SubjectsIndicator subjects={events[Object.keys(events)[i] as keyof typeof events]} />
+                        )}
+                        {events && !showDates && events[Object.keys(events)[i] as keyof typeof events].length > 0 && (
+                            <Flex jc="center">
+                                <IndicatorItem background={Colors.grey.main} />
+                            </Flex>
                         )}
                     </WeekDay>
                 )

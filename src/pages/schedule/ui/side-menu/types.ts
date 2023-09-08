@@ -1,7 +1,8 @@
+import { Hint } from '@shared/ui/search'
+
 export type SideMenuProps = {
-    filter: string | null
-    isGroup: boolean
-    search: string
+    handleReturnToMySchedule: () => void
+    onHintClick: (isSearchingGroup: boolean) => (hint: Hint | undefined) => void
+    handleValue: (value: string) => void
     baseSearchValue: string
-    setSearch: React.Dispatch<React.SetStateAction<string>>
 }

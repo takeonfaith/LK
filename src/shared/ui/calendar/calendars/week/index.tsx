@@ -1,19 +1,19 @@
 import { IWeekDayNames, WEEK_DAYS } from '@shared/consts'
 import React from 'react'
-import { CalendarWrapper } from '../calendar-wrapper'
-import Events from '../event/events'
-import Times from '../times'
-import { WeekDays } from '../week-days'
+import { CalendarWrapper } from '../../ui/calendar-wrapper'
+import Events from '../../ui/event/events'
+import Times from '../../ui/times'
+import { WeekDays } from '../../ui/week-days'
 import { useCalendarGeneral } from '../../hooks/use-calendar-general'
 import { WeekCalendarWrapper } from './styles'
 import { CalendarWeekProps } from './types'
 
 const WeekCalendar = (props: CalendarWeekProps) => {
-    const { handleOpenModal, shift, scale, showDates, interval, events } = useCalendarGeneral(props)
+    const { handleOpenModal, onDayClick, shift, scale, showDates, interval, events } = useCalendarGeneral(props)
 
     return (
         <WeekCalendarWrapper d="column">
-            <WeekDays showDates={showDates} showColumns={true} events={events} />
+            <WeekDays onDayClick={onDayClick} showDates={showDates} showColumns={true} events={events} />
             <CalendarWrapper>
                 <Times interval={interval} scale={scale} />
                 {Object.keys(WEEK_DAYS).map((day, i) => {

@@ -5,8 +5,8 @@ import { HiOutlineCalendar, HiOutlineExternalLink, HiOutlineLogin, HiOutlineUser
 import DotSeparatedWords from '../../../dot-separated-words'
 import Flex from '../../../flex'
 import { DayCalendarEvent } from '../../types'
-import EventBackground from '../day/ui/event-background'
-import IconText from '../day/ui/icon-text'
+import EventBackground from '../../calendars/day/ui/event-background'
+import IconText from '../../calendars/day/ui/icon-text'
 import { EventFront, EventItemStyled, EventTitle, MobileIcon } from './styles'
 import { UIProps } from './types'
 import { TimeIndicator } from '@features/schedule/ui/subject/time-indicator'
@@ -74,7 +74,6 @@ const EventItem = (props: Props) => {
             <MobileIcon>{icon}</MobileIcon>
             <EventBackground icon={icon} background={background} />
             <Flex className="event-body" gap="0px" ai="flex-start">
-                {/* {!shortInfo && <IconSection scale={scale}>{icon}</IconSection>} */}
                 <EventFront scale={scale} d="column" ai="flex-start" shortInfo={shortInfo}>
                     <Flex d="column" gap="2px">
                         {!shortInfo && (
@@ -88,14 +87,14 @@ const EventItem = (props: Props) => {
                                     />
                                 )}
                                 {!!link && (
-                                    <Flex gap="5px" d="column" ai="flex-start">
+                                    <a href={link} target="_blank" rel="noreferrer">
                                         <IconText shortInfo={shortInfo} icon={<HiOutlineExternalLink />} text={place} />
-                                    </Flex>
+                                    </a>
                                 )}
                             </Flex>
                         )}
                         <EventTitle scale={scale} shortInfo={shortInfo}>
-                            {!extremeSmallSize && getShortString(title, shortInfo ? 50 : 300)}
+                            {!extremeSmallSize && getShortString(title, shortInfo ? (hideSomeInfo ? 43 : 35) : 300)}
                         </EventTitle>
                     </Flex>
 
@@ -105,6 +104,19 @@ const EventItem = (props: Props) => {
                             text={<DotSeparatedWords words={shortInfo ? [shortNames[0]] : shortNames} />}
                             icon={<HiOutlineUserCircle />}
                         />
+                    )}
+
+                    {!!rooms?.length && shortInfo && !hideSomeInfo && (
+                        <IconText
+                            shortInfo={shortInfo}
+                            icon={<HiOutlineLogin />}
+                            text={<DotSeparatedWords words={rooms} />}
+                        />
+                    )}
+                    {!!link && shortInfo && !hideSomeInfo && (
+                        <a href={link} target="_blank" rel="noreferrer">
+                            <IconText shortInfo={shortInfo} icon={<HiOutlineExternalLink />} text={place} />
+                        </a>
                     )}
 
                     {!!dateInterval && !hideSomeInfo && (

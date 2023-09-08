@@ -1,31 +1,44 @@
-import { SCHEDULE_RETAKE_ROUTE } from '@app/routes/general-routes'
+import { SCHEDULE_FILTER_ROUTE, SCHEDULE_RETAKE_ROUTE, SCHEDULE_SESSION_ROUTE } from '@app/routes/general-routes'
 import { scheduleModel } from '@entities/schedule'
 import { userModel } from '@entities/user'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router'
+import { useHistory, useLocation } from 'react-router'
 import { useModal } from 'widgets'
 import { SideMenuContent } from '../ui/side-menu/side-menu-content'
 import React from 'react'
-
-/*
-    TODO: 
-*/
+import { getEnrichedTemplatePath } from '@entities/menu/lib/get-enriched-template-path'
+import { Hint } from '@shared/ui/search'
 
 const useSchedule = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const {
+        data: { filter },
+    } = scheduleModel.selectors.useSchedule()
+
     const { isTablet, isMobile } = useCurrentDevice()
     const [isSideMenuOpen, setIsSideMenuOpen] = useState(true)
     const location = useLocation()
+    const history = useHistory()
     const shouldShowSlider = location.pathname !== SCHEDULE_RETAKE_ROUTE
     const splitted = location.pathname.split('/')
-    const filter = splitted.length === 4 ? splitted[splitted.length - 1] : null
-    const isGroup = filter ? /\d/.test(filter) : false
+    const urlFilter = splitted.length === 4 ? splitted[splitted.length - 1] : null
+    const isGroup = urlFilter ? /\d/.test(urlFilter) : false
     const baseSearchValue = user?.user_status === 'staff' ? user?.fullName ?? '' : user?.group ?? ''
-    const [search, setSearch] = useState(baseSearchValue)
+    const isSessionPage = location.pathname === SCHEDULE_SESSION_ROUTE
     const { open } = useModal()
+
+    const handleReturnToMySchedule = () => {
+        if (filter) {
+            history.push(getEnrichedTemplatePath(SCHEDULE_FILTER_ROUTE, { page: location.pathname.split('/')[2] }))
+        }
+
+        scheduleModel.events.setSearchValue(baseSearchValue)
+        scheduleModel.events.setFilter('')
+        scheduleModel.events.resetExternalSchedule()
+    }
 
     useEffect(() => {
         if (isMobile || isTablet) {
@@ -36,16 +49,18 @@ const useSchedule = () => {
     }, [isTablet, isMobile])
 
     useEffect(() => {
-        if (filter) {
+        if (urlFilter) {
+            scheduleModel.events.setFilter(urlFilter)
+            scheduleModel.events.setSearchValue(urlFilter)
             if (isGroup) {
-                scheduleModel.effects.getGroupScheduleFx({ group: filter })
+                scheduleModel.effects.getGroupScheduleFx({ group: urlFilter })
             } else {
-                scheduleModel.effects.getTeacherScheduleFx({ fullName: filter })
+                scheduleModel.effects.getTeacherScheduleFx({ fullName: urlFilter })
             }
         } else {
-            scheduleModel.events.resetExternalSchedule()
+            handleReturnToMySchedule()
         }
-    }, [filter])
+    }, [urlFilter])
 
     useEffect(() => {
         return () => {
@@ -61,15 +76,34 @@ const useSchedule = () => {
         }
     }
 
+    const onHintClick = () => {
+        return (hint: Hint | undefined) => {
+            if (hint?.id === user?.group) {
+                handleReturnToMySchedule()
+            }
+            if (hint?.id) {
+                history.push(
+                    getEnrichedTemplatePath(SCHEDULE_FILTER_ROUTE, {
+                        page: location.pathname.split('/')[2],
+                        filter: hint.value,
+                    }),
+                )
+            }
+        }
+    }
+
+    const handleValue = (value: string) => {
+        scheduleModel.events.setSearchValue(value)
+    }
+
     const handleOpenSideMenu = () => {
         if (isMobile) {
             open(
                 <SideMenuContent
-                    filter={filter}
-                    isGroup={isGroup}
-                    search={search}
                     baseSearchValue={baseSearchValue}
-                    setSearch={setSearch}
+                    handleReturnToMySchedule={handleReturnToMySchedule}
+                    onHintClick={onHintClick}
+                    handleValue={handleValue}
                 />,
             )
         } else {
@@ -80,12 +114,12 @@ const useSchedule = () => {
     return {
         isSideMenuOpen,
         shouldShowSlider,
-        filter,
-        isGroup,
         isMobile,
-        search,
+        isSessionPage,
         baseSearchValue,
-        setSearch,
+        handleValue,
+        onHintClick,
+        handleReturnToMySchedule,
         handleLoad,
         handleOpenSideMenu,
     }

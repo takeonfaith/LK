@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from '@shared/consts'
 import { Direction } from '@ui/types'
 import styled from 'styled-components'
 
@@ -45,16 +46,7 @@ const BlockWrapper = styled.div<StyledProps>`
         padding-right: 5px;
     }
 
-    @media (max-width: 1400px) {
-        max-width: ${({ maxWidth }) => maxWidth ?? '800px'};
-        /* width: 100%; */
-    }
-
-    @media (max-width: 1225px) {
-        max-width: ${({ maxWidth }) => maxWidth ?? '600px'};
-    }
-
-    @media (max-width: 550px) {
+    ${MEDIA_QUERIES.isMobile} {
         /* height: auto; */
         /* max-height: 100%; */
         flex-direction: column;

@@ -51,8 +51,16 @@ export const normalizeSchedule = (
             }
         }
     }
+    const currentDay = new Date()
+        .toLocaleDateString('en-EN', {
+            weekday: 'long',
+        })
+        .toLocaleLowerCase() as IWeekDayNames
+
+    const today = week[currentDay]
 
     return {
+        today,
         week,
         semestr,
         session: {},

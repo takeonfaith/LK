@@ -28,7 +28,7 @@ const TimeLine = styled.div`
 `
 
 const SubtextStyled = styled(Subtext)`
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 
     ${MEDIA_QUERIES.isMobile} {
         font-size: 0.65rem;
@@ -42,10 +42,16 @@ const TIMES = Array(24)
 type Props = {
     interval: [number, number]
     scale: number
+    shortTimes?: boolean
 }
 
-const Times = ({ interval, scale }: Props) => {
-    const times = TIMES.slice(interval[0], interval[1] + 1)
+const Times = ({ interval, scale, shortTimes = false }: Props) => {
+    const times = shortTimes
+        ? Array(24)
+              .fill(0)
+              .map((_, i) => `${i}`)
+              .slice(interval[0], interval[1] + 1)
+        : TIMES.slice(interval[0], interval[1] + 1)
 
     return (
         <TimeWrapper

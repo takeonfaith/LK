@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from '@shared/consts'
 import styled from 'styled-components'
 
 const HeaderWrapper = styled.header<{ hidden?: boolean; headerVisible: boolean }>`
@@ -15,15 +16,21 @@ const HeaderWrapper = styled.header<{ hidden?: boolean; headerVisible: boolean }
     color: var(--text);
     display: ${({ hidden = false }) => (hidden ? 'none' : 'flex')};
 
-    & button {
+    & .back-button-wrapper button {
         transform: translateX(${({ headerVisible }) => (headerVisible ? '-35px' : '0')});
     }
+    ${MEDIA_QUERIES.isTablet} {
+        & .back-button-wrapper button {
+            transform: translateX(${({ headerVisible }) => (headerVisible ? '-25px' : '0')});
+        }
+    }
 
-    @media (max-width: 550px) {
+    ${MEDIA_QUERIES.isMobile} {
         padding: 0 15px;
         width: 100%;
         justify-content: flex-start;
-        & button {
+
+        & .back-button-wrapper button {
             transform: none;
         }
     }
@@ -34,7 +41,7 @@ export const HeaderTitle = styled.div<{
     noButton: boolean | undefined
     maxWidth: string
 }>`
-    max-width: ${({ maxWidth }) => maxWidth};
+    max-width: ${({ maxWidth }) => `calc(${maxWidth} - ${maxWidth === '100%' ? '55' : '40'}px)`};
     width: 100%;
     font-size: ${({ headerVisible }) => (headerVisible ? '1.1rem' : '1.4rem')};
     font-weight: 600;
@@ -46,14 +53,15 @@ export const HeaderTitle = styled.div<{
     pointer-events: none;
 
     @media (min-width: 1001px) {
-        transform: ${({ headerVisible }) => `translate(${headerVisible ? '0, 0' : '19px, 75px'})`};
+        transform: ${({ headerVisible }) => `translate(${headerVisible ? '-20px, 0' : '0px, 75px'})`};
     }
 
-    @media (max-width: 1000px) {
-        transform: ${({ headerVisible }) => `translate(${headerVisible ? '0, 0' : '26px, 75px'})`};
+    ${MEDIA_QUERIES.isTablet} {
+        max-width: ${({ maxWidth }) => `calc(${maxWidth} - ${maxWidth === '100%' ? '44' : '40'}px)`};
+        transform: ${({ headerVisible }) => `translate(${headerVisible ? '-14px, 0' : '6px, 75px'})`};
     }
 
-    @media (max-width: 550px) {
+    ${MEDIA_QUERIES.isMobile} {
         transform: ${({ headerVisible, noButton }) =>
             `translate(${headerVisible ? (noButton ? '0, 0' : '25px, 0') : '0px, 50px'})`};
         width: ${({ headerVisible }) => (headerVisible ? '180px' : 'calc(100% - 30px)')};

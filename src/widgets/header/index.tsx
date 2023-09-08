@@ -13,7 +13,7 @@ type Props = {
 }
 
 const Header: React.FC<Props> = ({ currentPage, headerVisible = false }) => {
-    const { isMobile } = useCurrentDevice()
+    const { isMobile, isTablet } = useCurrentDevice()
 
     const { headerTitle, backButton, isHeaderVisible, maxWidth } = useHeader({
         currentPage,
@@ -28,9 +28,9 @@ const Header: React.FC<Props> = ({ currentPage, headerVisible = false }) => {
                 {headerTitle}
             </HeaderTitle>
             <Flex jc="space-between" mw={maxWidth}>
-                {backButton ?? <div />}
+                <div className="back-button-wrapper">{backButton ?? <div />}</div>
 
-                {isMobile && <UserInfo showSearch />}
+                {(isMobile || isTablet) && <UserInfo showSearch />}
             </Flex>
         </HeaderWrapper>
     )

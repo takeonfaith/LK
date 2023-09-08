@@ -15,7 +15,7 @@ const getColor = ({ isCurrent, isCurrentChosenDay }: DateWrapperProps) => {
 
     if (isCurrentChosenDay) return 'var(--invert-text)'
 
-    if (isCurrent) return 'var(--reallyBlue)'
+    if (isCurrent) return 'var(--blue)'
 
     return 'var(--text)'
 }
@@ -72,11 +72,11 @@ export const WeekDayTop = styled(Flex)`
     }
 `
 
-export const DayWrapper = styled.span<{ showDates?: boolean; isCurrentChosenDay: boolean }>`
+export const DayWrapper = styled.span<{ showDates?: boolean; isCurrentChosenDay: boolean; isCurrent: boolean }>`
     margin-left: auto;
     margin-right: ${({ showDates }) => (!showDates ? 'auto' : '0')};
-    background: ${getBackground};
-    color: ${({ isCurrentChosenDay }) => (isCurrentChosenDay ? '#fff' : 'var(--grey)')};
+    background: ${({ showDates }) => !showDates && getBackground};
+    color: ${({ showDates }) => (!showDates ? getColor : 'var(--grey)')};
     padding: 5px;
     border-radius: 25px;
 

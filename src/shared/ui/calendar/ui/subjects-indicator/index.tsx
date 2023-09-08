@@ -10,7 +10,7 @@ const SubjectsIndicatorStyled = styled.div`
     width: fit-content;
 `
 
-const IndicatorItem = styled.div<{ background: string }>`
+export const IndicatorItem = styled.div<{ background: string }>`
     width: 6px;
     height: 6px;
     border-radius: 10px;

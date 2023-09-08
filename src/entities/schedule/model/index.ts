@@ -11,6 +11,8 @@ const DEFAULT_STORE: ISchedule = {
         externalSchedule: null,
         teachers: [],
         view: View.day,
+        filter: '',
+        searchValue: '',
     },
     loading: false,
     error: null,
@@ -51,6 +53,8 @@ const changeCurrentModule = createEvent<{ currentModule: keyof IFullSchedule }>(
 const changeView = createEvent<View>()
 const changeCurrentChosenDay = createEvent<{ day: number }>()
 const clearStore = createEvent()
+const setFilter = createEvent<string>()
+const setSearchValue = createEvent<string>()
 const resetExternalSchedule = createEvent()
 // const getSchedule = createEvent<{ group: string }>()
 // const getExternalGroupSchedule = createEvent<{ group: string }>()
@@ -81,6 +85,20 @@ sample({
     clock: getScheduleFx.doneData,
     source: $schedule,
     fn: (store, schedule) => ({ ...store, data: { ...store.data, schedule } }),
+    target: $schedule,
+})
+
+sample({
+    clock: setFilter,
+    source: $schedule,
+    fn: (store, filter) => ({ ...store, data: { ...store.data, filter } }),
+    target: $schedule,
+})
+
+sample({
+    clock: setSearchValue,
+    source: $schedule,
+    fn: (store, searchValue) => ({ ...store, data: { ...store.data, searchValue } }),
     target: $schedule,
 })
 
@@ -143,6 +161,8 @@ export const events = {
     changeCurrentChosenDay,
     clearStore,
     resetExternalSchedule,
+    setSearchValue,
+    setFilter,
 }
 
 export const effects = {

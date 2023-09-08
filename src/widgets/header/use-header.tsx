@@ -67,7 +67,7 @@ const useHeader = ({ headerVisible, currentPage }: Props) => {
                     background="transparent"
                     text={isHeaderVisible ? undefined : 'Все разделы'}
                     padding="0"
-                    textColor="var(--reallyBlue)"
+                    textColor="var(--blue)"
                 />
             ),
         [currentPage, historyStack, onClickBackButton],

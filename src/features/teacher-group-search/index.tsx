@@ -10,7 +10,7 @@ import { HiOutlineUserCircle } from 'react-icons/hi'
 
 type Props = {
     value: string
-    setValue: React.Dispatch<React.SetStateAction<string>>
+    setValue: (value: string) => void
     onHintClick: (isSearchingGroup: boolean) => (hint: Hint | undefined) => void
     onValueEmpty?: () => void
 }
@@ -35,7 +35,7 @@ export const TeacherGroupSearch = ({ value, setValue, onHintClick, onValueEmpty 
             width="100%"
             setValue={setValue}
             onHintClick={onHintClick(isGroup)}
-            placeholder={'Группа/Преподаватель'}
+            placeholder={'Поиск'}
             customMask={isGroup ? Masks.groupMask : undefined}
             transformRequest={isGroup ? undefined : (el) => el.fio}
             request={request}
