@@ -1,9 +1,9 @@
 import { selectedPEStudentModel } from '@entities/pe-student/model'
-import { peStudentVisitsColumns } from '@features/physical-education/pe-student-visits/constants'
 import { useUnit } from 'effector-react'
 import { AddPeStudentVisits } from './features/add-pe-student-visits/ui'
 import { StyledTable, Wrapper } from './styled'
 import React from 'react'
+import { peStudentVisitsColumns } from './constants'
 
 export const PEStudentVisits = () => {
     const [student] = useUnit([selectedPEStudentModel.stores.$selectedStudent])

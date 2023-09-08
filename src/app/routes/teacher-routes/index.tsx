@@ -334,11 +334,13 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Физическая культура',
         icon: <FiFileText />,
         color: 'lightGreen',
+        withoutHeader: true,
         path: PHYSICAL_EDUCATION,
         show: !isProduction,
         Component: TeacherPhysicalEducation,
         isTemplate: false,
         group: 'OTHER',
+        pageSize: 'big',
     },
     'physical-education-student': {
         id: 'physical-education-student',
@@ -350,6 +352,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         isTemplate: false,
         group: 'OTHER',
         show: false,
+        pageSize: 'big',
     },
     oop: {
         id: 'oop',
