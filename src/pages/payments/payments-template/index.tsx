@@ -24,7 +24,8 @@ const PaymentsTemplate = ({ contracts }: Props) => {
             {contracts.map((contract, i) => {
                 const { agreements, number, type, paygraph, payments, signed_user } = contract
                 const isDormitory = type === 'Общежитие'
-                const isSigned = signed_user
+                // Временная мера. Потом апи будет раздавать точную информацию о статусе договора.
+                const isSigned = true
                 const electronicAgreements = agreements.filter((item) => new Date(item?.date) > new Date('2022-02-1'))
 
                 return (
