@@ -9,10 +9,14 @@ const DEFAULT_STORE: ISchedule = {
     data: {
         schedule: null,
         externalSchedule: null,
+        externalStartDate: null,
+        externalEndDate: null,
         teachers: [],
         view: View.day,
         filter: '',
         searchValue: '',
+        startDate: new Date(),
+        endDate: new Date(),
     },
     loading: false,
     error: null,
@@ -35,6 +39,7 @@ const getScheduleFx = createEffect(async ({ group, fullName }: { fullName?: stri
 
 const getGroupScheduleFx = createEffect(async ({ group }: { group: string | undefined }) => {
     try {
+        if (!group) throw new Error('Невозможно получить расписание, так как не указана группа')
         return await getGroupSchedule(group)
     } catch (error) {
         throw new Error((error as Error).message)
@@ -43,6 +48,8 @@ const getGroupScheduleFx = createEffect(async ({ group }: { group: string | unde
 
 const getTeacherScheduleFx = createEffect(async ({ fullName }: { fullName: string | undefined }) => {
     try {
+        if (!fullName) throw new Error('Невозможно получить расписание, так как не указано имя сотрудника')
+
         return await getTeacherSchedule(fullName)
     } catch (error) {
         throw new Error((error as Error).message + 'ЭВФЫВФ')
@@ -84,7 +91,7 @@ const $schedule = createStore(DEFAULT_STORE)
 sample({
     clock: getScheduleFx.doneData,
     source: $schedule,
-    fn: (store, schedule) => ({ ...store, data: { ...store.data, schedule } }),
+    fn: (store, schedule) => ({ ...store, data: { ...store.data, ...schedule } }),
     target: $schedule,
 })
 
@@ -105,14 +112,30 @@ sample({
 sample({
     clock: getTeacherScheduleFx.doneData,
     source: $schedule,
-    fn: (store, externalSchedule) => ({ ...store, data: { ...store.data, externalSchedule } }),
+    fn: (store, externalSchedule) => ({
+        ...store,
+        data: {
+            ...store.data,
+            externalSchedule: externalSchedule.schedule,
+            externalStartDate: externalSchedule.startDate,
+            externalEndDate: externalSchedule.endDate,
+        },
+    }),
     target: $schedule,
 })
 
 sample({
     clock: getGroupScheduleFx.doneData,
     source: $schedule,
-    fn: (store, externalSchedule) => ({ ...store, data: { ...store.data, externalSchedule } }),
+    fn: (store, externalSchedule) => ({
+        ...store,
+        data: {
+            ...store.data,
+            externalSchedule: externalSchedule.schedule,
+            externalStartDate: externalSchedule.startDate,
+            externalEndDate: externalSchedule.endDate,
+        },
+    }),
     target: $schedule,
 })
 
@@ -147,7 +170,10 @@ sample({
 sample({
     clock: resetExternalSchedule,
     source: $schedule,
-    fn: (store) => ({ ...store, data: { ...store.data, externalSchedule: null } }),
+    fn: (store) => ({
+        ...store,
+        data: { ...store.data, externalSchedule: null, externalStartDate: null, externalEndDate: null },
+    }),
     target: $schedule,
 })
 

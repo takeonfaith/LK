@@ -1,25 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { scheduleModel } from '@entities/schedule'
 import { View } from '@entities/schedule/consts'
 import { IWeekEventSchedule } from '@shared/api/model'
-import { DayCalendar } from '@shared/ui/calendar'
-import WeekCalendar from '@shared/ui/calendar/calendars/week'
-import Flex from '@shared/ui/flex'
+import { DayCalendar, MonthCalendar, WeekCalendar } from '@shared/ui/calendar'
 import React, { useState } from 'react'
-import Slider from 'widgets/slider'
 
 type Props = {
     events: IWeekEventSchedule
     view: number
     showDates: boolean
+    startDate: Date
+    endDate: Date
 }
 
-export const Template = ({ events, view, showDates }: Props) => {
+export const Template = ({ events, view, showDates, startDate, endDate }: Props) => {
     const [currentChosenDay, setCurrentChosenDay] = useState<number | undefined>(undefined)
     const handleDayClick = (dayIndex: number) => {
-        // eslint-disable-next-line no-console
-        console.log({ dayIndex })
-
         scheduleModel.events.changeView(View.day)
         setCurrentChosenDay(dayIndex)
     }
@@ -37,6 +32,13 @@ export const Template = ({ events, view, showDates }: Props) => {
             interval={[9, 22]}
             key="week"
             showDates={showDates}
+            onDayClick={handleDayClick}
+        />,
+        <MonthCalendar
+            key={'month'}
+            events={events}
+            startDate={startDate}
+            endDate={endDate}
             onDayClick={handleDayClick}
         />,
     ]

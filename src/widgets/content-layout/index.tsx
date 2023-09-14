@@ -11,6 +11,7 @@ import useContentLayout from './hooks/use-content-layout'
 import { ContentWrapper, PageContent, Wrapper } from './styled'
 import Header from 'widgets/header'
 import { menuModel } from '@entities/menu'
+import ErrorBoundary from '@shared/ui/error-boundary'
 
 const ContentLayout = () => {
     const {
@@ -33,9 +34,11 @@ const ContentLayout = () => {
             <ContentWrapper>
                 <Header headerVisible={headerVisible} currentPage={currentPage} />
                 <PageContent ref={contentRef} onScroll={handleContentScroll} withHeader={!currentPage?.withoutHeader}>
-                    <Suspense fallback={null}>
-                        <PrivateRouter />
-                    </Suspense>
+                    <ErrorBoundary>
+                        <Suspense fallback={null}>
+                            <PrivateRouter />
+                        </Suspense>
+                    </ErrorBoundary>
                 </PageContent>
                 <MobileBottomMenu />
             </ContentWrapper>

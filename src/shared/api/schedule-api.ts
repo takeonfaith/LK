@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { $api } from '@api/config'
 import emulateRequest from '@shared/lib/emulate-request'
 import token from '@utils/token'
-import { RawScheduleResponse, RawTeacherScheduleResponse } from './model'
+import { RawScheduleResponse, RawSessionScheduleResponse, RawTeacherScheduleResponse } from './model'
 
 const MOCK = {
     Monday: {
@@ -347,13 +348,14 @@ export const getTeachers = (fullName: string) => {
 }
 
 export const getSession = () => {
-    return emulateRequest({
-        data: {
-            '2023/01/01': [MOCK.Friday],
-        },
-    })
+    return $api.get<RawSessionScheduleResponse>(`?getSchedule&session=1&token=${token()}`)
+    // return emulateRequest({
+    //     data: {
+    //         '2023/01/01': [MOCK.Friday],
+    //     },
+    // })
 }
 
 export const getTeachersSession = (fullName: string) => {
-    return $api.get(`?getScheduleTeacher&fio=${fullName}&session=1&token=${token()}`)
+    return $api.get<RawSessionScheduleResponse>(`?getScheduleTeacher&fio=${fullName}&session=1&token=${token()}`)
 }

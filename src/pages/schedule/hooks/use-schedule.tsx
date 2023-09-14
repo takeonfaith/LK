@@ -1,21 +1,26 @@
-import { SCHEDULE_FILTER_ROUTE, SCHEDULE_RETAKE_ROUTE, SCHEDULE_SESSION_ROUTE } from '@app/routes/general-routes'
+import {
+    SCHEDULE_FILTER_ROUTE,
+    SCHEDULE_RETAKE_ROUTE,
+    SCHEDULE_SEMESTR_ROUTE,
+    SCHEDULE_SESSION_ROUTE,
+} from '@app/routes/general-routes'
+import { getEnrichedTemplatePath } from '@entities/menu/lib/get-enriched-template-path'
 import { scheduleModel } from '@entities/schedule'
+import { View } from '@entities/schedule/consts'
 import { userModel } from '@entities/user'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
-import { useEffect, useState } from 'react'
+import { Hint } from '@shared/ui/search'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import { useModal } from 'widgets'
 import { SideMenuContent } from '../ui/side-menu/side-menu-content'
-import React from 'react'
-import { getEnrichedTemplatePath } from '@entities/menu/lib/get-enriched-template-path'
-import { Hint } from '@shared/ui/search'
 
 const useSchedule = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
     const {
-        data: { filter },
+        data: { filter, view },
     } = scheduleModel.selectors.useSchedule()
 
     const { isTablet, isMobile } = useCurrentDevice()
@@ -27,7 +32,9 @@ const useSchedule = () => {
     const urlFilter = splitted.length === 4 ? splitted[splitted.length - 1] : null
     const isGroup = urlFilter ? /\d/.test(urlFilter) : false
     const baseSearchValue = user?.user_status === 'staff' ? user?.fullName ?? '' : user?.group ?? ''
-    const isSessionPage = location.pathname === SCHEDULE_SESSION_ROUTE
+    const isSessionPage = location.pathname.includes(SCHEDULE_SESSION_ROUTE)
+    const isSemestrPage = location.pathname.includes(SCHEDULE_SEMESTR_ROUTE)
+    const showMonth = isSessionPage || isSemestrPage
     const { open } = useModal()
 
     const handleReturnToMySchedule = () => {
@@ -39,6 +46,12 @@ const useSchedule = () => {
         scheduleModel.events.setFilter('')
         scheduleModel.events.resetExternalSchedule()
     }
+
+    useLayoutEffect(() => {
+        if (view === View.month && !showMonth) {
+            scheduleModel.events.changeView(View.day)
+        }
+    }, [view, showMonth])
 
     useEffect(() => {
         if (isMobile || isTablet) {
@@ -117,6 +130,7 @@ const useSchedule = () => {
         isMobile,
         isSessionPage,
         baseSearchValue,
+        showMonth,
         handleValue,
         onHintClick,
         handleReturnToMySchedule,

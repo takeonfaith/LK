@@ -1,0 +1,1 @@
+export const MAX_EVENTS_VISIBLE_PER_DAY = 4

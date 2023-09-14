@@ -76,7 +76,7 @@ export const Colors: IColors = {
         light2: '#58f3a6',
         light3: '#74f5b5',
         transparent1: '#a7ffd38a',
-        transparent2: '#a7ffd324',
+        transparent2: '#a7ffd35c',
         transparent3: '#4ad18e1f',
     },
     lightGreen: {
@@ -123,10 +123,10 @@ export const Colors: IColors = {
         main: '#3831a5',
         light1: '#443cc5',
         light2: '#5850d4',
-        light3: '#675fe5',
-        transparent1: '#5c54d9e0',
-        transparent2: '#5c54d9b5',
-        transparent3: '#5c54d98c',
+        light3: '#beb9ff',
+        transparent1: '#7f77ff78',
+        transparent2: '#7f77ff78',
+        transparent3: '#7f77ff12',
     },
     purple: {
         dark3: '#5c3381',
@@ -174,7 +174,7 @@ export const Colors: IColors = {
         light3: '#ffd7ab',
         transparent1: '#ffd7ab99',
         transparent2: '#ffd7ab54',
-        transparent3: '#ffd7ab1f',
+        transparent3: '#ffd7ab4a',
     },
     grey: {
         dark3: '#353535',

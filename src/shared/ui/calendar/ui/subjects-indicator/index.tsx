@@ -23,10 +23,12 @@ export const IndicatorItem = styled.div<{ background: string }>`
 `
 
 type Props = {
-    subjects: DayCalendarEvent[]
+    subjects: DayCalendarEvent[] | undefined
 }
 
 export const SubjectsIndicator = ({ subjects }: Props) => {
+    if (!subjects) return null
+
     return (
         <SubjectsIndicatorStyled>
             {subjects.map((subject) => {

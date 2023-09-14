@@ -26,15 +26,15 @@ const TimeIntervalStyled = styled.span`
 `
 
 type Props = {
-    timeInterval: string
+    timeInterval?: string
     color: IColorPalette
 }
 
 export const TimeIndicator = ({ timeInterval, color }: Props) => {
     return (
         <TimeIndicatorStyled>
-            <TimeSquare color={color.light1} />
-            <TimeIntervalStyled>{timeInterval}</TimeIntervalStyled>
+            <TimeSquare color={color.main} />
+            {timeInterval && <TimeIntervalStyled>{timeInterval}</TimeIntervalStyled>}
         </TimeIndicatorStyled>
     )
 }

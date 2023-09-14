@@ -4,6 +4,8 @@ export type DayCalendarEvent = {
     duration: number
     title: string
     startTime: string
+    startDate: Date
+    endDate: Date | null
     icon: ChildrenType
     place: string
     people: string[]

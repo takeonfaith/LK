@@ -6,7 +6,7 @@ import Flex from '@shared/ui/flex'
 import PageBlock from '@shared/ui/page-block'
 import { Button, Wrapper } from '@ui/atoms'
 import React from 'react'
-import { FiSidebar } from 'react-icons/fi'
+import { FiMenu, FiSidebar } from 'react-icons/fi'
 import { Redirect, Route, Switch } from 'react-router'
 import { Slider } from 'widgets'
 import useSchedule from './hooks/use-schedule'
@@ -25,7 +25,7 @@ const Schedule = () => {
         handleValue,
         handleReturnToMySchedule,
         shouldShowSlider,
-        isSessionPage,
+        showMonth,
         baseSearchValue,
         handleLoad,
         handleOpenSideMenu,
@@ -40,7 +40,7 @@ const Schedule = () => {
                         <Slider
                             size="small"
                             sliderWidth="240px"
-                            pages={isSessionPage ? SESSION_VIEWS : VIEWS}
+                            pages={showMonth ? SESSION_VIEWS : VIEWS}
                             currentPage={view}
                             appearance={!isMobile}
                             setCurrentPage={scheduleModel.events.changeView}
@@ -49,7 +49,12 @@ const Schedule = () => {
                 }
                 topRightCornerElement={
                     <Flex w="fit-content" gap="8px">
-                        <Button icon={<FiSidebar />} width="36px" height="36px" onClick={handleOpenSideMenu} />
+                        <Button
+                            icon={isMobile ? <FiMenu /> : <FiSidebar />}
+                            width="36px"
+                            height="36px"
+                            onClick={handleOpenSideMenu}
+                        />
                     </Flex>
                 }
             >

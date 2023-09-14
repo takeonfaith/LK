@@ -5,7 +5,7 @@ import { SCHEDULE_NO_RESULT } from '@entities/schedule/consts'
 
 const SemestrSchedule = () => {
     const {
-        data: { schedule, externalSchedule, view },
+        data: { schedule, externalSchedule, view, startDate, endDate, externalStartDate, externalEndDate },
         loading,
     } = scheduleModel.selectors.useSchedule()
 
@@ -13,7 +13,18 @@ const SemestrSchedule = () => {
         ? SCHEDULE_NO_RESULT.schedule
         : externalSchedule ?? schedule ?? SCHEDULE_NO_RESULT.schedule
 
-    return <Template showDates={false} events={resultSchedule.semestr} view={view} />
+    const resultStartDate = externalStartDate ?? startDate
+    const resultEndDate = externalEndDate ?? endDate
+
+    return (
+        <Template
+            showDates={false}
+            events={resultSchedule.semestr}
+            view={view}
+            startDate={resultStartDate}
+            endDate={resultEndDate}
+        />
+    )
 }
 
 export default SemestrSchedule

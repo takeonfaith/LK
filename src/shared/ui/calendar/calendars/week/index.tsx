@@ -8,7 +8,7 @@ import { useCalendarGeneral } from '../../hooks/use-calendar-general'
 import { WeekCalendarWrapper } from './styles'
 import { CalendarWeekProps } from './types'
 
-const WeekCalendar = (props: CalendarWeekProps) => {
+export const WeekCalendar = (props: CalendarWeekProps) => {
     const { handleOpenModal, onDayClick, shift, scale, showDates, interval, events } = useCalendarGeneral(props)
 
     return (
@@ -36,5 +36,3 @@ const WeekCalendar = (props: CalendarWeekProps) => {
         </WeekCalendarWrapper>
     )
 }
-
-export default WeekCalendar

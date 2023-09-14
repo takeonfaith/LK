@@ -5,7 +5,7 @@ import React from 'react'
 
 const CurrentSchedule = () => {
     const {
-        data: { schedule, externalSchedule, view },
+        data: { schedule, externalSchedule, view, startDate, endDate },
         loading,
     } = scheduleModel.selectors.useSchedule()
 
@@ -13,7 +13,7 @@ const CurrentSchedule = () => {
         ? SCHEDULE_NO_RESULT.schedule
         : externalSchedule ?? schedule ?? SCHEDULE_NO_RESULT.schedule
 
-    return <Template showDates events={resultSchedule.week} view={view} />
+    return <Template showDates events={resultSchedule.week} view={view} startDate={startDate} endDate={endDate} />
 }
 
 export default CurrentSchedule

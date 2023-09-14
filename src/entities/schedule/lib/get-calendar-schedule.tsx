@@ -5,6 +5,8 @@ import { TimeType, getMinutesFromStringTime } from '@shared/lib/get-minutes-from
 import { type DayCalendarEvent } from '@shared/ui/calendar'
 import React from 'react'
 import { HiBookOpen } from 'react-icons/hi'
+import { getFullStartDate } from './get-full-start-date'
+import { getFullEndDate } from './get-full-end-date'
 
 export const getCalendarSchedule = (
     lessons: ISubject[] | undefined | null,
@@ -16,11 +18,17 @@ export const getCalendarSchedule = (
             const [startTime, endTime] = timeInterval.split(' - ')
             const duration =
                 getMinutesFromStringTime(endTime as TimeType) - getMinutesFromStringTime(startTime as TimeType)
+            const [start, end] = dateInterval.split('-').map((part) => part.trim())
+            const startDate = getFullStartDate(start)
+            const endDate = getFullEndDate(end, start)
+
             return {
                 title: name,
                 people: teachers,
                 startTime,
                 duration,
+                startDate,
+                endDate,
                 placeIcon: <HiBookOpen />,
                 dateInterval,
                 color: TimeIntervalColor[timeInterval as keyof ITimeIntervalColor],

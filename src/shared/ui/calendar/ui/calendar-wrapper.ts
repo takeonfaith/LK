@@ -8,7 +8,6 @@ export const CalendarWrapper = styled.div`
     overflow-y: auto;
     display: flex;
 
-    /* gap: 6px; */
     &::-webkit-scrollbar {
         display: none;
     }

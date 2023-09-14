@@ -45,6 +45,9 @@ export type FullRawTeacherScheduleResponse = RawTeacherScheduleResponse | ErrorR
 export type RawScheduleResponse = Record<CapitalLettersWeekNames, Record<'lessons', ISubject[] | null>>
 export type FullRawScheduleResponse = RawScheduleResponse | ErrorResponse
 
+type ExamDate = string // 2023-12-26, например
+export type RawSessionScheduleResponse = Record<ExamDate, ILessons>
+
 export interface IWeekSchedule {
     monday: ILessons
     tuesday: ILessons
@@ -73,10 +76,14 @@ export interface ISchedule {
     data: {
         schedule: IFullSchedule | null
         externalSchedule: IFullSchedule | null
+        externalStartDate: Date | null
+        externalEndDate: Date | null
         teachers: string[]
         view: View
         filter: string
         searchValue: string
+        startDate: Date
+        endDate: Date
     }
     loading: boolean
     error: string | null

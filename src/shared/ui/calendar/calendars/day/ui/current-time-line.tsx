@@ -18,7 +18,7 @@ export const CurrentTimeLine = ({ isVisible = true, shift, scale, interval, show
     const timelineRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (isVisible) timelineRef.current?.scrollIntoView({ block: 'nearest' })
+        if (isVisible) timelineRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
 
         intervalRef.current = setInterval(() => {
             setCurrentTime(getCurrentTime(new Date(), interval[0] * 60, interval[1] * 60))
