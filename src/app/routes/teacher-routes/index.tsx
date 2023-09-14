@@ -168,7 +168,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'orange',
         isTemplate: false,
         group: 'FINANCES_DOCS',
-        pageSize: 'big',
+        pageSize: 'large',
     },
     ...generalRoutes,
     'download-agreements': {
