@@ -1,4 +1,4 @@
-import { IColorPalette, MEDIA_QUERIES } from '@shared/consts'
+import { IColorPalette, MEDIA_QUERIES } from '@shared/constants'
 import React from 'react'
 import styled from 'styled-components'
 

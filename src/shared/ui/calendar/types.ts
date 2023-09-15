@@ -1,4 +1,4 @@
-import { IColorPalette } from '@shared/consts'
+import { IColorPalette } from '@shared/constants'
 
 export type DayCalendarEvent = {
     duration: number

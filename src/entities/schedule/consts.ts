@@ -1,5 +1,5 @@
 import { IFullSchedule, IWeekEventSchedule } from '@shared/api/model'
-import { IWeekDays, WEEK_DAYS } from '@shared/consts'
+import { IWeekDays, WEEK_DAYS } from '@shared/constants'
 
 export enum View {
     day,

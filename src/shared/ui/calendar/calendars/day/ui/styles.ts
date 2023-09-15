@@ -1,4 +1,4 @@
-import { Colors, MEDIA_QUERIES } from '@shared/consts'
+import { Colors, MEDIA_QUERIES } from '@shared/constants'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import styled from 'styled-components'

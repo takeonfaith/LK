@@ -1,4 +1,4 @@
-import { IWeekDays, WEEK_DAYS } from '@shared/consts'
+import { IWeekDays, WEEK_DAYS } from '@shared/constants'
 import { getMonday } from './get-monday'
 
 export const getWeekNames = () => {

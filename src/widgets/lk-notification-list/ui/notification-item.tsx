@@ -6,7 +6,7 @@ import { Button } from '@shared/ui/button'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
-import { Size } from '@shared/ui/types'
+import { ExtSize, Size } from '@shared/ui/types'
 import React, { useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
@@ -51,7 +51,7 @@ const NotificationTitle = styled.div<{ fontSize: string }>`
     font-weight: 500;
 `
 
-type SizeObject = Record<Size, string>
+type SizeObject = Record<ExtSize, string>
 
 const titleSize: SizeObject = {
     small: '0.8rem',

@@ -1,4 +1,4 @@
-import { MEDIA_QUERIES } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/constants'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 

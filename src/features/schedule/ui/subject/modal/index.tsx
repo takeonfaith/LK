@@ -1,7 +1,7 @@
 import { ISubject } from '@api/model'
 import { getSubjectIcon } from '@features/acad-performance/lib/get-subject-icon'
 import { Icon } from '@features/all-pages'
-import { IColorPalette } from '@shared/consts'
+import { IColorPalette } from '@shared/constants'
 import useTheme from '@shared/lib/hooks/use-theme'
 import EventBackground from '@shared/ui/calendar/calendars/day/ui/event-background'
 import IconText from '@shared/ui/calendar/calendars/day/ui/icon-text'

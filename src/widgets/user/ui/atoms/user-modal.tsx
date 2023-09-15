@@ -1,4 +1,4 @@
-import { MEDIA_QUERIES } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/constants'
 import UserHeader from '@shared/ui/user-header'
 import React from 'react'
 import styled from 'styled-components'

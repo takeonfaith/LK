@@ -10,7 +10,7 @@ import { useRouteMatch } from 'react-router'
 import styled from 'styled-components'
 import search from '../lib/search'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
-import { MEDIA_QUERIES } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/constants'
 
 const ListOfSettingsWrapper = styled(ListWrapper)<{ open: boolean }>`
     height: 100%;

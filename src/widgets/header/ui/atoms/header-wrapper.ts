@@ -1,4 +1,4 @@
-import { MEDIA_QUERIES } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/constants'
 import styled from 'styled-components'
 
 const HeaderWrapper = styled.header<{ hidden?: boolean; headerVisible: boolean }>`

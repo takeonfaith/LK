@@ -3,7 +3,7 @@ import { WeekEvents } from '../../types'
 import { DateWrapper, DayWrapper, WeekDay, WeekDayTop, WeekDaysWrapper } from './styles'
 import { IndicatorItem, SubjectsIndicator } from '../subjects-indicator'
 import { getWeekNames } from './lib/get-week-names'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import Flex from '@shared/ui/flex'
 
 type Props = {

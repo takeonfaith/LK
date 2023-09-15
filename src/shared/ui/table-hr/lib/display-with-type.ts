@@ -1,5 +1,5 @@
 import localizeDate from '@shared/lib/dates/localize-date'
-import { ColumnType } from '../types'
+import { ColumnType } from '@shared/ui/table/types'
 
 const displayWithType = (value?: string, type?: ColumnType) => {
     switch (type) {

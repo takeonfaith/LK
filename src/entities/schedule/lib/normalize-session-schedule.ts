@@ -1,5 +1,5 @@
 import { RawSessionScheduleResponse } from '@shared/api/model'
-import { IWeekDayNames, WEEK_DAYS } from '@shared/consts'
+import { IWeekDayNames, WEEK_DAYS } from '@shared/constants'
 import { EMPTY_WEEK } from '../consts'
 import { getCalendarSchedule } from './get-calendar-schedule'
 import { isValidDate } from '@shared/lib/dates/is-valid-date'

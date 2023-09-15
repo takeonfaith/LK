@@ -1,5 +1,5 @@
 import { IRoute } from '@app/routes/general-routes'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'

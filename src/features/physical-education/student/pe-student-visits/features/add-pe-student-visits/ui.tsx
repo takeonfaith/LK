@@ -1,5 +1,5 @@
 import { pEStudentVisitModel } from '@entities/pe-student/model'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import { Button } from '@shared/ui/button'
 import Input from '@shared/ui/input'
 import { useState } from 'react'

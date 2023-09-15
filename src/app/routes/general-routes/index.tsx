@@ -204,7 +204,7 @@ export const generalRoutes: IRoutes = {
         show: false,
         group: 'GENERAL',
         withoutBackButton: true,
-        pageSize: 'large',
+        pageSize: 'big',
     },
     settings: {
         id: 'settings',

@@ -1,4 +1,4 @@
-import { IWeekDayNames } from '@shared/consts'
+import { IWeekDayNames } from '@shared/constants'
 import { WeekEvents } from '@shared/ui/calendar/types'
 
 export const getDayEvents = (events: WeekEvents, date: Date) => {

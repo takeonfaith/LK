@@ -1,8 +1,6 @@
-import { scheduleModel } from '@entities/schedule'
 import { AnimatedCheck, Title } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
-import { useModal } from 'widgets'
 
 const DayEndedWrapper = styled.div`
     display: flex;
@@ -16,9 +14,6 @@ const DayEndedWrapper = styled.div`
 `
 
 const DayEnded = () => {
-    const { open } = useModal()
-    const { data } = scheduleModel.selectors.useSchedule()
-
     return (
         <DayEndedWrapper>
             <AnimatedCheck size={'38px'} />

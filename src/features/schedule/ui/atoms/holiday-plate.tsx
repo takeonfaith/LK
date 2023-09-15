@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Sleep from '../../../../shared/images/sleep.gif'
 import { Button } from '@shared/ui/button'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 
 const HolidayPlateWrapper = styled.div`
     width: 100%;

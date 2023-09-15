@@ -8,7 +8,7 @@ import {
     RawSessionScheduleResponse,
     RawTeacherScheduleResponse,
 } from '@shared/api/model'
-import { IWeekDayNames, WEEK_DAYS } from '@shared/consts'
+import { IWeekDayNames, WEEK_DAYS } from '@shared/constants'
 import { getMonday } from '@shared/ui/calendar/ui/week-days/lib/get-monday'
 import { EMPTY_WEEK, SCHEDULE_NO_RESULT } from '../consts'
 import { getCalendarSchedule } from './get-calendar-schedule'

@@ -1,4 +1,4 @@
-import { TIME_IN_MS } from '@shared/consts'
+import { TIME_IN_MS } from '@shared/constants'
 import getTimeFromMinutes from '@shared/lib/dates/get-time-from-minutes'
 import React, { useEffect, useRef, useState } from 'react'
 import { getCurrentTime } from '../lib/get-time-in-minutes'

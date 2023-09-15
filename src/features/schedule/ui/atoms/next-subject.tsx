@@ -1,4 +1,4 @@
-import { IColorPalette } from '@shared/consts'
+import { IColorPalette } from '@shared/constants'
 import useTheme from '@shared/lib/hooks/use-theme'
 import React from 'react'
 import styled from 'styled-components'

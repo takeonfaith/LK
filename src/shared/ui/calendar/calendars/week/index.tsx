@@ -1,4 +1,4 @@
-import { IWeekDayNames, WEEK_DAYS } from '@shared/consts'
+import { IWeekDayNames, WEEK_DAYS } from '@shared/constants'
 import React from 'react'
 import { CalendarWrapper } from '../../ui/calendar-wrapper'
 import Events from '../../ui/event/events'

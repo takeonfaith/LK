@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { DateWrapperProps, getBackground, getColor } from '../../ui/week-days/styles'
 import { CALENDAR_HEIGHT_DESKTOP, CALENDAR_HEIGHT_MOBILE } from '@pages/schedule/consts'
-import { MEDIA_QUERIES } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/constants'
 
 export const MonthCalendarWrapper = styled.div`
     width: 100%;

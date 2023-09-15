@@ -1,4 +1,4 @@
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import { Message } from '@shared/ui/message'
 import React from 'react'
 import { ColumnProps } from '@ui/table/types'
