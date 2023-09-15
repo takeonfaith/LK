@@ -36,6 +36,18 @@ const HeaderWrapper = styled.header<{ hidden?: boolean; headerVisible: boolean }
     }
 `
 
+export const getSmallDesktopMaxWidth = ({ maxWidth }: { maxWidth: string }) => {
+    if (maxWidth === '100%' || maxWidth === '963px') return `calc(100% - 55px)`
+
+    return `calc(${maxWidth} - 40px)`
+}
+
+const getTabletMaxWidth = ({ maxWidth }: { maxWidth: string }) => {
+    if (maxWidth === '100%' || maxWidth === '963px') return `calc(100% - 44px)`
+
+    return `calc(${maxWidth} - 40px)`
+}
+
 export const HeaderTitle = styled.div<{
     headerVisible: boolean
     noButton: boolean | undefined
@@ -52,18 +64,22 @@ export const HeaderTitle = styled.div<{
     text-overflow: ellipsis;
     pointer-events: none;
 
+    @media (max-width: 1232px) {
+        max-width: ${getSmallDesktopMaxWidth};
+    }
+
     @media (min-width: 1001px) {
         transform: ${({ headerVisible }) => `translate(${headerVisible ? '-20px, 0' : '0px, 75px'})`};
     }
 
     ${MEDIA_QUERIES.isTablet} {
-        max-width: ${({ maxWidth }) => `calc(${maxWidth} - ${maxWidth === '100%' ? '44' : '40'}px)`};
+        max-width: ${getTabletMaxWidth};
         transform: ${({ headerVisible }) => `translate(${headerVisible ? '-14px, 0' : '6px, 75px'})`};
     }
 
     ${MEDIA_QUERIES.isMobile} {
         transform: ${({ headerVisible, noButton }) =>
-            `translate(${headerVisible ? (noButton ? '0, 0' : '25px, 0') : noButton ? '0, 0' : '0px, 50px'})`};
+            `translate(${headerVisible ? (noButton ? '0, 0' : '25px, 0') : '0px, 50px'})`};
         width: ${({ headerVisible }) => (headerVisible ? '180px' : 'calc(100% - 30px)')};
     }
 `

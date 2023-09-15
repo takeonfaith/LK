@@ -15,11 +15,8 @@ type Props = {
 export const CurrentTimeLine = ({ isVisible = true, shift, scale, interval, showTime = true }: Props) => {
     const [currentTime, setCurrentTime] = useState(getCurrentTime(new Date(), interval[0] * 60, interval[1] * 60))
     const intervalRef = useRef<any>(null)
-    const timelineRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (isVisible) timelineRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' })
-
         intervalRef.current = setInterval(() => {
             setCurrentTime(getCurrentTime(new Date(), interval[0] * 60, interval[1] * 60))
         }, TIME_IN_MS.minute)
@@ -28,7 +25,7 @@ export const CurrentTimeLine = ({ isVisible = true, shift, scale, interval, show
     }, [isVisible])
 
     return (
-        <CurrentTimeLineStyled currentTime={(currentTime - shift) * scale} ref={timelineRef}>
+        <CurrentTimeLineStyled currentTime={(currentTime - shift) * scale}>
             {showTime && <CurrentTime>{getTimeFromMinutes(currentTime)}</CurrentTime>}
         </CurrentTimeLineStyled>
     )

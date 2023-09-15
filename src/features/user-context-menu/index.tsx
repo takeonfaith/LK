@@ -59,6 +59,7 @@ const UserContextMenu = () => {
                     width="100%"
                     align="left"
                     onClick={handleClose}
+                    padding="10px"
                 />
             </Link>
             <NotificationButtonWrapper>
@@ -69,6 +70,7 @@ const UserContextMenu = () => {
                     width="100%"
                     background="var(--schedule)"
                     align="left"
+                    padding="10px"
                 />
                 <Notification visible={notifications.length > 0} top="50%" right="0px" pulsing shadow>
                     {notifications.length}
@@ -82,6 +84,7 @@ const UserContextMenu = () => {
                     width="100%"
                     align="left"
                     onClick={handleClose}
+                    padding="10px"
                 />
             </Link>
             <a href={`${OLD_LK_URL}/index.php`}>
@@ -91,6 +94,7 @@ const UserContextMenu = () => {
                     width="100%"
                     background="var(--schedule)"
                     align="left"
+                    padding="10px"
                 />
             </a>
             <Divider />
@@ -101,6 +105,7 @@ const UserContextMenu = () => {
                 text="Выйти"
                 width="100%"
                 background="var(--schedule)"
+                padding="10px"
             />
             <Divider />
             <Button
@@ -110,6 +115,7 @@ const UserContextMenu = () => {
                 text="Что нового"
                 width="100%"
                 background="var(--schedule)"
+                padding="10px"
             />
         </>
     )
