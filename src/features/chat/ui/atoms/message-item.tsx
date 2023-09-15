@@ -1,7 +1,7 @@
 import { Message } from '@api/model'
 import { Colors } from '@consts'
 import { contextMenuModel } from '@entities/context-menu'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import React from 'react'
 import styled from 'styled-components'
 import { MessageContextMenu } from '.'

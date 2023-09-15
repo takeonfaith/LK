@@ -36,9 +36,9 @@ type GetScheduleResult = { schedule: IFullSchedule; teachers: string[] }
 export const SCHEDULE_NO_RESULT: GetScheduleResult = {
     schedule: {
         today: [],
-        week: EMPTY_WEEK,
-        semestr: EMPTY_WEEK,
-        session: {},
+        week: { ...EMPTY_WEEK },
+        semestr: { data: { ...EMPTY_WEEK }, startDate: new Date(), endDate: new Date() },
+        session: { data: { ...EMPTY_WEEK }, startDate: new Date(), endDate: new Date() },
     },
     teachers: [],
 }

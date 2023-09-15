@@ -1,4 +1,4 @@
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 
 const getDelayInDays = (period: number) => {
     const date = new Date()

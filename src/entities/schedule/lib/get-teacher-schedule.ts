@@ -3,9 +3,9 @@ import { normalizeSchedule } from './normalize-schedule'
 
 export const getTeacherSchedule = async (fullName: string) => {
     const scheduleResponse = await scheduleApi.getTeachers(fullName)
-    // const sessionResponse = await scheduleApi.getTeachersSession(fullName)
+    const sessionResponse = await scheduleApi.getTeachersSession(fullName)
 
-    const normalizedSchedule = normalizeSchedule(scheduleResponse.data)
+    const normalizedSchedule = normalizeSchedule(scheduleResponse.data, sessionResponse.data)
 
     return normalizedSchedule
 }

@@ -3,14 +3,19 @@ import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import styled from 'styled-components'
 
-export const EventBackgroundStyled = styled.div<{ background: string }>`
+export const EventBackgroundStyled = styled.div<{ background: string; noPadding: boolean }>`
     background: ${({ background }) => background};
     position: absolute;
-    width: 100%;
-    height: 100%;
-    inset: 0;
+    width: calc(100% + 45px);
+    height: calc(100% + 25px);
+    left: ${({ noPadding }) => (noPadding ? '-25px' : 0)};
+    top: ${({ noPadding }) => (noPadding ? '-55px' : 0)};
     z-index: -1;
     overflow: hidden;
+
+    ${MEDIA_QUERIES.isMobile} {
+        width: calc(100% + 50px);
+    }
 `
 
 export const Icons = styled.div`

@@ -1,17 +1,21 @@
+import { NextSubject } from '@features/schedule/ui'
+import { TimeIndicator } from '@features/schedule/ui/subject/time-indicator'
+import calcTimeLeft from '@shared/lib/dates/calc-time-left'
+import { TimeType, getMinutesFromStringTime } from '@shared/lib/dates/get-minutes-from-string-time'
+import { getMinutesFromDate } from '@shared/lib/dates/get-time-from-date'
 import getShortString from '@shared/lib/get-short-string'
+import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import useTheme from '@shared/lib/hooks/use-theme'
-import React from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { HiOutlineCalendar, HiOutlineExternalLink, HiOutlineLogin, HiOutlineUserCircle } from 'react-icons/hi'
 import DotSeparatedWords from '../../../dot-separated-words'
 import Flex from '../../../flex'
-import { DayCalendarEvent } from '../../types'
 import EventBackground from '../../calendars/day/ui/event-background'
 import IconText from '../../calendars/day/ui/icon-text'
+import { getTimeInterval } from '../../lib/get-time-interval'
+import { DayCalendarEvent } from '../../types'
 import { EventFront, EventItemStyled, EventTitle, MobileIcon } from './styles'
 import { UIProps } from './types'
-import { TimeIndicator } from '@features/schedule/ui/subject/time-indicator'
-import { getTimeInterval } from '../../lib/get-time-interval'
-import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 
 const getStartTimeShiftInMinutes = (startTime: string) => {
     // E.g 12:20 -> 740
@@ -19,7 +23,7 @@ const getStartTimeShiftInMinutes = (startTime: string) => {
     return +hour * 60 + +minute
 }
 
-type Props = DayCalendarEvent & UIProps
+type Props = DayCalendarEvent & UIProps & { isNextEvent?: boolean }
 
 const EventItem = (props: Props) => {
     const {
@@ -40,6 +44,9 @@ const EventItem = (props: Props) => {
         dateInterval,
         leftShift,
         quantity,
+        nameInOneRow = true,
+        isNextEvent = false,
+        listView = false,
         shortInfo = false,
     } = props
     const { theme } = useTheme()
@@ -57,8 +64,23 @@ const EventItem = (props: Props) => {
         return result
     })
 
+    const ref = useRef<HTMLDivElement>(null)
+
+    const isCurrentEvent =
+        getMinutesFromStringTime(startTime as TimeType) <= getMinutesFromDate(new Date()) &&
+        getMinutesFromDate(new Date()) <= getMinutesFromStringTime(startTime as TimeType) + duration
+
+    useLayoutEffect(() => {
+        if (isCurrentEvent && ref.current) {
+            ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+    }, [isCurrentEvent, isNextEvent, ref])
+
     return (
         <EventItemStyled
+            ref={isCurrentEvent || isNextEvent ? ref : undefined}
+            textColor={textColor}
+            listView={listView}
             leftShift={100 * leftShift}
             quantity={100 / quantity}
             duration={duration}
@@ -66,19 +88,28 @@ const EventItem = (props: Props) => {
             startTimeShift={startTimeShift}
             scale={scale}
             onClick={handleClick}
-            color={textColor}
             isCurrent={isCurrent}
             otherIsCurrent={otherIsCurrent}
             shortInfo={shortInfo}
         >
             <MobileIcon>{icon}</MobileIcon>
-            <EventBackground icon={icon} background={background} />
+            {!listView && <EventBackground icon={icon} background={background} />}
             <Flex className="event-body" gap="0px" ai="flex-start">
                 <EventFront scale={scale} d="column" ai="flex-start" shortInfo={shortInfo}>
                     <Flex d="column" gap="2px">
                         {!shortInfo && (
                             <Flex gap="16px">
-                                <TimeIndicator timeInterval={getTimeInterval(startTime, duration)} color={color} />
+                                <TimeIndicator
+                                    timeInterval={getTimeInterval(startTime, duration)}
+                                    color={color}
+                                    isCurrentEvent={isCurrentEvent}
+                                />
+                                <NextSubject
+                                    timeLeft={calcTimeLeft(startTime, 'minutes')}
+                                    isNext={isNextEvent}
+                                    color={color}
+                                    isCurrentEvent={isCurrentEvent}
+                                />
                                 {!!rooms?.length && (
                                     <IconText
                                         shortInfo={shortInfo}
@@ -93,7 +124,7 @@ const EventItem = (props: Props) => {
                                 )}
                             </Flex>
                         )}
-                        <EventTitle scale={scale} shortInfo={shortInfo}>
+                        <EventTitle listView={listView} nameInOneRow={nameInOneRow} scale={scale} shortInfo={shortInfo}>
                             {!extremeSmallSize && getShortString(title, shortInfo ? (hideSomeInfo ? 43 : 35) : 300)}
                         </EventTitle>
                     </Flex>

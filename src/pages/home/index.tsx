@@ -9,7 +9,7 @@ import UserInfo from '@features/user-info'
 import Block from '@shared/ui/block'
 import Flex from '@shared/ui/flex'
 import { CenterPage, Title, Wrapper } from '@ui/atoms'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import AlertsWidget from 'widgets/alerts-widget'
 import HomeTopPlate from './ui/home-top-plate'
@@ -35,19 +35,28 @@ const Home = () => {
     } = userModel.selectors.useUser()
 
     const { data: payments } = paymentsModel.selectors.usePayments()
-    const { data: schedule } = scheduleModel.selectors.useSchedule()
+    const {
+        data: { schedule },
+    } = scheduleModel.selectors.useSchedule()
 
     const { homeRoutes } = menuModel.selectors.useMenu()
 
     if (!user || !homeRoutes) return null
 
-    const load = () => {
-        scheduleModel.effects.getScheduleFx({ group: user.group })
-        paymentsModel.effects.getPaymentsFx()
-    }
+    useEffect(() => {
+        if (!payments) {
+            paymentsModel.effects.getPaymentsFx()
+        }
+    }, [payments])
+
+    useEffect(() => {
+        if (!schedule) {
+            scheduleModel.effects.getScheduleFx(user)
+        }
+    }, [schedule])
 
     return (
-        <Wrapper loading={!user} load={load} error={error} data={payments && schedule}>
+        <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <HomeTopPlate />
             <HomePageStyled>
                 <GlobalAppSearch />

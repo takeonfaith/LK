@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react'
-import { WEEK_DAYS } from '@consts'
 import { scheduleModel } from '@entities/schedule'
-import displayTopInfo from '@features/schedule/lib/display-top-info'
-import getTomorrow from '@features/schedule/lib/get-tomorrow'
-import { AnimatedCheck, Button, Title } from '@ui/atoms'
+import { AnimatedCheck, Title } from '@ui/atoms'
+import React from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
-import { DaySchedule } from '..'
 
 const DayEndedWrapper = styled.div`
     display: flex;

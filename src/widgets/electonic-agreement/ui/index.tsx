@@ -1,6 +1,6 @@
 import { Button, Divider, LinkButton, SubmitButton } from '@ui/atoms'
 import { Message } from '@ui/message'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import React from 'react'
 import { FiCheck, FiDownload } from 'react-icons/fi'
 import { useModal } from 'widgets'

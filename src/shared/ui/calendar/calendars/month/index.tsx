@@ -1,3 +1,4 @@
+import { useScheduleSubjectModal } from '@features/use-schedule-subject-modal'
 import React from 'react'
 import { WeekEvents } from '../../types'
 import { WeekDays } from '../../ui/week-days'
@@ -6,13 +7,12 @@ import { getSunday } from '../../ui/week-days/lib/get-sunday'
 import { getDaysBetweenDates } from './lib/get-days-between-dates'
 import { Cells, MonthCalendarWrapper } from './styles'
 import CalendarCells from './ui/calendar-cells'
-import { useCalendarGeneral } from '../../hooks/use-calendar-general'
 
 type Props = {
     events: WeekEvents
     startDate: Date
     endDate: Date
-    onDayClick: (dayIndex: number) => void
+    onDayClick?: (dayIndex: number) => void
 }
 
 // const normalizeDate = (date: Date) => {
@@ -24,10 +24,11 @@ type Props = {
 export const MonthCalendar = ({ events, startDate, endDate, onDayClick }: Props) => {
     const localStartDate = new Date(startDate)
     const localEndDate = new Date(endDate)
-    const weekStart = getMonday(localStartDate)
-    const { handleOpenModal } = useCalendarGeneral({ events, interval: [0, 0] })
 
-    const lastCellsWeekEnd = getSunday(localEndDate)
+    const weekStart = getMonday(localStartDate)
+    const handleOpenModal = useScheduleSubjectModal()
+
+    const lastCellsWeekEnd = localEndDate.getDay() !== 0 ? getSunday(localEndDate) : localEndDate
 
     const daysAmount = getDaysBetweenDates(localStartDate, localEndDate)
 

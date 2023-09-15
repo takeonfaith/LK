@@ -66,8 +66,8 @@ export interface ISessionSchedule {
 export interface IFullSchedule {
     today: DayCalendarEvent[]
     week: IWeekEventSchedule
-    semestr: IWeekEventSchedule
-    session: ISessionSchedule
+    semestr: { data: IWeekEventSchedule; startDate: Date; endDate: Date }
+    session: { data: IWeekEventSchedule; startDate: Date; endDate: Date }
 }
 
 export type ViewType = 'full' | 'big'
@@ -76,14 +76,10 @@ export interface ISchedule {
     data: {
         schedule: IFullSchedule | null
         externalSchedule: IFullSchedule | null
-        externalStartDate: Date | null
-        externalEndDate: Date | null
         teachers: string[]
         view: View
         filter: string
         searchValue: string
-        startDate: Date
-        endDate: Date
     }
     loading: boolean
     error: string | null

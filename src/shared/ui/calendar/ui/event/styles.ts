@@ -15,24 +15,23 @@ export const EventItemStyled = styled.div<StyledProps>`
     border-radius: 5px;
     padding: ${({ shortInfo, scale }) => (!shortInfo ? `${scale * 8}px` : '8px')};
     display: flex;
-    position: relative;
     overflow: hidden;
-    color: ${({ color }) => color};
+    color: ${({ textColor }) => textColor};
     filter: ${({ otherIsCurrent }) => otherIsCurrent && 'grayscale(0.8)'};
     cursor: pointer;
-    position: absolute;
+    position: ${({ listView }) => (listView ? 'static' : 'absolute')};
     transform: translateX(${({ leftShift }) => `calc(${leftShift}% + ${1 * (leftShift / 100)}px)`});
     left: 0;
     top: ${getTop};
     /* box-shadow: 0 0 1px ${({ color }) => color}; */
 
     a {
-        color: ${({ color }) => color};
+        color: ${({ textColor }) => textColor};
         text-decoration: underline;
     }
 
     &:hover {
-        filter: brightness(0.95);
+        filter: brightness(0.98);
     }
 
     ${MEDIA_QUERIES.isMobile} {
@@ -68,16 +67,17 @@ export const EventFront = styled(Flex)<{ shortInfo: boolean; scale: number }>`
     }
 `
 
-export const EventTitle = styled.span<{ shortInfo: boolean; scale: number }>`
+export const EventTitle = styled.span<{ shortInfo: boolean; scale: number; nameInOneRow: boolean; listView: boolean }>`
     font-weight: 500;
     font-size: ${({ shortInfo }) => (!shortInfo ? `0.9rem` : '0.85rem')};
     padding-top: 2px;
-    white-space: ${({ shortInfo }) => !shortInfo && 'nowrap'};
+    white-space: ${({ shortInfo, nameInOneRow }) => !shortInfo && nameInOneRow && 'nowrap'};
     text-overflow: ${({ shortInfo }) => !shortInfo && 'ellipsis'};
     overflow: ${({ shortInfo }) => !shortInfo && 'hidden'};
     hyphens: auto;
     width: 100%;
     margin-bottom: 2px;
+    margin-top: ${({ listView }) => (listView ? '2px' : '0')};
 
     ${MEDIA_QUERIES.isMobile} {
         word-break: break-all;

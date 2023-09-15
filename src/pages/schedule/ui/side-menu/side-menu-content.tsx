@@ -45,8 +45,7 @@ export const SideMenuContent = ({
                     return (
                         <NewPageLink
                             key={id}
-                            // || id === 'schedule-session'
-                            disabled={(id === 'schedule-retake' && !!filter) || id === 'schedule-session'}
+                            disabled={id === 'schedule-retake' && !!filter}
                             isCurrent={location.pathname === normalizedPath}
                             route={{ ...route, path: normalizedPath }}
                         />

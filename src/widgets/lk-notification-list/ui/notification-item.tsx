@@ -1,6 +1,6 @@
 import { TNotification, lkNotificationModel } from '@entities/lk-notifications'
 import getShortString from '@shared/lib/get-short-string'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import AutoAccordion from '@shared/ui/auto-accordion'
 import { Button } from '@shared/ui/button'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'

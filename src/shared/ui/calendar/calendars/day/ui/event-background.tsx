@@ -4,11 +4,12 @@ import { EventBackgroundStyled, Icons } from './styles'
 type Props = {
     icon: ChildrenType
     background: string
+    noPadding?: boolean
 }
 
-const EventBackground = ({ icon, background }: Props) => {
+const EventBackground = ({ icon, background, noPadding = false }: Props) => {
     return (
-        <EventBackgroundStyled background={background}>
+        <EventBackgroundStyled background={background} noPadding={noPadding}>
             <Icons>
                 <div>{icon}</div>
                 <div>{icon}</div>

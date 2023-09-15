@@ -5,6 +5,7 @@ import {
     IFullSchedule,
     IWeekEventSchedule,
     RawScheduleResponse,
+    RawSessionScheduleResponse,
     RawTeacherScheduleResponse,
 } from '@shared/api/model'
 import { IWeekDayNames, WEEK_DAYS } from '@shared/consts'
@@ -12,18 +13,18 @@ import { getMonday } from '@shared/ui/calendar/ui/week-days/lib/get-monday'
 import { EMPTY_WEEK, SCHEDULE_NO_RESULT } from '../consts'
 import { getCalendarSchedule } from './get-calendar-schedule'
 import getCurrentDaySubjects from './get-current-day-schedule'
+import { normalizeSessionSchedule } from './normalize-session-schedule'
 
 export const normalizeSchedule = (
     rawSchedule: FullRawScheduleResponse | FullRawTeacherScheduleResponse,
-): { schedule: IFullSchedule; startDate: Date; endDate: Date } => {
+    rawSessionSchedule: RawSessionScheduleResponse,
+): { schedule: IFullSchedule } => {
     let startDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
     let endDate = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
 
     if (typeof rawSchedule === 'object' && 'status' in rawSchedule) {
         return {
             schedule: SCHEDULE_NO_RESULT.schedule,
-            startDate,
-            endDate,
         }
     }
 
@@ -83,9 +84,14 @@ export const normalizeSchedule = (
 
     const today = week[currentDay]
 
+    const session = normalizeSessionSchedule(rawSessionSchedule)
+
     return {
-        schedule: { today, week, semestr, session: {} },
-        startDate,
-        endDate,
+        schedule: {
+            today,
+            week,
+            semestr: { data: semestr, startDate, endDate },
+            session: { data: session.schedule, startDate: session.startDate, endDate: session.endDate },
+        },
     }
 }

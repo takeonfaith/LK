@@ -1,4 +1,4 @@
-import { areDatesEqual } from '@shared/lib/are-dates-equal'
+import { areDatesEqual } from '@shared/lib/dates/are-dates-equal'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import { DayCalendarEvent, WeekEvents } from '@shared/ui/calendar/types'
 import { MonthEventItem } from '@shared/ui/calendar/ui/event/month-event-item'
@@ -40,20 +40,23 @@ const CalendarCells = ({
             {Array(daysAmount)
                 .fill(0)
                 .map((_, i) => {
+                    // Скипаем воскресенье
                     if (i !== 0) {
                         if (localStartDate.getDay() === 6 && addOneOnWeekends) {
                             localStartDate.setDate(localStartDate.getDate() + 2)
                         } else {
                             localStartDate.setDate(localStartDate.getDate() + 1)
                         }
-                    }
+                    } else if (localStartDate.getDay() === 0) return null
 
                     const dayEvents = getDayEvents(events, localStartDate)
                     const sunday = getSunday(localStartDate)
                     const showNextMonthName =
                         localStartDate.getDay() === 1 && sunday.getMonth() !== localStartDate.getMonth()
 
-                    const showCurrentMonthName = localStartDate.getDay() === 1 && localStartDate.getDate() === 1
+                    const showCurrentMonthName =
+                        (sunday.getMonth() === localStartDate.getMonth() && i === 0 && localStartDate.getDay() === 1) ||
+                        (localStartDate.getDay() === 1 && localStartDate.getDate() === 1)
 
                     return (
                         <>

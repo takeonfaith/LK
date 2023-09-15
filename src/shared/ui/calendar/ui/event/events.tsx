@@ -5,6 +5,7 @@ import { CurrentTimeLine } from '../../calendars/day/ui/current-time-line'
 import EventItem from './event-item'
 import { prepareEvents } from './lib/prepare-events'
 import { EventsWrapper } from './styles'
+import { isNextEvent } from '@features/schedule/lib/is-next-event'
 
 type Props = {
     currentDay?: number
@@ -60,6 +61,7 @@ const Events = ({
                                 isCurrent={isCurrent}
                                 otherIsCurrent={!isCurrent && currentEvent !== null}
                                 scale={scale}
+                                isNextEvent={isNextEvent(events, event)}
                                 {...event}
                                 onClick={onClick}
                                 shift={shift}

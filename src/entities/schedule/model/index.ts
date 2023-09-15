@@ -1,4 +1,4 @@
-import { IFullSchedule, ISchedule } from '@api/model'
+import { IFullSchedule, ISchedule, User } from '@api/model'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { View } from '../consts'
@@ -9,14 +9,10 @@ const DEFAULT_STORE: ISchedule = {
     data: {
         schedule: null,
         externalSchedule: null,
-        externalStartDate: null,
-        externalEndDate: null,
         teachers: [],
         view: View.day,
         filter: '',
         searchValue: '',
-        startDate: new Date(),
-        endDate: new Date(),
     },
     loading: false,
     error: null,
@@ -26,10 +22,14 @@ const useSchedule = () => {
     return useStore($schedule)
 }
 
-const getScheduleFx = createEffect(async ({ group, fullName }: { fullName?: string; group?: string | undefined }) => {
+const getScheduleFx = createEffect(async (user: User | undefined | null) => {
     try {
-        if (fullName) return await getTeacherSchedule(fullName)
-        if (group) return await getGroupSchedule(group)
+        if (!user) throw new Error('Невозможно получить расписание, так как не указан пользователь')
+
+        const { group, fullName, user_status } = user
+
+        if (fullName && user_status === 'staff') return await getTeacherSchedule(fullName)
+        if (group && user_status === 'stud') return await getGroupSchedule(group)
 
         throw new Error('Невозможно получить расписание, так как не указан ни один из параметров')
     } catch (error) {
@@ -52,7 +52,7 @@ const getTeacherScheduleFx = createEffect(async ({ fullName }: { fullName: strin
 
         return await getTeacherSchedule(fullName)
     } catch (error) {
-        throw new Error((error as Error).message + 'ЭВФЫВФ')
+        throw new Error((error as Error).message)
     }
 })
 
@@ -117,8 +117,6 @@ sample({
         data: {
             ...store.data,
             externalSchedule: externalSchedule.schedule,
-            externalStartDate: externalSchedule.startDate,
-            externalEndDate: externalSchedule.endDate,
         },
     }),
     target: $schedule,
@@ -132,8 +130,6 @@ sample({
         data: {
             ...store.data,
             externalSchedule: externalSchedule.schedule,
-            externalStartDate: externalSchedule.startDate,
-            externalEndDate: externalSchedule.endDate,
         },
     }),
     target: $schedule,

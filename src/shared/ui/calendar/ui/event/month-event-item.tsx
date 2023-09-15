@@ -43,7 +43,7 @@ export const MonthEventItem = (props: Props) => {
 
     return (
         <MonthEventItemStyled textColor={textColor} background={background} gap="6px" onClick={handleClick}>
-            <TimeIndicator color={color} />
+            <TimeIndicator isCurrentEvent={false} color={color} />
             <MonthEventItemTitle textColor={textColor}>{title}</MonthEventItemTitle>
             <Subtext fontSize="0.7rem">{startTime}</Subtext>
         </MonthEventItemStyled>

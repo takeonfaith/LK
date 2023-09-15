@@ -1,7 +1,7 @@
 import { electronicInteractionModel } from '@entities/electronic-interaction'
 import PageBlock from '@shared/ui/page-block'
 import { Wrapper } from '@ui/atoms'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import React from 'react'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
 

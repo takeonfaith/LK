@@ -1,5 +1,5 @@
 import { TIME_IN_MS } from '@shared/consts'
-import getTimeFromMinutes from '@shared/lib/get-time-from-minutes'
+import getTimeFromMinutes from '@shared/lib/dates/get-time-from-minutes'
 import React, { useEffect, useRef, useState } from 'react'
 import { getCurrentTime } from '../lib/get-time-in-minutes'
 import { CurrentTime, CurrentTimeLineStyled } from './styles'
@@ -18,7 +18,7 @@ export const CurrentTimeLine = ({ isVisible = true, shift, scale, interval, show
     const timelineRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (isVisible) timelineRef.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+        if (isVisible) timelineRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' })
 
         intervalRef.current = setInterval(() => {
             setCurrentTime(getCurrentTime(new Date(), interval[0] * 60, interval[1] * 60))

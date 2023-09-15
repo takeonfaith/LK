@@ -1,4 +1,3 @@
-export { default as Subject } from '../subject'
 export { default as SubjectModal } from '../subject/modal'
 export { default as Time } from './time'
 export { default as Place } from './place'

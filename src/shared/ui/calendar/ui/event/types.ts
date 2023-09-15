@@ -9,10 +9,13 @@ export type UIProps = {
     shortInfo?: boolean
     leftShift: number
     quantity: number
+    listView?: boolean
+    nameInOneRow?: boolean
 }
 
 export type StyledProps = Omit<UIProps, 'onClick' | 'shift'> & {
     duration: number
     startDayShift: number
     startTimeShift: number
+    textColor: string
 }

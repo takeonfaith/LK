@@ -82,11 +82,7 @@ const useSchedule = () => {
     }, [])
 
     const handleLoad = () => {
-        if (user?.user_status === 'staff') {
-            scheduleModel.effects.getScheduleFx({ fullName: user.fullName })
-        } else {
-            scheduleModel.effects.getScheduleFx({ group: user?.group })
-        }
+        scheduleModel.effects.getScheduleFx(user)
     }
 
     const onHintClick = () => {

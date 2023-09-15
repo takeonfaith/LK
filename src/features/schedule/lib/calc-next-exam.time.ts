@@ -1,5 +1,5 @@
 import { ISessionSchedule } from '@api/model'
-import calcTimeLeft from '@utils/calc-time-left'
+import calcTimeLeft from '@shared/lib/dates/calc-time-left'
 
 const calcNextExamTime = (schedule: ISessionSchedule | null) => {
     //Finds first exam with least positive amount of days left 'till them

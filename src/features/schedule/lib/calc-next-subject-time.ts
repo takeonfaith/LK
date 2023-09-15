@@ -1,5 +1,5 @@
 import { type DayCalendarEvent } from '@shared/ui/calendar'
-import calcTimeLeft from '@utils/calc-time-left'
+import calcTimeLeft from '@shared/lib/dates/calc-time-left'
 
 const calcNextSubjectTime = (lessons: DayCalendarEvent[] | null | undefined) => {
     if (!lessons) return Infinity
