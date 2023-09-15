@@ -1,12 +1,10 @@
 import { NextSubject } from '@features/schedule/ui'
 import { TimeIndicator } from '@features/schedule/ui/subject/time-indicator'
 import calcTimeLeft from '@shared/lib/dates/calc-time-left'
-import { TimeType, getMinutesFromStringTime } from '@shared/lib/dates/get-minutes-from-string-time'
-import { getMinutesFromDate } from '@shared/lib/dates/get-time-from-date'
 import getShortString from '@shared/lib/get-short-string'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import useTheme from '@shared/lib/hooks/use-theme'
-import React, { useLayoutEffect, useRef } from 'react'
+import React from 'react'
 import { HiOutlineCalendar, HiOutlineExternalLink, HiOutlineLogin, HiOutlineUserCircle } from 'react-icons/hi'
 import DotSeparatedWords from '../../../dot-separated-words'
 import Flex from '../../../flex'
@@ -23,7 +21,7 @@ const getStartTimeShiftInMinutes = (startTime: string) => {
     return +hour * 60 + +minute
 }
 
-type Props = DayCalendarEvent & UIProps & { isNextEvent?: boolean }
+type Props = DayCalendarEvent & UIProps & { isNextEvent?: boolean; isCurrentEvent?: boolean }
 
 const EventItem = (props: Props) => {
     const {
@@ -44,6 +42,7 @@ const EventItem = (props: Props) => {
         dateInterval,
         leftShift,
         quantity,
+        isCurrentEvent = false,
         nameInOneRow = true,
         isNextEvent = false,
         listView = false,
@@ -64,21 +63,8 @@ const EventItem = (props: Props) => {
         return result
     })
 
-    const ref = useRef<HTMLDivElement>(null)
-
-    const isCurrentEvent =
-        getMinutesFromStringTime(startTime as TimeType) <= getMinutesFromDate(new Date()) &&
-        getMinutesFromDate(new Date()) <= getMinutesFromStringTime(startTime as TimeType) + duration
-
-    useLayoutEffect(() => {
-        if (isCurrentEvent && ref.current) {
-            ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        }
-    }, [isCurrentEvent, isNextEvent, ref])
-
     return (
         <EventItemStyled
-            ref={isCurrentEvent || isNextEvent ? ref : undefined}
             textColor={textColor}
             listView={listView}
             leftShift={100 * leftShift}
