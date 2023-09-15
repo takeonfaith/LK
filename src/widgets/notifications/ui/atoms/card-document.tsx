@@ -1,6 +1,6 @@
 import React from 'react'
 import { docsNotification } from '@api/model/notification'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { personalNotificationModel } from '@entities/notification'
 import { userModel } from '@entities/user'
 import { LinkButton, SubmitButton } from '@ui/atoms'

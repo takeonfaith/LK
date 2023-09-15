@@ -1,4 +1,4 @@
-import { JS_QUERIES } from '@shared/consts'
+import { JS_QUERIES } from '@shared/constants'
 import { useLayoutEffect, useState } from 'react'
 
 type QueryType = typeof JS_QUERIES

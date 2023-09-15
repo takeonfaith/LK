@@ -16,6 +16,7 @@ export const ButtonWrapper = styled.button<{
     isActive: boolean
     fixedInMobile?: boolean
     height?: string
+    flipped?: boolean
 }>`
     display: flex;
     align-items: center;
@@ -34,6 +35,7 @@ export const ButtonWrapper = styled.button<{
     flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
     opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
     height: ${({ height = '40px' }) => height};
+    ${({ flipped }) => flipped && 'transform: rotate(180deg);'};
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);

@@ -2,7 +2,7 @@ import PaymentButton from '@features/payment-button'
 import { Contract } from '@features/payments'
 import Debt from '@features/payments/debt'
 import { PaymentsContract } from '@shared/api/model'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import localizeDate from '@shared/lib/dates/localize-date'
 import { AnimatedCheck } from '@shared/ui/animated-check'
@@ -64,22 +64,22 @@ const ContractButtonWrapper = styled.div`
 
 type Props = {
     data: PaymentsContract
-    isDormitory: boolean
 }
 
 const DebtAndQr = (props: Props) => {
-    const { data, isDormitory } = props
+    const { data } = props
     const { balance_currdate, balance, endDatePlan, can_sign, bill, qr_current, qr_total } = data
     const { isMobile } = useCurrentDevice()
     const { open } = useModal()
     const [currentPage, setCurrentPage] = useState(0)
     const chosenDebt = currentPage === 0 ? +balance_currdate : +balance
     const hasDebt = chosenDebt > 0
-    const paymentPlace = isDormitory ? 'общежитию' : 'обучению'
     const text = hasDebt
-        ? `Долг по ${paymentPlace}`
+        ? currentPage === 0
+            ? `Долг по договору`
+            : `Остаток по договору`
         : chosenDebt < 0
-        ? `Переплата по ${paymentPlace}`
+        ? `Переплата по договору`
         : 'У вас нет долга'
     const dateText = currentPage === 0 ? `На ${localizeDate(new Date())}` : `До ${localizeDate(endDatePlan)}`
 

@@ -63,7 +63,7 @@ export const HeaderTitle = styled.div<{
 
     ${MEDIA_QUERIES.isMobile} {
         transform: ${({ headerVisible, noButton }) =>
-            `translate(${headerVisible ? (noButton ? '0, 0' : '25px, 0') : '0px, 50px'})`};
+            `translate(${headerVisible ? (noButton ? '0, 0' : '25px, 0') : noButton ? '0, 0' : '0px, 50px'})`};
         width: ${({ headerVisible }) => (headerVisible ? '180px' : 'calc(100% - 30px)')};
     }
 `

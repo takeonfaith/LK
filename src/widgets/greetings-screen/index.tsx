@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { Button, CenterPage } from '@ui/atoms'
 import List from '@ui/list'
 import { ListWrapper } from '@ui/list/styles'

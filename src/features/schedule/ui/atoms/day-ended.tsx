@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { scheduleModel } from '@entities/schedule'
 import { AnimatedCheck, Title } from '@ui/atoms'
 import React from 'react'

@@ -1,4 +1,4 @@
-import { FileFormats, MAX_FILE_SIZE } from '@consts'
+import { FileFormats, MAX_FILE_SIZE } from '@shared/constants'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { getFileSize } from './get-file-size'
 import getFormatName from './get-format-name'

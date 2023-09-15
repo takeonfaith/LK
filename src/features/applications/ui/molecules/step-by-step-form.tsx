@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { IInputArea } from '@ui/input-area/model'
 import checkFormFields from '@utils/check-form-fields'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { Line } from '@ui/timeline/ui'
 import InputArea from '@ui/input-area'
 

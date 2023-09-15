@@ -1,6 +1,7 @@
 export { default as Header } from './header'
 export { default as LeftsideBar } from './leftside-bar'
 export { default as PopUpMessage } from './pop-up-message'
+export { default as PopUpMessageHr } from './pop-up-message-hr'
 export { default as useModal } from './modal'
 export { default as Confirm } from './confirm'
 export { default as SliderPage } from './slider-page'

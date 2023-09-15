@@ -1,3 +1,5 @@
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
+
 export default function getToken() {
-    return JSON.parse(localStorage.getItem('token') ?? sessionStorage.getItem('token') ?? 'null')?.token
+    return localStorage.getItem(BrowserStorageKey.Token) ?? sessionStorage.getItem(BrowserStorageKey.Token) ?? ''
 }

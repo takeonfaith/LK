@@ -17,10 +17,11 @@ type StyledProps = {
 }
 
 const SubmitButtonWrapper = styled.button<StyledProps>`
+    position: relative;
     width: ${({ width }) => width ?? '100%'};
     padding: 10px;
     box-sizing: border-box;
-    opacity: ${(props) => (props.isLoading || !props.isActive ? 0.5 : 1)};
+    opacity: ${(props) => (props.isLoading ? 0.5 : 1)};
     color: #fff;
     font-weight: 600;
     display: flex;
@@ -33,7 +34,12 @@ const SubmitButtonWrapper = styled.button<StyledProps>`
     overflow: hidden;
     border: none;
     cursor: pointer;
-    background: ${({ isDone, background }) => (isDone ? 'var(--green)' : background ?? 'var(--blue)')};
+    background: ${({ isDone, background, isActive }) =>
+        isDone
+            ? isActive
+                ? 'var(--green)'
+                : 'var(--greenTransparent)'
+            : background ?? (isActive ? 'var(--blue)' : 'var(--blueTransparent)')};
     animation: ${({ pulsing }) => pulsing && '1s pulsing infinite'};
 
     @keyframes pulsing {
@@ -143,6 +149,7 @@ type Props = StyledProps & {
     popUpSuccessMessage?: string
     popUpFailureMessage?: string
     isDone?: boolean
+    alerts?: boolean
 }
 
 const SubmitButton = ({
@@ -161,9 +168,10 @@ const SubmitButton = ({
     isLoading = false,
     completed = false,
     repeatable = true,
+    alerts = true,
 }: Props) => {
     useEffect(() => {
-        if (completed) {
+        if (completed && alerts) {
             popUpMessageModel.events.evokePopUpMessage({
                 message: popUpSuccessMessage,
                 type: 'success',
@@ -180,10 +188,11 @@ const SubmitButton = ({
     const handleAction = () => {
         if (isActive && !isDone && !isLoading) return action()
 
-        popUpMessageModel.events.evokePopUpMessage({
-            message: popUpFailureMessage,
-            type: 'failure',
-        })
+        alerts &&
+            popUpMessageModel.events.evokePopUpMessage({
+                message: popUpFailureMessage,
+                type: 'failure',
+            })
     }
 
     return (

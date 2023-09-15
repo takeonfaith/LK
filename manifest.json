@@ -3,20 +3,19 @@
     "background_color": "#ffffff",
     "display": "standalone",
     "scope": "/",
-    "start_url": ".",
+    "start_url": "/",
     "name": "Личный Кабинет Московского Политеха",
-    "short_name": "Политех",
+    "short_name": "ЛК",
     "icons": [
         {
-            "src": "icon.ico",
-            "sizes": "64x64 32x32 24x24 16x16",
+            "src": "/icon.ico",
+            "sizes": "64x64",
             "type": "image/x-icon"
         },
         {
             "src": "/icon-192x192.png",
             "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any maskable"
+            "type": "image/png"
         },
         {
             "src": "/icon-256x256.png",

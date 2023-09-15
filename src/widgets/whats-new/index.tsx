@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { menuModel } from '@entities/menu'
 import { userModel } from '@entities/user'
 import { Icon } from '@features/all-pages'

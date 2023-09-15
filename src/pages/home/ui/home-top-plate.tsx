@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { userModel } from '@entities/user'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import getLettersColors from '@shared/lib/get-letters-colors'
 import shuffleArray from '@shared/lib/shuffle-array'
 import React from 'react'

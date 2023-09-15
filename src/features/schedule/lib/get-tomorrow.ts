@@ -1,4 +1,4 @@
-import { IWeekDays } from '@consts'
+import { IWeekDays } from '@shared/constants'
 
 const getTomorrow = () => {
     const today = new Date()

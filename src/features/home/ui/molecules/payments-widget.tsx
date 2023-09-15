@@ -1,6 +1,6 @@
 import { Payments } from '@api/model'
 import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { IColors, MEDIA_QUERIES } from '@consts'
+import { IColors, MEDIA_QUERIES } from '@shared/constants'
 import { paymentsModel } from '@entities/payments'
 import PaymentButton from '@features/payment-button'
 import Debt from '@features/payments/debt'
@@ -16,6 +16,7 @@ import styled from 'styled-components'
 
 const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     max-width: 400px;
+    min-width: calc(100% / 3);
     width: 100%;
     height: 156px;
     background: var(--scheduleBg);

@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react'
 import { FiInfo } from 'react-icons/fi'
 import { TemplateFormStoreOutput } from 'shared/effector/create-form-store'
 import getMethodObtaining from '@features/applications/lib/get-method-obstaing'
-import { specialFieldsNameConfigT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 
 export type TemplateFormProps<T extends { last_update?: string }> = {
     model: TemplateFormStoreOutput<T, T>
@@ -36,7 +36,7 @@ const TemplateForm = <T extends { last_update?: string }>({
     const { data, completed } = model.selectors.useForm()
     const [loading, setLoading] = useState(false)
     const [form, setForm] = useState<IInputArea | null>(null)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameConfigT>({})
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
     const isDone = (completed || !isAvailableToSend) ?? false
 
     useEffect(() => {
@@ -59,7 +59,7 @@ const TemplateForm = <T extends { last_update?: string }>({
                 {...form}
                 collapsed={isDone && !repeatable}
                 setData={setForm as LoadedState}
-                specialFieldsName={specialFieldsName}
+                specialFieldsNameConfig={specialFieldsName}
             />
             <Message title="Информация по заявке" type="info" icon={<FiInfo />} visible={isDone && !!successMessage}>
                 {successMessage}
@@ -76,9 +76,7 @@ const TemplateForm = <T extends { last_update?: string }>({
                 buttonSuccessText="Отправлено"
                 repeatable={repeatable}
                 isDone={isDone && !repeatable}
-                isActive={
-                    checkFormFields(form, Object.values(specialFieldsName)) && (form.optionalCheckbox?.value ?? true)
-                }
+                isActive={checkFormFields(form, specialFieldsName) && (form.optionalCheckbox?.value ?? true)}
                 popUpFailureMessage={
                     isDone ? 'Форма отправлена' : 'Для отправки формы необходимо, чтобы все поля были заполнены'
                 }

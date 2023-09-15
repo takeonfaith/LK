@@ -8,7 +8,7 @@ import { applicationsModel } from '@entities/applications'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import checkFormFields from '@utils/check-form-fields'
 import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
-import { specialFieldsNameConfigT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 import getExtraHolidayLength from './lib/get-extra-holiday-length'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
@@ -20,7 +20,7 @@ const ExtraHolidayColl = () => {
     } = applicationsModel.selectors.useApplications()
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [specialFieldsName, setSpecialFieldsName] = useState<specialFieldsNameConfigT>({})
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
     const isDone = completed ?? false
 
     useEffect(() => {
@@ -40,7 +40,7 @@ const ExtraHolidayColl = () => {
                         {...form}
                         collapsed={isDone}
                         setData={setForm as LoadedState}
-                        specialFieldsName={specialFieldsName}
+                        specialFieldsNameConfig={specialFieldsName}
                     />
 
                     <SubmitButton

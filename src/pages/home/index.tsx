@@ -13,6 +13,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import AlertsWidget from 'widgets/alerts-widget'
 import HomeTopPlate from './ui/home-top-plate'
+import { settingsModel } from '@entities/settings'
 
 const HomePageStyled = styled.div`
     width: 100%;
@@ -55,6 +56,8 @@ const Home = () => {
         }
     }, [schedule])
 
+    const { news } = settingsModel.selectors.useSettings().settings['settings-home-page'].property
+
     return (
         <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <HomeTopPlate />
@@ -70,7 +73,7 @@ const Home = () => {
                             <UserInfo />
                         </Flex>
                         <ScheduleAndNotification />
-                        <AlertsWidget />
+                        {!!news && <AlertsWidget />}
                     </Block>
                 </CenterPage>
             </HomePageStyled>

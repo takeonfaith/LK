@@ -8,6 +8,7 @@ type Props = StyledProps &
         children: ChildrenType
         loading?: boolean
         skeleton?: ChildrenType
+        background?: string
     }
 
 const SkeletonWrapper = styled.div`
@@ -90,7 +91,6 @@ const Block = (props: Props) => {
     const { children, skeleton = <DefaultSkeleton />, loading = false, ...restProps } = props
     return (
         <BlockWrapper {...restProps} className="block">
-            {/* <div></div> */}
             {!loading ? children : skeleton}
         </BlockWrapper>
     )

@@ -5,7 +5,7 @@ import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
 import deletePageFromSidebar from '@features/all-pages/lib/delete-page-from-sidebar'
 import Avatar from '@features/home/ui/molecules/avatar'
 import { changeEmail, changePhone } from '@shared/api/user-api'
-import { REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@shared/consts'
+import { REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@shared/constants'
 import useTheme from '@shared/lib/hooks/use-theme'
 import React, { useEffect, useState } from 'react'
 import { useModal } from 'widgets'
@@ -28,7 +28,7 @@ const useSettings = () => {
     const [fullSettings, setFullSettings] = useState<TFullSettingsModel | null>(null)
     const { property: settingsProperty } = settings['settings-notifications']
     const { property: appearanceProperty } = settings['settings-appearance']
-    const { widgetPayment, widgetSchedule } = settings['settings-home-page'].property
+    const { widgetPayment, widgetSchedule, news } = settings['settings-home-page'].property
     const requiredLeftsideBarItems =
         user?.user_status === 'staff' ? REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG : REQUIRED_LEFTSIDE_BAR_CONFIG
     useEffect(() => {
@@ -112,7 +112,7 @@ const useSettings = () => {
                                 settingsModel.events.updateSetting({
                                     nameSettings: 'settings-home-page',
                                     nameParam: 'widgetSchedule',
-                                    value: !(state as boolean | undefined) ?? false,
+                                    value: !!state,
                                 }),
                         },
                         payments: {
@@ -121,9 +121,18 @@ const useSettings = () => {
                                 settingsModel.events.updateSetting({
                                     nameSettings: 'settings-home-page',
                                     nameParam: 'widgetPayment',
-                                    value: !(state as boolean | undefined) ?? false,
+                                    value: !!state,
                                 }),
                         },
+                    },
+                    news: {
+                        value: news as boolean,
+                        action: (state) =>
+                            settingsModel.events.updateSetting({
+                                nameSettings: 'settings-home-page',
+                                nameParam: 'news',
+                                value: !!state,
+                            }),
                     },
                 },
             }),
@@ -133,6 +142,7 @@ const useSettings = () => {
         homeRoutes,
         widgetSchedule,
         widgetPayment,
+        news,
         Object.keys(leftsideBarRoutes ?? {}).length,
         Object.keys(homeRoutes ?? {}).length,
     ])

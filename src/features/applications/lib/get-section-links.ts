@@ -28,8 +28,10 @@ import {
     INDEPENDENTLY_DEDUCTED,
     EXTENSION_ATTESTATION,
     FULL_TIME_PART_TIME_FORM,
+    ACCOMMODATION_FOR_GRADUATES,
+    MILITARY_REGISTRATION,
 } from '@app/routes/routes'
-import { isProduction, RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@consts'
+import { isProduction, RECEPTION_COMMISSION, UNION_ORGANIZATION } from '@shared/constants'
 import { Section } from '@features/applications/ui/molecules/create-application-list'
 
 const getSectionLinks = (): Section[] => {
@@ -105,6 +107,10 @@ const getSectionLinks = (): Section[] => {
                     link: TERMINATION_OF_EMPLOYMENT_CONTRACT,
                     title: 'Расторжение договора найма',
                 },
+                {
+                    link: ACCOMMODATION_FOR_GRADUATES,
+                    title: 'Предоставление права проживания в период каникул',
+                },
             ],
         },
         {
@@ -133,6 +139,7 @@ const getSectionLinks = (): Section[] => {
             disabled: isProduction,
             links: [
                 { link: MILITARY_REGISTRATION_DOCUMENTS, title: 'Отправить документы воинского учета' },
+                { link: MILITARY_REGISTRATION, title: 'Воинский учет' },
                 {
                     link: '',
                     title: 'Заполнить личную карточку обучающегося по воинскому учету для получения отсрочки от призывана военную службу',

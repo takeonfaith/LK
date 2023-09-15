@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 

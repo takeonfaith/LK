@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import styled from 'styled-components'
 
 const SelectHeader = styled.header<{ appearance: boolean }>`

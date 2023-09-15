@@ -9,7 +9,7 @@ import { MistakeModal } from './atoms'
 import Flex from '@shared/ui/flex'
 import styled from 'styled-components'
 import Subtext from '@shared/ui/subtext'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 
 const ElectornicAgreementStyled = styled.div`
     .info-text {

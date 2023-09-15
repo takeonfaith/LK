@@ -1,6 +1,6 @@
 import { IRoute } from '@app/routes/general-routes'
 import { Icon } from '@features/all-pages'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import getShortStirng from '@shared/lib/get-short-string'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'

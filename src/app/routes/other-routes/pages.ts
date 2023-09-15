@@ -44,6 +44,10 @@ export const RelocationInsideHostelPage = lazy(
     () => import('@pages/applications/pages/campus-management/relocation-inside-hostel'),
 )
 
+export const AccommodationForGraduatesPage = lazy(
+    () => import('@pages/applications/pages/campus-management/accommodation-for-graduates'),
+)
+
 export const RelocationToAnotherHostelPage = lazy(
     () => import('@pages/applications/pages/campus-management/relocation-to-another-hostel'),
 )
@@ -66,6 +70,10 @@ export const RetakeForDiploma = lazy(
 
 export const MilitaryRegistrationDocuments = lazy(
     () => import('@pages/applications/pages/mobilization-department/military-registration-documents'),
+)
+
+export const MilitaryRegistration = lazy(
+    () => import('@pages/applications/pages/mobilization-department/military-registration'),
 )
 
 export const FinancialSupport = lazy(

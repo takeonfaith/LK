@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import displayTopInfoSession from '@features/schedule/lib/display-top-info-session'
 import calcTimeLeft from '@shared/lib/dates/calc-time-left'
 import React from 'react'

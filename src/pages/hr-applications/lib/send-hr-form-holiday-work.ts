@@ -1,14 +1,12 @@
-import { popUpMessageModel } from '@entities/pop-up-message'
 import { IInputArea } from '@ui/input-area/model'
-import { applicationsModel } from '@entities/hr-applications'
+import { bufferHolidayWorkModel } from '../pages/buffer-holiday-work/model'
 
 const SendHrFormHolidayWork = async (
     employeeId: string,
     inputAreas: IInputArea[],
-    setLoading: (loading: boolean) => void,
     setCompleted: (loading: boolean) => void,
 ) => {
-    setLoading(true)
+    setCompleted(false)
 
     const form = inputAreas
         .map((itemForm) => {
@@ -45,37 +43,26 @@ const SendHrFormHolidayWork = async (
                     )
                 })
                 const obj = {} as any
-
                 obj[employeeId] = JSON.stringify(r)
-
                 return obj
             }
         })
         .flat()
 
     const result = Object.assign({}, ...form)
-    try {
-        const aaa = {
-            Title: result.reason,
-            Employee: employeeId,
-            WorkDays: [
-                {
-                    DateOfEmployment: result.holiday_work_date,
-                    DayOfRest: result.extra_holiday_date,
-                },
-            ],
-        }
-        await applicationsModel.effects.postApplicationFx(aaa)
-        setLoading(false)
-        setCompleted(true)
-    } catch (error) {
-        setLoading(false)
-        popUpMessageModel.events.evokePopUpMessage({
-            message: `Форма отправлена успешно`,
-            type: 'success',
-            time: 30000,
-        })
-    }
+
+    const response = await bufferHolidayWorkModel.effects.sendBufferHolidayWorkFx({
+        employeeGuid: result.jobGuid,
+        dates: [
+            {
+                date: result.holiday_work_date,
+                dayOff: result.extra_holiday_date ? result.extra_holiday_date : null,
+                hours: +result.holiday_work_hours,
+            },
+        ],
+    })
+
+    !response.isError && setCompleted(true)
 }
 
 export default SendHrFormHolidayWork

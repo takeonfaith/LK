@@ -1,20 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { IColors } from '@consts'
+import { IColors } from '@shared/constants'
 import React, { LazyExoticComponent } from 'react'
 
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import {
-    BiBookReader,
-    BiGroup,
-    BiHeadphone,
-    BiMessageRounded,
-    BiNews,
-    BiPalette,
-    BiRuble,
-    BiTimeFive,
-    BiUserCircle,
-} from 'react-icons/bi'
+import { BiBookReader, BiGroup, BiHeadphone, BiMessageRounded, BiNews, BiPalette, BiUserCircle } from 'react-icons/bi'
 
 import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 import {
@@ -31,14 +20,12 @@ import {
     ForgotPasswordPage,
     GetYourLoginPage,
     Home,
-    HomeSettings,
     // AllStudentsPage,
     // AllTeachersPage,
     InstructionsPage,
     MedicalCertificate,
     MemoFreshmenPage,
     MemoTeacherPage,
-    PaymentsPage,
     ProfilePage,
     ScheduleCurrent,
     // ChatPage,
@@ -52,6 +39,7 @@ import {
 
 import LkNotificationsPage from '@pages/lk-notifications'
 import { ExtSize } from '@shared/ui/types'
+import { AiOutlineReload } from 'react-icons/ai'
 import { BsFileMedical } from 'react-icons/bs'
 import {
     FiBell,
@@ -67,7 +55,6 @@ import {
 } from 'react-icons/fi'
 import { HiOutlineCalendar, HiOutlineClipboardCheck, HiOutlineFlag, HiOutlineViewGrid } from 'react-icons/hi'
 import { DOCLIST_ROUTE } from '../teacher-routes'
-import { AiOutlineReload } from 'react-icons/ai'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -105,6 +92,7 @@ export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activity'
 export const ALERTS_ROUTE = '/alerts'
 export const LK_NOTIFICATIONS_ROUTE = '/lk-notifications'
+export const MILITARY_REGISTRATION_ROUTE = '/military-registration'
 
 export const USEFUL_INFO_ROUTE = '/helpful-information'
 
@@ -122,7 +110,7 @@ export interface IRoutes {
 
 export enum Groups {
     GENERAL = 'Основное',
-    FINANCES_DOCS = 'Финансы и документы',
+    FINANCES_DOCS = 'Кадровая среда',
     LEARNING_ACTIVITIES = 'Учебная деятельность',
     OTHER = 'Находится в разработке',
     COMMUNICATION = 'Коммуникация',
@@ -216,6 +204,7 @@ export const generalRoutes: IRoutes = {
         show: false,
         group: 'GENERAL',
         withoutBackButton: true,
+        pageSize: 'large',
     },
     settings: {
         id: 'settings',
@@ -227,29 +216,6 @@ export const generalRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'GENERAL',
-    },
-    'electronic-interaction-agreement': {
-        id: 'electronic-interaction-agreement',
-        title: 'Соглашение об электронном взаимодействии',
-        shortTitle: 'Соглашение об электр...',
-        icon: <HiOutlineClipboardCheck />,
-        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
-        Component: ElectronicInteractionAgreementPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
-        pageSize: 'small',
-    },
-    payments: {
-        id: 'payments',
-        title: 'Договоры и оплаты',
-        icon: <BiRuble />,
-        path: PAYMENTS_ROUTE,
-        Component: PaymentsPage,
-        color: 'green',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
-        keywords: ['оплата'],
     },
     doclist: {
         id: 'doclist',
@@ -307,6 +273,18 @@ export const generalRoutes: IRoutes = {
         group: 'GENERAL',
         keywords: ['Оповещения'],
         isNew: true,
+    },
+    'electronic-interaction-agreement': {
+        id: 'electronic-interaction-agreement',
+        title: 'Соглашение об электронном взаимодействии',
+        shortTitle: 'Соглашение об электр...',
+        icon: <HiOutlineClipboardCheck />,
+        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
+        Component: ElectronicInteractionAgreementPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'GENERAL',
+        pageSize: 'small',
     },
     chat: {
         //ChatPage
@@ -394,7 +372,7 @@ export const generalRoutes: IRoutes = {
         Component: MedicalCertificate,
         color: 'blue',
         isTemplate: false,
-        group: 'GENERAL',
+        group: 'FINANCES_DOCS',
     },
 }
 
@@ -527,7 +505,7 @@ export const generalHiddenRoutes: IRoutes = {
         show: true,
         group: 'OTHER',
         isSubPage: true,
-        subPageHeaderTitle: 'Внешний вид',
+        subPageHeaderTitle: 'Аккаунт',
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
@@ -552,7 +530,7 @@ export const generalHiddenRoutes: IRoutes = {
         title: 'Настройки. Главная',
         icon: <FiHome />,
         path: SETTINGS_HOME_PAGE_ROUTE,
-        Component: HomeSettings,
+        Component: () => <></>,
         color: 'blue',
         isTemplate: true,
         show: true,

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import LoginBlock from './ui/organisms/login-block'
-import { MEDIA_QUERIES } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/constants'
 
 const LoginWrapper = styled.div`
     width: 100%;

@@ -8,8 +8,9 @@ import { AiOutlineReload } from 'react-icons/ai'
 import { UserToken } from '@api/model'
 import { InitialLoaderWrapper } from './styles'
 import getLettersColors from '@shared/lib/get-letters-colors'
-import { Colors } from '@shared/consts'
 import Flex from '../flex'
+import { Colors } from '@shared/constants'
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 
 interface Props {
     loading: boolean
@@ -22,13 +23,14 @@ const InitialLoader = ({ loading }: Props) => {
     } = userModel.selectors.useUser()
     const color = user ? getLettersColors(user?.fullName) : Colors.blue.main
 
-    const loadUser = () => userModel.effects.getUserFx(JSON.parse(localStorage.getItem('token') ?? '') as UserToken)
+    const loadUser = () =>
+        userModel.effects.getUserFx(JSON.parse(localStorage.getItem(BrowserStorageKey.Token) ?? '') as UserToken)
 
     const handleLogout = () => userModel.events.logout()
 
     if (!!error)
         return (
-            <InitialLoaderWrapper loading={true} color={color}>
+            <InitialLoaderWrapper $loading={true} color={color}>
                 <Error text={error}>
                     <Flex d="column" gap="8px">
                         <Button onClick={loadUser} text="Попробовать снова" icon={<AiOutlineReload />} width="200px" />
@@ -45,7 +47,7 @@ const InitialLoader = ({ loading }: Props) => {
         )
 
     return (
-        <InitialLoaderWrapper color={color} loading={loading}>
+        <InitialLoaderWrapper color={color} $loading={loading}>
             <Logo short width="100px" />
             {loading && <Loading />}
         </InitialLoaderWrapper>

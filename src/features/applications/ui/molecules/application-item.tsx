@@ -1,5 +1,5 @@
 import { Application } from '@api/model'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { Message } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'

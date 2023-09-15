@@ -2,12 +2,12 @@ import { AcadPerformance } from '@api/model/acad-performance'
 import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 import { getSubjectIcon } from '@features/acad-performance/lib/get-subject-icon'
 import { Icon } from '@features/all-pages'
-import { GradeByScore } from '@shared/consts'
+import { GradeByScore } from '@shared/constants'
+import localizeDate from '@shared/lib/dates/localize-date'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import getShortName from '@utils/get-short-name'
-import localizeDate from '@shared/lib/dates/localize-date'
 import React from 'react'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
@@ -16,7 +16,6 @@ import { SubjectCheker } from '../atoms'
 
 interface Props {
     item: AcadPerformance
-    number: number
     type: string
 }
 
@@ -61,12 +60,9 @@ const Grade = styled.strong<{ color: string }>`
     justify-content: flex-end;
 `
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SubjectItem = ({ item, number, type }: Props) => {
+const SubjectItem = ({ item, type }: Props) => {
     const { open } = useModal()
     const { name, grade } = item
-
-    // const grade = 'Удовлетворительно'
 
     const handleOpen = () => item.grade && open(<SubjectModal item={item} />, item.name)
 

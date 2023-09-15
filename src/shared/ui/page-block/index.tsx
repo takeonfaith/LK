@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { CenterPage } from '../atoms'
 import useCurrentExactPage from '@shared/lib/hooks/use-current-exact-page'
 import { getPageWidth } from './lib/get-page-width'
-import { MEDIA_QUERIES } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/constants'
 
 const PageBlockStyled = styled(BlockWrapper)<{ titleLen: number; hasCenterEl: boolean }>`
     position: relative;

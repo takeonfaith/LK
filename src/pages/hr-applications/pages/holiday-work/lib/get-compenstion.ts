@@ -1,11 +1,11 @@
 import { IInputAreaData } from '@ui/input-area/model'
-import { specialFieldsNameConfigT, specialFieldsNameT } from '@entities/applications/consts'
+import { SpecialFieldsNameConfig, SpecialFieldsName } from '@entities/applications/consts'
 
 type radioType = { id: number; title: string }
 
-const getCompensation = (data: IInputAreaData[]): specialFieldsNameConfigT => {
+const getCompensation = (data: IInputAreaData[]): SpecialFieldsNameConfig => {
     const reasonField = data.find((item: IInputAreaData) => item.fieldName === 'compensation')
-    let resultNameField: specialFieldsNameT = null
+    let resultNameField: SpecialFieldsName = null
     if (!!reasonField?.value) {
         const valueReason = reasonField?.value as radioType
         if (

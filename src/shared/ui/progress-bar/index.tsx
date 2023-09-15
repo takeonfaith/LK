@@ -1,4 +1,4 @@
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants'
 import React from 'react'
 import styled from 'styled-components'
 import { Title } from '../title'
@@ -15,6 +15,7 @@ const getColorFromValue = (value: number): keyof IColors => {
 const SIZES: Record<Size, number> = {
     small: 4,
     middle: 9,
+    large: 12,
     big: 14,
 }
 

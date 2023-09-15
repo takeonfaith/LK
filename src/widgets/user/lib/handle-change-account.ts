@@ -1,4 +1,5 @@
 import { confirmModel } from '@entities/confirm'
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 
 const handleChangeAccount = (token: string) => {
     if (token) {
@@ -6,12 +7,7 @@ const handleChangeAccount = (token: string) => {
             confirmModel.events.evokeConfirm({
                 message: 'Вы уверены, что хотите сменить аккаунт?',
                 onConfirm: () => {
-                    localStorage.setItem(
-                        'token',
-                        JSON.stringify({
-                            token,
-                        }),
-                    )
+                    localStorage.setItem(BrowserStorageKey.Token, token)
                     location.reload()
                 },
             })

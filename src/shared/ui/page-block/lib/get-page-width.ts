@@ -4,7 +4,7 @@ import { ExtSize } from '@shared/ui/types'
 const sizes: Record<ExtSize, string> = {
     small: '600px',
     middle: '700px',
-    big: '1000px',
+    big: '963px',
     large: '100%',
 }
 

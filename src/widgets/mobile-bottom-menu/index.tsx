@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { menuModel } from '@entities/menu'
-import { DEFAULT_MOBILE_CONFIG } from '@entities/menu/model'
+import { DEFAULT_STUDENT_MOBILE_CONFIG, DEFAULT_STAFF_MOBILE_CONFIG } from '@entities/menu/model'
 import { ListWrapper } from '@ui/list/styles'
 import { SkeletonShape } from '@ui/skeleton-shape'
 import { LeftsideBarItem } from 'widgets/leftside-bar/ui'
 import Flex from '@shared/ui/flex'
-import { MEDIA_QUERIES } from '@shared/consts'
+import { MEDIA_QUERIES } from '@shared/constants'
+import { userModel } from '@entities/user'
 
 const MobileBottomMenuWrapper = styled(ListWrapper)`
     position: absolute;
@@ -36,8 +37,11 @@ const LinkSkeleton = () => {
 
 const MobileBottomMenu = () => {
     const { allRoutes, currentPage } = menuModel.selectors.useMenu()
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
 
-    if (!allRoutes) {
+    if (!allRoutes || !user) {
         return (
             <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly" verticalAlign="center">
                 <LinkSkeleton />
@@ -49,9 +53,11 @@ const MobileBottomMenu = () => {
         )
     }
 
+    const config = user?.user_status === 'stud' ? DEFAULT_STUDENT_MOBILE_CONFIG : DEFAULT_STAFF_MOBILE_CONFIG
+
     return (
         <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly">
-            {DEFAULT_MOBILE_CONFIG.map((id) => {
+            {config.map((id) => {
                 return <LeftsideBarItem key={id} {...allRoutes[id]} isCurrent={currentPage?.id === id} />
             })}
         </MobileBottomMenuWrapper>

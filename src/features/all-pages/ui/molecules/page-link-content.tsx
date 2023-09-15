@@ -1,5 +1,5 @@
 import React from 'react'
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants'
 import { settingsModel } from '@entities/settings'
 import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
@@ -49,16 +49,6 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
         transition: 0.2s;
     }
 
-    &:hover {
-        .more-button {
-            opacity: 1;
-            visibility: visible;
-        }
-        .notification-circle {
-            opacity: 0;
-        }
-    }
-
     .outside {
         width: 100%;
         height: 100%;
@@ -85,6 +75,14 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
 
         @media (min-width: 1001px) {
             &:hover {
+                .more-button {
+                    opacity: 1;
+                    visibility: visible;
+                }
+                .notification-circle {
+                    opacity: 0;
+                }
+
                 .icon {
                     box-shadow: 0 20px 110px 60px ${({ color }) => Colors[color as keyof IColors].main};
                     transform: ${({ isVertical }) => isVertical && 'scale(1.1) translateY(20px)'};
