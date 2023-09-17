@@ -5,13 +5,14 @@ import { Error, Message, Wrapper } from '@ui/atoms'
 import React, { useEffect } from 'react'
 import { SliderPage } from 'widgets'
 import PaymentsTemplate from './payments-template'
+import { useUnit } from 'effector-react'
 
 const PaymentsPage = () => {
-    const {
-        data: { payments },
-        loading,
-        error,
-    } = paymentsModel.selectors.useData()
+    const [error, loading, payments] = useUnit([
+        paymentsModel.stores.$error,
+        paymentsModel.stores.$loading,
+        paymentsModel.stores.$paymentsStore,
+    ])
     const paymentType =
         !!payments?.dormitory.length && !!payments?.education.length
             ? 'both'

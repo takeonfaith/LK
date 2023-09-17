@@ -17,6 +17,7 @@ const PaymentsTemplate = ({ contracts }: Props) => {
     return (
         <PageWrapper>
             {contracts.map((contract, i) => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const { agreements, number, type, paygraph, payments, signed_user } = contract
                 const isDormitory = type === 'Общежитие'
                 // Временная мера. Потом апи будет раздавать точную информацию о статусе договора.

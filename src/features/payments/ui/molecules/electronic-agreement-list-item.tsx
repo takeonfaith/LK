@@ -6,6 +6,7 @@ import Accordion from '@ui/accordion/accordion'
 import { LinkButton, SubmitButton, Title } from '@ui/atoms'
 import { Message } from '@ui/message'
 import localizeDate from '@utils/localize-date'
+import { useUnit } from 'effector-react'
 import React from 'react'
 import { FiCheck, FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
@@ -27,10 +28,11 @@ const SignBlock = styled.div`
 
 const ElectronicAgreementListItem = ({ data, isContractSigned }: Props) => {
     const { id, signed_user: signedUser, name, can_sign: isActive, date } = data
-    const {
-        data: { done, completed },
-        loading,
-    } = paymentsModel.selectors.useData()
+    const [done, completed, loading] = useUnit([
+        paymentsModel.stores.$done,
+        paymentsModel.stores.$completed,
+        paymentsModel.stores.$loading,
+    ])
 
     const height = signedUser || done ? 140 : 100
     const handleSubmit = () => paymentsModel.events.signAgreement(id)
@@ -54,16 +56,16 @@ const ElectronicAgreementListItem = ({ data, isContractSigned }: Props) => {
                         isActive={!!data.file}
                         // background="transparent"
                     />
-                    {!done && (
+                    {!(signedUser || done) && (
                         <SubmitButton
-                            text={!done ? 'Подписать' : 'Подписано'}
+                            text={!(signedUser || done) ? 'Подписать' : 'Подписано'}
                             action={handleSubmit}
                             isLoading={loading}
                             completed={completed}
-                            isDone={done}
+                            isDone={signedUser || done}
                             width="160px"
                             setCompleted={setCompleted}
-                            isActive={!done && isActive}
+                            isActive={!(signedUser || done) && isActive}
                             popUpFailureMessage={
                                 !isActive
                                     ? isContractSigned
@@ -80,7 +82,7 @@ const ElectronicAgreementListItem = ({ data, isContractSigned }: Props) => {
                         icon={<FiCheck />}
                         align="center"
                         width="130px"
-                        visible={done}
+                        visible={signedUser || done}
                     />
                 </Flex>
             </SignBlock>

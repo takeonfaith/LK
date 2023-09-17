@@ -14,6 +14,7 @@ import styled from 'styled-components'
 import AlertsWidget from 'widgets/alerts-widget'
 import HomeTopPlate from './ui/home-top-plate'
 import { settingsModel } from '@entities/settings'
+import { useUnit } from 'effector-react'
 
 const HomePageStyled = styled.div`
     width: 100%;
@@ -35,9 +36,7 @@ const Home = () => {
         error,
     } = userModel.selectors.useUser()
 
-    const {
-        data: { payments },
-    } = paymentsModel.selectors.useData()
+    const payments = useUnit(paymentsModel.stores.$paymentsStore)
     const { data: schedule } = scheduleModel.selectors.useSchedule()
 
     const { homeRoutes } = menuModel.selectors.useMenu()

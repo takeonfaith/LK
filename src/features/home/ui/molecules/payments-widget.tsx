@@ -13,6 +13,7 @@ import React from 'react'
 import { FiCheck, FiInfo } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useUnit } from 'effector-react'
 
 const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     max-width: 400px;
@@ -127,10 +128,7 @@ const TopMessage = ({
 }
 
 const PaymentsWidget = () => {
-    const {
-        data: { payments },
-        error,
-    } = paymentsModel.selectors.useData()
+    const [payments, error] = useUnit([paymentsModel.stores.$paymentsStore, paymentsModel.stores.$error])
 
     if (error) return <ErrorMessage />
 

@@ -1,20 +1,9 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
-import { createEvent, sample } from 'effector'
-import { createEvent, sample } from 'effector'
-import { useStore } from 'effector-react/compat'
+import { combine, createEvent, sample } from 'effector'
 import { createEffect, createStore } from 'effector'
 import changeCanSign from '../lib/change-can-sign'
 import { agreementSubmit } from '@shared/api/payment-api'
-
-interface PaymentsStore {
-    payments: Payments | null
-    error: string | null
-    completed: boolean
-    done: boolean
-}
-
-const DEFAULT_STORE: PaymentsStore = { payments: null, completed: false, done: false, error: null }
 
 const signAgreement = createEvent<string>()
 const setDone = createEvent<boolean>()
@@ -54,53 +43,25 @@ const signAgreementFx = createEffect(async (id: string) => {
 
 sample({ clock: signAgreement, target: signAgreementFx })
 
-const useData = () => {
-    const { completed, done, payments, error } = useStore($paymentsStore)
-    return {
-        data: { completed, done, payments },
-        loading: useStore(getPaymentsFx.pending),
-        workerLoading: useStore(signAgreementFx.pending),
-        error: error,
-    }
-}
-
 const clearStore = createEvent()
 
-const $paymentsStore = createStore<PaymentsStore>(DEFAULT_STORE)
-    .on(getPaymentsFx, (oldData) => ({
-        ...oldData,
-        error: null,
-    }))
-    .on(getPaymentsFx.doneData, (oldData, newData) => ({
-        ...oldData,
-        payments: newData,
-    }))
-    .on(getPaymentsFx.failData, (oldData, newData) => ({
-        ...oldData,
-        error: newData.message,
-    }))
-    .on(signContractFx.doneData, (oldData, contractId) => ({
-        ...oldData,
-        payments: changeCanSign(oldData.payments, contractId, false),
-    }))
-    .on(signContractFx.failData, (oldData, newData) => ({
-        ...oldData,
-        error: newData.message,
-    }))
-    .on(clearStore, () => ({
-        ...DEFAULT_STORE,
-    }))
-    .on(setCompleted, (oldData, completed) => ({
-        ...oldData,
-        completed,
-    }))
-    .on(setDone, (oldData, done) => ({
-        ...oldData,
-        done,
-    }))
+const $loading = combine(signAgreementFx.pending, getPaymentsFx.pending, Boolean)
+const $completed = createStore<boolean>(false).on(setCompleted, (oldData, completed) => completed)
+const $done = createStore<boolean>(false).on(setDone, (oldData, done) => done)
+const $error = createStore<string | null>(null)
+    .on(getPaymentsFx.failData, (oldData, newData) => newData.message)
+    .on(signContractFx.failData, (oldData, newData) => newData.message)
+const $paymentsStore = createStore<Payments | null>(null)
+    .on(getPaymentsFx.doneData, (oldData, newData) => newData)
+    .on(signContractFx.doneData, (oldData, contractId) => changeCanSign(oldData, contractId, false))
+    .on(clearStore, () => null)
 
-export const selectors = {
-    useData,
+export const stores = {
+    $loading,
+    $completed,
+    $done,
+    $error,
+    $paymentsStore,
 }
 
 export const effects = {
