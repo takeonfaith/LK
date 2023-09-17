@@ -61,7 +61,7 @@ const ElectornicAgreement = ({ children }: Props) => {
                 />
             </Flex>
             <div className="info-text">{children}</div>
-            {true && (
+            {!data.status && !done && (
                 <SubmitButton
                     text={!data.status && !done ? 'Подписать' : 'Подписано'}
                     action={handleSubmit}
