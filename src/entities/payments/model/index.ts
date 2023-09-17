@@ -4,6 +4,8 @@ import { combine, createEvent, sample } from 'effector'
 import { createEffect, createStore } from 'effector'
 import changeCanSign from '../lib/change-can-sign'
 import { agreementSubmit } from '@shared/api/payment-api'
+import { MessageType } from '@shared/ui/types'
+import { popUpMessageModel } from '@entities/pop-up-message'
 
 const signAgreement = createEvent<string>()
 const setDone = createEvent<boolean>()
@@ -30,15 +32,27 @@ const signContractFx = createEffect(async (contractId: string) => {
 })
 
 const signAgreementFx = createEffect(async (id: string) => {
-    const response = await agreementSubmit(id)
-    if (!response.data.contracts.education && !response.data.contracts.dormitory)
-        throw new Error('У вас нет данных по оплате')
-    try {
+    return await agreementSubmit(id)
+})
+
+sample({
+    clock: signAgreementFx.doneData,
+    fn: (response) => {
+        if (!response.data.contracts.education && !response.data.contracts.dormitory)
+            return { message: 'У вас нет данных по оплате', type: 'failure' as MessageType }
+
         setDone(true)
-        return response.data.contracts
-    } catch (_) {
-        throw new Error('Не удалось загрузить оплату')
-    }
+        return { message: 'Успешно подписано', type: 'success' as MessageType }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
+})
+
+sample({
+    clock: signAgreementFx.failData,
+    fn: () => {
+        return { message: 'Не удалось загрузить оплату', type: 'failure' as MessageType }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
 })
 
 sample({ clock: signAgreement, target: signAgreementFx })

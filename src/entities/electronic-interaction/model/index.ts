@@ -3,6 +3,7 @@ import { ElectronicInteraction } from '@api/model'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { popUpMessageModel } from '@entities/pop-up-message'
+import { MessageType } from '@shared/ui/types'
 
 interface ElectronicInteractionStore {
     electronicInteraction: ElectronicInteraction | null
@@ -22,23 +23,32 @@ const postElectronicInteraction = createEvent()
 const changeDone = createEvent<boolean>()
 const changeCompleted = createEvent<boolean>()
 
-const postElectronicInteractionFx = createEffect(async (): Promise<void> => {
-    try {
-        const response = await pepApi.set()
-        const preparedData = response[0]
+const postElectronicInteractionFx = createEffect(async () => {
+    return await pepApi.set()
+})
 
-        if (preparedData?.result !== 'ok')
-            popUpMessageModel.events.evokePopUpMessage({ message: 'Не удалось подписать', type: 'failure' })
-        else {
-            changeDone(true)
-            popUpMessageModel.events.evokePopUpMessage({
-                message: 'Согласие успешно подписано',
-                type: 'success',
-            })
+sample({
+    clock: postElectronicInteractionFx.doneData,
+    fn: (response) => {
+        const preparedData = response[0]
+        if (preparedData?.result !== 'ok') return { message: 'Не удалось подписать', type: 'failure' as MessageType }
+
+        changeDone(true)
+        return {
+            message: `Форма отправлена успешно`,
+            type: 'success' as MessageType,
+            time: 0,
         }
-    } catch (error) {
-        throw new Error('Возникла ошибка. Попробуйте позже')
-    }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
+})
+
+sample({
+    clock: postElectronicInteractionFx.failData,
+    fn: () => {
+        return { message: 'Не удалось подписать', type: 'failure' as MessageType }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
 })
 
 const getElectronicInteractionFx = createEffect(async (): Promise<ElectronicInteraction> => {
