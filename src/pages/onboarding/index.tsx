@@ -1,8 +1,8 @@
 import PageBlock from '@shared/ui/page-block'
 import React from 'react'
-import { LinkList } from './ui/molecules/LinkList'
-import { TextFields } from './ui/molecules/TextFields'
+import { LinkList } from './ui/link-list'
 import { CenterPage } from '@shared/ui/atoms'
+import { TextFields } from './ui/text-fields'
 
 const Onboarding = () => {
     return (

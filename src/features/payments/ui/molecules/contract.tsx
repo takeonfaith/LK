@@ -10,6 +10,7 @@ import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import TechicalErrorMessage from './technical-error-message'
+import { formatNumber } from '@shared/lib/get-number-with-spaces-format'
 
 const ContractWrapper = styled.div`
     display: flex;
@@ -65,7 +66,11 @@ const Contract = ({ contract }: Props) => {
         },
         {
             text: 'Сумма к оплате',
-            info: sum ?? '',
+            info: formatNumber(sum) ?? '',
+        },
+        {
+            text: 'Статус',
+            info: '',
         },
         // {
         //     text: 'Ежемесячная плата: ',

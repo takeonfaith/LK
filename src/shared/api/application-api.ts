@@ -51,5 +51,5 @@ export const post = async (data: ApplicationCreating) => {
             'Content-Type': 'multipart/form-data',
         },
     })
-    return resultRequest.result
+    return resultRequest
 }

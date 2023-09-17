@@ -1,7 +1,7 @@
 import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ScheduleTable } from '../ui/molecules/ScheduleTable'
+import { ScheduleTable } from './schedule-table'
 
 export const HRDocumentFlow = () => (
     <>

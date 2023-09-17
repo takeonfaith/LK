@@ -132,7 +132,7 @@ const DEFAULT_STORE: UserStore = {
 
 changeSavePasswordFunc()
 
-const $userStore = createStore(DEFAULT_STORE)
+export const $userStore = createStore(DEFAULT_STORE)
     .on(getUserFx, (oldData) => ({
         ...oldData,
         error: null,

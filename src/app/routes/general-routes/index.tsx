@@ -30,7 +30,6 @@ import {
     ForgotPasswordPage,
     GetYourLoginPage,
     Home,
-    HomeSettings,
     // AllStudentsPage,
     // AllTeachersPage,
     InstructionsPage,
@@ -87,6 +86,7 @@ export const INSTRUCTIONS_ROUTE = '/instructions'
 export const PROJECT_ACTIVITIES_ROUTE = '/project-activity'
 export const ALERTS_ROUTE = '/alerts'
 export const LK_NOTIFICATIONS_ROUTE = '/lk-notifications'
+export const MILITARY_REGISTRATION_ROUTE = '/military-registration'
 
 export const USEFUL_INFO_ROUTE = '/helpful-information'
 
@@ -194,6 +194,7 @@ export const generalRoutes: IRoutes = {
         show: false,
         group: 'GENERAL',
         withoutBackButton: true,
+        pageSize: 'large',
     },
     settings: {
         id: 'settings',
@@ -205,19 +206,6 @@ export const generalRoutes: IRoutes = {
         isTemplate: true,
         show: true,
         group: 'GENERAL',
-        pageSize: 'small',
-    },
-    'electronic-interaction-agreement': {
-        id: 'electronic-interaction-agreement',
-        title: 'Соглашение об электронном взаимодействии',
-        shortTitle: 'Соглашение об электр...',
-        icon: <HiOutlineClipboardCheck />,
-        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
-        Component: ElectronicInteractionAgreementPage,
-        color: 'blue',
-        isTemplate: false,
-        group: 'FINANCES_DOCS',
-        pageSize: 'small',
     },
     doclist: {
         id: 'doclist',
@@ -275,6 +263,17 @@ export const generalRoutes: IRoutes = {
         group: 'GENERAL',
         keywords: ['Оповещения'],
         isNew: true,
+    },
+    'electronic-interaction-agreement': {
+        id: 'electronic-interaction-agreement',
+        title: 'Соглашение об электронном взаимодействии',
+        shortTitle: 'Соглашение об электр...',
+        icon: <HiOutlineClipboardCheck />,
+        path: ELECTRONIC_INTERACTION_AGREEMENT_ROUTE,
+        Component: ElectronicInteractionAgreementPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'GENERAL',
         pageSize: 'small',
     },
     chat: {
@@ -363,8 +362,7 @@ export const generalRoutes: IRoutes = {
         Component: MedicalCertificate,
         color: 'blue',
         isTemplate: false,
-        group: 'GENERAL',
-        pageSize: 'small',
+        group: 'FINANCES_DOCS',
     },
 }
 
@@ -418,7 +416,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-personal': {
         id: 'settings-personal',
@@ -435,7 +432,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-security': {
         id: 'settings-security',
@@ -451,14 +447,13 @@ export const generalHiddenRoutes: IRoutes = {
         subPageHeaderTitle: 'Безопасность',
         fallbackPrevPage: SETTINGS_ROUTE,
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-home-page': {
         id: 'settings-home-page',
         title: 'Настройки. Главная',
         icon: <FiHome />,
         path: SETTINGS_HOME_PAGE_ROUTE,
-        Component: HomeSettings,
+        Component: () => <></>,
         color: 'blue',
         isTemplate: true,
         show: true,
@@ -468,7 +463,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-customize-menu': {
         id: 'settings-customize-menu',
@@ -484,7 +478,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'settings-notifications': {
         id: 'settings-notifications',
@@ -500,7 +493,6 @@ export const generalHiddenRoutes: IRoutes = {
         fallbackPrevPage: SETTINGS_ROUTE,
 
         backButtonText: 'Настройки',
-        pageSize: 'small',
     },
     'useful-info-template': {
         id: `useful-info-template`,

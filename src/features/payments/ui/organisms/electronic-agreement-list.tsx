@@ -9,9 +9,10 @@ import TechicalErrorMessage from '../molecules/technical-error-message'
 interface Props {
     isDormitory: boolean
     electronicAgreements: any[]
+    isContractSigned: boolean
 }
 
-const ElectronicAgreementList = ({ isDormitory, electronicAgreements = [] }: Props) => {
+const ElectronicAgreementList = ({ isDormitory, electronicAgreements = [], isContractSigned }: Props) => {
     return (
         <List width="100%">
             <Title size={4} align="left" icon={<FiFolderPlus />} bottomGap>
@@ -22,7 +23,7 @@ const ElectronicAgreementList = ({ isDormitory, electronicAgreements = [] }: Pro
                 Подписание дополнительных соглашений к 3-сторонним договорам в Личном кабинете не предусмотрено
             </Message>
             {electronicAgreements.map((item, index) => (
-                <ElectronicAgreementListItem key={index} data={item} />
+                <ElectronicAgreementListItem key={index} data={item} isContractSigned={isContractSigned} />
             ))}
         </List>
     )

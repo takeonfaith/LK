@@ -17,8 +17,10 @@ const PaymentsTemplate = ({ contracts }: Props) => {
     return (
         <PageWrapper>
             {contracts.map((contract, i) => {
-                const { agreements, number, type, paygraph, payments } = contract
+                const { agreements, number, type, paygraph, payments, signed_user } = contract
                 const isDormitory = type === 'Общежитие'
+                // Временная мера. Потом апи будет раздавать точную информацию о статусе договора.
+                const isSigned = true
                 const electronicAgreements = agreements.filter((item) => new Date(item?.date) > new Date('2022-02-1'))
 
                 return (
@@ -35,11 +37,12 @@ const PaymentsTemplate = ({ contracts }: Props) => {
                                 </Subtext>
                             </Flex>
                         )}
-                        <DebtAndQr data={contract} isDormitory={isDormitory} />
+                        <DebtAndQr data={contract} />
                         <PaymentList payments={payments ?? []} />
                         <PaygraphTable paygraph={paygraph} />
                         <ElectronicAgreementList
                             isDormitory={isDormitory}
+                            isContractSigned={isSigned}
                             electronicAgreements={electronicAgreements}
                         />
                         {i !== contracts.length - 1 && <Divider margin="0" width="100%" />}

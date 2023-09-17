@@ -1,6 +1,6 @@
 import React from 'react'
-import { Contacts } from '../ui/atoms/Contacts'
 import { BoldText } from '@shared/ui/atoms/BoldText'
+import { Contacts } from './contacts'
 
 export const WorkplaceOrganization = () => (
     <>
@@ -19,7 +19,7 @@ export const WorkplaceOrganization = () => (
         </p>
         <Contacts>
             По всем дополнительным вопросам, связанным с обеспечением технической поддержки на рабочем месте, обращаться
-            по телефону <a href="tel:+74952230523p1111">+7 (495) 223-05-23 доб. 1111</a> или на адрес электронной почты{' '}
+            по телефону <a href="tel:+74952230523,1111">+7 (495) 223-05-23 доб. 1111</a> или на адрес электронной почты{' '}
             <a href="mailto:help@mospolytech.ru">help@mospolytech.ru</a>.
         </Contacts>
     </>
