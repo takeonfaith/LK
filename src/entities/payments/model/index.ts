@@ -63,6 +63,7 @@ const $loading = combine(signAgreementFx.pending, getPaymentsFx.pending, Boolean
 const $completed = createStore<boolean>(false).on(setCompleted, (oldData, completed) => completed)
 const $done = createStore<boolean>(false).on(setDone, (oldData, done) => done)
 const $error = createStore<string | null>(null)
+    .on(getPaymentsFx, () => null)
     .on(getPaymentsFx.failData, (oldData, newData) => newData.message)
     .on(signContractFx.failData, (oldData, newData) => newData.message)
 const $paymentsStore = createStore<Payments | null>(null)
