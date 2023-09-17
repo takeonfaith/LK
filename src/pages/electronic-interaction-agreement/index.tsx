@@ -2,12 +2,17 @@ import { electronicInteractionModel } from '@entities/electronic-interaction'
 import PageBlock from '@shared/ui/page-block'
 import { Wrapper } from '@ui/atoms'
 import localizeDate from '@utils/localize-date'
+import { useUnit } from 'effector-react'
 import React from 'react'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
 
 const ElectronicInteractionAgreementPage = () => {
-    const { data, error, loading } = electronicInteractionModel.selectors.useData()
-    const preparedData = data.electronicInteraction
+    const [data, error, loading] = useUnit([
+        electronicInteractionModel.stores.$electronicInteractionStore,
+        electronicInteractionModel.stores.$error,
+        electronicInteractionModel.stores.$loading,
+    ])
+    const preparedData = data
 
     const load = () => electronicInteractionModel.effects.getElectronicInteractionFx()
 

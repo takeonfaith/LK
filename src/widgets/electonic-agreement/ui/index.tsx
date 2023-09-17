@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import Subtext from '@shared/ui/subtext'
 import { Colors } from '@shared/constants'
 import { electronicInteractionModel } from '@entities/electronic-interaction'
+import { useUnit } from 'effector-react'
 
 const ElectornicAgreementStyled = styled.div`
     .info-text {
@@ -28,10 +29,12 @@ interface Props {
 
 const ElectornicAgreement = ({ children }: Props) => {
     const { open } = useModal()
-    const {
-        data: { electronicInteraction: data, done, completed },
-        workerLoading,
-    } = electronicInteractionModel.selectors.useData()
+    const [done, completed, workerLoading, data] = useUnit([
+        electronicInteractionModel.stores.$done,
+        electronicInteractionModel.stores.$completed,
+        electronicInteractionModel.stores.$workerLoading,
+        electronicInteractionModel.stores.$electronicInteractionStore,
+    ])
 
     const handleSubmit = () => {
         electronicInteractionModel.events.postElectronicInteraction()
@@ -69,7 +72,7 @@ const ElectornicAgreement = ({ children }: Props) => {
                     completed={completed}
                     isDone={done || !data.status}
                     setCompleted={setCompleted}
-                    isActive={true}
+                    isActive={!data.status && !done}
                     popUpFailureMessage="Согласие уже подписано"
                     popUpSuccessMessage="Согласие успешно подписано"
                 />
