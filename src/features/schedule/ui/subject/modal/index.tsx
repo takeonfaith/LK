@@ -9,15 +9,10 @@ import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'
 import { Button, Divider, Title } from '@ui/atoms'
 import React from 'react'
-import {
-    HiOutlineCalendar,
-    HiOutlineExternalLink,
-    HiOutlineLogin,
-    HiOutlineOfficeBuilding,
-    HiOutlineUserGroup,
-} from 'react-icons/hi'
+import { HiOutlineCalendar, HiOutlineExternalLink, HiOutlineLogin, HiOutlineOfficeBuilding } from 'react-icons/hi'
 import styled from 'styled-components'
 import { User } from 'widgets'
+import { Groups } from '../../atoms'
 import { TimeIndicator } from '../time-indicator'
 
 const SubjectModalWrapper = styled.div`
@@ -103,8 +98,6 @@ const SubjectModal = (props: Props) => {
 
     const { theme } = useTheme()
 
-    const groupsArray = groups?.split(', ') ?? []
-
     const textColor = theme === 'light' ? color.dark3 : color.light2
     const background = theme === 'light' ? color.light3 : color.dark3
 
@@ -144,9 +137,10 @@ const SubjectModal = (props: Props) => {
                 )}
                 {!link?.length && <IconText icon={<HiOutlineOfficeBuilding />} text={place} />}
                 {!!rooms.length && <IconText icon={<HiOutlineLogin />} text={<DotSeparatedWords words={rooms} />} />}
-                {!!groupsArray.length && (
+                {/* {!!groupsArray.length && (
                     <IconText icon={<HiOutlineUserGroup />} text={<DotSeparatedWords words={groupsArray} />} />
-                )}
+                )} */}
+                <Groups groups={groups} isCurrent={false} color={'var(--schedule)'} />
 
                 <Flex d="column" ai="flex-start">
                     {!!teachers[0].length && (
@@ -164,7 +158,7 @@ const SubjectModal = (props: Props) => {
                 {!link && <Divider margin="0" width="100%" />}
                 {!link && <Button text="Посмотреть на карте" width="100%" />}
             </ModalContentWrapper>
-            {/* <Groups groups={groups} isCurrent={false} color={'var(--schedule)'} />
+            {/* 
             <SubjectPlaceBlock place={place} link={link} name={name} />
             <span className="date-interval">{dateInterval}</span>
             

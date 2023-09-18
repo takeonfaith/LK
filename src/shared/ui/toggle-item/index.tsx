@@ -6,6 +6,7 @@ const ToggleItemBlock = styled.div<{ disabled?: boolean }>`
     padding: 0px 12px;
     height: 45px;
     width: 100%;
+    min-width: fit-content;
     display: flex;
     align-items: center;
     border-radius: var(--brLight);
@@ -34,12 +35,15 @@ const ToggleItemBlock = styled.div<{ disabled?: boolean }>`
         width: 100%;
         user-select: none;
         cursor: pointer;
+        min-width: fit-content;
+        gap: 8px;
 
         b {
             color: var(--text);
             opacity: 0.7;
             font-weight: 500;
             font-size: 0.85rem;
+            white-space: nowrap;
         }
     }
 

@@ -25,7 +25,7 @@ export const getCalendarSchedule = (
             return {
                 title: name,
                 people: teachers,
-                startTime,
+                startTime: startTime as TimeType,
                 duration,
                 startDate,
                 endDate,

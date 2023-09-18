@@ -36,7 +36,8 @@ const useCurrentDevice = () => {
 
     return {
         ...values,
-        currentDevice: Object.keys(values).find((el: string) => values[el as keyof typeof values] === true),
+        currentDevice:
+            Object.keys(values).find((el: string) => values[el as keyof typeof values] === true) ?? 'desktop',
     }
 }
 

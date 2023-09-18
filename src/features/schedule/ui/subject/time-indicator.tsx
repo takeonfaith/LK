@@ -1,4 +1,5 @@
 import { IColorPalette, MEDIA_QUERIES } from '@shared/constants'
+import useTheme from '@shared/lib/hooks/use-theme'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -21,7 +22,7 @@ const pulse = ({ color, start }: { color: string; start: boolean }) => `
         opacity: 1;
     }
     100% {
-        transform:  scale(2);
+        transform:  scale(2.5);
         opacity: 0;
     }
 }`
@@ -59,9 +60,11 @@ type Props = {
 }
 
 export const TimeIndicator = ({ timeInterval, color, isCurrentEvent }: Props) => {
+    const { theme } = useTheme()
+    const background = theme === 'light' ? color.main : color.light1
     return (
         <TimeIndicatorStyled>
-            <TimeCircle start={isCurrentEvent} color={color.main} />
+            <TimeCircle start={isCurrentEvent} color={background} />
             {timeInterval && <TimeIntervalStyled>{timeInterval}</TimeIntervalStyled>}
         </TimeIndicatorStyled>
     )

@@ -23,7 +23,7 @@ const TimeLine = styled.div`
     left: var(--time-width);
     top: 50%;
     transform: translateY(-50%);
-    background: var(--leftside-bar);
+    background: var(--divider);
     height: 1px;
 `
 

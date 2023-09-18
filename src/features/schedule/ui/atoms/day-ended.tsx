@@ -1,6 +1,7 @@
 import { AnimatedCheck, Title } from '@ui/atoms'
 import React from 'react'
 import styled from 'styled-components'
+import { ShowNextDayEventsButton } from '../show-next-day-events-button'
 
 const DayEndedWrapper = styled.div`
     display: flex;
@@ -18,22 +19,7 @@ const DayEnded = () => {
         <DayEndedWrapper>
             <AnimatedCheck size={'38px'} />
             <Title size={4}>Учебный день завершился</Title>
-            {/* {!!data.schedule?.week && (
-                <Button
-                    text="Посмотреть следующий"
-                    onClick={() =>
-                        open(
-                            <DaySchedule
-                                lessons={data.schedule?.week?.[getTomorrow()].lessons ?? []}
-                                topInfo={displayTopInfo(data.schedule?.week, getTomorrow())}
-                                weekDay={WeekDays[getTomorrow()].full}
-                            />,
-                        )
-                    }
-                    textColor="var(--blue)"
-                    background="transparent"
-                />
-            )} */}
+            <ShowNextDayEventsButton />
         </DayEndedWrapper>
     )
 }

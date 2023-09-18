@@ -50,6 +50,7 @@ const CalendarCells = ({
                     } else if (localStartDate.getDay() === 0) return null
 
                     const dayEvents = getDayEvents(events, localStartDate)
+
                     const sunday = getSunday(localStartDate)
                     const showNextMonthName =
                         localStartDate.getDay() === 1 && sunday.getMonth() !== localStartDate.getMonth()

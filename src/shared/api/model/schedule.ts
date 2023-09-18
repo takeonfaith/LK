@@ -76,7 +76,6 @@ export interface ISchedule {
     data: {
         schedule: IFullSchedule | null
         externalSchedule: IFullSchedule | null
-        teachers: string[]
         view: View
         filter: string
         searchValue: string

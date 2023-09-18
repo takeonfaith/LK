@@ -3,19 +3,18 @@ import React from 'react'
 import { FiInbox } from 'react-icons/fi'
 import { Error } from '../../../error'
 import Flex from '../../../flex'
-import { CalendarWrapper } from '../../ui/calendar-wrapper'
-import Events from '../../ui/event/events'
-import Times from '../../ui/times'
 import { WeekDays } from '../../ui/week-days'
 import { useCalendarDay } from './hooks/use-calendar-day'
 import { DayCalendarWrapper, EventInfo, EventsCarousel } from './styles'
 import { DayCalendarProps } from './types'
+import { TimesEvents } from './ui/times-events'
 
 export const DayCalendar = (props: DayCalendarProps) => {
     const {
         currentDay,
         events,
         carouselRef,
+        eventsRef,
         interval,
         scale,
         shift,
@@ -39,20 +38,19 @@ export const DayCalendar = (props: DayCalendarProps) => {
             <Flex h="100%" gap="18px">
                 <EventsCarousel onScroll={handleCarouselScroll} ref={carouselRef}>
                     {Object.keys(events ?? {}).map((day, i) => {
+                        const dayEvents = events?.[day as keyof typeof events]
                         return (
-                            <CalendarWrapper className="calendar-wrapper" key={i}>
-                                <Times interval={interval} scale={scale} />
-                                <Events
-                                    currentDay={currentDay}
-                                    weekDay={i + 1}
-                                    events={events?.[day as keyof typeof events] ?? []}
-                                    shift={shift}
-                                    currentEvent={null}
-                                    scale={scale}
-                                    onClick={onEventClick}
-                                    interval={interval}
-                                />
-                            </CalendarWrapper>
+                            <TimesEvents
+                                key={day}
+                                events={dayEvents}
+                                interval={interval}
+                                scale={scale}
+                                weekday={i + 1}
+                                currentDay={currentDay}
+                                shift={shift}
+                                onEventClick={onEventClick}
+                                ref={eventsRef}
+                            />
                         )
                     })}
                 </EventsCarousel>
@@ -66,6 +64,7 @@ export const DayCalendar = (props: DayCalendarProps) => {
                             name={chosenEvent.title}
                             place={chosenEvent.place}
                             link={chosenEvent.link}
+                            groups={chosenEvent.groups}
                             weekday={chosenEvent.weekday}
                             teachers={chosenEvent.people}
                             dateInterval={chosenEvent.dateInterval}

@@ -6,6 +6,9 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import { getCurrentDay } from '../lib/get-current-day'
 import { getEndTime } from '../lib/get-end-time'
 import { DayCalendarProps } from '../types'
+import { useScrollTo } from '@shared/lib/hooks/use-scroll-to'
+import { getCurrentTimeLinePosition } from '../lib/get-current-time-line-position'
+import { SCROLL_UP_SHIFT } from '../consts'
 
 type Props = DayCalendarProps
 
@@ -20,6 +23,10 @@ export const useCalendarDay = ({
     const [chosenEvent, setChosenEvent] = useState<DayCalendarEvent | null>(null)
     const [currentDay, setCurrentDay] = useState(getCurrentDay(currentChosenDay))
     const carouselRef = useRef<HTMLDivElement>(null)
+    const eventsRef = useScrollTo({
+        getScrollTopValue: () => getCurrentTimeLinePosition(interval, shift, scale) - SCROLL_UP_SHIFT,
+    })
+
     const timeInterval = chosenEvent
         ? (`${chosenEvent.startTime} - ${getEndTime(chosenEvent.startTime, chosenEvent.duration)}` as TimeIntervals)
         : ('9:00' as TimeIntervals)
@@ -48,6 +55,7 @@ export const useCalendarDay = ({
         currentDay,
         events,
         carouselRef,
+        eventsRef,
         interval,
         scale,
         shift,

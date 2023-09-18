@@ -1,9 +1,10 @@
 import { IColorPalette } from '@shared/constants'
+import { TimeType } from '@shared/lib/dates/get-minutes-from-string-time'
 
 export type DayCalendarEvent = {
     duration: number
     title: string
-    startTime: string
+    startTime: TimeType
     startDate: Date
     endDate: Date | null
     icon: ChildrenType

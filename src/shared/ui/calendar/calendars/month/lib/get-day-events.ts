@@ -1,14 +1,15 @@
-import { IWeekDayNames } from '@shared/constants'
+import { areDatesEqual } from '@shared/lib/dates/are-dates-equal'
+import { getWeekDayFromDate } from '@shared/lib/dates/get-weekday-from-date'
 import { WeekEvents } from '@shared/ui/calendar/types'
 
 export const getDayEvents = (events: WeekEvents, date: Date) => {
-    const weekday = date.toLocaleDateString('en-US', { weekday: 'long' }).toLocaleLowerCase() as
-        | IWeekDayNames
-        | 'sunday'
+    const weekday = getWeekDayFromDate(date)
 
     if (weekday === 'sunday') return []
 
     return events?.[weekday].filter((event) => {
-        return date >= event.startDate && date <= (event.endDate ?? event.startDate)
+        if (!event.endDate) return areDatesEqual(event.startDate, date)
+
+        return date >= event.startDate && date <= event.endDate
     })
 }

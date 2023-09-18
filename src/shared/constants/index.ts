@@ -74,7 +74,7 @@ export const Colors: IColors = {
         main: '#3cd288',
         light1: '#49e698',
         light2: '#58f3a6',
-        light3: '#92ffc9',
+        light3: '#a1ffd1',
         transparent1: '#a7ffd38a',
         transparent2: '#a7ffd35c',
         transparent3: '#4ad18e1f',

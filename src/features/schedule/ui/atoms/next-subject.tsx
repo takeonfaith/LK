@@ -24,7 +24,7 @@ const NextSubject = ({ timeLeft, isNext, color, isCurrentEvent }: Props) => {
     const hours = Math.floor(timeLeft / 60)
     const { theme } = useTheme()
     const textColor = theme === 'light' ? color.dark3 : color.light3
-    const background = theme === 'light' ? color.transparent3 : color.transparent3
+    const background = theme === 'light' ? color.transparent1 : color.transparent3
 
     if (!isNext && !isCurrentEvent) return null
 

@@ -1,8 +1,9 @@
 import { RawSessionScheduleResponse } from '@shared/api/model'
-import { IWeekDayNames, WEEK_DAYS } from '@shared/constants'
+import { WEEK_DAYS } from '@shared/constants'
+import { getWeekDayFromDate } from '@shared/lib/dates/get-weekday-from-date'
+import { isValidDate } from '@shared/lib/dates/is-valid-date'
 import { EMPTY_WEEK } from '../consts'
 import { getCalendarSchedule } from './get-calendar-schedule'
-import { isValidDate } from '@shared/lib/dates/is-valid-date'
 
 export const normalizeSessionSchedule = (schedule: RawSessionScheduleResponse) => {
     const result = { ...EMPTY_WEEK }
@@ -20,14 +21,11 @@ export const normalizeSessionSchedule = (schedule: RawSessionScheduleResponse) =
         if (Object.prototype.hasOwnProperty.call(schedule, day)) {
             const date = new Date(day)
 
-            const weekday = date.toLocaleDateString('en-US', { weekday: 'long' }).toLocaleLowerCase()
+            const weekday = getWeekDayFromDate(date)
 
             if (weekday === 'sunday') continue
 
-            result[weekday as IWeekDayNames] = getCalendarSchedule(
-                schedule[day].lessons,
-                WEEK_DAYS[weekday as IWeekDayNames].short,
-            )
+            result[weekday] = getCalendarSchedule(schedule[day].lessons, WEEK_DAYS[weekday].short)
         }
     }
 

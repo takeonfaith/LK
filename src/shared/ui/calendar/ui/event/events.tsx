@@ -6,6 +6,7 @@ import EventItem from './event-item'
 import { prepareEvents } from './lib/prepare-events'
 import { EventsWrapper } from './styles'
 import { isNextEvent } from '@features/schedule/lib/is-next-event'
+import { checkIfEventIsCurrent } from './lib/check-if-event-is-current'
 
 type Props = {
     currentDay?: number
@@ -61,7 +62,8 @@ const Events = ({
                                 isCurrent={isCurrent}
                                 otherIsCurrent={!isCurrent && currentEvent !== null}
                                 scale={scale}
-                                isNextEvent={isNextEvent(events, event)}
+                                isCurrentEvent={checkIfEventIsCurrent(event, isCurrentDay)}
+                                isNextEvent={isNextEvent(events, event, isCurrentDay)}
                                 {...event}
                                 onClick={onClick}
                                 shift={shift}

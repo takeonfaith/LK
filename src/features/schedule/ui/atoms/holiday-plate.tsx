@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Sleep from '../../../../shared/images/sleep.gif'
-import { Button } from '@shared/ui/button'
-import { Colors } from '@shared/constants'
+import { ShowNextDayEventsButton } from '../show-next-day-events-button'
 
 const HolidayPlateWrapper = styled.div`
     width: 100%;
@@ -30,12 +29,7 @@ const HolidayPlate = () => {
         <HolidayPlateWrapper>
             <img src={Sleep} alt="дед наелся и спит" />
             <span>В этот день пар нет</span>
-            <Button
-                text="Посмотреть следующий"
-                textColor="var(--blue)"
-                background="var(--form)"
-                hoverBackground={Colors.blue.transparent3}
-            />
+            <ShowNextDayEventsButton />
         </HolidayPlateWrapper>
     )
 }

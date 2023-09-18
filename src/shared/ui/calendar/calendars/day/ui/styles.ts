@@ -103,6 +103,7 @@ export const SubtextStyled = styled(Subtext)`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: auto;
 `
 
 export const CurrentTimeLineStyled = styled.div<{ currentTime: number }>`
@@ -143,6 +144,8 @@ export const CurrentTime = styled.div`
     box-shadow: -26px 0 26px 26px var(--schedule);
 
     ${MEDIA_QUERIES.isMobile} {
+        background: var(--theme);
+        box-shadow: -26px 0 26px 26px var(--theme);
         font-size: 0.7rem;
     }
 `

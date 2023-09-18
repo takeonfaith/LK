@@ -5,5 +5,8 @@ export const getFullStartDate = (startDate: string) => {
 
     const parsedStartDateMonth = Months[startMonth as keyof typeof Months]
 
-    return new Date(`${parsedStartDateMonth}/${startDay}/${new Date().getFullYear()}`)
+    const fullYear =
+        new Date().getMonth() > parsedStartDateMonth ? new Date().getFullYear() + 1 : new Date().getFullYear()
+
+    return new Date(`${parsedStartDateMonth}/${startDay}/${fullYear}`)
 }

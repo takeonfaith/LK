@@ -84,7 +84,7 @@ const EventItem = (props: Props) => {
                 <EventFront scale={scale} d="column" ai="flex-start" shortInfo={shortInfo}>
                     <Flex d="column" gap="2px">
                         {!shortInfo && (
-                            <Flex gap="16px">
+                            <Flex gap="8px">
                                 <TimeIndicator
                                     timeInterval={getTimeInterval(startTime, duration)}
                                     color={color}
@@ -111,7 +111,8 @@ const EventItem = (props: Props) => {
                             </Flex>
                         )}
                         <EventTitle listView={listView} nameInOneRow={nameInOneRow} scale={scale} shortInfo={shortInfo}>
-                            {!extremeSmallSize && getShortString(title, shortInfo ? (hideSomeInfo ? 43 : 35) : 300)}
+                            {!extremeSmallSize &&
+                                getShortString(title, shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64)}
                         </EventTitle>
                     </Flex>
 

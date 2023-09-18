@@ -44,7 +44,7 @@ export const WeekDay = styled.div<{ showColumns: boolean }>`
         top: 54px;
         width: 1.5px;
         position: absolute;
-        background: var(--leftside-bar);
+        background: var(--divider);
     }
 
     &::after {

@@ -1,6 +1,6 @@
 import { IRoute } from '@app/routes/general-routes'
 import { Icon } from '@features/all-pages'
-import { Colors } from '@shared/constants'
+import { Colors, MEDIA_QUERIES } from '@shared/constants'
 import getShortStirng from '@shared/lib/get-short-string'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
@@ -14,16 +14,13 @@ const LinkItemStyled = styled(Link)<{ amount: number; color: string }>`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     position: relative;
+    gap: 10px;
 
     .subtext {
         white-space: nowrap;
-        opacity: 0;
-        transform: translateY(10px) translateX(-50%);
-        position: absolute;
-        left: 50%;
-        bottom: 12px;
-        font-size: 0.8rem;
+        font-size: 0.72rem;
         transition: 0.2s;
         color: var(--text);
     }
@@ -34,32 +31,44 @@ const LinkItemStyled = styled(Link)<{ amount: number; color: string }>`
         }
 
         &:hover .subtext {
-            opacity: 1;
-            transform: translateY(0px) translateX(-50%);
+            transform: translateX(0px) translateY(-50%);
+            opacity: 0;
         }
 
         &:hover .icon {
-            transform: scale(0.8) translateY(-10px);
+            transform: scale(1.1) translateY(12px);
+        }
+
+        &:hover .notification-circle {
+            opacity: 0;
         }
     }
 
-    &:active .icon {
-        transform: scale(0.7);
-    }
+    ${MEDIA_QUERIES.isTablet} {
+        &:active .icon {
+            transform: scale(1.1) translateY(6px);
+        }
 
-    &:active .subtext {
-        transform: scale(0.9) translateY(0px) translateX(-50%);
-        transform-origin: left top;
-    }
+        &:active .subtext {
+            transform: translateX(0px) translateY(-50%);
+            opacity: 0;
+        }
 
-    &:hover .notification-circle {
-        opacity: 0;
-    }
+        &:active {
+            background-color: ${({ color }) => color};
+        }
 
-    @media (max-width: 1000px) {
         min-width: calc(25% - 10px);
         max-width: calc(25% - 10px);
         height: 50px;
+        gap: 3px;
+
+        .icon {
+            transform: scale(0.8);
+        }
+        .subtext {
+            font-size: 0.6rem;
+        }
     }
 `
 
@@ -76,7 +85,7 @@ const LinkItem = ({ item, amount }: Props) => {
     const { icon, color, path, title, notifications } = item
     return (
         <LinkItemStyled amount={amount} to={path} color={Colors[color].transparent3}>
-            <Icon badge={notifications?.toString()} color={color}>
+            <Icon badge={notifications?.toString()} color={color} size={35}>
                 {icon}
             </Icon>
             <Subtext className="subtext" align="center">

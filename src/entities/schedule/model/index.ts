@@ -9,7 +9,6 @@ const DEFAULT_STORE: ISchedule = {
     data: {
         schedule: null,
         externalSchedule: null,
-        teachers: [],
         view: View.day,
         filter: '',
         searchValue: '',

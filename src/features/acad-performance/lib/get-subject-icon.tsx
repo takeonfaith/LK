@@ -10,6 +10,7 @@ import {
     FiDribbble,
     FiGitBranch,
     FiHash,
+    FiInfo,
     FiLayers,
     FiLifeBuoy,
     FiPrinter,
@@ -83,6 +84,10 @@ export const getSubjectIcon = (name: string) => {
         {
             keys: ['информат'],
             icon: <FiHash />,
+        },
+        {
+            keys: ['информации'],
+            icon: <FiInfo />,
         },
         {
             keys: ['мобильн'],

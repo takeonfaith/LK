@@ -2,7 +2,7 @@ import { settingsModel } from '@entities/settings'
 import List from '@ui/list'
 import React from 'react'
 import PaymentsWidget from '../molecules/payments-widget'
-import { ScheduleWidget } from './schedule-widget'
+import { ScheduleWidget } from '../schedule-widget'
 
 const ScheduleAndNotification = () => {
     const { widgetSchedule, widgetPayment } =
