@@ -26,7 +26,7 @@ export const ShowNextDayEventsButton = () => {
             text="Посмотреть следующий"
             onClick={handleClick}
             textColor="var(--blue)"
-            background="var(--content-block)"
+            background="var(--block-content)"
             hoverBackground={Colors.blue.transparent3}
         />
     )

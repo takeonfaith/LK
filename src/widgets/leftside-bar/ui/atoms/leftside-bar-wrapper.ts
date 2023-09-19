@@ -6,7 +6,7 @@ const LeftsideBarWrapper = styled.div<{ isOpen: boolean; height: number }>`
     height: ${({ height }) => height + 'px'};
     box-shadow: var(--very-mild-shadow);
     border-radius: 0 var(--brSemi) var(--brSemi) 0;
-    background: var(--schedule);
+    background: var(--block);
     z-index: 4;
     display: flex;
     flex-direction: column;

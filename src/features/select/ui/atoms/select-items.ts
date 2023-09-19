@@ -14,7 +14,7 @@ const SelectItems = styled.ul<{ isOpen: boolean; itemsAmount: number; width?: st
 
     box-shadow: var(--very-mild-shadow);
     border-radius: 6px;
-    background: var(--content-block);
+    background: var(--block-content);
     user-select: none;
     max-height: 250px;
     overflow-y: auto;

@@ -68,7 +68,6 @@ const Home = () => {
         '--theme-t',
         '--text',
         '--invert-text',
-        '--content',
         '--invert',
         '--double-invert',
         '--theme',
@@ -82,8 +81,8 @@ const Home = () => {
         '--reallyBlue',
         '--almostTransparent',
         '--almostTransparentOpposite',
-        '--schedule',
-        '--content-block',
+        '--block',
+        '--block-content',
     ]
 
     return (

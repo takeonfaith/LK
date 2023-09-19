@@ -92,5 +92,5 @@ export const MonthStartName = styled.div`
     padding: 10px;
     z-index: 100;
     margin: 4px 0;
-    background: var(--schedule);
+    background: var(--block);
 `

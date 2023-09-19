@@ -7,9 +7,9 @@ const SelectHeaderWrapper = styled.div<{ multiple: boolean; appearance: boolean 
     min-height: 36px;
 
     padding: ${({ multiple }) => (multiple ? '5px 10px 5px 5px' : '5px 10px')};
-    box-shadow: ${({ appearance }) => appearance && 'var(--content-block-shadow)'};
+    box-shadow: ${({ appearance }) => appearance && 'var(--block-content-shadow)'};
     position: relative;
-    background: var(--content-block);
+    background: var(--block-content);
     border-radius: 6px;
     overflow: hidden;
 

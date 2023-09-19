@@ -35,8 +35,8 @@ const DataVerificationPageWrapper = styled.div`
         max-width: 600px;
         padding: 20px;
         border-radius: var(--brLight);
-        background: var(--content-block);
-        box-shadow: var(--schedule-shadow);
+        background: var(--block-content);
+        box-shadow: var(--block-shadow);
         display: flex;
         flex-direction: column;
         row-gap: 20px;

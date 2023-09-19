@@ -67,7 +67,7 @@ const BackgroundWrapper = styled.div<{ textColor: string; background: string; no
         svg {
             color: ${({ textColor }) => textColor};
         }
-        border: 5px solid var(--content-block);
+        border: 5px solid var(--block-content);
     }
 `
 
@@ -145,7 +145,7 @@ const SubjectModal = (props: Props) => {
                 {/* {!!groupsArray.length && (
                     <IconText icon={<HiOutlineUserGroup />} text={<DotSeparatedWords words={groupsArray} />} />
                 )} */}
-                <Groups groups={groups} isCurrent={false} color={'var(--schedule)'} />
+                <Groups groups={groups} isCurrent={false} color={'var(--block)'} />
 
                 <Flex d="column" ai="flex-start">
                     {!!teachers[0].length && (

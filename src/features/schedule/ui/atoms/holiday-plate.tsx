@@ -5,7 +5,7 @@ import { ShowNextDayEventsButton } from '../show-next-day-events-button'
 
 const HolidayPlateWrapper = styled.div`
     width: 100%;
-    background: var(--schedule);
+    background: var(--block);
     padding: 20px 15px;
     border-radius: 9px;
     scroll-snap-align: center;

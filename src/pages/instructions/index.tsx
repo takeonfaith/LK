@@ -40,7 +40,7 @@ const CustomLink = styled.a`
     }
 
     .link-image {
-        /* background: var(--content-block);
+        /* background: var(--block-content);
         box-shadow: 0 0 1px #00000075; */
         border-radius: 5px;
         min-width: 30px;

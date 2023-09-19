@@ -11,7 +11,7 @@ const LoginBlockStyled = styled(BlockWrapper)<{ isAuthenticated: boolean }>`
     min-height: 480px;
     transition: 0.2s box-shadow;
     position: relative;
-    background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--theme)' : 'var(--schedule)')};
+    background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--theme)' : 'var(--block)')};
 
     .left,
     .right {

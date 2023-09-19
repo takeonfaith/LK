@@ -27,7 +27,7 @@ const FileInputWrapper = styled.label<{ showPulse: boolean; isActive: boolean; t
 
         .info-item {
             padding: 5px 10px;
-            background: var(--schedule);
+            background: var(--block);
             border-radius: 5px;
             display: flex;
             align-items: center;

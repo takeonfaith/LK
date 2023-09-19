@@ -54,7 +54,7 @@ const UserContextMenu = () => {
             <Link to={PROFILE_ROUTE}>
                 <Button
                     text="Профиль"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     icon={<BiUserCircle />}
                     width="100%"
                     align="left"
@@ -68,7 +68,7 @@ const UserContextMenu = () => {
                     icon={<FiBell />}
                     text="Уведомления"
                     width="100%"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     align="left"
                     padding="10px"
                 />
@@ -79,7 +79,7 @@ const UserContextMenu = () => {
             <Link to={SETTINGS_ROUTE}>
                 <Button
                     text="Настройки"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     icon={<FiSettings />}
                     width="100%"
                     align="left"
@@ -92,7 +92,7 @@ const UserContextMenu = () => {
                     text="Старый дизайн"
                     icon={<FiArrowLeftCircle />}
                     width="100%"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     align="left"
                     padding="10px"
                 />
@@ -104,7 +104,7 @@ const UserContextMenu = () => {
                 onClick={logout}
                 text="Выйти"
                 width="100%"
-                background="var(--schedule)"
+                background="var(--block)"
                 padding="10px"
             />
             <Divider />
@@ -114,7 +114,7 @@ const UserContextMenu = () => {
                 onClick={handleWhatsNew}
                 text="Что нового"
                 width="100%"
-                background="var(--schedule)"
+                background="var(--block)"
                 padding="10px"
             />
         </>

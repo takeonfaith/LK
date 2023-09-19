@@ -9,7 +9,7 @@ const DayEndedWrapper = styled.div`
     align-items: center;
     justify-content: center;
     min-height: 144px;
-    background: var(--schedule);
+    background: var(--block);
     border-radius: var(--brLight);
     row-gap: 10px;
 `

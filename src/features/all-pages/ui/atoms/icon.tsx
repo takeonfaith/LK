@@ -40,7 +40,7 @@ const Icon = ({ children, color, borderRadius, badge, size = 38 }: Props) => {
     return (
         <IconWrapper borderRadius={borderRadius} backgroud={color} size={size} className="icon">
             <Notification
-                outline="4px solid var(--schedule)"
+                outline="4px solid var(--block)"
                 color="red"
                 top="93%"
                 left="93%"

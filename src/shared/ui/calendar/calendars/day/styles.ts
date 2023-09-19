@@ -20,11 +20,11 @@ export const EventInfo = styled.div`
     max-width: 340px;
     height: 100%;
     z-index: 10;
-    background: var(--content-block);
+    background: var(--block-content);
     border-radius: 10px;
     top: 0;
     overflow: hidden;
-    box-shadow: var(--schedule-shadow);
+    box-shadow: var(--block-shadow);
 
     ${MEDIA_QUERIES.isSmallTesktop} {
         display: none;

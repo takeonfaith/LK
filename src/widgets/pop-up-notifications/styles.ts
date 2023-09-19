@@ -26,7 +26,7 @@ export const PopUpNotificationsStyled = styled.div`
 
 export const PopUpNotificationsItem = styled.div<{ open: boolean }>`
     border-radius: var(--brLight);
-    background: var(--schedule);
+    background: var(--block);
     color: var(--text);
     display: flex;
     flex-direction: column;

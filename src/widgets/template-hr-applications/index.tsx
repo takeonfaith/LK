@@ -30,8 +30,8 @@ const CreateApplicationListWrapper = styled.div`
                 display: flex;
                 flex-direction: column;
                 width: 100%;
-                background: var(--schedule);
-                box-shadow: var(--schedule-shadow);
+                background: var(--block);
+                box-shadow: var(--block-shadow);
                 padding: 10px;
                 border-radius: var(--brLight);
 
@@ -79,7 +79,7 @@ const CreateApplicationListWrapper = styled.div`
 
 const LinksList = styled.div`
     padding: 12px;
-    box-shadow: var(--schedule-shadow);
+    box-shadow: var(--block-shadow);
     border-radius: 8px;
     margin: 10px 0;
 

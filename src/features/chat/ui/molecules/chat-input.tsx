@@ -7,13 +7,13 @@ import styled from 'styled-components'
 const ChatInputWrapper = styled.div`
     display: flex;
     align-items: center;
-    background: var(--schedule);
+    background: var(--block);
     padding: 5px 10px;
     /* box-shadow: 0 0 1px #00000039; */
     box-shadow: 3px -2px 3px #00000029;
 
     input {
-        background: var(--schedule);
+        background: var(--block);
     }
 `
 

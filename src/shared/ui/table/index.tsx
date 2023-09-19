@@ -7,10 +7,10 @@ import { Body, Header, Search, Footer } from './ui'
 
 const TableWrapper = styled.div`
     width: 100%;
-    box-shadow: var(--schedule-shadow);
+    box-shadow: var(--block-shadow);
     border-radius: var(--brLight);
     color: var(--text);
-    background: var(--content-block);
+    background: var(--block-content);
     overflow: hidden;
 `
 

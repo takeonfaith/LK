@@ -6,8 +6,8 @@ import styled from 'styled-components'
 export const AlertItemStyled = styled.div<{ orientation: Direction }>`
     width: 100%;
     border-radius: calc(var(--brLight) - 3px);
-    background: var(--content-block);
-    box-shadow: var(--schedule-shadow);
+    background: var(--block-content);
+    box-shadow: var(--block-shadow);
     position: relative;
     display: flex;
     flex-direction: ${({ orientation }) => (orientation === 'vertical' ? 'column' : 'row')};

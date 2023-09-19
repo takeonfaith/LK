@@ -29,7 +29,7 @@ const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     .payment-info {
         width: 100%;
         height: 100%;
-        background: var(--schedule);
+        background: var(--block);
         border-radius: 11px;
         padding: 10px;
         display: flex;

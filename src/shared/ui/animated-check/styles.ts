@@ -31,7 +31,7 @@ export const AnimatedCheckWrapper = styled.div<{ size: string; color?: string }>
         height: ${({ size }) => `calc(${size} - 6px)`};
         transform: scale(0);
         border-radius: 50%;
-        background: var(--schedule);
+        background: var(--block);
         animation: expand 0.4s 0.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
     }
 

@@ -24,11 +24,11 @@ const MessageItemWrapper = styled.div<{ isYourMessage: boolean; isLast: boolean 
     .name-and-message {
         display: flex;
         flex-direction: column;
-        background: ${({ isYourMessage }) => (isYourMessage ? Colors.blue.main : 'var(--schedule)')};
+        background: ${({ isYourMessage }) => (isYourMessage ? Colors.blue.main : 'var(--block)')};
         color: ${({ isYourMessage }) => (isYourMessage ? '#fff' : 'var(--text)')};
         padding: 7px;
         border-radius: ${({ isLast }) => (!isLast ? '10px' : '10px 10px 10px 0')};
-        box-shadow: var(--schedule-shadow);
+        box-shadow: var(--block-shadow);
         margin-left: 10px;
         max-width: 40%;
 

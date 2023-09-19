@@ -31,7 +31,7 @@ export const SideMenuContent = ({
                     text="Мое расписание"
                     onClick={handleReturnToMySchedule}
                     icon={<HiOutlineChevronLeft />}
-                    background="var(--schedule)"
+                    background="var(--block)"
                     textColor="var(--blue)"
                 />
             )}

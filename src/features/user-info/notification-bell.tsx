@@ -73,7 +73,7 @@ const NotificationBellSection = () => {
         <NotificationBellStyled onClick={handleClick}>
             <Notification
                 outline="none"
-                box-shadow="0px 0px 0px 3px var(--schedule)"
+                box-shadow="0px 0px 0px 3px var(--block)"
                 color="red"
                 top="14px"
                 left="30px"

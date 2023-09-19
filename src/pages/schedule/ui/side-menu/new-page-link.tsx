@@ -17,7 +17,7 @@ const NewPageLinkWrapper = styled(Link)<StyleProps>`
     width: 140px;
     opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
     border-radius: 10px;
-    background: ${({ isCurrent }) => (isCurrent ? Colors.blue.transparent3 : 'var(--schedule)')};
+    background: ${({ isCurrent }) => (isCurrent ? Colors.blue.transparent3 : 'var(--block)')};
     color: ${({ isCurrent }) => (isCurrent ? 'var(--blue)' : 'var(--grey)')};
 
     &:hover {

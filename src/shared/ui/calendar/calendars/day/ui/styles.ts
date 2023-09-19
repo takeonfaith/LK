@@ -136,12 +136,12 @@ export const CurrentTimeLineStyled = styled.div<{ currentTime: number }>`
 export const CurrentTime = styled.div`
     color: ${Colors.red.main};
     font-weight: 500;
-    background: var(--schedule);
+    background: var(--block);
     position: absolute;
     font-size: 0.9rem;
     width: var(--time-width);
     left: calc(var(--time-width) * -1);
-    box-shadow: -26px 0 26px 26px var(--schedule);
+    box-shadow: -26px 0 26px 26px var(--block);
 
     ${MEDIA_QUERIES.isMobile} {
         background: var(--theme);

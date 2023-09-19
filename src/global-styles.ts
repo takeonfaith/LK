@@ -63,7 +63,7 @@ const GlobalStyles = createGlobalStyle`
         --header-height: 55px;
         --mobile-bottom-menu-height: 60px;
 		--theme: #fff;
-		--content-block-shadow: 0 0 1px #3b3b3bab;
+		--block-content-shadow: 0 0 1px #3b3b3bab;
 	}
 
 	html[data-theme=dark] {
@@ -79,7 +79,6 @@ const GlobalStyles = createGlobalStyle`
 		--search: #313131;
 		--text: #f0f0f0;
 		--invert-text: #272727;
-		--content: #474747;
 		--invert: 0;
 		--double-invert: 1;
 		--theme-mild-opposite: #d2d2d2;
@@ -89,13 +88,12 @@ const GlobalStyles = createGlobalStyle`
 		--green: #94f0b9;
 		--greenTransparent: #94f0b9b0;
 		--red: #e27992;
-
 		--reallyBlue: #567dff;
 		--almostTransparent: rgba(0,0,0,0.281);
 		--almostTransparentOpposite: hsla(0,0%,100%,0.103);
-		--schedule: #2e2e2e;
-		--schedule-shadow: 0;
-		--content-block: #252525;
+		--block: #2e2e2e;
+		--block-shadow: 0;
+		--block-content: #252525;
 	}
 
 	html[data-theme=light] {
@@ -110,7 +108,6 @@ const GlobalStyles = createGlobalStyle`
 		--theme: #fff;
 		--text: #272727;
 		--invert-text: #f0f0f0;
-		--content: #f1f1f1;
 		--invert: 1;
 		--double-invert: 0;
 		--theme-mild-opposite: #565656;
@@ -123,9 +120,9 @@ const GlobalStyles = createGlobalStyle`
 		--reallyBlue: #567dff;
 		--almostTransparent: hsla(0,0%,87.8%,0.486);
 		--almostTransparentOpposite: rgba(53,53,53,0.151);
-		--schedule: #fff;
-		--schedule-shadow: 0 0 2px rgb(0 0 0 / 24%);
-		--content-block: #fff;
+		--block: #fff;
+		--block-shadow: 0 0 2px rgb(0 0 0 / 24%);
+		--block-content: #fff;
 	}
 
 	a {

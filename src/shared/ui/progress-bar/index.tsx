@@ -31,7 +31,7 @@ const BarStyled = styled.div<{ value: number; coloring: boolean; size: Size }>`
     border-radius: var(--brLight);
     height: ${({ size }) => SIZES[size]}px;
     transition: 0.2s;
-    background: ${({ coloring, value }) => (coloring ? Colors[getColorFromValue(value)].main : 'var(--schedule)')};
+    background: ${({ coloring, value }) => (coloring ? Colors[getColorFromValue(value)].main : 'var(--block)')};
 `
 
 const Container = styled.div<{ size: Size }>`

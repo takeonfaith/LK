@@ -23,7 +23,7 @@ const GroupsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean; color: 
         top: 0;
         right: 0;
         background: ${({ isCurrent, color }) =>
-            `linear-gradient(90deg, transparent, ${isCurrent ? color : 'var(--schedule)'})`};
+            `linear-gradient(90deg, transparent, ${isCurrent ? color : 'var(--block)'})`};
     }
 
     span {

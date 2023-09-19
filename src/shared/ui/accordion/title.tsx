@@ -11,7 +11,7 @@ const AreaTitleWrapper = styled.div`
     cursor: pointer;
     position: sticky;
     top: -2px;
-    background: var(--schedule);
+    background: var(--block);
     z-index: 3;
     width: 100%;
     /* border-radius: var(--brLight) var(--brLight) 0 0; */

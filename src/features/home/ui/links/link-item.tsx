@@ -10,7 +10,7 @@ import styled from 'styled-components'
 const LinkItemStyled = styled(Link)<{ amount: number; color: string }>`
     width: 100%;
     height: 100%;
-    /* background: var(--schedule); */
+    /* background: var(--block); */
     display: flex;
     align-items: center;
     justify-content: center;

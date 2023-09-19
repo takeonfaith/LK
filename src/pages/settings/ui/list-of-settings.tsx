@@ -18,9 +18,9 @@ const ListOfSettingsWrapper = styled(ListWrapper)<{ open: boolean }>`
     padding-top: 0;
     padding: 8px;
     border-radius: var(--brLight);
-    box-shadow: var(--schedule-shadow);
+    box-shadow: var(--block-shadow);
     margin-right: 20px;
-    background: var(--content-block);
+    background: var(--block-content);
 
     ${MEDIA_QUERIES.isMobile} {
         padding: 0;

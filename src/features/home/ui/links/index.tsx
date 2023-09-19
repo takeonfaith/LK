@@ -11,7 +11,7 @@ const LinksStyled = styled.div`
     align-items: center;
     max-width: 750px;
     border-radius: var(--brLight);
-    background: var(--schedule);
+    background: var(--block);
     box-shadow: var(--very-mild-shadow);
     overflow-y: hidden;
     height: 90px;

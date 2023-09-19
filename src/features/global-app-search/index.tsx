@@ -15,7 +15,7 @@ type SearchSize = 'icon' | 'small' | 'large'
 
 const GlobalAppSearchStyled = styled(BlockWrapper)<{ size: SearchSize }>`
     cursor: pointer;
-    box-shadow: ${({ size }) => size === 'small' && 'var(--content-block-shadow)'};
+    box-shadow: ${({ size }) => size === 'small' && 'var(--block-content-shadow)'};
     &:hover {
         filter: brightness(0.96);
     }

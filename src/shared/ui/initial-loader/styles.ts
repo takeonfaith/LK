@@ -17,6 +17,7 @@ export const InitialLoaderWrapper = styled.div<{ $loading: boolean; color: strin
     flex-direction: column;
 
     .loading-circle {
+        filter: invert(var(--invert));
         width: 40px;
         height: 40px;
         bottom: 40px;
@@ -26,17 +27,14 @@ export const InitialLoaderWrapper = styled.div<{ $loading: boolean; color: strin
 
     @keyframes logo {
         0% {
-            filter: invert(var(--invert));
             transform: translateY(0px);
             opacity: 1;
         }
         30% {
-            filter: invert(var(--invert));
             transform: translateY(5px);
             opacity: 1;
         }
         100% {
-            filter: invert(var(--double-invert));
             opacity: 0;
             transform: translateY(-10px);
         }
