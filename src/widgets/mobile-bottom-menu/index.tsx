@@ -17,7 +17,7 @@ const MobileBottomMenuWrapper = styled(ListWrapper)`
     width: 100%;
     height: var(--mobile-bottom-menu-height);
     background: var(--schedule);
-    border-top: 1px solid var(--scheduleBg);
+    border-top: 1px solid var(--theme-2);
     padding: 0px 10px;
     display: none;
 

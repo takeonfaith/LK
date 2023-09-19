@@ -95,7 +95,7 @@ const ChangePassword = () => {
                         width="100%"
                         text="Сгенерировать пароль"
                         onClick={handleGeneratePassword}
-                        background="var(--scheduleBg)"
+                        background="var(--theme-2)"
                     />
                 )}
                 {isActive && (

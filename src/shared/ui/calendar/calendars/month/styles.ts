@@ -19,9 +19,9 @@ export const Cells = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    border-left: 1px solid var(--leftside-bar);
-    border-top: 1px solid var(--leftside-bar);
-    border-bottom: 1px solid var(--leftside-bar);
+    border-left: 1px solid var(--theme-3);
+    border-top: 1px solid var(--theme-3);
+    border-bottom: 1px solid var(--theme-3);
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     scroll-padding-top: 90px;
@@ -42,13 +42,13 @@ export const DayCell = styled.div<{ disabled: boolean }>`
     width: calc(100% / 6);
     height: calc((100vh / 6) - 13px);
     background: transparent;
-    border-right: 1px solid var(--leftside-bar);
-    border-bottom: 1px solid var(--leftside-bar);
+    border-right: 1px solid var(--theme-3);
+    border-bottom: 1px solid var(--theme-3);
     display: flex;
     flex-direction: column;
     align-items: center;
     opacity: ${({ disabled }) => (disabled ? '0.4' : '1')};
-    background: ${({ disabled }) => (disabled ? 'var(--theme-mild-xxl)' : 'transparent')};
+    background: ${({ disabled }) => (disabled ? 'var(--theme-1t)' : 'transparent')};
     scroll-snap-align: center;
 
     ${MEDIA_QUERIES.isMobile} {

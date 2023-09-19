@@ -20,7 +20,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
     cursor: pointer;
     text-decoration: none;
     border-radius: var(--brLight);
-    background: var(--form);
+    background: var(--content-block);
 
     .new {
         position: absolute;

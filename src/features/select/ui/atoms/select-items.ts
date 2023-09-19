@@ -12,9 +12,9 @@ const SelectItems = styled.ul<{ isOpen: boolean; itemsAmount: number; width?: st
     position: absolute;
     top: ${({ title }) => (!!title ? '80px' : '46px')};
 
-    box-shadow: var(--light-box-shadow);
-    border-radius: var(--brLight);
-    background: var(--schedule);
+    box-shadow: var(--very-mild-shadow);
+    border-radius: 6px;
+    background: var(--content-block);
     user-select: none;
     max-height: 250px;
     overflow-y: auto;

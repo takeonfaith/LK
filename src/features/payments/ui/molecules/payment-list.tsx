@@ -24,7 +24,7 @@ const PaymentListWrapper = styled.div`
         min-height: 195px;
         height: 195px;
         padding-right: 5px;
-        background: var(--form);
+        background: var(--content-block);
         box-shadow: var(--schedule-shadow);
         border-radius: 7px;
         margin-top: 10px;

@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 const CardWrapper = styled(BlockWrapper)`
     border-radius: var(--brLight);
-    background: var(--form);
+    background: var(--content-block);
     position: relative;
 
     .background {

@@ -37,7 +37,7 @@ const BarStyled = styled.div<{ value: number; coloring: boolean; size: Size }>`
 const Container = styled.div<{ size: Size }>`
     width: 100%;
     border-radius: var(--brLight);
-    background-color: var(--scheduleBg);
+    background-color: var(--theme-2);
     height: ${({ size }) => SIZES[size]}px;
     overflow: hidden;
 `

@@ -20,7 +20,7 @@ const ListOfSettingsWrapper = styled(ListWrapper)<{ open: boolean }>`
     border-radius: var(--brLight);
     box-shadow: var(--schedule-shadow);
     margin-right: 20px;
-    background: var(--form);
+    background: var(--content-block);
 
     ${MEDIA_QUERIES.isMobile} {
         padding: 0;

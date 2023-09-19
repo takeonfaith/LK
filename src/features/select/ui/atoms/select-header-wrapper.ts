@@ -7,14 +7,14 @@ const SelectHeaderWrapper = styled.div<{ multiple: boolean; appearance: boolean 
     min-height: 36px;
 
     padding: ${({ multiple }) => (multiple ? '5px 10px 5px 5px' : '5px 10px')};
-    box-shadow: ${({ appearance }) => appearance && 'var(--schedule-shadow)'};
+    box-shadow: ${({ appearance }) => appearance && 'var(--content-block-shadow)'};
     position: relative;
-    background: var(--schedule);
-    border-radius: var(--brLight);
+    background: var(--content-block);
+    border-radius: 6px;
     overflow: hidden;
 
     &:hover {
-        filter: brightness(0.95);
+        filter: brightness(0.98);
     }
 `
 

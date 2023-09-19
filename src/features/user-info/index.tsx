@@ -15,7 +15,7 @@ const UserInfoStyled = styled.div`
     gap: 12px;
 
     &:hover {
-        background-color: var(--theme-mild-xxl);
+        background-color: var(--theme-1t);
     }
 `
 

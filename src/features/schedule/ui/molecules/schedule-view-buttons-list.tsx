@@ -9,7 +9,7 @@ const ScheduleViewButtonsListWrapper = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    background: var(--mild-theme);
+    background: var(--theme-1);
     border-radius: 10px;
     min-width: 80px;
     overflow: hidden;

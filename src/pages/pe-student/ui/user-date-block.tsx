@@ -22,7 +22,7 @@ const Wrapper = styled.div`
     row-gap: 4px;
     border-radius: 4px;
     padding: 12px;
-    background-color: var(--primary-background);
+    background-color: var(--theme-2);
 
     flex: 1;
 `

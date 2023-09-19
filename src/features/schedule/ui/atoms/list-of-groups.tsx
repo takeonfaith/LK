@@ -40,7 +40,7 @@ const GroupItem = styled(Link)`
     }
 
     &:hover {
-        background: var(--theme-mild-xxl);
+        background: var(--theme-1t);
     }
 `
 

@@ -35,7 +35,7 @@ export const ShortCutLinkContainer = styled(Link)`
     padding: 15px;
 
     border-radius: var(--brSemi);
-    box-shadow: var(--leftside-bar-shadow);
+    box-shadow: var(--theme-3-shadow);
 
     color: white;
     text-decoration: none;

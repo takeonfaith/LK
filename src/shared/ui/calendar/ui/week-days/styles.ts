@@ -33,7 +33,7 @@ export const WeekDay = styled.div<{ showColumns: boolean }>`
     cursor: pointer;
 
     &:hover {
-        background: var(--leftside-bar);
+        background: var(--theme-3);
     }
 
     &::before,
@@ -44,7 +44,7 @@ export const WeekDay = styled.div<{ showColumns: boolean }>`
         top: 54px;
         width: 1.5px;
         position: absolute;
-        background: var(--divider);
+        background: var(--theme-3);
     }
 
     &::after {

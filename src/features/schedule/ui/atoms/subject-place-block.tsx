@@ -1,22 +1,27 @@
-import { SkeletonShape } from '@ui/atoms'
+import { MEDIA_QUERIES } from '@shared/constants'
+import Flex from '@shared/ui/flex'
+import { Loading } from '@ui/atoms'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import LinkImageBlock from './link-image-block'
 
 const SubjectPlaceBlockWrapper = styled.div`
-    width: 100%;
+    ${MEDIA_QUERIES.isNotMobile} {
+        width: 500px;
+    }
+
     height: 200px;
     margin: 10px 0 10px 0;
     overflow: hidden;
     display: flex;
     align-items: center;
-    border-radius: var(--brSemi);
-    background: var(--orangeGradient);
+    border-radius: 8px;
+    background: var(--theme-2);
 `
 
 interface Props {
     place: string
-    link: string | null
+    link: string | null | undefined
     name: string
 }
 
@@ -27,7 +32,17 @@ const SubjectPlaceBlock = ({ place, link, name }: Props) => {
         setLoading(true)
         setTimeout(() => setLoading(false), 500)
     }, [name])
-    return !loading ? (
+
+    if (loading)
+        return (
+            <SubjectPlaceBlockWrapper>
+                <Flex jc="center">
+                    <Loading />
+                </Flex>
+            </SubjectPlaceBlockWrapper>
+        )
+
+    return (
         <SubjectPlaceBlockWrapper>
             {place === 'Webex' ? (
                 <LinkImageBlock
@@ -160,15 +175,6 @@ const SubjectPlaceBlock = ({ place, link, name }: Props) => {
                 )
             )}
         </SubjectPlaceBlockWrapper>
-    ) : (
-        <SkeletonShape
-            shape={'rect'}
-            size={{
-                width: '100%',
-                height: '200px',
-            }}
-            margin="0"
-        />
     )
 }
 

@@ -19,7 +19,7 @@ const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     min-width: calc(100% / 3);
     width: 100%;
     height: 156px;
-    background: var(--scheduleBg);
+    background: var(--theme-2);
     border-radius: 15px;
     padding: 6px;
     display: flex;

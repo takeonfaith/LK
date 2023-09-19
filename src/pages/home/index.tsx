@@ -58,6 +58,34 @@ const Home = () => {
 
     const { news } = settingsModel.selectors.useSettings().settings['settings-home-page'].property
 
+    const styles = [
+        '--blue',
+        '--blueTransparent',
+        '--theme-3',
+        '--theme-2',
+        '--theme-1',
+        '--theme-1t',
+        '--theme-t',
+        '--text',
+        '--invert-text',
+        '--content',
+        '--invert',
+        '--double-invert',
+        '--theme',
+        '--theme-mild-opposite',
+        '--search2',
+        '--search',
+        '--settings',
+        '--green',
+        '--greenTransparent',
+        '--red',
+        '--reallyBlue',
+        '--almostTransparent',
+        '--almostTransparentOpposite',
+        '--schedule',
+        '--content-block',
+    ]
+
     return (
         <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <HomeTopPlate />
@@ -76,6 +104,20 @@ const Home = () => {
                         {!!news && <AlertsWidget />}
                     </Block>
                 </CenterPage>
+                {styles.map((el) => (
+                    <div
+                        key={el}
+                        style={{
+                            width: '200px',
+                            height: '150px',
+                            borderRadius: '10px',
+                            background: `var(${el})`,
+                            padding: '10px',
+                        }}
+                    >
+                        {el}
+                    </div>
+                ))}
             </HomePageStyled>
         </Wrapper>
     )

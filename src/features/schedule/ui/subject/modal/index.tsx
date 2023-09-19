@@ -11,8 +11,8 @@ import { Button, Divider, Title } from '@ui/atoms'
 import React from 'react'
 import { HiOutlineCalendar, HiOutlineExternalLink, HiOutlineLogin, HiOutlineOfficeBuilding } from 'react-icons/hi'
 import styled from 'styled-components'
-import { User } from 'widgets'
-import { Groups } from '../../atoms'
+import { User, useModal } from 'widgets'
+import { Groups, SubjectPlaceBlock } from '../../atoms'
 import { TimeIndicator } from '../time-indicator'
 
 const SubjectModalWrapper = styled.div`
@@ -67,7 +67,7 @@ const BackgroundWrapper = styled.div<{ textColor: string; background: string; no
         svg {
             color: ${({ textColor }) => textColor};
         }
-        border: 5px solid var(--form);
+        border: 5px solid var(--content-block);
     }
 `
 
@@ -100,6 +100,7 @@ const SubjectModal = (props: Props) => {
 
     const textColor = theme === 'light' ? color.dark3 : color.light2
     const background = theme === 'light' ? color.light3 : color.dark3
+    const { open } = useModal()
 
     // const handleCheckGroups = () => {
     //     if (groupsArray.length === 1) {
@@ -109,6 +110,10 @@ const SubjectModal = (props: Props) => {
     //         open(<ListOfGroups groups={groupsArray} />)
     //     }
     // }
+
+    const handleShowOnMap = () => {
+        open(<SubjectPlaceBlock place={place} link={link} name={name} />)
+    }
 
     return (
         <SubjectModalWrapper>
@@ -156,7 +161,7 @@ const SubjectModal = (props: Props) => {
                     )}
                 </Flex>
                 {!link && <Divider margin="0" width="100%" />}
-                {!link && <Button text="Посмотреть на карте" width="100%" />}
+                {!link && <Button text="Посмотреть на карте" width="100%" onClick={handleShowOnMap} />}
             </ModalContentWrapper>
             {/* 
             <SubjectPlaceBlock place={place} link={link} name={name} />

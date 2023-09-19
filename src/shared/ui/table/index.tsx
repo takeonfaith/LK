@@ -10,7 +10,7 @@ const TableWrapper = styled.div`
     box-shadow: var(--schedule-shadow);
     border-radius: var(--brLight);
     color: var(--text);
-    background: var(--form);
+    background: var(--content-block);
     overflow: hidden;
 `
 

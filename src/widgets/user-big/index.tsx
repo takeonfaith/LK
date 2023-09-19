@@ -30,7 +30,7 @@ const UserBigWrapper = styled(Link)`
         position: absolute;
     }
     &:hover {
-        background: var(--mild-theme);
+        background: var(--theme-1);
         /* box-shadow: var(--very-mild-shadow); */
     }
 `

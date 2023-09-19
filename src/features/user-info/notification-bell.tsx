@@ -22,7 +22,7 @@ const NotificationBellStyled = styled.div`
     border-radius: var(--brLight);
 
     &:hover {
-        background: var(--theme-mild-xxl);
+        background: var(--theme-1t);
     }
 
     svg {

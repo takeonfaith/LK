@@ -20,7 +20,7 @@ export const EventInfo = styled.div`
     max-width: 340px;
     height: 100%;
     z-index: 10;
-    background: var(--form);
+    background: var(--content-block);
     border-radius: 10px;
     top: 0;
     overflow: hidden;

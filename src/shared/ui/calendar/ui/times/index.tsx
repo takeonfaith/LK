@@ -23,8 +23,12 @@ const TimeLine = styled.div`
     left: var(--time-width);
     top: 50%;
     transform: translateY(-50%);
-    background: var(--divider);
+    background: var(--theme-3);
     height: 1px;
+
+    ${MEDIA_QUERIES.isMobile} {
+        background: var(--almostTransparentOpposite);
+    }
 `
 
 const SubtextStyled = styled(Subtext)`

@@ -24,7 +24,7 @@ const DebtAndQrWrapper = styled.div`
 const DebtAndQrStyled = styled.div`
     width: 100%;
     padding: 16px;
-    background: var(--form);
+    background: var(--content-block);
     border-radius: 6px;
     box-shadow: var(--schedule-shadow);
 `

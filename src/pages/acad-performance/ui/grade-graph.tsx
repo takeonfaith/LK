@@ -13,7 +13,7 @@ const LinesWrapper = styled.div`
     display: flex;
     gap: 2px;
     height: 10px;
-    background: var(--form);
+    background: var(--content-block);
 `
 
 const Line = styled.div<{ percent: number; color: string }>`

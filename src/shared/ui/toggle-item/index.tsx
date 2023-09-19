@@ -48,7 +48,7 @@ const ToggleItemBlock = styled.div<{ disabled?: boolean }>`
     }
 
     &:hover {
-        background: var(--mild-theme);
+        background: var(--theme-1);
     }
 `
 

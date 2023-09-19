@@ -6,7 +6,7 @@ import styled from 'styled-components'
 export const AlertItemStyled = styled.div<{ orientation: Direction }>`
     width: 100%;
     border-radius: calc(var(--brLight) - 3px);
-    background: var(--form);
+    background: var(--content-block);
     box-shadow: var(--schedule-shadow);
     position: relative;
     display: flex;

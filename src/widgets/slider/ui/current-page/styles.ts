@@ -12,7 +12,7 @@ export const CurrentPageWrapper = styled.span<{
     size: Size
 }>`
     height: calc(100% - 0px);
-    background: ${({ appearance }) => (appearance ? 'var(--theme)' : 'var(--mild-theme)')};
+    background: ${({ appearance }) => (appearance ? 'var(--theme)' : 'var(--theme-1)')};
     display: block;
     position: absolute;
     transition: 0.3s left, 0.2s transform;

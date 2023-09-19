@@ -10,7 +10,7 @@ export const ScheduleWidgetStyled = styled.div<{ noSchedule: boolean }>`
     height: 156px;
     padding: 6px;
     border-radius: 14px;
-    background: var(--scheduleBg);
+    background: var(--theme-2);
 
     ${MEDIA_QUERIES.isMobile} {
         --time-width: 35px;

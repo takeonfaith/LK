@@ -27,7 +27,7 @@ const GroupsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean; color: 
     }
 
     span {
-        background: ${({ isCurrent }) => (isCurrent ? 'var(--almostTransparent)' : 'var(--scheduleBg)')};
+        background: ${({ isCurrent }) => (isCurrent ? 'var(--almostTransparent)' : 'var(--theme-2)')};
         padding: 0px 8px;
         height: 21px;
         border-radius: 4px;

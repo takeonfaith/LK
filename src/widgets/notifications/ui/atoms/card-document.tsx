@@ -17,7 +17,7 @@ const CardDocumentWrapper = styled.div`
     width: 100%;
     padding: 20px;
     border-radius: var(--brLight);
-    background: var(--form);
+    background: var(--content-block);
     box-shadow: var(--schedule-shadow);
     row-gap: 20px;
     min-height: 70px;

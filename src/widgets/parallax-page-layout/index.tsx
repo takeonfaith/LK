@@ -27,7 +27,7 @@ const TopStyled = styled.header<{ scrollValue: number }>`
 `
 
 const ContentWrapperStyled = styled.div<{ scrollValue: number }>`
-    background: var(--scheduleBg);
+    background: var(--theme-2);
     color: var(--text);
     height: calc(100vh - ${({ scrollValue }) => TOP_HEIGHT - scrollValue}px);
     overflow-y: auto;
