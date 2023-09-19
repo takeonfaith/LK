@@ -1,6 +1,7 @@
 import { menuModel } from '@entities/menu'
 import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
+import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
 import GlobalAppSearch from '@features/global-app-search'
 import Links from '@features/home/ui/links'
@@ -13,7 +14,6 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import AlertsWidget from 'widgets/alerts-widget'
 import HomeTopPlate from './ui/home-top-plate'
-import { settingsModel } from '@entities/settings'
 
 const HomePageStyled = styled.div`
     width: 100%;
@@ -58,33 +58,6 @@ const Home = () => {
 
     const { news } = settingsModel.selectors.useSettings().settings['settings-home-page'].property
 
-    const styles = [
-        '--blue',
-        '--blueTransparent',
-        '--theme-3',
-        '--theme-2',
-        '--theme-1',
-        '--theme-1t',
-        '--theme-t',
-        '--text',
-        '--invert-text',
-        '--invert',
-        '--double-invert',
-        '--theme',
-        '--theme-mild-opposite',
-        '--search2',
-        '--search',
-        '--settings',
-        '--green',
-        '--greenTransparent',
-        '--red',
-        '--reallyBlue',
-        '--almostTransparent',
-        '--almostTransparentOpposite',
-        '--block',
-        '--block-content',
-    ]
-
     return (
         <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <HomeTopPlate />
@@ -103,20 +76,6 @@ const Home = () => {
                         {!!news && <AlertsWidget />}
                     </Block>
                 </CenterPage>
-                {styles.map((el) => (
-                    <div
-                        key={el}
-                        style={{
-                            width: '200px',
-                            height: '150px',
-                            borderRadius: '10px',
-                            background: `var(${el})`,
-                            padding: '10px',
-                        }}
-                    >
-                        {el}
-                    </div>
-                ))}
             </HomePageStyled>
         </Wrapper>
     )

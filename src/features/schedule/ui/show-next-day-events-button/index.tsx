@@ -1,11 +1,10 @@
 import { scheduleModel } from '@entities/schedule'
+import capitalizeFirstLetter from '@shared/lib/capitalize-first-letter'
 import { getDateInSomeDays } from '@shared/lib/dates/get-date-in-some-days'
 import { Button } from '@shared/ui/button'
 import React from 'react'
 import { useModal } from 'widgets'
 import { Modal } from './modal'
-import capitalizeFirstLetter from '@shared/lib/capitalize-first-letter'
-import { Colors } from '@shared/constants'
 
 export const ShowNextDayEventsButton = () => {
     const {
@@ -21,13 +20,5 @@ export const ShowNextDayEventsButton = () => {
 
     const handleClick = () => open(<Modal />, modalTitle)
 
-    return (
-        <Button
-            text="Посмотреть следующий"
-            onClick={handleClick}
-            textColor="var(--blue)"
-            background="var(--block-content)"
-            hoverBackground={Colors.blue.transparent3}
-        />
-    )
+    return <Button text="Посмотреть следующий" onClick={handleClick} textColor="var(--blue)" background="transparent" />
 }
