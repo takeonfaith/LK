@@ -114,7 +114,7 @@ const Search = ({
             if (typeof currentSelectedHint === 'number')
                 setCurrentSelectedHint(limitNumber(currentSelectedHint - 1, (hints?.length ?? 1) - 1, 0))
         } else if (e.key === 'Enter') {
-            setValue(hints?.[currentSelectedHint ?? 0].title ?? '')
+            hints?.[currentSelectedHint ?? 0].title && setValue(hints?.[currentSelectedHint ?? 0].title)
             setOpenHints(false)
             onHintClick?.(hints?.[currentSelectedHint ?? 0])
         } else setCurrentSelectedHint(0)
