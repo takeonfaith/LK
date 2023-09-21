@@ -8,6 +8,7 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
     z-index: 5;
     width: 100%;
     height: 100%;
+    padding: 0 30px;
     background-color: rgba(0, 0, 0, 0.5);
     opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
     visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
