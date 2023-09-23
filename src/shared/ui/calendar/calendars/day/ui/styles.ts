@@ -70,8 +70,13 @@ export const Icons = styled.div`
     }
 `
 
-export const IconTextStyled = styled(Flex)<{ shortInfo: boolean }>`
+export const IconTextStyled = styled(Flex)<{ shortInfo: boolean; onClick?: () => void }>`
     font-size: ${({ shortInfo }) => `${!shortInfo ? 1 : 0.92}rem`};
+    cursor: ${({ onClick }) => onClick && 'pointer'};
+
+    &:hover {
+        background: ${({ onClick }) => onClick && 'var(--theme-1t)'};
+    }
 
     ${MEDIA_QUERIES.isMobile} {
         font-size: ${({ shortInfo }) => `${!shortInfo ? 0.95 : 0.6}rem`};

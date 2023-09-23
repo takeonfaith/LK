@@ -17,7 +17,6 @@ export const InitialLoaderWrapper = styled.div<{ $loading: boolean; color: strin
     flex-direction: column;
 
     .loading-circle {
-        filter: invert(var(--invert));
         width: 40px;
         height: 40px;
         bottom: 40px;

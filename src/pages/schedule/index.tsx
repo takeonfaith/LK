@@ -58,7 +58,6 @@ const Schedule = () => {
                     </Flex>
                 }
             >
-                {/* <ColorsWidget /> */}
                 {allRoutes && (
                     <Flex gap="16px" ai="flex-start">
                         {isSideMenuOpen && !isMobile && (

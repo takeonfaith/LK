@@ -1,12 +1,11 @@
-import Flex from '@shared/ui/flex'
+import { isNextEvent } from '@features/schedule/lib/is-next-event'
 import React from 'react'
-import { DayCalendarEvent } from '../../types'
 import { CurrentTimeLine } from '../../calendars/day/ui/current-time-line'
+import { DayCalendarEvent } from '../../types'
 import EventItem from './event-item'
+import { checkIfEventIsCurrent } from './lib/check-if-event-is-current'
 import { prepareEvents } from './lib/prepare-events'
 import { EventsWrapper } from './styles'
-import { isNextEvent } from '@features/schedule/lib/is-next-event'
-import { checkIfEventIsCurrent } from './lib/check-if-event-is-current'
 
 type Props = {
     currentDay?: number
@@ -39,42 +38,39 @@ const Events = ({
     const isTimelineVisible = currentDay !== undefined ? currentDay + 1 === weekDay : undefined
 
     return (
-        <Flex d="row" gap="2px" h="100%" className="events">
-            <EventsWrapper h="100%" d="column">
-                {isCurrentDay && (
-                    <CurrentTimeLine
-                        isVisible={isTimelineVisible}
-                        showTime={showTime}
-                        scale={scale}
-                        shift={shift}
-                        interval={interval}
-                    />
-                )}
-                {Object.keys(eventsPrepared).map((key, i) => {
-                    return eventsPrepared[key].map((event, index) => {
-                        const isCurrent =
-                            currentEvent?.title === event.title && currentEvent.startTime === event.startTime
+        <EventsWrapper h="100%" d="column">
+            {isCurrentDay && (
+                <CurrentTimeLine
+                    isVisible={isTimelineVisible}
+                    showTime={showTime}
+                    scale={scale}
+                    shift={shift}
+                    interval={interval}
+                />
+            )}
+            {Object.keys(eventsPrepared).map((key, i) => {
+                return eventsPrepared[key].map((event, index) => {
+                    const isCurrent = currentEvent?.title === event.title && currentEvent.startTime === event.startTime
 
-                        return (
-                            <EventItem
-                                leftShift={index}
-                                quantity={eventsPrepared[key].length}
-                                isCurrent={isCurrent}
-                                otherIsCurrent={!isCurrent && currentEvent !== null}
-                                scale={scale}
-                                isCurrentEvent={checkIfEventIsCurrent(event, isCurrentDay)}
-                                isNextEvent={isNextEvent(events, event, isCurrentDay)}
-                                {...event}
-                                onClick={onClick}
-                                shift={shift}
-                                key={event.startTime + event.title + i + index}
-                                shortInfo={shortInfo}
-                            />
-                        )
-                    })
-                })}
-            </EventsWrapper>
-        </Flex>
+                    return (
+                        <EventItem
+                            leftShift={index}
+                            quantity={eventsPrepared[key].length}
+                            isCurrent={isCurrent}
+                            otherIsCurrent={!isCurrent && currentEvent !== null}
+                            scale={scale}
+                            isCurrentEvent={checkIfEventIsCurrent(event, isCurrentDay)}
+                            isNextEvent={isNextEvent(events, event, isCurrentDay)}
+                            {...event}
+                            onClick={onClick}
+                            shift={shift}
+                            key={event.startTime + event.title + i + index}
+                            shortInfo={shortInfo}
+                        />
+                    )
+                })
+            })}
+        </EventsWrapper>
     )
 }
 

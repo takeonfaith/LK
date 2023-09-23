@@ -1,6 +1,6 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
-import { createEvent, sample } from 'effector'
+import { createEvent, forward, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { createEffect, createStore } from 'effector'
 import changeCanSign from '../lib/change-can-sign'
@@ -43,6 +43,7 @@ const signContractFx = createEffect(async (contractId: string) => {
 sample({ clock: signContractFx.doneData, target: getPaymentsFx })
 
 const clearStore = createEvent()
+const getPayments = createEvent()
 
 const $paymentsStore = createStore<PaymentsStore>(DEFAULT_STORE)
     .on(getPaymentsFx, (oldData) => ({
@@ -69,6 +70,11 @@ const $paymentsStore = createStore<PaymentsStore>(DEFAULT_STORE)
         ...DEFAULT_STORE,
     }))
 
+forward({
+    from: getPayments,
+    to: getPaymentsFx,
+})
+
 export const selectors = {
     usePayments,
 }
@@ -80,4 +86,5 @@ export const effects = {
 
 export const events = {
     clearStore,
+    getPayments,
 }

@@ -46,9 +46,5 @@ export const EventsCarousel = styled.div`
             scroll-snap-align: center;
             min-width: 100%;
         }
-
-        .events {
-            min-width: 100%;
-        }
     }
 `

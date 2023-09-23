@@ -99,17 +99,13 @@ export const MobileIcon = styled.div`
         width: 40%;
         height: auto;
     }
-
-    /* ${MEDIA_QUERIES.isMobile} {
-        display: flex;
-    } */
 `
 
 export const EventsWrapper = styled(Flex)`
     height: 100%;
     z-index: 1;
     position: relative;
-    margin-top: 19px;
+    margin-top: 10px;
     margin-left: 0px;
     margin-right: 0px;
 `

@@ -21,9 +21,5 @@ export const NextDayScheduleStyled = styled.div`
             scroll-snap-align: center;
             min-width: 100%;
         }
-
-        .events {
-            min-width: 100%;
-        }
     }
 `

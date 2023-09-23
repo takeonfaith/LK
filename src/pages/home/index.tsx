@@ -46,7 +46,7 @@ const Home = () => {
 
     useEffect(() => {
         if (!payments) {
-            paymentsModel.effects.getPaymentsFx()
+            paymentsModel.events.getPayments()
         }
     }, [payments])
 

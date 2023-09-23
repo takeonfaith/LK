@@ -9,11 +9,20 @@ import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'
 import { Button, Divider, Title } from '@ui/atoms'
 import React from 'react'
-import { HiOutlineCalendar, HiOutlineExternalLink, HiOutlineLogin, HiOutlineOfficeBuilding } from 'react-icons/hi'
+import { FiChevronRight } from 'react-icons/fi'
+import {
+    HiOutlineCalendar,
+    HiOutlineExternalLink,
+    HiOutlineLogin,
+    HiOutlineOfficeBuilding,
+    HiOutlineUserGroup,
+} from 'react-icons/hi'
 import styled from 'styled-components'
 import { User, useModal } from 'widgets'
-import { Groups, SubjectPlaceBlock } from '../../atoms'
+import { SubjectPlaceBlock } from '../../atoms'
+import ListOfGroups from '../../atoms/list-of-groups'
 import { TimeIndicator } from '../time-indicator'
+import GroupModal from '@features/groups-list/group-modal'
 
 const SubjectModalWrapper = styled.div`
     position: relative;
@@ -99,17 +108,17 @@ const SubjectModal = (props: Props) => {
     const { theme } = useTheme()
 
     const textColor = theme === 'light' ? color.dark3 : color.light2
+    const groupsArray = groups?.split(',') ?? []
     const background = theme === 'light' ? color.light3 : color.dark3
     const { open } = useModal()
 
-    // const handleCheckGroups = () => {
-    //     if (groupsArray.length === 1) {
-    //         history.push(`${SCHEDULE_ROUTE}/${groupsArray[0]}`)
-    //         close()
-    //     } else {
-    //         open(<ListOfGroups groups={groupsArray} />)
-    //     }
-    // }
+    const handleCheckGroups = () => {
+        if (groupsArray.length === 1) {
+            open(<GroupModal group={groupsArray[0]} />)
+        } else {
+            open(<ListOfGroups groups={groupsArray} />, 'Группы')
+        }
+    }
 
     const handleShowOnMap = () => {
         open(<SubjectPlaceBlock place={place} link={link} name={name} />)
@@ -142,10 +151,14 @@ const SubjectModal = (props: Props) => {
                 )}
                 {!link?.length && <IconText icon={<HiOutlineOfficeBuilding />} text={place} />}
                 {!!rooms.length && <IconText icon={<HiOutlineLogin />} text={<DotSeparatedWords words={rooms} />} />}
-                {/* {!!groupsArray.length && (
-                    <IconText icon={<HiOutlineUserGroup />} text={<DotSeparatedWords words={groupsArray} />} />
-                )} */}
-                <Groups groups={groups} isCurrent={false} color={'var(--block)'} />
+                {!!groupsArray.length && (
+                    <IconText
+                        onClick={handleCheckGroups}
+                        icon={<HiOutlineUserGroup />}
+                        text={<DotSeparatedWords words={groupsArray} />}
+                        rightIcon={<FiChevronRight />}
+                    />
+                )}
 
                 <Flex d="column" ai="flex-start">
                     {!!teachers[0].length && (
@@ -163,27 +176,6 @@ const SubjectModal = (props: Props) => {
                 {!link && <Divider margin="0" width="100%" />}
                 {!link && <Button text="Посмотреть на карте" width="100%" onClick={handleShowOnMap} />}
             </ModalContentWrapper>
-            {/* 
-            <SubjectPlaceBlock place={place} link={link} name={name} />
-            <span className="date-interval">{dateInterval}</span>
-            
-            <div className="time-and-next">
-                <Time timeInterval={timeInterval} isCurrent={false} />
-                <NextSubject timeLeft={calcTimeLeft(timeInterval)} isNext={isNext} />
-                <Rooms rooms={rooms} inModal />
-            </div>
-
-            
-            {groups && (
-                <>
-                    <Divider margin="20px auto" />
-                    <Button
-                        width="100%"
-                        text={`Посмотреть расписание ${groupsArray.length === 1 ? groupsArray[0] : 'групп'}`}
-                        onClick={handleCheckGroups}
-                    />
-                </>
-            )} */}
         </SubjectModalWrapper>
     )
 }

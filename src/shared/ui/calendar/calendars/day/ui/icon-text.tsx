@@ -5,13 +5,18 @@ type Props = {
     icon: ChildrenType
     text: ChildrenType
     shortInfo?: boolean
+    rightIcon?: ChildrenType
+    onClick?: () => void
 }
 
-const IconText = ({ icon, text, shortInfo = false }: Props) => {
+const IconText = ({ icon, text, onClick, rightIcon, shortInfo = false }: Props) => {
     return (
-        <IconTextStyled shortInfo={shortInfo} gap="7px" w="fit-content">
+        <IconTextStyled onClick={onClick} shortInfo={shortInfo} gap="7px" w="100%">
             <SmallIcon shortInfo={shortInfo}>{icon}</SmallIcon>
-            <SubtextStyled className="text">{text}</SubtextStyled>
+            <SubtextStyled width="100%" className="text">
+                {text}
+            </SubtextStyled>
+            <SmallIcon shortInfo={shortInfo}>{rightIcon}</SmallIcon>
         </IconTextStyled>
     )
 }
