@@ -56,7 +56,7 @@ const ListOfGroups = ({ groups }: Props) => {
                 return (
                     <GroupItem
                         key={group}
-                        to={getEnrichedTemplatePath(SCHEDULE_FILTER_ROUTE, { page: 'current', filter: group })}
+                        to={getEnrichedTemplatePath(SCHEDULE_FILTER_ROUTE, { page: 'current', filter: group.trim() })}
                         onClick={close}
                     >
                         <div className="start">
