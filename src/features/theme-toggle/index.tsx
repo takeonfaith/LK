@@ -65,7 +65,7 @@ const ThemeToggle = ({ type, onClick }: Props) => {
                 notActiveClickMessage="У вас включена тема по расписанию. Если хотите управлять темой вручную, перейдите в настройки -> внешний вид"
                 isActive={!apparanceSettings.scheduledLightTheme}
                 text={text}
-                background="var(--schedule)"
+                background="var(--block)"
                 icon={icon}
                 width="100%"
                 align="left"

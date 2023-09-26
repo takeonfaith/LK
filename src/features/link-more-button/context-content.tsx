@@ -69,7 +69,7 @@ const ContextContent = (props: IRoute) => {
                     icon={<FiXCircle />}
                     width="100%"
                     align="left"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     onClick={() => {
                         deletePageFromHome(id, settings)
                         contextMenuModel.events.close()
@@ -81,7 +81,7 @@ const ContextContent = (props: IRoute) => {
                     icon={<FiPlus />}
                     width="100%"
                     align="left"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     onClick={handleAddToHome}
                 />
             )}
@@ -91,7 +91,7 @@ const ContextContent = (props: IRoute) => {
                     icon={<FiPlus />}
                     width="100%"
                     align="left"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     onClick={handleAddToMenu}
                 />
             ) : (
@@ -100,7 +100,7 @@ const ContextContent = (props: IRoute) => {
                     icon={<FiXCircle />}
                     width="100%"
                     align="left"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     onClick={() => deletePageFromSidebar(id, settings, requiredLeftsideBarItems)}
                 />
             )}

@@ -13,7 +13,9 @@ function findPercentage(data: AcadPerformance[]): Percentage {
     const totalLength = data.filter((el) => !!el.grade && el.exam_type !== 'Зачет').length
 
     data.forEach(({ grade, exam_type }) => {
-        if (exam_type !== 'Зачет' && grade !== undefined) result[GradeByScore[grade] as keyof Percentage]++
+        if (exam_type !== 'Зачет' && grade !== undefined) {
+            result[GradeByScore[grade] as keyof Percentage]++
+        }
     })
 
     if (totalLength === 0) return result

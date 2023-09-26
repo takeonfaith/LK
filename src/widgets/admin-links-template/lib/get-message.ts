@@ -1,4 +1,4 @@
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 
 const getMessage = (dates: string[]) => {
     if (!dates[0].length && !!dates[1].length) return `За весь период до ${localizeDate(dates[1])} включительно`

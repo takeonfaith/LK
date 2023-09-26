@@ -2,7 +2,7 @@ import { userModel } from '@entities/user'
 import { vacationScheduleModel } from '@entities/vacation-schedule'
 import Select, { SelectPage } from '@features/select'
 import PageBlock from '@shared/ui/page-block'
-import { Divider, LinkButton, Title, Wrapper } from '@ui/atoms'
+import { CenterPage, Divider, LinkButton, Title, Wrapper } from '@ui/atoms'
 import Card from '@ui/card'
 import List from '@ui/list'
 import Subtext from '@ui/subtext'
@@ -38,53 +38,55 @@ const Page = () => {
 
     return (
         <Wrapper load={vacationScheduleModel.effects.getFx} error={error} data={data}>
-            <PageBlock>
-                <Subtext width="100%" maxWidth="100%">
-                    Производственный календарь на 2023 год
-                </Subtext>
-                <List scroll={false} direction="horizontal" gap={12} wrapOnMobile>
-                    <Card
-                        title="Для пятидневной рабочей недели"
-                        height="120px"
-                        width="50%"
-                        background="5"
-                        padding="20px 40px 20px 20px"
-                    >
-                        <LinkButton
-                            onClick={() => null}
-                            href={calendarUrls.fiveWorkDays}
-                            textColor="var(--reallyBlue)"
-                            text="Подробнее"
-                            background="transparent"
-                            padding="10px 0"
-                        />
-                    </Card>
-                    <Card
-                        title="Для шестидневной рабочей недели"
-                        height="120px"
-                        width="50%"
-                        background="6"
-                        padding="20px 40px 20px 20px"
-                    >
-                        <LinkButton
-                            onClick={() => null}
-                            href={calendarUrls.sixWorkDays}
-                            textColor="var(--reallyBlue)"
-                            text="Подробнее"
-                            background="transparent"
-                            padding="10px 0"
-                        />
-                    </Card>
-                </List>
-                <Divider />
-                <Title size={3} align="left">
-                    Сведения о трудоустройстве
-                </Title>
-                {!!user?.id && (
-                    <Select width="fit-content" items={items} selected={selected} setSelected={setSelected} />
-                )}
-                {selectedVacation && <Vacation {...selectedVacation} />}
-            </PageBlock>
+            <CenterPage alignItems="flex-start">
+                <PageBlock>
+                    <Subtext width="100%" maxWidth="100%">
+                        Производственный календарь на 2023 год
+                    </Subtext>
+                    <List scroll={false} direction="horizontal" gap={12} wrapOnMobile>
+                        <Card
+                            title="Для пятидневной рабочей недели"
+                            height="120px"
+                            width="50%"
+                            background="5"
+                            padding="20px 40px 20px 20px"
+                        >
+                            <LinkButton
+                                onClick={() => null}
+                                href={calendarUrls.fiveWorkDays}
+                                textColor="var(--reallyBlue)"
+                                text="Подробнее"
+                                background="transparent"
+                                padding="10px 0"
+                            />
+                        </Card>
+                        <Card
+                            title="Для шестидневной рабочей недели"
+                            height="120px"
+                            width="50%"
+                            background="6"
+                            padding="20px 40px 20px 20px"
+                        >
+                            <LinkButton
+                                onClick={() => null}
+                                href={calendarUrls.sixWorkDays}
+                                textColor="var(--reallyBlue)"
+                                text="Подробнее"
+                                background="transparent"
+                                padding="10px 0"
+                            />
+                        </Card>
+                    </List>
+                    <Divider />
+                    <Title size={3} align="left">
+                        Сведения о трудоустройстве
+                    </Title>
+                    {!!user?.id && (
+                        <Select width="fit-content" items={items} selected={selected} setSelected={setSelected} />
+                    )}
+                    {selectedVacation && <Vacation {...selectedVacation} />}
+                </PageBlock>
+            </CenterPage>
         </Wrapper>
     )
 }

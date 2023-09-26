@@ -10,6 +10,7 @@ import { useRouteMatch } from 'react-router'
 import styled from 'styled-components'
 import search from '../lib/search'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
+import { MEDIA_QUERIES } from '@shared/constants'
 
 const ListOfSettingsWrapper = styled(ListWrapper)<{ open: boolean }>`
     height: 100%;
@@ -17,11 +18,11 @@ const ListOfSettingsWrapper = styled(ListWrapper)<{ open: boolean }>`
     padding-top: 0;
     padding: 8px;
     border-radius: var(--brLight);
-    box-shadow: var(--schedule-shadow);
+    box-shadow: var(--block-shadow);
     margin-right: 20px;
-    background: var(--form);
+    background: var(--block-content);
 
-    @media (max-width: 600px) {
+    ${MEDIA_QUERIES.isMobile} {
         padding: 0;
         transition: 0.2s;
         margin-right: 0;

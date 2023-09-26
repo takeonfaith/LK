@@ -17,7 +17,7 @@ const ContextMenuWrapper = styled.div<{
     width: 220px;
     left: ${({ left }) => left + 'px'};
     top: ${({ top }) => top + 'px'};
-    background: var(--schedule);
+    background: var(--block);
     border-radius: var(--brLight);
     box-shadow: var(--very-mild-shadow);
     transition: 0.2s transform, 0.2s opacity, 0.2s visibility;

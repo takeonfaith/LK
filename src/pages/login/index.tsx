@@ -1,7 +1,7 @@
 import React from 'react'
-import { SCREEN_IPHONE_SE } from '@shared/constants'
 import styled from 'styled-components'
 import LoginBlock from './ui/organisms/login-block'
+import { MEDIA_QUERIES } from '@shared/constants'
 
 const LoginWrapper = styled.div`
     width: 100%;
@@ -12,7 +12,7 @@ const LoginWrapper = styled.div`
     background: var(--theme);
     flex-direction: column;
 
-    @media (max-width: ${SCREEN_IPHONE_SE}) {
+    ${MEDIA_QUERIES.isMobile} {
         justify-content: flex-start;
         align-items: flex-start;
     }

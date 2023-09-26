@@ -20,7 +20,7 @@ const AutoAccordionContent = styled.div<{ isOpen: boolean }>`
 `
 
 type Props = {
-    title?: string
+    title?: ChildrenType
     children: ChildrenType
     forceState?: boolean
     bottomMargin?: boolean

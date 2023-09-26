@@ -1,11 +1,14 @@
-import { ISubject } from '@api/model'
+import { TimeType, getMinutesFromStringTime } from '@shared/lib/dates/get-minutes-from-string-time'
+import { getMinutesFromDate } from '@shared/lib/dates/get-time-from-date'
+import { DayCalendarEvent } from '@shared/ui/calendar'
 
-const isDayEnded = (lessons: ISubject[]) => {
-    if (lessons && lessons[lessons.length - 1]) {
-        const [hours, minutes] = lessons[lessons.length - 1].timeInterval.split(' - ')[1].split(':')
-        if (new Date().getHours() > +hours) return true
-        else if (new Date().getHours() === +hours && new Date().getMinutes() > +minutes) return true
-        else return false
+const isDayEnded = (events: DayCalendarEvent[] | undefined) => {
+    if (events && events[events.length - 1]) {
+        const lastEvent = events[events.length - 1]
+        return (
+            getMinutesFromStringTime(lastEvent.startTime as TimeType) + lastEvent.duration <
+            getMinutesFromDate(new Date())
+        )
     }
 }
 

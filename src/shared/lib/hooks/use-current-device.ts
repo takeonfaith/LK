@@ -1,25 +1,22 @@
-import { useState, useLayoutEffect } from 'react'
+import { JS_QUERIES } from '@shared/constants'
+import { useLayoutEffect, useState } from 'react'
 
-const QUERIES = [
-    { query: '(max-width: 766px)', title: 'isMobile' },
-    { query: '(min-width: 767px) and (max-width: 1199px)', title: 'isTablet' },
-    { query: '(min-width: 1200px)', title: 'isDesktop' },
-] as const
+type QueryType = typeof JS_QUERIES
 
 const getValues = (
     mediaQueryList: {
         mql: MediaQueryList
-        title: (typeof QUERIES)[number]['title']
+        title: QueryType[number]['title']
     }[],
 ) => {
     return mediaQueryList.reduce((acc, value) => {
         acc[value.title] = value.mql.matches
         return acc
-    }, {} as Record<(typeof QUERIES)[number]['title'], boolean>)
+    }, {} as Record<QueryType[number]['title'], boolean>)
 }
 
 const useCurrentDevice = () => {
-    const mediaQueryList = QUERIES.map(({ query, title }) => ({ mql: matchMedia(query), title }))
+    const mediaQueryList = JS_QUERIES.map(({ query, title }) => ({ mql: matchMedia(query), title }))
     const [values, setValues] = useState(getValues(mediaQueryList))
 
     useLayoutEffect(() => {
@@ -37,7 +34,11 @@ const useCurrentDevice = () => {
             )
     }, [])
 
-    return values
+    return {
+        ...values,
+        currentDevice:
+            Object.keys(values).find((el: string) => values[el as keyof typeof values] === true) ?? 'desktop',
+    }
 }
 
 export default useCurrentDevice

@@ -1,13 +1,14 @@
-import React from 'react'
-import { Button } from '@ui/button'
-import { FiClock, FiMessageCircle } from 'react-icons/fi'
-import useModal from 'widgets/modal'
-import { UserModal } from '../atoms'
-import { UserProps } from 'widgets/user/types'
+import { SCHEDULE_FILTER_ROUTE } from '@app/routes/general-routes'
+import { getEnrichedTemplatePath } from '@entities/menu/lib/get-enriched-template-path'
 import getLettersColors from '@shared/lib/get-letters-colors'
-import handleChangeAccount from '../../lib/handle-change-account'
-import { SCHEDULE_ROUTE } from '@app/routes/general-routes'
+import { Button } from '@ui/button'
+import React from 'react'
+import { FiClock, FiMessageCircle } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import useModal from 'widgets/modal'
+import { UserProps } from 'widgets/user/types'
+import handleChangeAccount from '../../lib/handle-change-account'
+import { UserModal } from '../atoms'
 
 type Props = Pick<
     UserProps,
@@ -27,9 +28,16 @@ const StudentModal = (props: Props) => {
             {/* <Link to={`${CHAT_ROUTE}/${name}`}> */}
             {!token && (
                 <>
-                    <Link to={`${SCHEDULE_ROUTE}/${group}`}>
-                        <Button icon={<FiClock />} text={'Расписание'} onClick={() => close()} width="100%" />
-                    </Link>
+                    {group && (
+                        <Link
+                            to={getEnrichedTemplatePath(SCHEDULE_FILTER_ROUTE, {
+                                page: 'current',
+                                filter: group,
+                            })}
+                        >
+                            <Button icon={<FiClock />} text={'Расписание'} onClick={() => close()} width="100%" />
+                        </Link>
+                    )}
                     <Button
                         icon={<FiMessageCircle />}
                         text={'Написать'}

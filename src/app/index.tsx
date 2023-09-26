@@ -4,6 +4,7 @@ import { HashRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { ModalProvider } from 'widgets/modal/lib'
 import Router from './routers/router'
+import ErrorBoundary from '@shared/ui/error-boundary'
 import React from 'react'
 
 const Background = styled.div`
@@ -21,7 +22,9 @@ const App = () => {
         <ModalProvider>
             <HashRouter basename="/">
                 <Background>
-                    <Router />
+                    <ErrorBoundary>
+                        <Router />
+                    </ErrorBoundary>
                 </Background>
             </HashRouter>
         </ModalProvider>

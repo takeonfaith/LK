@@ -2,7 +2,7 @@
 import { confirmModel } from '@entities/confirm'
 import { NameSettings } from '@entities/settings/model'
 import { userModel } from '@entities/user'
-import getTimeFromMinutes from '@shared/lib/get-time-from-minutes'
+import getTimeFromMinutes from '@shared/lib/dates/get-time-from-minutes'
 import { FilterElementList } from '@shared/ui/added-elements-list'
 import { MessageType } from '@shared/ui/types'
 import React from 'react'

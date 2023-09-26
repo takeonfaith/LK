@@ -116,7 +116,7 @@ const AutoCompleteInputItems = styled.ul<{ isOpen: boolean; itemsAmount: number;
 
     box-shadow: var(--light-box-shadow);
     border-radius: var(--brLight);
-    background: var(--schedule);
+    background: var(--block);
     user-select: none;
     max-height: 250px;
     overflow-y: auto;

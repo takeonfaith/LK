@@ -1,5 +1,5 @@
 import { Message, Messages } from '@api/model'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 
 const avatars = {
     'Peter Parker':

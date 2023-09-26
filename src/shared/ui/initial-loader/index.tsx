@@ -8,6 +8,7 @@ import { AiOutlineReload } from 'react-icons/ai'
 import { UserToken } from '@api/model'
 import { InitialLoaderWrapper } from './styles'
 import getLettersColors from '@shared/lib/get-letters-colors'
+import Flex from '../flex'
 import { Colors } from '@shared/constants'
 import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 
@@ -25,11 +26,22 @@ const InitialLoader = ({ loading }: Props) => {
     const loadUser = () =>
         userModel.effects.getUserFx(JSON.parse(localStorage.getItem(BrowserStorageKey.Token) ?? '') as UserToken)
 
+    const handleLogout = () => userModel.events.logout()
+
     if (!!error)
         return (
             <InitialLoaderWrapper $loading={true} color={color}>
-                <Error text="Нет подключения к интернету">
-                    <Button onClick={loadUser} text="Попробовать снова" icon={<AiOutlineReload />} />
+                <Error text={error}>
+                    <Flex d="column" gap="8px">
+                        <Button onClick={loadUser} text="Попробовать снова" icon={<AiOutlineReload />} width="200px" />
+                        <Button
+                            onClick={handleLogout}
+                            textColor="var(--theme-mild-opposite)"
+                            text="Выйти"
+                            width="200px"
+                            background="var(--theme)"
+                        />
+                    </Flex>
                 </Error>
             </InitialLoaderWrapper>
         )

@@ -11,15 +11,18 @@ import styled from 'styled-components'
 import { useModal } from 'widgets'
 import GlobalAppSearchModal from './global-app-search-modal'
 
-const GlobalAppSearchStyled = styled(BlockWrapper)`
+type SearchSize = 'icon' | 'small' | 'large'
+
+const GlobalAppSearchStyled = styled(BlockWrapper)<{ size: SearchSize }>`
     cursor: pointer;
+    box-shadow: ${({ size }) => size === 'small' && 'var(--block-content-shadow)'};
     &:hover {
         filter: brightness(0.96);
     }
 `
 
 const Key = styled.div`
-    background-color: var(--mild-theme);
+    background-color: var(--theme-1);
     width: 23px;
     height: 23px;
     display: flex;
@@ -53,7 +56,7 @@ const getShortCut = () => {
 }
 
 type Props = {
-    size?: 'icon' | 'small' | 'large'
+    size?: SearchSize
 }
 
 const GlobalAppSearch = ({ size = 'large' }: Props) => {
@@ -76,6 +79,7 @@ const GlobalAppSearch = ({ size = 'large' }: Props) => {
                 icon={<FiSearch />}
                 width="40px"
                 minWidth="40px"
+                shrinkTextInMobile
                 background="transparent"
                 onClick={handleOpenModal}
             />
@@ -86,6 +90,7 @@ const GlobalAppSearch = ({ size = 'large' }: Props) => {
         <GlobalAppSearchStyled
             maxWidth="750px"
             width={width}
+            size={size}
             height="fit-content"
             padding={padding}
             justifyContent="space-between"

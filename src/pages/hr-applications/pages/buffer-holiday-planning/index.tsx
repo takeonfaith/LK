@@ -64,8 +64,8 @@ const ApplicationPageWrapper = styled.div`
 const HrHeader = styled.div`
     // block
     border-radius: var(--brSemi);
-    background: var(--schedule);
-    box-shadow: var(--schedule-shadow);
+    background: var(--block);
+    box-shadow: var(--block-shadow);
     height: fit-content;
     padding: 20px;
     display: flex;

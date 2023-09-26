@@ -15,7 +15,7 @@ const TextFieldStyled = styled.div`
     border-radius: var(--brLight);
 
     &:hover {
-        background: var(--mild-theme);
+        background: var(--theme-1);
     }
 
     .icon {

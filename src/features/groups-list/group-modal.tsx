@@ -1,4 +1,5 @@
-import { ALL_STUDENTS_ROUTE, SCHEDULE_ROUTE } from '@app/routes/general-routes'
+import { ALL_STUDENTS_ROUTE, SCHEDULE_FILTER_ROUTE } from '@app/routes/general-routes'
+import { getEnrichedTemplatePath } from '@entities/menu/lib/get-enriched-template-path'
 import { Icon } from '@features/all-pages'
 import { Button } from '@shared/ui/button'
 import Flex from '@shared/ui/flex'
@@ -40,7 +41,12 @@ const GroupModal = ({ group }: Props) => {
                 <Subtext fontSize="1.2rem">{group}</Subtext>
             </Flex>
             <Flex gap="8px" onClick={close}>
-                <LinkStyled to={`${SCHEDULE_ROUTE}/${group}`}>
+                <LinkStyled
+                    to={getEnrichedTemplatePath(SCHEDULE_FILTER_ROUTE, {
+                        page: 'current',
+                        filter: group,
+                    })}
+                >
                     <Button icon={<FiClock />} width="100%" text="Расписание" />
                 </LinkStyled>
                 <LinkStyled to={`${ALL_STUDENTS_ROUTE}/${group}`}>

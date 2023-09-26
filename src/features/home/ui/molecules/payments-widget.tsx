@@ -1,6 +1,6 @@
 import { Payments } from '@api/model'
 import { PAYMENTS_ROUTE } from '@app/routes/general-routes'
-import { IColors } from '@shared/constants'
+import { IColors, MEDIA_QUERIES } from '@shared/constants'
 import { paymentsModel } from '@entities/payments'
 import PaymentButton from '@features/payment-button'
 import Debt from '@features/payments/debt'
@@ -19,7 +19,7 @@ const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     min-width: calc(100% / 3);
     width: 100%;
     height: 156px;
-    background: var(--scheduleBg);
+    background: var(--theme-2);
     border-radius: 15px;
     padding: 6px;
     display: flex;
@@ -29,7 +29,7 @@ const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
     .payment-info {
         width: 100%;
         height: 100%;
-        background: var(--schedule);
+        background: var(--block);
         border-radius: 11px;
         padding: 10px;
         display: flex;
@@ -46,7 +46,7 @@ const PaymentsWidgetWrapper = styled.div<{ background?: keyof IColors }>`
         }
     }
 
-    @media (max-width: 600px) {
+    ${MEDIA_QUERIES.isMobile} {
         width: 100%;
         min-width: 100%;
         max-width: 100%;

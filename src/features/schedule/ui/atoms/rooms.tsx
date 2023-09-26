@@ -21,12 +21,12 @@ const RoomsWrapper = styled.div<{ isCurrent: boolean; inModal: boolean; color?: 
         top: 0;
         right: 0;
         background: ${({ isCurrent, color }) =>
-            `linear-gradient(90deg, transparent, ${isCurrent ? color : 'var(--schedule)'})`};
+            `linear-gradient(90deg, transparent, ${isCurrent ? color : 'var(--block)'})`};
     }
 
     .room {
         width: fit-content;
-        background: ${({ isCurrent }) => (isCurrent ? 'var(--almostTransparent)' : 'var(--scheduleBg)')};
+        background: ${({ isCurrent }) => (isCurrent ? 'var(--almostTransparent)' : 'var(--theme-2)')};
         padding: 0px 8px;
         height: 21px;
         border-radius: 4px;

@@ -14,7 +14,7 @@ const ConfirmWrapper = styled.div<{ isOpen: boolean }>`
     width: 100%;
     max-width: 390px;
     border-radius: var(--brLight);
-    background: var(--schedule);
+    background: var(--block);
     box-shadow: 0 0 40px #0000002f;
     color: var(--text);
     z-index: 10000;

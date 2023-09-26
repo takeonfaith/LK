@@ -2,7 +2,7 @@ import { peStudentRegulationPointsModel } from '@entities/pe-student-regulation-
 import { AddStudentRegulationPoints } from '@entities/pe-student-regulation-points/types'
 import { selectedPEStudentModel } from '@entities/pe-student/model'
 import Select, { SelectPage } from '@features/select'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import { Button } from '@shared/ui/button'
 import Input from '@shared/ui/input'
 import { useUnit } from 'effector-react'

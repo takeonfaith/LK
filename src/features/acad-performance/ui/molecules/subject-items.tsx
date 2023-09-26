@@ -14,7 +14,7 @@ const SubjectItems = ({ items, type }: Props) => {
         <>
             {items.map((item, i) => (
                 <React.Fragment key={item.id}>
-                    <SubjectItem item={item} number={i + 1} type={type} />
+                    <SubjectItem item={item} type={type} />
                     {i !== items.length - 1 && <Divider margin="0" width="100%" />}
                 </React.Fragment>
             ))}

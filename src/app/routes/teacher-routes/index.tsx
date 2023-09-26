@@ -168,7 +168,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         color: 'orange',
         isTemplate: false,
         group: 'FINANCES_DOCS',
-        pageSize: 'large',
+        pageSize: 'big',
     },
     ...generalRoutes,
     'download-agreements': {
@@ -350,6 +350,7 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         Component: PhysicalEducationStudent,
         isTemplate: false,
         fallbackPrevPage: PHYSICAL_EDUCATION,
+        show: false,
     },
     oop: {
         id: 'oop',

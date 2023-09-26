@@ -8,7 +8,7 @@ const HrBlockWrapper = styled.div<{ maxWidth?: string }>`
     padding: 20px;
     border-radius: var(--brSemi);
     background: transparent;
-    box-shadow: var(--schedule-shadow);
+    box-shadow: var(--block-shadow);
     display: flex;
     flex-direction: column;
     row-gap: 20px;

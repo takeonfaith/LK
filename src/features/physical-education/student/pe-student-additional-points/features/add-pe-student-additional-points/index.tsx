@@ -2,7 +2,7 @@ import { peStudentAdditionalPointsModel } from '@entities/pe-student-additional-
 import { AddStudentAdditionalPoints } from '@entities/pe-student-additional-points/types'
 import { selectedPEStudentModel } from '@entities/pe-student/model'
 import Select, { SelectPage } from '@features/select'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import { Button } from '@shared/ui/button'
 import Input from '@shared/ui/input'
 import { TextArea } from '@shared/ui/textarea'

@@ -11,7 +11,7 @@ const LoginBlockStyled = styled(BlockWrapper)<{ isAuthenticated: boolean }>`
     min-height: 480px;
     transition: 0.2s box-shadow;
     position: relative;
-    background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--theme)' : 'var(--schedule)')};
+    background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--theme)' : 'var(--block)')};
 
     .left,
     .right {
@@ -29,7 +29,7 @@ const LoginBlockStyled = styled(BlockWrapper)<{ isAuthenticated: boolean }>`
         min-width: 320px;
         width: 320px;
         transition: 0.2s background, 0.2s opacity;
-        background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--theme)' : 'var(--theme-mild-xxl)')};
+        background: ${({ isAuthenticated }) => (isAuthenticated ? 'var(--theme)' : 'var(--theme-1t)')};
         padding-top: ${({ isAuthenticated }) => (isAuthenticated ? '60px' : '22px')};
 
         & > * > * > *:not(.logo) {

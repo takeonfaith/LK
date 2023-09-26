@@ -74,9 +74,9 @@ export const Colors: IColors = {
         main: '#3cd288',
         light1: '#49e698',
         light2: '#58f3a6',
-        light3: '#6bfeb5',
+        light3: '#a1ffd1',
         transparent1: '#a7ffd38a',
-        transparent2: '#a7ffd324',
+        transparent2: '#a7ffd35c',
         transparent3: '#4ad18e1f',
     },
     lightGreen: {
@@ -87,12 +87,12 @@ export const Colors: IColors = {
         light1: '#66dfdf',
         light2: '#8bf1f1',
         light3: '#a3fbfb',
-        transparent1: '#a3fbfb99',
+        transparent1: '#98e8e899',
         transparent2: '#a3fbfb59',
         transparent3: '#a3fbfb29',
     },
     blue: {
-        dark3: '#29349c',
+        dark3: '#3d4695',
         dark2: '#3742b1',
         dark1: '#4552c9',
         main: '#5f6dec',
@@ -123,13 +123,13 @@ export const Colors: IColors = {
         main: '#3831a5',
         light1: '#443cc5',
         light2: '#5850d4',
-        light3: '#675fe5',
-        transparent1: '#5c54d9e0',
-        transparent2: '#5c54d9b5',
-        transparent3: '#5c54d98c',
+        light3: '#beb9ff',
+        transparent1: '#7f77ff78',
+        transparent2: '#7f77ff78',
+        transparent3: '#7f77ff12',
     },
     purple: {
-        dark3: '#5b248d',
+        dark3: '#5c3381',
         dark2: '#7434af',
         dark1: '#8b4ac7',
         main: '#a85fec',
@@ -141,7 +141,7 @@ export const Colors: IColors = {
         transparent3: '#dcb7ff2b',
     },
     pink: {
-        dark3: '#932066',
+        dark3: '#8d4370',
         dark2: '#a62b77',
         dark1: '#c34191',
         main: '#ec5fb6',
@@ -153,7 +153,7 @@ export const Colors: IColors = {
         transparent3: '#ffbce530',
     },
     red: {
-        dark3: '#a3252f',
+        dark3: '#91353d',
         dark2: '#bf3641',
         dark1: '#cf4b56',
         main: '#ec5f6b',
@@ -165,7 +165,7 @@ export const Colors: IColors = {
         transparent3: '#ffbbc133',
     },
     orange: {
-        dark3: '#985e1d',
+        dark3: '#815b32',
         dark2: '#a76821',
         dark1: '#ca8231',
         main: '#ee9e44',
@@ -174,7 +174,7 @@ export const Colors: IColors = {
         light3: '#ffd7ab',
         transparent1: '#ffd7ab99',
         transparent2: '#ffd7ab54',
-        transparent3: '#ffd7ab1f',
+        transparent3: '#ffd7ab4a',
     },
     grey: {
         dark3: '#353535',
@@ -207,25 +207,17 @@ export interface IWeekDayName {
     short: string
 }
 
-export interface IWeekDays {
-    monday: IWeekDayName
-    tuesday: IWeekDayName
-    wednesday: IWeekDayName
-    thursday: IWeekDayName
-    friday: IWeekDayName
-    saturday: IWeekDayName
-    // sunday: IWeekDayName
-}
-
-export const WeekDays: IWeekDays = {
+export const WEEK_DAYS = {
     monday: { full: 'Понедельник', short: 'Пн' },
     tuesday: { full: 'Вторник', short: 'Вт' },
     wednesday: { full: 'Среда', short: 'Ср' },
     thursday: { full: 'Четверг', short: 'Чт' },
     friday: { full: 'Пятница', short: 'Пт' },
     saturday: { full: 'Суббота', short: 'Сб' },
-    // sunday: { full: 'Воскресенье', short: 'Вс' },
-}
+} as const
+
+export type IWeekDays = typeof WEEK_DAYS
+export type IWeekDayNames = keyof IWeekDays
 
 export const ColorsByGrade: Record<keyof IGrade | 'default', string> = {
     Зачтено: Colors.green.main,
@@ -377,14 +369,35 @@ export const letterColorMatch: LetterColorMatch = {
 }
 
 export const VALID_FORMATS = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'] as const
-export type FileFormats = (typeof VALID_FORMATS)[number][]
+type ValidFormats = typeof VALID_FORMATS
+export type FileFormats = ValidFormats[number][]
 
 export const MAX_FILE_SIZE = 10
 
-export const SCREEN_IPHONE_SE = '376px'
-export const SCREEN_IPHONE_12 = '391px'
-export const SCREEN_IPHONE_XR = '415px'
-export const SCREEN_IPAD_AIR = '821px'
+export const MOBILE_SCREEN = '(max-width: 766px)'
+export const NOT_MOBILE_SCREEN = '(min-width: 767px)'
+export const TABLET_SCREEN = '(max-width: 1000px)'
+export const SMALL_DESKTOP = '(max-width: 1380px)'
+export const MIDDLE_DESKTOP = '(min-width: 1381px)'
+
+export const MEDIA_QUERIES = {
+    isMobile: `@media ${MOBILE_SCREEN}`,
+    isNotMobile: `@media ${NOT_MOBILE_SCREEN}`,
+    isTablet: `@media ${TABLET_SCREEN}`,
+    isSmallTesktop: `@media ${SMALL_DESKTOP}`,
+    isMiddleTesktop: `@media ${MIDDLE_DESKTOP}`,
+} as const
+
+export const JS_QUERIES = [
+    { query: MOBILE_SCREEN, title: 'isMobile', value: 'mobile' },
+    { query: TABLET_SCREEN, title: 'isTablet', value: 'tablet' },
+    { query: SMALL_DESKTOP, title: 'isSmallDesktop', value: 'smallDesktop' },
+    { query: MIDDLE_DESKTOP, title: 'isMiddleDesktop', value: 'middleDesktop' },
+] as const
+
+export const TIME_IN_MS = {
+    minute: 60000,
+}
 
 /**
  * @constant

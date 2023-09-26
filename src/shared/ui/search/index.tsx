@@ -49,7 +49,7 @@ const HintItem = styled.div<{ selected: boolean }>`
     }
 
     &:hover {
-        background: ${({ selected }) => (selected ? Colors.blue.main : 'var(--mild-theme)')};
+        background: ${({ selected }) => (selected ? Colors.blue.main : 'var(--theme-1)')};
     }
 `
 

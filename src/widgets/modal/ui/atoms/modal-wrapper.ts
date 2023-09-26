@@ -10,9 +10,29 @@ const ModalWrapper = styled.div<{ isOpen: boolean }>`
     height: 100%;
     padding: 0 30px;
     background-color: rgba(0, 0, 0, 0.5);
-    opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-    visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
-    transition: 0.2s opacity, 0.2s visibility;
+    animation: ${({ isOpen }) => (isOpen ? 'wrapperOpened 0.2s forwards' : 'wrapperClosed 0.2s forwards')};
+
+    @keyframes wrapperOpened {
+        0% {
+            opacity: 0;
+            visibility: hidden;
+        }
+        100% {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    @keyframes wrapperClosed {
+        0% {
+            opacity: 1;
+            visibility: visible;
+        }
+        100% {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
 
     @media (max-width: 800px) {
         padding: 8px;

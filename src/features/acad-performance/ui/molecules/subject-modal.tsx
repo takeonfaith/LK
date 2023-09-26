@@ -1,7 +1,7 @@
 import { AcadPerformance } from '@api/model/acad-performance'
 import KeyValue from '@ui/atoms/key-value'
 import findSemestr from '@utils/find-semestr'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import React from 'react'
 import styled from 'styled-components'
 import { User } from 'widgets'

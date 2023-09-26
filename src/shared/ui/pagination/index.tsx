@@ -1,9 +1,10 @@
 import { Button, Input } from '@ui/atoms'
-import List from '@ui/list'
 import { Align } from '@ui/types'
 import limitNumber from '@utils/limit-number'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
+import Flex from '../flex'
+import Subtext from '../subtext'
 
 interface Props {
     align?: Align
@@ -31,16 +32,18 @@ const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'ce
         } else setCurrentPageValue('')
     }
 
+    if (!condition) return null
+
     return (
-        <List horizontalAlign={align} visible={condition} direction={'horizontal'} width="100%" padding="10px">
+        <Flex gap="10px" jc={align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : align}>
             <Button
                 minWidth="42px"
                 height="42px"
-                background="var(--mild-theme)"
+                background="var(--theme)"
                 icon={<FiChevronLeft />}
                 onClick={() => setCurrentPageValue(limitNumber(currentPage - 1, pages).toString())}
             />
-            <div className="page-indicator">
+            <Flex w="fit-content" gap="6px">
                 <Input
                     width="12px"
                     placeholder=""
@@ -48,16 +51,19 @@ const Pagination = ({ pages, condition, currentPage, setCurrentPage, align = 'ce
                     setValue={handleValue}
                     inputAppearance={false}
                 />
-                / {pages + 1}
-            </div>
+                /{' '}
+                <Subtext width="fit-content" fontSize="0.85rem">
+                    {pages + 1}
+                </Subtext>
+            </Flex>
             <Button
                 minWidth="42px"
                 height="42px"
-                background="var(--mild-theme)"
+                background="var(--theme)"
                 icon={<FiChevronRight />}
                 onClick={() => setCurrentPageValue(limitNumber(currentPage + 1, pages).toString())}
             />
-        </List>
+        </Flex>
     )
 }
 

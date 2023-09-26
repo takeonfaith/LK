@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 const SkeletonLoadingWrapper = styled.div`
     width: 100%;
-    background: var(--schedule);
+    background: var(--block);
     padding: 20px 15px;
     border-radius: 9px;
     scroll-snap-align: center;

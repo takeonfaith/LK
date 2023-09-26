@@ -30,7 +30,7 @@ const LinkImageBlockWrapper = styled.a`
 
 interface Props {
     title: string
-    link: string | null
+    link: string | null | undefined
     image: string
 }
 
