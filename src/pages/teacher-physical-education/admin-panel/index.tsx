@@ -1,3 +1,4 @@
+import { AddCompetition } from '@features/physical-education/admin-panel/add-competition/ui'
 import { AddNewTeacher } from '@features/physical-education/admin-panel/add-new-teacher/ui'
 import { AssignCurator } from '@features/physical-education/admin-panel/assign-curator/ui'
 import { AssignVisitValue } from '@features/physical-education/admin-panel/assign-visit-value/ui'
@@ -24,12 +25,17 @@ export const AdminPanel = () => {
         open(<AssignVisitValue />)
     }
 
+    const handleAddCompetition = () => {
+        open(<AddCompetition />)
+    }
+
     return (
         <WrapperBlock>
             <Button onClick={handleOpenTeacherAdd} text={'Добавить нового преподавателя'} />
             <Button onClick={handleUpdateStudentsList} text={'Обновить данные о студентах'} />
             <Button onClick={handleAssignCurator} text={'Назначить куратора'} />
             <Button onClick={handleAssignVisitValue} text={'Назначить стоимость посещения'} />
+            <Button onClick={handleAddCompetition} text={'Добавить соревнование'} />
         </WrapperBlock>
     )
 }

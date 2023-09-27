@@ -7,6 +7,11 @@ export const getAddPEStudentAdditionalPoints = (model: AddStudentAdditionalPoint
           input: ${jsonStringifyGraphql(model, ['workType'])}
         ) {
           success
+          errors {
+            ... on Error {
+              message
+            }
+          }
         }
       }`
 }

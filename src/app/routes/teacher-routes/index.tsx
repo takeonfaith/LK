@@ -346,11 +346,11 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         title: 'Физическая культура',
         icon: <FiFileText />,
         color: 'pink',
+        show: false,
         path: PHYSICAL_EDUCATION_STUDENT,
         Component: PhysicalEducationStudent,
         isTemplate: false,
         fallbackPrevPage: PHYSICAL_EDUCATION,
-        show: false,
     },
     oop: {
         id: 'oop',

@@ -12,8 +12,9 @@ import { useUnit } from 'effector-react'
 import React, { useEffect, useState } from 'react'
 import { useModal } from 'widgets'
 import { pEStudentFilterModel, pEStudentIsExamModel, pEStudentSearchModel } from '../model'
-import { examPeStudentColumns, peStudentColumns } from './constants'
 import { TableWrapper, Wrapper } from './styled'
+import { peStudentColumns, examPeStudentColumns } from './constants'
+import { pageLoaded } from './model'
 
 export const StudentsList = () => {
     const { open } = useModal()
@@ -30,7 +31,7 @@ export const StudentsList = () => {
     const [studentSearchValue, setStudentSearchValue] = useState(search ?? '')
 
     useEffect(() => {
-        pEStudentModel.events.load()
+        pageLoaded()
     }, [])
 
     const handleRequest = async (value: string) => {

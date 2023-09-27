@@ -1,5 +1,5 @@
 import { peStudentAdditionalPointsModel } from '@entities/pe-student-additional-points/model'
-import { AddStudentAdditionalPoints } from '@entities/pe-student-additional-points/types'
+import { AddStudentAdditionalPoints, WorkType } from '@entities/pe-student-additional-points/types'
 import { selectedPEStudentModel } from '@entities/pe-student/model'
 import Select, { SelectPage } from '@features/select'
 import localizeDate from '@shared/lib/dates/localize-date'
@@ -46,7 +46,9 @@ export const AddPEStudentAdditionalPoints = () => {
                 maxValue={50}
             />
 
-            <TextArea setValue={setComment} value={comment} title={'Комментарий'} />
+            {type?.id !== WorkType.Competition && (
+                <TextArea setValue={setComment} value={comment} title={'Комментарий'} />
+            )}
 
             <Button text="Добавить" onClick={handleClick} />
         </Wrapper>

@@ -11,7 +11,7 @@ const searchFx = createEffect(async (search: string) => {
     } = await userApiRequest<{ employees: { items: { guid: string; fullName: string }[] } }>(`
     query teachers {
         employees(
-          take: 100
+          take: 30
           order: { fullName: ASC }
           where: { fullName: { contains: "${search}" } }
         ) {

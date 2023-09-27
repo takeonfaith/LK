@@ -5,6 +5,11 @@ export const getAssignCuratorToGroup = (model: Omit<AssignCurator, 'newVisitValu
     return `mutation assignCuratorToGroup{
       assignCuratorToGroup(input: ${jsonStringifyGraphql(model)}) {
         success
+        errors {
+          ... on Error {
+            message
+          }
+        }
       }
     }`
 }
