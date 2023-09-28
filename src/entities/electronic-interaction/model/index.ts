@@ -9,16 +9,18 @@ const changeDone = createEvent<boolean>()
 const changeCompleted = createEvent<boolean>()
 
 const postElectronicInteractionFx = createEffect(async () => {
-    return await pepApi.set()
+    const response = await pepApi.set()
+
+    const preparedData = response[0]
+
+    if (preparedData?.result !== 'ok') throw new Error()
+
+    return response
 })
 
 sample({
     clock: postElectronicInteractionFx.doneData,
-    fn: (response) => {
-        const preparedData = response[0]
-        if (preparedData?.result !== 'ok') return { message: 'Не удалось подписать', type: 'failure' as MessageType }
-
-        changeDone(true)
+    fn: () => {
         return {
             message: `Форма отправлена успешно`,
             type: 'success' as MessageType,
