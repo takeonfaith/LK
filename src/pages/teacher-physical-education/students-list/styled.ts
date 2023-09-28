@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
     display: grid;
-    padding: 12px;
+    width: 100%;
 `
 
 export const TableWrapper = styled.div`

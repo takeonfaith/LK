@@ -18,7 +18,7 @@ const GoBackButton = ({ visible = true, text = 'Назад', fullWidth = true }:
             text={text}
             onClick={() => history.goBack()}
             icon={<HiOutlineChevronLeft />}
-            textColor="var(--reallyBlue)"
+            textColor="var(--blue)"
             background="transparent"
             width={fullWidth ? '100%' : undefined}
             padding="0"

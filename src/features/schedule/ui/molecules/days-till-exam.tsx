@@ -1,6 +1,6 @@
 import { Colors } from '@shared/constants'
 import displayTopInfoSession from '@features/schedule/lib/display-top-info-session'
-import calcTimeLeft from '@utils/calc-time-left'
+import calcTimeLeft from '@shared/lib/dates/calc-time-left'
 import React from 'react'
 import styled from 'styled-components'
 

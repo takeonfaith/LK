@@ -10,7 +10,7 @@ const DivisionItemStyled = styled.div`
     width: 100%;
     color: var(--text);
     padding: 0px 16px;
-    background: var(--theme-mild-xxl);
+    background: var(--theme-1t);
     border-radius: var(--brLight);
     cursor: pointer;
 

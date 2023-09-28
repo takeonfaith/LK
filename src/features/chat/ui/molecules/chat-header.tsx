@@ -19,7 +19,7 @@ const ChatHeaderWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     padding: 0 10px;
-    background: var(--schedule);
+    background: var(--block);
     box-shadow: 5px 0 5px #00000036;
     position: relative;
 `
@@ -45,7 +45,7 @@ const ChatHeader = ({ avatar, name, loading }: Props) => {
 
     return (
         <ChatHeaderWrapper ref={menuRef}>
-            <Button icon={<FiX />} onClick={handleClick} background="var(--schedule)" />
+            <Button icon={<FiX />} onClick={handleClick} background="var(--block)" />
             {!searchMode ? (
                 <User type="staff" avatar={avatar} name={name} loading={loading} />
             ) : (
@@ -90,7 +90,7 @@ const ChatHeader = ({ avatar, name, loading }: Props) => {
                         ),
                     })
                 }
-                background="var(--schedule)"
+                background="var(--block)"
             />
         </ChatHeaderWrapper>
     )

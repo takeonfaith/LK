@@ -1,6 +1,6 @@
 import { hrApplicationsConstants, hrOrderConstants } from '@entities/applications/consts'
 import downloadFile from '@pages/hr-applications/lib/get-file-dismissal'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import { Button } from '@shared/ui/button'
 
 import { Message } from '@ui/message'

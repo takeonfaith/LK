@@ -5,6 +5,7 @@ import { createEffect, createEvent, createStore, forward, sample } from 'effecto
 import { useStore } from 'effector-react'
 import createNotification from '../lib/create-notification'
 import { TNotification } from '../types'
+import { filterNotificationsViaSettings } from '../lib/filter-notifications-via-settings'
 
 type TStore = {
     notifications: TNotification[]
@@ -34,18 +35,9 @@ const fetchNotifications = createEffect(async ({ settings }: { settings: Notific
     try {
         const { data } = await lkNotificationApi.get()
 
-        const typeSettingsDictionary: Record<string, keyof NotificationsSettingsType> = {
-            message: 'messages',
-            'doc-for-review': 'doclist',
-            'version-update': 'newVersion',
-            'digital-services': 'applications',
-            alert: 'news',
-            schedule: 'schedule',
-        }
-
-        return data
-            .filter(({ type }) => settings[typeSettingsDictionary[type]])
-            .map(({ id, type, title, text }) => createNotification(type, id, title, text))
+        return filterNotificationsViaSettings(settings, data).map(({ id, type, title, text }) =>
+            createNotification(type, id, title, text),
+        )
     } catch (error) {
         throw new Error(`Не удалось загрузить уведомления. Ошибка: ${error}`)
     }

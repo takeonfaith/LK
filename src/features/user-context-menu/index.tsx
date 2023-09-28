@@ -1,16 +1,17 @@
-import { SETTINGS_ROUTE } from '@app/routes/general-routes'
+import { PROFILE_ROUTE, SETTINGS_ROUTE } from '@app/routes/general-routes'
 import { confirmModel } from '@entities/confirm'
 import { contextMenuModel } from '@entities/context-menu'
 import { lkNotificationModel } from '@entities/lk-notifications'
 import { userModel } from '@entities/user'
-import { NotificationsModal } from '@features/user-info/notification-bell'
 import ThemeToggle from '@features/theme-toggle'
+import { NotificationsModal } from '@features/user-info/notification-bell'
 import { OLD_LK_URL } from '@shared/constants'
 import { Divider } from '@shared/ui/atoms'
 import { Button } from '@shared/ui/button'
 import NewVersionMessage from '@shared/ui/new-version-message'
 import Notification from '@ui/notification'
 import React from 'react'
+import { BiUserCircle } from 'react-icons/bi'
 import { FiArrowLeftCircle, FiBell, FiLogOut, FiSettings } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -50,14 +51,26 @@ const UserContextMenu = () => {
             <Divider />
             <ThemeToggle type="h-button" />
             <Divider />
+            <Link to={PROFILE_ROUTE}>
+                <Button
+                    text="Профиль"
+                    background="var(--block)"
+                    icon={<BiUserCircle />}
+                    width="100%"
+                    align="left"
+                    onClick={handleClose}
+                    padding="10px"
+                />
+            </Link>
             <NotificationButtonWrapper>
                 <Button
                     onClick={handleOpenNotificationModal}
                     icon={<FiBell />}
                     text="Уведомления"
                     width="100%"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     align="left"
+                    padding="10px"
                 />
                 <Notification visible={notifications.length > 0} top="50%" right="0px" pulsing shadow>
                     {notifications.length}
@@ -66,11 +79,12 @@ const UserContextMenu = () => {
             <Link to={SETTINGS_ROUTE}>
                 <Button
                     text="Настройки"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     icon={<FiSettings />}
                     width="100%"
                     align="left"
                     onClick={handleClose}
+                    padding="10px"
                 />
             </Link>
             <a href={`${OLD_LK_URL}/index.php`}>
@@ -78,8 +92,9 @@ const UserContextMenu = () => {
                     text="Старый дизайн"
                     icon={<FiArrowLeftCircle />}
                     width="100%"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     align="left"
+                    padding="10px"
                 />
             </a>
             <Divider />
@@ -89,7 +104,8 @@ const UserContextMenu = () => {
                 onClick={logout}
                 text="Выйти"
                 width="100%"
-                background="var(--schedule)"
+                background="var(--block)"
+                padding="10px"
             />
             <Divider />
             <Button
@@ -98,7 +114,8 @@ const UserContextMenu = () => {
                 onClick={handleWhatsNew}
                 text="Что нового"
                 width="100%"
-                background="var(--schedule)"
+                background="var(--block)"
+                padding="10px"
             />
         </>
     )

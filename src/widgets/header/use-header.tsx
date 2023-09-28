@@ -3,19 +3,22 @@ import { menuModel } from '@entities/menu'
 import useHistoryStack from '@shared/lib/hooks/use-history-stack'
 import { Button } from '@shared/ui/button'
 import GoBackButton from '@shared/ui/go-back-button'
+import { getPageWidth } from '@shared/ui/page-block/lib/get-page-width'
 import React from 'react'
 import { HiOutlineChevronLeft } from 'react-icons/hi'
 import { useHistory } from 'react-router'
 
 type Props = {
-    currentPage: IRoute
-    exactCurrentPage: IRoute | null
-    isHeaderVisible: boolean
+    headerVisible: boolean
+    currentPage: IRoute | null
 }
 
-const useHeader = ({ currentPage, exactCurrentPage, isHeaderVisible }: Props) => {
+const useHeader = ({ headerVisible, currentPage }: Props) => {
     const history = useHistory()
     const historyStack = useHistoryStack()
+
+    const isHeaderVisible = headerVisible || !!currentPage?.planeHeader
+    const maxWidth = getPageWidth(currentPage)
 
     const onClickBackButton = (route = ALL_ROUTE) => {
         return () => {
@@ -29,24 +32,24 @@ const useHeader = ({ currentPage, exactCurrentPage, isHeaderVisible }: Props) =>
 
     const headerTitle = React.useMemo(
         () =>
-            exactCurrentPage
-                ? exactCurrentPage.isSubPage
-                    ? exactCurrentPage.subPageHeaderTitle
-                    : exactCurrentPage.title
-                : currentPage?.title,
-        [currentPage, exactCurrentPage],
+            currentPage
+                ? currentPage.isSubPage
+                    ? currentPage.subPageHeaderTitle || currentPage.title
+                    : currentPage.title
+                : 'Не известная страница',
+        [currentPage],
     )
 
     const backButton = React.useMemo(
         () =>
-            exactCurrentPage?.withoutBackButton ? null : exactCurrentPage?.isSubPage ? (
+            currentPage?.withoutBackButton ? null : currentPage?.isSubPage ? (
                 historyStack.length > 1 ? (
-                    <GoBackButton text={exactCurrentPage?.backButtonText} fullWidth={false} />
-                ) : exactCurrentPage.fallbackPrevPage ? (
+                    <GoBackButton text={currentPage?.backButtonText} fullWidth={false} />
+                ) : currentPage.fallbackPrevPage ? (
                     <Button
                         direction="vertical"
                         icon={<HiOutlineChevronLeft />}
-                        onClick={onClickBackButton(exactCurrentPage.fallbackPrevPage)}
+                        onClick={onClickBackButton(currentPage.fallbackPrevPage)}
                         background="transparent"
                     />
                 ) : (
@@ -64,13 +67,13 @@ const useHeader = ({ currentPage, exactCurrentPage, isHeaderVisible }: Props) =>
                     background="transparent"
                     text={isHeaderVisible ? undefined : 'Все разделы'}
                     padding="0"
-                    textColor="var(--reallyBlue)"
+                    textColor="var(--blue)"
                 />
             ),
-        [exactCurrentPage, historyStack, onClickBackButton],
+        [currentPage, historyStack, onClickBackButton],
     )
 
-    return { backButton, headerTitle }
+    return { backButton, headerTitle, maxWidth, currentPage, isHeaderVisible }
 }
 
 export default useHeader

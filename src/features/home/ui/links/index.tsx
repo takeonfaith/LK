@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import LinkItem from './link-item'
 import { Divider } from '@shared/ui/divider'
+import { menuModel } from '@entities/menu'
 
 const LinksStyled = styled.div`
     width: 100%;
@@ -10,7 +11,7 @@ const LinksStyled = styled.div`
     align-items: center;
     max-width: 750px;
     border-radius: var(--brLight);
-    background: var(--schedule);
+    background: var(--block);
     box-shadow: var(--very-mild-shadow);
     overflow-y: hidden;
     height: 90px;
@@ -27,6 +28,10 @@ type Props = {
 const Links = ({ links }: Props) => {
     const linksKeysArray = Object.keys(links)
     const amount = linksKeysArray.length < 8 ? 8 : Object.keys(links).length
+    const { allRoutes } = menuModel.selectors.useMenu()
+
+    if (!allRoutes) return null
+
     return (
         <LinksStyled>
             {linksKeysArray.map((key, index) => {
@@ -39,6 +44,8 @@ const Links = ({ links }: Props) => {
                     </React.Fragment>
                 )
             })}
+            <Divider direction="vertical" margin="10px 0" width="70%" />
+            <LinkItem item={allRoutes['all']} amount={amount} />
         </LinksStyled>
     )
 }

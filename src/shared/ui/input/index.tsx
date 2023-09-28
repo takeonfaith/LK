@@ -41,7 +41,7 @@ const InputWrapper = styled.div<{
         border: none;
         color: var(--text);
         outline: none;
-        background: ${({ inputAppearance }) => (inputAppearance ? 'var(--search)' : 'transparent')};
+        background: ${({ inputAppearance }) => (inputAppearance ? 'var(--theme-1)' : 'transparent')};
         height: 100%;
         width: 100%;
         padding: 10px;

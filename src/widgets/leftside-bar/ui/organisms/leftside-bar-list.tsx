@@ -1,24 +1,16 @@
 import { IRoute } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
+import Flex from '@shared/ui/flex'
 import { SkeletonShape } from '@ui/skeleton-shape'
-import React, { useMemo } from 'react'
+import React from 'react'
+import { useLocation } from 'react-router'
 import LeftsideBarListWrapper from '../atoms/leftside-bar-list-wrapper'
 import LeftsideBarItem from '../molecules/leftside-bar-item'
-import Flex from '@shared/ui/flex'
 
 const LeftsideBarList = () => {
-    const { leftsideBarRoutes, currentPage } = menuModel.selectors.useMenu()
+    const { leftsideBarRoutes } = menuModel.selectors.useMenu()
 
-    const currentPageId = useMemo(() => {
-        const paths = window.location.hash.split('/')
-
-        // to keep current page indicator while on subpage
-        if (paths.length > 2 && paths[1]) {
-            return paths[1]
-        }
-
-        return currentPage?.id
-    }, [currentPage])
+    const location = useLocation()
 
     if (!leftsideBarRoutes)
         return (
@@ -95,7 +87,13 @@ const LeftsideBarList = () => {
             {Object.values(leftsideBarRoutes)
                 .filter((el) => el !== undefined)
                 .map((props: IRoute) => {
-                    return <LeftsideBarItem {...props} key={props?.id} isCurrent={currentPageId === props?.id} />
+                    return (
+                        <LeftsideBarItem
+                            {...props}
+                            key={props?.id}
+                            isCurrent={location.pathname.includes(props.path)}
+                        />
+                    )
                 })}
         </LeftsideBarListWrapper>
     )

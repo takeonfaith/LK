@@ -56,10 +56,6 @@ const WrapperBlock = styled.div.withConfig({
     @media (max-width: 550px) {
         padding: 10px;
     }
-
-    @media (max-width: 1000px) {
-        margin-top: 25px;
-    }
 `
 
 interface Props {

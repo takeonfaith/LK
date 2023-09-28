@@ -1,6 +1,7 @@
 import { OLD_LK_URL } from '@shared/constants'
-import { Error, LinkButton } from '@ui/atoms'
+import { Button, Error } from '@ui/atoms'
 import React, { useEffect } from 'react'
+import { FiArrowLeftCircle } from 'react-icons/fi'
 
 interface Props {
     oldVersionUrl?: string
@@ -23,15 +24,17 @@ const PageIsNotReady = ({
     return (
         <Error text={errorText}>
             {isRedirectButtonVisible && (
-                <LinkButton
-                    text={buttonText}
-                    onClick={() => {
-                        localStorage.setItem('useOldVersion', 'true')
-                    }}
-                    background="var(--purple)"
-                    width="300px"
-                    href={`${OLD_LK_URL}/?p=${oldVersionUrl?.slice(1, oldVersionUrl.length)}`}
-                />
+                <a href={`${OLD_LK_URL}/?p=${oldVersionUrl?.slice(1, oldVersionUrl.length)}`}>
+                    <Button
+                        text={buttonText}
+                        icon={<FiArrowLeftCircle />}
+                        width="100%"
+                        background="var(--reallyBlue)"
+                        textColor="#fff"
+                        align="left"
+                        padding="10px"
+                    />
+                </a>
             )}
         </Error>
     )

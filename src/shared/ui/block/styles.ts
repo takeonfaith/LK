@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from '@shared/constants'
 import { Direction } from '@ui/types'
 import styled from 'styled-components'
 
@@ -22,7 +23,7 @@ const BlockWrapper = styled.div<StyledProps>`
     display: flex;
     align-items: ${({ alignItems }) => alignItems ?? 'center'};
     justify-content: ${({ justifyContent }) => justifyContent ?? 'space-between'};
-    background: ${({ background }) => background ?? 'var(--schedule)'};
+    background: ${({ background }) => background ?? 'var(--block)'};
     line-height: ${({ lineHeight }) => lineHeight};
     border-radius: var(--brLight);
     flex-direction: ${({ orientation }) => (orientation === 'vertical' ? 'column' : 'row')};
@@ -45,16 +46,7 @@ const BlockWrapper = styled.div<StyledProps>`
         padding-right: 5px;
     }
 
-    @media (max-width: 1400px) {
-        max-width: ${({ maxWidth }) => maxWidth ?? '800px'};
-        /* width: 100%; */
-    }
-
-    @media (max-width: 1225px) {
-        max-width: ${({ maxWidth }) => maxWidth ?? '600px'};
-    }
-
-    @media (max-width: 550px) {
+    ${MEDIA_QUERIES.isMobile} {
         /* height: auto; */
         /* max-height: 100%; */
         flex-direction: column;

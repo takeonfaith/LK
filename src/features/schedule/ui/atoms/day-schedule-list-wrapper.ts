@@ -4,7 +4,7 @@ const DayScheduleListWrapper = styled.div<{ isFull: boolean; height: number; isT
     border-radius: 15px;
     overflow: hidden;
     padding: 6px;
-    background: var(--scheduleBg);
+    background: var(--theme-2);
     display: flex;
     flex-direction: column;
     row-gap: 6px;

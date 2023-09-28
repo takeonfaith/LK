@@ -1,7 +1,6 @@
 import { paymentApi } from '@api'
 import { Payments } from '@api/model'
-import { combine, createEvent, sample } from 'effector'
-import { createEffect, createStore } from 'effector'
+import { createEffect, createStore, combine, createEvent, forward, sample } from 'effector'
 import changeCanSign from '../lib/change-can-sign'
 import { agreementSubmit } from '@shared/api/payment-api'
 import { MessageType } from '@shared/ui/types'
@@ -58,6 +57,7 @@ sample({
 sample({ clock: signAgreement, target: signAgreementFx })
 
 const clearStore = createEvent()
+const getPayments = createEvent()
 
 const $loading = combine(signAgreementFx.pending, getPaymentsFx.pending, Boolean)
 const $completed = createStore<boolean>(false).on(setCompleted, (_, completed) => completed)
@@ -79,6 +79,11 @@ export const stores = {
     $paymentsStore,
 }
 
+forward({
+    from: getPayments,
+    to: getPaymentsFx,
+})
+
 export const effects = {
     getPaymentsFx,
     signContractFx,
@@ -88,4 +93,5 @@ export const events = {
     signAgreement,
     setCompleted,
     clearStore,
+    getPayments,
 }

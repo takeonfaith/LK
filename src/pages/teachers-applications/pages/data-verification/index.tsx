@@ -3,7 +3,7 @@ import { FormBlock, Message, SubmitButton, Title, Wrapper } from '@ui/atoms'
 import Checkbox from '@ui/atoms/checkbox'
 import InputArea from '@ui/input-area'
 import { IInputArea } from '@ui/input-area/model'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import React, { useEffect, useState } from 'react'
 import { FiCheckCircle } from 'react-icons/fi'
 import styled from 'styled-components'
@@ -35,8 +35,8 @@ const DataVerificationPageWrapper = styled.div`
         max-width: 600px;
         padding: 20px;
         border-radius: var(--brLight);
-        background: var(--form);
-        box-shadow: var(--schedule-shadow);
+        background: var(--block-content);
+        box-shadow: var(--block-shadow);
         display: flex;
         flex-direction: column;
         row-gap: 20px;

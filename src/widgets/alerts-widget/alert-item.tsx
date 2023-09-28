@@ -1,7 +1,7 @@
 import AlertModal from '@pages/alerts/ui/alert-modal'
 import { Alert } from '@shared/api/model/alert'
 import getShortString from '@shared/lib/get-short-string'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Subtext from '@shared/ui/subtext'
 import { Direction } from '@shared/ui/types'

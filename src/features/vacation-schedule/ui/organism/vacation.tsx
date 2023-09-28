@@ -6,7 +6,7 @@ import Table from '@ui/table'
 import { IndexedProperties } from '@utility-types/indexed-properties'
 import getCorrectWordForm, { Rules } from '@utils/get-correct-word-form'
 import React from 'react'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 
 const RULES: Rules = {
     fiveToNine: 'дней',

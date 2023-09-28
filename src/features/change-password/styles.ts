@@ -25,7 +25,7 @@ export const FormStyled = styled.div`
 
 export const LeftSide = styled.div`
     height: 100%;
-    background: var(--theme-mild-xxl);
+    background: var(--theme-1t);
     border-radius: var(--brLight);
     padding: 16px;
     display: flex;

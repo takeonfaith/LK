@@ -1,12 +1,15 @@
+import SearchWithHints from '@features/search-with-hints'
 import Select, { SelectPage } from '@features/select'
 import { pEStudentFilterModel, pEStudentIsExamModel } from '@pages/teacher-physical-education/model'
-import Input from '@shared/ui/input'
-import { useUnit } from 'effector-react'
-import { Wrapper } from './styled'
-import React from 'react'
+import { studentApi } from '@shared/api'
 import ToggleItem from '@shared/ui/toggle-item'
+import { useUnit } from 'effector-react'
+import React, { useState } from 'react'
+import { Wrapper } from './styled'
+import Masks from '@shared/lib/masks'
+import { FiUsers } from 'react-icons/fi'
 
-enum FiltersSelect {
+export enum FiltersSelect {
     Group = 'group.groupName',
     Course = 'course',
 }
@@ -21,18 +24,24 @@ const courses = [
 
 export const PEStudentsFilter = () => {
     const [filters, isExam] = useUnit([pEStudentFilterModel.stores.$filters, pEStudentIsExamModel.stores.$isExam])
+    const [groupSearch, setGroupSearch] = useState<string>((filters[FiltersSelect.Group] as string) ?? '')
     return (
         <Wrapper>
-            <Input
-                title="Номер группы"
-                value={filters[FiltersSelect.Group] as string}
-                setValue={(value) => {
-                    pEStudentFilterModel.events.addFilter({ name: FiltersSelect.Group, value })
-                }}
+            <SearchWithHints
+                leftIcon={<FiUsers />}
+                placeholder={'Номер группы'}
+                value={groupSearch}
+                setValue={setGroupSearch}
+                customMask={Masks.groupMask}
+                onValueEmpty={() => pEStudentFilterModel.events.addFilter({ name: FiltersSelect.Group, value: '' })}
+                onHintClick={(hint) =>
+                    pEStudentFilterModel.events.addFilter({ name: FiltersSelect.Group, value: hint?.id ?? '' })
+                }
+                request={studentApi.getGroups}
             />
             <Select
-                title="Курс"
                 items={courses}
+                placeholder="Курс"
                 selected={courses.find((c) => c.id === filters[FiltersSelect.Course]) ?? null}
                 setSelected={
                     ((value: SelectPage | null) => {

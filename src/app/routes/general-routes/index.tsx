@@ -3,17 +3,7 @@ import React, { LazyExoticComponent } from 'react'
 
 import LoginPage from '@pages/login'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import {
-    BiBookReader,
-    BiGroup,
-    BiHeadphone,
-    BiIdCard,
-    BiMessageRounded,
-    BiNews,
-    BiPalette,
-    BiTimeFive,
-    BiUserCircle,
-} from 'react-icons/bi'
+import { BiBookReader, BiGroup, BiHeadphone, BiMessageRounded, BiNews, BiPalette, BiUserCircle } from 'react-icons/bi'
 
 import { HelpfulInformation } from '@app/routes/teacher-routes/pages'
 import {
@@ -37,19 +27,34 @@ import {
     MemoFreshmenPage,
     MemoTeacherPage,
     ProfilePage,
+    ScheduleCurrent,
     // ChatPage,
     SchedulePage,
+    ScheduleRetake,
+    ScheduleSemestr,
+    ScheduleSession,
     Security,
     SettingsPage,
-    TeachersSchedule,
 } from './pages'
 
 import LkNotificationsPage from '@pages/lk-notifications'
+import { ExtSize } from '@shared/ui/types'
+import { AiOutlineReload } from 'react-icons/ai'
 import { BsFileMedical } from 'react-icons/bs'
-import { FiBell, FiClipboard, FiFileText, FiHome, FiLock, FiMenu, FiSettings, FiUser, FiXCircle } from 'react-icons/fi'
-import { HiOutlineClipboardCheck, HiOutlineViewGrid } from 'react-icons/hi'
+import {
+    FiBell,
+    FiClipboard,
+    FiClock,
+    FiFileText,
+    FiHome,
+    FiLock,
+    FiMenu,
+    FiSettings,
+    FiUser,
+    FiXCircle,
+} from 'react-icons/fi'
+import { HiOutlineCalendar, HiOutlineClipboardCheck, HiOutlineFlag, HiOutlineViewGrid } from 'react-icons/hi'
 import { DOCLIST_ROUTE } from '../teacher-routes'
-import { Size } from '@shared/ui/types'
 
 export const LOGIN_ROUTE = '/login'
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password'
@@ -59,10 +64,12 @@ export const ALL_ROUTE = '/all'
 export const HOME_ROUTE = '/home'
 export const PROFILE_ROUTE = '/profile'
 export const CHAT_ROUTE = '/chat'
+export const OLD_CHAT_ROUTE = '/messages'
 export const TEMPLATE_CHAT_ROUTE = CHAT_ROUTE + '/:chatId'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const PAYMENTS_ROUTE = '/payments'
 export const SCHEDULE_ROUTE = '/schedule'
+
 export const ALL_STUDENTS_ROUTE = '/all-students'
 export const FILTERED_ALL_STUDENTS_ROUTE = '/all-students/:filter'
 export const FILTERED_ALL_TEACHERS_ROUTE = '/all-teachers/:filter'
@@ -91,7 +98,11 @@ export const MILITARY_REGISTRATION_ROUTE = '/military-registration'
 export const USEFUL_INFO_ROUTE = '/helpful-information'
 
 // hidden
-export const FILTER_SCHEDULE = SCHEDULE_ROUTE + '/:filter'
+export const SCHEDULE_FILTER_ROUTE = SCHEDULE_ROUTE + '/:page/:filter'
+export const SCHEDULE_CURRENT_ROUTE = SCHEDULE_ROUTE + '/current'
+export const SCHEDULE_SEMESTR_ROUTE = SCHEDULE_ROUTE + '/semestr'
+export const SCHEDULE_SESSION_ROUTE = SCHEDULE_ROUTE + '/session'
+export const SCHEDULE_RETAKE_ROUTE = SCHEDULE_ROUTE + '/retake'
 export const TEMPLATE_USEFUL_INFO_ROUTE = USEFUL_INFO_ROUTE + '/:infoType'
 
 export interface IRoutes {
@@ -127,7 +138,7 @@ export interface IRoute {
     subPageHeaderTitle?: string
     fallbackPrevPage?: string
     planeHeader?: boolean
-    pageSize?: Size
+    pageSize?: ExtSize
 }
 
 export const publicRoutes = [
@@ -194,7 +205,7 @@ export const generalRoutes: IRoutes = {
         show: false,
         group: 'GENERAL',
         withoutBackButton: true,
-        pageSize: 'large',
+        pageSize: 'big',
     },
     settings: {
         id: 'settings',
@@ -282,7 +293,7 @@ export const generalRoutes: IRoutes = {
         title: 'Сообщения',
         icon: <BiMessageRounded />,
         path: CHAT_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
+        Component: () => PageIsNotReady({ oldVersionUrl: OLD_CHAT_ROUTE }),
         color: 'red',
         isTemplate: true,
         group: 'OTHER',
@@ -292,14 +303,14 @@ export const generalRoutes: IRoutes = {
     schedule: {
         id: 'schedule',
         title: 'Расписание',
-        icon: <BiTimeFive />,
+        icon: <FiClock />,
         path: SCHEDULE_ROUTE,
         Component: SchedulePage,
         color: 'pink',
-        isTemplate: false,
+        isTemplate: true,
+        show: true,
         group: 'LEARNING_ACTIVITIES',
-        keywords: ['экзамены', 'зачеты', 'сессия', 'пересдача'],
-        planeHeader: true,
+        pageSize: 'large',
     },
     'all-students': {
         id: 'all-students',
@@ -366,19 +377,86 @@ export const generalRoutes: IRoutes = {
     },
 }
 
-export const generalHiddenRoutes: IRoutes = {
-    'teachers-schedule': {
-        id: 'teachers-schedule',
-        title: 'Расписание преподавателя',
-        icon: <BiIdCard />,
-        path: FILTER_SCHEDULE,
-        Component: TeachersSchedule,
-        color: 'blue',
+export const scheduleRoutes: IRoutes = {
+    'schedule-current': {
+        id: 'schedule-current',
+        title: 'Текущее расписание',
+        shortTitle: 'Текущее',
+        icon: <FiClock />,
+        path: SCHEDULE_CURRENT_ROUTE,
+        Component: ScheduleCurrent,
+        color: 'pink',
         isTemplate: false,
         show: false,
         group: 'OTHER',
-        planeHeader: true,
+        pageSize: 'large',
     },
+    'schedule-semestr': {
+        id: 'schedule-semestr',
+        title: 'Расписание на семестр',
+        shortTitle: 'Семестр',
+        icon: <HiOutlineCalendar />,
+        path: SCHEDULE_SEMESTR_ROUTE,
+        Component: ScheduleSemestr,
+        color: 'orange',
+        isTemplate: false,
+        show: true,
+        group: 'OTHER',
+        pageSize: 'large',
+    },
+    'schedule-session': {
+        id: 'schedule-session',
+        title: 'Расписание сессии',
+        shortTitle: 'Сессия',
+        icon: <HiOutlineFlag />,
+        path: SCHEDULE_SESSION_ROUTE,
+        Component: ScheduleSession,
+        color: 'red',
+        isTemplate: false,
+        show: true,
+        group: 'OTHER',
+        pageSize: 'large',
+    },
+    'schedule-retake': {
+        id: 'schedule-retake',
+        title: 'Пересдачи',
+        icon: <AiOutlineReload />,
+        path: SCHEDULE_RETAKE_ROUTE,
+        Component: ScheduleRetake,
+        color: 'red',
+        isTemplate: false,
+        show: true,
+        group: 'OTHER',
+        pageSize: 'large',
+    },
+}
+
+export const generalHiddenRoutes: IRoutes = {
+    // 'teachers-schedule': {
+    //     id: 'teachers-schedule',
+    //     title: 'Расписание преподавателя',
+    //     icon: <BiIdCard />,
+    //     path: FILTER_SCHEDULE,
+    //     Component: TeachersSchedule,
+    //     color: 'blue',
+    //     isTemplate: false,
+    //     show: false,
+    //     group: 'OTHER',
+    //     pageSize: 'large',
+    // },
+    'schedule-filter': {
+        id: 'schedule-filter',
+        title: 'Расписание',
+        icon: <FiClock />,
+        path: SCHEDULE_FILTER_ROUTE,
+        Component: SchedulePage,
+        color: 'pink',
+        isTemplate: false,
+        show: false,
+        group: 'OTHER',
+        pageSize: 'large',
+    },
+    ...scheduleRoutes,
     'filtered-all-students': {
         id: 'filtered-all-students',
         title: 'Все студенты',

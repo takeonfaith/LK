@@ -40,7 +40,7 @@ const WrapperBlock = styled.div`
     flex-wrap: wrap;
     padding: 12px;
     gap: 12px;
-    background-color: var(--schedule);
+    background-color: var(--block);
     height: 100%;
     border-radius: 10px;
 `

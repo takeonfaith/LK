@@ -4,7 +4,7 @@ import Debt from '@features/payments/debt'
 import { PaymentsContract } from '@shared/api/model'
 import { Colors } from '@shared/constants'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import { AnimatedCheck } from '@shared/ui/animated-check'
 import { Button, LinkButton } from '@shared/ui/atoms'
 import Flex from '@shared/ui/flex'
@@ -24,9 +24,9 @@ const DebtAndQrWrapper = styled.div`
 const DebtAndQrStyled = styled.div`
     width: 100%;
     padding: 16px;
-    background: var(--form);
+    background: var(--block-content);
     border-radius: 6px;
-    box-shadow: var(--schedule-shadow);
+    box-shadow: var(--block-shadow);
 `
 
 const DebtAndQrContentStyled = styled.div`

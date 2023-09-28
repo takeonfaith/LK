@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const SettingsSection = styled.section`
     width: 100%;
-    background: var(--schedule);
+    background: var(--block);
     border-radius: var(--brLight);
     padding: 0px;
     overflow: hidden;

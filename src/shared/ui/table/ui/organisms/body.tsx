@@ -15,7 +15,7 @@ const BodyWrapper = styled.div`
 
     .page-indicator {
         width: 100px;
-        background: var(--mild-theme);
+        background: var(--theme-1);
         padding: 3px;
         border-radius: var(--brLight);
         display: flex;

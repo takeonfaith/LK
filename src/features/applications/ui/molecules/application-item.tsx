@@ -12,7 +12,7 @@ const ApplicationItemWrapper = styled.div<{ even: boolean }>`
     font-size: 0.9em;
     height: 50px;
     color: var(--text);
-    background: ${({ even }) => (even ? 'var(--scheduleBg)' : 'var(--schedule)')};
+    background: ${({ even }) => (even ? 'var(--theme-2)' : 'var(--block)')};
     cursor: pointer;
     overflow: hidden;
     padding: 0px 10px;

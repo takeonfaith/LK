@@ -1,4 +1,4 @@
-import calcTimeLeft from '@utils/calc-time-left'
+import calcTimeLeft from '@shared/lib/dates/calc-time-left'
 import getCorrectWordForm from '@utils/get-correct-word-form'
 
 const displayTopInfoSession = (day: string) => {

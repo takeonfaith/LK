@@ -1,12 +1,12 @@
 import { settingsModel } from '@entities/settings'
 import { useCallback, useLayoutEffect, useState } from 'react'
+
+type Theme = 'light' | 'dark'
 const useTheme = () => {
     const { settings } = settingsModel.selectors.useSettings()
     const appearanceSettings = settings?.['settings-appearance']
 
-    const [theme, setTheme] = useState<string>(
-        (settings?.['settings-appearance']?.property?.theme as string) ?? 'light',
-    )
+    const [theme, setTheme] = useState<Theme>((settings?.['settings-appearance']?.property?.theme as Theme) ?? 'light')
 
     useLayoutEffect(() => {
         if (settings) {
@@ -18,7 +18,7 @@ const useTheme = () => {
                 ? isTimeInInterval
                     ? 'light'
                     : 'dark'
-                : (appearanceSettings.property['theme'] as string)
+                : (appearanceSettings.property['theme'] as Theme)
             if (!document.documentElement.getAttribute('data-theme')) {
                 setTheme(currentTheme)
                 document.documentElement.setAttribute('data-theme', currentTheme)
