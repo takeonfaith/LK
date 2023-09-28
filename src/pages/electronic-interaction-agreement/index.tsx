@@ -7,14 +7,13 @@ import React from 'react'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
 
 const ElectronicInteractionAgreementPage = () => {
-    const [data, error, loading] = useUnit([
+    const [preparedData, error, loading] = useUnit([
         electronicInteractionModel.stores.$electronicInteractionStore,
         electronicInteractionModel.stores.$error,
         electronicInteractionModel.stores.$loading,
     ])
-    const preparedData = data
 
-    const load = () => electronicInteractionModel.effects.getElectronicInteractionFx()
+    const load = () => electronicInteractionModel.events.getElectronicInteraction()
 
     return (
         <Wrapper load={load} loading={loading} error={error} data={preparedData} loadEveryVisit>

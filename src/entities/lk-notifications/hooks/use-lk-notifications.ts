@@ -26,6 +26,7 @@ const useLkNotifications = () => {
     )
 
     useEffect(() => {
+        electronicInteractionModel.events.getElectronicInteraction()
         if (preparedData && !preparedData.status) {
             lkNotificationModel.events.add(createNotification('electronic-interaction', 'electronic-interaction'))
         }

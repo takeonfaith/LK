@@ -4,6 +4,7 @@ import { createEffect, createEvent, createStore, sample } from 'effector'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { MessageType } from '@shared/ui/types'
 
+const getElectronicInteraction = createEvent()
 const postElectronicInteraction = createEvent()
 const changeDone = createEvent<boolean>()
 const changeCompleted = createEvent<boolean>()
@@ -50,6 +51,7 @@ const getElectronicInteractionFx = createEffect(async (): Promise<ElectronicInte
 })
 
 sample({ clock: postElectronicInteraction, target: postElectronicInteractionFx })
+sample({ clock: getElectronicInteraction, target: getElectronicInteractionFx })
 
 const clearStore = createEvent()
 
@@ -73,11 +75,8 @@ export const stores = {
     $workerLoading,
 }
 
-export const effects = {
-    getElectronicInteractionFx,
-}
-
 export const events = {
+    getElectronicInteraction,
     postElectronicInteraction,
     changeCompleted,
     clearStore,
