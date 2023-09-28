@@ -14,7 +14,6 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import AlertsWidget from 'widgets/alerts-widget'
 import HomeTopPlate from './ui/home-top-plate'
-import { settingsModel } from '@entities/settings'
 import { useUnit } from 'effector-react'
 
 const HomePageStyled = styled.div`
