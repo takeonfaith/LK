@@ -14,18 +14,14 @@ const postElectronicInteractionFx = createEffect(async () => {
     const preparedData = response[0]
 
     if (preparedData?.result !== 'ok') throw new Error()
-
-    return response
 })
 
 sample({
     clock: postElectronicInteractionFx.doneData,
-    fn: () => {
-        return {
-            message: `Форма отправлена успешно`,
-            type: 'success' as MessageType,
-        }
-    },
+    fn: () => ({
+        message: `Форма отправлена успешно`,
+        type: 'success' as MessageType,
+    }),
     target: popUpMessageModel.events.evokePopUpMessage,
 })
 

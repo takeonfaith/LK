@@ -8,7 +8,7 @@ import { MessageType } from '@shared/ui/types'
 import { popUpMessageModel } from '@entities/pop-up-message'
 
 const signAgreement = createEvent<string>()
-const setDone = createEvent<boolean>()
+const changeDone = createEvent<boolean>()
 const setCompleted = createEvent<boolean>()
 
 const getPaymentsFx = createEffect(async (): Promise<Payments> => {
@@ -32,26 +32,26 @@ const signContractFx = createEffect(async (contractId: string) => {
 })
 
 const signAgreementFx = createEffect(async (id: string) => {
-    return await agreementSubmit(id)
+    const response = await agreementSubmit(id)
+
+    if (!response.data.contracts.education && !response.data.contracts.dormitory) throw new Error()
 })
 
 sample({
     clock: signAgreementFx.doneData,
-    fn: (response) => {
-        if (!response.data.contracts.education && !response.data.contracts.dormitory)
-            return { message: 'У вас нет данных по оплате', type: 'failure' as MessageType }
-
-        setDone(true)
-        return { message: 'Успешно подписано', type: 'success' as MessageType }
-    },
+    fn: () => ({ message: 'Успешно подписано', type: 'success' as MessageType }),
     target: popUpMessageModel.events.evokePopUpMessage,
 })
 
 sample({
+    clock: signAgreementFx.doneData,
+    fn: () => true,
+    target: changeDone,
+})
+
+sample({
     clock: signAgreementFx.failData,
-    fn: () => {
-        return { message: 'Не удалось загрузить оплату', type: 'failure' as MessageType }
-    },
+    fn: () => ({ message: 'У вас нет данных по оплате', type: 'failure' as MessageType }),
     target: popUpMessageModel.events.evokePopUpMessage,
 })
 
@@ -60,14 +60,14 @@ sample({ clock: signAgreement, target: signAgreementFx })
 const clearStore = createEvent()
 
 const $loading = combine(signAgreementFx.pending, getPaymentsFx.pending, Boolean)
-const $completed = createStore<boolean>(false).on(setCompleted, (oldData, completed) => completed)
-const $done = createStore<boolean>(false).on(setDone, (oldData, done) => done)
+const $completed = createStore<boolean>(false).on(setCompleted, (_, completed) => completed)
+const $done = createStore<boolean>(false).on(changeDone, (_, done) => done)
 const $error = createStore<string | null>(null)
     .on(getPaymentsFx, () => null)
-    .on(getPaymentsFx.failData, (oldData, newData) => newData.message)
-    .on(signContractFx.failData, (oldData, newData) => newData.message)
+    .on(getPaymentsFx.failData, (_, newData) => newData.message)
+    .on(signContractFx.failData, (_, newData) => newData.message)
 const $paymentsStore = createStore<Payments | null>(null)
-    .on(getPaymentsFx.doneData, (oldData, newData) => newData)
+    .on(getPaymentsFx.doneData, (_, newData) => newData)
     .on(signContractFx.doneData, (oldData, contractId) => changeCanSign(oldData, contractId, false))
     .on(clearStore, () => null)
 
