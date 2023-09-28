@@ -1,40 +1,43 @@
 import { pepApi } from '@api'
 import { ElectronicInteraction } from '@api/model'
-import { useStore } from 'effector-react/compat'
-import { createEffect, createEvent, createStore } from 'effector'
+import { createEffect, createEvent, createStore, sample } from 'effector'
+import { popUpMessageModel } from '@entities/pop-up-message'
+import { MessageType } from '@shared/ui/types'
 
-interface ElectronicInteractionStore {
-    electronicInteraction: ElectronicInteraction | null
-    error: string | null
-    completed: boolean
-}
+const getElectronicInteraction = createEvent()
+const postElectronicInteraction = createEvent()
+const changeDone = createEvent<boolean>()
+const changeCompleted = createEvent<boolean>()
 
-const DEFAULT_STORE = {
-    electronicInteraction: null,
-    error: null,
-    completed: false,
-}
+const postElectronicInteractionFx = createEffect(async () => {
+    const response = await pepApi.set()
 
-const useElectronicInteraction = () => {
-    return {
-        data: useStore($electronicInteractionStore).electronicInteraction,
-        loading: useStore(getElectronicInteractionFx.pending),
-        error: useStore($electronicInteractionStore).error,
-        completed: useStore($electronicInteractionStore).completed,
-    }
-}
+    const preparedData = response[0]
 
-const postElectronicInteraction = createEvent<ElectronicInteraction>()
-const changeCompleted = createEvent<{ completed: boolean }>()
+    if (preparedData?.result !== 'ok') throw new Error()
+})
 
-const postElectronicInteractionFx = createEffect(async (): Promise<void> => {
-    try {
-        const response = await pepApi.set()
+sample({
+    clock: postElectronicInteractionFx.doneData,
+    fn: () => ({
+        message: `Форма отправлена успешно`,
+        type: 'success' as MessageType,
+    }),
+    target: popUpMessageModel.events.evokePopUpMessage,
+})
 
-        return response.data
-    } catch (error) {
-        throw new Error('Не удалось загрузить раздел')
-    }
+sample({
+    clock: postElectronicInteractionFx.doneData,
+    fn: () => true,
+    target: changeDone,
+})
+
+sample({
+    clock: postElectronicInteractionFx.failData,
+    fn: () => {
+        return { message: 'Не удалось подписать', type: 'failure' as MessageType }
+    },
+    target: popUpMessageModel.events.evokePopUpMessage,
 })
 
 const getElectronicInteractionFx = createEffect(async (): Promise<ElectronicInteraction> => {
@@ -47,38 +50,33 @@ const getElectronicInteractionFx = createEffect(async (): Promise<ElectronicInte
     }
 })
 
+sample({ clock: postElectronicInteraction, target: postElectronicInteractionFx })
+sample({ clock: getElectronicInteraction, target: getElectronicInteractionFx })
+
 const clearStore = createEvent()
 
-const $electronicInteractionStore = createStore<ElectronicInteractionStore>(DEFAULT_STORE)
-    .on(getElectronicInteractionFx, (oldData) => ({
-        ...oldData,
-        error: null,
-    }))
-    .on(getElectronicInteractionFx.doneData, (oldData, newData) => ({
-        ...oldData,
-        electronicInteraction: newData,
-    }))
-    .on(getElectronicInteractionFx.failData, (oldData, newData) => ({
-        ...oldData,
-        error: newData.message,
-    }))
-    .on(changeCompleted, (oldData, newData) => ({
-        ...oldData,
-        completed: newData.completed,
-    }))
-    .on(clearStore, () => ({
-        ...DEFAULT_STORE,
-    }))
+const $loading = getElectronicInteractionFx.pending
+const $workerLoading = postElectronicInteractionFx.pending
+const $completed = createStore<boolean>(false).on(changeCompleted, (_, completed) => completed)
+const $done = createStore<boolean>(false).on(changeDone, (_, done) => done)
+const $error = createStore<string | null>(null)
+    .on(getElectronicInteractionFx, () => null)
+    .on(getElectronicInteractionFx.failData, (_, newData) => newData.message)
+const $electronicInteractionStore = createStore<ElectronicInteraction | null>(null)
+    .on(getElectronicInteractionFx.doneData, (_, newData) => newData)
+    .on(clearStore, () => null)
 
-export const selectors = {
-    useElectronicInteraction,
+export const stores = {
+    $error,
+    $electronicInteractionStore,
+    $completed,
+    $done,
+    $loading,
+    $workerLoading,
 }
 
-export const effects = {
-    getElectronicInteractionFx,
-    postElectronicInteractionFx,
-}
 export const events = {
+    getElectronicInteraction,
     postElectronicInteraction,
     changeCompleted,
     clearStore,

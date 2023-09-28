@@ -1,12 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { paymentsModel } from '@entities/payments'
 import { ElectronicAgreementList, PageWrapper, PaymentList } from '@features/payments'
-import getDormitoryPaygraphColumns from '@pages/payments/lib/get-dormitory-paygraph-columns'
 import Flex from '@shared/ui/flex'
-import Table from '@shared/ui/table'
-import { Divider, Message, Title } from '@ui/atoms'
+import { Divider, Title } from '@ui/atoms'
 import React from 'react'
-import { FiBarChart2 } from 'react-icons/fi'
 import DebtAndQr from './debt-and-qr'
 import PaygraphTable from './paygraph-table'
 import { PaymentsContract } from '@shared/api/model'
@@ -22,6 +17,7 @@ const PaymentsTemplate = ({ contracts }: Props) => {
     return (
         <PageWrapper>
             {contracts.map((contract, i) => {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 const { agreements, number, type, paygraph, payments, signed_user } = contract
                 const isDormitory = type === 'Общежитие'
                 // Временная мера. Потом апи будет раздавать точную информацию о статусе договора.
