@@ -70,7 +70,7 @@ const ElectornicAgreement = ({ children }: Props) => {
                     action={handleSubmit}
                     isLoading={workerLoading}
                     completed={completed}
-                    isDone={done || !data.status}
+                    isDone={done || data.status}
                     setCompleted={setCompleted}
                     isActive={!data.status && !done}
                     popUpFailureMessage="Согласие уже подписано"

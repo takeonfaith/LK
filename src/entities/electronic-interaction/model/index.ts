@@ -24,10 +24,15 @@ sample({
         return {
             message: `Форма отправлена успешно`,
             type: 'success' as MessageType,
-            time: 0,
         }
     },
     target: popUpMessageModel.events.evokePopUpMessage,
+})
+
+sample({
+    clock: postElectronicInteractionFx.doneData,
+    fn: () => true,
+    target: changeDone,
 })
 
 sample({
@@ -54,13 +59,13 @@ const clearStore = createEvent()
 
 const $loading = getElectronicInteractionFx.pending
 const $workerLoading = postElectronicInteractionFx.pending
-const $completed = createStore<boolean>(false).on(changeCompleted, (oldData, completed) => completed)
-const $done = createStore<boolean>(false).on(changeDone, (oldData, done) => done)
+const $completed = createStore<boolean>(false).on(changeCompleted, (_, completed) => completed)
+const $done = createStore<boolean>(false).on(changeDone, (_, done) => done)
 const $error = createStore<string | null>(null)
     .on(getElectronicInteractionFx, () => null)
-    .on(getElectronicInteractionFx.failData, (oldData, newData) => newData.message)
+    .on(getElectronicInteractionFx.failData, (_, newData) => newData.message)
 const $electronicInteractionStore = createStore<ElectronicInteraction | null>(null)
-    .on(getElectronicInteractionFx.doneData, (oldData, newData) => newData)
+    .on(getElectronicInteractionFx.doneData, (_, newData) => newData)
     .on(clearStore, () => null)
 
 export const stores = {
