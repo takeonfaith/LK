@@ -48,23 +48,49 @@ const ProjectActivitiesPage = () => {
             <Container>
                 <PageBlock>
                     <Message lineHeight="1.5rem" fontSize="0.86rem" type="info" title="Вниманию студентов 2-4 курсов!">
-                        Актуальная информация на 1 сентября 2022 г.:
-                        <br />
-                        1. Дата первой встречи по проектам:
-                        <br /> - 5 сентября для студентов 2-5 курсов; <br />- 19 сентября для студентов 1 курса.
-                        <br />
-                        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR1Jm1FlsR4ldXW75Qkval9K2_c_Zs8u96xcFsP9eOCRmao7MbETHUFWY7rr_s4qC-5_Hyr-p1XC4tr/pubhtml?gid=845074321&single=true">
-                            2. Расписание занятий по проектам 2-4 курсов
-                        </a>
-                        3. Регламент начисления баллов по дисциплинам “Введение в проектную деятельность” и “Проектная
-                        деятельность”, порядок и сроки пересдач по дисциплинам “Введение в проектную деятельность”,
-                        “Проектная деятельность”, “Управление проектами” и “Основы технологического предпринимательства”
-                        доступен по ссылке
-                        <a href="https://docs.google.com/document/d/e/2PACX-1vRPlG738Pszk13swt9O1EhABnOdze3M39OoZ8rlkSyNae0fbqm8CFjLx21IPA9gZl6qjVLYdAN1gmEx/pub">
-                            https://docs.google.com/document/d/e/2PAC...
-                        </a>
-                        <br />
-                        Всем успешной работы на проектах!
+                        <p>
+                            Уважаемые студенты!
+                            <br />
+                            <br />
+                            Центр проектной деятельности приглашает вас выбрать проекты, которые вы будете реализовывать
+                            в рамках дисциплины «Проектная деятельность» в 2023-2024 учебном году.
+                            <br />
+                            <br />
+                            Порядок действий для выбора проектов:
+                            <br />
+                            <br />
+                            1. Для знакомства с проектами мы создали для вас:
+                            <br />• Сайт-витрину:{' '}
+                            <a href="http://projects.mospolytech.ru/">http://projects.mospolytech.ru/</a>
+                            <br />• Телеграм-канал, где вы можете задать вопросы инициаторам проектов, общаться с
+                            потенциальными участниками проектов:{' '}
+                            <a href="https://t.me/cpd_projects">https://t.me/cpd_projects</a>
+                            <br />
+                            <br />
+                            2. Регистрация на проекты:
+                            <br />
+                            10 июля в 14:00 регистрация будет открыта студентам с рейтингом 2**;
+                            <br />
+                            12 июля с 14:00 регистрация будет открыта студентам с рейтингом 2** и 1*;
+                            <br />
+                            14 июля с 14:00 регистрация будет открыта всем студентам;
+                            <br />
+                            16 июля в 23:59 регистрация завершится.
+                            <br />
+                            <br />
+                            Подробная информация:{' '}
+                            <a href="https://vk.com/wall-78395495_2038">https://vk.com/wall-78395495_2038</a>
+                            <br />
+                            <br />
+                            <a href="https://docs.google.com/spreadsheets/u/1/d/e/2PACX-1vSybcuU7Cv0_IGEg8sP7LD_mxQYu3akGUj_xxKX-5gXtdqcwAeDhtWRM8d4WGqscS3_LIQBWUThqoXk/pubhtml?gid=0&single=true">
+                                Расписание занятий по проектной деятельности
+                            </a>
+                            <br />
+                            <br />
+                            <a href="https://docs.google.com/document/u/1/d/e/2PACX-1vRPlG738Pszk13swt9O1EhABnOdze3M39OoZ8rlkSyNae0fbqm8CFjLx21IPA9gZl6qjVLYdAN1gmEx/pub">
+                                Регламент начисления баллов
+                            </a>
+                        </p>
                     </Message>
                     {/* {!!user?.id && <Select items={items} selected={selected} setSelected={setSelected} />} */}
                     {/* <Subtext>
