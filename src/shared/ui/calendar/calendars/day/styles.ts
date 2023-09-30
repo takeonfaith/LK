@@ -38,7 +38,6 @@ export const EventsCarousel = styled.div`
     width: 100%;
     gap: 32px;
     display: flex;
-
     scroll-snap-type: x mandatory;
 
     & {

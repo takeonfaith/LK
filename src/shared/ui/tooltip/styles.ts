@@ -4,6 +4,8 @@ import { Direction } from './types'
 
 export const TooltipWrapper = styled.div<{ direction: Direction }>`
     position: relative;
+    width: fit-content;
+    height: fit-content;
 
     &:hover > div {
         transform: ${({ direction }) => findPosition(direction)};

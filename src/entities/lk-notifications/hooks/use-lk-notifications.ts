@@ -18,7 +18,8 @@ const useLkNotifications = () => {
     // } = scheduleModel.selectors.useSchedule()
     const { notifications, loading, loaded } = lkNotificationModel.selectors.useLkNotifications()
     const { settings } = settingsModel.selectors.useSettings()
-    const { preparedData } = electronicInteractionModel.selectors.useData()
+    const { data, preparedData } = electronicInteractionModel.selectors.useData()
+
     const notificationSettings = useMemo(
         () => settings?.['settings-notifications'].property as NotificationsSettingsType,
         [settings?.['settings-notifications']],
@@ -29,6 +30,12 @@ const useLkNotifications = () => {
             lkNotificationModel.events.add(createNotification('electronic-interaction', 'electronic-interaction'))
         }
     }, [preparedData?.status])
+
+    useEffect(() => {
+        if (!data) {
+            electronicInteractionModel.effects.getFx()
+        }
+    }, [data])
 
     useEffect(() => {
         if (!!user && !!notificationSettings) {

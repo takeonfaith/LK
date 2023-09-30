@@ -6,7 +6,7 @@ import ThemeToggle from '@features/theme-toggle'
 import { Logo } from '@ui/logo'
 import useResize from '@utils/hooks/use-resize'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import UserBig from 'widgets/user-big'
 import { CloseMenuButton, LeftsideBarList, LeftsideBarWrapper } from './ui'
 
@@ -17,7 +17,8 @@ const LeftsideBar = () => {
         data: { user },
     } = userModel.selectors.useUser()
 
-    const { visibleRoutes, currentPage } = menuModel.selectors.useMenu()
+    const { visibleRoutes } = menuModel.selectors.useMenu()
+    const location = useLocation()
 
     return (
         <LeftsideBarWrapper isOpen={isOpen} height={height}>
@@ -30,7 +31,7 @@ const LeftsideBar = () => {
                     avatar={user?.avatar}
                     name={user?.fullName ?? ''}
                     loading={!user}
-                    selected={currentPage?.id === 'profile'}
+                    selected={location.pathname === '/profile'}
                 />
                 <GlobalAppSearch size="small" />
                 <LeftsideBarList />

@@ -7,7 +7,7 @@ import { checkIfEventIsCurrent } from '@shared/ui/calendar/ui/event/lib/check-if
 
 export const useScheduleWidget = () => {
     const {
-        data: { schedule },
+        data: { schedule, hasNoSchedule },
         loading,
     } = scheduleModel.selectors.useSchedule()
     const handleOpenModal = useScheduleSubjectModal()
@@ -25,5 +25,5 @@ export const useScheduleWidget = () => {
                   ) ?? 0),
     })
 
-    return { listRef, noSchedule, handleOpenModal, loading, schedule: schedule?.today, isEnded }
+    return { listRef, noSchedule, handleOpenModal, loading, schedule: schedule?.today, isEnded, hasNoSchedule }
 }

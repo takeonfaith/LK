@@ -11,7 +11,7 @@ export const NextDayScheduleStyled = styled.div`
 
     ${MEDIA_QUERIES.isMobile} {
         --time-width: 35px;
-        height: 600px;
+        height: 400px;
     }
 
     position: relative;

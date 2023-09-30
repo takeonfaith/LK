@@ -9,6 +9,8 @@ import { DayCalendarProps } from '../types'
 import { useScrollTo } from '@shared/lib/hooks/use-scroll-to'
 import { getCurrentTimeLinePosition } from '../lib/get-current-time-line-position'
 import { SCROLL_UP_SHIFT } from '../consts'
+import { checkIfEventIsCurrent } from '@shared/ui/calendar/ui/event/lib/check-if-event-is-current'
+import { IWeekDayNames } from '@shared/constants'
 
 type Props = DayCalendarProps
 
@@ -28,7 +30,13 @@ export const useCalendarDay = ({
     })
 
     useEffect(() => {
-        setChosenEvent(null)
+        if (allEvents) {
+            const day = Object.keys(allEvents ?? {})[currentDay] as IWeekDayNames
+            const chosen = allEvents[day].find((event) => checkIfEventIsCurrent(event, true)) ?? null
+            setChosenEvent(chosen)
+        } else {
+            setChosenEvent(null)
+        }
     }, [allEvents])
 
     const timeInterval = chosenEvent

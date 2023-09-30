@@ -120,6 +120,7 @@ export interface IRoute {
     title: string
     icon: ChildrenType
     path: string
+    menuPath?: string
     Component: (() => JSX.Element | null) | LazyExoticComponent<() => JSX.Element | null>
     color: keyof IColors
     isTemplate: boolean
@@ -304,6 +305,7 @@ export const generalRoutes: IRoutes = {
         title: 'Расписание',
         icon: <FiClock />,
         path: SCHEDULE_ROUTE,
+        menuPath: SCHEDULE_CURRENT_ROUTE,
         Component: SchedulePage,
         color: 'pink',
         isTemplate: true,
