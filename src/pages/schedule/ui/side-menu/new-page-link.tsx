@@ -9,15 +9,17 @@ import styled from 'styled-components'
 type StyleProps = {
     isCurrent: boolean
     disabled?: boolean
+    collapsed?: boolean
 }
 
 const NewPageLinkWrapper = styled(Link)<StyleProps>`
     color: var(--text);
     padding: 15px 15px;
-    width: 140px;
+    max-width: 140px;
+    width: 100%;
     opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
     border-radius: 10px;
-    background: ${({ isCurrent }) => (isCurrent ? Colors.blue.transparent3 : 'var(--block)')};
+    background: ${({ isCurrent }) => (isCurrent ? Colors.blue.transparent3 : 'transparent')};
     color: ${({ isCurrent }) => (isCurrent ? 'var(--blue)' : 'var(--grey)')};
 
     &:hover {
@@ -29,10 +31,11 @@ const IconWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
     svg {
-        width: 18px;
-        min-width: 18px;
-        height: 18px;
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
     }
 `
 
@@ -45,7 +48,7 @@ type Props = StyleProps & {
     route: IRoute | undefined
 }
 
-export const NewPageLink = ({ route, disabled = false, isCurrent = false }: Props) => {
+export const NewPageLink = ({ route, collapsed = false, disabled = false, isCurrent = false }: Props) => {
     if (!route) return <Subtext>Ссылка не определена</Subtext>
 
     const { path, title, icon, color, shortTitle } = route
@@ -57,10 +60,18 @@ export const NewPageLink = ({ route, disabled = false, isCurrent = false }: Prop
     }
 
     return (
-        <NewPageLinkWrapper disabled={disabled} isCurrent={isCurrent} to={path} color={color} onClick={handleClick}>
+        <NewPageLinkWrapper
+            collapsed={collapsed}
+            disabled={disabled}
+            isCurrent={isCurrent}
+            to={path}
+            title={shortTitle ?? title}
+            color={color}
+            onClick={handleClick}
+        >
             <Flex gap="8px">
                 <IconWrapper>{icon}</IconWrapper>
-                <LinkTitle isCurrent={isCurrent}>{shortTitle ?? title}</LinkTitle>
+                {!collapsed && <LinkTitle isCurrent={isCurrent}>{shortTitle ?? title}</LinkTitle>}
             </Flex>
         </NewPageLinkWrapper>
     )

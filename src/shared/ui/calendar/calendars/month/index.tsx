@@ -1,4 +1,3 @@
-import { useScheduleSubjectModal } from '@features/use-schedule-subject-modal'
 import React from 'react'
 import { WeekEvents } from '../../types'
 import { WeekDays } from '../../ui/week-days'
@@ -15,18 +14,11 @@ type Props = {
     onDayClick?: (dayIndex: number) => void
 }
 
-// const normalizeDate = (date: Date) => {
-//     const offset = date.getTimezoneOffset()
-//     date = new Date(date.getTime() - offset * 60 * 1000)
-//     return date.toISOString().split('T')[0]
-// }
-
 export const MonthCalendar = ({ events, startDate, endDate, onDayClick }: Props) => {
     const localStartDate = new Date(startDate)
     const localEndDate = new Date(endDate)
 
     const weekStart = getMonday(localStartDate)
-    const handleOpenModal = useScheduleSubjectModal()
 
     const lastCellsWeekEnd = localEndDate.getDay() !== 0 ? getSunday(localEndDate) : localEndDate
 
@@ -47,7 +39,6 @@ export const MonthCalendar = ({ events, startDate, endDate, onDayClick }: Props)
                     daysAmount={daysAmount}
                     startDate={localStartDate}
                     events={events}
-                    handleEventClick={handleOpenModal}
                     addOneOnWeekends={true}
                 />
                 <CalendarCells

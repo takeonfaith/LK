@@ -7,15 +7,16 @@ import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
 import { HiOutlineChevronLeft } from 'react-icons/hi'
+import { useLocation } from 'react-router'
 import { NewPageLink } from './new-page-link'
 import { SideMenuProps } from './types'
-import { useLocation } from 'react-router'
 
 export const SideMenuContent = ({
     handleReturnToMySchedule,
     baseSearchValue,
     handleValue,
     onHintClick,
+    isSideMenuOpen,
 }: SideMenuProps) => {
     const {
         data: { searchValue, filter },
@@ -24,11 +25,15 @@ export const SideMenuContent = ({
 
     return (
         <>
-            <Subtext>Группа или преподаватель</Subtext>
-            <TeacherGroupSearch value={searchValue} setValue={handleValue} onHintClick={onHintClick} />
+            {isSideMenuOpen && (
+                <>
+                    <Subtext>Группа или преподаватель</Subtext>
+                    <TeacherGroupSearch value={searchValue} setValue={handleValue} onHintClick={onHintClick} />
+                </>
+            )}
             {baseSearchValue !== searchValue && (
                 <Button
-                    text="Мое расписание"
+                    text={isSideMenuOpen && 'Мое расписание'}
                     onClick={handleReturnToMySchedule}
                     icon={<HiOutlineChevronLeft />}
                     background="var(--block)"
@@ -45,6 +50,7 @@ export const SideMenuContent = ({
                     return (
                         <NewPageLink
                             key={id}
+                            collapsed={!isSideMenuOpen}
                             disabled={id === 'schedule-retake' && !!filter}
                             isCurrent={location.pathname === normalizedPath}
                             route={{ ...route, path: normalizedPath }}

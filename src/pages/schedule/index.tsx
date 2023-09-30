@@ -60,8 +60,9 @@ const Schedule = () => {
             >
                 {allRoutes && (
                     <Flex gap="16px" ai="flex-start">
-                        {isSideMenuOpen && !isMobile && (
+                        {!isMobile && (
                             <SideMenu
+                                isSideMenuOpen={isSideMenuOpen}
                                 baseSearchValue={baseSearchValue}
                                 handleReturnToMySchedule={handleReturnToMySchedule}
                                 onHintClick={onHintClick}

@@ -79,6 +79,7 @@ export interface ISchedule {
         view: View
         filter: string
         searchValue: string
+        hasNoSchedule: boolean
     }
     loading: boolean
     error: string | null

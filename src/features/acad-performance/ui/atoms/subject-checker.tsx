@@ -13,9 +13,7 @@ const Container = styled.div<Props>`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-
-    color: ${({ grade }) => findProgressBarColor(grade)};
+    color: ${({ grade }) => findProgressBarColor(grade) as string};
 
     width: 22px;
     height: 22px;

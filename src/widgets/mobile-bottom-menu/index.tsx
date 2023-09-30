@@ -8,6 +8,7 @@ import { LeftsideBarItem } from 'widgets/leftside-bar/ui'
 import Flex from '@shared/ui/flex'
 import { MEDIA_QUERIES } from '@shared/constants'
 import { userModel } from '@entities/user'
+import { useLocation } from 'react-router'
 
 const MobileBottomMenuWrapper = styled(ListWrapper)`
     position: absolute;
@@ -36,10 +37,11 @@ const LinkSkeleton = () => {
 }
 
 const MobileBottomMenu = () => {
-    const { allRoutes, currentPage } = menuModel.selectors.useMenu()
+    const { allRoutes } = menuModel.selectors.useMenu()
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const location = useLocation()
 
     if (!allRoutes || !user) {
         return (
@@ -58,7 +60,13 @@ const MobileBottomMenu = () => {
     return (
         <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly">
             {config.map((id) => {
-                return <LeftsideBarItem key={id} {...allRoutes[id]} isCurrent={currentPage?.id === id} />
+                return (
+                    <LeftsideBarItem
+                        key={id}
+                        {...allRoutes[id]}
+                        isCurrent={location.pathname.includes(allRoutes[id].path)}
+                    />
+                )
             })}
         </MobileBottomMenuWrapper>
     )

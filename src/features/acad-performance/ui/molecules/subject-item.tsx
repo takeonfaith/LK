@@ -2,7 +2,7 @@ import { AcadPerformance } from '@api/model/acad-performance'
 import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 import { getSubjectIcon } from '@features/acad-performance/lib/get-subject-icon'
 import { Icon } from '@features/all-pages'
-import { GradeByScore } from '@shared/constants'
+import { GradeByScore, IColorPalette } from '@shared/constants'
 import localizeDate from '@shared/lib/dates/localize-date'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'
@@ -63,13 +63,15 @@ const Grade = styled.strong<{ color: string }>`
 const SubjectItem = ({ item, type }: Props) => {
     const { open } = useModal()
     const { name, grade } = item
+    const color = findProgressBarColor(grade) as string
 
-    const handleOpen = () => item.grade && open(<SubjectModal item={item} />, item.name)
+    const handleOpen = () =>
+        item.grade && open(<SubjectModal item={item} color={findProgressBarColor(grade, true) as IColorPalette} />)
 
     return (
         <Wrap onClick={handleOpen} isGraded={!!item.grade}>
             <Flex gap="16px">
-                <Icon color={findProgressBarColor(grade)} borderRadius="9px">
+                <Icon color={color} borderRadius="9px">
                     {getSubjectIcon(name)}
                 </Icon>
                 <Flex d="column" ai="flex-start" gap="4px">
@@ -79,7 +81,7 @@ const SubjectItem = ({ item, type }: Props) => {
                     </Subtext>
                 </Flex>
             </Flex>
-            <Grade color={findProgressBarColor(grade)}>
+            <Grade color={color}>
                 {type === 'Зачет' ? <SubjectCheker grade={grade} /> : grade && GradeByScore[grade]}
             </Grade>
         </Wrap>

@@ -33,6 +33,12 @@ const useLkNotifications = () => {
     }, [preparedData?.status])
 
     useEffect(() => {
+        if (!preparedData) {
+            electronicInteractionModel.events.getElectronicInteraction()
+        }
+    }, [preparedData])
+
+    useEffect(() => {
         if (!!user && !!notificationSettings) {
             if (notificationSettings.all !== false && !loaded && !loading) {
                 const scheduleNotification: NotificationsResponse = [
