@@ -64,6 +64,7 @@ export const ALL_ROUTE = '/all'
 export const HOME_ROUTE = '/home'
 export const PROFILE_ROUTE = '/profile'
 export const CHAT_ROUTE = '/chat'
+export const OLD_CHAT_ROUTE = '/messages'
 export const TEMPLATE_CHAT_ROUTE = CHAT_ROUTE + '/:chatId'
 export const ELECTRONIC_INTERACTION_AGREEMENT_ROUTE = '/electronic-interaction-agreement'
 export const PAYMENTS_ROUTE = '/payments'
@@ -293,7 +294,7 @@ export const generalRoutes: IRoutes = {
         title: 'Сообщения',
         icon: <BiMessageRounded />,
         path: CHAT_ROUTE,
-        Component: () => PageIsNotReady({ oldVersionUrl: CHAT_ROUTE }),
+        Component: () => PageIsNotReady({ oldVersionUrl: OLD_CHAT_ROUTE }),
         color: 'red',
         isTemplate: true,
         group: 'OTHER',

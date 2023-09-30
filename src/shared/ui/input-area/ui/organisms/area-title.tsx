@@ -21,7 +21,7 @@ const AreaTitleWrapper = styled.div`
         align-items: center;
     }
 
-    @media (max-width: 550px) {
+    @media (max-width: 1000px) {
         background: transparent;
         position: relative;
     }

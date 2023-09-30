@@ -21,8 +21,9 @@ const IconWrapper = styled.div<{ backgroud: ColorType; size: number; borderRadiu
 
     svg {
         color: #fff;
-        width: ${({ size }) => size / 2 + 'px'};
-        height: ${({ size }) => size / 2 + 'px'};
+        width: 100%;
+        height: 100%;
+        scale: 0.5;
     }
 `
 

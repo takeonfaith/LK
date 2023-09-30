@@ -11,6 +11,7 @@ import styled from 'styled-components'
 import { useModal } from 'widgets'
 import TechicalErrorMessage from './technical-error-message'
 import { formatNumber } from '@shared/lib/get-number-with-spaces-format'
+import { useUnit } from 'effector-react'
 
 const ContractWrapper = styled.div`
     display: flex;
@@ -41,7 +42,7 @@ const Contract = ({ contract }: Props) => {
     const [copied, setCopied] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
-    const { error } = paymentsModel.selectors.usePayments()
+    const error = useUnit(paymentsModel.stores.$error)
 
     const contractInfo = [
         {

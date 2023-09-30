@@ -8,6 +8,7 @@ import { lkNotificationModel } from '..'
 import { filterNotificationsViaSettings } from '../lib/filter-notifications-via-settings'
 import { electronicInteractionModel } from '@entities/electronic-interaction'
 import createNotification from '../lib/create-notification'
+import { useUnit } from 'effector-react'
 
 const useLkNotifications = () => {
     const {
@@ -18,24 +19,24 @@ const useLkNotifications = () => {
     // } = scheduleModel.selectors.useSchedule()
     const { notifications, loading, loaded } = lkNotificationModel.selectors.useLkNotifications()
     const { settings } = settingsModel.selectors.useSettings()
-    const { data, preparedData } = electronicInteractionModel.selectors.useData()
-
+    const [preparedData] = useUnit([electronicInteractionModel.stores.$electronicInteractionStore])
     const notificationSettings = useMemo(
         () => settings?.['settings-notifications'].property as NotificationsSettingsType,
         [settings?.['settings-notifications']],
     )
 
     useEffect(() => {
+        electronicInteractionModel.events.getElectronicInteraction()
         if (preparedData && !preparedData.status) {
             lkNotificationModel.events.add(createNotification('electronic-interaction', 'electronic-interaction'))
         }
     }, [preparedData?.status])
 
     useEffect(() => {
-        if (!data) {
-            electronicInteractionModel.effects.getFx()
+        if (!preparedData) {
+            electronicInteractionModel.events.getElectronicInteraction()
         }
-    }, [data])
+    }, [preparedData])
 
     useEffect(() => {
         if (!!user && !!notificationSettings) {
