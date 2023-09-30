@@ -1,4 +1,4 @@
-import { FileFormats } from '@shared/consts'
+import { FileFormats } from '@shared/constants'
 
 const getFormatName = (format: FileFormats[number]) => {
     return format.split('/')[1]

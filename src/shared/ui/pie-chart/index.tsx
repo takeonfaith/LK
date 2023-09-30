@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Size } from '../types'
-import { Colors, IColors } from '@shared/consts'
+import { Colors, IColors } from '@shared/constants'
 import { SkeletonShape } from '../skeleton-shape'
 import { Title } from '../title'
 
@@ -58,7 +58,7 @@ type Props = {
 }
 
 const PieChart = ({ percent, children, label, color = 'blue', size = 'middle', loading = false }: Props) => {
-    const width = ({ small: 80, middle: 160, big: 240 } as const)[size]
+    const width = ({ small: 80, middle: 160, large: 220, big: 240 } as const)[size]
     const strokeDashoffset = (1 - percent) * width * FACTOR + 'px'
     const s = width / 2 - 10
     const chartLabel = label ?? `${(percent * 100).toFixed(0)}%`

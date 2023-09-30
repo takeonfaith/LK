@@ -1,12 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { paymentsModel } from '@entities/payments'
 import { ElectronicAgreementList, PageWrapper, PaymentList } from '@features/payments'
-import getDormitoryPaygraphColumns from '@pages/payments/lib/get-dormitory-paygraph-columns'
 import Flex from '@shared/ui/flex'
-import Table from '@shared/ui/table'
-import { Divider, Message, Title } from '@ui/atoms'
+import { Divider, Title } from '@ui/atoms'
 import React from 'react'
-import { FiBarChart2 } from 'react-icons/fi'
 import DebtAndQr from './debt-and-qr'
 import PaygraphTable from './paygraph-table'
 import { PaymentsContract } from '@shared/api/model'
@@ -22,8 +17,11 @@ const PaymentsTemplate = ({ contracts }: Props) => {
     return (
         <PageWrapper>
             {contracts.map((contract, i) => {
-                const { agreements, number, type, paygraph, payments } = contract
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                const { agreements, number, type, paygraph, payments, signed_user } = contract
                 const isDormitory = type === 'Общежитие'
+                // Временная мера. Потом апи будет раздавать точную информацию о статусе договора.
+                const isSigned = true
                 const electronicAgreements = agreements.filter((item) => new Date(item?.date) > new Date('2022-02-1'))
 
                 return (
@@ -40,11 +38,12 @@ const PaymentsTemplate = ({ contracts }: Props) => {
                                 </Subtext>
                             </Flex>
                         )}
-                        <DebtAndQr data={contract} isDormitory={isDormitory} />
+                        <DebtAndQr data={contract} />
                         <PaymentList payments={payments ?? []} />
                         <PaygraphTable paygraph={paygraph} />
                         <ElectronicAgreementList
                             isDormitory={isDormitory}
+                            isContractSigned={isSigned}
                             electronicAgreements={electronicAgreements}
                         />
                         {i !== contracts.length - 1 && <Divider margin="0" width="100%" />}

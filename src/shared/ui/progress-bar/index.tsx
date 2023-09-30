@@ -1,8 +1,8 @@
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants'
 import React from 'react'
 import styled from 'styled-components'
 import { Title } from '../title'
-import { Size } from '../types'
+import { ExtSize, Size } from '../types'
 
 const getColorFromValue = (value: number): keyof IColors => {
     if (value === 0) return 'grey'
@@ -12,9 +12,10 @@ const getColorFromValue = (value: number): keyof IColors => {
     return 'green'
 }
 
-const SIZES: Record<Size, number> = {
+const SIZES: Record<ExtSize, number> = {
     small: 4,
     middle: 9,
+    large: 12,
     big: 14,
 }
 
@@ -30,13 +31,13 @@ const BarStyled = styled.div<{ value: number; coloring: boolean; size: Size }>`
     border-radius: var(--brLight);
     height: ${({ size }) => SIZES[size]}px;
     transition: 0.2s;
-    background: ${({ coloring, value }) => (coloring ? Colors[getColorFromValue(value)].main : 'var(--schedule)')};
+    background: ${({ coloring, value }) => (coloring ? Colors[getColorFromValue(value)].main : 'var(--block)')};
 `
 
 const Container = styled.div<{ size: Size }>`
     width: 100%;
     border-radius: var(--brLight);
-    background-color: var(--scheduleBg);
+    background-color: var(--theme-2);
     height: ${({ size }) => SIZES[size]}px;
     overflow: hidden;
 `

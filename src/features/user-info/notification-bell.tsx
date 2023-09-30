@@ -6,7 +6,7 @@ import Flex from '@shared/ui/flex'
 import Notification from '@shared/ui/notification'
 import Subtext from '@shared/ui/subtext'
 import React from 'react'
-import { MdOutlineNotifications } from 'react-icons/md'
+import { FiBell } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
@@ -22,7 +22,7 @@ const NotificationBellStyled = styled.div`
     border-radius: var(--brLight);
 
     &:hover {
-        background: var(--theme-mild-xxl);
+        background: var(--theme-1t);
     }
 
     svg {
@@ -73,7 +73,7 @@ const NotificationBellSection = () => {
         <NotificationBellStyled onClick={handleClick}>
             <Notification
                 outline="none"
-                box-shadow="0px 0px 0px 3px var(--schedule)"
+                box-shadow="0px 0px 0px 3px var(--block)"
                 color="red"
                 top="14px"
                 left="30px"
@@ -84,7 +84,7 @@ const NotificationBellSection = () => {
             >
                 {notifications.length > 10 ? '10+' : notifications.length}
             </Notification>
-            <MdOutlineNotifications />
+            <FiBell />
         </NotificationBellStyled>
     )
 }

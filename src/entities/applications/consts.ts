@@ -17,6 +17,11 @@ export const hrOrderConstants = {
     fixing: 'На доработке',
     empty: 'Не создан',
 }
+export const hrOrderRegisterConstants = {
+    registered: 'Зарегистрирован',
+    registering: 'На регистрации',
+    notRegistered: 'Не зарегистрирован',
+}
 
 export const NumberOfCopiesOptions = [
     { id: 1, title: '1' },
@@ -49,11 +54,12 @@ export const MethodObtainingOptions = [
     { id: 3, title: 'На почтовый адрес' },
 ]
 
-export type specialFieldsNameT =
+export type SpecialFieldsName =
     | 'personalMethod'
     | 'postMethod'
     | 'personalNature'
     | 'Compensation'
+    | 'Compensation2'
     | 'Address'
     | 'collHoliday1'
     | 'collHoliday2'
@@ -62,7 +68,9 @@ export type specialFieldsNameT =
     | 'collHoliday5'
     | 'Structure1'
     | 'Structure2'
+    | 'PartTime'
+    | 'collDog'
     | 'dueToWithdrawal'
     | null
 
-export type specialFieldsNameConfigT = { [key: string]: specialFieldsNameT }
+export type SpecialFieldsNameConfig = { [key: string]: SpecialFieldsName }

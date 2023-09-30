@@ -2,7 +2,7 @@
 import { confirmModel } from '@entities/confirm'
 import { NameSettings } from '@entities/settings/model'
 import { userModel } from '@entities/user'
-import getTimeFromMinutes from '@shared/lib/get-time-from-minutes'
+import getTimeFromMinutes from '@shared/lib/dates/get-time-from-minutes'
 import { FilterElementList } from '@shared/ui/added-elements-list'
 import { MessageType } from '@shared/ui/types'
 import React from 'react'
@@ -61,7 +61,11 @@ type SettingsFullProps = {
     phone: Prop<string>
     avatar: Prop<string | undefined>
     menu: Prop<FilterElementList>
-    homepage: { widgets: { schedule: Prop<boolean>; payments: Prop<boolean> }; sections: Prop<FilterElementList> }
+    homepage: {
+        widgets: { schedule: Prop<boolean>; payments: Prop<boolean> }
+        sections: Prop<FilterElementList>
+        news: Prop<boolean>
+    }
     settings: {
         all: boolean
         messages: boolean
@@ -165,6 +169,17 @@ const getSettingsModel: TSettingsModel = ({
                     type: 'toggle',
                     value: homepage.widgets.payments.value,
                     action: homepage.widgets.payments.action,
+                },
+            ],
+        },
+        {
+            title: 'Новости',
+            fields: [
+                {
+                    title: 'Последние новости',
+                    type: 'toggle',
+                    value: homepage.news.value,
+                    action: homepage.news.action,
                 },
             ],
         },

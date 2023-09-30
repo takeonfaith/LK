@@ -1,6 +1,7 @@
 import { menuModel } from '@entities/menu'
 import { paymentsModel } from '@entities/payments'
 import { scheduleModel } from '@entities/schedule'
+import { settingsModel } from '@entities/settings'
 import { userModel } from '@entities/user'
 import GlobalAppSearch from '@features/global-app-search'
 import Links from '@features/home/ui/links'
@@ -9,10 +10,11 @@ import UserInfo from '@features/user-info'
 import Block from '@shared/ui/block'
 import Flex from '@shared/ui/flex'
 import { CenterPage, Title, Wrapper } from '@ui/atoms'
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import AlertsWidget from 'widgets/alerts-widget'
 import HomeTopPlate from './ui/home-top-plate'
+import { useUnit } from 'effector-react'
 
 const HomePageStyled = styled.div`
     width: 100%;
@@ -34,20 +36,31 @@ const Home = () => {
         error,
     } = userModel.selectors.useUser()
 
-    const { data: payments } = paymentsModel.selectors.usePayments()
-    const { data: schedule } = scheduleModel.selectors.useSchedule()
+    const payments = useUnit(paymentsModel.stores.$paymentsStore)
+    const {
+        data: { schedule },
+    } = scheduleModel.selectors.useSchedule()
 
     const { homeRoutes } = menuModel.selectors.useMenu()
 
     if (!user || !homeRoutes) return null
 
-    const load = () => {
-        scheduleModel.effects.getScheduleFx({ user })
-        paymentsModel.effects.getPaymentsFx()
-    }
+    useEffect(() => {
+        if (!payments) {
+            paymentsModel.events.getPayments()
+        }
+    }, [payments])
+
+    useEffect(() => {
+        if (!schedule) {
+            scheduleModel.effects.getScheduleFx(user)
+        }
+    }, [schedule])
+
+    const { news } = settingsModel.selectors.useSettings().settings['settings-home-page'].property
 
     return (
-        <Wrapper loading={!user} load={load} error={error} data={payments && schedule}>
+        <Wrapper loading={!user} load={() => null} error={error} data={user}>
             <HomeTopPlate />
             <HomePageStyled>
                 <GlobalAppSearch />
@@ -61,7 +74,7 @@ const Home = () => {
                             <UserInfo />
                         </Flex>
                         <ScheduleAndNotification />
-                        <AlertsWidget />
+                        {!!news && <AlertsWidget />}
                     </Block>
                 </CenterPage>
             </HomePageStyled>

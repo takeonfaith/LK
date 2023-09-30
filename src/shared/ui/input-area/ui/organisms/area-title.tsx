@@ -12,7 +12,7 @@ const AreaTitleWrapper = styled.div`
     cursor: pointer;
     position: sticky;
     top: -2px;
-    background: var(--schedule);
+    background: var(--block);
     z-index: 3;
     width: 100%;
 
@@ -23,6 +23,7 @@ const AreaTitleWrapper = styled.div`
 
     @media (max-width: 1000px) {
         background: transparent;
+        position: relative;
     }
 `
 
@@ -34,14 +35,15 @@ interface Props {
     setOpenArea: React.Dispatch<React.SetStateAction<boolean>>
     setIncluded: React.Dispatch<React.SetStateAction<boolean>>
     collapsed?: boolean
+    openArea?: boolean
 }
 
-const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setIncluded, collapsed }: Props) => {
+const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setIncluded, collapsed, openArea }: Props) => {
     return (
         <AreaTitleWrapper onClick={() => !collapsed && (included || !optional) && setOpenArea((prev) => !prev)}>
             <div className="title-and-icon">
                 <Title
-                    size={4}
+                    size={3}
                     align="left"
                     icon={
                         confirmed !== undefined ? (
@@ -58,7 +60,7 @@ const AreaTitle = ({ title, included, optional, confirmed, setOpenArea, setInclu
                 </Title>
                 {optional && <Checkbox checked={included} setChecked={setIncluded} />}
             </div>
-            <Button icon={<HiChevronDown />} onClick={() => null} background="transparent" />
+            <Button icon={<HiChevronDown />} onClick={() => null} background="transparent" flipped={openArea} />
         </AreaTitleWrapper>
     )
 }

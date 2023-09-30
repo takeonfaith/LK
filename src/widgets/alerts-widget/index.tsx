@@ -7,7 +7,7 @@ import React, { useEffect } from 'react'
 import AlertItem from './alert-item'
 import { Title } from '@shared/ui/title'
 import { Button } from '@shared/ui/button'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import { Link } from 'react-router-dom'
 import { ALERTS_ROUTE } from '@app/routes/general-routes'
 

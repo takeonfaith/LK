@@ -1,4 +1,4 @@
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants'
 import React from 'react'
 import Notification from '@ui/notification'
 import styled from 'styled-components'
@@ -21,8 +21,9 @@ const IconWrapper = styled.div<{ backgroud: ColorType; size: number; borderRadiu
 
     svg {
         color: #fff;
-        width: ${({ size }) => size / 2 + 'px'};
-        height: ${({ size }) => size / 2 + 'px'};
+        width: 100%;
+        height: 100%;
+        scale: 0.5;
     }
 `
 
@@ -40,7 +41,7 @@ const Icon = ({ children, color, borderRadius, badge, size = 38 }: Props) => {
     return (
         <IconWrapper borderRadius={borderRadius} backgroud={color} size={size} className="icon">
             <Notification
-                outline="4px solid var(--schedule)"
+                outline="4px solid var(--block)"
                 color="red"
                 top="93%"
                 left="93%"

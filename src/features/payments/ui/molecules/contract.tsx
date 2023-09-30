@@ -1,15 +1,17 @@
 import { PaymentsContract } from '@api/model'
 import { paymentsModel } from '@entities/payments'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import KeyValue from '@shared/ui/atoms/key-value'
 import Flex from '@shared/ui/flex'
 import { Button, LinkButton, SubmitButton } from '@ui/atoms'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import React, { useState } from 'react'
 import { FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import TechicalErrorMessage from './technical-error-message'
+import { formatNumber } from '@shared/lib/get-number-with-spaces-format'
+import { useUnit } from 'effector-react'
 
 const ContractWrapper = styled.div`
     display: flex;
@@ -40,7 +42,7 @@ const Contract = ({ contract }: Props) => {
     const [copied, setCopied] = useState<boolean>(false)
     const [loading, setLoading] = useState(false)
     const [completed, setCompleted] = useState(false)
-    const { error } = paymentsModel.selectors.usePayments()
+    const error = useUnit(paymentsModel.stores.$error)
 
     const contractInfo = [
         {
@@ -65,7 +67,11 @@ const Contract = ({ contract }: Props) => {
         },
         {
             text: 'Сумма к оплате',
-            info: sum ?? '',
+            info: formatNumber(sum) ?? '',
+        },
+        {
+            text: 'Статус',
+            info: '',
         },
         // {
         //     text: 'Ежемесячная плата: ',

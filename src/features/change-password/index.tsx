@@ -11,6 +11,7 @@ import { MANDATORY_RULES, OPTIONAL_RULES } from './const'
 import generatePassword from './lib/generate-password'
 import getPasswordStrength from './lib/get-password-strength'
 import { Buttons, ChangePasswordStyled, CheckStyled, FormStyled, InputsStyled, LeftSide, TopLeftSide } from './styles'
+import { useModal } from 'widgets'
 
 const ChangePassword = () => {
     const [old, setOld] = useState('')
@@ -21,6 +22,8 @@ const ChangePassword = () => {
     const [completed, setCompleted] = useState(false)
     const { isActive, validationError } = useFormValidation(MANDATORY_RULES, [first, second, old])
     const strength = getPasswordStrength(first)
+
+    const { close } = useModal()
 
     const handleGeneratePassword = () => {
         const newPassword = generatePassword(12)
@@ -92,7 +95,7 @@ const ChangePassword = () => {
                         width="100%"
                         text="Сгенерировать пароль"
                         onClick={handleGeneratePassword}
-                        background="var(--scheduleBg)"
+                        background="var(--theme-2)"
                     />
                 )}
                 {isActive && (
@@ -135,7 +138,7 @@ const ChangePassword = () => {
                 </InputsStyled>
 
                 <Buttons>
-                    <Button text="Отменить" width="100%" />
+                    <Button text="Отменить" width="100%" onClick={close} />
                     <SubmitButton
                         isLoading={loading}
                         completed={completed}

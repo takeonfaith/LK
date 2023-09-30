@@ -2,11 +2,12 @@ import { AdminLinks, User } from '@api/model'
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 import { hiddenRoutes, privateRoutes } from '@app/routes/routes'
 import { teachersHiddenRoutes, teachersPrivateRoutes } from '@app/routes/teacher-routes'
-import { MenuType, REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { MenuType, REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@shared/constants'
 import { SettingsType } from '@entities/settings/model'
 import { useStore } from 'effector-react/compat'
 import { createEvent, createStore } from 'effector'
 import findRoutesByConfig from '../lib/find-routes-by-config'
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 
 export interface Menu {
     allRoutes: IRoutes | null
@@ -25,9 +26,9 @@ export const DEFAULT_STAFF_MOBILE_CONFIG = ['home', 'schedule', 'hr-applications
 const getLeftsideBarConfig = (user: User | null): MenuType => {
     if (!user) return []
 
-    const localSettings = JSON.parse(localStorage.getItem('new-settings') || '{}') as SettingsType
+    const localSettings = JSON.parse(localStorage.getItem(BrowserStorageKey.NewSettings) || '{}') as SettingsType
     const settingsMenuData =
-        (localSettings[user.id]['settings-customize-menu']?.property.pages as unknown as string[]) ??
+        (localSettings[user.id]?.['settings-customize-menu']?.property.pages as unknown as string[]) ??
         REQUIRED_LEFTSIDE_BAR_CONFIG
 
     const uniqueRequiredTeacherMenuItems = REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG.filter(
@@ -104,7 +105,7 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
         allRoutes:
             user?.user_status === 'staff'
                 ? { ...filterTeachersPrivateRoutes(adminLinks), ...teachersHiddenRoutes() }
-                : { ...privateRoutes(), ...hiddenRoutes() },
+                : { ...privateRoutes(), ...hiddenRoutes(user) },
         visibleRoutes: user?.user_status === 'staff' ? filterTeachersPrivateRoutes(adminLinks) : privateRoutes(),
         leftsideBarRoutes: findRoutesByConfig(
             getLeftsideBarConfig(user),
@@ -112,10 +113,12 @@ const $menu = createStore<Menu>(DEFAULT_STORE)
         ),
         homeRoutes: findRoutesByConfig(
             homeRoutes ??
-                (JSON.parse(localStorage.getItem('home-routes') ?? JSON.stringify(DEFAULT_HOME_CONFIG)) as string[]),
+                (JSON.parse(
+                    localStorage.getItem(BrowserStorageKey.HomeRoutes) ?? JSON.stringify(DEFAULT_HOME_CONFIG),
+                ) as string[]),
             user?.user_status === 'staff'
                 ? { ...filterTeachersPrivateRoutes(adminLinks), ...teachersHiddenRoutes() }
-                : { ...privateRoutes(), ...hiddenRoutes() },
+                : { ...privateRoutes(), ...hiddenRoutes(user) },
         ),
     }))
     .on(changeNotifications, (oldData, { page, notifications }) => ({

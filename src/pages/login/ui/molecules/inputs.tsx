@@ -49,7 +49,12 @@ const Inputs = () => {
                         setSelected={(value: any) => setSelectedLang(value)}
                     /> */}
                 </Flex>
-
+                <Message type={'info'} title="Уважаемые абитуриенты!">
+                    Личный кабинет абитуриента находится по ссылке
+                    <a href="https://lk.mospolytech.ru/" target="_blank" rel="noreferrer">
+                        <strong> lk.mospolytech.ru</strong>
+                    </a>
+                </Message>
                 <List gap={16} scroll={false}>
                     <Title size={4} align="left">
                         Вход

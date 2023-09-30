@@ -1,4 +1,6 @@
-import React, { createContext, useCallback, useMemo, useState } from 'react'
+import { useUnit } from 'effector-react'
+import React, { createContext, useCallback, useEffect, useMemo, useState } from 'react'
+import { modalModel } from 'widgets/modal/model'
 
 export const Context = createContext<ModalContext>({
     isOpen: false,
@@ -29,6 +31,7 @@ export const ModalProvider = ({ children }: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false)
     const [titles, setTitles] = useState<string[]>([])
     const [openModals, setOpenModals] = useState<React.ReactElement<any, any>[]>([])
+    const isModalOpen = useUnit(modalModel.stores.$isModalOpen)
 
     const canBack = openModals.length > 1
 
@@ -52,6 +55,7 @@ export const ModalProvider = ({ children }: Props) => {
                     setTitles(() => [...titles, title ?? ''])
                 }
                 setIsOpen(() => true)
+                modalModel.events.open()
             }
         },
         [setOpenModals, setIsOpen, openModals, isOpen],
@@ -59,6 +63,7 @@ export const ModalProvider = ({ children }: Props) => {
 
     const close = useCallback(() => {
         setIsOpen(() => false)
+        modalModel.events.close()
     }, [setOpenModals, setIsOpen])
 
     const component = useMemo(() => openModals[openModals.length - 1], [openModals])
@@ -69,6 +74,12 @@ export const ModalProvider = ({ children }: Props) => {
             setOpenModals([...openModals, Component])
         }
     }, [])
+
+    useEffect(() => {
+        if (isModalOpen !== isOpen) {
+            setIsOpen(isModalOpen)
+        }
+    }, [isModalOpen])
 
     return (
         <Context.Provider

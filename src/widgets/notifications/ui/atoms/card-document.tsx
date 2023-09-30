@@ -1,11 +1,11 @@
 import React from 'react'
 import { docsNotification } from '@api/model/notification'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { personalNotificationModel } from '@entities/notification'
 import { userModel } from '@entities/user'
 import { LinkButton, SubmitButton } from '@ui/atoms'
 import getRightGenderWord from '@utils/get-right-gender-word'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import { useState } from 'react'
 import { FiLink } from 'react-icons/fi'
 import styled from 'styled-components'
@@ -17,8 +17,8 @@ const CardDocumentWrapper = styled.div`
     width: 100%;
     padding: 20px;
     border-radius: var(--brLight);
-    background: var(--form);
-    box-shadow: var(--schedule-shadow);
+    background: var(--block-content);
+    box-shadow: var(--block-shadow);
     row-gap: 20px;
     min-height: 70px;
     display: flex;

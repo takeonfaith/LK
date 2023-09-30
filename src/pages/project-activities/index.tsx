@@ -1,6 +1,5 @@
 import { projectActivitesModel } from '@entities/project-activites'
-import { Colors } from '@shared/consts'
-import { Message } from '@shared/ui/message'
+import { Colors } from '@shared/constants'
 import PageBlock from '@shared/ui/page-block'
 import Subtext from '@shared/ui/subtext'
 import { Button, Divider, Title, Wrapper } from '@ui/atoms'
@@ -12,12 +11,15 @@ import CurrentSemestr from './ui/current-semestr'
 import LastSemestr from './ui/last-semestr'
 import InfoModal from './ui/project-info/info-modal'
 import Result from './ui/result'
+import { userModel } from '@entities/user'
+import { ProjectActivityIntroMessage } from './ui/intro-message'
 
 const Container = styled.div`
     h3 {
         background: ${Colors.blue.main};
         background: linear-gradient(to right, ${Colors.blue.main} 0%, ${Colors.pink.main} 100%);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
     }
 
@@ -32,6 +34,9 @@ const ProjectStyled = styled.div`
 
 const ProjectActivitiesPage = () => {
     const { data, loading, error } = projectActivitesModel.selectors.useData()
+    const {
+        data: { user },
+    } = userModel.selectors.useUser()
     const { open } = useModal()
 
     const handleOpenModal = () => {
@@ -47,29 +52,7 @@ const ProjectActivitiesPage = () => {
         >
             <Container>
                 <PageBlock>
-                    <Message lineHeight="1.5rem" fontSize="0.86rem" type="info" title="Вниманию студентов 2-4 курсов!">
-                        Актуальная информация на 1 сентября 2022 г.:
-                        <br />
-                        1. Дата первой встречи по проектам:
-                        <br /> - 5 сентября для студентов 2-5 курсов; <br />- 19 сентября для студентов 1 курса.
-                        <br />
-                        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR1Jm1FlsR4ldXW75Qkval9K2_c_Zs8u96xcFsP9eOCRmao7MbETHUFWY7rr_s4qC-5_Hyr-p1XC4tr/pubhtml?gid=845074321&single=true">
-                            2. Расписание занятий по проектам 2-4 курсов
-                        </a>
-                        3. Регламент начисления баллов по дисциплинам “Введение в проектную деятельность” и “Проектная
-                        деятельность”, порядок и сроки пересдач по дисциплинам “Введение в проектную деятельность”,
-                        “Проектная деятельность”, “Управление проектами” и “Основы технологического предпринимательства”
-                        доступен по ссылке
-                        <a href="https://docs.google.com/document/d/e/2PACX-1vRPlG738Pszk13swt9O1EhABnOdze3M39OoZ8rlkSyNae0fbqm8CFjLx21IPA9gZl6qjVLYdAN1gmEx/pub">
-                            https://docs.google.com/document/d/e/2PAC...
-                        </a>
-                        <br />
-                        Всем успешной работы на проектах!
-                    </Message>
-                    {/* {!!user?.id && <Select items={items} selected={selected} setSelected={setSelected} />} */}
-                    {/* <Subtext>
-                        Год: {data?.year} • Полугодие: {data?.semestr}
-                    </Subtext> */}
+                    <ProjectActivityIntroMessage course={user?.course} />
                     <ProjectStyled>
                         <Subtext fontSize="0.85rem">Вам назначен проект</Subtext>
                         <Title size={3} align="left" bottomGap>

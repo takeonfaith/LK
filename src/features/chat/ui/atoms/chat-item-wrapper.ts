@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -14,7 +14,7 @@ const ChatItemWrapper = styled(Link)<{ isChosen: boolean; isOpen: boolean }>`
         width: 100%;
         padding: 10px;
         border-radius: var(--brLight);
-        background: ${({ isChosen }) => (isChosen ? Colors.blue.main : 'var(--schedule)')};
+        background: ${({ isChosen }) => (isChosen ? Colors.blue.main : 'var(--block)')};
         overflow: hidden;
         position: relative;
 

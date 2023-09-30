@@ -4,7 +4,7 @@ import { ColumnProps } from '@ui/table/types'
 import React from 'react'
 import { ApplicationFileOutput } from '@api/model'
 import { Button } from '@ui/button'
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
@@ -55,7 +55,7 @@ const getApplicationsColumns = (): ColumnProps[] => {
         },
         { title: 'Примечание', field: 'comment', priority: 'five', width: '150px' },
         {
-            title: 'Файлы',
+            title: 'Файлы для скачивания',
             align: 'center',
             field: 'files_output',
             priority: 'five',

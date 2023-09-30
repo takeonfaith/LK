@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import styled from 'styled-components'
 
 const DragAndDropAreaWrapper = styled.label<{ showPulse: boolean; isActive: boolean; topPadding: boolean }>`
@@ -29,7 +29,7 @@ const DragAndDropAreaWrapper = styled.label<{ showPulse: boolean; isActive: bool
 
         .info-item {
             padding: 5px 10px;
-            background: var(--schedule);
+            background: var(--block);
             border-radius: 5px;
             display: flex;
             align-items: center;

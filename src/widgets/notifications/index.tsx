@@ -33,7 +33,7 @@ type NotificationType = 'notifications' | 'docs'
 
 const BASE_FILTER_LIST = [
     { id: 'all', title: 'Все' },
-    { id: 'current', title: 'Актуальные' },
+    { id: 'unread', title: 'Непрочитанные' },
 ]
 
 const NOTIFICATION_FILTER_LIST = [

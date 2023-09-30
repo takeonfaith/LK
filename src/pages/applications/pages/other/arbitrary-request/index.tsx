@@ -12,7 +12,7 @@ import { applicationsModel } from '@entities/applications'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
-const ApplicationForSuperiorRoom = () => {
+const ArbitraryRequestPage = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
     const [completed, setCompleted] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -54,4 +54,4 @@ const ApplicationForSuperiorRoom = () => {
     )
 }
 
-export default ApplicationForSuperiorRoom
+export default ArbitraryRequestPage

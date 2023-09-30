@@ -9,6 +9,7 @@ export interface SelectPage {
     icon?: React.ReactNode
     title: string
     children?: SelectPage[]
+    data?: string | number
 }
 
 const Select = (props: SelectProps) => {
@@ -36,7 +37,7 @@ const Select = (props: SelectProps) => {
             isActive={isActive ?? true}
             width={width}
         >
-            <Title size={5} align="left" bottomGap="5px" visible={!!title} required={required}>
+            <Title size={4} align="left" bottomGap="5px" visible={!!title} required={required}>
                 {title}
             </Title>
             <SelectHeaderWrapper multiple={multiple} appearance={appearance}>
@@ -92,12 +93,12 @@ const Select = (props: SelectProps) => {
                         </span>
                     </SelectItem>
                 )}
-                {currentItems.map(({ id, icon, title, children }) => (
+                {currentItems.map(({ id, icon, title, children, data }) => (
                     <SelectItem
                         key={title}
                         onClick={(e) => {
                             e.stopPropagation()
-                            handleSelect({ id, icon, title, children })
+                            handleSelect({ id, icon, title, children, data })
                         }}
                         isSelected={!multiple && !!selected && (selected as SelectPage).title.includes(title)}
                         leadingToSelected={selectedRoute.includes(id.toString())}

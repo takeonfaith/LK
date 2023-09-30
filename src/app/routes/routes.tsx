@@ -1,8 +1,8 @@
 import React from 'react'
-import { isProduction } from '@consts'
+import { isProduction } from '@shared/constants'
 import FullTimePartTimeFormPage from '@pages/applications/pages/campus-management/full-time-part-time-form'
 import PageIsNotReady from '@pages/page-is-not-ready'
-import { BiCheckCircle, BiIdCard, BiInfoCircle } from 'react-icons/bi'
+import { BiCheckCircle, BiIdCard, BiInfoCircle, BiRuble, BiStar } from 'react-icons/bi'
 import { FaRegLightbulb } from 'react-icons/fa'
 import { FiBriefcase, FiFileText } from 'react-icons/fi'
 import { MdOutlineBedroomChild } from 'react-icons/md'
@@ -10,6 +10,7 @@ import {
     generalHiddenRoutes,
     generalRoutes,
     IRoutes,
+    PAYMENTS_ROUTE,
     PROJECT_ACTIVITIES_ROUTE,
     USEFUL_INFO_ROUTE,
 } from './general-routes'
@@ -35,21 +36,26 @@ import {
     FinancialSupport,
     IncreasedStateAcademicScholarship,
     MilitaryRegistrationCard,
-    MilitaryRegistrationDocuments,
     PaymentRecipient,
     PreferentialAccommodationPage,
     ProjectActivitiesPage,
     RegularAccommodationPage,
     RelocationInsideHostelPage,
     RelocationToAnotherHostelPage,
+    AccommodationForGraduatesPage,
     RestoringTheMagneticPass,
     RetakeForDiploma,
     StateAccreditation,
     StudentStatus,
     TerminationOfEmploymentContractPage,
     ArbitraryRequestPage,
+    MilitaryRegistrationDocuments,
 } from './other-routes/pages'
 import { HelpfulInformation } from './teacher-routes/pages'
+import { User } from '@shared/api/model'
+import PaymentsPage from '@pages/payments'
+import { EndDateSuperiorRoom } from '@pages/application-for-superior-room/lib/get-status'
+import MilitaryRegistration from '@pages/applications/pages/mobilization-department/military-registration'
 
 export const APPLICATIONS_ROUTE = '/applications'
 export const JOB_ROUTE = '/job'
@@ -73,10 +79,12 @@ export const FAMILY_ROOM = APPLICATIONS_ROUTE + '/family-room'
 export const TERMINATION_OF_EMPLOYMENT_CONTRACT = APPLICATIONS_ROUTE + '/termination-of-employment-contract'
 export const RELOCATION_INSIDE_HOSTEL = APPLICATIONS_ROUTE + '/relocation-inside-hostel'
 export const RELOCATION_TO_ANOTHER_HOSTEL = APPLICATIONS_ROUTE + '/relocation-to-another-hostel'
+export const ACCOMMODATION_FOR_GRADUATES = APPLICATIONS_ROUTE + '/accommodation-for-graduates'
 export const PAYMENT_RECIPIENT = APPLICATIONS_ROUTE + '/payment-recipient'
 export const RESTORING_THE_MAGNETIC_PASS = APPLICATIONS_ROUTE + '/restoring-the-magnetic-pass'
 export const RETAKE_FOR_DIPLOMA = APPLICATIONS_ROUTE + '/retake-for-diploma'
 export const MILITARY_REGISTRATION_DOCUMENTS = APPLICATIONS_ROUTE + '/military-registration-documents'
+export const MILITARY_REGISTRATION = APPLICATIONS_ROUTE + '/military-registration'
 export const FINANCIAL_SUPPORT = APPLICATIONS_ROUTE + '/financial-support'
 export const FINANCIAL_ASSISTANCE = APPLICATIONS_ROUTE + '/financial-assistance'
 export const INCREASED_STATE_ACADEMIC_SCHOLARSHIP = APPLICATIONS_ROUTE + '/increased-state-academic-scholarship'
@@ -101,11 +109,22 @@ export const privateRoutes: () => IRoutes = () => ({
         Component: ApplicationsPage,
         color: 'red',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         pageSize: 'big',
         keywords: ['справки', 'справка', 'заявления', 'заявление'],
     },
     ...generalRoutes,
+    payments: {
+        id: 'payments',
+        title: 'Договоры и оплаты',
+        icon: <BiRuble />,
+        path: PAYMENTS_ROUTE,
+        Component: PaymentsPage,
+        color: 'green',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        keywords: ['оплата'],
+    },
     dormitory: {
         id: 'dormitory',
         title: 'Список ожидания на заселение в общежитие',
@@ -159,11 +178,11 @@ export const privateRoutes: () => IRoutes = () => ({
         color: 'blue',
         isTemplate: false,
         group: 'GENERAL',
-        show: false,
+        show: new Date() > new Date(EndDateSuperiorRoom) ? false : true,
     },
 })
 
-export const hiddenRoutes: () => IRoutes = () => ({
+export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
     ...generalHiddenRoutes,
     'clarification-of-passport-data': {
         id: 'clarification-of-passport-data',
@@ -173,7 +192,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ClarificationOfPassportDataApplication,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -187,13 +206,12 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ArbitraryRequestPage,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
         fallbackPrevPage: APPLICATIONS_ROUTE,
     },
-
     'social-scollarship': {
         id: 'social-scollarship',
         title: 'Социальная стипендия',
@@ -202,7 +220,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: isProduction ? ApplicationRedirect : ApplicationForSocialScrollarship,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -216,7 +234,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationForCertificateOfAttendance,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -230,7 +248,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationSocialAgencies,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -244,7 +262,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationPaperCall,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -346,7 +364,14 @@ export const hiddenRoutes: () => IRoutes = () => ({
         title: 'Переселение внутри общежития',
         icon: <BiIdCard />,
         path: RELOCATION_INSIDE_HOSTEL,
-        Component: RelocationInsideHostelPage,
+        Component: isProduction
+            ? () => (
+                  <PageIsNotReady
+                      isRedirectButtonVisible={false}
+                      errorText="Прием заявок на переселение внутри общежития будет осуществляться с 01.10.2023"
+                  />
+              )
+            : RelocationInsideHostelPage,
         color: 'blue',
         isTemplate: false,
         isSubPage: true,
@@ -356,10 +381,40 @@ export const hiddenRoutes: () => IRoutes = () => ({
     },
     'relocation-to-another-hostel': {
         id: 'relocation-to-another-hostel',
-        title: 'Переселение в другое общежитие (Подача заявок доступна с 08.06.2023 по 15.06.2023)',
+        title: 'Переселение в другое общежитие',
         icon: <BiIdCard />,
         path: RELOCATION_TO_ANOTHER_HOSTEL,
-        Component: isProduction ? ApplicationRedirect : RelocationToAnotherHostelPage,
+        Component: isProduction
+            ? () => (
+                  <PageIsNotReady
+                      isRedirectButtonVisible={false}
+                      errorText="Прием заявок на переселение в другое общежитие завершен 15.06.2023"
+                  />
+              )
+            : RelocationToAnotherHostelPage,
+        color: 'blue',
+        isTemplate: false,
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'accommodation-for-graduates': {
+        id: 'accommodation-for-graduates',
+        title: 'Предоставление права проживания в каникулярный период',
+        icon: BiIdCard,
+        path: ACCOMMODATION_FOR_GRADUATES,
+        Component:
+            ['4', '5', '6'].includes(user?.course ?? '') ||
+            user?.status?.toLocaleLowerCase()?.includes('окончил') ||
+            (user?.degreeLevel?.toLocaleLowerCase() === 'магистратура' && user?.course === '2')
+                ? AccommodationForGraduatesPage
+                : () => (
+                      <PageIsNotReady
+                          isRedirectButtonVisible={false}
+                          errorText={'Сервис доступен только выпускникам университета, проживающих в общежитии'}
+                      />
+                  ),
         color: 'blue',
         isTemplate: false,
         isSubPage: true,
@@ -404,6 +459,19 @@ export const hiddenRoutes: () => IRoutes = () => ({
         isSubPage: true,
         backButtonText: 'Назад к заявлениям',
         subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'military-registration': {
+        id: 'military-registration',
+        title: 'Воинский учет',
+        icon: <BiStar />,
+        path: MILITARY_REGISTRATION,
+        Component: isProduction ? ApplicationRedirect : MilitaryRegistration,
+        color: 'red',
+        isTemplate: false,
+        isSubPage: true,
+        backButtonText: 'Назад к заявлениям',
+        subPageHeaderTitle: 'Воинский учет',
         fallbackPrevPage: APPLICATIONS_ROUTE,
     },
     'retake-for-diploma': {
@@ -505,7 +573,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationHolidaysAfterTraining,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -519,7 +587,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationProvisionAcademicLeave,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -533,7 +601,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationIndependentlyDeduction,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',
@@ -547,7 +615,7 @@ export const hiddenRoutes: () => IRoutes = () => ({
         Component: ApplicationExtensionAttestation,
         color: 'blue',
         isTemplate: false,
-        group: 'OTHER',
+        group: 'FINANCES_DOCS',
         isSubPage: true,
         backButtonText: 'Назад к цифровым сервисам',
         subPageHeaderTitle: '',

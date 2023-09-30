@@ -1,24 +1,26 @@
 import { electronicInteractionModel } from '@entities/electronic-interaction'
 import PageBlock from '@shared/ui/page-block'
 import { Wrapper } from '@ui/atoms'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
+import { useUnit } from 'effector-react'
 import React from 'react'
 import { ElectornicAgreement } from 'widgets/electonic-agreement'
 
 const ElectronicInteractionAgreementPage = () => {
-    const { data, preparedData, error, loading } = electronicInteractionModel.selectors.useData()
-    const handleSubmit = async () => {
-        electronicInteractionModel.effects.postFx()
-    }
+    const [preparedData, error, loading] = useUnit([
+        electronicInteractionModel.stores.$electronicInteractionStore,
+        electronicInteractionModel.stores.$error,
+        electronicInteractionModel.stores.$loading,
+    ])
 
-    const load = () => electronicInteractionModel.effects.getFx()
+    const load = () => electronicInteractionModel.events.getElectronicInteraction()
 
     return (
-        <Wrapper load={load} loading={loading} error={error} data={data} loadEveryVisit>
+        <Wrapper load={load} loading={loading} error={error} data={preparedData} loadEveryVisit>
             <PageBlock>
                 {preparedData && (
-                    <ElectornicAgreement data={preparedData} submit={handleSubmit}>
-                        <p className="info-text">
+                    <ElectornicAgreement>
+                        <div className="info-text">
                             Я, <b>{preparedData.fio}</b>,
                             <p>
                                 <b>Паспорт: </b>
@@ -47,7 +49,7 @@ const ElectronicInteractionAgreementPage = () => {
                                 об электронном взаимодействии, опубликованного на официальном сайте Университета, и
                                 выражаю согласие на подписание электронных документов в личном кабинете.
                             </p>
-                        </p>
+                        </div>
                     </ElectornicAgreement>
                 )}
             </PageBlock>

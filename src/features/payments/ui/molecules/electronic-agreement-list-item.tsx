@@ -1,18 +1,19 @@
-import { paymentApi } from '@api'
 import { Agreement } from '@api/model'
+import { paymentsModel } from '@entities/payments'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
 import Accordion from '@ui/accordion/accordion'
-import { Divider, LinkButton, SubmitButton, Title } from '@ui/atoms'
+import { LinkButton, SubmitButton, Title } from '@ui/atoms'
 import { Message } from '@ui/message'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
+import { useUnit } from 'effector-react'
 import React from 'react'
 import { FiCheck, FiDownload } from 'react-icons/fi'
 import styled from 'styled-components'
-import { useElectronicAgreement } from 'widgets/electonic-agreement'
 
 interface Props {
     data: Agreement
+    isContractSigned: boolean
 }
 
 const SignBlock = styled.div`
@@ -25,15 +26,17 @@ const SignBlock = styled.div`
     }
 `
 
-const ElectronicAgreementListItem = ({ data }: Props) => {
+const ElectronicAgreementListItem = ({ data, isContractSigned }: Props) => {
     const { id, signed_user: signedUser, name, can_sign: isActive, date } = data
-
-    const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
-        isDone: signedUser,
-        submit: () => paymentApi.agreementSubmit(id),
-    })
+    const [done, completed, loading] = useUnit([
+        paymentsModel.stores.$done,
+        paymentsModel.stores.$completed,
+        paymentsModel.stores.$loading,
+    ])
 
     const height = signedUser || done ? 140 : 100
+    const handleSubmit = () => paymentsModel.events.signAgreement(id)
+    const setCompleted = paymentsModel.events.setCompleted
 
     return (
         <Accordion height={height} title={name} confirmed={signedUser || done}>
@@ -50,21 +53,24 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                         onClick={() => null}
                         width="40px"
                         icon={<FiDownload />}
+                        isActive={!!data.file}
                         // background="transparent"
                     />
-                    {!done && (
+                    {!(signedUser || done) && (
                         <SubmitButton
-                            text={!done ? 'Подписать' : 'Подписано'}
+                            text={!(signedUser || done) ? 'Подписать' : 'Подписано'}
                             action={handleSubmit}
                             isLoading={loading}
                             completed={completed}
-                            isDone={done}
+                            isDone={signedUser || done}
                             width="160px"
                             setCompleted={setCompleted}
-                            isActive={!done && isActive}
+                            isActive={!(signedUser || done) && isActive}
                             popUpFailureMessage={
                                 !isActive
-                                    ? 'Необходимо сначала подписать соглашение об электронном взаимодейтсвии'
+                                    ? isContractSigned
+                                        ? 'Необходимо сначала подписать соглашение об электронном взаимодейтсвии'
+                                        : 'Необходимо сначала подписать договор'
                                     : 'Согласие уже подписано'
                             }
                             popUpSuccessMessage="Согласие успешно подписано"
@@ -76,11 +82,10 @@ const ElectronicAgreementListItem = ({ data }: Props) => {
                         icon={<FiCheck />}
                         align="center"
                         width="130px"
-                        visible={done}
+                        visible={signedUser || done}
                     />
                 </Flex>
             </SignBlock>
-            {(done || signedUser) && <Divider width="100%" />}
             {(done || signedUser) && (
                 <Subtext>
                     Дата подписания: {localizeDate(data.signed_user_date || new Date())},{' '}

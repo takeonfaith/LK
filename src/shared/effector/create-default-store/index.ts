@@ -1,4 +1,4 @@
-import { DEFAULT_API_LOAD_ERROR_MESSAGE } from '@shared/consts'
+import { DEFAULT_API_LOAD_ERROR_MESSAGE } from '@shared/constants'
 import { createEffect, createEvent, createStore } from 'effector'
 import { useStore } from 'effector-react/compat'
 import { Args, EffectReturnType, TemplateStore, TemplateStoreOutput } from './types'
@@ -50,7 +50,12 @@ export const createDefaultStore = <APIDataType, OutputDataType = void, APIGetArg
 
     const postFx = createEffect(async (args: APIPostArgs): Promise<any> => {
         try {
-            await api.post?.(args)
+            const response = await api.post?.(args)
+
+            return {
+                data: response,
+                preparedData: (prepareData ? prepareData(response) : response) as PreparedDataType,
+            }
         } catch (error) {
             throw new Error(errorMessage(error as Error))
         }

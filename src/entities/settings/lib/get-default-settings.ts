@@ -1,4 +1,4 @@
-import { ThemeType, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { ThemeType, REQUIRED_LEFTSIDE_BAR_CONFIG } from '@shared/constants'
 import { NameSettings, Param, SettingsType } from '../model'
 
 const NOTIFICATIONS_DEFAULT_VALUE = {
@@ -40,6 +40,7 @@ const getDefaultSettings = (userId = ''): SettingsType => ({
                 pages: ['settings', 'profile', 'chat', 'schedule', 'payments', 'project-activity', 'all-students'],
                 widgetSchedule: true,
                 widgetPayment: true,
+                news: true,
             },
         },
         [NameSettings['settings-customize-menu']]: {

@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from '@shared/constants'
 import { Align, Direction } from '@ui/types'
 import styled from 'styled-components'
 
@@ -16,13 +17,14 @@ export const ButtonWrapper = styled.button<{
     isActive: boolean
     fixedInMobile?: boolean
     height?: string
+    flipped?: boolean
 }>`
     display: flex;
     align-items: center;
     justify-content: ${({ align = 'center' }) => align};
     border: none;
     color: ${({ textColor }) => (textColor ? textColor : 'var(--text)')};
-    background: ${({ isChosen, background }) => (isChosen ? 'var(--blue)' : background ?? 'var(--search)')};
+    background: ${({ isChosen, background }) => (isChosen ? 'var(--reallyBlue)' : background ?? 'var(--search)')};
     padding: ${({ padding }) => padding ?? '10px'};
     border-radius: 10px;
     cursor: pointer;
@@ -34,6 +36,7 @@ export const ButtonWrapper = styled.button<{
     flex-direction: ${({ direction }) => direction === 'vertical' && 'column'};
     opacity: ${({ isActive }) => (isActive ? 1 : 0.5)};
     height: ${({ height = '40px' }) => height};
+    ${({ flipped }) => flipped && 'transform: rotate(180deg);'};
 
     &:focus {
         outline: 4px solid var(--almostTransparentOpposite);
@@ -75,14 +78,13 @@ export const ButtonWrapper = styled.button<{
         }
     }
 
-    @media (max-width: 1000px) {
+    ${MEDIA_QUERIES.isTablet} {
         font-size: 12px;
         height: ${({ height = '36px' }) => height};
         position: ${({ fixedInMobile }) => fixedInMobile && 'absolute'};
         z-index: ${({ fixedInMobile }) => fixedInMobile && '5'};
         bottom: 10px;
         right: 10px;
-        padding: 0;
 
         .text {
             margin-top: ${({ direction, shrinkTextInMobile }) =>

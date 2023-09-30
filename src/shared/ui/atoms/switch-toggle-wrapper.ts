@@ -14,7 +14,7 @@ const SwitchToggleWrapper = styled.div`
         height: 100%;
         display: block;
         position: relative;
-        background: var(--search);
+        background: var(--theme-2);
         cursor: pointer;
         border-radius: 50px;
         padding: 4px;
@@ -23,7 +23,7 @@ const SwitchToggleWrapper = styled.div`
 
     .toggle-circle {
         height: 100%;
-        background: var(--theme);
+        background: #fff;
         width: 22px;
         display: block;
         border-radius: 100%;
@@ -31,9 +31,7 @@ const SwitchToggleWrapper = styled.div`
     }
 
     .checkbox:checked + .toggle-body .toggle-circle {
-        background: #fff;
         margin-left: calc(100% - 22px);
-        /* box-shadow: 0 0 30px #6290e4; */
     }
 
     .checkbox:checked + .toggle-body {

@@ -1,12 +1,12 @@
 import { TNotification, lkNotificationModel } from '@entities/lk-notifications'
 import getShortString from '@shared/lib/get-short-string'
-import localizeDate from '@shared/lib/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import AutoAccordion from '@shared/ui/auto-accordion'
 import { Button } from '@shared/ui/button'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'
 import Subtext from '@shared/ui/subtext'
-import { Size } from '@shared/ui/types'
+import { ExtSize, Size } from '@shared/ui/types'
 import React, { useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
@@ -14,7 +14,7 @@ import styled from 'styled-components'
 import { useModal } from 'widgets/modal/lib'
 import { iconObject } from './notification-icon'
 
-const NotificationItemStyled = styled(Link)<{ closed: boolean }>`
+const NotificationItemStyled = styled(Link)`
     width: 100%;
     display: flex;
     align-items: center;
@@ -42,7 +42,7 @@ const NotificationItemStyled = styled(Link)<{ closed: boolean }>`
     }
 
     &:hover {
-        background: var(--theme-mild-xxl);
+        background: var(--theme-1t);
     }
 `
 
@@ -51,23 +51,26 @@ const NotificationTitle = styled.div<{ fontSize: string }>`
     font-weight: 500;
 `
 
-type SizeObject = Record<Size, string>
+type SizeObject = Record<ExtSize, string>
 
 const titleSize: SizeObject = {
     small: '0.8rem',
     middle: '0.83rem',
+    large: '0.85rem',
     big: '0.86rem',
 }
 
 const textSize: SizeObject = {
     small: '0.75rem',
     middle: '0.78rem',
+    large: '0.79rem',
     big: '0.80rem',
 }
 
 const gapSize: SizeObject = {
     small: '0px',
     middle: '1px',
+    large: '2px',
     big: '3px',
 }
 
@@ -117,7 +120,7 @@ const NotificationItem = ({
 
     return (
         <AutoAccordion forceState={!removeButtonClicked} bottomMargin={bottomMargin}>
-            <NotificationItemStyled to={goTo ?? ''} onClick={handleClick} closed={removeButtonClicked}>
+            <NotificationItemStyled to={goTo ?? ''} onClick={handleClick}>
                 <span className="left-icon">{iconObject()[type]}</span>
                 <div className="content">
                     <Subtext fontSize="0.7rem">

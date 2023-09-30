@@ -1,5 +1,5 @@
 import { IGrade } from '@api/model/acad-performance'
-import { GradeByScore } from '@consts'
+import { GradeByScore } from '@shared/constants'
 import findProgressBarColor from '@features/acad-performance/lib/find-progress-bar-color'
 import React from 'react'
 import { HiOutlineCheck, HiOutlineX } from 'react-icons/hi'
@@ -13,9 +13,7 @@ const Container = styled.div<Props>`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-
-    color: ${({ grade }) => findProgressBarColor(grade)};
+    color: ${({ grade }) => findProgressBarColor(grade) as string};
 
     width: 22px;
     height: 22px;

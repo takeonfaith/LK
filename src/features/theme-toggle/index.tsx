@@ -1,6 +1,6 @@
 import { settingsModel } from '@entities/settings'
 import { IconWrapper } from '@pages/profile/ui/top/styles'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import useTheme from '@shared/lib/hooks/use-theme'
 import { Button } from '@shared/ui/button'
 import ToggleArea, { ToggleItem } from '@shared/ui/organisms/toggle-area'
@@ -65,7 +65,7 @@ const ThemeToggle = ({ type, onClick }: Props) => {
                 notActiveClickMessage="У вас включена тема по расписанию. Если хотите управлять темой вручную, перейдите в настройки -> внешний вид"
                 isActive={!apparanceSettings.scheduledLightTheme}
                 text={text}
-                background="var(--schedule)"
+                background="var(--block)"
                 icon={icon}
                 width="100%"
                 align="left"

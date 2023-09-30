@@ -2,7 +2,7 @@ import getToken from '@shared/lib/token'
 import { $api } from './config'
 import { NotificationType } from '@entities/lk-notifications'
 
-type NotificationsResponse = {
+export type NotificationsResponse = {
     id: NotificationType
     type: NotificationType
     title: string

@@ -38,8 +38,8 @@ const CreateApplicationListWrapper = styled.div`
                 display: flex;
                 flex-direction: column;
                 width: calc(50% - 5px);
-                background: var(--schedule);
-                box-shadow: var(--schedule-shadow);
+                background: var(--block);
+                box-shadow: var(--block-shadow);
                 padding: 10px;
                 border-radius: var(--brLight);
 

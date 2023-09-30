@@ -1,34 +1,18 @@
-//import { getUserToken } from '@api/user-api'
-import { OLD_LK_URL } from '@consts'
-import { getJwtToken } from '@entities/user/lib/jwt-token'
+import { OLD_LK_URL } from '@shared/constants'
 import axios, { AxiosError } from 'axios'
+import { addAuthHeaderToRequests } from './utils'
 
 export const API_BASE_URL = `${OLD_LK_URL}/lk_api.php`
-export const API_HR_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/`
-export const API_WORKER_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/Dismissal.GetAllHistory`
-export const API_WORKER_STATUSES_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders/Dismissal.AllHistory`
+export const API_HR_URL = `https://api.mospolytech.ru/serviceforfrontpersonnelorders`
 
 export const $api = axios.create({ baseURL: API_BASE_URL, withCredentials: true })
-export const $workerApi = axios.create({ baseURL: API_WORKER_URL, timeout: 30000 })
-export const $workerStatusesApi = axios.create({ baseURL: API_WORKER_STATUSES_URL })
 export const $hrApi = axios.create({ baseURL: API_HR_URL })
+$hrApi.interceptors.request.use(addAuthHeaderToRequests)
 
-$workerApi.interceptors.request.use((config) => {
-    if (!config.headers) config.headers = {}
-    config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
-    return config
-})
-$workerStatusesApi.interceptors.request.use((config) => {
-    if (!config.headers) config.headers = {}
-    config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
-    return config
-})
-
-$hrApi.interceptors.request.use((config) => {
-    if (!config.headers) config.headers = {}
-    config.headers.Authorization = `Bearer ${JSON.parse(getJwtToken() || '{}')}`
-    return config
-})
+// Uncomment when ready
+// $hrApi.interceptors.response.use((response) => {
+//     return response
+// }, authResponseInterceptor)
 
 export function isAxiosError(error: Error): error is AxiosError {
     return (error as AxiosError).isAxiosError

@@ -4,6 +4,7 @@ import { UserApplication } from '@api/model'
 import getAddressFields from '@features/applications/lib/get-address-fields'
 import getTeacherSubdivisions from '@pages/teachers-applications/lib/get-teacher-subdivisions'
 import getMethodObtainingFields from '@features/applications/lib/get-method-obtaining-fields'
+import { getLastYearForPeriod } from '@pages/teachers-applications/lib/get-last-year-for-period'
 
 const getForm = (data: UserApplication): IInputArea => {
     return {
@@ -11,12 +12,14 @@ const getForm = (data: UserApplication): IInputArea => {
         data: [
             ...getBasicFieldsApplicationTeacher(data),
             {
-                title: 'Период справки',
-                type: 'date',
-                value: '',
-                editable: true,
+                title: 'Период',
+                type: 'select',
+                value: null,
                 fieldName: 'period',
+                editable: true,
+                width: '100',
                 required: true,
+                items: getLastYearForPeriod(),
             },
             ...getMethodObtainingFields(),
             ...getTeacherSubdivisions(),

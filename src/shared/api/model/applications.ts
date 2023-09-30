@@ -88,7 +88,7 @@ export interface dismissalOrder {
     display: boolean
     displayDate: boolean
     isError: boolean
-    error: string
+    error: string | null
     orderDate: string
     orderStatus: string
     downloadable: boolean
@@ -102,7 +102,7 @@ export interface dismissalApplications {
     display: boolean
     displayDate: boolean
     isError: boolean
-    error: string
+    error: string | null
     status: string
     signDate: string
     employeeSigningStatus: string
@@ -114,7 +114,7 @@ export interface WorkerApplication {
     jobGuid: string
     jobTitle: string
     subDivision: string
-    rate: string
+    rate: number
     isDismissal: boolean
     canBeRepeated: boolean
     dismissalApplications: dismissalApplications[]

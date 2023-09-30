@@ -21,7 +21,7 @@ const LogoutButton = () => {
             onClick={handleClick}
             text="Выйти"
             width="100%"
-            background="var(--schedule)"
+            background="var(--block)"
         />
     )
 }

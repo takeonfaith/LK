@@ -9,8 +9,8 @@ const CustomBlock = styled.div`
     padding: 16px;
     margin: 1px;
     border-radius: var(--brLight);
-    background: var(--form);
-    box-shadow: var(--schedule-shadow);
+    background: var(--block-content);
+    box-shadow: var(--block-shadow);
     padding: 16px;
     a {
         font-size: 0.95rem;

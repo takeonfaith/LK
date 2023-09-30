@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { TSettingsFields } from '../../model'
 
 const TextFieldStyled = styled.div`
+    cursor: pointer;
     width: 100%;
     display: flex;
     align-items: center;
@@ -14,7 +15,7 @@ const TextFieldStyled = styled.div`
     border-radius: var(--brLight);
 
     &:hover {
-        background: var(--mild-theme);
+        background: var(--theme-1);
     }
 
     .icon {

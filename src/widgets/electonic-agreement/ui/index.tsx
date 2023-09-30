@@ -1,15 +1,16 @@
 import { Button, Divider, LinkButton, SubmitButton } from '@ui/atoms'
 import { Message } from '@ui/message'
-import localizeDate from '@utils/localize-date'
+import localizeDate from '@shared/lib/dates/localize-date'
 import React from 'react'
 import { FiCheck, FiDownload } from 'react-icons/fi'
 import { useModal } from 'widgets'
-import { useElectronicAgreement } from '../hooks/use-electronic-agreement'
 import { MistakeModal } from './atoms'
 import Flex from '@shared/ui/flex'
 import styled from 'styled-components'
 import Subtext from '@shared/ui/subtext'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
+import { electronicInteractionModel } from '@entities/electronic-interaction'
+import { useUnit } from 'effector-react'
 
 const ElectornicAgreementStyled = styled.div`
     .info-text {
@@ -24,19 +25,21 @@ const ElectornicAgreementStyled = styled.div`
 
 interface Props {
     children: React.ReactChild
-    submit: () => Promise<void> | void
-    data: any
-    setData?: React.Dispatch<any>
-    isDone?: boolean
 }
 
-const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }: Props) => {
+const ElectornicAgreement = ({ children }: Props) => {
     const { open } = useModal()
-    const { handleSubmit, loading, done, completed, setCompleted } = useElectronicAgreement({
-        isDone,
-        submit,
-        setData,
-    })
+    const [done, completed, workerLoading, data] = useUnit([
+        electronicInteractionModel.stores.$done,
+        electronicInteractionModel.stores.$completed,
+        electronicInteractionModel.stores.$workerLoading,
+        electronicInteractionModel.stores.$electronicInteractionStore,
+    ])
+
+    const handleSubmit = () => {
+        electronicInteractionModel.events.postElectronicInteraction()
+    }
+    const setCompleted = electronicInteractionModel.events.changeCompleted
 
     if (!data) return null
 
@@ -65,7 +68,7 @@ const ElectornicAgreement = ({ children, data, setData, submit, isDone = false }
                 <SubmitButton
                     text={!data.status && !done ? 'Подписать' : 'Подписано'}
                     action={handleSubmit}
-                    isLoading={loading}
+                    isLoading={workerLoading}
                     completed={completed}
                     isDone={done || data.status}
                     setCompleted={setCompleted}

@@ -1,8 +1,9 @@
 import { useStore } from 'effector-react/compat'
 import { createEvent, createStore } from 'effector'
 import { createEffect } from 'effector'
-import { ThemeType } from '@consts'
+import { ThemeType } from '@shared/constants'
 import getDefaultSettings from '../lib/get-default-settings'
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 
 export enum NameSettings {
     'settings-home-page' = 'settings-home-page',
@@ -62,7 +63,7 @@ const actualizeSettings = (settings: Param | undefined, defaultSettings: Param) 
 
 const getLocalSettingsFx = createEffect((userId: string): Param => {
     currentUser = userId
-    const localSettings = JSON.parse(localStorage.getItem('new-settings') ?? '{}')[currentUser] as Param
+    const localSettings = JSON.parse(localStorage.getItem(BrowserStorageKey.NewSettings) ?? '{}')[currentUser] as Param
     return actualizeSettings(localSettings, getDefaultSettings(userId)[userId])
 })
 
@@ -108,9 +109,9 @@ const $settingsStore = createStore<SettingsStore>(DEFAULT_STORE)
 
 $settingsStore.watch((state) => {
     if (state !== DEFAULT_STORE && !!currentUser) {
-        const allSettings = JSON.parse(localStorage.getItem('new-settings') ?? JSON.stringify({}))
+        const allSettings = JSON.parse(localStorage.getItem(BrowserStorageKey.NewSettings) ?? JSON.stringify({}))
         allSettings[currentUser] = state.settings[currentUser]
-        localStorage.setItem('new-settings', JSON.stringify(allSettings))
+        localStorage.setItem(BrowserStorageKey.NewSettings, JSON.stringify(allSettings))
     }
 })
 

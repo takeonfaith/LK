@@ -1,5 +1,5 @@
 import React from 'react'
-import { Colors, IColors } from '@consts'
+import { Colors, IColors } from '@shared/constants'
 import { settingsModel } from '@entities/settings'
 import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 import deletePageFromHome from '@features/all-pages/lib/delete-page-from-home'
@@ -20,7 +20,7 @@ export const PageLinkWrapper = styled(BlockWrapper)<{ color: string; isVertical:
     cursor: pointer;
     text-decoration: none;
     border-radius: var(--brLight);
-    background: var(--form);
+    background: var(--block-content);
 
     .new {
         position: absolute;
@@ -184,7 +184,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
                         width="80px"
                         align="center"
                         textColor="var(--red)"
-                        background="var(--schedule)"
+                        background="var(--block)"
                         onClick={() => deletePageFromHome(id, settings)}
                     />
                 ) : (
@@ -194,7 +194,7 @@ const PageLinkContent = (props: PageLinkProps & { maxWordLength: number }) => {
                         width="80px"
                         textColor="var(--green)"
                         align="center"
-                        background="var(--schedule)"
+                        background="var(--block)"
                         onClick={() => addPageToHome(id, settings)}
                     />
                 )

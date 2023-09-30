@@ -1,7 +1,10 @@
 import { AcadPerformance } from '@api/model/acad-performance'
+import { SubjectIconAndBackground } from '@features/schedule/ui/subject/subject-icon-and-background'
+import { IColorPalette } from '@shared/constants'
+import localizeDate from '@shared/lib/dates/localize-date'
+import { Title } from '@shared/ui/title'
 import KeyValue from '@ui/atoms/key-value'
 import findSemestr from '@utils/find-semestr'
-import localizeDate from '@utils/localize-date'
 import React from 'react'
 import styled from 'styled-components'
 import { User } from 'widgets'
@@ -14,13 +17,24 @@ const Container = styled.div`
     }
 `
 
+const TitleWrapper = styled.div`
+    margin: 20px 0;
+`
+
 interface Props {
     item: AcadPerformance
+    color: IColorPalette
 }
 
-const SubjectModal = ({ item }: Props) => {
+const SubjectModal = ({ item, color }: Props) => {
     return (
         <Container>
+            <SubjectIconAndBackground subjectName={item.name} color={color} noPadding={true} />
+            <TitleWrapper>
+                <Title size={3} align="left">
+                    {item.name}
+                </Title>
+            </TitleWrapper>
             <KeyValue keyStr="Курс" value={item.course} />
             <KeyValue keyStr="Форма аттестации" value={item.exam_type} />
             <KeyValue keyStr="Дата проведения" value={localizeDate(item.exam_date)} />

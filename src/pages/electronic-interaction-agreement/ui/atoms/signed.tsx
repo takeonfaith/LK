@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import React from 'react'
 import { FiCheck } from 'react-icons/fi'
 import styled from 'styled-components'

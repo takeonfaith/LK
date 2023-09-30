@@ -19,7 +19,7 @@ type GeneralAccountFields = {
 export type StudentAccount = {
     status?: string
     group?: string
-    course?: number
+    course?: string
     educationForm?: EducationFormT
     finance?: string
     degreeLevel?: string
@@ -33,6 +33,7 @@ export type GeneralAccount = GeneralAccountFields & StudentAccount & StaffAccoun
 
 export type User = StudentAccount & {
     id: string
+    guid: string
     name: string
     fullName: string
     avatar: string

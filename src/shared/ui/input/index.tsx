@@ -1,4 +1,4 @@
-import { Colors } from '@consts'
+import { Colors } from '@shared/constants'
 import { Button } from '@ui/button'
 import { Title } from '@ui/title'
 import React, { ForwardedRef, HTMLInputTypeAttribute, forwardRef } from 'react'
@@ -41,7 +41,7 @@ const InputWrapper = styled.div<{
         border: none;
         color: var(--text);
         outline: none;
-        background: ${({ inputAppearance }) => (inputAppearance ? 'var(--search)' : 'transparent')};
+        background: ${({ inputAppearance }) => (inputAppearance ? 'var(--theme-1)' : 'transparent')};
         height: 100%;
         width: 100%;
         padding: 10px;
@@ -113,6 +113,7 @@ interface Props {
     autocomplete?: boolean
     danger?: boolean
     alertMessage?: string
+    maxLength?: number
     minValue?: number | string
     maxValue?: number | string
     loading?: boolean
@@ -140,7 +141,9 @@ const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInpu
         autocomplete = false,
         minValue = undefined,
         maxValue = undefined,
+        maxLength = undefined,
     } = props
+
     const { inputType, buttonOnClick, danger, handleOnChange, phoneMaskKeyDown } = useInput(
         value,
         setValue,
@@ -170,6 +173,7 @@ const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInpu
                 id={placeholder}
                 min={minValue}
                 max={maxValue}
+                maxLength={maxLength}
                 step={maxValue ? 0.1 : undefined}
                 type={inputType}
                 placeholder={placeholder}

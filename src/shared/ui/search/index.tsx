@@ -1,5 +1,5 @@
 import PerhapsYouMeant from '@features/perhaps-you-meant'
-import { Colors } from '@shared/consts'
+import { Colors } from '@shared/constants'
 import useOnClickOutside from '@shared/lib/hooks/use-on-click-outside'
 import limitNumber from '@shared/lib/limit-number'
 import React, { useEffect, useRef, useState } from 'react'
@@ -49,7 +49,7 @@ const HintItem = styled.div<{ selected: boolean }>`
     }
 
     &:hover {
-        background: ${({ selected }) => (selected ? Colors.blue.main : 'var(--mild-theme)')};
+        background: ${({ selected }) => (selected ? Colors.blue.main : 'var(--theme-1)')};
     }
 `
 
@@ -114,7 +114,7 @@ const Search = ({
             if (typeof currentSelectedHint === 'number')
                 setCurrentSelectedHint(limitNumber(currentSelectedHint - 1, (hints?.length ?? 1) - 1, 0))
         } else if (e.key === 'Enter') {
-            setValue(hints?.[currentSelectedHint ?? 0].title ?? '')
+            hints?.[currentSelectedHint ?? 0].title && setValue(hints?.[currentSelectedHint ?? 0].title)
             setOpenHints(false)
             onHintClick?.(hints?.[currentSelectedHint ?? 0])
         } else setCurrentSelectedHint(0)

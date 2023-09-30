@@ -1,5 +1,5 @@
-import { SCHEDULE_ROUTE } from '@app/routes/general-routes'
-import { Title } from '@shared/ui/title'
+import { SCHEDULE_FILTER_ROUTE } from '@app/routes/general-routes'
+import { getEnrichedTemplatePath } from '@entities/menu/lib/get-enriched-template-path'
 import React from 'react'
 import { BiGroup } from 'react-icons/bi'
 import { FiChevronRight } from 'react-icons/fi'
@@ -40,7 +40,7 @@ const GroupItem = styled(Link)`
     }
 
     &:hover {
-        background: var(--theme-mild-xxl);
+        background: var(--theme-1t);
     }
 `
 
@@ -52,12 +52,13 @@ const ListOfGroups = ({ groups }: Props) => {
     const { close } = useModal()
     return (
         <ListOfGroupsStyled>
-            <Title size={3} align="left">
-                Группы
-            </Title>
             {groups.map((group) => {
                 return (
-                    <GroupItem key={group} to={`${SCHEDULE_ROUTE}/${group}`} onClick={close}>
+                    <GroupItem
+                        key={group}
+                        to={getEnrichedTemplatePath(SCHEDULE_FILTER_ROUTE, { page: 'current', filter: group.trim() })}
+                        onClick={close}
+                    >
                         <div className="start">
                             <BiGroup />
                             {group}

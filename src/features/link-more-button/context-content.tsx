@@ -12,7 +12,7 @@ import addPageToHome from '@features/all-pages/lib/add-page-to-home'
 import addPageToSidebar from '@features/all-pages/lib/add-page-to-sidebar'
 import { menuModel } from '@entities/menu'
 import deletePageFromSidebar from '@features/all-pages/lib/delete-page-from-sidebar'
-import { REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@consts'
+import { REQUIRED_LEFTSIDE_BAR_CONFIG, REQUIRED_TEACHER_LEFTSIDE_BAR_CONFIG } from '@shared/constants'
 import { userModel } from '@entities/user'
 
 const ContextContentWrapper = styled.div`
@@ -69,7 +69,7 @@ const ContextContent = (props: IRoute) => {
                     icon={<FiXCircle />}
                     width="100%"
                     align="left"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     onClick={() => {
                         deletePageFromHome(id, settings)
                         contextMenuModel.events.close()
@@ -81,7 +81,7 @@ const ContextContent = (props: IRoute) => {
                     icon={<FiPlus />}
                     width="100%"
                     align="left"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     onClick={handleAddToHome}
                 />
             )}
@@ -91,7 +91,7 @@ const ContextContent = (props: IRoute) => {
                     icon={<FiPlus />}
                     width="100%"
                     align="left"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     onClick={handleAddToMenu}
                 />
             ) : (
@@ -100,7 +100,7 @@ const ContextContent = (props: IRoute) => {
                     icon={<FiXCircle />}
                     width="100%"
                     align="left"
-                    background="var(--schedule)"
+                    background="var(--block)"
                     onClick={() => deletePageFromSidebar(id, settings, requiredLeftsideBarItems)}
                 />
             )}

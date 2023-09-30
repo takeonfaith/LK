@@ -1,54 +1,106 @@
+import { HR_APPLICATIONS_ROUTE } from '@app/routes/teacher-routes'
 import { applicationsModel } from '@entities/applications'
-import globalAppSendForm from '@pages/applications/lib/global-app-send-form'
+import { SpecialFieldsNameConfig } from '@entities/applications/consts'
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
-import { FormBlock, SubmitButton } from '@ui/atoms'
+import sendHrFormWorkTransfer from '@pages/hr-applications/lib/send-hr-form-work-transfer'
+import { $hrDivisions, $hrDivisionsSuggestions } from '@pages/hr-applications/model/divisions'
+import { Button, FormBlock, SubmitButton } from '@ui/atoms'
 import InputArea from '@ui/input-area'
-import { IInputArea } from '@ui/input-area/model'
+import { IInputArea, IInputAreaData } from '@ui/input-area/model'
 import { ApplicationFormCodes } from '@utility-types/application-form-codes'
 import checkFormFields from '@utils/check-form-fields'
+import { useUnit } from 'effector-react'
 import React, { useEffect, useState } from 'react'
+import { FiChevronLeft } from 'react-icons/fi'
+import { useHistory, useParams } from 'react-router'
+import { bufferWorkTransferModel } from '../buffer-work-transfer/model'
 import getForm from './lib/get-form'
-import getNewPost from './lib/get-new-post'
-import getOldPost from './lib/get-old-post'
+import getPostAfterTransfer from './lib/get-post-after-transfer'
 
 type LoadedState = React.Dispatch<React.SetStateAction<IInputArea>>
 
 const WorkTransfer = () => {
     const [form, setForm] = useState<IInputArea | null>(null)
+    const suggestions = useUnit($hrDivisionsSuggestions)
     const {
-        data: { dataUserApplication },
+        data: { dataUserApplication, dataWorkerApplication },
     } = applicationsModel.selectors.useApplications()
+    const { loading: loading } = bufferWorkTransferModel.selectors.useBufferWorkTransfer()
     const [completed, setCompleted] = useState(false)
-    const [loading, setLoading] = useState(false)
-    const [oldPost, setOldPost] = useState<IInputArea | null>(null)
-    const [newPost, setNewPost] = useState<IInputArea | null>(null)
+    const [partTimeType, setPartTimeType] = useState<any | null>(null)
+    const [employment, setEmployment] = useState<any | null>(null)
+    const [newPost, setNewPost] = useState<string | null>(null)
+    const [newPlaceOfWork, setNewPlaceOfWork] = useState<string | null>(null)
+    const [newRate, setNewRate] = useState<any>(null)
+    const [transferDate, setTransferDate] = useState<string | null>(null)
+    const [specialFieldsName, setSpecialFieldsName] = useState<SpecialFieldsNameConfig>({})
+    const divisions = useUnit($hrDivisions)
     const isDone = completed ?? false
+    const history = useHistory()
+    const { id } = useParams<{ id: string }>()
+    const currentIndex = +id
+    useEffect(() => {
+        if (!!form && !!dataUserApplication) {
+            setSpecialFieldsName(getPostAfterTransfer(form.data as IInputAreaData[]))
+        }
+    }, [form])
 
     useEffect(() => {
-        if (!!dataUserApplication) {
-            setForm(getForm(dataUserApplication))
-            setOldPost(getOldPost())
-            setNewPost(getNewPost())
+        if (!!dataUserApplication && !!dataWorkerApplication && !loading) {
+            setForm(
+                getForm(
+                    dataUserApplication,
+                    dataWorkerApplication,
+                    currentIndex,
+                    employment,
+                    setEmployment,
+                    newPost,
+                    setNewPost,
+                    newPlaceOfWork,
+                    setNewPlaceOfWork,
+                    newRate,
+                    setNewRate,
+                    transferDate,
+                    setTransferDate,
+                    partTimeType,
+                    setPartTimeType,
+                    suggestions,
+                ),
+            )
         }
-    }, [dataUserApplication])
-
+    }, [
+        dataUserApplication,
+        currentIndex,
+        loading,
+        employment,
+        newPost,
+        newPlaceOfWork,
+        newRate,
+        transferDate,
+        partTimeType,
+    ])
     return (
         <BaseApplicationWrapper isDone={isDone}>
-            {!!form && !!setForm && !!oldPost && !!newPost && (
+            {!!form && !!setForm && (
                 <FormBlock>
-                    <InputArea {...form} collapsed={isDone} setData={setForm as LoadedState} />
-                    {oldPost && <InputArea {...oldPost} collapsed={isDone} setData={setOldPost as LoadedState} />}
-                    {newPost && <InputArea {...newPost} collapsed={isDone} setData={setNewPost as LoadedState} />}
+                    <Button
+                        text="Назад к кадровым заявлениям"
+                        icon={<FiChevronLeft />}
+                        onClick={() => history.push(HR_APPLICATIONS_ROUTE)}
+                        background="transparent"
+                        textColor="var(--blue)"
+                    />
+                    <InputArea
+                        {...form}
+                        collapsed={isDone}
+                        setData={setForm as LoadedState}
+                        specialFieldsNameConfig={specialFieldsName}
+                    />
 
                     <SubmitButton
                         text={'Отправить'}
                         action={() =>
-                            globalAppSendForm(
-                                ApplicationFormCodes.DISMISSAL,
-                                [form, oldPost, newPost],
-                                setLoading,
-                                setCompleted,
-                            )
+                            sendHrFormWorkTransfer(ApplicationFormCodes.HOLIDAY_WORK, [form], setCompleted, divisions)
                         }
                         isLoading={loading}
                         completed={completed}
@@ -68,6 +120,6 @@ const WorkTransfer = () => {
 
 export default WorkTransfer
 
-/*<TemplateFormPage model={teacherStatementModel}
-            getForm={getForm(dataUserApplication)}
+/*<TemplateFormPage model={teacherStatementModel} 
+            getForm={getForm(dataUserApplication)} 
             goBack="Назад к цифровым сервисам" />*/

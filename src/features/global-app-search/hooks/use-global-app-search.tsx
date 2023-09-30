@@ -5,6 +5,7 @@ import getSearchHistory from '../lib/get-search-history'
 import getDataLength from '../lib/get-data-length'
 import isValidEnglishText from '@shared/ui/search/lib/is-valid-english-text'
 import englishToRussianKeyboard from '@shared/ui/search/lib/english-to-russian-keyboard'
+import { BrowserStorageKey } from '@shared/constants/browser-storage-key'
 
 const useGlobalAppSearch = () => {
     const config = useSearchConfig()
@@ -26,7 +27,7 @@ const useGlobalAppSearch = () => {
                 searchHistory.pop()
             }
 
-            localStorage.setItem('search_history', JSON.stringify(searchHistory))
+            localStorage.setItem(BrowserStorageKey.SearchHistory, JSON.stringify(searchHistory))
         }
     }
 

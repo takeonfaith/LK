@@ -14,7 +14,7 @@ const ListOfChatsWrapper = styled.div<{ isOpen: boolean; chatId?: string }>`
     width: ${({ isOpen }) => (isOpen ? '350px' : '115px')};
     transition: 0.2s width, 0.2s min-width, 0.2s padding, 0.2s opacity;
     height: 100%;
-    background: var(--schedule);
+    background: var(--block);
     color: var(--text);
     box-shadow: 1px 0 5px #00000036;
 

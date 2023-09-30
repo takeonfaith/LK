@@ -8,7 +8,7 @@ import styled from 'styled-components'
 const StoryCardWrapper = styled(BlockWrapper)<{ color?: string; seen?: boolean; background?: string }>`
     overflow: hidden;
     position: relative;
-    background: ${({ background }) => background ?? 'var(--schedule)'};
+    background: ${({ background }) => background ?? 'var(--block)'};
     cursor: pointer;
     border-radius: var(--brLight);
     width: ${({ width }) => width};
