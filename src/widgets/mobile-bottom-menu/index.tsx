@@ -41,6 +41,7 @@ const MobileBottomMenu = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
+    const location = useLocation()
 
     if (!allRoutes || !user) {
         return (
@@ -53,8 +54,6 @@ const MobileBottomMenu = () => {
             </MobileBottomMenuWrapper>
         )
     }
-
-    const location = useLocation()
 
     const config = user?.user_status === 'stud' ? DEFAULT_STUDENT_MOBILE_CONFIG : DEFAULT_STAFF_MOBILE_CONFIG
 
