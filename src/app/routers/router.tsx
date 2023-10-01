@@ -33,12 +33,15 @@ const Router = () => {
     }, [isAuthenticated, user])
 
     useEffect(() => {
-        if (user && settings) {
-            menuModel.events.defineMenu({
-                user,
-                adminLinks: data,
-                homeRoutes: settings['settings-home-page'].property['pages'] as string[],
-            })
+        if (user) {
+            if (!settings) settingsModel.effects.getLocalSettingsFx(user.id)
+            else {
+                menuModel.events.defineMenu({
+                    user,
+                    adminLinks: data,
+                    homeRoutes: settings['settings-home-page'].property['pages'] as string[],
+                })
+            }
         }
     }, [user, data, settings])
 
