@@ -335,7 +335,6 @@ export const teachersPrivateRoutes: () => IRoutes = () => ({
         icon: <FiFileText />,
         color: 'lightGreen',
         path: PHYSICAL_EDUCATION,
-        show: !isProduction,
         pageSize: 'big',
         Component: TeacherPhysicalEducation,
         isTemplate: false,
