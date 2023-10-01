@@ -25,7 +25,7 @@ const TeacherPhysicalEducation = () => {
     )
         ? [
               { title: 'Студенты', content: <StudentsList /> },
-              { title: 'Администрирование', content: <AdminPanel /> },
+              { title: 'Управление', content: <AdminPanel /> },
               { title: 'Мои Группы', content: <MyGroups /> },
           ]
         : [

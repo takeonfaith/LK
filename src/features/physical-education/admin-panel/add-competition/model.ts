@@ -5,6 +5,7 @@ import { modalModel } from 'widgets/modal/model'
 import { popUpMessageModel } from '@entities/pop-up-message'
 import { AddCompetition } from './types'
 import { getAddCompetition } from './utils'
+import { peStudentCompetitionModel } from '@entities/pe-student/model'
 
 export const addCompetition = createEvent<AddCompetition>()
 
@@ -37,6 +38,8 @@ sample({
     },
     target: popUpMessageModel.events.evokePopUpMessage,
 })
+
+sample({ clock: addCompetitionFx.doneData, target: peStudentCompetitionModel.events.load })
 
 sample({
     clock: addCompetitionFx.doneData,

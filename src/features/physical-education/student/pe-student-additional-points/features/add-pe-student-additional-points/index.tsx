@@ -1,6 +1,6 @@
 import { peStudentAdditionalPointsModel } from '@entities/pe-student-additional-points/model'
 import { AddStudentAdditionalPoints, WorkType } from '@entities/pe-student-additional-points/types'
-import { selectedPEStudentModel } from '@entities/pe-student/model'
+import { peStudentCompetitionModel, selectedPEStudentModel } from '@entities/pe-student/model'
 import Select, { SelectPage } from '@features/select'
 import localizeDate from '@shared/lib/dates/localize-date'
 import { Button } from '@shared/ui/button'
@@ -8,13 +8,17 @@ import Input from '@shared/ui/input'
 import { TextArea } from '@shared/ui/textarea'
 import { Title } from '@shared/ui/title'
 import { useUnit } from 'effector-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { selectorData } from '../../constants'
 import { Wrapper } from './styled'
 import React from 'react'
 
 export const AddPEStudentAdditionalPoints = () => {
-    const student = useUnit(selectedPEStudentModel.stores.$selectedStudent)
+    const [student, competitions] = useUnit([
+        selectedPEStudentModel.stores.$selectedStudent,
+        peStudentCompetitionModel.stores.$competitions,
+    ])
+    const [competition, setCompetition] = useState<SelectPage | null>(null)
     const [date, setDate] = useState<string>('')
     const [type, setType] = useState<SelectPage | null>(null)
     const [pointsAmount, setPointsAmount] = useState<string>('0')
@@ -22,7 +26,7 @@ export const AddPEStudentAdditionalPoints = () => {
 
     const handleClick = () => {
         peStudentAdditionalPointsModel.events.addAdditionPoints({
-            comment,
+            comment: type?.id === WorkType.Competition ? competition?.title ?? '' : comment,
             date: localizeDate(date, 'numeric'),
             pointsAmount: Number(pointsAmount),
             studentGuid: student?.studentGuid,
@@ -30,11 +34,25 @@ export const AddPEStudentAdditionalPoints = () => {
         } as AddStudentAdditionalPoints)
     }
 
+    useEffect(() => {
+        peStudentCompetitionModel.events.load()
+    }, [])
+
+    const competitionsSelectItems = competitions.map((c) => ({ id: c, title: c }))
+
     return (
         <Wrapper>
             <Title size={3}>Дополнительные баллы</Title>
 
             <Select title={'Тип работ'} items={selectorData} selected={type} setSelected={setType} />
+            {type?.id === WorkType.Competition && (
+                <Select
+                    title={'Соревнование'}
+                    items={competitionsSelectItems}
+                    selected={competition}
+                    setSelected={setCompetition}
+                />
+            )}
 
             <Input title={'Дата'} setValue={setDate} value={date} type="date" />
 

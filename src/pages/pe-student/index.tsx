@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import Slider from 'widgets/slider'
 import { ContentWrapper, UserData } from './styled'
-import { UserDataBlock } from './ui/user-date-block'
+import { UserDataBlock } from './ui/user-data-block'
 
 const PEStudent = () => {
     const { studentId } = useParams<{ studentId: string }>()

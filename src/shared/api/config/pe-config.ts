@@ -5,7 +5,7 @@ import { addAuthHeaderToRequests, authResponseInterceptor } from './utils'
 // export const PE_URL = 'http://45.10.42.218:3333/graphql/'
 export const PE_URL = 'https://api.mospolytech.ru/physedjournal/graphql/'
 
-const $pEApi = axios.create({ baseURL: PE_URL })
+export const $pEApi = axios.create({ baseURL: PE_URL })
 
 const config = {
     headers: {
