@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { addAuthHeaderToRequests, authResponseInterceptor } from './utils'
 
-export const URL = 'http://apilin.mospolytech.ru:3345/userinfo/graphql/'
+// TODO: update after release
+export const URL = 'https://apilin.mospolytech.ru:3345/userinfo/graphql/'
 
 const userApi = axios.create({ baseURL: URL })
 

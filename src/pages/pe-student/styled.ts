@@ -12,7 +12,12 @@ export const Wrapper = styled.div`
 `
 
 export const UserData = styled.div`
+    width: 100%;
     display: flex;
     gap: 5px;
     flex-direction: row;
+`
+
+export const ContentWrapper = styled.div`
+    width: 100%;
 `

@@ -3,7 +3,7 @@ import { STUDENT_PAGE_SIZE } from '../constants'
 
 export const getPEStudentsQuery = (page: number, filters: Record<string, unknown> | null = null) => {
     const stringifyFilters = jsonStringifyGraphql(filters, ['course'])
-    return `{
+    return `query {
       students (take:${STUDENT_PAGE_SIZE}, skip: ${
         STUDENT_PAGE_SIZE * page
     }, where: ${stringifyFilters}, order: [{fullName:ASC}]){
@@ -19,6 +19,9 @@ export const getPEStudentsQuery = (page: number, filters: Record<string, unknown
             }
             course
             department
+            pointsHistory(where: {workType: {eq: ONLINE_WORK}}) {
+              points
+            }
         }
         totalCount
       }

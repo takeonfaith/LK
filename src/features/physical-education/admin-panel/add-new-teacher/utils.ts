@@ -7,7 +7,9 @@ export const getAddNewTeacherMutation = (model: AddTeacher) => {
           input: ${jsonStringifyGraphql(model)}
         ) {
           errors {
-            __typename
+            ... on Error {
+              message
+            }
           }
         }
       }`

@@ -5,6 +5,11 @@ export const getAssignVisitValueMutation = (model: AssignVisitValue) => {
     return `mutation assignVisitValue {
       assignVisitValue(input: ${jsonStringifyGraphql(model, ['newVisitValue'])}) {
         success
+        errors {
+          ... on Error {
+            message
+          }
+        }
       }
     }`
 }

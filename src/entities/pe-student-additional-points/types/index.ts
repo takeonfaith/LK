@@ -8,6 +8,7 @@ export interface AddStudentAdditionalPoints {
 
 export enum WorkType {
     Activist = 'ACTIVIST',
+    Competition = 'COMPETITION',
     ExternalFitness = 'EXTERNAL_FITNESS',
     GTO = 'GTO',
     InternalTeam = 'INTERNAL_TEAM',

@@ -1,3 +1,4 @@
+import Flex from '@shared/ui/flex'
 import styled from 'styled-components'
 
 export const Wrapper = styled.div`
@@ -11,4 +12,12 @@ export const TableWrapper = styled.div`
     align-items: flex-end;
     gap: 10px;
     justify-content: flex-end;
+`
+
+export const FiltersWrapper = styled(Flex)`
+    gap: 8px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 `

@@ -8,7 +8,9 @@ export const getAddPEStudentRegulationPoints = (model: AddStudentRegulationPoint
         ) {
           success
           errors {
-            __typename
+            ... on Error {
+              message
+            }
           }
         }
       }`

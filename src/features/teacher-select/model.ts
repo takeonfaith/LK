@@ -1,4 +1,4 @@
-import { userApiRequest } from '@shared/api/config/user-api-config'
+import axios from 'axios'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { debounce } from 'patronum'
 
@@ -6,23 +6,9 @@ const onSearch = createEvent<string>()
 const resetTeachers = createEvent()
 
 const searchFx = createEffect(async (search: string) => {
-    const {
-        employees: { items },
-    } = await userApiRequest<{ employees: { items: { guid: string; fullName: string }[] } }>(`
-    query teachers {
-        employees(
-          take: 100
-          order: { fullName: ASC }
-          where: { fullName: { contains: "${search}" } }
-        ) {
-          items {
-            fullName
-            guid
-          }
-        }
-      }`)
+    const { employees } = (await axios.get(`https://api.mospolytech.ru/physedjournal/staff?filter=${search}`)).data
 
-    return items
+    return employees
 })
 
 const $search = createStore<string | null>(null).on(onSearch, (_, search) => search)
