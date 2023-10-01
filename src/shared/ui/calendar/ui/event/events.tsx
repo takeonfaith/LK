@@ -20,18 +20,7 @@ type Props = {
     showTime?: boolean
 }
 
-const Events = ({
-    events,
-    currentEvent,
-    shift,
-    scale,
-    shortInfo,
-    weekDay,
-    interval,
-    showTime,
-    onClick,
-    currentDay,
-}: Props) => {
+const Events = ({ events, shift, scale, shortInfo, weekDay, interval, showTime, onClick, currentDay }: Props) => {
     const eventsPrepared = prepareEvents(events)
 
     const isCurrentDay = new Date().getDay() === weekDay
@@ -50,14 +39,10 @@ const Events = ({
             )}
             {Object.keys(eventsPrepared).map((key, i) => {
                 return eventsPrepared[key].map((event, index) => {
-                    const isCurrent = currentEvent?.title === event.title && currentEvent.startTime === event.startTime
-
                     return (
                         <EventItem
                             leftShift={index}
                             quantity={eventsPrepared[key].length}
-                            isCurrent={isCurrent}
-                            otherIsCurrent={!isCurrent && currentEvent !== null}
                             scale={scale}
                             isCurrentEvent={checkIfEventIsCurrent(event, isCurrentDay)}
                             isNextEvent={isNextEvent(events, event, isCurrentDay)}

@@ -93,6 +93,7 @@ const GlobalStyles = createGlobalStyle`
 		--almostTransparentOpposite: hsla(0,0%,100%,0.103);
 		--block: #2e2e2e;
 		--block-shadow: 0;
+		--block-shadow-1: 0 0 2px #ffffff8f;
 		--block-content: #252525;
 	}
 
@@ -122,6 +123,7 @@ const GlobalStyles = createGlobalStyle`
 		--almostTransparentOpposite: rgba(53,53,53,0.151);
 		--block: #fff;
 		--block-shadow: 0 0 2px rgb(0 0 0 / 24%);
+		--block-shadow-1: 0 0 2px rgb(0 0 0 / 24%);
 		--block-content: #fff;
 	}
 

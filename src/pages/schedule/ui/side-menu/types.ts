@@ -5,4 +5,5 @@ export type SideMenuProps = {
     onHintClick: (isSearchingGroup: boolean) => (hint: Hint | undefined) => void
     handleValue: (value: string) => void
     baseSearchValue: string
+    isSideMenuOpen: boolean
 }

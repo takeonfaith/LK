@@ -17,7 +17,6 @@ export const EventItemStyled = styled.div<StyledProps>`
     display: flex;
     overflow: hidden;
     color: ${({ textColor }) => textColor};
-    filter: ${({ otherIsCurrent }) => otherIsCurrent && 'grayscale(0.8)'};
     cursor: pointer;
     position: ${({ listView }) => (listView ? 'static' : 'absolute')};
     transform: translateX(${({ leftShift }) => `calc(${leftShift}% + ${1 * (leftShift / 100)}px)`});

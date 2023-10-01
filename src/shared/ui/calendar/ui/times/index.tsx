@@ -32,7 +32,8 @@ const TimeLine = styled.div`
 `
 
 const SubtextStyled = styled(Subtext)`
-    font-size: 0.85rem;
+    font-size: 0.82rem;
+    opacity: 0.5;
 
     ${MEDIA_QUERIES.isMobile} {
         font-size: 0.65rem;

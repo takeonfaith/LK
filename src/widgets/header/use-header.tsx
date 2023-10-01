@@ -44,7 +44,7 @@ const useHeader = ({ headerVisible, currentPage }: Props) => {
         () =>
             currentPage?.withoutBackButton ? null : currentPage?.isSubPage ? (
                 historyStack.length > 1 ? (
-                    <GoBackButton text={currentPage?.backButtonText} fullWidth={false} />
+                    <GoBackButton text={isHeaderVisible ? '' : currentPage?.backButtonText} fullWidth={false} />
                 ) : currentPage.fallbackPrevPage ? (
                     <Button
                         direction="vertical"
