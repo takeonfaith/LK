@@ -111,8 +111,9 @@ const EventItem = (props: Props) => {
                                 ? getShortString(title, shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64)
                                 : title
                                       .split('(')[0]
-                                      .split(' ')
-                                      .map((el) => el[0].toUpperCase())}
+                                      .split('https')[0]
+                                      .split(/[\s-]+/)
+                                      .map((el) => el[0]?.toUpperCase())}
                         </EventTitle>
                     </Flex>
 
