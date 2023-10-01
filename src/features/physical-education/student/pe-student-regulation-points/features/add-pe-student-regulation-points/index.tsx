@@ -6,18 +6,16 @@ import localizeDate from '@shared/lib/dates/localize-date'
 import { Button } from '@shared/ui/button'
 import Input from '@shared/ui/input'
 import { useUnit } from 'effector-react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { selectorData } from '../../constants'
 import { Wrapper } from './styled'
-import React from 'react'
-import Checkbox from '@shared/ui/atoms/checkbox'
 
 export const AddPEStudentRegulationPoints = () => {
     const student = useUnit(selectedPEStudentModel.stores.$selectedStudent)
     const [date, setDate] = useState<string>('')
     const [type, setType] = useState<SelectPage | null>(null)
     const [pointsAmount, setPointsAmount] = useState<string>('0')
-    const [isOverride, setIsOverride] = useState<boolean>(false)
+    // const [isOverride, setIsOverride] = useState<boolean>(false)
 
     const handleClick = () => {
         peStudentRegulationPointsModel.events.addRegulationPoints({
@@ -25,7 +23,7 @@ export const AddPEStudentRegulationPoints = () => {
             pointsAmount: Number(pointsAmount),
             studentGuid: student?.studentGuid,
             standardType: type?.id,
-            isOverride,
+            isOverride: false,
         } as AddStudentRegulationPoints)
     }
 
@@ -43,7 +41,7 @@ export const AddPEStudentRegulationPoints = () => {
                 maxValue={50}
             />
 
-            <Checkbox checked={isOverride} setChecked={setIsOverride} text={'Перезаписать'} />
+            {/* <Checkbox checked={isOverride} setChecked={setIsOverride} text={'Перезаписать'} /> */}
 
             <Button text="Добавить" onClick={handleClick} />
         </Wrapper>
