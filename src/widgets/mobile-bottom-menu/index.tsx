@@ -75,7 +75,7 @@ const MobileBottomMenu = () => {
                     <LeftsideBarItem
                         key={id}
                         {...allRoutes[id]}
-                        isCurrent={location.pathname.includes(allRoutes[id].path)}
+                        isCurrent={location.pathname.includes(allRoutes[id]?.path)}
                     />
                 )
             })}
