@@ -15,7 +15,6 @@ export type UIProps = {
 
 export type StyledProps = Omit<UIProps, 'onClick' | 'shift'> & {
     duration: number
-    startDayShift: number
-    startTimeShift: number
     textColor: string
+    top: number
 }

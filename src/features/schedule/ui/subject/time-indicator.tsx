@@ -61,7 +61,7 @@ type Props = {
 
 export const TimeIndicator = ({ timeInterval, color, isCurrentEvent }: Props) => {
     const { theme } = useTheme()
-    const background = theme === 'light' ? color.main : color.light1
+    const background = theme === 'light' ? color.main : color.light2
     return (
         <TimeIndicatorStyled>
             <TimeCircle start={isCurrentEvent} color={background} />

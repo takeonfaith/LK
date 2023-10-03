@@ -3,14 +3,8 @@ import Flex from '@shared/ui/flex'
 import styled from 'styled-components'
 import { StyledProps } from './types'
 
-const getTop = ({ startTimeShift, startDayShift, scale }: StyledProps) => {
-    const top = (startTimeShift - startDayShift) * scale
-
-    return `${top}px`
-}
-
 export const EventItemStyled = styled.div<StyledProps>`
-    width: ${({ quantity }) => `calc(${quantity}% - 1px)`};
+    width: ${({ quantity }) => `calc(${quantity}% - 1.2px)`};
     height: ${({ duration, scale }) => `${duration * scale}px`};
     border-radius: 5px;
     padding: ${({ shortInfo, scale }) => (!shortInfo ? `${scale * 8}px` : '8px')};
@@ -21,8 +15,8 @@ export const EventItemStyled = styled.div<StyledProps>`
     cursor: pointer;
     position: ${({ listView }) => (listView ? 'static' : 'absolute')};
     transform: translateX(${({ leftShift }) => `calc(${leftShift}% + ${1 * (leftShift / 100)}px)`});
-    left: 0;
-    top: ${getTop};
+    left: 1.5px;
+    top: ${({ top }) => `${top}px`};
     /* box-shadow: 0 0 1px ${({ color }) => color}; */
 
     a {
@@ -69,7 +63,7 @@ export const EventFront = styled(Flex)<{ shortInfo: boolean; scale: number }>`
 
 export const EventTitle = styled.span<{ shortInfo: boolean; scale: number; nameInOneRow: boolean; listView: boolean }>`
     font-weight: 500;
-    font-size: ${({ shortInfo }) => (!shortInfo ? `0.9rem` : '0.85rem')};
+    font-size: ${({ shortInfo }) => (!shortInfo ? `0.93rem` : '0.85rem')};
     padding-top: 2px;
     white-space: ${({ shortInfo, nameInOneRow }) => !shortInfo && nameInOneRow && 'nowrap'};
     text-overflow: ${({ shortInfo }) => !shortInfo && 'ellipsis'};

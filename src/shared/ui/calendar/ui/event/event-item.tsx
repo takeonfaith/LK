@@ -14,12 +14,8 @@ import { getTimeInterval } from '../../lib/get-time-interval'
 import { DayCalendarEvent } from '../../types'
 import { EventFront, EventItemStyled, EventTitle, MobileIcon } from './styles'
 import { UIProps } from './types'
-
-const getStartTimeShiftInMinutes = (startTime: string) => {
-    // E.g 12:20 -> 740
-    const [hour, minute] = startTime.split(':')
-    return +hour * 60 + +minute
-}
+import { getEventTopPosition } from './lib/get-event-top-position'
+import { getSubjectName } from '@features/schedule/lib/get-subject-name'
 
 type Props = DayCalendarEvent & UIProps & { isNextEvent?: boolean; isCurrentEvent?: boolean }
 
@@ -50,7 +46,6 @@ const EventItem = (props: Props) => {
     } = props
     const { theme } = useTheme()
     const { isMobile } = useCurrentDevice()
-    const startTimeShift = getStartTimeShiftInMinutes(startTime)
     const textColor = theme === 'light' ? color.dark3 : color.light3
     const background = theme === 'light' ? color.transparent1 : color.transparent2
     const handleClick = () => onClick(props)
@@ -62,6 +57,8 @@ const EventItem = (props: Props) => {
 
         return result
     })
+    const top = getEventTopPosition(startTime, shift, scale)
+    const normalizedTitle = getSubjectName(title)
 
     return (
         <EventItemStyled
@@ -70,9 +67,8 @@ const EventItem = (props: Props) => {
             leftShift={100 * leftShift}
             quantity={100 / quantity}
             duration={duration}
-            startDayShift={shift}
-            startTimeShift={startTimeShift}
             scale={scale}
+            top={top}
             onClick={handleClick}
             isCurrent={isCurrent}
             otherIsCurrent={otherIsCurrent}
@@ -103,16 +99,23 @@ const EventItem = (props: Props) => {
                                         text={<DotSeparatedWords words={rooms} />}
                                     />
                                 )}
-                                {!!link && (
-                                    <a href={link} target="_blank" rel="noreferrer">
-                                        <IconText shortInfo={shortInfo} icon={<HiOutlineExternalLink />} text={place} />
+                                {(!!link || normalizedTitle.link) && (
+                                    <a href={link ?? normalizedTitle.link} target="_blank" rel="noreferrer">
+                                        <IconText
+                                            shortInfo={shortInfo}
+                                            icon={<HiOutlineExternalLink />}
+                                            text={link ? place : 'Cсылка'}
+                                        />
                                     </a>
                                 )}
                             </Flex>
                         )}
                         <EventTitle listView={listView} nameInOneRow={nameInOneRow} scale={scale} shortInfo={shortInfo}>
                             {!extremeSmallSize &&
-                                getShortString(title, shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64)}
+                                getShortString(
+                                    normalizedTitle.name,
+                                    shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64,
+                                )}
                         </EventTitle>
                     </Flex>
 

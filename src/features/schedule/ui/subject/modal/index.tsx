@@ -23,6 +23,7 @@ import { SubjectPlaceBlock } from '../../atoms'
 import ListOfGroups from '../../atoms/list-of-groups'
 import { TimeIndicator } from '../time-indicator'
 import GroupModal from '@features/groups-list/group-modal'
+import { getSubjectName } from '@features/schedule/lib/get-subject-name'
 
 const SubjectModalWrapper = styled.div`
     position: relative;
@@ -30,6 +31,7 @@ const SubjectModalWrapper = styled.div`
     max-width: 400px;
 
     @media (min-width: 1001px) {
+        min-width: 320px;
         width: 100%;
     }
 
@@ -83,7 +85,6 @@ const BackgroundWrapper = styled.div<{ textColor: string; background: string; no
 const ModalContentWrapper = styled(Flex)<{ noPadding: boolean }>`
     padding: ${({ noPadding }) => (noPadding ? '24px 0 0 0' : '24px')};
     hyphens: auto;
-    overflow-y: auto;
     height: calc(100% - 154px);
 `
 
@@ -124,6 +125,8 @@ const SubjectModal = (props: Props) => {
         open(<SubjectPlaceBlock place={place} link={link} name={name} />)
     }
 
+    const normalizedName = getSubjectName(name)
+
     return (
         <SubjectModalWrapper>
             <BackgroundWrapper noPadding={noPadding} textColor={textColor} background={background}>
@@ -136,7 +139,7 @@ const SubjectModal = (props: Props) => {
                 <Flex jc="space-between" ai="flex-start" d="column" gap="6px">
                     <TimeIndicator isCurrentEvent={false} color={color} timeInterval={timeInterval} />
                     <Title size={3} align="left" width="fit-content">
-                        {name}
+                        {normalizedName.name}
                     </Title>
                 </Flex>
                 <Divider margin="0" width="100%" />
@@ -144,9 +147,9 @@ const SubjectModal = (props: Props) => {
                     icon={<HiOutlineCalendar />}
                     text={<DotSeparatedWords words={[weekday ?? '', dateInterval]} />}
                 />
-                {link?.length && (
-                    <a href={link} target="_blank" rel="noreferrer">
-                        <IconText icon={<HiOutlineExternalLink />} text={place} />
+                {(link?.length || normalizedName.link) && (
+                    <a href={link ?? normalizedName.link} target="_blank" rel="noreferrer">
+                        <IconText icon={<HiOutlineExternalLink />} text={link ? place : 'Ссылка'} />
                     </a>
                 )}
                 {!link?.length && <IconText icon={<HiOutlineOfficeBuilding />} text={place} />}

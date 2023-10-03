@@ -14,6 +14,7 @@ import { EMPTY_WEEK, SCHEDULE_NO_RESULT } from '../consts'
 import { getCalendarSchedule } from './get-calendar-schedule'
 import getCurrentDaySubjects from './get-current-day-schedule'
 import { normalizeSessionSchedule } from './normalize-session-schedule'
+import { getDateInSomeDays } from '@shared/lib/dates/get-date-in-some-days'
 
 export const normalizeSchedule = (
     rawSchedule: FullRawScheduleResponse | FullRawTeacherScheduleResponse,
@@ -28,7 +29,9 @@ export const normalizeSchedule = (
         }
     }
 
-    const weekday = getMonday(new Date())
+    const todaysDate = new Date()
+    let weekday = getMonday(todaysDate)
+    if (todaysDate.getDay() === 0) weekday = getDateInSomeDays(todaysDate, 1)
 
     const week: IWeekEventSchedule = { ...EMPTY_WEEK }
     const semestr: IWeekEventSchedule = { ...EMPTY_WEEK }
