@@ -10,6 +10,9 @@ export interface PEStudent {
     group: {
         visitValue: number
     }
+    pointsHistory: {
+        points: number
+    }[]
     course: number
     department: string
 }

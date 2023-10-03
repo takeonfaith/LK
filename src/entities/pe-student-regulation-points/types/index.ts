@@ -3,6 +3,7 @@ export interface AddStudentRegulationPoints {
     standardType: RegulationType
     date: string
     pointsAmount: number
+    isOverride: boolean
 }
 
 export enum RegulationType {

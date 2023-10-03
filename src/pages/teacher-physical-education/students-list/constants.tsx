@@ -1,5 +1,5 @@
 import { PEStudent } from '@entities/pe-student/types'
-import { calcSummaryPoints } from '@entities/pe-student/utils/calcSummaryPoints'
+import { calcSummaryPoints } from '@entities/pe-student/utils/cals-summary-points'
 import { ColumnProps } from '@shared/ui/table/types'
 
 export const peStudentColumns: ColumnProps[] = [
@@ -25,19 +25,16 @@ export const peStudentColumns: ColumnProps[] = [
         priority: 'two',
         render: (_, value) => calcSummaryPoints(value as PEStudent),
     },
-    // {
-    //     title: '',
-    //     field: 'addPoints',
-    //     render: (_, value) => {
-    //         const student = value as PEStudent
-
-    //         const handleClick = () => {
-    //             pEStudentVisitModel.events.addVisit({ studentGuid, date: localizeDate(date, 'numeric') })
-    //         }
-
-    //         return <Button text={''} />
-    //     },
-    // },
+    {
+        title: 'Нормативы',
+        field: 'pointsStandardsCount',
+        render: (_, value) => (value as PEStudent).pointsForStandards,
+    },
+    {
+        title: 'ЛМС',
+        field: 'pointsLMSCount',
+        render: (_, value) => (value as PEStudent).pointsHistory.reduce((sum, d) => sum + d.points, 0),
+    },
 ]
 
 export const examPeStudentColumns: ColumnProps[] = [
