@@ -1,9 +1,6 @@
 import { ISubject } from '@api/model'
-import { getSubjectIcon } from '@features/acad-performance/lib/get-subject-icon'
-import { Icon } from '@features/all-pages'
+import GroupModal from '@features/groups-list/group-modal'
 import { IColorPalette } from '@shared/constants'
-import useTheme from '@shared/lib/hooks/use-theme'
-import EventBackground from '@shared/ui/calendar/calendars/day/ui/event-background'
 import IconText from '@shared/ui/calendar/calendars/day/ui/icon-text'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Flex from '@shared/ui/flex'
@@ -19,11 +16,12 @@ import {
 } from 'react-icons/hi'
 import styled from 'styled-components'
 import { User, useModal } from 'widgets'
-import { SubjectPlaceBlock } from '../../atoms'
+import { NextSubject, SubjectPlaceBlock } from '../../atoms'
 import ListOfGroups from '../../atoms/list-of-groups'
+import { SubjectIconAndBackground } from '../subject-icon-and-background'
 import { TimeIndicator } from '../time-indicator'
-import GroupModal from '@features/groups-list/group-modal'
 import { getSubjectName } from '@features/schedule/lib/get-subject-name'
+import calcTimeLeft from '@shared/lib/dates/calc-time-left'
 
 const SubjectModalWrapper = styled.div`
     position: relative;
@@ -61,34 +59,18 @@ const SubjectModalWrapper = styled.div`
     }
 `
 
-const BackgroundWrapper = styled.div<{ textColor: string; background: string; noPadding: boolean }>`
-    width: 100%;
-    height: 110px;
-    position: relative;
-    color: var(--text);
-    margin-bottom: ${({ noPadding }) => (noPadding ? '0px' : '40px')};
-
-    .icon {
-        position: absolute;
-        bottom: ${({ noPadding }) => (noPadding ? '-5px' : '-50px')};
-        left: ${({ noPadding }) => (noPadding ? '-5px' : '16px')};
-        background: ${({ background }) => background};
-        transition: 0s;
-
-        svg {
-            color: ${({ textColor }) => textColor};
-        }
-        border: 5px solid var(--block-content);
-    }
-`
-
 const ModalContentWrapper = styled(Flex)<{ noPadding: boolean }>`
     padding: ${({ noPadding }) => (noPadding ? '24px 0 0 0' : '24px')};
     hyphens: auto;
     height: calc(100% - 154px);
 `
 
-type Props = ISubject & { isCurrent: boolean; isNext?: boolean; color: IColorPalette; noPadding?: boolean }
+type Props = ISubject & {
+    isCurrentEvent: boolean
+    color: IColorPalette
+    noPadding?: boolean
+    isNextEvent: boolean
+}
 
 const SubjectModal = (props: Props) => {
     const {
@@ -102,15 +84,12 @@ const SubjectModal = (props: Props) => {
         groups,
         color,
         weekday,
+        isNextEvent,
+        isCurrentEvent,
         noPadding = false,
     } = props
-    const icon = getSubjectIcon(name)
 
-    const { theme } = useTheme()
-
-    const textColor = theme === 'light' ? color.dark3 : color.light2
     const groupsArray = groups?.split(',') ?? []
-    const background = theme === 'light' ? color.light3 : color.dark3
     const { open } = useModal()
 
     const handleCheckGroups = () => {
@@ -129,15 +108,18 @@ const SubjectModal = (props: Props) => {
 
     return (
         <SubjectModalWrapper>
-            <BackgroundWrapper noPadding={noPadding} textColor={textColor} background={background}>
-                <EventBackground noPadding={noPadding} icon={icon} background={background} />
-                <Icon color={color.main} size={70} borderRadius="23px">
-                    {icon}
-                </Icon>
-            </BackgroundWrapper>
+            <SubjectIconAndBackground subjectName={name} color={color} noPadding={noPadding} />
             <ModalContentWrapper noPadding={noPadding} d="column" gap="20px" ai="flex-start">
                 <Flex jc="space-between" ai="flex-start" d="column" gap="6px">
-                    <TimeIndicator isCurrentEvent={false} color={color} timeInterval={timeInterval} />
+                    <Flex gap="8px">
+                        <TimeIndicator isCurrentEvent={isCurrentEvent} color={color} timeInterval={timeInterval} />
+                        <NextSubject
+                            timeLeft={calcTimeLeft(timeInterval.split(' - ')[0], 'minutes')}
+                            isNext={isNextEvent}
+                            color={color}
+                            isCurrentEvent={isCurrentEvent}
+                        />
+                    </Flex>
                     <Title size={3} align="left" width="fit-content">
                         {normalizedName.name}
                     </Title>

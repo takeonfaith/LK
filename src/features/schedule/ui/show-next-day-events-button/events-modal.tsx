@@ -1,22 +1,18 @@
-import { scheduleModel } from '@entities/schedule'
-import { getDateInSomeDays } from '@shared/lib/dates/get-date-in-some-days'
+import { useScheduleSubjectModal } from '@features/use-schedule-subject-modal'
+import { Sleep } from '@shared/images'
 import { getMinutesFromStringTime } from '@shared/lib/dates/get-minutes-from-string-time'
-import { getWeekDayFromDate } from '@shared/lib/dates/get-weekday-from-date'
+import { DayCalendarEvent } from '@shared/ui/calendar'
+import { TimesEvents } from '@shared/ui/calendar/calendars/day/ui/times-events'
 import { useCalendarScale } from '@shared/ui/calendar/hooks/use-calendar-scale'
+import { Error } from '@shared/ui/error'
 import React from 'react'
 import { NextDayScheduleStyled } from './styles'
-import { TimesEvents } from '@shared/ui/calendar/calendars/day/ui/times-events'
-import { useScheduleSubjectModal } from '@features/use-schedule-subject-modal'
-import { Error } from '@shared/ui/error'
-import { Sleep } from '@shared/images'
 
-export const Modal = () => {
-    const {
-        data: { schedule },
-    } = scheduleModel.selectors.useSchedule()
-    const nextDay = getDateInSomeDays(new Date(), 1)
-    const weekday = getWeekDayFromDate(nextDay)
-    const dayEvents = weekday === 'sunday' ? [] : schedule?.week[weekday]
+type Props = {
+    dayEvents: DayCalendarEvent[] | undefined
+}
+
+export const EventsModal = ({ dayEvents }: Props) => {
     const firstEvent = dayEvents?.[0]
     const lastEvent = dayEvents?.[dayEvents.length - 1]
     const scale = useCalendarScale()

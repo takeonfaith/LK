@@ -5,7 +5,7 @@ import { SideMenuProps } from './types'
 
 export const SideMenu = (props: SideMenuProps) => {
     return (
-        <SideMenuStyled>
+        <SideMenuStyled isSideMenuOpen={props.isSideMenuOpen}>
             <SideMenuContent {...props} />
         </SideMenuStyled>
     )

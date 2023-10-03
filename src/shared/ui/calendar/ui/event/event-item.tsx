@@ -32,8 +32,6 @@ const EventItem = (props: Props) => {
         scale,
         onClick,
         link,
-        isCurrent,
-        otherIsCurrent,
         rooms,
         dateInterval,
         leftShift,
@@ -70,8 +68,6 @@ const EventItem = (props: Props) => {
             scale={scale}
             top={top}
             onClick={handleClick}
-            isCurrent={isCurrent}
-            otherIsCurrent={otherIsCurrent}
             shortInfo={shortInfo}
         >
             <MobileIcon>{icon}</MobileIcon>
@@ -95,7 +91,7 @@ const EventItem = (props: Props) => {
                                 {!!rooms?.length && (
                                     <IconText
                                         shortInfo={shortInfo}
-                                        icon={<HiOutlineLogin />}
+                                        icon={isMobile && quantity > 1 ? undefined : <HiOutlineLogin />}
                                         text={<DotSeparatedWords words={rooms} />}
                                     />
                                 )}
@@ -111,11 +107,12 @@ const EventItem = (props: Props) => {
                             </Flex>
                         )}
                         <EventTitle listView={listView} nameInOneRow={nameInOneRow} scale={scale} shortInfo={shortInfo}>
-                            {!extremeSmallSize &&
-                                getShortString(
-                                    normalizedTitle.name,
-                                    shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64,
-                                )}
+                            {!extremeSmallSize
+                                ? getShortString(
+                                      normalizedTitle.name,
+                                      shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64,
+                                  )
+                                : title.split(' ').map((el) => el[0].toUpperCase())}
                         </EventTitle>
                     </Flex>
 

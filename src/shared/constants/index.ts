@@ -219,15 +219,15 @@ export const WEEK_DAYS = {
 export type IWeekDays = typeof WEEK_DAYS
 export type IWeekDayNames = keyof IWeekDays
 
-export const ColorsByGrade: Record<keyof IGrade | 'default', string> = {
-    Зачтено: Colors.green.main,
-    'Не зачтено': Colors.red.main,
-    Отлично: Colors.green.main,
-    Хорошо: Colors.blue.main,
-    Удовлетворительно: Colors.orange.main,
-    Неудовлетворительно: Colors.red.main,
-    'Не явился': Colors.red.main,
-    default: Colors.red.main,
+export const ColorsByGrade: Record<keyof IGrade | 'default', IColorPalette> = {
+    Зачтено: Colors.green,
+    'Не зачтено': Colors.red,
+    Отлично: Colors.green,
+    Хорошо: Colors.blue,
+    Удовлетворительно: Colors.orange,
+    Неудовлетворительно: Colors.red,
+    'Не явился': Colors.red,
+    default: Colors.red,
 }
 
 export const WidthByGrade: IGrade & { default: number } = {

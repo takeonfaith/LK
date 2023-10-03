@@ -1,7 +1,7 @@
 import { IFullSchedule, ISchedule, User } from '@api/model'
 import { createEffect, createEvent, createStore, sample } from 'effector'
 import { useStore } from 'effector-react/compat'
-import { View } from '../consts'
+import { EMPTY_WEEK, View } from '../consts'
 import { getGroupSchedule } from '../lib/get-group-schedule'
 import { getTeacherSchedule } from '../lib/get-teacher-schedule'
 
@@ -12,6 +12,7 @@ const DEFAULT_STORE: ISchedule = {
         view: View.day,
         filter: '',
         searchValue: '',
+        hasNoSchedule: false,
     },
     loading: false,
     error: null,
@@ -62,13 +63,11 @@ const clearStore = createEvent()
 const setFilter = createEvent<string>()
 const setSearchValue = createEvent<string>()
 const resetExternalSchedule = createEvent()
-// const getSchedule = createEvent<{ group: string }>()
-// const getExternalGroupSchedule = createEvent<{ group: string }>()
 
 const $schedule = createStore(DEFAULT_STORE)
     .on(getScheduleFx, (oldData) => ({
         ...oldData,
-        data: { ...oldData.data, schedule: null },
+        data: { ...oldData.data, schedule: null, hasNoSchedule: false },
         error: null,
     }))
     .on(getScheduleFx.failData, (oldData, error) => ({
@@ -90,7 +89,14 @@ const $schedule = createStore(DEFAULT_STORE)
 sample({
     clock: getScheduleFx.doneData,
     source: $schedule,
-    fn: (store, schedule) => ({ ...store, data: { ...store.data, ...schedule } }),
+    fn: (store, schedule) => ({
+        ...store,
+        data: {
+            ...store.data,
+            ...schedule,
+            hasNoSchedule: JSON.stringify(schedule.schedule.semestr.data) === JSON.stringify(EMPTY_WEEK),
+        },
+    }),
     target: $schedule,
 })
 

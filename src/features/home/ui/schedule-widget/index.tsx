@@ -7,7 +7,9 @@ import { useScheduleWidget } from './hooks/use-schedule-widget'
 import { ScheduleList, ScheduleWidgetStyled } from './styles'
 
 export const ScheduleWidget = () => {
-    const { listRef, noSchedule, handleOpenModal, loading, schedule, isEnded } = useScheduleWidget()
+    const { listRef, noSchedule, handleOpenModal, loading, schedule, isEnded, hasNoSchedule } = useScheduleWidget()
+
+    if (hasNoSchedule) return null
 
     return (
         <ScheduleWidgetStyled noSchedule={noSchedule || loading}>
@@ -24,8 +26,6 @@ export const ScheduleWidget = () => {
                             isNextEvent={isNextEvent(schedule, event, true)}
                             onClick={handleOpenModal}
                             isCurrentEvent={checkIfEventIsCurrent(event, true)}
-                            isCurrent={false}
-                            otherIsCurrent={false}
                             leftShift={0}
                             quantity={1}
                             {...event}

@@ -5,6 +5,7 @@ import { TableCatalogType, TableProps } from '@ui/table/types'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Row } from '../molecules'
+import { Divider } from '@shared/ui/divider'
 
 const BodyWrapper = styled.div`
     display: flex;
@@ -39,6 +40,13 @@ const LoadingWrapper = styled.div`
     }
 `
 
+const PaginationWrapper = styled.div`
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
 const Body = ({ data, loading, columns, maxOnPage, onRowClick, filter }: TableProps & { filter: TableCatalogType }) => {
     const [currentPage, setCurrentPage] = useState<number>(0)
     const pages = Math.ceil((data?.length ?? 0) / (maxOnPage ?? 1)) - 1
@@ -54,12 +62,15 @@ const Body = ({ data, loading, columns, maxOnPage, onRowClick, filter }: TablePr
                 return <Row onRowClick={onRowClick} columns={columns} el={el} key={i} index={i} />
             })}
             {!result?.length && <Error text="Нет данных" />}
-            <Pagination
-                pages={pages}
-                condition={!!maxOnPage && !!result?.length}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-            />
+            {pages > 0 && <Divider margin="0" width="100%" />}
+            <PaginationWrapper>
+                <Pagination
+                    pages={pages}
+                    condition={!!maxOnPage && !!result?.length}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                />
+            </PaginationWrapper>
         </BodyWrapper>
     ) : (
         <LoadingWrapper>

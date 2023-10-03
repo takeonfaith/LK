@@ -14,6 +14,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { useHistory, useLocation } from 'react-router'
 import { useModal } from 'widgets'
 import { SideMenuContent } from '../ui/side-menu/side-menu-content'
+import Flex from '@shared/ui/flex'
 
 const useSchedule = () => {
     const {
@@ -108,12 +109,15 @@ const useSchedule = () => {
     const handleOpenSideMenu = () => {
         if (isMobile) {
             open(
-                <SideMenuContent
-                    baseSearchValue={baseSearchValue}
-                    handleReturnToMySchedule={handleReturnToMySchedule}
-                    onHintClick={onHintClick}
-                    handleValue={handleValue}
-                />,
+                <Flex d="column" gap="8px" ai="flex-start">
+                    <SideMenuContent
+                        isSideMenuOpen
+                        baseSearchValue={baseSearchValue}
+                        handleReturnToMySchedule={handleReturnToMySchedule}
+                        onHintClick={onHintClick}
+                        handleValue={handleValue}
+                    />
+                </Flex>,
             )
         } else {
             setIsSideMenuOpen((prev) => !prev)

@@ -8,6 +8,8 @@ import { useCalendarDay } from './hooks/use-calendar-day'
 import { DayCalendarWrapper, EventInfo, EventsCarousel } from './styles'
 import { DayCalendarProps } from './types'
 import { TimesEvents } from './ui/times-events'
+import { checkIfEventIsCurrent } from '../../ui/event/lib/check-if-event-is-current'
+import { isNextEvent } from '@features/schedule/lib/is-next-event'
 
 export const DayCalendar = (props: DayCalendarProps) => {
     const {
@@ -57,6 +59,7 @@ export const DayCalendar = (props: DayCalendarProps) => {
                         <Error text="Ничего не выбрано" image={<FiInbox />} />
                     ) : (
                         <SubjectModal
+                            isNextEvent={isNextEvent(events?.saturday, chosenEvent, true)}
                             timeInterval={timeInterval}
                             color={chosenEvent.color}
                             name={chosenEvent.title}
@@ -67,7 +70,7 @@ export const DayCalendar = (props: DayCalendarProps) => {
                             teachers={chosenEvent.people}
                             dateInterval={chosenEvent.dateInterval}
                             rooms={chosenEvent.rooms ?? []}
-                            isCurrent={false}
+                            isCurrentEvent={checkIfEventIsCurrent(chosenEvent, true)}
                         />
                     )}
                 </EventInfo>

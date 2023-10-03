@@ -6,6 +6,8 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { getCurrentDay } from '../lib/get-current-day'
 import { getEndTime } from '../lib/get-end-time'
 import { DayCalendarProps } from '../types'
+import { IWeekDayNames } from '@shared/constants'
+import { checkIfEventIsCurrent } from '@shared/ui/calendar/ui/event/lib/check-if-event-is-current'
 
 type Props = DayCalendarProps
 
@@ -22,7 +24,13 @@ export const useCalendarDay = ({
     const carouselRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        setChosenEvent(null)
+        if (allEvents) {
+            const day = Object.keys(allEvents ?? {})[currentDay] as IWeekDayNames
+            const chosen = allEvents[day].find((event) => checkIfEventIsCurrent(event, true)) ?? null
+            setChosenEvent(chosen)
+        } else {
+            setChosenEvent(null)
+        }
     }, [allEvents])
 
     const timeInterval = chosenEvent

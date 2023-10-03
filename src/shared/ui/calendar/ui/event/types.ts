@@ -4,8 +4,6 @@ export type UIProps = {
     shift: number
     scale: number
     onClick: (event: DayCalendarEvent) => void
-    isCurrent: boolean
-    otherIsCurrent: boolean
     shortInfo?: boolean
     leftShift: number
     quantity: number

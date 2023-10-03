@@ -1,6 +1,5 @@
 import { PROFILE_ROUTE } from '@app/routes/general-routes'
 import { contextMenuModel } from '@entities/context-menu'
-import { menuModel } from '@entities/menu'
 import Avatar from '@features/home/ui/molecules/avatar'
 import UserContextMenu from '@features/user-context-menu'
 import { Button } from '@ui/button'
@@ -31,7 +30,6 @@ const UserBigWrapper = styled(Link)`
     }
     &:hover {
         background: var(--theme-1);
-        /* box-shadow: var(--very-mild-shadow); */
     }
 `
 
@@ -56,24 +54,23 @@ const UserBig = ({ name, avatar, loading, size, notifications, selected }: Props
             />
         )
 
+    const handleContextMenu = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault()
+        e.stopPropagation()
+        contextMenuModel.events.open({
+            e,
+            height: 143,
+            content: <UserContextMenu />,
+        })
+    }
+
     return (
-        <UserBigWrapper
-            to={PROFILE_ROUTE}
-            onClick={() => menuModel.events.changeOpen({ isOpen: false, currentPage: 'profile' })}
-        >
+        <UserBigWrapper to={PROFILE_ROUTE}>
             <Button
                 icon={<FiMoreVertical />}
                 className="more-button"
                 background="transparent"
-                onClick={(e) => {
-                    e.preventDefault()
-                    e.stopPropagation()
-                    contextMenuModel.events.open({
-                        e,
-                        height: 143,
-                        content: <UserContextMenu />,
-                    })
-                }}
+                onClick={handleContextMenu}
             />
             <Avatar
                 notifications={notifications}

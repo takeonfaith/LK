@@ -37,7 +37,9 @@ const Home = () => {
     } = userModel.selectors.useUser()
 
     const payments = useUnit(paymentsModel.stores.$paymentsStore)
-    const { data: schedule } = scheduleModel.selectors.useSchedule()
+    const {
+        data: { schedule },
+    } = scheduleModel.selectors.useSchedule()
 
     const { homeRoutes } = menuModel.selectors.useMenu()
 

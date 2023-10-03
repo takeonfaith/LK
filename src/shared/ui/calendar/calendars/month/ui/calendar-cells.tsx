@@ -13,6 +13,9 @@ import { getDayEvents } from '../lib/get-day-events'
 import { DateSection, DateWrapper, DayCell, MonthStartName } from '../styles'
 import capitalizeFirstLetter from '@shared/lib/capitalize-first-letter'
 import get2DigitDumber from '@shared/lib/get-2-digit-number'
+import { useModal } from 'widgets'
+import { EventsModal } from '@features/schedule/ui/show-next-day-events-button/events-modal'
+import localizeDate from '@shared/lib/dates/localize-date'
 
 type Props = {
     daysAmount: number
@@ -34,7 +37,11 @@ const CalendarCells = ({
     if (daysAmount < 0 || isNaN(daysAmount)) return <Error text={'Неправильная длина календаря'} />
     const localStartDate = new Date(startDate)
     const { isMobile } = useCurrentDevice()
+    const { open } = useModal()
 
+    const handleOpenModal = (dayEvents: DayCalendarEvent[] | undefined, day: string) => () => {
+        open(<EventsModal dayEvents={dayEvents} />, day)
+    }
     return (
         <>
             {Array(daysAmount)
@@ -60,7 +67,7 @@ const CalendarCells = ({
                         (localStartDate.getDay() === 1 && localStartDate.getDate() === 1)
 
                     return (
-                        <>
+                        <React.Fragment key={localStartDate.toLocaleDateString('ru-RU')}>
                             {(showCurrentMonthName || showNextMonthName) && (
                                 <MonthStartName>
                                     {capitalizeFirstLetter(
@@ -70,7 +77,10 @@ const CalendarCells = ({
                                     )}
                                 </MonthStartName>
                             )}
-                            <DayCell disabled={disabled} key={localStartDate.toLocaleDateString('ru-RU')}>
+                            <DayCell
+                                disabled={disabled}
+                                onClick={handleOpenModal(dayEvents, localizeDate(localStartDate))}
+                            >
                                 <DateSection>
                                     <DateWrapper
                                         isCurrentChosenDay={areDatesEqual(localStartDate, new Date())}
@@ -102,7 +112,7 @@ const CalendarCells = ({
 
                                 {isMobile && <SubjectsIndicator subjects={dayEvents} />}
                             </DayCell>
-                        </>
+                        </React.Fragment>
                     )
                 })}
         </>
