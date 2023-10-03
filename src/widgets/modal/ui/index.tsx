@@ -51,7 +51,7 @@ const Modal = () => {
                     height="35px"
                     minWidth="35px"
                     width="35px"
-                    background="var(--search)"
+                    background="var(--almostTransparent)"
                 />
 
                 <Content>{Component}</Content>

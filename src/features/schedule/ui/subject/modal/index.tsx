@@ -53,10 +53,6 @@ const SubjectModalWrapper = styled.div`
             margin-top: 5px;
         }
     }
-
-    @media (max-width: 1000px) {
-        padding: 10px;
-    }
 `
 
 const ModalContentWrapper = styled(Flex)<{ noPadding: boolean }>`

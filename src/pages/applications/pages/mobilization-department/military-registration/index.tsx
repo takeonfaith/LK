@@ -1,6 +1,6 @@
 import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrapper'
 import { FormBlock, SubmitButton, Title } from '@shared/ui/atoms'
-import Checkbox from '@shared/ui/atoms/checkbox'
+import Checkbox from '@shared/ui/checkbox'
 import { IInputArea, IInputAreaData } from '@shared/ui/input-area/model'
 import React, { useEffect, useMemo, useState } from 'react'
 import {

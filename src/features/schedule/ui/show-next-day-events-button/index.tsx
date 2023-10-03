@@ -22,7 +22,7 @@ export const ShowNextDayEventsButton = () => {
 
     if (!schedule?.week) return null
 
-    const handleClick = () => open(<EventsModal dayEvents={dayEvents} />, modalTitle)
+    const handleClick = () => open(<EventsModal dayEvents={dayEvents} day={modalTitle} />, modalTitle)
 
     return <Button text="Посмотреть следующий" onClick={handleClick} textColor="var(--blue)" background="transparent" />
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const ModalContent = styled.div<{ isOpen: boolean; hasBack: boolean; hasTitle: boolean }>`
-    background: var(--theme);
+    background: var(--block);
     color: var(--text);
     padding: 20px;
     min-height: 150px;

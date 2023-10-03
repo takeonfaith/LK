@@ -47,10 +47,10 @@ const GroupModal = ({ group }: Props) => {
                         filter: group,
                     })}
                 >
-                    <Button icon={<FiClock />} width="100%" text="Расписание" />
+                    <Button icon={<FiClock />} width="100%" text="Расписание" background="var(--theme-4)" />
                 </LinkStyled>
                 <LinkStyled to={`${ALL_STUDENTS_ROUTE}/${group}`}>
-                    <Button icon={<FiList />} width="100%" text="Список" />
+                    <Button icon={<FiList />} width="100%" text="Список" background="var(--theme-4)" />
                 </LinkStyled>
             </Flex>
         </GroupModalStyled>

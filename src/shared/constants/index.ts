@@ -153,7 +153,7 @@ export const Colors: IColors = {
         transparent3: '#ffbce530',
     },
     red: {
-        dark3: '#91353d',
+        dark3: '#8f454b',
         dark2: '#bf3641',
         dark1: '#cf4b56',
         main: '#ec5f6b',
@@ -253,7 +253,7 @@ export const GradeByScore: IGrade = {
 
 export const OLD_LK_URL = 'https://e.mospolytech.ru/old'
 
-export const LastUpdateWhatsNew = '2023-06-30T00:43:43'
+export const LastUpdateWhatsNew = '2023-10-03T10:43:43'
 
 type MessageTypeObj = {
     [key in MessageType]: {
@@ -397,6 +397,8 @@ export const JS_QUERIES = [
 
 export const TIME_IN_MS = {
     minute: 60000,
+    ten_seconds: 10000,
+    thirty_seconds: 30000,
 }
 
 /**

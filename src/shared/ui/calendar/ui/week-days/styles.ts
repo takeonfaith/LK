@@ -44,7 +44,7 @@ export const WeekDay = styled.div<{ showColumns: boolean; showDates?: boolean }>
         top: 54px;
         width: 1.5px;
         position: absolute;
-        background: var(--theme-3);
+        background: var(--theme-4);
     }
 
     &::after {
@@ -57,8 +57,8 @@ export const WeekDay = styled.div<{ showColumns: boolean; showDates?: boolean }>
 
         &::after,
         &::before {
-            top: 80px;
-            height: calc(100% - 88px);
+            top: 90px;
+            height: calc(100% - 100px);
         }
     }
 `

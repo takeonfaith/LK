@@ -1,6 +1,6 @@
 import Select, { SelectPage } from '@features/select'
 import { Input, TextArea } from '@ui/atoms'
-import Checkbox from '@ui/atoms/checkbox'
+import Checkbox from '@ui/checkbox'
 import { CheckboxDocs, IComplexInputAreaData, IInputArea, IInputAreaData, IInputAreaFiles } from '@ui/input-area/model'
 import { DateInterval } from '@ui/molecules'
 import { CheckboxDocumentList, RadioButtonList } from '@ui/organisms'

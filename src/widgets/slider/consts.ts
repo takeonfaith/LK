@@ -10,7 +10,7 @@ export const HEIGHTS: SizeDictionary = {
 
 export const RADIUSES: SizeDictionary = {
     small: '8px',
-    middle: '12px',
+    middle: '10px',
     big: '16px',
 }
 
@@ -18,4 +18,10 @@ export const FONT_SIZES: SizeDictionary = {
     small: '0.8rem',
     middle: '0.9rem',
     big: '1rem',
+}
+
+export const MOBILE_FONT_SIZES: SizeDictionary = {
+    small: '0.65rem',
+    middle: '0.75rem',
+    big: '0.85rem',
 }

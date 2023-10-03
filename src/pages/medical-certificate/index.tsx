@@ -5,7 +5,7 @@ import BaseApplicationWrapper from '@pages/applications/ui/base-application-wrap
 import checkFormFields from '@shared/lib/check-form-fields'
 import { ApplicationFormCodes } from '@shared/models/application-form-codes'
 import { FormBlock, SubmitButton } from '@shared/ui/atoms'
-import Checkbox from '@shared/ui/atoms/checkbox'
+import Checkbox from '@shared/ui/checkbox'
 import InputArea from '@shared/ui/input-area'
 import { IInputArea } from '@shared/ui/input-area/model'
 import React, { useEffect, useState } from 'react'

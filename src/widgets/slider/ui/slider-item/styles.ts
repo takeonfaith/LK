@@ -1,6 +1,7 @@
+import { MEDIA_QUERIES } from '@shared/constants'
 import { Size } from '@shared/ui/types'
 import styled from 'styled-components'
-import { FONT_SIZES } from 'widgets/slider/consts'
+import { FONT_SIZES, MOBILE_FONT_SIZES } from 'widgets/slider/consts'
 import { getValueFromSize } from 'widgets/slider/lib/get-value-from-size'
 
 export const SliderItemWrapper = styled.div<{ elementsVisible: number; condition: boolean; size: Size }>`
@@ -36,5 +37,11 @@ export const SliderItemWrapper = styled.div<{ elementsVisible: number; condition
 
     &:active {
         transform: scale(0.97);
+    }
+
+    ${MEDIA_QUERIES.isMobile} {
+        & > b {
+            font-size: ${getValueFromSize(MOBILE_FONT_SIZES)};
+        }
     }
 `

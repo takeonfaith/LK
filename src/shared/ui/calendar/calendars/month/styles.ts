@@ -34,6 +34,7 @@ export const Cells = styled.div`
 
     ${MEDIA_QUERIES.isMobile} {
         border: none;
+        scroll-padding-top: 50px;
     }
 `
 
@@ -42,8 +43,8 @@ export const DayCell = styled.div<{ disabled: boolean }>`
     width: calc(100% / 6);
     height: calc((100vh / 6) - 13px);
     background: transparent;
-    border-right: 1px solid var(--theme-3);
-    border-bottom: 1px solid var(--theme-3);
+    border-right: 1px solid var(--almostTransparentOpposite);
+    border-bottom: 1px solid var(--almostTransparentOpposite);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,4 +94,8 @@ export const MonthStartName = styled.div`
     z-index: 100;
     margin: 4px 0;
     background: var(--block);
+
+    ${MEDIA_QUERIES.isMobile} {
+        background: var(--theme);
+    }
 `

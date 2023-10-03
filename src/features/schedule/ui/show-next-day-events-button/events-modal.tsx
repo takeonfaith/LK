@@ -1,6 +1,5 @@
 import { useScheduleSubjectModal } from '@features/use-schedule-subject-modal'
 import { Sleep } from '@shared/images'
-import { getMinutesFromStringTime } from '@shared/lib/dates/get-minutes-from-string-time'
 import { DayCalendarEvent } from '@shared/ui/calendar'
 import { TimesEvents } from '@shared/ui/calendar/calendars/day/ui/times-events'
 import { useCalendarScale } from '@shared/ui/calendar/hooks/use-calendar-scale'
@@ -10,23 +9,18 @@ import { NextDayScheduleStyled } from './styles'
 
 type Props = {
     dayEvents: DayCalendarEvent[] | undefined
+    day: string
 }
 
-export const EventsModal = ({ dayEvents }: Props) => {
-    const firstEvent = dayEvents?.[0]
-    const lastEvent = dayEvents?.[dayEvents.length - 1]
+export const EventsModal = ({ dayEvents, day }: Props) => {
     const scale = useCalendarScale()
-    const intervalStart = firstEvent ? Math.floor(getMinutesFromStringTime(firstEvent.startTime) / 60) : 9
-    const intervalEnd = lastEvent
-        ? Math.floor((getMinutesFromStringTime(lastEvent.startTime) + lastEvent.duration) / 60 + 1)
-        : 22
-    const interval: [number, number] = [intervalStart, intervalEnd]
     const openModal = useScheduleSubjectModal()
+    const interval = [9, 22] as [number, number]
 
     if (!dayEvents?.length) return <Error text={'В этот день пар нет'} image={Sleep} />
 
     return (
-        <NextDayScheduleStyled>
+        <NextDayScheduleStyled key={day}>
             <TimesEvents
                 events={dayEvents}
                 interval={interval}

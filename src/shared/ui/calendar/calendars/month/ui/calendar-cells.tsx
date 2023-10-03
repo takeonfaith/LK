@@ -40,7 +40,7 @@ const CalendarCells = ({
     const { open } = useModal()
 
     const handleOpenModal = (dayEvents: DayCalendarEvent[] | undefined, day: string) => () => {
-        open(<EventsModal dayEvents={dayEvents} />, day)
+        open(<EventsModal dayEvents={dayEvents} day={day} />, day)
     }
     return (
         <>

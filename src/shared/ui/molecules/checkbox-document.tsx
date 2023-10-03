@@ -1,4 +1,4 @@
-import Checkbox, { CheckboxProps } from '@ui/atoms/checkbox'
+import Checkbox, { CheckboxProps } from '@ui/checkbox'
 import FileInput, { FileInputProps } from '@ui/file-input'
 import styled from 'styled-components'
 import React from 'react'

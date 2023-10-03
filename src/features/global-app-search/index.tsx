@@ -88,7 +88,7 @@ const GlobalAppSearch = ({ size = 'large' }: Props) => {
 
     return (
         <GlobalAppSearchStyled
-            tabIndex={10}
+            tabIndex={0}
             maxWidth="750px"
             width={width}
             size={size}

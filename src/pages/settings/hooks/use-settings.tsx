@@ -44,12 +44,12 @@ const useSettings = () => {
                         onAdd: () =>
                             open(
                                 <CustomizeMenu
-                                    title={'Настройка меню'}
                                     enabledList={'leftsideBarRoutes'}
                                     requiredList={requiredLeftsideBarItems}
                                     remove={deletePageFromSidebar}
                                     add={addPageToSidebar}
                                 />,
+                                'Настройка меню',
                             ),
                         onRemoveOne: (id) => deletePageFromSidebar(id as string, settings, requiredLeftsideBarItems),
                     },
@@ -96,12 +96,12 @@ const useSettings = () => {
                             onAdd: () =>
                                 open(
                                     <CustomizeMenu
-                                        title={'Добавить страницы'}
                                         enabledList={'homeRoutes'}
                                         requiredList={[]}
                                         remove={deletePageFromHome}
                                         add={addPageToHome}
                                     />,
+                                    'Добавить страницы',
                                 ),
                         },
                     },

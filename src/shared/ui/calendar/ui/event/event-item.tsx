@@ -1,3 +1,4 @@
+import { getSubjectName } from '@features/schedule/lib/get-subject-name'
 import { NextSubject } from '@features/schedule/ui'
 import { TimeIndicator } from '@features/schedule/ui/subject/time-indicator'
 import calcTimeLeft from '@shared/lib/dates/calc-time-left'
@@ -8,14 +9,13 @@ import React from 'react'
 import { HiOutlineCalendar, HiOutlineExternalLink, HiOutlineLogin, HiOutlineUserCircle } from 'react-icons/hi'
 import DotSeparatedWords from '../../../dot-separated-words'
 import Flex from '../../../flex'
-import EventBackground from '../../calendars/day/ui/event-background'
 import IconText from '../../calendars/day/ui/icon-text'
 import { getTimeInterval } from '../../lib/get-time-interval'
 import { DayCalendarEvent } from '../../types'
+import { getEventTopPosition } from './lib/get-event-top-position'
 import { EventFront, EventItemStyled, EventTitle, MobileIcon } from './styles'
 import { UIProps } from './types'
-import { getEventTopPosition } from './lib/get-event-top-position'
-import { getSubjectName } from '@features/schedule/lib/get-subject-name'
+import { Icons } from '../../calendars/day/ui/styles'
 
 type Props = DayCalendarEvent & UIProps & { isNextEvent?: boolean; isCurrentEvent?: boolean }
 
@@ -57,9 +57,13 @@ const EventItem = (props: Props) => {
     })
     const top = getEventTopPosition(startTime, shift, scale)
     const normalizedTitle = getSubjectName(title)
+    const eventTitle = !extremeSmallSize
+        ? getShortString(normalizedTitle.name, shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64)
+        : title.split(' ').map((el) => el[0].toUpperCase())
 
     return (
         <EventItemStyled
+            background={background}
             textColor={textColor}
             listView={listView}
             leftShift={100 * leftShift}
@@ -71,7 +75,15 @@ const EventItem = (props: Props) => {
             shortInfo={shortInfo}
         >
             <MobileIcon>{icon}</MobileIcon>
-            {!listView && <EventBackground icon={icon} background={background} />}
+            {!listView && (
+                <Icons>
+                    <div>{icon}</div>
+                    <div>{icon}</div>
+                    <div>{icon}</div>
+                    <div>{icon}</div>
+                </Icons>
+            )}
+            {/* {!listView && <EventBackground icon={icon} background={background} />} */}
             <Flex className="event-body" gap="0px" ai="flex-start">
                 <EventFront scale={scale} d="column" ai="flex-start" shortInfo={shortInfo}>
                     <Flex d="column" gap="2px">
@@ -107,12 +119,7 @@ const EventItem = (props: Props) => {
                             </Flex>
                         )}
                         <EventTitle listView={listView} nameInOneRow={nameInOneRow} scale={scale} shortInfo={shortInfo}>
-                            {!extremeSmallSize
-                                ? getShortString(
-                                      normalizedTitle.name,
-                                      shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64,
-                                  )
-                                : title.split(' ').map((el) => el[0].toUpperCase())}
+                            {eventTitle}
                         </EventTitle>
                     </Flex>
 

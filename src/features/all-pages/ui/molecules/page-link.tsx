@@ -34,7 +34,7 @@ export type PageLinkProps = IRoute & {
 
 const PageLink = (props: PageLinkProps) => {
     const { close } = useModal()
-    const { path, orientation = 'vertical', mode = 'use' } = props
+    const { menuPath, path, orientation = 'vertical', mode = 'use' } = props
     const maxWordLength = orientation === 'vertical' ? 17 : 50
     const linkWidth = 1
 
@@ -52,7 +52,11 @@ const PageLink = (props: PageLinkProps) => {
     }
 
     return (
-        <LinkWrapper to={path} onClick={handleClickLink} width={orientation === 'vertical' ? linkWidth : '100%'}>
+        <LinkWrapper
+            to={menuPath ?? path}
+            onClick={handleClickLink}
+            width={orientation === 'vertical' ? linkWidth : '100%'}
+        >
             <PageLinkContent {...props} maxWordLength={maxWordLength} mode={mode} />
         </LinkWrapper>
     )

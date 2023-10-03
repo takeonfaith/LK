@@ -82,9 +82,9 @@ type Props = {
 }
 
 const LinkItem = ({ item, amount }: Props) => {
-    const { icon, color, path, title, notifications } = item
+    const { icon, color, path, title, notifications, menuPath } = item
     return (
-        <LinkItemStyled amount={amount} to={path} color={Colors[color].transparent3}>
+        <LinkItemStyled amount={amount} to={menuPath ?? path} color={Colors[color].transparent3}>
             <Icon badge={notifications?.toString()} color={color} size={35}>
                 {icon}
             </Icon>

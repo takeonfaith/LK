@@ -32,17 +32,33 @@ const Notification = styled.span<{
     font-weight: bold;
     height: 16px;
     display: ${({ visible }) => !visible && 'none'};
-    animation: ${({ pulsing }) => pulsing && '2s notif-pulsing infinite'};
 
-    @keyframes notif-pulsing {
+    &::before {
+        content: '';
+        background: ${({ color }) => Colors[color ?? 'red'].light1};
+        display: block;
+        width: 100%;
+        height: 16px;
+        border-radius: 10px;
+        position: absolute;
+        inset: 0;
+        top: 0px;
+        z-index: -1;
+        animation: ${({ pulsing }) => (pulsing ? 'pulse-animation 1s infinite linear' : 'none')};
+    }
+
+    @keyframes pulse-animation {
         0% {
-            outline: 0px solid ${({ color }) => Colors[color ?? 'red'].main};
+            transform: scale(1);
+            opacity: 1;
         }
-        50% {
-            outline: 10px solid transparent;
+        90% {
+            transform: scale(2);
+            opacity: 0;
         }
         100% {
-            outline: 0px solid transparent;
+            transform: scale(1);
+            opacity: 0;
         }
     }
 `

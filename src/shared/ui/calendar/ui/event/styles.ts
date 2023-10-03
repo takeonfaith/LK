@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { StyledProps } from './types'
 
 export const EventItemStyled = styled.div<StyledProps>`
-    width: ${({ quantity }) => `calc(${quantity}% - 1.2px)`};
+    background: ${({ background }) => background};
+    width: ${({ quantity, listView }) => (listView ? '100%' : `calc(${quantity}% - 2.5px)`)};
     height: ${({ duration, scale }) => `${duration * scale}px`};
     border-radius: 5px;
     padding: ${({ shortInfo, scale }) => (!shortInfo ? `${scale * 8}px` : '8px')};
@@ -14,7 +15,7 @@ export const EventItemStyled = styled.div<StyledProps>`
     cursor: pointer;
     position: ${({ listView }) => (listView ? 'static' : 'absolute')};
     transform: translateX(${({ leftShift }) => `calc(${leftShift}% + ${1 * (leftShift / 100)}px)`});
-    left: 1.5px;
+    left: 2px;
     top: ${({ top }) => `${top}px`};
     /* box-shadow: 0 0 1px ${({ color }) => color}; */
 

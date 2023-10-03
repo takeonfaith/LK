@@ -11,7 +11,7 @@ type Props = {
 
 const IconText = ({ icon, text, onClick, rightIcon, shortInfo = false }: Props) => {
     return (
-        <IconTextStyled onClick={onClick} shortInfo={shortInfo} gap="7px" w="fit-content">
+        <IconTextStyled onClick={onClick} shortInfo={shortInfo} gap="7px" mw="100%" w="fit-content">
             <SmallIcon shortInfo={shortInfo}>{icon}</SmallIcon>
             <SubtextStyled width="100%" className="text">
                 {text}

@@ -1,5 +1,5 @@
 import { Title } from '@ui/atoms'
-import Checkbox from '@ui/atoms/checkbox'
+import Checkbox from '@ui/checkbox'
 import List from '@ui/list'
 import React from 'react'
 

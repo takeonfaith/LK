@@ -139,8 +139,9 @@ const NotificationItem = ({
                     <Button
                         isActive={!(loadingRemove && removeButtonClicked)}
                         icon={<FiX />}
-                        background="transparent"
+                        background="var(--theme-2)"
                         onClick={handleClose}
+                        style={{ borderRadius: '20px' }}
                     />
                 )}
             </NotificationItemStyled>

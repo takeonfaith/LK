@@ -1,6 +1,6 @@
 import { Colors, FileFormats } from '@shared/constants'
 import { Button, Divider, FileLink, Message } from '@ui/atoms'
-import Checkbox from '@ui/atoms/checkbox'
+import Checkbox from '@ui/checkbox'
 import FileInput from '@ui/file-input'
 import React from 'react'
 import { FiAlertCircle, FiInfo, FiMinusCircle, FiPlusCircle } from 'react-icons/fi'

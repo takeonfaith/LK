@@ -35,7 +35,13 @@ const StudentModal = (props: Props) => {
                                 filter: group,
                             })}
                         >
-                            <Button icon={<FiClock />} text={'Расписание'} onClick={() => close()} width="100%" />
+                            <Button
+                                icon={<FiClock />}
+                                text={'Расписание'}
+                                onClick={() => close()}
+                                width="100%"
+                                background="var(--theme-4)"
+                            />
                         </Link>
                     )}
                     <Button
@@ -43,6 +49,7 @@ const StudentModal = (props: Props) => {
                         text={'Написать'}
                         onClick={() => close()}
                         width="100%"
+                        background="var(--theme-4)"
                         isActive={false}
                     />
                 </>

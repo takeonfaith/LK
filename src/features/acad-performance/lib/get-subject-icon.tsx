@@ -42,6 +42,7 @@ import {
     HiOutlinePresentationChartBar,
     HiOutlinePresentationChartLine,
     HiOutlineRefresh,
+    HiOutlineServer,
     HiOutlineShieldCheck,
     HiOutlineSparkles,
     HiOutlineSpeakerphone,
@@ -66,6 +67,10 @@ export const getSubjectIcon = (name: string) => {
             icon: <HiOutlineBeaker />,
         },
         {
+            keys: ['сервер'],
+            icon: <HiOutlineServer />,
+        },
+        {
             keys: ['игр'],
             icon: <LuGamepad />,
         },
@@ -74,7 +79,7 @@ export const getSubjectIcon = (name: string) => {
             icon: <FiLifeBuoy />,
         },
         {
-            keys: ['web'],
+            keys: ['web', 'веб'],
             icon: <FiChrome />,
         },
         {

@@ -1,4 +1,4 @@
-import Checkbox from '@ui/atoms/checkbox'
+import Checkbox from '@ui/checkbox'
 import Notification from '@ui/notification'
 import getLettersColors from '@utils/get-letters-colors'
 import getNameFirstLetters from '@utils/get-name-first-letters'

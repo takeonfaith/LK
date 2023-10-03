@@ -24,12 +24,12 @@ const HolidayPlateWrapper = styled.div`
     }
 `
 
-const HolidayPlate = () => {
+const HolidayPlate = ({ errorInData }: { errorInData: boolean }) => {
     return (
         <HolidayPlateWrapper>
             <img src={Sleep} alt="дед наелся и спит" />
             <span>В этот день пар нет</span>
-            <ShowNextDayEventsButton />
+            {!errorInData && <ShowNextDayEventsButton />}
         </HolidayPlateWrapper>
     )
 }
