@@ -109,7 +109,10 @@ const EventItem = (props: Props) => {
                         <EventTitle listView={listView} nameInOneRow={nameInOneRow} scale={scale} shortInfo={shortInfo}>
                             {!extremeSmallSize
                                 ? getShortString(title, shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64)
-                                : title.split(' ').map((el) => el[0].toUpperCase())}
+                                : title
+                                      .split('(')[0]
+                                      .split(' ')
+                                      .map((el) => el[0].toUpperCase())}
                         </EventTitle>
                     </Flex>
 
