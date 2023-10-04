@@ -2,6 +2,7 @@ import { SCHEDULE_CURRENT_ROUTE, scheduleRoutes } from '@app/routes/general-rout
 import { menuModel } from '@entities/menu'
 import { scheduleModel } from '@entities/schedule'
 import { SESSION_VIEWS, VIEWS } from '@entities/schedule/consts'
+import { ErrorIconIndicator } from '@shared/ui/error-icon-indicator'
 import Flex from '@shared/ui/flex'
 import PageBlock from '@shared/ui/page-block'
 import { Button, Wrapper } from '@ui/atoms'
@@ -14,22 +15,23 @@ import { SideMenu } from './ui/side-menu'
 
 const Schedule = () => {
     const {
-        data: { view, schedule, externalSchedule },
+        data: { view, schedule, externalSchedule, errorInData },
         loading,
         error,
     } = scheduleModel.selectors.useSchedule()
     const { allRoutes } = menuModel.selectors.useMenu()
     const {
         isSideMenuOpen,
-        onHintClick,
-        handleValue,
-        handleReturnToMySchedule,
         shouldShowSlider,
         showMonth,
         baseSearchValue,
+        isMobile,
+        onHintClick,
+        handleValue,
+        handleReturnToMySchedule,
         handleLoad,
         handleOpenSideMenu,
-        isMobile,
+        handleErrorClick,
     } = useSchedule()
 
     return (
@@ -48,7 +50,8 @@ const Schedule = () => {
                     )
                 }
                 topRightCornerElement={
-                    <Flex w="fit-content" gap="8px">
+                    <Flex w="fit-content" gap="20px">
+                        {<ErrorIconIndicator visible={!!errorInData} onClick={handleErrorClick} />}
                         <Button
                             icon={isMobile ? <FiMenu /> : <FiSidebar />}
                             width="36px"

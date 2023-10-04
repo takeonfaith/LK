@@ -1,8 +1,12 @@
 import { IWeekDays, WEEK_DAYS } from '@shared/constants'
 import { getMonday } from './get-monday'
+import { getDateInSomeDays } from '@shared/lib/dates/get-date-in-some-days'
 
 export const getWeekNames = () => {
-    const day = getMonday(new Date())
+    const today = new Date()
+    let day = getMonday(today)
+    if (today.getDay() === 0) day = getDateInSomeDays(today, 1)
+
     const result = Object.keys(WEEK_DAYS).reduce((acc, el) => {
         acc[WEEK_DAYS[el as keyof IWeekDays].short] = ''
         return acc

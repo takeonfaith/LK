@@ -1,4 +1,4 @@
-import { MEDIA_QUERIES } from '@shared/constants'
+import { Colors, MEDIA_QUERIES } from '@shared/constants'
 import styled from 'styled-components'
 
 export const ScheduleWidgetStyled = styled.div<{ noSchedule: boolean }>`
@@ -40,4 +40,11 @@ export const ScheduleList = styled.div`
             display: none;
         }
     }
+`
+
+export const ErrorInDataWrapper = styled.div`
+    position: absolute;
+    top: 22px;
+    right: 22px;
+    color: ${Colors.red.main};
 `

@@ -12,6 +12,7 @@ const useLogin = () => {
     const [capsLock, setCapsLock] = useState(false)
     const isSubmitActive = !!password && !!login
     const loginFunc = userModel.events.login
+    const showAbiturientMessage = new Date().getMonth() >= 6 && new Date().getMonth() <= 8
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
         setCapsLock(e.getModifierState('CapsLock'))
@@ -33,13 +34,14 @@ const useLogin = () => {
 
     return {
         isSubmitActive,
+        password,
+        capsLock,
+        login,
+        showAbiturientMessage,
         handleSavePassword,
         handleKeyPress,
         handleLogin,
-        password,
         setPassword,
-        capsLock,
-        login,
         setLogin,
     }
 }

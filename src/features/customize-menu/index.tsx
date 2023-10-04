@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
 import { IRoute, IRoutes } from '@app/routes/general-routes'
 import { menuModel } from '@entities/menu'
-import { settingsModel } from '@entities/settings'
-import { Title } from '@ui/title'
-import { CustomizeLeftsideBarItem } from '../../pages/settings/pages/customize-menu/ui/molecules'
-import { LocalSearch } from '@shared/ui/molecules'
-import search from '@features/all-pages/lib/search'
 import { Menu } from '@entities/menu/model'
+import { settingsModel } from '@entities/settings'
+import search from '@features/all-pages/lib/search'
+import { LocalSearch } from '@shared/ui/molecules'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { CustomizeLeftsideBarItem } from '../../pages/settings/pages/customize-menu/ui/molecules'
 
 const CustomizeMenuStyled = styled.div`
     display: flex;
@@ -21,14 +20,13 @@ const CustomizeMenuStyled = styled.div`
 `
 
 type Props = {
-    title: string
     enabledList: keyof Omit<Menu, 'isOpen' | 'currentPage'>
     requiredList: string[]
     remove: (id: string, settings: settingsModel.Param, requiredList: string[]) => void
     add: (id: string, settings: settingsModel.Param, maxLength: number, requiredList: string[]) => void
 }
 
-const CustomizeMenu = ({ title, enabledList, requiredList, add, remove }: Props) => {
+const CustomizeMenu = ({ enabledList, requiredList, add, remove }: Props) => {
     const { settings } = settingsModel.selectors.useSettings()
     const menu = menuModel.selectors.useMenu()
     const { visibleRoutes } = menuModel.selectors.useMenu()
@@ -48,9 +46,6 @@ const CustomizeMenu = ({ title, enabledList, requiredList, add, remove }: Props)
 
     return (
         <CustomizeMenuStyled>
-            <Title size={2} align="left" bottomGap>
-                {title}
-            </Title>
             <LocalSearch
                 placeholder="Поиск"
                 whereToSearch={visibleRoutes}

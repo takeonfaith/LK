@@ -94,7 +94,9 @@ sample({
         data: {
             ...store.data,
             ...schedule,
-            hasNoSchedule: JSON.stringify(schedule.schedule.semestr.data) === JSON.stringify(EMPTY_WEEK),
+            hasNoSchedule: !schedule.errorInData
+                ? JSON.stringify(schedule.schedule.semestr.data) === JSON.stringify(EMPTY_WEEK)
+                : false,
         },
     }),
     target: $schedule,
@@ -122,6 +124,7 @@ sample({
         data: {
             ...store.data,
             externalSchedule: externalSchedule.schedule,
+            errorInData: externalSchedule.errorInData,
         },
     }),
     target: $schedule,
@@ -135,6 +138,7 @@ sample({
         data: {
             ...store.data,
             externalSchedule: externalSchedule.schedule,
+            errorInData: externalSchedule.errorInData,
         },
     }),
     target: $schedule,

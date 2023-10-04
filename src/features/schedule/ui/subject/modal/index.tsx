@@ -20,6 +20,7 @@ import { NextSubject, SubjectPlaceBlock } from '../../atoms'
 import ListOfGroups from '../../atoms/list-of-groups'
 import { SubjectIconAndBackground } from '../subject-icon-and-background'
 import { TimeIndicator } from '../time-indicator'
+import { getSubjectName } from '@features/schedule/lib/get-subject-name'
 import calcTimeLeft from '@shared/lib/dates/calc-time-left'
 
 const SubjectModalWrapper = styled.div`
@@ -28,6 +29,7 @@ const SubjectModalWrapper = styled.div`
     max-width: 400px;
 
     @media (min-width: 1001px) {
+        min-width: 320px;
         width: 100%;
     }
 
@@ -51,16 +53,11 @@ const SubjectModalWrapper = styled.div`
             margin-top: 5px;
         }
     }
-
-    @media (max-width: 1000px) {
-        padding: 10px;
-    }
 `
 
 const ModalContentWrapper = styled(Flex)<{ noPadding: boolean }>`
     padding: ${({ noPadding }) => (noPadding ? '24px 0 0 0' : '24px')};
     hyphens: auto;
-    overflow-y: auto;
     height: calc(100% - 154px);
 `
 
@@ -103,6 +100,8 @@ const SubjectModal = (props: Props) => {
         open(<SubjectPlaceBlock place={place} link={link} name={name} />)
     }
 
+    const normalizedName = getSubjectName(name)
+
     return (
         <SubjectModalWrapper>
             <SubjectIconAndBackground subjectName={name} color={color} noPadding={noPadding} />
@@ -118,7 +117,7 @@ const SubjectModal = (props: Props) => {
                         />
                     </Flex>
                     <Title size={3} align="left" width="fit-content">
-                        {name}
+                        {normalizedName.name}
                     </Title>
                 </Flex>
                 <Divider margin="0" width="100%" />
@@ -126,9 +125,9 @@ const SubjectModal = (props: Props) => {
                     icon={<HiOutlineCalendar />}
                     text={<DotSeparatedWords words={[weekday ?? '', dateInterval]} />}
                 />
-                {link?.length && (
-                    <a href={link} target="_blank" rel="noreferrer">
-                        <IconText icon={<HiOutlineExternalLink />} text={place} />
+                {(link?.length || normalizedName.link) && (
+                    <a href={link ?? normalizedName.link} target="_blank" rel="noreferrer">
+                        <IconText icon={<HiOutlineExternalLink />} text={link ? place : 'Ссылка'} />
                     </a>
                 )}
                 {!link?.length && <IconText icon={<HiOutlineOfficeBuilding />} text={place} />}

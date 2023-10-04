@@ -36,6 +36,7 @@ const TeacherModal = (props: Props) => {
                             onClick={() => {
                                 close()
                             }}
+                            background="var(--theme-4)"
                             width="100%"
                         />
                     </Link>
@@ -44,6 +45,7 @@ const TeacherModal = (props: Props) => {
                         text={'Написать'}
                         onClick={() => close()}
                         width="100%"
+                        background="var(--theme-4)"
                         isActive={false}
                     />
                 </>

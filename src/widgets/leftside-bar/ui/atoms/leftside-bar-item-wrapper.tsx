@@ -1,4 +1,4 @@
-import { Colors, IColors } from '@shared/constants'
+import { Colors, IColors, MEDIA_QUERIES } from '@shared/constants'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -77,8 +77,9 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
         opacity: ${({ isCurrent }) => (isCurrent ? 1 : 0)};
     }
 
-    @media (max-width: 1000px) {
+    ${MEDIA_QUERIES.isTablet} {
         margin: 0;
+        height: 100%;
         font-weight: ${({ isCurrent }) => (isCurrent ? 800 : 600)};
 
         & > button {
@@ -95,6 +96,7 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
 
         svg {
             margin-right: 0px;
+            transform: translateY(-5px);
         }
 
         &::before {
@@ -113,7 +115,7 @@ const LeftsideBarItemWrapper = styled(Link).withConfig({
             position: absolute;
             left: 50%;
             transform: translate(-50%);
-            bottom: -5px;
+            bottom: 8px;
             font-size: 0.65em;
             width: 100%;
             text-align: center;

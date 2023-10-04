@@ -68,6 +68,7 @@ const GlobalStyles = createGlobalStyle`
 
 	html[data-theme=dark] {
 		--blue: #6d86e3;
+		--theme-4: #494949;
 		--theme-3: #3b3b3b;
 		--theme-3-shadow: 5px 5px 10px rgba(0,0,0,0.377);
 		--theme-2: rgb(34, 34, 34);
@@ -100,6 +101,7 @@ const GlobalStyles = createGlobalStyle`
 	html[data-theme=light] {
 		--blue: #6d86e3;
 		--blueTransparent: #6d86e3b0;
+		--theme-4: #f1f1f1;
 		--theme-3: #f1f1f1;
 		--theme-3-shadow: 5px 5px 10px hsla(0,0%,40.8%,0.24);
 		--theme-2: rgb(243, 243, 243);
@@ -151,5 +153,29 @@ const GlobalStyles = createGlobalStyle`
 		}
 	}
 `
+
+export const pulse = ({ color, start }: { color: string; start: boolean }) => `
+&::before {
+    content: '';
+    background: ${color};
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    position: absolute;
+    inset: 0;
+    animation: ${start ? 'pulse-animation 1s infinite linear' : 'none'};
+}
+
+@keyframes pulse-animation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform:  scale(2.5);
+        opacity: 0;
+    }
+}`
 
 export default GlobalStyles

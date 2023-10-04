@@ -71,13 +71,8 @@ const MobileBottomMenu = () => {
     return (
         <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly">
             {config.map((id) => {
-                return (
-                    <LeftsideBarItem
-                        key={id}
-                        {...allRoutes[id]}
-                        isCurrent={location.pathname.includes(allRoutes[id]?.path)}
-                    />
-                )
+                const isCurrent = allRoutes[id] ? location.pathname.includes(allRoutes[id].path) : false
+                return <LeftsideBarItem key={id} {...allRoutes[id]} isCurrent={isCurrent} />
             })}
         </MobileBottomMenuWrapper>
     )

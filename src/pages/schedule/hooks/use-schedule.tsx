@@ -15,13 +15,15 @@ import { useHistory, useLocation } from 'react-router'
 import { useModal } from 'widgets'
 import { SideMenuContent } from '../ui/side-menu/side-menu-content'
 import Flex from '@shared/ui/flex'
+import { popUpMessageModel } from '@entities/pop-up-message'
+import { TIME_IN_MS } from '@shared/constants'
 
 const useSchedule = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
     const {
-        data: { filter, view },
+        data: { filter, view, errorInData },
     } = scheduleModel.selectors.useSchedule()
 
     const { isTablet, isMobile } = useCurrentDevice()
@@ -124,6 +126,14 @@ const useSchedule = () => {
         }
     }
 
+    const handleErrorClick = () => {
+        popUpMessageModel.events.evokePopUpMessage({
+            message: errorInData,
+            type: 'failure',
+            time: TIME_IN_MS.ten_seconds,
+        })
+    }
+
     return {
         isSideMenuOpen,
         shouldShowSlider,
@@ -131,6 +141,7 @@ const useSchedule = () => {
         isSessionPage,
         baseSearchValue,
         showMonth,
+        handleErrorClick,
         handleValue,
         onHintClick,
         handleReturnToMySchedule,

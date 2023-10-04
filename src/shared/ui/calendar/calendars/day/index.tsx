@@ -16,7 +16,6 @@ export const DayCalendar = (props: DayCalendarProps) => {
         currentDay,
         events,
         carouselRef,
-        eventsRef,
         interval,
         scale,
         shift,
@@ -51,7 +50,6 @@ export const DayCalendar = (props: DayCalendarProps) => {
                                 currentDay={currentDay}
                                 shift={shift}
                                 onEventClick={onEventClick}
-                                ref={eventsRef}
                             />
                         )
                     })}

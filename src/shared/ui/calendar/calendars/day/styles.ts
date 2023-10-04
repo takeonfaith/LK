@@ -18,7 +18,7 @@ export const DayCalendarWrapper = styled(Wrapper)`
 export const EventInfo = styled.div`
     min-width: 340px;
     max-width: 340px;
-    height: 100%;
+    height: calc(100vh - 220px);
     z-index: 10;
     background: var(--block-content);
     border-radius: 10px;

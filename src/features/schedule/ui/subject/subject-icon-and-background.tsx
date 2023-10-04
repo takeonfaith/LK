@@ -6,7 +6,11 @@ import EventBackground from '@shared/ui/calendar/calendars/day/ui/event-backgrou
 import React from 'react'
 import styled from 'styled-components'
 
-const BackgroundWrapper = styled.div<{ textColor: string; background: string; noPadding: boolean }>`
+const BackgroundWrapper = styled.div<{
+    textColor: string
+    noPadding: boolean
+    iconBackground: string
+}>`
     width: 100%;
     height: 110px;
     position: relative;
@@ -17,7 +21,7 @@ const BackgroundWrapper = styled.div<{ textColor: string; background: string; no
         position: absolute;
         bottom: ${({ noPadding }) => (noPadding ? '-5px' : '-50px')};
         left: ${({ noPadding }) => (noPadding ? '-5px' : '16px')};
-        background: ${({ background }) => background};
+        background: ${({ iconBackground }) => iconBackground};
         transition: 0s;
 
         svg {
@@ -37,11 +41,12 @@ export const SubjectIconAndBackground = ({ subjectName, color, noPadding }: Prop
     const icon = getSubjectIcon(subjectName)
 
     const { theme } = useTheme()
-    const textColor = theme === 'light' ? color.dark3 : color.light2
+    const textColor = theme === 'light' ? color.dark3 : color.light3
     const background = theme === 'light' ? color.light3 : color.dark3
+    const iconBackground = theme === 'light' ? color.light3 : color.dark3
 
     return (
-        <BackgroundWrapper noPadding={noPadding} textColor={textColor} background={background}>
+        <BackgroundWrapper noPadding={noPadding} textColor={textColor} iconBackground={iconBackground}>
             <EventBackground noPadding={noPadding} icon={icon} background={background} />
             <Icon color={color.main} size={70} borderRadius="19px">
                 {icon}

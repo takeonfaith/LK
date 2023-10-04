@@ -5,10 +5,33 @@ import React from 'react'
 import { ApplicationFileOutput } from '@api/model'
 import { Button } from '@ui/button'
 import { Colors } from '@shared/constants'
+import Flex from '@shared/ui/flex'
+import { FiDownload } from 'react-icons/fi'
+import { LinkButton } from '@shared/ui/atoms'
 
 const getApplicationsColumns = (): ColumnProps[] => {
     return [
-        { title: 'Запрос', field: 'subject', priority: 'one', search: true, showFull: true },
+        {
+            title: 'Запрос',
+            field: 'subject',
+            priority: 'one',
+            search: true,
+            showFull: true,
+            render: (val, obj) => {
+                return (
+                    <Flex jc="space-between">
+                        {val}
+                        {!!obj?.files_output?.length && (
+                            <LinkButton
+                                icon={<FiDownload />}
+                                background="transparent"
+                                href={obj?.files_output[0].url}
+                            />
+                        )}
+                    </Flex>
+                )
+            },
+        },
         {
             title: 'Дата',
             field: 'created',
