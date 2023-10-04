@@ -46,7 +46,7 @@ const MobileBottomMenu = () => {
     const {
         data: { user },
     } = userModel.selectors.useUser()
-    const { noSchedule, loading } = useScheduleWidget()
+    const { hasNoSchedule, loading } = useScheduleWidget()
     const location = useLocation()
 
     if (!allRoutes || !user || loading) {
@@ -64,7 +64,7 @@ const MobileBottomMenu = () => {
     const config =
         user?.user_status === 'stud'
             ? DEFAULT_STUDENT_MOBILE_CONFIG
-            : noSchedule
+            : hasNoSchedule
             ? DEFAULT_STAFF_MOBILE_CONFIG
             : DEFAULT_PPS_MOBILE_CONFIG
 
