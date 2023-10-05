@@ -139,7 +139,7 @@ const Contract = ({ contract }: Props) => {
                         popUpSuccessMessage="Номер договора скопирован в буфер"
                         isActive
                     />
-                    <LinkButton onClick={() => null} href={file ?? ''} icon={<FiDownload />} width="45px" />
+                    {file && <LinkButton onClick={() => null} href={file ?? ''} icon={<FiDownload />} width="45px" />}
                 </Flex>
             )}
         </ContractWrapper>
