@@ -10,12 +10,19 @@ import { FiCommand, FiSearch } from 'react-icons/fi'
 import styled from 'styled-components'
 import { useModal } from 'widgets'
 import GlobalAppSearchModal from './global-app-search-modal'
+import { MEDIA_QUERIES } from '@shared/constants'
 
 type SearchSize = 'icon' | 'small' | 'large'
 
 const GlobalAppSearchStyled = styled(BlockWrapper)<{ size: SearchSize }>`
     cursor: pointer;
     box-shadow: ${({ size }) => size === 'small' && 'var(--block-shadow-1)'};
+    border-radius: 17px;
+
+    ${MEDIA_QUERIES.isTablet} {
+        align-items: flex-start;
+    }
+
     &:hover {
         filter: brightness(0.96);
     }

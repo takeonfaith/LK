@@ -30,22 +30,24 @@ const Wrapper = styled.div`
     max-width: 600px;
 
     & > div {
-        line-height: 1.6rem;
         width: 100%;
 
         p {
             margin-top: 10px;
             width: 100%;
             opacity: 0.9;
+            line-height: 1.7rem;
         }
 
         a {
             text-decoration: underline;
         }
 
-        strong,
-        p:nth-child(1) {
+        strong {
             font-weight: 600;
+        }
+
+        p:nth-child(1) {
             margin: 0;
             opacity: 1;
             text-align: left !important;
@@ -61,6 +63,7 @@ const Wrapper = styled.div`
             object-fit: cover;
             border-radius: var(--brLight);
             margin-bottom: 20px;
+            box-shadow: var(--block-content-shadow);
         }
     }
 `

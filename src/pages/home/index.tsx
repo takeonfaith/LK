@@ -66,7 +66,14 @@ const Home = () => {
                 <GlobalAppSearch />
                 <Links links={homeRoutes} />
                 <CenterPage>
-                    <Block maxWidth="750px" minHeight="100%" height="100%" orientation="vertical" gap="20px">
+                    <Block
+                        noAppearanceInMobile
+                        maxWidth="750px"
+                        minHeight="100%"
+                        height="100%"
+                        orientation="vertical"
+                        gap="20px"
+                    >
                         <Flex>
                             <Title size={2} align="left" width="100%">
                                 Главная

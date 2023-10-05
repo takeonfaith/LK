@@ -1,6 +1,5 @@
 import AlertModal from '@pages/alerts/ui/alert-modal'
 import { Alert } from '@shared/api/model/alert'
-import getShortString from '@shared/lib/get-short-string'
 import localizeDate from '@shared/lib/dates/localize-date'
 import DotSeparatedWords from '@shared/ui/dot-separated-words'
 import Subtext from '@shared/ui/subtext'
@@ -9,7 +8,8 @@ import React from 'react'
 import { BiNews } from 'react-icons/bi'
 import { useModal } from 'widgets/modal/lib'
 import getImageURLFromContent from './lib/get-image-url-from-content'
-import { AlertContent, AlertItemBadge, AlertItemStyled, AlertText, AlertTitle, Image } from './styles'
+import { AlertContent, AlertItemBadge, AlertItemStyled, AlertTitle, Image } from './styles'
+import getShortStirng from '@shared/lib/get-short-string'
 
 type Props = {
     news: Alert
@@ -25,11 +25,11 @@ const AlertItem = ({ news, orientation = 'vertical', isNew = false }: Props) => 
     return (
         <AlertItemStyled onClick={handleOpenModal} orientation={orientation}>
             <Image orientation={orientation}>{cover ? <img src={cover} alt="" /> : <BiNews />}</Image>
-            <AlertContent>
-                <AlertTitle orientation={orientation}>{news.title}</AlertTitle>
-                <AlertText>
-                    <div dangerouslySetInnerHTML={{ __html: getShortString(news.content, 220) }} />
-                </AlertText>
+            <AlertContent orientation={orientation}>
+                <AlertTitle orientation={orientation}>
+                    {orientation === 'vertical' ? getShortStirng(news.title, 38) : news.title}
+                </AlertTitle>
+
                 <Subtext>
                     <DotSeparatedWords words={[localizeDate(news.date), news.time]} />
                 </Subtext>

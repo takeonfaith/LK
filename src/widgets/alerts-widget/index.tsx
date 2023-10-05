@@ -36,7 +36,7 @@ const AlertsWidget = () => {
                     />
                 </Link>
             </Title>
-            <Flex gap="12px" d={isMobile ? 'column' : 'row'}>
+            <Flex gap="10px" d={isMobile ? 'column' : 'row'}>
                 {loading && (
                     <Flex d="column" gap="8px">
                         <PlaneSkeletonList />
