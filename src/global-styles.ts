@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { CSSObject, createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
 	* {
@@ -177,5 +177,11 @@ export const pulse = ({ color, start }: { color: string; start: boolean }) => `
         opacity: 0;
     }
 }`
+
+export const textEllipsis: CSSObject = {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+}
 
 export default GlobalStyles

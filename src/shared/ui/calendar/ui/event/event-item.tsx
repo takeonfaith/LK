@@ -15,7 +15,6 @@ import { DayCalendarEvent } from '../../types'
 import { getEventTopPosition } from './lib/get-event-top-position'
 import { EventFront, EventItemStyled, EventTitle, MobileIcon } from './styles'
 import { UIProps } from './types'
-import { Icons } from '../../calendars/day/ui/styles'
 
 type Props = DayCalendarEvent & UIProps & { isNextEvent?: boolean; isCurrentEvent?: boolean }
 
@@ -75,14 +74,7 @@ const EventItem = (props: Props) => {
             shortInfo={shortInfo}
         >
             <MobileIcon>{icon}</MobileIcon>
-            {!listView && (
-                <Icons>
-                    <div>{icon}</div>
-                    <div>{icon}</div>
-                    <div>{icon}</div>
-                    <div>{icon}</div>
-                </Icons>
-            )}
+
             {/* {!listView && <EventBackground icon={icon} background={background} />} */}
             <Flex className="event-body" gap="0px" ai="flex-start">
                 <EventFront scale={scale} d="column" ai="flex-start" shortInfo={shortInfo}>

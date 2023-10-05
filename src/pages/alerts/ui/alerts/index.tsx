@@ -54,7 +54,7 @@ const Alerts = ({ alerts, listView }: Props) => {
                             isCollapsed={collapsed}
                             initiallyCollapsed={collapsed}
                         >
-                            <List scroll={false} gap={12}>
+                            <List scroll={false} gap={20}>
                                 {finalAlerts[year].map((alert, index) => {
                                     return (
                                         <AlertItem
