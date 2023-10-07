@@ -39,7 +39,7 @@ export const PEStudentModal = ({ student }: Props) => {
                 <Divider width="100%" margin="0" />
                 <Flex d="column" gap="4px" ai="flex-start">
                     <Title align="left" size={4}>
-                        Посещения
+                        Дата
                     </Title>
                     <AddPeStudentVisits studentGuid={student.studentGuid} />
                 </Flex>

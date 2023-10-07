@@ -6,9 +6,10 @@ import { $search, $teachers, onSearch, resetTeachers } from './model'
 
 type TeacherSelectProps = {
     onChange: (value: string) => void
+    onSearchChange?: (value: string) => void
 }
 
-export const TeacherSelect = ({ onChange }: TeacherSelectProps) => {
+export const TeacherSelect = ({ onChange, onSearchChange }: TeacherSelectProps) => {
     const [teachers, search] = useUnit([$teachers, $search])
 
     const handleHintClick = (hint: Hint | undefined) => {
@@ -22,6 +23,10 @@ export const TeacherSelect = ({ onChange }: TeacherSelectProps) => {
 
         return resetTeachers
     }, [])
+
+    useEffect(() => {
+        search && onSearchChange?.(search)
+    }, [search])
 
     return (
         <>

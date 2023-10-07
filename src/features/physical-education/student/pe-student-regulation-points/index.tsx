@@ -6,6 +6,7 @@ import { regularPointsColumns } from './constants'
 import { AddPEStudentRegulationPoints } from './features/add-pe-student-regulation-points'
 import { StyledTable, Wrapper } from './styled'
 import React from 'react'
+import { Colors } from '@shared/constants'
 
 export const PEStudentRegulationPoints = () => {
     const [student] = useUnit([selectedPEStudentModel.stores.$selectedStudent])
@@ -13,14 +14,19 @@ export const PEStudentRegulationPoints = () => {
     const { open } = useModal()
 
     const handleClick = () => {
-        open(<AddPEStudentRegulationPoints />)
+        open(<AddPEStudentRegulationPoints />, 'Добавить норматив')
     }
 
     if (!student) return null
 
     return (
         <Wrapper>
-            <Button text="Добавить норматив" onClick={handleClick} />
+            <Button
+                text="Добавить норматив"
+                onClick={handleClick}
+                background={Colors.blue.main}
+                textColor={Colors.white.main}
+            />
             <StyledTable data={student.standardsHistory} columns={regularPointsColumns} />
         </Wrapper>
     )

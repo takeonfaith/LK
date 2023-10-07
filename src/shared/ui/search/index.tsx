@@ -7,6 +7,7 @@ import { FiSearch } from 'react-icons/fi'
 import styled from 'styled-components'
 import { Input } from '../atoms'
 import BlockWrapper from '../block/styles'
+import { Size } from '../types'
 
 const SearchStyled = styled.div<{ width?: string }>`
     display: flex;
@@ -73,6 +74,7 @@ type SearchProps = {
     focusOn?: any
     onHintClick?: (hint: Hint | undefined) => void
     customMask?: (value: string, prevValue?: string) => string
+    size?: Size
 }
 
 const Search = ({
@@ -88,6 +90,7 @@ const Search = ({
     customMask,
     onHintClick,
     validationCheck = false,
+    size = 'middle',
 }: SearchProps) => {
     const [currentSelectedHint, setCurrentSelectedHint] = useState<number | null>(0)
     const [openHints, setOpenHints] = useState(false)
@@ -136,6 +139,7 @@ const Search = ({
     return (
         <SearchStyled width={width} onKeyDown={handleKeyDown} onMouseDown={handleMouseDown} ref={hintsRef}>
             <Input
+                size={size}
                 value={value}
                 placeholder={placeholder}
                 leftIcon={leftIcon ?? <FiSearch />}

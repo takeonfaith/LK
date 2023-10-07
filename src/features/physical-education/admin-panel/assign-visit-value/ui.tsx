@@ -6,7 +6,11 @@ import { assignVisitValue } from './model'
 import { Wrapper } from './styled'
 
 const COSTS = [
+    { id: '', title: 'Не выбрано' },
     { id: '2', title: '2' },
+    { id: '2.5', title: '2.5' },
+    { id: '3', title: '3' },
+    { id: '3.5', title: '3.5' },
     { id: '4', title: '4' },
 ]
 

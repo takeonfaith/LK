@@ -26,7 +26,7 @@ const Select = (props: SelectProps) => {
         refItems,
         appearance,
     } = useSelect(props)
-    const { isActive, width, title, required, selected, placeholder } = props
+    const { isActive, width, title, required, selected, placeholder, size = 'middle' } = props
 
     return (
         <SelectWrapper
@@ -36,11 +36,12 @@ const Select = (props: SelectProps) => {
             isOpen={isOpen}
             isActive={isActive ?? true}
             width={width}
+            size={size}
         >
             <Title size={4} align="left" bottomGap="5px" visible={!!title} required={required}>
                 {title}
             </Title>
-            <SelectHeaderWrapper multiple={multiple} appearance={appearance}>
+            <SelectHeaderWrapper multiple={multiple} appearance={appearance} size={size}>
                 <SelectHeader appearance={appearance}>
                     {!multiple ? (
                         <div className="single-header">

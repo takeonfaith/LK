@@ -64,7 +64,7 @@ sample({
 sample({
     clock: loadBufferHolidayPlanningFx.failData,
     fn: (response) => {
-        const message = isAxiosError(response) ? response.response?.data.error : 'Не удалось загрузить данные'
+        const message = isAxiosError(response) ? (response.response?.data as any).error : 'Не удалось загрузить данные'
 
         return {
             message,
@@ -78,7 +78,7 @@ sample({
 sample({
     clock: sendBufferHolidayPlanningFx.failData,
     fn: (response) => {
-        const message = isAxiosError(response) ? response.response?.data.error : 'Не удалось отправить данные'
+        const message = isAxiosError(response) ? (response.response?.data as any).error : 'Не удалось отправить данные'
 
         return {
             message,

@@ -6,20 +6,26 @@ import { additionalPointsColumns } from './constants'
 import { AddPEStudentAdditionalPoints } from './features/add-pe-student-additional-points'
 import { StyledTable, Wrapper } from './styled'
 import React from 'react'
+import { Colors } from '@shared/constants'
 
 export const PEStudentAdditionalPoints = () => {
     const [student] = useUnit([selectedPEStudentModel.stores.$selectedStudent])
     const { open } = useModal()
 
     const handleClick = () => {
-        open(<AddPEStudentAdditionalPoints />)
+        open(<AddPEStudentAdditionalPoints />, 'Дополнительные баллы')
     }
 
     if (!student) return null
 
     return (
         <Wrapper>
-            <Button text="Добавить дополнительные баллы" onClick={handleClick} />
+            <Button
+                text="Добавить дополнительные баллы"
+                onClick={handleClick}
+                background={Colors.blue.main}
+                textColor={Colors.white.main}
+            />
             <StyledTable columns={additionalPointsColumns} data={student.pointsHistory} />
         </Wrapper>
     )

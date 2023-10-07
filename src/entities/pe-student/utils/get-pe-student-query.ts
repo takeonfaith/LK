@@ -63,6 +63,9 @@ export const getPEStudentQuery = (studentId: string) => `{
           comment
           date
           points
+          teacher{
+            fullName
+          }
         }
       }
 }`

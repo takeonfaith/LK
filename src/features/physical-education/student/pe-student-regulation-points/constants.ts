@@ -28,4 +28,9 @@ export const regularPointsColumns: ColumnProps[] = [
         title: 'Количество баллов',
         field: 'points',
     },
+    {
+        title: 'Преподаватель',
+        field: 'teacher',
+        render: (data) => data.fullName,
+    },
 ]

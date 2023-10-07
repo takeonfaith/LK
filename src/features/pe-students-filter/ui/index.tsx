@@ -24,7 +24,8 @@ const courses = [
 
 export const PEStudentsFilter = () => {
     const [filters, isExam] = useUnit([pEStudentFilterModel.stores.$filters, pEStudentIsExamModel.stores.$isExam])
-    const [groupSearch, setGroupSearch] = useState<string>((filters[FiltersSelect.Group] as string) ?? '')
+    const [groupSearch, setGroupSearch] = useState<string>((filters[FiltersSelect.Group]?.value as string) ?? '')
+
     return (
         <Wrapper>
             <SearchWithHints
@@ -35,14 +36,20 @@ export const PEStudentsFilter = () => {
                 customMask={Masks.groupMask}
                 onValueEmpty={() => pEStudentFilterModel.events.addFilter({ name: FiltersSelect.Group, value: '' })}
                 onHintClick={(hint) =>
-                    pEStudentFilterModel.events.addFilter({ name: FiltersSelect.Group, value: hint?.id ?? '' })
+                    pEStudentFilterModel.events.addFilter({
+                        name: FiltersSelect.Group,
+                        value: hint?.id ?? '',
+                        strict: true,
+                    })
                 }
                 request={studentApi.getGroups}
+                size={'big'}
             />
             <Select
                 items={courses}
+                size={'big'}
                 placeholder="Курс"
-                selected={courses.find((c) => c.id === filters[FiltersSelect.Course]) ?? null}
+                selected={courses.find((c) => c.id === filters[FiltersSelect.Course]?.value) ?? null}
                 setSelected={
                     ((value: SelectPage | null) => {
                         if (value?.id) {
@@ -62,7 +69,7 @@ export const PEStudentsFilter = () => {
                 }
             />
             <ToggleItem
-                title={'Проведение зачета'}
+                title={'Зачет'}
                 state={isExam}
                 action={(value) => pEStudentIsExamModel.events.setIsExam(value)}
             />

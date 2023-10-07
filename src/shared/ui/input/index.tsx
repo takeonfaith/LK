@@ -1,10 +1,13 @@
 import { Colors } from '@shared/constants'
+import { INPUT_HEIGHT } from '@shared/constants/input-size'
 import { Button } from '@ui/button'
 import { Title } from '@ui/title'
-import React, { ForwardedRef, HTMLInputTypeAttribute, forwardRef } from 'react'
+import React, { ForwardedRef, forwardRef, HTMLInputTypeAttribute } from 'react'
 import { FiAlertTriangle, FiEye, FiEyeOff, FiX } from 'react-icons/fi'
 import styled from 'styled-components'
+import { getValueFromSize } from 'widgets/slider/lib/get-value-from-size'
 import { Loading, Message } from '../atoms'
+import { Size } from '../types'
 import useInput from './hooks/use-input'
 
 const InputWrapper = styled.div<{
@@ -14,6 +17,7 @@ const InputWrapper = styled.div<{
     width?: string
     minWidth?: string
     danger?: boolean
+    size: Size
 }>`
     display: flex;
     flex-direction: column;
@@ -42,14 +46,14 @@ const InputWrapper = styled.div<{
         color: var(--text);
         outline: none;
         background: ${({ inputAppearance }) => (inputAppearance ? 'var(--theme-1)' : 'transparent')};
-        height: 100%;
         width: 100%;
         padding: 10px;
         font-weight: bold;
         border-radius: 7px;
         padding-left: ${({ leftIcon, inputAppearance }) => (leftIcon ? '30px' : inputAppearance ? '10px' : '0')};
         padding-right: ${({ inputAppearance }) => (!inputAppearance ? '0' : '35px')};
-        max-height: 36px;
+        height: ${getValueFromSize(INPUT_HEIGHT)};
+        max-height: ${getValueFromSize(INPUT_HEIGHT)};
         border: ${({ danger }) => danger && `2px solid ${Colors.red.main}`};
 
         &::placeholder {
@@ -99,6 +103,7 @@ type InputType = 'tel' | 'text' | 'number' | 'date' | 'email' | 'password' | HTM
 
 interface Props {
     value: string
+    size?: Size
     setValue: (value: string) => void
     leftIcon?: React.ReactNode
     title?: string
@@ -118,6 +123,8 @@ interface Props {
     maxValue?: number | string
     loading?: boolean
     customMask?: (value: string, prevValue?: string) => string
+    hideCross?: boolean
+    stepSize?: number
 }
 
 const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInputElement>) {
@@ -142,6 +149,9 @@ const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInpu
         minValue = undefined,
         maxValue = undefined,
         maxLength = undefined,
+        hideCross = false,
+        stepSize = 0.1,
+        size = 'middle',
     } = props
 
     const { inputType, buttonOnClick, danger, handleOnChange, phoneMaskKeyDown } = useInput(
@@ -163,6 +173,7 @@ const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInpu
             width={width}
             danger={danger}
             minWidth={minWidth}
+            size={size}
         >
             <Title size={5} align="left" visible={!!title} bottomGap="5px" required={required}>
                 {title}
@@ -174,7 +185,7 @@ const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInpu
                 min={minValue}
                 max={maxValue}
                 maxLength={maxLength}
-                step={maxValue ? 0.1 : undefined}
+                step={stepSize ?? undefined}
                 type={inputType}
                 placeholder={placeholder}
                 value={value ?? ''}
@@ -188,7 +199,11 @@ const Input = forwardRef(function Input(props: Props, ref: ForwardedRef<HTMLInpu
             {type !== 'password' ? (
                 !!value?.length &&
                 inputAppearance &&
-                (loading ? <Loading /> : <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />)
+                (loading ? (
+                    <Loading />
+                ) : (
+                    !hideCross && <Button icon={<FiX />} onClick={() => setValue('')} tabIndex={-1} />
+                ))
             ) : (
                 <Button
                     icon={inputType === 'password' ? <FiEye /> : <FiEyeOff />}
