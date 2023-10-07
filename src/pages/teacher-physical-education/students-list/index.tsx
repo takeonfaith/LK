@@ -34,7 +34,7 @@ export const StudentsList = () => {
         <Wrapper>
             <TableWrapper>
                 <FiltersWrapper>
-                    <Search value={search} setValue={pEStudentSearchModel.events.update} />
+                    <Search value={search} setValue={pEStudentSearchModel.events.update} size={'big'} />
                     <PEStudentsFilter />
                 </FiltersWrapper>
                 <Table

@@ -1,4 +1,5 @@
 import Search, { Hint } from '@shared/ui/search'
+import { Size } from '@shared/ui/types'
 import { AxiosResponse } from 'axios'
 import React, { useEffect, useState } from 'react'
 
@@ -10,6 +11,7 @@ type Props<T> = {
     loading?: boolean
     focusOn?: any
     width?: string
+    size?: Size
     transformRequest?: (el: T) => string
     setValue: (value: string) => void
     onHintClick: (hint: Hint | undefined) => void
@@ -32,6 +34,7 @@ const SeachWithHints = <T,>({
     onValueEmpty,
     customMask,
     onHintClick,
+    size,
 }: Props<T>) => {
     const [hints, setHints] = useState<Hint[]>([])
     const [loadingHints, setLoadingHints] = useState(false)
@@ -72,6 +75,7 @@ const SeachWithHints = <T,>({
             loading={loadingHints && loading}
             onHintClick={onHintClick}
             customMask={customMask}
+            size={size}
         />
     )
 }

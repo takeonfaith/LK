@@ -116,14 +116,15 @@ export enum Groups {
     OTHER = 'Находится в разработке',
     COMMUNICATION = 'Коммуникация',
 }
+
 export interface IRoute {
     id: string
     title: string
     icon: ChildrenType
-    path: string
     menuPath?: string
-    Component: (() => JSX.Element | null) | LazyExoticComponent<() => JSX.Element | null>
+    path: string
     color: keyof IColors
+    Component: (() => JSX.Element | null) | LazyExoticComponent<() => JSX.Element | null>
     isTemplate: boolean
     shortTitle?: string
     isAdmin?: boolean

@@ -5,8 +5,5 @@ export const Wrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 10px;
-
-    input {
-        height: auto !important;
-    }
+    height: 100%;
 `

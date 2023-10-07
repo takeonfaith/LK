@@ -14,7 +14,7 @@
         "reinstall": "rm -rf node_modules && rm -rf package-lock.json && npm cache clean -f && npm i"
     },
     "dependencies": {
-        "axios": "^0.24.0",
+        "axios": "^1.5.1",
         "effector": "^22.4.0",
         "effector-react": "^22.3.4",
         "patronum": "^1.17.0",

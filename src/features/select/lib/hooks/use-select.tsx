@@ -1,4 +1,5 @@
 import { SelectPage } from '@features/select'
+import { Size } from '@shared/ui/types'
 import useOnClickOutside from '@utils/hooks/use-on-click-outside'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import findCurrentPage from '../find-current-page'
@@ -18,6 +19,7 @@ export interface SelectProps {
     required?: boolean
     placeholder?: string
     appearance?: boolean
+    size?: Size
 }
 
 const useSelect = (props: SelectProps) => {

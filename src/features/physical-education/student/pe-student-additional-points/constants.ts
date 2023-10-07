@@ -21,10 +21,28 @@ export const additionalPointsColumns: ColumnProps[] = [
     {
         title: 'Тип работ',
         field: 'workType',
-        render: (data) => selectorData.find(({ id }) => id === data)?.title,
+        render: (data, row) => {
+            const workType = selectorData.find(({ id }) => id === data)
+
+            if (workType?.id === WorkType.Competition) {
+                return row.comment
+            }
+
+            return workType?.title
+        },
     },
     {
         title: 'Количество баллов',
         field: 'points',
+    },
+    {
+        title: 'Преподаватель',
+        field: 'teacher',
+        render: (data) => data.fullName,
+    },
+    {
+        title: 'Комментарий',
+        field: 'comment',
+        priority: 'five',
     },
 ]

@@ -1,7 +1,6 @@
 import { PeTeacherAddPermission } from '@entities/pe-teacher/types'
 
-export type AddTeacher = {
+export type AddPermissionToTeacher = {
     teacherGuid: string
-    fullName: string
-    permission?: PeTeacherAddPermission
+    permission: PeTeacherAddPermission
 }

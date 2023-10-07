@@ -1,1 +1,1 @@
-export const STUDENT_PAGE_SIZE = 10
+export const STUDENT_PAGE_SIZE = 40
