@@ -13,7 +13,7 @@ import { Wrapper } from './styled'
 
 export const AddPEStudentRegulationPoints = () => {
     const student = useUnit(selectedPEStudentModel.stores.$selectedStudent)
-    const [date, setDate] = useState<string>(new Date().toISOString())
+    const [date, setDate] = useState<string>('')
     const [type, setType] = useState<SelectPage | null>(null)
     const [pointsAmount, setPointsAmount] = useState<string>('0')
     // const [isOverride, setIsOverride] = useState<boolean>(false)
