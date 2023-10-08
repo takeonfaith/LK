@@ -6,7 +6,13 @@ import getShortString from '@shared/lib/get-short-string'
 import useCurrentDevice from '@shared/lib/hooks/use-current-device'
 import useTheme from '@shared/lib/hooks/use-theme'
 import React from 'react'
-import { HiOutlineCalendar, HiOutlineExternalLink, HiOutlineLogin, HiOutlineUserCircle } from 'react-icons/hi'
+import {
+    HiOutlineCalendar,
+    HiOutlineExternalLink,
+    HiOutlineLogin,
+    HiOutlineUserCircle,
+    HiOutlineUserGroup,
+} from 'react-icons/hi'
 import DotSeparatedWords from '../../../dot-separated-words'
 import Flex from '../../../flex'
 import IconText from '../../calendars/day/ui/icon-text'
@@ -35,6 +41,7 @@ const EventItem = (props: Props) => {
         dateInterval,
         leftShift,
         quantity,
+        groups,
         isCurrentEvent = false,
         nameInOneRow = true,
         isNextEvent = false,
@@ -59,6 +66,7 @@ const EventItem = (props: Props) => {
     const eventTitle = !extremeSmallSize
         ? getShortString(normalizedTitle.name, shortInfo ? (hideSomeInfo ? 43 : 35) : nameInOneRow ? 300 : 64)
         : title.split(' ').map((el) => el[0].toUpperCase())
+    const groupsArray = groups?.split(',') ?? []
 
     return (
         <EventItemStyled
@@ -108,6 +116,12 @@ const EventItem = (props: Props) => {
                                         />
                                     </a>
                                 )}
+                                {!!groupsArray.length && (
+                                    <IconText
+                                        icon={<HiOutlineUserGroup />}
+                                        text={<DotSeparatedWords words={groupsArray} />}
+                                    />
+                                )}
                             </Flex>
                         )}
                         <EventTitle listView={listView} nameInOneRow={nameInOneRow} scale={scale} shortInfo={shortInfo}>
@@ -137,7 +151,7 @@ const EventItem = (props: Props) => {
                     )}
 
                     {!!dateInterval && !hideSomeInfo && (
-                        <Flex gap="5px" d="column" ai="flex-start">
+                        <Flex gap="5px">
                             <IconText shortInfo={shortInfo} icon={<HiOutlineCalendar />} text={dateInterval} />
                         </Flex>
                     )}
