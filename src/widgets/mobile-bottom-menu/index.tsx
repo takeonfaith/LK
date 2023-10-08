@@ -14,17 +14,20 @@ import { MEDIA_QUERIES } from '@shared/constants'
 import { userModel } from '@entities/user'
 import { useScheduleWidget } from '@features/home/ui/schedule-widget/hooks/use-schedule-widget'
 import { useLocation } from 'react-router'
+import getUsersOS from '@shared/lib/get-users-os'
+import { useIsPwaApp } from '@shared/lib/hooks/use-is-pwa-app'
 
-const MobileBottomMenuWrapper = styled(ListWrapper)`
+const MobileBottomMenuWrapper = styled(ListWrapper)<{ isPwaOnIOS: boolean }>`
     position: absolute;
     bottom: 0;
     left: 0;
 
     width: 100%;
-    height: var(--mobile-bottom-menu-height);
+    height: ${({ isPwaOnIOS }) =>
+        isPwaOnIOS ? 'calc(var(--mobile-bottom-menu-height) + 20px)' : 'var(--mobile-bottom-menu-height)'};
     background: var(--block);
     border-top: 1px solid var(--theme-2);
-    padding: 0px 10px;
+    padding: ${({ isPwaOnIOS }) => (isPwaOnIOS ? '0px 10px 20px 10px' : '0px 10px')};
     display: none;
 
     ${MEDIA_QUERIES.isTablet} {
@@ -48,10 +51,18 @@ const MobileBottomMenu = () => {
     } = userModel.selectors.useUser()
     const { hasNoSchedule, loading } = useScheduleWidget()
     const location = useLocation()
+    const isPwa = useIsPwaApp()
+    const os = getUsersOS()
+    const isPwaOnIOS = os === 'iOS' && isPwa
 
     if (!allRoutes || !user || loading) {
         return (
-            <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly" verticalAlign="center">
+            <MobileBottomMenuWrapper
+                isPwaOnIOS={isPwaOnIOS}
+                direction="horizontal"
+                horizontalAlign="evenly"
+                verticalAlign="center"
+            >
                 <LinkSkeleton />
                 <LinkSkeleton />
                 <LinkSkeleton />
@@ -69,7 +80,7 @@ const MobileBottomMenu = () => {
             : DEFAULT_PPS_MOBILE_CONFIG
 
     return (
-        <MobileBottomMenuWrapper direction="horizontal" horizontalAlign="evenly">
+        <MobileBottomMenuWrapper isPwaOnIOS={isPwaOnIOS} direction="horizontal" horizontalAlign="evenly">
             {config.map((id) => {
                 const isCurrent = allRoutes[id] ? location.pathname.includes(allRoutes[id].path) : false
                 return <LeftsideBarItem key={id} {...allRoutes[id]} isCurrent={isCurrent} />

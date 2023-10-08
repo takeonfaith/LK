@@ -57,6 +57,8 @@ const getShortCut = () => {
         Linux: [{ title: 'CTRL', key: 'Control' }, { key: 'k' }],
         UNIX: [{ title: 'CTRL', key: 'Control' }, { key: 'k' }],
         MacOS: [{ title: 'CMD', key: 'Meta', icon: <FiCommand /> }, { key: 'k' }],
+        iOS: [],
+        Android: [],
     } as Record<typeof os, { title?: string; key: string; icon?: React.ReactNode }[]>
 
     return shortcuts[os]

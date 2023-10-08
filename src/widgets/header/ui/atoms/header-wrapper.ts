@@ -63,6 +63,7 @@ export const HeaderTitle = styled.div<{
     overflow: hidden;
     text-overflow: ellipsis;
     pointer-events: none;
+    will-change: transform;
 
     @media (max-width: 1232px) {
         max-width: ${getSmallDesktopMaxWidth};
