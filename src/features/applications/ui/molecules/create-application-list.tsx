@@ -112,12 +112,13 @@ const CreateApplicationList = ({ isTeachers = false, currentFormEducation }: Pro
             <div className="list">
                 <div className="links-wrapper">
                     {(foundSections ?? sections).map((section) => {
-                        return (
-                            <div className="link-list" key={section.title}>
-                                <Title size={4} align="left" bottomGap>
-                                    {section.title}
-                                </Title>
-                                {!section.disabled && (
+                        if (!section.disabled)
+                            return (
+                                <div className="link-list" key={section.title}>
+                                    <Title size={4} align="left" bottomGap>
+                                        {section.title}
+                                    </Title>
+
                                     <div className="links">
                                         {section.links.map((link, index) => {
                                             if (
@@ -145,9 +146,8 @@ const CreateApplicationList = ({ isTeachers = false, currentFormEducation }: Pro
                                             )
                                         })}
                                     </div>
-                                )}
-                            </div>
-                        )
+                                </div>
+                            )
                     })}
                     {!foundSections?.length && !!search.length && (
                         <Error text={`По запросу ${search} ничего не найдено`} />
