@@ -50,6 +50,7 @@ import {
     TerminationOfEmploymentContractPage,
     ArbitraryRequestPage,
     MilitaryRegistrationDocuments,
+    StudentEmploymentPage,
 } from './other-routes/pages'
 import { HelpfulInformation } from './teacher-routes/pages'
 import { User } from '@shared/api/model'
@@ -66,6 +67,7 @@ export const DORMITORY = '/dormitory'
 //hidden routes
 export const CLARIFICATION_OF_PASSPORT_DATA_ROUTE = APPLICATIONS_ROUTE + '/clarification-of-passport-data'
 export const ARBITRARY_REQUEST_ROUTE = APPLICATIONS_ROUTE + '/arbitrary-request'
+export const STUDENT_EMPLOYMENT_ROUTE = APPLICATIONS_ROUTE + '/student-employment'
 export const SOCIAL_SCOLLARSHIP = APPLICATIONS_ROUTE + '/social-scollarship'
 export const CERTIFICATE_OF_ATTENDANCE = APPLICATIONS_ROUTE + '/certificate-of-attendance'
 export const SOCIAL_AGENCIES = APPLICATIONS_ROUTE + '/social-agencies'
@@ -204,6 +206,20 @@ export const hiddenRoutes: (user: User | null) => IRoutes = (user) => ({
         icon: <FiBriefcase />,
         path: ARBITRARY_REQUEST_ROUTE,
         Component: ArbitraryRequestPage,
+        color: 'blue',
+        isTemplate: false,
+        group: 'FINANCES_DOCS',
+        isSubPage: true,
+        backButtonText: 'Назад к цифровым сервисам',
+        subPageHeaderTitle: '',
+        fallbackPrevPage: APPLICATIONS_ROUTE,
+    },
+    'student-employment': {
+        id: 'student-employment',
+        title: 'Трудоустройство студентов',
+        icon: <FiBriefcase />,
+        path: STUDENT_EMPLOYMENT_ROUTE,
+        Component: isProduction ? ApplicationRedirect : StudentEmploymentPage,
         color: 'blue',
         isTemplate: false,
         group: 'FINANCES_DOCS',

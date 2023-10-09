@@ -38,7 +38,6 @@ const StudentEmployment = () => {
         <BaseApplicationWrapper isDone={isDone}>
             {!!form && !!setForm && (
                 <FormBlock>
-                    <>{console.log(form)}</>
                     <InputArea
                         {...form}
                         collapsed={isDone}
